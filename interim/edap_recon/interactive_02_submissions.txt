@@ -1,0 +1,613 @@
+exploration    (   0,   0)  Instances
+application    (   0,   0)  Show keyboard shortcuts
+Show screen reader tips
+Skip to main
+button         (  -1,  -2)  Show keyboard shortcuts
+a              (  -1,  25)  Show screen reader tips (opens in new tab)
+button         (  -1,  53)  Skip to main content
+region         (   0,   0)  Power BI Report
+group          (1324,  25)  …
+svg            (1329,  35)  LastRefreshDate Refresh Date: 19-06-2026 18:09.
+group          (1195,  37)  6/19/2026 6:09:24 PM
+svg            (1200,  46)  Earliest Last Refreshed Date 6/19/2026 6:09:24 PM.
+group          (  91,  77)  7 items
+group          (1073,  77)  Select Visible Columns
+Multiple selections
+h3             (1087,  82)  Select Visible Columns
+combobox       (1084, 104)  FP_Pillar3
+div            (1090, 110)  Multiple selections
+group          (  91,  78)  Ref Date
+All
+h3             ( 105,  83)  Ref Date
+combobox       ( 102, 105)  ReferenceDate
+div            ( 108, 111)  All
+group          ( 213,  78)  Entity Type
+All
+h3             ( 227,  83)  Entity Type
+combobox       ( 224, 105)  EntityType
+div            ( 230, 111)  All
+group          ( 349,  78)  Institution Type
+All
+h3             ( 363,  83)  Institution Type
+combobox       ( 360, 105)  InstitutionType
+div            ( 366, 111)  All
+group          ( 477,  78)  Entity Name
+All
+h3             ( 491,  83)  Entity Name
+combobox       ( 488, 105)  ENT_NAM
+div            ( 494, 111)  All
+group          ( 626,  78)  Module Name
+All
+h3             ( 640,  83)  Module Name
+combobox       ( 637, 105)  ModuleName
+div            ( 643, 111)  All
+group          ( 788,  78)  File Name
+All
+h3             ( 802,  83)  File Name
+combobox       ( 799, 105)  Name
+div            ( 805, 111)  All
+link           (1279,  78)  Bookmark . Click here to follow
+link           (   0,  88)  Bookmark . Click here to follow
+button         ( 842, 150)  Drill through . To drill through to Templates, select a single submission entry
+link           (  32, 150)  Page navigation . Click here to follow
+group          (  30, 190)  Scroll up
+Scroll down
+Scroll left
+Scroll right
+Row Selection
+toolbar        (1214, 166)  Visual container header
+button         (1227, 170)  Filters on Visual
+button         (1255, 170)  Personalize this visual
+button         (1283, 170)  Focus mode
+button         (1311, 170)  More options
+document       (  35, 195)  Scroll up
+Scroll down
+Scroll left
+Scroll right
+Row Selection
+grid           (  35, 195)  Row Selection
+Official Data (Report File)
+Ref Date
+Entity Ty
+presentation   (  35, 195)  Row Selection
+Official Data (Report File)
+Ref Date
+Entity Ty
+row            (  35, 195)  Row Selection
+Official Data (Report File)
+Ref Date
+Entity Ty
+presentation   (  36, 195)  Row Selection
+Official Data (Report File)
+Ref Date
+Entity Ty
+presentation   (  36, 195)  Row Selection
+Official Data (Report File)
+Ref Date
+Entity Ty
+columnheader   (  36, 195)  Official Data (Report File)
+div            (  42, 217)  Can be sorted
+columnheader   ( 193, 195)  Ref Date
+div            ( 198, 217)  Can be sorted
+columnheader   ( 326, 195)  Entity Type
+div            ( 332, 217)  Can be sorted
+columnheader   ( 423, 195)  Institution Type
+div            ( 428, 217)  Can be sorted
+columnheader   ( 524, 195)  Entity Name
+div            ( 529, 217)  Can be sorted
+columnheader   ( 762, 195)  Module Name
+div            ( 767, 217)  Can be sorted
+columnheader   ( 923, 195)  Submission Date Time
+div            ( 928, 217)  Can be sorted
+columnheader   (1062, 195)  File Name
+div            (1067, 217)  Can be sorted
+columnheader   (1640, 195)  Country
+div            (1645, 217)  Can be sorted
+columnheader   (1699, 195)  Technical Field (Ignore)
+div            (1703, 217)  Can be sorted
+presentation   (  35, 230)  Select Row
+30/06/2025
+Banking Group
+Large highest EEA
+DekaBa
+presentation   (  35, 230)  Select Row
+30/06/2025
+Banking Group
+Large highest EEA
+DekaBa
+row            (  35, 230)  Select Row
+30/06/2025
+Banking Group
+Large highest EEA
+DekaBa
+presentation   (  36, 230)  Select Row
+30/06/2025
+Banking Group
+Large highest EEA
+DekaBa
+presentation   (  36, 230)  Select Row
+30/06/2025
+Banking Group
+Large highest EEA
+DekaBa
+gridcell       (  36, 230)  Select Row
+link           ( 107, 235)  https://errp.eba.europa.eu/public-documents/CODIS/input/0W2PZJM8XOY22M4GG883.CON_DE_PILLAR3020000_CODIS_2025-06-30_20260211154609543.zip
+gridcell       ( 193, 230)  30/06/2025
+gridcell       ( 326, 230)  Banking Group
+gridcell       ( 423, 230)  Large highest EEA
+gridcell       ( 524, 230)  DekaBank Deutsche Girozentrale
+gridcell       ( 762, 230)  Common disclosures
+gridcell       ( 923, 230)  11/02/2026 17:00:17
+gridcell       (1062, 230)  0W2PZJM8XOY22M4GG883.CON_DE_PILLAR3020000_CODIS_2025-06-30_2
+gridcell       (1640, 230)  Germany
+gridcell       (1699, 230)  3342854
+row            (  35, 257)  Select Row
+30/09/2025
+Banking Group
+Large highest EEA
+DekaBa
+presentation   (  36, 257)  Select Row
+30/09/2025
+Banking Group
+Large highest EEA
+DekaBa
+presentation   (  36, 257)  Select Row
+30/09/2025
+Banking Group
+Large highest EEA
+DekaBa
+gridcell       (  36, 257)  Select Row
+link           ( 107, 261)  https://errp.eba.europa.eu/public-documents/CODIS/input/0W2PZJM8XOY22M4GG883.CON_DE_PILLAR3020000_CODIS_2025-09-30_20260211161133472.zip
+gridcell       ( 193, 257)  30/09/2025
+gridcell       ( 326, 257)  Banking Group
+gridcell       ( 423, 257)  Large highest EEA
+gridcell       ( 524, 257)  DekaBank Deutsche Girozentrale
+gridcell       ( 762, 257)  Common disclosures
+gridcell       ( 923, 257)  17/03/2026 10:48:49
+gridcell       (1062, 257)  0W2PZJM8XOY22M4GG883.CON_DE_PILLAR3020000_CODIS_2025-09-30_2
+gridcell       (1640, 257)  Germany
+gridcell       (1699, 257)  3387584
+row            (  35, 284)  Select Row
+31/12/2025
+Banking Group
+Large highest EEA
+DekaBa
+presentation   (  36, 284)  Select Row
+31/12/2025
+Banking Group
+Large highest EEA
+DekaBa
+presentation   (  36, 284)  Select Row
+31/12/2025
+Banking Group
+Large highest EEA
+DekaBa
+gridcell       (  36, 284)  Select Row
+link           ( 107, 288)  https://errp.eba.europa.eu/public-documents/CODIS/input/0W2PZJM8XOY22M4GG883.CON_DE_PILLAR3020000_CODIS_2025-12-31_20260428174043285.zip
+gridcell       ( 193, 284)  31/12/2025
+gridcell       ( 326, 284)  Banking Group
+gridcell       ( 423, 284)  Large highest EEA
+gridcell       ( 524, 284)  DekaBank Deutsche Girozentrale
+gridcell       ( 762, 284)  Common disclosures
+gridcell       ( 923, 284)  04/05/2026 12:21:41
+gridcell       (1062, 284)  0W2PZJM8XOY22M4GG883.CON_DE_PILLAR3020000_CODIS_2025-12-31_2
+gridcell       (1640, 284)  Germany
+gridcell       (1699, 284)  3445439
+row            (  35, 310)  Select Row
+31/03/2026
+Banking Group
+Large highest EEA
+DekaBa
+presentation   (  36, 310)  Select Row
+31/03/2026
+Banking Group
+Large highest EEA
+DekaBa
+presentation   (  36, 310)  Select Row
+31/03/2026
+Banking Group
+Large highest EEA
+DekaBa
+gridcell       (  36, 310)  Select Row
+link           ( 107, 314)  https://errp.eba.europa.eu/public-documents/CODIS/input/0W2PZJM8XOY22M4GG883.CON_DE_PILLAR3020100_CODIS_2026-03-31_20260511165608771.zip
+gridcell       ( 193, 310)  31/03/2026
+gridcell       ( 326, 310)  Banking Group
+gridcell       ( 423, 310)  Large highest EEA
+gridcell       ( 524, 310)  DekaBank Deutsche Girozentrale
+gridcell       ( 762, 310)  Common disclosures
+gridcell       ( 923, 310)  29/05/2026 10:14:25
+gridcell       (1062, 310)  0W2PZJM8XOY22M4GG883.CON_DE_PILLAR3020100_CODIS_2026-03-31_2
+gridcell       (1640, 310)  Germany
+gridcell       (1699, 310)  3488742
+row            (  35, 337)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+HYPO T
+presentation   (  36, 337)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+HYPO T
+presentation   (  36, 337)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+HYPO T
+gridcell       (  36, 337)  Select Row
+link           ( 107, 341)  https://errp.eba.europa.eu/public-documents/CODIS/input/0W5QHUNYV4W7GJO62R27.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260521122845618.zip
+gridcell       ( 193, 337)  31/12/2025
+gridcell       ( 326, 337)  Banking Group
+gridcell       ( 423, 337)  Other highest EEA
+gridcell       ( 524, 337)  HYPO TIROL BANK AG
+gridcell       ( 762, 337)  Common disclosures
+gridcell       ( 923, 337)  21/05/2026 10:29:51
+gridcell       (1062, 337)  0W5QHUNYV4W7GJO62R27.CON_AT_PILLAR3020000_CODIS_2025-12-31_2
+gridcell       (1640, 337)  Austria
+gridcell       (1699, 337)  3484023
+row            (  35, 363)  Select Row
+30/06/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 363)  Select Row
+30/06/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 363)  Select Row
+30/06/2025
+CRD Credit Institution
+Large highest E
+gridcell       (  36, 363)  Select Row
+link           ( 107, 367)  https://errp.eba.europa.eu/public-documents/CODIS/input/1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-06-30_20260409113127000.zip
+gridcell       ( 193, 363)  30/06/2025
+gridcell       ( 326, 363)  CRD Credit Institution
+gridcell       ( 423, 363)  Large highest EEA
+gridcell       ( 524, 363)  Aktiebolaget Svensk Exportkredit
+gridcell       ( 762, 363)  Common disclosures
+gridcell       ( 923, 363)  24/04/2026 08:44:16
+gridcell       (1062, 363)  1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-06-30_2
+gridcell       (1640, 363)  Sweden
+gridcell       (1699, 363)  3435021
+row            (  35, 390)  Select Row
+30/06/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 390)  Select Row
+30/06/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 390)  Select Row
+30/06/2025
+CRD Credit Institution
+Large highest E
+gridcell       (  36, 390)  Select Row
+link           ( 107, 394)  https://errp.eba.europa.eu/public-documents/CODIS/input/1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-06-30_20260527103127099.zip
+gridcell       ( 193, 390)  30/06/2025
+gridcell       ( 326, 390)  CRD Credit Institution
+gridcell       ( 423, 390)  Large highest EEA
+gridcell       ( 524, 390)  Aktiebolaget Svensk Exportkredit
+gridcell       ( 762, 390)  Common disclosures
+gridcell       ( 923, 390)  27/05/2026 13:34:43
+gridcell       (1062, 390)  1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-06-30_2
+gridcell       (1640, 390)  Sweden
+gridcell       (1699, 390)  3487392
+row            (  35, 416)  Select Row
+30/06/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 416)  Select Row
+30/06/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 416)  Select Row
+30/06/2025
+CRD Credit Institution
+Large highest E
+gridcell       (  36, 416)  Select Row
+link           ( 107, 421)  https://errp.eba.europa.eu/public-documents/CODIS/input/1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-06-30_20260529011232000.zip
+gridcell       ( 193, 416)  30/06/2025
+gridcell       ( 326, 416)  CRD Credit Institution
+gridcell       ( 423, 416)  Large highest EEA
+gridcell       ( 524, 416)  Aktiebolaget Svensk Exportkredit
+gridcell       ( 762, 416)  Common disclosures
+gridcell       ( 923, 416)  01/06/2026 12:48:16
+gridcell       (1062, 416)  1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-06-30_2
+gridcell       (1640, 416)  Sweden
+gridcell       (1699, 416)  3490881
+row            (  35, 443)  Select Row
+30/09/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 443)  Select Row
+30/09/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 443)  Select Row
+30/09/2025
+CRD Credit Institution
+Large highest E
+gridcell       (  36, 443)  Select Row
+link           ( 107, 447)  https://errp.eba.europa.eu/public-documents/CODIS/input/1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-09-30_20260422073936000.zip
+gridcell       ( 193, 443)  30/09/2025
+gridcell       ( 326, 443)  CRD Credit Institution
+gridcell       ( 423, 443)  Large highest EEA
+gridcell       ( 524, 443)  Aktiebolaget Svensk Exportkredit
+gridcell       ( 762, 443)  Common disclosures
+gridcell       ( 923, 443)  24/04/2026 08:49:18
+gridcell       (1062, 443)  1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-09-30_2
+gridcell       (1640, 443)  Sweden
+gridcell       (1699, 443)  3435029
+row            (  35, 469)  Select Row
+31/12/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 469)  Select Row
+31/12/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 469)  Select Row
+31/12/2025
+CRD Credit Institution
+Large highest E
+gridcell       (  36, 469)  Select Row
+link           ( 107, 474)  https://errp.eba.europa.eu/public-documents/CODIS/input/1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-12-31_20260513085118000.zip
+gridcell       ( 193, 469)  31/12/2025
+gridcell       ( 326, 469)  CRD Credit Institution
+gridcell       ( 423, 469)  Large highest EEA
+gridcell       ( 524, 469)  Aktiebolaget Svensk Exportkredit
+gridcell       ( 762, 469)  Common disclosures
+gridcell       ( 923, 469)  13/05/2026 09:25:50
+gridcell       (1062, 469)  1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-12-31_2
+gridcell       (1640, 469)  Sweden
+gridcell       (1699, 469)  3473344
+row            (  35, 496)  Select Row
+31/12/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 496)  Select Row
+31/12/2025
+CRD Credit Institution
+Large highest E
+presentation   (  36, 496)  Select Row
+31/12/2025
+CRD Credit Institution
+Large highest E
+gridcell       (  36, 496)  Select Row
+link           ( 107, 500)  https://errp.eba.europa.eu/public-documents/CODIS/input/1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-12-31_20260521070928002.zip
+gridcell       ( 193, 496)  31/12/2025
+gridcell       ( 326, 496)  CRD Credit Institution
+gridcell       ( 423, 496)  Large highest EEA
+gridcell       ( 524, 496)  Aktiebolaget Svensk Exportkredit
+gridcell       ( 762, 496)  Common disclosures
+gridcell       ( 923, 496)  21/05/2026 13:06:22
+gridcell       (1062, 496)  1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020000_CODIS_2025-12-31_2
+gridcell       (1640, 496)  Sweden
+gridcell       (1699, 496)  3484424
+row            (  35, 523)  Select Row
+31/03/2026
+CRD Credit Institution
+Large highest E
+presentation   (  36, 523)  Select Row
+31/03/2026
+CRD Credit Institution
+Large highest E
+presentation   (  36, 523)  Select Row
+31/03/2026
+CRD Credit Institution
+Large highest E
+gridcell       (  36, 523)  Select Row
+link           ( 107, 527)  https://errp.eba.europa.eu/public-documents/CODIS/input/1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020100_CODIS_2026-03-31_20260618013541000.zip
+gridcell       ( 193, 523)  31/03/2026
+gridcell       ( 326, 523)  CRD Credit Institution
+gridcell       ( 423, 523)  Large highest EEA
+gridcell       ( 524, 523)  Aktiebolaget Svensk Exportkredit
+gridcell       ( 762, 523)  Common disclosures
+gridcell       ( 923, 523)  18/06/2026 14:19:12
+gridcell       (1062, 523)  1FOLRR5RWTWWI397R131.IND_SE_PILLAR3020100_CODIS_2026-03-31_2
+gridcell       (1640, 523)  Sweden
+gridcell       (1699, 523)  3504695
+row            (  35, 549)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+SPARKA
+presentation   (  36, 549)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+SPARKA
+presentation   (  36, 549)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+SPARKA
+gridcell       (  36, 549)  Select Row
+link           ( 107, 553)  https://errp.eba.europa.eu/public-documents/CODIS/input/21380033CFFM2V1ZCK65.CON_MT_PILLAR3020000_CODIS_2025-12-31_20260424141111218.zip
+gridcell       ( 193, 549)  31/12/2025
+gridcell       ( 326, 549)  Banking Group
+gridcell       ( 423, 549)  Other highest EEA
+gridcell       ( 524, 549)  SPARKASSE (HOLDINGS) MALTA LIMITED
+gridcell       ( 762, 549)  Common disclosures
+gridcell       ( 923, 549)  24/04/2026 12:18:22
+gridcell       (1062, 549)  21380033CFFM2V1ZCK65.CON_MT_PILLAR3020000_CODIS_2025-12-31_2
+gridcell       (1640, 549)  Malta
+gridcell       (1699, 549)  3435613
+row            (  35, 576)  Select Row
+30/06/2025
+Banking Group
+Other highest EEA
+NOBA G
+presentation   (  36, 576)  Select Row
+30/06/2025
+Banking Group
+Other highest EEA
+NOBA G
+presentation   (  36, 576)  Select Row
+30/06/2025
+Banking Group
+Other highest EEA
+NOBA G
+gridcell       (  36, 576)  Select Row
+link           ( 107, 580)  https://errp.eba.europa.eu/public-documents/CODIS/input/21380057HUGFEAF25W84.CON_SE_PILLAR3020000_CODIS_2025-06-30_20260205164528910.zip
+gridcell       ( 193, 576)  30/06/2025
+gridcell       ( 326, 576)  Banking Group
+gridcell       ( 423, 576)  Other highest EEA
+gridcell       ( 524, 576)  NOBA Group
+gridcell       ( 762, 576)  Common disclosures
+gridcell       ( 923, 576)  05/02/2026 15:49:59
+gridcell       (1062, 576)  21380057HUGFEAF25W84.CON_SE_PILLAR3020000_CODIS_2025-06-30_2
+gridcell       (1640, 576)  Sweden
+gridcell       (1699, 576)  3332849
+row            (  35, 602)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+NOBA G
+presentation   (  36, 602)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+NOBA G
+presentation   (  36, 602)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+NOBA G
+gridcell       (  36, 602)  Select Row
+link           ( 107, 607)  https://errp.eba.europa.eu/public-documents/CODIS/input/21380057HUGFEAF25W84.CON_SE_PILLAR3020000_CODIS_2025-12-31_20260402095742234.zip
+gridcell       ( 193, 602)  31/12/2025
+gridcell       ( 326, 602)  Banking Group
+gridcell       ( 423, 602)  Other highest EEA
+gridcell       ( 524, 602)  NOBA Group
+gridcell       ( 762, 602)  Common disclosures
+gridcell       ( 923, 602)  17/04/2026 06:41:18
+gridcell       (1062, 602)  21380057HUGFEAF25W84.CON_SE_PILLAR3020000_CODIS_2025-12-31_2
+gridcell       (1640, 602)  Sweden
+gridcell       (1699, 602)  3427806
+row            (  35, 629)  Select Row
+30/06/2025
+Banking Group
+Other highest EEA
+AS Inb
+presentation   (  36, 629)  Select Row
+30/06/2025
+Banking Group
+Other highest EEA
+AS Inb
+presentation   (  36, 629)  Select Row
+30/06/2025
+Banking Group
+Other highest EEA
+AS Inb
+gridcell       (  36, 629)  Select Row
+link           ( 107, 633)  https://errp.eba.europa.eu/public-documents/CODIS/input/2138005M92IEIQVEL297.CON_EE_PILLAR3020000_CODIS_2025-06-30_20260222173827032.zip
+gridcell       ( 193, 629)  30/06/2025
+gridcell       ( 326, 629)  Banking Group
+gridcell       ( 423, 629)  Other highest EEA
+gridcell       ( 524, 629)  AS Inbank
+gridcell       ( 762, 629)  Common disclosures
+gridcell       ( 923, 629)  22/02/2026 16:14:14
+gridcell       (1062, 629)  2138005M92IEIQVEL297.CON_EE_PILLAR3020000_CODIS_2025-06-30_2
+gridcell       (1640, 629)  Estonia
+gridcell       (1699, 629)  3361847
+row            (  35, 655)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+AS Inb
+presentation   (  36, 655)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+AS Inb
+presentation   (  36, 655)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+AS Inb
+gridcell       (  36, 655)  Select Row
+link           ( 107, 660)  https://errp.eba.europa.eu/public-documents/CODIS/input/2138005M92IEIQVEL297.CON_EE_PILLAR3020000_CODIS_2025-12-31_20260302165627032.zip
+gridcell       ( 193, 655)  31/12/2025
+gridcell       ( 326, 655)  Banking Group
+gridcell       ( 423, 655)  Other highest EEA
+gridcell       ( 524, 655)  AS Inbank
+gridcell       ( 762, 655)  Common disclosures
+gridcell       ( 923, 655)  05/03/2026 07:35:37
+gridcell       (1062, 655)  2138005M92IEIQVEL297.CON_EE_PILLAR3020000_CODIS_2025-12-31_2
+gridcell       (1640, 655)  Estonia
+gridcell       (1699, 655)  3370131
+row            (  35, 682)  Select Row
+31/12/2025
+CRD Credit Institution
+Other highest E
+presentation   (  36, 682)  Select Row
+31/12/2025
+CRD Credit Institution
+Other highest E
+presentation   (  36, 682)  Select Row
+31/12/2025
+CRD Credit Institution
+Other highest E
+gridcell       (  36, 682)  Select Row
+link           ( 107, 686)  https://errp.eba.europa.eu/public-documents/CODIS/input/2138005MGIT3X9ZTMP37.IND_DK_PILLAR3020000_CODIS_2025-12-31_20260225114311736.zip
+gridcell       ( 193, 682)  31/12/2025
+gridcell       ( 326, 682)  CRD Credit Institution
+gridcell       ( 423, 682)  Other highest EEA
+gridcell       ( 524, 682)  Rønde Sparekasse
+gridcell       ( 762, 682)  Common disclosures
+gridcell       ( 923, 682)  10/03/2026 10:51:28
+gridcell       (1062, 682)  2138005MGIT3X9ZTMP37.IND_DK_PILLAR3020000_CODIS_2025-12-31_2
+gridcell       (1640, 682)  Denmark
+gridcell       (1699, 682)  3373407
+row            (  35, 709)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+Akciju
+presentation   (  36, 709)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+Akciju
+presentation   (  36, 709)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+Akciju
+gridcell       (  36, 709)  Select Row
+link           ( 107, 713)  https://errp.eba.europa.eu/public-documents/CODIS/input/2138007F5HA5FFJROB80.CON_LV_PILLAR3020000_CODIS_2025-12-31_20260522170313364.zip
+gridcell       ( 193, 709)  31/12/2025
+gridcell       ( 326, 709)  Banking Group
+gridcell       ( 423, 709)  Other highest EEA
+gridcell       ( 524, 709)  Akciju sabiedrība "Rietumu Banka"
+gridcell       ( 762, 709)  Common disclosures
+gridcell       ( 923, 709)  22/05/2026 14:09:11
+gridcell       (1062, 709)  2138007F5HA5FFJROB80.CON_LV_PILLAR3020000_CODIS_2025-12-31_2
+gridcell       (1640, 709)  Latvia
+gridcell       (1699, 709)  3485726
+row            (  35, 735)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+Akciju
+presentation   (  36, 735)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+Akciju
+presentation   (  36, 735)  Select Row
+31/12/2025
+Banking Group
+Other highest EEA
+Akciju
+gridcell       (  36, 735)  Select Row
+link           ( 107, 739)  https://errp.eba.europa.eu/public-documents/CODIS/input/2138007F5HA5FFJROB80.CON_LV_PILLAR3020000_CODIS_2025-12-31_20260527125254835.zip
+gridcell       ( 193, 735)  31/12/2025
+gridcell       ( 326, 735)  Banking Group
+gridcell       ( 423, 735)  Other highest EEA
+gridcell       ( 524, 735)  Akciju sabiedrība "Rietumu Banka"
+gridcell       ( 762, 735)  Common disclosures
+gridcell       ( 923, 735)  27/05/2026 10:00:47
+gridcell       (1062, 735)  2138007F5HA5FFJROB80.CON_LV_PILLAR3020000_CODIS_2025-12-31_2
+gridcell       (1640, 735)  Latvia
+gridcell       (1699, 735)  3487133

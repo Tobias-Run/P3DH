@@ -1,0 +1,186 @@
+================================================================================
+PROJEKT: EBA Pillar 3 Data Hub (P3DH) - Datenanalyse-Pipeline
+ANWEISUNGEN FÜR EINEN CODING-AGENTEN (Claude Code o.ä.)
+================================================================================
+
+ZWECK
+-----
+Baue eine reproduzierbare Pipeline, die öffentlich publizierte Pillar-3-Daten
+aus dem EBA Pillar 3 Data Hub (P3DH) auf dem European Data Access Portal (EDAP)
+bezieht, sie aus dem XBRL-CSV-Format in menschenlesbare, analysefertige Daten
+überführt und Data-Science-Explorationen darauf ermöglicht.
+
+Quell-Kontext (zur Orientierung, NICHT blind vertrauen - live verifizieren):
+- P3DH-Übersicht: https://www.eba.europa.eu/risk-and-data-analysis/pillar-3-data-hub
+- Zugang P3DH auf EDAP: https://edap-public.eba.europa.eu/Report/index/MTE1
+- Daten sind seit Januar 2026 öffentlich.
+- Quantitative Daten: XBRL-CSV. Qualitative Angaben: PDF-Report.
+- Rechtsbasis u.a. Commission Implementing Regulation (EU) 2024/3172 (ITS on disclosures).
+
+WICHTIGE ARBEITSPRINZIPIEN
+--------------------------
+1. Reproduzierbarkeit ist Pflicht. Roh-Daten nie überschreiben. Jede
+   Transformation als Skript, kein manuelles Editieren von Zwischenständen.
+2. Annahmen offenlegen, nicht verstecken. Wenn etwas unklar ist (z.B.
+   ob EDAP einen Bulk-Export hat), dokumentiere die Annahme im Code/README
+   und mach weiter - frag nicht bei jeder Kleinigkeit nach.
+3. "Fehlt" ist nicht "Null". Ein nicht offengelegtes Template ist analytisch
+   etwas anderes als ein gemeldeter Nullwert. Diese Unterscheidung muss in
+   den Daten erhalten bleiben.
+4. Vergleichbarkeitsfallen benennen: unterschiedliche Rechnungslegung,
+   Konsolidierungsebenen, nationale Optionen. Kennzahlen sind nicht naiv 1:1
+   vergleichbar - als Caveat in jeder Analyse führen.
+
+TECH-STACK (Vorschlag, anpassbar)
+---------------------------------
+- Python 3.11+
+- Polars oder Pandas für Tabellen, DuckDB für Ad-hoc-SQL über die Sammlung
+- Parquet als Speicherformat (partitioniert)
+- Eine XBRL/XBRL-CSV-Bibliothek oder eigener CSV-Parser (s. Phase 2)
+- pdfplumber/pypdf o.ä. für die qualitativen PDF-Reports
+- Struktur: /raw  /interim  /processed  /codebook  /notebooks  /reports
+
+================================================================================
+PHASE 0 - SCOPING & ZUGANGSKLÄRUNG (zuerst, bevor Code für Ingestion entsteht)
+================================================================================
+- Prüfe EDAP auf Zugangsweg: (a) öffentliche API/Endpoint, (b) Bulk-Export,
+  (c) nur einzelne Report-Files pro Institut/Stichtag. Starte beim
+  "Access to P3DH"-Link und dem EDAP-User-Guide.
+- Halte die Format-Realität fest: XBRL-CSV (quantitativ) + PDF (qualitativ).
+- Besorge die Referenzartefakte der EBA:
+    * DPM Data Dictionary (Reporting Framework 4.1 und 4.2)
+    * "frequency_of_disclosures"-File (Disclosure-Pflichten je Institutstyp)
+    * Mapping-Tool (Übergang Framework 4.1 -> 4.2)
+    * "DPM known issues"-Liste (als Filter/Flag nutzen)
+- Pilot-Scope-Entscheidung: NICHT alles auf einmal. Empfehlung: EIN Modul
+  (z.B. Eigenmittel/Solvenz, Templates KM1/OV1) über ALLE Institute für EINEN
+  Stichtag. Erst wenn das sauber läuft, ausweiten.
+
+DELIVERABLE PHASE 0: kurzes Decision-Memo (Zugangsweg, Format, Pilot-Scope)
++ ein manuell heruntergeladener Beispiel-Report als Referenz im /raw-Ordner.
+
+================================================================================
+PHASE 1 - INGESTION
+================================================================================
+- Baue einen Downloader, der über (Institut x Stichtag x Modul) iteriert,
+  XBRL-CSV-Pakete + zugehörige PDFs zieht und sie ROH und unverändert in /raw
+  ablegt.
+- Schreibe ein Manifest/Katalog mit: Institut, Stichtag, Framework-Version,
+  Quell-URL, Download-Zeitstempel, Dateipfad, Prüfsumme.
+- Baue robust gegen Lücken: einige Templates haben temporäre Rendering-
+  Probleme (z.B. K_26.00, K_29.00, K_64.01 u.a.). Über die "known issues"-Liste
+  flaggen, nicht hart abbrechen.
+
+DELIVERABLE PHASE 1: gefüllter /raw-Layer + maschinenlesbares Manifest.
+
+================================================================================
+PHASE 2 - PARSING & "HUMAN READABLE" MACHEN
+================================================================================
+Kern der Aufgabe. Die XBRL-CSV-Pakete bestehen aus mehreren Dateien, u.a.
+parameters.csv, filing-indicators.csv und Daten-CSVs. Datapoints sind kryptische
+Codes und müssen über das DPM Dictionary zu sprechenden Labels gejoint werden.
+
+ZWINGEND korrekt umsetzen:
+- DPM-Join: Code -> menschenlesbares Label (Template, Zeile/Spalte, Bedeutung,
+  Einheit). Ergebnis ist ein "Codebook".
+- Präzision/Einheiten: Monetäre Werte stehen IN WÄHRUNGSEINHEITEN, NICHT in
+  Tausend oder Millionen. decimalsMonetary = -6 bedeutet Millionen-Genauigkeit,
+  -3 bedeutet Tausender-Genauigkeit. Diese Semantik MUSS ins Parsing, sonst sind
+  alle Größenordnungen falsch.
+- Währung: Werte können in Originalwährung vorliegen. Für Vergleichbarkeit auf
+  EUR normalisieren (EZB-Referenzkurse, wie die EBA selbst es tut). Original-
+  währung als eigene Spalte behalten, nie überschreiben.
+- filing-indicators auswerten: "true"/"false" je Template. Damit "nicht
+  offenlegungspflichtig/nicht eingereicht" von "echter Nullwert" unterscheiden.
+- PDF-Pfad (qualitativ): Text extrahieren, nach Template-Überschriften
+  segmentieren. Realistisch bleiben - Narrative sind heterogen, eher Stichwort-/
+  Themen-Extraktion als saubere Tabellen.
+
+DELIVERABLE PHASE 2: Codebook (Mapping Code -> Label/Einheit) + ein Parser,
+der ein Roh-Paket in einen sauberen Long-Form-Datensatz verwandelt.
+
+================================================================================
+PHASE 3 - MODELLIERUNG FÜR DATA SCIENCE
+================================================================================
+- Tidy/Long-Format als Wahrheit: eine Zeile =
+  (Institut, Stichtag, Template, Datapoint, Wert, Einheit, Währung,
+   Framework-Version, Flags). Daraus beliebige Wide-Pivots je Analyse erzeugen.
+- Entity-Layer: stabile Institut-ID über Zeit (LEI nutzen, falls vorhanden),
+  Land, Institutstyp (large/other, listed/G-SII), Konsolidierungsebene.
+- Framework-Versions-Brücke: 4.1 vs 4.2 können Template-/Datapoint-Änderungen
+  haben. Mapping-Tool der EBA nutzen, damit Zeitreihen über den Versionswechsel
+  konsistent bleiben. Sonst brechen Trends künstlich.
+- Speicherform: partitioniertes Parquet (z.B. nach Stichtag/Land). DuckDB für
+  Ad-hoc-SQL.
+- Data-Quality-Layer: automatische Checks (CET1-Ratio in plausiblen Grenzen,
+  RWA > 0, Summenkonsistenz innerhalb eines Templates). Ergebnis als QA-Report.
+
+DELIVERABLE PHASE 3: analysefertiger Parquet-Datensatz + Daten-Wörterbuch
++ QA-Report.
+
+================================================================================
+PHASE 4 - DATA-SCIENCE-EXPLORATIONEN
+================================================================================
+Pro Exploration ein eigenes Notebook. Geordnet von solide zu ambitioniert.
+
+QUERSCHNITT & BENCHMARKING
+- Kapital-/Liquiditätslandkarte: Verteilung von CET1-, Leverage-, LCR-,
+  NSFR-Ratios über Institute/Länder; Quantile, Ausreißer, Peer-Gruppen.
+- Peer-Group-Benchmarking: ein Institut gegen seine Kohorte (Größe/Land/
+  Geschäftsmodell), Perzentil-Einordnung.
+
+ZEITREIHEN (sobald mehrere Stichtage vorliegen)
+- Trajektorien von Kapital-/Risikokennzahlen quartalsweise.
+- Drift-/Frühwarn-Erkennung: Institute mit ungewöhnlich schnellen Bewegungen
+  relativ zur Peer-Group.
+
+STRUKTUR & MUSTER
+- Risikokomposition: RWA-Aufschlüsselung (Kredit-/Markt-/operationelles Risiko)
+  als Geschäftsmodell-Fingerabdruck. Clustering nach Risikoprofil statt nach
+  Land/Größe.
+- Asset-Quality-Lens: NPL-/Forbearance-Disclosures, Verteilung/Konzentration.
+
+ESG / TRANSPARENZVERHALTEN
+- ESG-Risiko-Templates (Art. 449a CRR): Green-Asset-Ratio, Banking-Book-
+  Taxonomy-Alignment über Institute vergleichen.
+- Disclosure-Vollständigkeit als eigene Metrik: Wer legt wie viel offen, wie
+  viele Templates werden "false"/leer gemeldet? Transparenz selbst messbar
+  machen - eine der originellsten Achsen, die der zentrale Hub erst ermöglicht.
+
+NLP AUF QUALITATIVEN DISCLOSURES (explorativ, nicht überverkaufen)
+- Themen-/Sentiment-Analyse der Narrative; Boilerplate-Erkennung (wer kopiert
+  Vorjahrestext, wer schreibt substanziell).
+
+DELIVERABLE PHASE 4: ein Notebook je Exploration + zusammenfassendes Findings-
+Dokument mit Visualisierungen.
+
+================================================================================
+QUERSCHNITTSTHEMEN (über alle Phasen)
+================================================================================
+- Versionierung & Reproduzierbarkeit: Roh-Layer immutable, jede Transformation
+  skriptiert, Manifest mit Quell-URLs/Zeitstempeln.
+- Vergleichbarkeitsfallen offen benennen (Rechnungslegung, Konsolidierung,
+  nationale Optionen).
+- "Fehlt" != "Null" durchgängig sauber halten.
+
+REALISTISCHE RISIKEN
+- Zugangsweg ist die größte Unbekannte. Ohne Bulk-Export wird Ingestion zäh
+  (Report-für-Report). Phase 0 entscheidet darüber.
+- DPM-Mapping ist fummelig; Codebook wächst iterativ.
+- Framework-Versionswechsel (4.1 -> 4.2) bricht naive Zeitreihen - früh
+  adressieren.
+
+================================================================================
+EMPFOHLENE REIHENFOLGE
+================================================================================
+1. Phase 0 abschließen (Zugang + Pilot-Scope), Decision-Memo schreiben.
+2. Pilot end-to-end für EIN Modul / EINEN Stichtag durch alle Phasen ziehen.
+3. Erst dann auf weitere Module, Stichtage, Institute skalieren.
+4. Explorationen schrittweise ergänzen, beginnend mit Querschnitt/Benchmarking.
+
+ERSTE KONKRETE AKTION FÜR DEN AGENTEN:
+Lege die Projektstruktur an, schreibe ein README mit diesem Plan, und beginne
+mit Phase 0: untersuche den EDAP-Zugangsweg und lade einen einzelnen
+Beispiel-Report manuell/programmatisch herunter, um das XBRL-CSV-Paket-Format
+real zu inspizieren.
+================================================================================

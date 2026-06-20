@@ -1,0 +1,14 @@
+{
+	"documentInfo" : {
+			"documentType" : "https://xbrl.org/2021/xbrl-csv",
+			"extends" : [
+					"http://www.eba.europa.eu/eu/fr/xbrl/crr/fws/pillar3/4.1/mod/codis.json"
+				]
+		},
+	"eba:generatingSoftwareInformation": {
+		"eba:softwareId": "Regnology XBRL engine",
+		"eba:softwareVersion": "9.5.1.0",
+		"eba:softwareCreationDate": "2022-10-14",
+		"eba:softwareAdditionalInfo": ""
+	}
+}

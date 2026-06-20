@@ -1,0 +1,25 @@
+exploration    (   0,   0)  Cover
+application    (   0,   0)  Show keyboard shortcuts
+Show screen reader tips
+Skip to main
+button         (  -1,  -2)  Show keyboard shortcuts
+a              (  -1,  25)  Show screen reader tips (opens in new tab)
+button         (  -1,  53)  Skip to main content
+region         (   0,   0)  Power BI Report
+group          ( 122, 498)  Ref Date
+All
+h3             ( 136, 503)  Ref Date
+combobox       ( 133, 524)  ReferenceDate
+div            ( 139, 530)  All
+group          ( 361, 498)  Entity Name
+All
+h3             ( 375, 503)  Entity Name
+combobox       ( 372, 524)  ENT_NAM
+div            ( 378, 530)  All
+group          ( 811, 498)  Module Name
+All
+h3             ( 825, 503)  Module Name
+combobox       ( 822, 524)  ModuleName
+div            ( 828, 530)  All
+link           (1260, 498)  Page navigation . Click here to follow
+link           (1260, 659)  Web URL . Click here to follow

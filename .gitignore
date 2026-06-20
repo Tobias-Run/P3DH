@@ -1,0 +1,29 @@
+# DPM Database und große Dateien
+codebook/*.zip
+codebook/*.accdb
+codebook/*.pdf
+
+# Raw Downloads (bei Phase 1 erzeugt)
+raw/*.zip
+raw/*.csv
+
+# Processed Outputs (wird erzeugt)
+processed/
+
+# Notebooks Checkpoints
+notebooks/.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
