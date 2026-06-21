@@ -55,3 +55,7 @@ einem Report, bevor skaliert wird).
 3. „Fehlt" ≠ „Null" durchgängig erhalten (`filing-indicators`).
 4. Vergleichbarkeitsfallen (Rechnungslegung, Konsolidierung, nationale Optionen) als
    Caveat in jeder Analyse benennen.
+5. Resubmissions: pro (Institut, Modul, Stichtag) wird nur die neueste Einreichung
+   verarbeitet (`scripts/resolve_latest_submissions.py`, „latest wins"). Der
+   vollständige Katalog inkl. älterer Fassungen bleibt in `manifest_urls.csv` als
+   Audit-Trail erhalten.

@@ -32,6 +32,29 @@ python3 scripts/harvest_catalog.py
 
 ---
 
+## Step 1.5: Resolve Resubmissions ("latest wins")
+
+EDAP enthält pro (Institut, Modul, Stichtag) teils mehrere Submissions
+(Korrekturen). Policy: nur die jeweils neueste (höchster `submission_ts`)
+wird heruntergeladen/geparst. Ältere Fassungen bleiben im Roh-Katalog
+(`manifest_urls.csv`) als Audit-Trail erhalten, fließen aber nicht in
+Download/Parsing ein.
+
+```bash
+python3 scripts/resolve_latest_submissions.py
+```
+
+**What happens:**
+1. Liest `manifest_urls.csv` (vollständiger Katalog, eine Zeile je Submission)
+2. Gruppiert nach `(lei, consolidation, country, module, refdate)`
+3. Behält je Gruppe nur die Zeile mit dem höchsten `submission_ts`
+4. Schreibt `interim/edap_recon/manifest_latest.csv`, loggt verworfene Resubmissions
+
+**Output:** `interim/edap_recon/manifest_latest.csv` — diese Datei konsumieren
+Download und Parser, nicht `manifest_urls.csv`.
+
+---
+
 ## Step 2: Download Reports
 
 Parallel HTTP download from public URLs into `/raw/`.
@@ -41,7 +64,7 @@ python3 scripts/download_raw_reports.py
 ```
 
 **What happens:**
-1. Reads `manifest_urls.csv`
+1. Reads `manifest_latest.csv` (nur aktuellste Submission je Institut/Modul/Stichtag)
 2. Downloads each `.zip` in parallel (4 workers, respects M1 constraint)
 3. Skips files already in `/raw/`
 4. Prints progress per file
