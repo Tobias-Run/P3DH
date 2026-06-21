@@ -1,55 +1,53 @@
-# Session Status — 2026-06-20
+# Session Status — 2026-06-21
 
-## Completed
+> Diese Datei ist die laufend aktualisierte Wahrheit zum Projektstatus.
+> Wird am Ende jeder Session auf den tatsächlichen Stand gebracht — nicht
+> verwaisen lassen wie die Vorgängerversion.
 
-**Phase 0: Analysis & Procurement**
-- ✅ EDAP access method clarified (Power BI embed + public HTTP URLs)
-- ✅ XBRL-CSV format inspected (real sample downloaded & analyzed)
-- ✅ DPM 2.0 Release 4.0 procured locally (`codebook/`)
-- ✅ Project structure + Git/GitHub set up
-- ✅ Decision memos + technical documentation written
+## Phasen-Übersicht
 
-**Phase 1: Ingestion (Scripts Ready)**
-- ✅ `harvest_catalog.py` — Playwright EDAP table scraper
-- ✅ `download_raw_reports.py` — HTTP parallel downloader (4 workers)
-- ✅ `phase1_ingestion.md` — Implementation guide
+| Phase | Status | Stand |
+|---|---|---|
+| 0 — Scoping & Zugangsklärung | ✅ Abgeschlossen | Decision Memo, Format-Analyse, EDAP-Zugang geklärt |
+| 1 — Ingestion | 🟡 Teilweise | Katalog geharvested (21 Submissions); Resubmission-Policy (latest-wins) umgesetzt → 17 aktuelle; nur 1 von 17 Roh-ZIPs tatsächlich in `raw/` persistiert |
+| 2 — Parsing & DPM-Join | 🟡 Interim | Parser liefert 19.048 Long-Form-Records aus 20 Reports; **alle Datapoint-Labels sind `[TODO: DPM lookup]`** — echter DPM-Join fehlt noch |
+| 3 — Modellierung | ⬜ Nicht begonnen | — |
+| 4 — Explorationen | ⬜ Nicht begonnen | — |
 
-## Next Action (Tomorrow or Later)
+## Zuletzt erledigt
+
+- Resubmission-Policy "latest wins": `scripts/resolve_latest_submissions.py`
+  filtert den Roh-Katalog (`manifest_urls.csv`, 21 Zeilen) auf eine Zeile je
+  (Institut, Modul, Stichtag) → `manifest_latest.csv` (17 Zeilen). Roh-Katalog
+  bleibt als Audit-Trail erhalten.
+- `download_raw_reports.py` konsumiert jetzt `manifest_latest.csv` statt der
+  ungefilterten Liste.
+- `BACKLOG.md` angelegt für offene Architekturpunkte.
+
+## Größte offene Blocker
+
+1. **DPM Data Dictionary nicht extrahiert.** Access-DB (`codebook/`) muss noch
+   per mdb-tools/pyodbc ausgelesen werden, um die 3.206 `dp<n>`-Codes im
+   Mini-Codebook auf echte Labels/Einheiten zu mappen. Ohne das bleiben die
+   Long-Form-Daten kryptisch (Phase 2 nicht wirklich abgeschlossen).
+2. **Roh-Layer unvollständig.** Nur 1 von 17 aktuellen Submissions liegt
+   physisch in `raw/` — der Rest wurde nie heruntergeladen oder ist
+   gitignored verlorengegangen. `download_raw_reports.py` muss erneut laufen.
+3. **Siehe `BACKLOG.md`:** Parser macht Full-Rerun statt inkrementellem
+   Append; kein Diff zwischen Harvest-Läufen.
+
+## Nächste konkrete Aktion
 
 ```bash
-cd /Users/tobibi/P3dh
-python3 scripts/harvest_catalog.py       # ~3–5 min: harvest URLs → manifest_urls.csv
-python3 scripts/download_raw_reports.py  # Download all .zip to /raw/
+python3 scripts/download_raw_reports.py     # restliche 16 Roh-ZIPs laden
+# danach: DPM-Dictionary-Extraktion angehen (Blocker 1)
 ```
-
-## Key Milestones
-
-| Phase | Status | Deliverable |
-|-------|--------|-------------|
-| 0 | ✅ Complete | Decision memo, format specs, DPM procured |
-| 1 | Ready (scripts written, not executed) | `/raw/*.zip` + `manifest_urls.csv` |
-| 2 | Pending | Parse XBRL-CSV, build Codebook, Long-Form conversion |
-| 3 | Pending | RF 4.1 ↔ 4.2 mapping for time series |
-| 4 | Pending | Zweig A (template rendering) + Zweig B (analytics) |
 
 ## Hardware Constraint
 
-M1/8GB: Playwright runs headless sequentially, HTTP download uses max 4 workers.
-
-## Known Blockers (Phase 2+)
-
-- **DPM Access:** Access Database locally available but requires external tool (mdb-tools/pyodbc) to extract
-- **DPM Dictionary:** Will be needed for Codebook construction (Phase 2)
+M1/8GB: Playwright läuft headless sequentiell, HTTP-Download max. 4 Worker.
 
 ## Repository
 
 - GitHub: https://github.com/Tobias-Run/P3DH
-- SSH key configured for CI/CD pushes
-- .gitignore excludes large files (DPM, raw downloads)
-
----
-
-**Git commits today:**
-1. `0486206` — Phase 0 complete: EDAP access, format analysis, DPM procurement
-2. `9d90188` — Phase 1 (Ingestion): Catalog harvester + HTTP downloader
-
+- `.gitignore` schließt große Dateien aus (DPM-Datenbank, Roh-ZIPs, große Processed-CSVs)
