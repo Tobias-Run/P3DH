@@ -7,7 +7,7 @@ import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
 
-MANIFEST = Path(__file__).resolve().parent.parent / "interim" / "edap_recon" / "manifest_urls.csv"
+MANIFEST = Path(__file__).resolve().parent.parent / "interim" / "edap_recon" / "manifest_latest.csv"
 RAW_DIR = Path(__file__).resolve().parent.parent / "raw"
 RAW_DIR.mkdir(exist_ok=True)
 
@@ -42,7 +42,7 @@ def download_file(url, dest_path, timeout=30):
 def main():
     if not MANIFEST.exists():
         print(f"ERROR: Manifest not found at {MANIFEST}")
-        print("Run: python scripts/harvest_catalog.py first")
+        print("Run: python scripts/harvest_catalog.py && python scripts/resolve_latest_submissions.py first")
         return
 
     # Load URLs from manifest

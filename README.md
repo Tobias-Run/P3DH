@@ -4,6 +4,10 @@ Reproduzierbare Pipeline: öffentlich publizierte Pillar-3-Daten aus dem EBA Pil
 Data Hub (P3DH) auf dem European Data Access Portal (EDAP) beziehen, aus XBRL-CSV in
 analysefertige Form überführen und Data-Science darauf ermöglichen.
 
+> **Aktueller Projektstatus:** siehe `SESSION_STATUS.md` — wird laufend aktuell gehalten.
+> `P3DH agent instructions.txt` war nur das initiale Briefing zu Projektstart und wird
+> seitdem nicht mehr fortgeschrieben; für den heutigen Stand nicht verlässlich.
+
 ## Zwei Ausgabe-Zweige, ein gemeinsamer Kern
 
 Der teure, fehleranfällige Teil (DPM-Join, Einheiten-Semantik, `filing-indicators`,
@@ -55,3 +59,7 @@ einem Report, bevor skaliert wird).
 3. „Fehlt" ≠ „Null" durchgängig erhalten (`filing-indicators`).
 4. Vergleichbarkeitsfallen (Rechnungslegung, Konsolidierung, nationale Optionen) als
    Caveat in jeder Analyse benennen.
+5. Resubmissions: pro (Institut, Modul, Stichtag) wird nur die neueste Einreichung
+   verarbeitet (`scripts/resolve_latest_submissions.py`, „latest wins"). Der
+   vollständige Katalog inkl. älterer Fassungen bleibt in `manifest_urls.csv` als
+   Audit-Trail erhalten.
