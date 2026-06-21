@@ -7,8 +7,9 @@ codebook/*.pdf
 raw/*.zip
 raw/*.csv
 
-# Processed Outputs (wird erzeugt)
-processed/
+# Processed Outputs (wird erzeugt) — CSV nur wenn klein
+processed/*.parquet
+processed/*.csv.gz
 
 # Notebooks Checkpoints
 notebooks/.ipynb_checkpoints/
