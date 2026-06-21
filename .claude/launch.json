@@ -4,7 +4,7 @@
     {
       "name": "zweig-a",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8766", "--directory", "processed/zweig_a"],
+      "runtimeArgs": ["-m", "http.server", "8766"],
       "port": 8766
     }
   ]

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zweig A — P3DH Template Viewer</title>
+<style>
+  :root { --blue:#0b3d91; --line:#e2e2e2; --bg:#fafafa; }
+  *{box-sizing:border-box}
+  body{font:13px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1a1a1a;background:var(--bg)}
+  header{background:var(--blue);color:#fff;padding:.7rem 1rem;position:sticky;top:0;z-index:5;
+         display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+  header h1{font-size:1.05rem;margin:0;font-weight:600}
+  header .sub{font-size:12px;opacity:.85}
+  .layout{display:flex;min-height:calc(100vh - 48px)}
+  aside{width:300px;flex:0 0 300px;border-right:1px solid var(--line);background:#fff;
+        overflow:auto;max-height:calc(100vh - 48px);position:sticky;top:48px}
+  aside .filter{padding:.5rem}
+  aside input{width:100%;padding:.4rem .5rem;border:1px solid var(--line);border-radius:4px;font:inherit}
+  .report{padding:.5rem .75rem;border-bottom:1px solid #f0f0f0;cursor:pointer}
+  .report:hover{background:#f3f6fc}
+  .report.active{background:#e7eefb;border-left:3px solid var(--blue)}
+  .report .lei{font-weight:600;word-break:break-all}
+  .report .rmeta{color:#666;font-size:11px;margin-top:2px}
+  main{flex:1;padding:1rem 1.25rem;overflow:auto;max-height:calc(100vh - 48px)}
+  .rhead h2{font-size:1.1rem;margin:.2rem 0;word-break:break-all}
+  .rhead .meta{color:#555;margin:.2rem 0 .6rem}
+  .tfilter{margin:.3rem 0 .8rem}
+  .tfilter input{padding:.35rem .5rem;border:1px solid var(--line);border-radius:4px;font:inherit;width:260px}
+  section{margin-bottom:1.4rem}
+  section h3{font-size:.95rem;margin:.2rem 0 .35rem;color:var(--blue)}
+  table{border-collapse:collapse;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  th,td{border:1px solid var(--line);padding:3px 7px;vertical-align:top}
+  thead th{background:var(--blue);color:#fff;font-weight:600;text-align:left;font-size:11px}
+  .rh{background:#f0f3fa;color:var(--blue);font-weight:600;text-align:center;width:48px}
+  .rl{max-width:340px;font-size:12px}
+  .cl{font-weight:400;opacity:.85;font-size:10px}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  td.empty{background:#f7f7f7}
+  .status{padding:2rem;color:#666}
+  .pill{display:inline-block;background:rgba(255,255,255,.18);border-radius:10px;padding:1px 8px;font-size:11px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Zweig A — Pillar 3 Template Viewer</h1>
+  <span class="sub" id="hsub">loading raw data…</span>
+</header>
+<div class="layout">
+  <aside>
+    <div class="filter"><input id="reportFilter" placeholder="Filter reports (LEI / currency)…"></div>
+    <div id="reportList"></div>
+  </aside>
+  <main id="main"><div class="status">Loading <code>long_form_raw.csv</code> + <code>dpm_codebook.csv</code>…</div></main>
+</div>
+
+<script>
+// ---- robust CSV parser (handles quoted fields with commas) ----
+function parseCSV(text){
+  const rows=[]; let field='', row=[], inq=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(inq){
+      if(c==='"'){ if(text[i+1]==='"'){field+='"';i++;} else inq=false; }
+      else field+=c;
+    }else{
+      if(c==='"') inq=true;
+      else if(c===','){ row.push(field); field=''; }
+      else if(c==='\n'){ row.push(field); rows.push(row); row=[]; field=''; }
+      else if(c!=='\r') field+=c;
+    }
+  }
+  if(field.length||row.length){ row.push(field); rows.push(row); }
+  return rows;
+}
+function toObjects(rows){
+  const head=rows[0]; const out=[];
+  for(let i=1;i<rows.length;i++){
+    if(rows[i].length===1 && rows[i][0]==='') continue;
+    const o={}; head.forEach((h,j)=>o[h]=rows[i][j]); out.push(o);
+  }
+  return out;
+}
+const esc=s=>String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function fmt(v){
+  const n=Number(v);
+  if(v==='' || isNaN(n)) return esc(v);
+  const s=(Number.isInteger(n)? n.toLocaleString('en-US') : n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
+  return s.replace(/,/g,' '); // narrow no-break space as thousands sep
+}
+// long-form template_id '60.00.A' -> DPM codebook key 'K_60.00.a'
+function dpmCode(tid){
+  const p=tid.split('.');
+  if(p.length && /^[A-Z]$/.test(p[p.length-1])) p[p.length-1]=p[p.length-1].toLowerCase();
+  return 'K_'+p.join('.');
+}
+
+let REPORTS=[], CB=new Map(), TITLES=new Map(), activeKey=null;
+
+function buildIndexes(longform, codebook){
+  for(const r of codebook){
+    if(!r.row) continue;
+    CB.set(r.template+'|'+r.row+'|'+r.col, {rl:r.row_label, cl:r.col_label});
+    if(r.template_title) TITLES.set(r.template, r.template_title);
+  }
+  const byReport=new Map();
+  for(const r of longform){
+    if(!r.cell_row) continue;
+    const key=r.entityID+'|'+r.refPeriod;
+    let rep=byReport.get(key);
+    if(!rep){ rep={entityID:r.entityID, refPeriod:r.refPeriod, baseCurrency:r.baseCurrency,
+                   framework:r.framework_version, templates:new Map()}; byReport.set(key,rep); }
+    let cells=rep.templates.get(r.template_id);
+    if(!cells){ cells=[]; rep.templates.set(r.template_id, cells); }
+    cells.push({row:r.cell_row, col:r.cell_col, val:r.fact_value});
+  }
+  REPORTS=[...byReport.values()].sort((a,b)=>
+    (a.entityID+a.refPeriod).localeCompare(b.entityID+b.refPeriod));
+}
+
+function renderReportList(filter=''){
+  const f=filter.toLowerCase();
+  const host=document.getElementById('reportList'); host.innerHTML='';
+  REPORTS.forEach(rep=>{
+    const hay=(rep.entityID+' '+rep.baseCurrency+' '+rep.refPeriod).toLowerCase();
+    if(f && !hay.includes(f)) return;
+    const key=rep.entityID+'|'+rep.refPeriod;
+    const div=document.createElement('div');
+    div.className='report'+(key===activeKey?' active':'');
+    div.innerHTML=`<div class="lei">${esc(rep.entityID)}</div>
+      <div class="rmeta">${esc(rep.refPeriod)} · ${esc(rep.baseCurrency)} · ${rep.templates.size} templates</div>`;
+    div.onclick=()=>{ activeKey=key; renderReportList(document.getElementById('reportFilter').value); renderReport(rep); };
+    host.appendChild(div);
+  });
+}
+
+function renderTemplate(tid, cells){
+  const tcode=dpmCode(tid);
+  const title=TITLES.get(tcode)||'';
+  const rows=[...new Set(cells.map(c=>c.row))].sort();
+  const cols=[...new Set(cells.map(c=>c.col))].sort();
+  const val=new Map(cells.map(c=>[c.row+'|'+c.col,c.val]));
+  const rowLbl=r=>{ const e=CB.get(tcode+'|'+r+'|'+cols[0]); return e?e.rl:''; };
+  const colLbl=c=>{ for(const r of rows){ const e=CB.get(tcode+'|'+r+'|'+c); if(e) return e.cl; } return ''; };
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'}</h3><table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
+  for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
+  h+='</tr></thead><tbody>';
+  for(const r of rows){
+    h+=`<tr><th class="rh">${esc(r)}</th><td class="rl">${esc(rowLbl(r))}</td>`;
+    for(const c of cols){ const v=val.get(r+'|'+c);
+      h+= v!==undefined? `<td class="num">${fmt(v)}</td>` : '<td class="empty"></td>'; }
+    h+='</tr>';
+  }
+  return h+'</tbody></table></section>';
+}
+
+function renderReport(rep){
+  const main=document.getElementById('main');
+  const tids=[...rep.templates.keys()].sort();
+  let html=`<div class="rhead"><h2>${esc(rep.entityID)}</h2>
+    <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(rep.baseCurrency)}</b>
+    · Framework <b>${esc(rep.framework)}</b> · values in units of base currency</div></div>
+    <div class="tfilter"><input id="tfilter" placeholder="Filter templates (code / title)…"></div>
+    <div id="tcontainer"></div>`;
+  main.innerHTML=html;
+  const draw=(f='')=>{
+    f=f.toLowerCase();
+    const c=document.getElementById('tcontainer'); c.innerHTML='';
+    let shown=0;
+    for(const tid of tids){
+      const title=(TITLES.get(dpmCode(tid))||'').toLowerCase();
+      if(f && !tid.toLowerCase().includes(f) && !title.includes(f)) continue;
+      c.insertAdjacentHTML('beforeend', renderTemplate(tid, rep.templates.get(tid)));
+      shown++;
+    }
+    if(!shown) c.innerHTML='<div class="status">No templates match.</div>';
+  };
+  draw();
+  document.getElementById('tfilter').addEventListener('input', e=>draw(e.target.value));
+  main.scrollTop=0;
+}
+
+async function init(){
+  try{
+    const [lfText, cbText]=await Promise.all([
+      fetch('../long_form_raw.csv').then(r=>{if(!r.ok)throw new Error('long_form_raw.csv '+r.status);return r.text();}),
+      fetch('../../codebook/dpm_codebook.csv').then(r=>{if(!r.ok)throw new Error('dpm_codebook.csv '+r.status);return r.text();})
+    ]);
+    const longform=toObjects(parseCSV(lfText));
+    const codebook=toObjects(parseCSV(cbText));
+    buildIndexes(longform, codebook);
+    document.getElementById('hsub').innerHTML=
+      `<span class="pill">${REPORTS.length} reports</span> <span class="pill">${longform.length.toLocaleString('en-US')} facts</span> <span class="pill">${CB.size.toLocaleString('en-US')} labelled cells</span>`;
+    renderReportList();
+    document.getElementById('reportFilter').addEventListener('input', e=>renderReportList(e.target.value));
+    document.getElementById('main').innerHTML='<div class="status">Select a report on the left.</div>';
+    if(REPORTS.length){ activeKey=REPORTS[0].entityID+'|'+REPORTS[0].refPeriod; renderReportList(); renderReport(REPORTS[0]); }
+  }catch(err){
+    document.getElementById('main').innerHTML='<div class="status">Failed to load data: '+esc(err.message)+
+      '<br><br>Serve from the project root, e.g.<br><code>python3 -m http.server 8766</code><br>then open <code>/processed/zweig_a/viewer.html</code></div>';
+    document.getElementById('hsub').textContent='load error';
+  }
+}
+init();
+</script>
+</body>
+</html>

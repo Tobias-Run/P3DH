@@ -49,18 +49,25 @@ cd /Users/tobibi/P3dh
 | 2 | ✅ core | Long-form (19,048 rows), DPM codebook (100% dp resolved, 82% cells) |
 | 2.5 | 🔧 | Sheet-dimension + Table-code join for remaining 18% |
 | 3 | ⬜ | RF 4.1 ↔ 4.2 mapping for time series |
-| 4A | ✅ | **Zweig A: HTML template reconstruction** (`processed/zweig_a/`) |
+| 4A | ✅ | **Zweig A: data-driven template viewer** (`processed/zweig_a/viewer.html`) |
 | 4B | ⬜ | Zweig B (machine-readable analytics: Parquet/DuckDB) |
 
-## Zweig A (done)
+## Zweig A (done) — data-driven viewer
 
-`render_zweig_a.py` rebuilds the long-form data into human-readable EBA template grids
-(one self-contained HTML per report + `index.html`), e.g. **KM1 (61.00)** with full row
-labels ("1. Common Equity Tier 1 (CET1) capital"), column periods (a=T, b=T-1) and
-correctly placed values. Labels come from the fully-labelled `dpm_codebook.csv`
-(`build_codebook.py`): `dp<n> → {template,row,col}` plus row/col label + template title,
-via pure ID joins through `TableVersionCell.TableVID → TableVersion / HeaderVersion`.
-Preview: `python3 -m http.server 8766 --directory processed/zweig_a` (or `launch.json`).
+`processed/zweig_a/viewer.html` is a single static page (vanilla JS, no build step) that
+**fetches the raw CSVs at runtime** and renders the EBA template grids client-side — no
+hardcoded data, no per-report files. It loads `processed/long_form_raw.csv` +
+`codebook/dpm_codebook.csv`, lets you pick a report (sidebar, filterable) and filter
+templates, e.g. **KM1 (61.00)** with full row labels ("1. Common Equity Tier 1 (CET1)
+capital"), period columns (a=T … e=T-4) and correctly placed values.
+
+Labels come from the fully-labelled `dpm_codebook.csv` (`build_codebook.py`):
+`dp<n> → {template,row,col}` + row/col label + template title, via pure ID joins through
+`TableVersionCell.TableVID → TableVersion / HeaderVersion`.
+
+Run (must serve from project root so the viewer can reach both CSVs):
+`python3 -m http.server 8766` → open `/processed/zweig_a/viewer.html`
+(or `.claude/launch.json` config `zweig-a`).
 
 Open polish items:
 - Template **titles** only ~22/148 (access-parser can't read memo-overflow `Name` fields);
