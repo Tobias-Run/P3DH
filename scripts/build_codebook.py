@@ -134,6 +134,33 @@ def parse_cellcode(code: str):
     return m.group(1).strip(), m.group(2), m.group(3)
 
 
+def load_template_titles():
+    """Authoritative template titles from the EBA Annotated Table Layout TOC
+    (extract_template_titles.py). Keyed by DPM code 'K_61.00'. Empty if absent."""
+    path = ROOT / "codebook" / "template_titles.csv"
+    titles = {}
+    if path.exists():
+        with open(path, encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                titles[r["template"]] = r["title"]
+        # base fallback: a sheet variant like K_19.02.d reuses K_19.02.<any> title
+        for code, title in list(titles.items()):
+            parts = code.split(".")
+            if len(parts) == 3 and len(parts[-1]) == 1:  # K_NN.NN.x
+                titles.setdefault(".".join(parts[:2]), title)
+    return titles
+
+
+def title_for(tmpl: str, titles: dict) -> str:
+    """Exact match, else fall back to the base template (drop sheet sub-letter)."""
+    if tmpl in titles:
+        return titles[tmpl]
+    parts = tmpl.split(".")
+    if len(parts) == 3 and len(parts[-1]) == 1:
+        return titles.get(".".join(parts[:2]), "")
+    return ""
+
+
 def load_report_codes(path: Path):
     out = []
     with open(path) as f:
@@ -149,6 +176,8 @@ def main():
     title_by_tvid, labels = build_label_index(db)
     print("  building resolution maps...")
     id2vid, vid2cell = build_resolution_maps(db)
+    title_csv = load_template_titles()
+    print(f"  template titles (EBA layout): {len(title_csv)}")
 
     report_codes = load_report_codes(REPORT_CODES)
     print(f"Resolving {len(report_codes)} datapoint codes...")
@@ -173,7 +202,7 @@ def main():
             rows.append({
                 "datapoint_code": dp_str, "variable_id": dp_int,
                 "template": tmpl, "row": row, "col": col,
-                "template_title": title_by_tvid.get(tvid, ""),
+                "template_title": title_for(tmpl, title_csv) or title_by_tvid.get(tvid, ""),
                 "row_label": labels.get((tvid, "row", row.zfill(4)), ""),
                 "col_label": labels.get((tvid, "col", col.zfill(4)), ""),
                 "frequency": freq,

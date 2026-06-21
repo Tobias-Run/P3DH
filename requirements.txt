@@ -6,3 +6,6 @@ pandas>=2.0
 
 # Phase 2 DPM dictionary (pure-python Access DB reader — no pyodbc/mdbtools needed)
 access-parser>=0.0.6
+
+# Phase 2 template titles (EBA Annotated Table Layout)
+openpyxl>=3.1

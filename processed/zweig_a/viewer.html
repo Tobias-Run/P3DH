@@ -201,16 +201,17 @@ function renderReport(rep){
 
 async function init(){
   try{
+    const NS={cache:'no-store'};  // always read the current CSVs, never a stale cache
     const [lfText, cbText]=await Promise.all([
-      fetch('../long_form_raw.csv').then(r=>{if(!r.ok)throw new Error('long_form_raw.csv '+r.status);return r.text();}),
-      fetch('../../codebook/dpm_codebook.csv').then(r=>{if(!r.ok)throw new Error('dpm_codebook.csv '+r.status);return r.text();})
+      fetch('../long_form_raw.csv',NS).then(r=>{if(!r.ok)throw new Error('long_form_raw.csv '+r.status);return r.text();}),
+      fetch('../../codebook/dpm_codebook.csv',NS).then(r=>{if(!r.ok)throw new Error('dpm_codebook.csv '+r.status);return r.text();})
     ]);
     const longform=toObjects(parseCSV(lfText));
     const codebook=toObjects(parseCSV(cbText));
     buildIndexes(longform, codebook);
     // optional: LEI -> bank name (degrades gracefully to the LEI if missing)
     try{
-      const namesText=await fetch('../lei_names.csv').then(r=>r.ok?r.text():'');
+      const namesText=await fetch('../lei_names.csv',NS).then(r=>r.ok?r.text():'');
       for(const r of toObjects(parseCSV(namesText))){
         if(r.lei) NAMES.set(r.lei, {name:r.legal_name, jur:r.jurisdiction});
       }

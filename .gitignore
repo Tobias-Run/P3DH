@@ -2,6 +2,7 @@
 codebook/*.zip
 codebook/*.accdb
 codebook/*.pdf
+codebook/*.xlsx
 
 # Raw Downloads (bei Phase 1 erzeugt)
 raw/*.zip
