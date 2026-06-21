@@ -125,10 +125,11 @@ def main():
                 if "errp.eba.europa.eu" in url:
                     parts = url.split("/")[-1].replace(".zip", "").split("_")
                     if len(parts) >= 6:
-                        lei = parts[0]
-                        consol_country = parts[1].split(".")
-                        consolidation = consol_country[0] if len(consol_country) > 0 else ""
-                        country = consol_country[1] if len(consol_country) > 1 else ""
+                        # parts[0] = LEI.CON|IND, parts[1] = Country, parts[2] = PILLAR3{module}, parts[3] = CODIS, parts[4] = refdate, parts[5] = timestamp
+                        lei_consol = parts[0].split(".")
+                        lei = lei_consol[0]
+                        consolidation = lei_consol[1] if len(lei_consol) > 1 else ""
+                        country = parts[1]
                         module = parts[2].replace("PILLAR3", "")
                         refdate = parts[4]
                         ts = parts[5]
