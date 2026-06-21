@@ -49,7 +49,24 @@ cd /Users/tobibi/P3dh
 | 2 | ✅ core | Long-form (19,048 rows), DPM codebook (100% dp resolved, 82% cells) |
 | 2.5 | 🔧 | Sheet-dimension + Table-code join for remaining 18% |
 | 3 | ⬜ | RF 4.1 ↔ 4.2 mapping for time series |
-| 4 | ⬜ | Zweig A (template rendering) + Zweig B (analytics) |
+| 4A | ✅ | **Zweig A: HTML template reconstruction** (`processed/zweig_a/`) |
+| 4B | ⬜ | Zweig B (machine-readable analytics: Parquet/DuckDB) |
+
+## Zweig A (done)
+
+`render_zweig_a.py` rebuilds the long-form data into human-readable EBA template grids
+(one self-contained HTML per report + `index.html`), e.g. **KM1 (61.00)** with full row
+labels ("1. Common Equity Tier 1 (CET1) capital"), column periods (a=T, b=T-1) and
+correctly placed values. Labels come from the fully-labelled `dpm_codebook.csv`
+(`build_codebook.py`): `dp<n> → {template,row,col}` plus row/col label + template title,
+via pure ID joins through `TableVersionCell.TableVID → TableVersion / HeaderVersion`.
+Preview: `python3 -m http.server 8766 --directory processed/zweig_a` (or `launch.json`).
+
+Open polish items:
+- Template **titles** only ~22/148 (access-parser can't read memo-overflow `Name` fields);
+  cleaner source = EBA "DPM table layout" / Glossary XLSX. Row/col labels are 100%.
+- **Unit handling**: percentage cells render as decimals (0.47 = 47%); long-form carries
+  no per-cell unit yet to distinguish monetary vs ratio.
 
 ## Hardware Note
 
