@@ -18,17 +18,20 @@ class XBRLCSVParser:
         self.datapoints = []
 
     def _load_codebook(self, codebook_path):
-        """Load datapoint codebook (dp<n> → label)."""
+        """Load DPM codebook keyed by (datapoint_code, template) → cell coordinate.
+
+        A datapoint can occur in several templates (shared variable), so the join
+        key includes the template. Codebook template format: 'K_73.00.c'."""
         codebook = {}
         if codebook_path and codebook_path.exists():
             with open(codebook_path, "r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    dp_code = row.get("datapoint_code", "")
-                    codebook[dp_code] = {
-                        "label": row.get("label", ""),
-                        "unit": row.get("unit", ""),
-                        "template": row.get("template", ""),
+                    key = (row.get("datapoint_code", ""), row.get("template", ""))
+                    codebook[key] = {
+                        "row": row.get("row", ""),
+                        "col": row.get("col", ""),
+                        "cell_code": row.get("cell_code", ""),
                     }
         return codebook
 
@@ -91,9 +94,12 @@ class XBRLCSVParser:
             filing_csv = z.read(filing_file).decode("utf-8")
             reader = csv.DictReader(filing_csv.splitlines())
             for row in reader:
-                template_id = row.get("templateID", "").upper()
+                # FilingIndicators format: templateID="K_03.00" (uppercase, K_ prefix,
+                # template-level only — no A/B/C sub-letter). Normalize to base id "03.00".
+                raw_id = row.get("templateID", "")
+                base_id = raw_id.upper().replace("K_", "").strip()
                 reported = row.get("reported", "").lower() == "true"
-                indicators[template_id] = reported
+                indicators[base_id] = reported
         except Exception as e:
             print(f"  Warning: FilingIndicators not found: {e}")
         return indicators
@@ -104,10 +110,15 @@ class XBRLCSVParser:
         k_files = [f for f in z.namelist() if "/k_" in f and f.endswith(".csv")]
 
         for k_file in k_files:
-            # Extract template ID from filename (e.g., k_01.00.csv → 01.00)
-            template_id = Path(k_file).stem.replace("k_", "").upper()
-            # Check if template was filed
-            reported = filing_indicators.get(template_id, False)
+            # Extract template ID from filename (e.g., k_04.00.a.csv → 04.00.A)
+            stem = Path(k_file).stem.replace("k_", "")
+            template_id = stem.upper()
+            # Codebook join key uses the DPM template code 'K_04.00.a' (lowercase sub-letter).
+            template_code = "K_" + stem
+            # Filing indicators are template-level only (K_04.00), so look up the
+            # base id without the A/B/C sub-letter (04.00.A → 04.00).
+            base_template = ".".join(template_id.split(".")[:2])
+            reported = filing_indicators.get(base_template, False)
 
             try:
                 k_csv = z.read(k_file).decode("utf-8")
@@ -120,8 +131,8 @@ class XBRLCSVParser:
                     if not dp_code or not fact_value:
                         continue
 
-                    # Look up label/unit in codebook
-                    cb_entry = self.codebook.get(dp_code, {})
+                    # Resolve cell coordinate from DPM codebook (datapoint × template)
+                    cb_entry = self.codebook.get((dp_code, template_code), {})
 
                     record = {
                         "entityID": self.metadata.get("entityID", ""),
@@ -130,9 +141,9 @@ class XBRLCSVParser:
                         "template_id": template_id,
                         "template_reported": reported,
                         "datapoint_code": dp_code,
-                        "datapoint_label": cb_entry.get("label", "[TODO]"),
+                        "cell_row": cb_entry.get("row", ""),
+                        "cell_col": cb_entry.get("col", ""),
                         "fact_value": fact_value,
-                        "unit": cb_entry.get("unit", "[TODO]"),
                         "baseCurrency": self.metadata.get("baseCurrency", ""),
                         "decimalsMonetary": self.metadata.get("decimalsMonetary", ""),
                     }
@@ -174,7 +185,7 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path):
 
 if __name__ == "__main__":
     RAW_DIR = Path(__file__).resolve().parent.parent / "raw"
-    CODEBOOK = Path(__file__).resolve().parent.parent / "codebook" / "mini_codebook_from_reports.csv"
+    CODEBOOK = Path(__file__).resolve().parent.parent / "codebook" / "dpm_codebook.csv"
     OUTPUT = Path(__file__).resolve().parent.parent / "processed" / "long_form_raw.csv"
 
     parse_all_reports(RAW_DIR, CODEBOOK, OUTPUT)

@@ -1,0 +1,8 @@
+# Phase 1 ingestion
+playwright>=1.40
+
+# Phase 1.5 metadata
+pandas>=2.0
+
+# Phase 2 DPM dictionary (pure-python Access DB reader — no pyodbc/mdbtools needed)
+access-parser>=0.0.6
