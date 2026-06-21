@@ -20,10 +20,12 @@
   .report{padding:.5rem .75rem;border-bottom:1px solid #f0f0f0;cursor:pointer}
   .report:hover{background:#f3f6fc}
   .report.active{background:#e7eefb;border-left:3px solid var(--blue)}
-  .report .lei{font-weight:600;word-break:break-all}
+  .report .lei{font-weight:600}
   .report .rmeta{color:#666;font-size:11px;margin-top:2px}
+  .report .leicode{color:#aaa;font-size:10px;margin-top:1px;font-variant-numeric:tabular-nums;letter-spacing:.2px}
   main{flex:1;padding:1rem 1.25rem;overflow:auto;max-height:calc(100vh - 48px)}
-  .rhead h2{font-size:1.1rem;margin:.2rem 0;word-break:break-all}
+  .rhead h2{font-size:1.2rem;margin:.2rem 0}
+  .meta .leicode{color:#999;font-size:11px;font-variant-numeric:tabular-nums;letter-spacing:.3px}
   .rhead .meta{color:#555;margin:.2rem 0 .6rem}
   .tfilter{margin:.3rem 0 .8rem}
   .tfilter input{padding:.35rem .5rem;border:1px solid var(--line);border-radius:4px;font:inherit;width:260px}
@@ -48,7 +50,7 @@
 </header>
 <div class="layout">
   <aside>
-    <div class="filter"><input id="reportFilter" placeholder="Filter reports (LEI / currency)…"></div>
+    <div class="filter"><input id="reportFilter" placeholder="Filter reports (name / LEI / currency)…"></div>
     <div id="reportList"></div>
   </aside>
   <main id="main"><div class="status">Loading <code>long_form_raw.csv</code> + <code>dpm_codebook.csv</code>…</div></main>
@@ -95,7 +97,19 @@ function dpmCode(tid){
   return 'K_'+p.join('.');
 }
 
-let REPORTS=[], CB=new Map(), TITLES=new Map(), activeKey=null;
+let REPORTS=[], CB=new Map(), TITLES=new Map(), NAMES=new Map(), activeKey=null;
+
+// entityID 'rs:0W2PZJM8XOY22M4GG883.CON' -> {lei, scope}
+function leiParts(entityID){
+  const m=entityID.match(/([A-Z0-9]{20})(?:\.(\w+))?/);
+  return m ? {lei:m[1], scope:(m[2]||'')} : {lei:entityID, scope:''};
+}
+function bankName(entityID){
+  const {lei}=leiParts(entityID);
+  const n=NAMES.get(lei);
+  return n && n.name ? n.name : entityID;
+}
+function refScope(s){ return s==='CON'?'Consolidated':s==='IND'?'Individual':s; }
 
 function buildIndexes(longform, codebook){
   for(const r of codebook){
@@ -122,13 +136,15 @@ function renderReportList(filter=''){
   const f=filter.toLowerCase();
   const host=document.getElementById('reportList'); host.innerHTML='';
   REPORTS.forEach(rep=>{
-    const hay=(rep.entityID+' '+rep.baseCurrency+' '+rep.refPeriod).toLowerCase();
+    const {lei,scope}=leiParts(rep.entityID);
+    const hay=(bankName(rep.entityID)+' '+rep.entityID+' '+rep.baseCurrency+' '+rep.refPeriod).toLowerCase();
     if(f && !hay.includes(f)) return;
     const key=rep.entityID+'|'+rep.refPeriod;
     const div=document.createElement('div');
     div.className='report'+(key===activeKey?' active':'');
-    div.innerHTML=`<div class="lei">${esc(rep.entityID)}</div>
-      <div class="rmeta">${esc(rep.refPeriod)} · ${esc(rep.baseCurrency)} · ${rep.templates.size} templates</div>`;
+    div.innerHTML=`<div class="lei">${esc(bankName(rep.entityID))}</div>
+      <div class="rmeta">${esc(refScope(scope))} · ${esc(rep.refPeriod)} · ${esc(rep.baseCurrency)} · ${rep.templates.size} templates</div>
+      <div class="leicode">${esc(lei)}</div>`;
     div.onclick=()=>{ activeKey=key; renderReportList(document.getElementById('reportFilter').value); renderReport(rep); };
     host.appendChild(div);
   });
@@ -157,7 +173,10 @@ function renderTemplate(tid, cells){
 function renderReport(rep){
   const main=document.getElementById('main');
   const tids=[...rep.templates.keys()].sort();
-  let html=`<div class="rhead"><h2>${esc(rep.entityID)}</h2>
+  const {lei,scope}=leiParts(rep.entityID);
+  const nrec=NAMES.get(lei)||{};
+  let html=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2>
+    <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
     <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(rep.baseCurrency)}</b>
     · Framework <b>${esc(rep.framework)}</b> · values in units of base currency</div></div>
     <div class="tfilter"><input id="tfilter" placeholder="Filter templates (code / title)…"></div>
@@ -189,6 +208,15 @@ async function init(){
     const longform=toObjects(parseCSV(lfText));
     const codebook=toObjects(parseCSV(cbText));
     buildIndexes(longform, codebook);
+    // optional: LEI -> bank name (degrades gracefully to the LEI if missing)
+    try{
+      const namesText=await fetch('../lei_names.csv').then(r=>r.ok?r.text():'');
+      for(const r of toObjects(parseCSV(namesText))){
+        if(r.lei) NAMES.set(r.lei, {name:r.legal_name, jur:r.jurisdiction});
+      }
+    }catch(e){ /* keep LEIs */ }
+    // sort reports by bank name (now that names are loaded), then ref period
+    REPORTS.sort((a,b)=> (bankName(a.entityID)+a.refPeriod).localeCompare(bankName(b.entityID)+b.refPeriod));
     document.getElementById('hsub').innerHTML=
       `<span class="pill">${REPORTS.length} reports</span> <span class="pill">${longform.length.toLocaleString('en-US')} facts</span> <span class="pill">${CB.size.toLocaleString('en-US')} labelled cells</span>`;
     renderReportList();
