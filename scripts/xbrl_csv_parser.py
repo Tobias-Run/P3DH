@@ -16,6 +16,7 @@ class XBRLCSVParser:
         self.codebook = self._load_codebook(codebook_path)
         self.metadata = {}
         self.datapoints = []
+        self.filing_indicators = {}
 
     def _load_codebook(self, codebook_path):
         """Load DPM codebook keyed by (datapoint_code, template) → cell coordinate.
@@ -42,10 +43,10 @@ class XBRLCSVParser:
             self._extract_metadata(z)
 
             # 2. Extract filing indicators (templates reported: true/false)
-            filing_indicators = self._extract_filing_indicators(z)
+            self.filing_indicators = self._extract_filing_indicators(z)
 
             # 3. Parse all k_NN.csv files
-            self._extract_datapoints(z, filing_indicators)
+            self._extract_datapoints(z, self.filing_indicators)
 
         return self.metadata, self.datapoints
 
@@ -91,7 +92,7 @@ class XBRLCSVParser:
         indicators = {}
         try:
             filing_file = next(f for f in z.namelist() if f.endswith("FilingIndicators.csv"))
-            filing_csv = z.read(filing_file).decode("utf-8")
+            filing_csv = z.read(filing_file).decode("utf-8-sig")  # some files carry a BOM
             reader = csv.DictReader(filing_csv.splitlines())
             for row in reader:
                 # FilingIndicators format: templateID="K_03.00" (uppercase, K_ prefix,
@@ -121,7 +122,7 @@ class XBRLCSVParser:
             reported = filing_indicators.get(base_template, False)
 
             try:
-                k_csv = z.read(k_file).decode("utf-8")
+                k_csv = z.read(k_file).decode("utf-8-sig")  # some files carry a BOM
                 reader = csv.DictReader(k_csv.splitlines())
                 for row in reader:
                     dp_code = row.get("datapoint", "")
@@ -155,10 +156,33 @@ class XBRLCSVParser:
         return datapoints
 
 
-def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path):
-    """Parse all .zip files in raw_dir → combined long-form CSV."""
+def _latest_filenames(manifest_path: Path):
+    """Filenames of the latest-wins submissions (resolve_latest_submissions.py output)."""
+    names = set()
+    with open(manifest_path, encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            url = row.get("url", "")
+            if url:
+                names.add(url.rstrip("/").split("/")[-1])
+    return names
+
+
+def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path, manifest_path: Path = None):
+    """Parse the latest-wins .zip submissions in raw_dir → combined long-form CSV.
+
+    If manifest_path (manifest_latest.csv) is given, only the submissions it lists are
+    parsed — older resubmissions present in raw/ are skipped (Resubmission-Policy)."""
     all_records = []
-    zip_files = list(raw_dir.glob("*.zip"))
+    coverage = []  # report × template × reported (the "fehlt ≠ Null" matrix)
+    zip_files = sorted(raw_dir.glob("*.zip"))
+
+    if manifest_path and manifest_path.exists():
+        latest = _latest_filenames(manifest_path)
+        kept = [z for z in zip_files if z.name in latest]
+        skipped = len(zip_files) - len(kept)
+        zip_files = kept
+        if skipped:
+            print(f"Resubmission-Policy: {skipped} ältere ZIP(s) übersprungen (nicht in manifest_latest.csv)")
 
     print(f"Parsing {len(zip_files)} reports...")
     for i, zip_file in enumerate(zip_files, 1):
@@ -166,6 +190,14 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path):
             parser = XBRLCSVParser(zip_file, codebook_path)
             metadata, datapoints = parser.parse()
             all_records.extend(datapoints)
+            for template_id, reported in parser.filing_indicators.items():
+                coverage.append({
+                    "entityID": metadata.get("entityID", ""),
+                    "refPeriod": metadata.get("refPeriod", ""),
+                    "framework_version": metadata.get("framework_version", ""),
+                    "template_id": template_id,
+                    "reported": reported,
+                })
             print(f"  [{i:2d}/{len(zip_files)}] {zip_file.name[:50]:50s} {len(datapoints):6d} datapoints")
         except Exception as e:
             print(f"  [{i:2d}/{len(zip_files)}] {zip_file.name[:50]:50s} ERROR: {e}")
@@ -182,10 +214,25 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path):
     else:
         print("ERROR: No records extracted")
 
+    # Coverage matrix — which templates each report declared reported / not reported.
+    # This is the "fehlt ≠ Null" foundation: a template absent here was never declared,
+    # reported=False means explicitly declared as not disclosed.
+    if coverage:
+        cov_path = output_path.parent / "filing_indicators.csv"
+        with open(cov_path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=list(coverage[0].keys()))
+            writer.writeheader()
+            writer.writerows(coverage)
+        n_true = sum(1 for c in coverage if c["reported"])
+        print(f"✓ Filing indicators: {cov_path}")
+        print(f"  {len(coverage)} rows ({n_true} reported / {len(coverage)-n_true} declared not-reported)")
+
 
 if __name__ == "__main__":
-    RAW_DIR = Path(__file__).resolve().parent.parent / "raw"
-    CODEBOOK = Path(__file__).resolve().parent.parent / "codebook" / "dpm_codebook.csv"
-    OUTPUT = Path(__file__).resolve().parent.parent / "processed" / "long_form_raw.csv"
+    ROOT = Path(__file__).resolve().parent.parent
+    RAW_DIR = ROOT / "raw"
+    CODEBOOK = ROOT / "codebook" / "dpm_codebook.csv"
+    OUTPUT = ROOT / "processed" / "long_form_raw.csv"
+    MANIFEST = ROOT / "interim" / "edap_recon" / "manifest_latest.csv"
 
-    parse_all_reports(RAW_DIR, CODEBOOK, OUTPUT)
+    parse_all_reports(RAW_DIR, CODEBOOK, OUTPUT, MANIFEST)
