@@ -23,9 +23,77 @@ generischen Phase-4-Vorschlägen der Instructions).
    bis der DPM-Join steht.
 2. **Filing-Indicators defekt** — `template_reported` ist derzeit immer `False`
    (BOM- + Key-Bug, siehe BACKLOG). „Fehlt ≠ Null" ist erst nach Fix vertrauenswürdig.
-3. **Kleine Stichprobe** — 8 Institute tragen kein robustes Peer-Benchmarking /
-   Clustering. Querschnitt-Analysen sind vorerst „Methode bauen, Insight nach
-   Skalierung der Ingestion".
+3. **Kleine Stichprobe — und geschäftsmodell-fragmentiert** — 8 Institute tragen
+   kein robustes Peer-Benchmarking / Clustering. Verschärfend: die 8 verteilen sich
+   auf ~6 sehr unterschiedliche Geschäftsmodelle (siehe Abschnitt „Geschäftsmodell-
+   Abhängigkeit" unten), d. h. die *effektive* Peer-Gruppe ist eher 1–2 als 8.
+   Querschnitt-Analysen sind vorerst „Methode bauen, Insight nach Skalierung der
+   Ingestion".
+
+---
+
+## Geschäftsmodell-Abhängigkeit (Prüfung zu Einschränkung 3)
+
+**Frage:** Trägt die Stichprobe von 8 Instituten ein Querschnitts-Benchmarking,
+wenn man die Geschäftsmodelle berücksichtigt? **Antwort: nein — eher weniger als
+die reine Zahl 8 suggeriert, aber die Heterogenität ist für die *Struktur*-Analyse
+(Idee A) ein Gewinn, kein Verlust.**
+
+### Die 8 Institute nach Geschäftsmodell-Archetyp
+
+| Institut | Land | Kons. | Archetyp | gemeldete Templates |
+|---|---|---|---|---|
+| DEKABANK | DE | CON | Sparkassen-Zentralinstitut / Kapitalmarkt & Asset Mgmt | **45** |
+| Aktiebolaget Svensk Exportkredit | SE | IND | Exportkreditagentur (Spezial-/Förderkredit) | 32 |
+| NOBA BANK GROUP | SE | CON | Consumer-Finance / Nischenbank | 28 |
+| HYPO TIROL BANK | AT | CON | Regionale Universalbank | 26 |
+| AS INBANK | EE | CON | Digitale Consumer-Finance-Bank | 26 |
+| SPARKASSE (HOLDINGS) MALTA | MT | CON | Kleine Sparkasse (Holding) | 9 |
+| RØNDE SPAREKASSE | DK | IND | Sehr kleine lokale Sparkasse | 7 |
+| RIETUMU BANKA | LV | CON | Commercial / Private Bank | **4** |
+
+→ ~6 Archetypen auf 8 Institute. Spannweite der gemeldeten Templates: **4 bis 45**
+(Faktor >10). Das sind keine 8 vergleichbaren Banken, sondern ein Spektrum vom
+winzigen Einlageninstitut bis zum vollen Kapitalmarkthaus.
+
+### Empirischer Beleg: der Template-Fußabdruck folgt dem Geschäftsmodell
+
+Aus `processed/filing_indicators.csv` (reported=true), nicht aus Annahmen:
+
+- **Universeller Kern (alle Archetypen melden):** `60 OV1` (Risikoexposure-Übersicht),
+  `61 KM1` (Key Metrics), `66.01/66.02 CC1/CC2` (Eigenmittel-Zusammensetzung). Das
+  ist das Pflicht-Rückgrat, das jede Bank einreicht.
+- **Nur DekaBank, NICHT bei den kleinen Sparkassen (Rønde/Rietumu/Malta):**
+  Marktrisiko (`10–13 MR1/MR2/MR3`), Kontrahentenrisiko (`02–08 CCR1–8`),
+  Verbriefung (`09 SEC1/4`), IRB-Kreditrisiko (`26–29 CR6–10`), operationelles
+  Risiko im Detail (`19 OR1–3`), LCR/NSFR (`73/74 LIQ1/2`), Prudent Valuation
+  (`65 PV1`), Krypto-Assets (`01 CAE1`).
+
+Diese Templates fehlen bei den Sparkassen **strukturell** — kein Handelsbuch, keine
+IRB-Modelle, keine Verbriefung. Das ist Geschäftsmodell, nicht Intransparenz.
+
+### Konsequenzen für die Analysen
+
+1. **Tier-2-Benchmarking (D/E) ist noch stärker limitiert als „N=8" andeutet.**
+   Eine CET1-/Leverage-/RWA-Dichte-Verteilung würde eine Exportkreditagentur mit
+   einer dänischen Dorfsparkasse vergleichen — ökonomisch sinnlos. Effektive
+   Peer-Gruppe ≈ 1–2. → erst Methode bauen, Insight nach Skalierung; und beim
+   Skalieren muss eine Geschäftsmodell-/Größenklassen-Schichtung *vor* jedem
+   Vergleich stehen.
+
+2. **„Fehlt ≠ Null" braucht einen dritten Zustand.** Nicht nur
+   `reported=true` vs. `false`, sondern auch **„strukturell nicht anwendbar"**
+   (Template gar nicht im Set des Instituts, weil geschäftsmodellbedingt irrelevant).
+   Ein fehlendes Marktrisiko-Template bei Rønde Sparekasse ist *erwartet*, kein
+   Versäumnis.
+
+3. **Idee A (Disclosure-Profil) wird durch die Heterogenität wertvoller, nicht
+   schwächer.** Schon bei N=8 ist ein archetyp-getriebener Offenlegungs-Fußabdruck
+   sichtbar. ABER: der Transparenz-Score darf **nicht** an der Gesamtzahl aller
+   Templates normiert werden (sonst „bestraft" man die Sparkasse für nicht
+   vorhandenes Handelsbuch-Risiko), sondern an der **geschäftsmodell-bedingten
+   Anwendbarkeit**. Methodisch: Score = gemeldet / (gemeldet + bewusst als
+   „nicht wesentlich/nicht anwendbar" gemeldet), nicht / Gesamtuniversum.
 
 ---
 
@@ -43,6 +111,10 @@ brauchen die 423-MB-Access-DB **nicht**.
 - Voraussetzung: Filing-Indicator-Bug fixen. Caveat: „nicht offenlegungspflichtig"
   ≠ „freiwillig weggelassen" → braucht `frequency_of_disclosures` (Pflicht je
   Institutstyp), um Pflicht von Wahl zu trennen.
+- **Wichtig:** Score an geschäftsmodell-bedingter Anwendbarkeit normieren, nicht am
+  Gesamt-Template-Universum — siehe Abschnitt „Geschäftsmodell-Abhängigkeit".
+  Der dritte Zustand „strukturell nicht anwendbar" muss von „bewusst weggelassen"
+  getrennt werden.
 
 ### B. Framework 4.1 → 4.2 Struktur-Diff  ⭐ de-riskt Phase 3
 - Beide Versionen sind bereits im Datensatz → welche Templates/Datapoints sind in
