@@ -10,7 +10,7 @@
 | 0 — Scoping & Zugang | ✅ | Decision Memo, Format-Analyse, EDAP-Zugang, Git/GitHub |
 | 1 — Ingestion | ✅ | 20 ZIPs in `raw/`; Resubmission-Policy „latest-wins" eingebunden (Download **und** Parser konsumieren `manifest_latest.csv`) → 16 aktuelle Submissions |
 | 2 — Parsing & DPM-Join | ✅ | `long_form_raw.csv` (**17.883 Records**); DPM-Blocker gelöst (access-parser + DPM v4.2); 3206/3206 Datapoints aufgelöst, 84 % mit Zellkoordinate; voll gelabeltes `dpm_codebook.csv` (Row/Col-Labels 100 %, **Template-Titel 82/82**) |
-| 2.5 — Refinement | 🔧 | restliche ~16 % ohne Zellkoordinate (Sheet-/Z-Achse + Sub-Letter-Versatz bei 64/66/67/29) |
+| 2.5 — Refinement | ✅ | Ursache der ~16 % ohne Zellkoordinate geklärt: **offene Achse** (67/66/64/29 u. a. tragen typisierte Dimensionsspalte). Parser erfasst sie jetzt als `open_axis_dims` statt sie zu verwerfen; Regressionstests in `tests/`. **TODO Laptop:** `long_form_raw.csv` über alle 16 Reports neu erzeugen |
 | 3 — RF 4.1↔4.2-Mapping | ⬜ | Brücke für Zeitreihen (beide Versionen im Datensatz) |
 | 4A — Zweig A | ✅ | **Data-driven Viewer** `processed/zweig_a/viewer.html` (Bank-Namen + volle Titel) |
 | 4B — Zweig B | ⬜ | maschinenlesbare Analytics (Parquet/DuckDB) |
@@ -76,8 +76,11 @@ Politur offen: Unit-Handling (% -Zellen als Dezimal, keine Pro-Zelle-Einheit).
 
 ## Offene Punkte / Backlog (siehe `BACKLOG.md`)
 
-1. **Phase 2.5:** ~16 % Records ohne Zellkoordinate (Sheet-/Z-Achse, Sub-Letter-Versatz
-   bei 64/66/67/29) → über relationale `Table`/`TableVersion`-Codes statt Dateinamen joinen.
+1. ✅ **Phase 2.5 geklärt:** Die ~16 % ohne Zellkoordinate sind **offene-Achsen-Templates**
+   (typisierte Dimensionsspalte `RIO`/`qADP`/`qABI`/`qEEA`), kein Join-Bug. Parser erfasst
+   die Dimension jetzt als `open_axis_dims`. **Folgeschritt:** `long_form_raw.csv` auf dem
+   Laptop über alle 16 Reports neu erzeugen; optional Phase 3: Dimensionswerte gegen
+   DPM-Open-Axis-Member auflösen.
 2. **Unit-Handling:** % -Zellen als Dezimal (0.47 = 47 %); Long-Form trägt keine Pro-Zelle-Einheit.
 3. **Delta-Pipeline:** Harvest schreibt Katalog komplett neu (kein Diff); Parser Full-Rerun
    statt Append. Unkritisch bei ~20 Reports.

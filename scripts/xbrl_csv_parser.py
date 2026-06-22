@@ -135,6 +135,20 @@ class XBRLCSVParser:
                     # Resolve cell coordinate from DPM codebook (datapoint × template)
                     cb_entry = self.codebook.get((dp_code, template_code), {})
 
+                    # Open-axis templates (e.g. 67.01 CCyB1 geographical, 66.02 CC2,
+                    # 64.0x LI2/LI3, 29.0x CR9/CR10) carry typed-dimension columns
+                    # beyond datapoint/factValue (RIO=country, qADP/qABI=free text).
+                    # The "row" of such a table is defined at filing time by this
+                    # dimension value, not by a static DPM cell — so there is no
+                    # codebook coordinate to join. Capture the dimension instead of
+                    # dropping it (otherwise e.g. the country of each CCyB1 exposure
+                    # is lost). Serialized as "col=value;col=value".
+                    open_dims = {
+                        k: v for k, v in row.items()
+                        if k not in ("datapoint", "factValue") and (v or "").strip()
+                    }
+                    open_axis_dims = ";".join(f"{k}={v}" for k, v in open_dims.items())
+
                     record = {
                         "entityID": self.metadata.get("entityID", ""),
                         "refPeriod": self.metadata.get("refPeriod", ""),
@@ -144,6 +158,7 @@ class XBRLCSVParser:
                         "datapoint_code": dp_code,
                         "cell_row": cb_entry.get("row", ""),
                         "cell_col": cb_entry.get("col", ""),
+                        "open_axis_dims": open_axis_dims,
                         "fact_value": fact_value,
                         "baseCurrency": self.metadata.get("baseCurrency", ""),
                         "decimalsMonetary": self.metadata.get("decimalsMonetary", ""),

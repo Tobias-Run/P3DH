@@ -1,25 +1,34 @@
 # Backlog
 
-## 🔴 BUG: Filing-Indicators immer `False` (Korrektheit, „Fehlt ≠ Null" kaputt)
+## ✅ ERLEDIGT: Filing-Indicators immer `False` („Fehlt ≠ Null")
 
-`xbrl_csv_parser.py` setzt `template_reported` für **alle** Records auf `False`.
-Zwei unabhängige Ursachen, beide bestätigt am Sample-Report (real: 34×true/21×false):
+Behoben (utf-8-sig + Key-Normalisierung auf Basis-ID ohne `K_`-Präfix). Der
+Parser schreibt jetzt zusätzlich `processed/filing_indicators.csv` (Coverage-
+Matrix). Regressionstest dagegen: `tests/test_xbrl_csv_parser.py`
+(`test_filing_indicators_not_all_false`, `..._key_normalized_and_values`).
 
-1. **BOM:** `_extract_filing_indicators()` liest `FilingIndicators.csv` mit
-   `.decode("utf-8")` statt `utf-8-sig`. Die erste Spalte heißt dadurch intern
-   `﻿reported`, `row.get("reported")` liefert `None` → alles `False`.
-   (`_extract_metadata()` macht es mit `utf-8-sig` bereits korrekt — Inkonsistenz.)
-2. **Key-Mismatch:** Parser leitet aus `k_61.00.csv` die ID `61.00` ab, der
-   Indicator-Dict-Key ist aber `K_61.00`. `.get("61.00")` trifft nie → `False`.
+## ✅ ERLEDIGT: Phase 2.5 — fehlende Zell-Koordinaten = offene Achse
 
-**Wirkung:** Die in den Instructions als *zwingend* markierte Unterscheidung
-„nicht offengelegt" vs. „echter Nullwert" fehlt komplett. Blockiert die
-Disclosure-/Transparenz-Analyse (Tier 1, höchster Wert — siehe
-`docs/phase4_analysis_ideas.md`).
+~16 % der Records hatten kein `cell_row`/`cell_col`, zu 100 % in den Templates
+mit **offener Achse** (67.01 CCyB1 geografisch, 66.02 CC2, 64.0x LI2/LI3,
+29.0x CR9/CR10; auch open-axis-Zellen in 04.00/26.00). Diese k-Dateien tragen
+eine dritte, typisierte Dimensionsspalte (`RIO`=Land, `qADP`/`qABI`/`qEEA`=
+Freitext/Enumeration). Für offene Tabellen gibt es im DPM **keine statische
+(row, col)** — die Zeile entsteht erst zur Einreichung über den Dimensionswert.
 
-**Fix-Hinweis:** klein (utf-8-sig + Key-Normalisierung auf `K_<NN.NN>`), aber
-erst zusammen mit dem Repopulieren des `raw/`-Layers anwenden, sonst entstehen
-Code und committetes `long_form_raw.csv` inkonsistent (nur 1 ZIP lokal vorhanden).
+Es war also **kein Join-Bug**, sondern Datenverlust: der Parser las nur
+`datapoint`/`factValue` und verwarf die Dimensionsspalte (→ bei CCyB1 ging das
+Land jeder Position verloren). Fix: neues Feld `open_axis_dims` erfasst alle
+Spalten jenseits von `datapoint`/`factValue` als `col=value;…`. Am Sample-Report
+verifiziert: 370/370 koordinatenlose Records sind jetzt über `open_axis_dims`
+identifiziert, 0 bleiben ohne Identität. Regressionstest:
+`test_open_axis_dimension_captured`, `test_open_axis_rows_not_collapsed`.
+
+**Offen / Folgeschritt:** `processed/long_form_raw.csv` muss mit allen 16 Reports
+auf dem Laptop **neu erzeugt** werden, damit die neue Spalte `open_axis_dims`
+und die geretteten Dimensionen einfließen (Remote-Session hat nur 1 Sample-ZIP,
+deshalb hier bewusst nicht überschrieben). Optional Phase 3: `open_axis_dims`
+gegen DPM-Open-Axis-Member auflösen (z. B. `eba_GA:NL` → „Niederlande").
 
 ## Delta-Pipeline: inkrementelle Verarbeitung (offen)
 
