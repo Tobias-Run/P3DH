@@ -29,3 +29,6 @@ venv/
 
 # macOS
 .DS_Store
+
+# captured live request may contain session tokens
+interim/edap_recon/query_request.json
