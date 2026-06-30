@@ -8,7 +8,7 @@
 | Phase | Status | Stand |
 |---|---|---|
 | 0 — Scoping & Zugang | ✅ | Decision Memo, Format-Analyse, EDAP-Zugang, Git/GitHub |
-| 1 — Ingestion | ✅ | 20 ZIPs in `raw/`; Resubmission-Policy „latest-wins" eingebunden (Download **und** Parser konsumieren `manifest_latest.csv`) → 16 aktuelle Submissions |
+| 1 — Ingestion | ✅ (Mechanik), 🟡 (Umfang) | 20 ZIPs in `raw/`; Resubmission-Policy „latest-wins" eingebunden → 16 aktuelle Submissions. **NEU: Voll-Katalog-Harvester** `harvest_catalog_query.py` (Power-BI-`query`-Endpoint statt Scroll) → **kompletter Katalog: 4.278 Submissions / 489 Institute**. Geladen sind erst **8/489 Institute ≈ 1,6 %** bzw. **16/4.278 ≈ 0,4 %** |
 | 2 — Parsing & DPM-Join | ✅ | `long_form_raw.csv` (**17.883 Records**); DPM-Blocker gelöst (access-parser + DPM v4.2); 3206/3206 Datapoints aufgelöst, 84 % mit Zellkoordinate; voll gelabeltes `dpm_codebook.csv` (Row/Col-Labels 100 %, **Template-Titel 82/82**) |
 | 2.5 — Refinement | ✅ | Ursache der ~16 % ohne Zellkoordinate geklärt: **offene Achse** (67/66/64/29 u. a. tragen typisierte Dimensionsspalte). Parser erfasst sie jetzt als `open_axis_dims` statt sie zu verwerfen; Regressionstests in `tests/`. **TODO Laptop:** `long_form_raw.csv` über alle 16 Reports neu erzeugen |
 | 3 — RF 4.1↔4.2-Mapping | ⬜ | Brücke für Zeitreihen (beide Versionen im Datensatz) |
@@ -18,7 +18,13 @@
 
 ## Datenabdeckung (Snapshot)
 
-8 Institute · 16 aktuelle Submissions (nach Resubmission-Dedup; 20 ZIPs roh) ·
+**Echter Gesamtbestand im Hub (harvested 2026-06-22):** 4.278 Submissions · 489 Institute ·
+2 Module (010000 *und* 020000 — geladen nur 020000) · Stichtage 2025-12-31 (2.690),
+2025-06-30 (1.010), 2025-09-30 (314), 2026-03-31 (248), 2025-10-31 (16) · EU/EEA-weit
+(DE 518, IT 440, FR 375, ES 277, SE 244, AT 233, PL 202, NL, DK, BE, LU, IE …).
+Katalog liegt in `interim/edap_recon/manifest_full.csv`. **Wir haben davon ~0,4 % geladen.**
+
+**Aktuell geladen:** 8 Institute · 16 aktuelle Submissions (nach Resubmission-Dedup; 20 ZIPs roh) ·
 4 Stichtage (2025-06-30 … 2026-03-31) · DE/SE/AT/MT/EE/DK/LV · 11 CON / 5 IND ·
 EUR/SEK/DKK · Framework 4.1 (94 %) **und** 4.2 (6 %) gemischt · 88 Templates ·
 4 Institute mit ≥2 Stichtagen (1 mit allen 4) → kurze Zeitreihen möglich.
@@ -30,7 +36,8 @@ GIROZENTRALE, HYPO TIROL BANK AG, Aktiebolaget Svensk Exportkredit, SPARKASSE
 ## Pipeline-Artefakte (Reihenfolge)
 
 ```
-harvest_catalog.py            -> interim/edap_recon/manifest_urls.csv  (Roh-Katalog, Audit)
+harvest_catalog_query.py      -> interim/edap_recon/manifest_full.csv  (VOLLER Katalog, query-API)
+harvest_catalog.py            -> interim/edap_recon/manifest_urls.csv  (alt: Scroll, nur ~20 — überholt)
 resolve_latest_submissions.py -> interim/edap_recon/manifest_latest.csv (latest-wins)
 download_raw_reports.py       -> raw/*.zip
 build_sample_codebook.py      -> codebook/mini_codebook_from_reports.csv (dp-Codes)
@@ -73,6 +80,11 @@ Politur offen: Unit-Handling (% -Zellen als Dezimal, keine Pro-Zelle-Einheit).
   not-reported) als „Fehlt ≠ Null"-Grundlage, sauber getrennt von den Fakten.
 - **Bank-Namen** via GLEIF in den Viewer.
 - **Template-Titel** 82/82 via EBA Annotated Table Layout.
+- **Voll-Katalog-Harvester** gebaut (`harvest_catalog_query.py`): EDAP ist Azure Blob (kein
+  public list) + kein offizielles Bulk/API → Katalog via Power-BI-`query`-Endpoint (Window
+  hochgesetzt, ein Request) → 4.278 Submissions / 489 Institute. Damit echte Abdeckung = ~0,4 %.
+- **Loop-Konzept** („loop engineering") besprochen, vorerst **geparkt**: passt später als
+  Cron-Delta-Loop (Hub wächst bis Mitte 2026), aber erst wenn die Skalen-Pipeline (Zweig B) steht.
 
 ## Offene Punkte / Backlog (siehe `BACKLOG.md`)
 
@@ -86,6 +98,10 @@ Politur offen: Unit-Handling (% -Zellen als Dezimal, keine Pro-Zelle-Einheit).
    statt Append. Unkritisch bei ~20 Reports.
 4. **Erste Auswertung** auf der Coverage-Matrix (Transparenz-/Disclosure-Score je Institut,
    Tier 1 aus `docs/phase4_analysis_ideas.md`) — netz-unabhängig machbar.
+5. **STRATEGISCHE ENTSCHEIDUNG (offen):** Voll-Load 4.278 Submissions ⇒ Millionen Long-Form-
+   Zeilen ⇒ **Zweig B (DuckDB/Parquet) wird Pflicht**, Browser-Viewer skaliert nicht (muss pro
+   Report lazy-laden). Alternative: erst repräsentative Stichprobe (z. B. 1 Stichtag × alle
+   Länder) als Skalentest. Download via `manifest_full.csv` → `download_raw_reports.py`.
 
 ## Hardware
 
