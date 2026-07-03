@@ -3,11 +3,14 @@ Reads manifest.csv, downloads in parallel, skips existing files."""
 
 from pathlib import Path
 import csv
+import sys
 import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
 
-MANIFEST = Path(__file__).resolve().parent.parent / "interim" / "edap_recon" / "manifest_latest.csv"
+# Manifest to download: CLI arg wins, else the latest-wins default.
+_RECON = Path(__file__).resolve().parent.parent / "interim" / "edap_recon"
+MANIFEST = Path(sys.argv[1]) if len(sys.argv) > 1 else _RECON / "manifest_latest.csv"
 RAW_DIR = Path(__file__).resolve().parent.parent / "raw"
 RAW_DIR.mkdir(exist_ok=True)
 
