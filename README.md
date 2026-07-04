@@ -8,6 +8,26 @@ analysefertige Form überführen und Data-Science darauf ermöglichen.
 > `P3DH agent instructions.txt` war nur das initiale Briefing zu Projektstart und wird
 > seitdem nicht mehr fortgeschrieben; für den heutigen Stand nicht verlässlich.
 
+## 🔗 Live-Viewer (im Browser, ohne Installation)
+
+Der **Zweig-A-Viewer** rekonstruiert die Bank-Templates (KM1, CCR1 …) mit vollen
+Zeilen-/Spalten-Labels direkt im Browser — er lädt die verarbeiteten CSVs zur Laufzeit.
+
+- **Landing:** `index.html` · **Viewer:** `processed/zweig_a/viewer.html`
+- **Öffentlich (GitHub Pages):** `https://tobias-run.github.io/P3DH/`
+  → einmalig aktivieren: **Repo → Settings → Pages → Source: `main` / root**. Danach ist der
+  Viewer für jeden Web-Besucher live, kein Klonen/Server nötig.
+- **Lokal:** `python3 -m http.server 8766` im Repo-Root → `http://localhost:8766/`
+
+## ⚠ Disclaimer / Datenquellen
+
+Unabhängiges, **nicht-kommerzielles Forschungs-/Bildungsprojekt**, **nicht** mit EBA oder
+GLEIF verbunden. Alle externen Daten sind **öffentlich** und werden ausschließlich zu
+**wissenschaftlichen/Bildungszwecken** genutzt (Fair Use / Forschung). Quellen: EBA Pillar 3
+Data Hub (© EBA), EBA DPM 2.0, GLEIF (LEI-Namen). Bereitstellung „as is", ohne Gewähr —
+Zahlen stets gegen die offizielle EBA-Quelle prüfen; keine Anlage-/Rechtsberatung.
+Volltext: **`DISCLAIMER.md`**.
+
 ## Zwei Ausgabe-Zweige, ein gemeinsamer Kern
 
 Der teure, fehleranfällige Teil (DPM-Join, Einheiten-Semantik, `filing-indicators`,

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EBA Pillar 3 Data Hub — Research Viewer</title>
+<style>
+  :root{--blue:#0b3d91;--bg:#fafafa;--line:#e6e6e6;}
+  *{box-sizing:border-box}
+  body{font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1a1a1a;background:var(--bg)}
+  .wrap{max-width:760px;margin:0 auto;padding:3rem 1.25rem 4rem}
+  header h1{font-size:1.7rem;margin:.2rem 0;color:var(--blue)}
+  header p.tag{font-size:1.05rem;color:#444;margin:.2rem 0 1.4rem}
+  .cta{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;
+       padding:.7rem 1.4rem;border-radius:7px;margin:.4rem 0}
+  .cta:hover{background:#0a3480}
+  .cta.secondary{background:#fff;color:var(--blue);border:1px solid var(--blue);margin-left:.5rem}
+  section{background:#fff;border:1px solid var(--line);border-radius:9px;padding:1.1rem 1.3rem;margin:1.1rem 0;
+          box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  h2{font-size:1.05rem;color:var(--blue);margin:.1rem 0 .6rem}
+  code{background:#f0f3fa;padding:1px 5px;border-radius:4px;font-size:.9em}
+  .disclaimer{background:#fff8e6;border-color:#f0dca0}
+  .disclaimer h2{color:#8a6d1a}
+  ul{margin:.3rem 0 .3rem 1.1rem;padding:0}
+  li{margin:.25rem 0}
+  a{color:var(--blue)}
+  footer{color:#777;font-size:12.5px;margin-top:1.6rem;border-top:1px solid var(--line);padding-top:1rem}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:.3rem 0}
+  th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  th{background:#f0f3fa;color:var(--blue)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>EBA Pillar 3 — Bank Disclosure Viewer</h1>
+    <p class="tag">An independent, open research pipeline that turns the EU banks' public
+       Pillar&nbsp;3 regulatory disclosures into readable, browsable templates.</p>
+    <a class="cta" href="processed/zweig_a/viewer.html">▶ Open the viewer</a>
+    <a class="cta secondary" href="https://github.com/Tobias-Run/P3DH">View source on GitHub</a>
+  </header>
+
+  <section>
+    <h2>What is this?</h2>
+    <p>Large EU/EEA banks must publicly disclose prudential (“Pillar 3”) information — capital,
+       risk, liquidity. The EBA centralises these on the <a href="https://www.eba.europa.eu/risk-and-data-analysis/pillar-3-data-hub">Pillar 3 Data Hub</a>
+       as machine-readable XBRL-CSV. This project ingests those filings, resolves the DPM
+       data-point dictionary, and reconstructs each bank's official templates (KM1, CCR1, …)
+       with full row/column labels — viewable right in your browser, no install.</p>
+    <p style="color:#555;margin-bottom:0">The viewer loads the processed CSVs live. It currently
+       shows a sample of institutions; the full catalog covers 489 institutions / 4,278 filings.</p>
+  </section>
+
+  <section class="disclaimer">
+    <h2>⚠ Disclaimer — public data, research use</h2>
+    <p>Independent, <b>non-commercial research / educational</b> project. <b>Not affiliated with,
+       endorsed by, or connected to</b> the EBA, GLEIF, or any disclosing institution.</p>
+    <p>All external data is <b>publicly available</b> and used for <b>scientific and educational
+       purposes only</b> (fair use / research exemptions):</p>
+    <table>
+      <tr><th>Data</th><th>Source</th></tr>
+      <tr><td>Public Pillar 3 disclosures (XBRL-CSV)</td><td>© European Banking Authority — Pillar 3 Data Hub / EDAP</td></tr>
+      <tr><td>Datapoint & template labels</td><td>© European Banking Authority — DPM 2.0</td></tr>
+      <tr><td>LEI → entity names</td><td>© GLEIF (CC0)</td></tr>
+    </table>
+    <p style="margin-bottom:0"><b>No warranty.</b> Data is re-presented “as is” and may contain
+       parsing/mapping errors — always verify against the official EBA source. Nothing here is
+       investment, financial, legal, or accounting advice.
+       Full text: <a href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md">DISCLAIMER.md</a>.</p>
+  </section>
+
+  <footer>
+    Original data © European Banking Authority and GLEIF. This repository’s own code and derived
+    presentations are provided for research and transparency. Sources:
+    <a href="https://www.eba.europa.eu/risk-and-data-analysis/pillar-3-data-hub">EBA Pillar 3 Data Hub</a> ·
+    <a href="https://www.gleif.org/">GLEIF</a>.
+  </footer>
+</div>
+</body>
+</html>

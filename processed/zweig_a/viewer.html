@@ -12,6 +12,12 @@
          display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
   header h1{font-size:1.05rem;margin:0;font-weight:600}
   header .sub{font-size:12px;opacity:.85}
+  header .hlink{color:#fff;font-size:12px;text-decoration:none;opacity:.9;border:1px solid rgba(255,255,255,.4);
+                border-radius:5px;padding:2px 8px}
+  header .hlink:hover{opacity:1;background:rgba(255,255,255,.12)}
+  header .hlink:first-of-type{margin-left:auto}
+  footer.disc{font-size:11.5px;color:#666;padding:.7rem 1rem;border-top:1px solid var(--line);background:#fff}
+  footer.disc a{color:var(--blue)}
   .layout{display:flex;min-height:calc(100vh - 48px)}
   aside{width:300px;flex:0 0 300px;border-right:1px solid var(--line);background:#fff;
         overflow:auto;max-height:calc(100vh - 48px);position:sticky;top:48px}
@@ -47,6 +53,8 @@
 <header>
   <h1>Zweig A — Pillar 3 Template Viewer</h1>
   <span class="sub" id="hsub">loading raw data…</span>
+  <a class="hlink" href="../../index.html">About</a>
+  <a class="hlink" href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md" title="Public data, research use — not affiliated with EBA/GLEIF">Disclaimer</a>
 </header>
 <div class="layout">
   <aside>
@@ -55,6 +63,12 @@
   </aside>
   <main id="main"><div class="status">Loading <code>long_form_raw.csv</code> + <code>dpm_codebook.csv</code>…</div></main>
 </div>
+<footer class="disc">
+  Independent, non-commercial research project — <b>not affiliated with the EBA or GLEIF</b>.
+  Public Pillar&nbsp;3 data © European Banking Authority; entity names © GLEIF. Re-presented
+  “as is” for scientific/educational use (fair use) — verify figures against the official EBA
+  source. Not investment or legal advice. <a href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md">Full disclaimer</a>.
+</footer>
 
 <script>
 // ---- robust CSV parser (handles quoted fields with commas) ----
