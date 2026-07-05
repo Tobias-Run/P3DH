@@ -248,6 +248,13 @@ if __name__ == "__main__":
     RAW_DIR = ROOT / "raw"
     CODEBOOK = ROOT / "codebook" / "dpm_codebook.csv"
     OUTPUT = ROOT / "processed" / "long_form_raw.csv"
-    MANIFEST = ROOT / "interim" / "edap_recon" / "manifest_latest.csv"
+    import sys
+    # Manifest to parse: CLI arg wins, else the CODIS parse manifest, else latest-wins.
+    if len(sys.argv) > 1:
+        MANIFEST = Path(sys.argv[1])
+    else:
+        MANIFEST = ROOT / "interim" / "edap_recon" / "manifest_parse.csv"
+        if not MANIFEST.exists():
+            MANIFEST = ROOT / "interim" / "edap_recon" / "manifest_latest.csv"
 
     parse_all_reports(RAW_DIR, CODEBOOK, OUTPUT, MANIFEST)
