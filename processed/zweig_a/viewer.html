@@ -21,8 +21,16 @@
   .layout{display:flex;min-height:calc(100vh - 48px)}
   aside{width:300px;flex:0 0 300px;border-right:1px solid var(--line);background:#fff;
         overflow:auto;max-height:calc(100vh - 48px);position:sticky;top:48px}
-  aside .filter{padding:.5rem}
-  aside input{width:100%;padding:.4rem .5rem;border:1px solid var(--line);border-radius:4px;font:inherit}
+  aside .filter{padding:.5rem;border-bottom:1px solid var(--line)}
+  aside input[type=text],aside input:not([type]){width:100%;padding:.4rem .5rem;border:1px solid var(--line);border-radius:4px;font:inherit}
+  .selrow{display:flex;gap:.35rem;margin-top:.35rem}
+  .selrow select{flex:1;min-width:0;padding:.3rem .2rem;border:1px solid var(--line);border-radius:4px;
+                 font:inherit;font-size:11.5px;background:#fff;color:#333}
+  .gsii{display:flex;align-items:center;gap:.4rem;font-size:11.5px;color:#333;margin-top:.4rem;cursor:pointer}
+  .fcount{font-size:11px;color:#888;margin-top:.35rem}
+  .badge{display:inline-block;font-size:9.5px;font-weight:600;border-radius:3px;padding:0 4px;margin-left:4px;vertical-align:1px}
+  .badge.gs{background:#7a1fa2;color:#fff}
+  .badge.it{background:#e7eefb;color:var(--blue)}
   .report{padding:.5rem .75rem;border-bottom:1px solid #f0f0f0;cursor:pointer}
   .report:hover{background:#f3f6fc}
   .report.active{background:#e7eefb;border-left:3px solid var(--blue)}
@@ -58,7 +66,20 @@
 </header>
 <div class="layout">
   <aside>
-    <div class="filter"><input id="reportFilter" placeholder="Filter reports (name / LEI / currency)…"></div>
+    <div class="filter">
+      <input id="reportFilter" placeholder="Filter reports (name / LEI / currency)…">
+      <div class="selrow">
+        <select id="fCountry"><option value="">Land: alle</option></select>
+        <select id="fItype"><option value="">Größenklasse: alle</option></select>
+      </div>
+      <div class="selrow">
+        <select id="fScope"><option value="">Scope: alle</option>
+          <option value="CON">Consolidated</option><option value="IND">Individual</option></select>
+        <select id="fDate"><option value="">Stichtag: alle</option></select>
+      </div>
+      <label class="gsii"><input type="checkbox" id="fGsii"> nur G-SII-Modul-Melder</label>
+      <div class="fcount" id="fCount"></div>
+    </div>
     <div id="reportList"></div>
   </aside>
   <main id="main"><div class="status">Loading <code>long_form_raw.csv</code> + <code>dpm_codebook.csv</code>…</div></main>
@@ -111,7 +132,7 @@ function dpmCode(tid){
   return 'K_'+p.join('.');
 }
 
-let REPORTS=[], CB=new Map(), TITLES=new Map(), NAMES=new Map(), activeKey=null;
+let REPORTS=[], CB=new Map(), TITLES=new Map(), NAMES=new Map(), META=new Map(), activeKey=null;
 
 // entityID 'rs:0W2PZJM8XOY22M4GG883.CON' -> {lei, scope}
 function leiParts(entityID){
@@ -146,22 +167,65 @@ function buildIndexes(longform, codebook){
     (a.entityID+a.refPeriod).localeCompare(b.entityID+b.refPeriod));
 }
 
-function renderReportList(filter=''){
-  const f=filter.toLowerCase();
+function shortItype(t){
+  return t==='Large highest EEA'?'Large':t==='Other highest EEA'?'Other':
+         t==='Large subsidiaries'?'Large sub.':t;
+}
+function renderReportList(){
+  const f=(document.getElementById('reportFilter').value||'').toLowerCase();
+  const fc=document.getElementById('fCountry').value;
+  const fi=document.getElementById('fItype').value;
+  const fs=document.getElementById('fScope').value;
+  const fd=document.getElementById('fDate').value;
+  const fg=document.getElementById('fGsii').checked;
   const host=document.getElementById('reportList'); host.innerHTML='';
+  let shown=0;
   REPORTS.forEach(rep=>{
     const {lei,scope}=leiParts(rep.entityID);
-    const hay=(bankName(rep.entityID)+' '+rep.entityID+' '+rep.baseCurrency+' '+rep.refPeriod).toLowerCase();
+    const m=META.get(lei)||{};
+    const hay=(bankName(rep.entityID)+' '+rep.entityID+' '+rep.baseCurrency+' '+rep.refPeriod+' '+(m.country||'')).toLowerCase();
     if(f && !hay.includes(f)) return;
+    if(fc && m.country!==fc) return;
+    if(fi && m.institution_type!==fi) return;
+    if(fs && scope!==fs) return;
+    if(fd && rep.refPeriod!==fd) return;
+    if(fg && m.is_gsii!=='true') return;
+    shown++;
     const key=rep.entityID+'|'+rep.refPeriod;
+    const badges=(m.is_gsii==='true'?'<span class="badge gs" title="reicht das G-SII-Offenlegungsmodul ein">G-SII</span>':'')+
+                 (m.institution_type?`<span class="badge it">${esc(shortItype(m.institution_type))}</span>`:'');
     const div=document.createElement('div');
     div.className='report'+(key===activeKey?' active':'');
-    div.innerHTML=`<div class="lei">${esc(bankName(rep.entityID))}</div>
-      <div class="rmeta">${esc(refScope(scope))} · ${esc(rep.refPeriod)} · ${esc(rep.baseCurrency)} · ${rep.templates.size} templates</div>
+    div.innerHTML=`<div class="lei">${esc(bankName(rep.entityID))}${badges}</div>
+      <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(scope))} · ${esc(rep.refPeriod)} · ${esc(rep.baseCurrency)} · ${rep.templates.size} templates</div>
       <div class="leicode">${esc(lei)}</div>`;
-    div.onclick=()=>{ activeKey=key; renderReportList(document.getElementById('reportFilter').value); renderReport(rep); };
+    div.onclick=()=>{ activeKey=key; renderReportList(); renderReport(rep); };
     host.appendChild(div);
   });
+  document.getElementById('fCount').textContent=`${shown} von ${REPORTS.length} Reports`;
+}
+function initFilters(){
+  const countries=new Set(), itypes=new Set(), dates=new Set();
+  REPORTS.forEach(rep=>{
+    const {lei}=leiParts(rep.entityID);
+    const m=META.get(lei)||{};
+    if(m.country) countries.add(m.country);
+    if(m.institution_type) itypes.add(m.institution_type);
+    dates.add(rep.refPeriod);
+  });
+  const fill=(id,vals,label)=>{
+    const sel=document.getElementById(id);
+    [...vals].sort().forEach(v=>{
+      const o=document.createElement('option'); o.value=v;
+      o.textContent=(label?label(v):v); sel.appendChild(o);
+    });
+  };
+  fill('fCountry',countries);
+  fill('fItype',itypes,shortItype);
+  fill('fDate',dates);
+  ['fCountry','fItype','fScope','fDate'].forEach(id=>
+    document.getElementById(id).addEventListener('change',renderReportList));
+  document.getElementById('fGsii').addEventListener('change',renderReportList);
 }
 
 function renderTemplate(tid, cells){
@@ -230,12 +294,20 @@ async function init(){
         if(r.lei) NAMES.set(r.lei, {name:r.legal_name, jur:r.jurisdiction});
       }
     }catch(e){ /* keep LEIs */ }
+    // optional: LEI -> EDAP entity metadata (country, EBA size class, G-SII module)
+    try{
+      const metaText=await fetch('../entity_meta.csv',NS).then(r=>r.ok?r.text():'');
+      for(const r of toObjects(parseCSV(metaText))){
+        if(r.lei) META.set(r.lei, r);
+      }
+    }catch(e){ /* filters stay empty */ }
     // sort reports by bank name (now that names are loaded), then ref period
     REPORTS.sort((a,b)=> (bankName(a.entityID)+a.refPeriod).localeCompare(bankName(b.entityID)+b.refPeriod));
     document.getElementById('hsub').innerHTML=
       `<span class="pill">${REPORTS.length} reports</span> <span class="pill">${longform.length.toLocaleString('en-US')} facts</span> <span class="pill">${CB.size.toLocaleString('en-US')} labelled cells</span>`;
+    initFilters();
     renderReportList();
-    document.getElementById('reportFilter').addEventListener('input', e=>renderReportList(e.target.value));
+    document.getElementById('reportFilter').addEventListener('input', ()=>renderReportList());
     document.getElementById('main').innerHTML='<div class="status">Select a report on the left.</div>';
     if(REPORTS.length){ activeKey=REPORTS[0].entityID+'|'+REPORTS[0].refPeriod; renderReportList(); renderReport(REPORTS[0]); }
   }catch(err){

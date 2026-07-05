@@ -32,3 +32,4 @@ venv/
 
 # captured live request may contain session tokens
 interim/edap_recon/query_request.json
+interim/edap_recon/query_response.json
