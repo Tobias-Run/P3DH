@@ -132,6 +132,29 @@ def build_label_index(db):
     return title_by_tvid, labels
 
 
+# DataType table is a fixed 13-row dictionary; IDs verified against the 4.2 DB.
+DATATYPE_BY_ID = {1: "integer", 2: "decimal", 3: "string", 4: "boolean", 5: "true",
+                  6: "datetime", 7: "date", 8: "enum", 9: "monetary", 10: "percentage",
+                  11: "uri", 12: "ordinal", 13: "string"}
+
+
+def build_datatype_map(db):
+    """VariableID -> data type name, via VariableVersion.PropertyID -> Property.DataTypeID.
+    All versions of a variable share its property, so variable-level typing is exact."""
+    prop = db.parse_table("Property")
+    dt_by_prop = {int(p): DATATYPE_BY_ID.get(int(d), "")
+                  for p, d in zip(prop["PropertyID"], prop["DataTypeID"]) if p and d}
+    vv = db.parse_table("VariableVersion")
+    id2dt = {}
+    for varid, pid in zip(vv["VariableID"], vv["PropertyID"]):
+        if varid in id2dt or not pid:
+            continue
+        dt = dt_by_prop.get(int(pid))
+        if dt:
+            id2dt[varid] = dt
+    return id2dt
+
+
 def build_resolution_maps(db):
     """VariableID -> set(VariableVID); VariableVID -> set((TableVID, decoded CellCode))."""
     vv = db.parse_table("VariableVersion")
@@ -196,6 +219,7 @@ def main():
     title_by_tvid, labels = build_label_index(db)
     print("  building resolution maps...")
     id2vid, vid2cell = build_resolution_maps(db)
+    id2dt = build_datatype_map(db)
     title_csv = load_template_titles()
     print(f"  template titles (EBA layout): {len(title_csv)}")
 
@@ -211,7 +235,7 @@ def main():
         if not cells:
             rows.append({"datapoint_code": dp_str, "variable_id": dp_int, "template": "",
                          "row": "", "col": "", "template_title": "", "row_label": "",
-                         "col_label": "", "frequency": freq})
+                         "col_label": "", "data_type": id2dt.get(dp_int, ""), "frequency": freq})
             continue
         resolved += 1
         for tvid, code in sorted(cells):
@@ -225,6 +249,7 @@ def main():
                 "template_title": title_for(tmpl, title_csv) or title_by_tvid.get(tvid, ""),
                 "row_label": labels.get((tvid, "row", row.zfill(4)), ""),
                 "col_label": labels.get((tvid, "col", col.zfill(4)), ""),
+                "data_type": id2dt.get(dp_int, ""),
                 "frequency": freq,
             })
 
@@ -240,7 +265,7 @@ def main():
     rows.sort(key=lambda r: (r["template"], r["row"], r["col"], r["datapoint_code"]))
 
     fields = ["datapoint_code", "variable_id", "template", "row", "col",
-              "template_title", "row_label", "col_label", "frequency"]
+              "template_title", "row_label", "col_label", "data_type", "frequency"]
     with open(OUT, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fields)
         w.writeheader()

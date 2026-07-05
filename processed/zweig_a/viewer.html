@@ -41,8 +41,11 @@
   .rhead h2{font-size:1.2rem;margin:.2rem 0}
   .meta .leicode{color:#999;font-size:11px;font-variant-numeric:tabular-nums;letter-spacing:.3px}
   .rhead .meta{color:#555;margin:.2rem 0 .6rem}
-  .tfilter{margin:.3rem 0 .8rem}
+  .tfilter{margin:.3rem 0 .8rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
   .tfilter input{padding:.35rem .5rem;border:1px solid var(--line);border-radius:4px;font:inherit;width:260px}
+  .scalelbl{font-size:12.5px;color:#444}
+  .scalelbl select{margin-left:.3rem;padding:.25rem .3rem;border:1px solid var(--line);border-radius:4px;font:inherit;font-size:12px;background:#fff}
+  .scalenote{font-size:11px;font-weight:400;color:#666;background:#f0f3fa;border-radius:4px;padding:1px 7px;margin-left:.5rem;vertical-align:2px}
   section{margin-bottom:1.4rem}
   section h3{font-size:.95rem;margin:.2rem 0 .35rem;color:var(--blue)}
   table{border-collapse:collapse;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08)}
@@ -125,6 +128,28 @@ function fmt(v){
   const s=(Number.isInteger(n)? n.toLocaleString('en-US') : n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
   return s.replace(/,/g,' '); // narrow no-break space as thousands sep
 }
+// ---- typed rendering (data types from the DPM dictionary) ----
+let SCALE='auto';  // 'auto' | 1 | 1e3 | 1e6 | 1e9
+const UNIT_LABEL={1:'',1e3:'Tsd.',1e6:'Mio.',1e9:'Mrd.'};
+function pickUnit(maxAbs){
+  if(SCALE!=='auto') return SCALE;
+  for(const u of [1e9,1e6,1e3]) if(maxAbs/u>=1) return u;
+  return 1;
+}
+function fmtTyped(v, dt, unit){
+  const n=Number(v);
+  if(v==='' || isNaN(n)) return esc(v);
+  if(dt==='percentage'){
+    const p=n*100;
+    return p.toFixed(Math.abs(p)<10?2:1)+' %';
+  }
+  if(dt==='integer') return fmt(v);
+  if(dt==='monetary' && unit>1){
+    const s=(n/unit).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
+    return s.replace(/,/g,' ');
+  }
+  return fmt(v);
+}
 // long-form template_id '60.00.A' -> DPM codebook key 'K_60.00.a'
 function dpmCode(tid){
   const p=tid.split('.');
@@ -149,7 +174,7 @@ function refScope(s){ return s==='CON'?'Consolidated':s==='IND'?'Individual':s; 
 function buildIndexes(longform, codebook){
   for(const r of codebook){
     if(!r.row) continue;
-    CB.set(r.template+'|'+r.row+'|'+r.col, {rl:r.row_label, cl:r.col_label});
+    CB.set(r.template+'|'+r.row+'|'+r.col, {rl:r.row_label, cl:r.col_label, dt:r.data_type||''});
     if(r.template_title) TITLES.set(r.template, r.template_title);
   }
   const byReport=new Map();
@@ -228,21 +253,29 @@ function initFilters(){
   document.getElementById('fGsii').addEventListener('change',renderReportList);
 }
 
-function renderTemplate(tid, cells){
+function renderTemplate(tid, cells, currency){
   const tcode=dpmCode(tid);
   const title=TITLES.get(tcode)||'';
   const rows=[...new Set(cells.map(c=>c.row))].sort();
   const cols=[...new Set(cells.map(c=>c.col))].sort();
   const val=new Map(cells.map(c=>[c.row+'|'+c.col,c.val]));
+  const dtOf=(r,c)=>{ const e=CB.get(tcode+'|'+r+'|'+c); return e?e.dt:''; };
   const rowLbl=r=>{ const e=CB.get(tcode+'|'+r+'|'+cols[0]); return e?e.rl:''; };
   const colLbl=c=>{ for(const r of rows){ const e=CB.get(tcode+'|'+r+'|'+c); if(e) return e.cl; } return ''; };
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'}</h3><table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
+  // template-wide monetary scale: one unit per table keeps columns comparable
+  let maxAbs=0;
+  for(const c of cells){
+    if(dtOf(c.row,c.col)==='monetary'){ const n=Math.abs(Number(c.val)); if(n>maxAbs) maxAbs=n; }
+  }
+  const unit=maxAbs>0?pickUnit(maxAbs):1;
+  const note=unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${esc(currency||'')}</span>`:'';
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${note}</h3><table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){
     h+=`<tr><th class="rh">${esc(r)}</th><td class="rl">${esc(rowLbl(r))}</td>`;
     for(const c of cols){ const v=val.get(r+'|'+c);
-      h+= v!==undefined? `<td class="num">${fmt(v)}</td>` : '<td class="empty"></td>'; }
+      h+= v!==undefined? `<td class="num">${fmtTyped(v,dtOf(r,c),unit)}</td>` : '<td class="empty"></td>'; }
     h+='</tr>';
   }
   return h+'</tbody></table></section>';
@@ -256,10 +289,17 @@ function renderReport(rep){
   let html=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2>
     <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
     <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(rep.baseCurrency)}</b>
-    · Framework <b>${esc(rep.framework)}</b> · values in units of base currency</div></div>
-    <div class="tfilter"><input id="tfilter" placeholder="Filter templates (code / title)…"></div>
+    · Framework <b>${esc(rep.framework)}</b></div></div>
+    <div class="tfilter"><input id="tfilter" placeholder="Filter templates (code / title)…">
+      <label class="scalelbl">Skala:
+        <select id="scaleSel">
+          <option value="auto">Auto</option><option value="1">Voll</option>
+          <option value="1000">Tsd.</option><option value="1000000">Mio.</option>
+          <option value="1000000000">Mrd.</option>
+        </select></label></div>
     <div id="tcontainer"></div>`;
   main.innerHTML=html;
+  const cur=(rep.baseCurrency||'').replace('iso4217:','');
   const draw=(f='')=>{
     f=f.toLowerCase();
     const c=document.getElementById('tcontainer'); c.innerHTML='';
@@ -267,13 +307,19 @@ function renderReport(rep){
     for(const tid of tids){
       const title=(TITLES.get(dpmCode(tid))||'').toLowerCase();
       if(f && !tid.toLowerCase().includes(f) && !title.includes(f)) continue;
-      c.insertAdjacentHTML('beforeend', renderTemplate(tid, rep.templates.get(tid)));
+      c.insertAdjacentHTML('beforeend', renderTemplate(tid, rep.templates.get(tid), cur));
       shown++;
     }
     if(!shown) c.innerHTML='<div class="status">No templates match.</div>';
   };
   draw();
   document.getElementById('tfilter').addEventListener('input', e=>draw(e.target.value));
+  const sel=document.getElementById('scaleSel');
+  sel.value=SCALE==='auto'?'auto':String(SCALE);
+  sel.addEventListener('change', ()=>{
+    SCALE=sel.value==='auto'?'auto':Number(sel.value);
+    draw(document.getElementById('tfilter').value);
+  });
   main.scrollTop=0;
 }
 
