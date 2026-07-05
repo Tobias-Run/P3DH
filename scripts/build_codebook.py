@@ -31,10 +31,29 @@ OUT = ROOT / "codebook" / "dpm_codebook.csv"
 CELLCODE_RE = re.compile(r"\{([^,]+),\s*r(\w+),\s*c(\w+)")
 
 
+def _char_ok(c: str) -> bool:
+    """Chars that count as 'text' when scoring decode candidates. ASCII plus the
+    typographic Unicode that EBA labels legitimately contain (– — ' " €, Latin-1
+    letters). CJK garbage from wrong byte order stays at zero."""
+    o = ord(c)
+    return (32 <= o < 127) or (0xA0 <= o <= 0x17F) or (0x2010 <= o <= 0x2027) or o == 0x20AC
+
+
 def _printable_ratio(s: str) -> float:
     if not s:
         return -1.0
-    return sum(1 for c in s if 32 <= ord(c) < 127) / len(s)
+    return sum(1 for c in s if _char_ok(c)) / len(s)
+
+
+_GP_MANGLED = re.compile(r"([\x10-\x1f])\x20")
+
+
+def _repair_mangled_punct(s: str) -> str:
+    """A UTF-16LE char from the General Punctuation block (U+2010–U+201F: – — ' ")
+    sometimes survives decoding as its two bytes: a control char 0x10–0x1F followed by
+    the 0x20 high byte rendered as a space. Recombine: chr(0x2000+low). Plain ASCII
+    (e.g. '&' 0x26) is never touched."""
+    return _GP_MANGLED.sub(lambda m: chr(0x2000 + ord(m.group(1))), s)
 
 
 def dpm_decode(v) -> str:
@@ -64,7 +83,8 @@ def dpm_decode(v) -> str:
         for k in range(0, len(p) - 1, 2):
             s2 += bytes([p[k + 1], p[k]])
         cands.append(s2.decode("latin-1", "replace"))
-    return max(cands, key=_printable_ratio).replace("\x00", "").strip()
+    best = max(cands, key=_printable_ratio).replace("\x00", "").strip()
+    return _repair_mangled_punct(best)
 
 
 def clean_text(s: str) -> str:

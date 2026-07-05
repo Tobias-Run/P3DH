@@ -3103,7 +3103,7 @@ dp3531006,3531006,K_00.02,0160,0010,Accompanying narrative CONDIS,EU LIQ1 - Quan
 dp3531007,3531007,K_00.02,0170,0010,Accompanying narrative CONDIS,EU LIQ2: Net Stable Funding Ratio,Accompanying narrative,14
 dp3531008,3531008,K_00.02,0180,0010,Accompanying narrative CONDIS,EU CR3 –  CRM techniques overview:  Disclosure of the use of credit risk mitigation techniques,Accompanying narrative,14
 dp3531009,3531009,K_00.02,0190,0010,Accompanying narrative CONDIS,EU CR4 – standardised approach – Credit risk exposure and CRM effects,Accompanying narrative,14
-dp3531010,3531010,K_00.02,0200,0010,Accompanying narrative CONDIS,EU CR5   standardised approach,Accompanying narrative,16
+dp3531010,3531010,K_00.02,0200,0010,Accompanying narrative CONDIS,EU CR5 – standardised approach,Accompanying narrative,16
 dp3531011,3531011,K_00.02,0210,0010,Accompanying narrative CONDIS,EU CR6-A – Scope of the use of IRB and SA approaches,Accompanying narrative,16
 dp3531012,3531012,K_00.02,0220,0010,Accompanying narrative CONDIS,EU CR6 – IRB approach – Credit risk exposures by exposure class and PD range,Accompanying narrative,18
 dp3531013,3531013,K_00.02,0230,0010,Accompanying narrative CONDIS,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,Accompanying narrative,17
@@ -3118,7 +3118,7 @@ dp3531021,3531021,K_00.02,0310,0010,Accompanying narrative CONDIS,EU CCR4 – IR
 dp3531022,3531022,K_00.02,0320,0010,Accompanying narrative CONDIS,EU CCR5 – Composition of collateral for CCR exposures,Accompanying narrative,17
 dp3531023,3531023,K_00.02,0330,0010,Accompanying narrative CONDIS,EU CCR6 – Credit derivatives exposures,Accompanying narrative,18
 dp3531024,3531024,K_00.02,0340,0010,Accompanying narrative CONDIS,EU CCR7 – RWEA flow statements of CCR exposures under the IMM,Accompanying narrative,24
-dp3531025,3531025,K_00.02,0350,0010,Accompanying narrative CONDIS,EU CCR8   Exposures to CCPs,Accompanying narrative,17
+dp3531025,3531025,K_00.02,0350,0010,Accompanying narrative CONDIS,EU CCR8 – Exposures to CCPs,Accompanying narrative,17
 dp3531026,3531026,K_00.02,0360,0010,Accompanying narrative CONDIS,EU-SEC1 - Securitisation exposures in the non-trading book,Accompanying narrative,16
 dp3531027,3531027,K_00.02,0370,0010,Accompanying narrative CONDIS,EU-SEC2 - Securitisation exposures in the trading book,Accompanying narrative,20
 dp3531028,3531028,K_00.02,0380,0010,Accompanying narrative CONDIS,EU-SEC3 - Securitisation exposures in the non-trading book and associated regulatory capital requirements - institution acting as originator or as sponsor,Accompanying narrative,19
@@ -3429,14 +3429,14 @@ dp3528957,3528957,K_04.00.b,0100,0040,EU CCR4 – IRB approach – CCR exposures
 dp3526438,3526438,K_04.00.b,0100,0050,EU CCR4 – IRB approach – CCR exposures by exposure class and PD scale (II),Total (all CCR relevant exposure classes),e. Exposure weighted average maturity (years),16
 dp3529513,3529513,K_04.00.b,0100,0060,EU CCR4 – IRB approach – CCR exposures by exposure class and PD scale (II),Total (all CCR relevant exposure classes),f. RWEA,17
 dp3526613,3526613,K_04.00.b,0100,0070,EU CCR4 – IRB approach – CCR exposures by exposure class and PD scale (II),Total (all CCR relevant exposure classes),g. Density of risk weighted exposure amounts,17
-dp475253,475253,K_05.00.a,0010,0010,EU CCR5 – Composition of collateral for CCR exposures (I),01. Cash   domestic currency,a. Segregated,17
-dp475254,475254,K_05.00.a,0010,0020,EU CCR5 – Composition of collateral for CCR exposures (I),01. Cash   domestic currency,b. Unsegregated,32
-dp475251,475251,K_05.00.a,0010,0050,EU CCR5 – Composition of collateral for CCR exposures (I),01. Cash   domestic currency,e. Segregated,14
-dp475252,475252,K_05.00.a,0010,0060,EU CCR5 – Composition of collateral for CCR exposures (I),01. Cash   domestic currency,f. Unsegregated,23
-dp475269,475269,K_05.00.a,0020,0010,EU CCR5 – Composition of collateral for CCR exposures (I),2. Cash   other currencies,a. Segregated,16
-dp475270,475270,K_05.00.a,0020,0020,EU CCR5 – Composition of collateral for CCR exposures (I),2. Cash   other currencies,b. Unsegregated,28
-dp475267,475267,K_05.00.a,0020,0050,EU CCR5 – Composition of collateral for CCR exposures (I),2. Cash   other currencies,e. Segregated,13
-dp475268,475268,K_05.00.a,0020,0060,EU CCR5 – Composition of collateral for CCR exposures (I),2. Cash   other currencies,f. Unsegregated,19
+dp475253,475253,K_05.00.a,0010,0010,EU CCR5 – Composition of collateral for CCR exposures (I),01. Cash – domestic currency,a. Segregated,17
+dp475254,475254,K_05.00.a,0010,0020,EU CCR5 – Composition of collateral for CCR exposures (I),01. Cash – domestic currency,b. Unsegregated,32
+dp475251,475251,K_05.00.a,0010,0050,EU CCR5 – Composition of collateral for CCR exposures (I),01. Cash – domestic currency,e. Segregated,14
+dp475252,475252,K_05.00.a,0010,0060,EU CCR5 – Composition of collateral for CCR exposures (I),01. Cash – domestic currency,f. Unsegregated,23
+dp475269,475269,K_05.00.a,0020,0010,EU CCR5 – Composition of collateral for CCR exposures (I),2. Cash – other currencies,a. Segregated,16
+dp475270,475270,K_05.00.a,0020,0020,EU CCR5 – Composition of collateral for CCR exposures (I),2. Cash – other currencies,b. Unsegregated,28
+dp475267,475267,K_05.00.a,0020,0050,EU CCR5 – Composition of collateral for CCR exposures (I),2. Cash – other currencies,e. Segregated,13
+dp475268,475268,K_05.00.a,0020,0060,EU CCR5 – Composition of collateral for CCR exposures (I),2. Cash – other currencies,f. Unsegregated,19
 dp475245,475245,K_05.00.a,0030,0010,EU CCR5 – Composition of collateral for CCR exposures (I),3. Domestic sovereign debt,a. Segregated,15
 dp475246,475246,K_05.00.a,0030,0020,EU CCR5 – Composition of collateral for CCR exposures (I),3. Domestic sovereign debt,b. Unsegregated,19
 dp475243,475243,K_05.00.a,0030,0050,EU CCR5 – Composition of collateral for CCR exposures (I),3. Domestic sovereign debt,e. Segregated,12
@@ -3465,14 +3465,14 @@ dp475329,475329,K_05.00.a,0090,0010,EU CCR5 – Composition of collateral for CC
 dp475330,475330,K_05.00.a,0090,0020,EU CCR5 – Composition of collateral for CCR exposures (I),9. Total,b. Unsegregated,33
 dp475327,475327,K_05.00.a,0090,0050,EU CCR5 – Composition of collateral for CCR exposures (I),9. Total,e. Segregated,14
 dp475328,475328,K_05.00.a,0090,0060,EU CCR5 – Composition of collateral for CCR exposures (I),9. Total,f. Unsegregated,25
-dp475249,475249,K_05.00.b,0010,0030,EU CCR5 – Composition of collateral for CCR exposures (II),01. Cash   domestic currency,c. Segregated,18
-dp475250,475250,K_05.00.b,0010,0040,EU CCR5 – Composition of collateral for CCR exposures (II),01. Cash   domestic currency,d. Unsegregated,31
-dp475247,475247,K_05.00.b,0010,0070,EU CCR5 – Composition of collateral for CCR exposures (II),01. Cash   domestic currency,g. Segregated,13
-dp475248,475248,K_05.00.b,0010,0080,EU CCR5 – Composition of collateral for CCR exposures (II),01. Cash   domestic currency,h. Unsegregated,20
-dp475265,475265,K_05.00.b,0020,0030,EU CCR5 – Composition of collateral for CCR exposures (II),2. Cash   other currencies,c. Segregated,17
-dp475266,475266,K_05.00.b,0020,0040,EU CCR5 – Composition of collateral for CCR exposures (II),2. Cash   other currencies,d. Unsegregated,25
-dp475263,475263,K_05.00.b,0020,0070,EU CCR5 – Composition of collateral for CCR exposures (II),2. Cash   other currencies,g. Segregated,13
-dp475264,475264,K_05.00.b,0020,0080,EU CCR5 – Composition of collateral for CCR exposures (II),2. Cash   other currencies,h. Unsegregated,19
+dp475249,475249,K_05.00.b,0010,0030,EU CCR5 – Composition of collateral for CCR exposures (II),01. Cash – domestic currency,c. Segregated,18
+dp475250,475250,K_05.00.b,0010,0040,EU CCR5 – Composition of collateral for CCR exposures (II),01. Cash – domestic currency,d. Unsegregated,31
+dp475247,475247,K_05.00.b,0010,0070,EU CCR5 – Composition of collateral for CCR exposures (II),01. Cash – domestic currency,g. Segregated,13
+dp475248,475248,K_05.00.b,0010,0080,EU CCR5 – Composition of collateral for CCR exposures (II),01. Cash – domestic currency,h. Unsegregated,20
+dp475265,475265,K_05.00.b,0020,0030,EU CCR5 – Composition of collateral for CCR exposures (II),2. Cash – other currencies,c. Segregated,17
+dp475266,475266,K_05.00.b,0020,0040,EU CCR5 – Composition of collateral for CCR exposures (II),2. Cash – other currencies,d. Unsegregated,25
+dp475263,475263,K_05.00.b,0020,0070,EU CCR5 – Composition of collateral for CCR exposures (II),2. Cash – other currencies,g. Segregated,13
+dp475264,475264,K_05.00.b,0020,0080,EU CCR5 – Composition of collateral for CCR exposures (II),2. Cash – other currencies,h. Unsegregated,19
 dp475241,475241,K_05.00.b,0030,0030,EU CCR5 – Composition of collateral for CCR exposures (II),3. Domestic sovereign debt,c. Segregated,14
 dp475242,475242,K_05.00.b,0030,0040,EU CCR5 – Composition of collateral for CCR exposures (II),3. Domestic sovereign debt,d. Unsegregated,17
 dp475239,475239,K_05.00.b,0030,0070,EU CCR5 – Composition of collateral for CCR exposures (II),3. Domestic sovereign debt,g. Segregated,13
@@ -4540,7 +4540,7 @@ dp3529764,3529764,K_11.00.a,0100,0010,EU MR2-A - Market risk under the internal 
 dp3529763,3529763,K_11.00.a,0140,0010,EU MR2-A - Market risk under the internal Model Approach (IMA) - RWEA,5. Other,a RWEAs,19
 dp3529523,3529523,K_11.00.a,0150,0010,EU MR2-A - Market risk under the internal Model Approach (IMA) - RWEA,6. Total,a RWEAs,27
 dp3530246,3530246,K_11.00.b,0010,0020,EU MR2-A - Market risk under the internal Model Approach (IMA) - Own funds requirements,1. VaR (higher of values a and b),b Own funds requirements,8
-dp15767,15767,K_11.00.b,0020,0020,EU MR2-A - Market risk under the internal Model Approach (IMA) - Own funds requirements,a. Previous day s VaR (VaR_t-1),b Own funds requirements,8
+dp15767,15767,K_11.00.b,0020,0020,EU MR2-A - Market risk under the internal Model Approach (IMA) - Own funds requirements,a. Previous day’s VaR (VaR_t-1),b Own funds requirements,8
 dp15668,15668,K_11.00.b,0030,0020,EU MR2-A - Market risk under the internal Model Approach (IMA) - Own funds requirements,b. Multiplication factor mc  x average of previous 60 working days (VaR_avg),b Own funds requirements,8
 dp3530241,3530241,K_11.00.b,0040,0020,EU MR2-A - Market risk under the internal Model Approach (IMA) - Own funds requirements,2. SVaR (higher of values a and b),b Own funds requirements,8
 dp15756,15756,K_11.00.b,0050,0020,EU MR2-A - Market risk under the internal Model Approach (IMA) - Own funds requirements,a. Latest available SVaR (SVaR_t-1),b Own funds requirements,8
@@ -6734,18 +6734,18 @@ dp3529752,3529752,K_27.01,0050,0010,EU CR7 – IRB approach – Effect on the RW
 dp3529801,3529801,K_27.01,0050,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 2a Regional governments and local authorities A-IRB,b Actual risk weighted exposure amount,6
 dp3529799,3529799,K_27.01,0060,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 2b Public sectore entities A-IRB,a Pre-credit derivatives risk weighted exposure amount,6
 dp3529800,3529800,K_27.01,0060,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 2b Public sectore entities A-IRB,b Actual risk weighted exposure amount,6
-dp3529742,3529742,K_27.01,0070,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,3 Insitutions   F-IRB,a Pre-credit derivatives risk weighted exposure amount,14
-dp3529741,3529741,K_27.01,0070,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,3 Insitutions   F-IRB,b Actual risk weighted exposure amount,14
-dp3529729,3529729,K_27.01,0090,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,5 Corporates   F-IRB,a Pre-credit derivatives risk weighted exposure amount,17
-dp3529570,3529570,K_27.01,0090,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,5 Corporates   F-IRB,b Actual risk weighted exposure amount,17
+dp3529742,3529742,K_27.01,0070,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,3 Insitutions – F-IRB,a Pre-credit derivatives risk weighted exposure amount,14
+dp3529741,3529741,K_27.01,0070,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,3 Insitutions – F-IRB,b Actual risk weighted exposure amount,14
+dp3529729,3529729,K_27.01,0090,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,5 Corporates – F-IRB,a Pre-credit derivatives risk weighted exposure amount,17
+dp3529570,3529570,K_27.01,0090,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,5 Corporates – F-IRB,b Actual risk weighted exposure amount,17
 dp3529806,3529806,K_27.01,0100,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 5a  Corporates - General,a Pre-credit derivatives risk weighted exposure amount,17
 dp3529807,3529807,K_27.01,0100,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 5a  Corporates - General,b Actual risk weighted exposure amount,17
 dp3529745,3529745,K_27.01,0110,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 5b  Corporates - Specialised lending,a Pre-credit derivatives risk weighted exposure amount,13
 dp3529744,3529744,K_27.01,0110,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 5b  Corporates - Specialised lending,b Actual risk weighted exposure amount,13
 dp3529568,3529568,K_27.01,0120,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 5c  Corporates - Purchased receivables,a Pre-credit derivatives risk weighted exposure amount,9
 dp3529732,3529732,K_27.01,0120,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 5c  Corporates - Purchased receivables,b Actual risk weighted exposure amount,9
-dp3529571,3529571,K_27.01,0130,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,6 Corporate   A-IRB,a Pre-credit derivatives risk weighted exposure amount,11
-dp3529728,3529728,K_27.01,0130,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,6 Corporate   A-IRB,b Actual risk weighted exposure amount,12
+dp3529571,3529571,K_27.01,0130,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,6 Corporate – A-IRB,a Pre-credit derivatives risk weighted exposure amount,11
+dp3529728,3529728,K_27.01,0130,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,6 Corporate – A-IRB,b Actual risk weighted exposure amount,12
 dp3529747,3529747,K_27.01,0140,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 6a  Corporates - General,a Pre-credit derivatives risk weighted exposure amount,10
 dp3529746,3529746,K_27.01,0140,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 6a  Corporates - General,b Actual risk weighted exposure amount,11
 dp3529808,3529808,K_27.01,0150,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,EU 6b  Corporates - Specialised lending,a Pre-credit derivatives risk weighted exposure amount,10
@@ -6832,21 +6832,21 @@ dp3529610,3529610,K_27.02.a,0040,0130,EU CR7-A – IRB approach – Disclosure o
 reduction effects only",9
 dp3529551,3529551,K_27.02.a,0040,0140,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5 Corporates,"n RWEA with substitution effects
 both reduction and sustitution effects",17
-dp3528371,3528371,K_27.02.a,0050,0010,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,a Total exposures,16
-dp3530434,3530434,K_27.02.a,0050,0020,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,b Part of exposures covered by Financial Collaterals %,14
-dp3530455,3530455,K_27.02.a,0050,0030,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,c Part of exposures covered by Other eligible collaterals %,16
-dp3530532,3530532,K_27.02.a,0050,0040,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,d Part of exposures covered by Immovable property Collaterals %,16
-dp3530477,3530477,K_27.02.a,0050,0050,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,e Part of exposures covered by Receivables %,10
-dp3530537,3530537,K_27.02.a,0050,0060,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,f Part of exposures covered by Other physical collateral %,13
-dp3530482,3530482,K_27.02.a,0050,0070,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,g Part of exposures covered by Other funded credit protection %,8
-dp3530361,3530361,K_27.02.a,0050,0080,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,h Part of exposures covered by Cash on deposit %,8
-dp3530548,3530548,K_27.02.a,0050,0090,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,I Part of exposures covered by Life insurance policies %,8
-dp3530370,3530370,K_27.02.a,0050,0100,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,j Part of exposures covered by Instruments held by a third party %,8
-dp3530555,3530555,K_27.02.a,0050,0110,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,k Part of exposures covered by Guarantees %,11
-dp3530424,3530424,K_27.02.a,0050,0120,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,l Part of exposures covered by Credit Derivatives %,8
-dp3529504,3529504,K_27.02.a,0050,0130,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,"m RWEA without substitution effects
+dp3528371,3528371,K_27.02.a,0050,0010,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,a Total exposures,16
+dp3530434,3530434,K_27.02.a,0050,0020,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,b Part of exposures covered by Financial Collaterals %,14
+dp3530455,3530455,K_27.02.a,0050,0030,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,c Part of exposures covered by Other eligible collaterals %,16
+dp3530532,3530532,K_27.02.a,0050,0040,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,d Part of exposures covered by Immovable property Collaterals %,16
+dp3530477,3530477,K_27.02.a,0050,0050,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,e Part of exposures covered by Receivables %,10
+dp3530537,3530537,K_27.02.a,0050,0060,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,f Part of exposures covered by Other physical collateral %,13
+dp3530482,3530482,K_27.02.a,0050,0070,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,g Part of exposures covered by Other funded credit protection %,8
+dp3530361,3530361,K_27.02.a,0050,0080,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,h Part of exposures covered by Cash on deposit %,8
+dp3530548,3530548,K_27.02.a,0050,0090,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,I Part of exposures covered by Life insurance policies %,8
+dp3530370,3530370,K_27.02.a,0050,0100,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,j Part of exposures covered by Instruments held by a third party %,8
+dp3530555,3530555,K_27.02.a,0050,0110,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,k Part of exposures covered by Guarantees %,11
+dp3530424,3530424,K_27.02.a,0050,0120,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,l Part of exposures covered by Credit Derivatives %,8
+dp3529504,3529504,K_27.02.a,0050,0130,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,"m RWEA without substitution effects
 reduction effects only",8
-dp3529505,3529505,K_27.02.a,0050,0140,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates   General,"n RWEA with substitution effects
+dp3529505,3529505,K_27.02.a,0050,0140,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1    Corporates – General,"n RWEA with substitution effects
 both reduction and sustitution effects",16
 dp3528370,3528370,K_27.02.a,0060,0010,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.2     Corporates – Specialised lending,a Total exposures,15
 dp3530435,3530435,K_27.02.a,0060,0020,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.2     Corporates – Specialised lending,b Part of exposures covered by Financial Collaterals %,12
@@ -7061,22 +7061,22 @@ dp3529558,3529558,K_27.02.b,0050,0130,EU CR7-A – IRB approach – Disclosure o
 reduction effects only",18
 dp3529557,3529557,K_27.02.b,0050,0140,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5 Corporates,"n RWEA with substitution effects
 both reduction and sustitution effects",25
-dp3528244,3528244,K_27.02.b,0060,0010,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,a Total exposures,25
-dp3530379,3530379,K_27.02.b,0060,0020,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,"b 
+dp3528244,3528244,K_27.02.b,0060,0010,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,a Total exposures,25
+dp3530379,3530379,K_27.02.b,0060,0020,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,"b 
 Part of exposures covered by Financial Collaterals %",15
-dp3530598,3530598,K_27.02.b,0060,0030,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,c Part of exposures covered by Other eligible collaterals %,19
-dp3530397,3530397,K_27.02.b,0060,0040,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,d Part of exposures covered by Immovable property Collaterals %,18
-dp3530400,3530400,K_27.02.b,0060,0050,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,e Part of exposures covered by Receivables %,10
-dp3530592,3530592,K_27.02.b,0060,0060,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,f Part of exposures covered by Other physical collateral %,12
-dp3530407,3530407,K_27.02.b,0060,0070,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,g Part of exposures covered by Other funded credit protection %,9
-dp3530412,3530412,K_27.02.b,0060,0080,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,h Part of exposures covered by Cash on deposit %,9
-dp3530490,3530490,K_27.02.b,0060,0090,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,I Part of exposures covered by Life insurance policies %,8
-dp3530577,3530577,K_27.02.b,0060,0100,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,j Part of exposures covered by Instruments held by a third party %,8
-dp3530494,3530494,K_27.02.b,0060,0110,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,k Part of exposures covered by Guarantees %,19
-dp3530501,3530501,K_27.02.b,0060,0120,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,l Part of exposures covered by Credit Derivatives %,8
-dp3529613,3529613,K_27.02.b,0060,0130,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,"m RWEA without substitution effects
+dp3530598,3530598,K_27.02.b,0060,0030,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,c Part of exposures covered by Other eligible collaterals %,19
+dp3530397,3530397,K_27.02.b,0060,0040,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,d Part of exposures covered by Immovable property Collaterals %,18
+dp3530400,3530400,K_27.02.b,0060,0050,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,e Part of exposures covered by Receivables %,10
+dp3530592,3530592,K_27.02.b,0060,0060,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,f Part of exposures covered by Other physical collateral %,12
+dp3530407,3530407,K_27.02.b,0060,0070,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,g Part of exposures covered by Other funded credit protection %,9
+dp3530412,3530412,K_27.02.b,0060,0080,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,h Part of exposures covered by Cash on deposit %,9
+dp3530490,3530490,K_27.02.b,0060,0090,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,I Part of exposures covered by Life insurance policies %,8
+dp3530577,3530577,K_27.02.b,0060,0100,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,j Part of exposures covered by Instruments held by a third party %,8
+dp3530494,3530494,K_27.02.b,0060,0110,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,k Part of exposures covered by Guarantees %,19
+dp3530501,3530501,K_27.02.b,0060,0120,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,l Part of exposures covered by Credit Derivatives %,8
+dp3529613,3529613,K_27.02.b,0060,0130,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,"m RWEA without substitution effects
 reduction effects only",18
-dp3529612,3529612,K_27.02.b,0060,0140,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates   General,"n RWEA with substitution effects
+dp3529612,3529612,K_27.02.b,0060,0140,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.1      Corporates – General,"n RWEA with substitution effects
 both reduction and sustitution effects",25
 dp3527869,3527869,K_27.02.b,0070,0010,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.2     Corporates – Specialised lending,a Total exposures,19
 dp3530497,3530497,K_27.02.b,0070,0020,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,5.2     Corporates – Specialised lending,"b 
