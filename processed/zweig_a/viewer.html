@@ -136,19 +136,22 @@ function pickUnit(maxAbs){
   for(const u of [1e9,1e6,1e3]) if(maxAbs/u>=1) return u;
   return 1;
 }
+// report convention: anything that would display as zero shows as a dash
+const ZERO_RE=/^-?0([.,]0+)?$/;
+const zdash=s=>ZERO_RE.test(String(s).replace(/[\s\u202f\u00a0]|%/g,''))?'\u2013':s;
 function fmtTyped(v, dt, unit){
   const n=Number(v);
   if(v==='' || isNaN(n)) return esc(v);
   if(dt==='percentage'){
     const p=n*100;
-    return p.toFixed(Math.abs(p)<10?2:1)+' %';
+    return zdash(p.toFixed(Math.abs(p)<10?2:1)+'\u202f%');
   }
-  if(dt==='integer') return fmt(v);
+  if(dt==='integer') return zdash(fmt(v));
   if(dt==='monetary' && unit>1){
     const s=(n/unit).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
-    return s.replace(/,/g,' ');
+    return zdash(s.replace(/,/g,'\u202f'));
   }
-  return fmt(v);
+  return zdash(fmt(v));
 }
 // long-form template_id '60.00.A' -> DPM codebook key 'K_60.00.a'
 function dpmCode(tid){
