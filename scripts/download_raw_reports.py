@@ -1,5 +1,10 @@
 """Phase 1: Download raw .zip reports from errp.eba.europa.eu.
-Reads manifest.csv, downloads in parallel, skips existing files."""
+Reads manifest.csv, downloads in parallel, skips existing files.
+
+Known data quirk: ~1% of catalog entries are dead links (HTTP 404 "blob does not
+exist" — the submission row exists in the EDAP catalog but the file was never
+published or was withdrawn). These are expected; the script reports them as
+failed and they simply stay missing."""
 
 from pathlib import Path
 import csv

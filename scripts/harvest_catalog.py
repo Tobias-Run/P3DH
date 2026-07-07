@@ -1,5 +1,13 @@
-"""Phase 1: Harvest complete EDAP Submissions catalog via Power BI table scroll.
-Outputs manifest.csv with all file URLs + metadata."""
+"""DEPRECATED — do not use for new harvests.
+
+This DOM-scroll approach only ever surfaces the ~20 rows Power BI renders in its
+virtualised grid. Use `harvest_catalog_query.py` instead: it replays the Power BI
+`query` endpoint with a raised DataReduction window and drains the COMPLETE catalog
+(4,278 submissions / 489 institutions) in one request.
+
+Kept only as reference for the Playwright navigation pattern.
+
+Original: Phase 1 — harvest EDAP submissions catalog via Power BI table scroll."""
 
 from pathlib import Path
 from playwright.sync_api import sync_playwright

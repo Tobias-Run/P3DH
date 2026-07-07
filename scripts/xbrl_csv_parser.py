@@ -162,6 +162,7 @@ class XBRLCSVParser:
                         "fact_value": fact_value,
                         "baseCurrency": self.metadata.get("baseCurrency", ""),
                         "decimalsMonetary": self.metadata.get("decimalsMonetary", ""),
+                        "source_file": self.zip_path.name,
                     }
                     datapoints.append(record)
             except Exception as e:
@@ -182,23 +183,65 @@ def _latest_filenames(manifest_path: Path):
     return names
 
 
-def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path, manifest_path: Path = None):
+def _load_existing(path: Path, wanted: set):
+    """Existing output rows split into (kept, dropped_sources, parsed_sources).
+
+    kept = rows whose source_file is still wanted (they survive the merge);
+    rows from files no longer in the manifest (stale resubmissions) are dropped."""
+    kept, parsed, dropped = [], set(), set()
+    if path.exists():
+        with open(path, encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                src = r.get("source_file", "")
+                if src and src in wanted:
+                    kept.append(r)
+                    parsed.add(src)
+                elif src:
+                    dropped.add(src)
+    return kept, dropped, parsed
+
+
+def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path,
+                      manifest_path: Path = None, incremental: bool = True):
     """Parse the latest-wins .zip submissions in raw_dir → combined long-form CSV.
 
     If manifest_path (manifest_latest.csv) is given, only the submissions it lists are
-    parsed — older resubmissions present in raw/ are skipped (Resubmission-Policy)."""
-    all_records = []
+    parsed — older resubmissions present in raw/ are skipped (Resubmission-Policy).
+
+    Incremental (default): rows of already-parsed source files are kept from the
+    existing output, only new zips are parsed, and rows of source files that fell out
+    of the manifest (superseded resubmissions) are dropped. Pass incremental=False
+    (CLI: --full) to re-parse everything, e.g. after parser or codebook changes."""
     coverage = []  # report × template × reported (the "fehlt ≠ Null" matrix)
     zip_files = sorted(raw_dir.glob("*.zip"))
 
     if manifest_path and manifest_path.exists():
         latest = _latest_filenames(manifest_path)
-        kept = [z for z in zip_files if z.name in latest]
-        skipped = len(zip_files) - len(kept)
-        zip_files = kept
+        kept_zips = [z for z in zip_files if z.name in latest]
+        skipped = len(zip_files) - len(kept_zips)
+        zip_files = kept_zips
         if skipped:
             print(f"Resubmission-Policy: {skipped} ältere ZIP(s) übersprungen (nicht in manifest_latest.csv)")
 
+    wanted = {z.name for z in zip_files}
+    existing_rows, existing_cov = [], []
+    if incremental:
+        existing_rows, dropped, parsed_sources = _load_existing(output_path, wanted)
+        cov_path = output_path.parent / "filing_indicators.csv"
+        existing_cov, _, _ = _load_existing(cov_path, wanted)
+        before = len(zip_files)
+        zip_files = [z for z in zip_files if z.name not in parsed_sources]
+        # a zip being (re)parsed must not keep its old coverage rows (would duplicate)
+        reparse = {z.name for z in zip_files}
+        existing_cov = [r for r in existing_cov if r.get("source_file") not in reparse]
+        if dropped:
+            print(f"Inkrementell: {len(dropped)} überholte Quelle(n) aus dem Bestand entfernt")
+        print(f"Inkrementell: {before - len(zip_files)} bereits geparst, {len(zip_files)} neu zu parsen")
+        if not zip_files and not dropped:
+            print("✓ Nichts zu tun — Long-Form ist aktuell")
+            return
+
+    all_records = []
     print(f"Parsing {len(zip_files)} reports...")
     for i, zip_file in enumerate(zip_files, 1):
         try:
@@ -212,35 +255,42 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path, man
                     "framework_version": metadata.get("framework_version", ""),
                     "template_id": template_id,
                     "reported": reported,
+                    "source_file": zip_file.name,
                 })
             print(f"  [{i:2d}/{len(zip_files)}] {zip_file.name[:50]:50s} {len(datapoints):6d} datapoints")
         except Exception as e:
             print(f"  [{i:2d}/{len(zip_files)}] {zip_file.name[:50]:50s} ERROR: {e}")
 
-    # Write long-form CSV
-    if all_records:
+    LF_FIELDS = ["entityID", "refPeriod", "framework_version", "template_id",
+                 "template_reported", "datapoint_code", "cell_row", "cell_col",
+                 "open_axis_dims", "fact_value", "baseCurrency", "decimalsMonetary",
+                 "source_file"]
+    merged = existing_rows + all_records
+    if merged:
         with open(output_path, "w", newline="", encoding="utf-8") as f:
-            fieldnames = list(all_records[0].keys())
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer = csv.DictWriter(f, fieldnames=LF_FIELDS, extrasaction="ignore")
             writer.writeheader()
-            writer.writerows(all_records)
+            writer.writerows(merged)
         print(f"\n✓ Long-form data: {output_path}")
-        print(f"  Total records: {len(all_records)}")
+        print(f"  Total records: {len(merged)} ({len(all_records)} neu, {len(existing_rows)} übernommen)")
     else:
         print("ERROR: No records extracted")
 
     # Coverage matrix — which templates each report declared reported / not reported.
     # This is the "fehlt ≠ Null" foundation: a template absent here was never declared,
     # reported=False means explicitly declared as not disclosed.
-    if coverage:
+    COV_FIELDS = ["entityID", "refPeriod", "framework_version", "template_id",
+                  "reported", "source_file"]
+    merged_cov = existing_cov + coverage
+    if merged_cov:
         cov_path = output_path.parent / "filing_indicators.csv"
         with open(cov_path, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=list(coverage[0].keys()))
+            writer = csv.DictWriter(f, fieldnames=COV_FIELDS, extrasaction="ignore")
             writer.writeheader()
-            writer.writerows(coverage)
-        n_true = sum(1 for c in coverage if c["reported"])
+            writer.writerows(merged_cov)
+        n_true = sum(1 for c in merged_cov if str(c["reported"]) == "True")
         print(f"✓ Filing indicators: {cov_path}")
-        print(f"  {len(coverage)} rows ({n_true} reported / {len(coverage)-n_true} declared not-reported)")
+        print(f"  {len(merged_cov)} rows ({n_true} reported / {len(merged_cov)-n_true} declared not-reported)")
 
 
 if __name__ == "__main__":
@@ -249,12 +299,14 @@ if __name__ == "__main__":
     CODEBOOK = ROOT / "codebook" / "dpm_codebook.csv"
     OUTPUT = ROOT / "processed" / "long_form_raw.csv"
     import sys
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    full = "--full" in sys.argv
     # Manifest to parse: CLI arg wins, else the CODIS parse manifest, else latest-wins.
-    if len(sys.argv) > 1:
-        MANIFEST = Path(sys.argv[1])
+    if args:
+        MANIFEST = Path(args[0])
     else:
         MANIFEST = ROOT / "interim" / "edap_recon" / "manifest_parse.csv"
         if not MANIFEST.exists():
             MANIFEST = ROOT / "interim" / "edap_recon" / "manifest_latest.csv"
 
-    parse_all_reports(RAW_DIR, CODEBOOK, OUTPUT, MANIFEST)
+    parse_all_reports(RAW_DIR, CODEBOOK, OUTPUT, MANIFEST, incremental=not full)
