@@ -33,3 +33,6 @@ venv/
 # captured live request may contain session tokens
 interim/edap_recon/query_request.json
 interim/edap_recon/query_response.json
+
+# Zweig B analytics artifacts (regenerable via build_zweig_b.py)
+processed/long/
