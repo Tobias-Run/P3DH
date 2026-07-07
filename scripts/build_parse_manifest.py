@@ -1,5 +1,11 @@
 """Build the parse manifest: union of the original latest-wins set and the random
-sample, filtered to CODIS submissions (the only module the parser/codebook support yet).
+sample, filtered to XBRL-CSV report packages.
+
+All Pillar 3 XBRL modules share the same package structure (reports/k_*.csv,
+FilingIndicators.csv, parameters.csv) and are covered by the DPM codebook —
+CODIS, MRELTLACDIS (K_90/91), REMDIS (K_30), FINDIS, IRRBBDIS, ESGDIS, GSIIDIS.
+Excluded are only the *DISDOCS packages: those contain the banks' qualitative
+Pillar 3 PDF reports, not XBRL-CSV (candidate for a separate PDF index later).
 
 Output: interim/edap_recon/manifest_parse.csv — consumed by xbrl_csv_parser.py.
 """
@@ -20,7 +26,7 @@ def main():
             continue
         with open(src, encoding="utf-8") as f:
             for r in csv.DictReader(f):
-                if "CODIS" not in r["url"] or r["url"] in seen:
+                if "DISDOCS" in r["url"] or r["url"] in seen:
                     continue
                 seen.add(r["url"])
                 rows.append(r)
@@ -32,7 +38,7 @@ def main():
 
     leis = {r["lei"] for r in rows}
     print(f"✓ {OUT}")
-    print(f"  {len(rows)} CODIS-Submissions · {len(leis)} Institute")
+    print(f"  {len(rows)} XBRL-Submissions · {len(leis)} Institute")
 
 
 if __name__ == "__main__":
