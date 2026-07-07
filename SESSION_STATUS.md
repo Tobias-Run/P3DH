@@ -1,4 +1,4 @@
-# Session Status — 2026-06-22
+# Session Status — 2026-07-07
 
 > Diese Datei ist die laufend aktualisierte Wahrheit zum Projektstatus.
 > Am Ende jeder Session auf den tatsächlichen Stand bringen — nicht verwaisen lassen.
@@ -8,12 +8,13 @@
 | Phase | Status | Stand |
 |---|---|---|
 | 0 — Scoping & Zugang | ✅ | Decision Memo, Format-Analyse, EDAP-Zugang, Git/GitHub |
-| 1 — Ingestion | ✅ (Mechanik), 🟡 (Umfang) | 20 ZIPs in `raw/`; Resubmission-Policy „latest-wins" eingebunden → 16 aktuelle Submissions. **NEU: Voll-Katalog-Harvester** `harvest_catalog_query.py` (Power-BI-`query`-Endpoint statt Scroll) → **kompletter Katalog: 4.278 Submissions / 489 Institute**. Geladen sind erst **8/489 Institute ≈ 1,6 %** bzw. **16/4.278 ≈ 0,4 %** |
-| 2 — Parsing & DPM-Join | ✅ | `long_form_raw.csv` (**17.883 Records**); DPM-Blocker gelöst (access-parser + DPM v4.2); 3206/3206 Datapoints aufgelöst, 84 % mit Zellkoordinate; voll gelabeltes `dpm_codebook.csv` (Row/Col-Labels 100 %, **Template-Titel 82/82**) |
-| 2.5 — Refinement | ✅ | Ursache der ~16 % ohne Zellkoordinate geklärt: **offene Achse** (67/66/64/29 u. a. tragen typisierte Dimensionsspalte). Parser erfasst sie jetzt als `open_axis_dims` statt sie zu verwerfen; Regressionstests in `tests/`. **TODO Laptop:** `long_form_raw.csv` über alle 16 Reports neu erzeugen |
-| 3 — RF 4.1↔4.2-Mapping | ⬜ | Brücke für Zeitreihen (beide Versionen im Datensatz) |
-| 4A — Zweig A | ✅ | **Data-driven Viewer** `processed/zweig_a/viewer.html` (Bank-Namen + volle Titel) |
-| 4B — Zweig B | ⬜ | maschinenlesbare Analytics (Parquet/DuckDB) |
+| 1 — Ingestion | ✅ | Voll-Katalog-Harvester `harvest_catalog_query.py` (Power-BI-`query`, alter Scroll deprecated) → **4.278 Submissions / 489 Institute**. **20%-Stichprobe geladen** (346 ZIPs). **Delta-Pipeline**: Harvest-Diff (`harvest_log.csv`/`manifest_delta.csv`) + inkrementeller Parser (`source_file`, `--full`) |
+| 2 — Parsing & DPM-Join | ✅ | `long_form_raw.csv` **209.231 Records / 218 Reports** (Multi-Modul); 9146/9146 Datapoints aufgelöst, gelabeltes `dpm_codebook.csv` (+ `data_type` aus DPM); Template-Titel via EBA-Layout |
+| 2.5 — Refinement | ✅ | offene Achse als `open_axis_dims` erfasst (Re-Parse über alle Reports durch) |
+| 3 — Multi-Modul | ✅ | CODIS + ESGDIS/FINDIS/GSIIDIS/IRRBBDIS/MRELTLACDIS (KM2)/REMDIS geparst; nur `*DISDOCS` (PDF) ausgenommen |
+| 3b — RF 4.1↔4.2-Mapping | ⬜ | Brücke für Zeitreihen (beide Versionen im Datensatz) |
+| 4A — Zweig A | ✅ | **Viewer**: Bank-Namen, volle Titel, typisierte Skalierung (%/Mio/Mrd), EUR-Normalisierung (EZB), Filter (Land/Größe/G-SII), **Benchmark-Profile** (KM1/Headroom/Risiko/Liquidität) + **Zeitreihen/Sparklines**, Vergleichsmodus, Dark Mode, Deep-Links |
+| 4B — Zweig B | ✅ | `build_zweig_b.py` → `processed/long/p3dh_long.parquet` (self-contained, DuckDB), Beispiele in `docs/zweig_b_queries.md` |
 | 4 — Explorationen | 🟡 geplant | Analyse-Ideen datengeerdet → `docs/phase4_analysis_ideas.md` |
 
 ## Datenabdeckung (Snapshot)
