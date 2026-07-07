@@ -24,11 +24,10 @@ verifiziert: 370/370 koordinatenlose Records sind jetzt über `open_axis_dims`
 identifiziert, 0 bleiben ohne Identität. Regressionstest:
 `test_open_axis_dimension_captured`, `test_open_axis_rows_not_collapsed`.
 
-**Offen / Folgeschritt:** `processed/long_form_raw.csv` muss mit allen 16 Reports
-auf dem Laptop **neu erzeugt** werden, damit die neue Spalte `open_axis_dims`
-und die geretteten Dimensionen einfließen (Remote-Session hat nur 1 Sample-ZIP,
-deshalb hier bewusst nicht überschrieben). Optional Phase 3: `open_axis_dims`
-gegen DPM-Open-Axis-Member auflösen (z. B. `eba_GA:NL` → „Niederlande").
+**✅ Folgeschritt erledigt (2026-07-05):** Long-Form über alle 123 CODIS-Reports
+der 20-%-Stichprobe neu erzeugt — 53.833 Records tragen `open_axis_dims`.
+Optional weiter offen: `open_axis_dims` gegen DPM-Open-Axis-Member auflösen
+(z. B. `eba_GA:NL` → „Niederlande") für lesbare offene Achsen im Viewer.
 
 ## Delta-Pipeline: inkrementelle Verarbeitung (offen)
 
