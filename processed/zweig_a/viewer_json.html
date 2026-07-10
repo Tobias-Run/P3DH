@@ -172,9 +172,13 @@ const repKey=r=>r.entityID+'|'+r.refPeriod;
 const byKey =k=>REPORTS.find(r=>repKey(r)===k);
 
 /* ================= json fetch ================= */
-async function getJSON(url){
-  const r=await fetch(url,{cache:'no-store'});
-  if(!r.ok) throw new Error(url.split('/').pop()+' '+r.status);
+/* Data lives on the orphan `data` branch, served via jsDelivr in production;
+   locally it's the (git-ignored) processed/zweig_a/data/ dir next to this file. */
+const LOCAL = /^(localhost|127\.|0\.0\.0\.0|\[?::1)/.test(location.hostname) || location.protocol==='file:';
+const DATA_BASE = LOCAL ? 'data/' : 'https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@data/';
+async function getJSON(path){
+  const r=await fetch(DATA_BASE+path,{cache:'no-store'});
+  if(!r.ok) throw new Error(path.split('/').pop()+' '+r.status);
   return r.json();   // native parse — no hand-rolled CSV parser
 }
 
@@ -254,7 +258,7 @@ function buildFromIndex(idx, codebook){
 /* fetch a report's full grid on demand */
 async function ensureLoaded(rep){
   if(rep.loaded) return;
-  const j=await getJSON('data/reports/'+rep.shard);
+  const j=await getJSON('reports/'+rep.shard);
   for(const [tid,cells] of Object.entries(j.tpl)) rep.templates.set(tid, cellsFrom(cells));
   rep.loaded=true;
 }
@@ -263,7 +267,7 @@ async function ensureLoaded(rep){
 let BM_LOADED=false, BM_PROMISE=null;
 function ensureBenchmark(){
   if(BM_LOADED) return Promise.resolve();
-  if(!BM_PROMISE) BM_PROMISE=getJSON('data/benchmark.json').then(bm=>{
+  if(!BM_PROMISE) BM_PROMISE=getJSON('benchmark.json').then(bm=>{
     for(const rep of REPORTS){
       const h=bm[repKey(rep)];
       if(h) for(const [tid,cells] of Object.entries(h))
@@ -787,7 +791,7 @@ async function init(){
   try{
     const bar=document.getElementById('progBar');
     const [idx, codebook]=await Promise.all([
-      getJSON('data/index.json'), getJSON('data/codebook.json')
+      getJSON('index.json'), getJSON('codebook.json')
     ]);
     if(bar) bar.style.width='100%';
     buildFromIndex(idx, codebook);

@@ -36,3 +36,8 @@ interim/edap_recon/query_response.json
 
 # Zweig B analytics artifacts (regenerable via build_zweig_b.py)
 processed/long/
+
+# Zweig A JSON data — lives on the orphan `data` branch (served via jsDelivr),
+# regenerable via build_zweig_a_shards.py + publish_data_branch.sh. Kept out of
+# main so the shard tree never bloats main's history.
+processed/zweig_a/data/
