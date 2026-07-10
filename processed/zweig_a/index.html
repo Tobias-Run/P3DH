@@ -44,9 +44,9 @@
   <p>JSON-Viewer ist Standard — CSV bleibt als Legacy verfügbar.</p>
 </header>
 <main>
-  <p class="lead">Beide Varianten zeigen <b>dieselben Daten</b> (218 Reports · 176.453 Fakten) mit
-  identischen Funktionen — Reports, Benchmark, Vergleich, Zeitreihen. Sie unterscheiden sich nur darin,
-  <i>wie</i> geladen wird. Standard ist der JSON-Viewer; der CSV-Viewer bleibt zum Vergleich.</p>
+  <p class="lead">Aktueller Stand: <b>553 Reports · 1,26 Mio. Fakten</b> (u. a. der volle Stichtag
+  31.12.2025 über 30 Länder). Der JSON-Viewer ist Standard und live; der CSV-Viewer bleibt als
+  lokales Gegenprüf-Werkzeug — er lädt alles vorab und skaliert bei diesem Volumen nicht mehr im Browser.</p>
 
   <div class="cards">
     <a class="card" href="viewer_json.html">
@@ -54,21 +54,21 @@
       <h2>JSON-Viewer <small>(per-Report-Shards)</small></h2>
       <div class="sub">Lädt einen schlanken Index vorab, jeden Report erst beim Öffnen — nativ per <code>JSON.parse</code>.</div>
       <ul>
-        <li>Startlast: <span class="metric">~0,25 MB</span> (Index + Codebook)</li>
-        <li>Pro Report: <span class="metric">~3&nbsp;KB</span> (median, lazy)</li>
-        <li>Gespeist aus Zweig B · skaliert Richtung Voll-Load</li>
+        <li>Startlast: <span class="metric">~0,12 MB</span> (Slim-Index + Codebook)</li>
+        <li>Pro Report: <span class="metric">~8&nbsp;KB</span> (median, lazy)</li>
+        <li>Gespeist aus Zweig B · via <code>data</code>-Branch/jsDelivr · Voll-Load-tauglich</li>
       </ul>
       <span class="go json">JSON-Viewer öffnen →</span>
     </a>
 
     <a class="card" href="viewer.html">
-      <span class="tag csv">CSV · Legacy</span>
+      <span class="tag csv">CSV · Legacy (nur lokal)</span>
       <h2>CSV-Viewer</h2>
       <div class="sub">Lädt die Roh-CSVs komplett und joint/typisiert im Browser.</div>
       <ul>
-        <li>Startlast: <span class="metric">~2,7 MB</span> (alles vorab)</li>
-        <li>Danach: alle Reports sofort im Speicher</li>
-        <li>Bewährt, unverändert — zum Gegenprüfen</li>
+        <li>Braucht die lokale <code>long_form_raw.csv</code> (275 MB) — nicht deployt</li>
+        <li>Lädt alles vorab → bei diesem Volumen im Browser nicht mehr tragfähig</li>
+        <li>Bleibt für lokale Gegenproben auf kleinen Ständen</li>
       </ul>
       <span class="go">CSV-Viewer öffnen →</span>
     </a>

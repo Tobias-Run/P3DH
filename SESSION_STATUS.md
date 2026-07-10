@@ -23,16 +23,19 @@
 2 Module (010000 *und* 020000 — geladen nur 020000) · Stichtage 2025-12-31 (2.690),
 2025-06-30 (1.010), 2025-09-30 (314), 2026-03-31 (248), 2025-10-31 (16) · EU/EEA-weit
 (DE 518, IT 440, FR 375, ES 277, SE 244, AT 233, PL 202, NL, DK, BE, LU, IE …).
-Katalog liegt in `interim/edap_recon/manifest_full.csv`. **Wir haben davon ~0,4 % geladen.**
+Katalog liegt in `interim/edap_recon/manifest_full.csv`.
 
-**Aktuell geladen:** 8 Institute · 16 aktuelle Submissions (nach Resubmission-Dedup; 20 ZIPs roh) ·
-4 Stichtage (2025-06-30 … 2026-03-31) · DE/SE/AT/MT/EE/DK/LV · 11 CON / 5 IND ·
-EUR/SEK/DKK · Framework 4.1 (94 %) **und** 4.2 (6 %) gemischt · 88 Templates ·
-4 Institute mit ≥2 Stichtagen (1 mit allen 4) → kurze Zeitreihen möglich.
+**Aktuell geladen (Stand 2026-07-10):** **553 Reports · 1.259.328 platzierbare Facts** ·
+445 Institute · 30 Länder · 7 Module (CODIS/FINDIS/REMDIS/IRRBBDIS/MRELTLAC/ESGDIS/GSIIDIS).
+Erste **volle Stichtags-Welle 31.12.2025** (434 Reports, `manifest_wave.csv`, latest-wins,
+ohne DISDOCS) + der frühere 20 %-Sample-Rest (2025-06-30: 64, 2025-09-30: 34, 2026-03-31: 21).
+Nächste Wellen: weitere Stichtage aus `manifest_full.csv` (download → parse → Zweig B → Shards
+→ `publish_data_branch.sh`, alles inkrementell).
 
-Institute (LEI → Name via GLEIF, `processed/lei_names.csv`): DEKABANK DEUTSCHE
-GIROZENTRALE, HYPO TIROL BANK AG, Aktiebolaget Svensk Exportkredit, SPARKASSE
-(HOLDINGS) MALTA, NOBA BANK GROUP, AS INBANK, RØNDE SPAREKASSE, RIETUMU BANKA.
+**Deployment (wichtig):** Die JSON-Daten liegen **nicht** auf `main`, sondern auf dem Orphan-
+`data`-Branch und werden via **jsDelivr** ausgeliefert (Fallback raw.githubusercontent). `main`
+trägt nur Code + kleine CSVs; `long_form_raw.csv` (275 MB) und das Parquet sind gitignored
+(regenerierbar). Legacy-CSV-Viewer nur noch lokal (braucht die große CSV).
 
 ## Pipeline-Artefakte (Reihenfolge)
 

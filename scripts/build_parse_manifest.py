@@ -15,7 +15,8 @@ import csv
 
 ROOT = Path(__file__).resolve().parent.parent
 RECON = ROOT / "interim" / "edap_recon"
-SOURCES = [RECON / "manifest_latest.csv", RECON / "manifest_sample.csv"]
+SOURCES = [RECON / "manifest_latest.csv", RECON / "manifest_sample.csv",
+           RECON / "manifest_wave.csv"]   # full reference-date waves (e.g. 2025-12-31)
 OUT = RECON / "manifest_parse.csv"
 
 

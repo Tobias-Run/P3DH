@@ -11,6 +11,9 @@ raw/*.csv
 # Processed Outputs (wird erzeugt) — CSV nur wenn klein
 processed/*.parquet
 processed/*.csv.gz
+# long_form_raw.csv wächst mit dem Bestand (>100 MB @ Voll-Load) → nicht auf main.
+# Regenerierbar via xbrl_csv_parser.py; nur der Legacy-CSV-Viewer braucht es (lokal).
+processed/long_form_raw.csv
 
 # Notebooks Checkpoints
 notebooks/.ipynb_checkpoints/
