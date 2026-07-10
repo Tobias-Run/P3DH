@@ -245,13 +245,11 @@ function buildFromIndex(idx, codebook){
   for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
-  REPORTS = idx.reports.map(r=>{
-    const templates=new Map();                    // index carries only the head templates
-    for(const [tid,cells] of Object.entries(r.head||{})) templates.set(tid, cellsFrom(cells));
-    return {entityID:r.entityID, refPeriod:r.refPeriod, baseCurrency:r.baseCurrency,
-            framework:r.framework, tids:r.tids, nt:r.nt, shard:r.f,
-            templates, loaded:false};
-  });
+  REPORTS = idx.reports.map(r=>({    // slim index: metadata only, no cells
+    entityID:r.entityID, refPeriod:r.refPeriod, baseCurrency:r.baseCurrency,
+    framework:r.framework, nt:r.nt, shard:r.f,
+    templates:new Map(), loaded:false,   // filled lazily: head via benchmark.json, full via shard
+  }));
 }
 /* fetch a report's full grid on demand */
 async function ensureLoaded(rep){
@@ -259,6 +257,21 @@ async function ensureLoaded(rep){
   const j=await getJSON('data/reports/'+rep.shard);
   for(const [tid,cells] of Object.entries(j.tpl)) rep.templates.set(tid, cellsFrom(cells));
   rep.loaded=true;
+}
+/* head templates (KM1 61.00 / OV1 60.00.A) for ALL reports — the cross-report data the
+   benchmark and time-series need. Loaded once, lazily; merged into each report's templates. */
+let BM_LOADED=false, BM_PROMISE=null;
+function ensureBenchmark(){
+  if(BM_LOADED) return Promise.resolve();
+  if(!BM_PROMISE) BM_PROMISE=getJSON('data/benchmark.json').then(bm=>{
+    for(const rep of REPORTS){
+      const h=bm[repKey(rep)];
+      if(h) for(const [tid,cells] of Object.entries(h))
+        if(!rep.templates.has(tid)) rep.templates.set(tid, cellsFrom(cells));
+    }
+    BM_LOADED=true;
+  });
+  return BM_PROMISE;
 }
 
 /* ================= sidebar: filters & list ================= */
@@ -409,7 +422,7 @@ async function renderReport(rep){
     catch(e){ main.innerHTML='<div class="status">Fehler beim Laden des Reports: '+esc(e.message)+'</div>'; return; }
     if(activeKey!==repKey(rep)) return;   // user navigated away while the shard loaded
   }
-  const tids=[...rep.tids].sort();
+  const tids=[...rep.templates.keys()].sort();
   const {lei,scope}=leiParts(rep.entityID);
   const nrec=NAMES.get(lei)||{};
   main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2>
@@ -419,44 +432,10 @@ async function renderReport(rep){
     <div id="tsSection"></div>
     <div class="tfilter"><input id="tfilter" placeholder="Filter templates (code / title)…">${controlsHTML()}</div>
     <div id="tcontainer"></div>`;
-  // Zeitreihe: KM1-Kennzahlen über alle Stichtage dieses Instituts (ab 2 Stichtagen)
-  const series=entityReports(rep);
-  if(series.length>=2){
-    const METRICS=[
-      {row:'0050',label:'CET1-Ratio',kind:'pct'},
-      {row:'0070',label:'TotalCap-Ratio',kind:'pct'},
-      {row:'0220',label:'Leverage',kind:'pct'},
-      {row:'0320',label:'LCR',kind:'pct'},
-      {row:'0350',label:'NSFR',kind:'pct'},
-      {row:'0040',label:'TREA (Mrd)',kind:'eur'},
-      {row:'0010',label:'CET1 (Mrd)',kind:'eur'},
-    ];
-    let ts=`<section class="ts"><h3>Zeitreihe — EU KM1 <span class="scalenote">${series.length} Stichtage</span></h3>
-      <table><thead><tr><th class="rl">Kennzahl</th>`;
-    for(const s of series){
-      const on=s.refPeriod===rep.refPeriod;
-      ts+=`<th class="datecol"><a href="#r/${lei}/${s.refPeriod}/${scope}">${esc(s.refPeriod)}</a>${on?' •':''}</th>`;
-    }
-    ts+='<th>Trend</th></tr></thead><tbody>';
-    let any=false;
-    for(const m of METRICS){
-      const vals=series.map(s=>{
-        const v=km1Value(s,m.row);
-        if(v==null) return null;
-        if(m.kind==='pct') return Math.abs(v)>10?null:v*100;
-        const cur=curOf(s); const fxr=cur==='EUR'?1:(FX.get(cur+'|'+s.refPeriod)||null);
-        return fxr==null?null:v*fxr/1e9;
-      });
-      if(vals.filter(x=>x!=null).length<2) continue;
-      any=true;
-      ts+=`<tr><td class="rl">${esc(m.label)}${m.kind==='eur'?' <span class="cl">EUR</span>':''}</td>`;
-      for(const v of vals) ts+= v==null?'<td class="empty"></td>':
-        `<td class="num">${m.kind==='pct'?zdash(v.toFixed(1)+NBSP+'%'):zdash(v.toLocaleString('en-US',{maximumFractionDigits:1}).split(',').join(NBSP))}</td>`;
-      ts+=`<td>${sparkline(vals)}</td></tr>`;
-    }
-    ts+='</tbody></table></section>';
-    if(any) document.getElementById('tsSection').innerHTML=ts;
-  }
+  // Zeitreihe nur, wenn dieses Institut ≥2 Stichtage hat (aus dem Slim-Index bekannt) →
+  // Benchmark-Aggregat lazy laden, dann #tsSection nachrendern
+  if(entityReports(rep).length>=2)
+    ensureBenchmark().then(()=>{ if(activeKey===repKey(rep)) renderTimeseries(rep); });
   const draw=()=>{
     const f=(document.getElementById('tfilter').value||'').toLowerCase();
     const c=document.getElementById('tcontainer'); c.innerHTML='';
@@ -477,6 +456,47 @@ async function renderReport(rep){
 }
 
 /* ================= time series helpers ================= */
+function renderTimeseries(rep){
+  const host=document.getElementById('tsSection');
+  if(!host) return;
+  const {lei,scope}=leiParts(rep.entityID);
+  const series=entityReports(rep);
+  if(series.length<2) return;
+  const METRICS=[
+    {row:'0050',label:'CET1-Ratio',kind:'pct'},
+    {row:'0070',label:'TotalCap-Ratio',kind:'pct'},
+    {row:'0220',label:'Leverage',kind:'pct'},
+    {row:'0320',label:'LCR',kind:'pct'},
+    {row:'0350',label:'NSFR',kind:'pct'},
+    {row:'0040',label:'TREA (Mrd)',kind:'eur'},
+    {row:'0010',label:'CET1 (Mrd)',kind:'eur'},
+  ];
+  let ts=`<section class="ts"><h3>Zeitreihe — EU KM1 <span class="scalenote">${series.length} Stichtage</span></h3>
+    <table><thead><tr><th class="rl">Kennzahl</th>`;
+  for(const s of series){
+    const on=s.refPeriod===rep.refPeriod;
+    ts+=`<th class="datecol"><a href="#r/${lei}/${s.refPeriod}/${scope}">${esc(s.refPeriod)}</a>${on?' •':''}</th>`;
+  }
+  ts+='<th>Trend</th></tr></thead><tbody>';
+  let any=false;
+  for(const m of METRICS){
+    const vals=series.map(s=>{
+      const v=km1Value(s,m.row);
+      if(v==null) return null;
+      if(m.kind==='pct') return Math.abs(v)>10?null:v*100;
+      const cur=curOf(s); const fxr=cur==='EUR'?1:(FX.get(cur+'|'+s.refPeriod)||null);
+      return fxr==null?null:v*fxr/1e9;
+    });
+    if(vals.filter(x=>x!=null).length<2) continue;
+    any=true;
+    ts+=`<tr><td class="rl">${esc(m.label)}${m.kind==='eur'?' <span class="cl">EUR</span>':''}</td>`;
+    for(const v of vals) ts+= v==null?'<td class="empty"></td>':
+      `<td class="num">${m.kind==='pct'?zdash(v.toFixed(1)+NBSP+'%'):zdash(v.toLocaleString('en-US',{maximumFractionDigits:1}).split(',').join(NBSP))}</td>`;
+    ts+=`<td>${sparkline(vals)}</td></tr>`;
+  }
+  ts+='</tbody></table></section>';
+  if(any) host.innerHTML=ts;
+}
 function entityReports(rep){
   const {lei,scope}=leiParts(rep.entityID);
   return REPORTS.filter(r=>{ const p=leiParts(r.entityID); return p.lei===lei&&p.scope===scope; })
@@ -596,11 +616,16 @@ function bmCell(c,v){
   if(c.kind==='pp') return `<td class="num">${zdash(v.toFixed(1)+NBSP+'pp')}</td>`;
   return `<td class="num">${zdash(v.toFixed(1)+NBSP+'%')}</td>`;
 }
-function renderBenchmark(){
+async function renderBenchmark(){
   VIEW='benchmark'; setTabs(); activeKey=null;
+  const main=document.getElementById('main');
+  if(!BM_LOADED){
+    main.innerHTML='<div class="rhead"><h2>Benchmark</h2></div><div class="status">Lade Benchmark-Daten…</div>';
+    try{ await ensureBenchmark(); }catch(e){ main.innerHTML='<div class="status">Fehler: '+esc(e.message)+'</div>'; return; }
+    if(VIEW!=='benchmark') return;   // navigated away while loading
+  }
   const prof=BM_PROFILES[BMP];
   const rows=benchmarkRows();
-  const main=document.getElementById('main');
   const profSel=Object.entries(BM_PROFILES).map(([k,p])=>
     `<option value="${k}"${k===BMP?' selected':''}>${esc(p.label)}</option>`).join('');
   let h=`<div class="rhead"><h2>Benchmark</h2></div>
@@ -657,7 +682,7 @@ async function renderCompare(){
     if(VIEW!=='compare') return;   // navigated away while loading
   }
   const tplSet=new Set();
-  reps.forEach(r=>r.tids.forEach(t=>tplSet.add(t)));
+  reps.forEach(r=>[...r.templates.keys()].forEach(t=>tplSet.add(t)));
   const tpls=[...tplSet].sort();
   if(!tpls.includes(CMPTPL)) CMPTPL=tpls.includes('61.00')?'61.00':tpls[0];
   main.innerHTML=`<div class="rhead"><h2>Vergleich</h2></div><div class="cmp-pick">

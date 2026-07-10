@@ -13,7 +13,7 @@
 | 2.5 — Refinement | ✅ | offene Achse als `open_axis_dims` erfasst (Re-Parse über alle Reports durch) |
 | 3 — Multi-Modul | ✅ | CODIS + ESGDIS/FINDIS/GSIIDIS/IRRBBDIS/MRELTLACDIS (KM2)/REMDIS geparst; nur `*DISDOCS` (PDF) ausgenommen |
 | 3b — RF 4.1↔4.2-Mapping | ⬜ | Brücke für Zeitreihen (beide Versionen im Datensatz) |
-| 4A — Zweig A | ✅ | **JSON-Viewer = Standard** (`viewer_json.html`): lädt schlanken `data/index.json`+`codebook.json` (~0,25 MB gzip) vorab, jeden Report lazy als `data/reports/<key>.json` (~3 KB). Featuregleich: typisierte Skalierung (%/Mio/Mrd), EUR (EZB), Filter, **Benchmark-Profile**, **Zeitreihen/Sparklines**, Vergleich, Dark Mode, Deep-Links. **CSV-Viewer** (`viewer.html`) bleibt als Legacy; Gabelseite `index.html` |
+| 4A — Zweig A | ✅ | **JSON-Viewer = Standard** (`viewer_json.html`): **Slim-`index.json`** (nur Report-Meta, ~0,01 MB gzip) + `codebook.json` vorab; **`benchmark.json`** (KM1/OV1-Head, ~0,14 MB) **lazy** für Benchmark/Zeitreihe; jeder Report lazy als `data/reports/<key>.json` (~3 KB). Featuregleich (typisierte Skalen, EUR, Filter, Benchmark-Profile, Zeitreihen, Vergleich, Dark, Deep-Links). **Voll-Load-tauglich**: Index-Projektion ~0,2 MB gzip @ 4.278 Reports; Shards inkrementell geschrieben. **CSV-Viewer** (`viewer.html`) = Legacy; Gabelseite `index.html` |
 | 4B — Zweig B | ✅ | `build_zweig_b.py` → `processed/long/p3dh_long.parquet` (self-contained, DuckDB; +`fact_value_raw`/`fx_rate`), Beispiele in `docs/zweig_b_queries.md`. **Speist auch Zweig A**: `build_zweig_a_shards.py` leitet die JSON-Shards allein aus dem Parquet ab → eine Transformationsstelle, kein Drift (Werte byte-identisch verifiziert) |
 | 4 — Explorationen | 🟡 geplant | Analyse-Ideen datengeerdet → `docs/phase4_analysis_ideas.md` |
 
