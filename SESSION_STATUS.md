@@ -1,4 +1,4 @@
-# Session Status — 2026-07-07
+# Session Status — 2026-07-10
 
 > Diese Datei ist die laufend aktualisierte Wahrheit zum Projektstatus.
 > Am Ende jeder Session auf den tatsächlichen Stand bringen — nicht verwaisen lassen.
@@ -13,8 +13,8 @@
 | 2.5 — Refinement | ✅ | offene Achse als `open_axis_dims` erfasst (Re-Parse über alle Reports durch) |
 | 3 — Multi-Modul | ✅ | CODIS + ESGDIS/FINDIS/GSIIDIS/IRRBBDIS/MRELTLACDIS (KM2)/REMDIS geparst; nur `*DISDOCS` (PDF) ausgenommen |
 | 3b — RF 4.1↔4.2-Mapping | ⬜ | Brücke für Zeitreihen (beide Versionen im Datensatz) |
-| 4A — Zweig A | ✅ | **Viewer**: Bank-Namen, volle Titel, typisierte Skalierung (%/Mio/Mrd), EUR-Normalisierung (EZB), Filter (Land/Größe/G-SII), **Benchmark-Profile** (KM1/Headroom/Risiko/Liquidität) + **Zeitreihen/Sparklines**, Vergleichsmodus, Dark Mode, Deep-Links |
-| 4B — Zweig B | ✅ | `build_zweig_b.py` → `processed/long/p3dh_long.parquet` (self-contained, DuckDB), Beispiele in `docs/zweig_b_queries.md` |
+| 4A — Zweig A | ✅ | **JSON-Viewer = Standard** (`viewer_json.html`): lädt schlanken `data/index.json`+`codebook.json` (~0,25 MB gzip) vorab, jeden Report lazy als `data/reports/<key>.json` (~3 KB). Featuregleich: typisierte Skalierung (%/Mio/Mrd), EUR (EZB), Filter, **Benchmark-Profile**, **Zeitreihen/Sparklines**, Vergleich, Dark Mode, Deep-Links. **CSV-Viewer** (`viewer.html`) bleibt als Legacy; Gabelseite `index.html` |
+| 4B — Zweig B | ✅ | `build_zweig_b.py` → `processed/long/p3dh_long.parquet` (self-contained, DuckDB; +`fact_value_raw`/`fx_rate`), Beispiele in `docs/zweig_b_queries.md`. **Speist auch Zweig A**: `build_zweig_a_shards.py` leitet die JSON-Shards allein aus dem Parquet ab → eine Transformationsstelle, kein Drift (Werte byte-identisch verifiziert) |
 | 4 — Explorationen | 🟡 geplant | Analyse-Ideen datengeerdet → `docs/phase4_analysis_ideas.md` |
 
 ## Datenabdeckung (Snapshot)
@@ -47,7 +47,13 @@ build_codebook.py             -> codebook/dpm_codebook.csv     (dp -> Template/R
 fetch_lei_names.py            -> processed/lei_names.csv        (GLEIF)
 xbrl_csv_parser.py            -> processed/long_form_raw.csv    (Fakten)
                               -> processed/filing_indicators.csv (Coverage-Matrix, „Fehlt ≠ Null")
-processed/zweig_a/viewer.html  (liest long_form + codebook + lei_names live im Browser)
+build_entity_meta.py          -> processed/entity_meta.csv      (Name/Land/Größe/G-SII aus EDAP)
+fetch_fx_rates.py             -> processed/fx_rates.csv          (EZB-Referenzkurse)
+build_zweig_b.py              -> processed/long/p3dh_long.parquet (EINE gejointe Wahrheit, DuckDB)
+build_zweig_a_shards.py       -> processed/zweig_a/data/index.json + codebook.json + reports/<key>.json
+                                 (JSON-Shards, allein aus dem Parquet abgeleitet)
+processed/zweig_a/viewer_json.html  (Standard: lädt index/codebook vorab, Reports lazy als Shards)
+processed/zweig_a/viewer.html       (Legacy: liest long_form + codebook + lei_names live im Browser)
 ```
 
 ## DPM-Auflösung (Referenz)
@@ -62,14 +68,23 @@ den jeweiligen Scripts. 4.2-DB packt Textfelder inkonsistent → `dpm_decode` sc
 
 ## Zweig A — Data-driven Viewer
 
-`processed/zweig_a/viewer.html`: statische Vanilla-JS-Seite, lädt die Roh-CSVs zur Laufzeit
-(`cache:'no-store'`) und rendert die Template-Gitter clientseitig. **Bank-Name** prominent
-(LEI klein), Report-Sidebar + Template-Filter, **voller offizieller Template-Titel**
-(z.B. „EU KM1 - Key metrics template"), Werte mit Zeilen-/Spalten-Labels platziert.
-Starten (vom **Repo-Root**): `python3 -m http.server 8766` → `/processed/zweig_a/viewer.html`
-(oder `.claude/launch.json`, Config `zweig-a`).
+Zwei featuregleiche Vanilla-JS-Seiten, Gabelseite `processed/zweig_a/index.html`:
 
-Politur offen: Unit-Handling (% -Zellen als Dezimal, keine Pro-Zelle-Einheit).
+- **`viewer_json.html` (Standard):** lädt `data/index.json` (Report-Meta + Head-Templates
+  KM1/OV1 + meta/names/fx) + `data/codebook.json` vorab (~0,25 MB gzip), holt jeden Report
+  lazy als `data/reports/<entityID>__<refPeriod>.json` (~3 KB median). Nativ `JSON.parse`,
+  kein CSV-Parser. Skaliert Richtung Voll-Load (Browser lädt nur das Sichtbare).
+- **`viewer.html` (Legacy):** lädt die Roh-CSVs komplett und joint/typisiert im Browser —
+  unabhängige Gegenprobe.
+
+Die Shards kommen **allein aus dem Zweig-B-Parquet** (`build_zweig_a_shards.py`, deterministisch,
+Werte byte-identisch verifiziert) → Viewer und Analytics teilen eine Transformationsstelle.
+Bank-Namen jetzt aus EDAP (`entity_meta`, lesbarer als GLEIF-Legalnamen).
+
+Starten (vom **Repo-Root**): `python3 -m http.server 8766` (Config `p3dh-web` mit
+`--directory /Users/tobibi/P3dh`) → `/processed/zweig_a/`.
+
+Politur offen: Open-Axis-Member (mehrere Werte je Zelle kollabieren im Gitter, wie im CSV-Viewer).
 
 ## Heute erledigt (2026-06-22)
 

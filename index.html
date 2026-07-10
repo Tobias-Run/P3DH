@@ -36,8 +36,10 @@
     <h1>EBA Pillar 3 — Bank Disclosure Viewer</h1>
     <p class="tag">An independent, open research pipeline that turns the EU banks' public
        Pillar&nbsp;3 regulatory disclosures into readable, browsable templates.</p>
-    <a class="cta" href="processed/zweig_a/viewer.html">▶ Open the viewer</a>
+    <a class="cta" href="processed/zweig_a/viewer_json.html">▶ Open the viewer</a>
     <a class="cta secondary" href="https://github.com/Tobias-Run/P3DH">View source on GitHub</a>
+    <p style="font-size:.9rem;color:#666;margin:.6rem 0 0">Loads a light index up front, each report on demand.
+       <a href="processed/zweig_a/index.html">Compare data layers (JSON / legacy CSV) →</a></p>
   </header>
 
   <section>
@@ -47,8 +49,10 @@
        as machine-readable XBRL-CSV. This project ingests those filings, resolves the DPM
        data-point dictionary, and reconstructs each bank's official templates (KM1, CCR1, …)
        with full row/column labels — viewable right in your browser, no install.</p>
-    <p style="color:#555;margin-bottom:0">The viewer loads the processed CSVs live. It currently
-       shows a sample of institutions; the full catalog covers 489 institutions / 4,278 filings.</p>
+    <p style="color:#555;margin-bottom:0">The viewer loads a lightweight index up front and fetches each
+       report on demand as a per-report JSON shard (derived from the analytics layer, so the viewer and
+       machine-readable branch share one source). It currently shows a sample of institutions; the full
+       catalog covers 489 institutions / 4,278 filings.</p>
   </section>
 
   <section class="disclaimer">

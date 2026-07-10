@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pillar 3 Viewer (JSON) — P3DH</title>
+<style>
+  :root{
+    --blue:#0b3d91; --line:#e2e2e2; --bg:#fafafa; --card:#fff; --ink:#1a1a1a;
+    --muted:#666; --soft:#f0f3fa; --softink:#0b3d91; --empty:#f7f7f7; --hover:#f3f6fc;
+    --active:#e7eefb; --thead:#0b3d91; --theadink:#fff;
+  }
+  [data-theme=dark]{
+    --blue:#7ea8ff; --line:#333a45; --bg:#12151a; --card:#1a1f27; --ink:#e6e9ee;
+    --muted:#9aa3b0; --soft:#232c3d; --softink:#9db9f5; --empty:#171b22; --hover:#212836;
+    --active:#27334a; --thead:#1f3460; --theadink:#dfe7ff;
+  }
+  *{box-sizing:border-box}
+  body{font:13px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:var(--ink);background:var(--bg)}
+  header{background:var(--thead);color:var(--theadink);padding:.6rem 1rem;position:sticky;top:0;z-index:10;
+         display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+  header h1{font-size:1.02rem;margin:0;font-weight:600;white-space:nowrap}
+  .pill{display:inline-block;background:rgba(255,255,255,.16);border-radius:10px;padding:1px 8px;font-size:11px}
+  nav.tabs{display:flex;gap:.25rem;margin-left:.5rem}
+  nav.tabs button{background:transparent;color:var(--theadink);border:1px solid rgba(255,255,255,.35);
+    border-radius:6px;padding:3px 11px;font:inherit;font-size:12px;cursor:pointer;opacity:.85}
+  nav.tabs button:hover{opacity:1;background:rgba(255,255,255,.1)}
+  nav.tabs button.on{background:rgba(255,255,255,.22);opacity:1;font-weight:600}
+  .hright{margin-left:auto;display:flex;gap:.4rem;align-items:center}
+  .hlink,.iconbtn{color:var(--theadink);font-size:12px;text-decoration:none;opacity:.9;
+    border:1px solid rgba(255,255,255,.4);border-radius:5px;padding:2px 8px;background:transparent;cursor:pointer;font-family:inherit}
+  .hlink:hover,.iconbtn:hover{opacity:1;background:rgba(255,255,255,.12)}
+  .layout{display:flex;min-height:calc(100vh - 46px)}
+  aside{width:300px;flex:0 0 300px;border-right:1px solid var(--line);background:var(--card);
+        overflow:auto;max-height:calc(100vh - 46px);position:sticky;top:46px}
+  aside .filter{padding:.5rem;border-bottom:1px solid var(--line)}
+  aside input:not([type=checkbox]){width:100%;padding:.4rem .5rem;border:1px solid var(--line);border-radius:5px;font:inherit;
+              background:var(--card);color:var(--ink)}
+  .selrow{display:flex;gap:.35rem;margin-top:.35rem}
+  .selrow select{flex:1;min-width:0;padding:.3rem .2rem;border:1px solid var(--line);border-radius:5px;
+                 font:inherit;font-size:11.5px;background:var(--card);color:var(--ink)}
+  .gsii{display:flex;align-items:center;gap:.4rem;font-size:11.5px;color:var(--ink);margin-top:.4rem;cursor:pointer}
+  .fcount{font-size:11px;color:var(--muted);margin-top:.35rem}
+  .report{padding:.5rem .6rem .5rem .75rem;border-bottom:1px solid var(--line);cursor:pointer;position:relative}
+  .report:hover{background:var(--hover)}
+  .report.active{background:var(--active);border-left:3px solid var(--blue)}
+  .report .lei{font-weight:600;padding-right:26px}
+  .report .rmeta{color:var(--muted);font-size:11px;margin-top:2px}
+  .report .leicode{color:var(--muted);opacity:.6;font-size:10px;margin-top:1px;font-variant-numeric:tabular-nums;letter-spacing:.2px}
+  .badge{display:inline-block;font-size:9.5px;font-weight:600;border-radius:3px;padding:0 4px;margin-left:4px;vertical-align:1px}
+  .badge.gs{background:#7a1fa2;color:#fff}
+  .badge.it{background:var(--soft);color:var(--softink)}
+  .pinbtn{position:absolute;top:.45rem;right:.4rem;border:1px solid var(--line);background:var(--card);color:var(--muted);
+    border-radius:5px;width:22px;height:22px;font-size:12px;line-height:1;cursor:pointer;padding:0}
+  .pinbtn:hover{color:var(--blue);border-color:var(--blue)}
+  .pinbtn.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  main{flex:1;padding:1rem 1.25rem 2.5rem;overflow:auto;max-height:calc(100vh - 46px)}
+  .rhead h2{font-size:1.2rem;margin:.2rem 0}
+  .meta{color:var(--muted);margin:.2rem 0 .6rem}
+  .meta .leicode{color:var(--muted);opacity:.7;font-size:11px;font-variant-numeric:tabular-nums;letter-spacing:.3px}
+  .tfilter{margin:.3rem 0 .8rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+  .tfilter input{padding:.35rem .5rem;border:1px solid var(--line);border-radius:5px;font:inherit;width:250px;
+                 background:var(--card);color:var(--ink)}
+  .ctl{font-size:12.5px;color:var(--ink);display:inline-flex;align-items:center;gap:.3rem}
+  .ctl select{padding:.25rem .3rem;border:1px solid var(--line);border-radius:5px;font:inherit;font-size:12px;
+              background:var(--card);color:var(--ink)}
+  section{margin-bottom:1.4rem}
+  section h3{font-size:.95rem;margin:.2rem 0 .35rem;color:var(--blue)}
+  .scalenote{font-size:11px;font-weight:400;color:var(--muted);background:var(--soft);border-radius:4px;padding:1px 7px;margin-left:.5rem;vertical-align:2px}
+  table{border-collapse:separate;border-spacing:0;background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:3px 7px;vertical-align:top}
+  table tr>*:first-child{border-left:1px solid var(--line)}
+  thead th{background:var(--thead);color:var(--theadink);font-weight:600;text-align:left;font-size:11px;
+           position:sticky;top:0;z-index:2;border-top:1px solid var(--line)}
+  .rh{background:var(--soft);color:var(--softink);font-weight:600;text-align:center;width:48px}
+  .rl{max-width:340px;font-size:12px}
+  .cl{font-weight:400;opacity:.85;font-size:10px}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:default}
+  td.empty{background:var(--empty)}
+  .status{padding:2rem;color:var(--muted)}
+  .prog{height:3px;background:var(--soft);border-radius:2px;overflow:hidden;margin-top:.6rem;width:340px}
+  .prog i{display:block;height:100%;background:var(--blue);width:0%;transition:width .2s}
+  .bmtable th{cursor:pointer;user-select:none}
+  .bmtable th.num,.bmtable td.num{text-align:right}
+  .bmtable th .dir{opacity:.7;font-size:9px}
+  .bmtable td.bank{font-weight:600;max-width:260px}
+  .bmtable td .sub{display:block;font-weight:400;font-size:10px;color:var(--muted)}
+  .caveat{font-size:11.5px;color:var(--muted);background:var(--soft);border-left:3px solid var(--blue);
+          padding:.5rem .8rem;border-radius:0 6px 6px 0;margin:.6rem 0 1rem;max-width:860px}
+  .spark{color:var(--blue);vertical-align:middle}
+  .ts td.num a{color:inherit;text-decoration:none}
+  .ts th.datecol a{color:var(--theadink);text-decoration:underline dotted}
+  .bmbar{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin:.2rem 0 .6rem}
+  .cmp-pick{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.4rem 0 .8rem}
+  .chip{display:inline-flex;align-items:center;gap:.35rem;background:var(--soft);color:var(--softink);
+        border-radius:12px;padding:2px 9px;font-size:11.5px}
+  .chip button{border:0;background:transparent;color:inherit;cursor:pointer;font-size:12px;padding:0}
+  footer.disc{font-size:11.5px;color:var(--muted);padding:.7rem 1rem;border-top:1px solid var(--line);background:var(--card)}
+  footer.disc a{color:var(--blue)}
+  a{color:var(--blue)}
+  @media (max-width:860px){
+    .layout{flex-direction:column}
+    aside{width:100%;flex:none;position:static;max-height:38vh}
+    main{max-height:none}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Pillar 3 Viewer</h1>
+  <span class="pill" style="background:#1f8a4c;color:#fff" title="Lädt per-Report-JSON-Shards, lazy">JSON · Lazy-Shards</span>
+  <span class="pill" id="hsub">lädt…</span>
+  <nav class="tabs">
+    <button id="tabReports" class="on">Reports</button>
+    <button id="tabBenchmark">Benchmark</button>
+    <button id="tabCompare">Vergleich <span id="cmpN"></span></button>
+  </nav>
+  <div class="hright">
+    <button class="iconbtn" id="themeBtn" title="Dark Mode umschalten">◐</button>
+    <a class="hlink" href="index.html" title="Zwischen CSV- und JSON-Viewer wechseln">↔ Wechseln</a>
+    <a class="hlink" href="../../index.html">About</a>
+    <a class="hlink" href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md" title="Public data, research use — not affiliated with EBA/GLEIF">Disclaimer</a>
+  </div>
+</header>
+<div class="layout">
+  <aside>
+    <div class="filter">
+      <input id="reportFilter" placeholder="Suchen… ( / )">
+      <div class="selrow">
+        <select id="fCountry"><option value="">Land: alle</option></select>
+        <select id="fItype"><option value="">Größenklasse: alle</option></select>
+      </div>
+      <div class="selrow">
+        <select id="fScope"><option value="">Scope: alle</option>
+          <option value="CON">Consolidated</option><option value="IND">Individual</option></select>
+        <select id="fDate"><option value="">Stichtag: alle</option></select>
+      </div>
+      <label class="gsii"><input type="checkbox" id="fGsii"> nur G-SII-Modul-Melder</label>
+      <div class="fcount" id="fCount"></div>
+    </div>
+    <div id="reportList"></div>
+  </aside>
+  <main id="main">
+    <div class="status" id="loadStatus">Lade Daten…<div class="prog"><i id="progBar"></i></div></div>
+  </main>
+</div>
+<footer class="disc">
+  Independent, non-commercial research project — <b>not affiliated with the EBA or GLEIF</b>.
+  Public Pillar&nbsp;3 data © European Banking Authority; entity names © GLEIF; FX = ECB reference rates.
+  Re-presented “as is” for scientific/educational use (fair use) — verify figures against the official EBA
+  source. Not investment or legal advice. <a href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md">Full disclaimer</a>.
+</footer>
+
+<script>
+'use strict';
+/* ================= state & persistence ================= */
+const store = JSON.parse(localStorage.getItem('p3dh')||'{}');
+let VIEW  = 'reports';
+let SCALE = store.scale ?? 'auto';        // 'auto' | 1 | 1e3 | 1e6 | 1e9
+let EUR   = store.eur ?? false;           // EUR normalization
+let PINS  = new Set(store.pins||[]);      // report keys for compare
+let DARK  = store.dark ?? window.matchMedia('(prefers-color-scheme: dark)').matches;
+let CMPTPL = store.cmptpl || '61.00';
+function persist(){ localStorage.setItem('p3dh', JSON.stringify({
+  scale:SCALE, eur:EUR, pins:[...PINS], dark:DARK, cmptpl:CMPTPL,
+  bmp:(typeof BMP!=='undefined'?BMP:undefined)})); }
+function applyTheme(){ document.documentElement.dataset.theme = DARK?'dark':'light'; }
+applyTheme();
+
+let REPORTS=[], CB=new Map(), TITLES=new Map(), NAMES=new Map(), META=new Map(), FX=new Map(), activeKey=null;
+const repKey=r=>r.entityID+'|'+r.refPeriod;
+const byKey =k=>REPORTS.find(r=>repKey(r)===k);
+
+/* ================= json fetch ================= */
+async function getJSON(url){
+  const r=await fetch(url,{cache:'no-store'});
+  if(!r.ok) throw new Error(url.split('/').pop()+' '+r.status);
+  return r.json();   // native parse — no hand-rolled CSV parser
+}
+
+/* ================= formatting ================= */
+const esc=s=>String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const NBSP=' ';
+function fmt(v){
+  const n=Number(v);
+  if(v==='' || isNaN(n)) return esc(v);
+  const s=(Number.isInteger(n)? n.toLocaleString('en-US') : n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
+  return s.split(',').join(NBSP);
+}
+const ZERO_RE=/^-?0([.,]0+)?$/;
+const zdash=s=>ZERO_RE.test(String(s).replace(/[\s  ]|%/g,''))?'–':s;
+const UNIT_LABEL={1:'',1e3:'Tsd.',1e6:'Mio.',1e9:'Mrd.'};
+function pickUnit(maxAbs){
+  if(SCALE!=='auto') return SCALE;
+  for(const u of [1e9,1e6,1e3]) if(maxAbs/u>=1) return u;
+  return 1;
+}
+function fmtTyped(v, dt, unit, fx){
+  const n=Number(v);
+  if(v==='' || isNaN(n)) return esc(v);
+  if(dt==='percentage'){ const p=n*100; return zdash(p.toFixed(Math.abs(p)<10?2:1)+NBSP+'%'); }
+  if(dt==='integer') return zdash(fmt(v));
+  if(dt==='monetary'){
+    const m=n*(fx||1);
+    if(unit>1){ const s=(m/unit).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
+      return zdash(s.split(',').join(NBSP)); }
+    return zdash(fmt(m));
+  }
+  return zdash(fmt(v));
+}
+
+/* ================= helpers ================= */
+function dpmCode(tid){
+  const p=tid.split('.');
+  if(p.length && /^[A-Z]$/.test(p[p.length-1])) p[p.length-1]=p[p.length-1].toLowerCase();
+  return 'K_'+p.join('.');
+}
+function leiParts(entityID){
+  const m=entityID.match(/([A-Z0-9]{20})(?:\.(\w+))?/);
+  return m ? {lei:m[1], scope:(m[2]||'')} : {lei:entityID, scope:''};
+}
+function bankName(entityID){
+  const {lei}=leiParts(entityID); const n=NAMES.get(lei);
+  return n && n.name ? n.name : entityID;
+}
+function refScope(s){ return s==='CON'?'Consolidated':s==='IND'?'Individual':s; }
+function shortItype(t){
+  return t==='Large highest EEA'?'Large':t==='Other highest EEA'?'Other':
+         t==='Large subsidiaries'?'Large sub.':t;
+}
+function curOf(rep){ return (rep.baseCurrency||'').replace('iso4217:',''); }
+function fxOf(rep){
+  if(!EUR) return {rate:1, cur:curOf(rep)};
+  const cur=curOf(rep);
+  if(cur==='EUR') return {rate:1, cur:'EUR'};
+  const r=FX.get(cur+'|'+rep.refPeriod);
+  return r ? {rate:r, cur:'EUR'} : {rate:1, cur:cur};   // missing rate -> keep original
+}
+
+/* ================= data indexing ================= */
+const cellsFrom=arr=>arr.map(c=>({row:c[0], col:c[1], val:c[2]}));
+function buildFromIndex(idx, codebook){
+  for(const [k,v] of Object.entries(codebook.cb))     CB.set(k,{rl:v[0], cl:v[1], dt:v[2]||''});
+  for(const [k,v] of Object.entries(codebook.titles)) TITLES.set(k, v);
+  for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
+  for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
+  for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
+  REPORTS = idx.reports.map(r=>{
+    const templates=new Map();                    // index carries only the head templates
+    for(const [tid,cells] of Object.entries(r.head||{})) templates.set(tid, cellsFrom(cells));
+    return {entityID:r.entityID, refPeriod:r.refPeriod, baseCurrency:r.baseCurrency,
+            framework:r.framework, tids:r.tids, nt:r.nt, shard:r.f,
+            templates, loaded:false};
+  });
+}
+/* fetch a report's full grid on demand */
+async function ensureLoaded(rep){
+  if(rep.loaded) return;
+  const j=await getJSON('data/reports/'+rep.shard);
+  for(const [tid,cells] of Object.entries(j.tpl)) rep.templates.set(tid, cellsFrom(cells));
+  rep.loaded=true;
+}
+
+/* ================= sidebar: filters & list ================= */
+function activeFilters(){
+  return {
+    q:(document.getElementById('reportFilter').value||'').toLowerCase(),
+    c:document.getElementById('fCountry').value,
+    i:document.getElementById('fItype').value,
+    s:document.getElementById('fScope').value,
+    d:document.getElementById('fDate').value,
+    g:document.getElementById('fGsii').checked,
+  };
+}
+function passFilters(rep,f){
+  const {lei,scope}=leiParts(rep.entityID);
+  const m=META.get(lei)||{};
+  const hay=(bankName(rep.entityID)+' '+rep.entityID+' '+rep.baseCurrency+' '+rep.refPeriod+' '+(m.country||'')).toLowerCase();
+  if(f.q && !hay.includes(f.q)) return false;
+  if(f.c && m.country!==f.c) return false;
+  if(f.i && m.institution_type!==f.i) return false;
+  if(f.s && scope!==f.s) return false;
+  if(f.d && rep.refPeriod!==f.d) return false;
+  if(f.g && m.is_gsii!=='true') return false;
+  return true;
+}
+function renderReportList(){
+  const f=activeFilters();
+  const host=document.getElementById('reportList'); host.innerHTML='';
+  let shown=0;
+  REPORTS.forEach(rep=>{
+    if(!passFilters(rep,f)) return;
+    shown++;
+    const {lei,scope}=leiParts(rep.entityID);
+    const m=META.get(lei)||{};
+    const key=repKey(rep);
+    const badges=(m.is_gsii==='true'?'<span class="badge gs" title="reicht das G-SII-Offenlegungsmodul ein">G-SII</span>':'')+
+                 (m.institution_type?`<span class="badge it">${esc(shortItype(m.institution_type))}</span>`:'');
+    const div=document.createElement('div');
+    div.className='report'+(key===activeKey?' active':'');
+    div.innerHTML=`<button class="pinbtn${PINS.has(key)?' on':''}" title="für Vergleich anpinnen">⊞</button>
+      <div class="lei">${esc(bankName(rep.entityID))}${badges}</div>
+      <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(scope))} · ${esc(rep.refPeriod)} · ${esc(curOf(rep))} · ${rep.nt} templates</div>
+      <div class="leicode">${esc(lei)}</div>`;
+    div.querySelector('.pinbtn').onclick=(ev)=>{ ev.stopPropagation(); togglePin(key); };
+    div.onclick=()=>{ location.hash='#r/'+lei+'/'+rep.refPeriod+'/'+scope; };
+    host.appendChild(div);
+  });
+  document.getElementById('fCount').textContent=`${shown} von ${REPORTS.length} Reports`;
+}
+function initFilters(){
+  const countries=new Set(), itypes=new Set(), dates=new Set();
+  REPORTS.forEach(rep=>{
+    const {lei}=leiParts(rep.entityID);
+    const m=META.get(lei)||{};
+    if(m.country) countries.add(m.country);
+    if(m.institution_type) itypes.add(m.institution_type);
+    dates.add(rep.refPeriod);
+  });
+  const fill=(id,vals,label)=>{
+    const sel=document.getElementById(id);
+    [...vals].sort().forEach(v=>{
+      const o=document.createElement('option'); o.value=v;
+      o.textContent=(label?label(v):v); sel.appendChild(o); });
+  };
+  fill('fCountry',countries); fill('fItype',itypes,shortItype); fill('fDate',dates);
+  const rerender=()=>{ renderReportList(); if(VIEW==='benchmark') renderBenchmark(); };
+  ['fCountry','fItype','fScope','fDate'].forEach(id=>
+    document.getElementById(id).addEventListener('change',rerender));
+  document.getElementById('fGsii').addEventListener('change',rerender);
+  document.getElementById('reportFilter').addEventListener('input',rerender);
+}
+function togglePin(key){
+  if(PINS.has(key)) PINS.delete(key);
+  else{
+    if(PINS.size>=4){ alert('Maximal 4 Reports vergleichen.'); return; }
+    PINS.add(key);
+  }
+  persist(); updateCmpBadge(); renderReportList();
+  if(VIEW==='compare') renderCompare();
+}
+function updateCmpBadge(){
+  document.getElementById('cmpN').textContent=PINS.size?`(${PINS.size})`:'';
+}
+
+/* ================= scale / EUR controls (shared) ================= */
+function controlsHTML(){
+  return `<label class="ctl">Skala:
+      <select id="scaleSel">
+        <option value="auto">Auto</option><option value="1">Voll</option>
+        <option value="1000">Tsd.</option><option value="1000000">Mio.</option>
+        <option value="1000000000">Mrd.</option>
+      </select></label>
+    <label class="ctl"><input type="checkbox" id="eurChk"> in EUR (EZB-Kurs)</label>`;
+}
+function wireControls(redraw){
+  const sel=document.getElementById('scaleSel');
+  if(sel){ sel.value=SCALE==='auto'?'auto':String(SCALE);
+    sel.addEventListener('change',()=>{ SCALE=sel.value==='auto'?'auto':Number(sel.value); persist(); redraw(); }); }
+  const chk=document.getElementById('eurChk');
+  if(chk){ chk.checked=EUR;
+    chk.addEventListener('change',()=>{ EUR=chk.checked; persist(); redraw(); }); }
+}
+
+/* ================= report view ================= */
+function renderTemplate(tid, cells, rep){
+  const tcode=dpmCode(tid);
+  const title=TITLES.get(tcode)||'';
+  const {rate,cur}=fxOf(rep);
+  const rows=[...new Set(cells.map(c=>c.row))].sort();
+  const cols=[...new Set(cells.map(c=>c.col))].sort();
+  const val=new Map(cells.map(c=>[c.row+'|'+c.col,c.val]));
+  const dtOf=(r,c)=>{ const e=CB.get(tcode+'|'+r+'|'+c); return e?e.dt:''; };
+  const rowLbl=r=>{ const e=CB.get(tcode+'|'+r+'|'+cols[0]); return e?e.rl:''; };
+  const colLbl=c=>{ for(const r of rows){ const e=CB.get(tcode+'|'+r+'|'+c); if(e) return e.cl; } return ''; };
+  let maxAbs=0;
+  for(const c of cells) if(dtOf(c.row,c.col)==='monetary'){
+    const n=Math.abs(Number(c.val))*rate; if(n>maxAbs) maxAbs=n; }
+  const unit=maxAbs>0?pickUnit(maxAbs):1;
+  const conv=EUR&&cur==='EUR'&&curOf(rep)!=='EUR';
+  const note=unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${esc(cur)}${conv?' · EZB-Kurs':''}</span>`
+             :(conv?`<span class="scalenote">EUR · EZB-Kurs</span>`:'');
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${note}</h3><table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
+  for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
+  h+='</tr></thead><tbody>';
+  for(const r of rows){
+    h+=`<tr><th class="rh">${esc(r)}</th><td class="rl">${esc(rowLbl(r))}</td>`;
+    for(const c of cols){
+      const v=val.get(r+'|'+c);
+      if(v===undefined){ h+='<td class="empty"></td>'; continue; }
+      const dt=dtOf(r,c);
+      const tip=dt==='monetary'?` title="${esc(fmt(v))} ${esc(curOf(rep))} (Originalwert)"`:
+                dt==='percentage'?` title="Rohwert ${esc(v)}"`:'';
+      h+=`<td class="num"${tip}>${fmtTyped(v,dt,unit,dt==='monetary'?rate:1)}</td>`;
+    }
+    h+='</tr>';
+  }
+  return h+'</tbody></table></section>';
+}
+async function renderReport(rep){
+  VIEW='reports'; setTabs();
+  activeKey=repKey(rep);
+  const main=document.getElementById('main');
+  if(!rep.loaded){
+    main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2></div>
+      <div class="status">Lade Report…<div class="prog"><i style="width:45%"></i></div></div>`;
+    renderReportList();
+    try{ await ensureLoaded(rep); }
+    catch(e){ main.innerHTML='<div class="status">Fehler beim Laden des Reports: '+esc(e.message)+'</div>'; return; }
+    if(activeKey!==repKey(rep)) return;   // user navigated away while the shard loaded
+  }
+  const tids=[...rep.tids].sort();
+  const {lei,scope}=leiParts(rep.entityID);
+  const nrec=NAMES.get(lei)||{};
+  main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2>
+    <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
+    <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(curOf(rep))}</b>
+    · Framework <b>${esc(rep.framework)}</b></div></div>
+    <div id="tsSection"></div>
+    <div class="tfilter"><input id="tfilter" placeholder="Filter templates (code / title)…">${controlsHTML()}</div>
+    <div id="tcontainer"></div>`;
+  // Zeitreihe: KM1-Kennzahlen über alle Stichtage dieses Instituts (ab 2 Stichtagen)
+  const series=entityReports(rep);
+  if(series.length>=2){
+    const METRICS=[
+      {row:'0050',label:'CET1-Ratio',kind:'pct'},
+      {row:'0070',label:'TotalCap-Ratio',kind:'pct'},
+      {row:'0220',label:'Leverage',kind:'pct'},
+      {row:'0320',label:'LCR',kind:'pct'},
+      {row:'0350',label:'NSFR',kind:'pct'},
+      {row:'0040',label:'TREA (Mrd)',kind:'eur'},
+      {row:'0010',label:'CET1 (Mrd)',kind:'eur'},
+    ];
+    let ts=`<section class="ts"><h3>Zeitreihe — EU KM1 <span class="scalenote">${series.length} Stichtage</span></h3>
+      <table><thead><tr><th class="rl">Kennzahl</th>`;
+    for(const s of series){
+      const on=s.refPeriod===rep.refPeriod;
+      ts+=`<th class="datecol"><a href="#r/${lei}/${s.refPeriod}/${scope}">${esc(s.refPeriod)}</a>${on?' •':''}</th>`;
+    }
+    ts+='<th>Trend</th></tr></thead><tbody>';
+    let any=false;
+    for(const m of METRICS){
+      const vals=series.map(s=>{
+        const v=km1Value(s,m.row);
+        if(v==null) return null;
+        if(m.kind==='pct') return Math.abs(v)>10?null:v*100;
+        const cur=curOf(s); const fxr=cur==='EUR'?1:(FX.get(cur+'|'+s.refPeriod)||null);
+        return fxr==null?null:v*fxr/1e9;
+      });
+      if(vals.filter(x=>x!=null).length<2) continue;
+      any=true;
+      ts+=`<tr><td class="rl">${esc(m.label)}${m.kind==='eur'?' <span class="cl">EUR</span>':''}</td>`;
+      for(const v of vals) ts+= v==null?'<td class="empty"></td>':
+        `<td class="num">${m.kind==='pct'?zdash(v.toFixed(1)+NBSP+'%'):zdash(v.toLocaleString('en-US',{maximumFractionDigits:1}).split(',').join(NBSP))}</td>`;
+      ts+=`<td>${sparkline(vals)}</td></tr>`;
+    }
+    ts+='</tbody></table></section>';
+    if(any) document.getElementById('tsSection').innerHTML=ts;
+  }
+  const draw=()=>{
+    const f=(document.getElementById('tfilter').value||'').toLowerCase();
+    const c=document.getElementById('tcontainer'); c.innerHTML='';
+    let shown=0;
+    for(const tid of tids){
+      const title=(TITLES.get(dpmCode(tid))||'').toLowerCase();
+      if(f && !tid.toLowerCase().includes(f) && !title.includes(f)) continue;
+      c.insertAdjacentHTML('beforeend', renderTemplate(tid, rep.templates.get(tid), rep));
+      shown++;
+    }
+    if(!shown) c.innerHTML='<div class="status">No templates match.</div>';
+  };
+  draw();
+  document.getElementById('tfilter').addEventListener('input',draw);
+  wireControls(draw);
+  renderReportList();
+  main.scrollTop=0;
+}
+
+/* ================= time series helpers ================= */
+function entityReports(rep){
+  const {lei,scope}=leiParts(rep.entityID);
+  return REPORTS.filter(r=>{ const p=leiParts(r.entityID); return p.lei===lei&&p.scope===scope; })
+    .sort((a,b)=>a.refPeriod.localeCompare(b.refPeriod));
+}
+function sparkline(vals,w,h){
+  w=w||86; h=h||20;
+  const present=vals.filter(x=>x!=null);
+  if(present.length<2) return '';
+  const min=Math.min(...present), max=Math.max(...present), span=(max-min)||1;
+  const pts=vals.map((x,i)=> x==null?null:
+    [ (vals.length>1 ? i/(vals.length-1) : 0)*(w-6)+3, h-3-((x-min)/span)*(h-7) ]);
+  let d='', started=false;
+  for(const p of pts){ if(!p){started=false;continue;}
+    d+=(started?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1); started=true; }
+  const last=[...pts].reverse().find(Boolean);
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">`+
+    `<path d="${d}" fill="none" stroke="currentColor" stroke-width="1.4"/>`+
+    `<circle cx="${last[0]}" cy="${last[1]}" r="1.8" fill="currentColor"/></svg>`;
+}
+function tplValue(rep,tid,row){
+  const cells=rep.templates.get(tid);
+  if(!cells) return null;
+  const hit=cells.find(c=>c.row===row&&c.col==='0010');
+  return hit?Number(hit.val):null;
+}
+const km1Value=(rep,row)=>tplValue(rep,'61.00',row);
+
+/* ================= benchmark view (profiles) ================= */
+/* col kinds: pct = KM1 raw ratio *100 · eur = monetary -> Mrd EUR (ECB rate)
+   shareOfTrea = OV1 component / KM1 TREA *100 · pp = difference already in % points */
+const BM_PROFILES={
+  km1:{label:'KM1-Kennzahlen', tpl:'61.00', trendRow:'0050', defaultSort:{col:'0050',dir:-1}, cols:[
+    {id:'0050',label:'CET1-Ratio',kind:'pct',row:'0050'},
+    {id:'0060',label:'T1-Ratio',kind:'pct',row:'0060'},
+    {id:'0070',label:'TotalCap-Ratio',kind:'pct',row:'0070'},
+    {id:'0220',label:'Leverage',kind:'pct',row:'0220'},
+    {id:'0320',label:'LCR',kind:'pct',row:'0320'},
+    {id:'0350',label:'NSFR',kind:'pct',row:'0350'},
+    {id:'0040',label:'TREA (Mrd EUR)',kind:'eur',row:'0040'},
+    {id:'0010',label:'CET1 (Mrd EUR)',kind:'eur',row:'0010'},
+  ]},
+  headroom:{label:'Kapital-Headroom', tpl:'61.00', trendRow:'0070', defaultSort:{col:'hr',dir:1}, cols:[
+    {id:'0050',label:'CET1-Ratio',kind:'pct',row:'0050'},
+    {id:'0070',label:'TotalCap-Ratio',kind:'pct',row:'0070'},
+    {id:'0190',label:'Gesamtanforderung (OCR)',kind:'pct',row:'0190'},
+    // consistent units: total-capital ratio minus overall capital requirement
+    {id:'hr',label:'Headroom TC−OCR (pp)',kind:'pp',
+      calc:rep=>{ const t=km1Value(rep,'0070'), o=km1Value(rep,'0190');
+        return (t==null||o==null||Math.abs(t)>10||Math.abs(o)>10)?null:(t-o)*100; }},
+    {id:'0200',label:'CET1 n. SREP verfügbar',kind:'pct',row:'0200'},
+    {id:'0040',label:'TREA (Mrd EUR)',kind:'eur',row:'0040'},
+  ]},
+  risk:{label:'Risikoprofil (OV1)', tpl:'60.00.A', trendRow:null, defaultSort:{col:'sh0010',dir:-1}, cols:[
+    {id:'sh0010',label:'Kreditrisiko %',kind:'shareOfTrea',row:'0010'},
+    {id:'sh0070',label:'CCR %',kind:'shareOfTrea',row:'0070'},
+    {id:'sh0120',label:'CVA %',kind:'shareOfTrea',row:'0120'},
+    {id:'sh0260',label:'Marktrisiko %',kind:'shareOfTrea',row:'0260'},
+    {id:'sh0320',label:'Op-Risiko %',kind:'shareOfTrea',row:'0320'},
+    {id:'0040',label:'TREA (Mrd EUR)',kind:'eur',row:'0040'},
+  ]},
+  liq:{label:'Liquidität', tpl:'61.00', trendRow:'0320', defaultSort:{col:'0320',dir:-1}, cols:[
+    {id:'0320',label:'LCR',kind:'pct',row:'0320'},
+    {id:'0350',label:'NSFR',kind:'pct',row:'0350'},
+    {id:'0280',label:'HQLA (Mrd EUR)',kind:'eur',row:'0280'},
+    {id:'0310',label:'Netto-Abflüsse (Mrd EUR)',kind:'eur',row:'0310'},
+    {id:'0330',label:'Verf. stabile Mittel (Mrd EUR)',kind:'eur',row:'0330'},
+  ]},
+};
+let BMP = store.bmp && BM_PROFILES[store.bmp] ? store.bmp : 'km1';
+let bmSort={...BM_PROFILES[BMP].defaultSort};
+function benchmarkRows(){
+  const prof=BM_PROFILES[BMP];
+  const f=activeFilters();
+  const out=[];
+  for(const rep of REPORTS){
+    if(!passFilters(rep,f)) continue;
+    if(!rep.templates.has(prof.tpl)) continue;
+    const {lei,scope}=leiParts(rep.entityID);
+    const m=META.get(lei)||{};
+    const cur=curOf(rep);
+    const fxr=cur==='EUR'?1:(FX.get(cur+'|'+rep.refPeriod)||null);
+    const trea=km1Value(rep,'0040');
+    const row={key:repKey(rep), lei, name:bankName(rep.entityID), country:m.country||'',
+               itype:shortItype(m.institution_type||''), scope, date:rep.refPeriod, gsii:m.is_gsii==='true'};
+    for(const c of prof.cols){
+      if(c.calc){ row[c.id]=c.calc(rep); continue; }
+      const v=tplValue(rep,c.kind==='shareOfTrea'?prof.tpl:'61.00',c.row) ??
+              (c.kind==='eur'&&prof.tpl!=='61.00' ? tplValue(rep,prof.tpl,c.row) : null);
+      if(c.kind==='pct') row[c.id]=(v==null||Math.abs(v)>10)?null:v*100;   // guard misfiled amounts
+      else if(c.kind==='shareOfTrea') row[c.id]=(v==null||trea==null||trea===0)?null:v/trea*100;
+      else row[c.id]= v==null?null:(fxr==null?null:v*fxr/1e9);
+    }
+    // trend sparkline data (metric across the entity's ref dates)
+    if(prof.trendRow){
+      const series=entityReports(rep).map(r=>{
+        const t=km1Value(r,prof.trendRow);
+        return (t==null||Math.abs(t)>10)?null:t*100;
+      });
+      row._trend = series.filter(x=>x!=null).length>=2 ? series : null;
+    } else row._trend=null;
+    out.push(row);
+  }
+  const k=bmSort.col;
+  out.sort((a,b)=>{
+    const av=a[k], bv=b[k];
+    if(av==null&&bv==null) return 0;
+    if(av==null) return 1; if(bv==null) return -1;
+    if(typeof av==='string') return String(av).localeCompare(String(bv))*bmSort.dir;
+    return (av-bv)*bmSort.dir;
+  });
+  return out;
+}
+function bmCell(c,v){
+  if(v==null) return '<td class="empty"></td>';
+  if(c.kind==='eur') return `<td class="num">${zdash(v.toLocaleString('en-US',{maximumFractionDigits:1}).split(',').join(NBSP))}</td>`;
+  if(c.kind==='pp') return `<td class="num">${zdash(v.toFixed(1)+NBSP+'pp')}</td>`;
+  return `<td class="num">${zdash(v.toFixed(1)+NBSP+'%')}</td>`;
+}
+function renderBenchmark(){
+  VIEW='benchmark'; setTabs(); activeKey=null;
+  const prof=BM_PROFILES[BMP];
+  const rows=benchmarkRows();
+  const main=document.getElementById('main');
+  const profSel=Object.entries(BM_PROFILES).map(([k,p])=>
+    `<option value="${k}"${k===BMP?' selected':''}>${esc(p.label)}</option>`).join('');
+  let h=`<div class="rhead"><h2>Benchmark</h2></div>
+    <div class="bmbar"><label class="ctl">Profil: <select id="bmProfile">${profSel}</select></label>
+      <span class="meta" style="margin:0">Basis: Template ${esc(prof.tpl)}${prof.tpl!=='61.00'?' + 61.00':''} · Spalte a · Beträge in Mrd. EUR (EZB-Kurs) · Sidebar-Filter aktiv · Klick auf Spalte sortiert</span></div>
+    <div class="caveat">⚠ Vergleichbarkeits-Caveat: Rechnungslegung, Konsolidierungskreis (CON/IND),
+    nationale Optionen und Framework-Version (4.1/4.2) unterscheiden sich — Ranglisten sind indikativ,
+    keine Aufsichtsmetrik. Quelle: öffentliche Pillar-3-Meldungen (© EBA).</div>
+    <table class="bmtable"><thead><tr>
+      <th data-k="name">Institut <span class="dir"></span></th><th data-k="date">Stichtag <span class="dir"></span></th>`;
+  for(const c of prof.cols) h+=`<th class="num" data-k="${c.id}">${esc(c.label)} <span class="dir"></span></th>`;
+  if(prof.trendRow) h+=`<th title="Verlauf über verfügbare Stichtage (${esc((prof.cols.find(x=>x.row===prof.trendRow)||{}).label||'')})">Trend</th>`;
+  h+='</tr></thead><tbody>';
+  for(const r of rows){
+    h+=`<tr><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
+        ${r.gsii?'<span class="badge gs">G-SII</span>':''}
+        <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
+        <td>${esc(r.date)}</td>`;
+    for(const c of prof.cols) h+=bmCell(c,r[c.id]);
+    if(prof.trendRow) h+=`<td>${r._trend?sparkline(r._trend):''}</td>`;
+    h+='</tr>';
+  }
+  h+=`</tbody></table><div class="meta" style="margin-top:.5rem">${rows.length} Reports mit Template ${esc(prof.tpl)}</div>`;
+  main.innerHTML=h;
+  document.getElementById('bmProfile').addEventListener('change',e=>{
+    BMP=e.target.value; bmSort={...BM_PROFILES[BMP].defaultSort};
+    store.bmp=BMP; persist(); renderBenchmark();
+  });
+  main.querySelectorAll('th[data-k]').forEach(th=>{
+    const k=th.dataset.k;
+    if(k===bmSort.col) th.querySelector('.dir').textContent=bmSort.dir<0?'▼':'▲';
+    th.onclick=()=>{
+      if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:(k==='name'||k==='date')?1:-1};
+      renderBenchmark();
+    };
+  });
+  main.scrollTop=0;
+}
+
+/* ================= compare view ================= */
+async function renderCompare(){
+  VIEW='compare'; setTabs(); activeKey=null;
+  const main=document.getElementById('main');
+  const reps=[...PINS].map(byKey).filter(Boolean);
+  if(!reps.length){
+    main.innerHTML=`<div class="rhead"><h2>Vergleich</h2></div>
+      <div class="status">Keine Reports angepinnt. In der Liste links das <b>⊞</b>-Symbol an bis zu 4 Reports klicken.</div>`;
+    return;
+  }
+  const need=reps.filter(r=>!r.loaded);
+  if(need.length){
+    main.innerHTML=`<div class="rhead"><h2>Vergleich</h2></div><div class="status">Lade ${need.length} Report(s)…</div>`;
+    try{ await Promise.all(need.map(ensureLoaded)); }catch(e){}
+    if(VIEW!=='compare') return;   // navigated away while loading
+  }
+  const tplSet=new Set();
+  reps.forEach(r=>r.tids.forEach(t=>tplSet.add(t)));
+  const tpls=[...tplSet].sort();
+  if(!tpls.includes(CMPTPL)) CMPTPL=tpls.includes('61.00')?'61.00':tpls[0];
+  main.innerHTML=`<div class="rhead"><h2>Vergleich</h2></div><div class="cmp-pick">
+    <label class="ctl">Template:
+      <select id="cmpTpl">${tpls.map(t=>{
+        const ttl=TITLES.get(dpmCode(t))||'';
+        return `<option value="${esc(t)}"${t===CMPTPL?' selected':''}>${esc(t)}${ttl?' — '+esc(ttl.slice(0,45)):''}</option>`;
+      }).join('')}</select></label>
+    ${controlsHTML()}
+    ${reps.map(r=>`<span class="chip">${esc(bankName(r.entityID).slice(0,28))} · ${esc(r.refPeriod)}
+      <button title="entfernen" data-k="${esc(repKey(r))}">✕</button></span>`).join('')}
+  </div><div id="cmpBody"></div>`;
+
+  const draw=()=>{
+    const body=document.getElementById('cmpBody');
+    const tcode=dpmCode(CMPTPL);
+    const per=reps.map(rep=>{
+      const cells=rep.templates.get(CMPTPL)||[];
+      const {rate,cur}=fxOf(rep);
+      return {rep,rate,cur,val:new Map(cells.map(c=>[c.row+'|'+c.col,c.val]))};
+    });
+    const keys=new Set();
+    per.forEach(p=>p.val.forEach((_,k)=>keys.add(k)));
+    const sorted=[...keys].sort();
+    let maxAbs=0;
+    per.forEach(p=>p.val.forEach((v,k)=>{
+      const dt=(CB.get(tcode+'|'+k)||{}).dt;
+      if(dt==='monetary'){ const n=Math.abs(Number(v))*p.rate; if(n>maxAbs) maxAbs=n; }
+    }));
+    const unit=maxAbs>0?pickUnit(maxAbs):1;
+    const anyFx=per.some(p=>p.cur==='EUR'&&curOf(p.rep)!=='EUR');
+    const mixedCur=new Set(per.map(p=>EUR?p.cur:curOf(p.rep))).size>1;
+    const ttl=TITLES.get(tcode)||'';
+    let t=`<section><h3>${esc(CMPTPL)} — ${esc(ttl)}
+      ${unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${EUR?'EUR':esc(curOf(per[0].rep))}${anyFx?' · EZB-Kurs':''}</span>`:''}
+      ${mixedCur?'<span class="scalenote" style="color:#b26b00">⚠ verschiedene Währungen — EUR-Toggle empfohlen</span>':''}
+      </h3><table><thead><tr><th class="rh">Zelle</th><th class="rl"></th>`;
+    per.forEach(p=>{ t+=`<th>${esc(bankName(p.rep.entityID).slice(0,24))}<br><span class="cl">${esc(p.rep.refPeriod)} · ${esc(curOf(p.rep))}</span></th>`; });
+    t+='</tr></thead><tbody>';
+    for(const k of sorted){
+      const [row,col]=k.split('|');
+      const e=CB.get(tcode+'|'+k)||{};
+      t+=`<tr><th class="rh">${esc(row)}<br><span class="cl">c${esc(col)}</span></th>
+          <td class="rl">${esc(e.rl||'')}${e.cl?`<span class="cl"> · ${esc(e.cl)}</span>`:''}</td>`;
+      per.forEach(p=>{
+        const v=p.val.get(k);
+        t+= v===undefined?'<td class="empty"></td>':
+          `<td class="num">${fmtTyped(v,e.dt||'',unit,(e.dt==='monetary')?p.rate:1)}</td>`;
+      });
+      t+='</tr>';
+    }
+    body.innerHTML=t+'</tbody></table></section>';
+  };
+  draw();
+  document.getElementById('cmpTpl').addEventListener('change',e=>{ CMPTPL=e.target.value; persist(); draw(); });
+  wireControls(draw);
+  main.querySelectorAll('.chip button').forEach(b=>b.onclick=()=>togglePin(b.dataset.k));
+  main.scrollTop=0;
+}
+
+/* ================= routing & tabs ================= */
+function setTabs(){
+  document.getElementById('tabReports').classList.toggle('on',VIEW==='reports');
+  document.getElementById('tabBenchmark').classList.toggle('on',VIEW==='benchmark');
+  document.getElementById('tabCompare').classList.toggle('on',VIEW==='compare');
+}
+function route(){
+  const hsh=decodeURIComponent(location.hash||'');
+  if(hsh.startsWith('#benchmark')){ renderBenchmark(); return; }
+  if(hsh.startsWith('#compare')){ renderCompare(); return; }
+  const m=hsh.match(/^#r\/([A-Z0-9]{20})\/([\d-]+)(?:\/(\w+))?/);
+  if(m){
+    const rep=REPORTS.find(r=>{
+      const p=leiParts(r.entityID);
+      return p.lei===m[1] && r.refPeriod===m[2] && (!m[3]||p.scope===m[3]);
+    });
+    if(rep){ renderReport(rep); return; }
+  }
+  if(REPORTS.length) renderReport(REPORTS[0]);
+}
+document.getElementById('tabReports').onclick=()=>{
+  if(activeKey){ const r=byKey(activeKey); location.hash='#r/'+leiParts(r.entityID).lei+'/'+r.refPeriod+'/'+leiParts(r.entityID).scope; }
+  else{ history.replaceState(null,'',location.pathname); route(); }
+};
+document.getElementById('tabBenchmark').onclick=()=>{ location.hash='#benchmark'; };
+document.getElementById('tabCompare').onclick=()=>{ location.hash='#compare'; };
+window.addEventListener('hashchange',route);
+
+/* theme + keyboard */
+document.getElementById('themeBtn').onclick=()=>{ DARK=!DARK; applyTheme(); persist(); };
+document.addEventListener('keydown',e=>{
+  if(e.key==='/' && document.activeElement.tagName!=='INPUT' && document.activeElement.tagName!=='SELECT'){
+    e.preventDefault(); document.getElementById('reportFilter').focus();
+  }
+  if(e.key==='Escape' && document.activeElement.id==='reportFilter'){
+    document.activeElement.value=''; renderReportList(); document.activeElement.blur();
+  }
+});
+
+/* ================= boot ================= */
+async function init(){
+  try{
+    const bar=document.getElementById('progBar');
+    const [idx, codebook]=await Promise.all([
+      getJSON('data/index.json'), getJSON('data/codebook.json')
+    ]);
+    if(bar) bar.style.width='100%';
+    buildFromIndex(idx, codebook);
+    REPORTS.sort((a,b)=>(bankName(a.entityID)+a.refPeriod).localeCompare(bankName(b.entityID)+b.refPeriod));
+    const nf=idx.stats.facts;
+    document.getElementById('hsub').textContent=`${idx.stats.reports} Reports · ${nf.toLocaleString('en-US').split(',').join(NBSP)} Facts`;
+    initFilters(); updateCmpBadge(); renderReportList(); route();
+  }catch(err){
+    document.getElementById('main').innerHTML='<div class="status">Fehler beim Laden: '+esc(err.message)+
+      '<br><br>Vom Repo-Root ausliefern: <code>python3 -m http.server 8766</code> → <code>/processed/zweig_a/viewer_json.html</code></div>';
+  }
+}
+init();
+</script>
+</body>
+</html>

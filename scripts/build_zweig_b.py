@@ -69,7 +69,9 @@ def main():
         b.datapoint_code,
         cb.data_type,
         b.fact_value_num          AS fact_value,
+        b.fact_value              AS fact_value_raw,   -- original string: keeps ~1.3% non-numeric facts
         b.currency,
+        TRY_CAST(fx.rate_to_eur AS DOUBLE)                                      AS fx_rate,
         CASE WHEN cb.data_type='monetary'
              THEN b.fact_value_num * TRY_CAST(fx.rate_to_eur AS DOUBLE)
              END                                                                AS fact_value_eur,

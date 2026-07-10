@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pillar 3 Viewer — Variante wählen</title>
+<style>
+  :root{--blue:#0b3d91;--ink:#1a1a1a;--muted:#666;--line:#e2e2e2;--bg:#fafafa;--card:#fff;--green:#1f8a4c}
+  @media (prefers-color-scheme:dark){
+    :root{--blue:#7ea8ff;--ink:#e6e9ee;--muted:#9aa3b0;--line:#333a45;--bg:#12151a;--card:#1a1f27;--green:#3ecf77}
+  }
+  *{box-sizing:border-box}
+  body{font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:var(--ink);background:var(--bg);
+       display:flex;flex-direction:column;min-height:100vh}
+  header{background:var(--blue);color:#fff;padding:1rem 1.25rem}
+  header h1{margin:0;font-size:1.2rem}
+  header p{margin:.3rem 0 0;opacity:.9;font-size:.9rem}
+  main{flex:1;max-width:900px;margin:0 auto;padding:1.5rem 1.25rem 2rem;width:100%}
+  .lead{color:var(--muted);margin:.2rem 0 1.4rem}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+  @media (max-width:720px){.cards{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:1.15rem 1.15rem 1.25rem;
+        display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:box-shadow .15s,transform .15s}
+  .card:hover{box-shadow:0 6px 22px rgba(0,0,0,.12);transform:translateY(-2px)}
+  .tag{display:inline-block;font-size:11px;font-weight:700;border-radius:20px;padding:2px 10px;margin-bottom:.6rem;align-self:flex-start}
+  .tag.csv{background:#eef2fb;color:var(--blue)}
+  .tag.json{background:#e7f6ed;color:var(--green)}
+  .card h2{margin:.1rem 0 .3rem;font-size:1.1rem}
+  .card .sub{color:var(--muted);font-size:.86rem;margin-bottom:.7rem}
+  ul{margin:.2rem 0 .9rem;padding-left:1.1rem}
+  li{margin:.15rem 0;font-size:.9rem}
+  .metric{font-variant-numeric:tabular-nums;font-weight:600}
+  .go{margin-top:auto;font-weight:600;color:var(--blue)}
+  .go.json{color:var(--green)}
+  .note{margin-top:1.5rem;font-size:.82rem;color:var(--muted);background:var(--card);border:1px solid var(--line);
+        border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:.7rem .9rem}
+  footer{color:var(--muted);font-size:.78rem;padding:1rem 1.25rem;border-top:1px solid var(--line);text-align:center}
+  a{color:var(--blue)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Pillar 3 Viewer</h1>
+  <p>JSON-Viewer ist Standard — CSV bleibt als Legacy verfügbar.</p>
+</header>
+<main>
+  <p class="lead">Beide Varianten zeigen <b>dieselben Daten</b> (218 Reports · 176.453 Fakten) mit
+  identischen Funktionen — Reports, Benchmark, Vergleich, Zeitreihen. Sie unterscheiden sich nur darin,
+  <i>wie</i> geladen wird. Standard ist der JSON-Viewer; der CSV-Viewer bleibt zum Vergleich.</p>
+
+  <div class="cards">
+    <a class="card" href="viewer_json.html">
+      <span class="tag json">JSON · Standard</span>
+      <h2>JSON-Viewer <small>(per-Report-Shards)</small></h2>
+      <div class="sub">Lädt einen schlanken Index vorab, jeden Report erst beim Öffnen — nativ per <code>JSON.parse</code>.</div>
+      <ul>
+        <li>Startlast: <span class="metric">~0,25 MB</span> (Index + Codebook)</li>
+        <li>Pro Report: <span class="metric">~3&nbsp;KB</span> (median, lazy)</li>
+        <li>Gespeist aus Zweig B · skaliert Richtung Voll-Load</li>
+      </ul>
+      <span class="go json">JSON-Viewer öffnen →</span>
+    </a>
+
+    <a class="card" href="viewer.html">
+      <span class="tag csv">CSV · Legacy</span>
+      <h2>CSV-Viewer</h2>
+      <div class="sub">Lädt die Roh-CSVs komplett und joint/typisiert im Browser.</div>
+      <ul>
+        <li>Startlast: <span class="metric">~2,7 MB</span> (alles vorab)</li>
+        <li>Danach: alle Reports sofort im Speicher</li>
+        <li>Bewährt, unverändert — zum Gegenprüfen</li>
+      </ul>
+      <span class="go">CSV-Viewer öffnen →</span>
+    </a>
+  </div>
+
+  <div class="note">
+    <b>Warum zwei Varianten?</b> Der JSON-Viewer bündelt die Transformation an einer Stelle: die Shards
+    werden offline aus dem <b>Zweig-B-Parquet</b> abgeleitet (<code>build_zweig_a_shards.py</code>) — dieselbe
+    Tabelle, die auch die Datenanalysen speist. Viewer und Analytics teilen so <b>eine Quelle</b> und können
+    nicht auseinanderlaufen. Geladen wird nur, was du ansiehst — beim Voll-Load (4.278 Reports) wäre „alles
+    vorab" im Browser nicht mehr tragfähig. Der CSV-Viewer bleibt als unabhängige Gegenprobe; Werte sind in
+    beiden Varianten byte-identisch aus <code>long_form_raw.csv</code> abgeleitet.
+  </div>
+</main>
+<footer>
+  Unabhängiges, nicht-kommerzielles Forschungsprojekt — nicht mit EBA/GLEIF affiliiert ·
+  <a href="../../index.html">About</a> ·
+  <a href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md">Disclaimer</a>
+</footer>
+</body>
+</html>

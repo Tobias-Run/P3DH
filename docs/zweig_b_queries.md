@@ -11,7 +11,12 @@ Nutzen (CLI `duckdb` oder `python3 -c "import duckdb; ..."`), Pfade relativ zum 
 `bank_name, lei, scope (CON/IND), country, institution_type, files_gsii_module,
 refPeriod, framework_version, template_id, template_title, cell_row, row_label,
 cell_col, col_label, open_axis_dims, datapoint_code, data_type, fact_value,
-currency, fact_value_eur, template_reported, source_file`
+fact_value_raw, currency, fx_rate, fact_value_eur, template_reported, source_file`
+
+`fact_value` ist numerisch gecastet (NULL bei Textfakten); `fact_value_raw` hält den
+Original-String (inkl. der ~1,3 % nicht-numerischen Text-/Enum-Fakten). `fx_rate` ist
+der EZB-Kurs zum Stichtag (Basis für `fact_value_eur`). Diese Parquet-Tabelle speist
+auch den JSON-Viewer (Zweig A) — via `build_zweig_a_shards.py`.
 
 ## Beispiele
 
