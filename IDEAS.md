@@ -7,7 +7,10 @@ Für den P3DH-Backlog siehe `BACKLOG.md`.
 
 ## Neues Projekt: Epic Engine + LiveLink Face — Use-Case-Experiment
 
-**Erfasst:** 2026-07-12 · **Status:** Merker / noch nicht gescoped
+> ➡️ **Ausgelagert in eigenes Repo:** https://github.com/Tobias-Run/livelink-face-usecase
+> (2026-08-19). Weiterarbeit dort; dieser Eintrag bleibt nur als Verweis.
+
+**Erfasst:** 2026-07-12 · **Status:** in eigenes Repo überführt
 
 Experiment mit Unreal Engine (Epic Games) und **Live Link Face** (iOS-App zur
 ARKit-basierten Gesichts-Mocap) als Use Case aufsetzen — z. B. Echtzeit-
