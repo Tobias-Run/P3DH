@@ -29,20 +29,22 @@ der 20-%-Stichprobe neu erzeugt — 53.833 Records tragen `open_axis_dims`.
 Optional weiter offen: `open_axis_dims` gegen DPM-Open-Axis-Member auflösen
 (z. B. `eba_GA:NL` → „Niederlande") für lesbare offene Achsen im Viewer.
 
-## Delta-Pipeline: inkrementelle Verarbeitung (offen)
+## ✅ ERLEDIGT: Delta-Pipeline + Automatisierung (2026-08-21)
 
-Aktuell nur teilweise umgesetzt (siehe `scripts/resolve_latest_submissions.py` für
-die Resubmission-Policy). Der eigentliche Kern fehlt noch:
+- **Parser ist inkrementell** (`source_file`-Ledger, `--full` erzwingt Neuaufbau).
+  Zwei dabei gefundene Defekte behoben: (a) die Menge der gültigen Quellen kam aus
+  den ZIPs *auf der Platte* — auf einem zustandslosen Runner hätte der Merge den
+  gesamten Altbestand verworfen; sie kommt jetzt aus dem Manifest. (b) Einreichungen
+  ohne platzierbare Fakten stehen nur in der Coverage-Matrix und wurden deshalb bei
+  jedem Lauf neu geparst; die Coverage ist jetzt das maßgebliche Ledger.
+  Regressionstests: `IncrementalMergeTest` (gegen die alte Logik gegengeprüft).
+- **Download-Delta** via `scripts/plan_delta.py` → `manifest_todo.csv` (Manifest minus
+  bereits Verarbeitetes), statt sich auf den Dateibestand in `raw/` zu verlassen.
+- **Automatischer Trigger** da: `.github/workflows/pipeline.yml` (Cron wöchentlich +
+  `workflow_dispatch`), inklusive Sanity-Gate gegen schrumpfenden Bestand.
 
-- **Kein Diff zwischen Harvest-Läufen.** `harvest_catalog.py` schreibt bei jedem
-  Lauf den kompletten Katalog neu, ohne Vergleich/Log, was seit dem letzten
-  Harvest neu hinzugekommen ist.
-- **Parser macht Full-Rerun statt Append.** `xbrl_csv_parser.py::parse_all_reports()`
-  parst bei jedem Lauf alle `.zip` in `raw/` neu und überschreibt
-  `processed/long_form_raw.csv` komplett. Sollte stattdessen nur neue/geänderte
-  Reports parsen und an die bestehende Long-Form-Tabelle anhängen.
-- **Kein automatischer Trigger.** Harvest läuft nur manuell, kein Cron o.ä.
-  (nice-to-have, kein Muss).
-
-Bei der aktuellen Datenmenge (~16–20 Reports) unkritisch (Full-Rerun dauert
-Sekunden), wird aber relevant, sobald die Anzahl Reports/Institute deutlich wächst.
+Offen bleibt nur: **Harvest-Diff.** `harvest_catalog_query.py` schreibt den Katalog
+komplett neu, ohne Log, was seit dem letzten Harvest dazukam (`harvest_log.csv`/
+`manifest_delta.csv` sind angelegt, aber der Vergleich ist nicht scharf geschaltet).
+Im Workflow ist der Harvest deshalb bewusst **opt-in** — er ist der fragilste Teil
+der Kette (headless Power-BI-Embed).

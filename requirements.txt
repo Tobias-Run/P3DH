@@ -1,5 +1,6 @@
 # Phase 1 ingestion
 playwright>=1.40
+requests>=2.31
 
 # Phase 1.5 metadata
 pandas>=2.0
@@ -13,3 +14,7 @@ openpyxl>=3.1
 # Zweig B analytics
 duckdb>=1.0
 pyarrow>=15
+
+# Tests (tests/test_xbrl_csv_parser.py — parser regressions: BOM, filing
+# indicators, open axis). Run: python -m pytest tests/ -q
+pytest>=8.0

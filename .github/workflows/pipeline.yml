@@ -1,0 +1,141 @@
+name: P3DH pipeline
+
+# Runs the whole chain off the laptop: restore state → find new submissions →
+# download only those → parse incrementally → Zweig B → Zweig A shards → publish.
+#
+# The pipeline is STATELESS by design: `raw/` starts empty on every runner. What
+# carries over between runs is the state on the orphan `data` branch (long form +
+# coverage matrix + parquet), restored by scripts/fetch_state.sh. The coverage
+# matrix doubles as the ledger of which submissions were already processed, so a
+# run only touches what is genuinely new.
+
+on:
+  workflow_dispatch:
+    inputs:
+      harvest:
+        description: "Katalog neu ernten (Playwright/Power-BI) — sonst wird das committete Manifest genutzt"
+        type: boolean
+        default: false
+      full_reparse:
+        description: "Alles neu parsen (nach Parser-/Codebook-Änderungen) — lädt den gesamten Korpus neu"
+        type: boolean
+        default: false
+  schedule:
+    - cron: "0 4 * * 1"     # montags 04:00 UTC
+
+permissions:
+  contents: write           # push the data branch + refreshed manifests
+
+concurrency:
+  group: p3dh-pipeline      # the data branch is force-pushed — never run two at once
+  cancel-in-progress: false
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore pipeline state (data branch)
+        run: bash scripts/fetch_state.sh
+
+      - name: Record baseline
+        id: baseline
+        run: |
+          before=$(( $(wc -l < processed/long_form_raw.csv) - 1 ))
+          echo "records=$before" >> "$GITHUB_OUTPUT"
+          echo "Bestand vorher: $before Records"
+
+      # Optional: refresh the catalog. Kept opt-in because it drives a headless
+      # Power BI embed — the fragile part of the chain. Without it the run uses
+      # the manifests committed on main.
+      - name: Harvest catalog
+        if: inputs.harvest
+        run: |
+          playwright install --with-deps chromium
+          python scripts/harvest_catalog_query.py
+          python scripts/resolve_latest_submissions.py
+          python scripts/build_parse_manifest.py
+
+      - name: Plan delta
+        run: python scripts/plan_delta.py
+
+      - name: Download new submissions
+        run: |
+          if [ "${{ inputs.full_reparse }}" = "true" ]; then
+            python scripts/download_raw_reports.py interim/edap_recon/manifest_parse.csv
+          else
+            python scripts/download_raw_reports.py interim/edap_recon/manifest_todo.csv
+          fi
+
+      - name: Parse
+        run: |
+          if [ "${{ inputs.full_reparse }}" = "true" ]; then
+            python scripts/xbrl_csv_parser.py --full
+          else
+            python scripts/xbrl_csv_parser.py
+          fi
+
+      # Guards the failure mode that matters: a bug in the incremental merge
+      # silently dropping the accumulated corpus. Shrinking is only ever legitimate
+      # via a deliberate full re-parse.
+      - name: Sanity gate
+        if: ${{ !inputs.full_reparse }}
+        run: |
+          after=$(( $(wc -l < processed/long_form_raw.csv) - 1 ))
+          before=${{ steps.baseline.outputs.records }}
+          echo "vorher: $before · nachher: $after"
+          if [ "$after" -lt "$before" ]; then
+            echo "::error::Bestand geschrumpft ($before → $after) — Merge-Fehler, Publish abgebrochen."
+            exit 1
+          fi
+
+      - name: Build Zweig B (parquet)
+        run: python scripts/build_zweig_b.py
+
+      - name: Build Zweig A (JSON shards)
+        run: python scripts/build_zweig_a_shards.py
+
+      - name: Publish data branch
+        env:
+          P3DH_PUSH_URL: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+        run: bash scripts/publish_data_branch.sh
+
+      # Only the manifests live on main; everything else is derived and belongs
+      # on the data branch.
+      - name: Commit refreshed manifests
+        if: inputs.harvest
+        run: |
+          git config user.name  "P3DH pipeline bot"
+          git config user.email "noreply@anthropic.com"
+          git add interim/edap_recon/*.csv
+          if git diff --cached --quiet; then
+            echo "Manifeste unverändert"
+          else
+            git commit -m "Katalog aktualisiert (automatischer Harvest)"
+            git push
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## P3DH pipeline"
+            if [ -f processed/long_form_raw.csv ]; then
+              echo "- Records: **$(( $(wc -l < processed/long_form_raw.csv) - 1 ))** (vorher ${{ steps.baseline.outputs.records }})"
+            fi
+            if [ -f processed/zweig_a/data/index.json ]; then
+              echo "- Shards: **$(find processed/zweig_a/data/reports -name '*.json' | wc -l)**"
+            fi
+            echo "- Viewer: https://tobias-run.github.io/P3DH/"
+          } >> "$GITHUB_STEP_SUMMARY"

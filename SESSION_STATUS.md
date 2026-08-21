@@ -1,4 +1,4 @@
-# Session Status — 2026-07-10
+# Session Status — 2026-08-21
 
 > Diese Datei ist die laufend aktualisierte Wahrheit zum Projektstatus.
 > Am Ende jeder Session auf den tatsächlichen Stand bringen — nicht verwaisen lassen.
@@ -40,9 +40,12 @@ trägt nur Code + kleine CSVs; `long_form_raw.csv` (275 MB) und das Parquet sind
 ## Pipeline-Artefakte (Reihenfolge)
 
 ```
+fetch_state.sh                <- data-Branch state/ (long_form + coverage + parquet zurückholen)
 harvest_catalog_query.py      -> interim/edap_recon/manifest_full.csv  (VOLLER Katalog, query-API)
 harvest_catalog.py            -> interim/edap_recon/manifest_urls.csv  (alt: Scroll, nur ~20 — überholt)
 resolve_latest_submissions.py -> interim/edap_recon/manifest_latest.csv (latest-wins)
+build_parse_manifest.py       -> interim/edap_recon/manifest_parse.csv (Union, ohne DISDOCS)
+plan_delta.py                 -> interim/edap_recon/manifest_todo.csv  (nur noch nicht Verarbeitetes)
 download_raw_reports.py       -> raw/*.zip
 build_sample_codebook.py      -> codebook/mini_codebook_from_reports.csv (dp-Codes)
 extract_template_titles.py    -> codebook/template_titles.csv  (EBA Annotated Table Layout)
@@ -55,9 +58,13 @@ fetch_fx_rates.py             -> processed/fx_rates.csv          (EZB-Referenzku
 build_zweig_b.py              -> processed/long/p3dh_long.parquet (EINE gejointe Wahrheit, DuckDB)
 build_zweig_a_shards.py       -> processed/zweig_a/data/index.json + codebook.json + reports/<key>.json
                                  (JSON-Shards, allein aus dem Parquet abgeleitet)
+publish_data_branch.sh        -> data-Branch: Shards + state/ (long_form.gz, coverage.gz, parquet)
 processed/zweig_a/viewer_json.html  (Standard: lädt index/codebook vorab, Reports lazy als Shards)
 processed/zweig_a/viewer.html       (Legacy: liest long_form + codebook + lei_names live im Browser)
 ```
+
+Die ganze Kette läuft auch als GitHub-Action (`.github/workflows/pipeline.yml`):
+`workflow_dispatch` (mit Schaltern `harvest` / `full_reparse`) oder wöchentlich per Cron.
 
 ## DPM-Auflösung (Referenz)
 
@@ -89,7 +96,7 @@ Starten (vom **Repo-Root**): `python3 -m http.server 8766` (Config `p3dh-web` mi
 
 Politur offen: Open-Axis-Member (mehrere Werte je Zelle kollabieren im Gitter, wie im CSV-Viewer).
 
-## Session 2026-07-10 — Benchmark-Standortbestimmung & Roadmap
+## Session 2026-08-21 — Benchmark-Standortbestimmung & Roadmap
 
 Keine Code-Änderung, sondern strategische Bestandsaufnahme: **Wo stehen wir bei Benchmarking
 und Mehrwert ggü. EDAP?** EDAP ist ein Archiv (ein Bank-ZIP nach dem anderen, kein Quervergleich).
@@ -124,6 +131,44 @@ Caveat. Dazu Zeitreihe je Institut, Vergleich (bis 4 Pins), Zweig B als freie SQ
 **Entscheidung:** Richtung = Benchmark-Substanz vertiefen (1 → 2), Transparenz-Matrix (3) nur als
 Experiment, keine Priorität. Heute nichts gebaut — nur dokumentiert.
 
+## Session 2026-08-21 (Teil 2) — Weg von lokaler Datenhaltung
+
+Der Laptop war Zustandsspeicher der Pipeline (1,9 GB). Jetzt ist er nur noch Arbeitskopie:
+**lokal 358 MB**, der Zustand liegt in der Cloud, und die Kette läuft auch ohne ihn.
+
+**Zustand auf dem `data`-Branch.** `publish_data_branch.sh` legt zusätzlich `state/` ab
+(`long_form_raw.csv.gz` 14 MB, `filing_indicators.csv.gz`, `p3dh_long.parquet` 19 MB);
+`fetch_state.sh` holt ihn zurück. Round-Trip byte-identisch verifiziert. Damit ist das
+Parquet auch ein öffentlicher Download der Analytik-Schicht.
+
+**Lokal gelöscht (alles wiederbeschaffbar):** DPM-Datenbanken 1,3 GB (nur Build-Zeit —
+`dpm_codebook.csv` ist committet; URLs stehen in `build_codebook.py`), `long_form_raw.csv`
+275 MB und das Parquet (beide im State). `filing_indicators.csv` ist von `main` genommen
+(war ein 5,4-MB-Duplikat, das mit jeder Welle veraltet wäre) → jetzt gitignored.
+
+**Zwei echte Parser-Defekte gefunden und behoben** — beide hätten den CI-Betrieb zerstört:
+1. **Datenverlust bei zustandslosem Lauf.** Die Menge der gültigen Quellen kam aus den ZIPs
+   *auf der Platte*. Auf einem frischen Runner (nur die neuen ZIPs) hätte der Merge den
+   gesamten Altbestand als „überholt" verworfen — 1,26 Mio. Facts. Jetzt kommt sie aus dem
+   **Manifest**; nur wirklich überholte Resubmissions fallen raus.
+2. **Nicht idempotent.** 35 Einreichungen ohne platzierbare Fakten stehen nur in der
+   Coverage-Matrix, nie in der Long-Form → wurden bei *jedem* Lauf neu geparst. Die Coverage
+   ist jetzt das maßgebliche Ledger. Inkrementeller Lauf: 6 s statt ~1 min, echter No-Op.
+
+**Neu:** `plan_delta.py` (Download-Liste = Manifest minus Verarbeitetes; aktuell 17 statt
+2.073 — die 17 sind tote EDAP-Links). `.github/workflows/pipeline.yml`: restore → plan →
+download → parse → Zweig B → Shards → publish, mit **Sanity-Gate** (Publish bricht ab, wenn
+der Bestand schrumpft) und `concurrency`-Guard gegen parallele Force-Pushes.
+
+**Tests wiederbelebt:** `pytest` + `requests` fehlten in `requirements.txt` (Downloader
+importiert `requests` — lief nur zufällig). Suite 8 → **11 Tests**, alle grün; die drei neuen
+decken die beiden Defekte ab und wurden **gegen die alte Logik gegengeprüft** (schlagen dort fehl).
+
+**Noch offen:** Der Harvest (Playwright/Power-BI) ist im Workflow bewusst opt-in — der
+fragilste Teil der Kette; ohne ihn verarbeitet der Cron nur das committete Manifest.
+`raw/` (253 MB, 2.073 ZIPs) bleibt lokal: EDAP-Links sterben (17 belegt), der Actions-Cache
+taugt nicht als Archiv. Für echte Auslagerung wäre Object Storage (R2/B2) nötig.
+
 ## Heute erledigt (2026-06-22)
 
 - Handy-Branch `claude/status-check-9vherq` gemergt (Doku + `resolve_latest_submissions.py`).
@@ -152,7 +197,7 @@ Experiment, keine Priorität. Heute nichts gebaut — nur dokumentiert.
    statt Append. Unkritisch bei ~20 Reports.
 4. **Erste Auswertung** auf der Coverage-Matrix (Transparenz-/Disclosure-Score je Institut,
    Tier 1 aus `docs/phase4_analysis_ideas.md`) — netz-unabhängig machbar. ⚗️ Als **Experiment**
-   eingestuft (= Roadmap-Punkt 3, s. Session 2026-07-10), niedrige Prio.
+   eingestuft (= Roadmap-Punkt 3, s. Session 2026-08-21), niedrige Prio.
 6. **Benchmark-Substanz vertiefen (Roadmap 1+2):** weitere Templates in den Benchmark ziehen
    (NPL CR1/CQ3, ESG 41.00, Kreditrisiko) + Perzentil-/Quartil-Bänder. Höchster Mehrwert/Aufwand.
 5. **STRATEGISCHE ENTSCHEIDUNG (offen):** Voll-Load 4.278 Submissions ⇒ Millionen Long-Form-

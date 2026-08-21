@@ -62,6 +62,19 @@ Zweig A wird **immer aus** Zweig B abgeleitet, nie parallel geparst (Werte byte-
 verifiziert). Der Legacy-CSV-Viewer (`viewer.html`) liest die Long-Form-CSV direkt und dient
 nur noch als lokale, unabhängige Gegenprobe.
 
+## Lokal arbeiten
+
+Der Zustand der Pipeline (Long-Form, Coverage-Matrix, Zweig-B-Parquet) liegt **nicht** im
+Repo, sondern auf dem `data`-Branch unter `state/`. Ein frischer Clone holt ihn sich:
+
+```bash
+bash scripts/fetch_state.sh     # ~300 MB, danach ist alles lokal auswertbar
+```
+
+Danach genügt `python3 scripts/build_zweig_b.py` bzw. DuckDB direkt auf dem Parquet.
+Die DPM-Access-DB (720 MB) wird nur zum *Neubauen* des Codebooks gebraucht — das
+fertige `codebook/dpm_codebook.csv` liegt im Repo.
+
 ## Projektstruktur
 
 | Ordner | Inhalt |
@@ -82,6 +95,22 @@ nur noch als lokale, unabhängige Gegenprobe.
 - **Phase 2** — Parsing & DPM-Join → Codebook + Long-Form ✅
 - **Phase 3** — Zweig B (Parquet/DuckDB) + Zweig A (JSON-Viewer, aus Zweig B gespeist) ✅ · RF-4.1↔4.2-Brücke offen
 - **Phase 4** — Explorationen: Peer-Benchmark live; NPL/ESG-Profile, Perzentile, Transparenz-Matrix offen
+
+## Automatisierte Pipeline (GitHub Actions)
+
+`.github/workflows/pipeline.yml` fährt die ganze Kette ohne den Laptop — manuell
+(`workflow_dispatch`) oder wöchentlich per Cron:
+
+```
+fetch_state.sh → plan_delta.py → download (nur Neues) → parse (inkrementell)
+   → build_zweig_b.py → build_zweig_a_shards.py → publish_data_branch.sh
+```
+
+Der Lauf ist **zustandslos**: `raw/` startet leer, der Bestand kommt aus `state/` auf dem
+`data`-Branch, und die Coverage-Matrix sagt, was schon verarbeitet ist — geladen wird nur
+die Differenz. Zwei Schalter: `harvest` (Katalog neu ernten, opt-in, weil der
+Playwright-/Power-BI-Teil der fragilste ist) und `full_reparse`. Ein **Sanity-Gate** bricht
+vor dem Publish ab, falls der Bestand schrumpft.
 
 ## Arbeitsprinzipien
 

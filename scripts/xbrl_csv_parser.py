@@ -215,6 +215,7 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path,
     coverage = []  # report × template × reported (the "fehlt ≠ Null" matrix)
     zip_files = sorted(raw_dir.glob("*.zip"))
 
+    latest = None
     if manifest_path and manifest_path.exists():
         latest = _latest_filenames(manifest_path)
         kept_zips = [z for z in zip_files if z.name in latest]
@@ -223,12 +224,21 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path,
         if skipped:
             print(f"Resubmission-Policy: {skipped} ältere ZIP(s) übersprungen (nicht in manifest_latest.csv)")
 
-    wanted = {z.name for z in zip_files}
+    # Which source files stay valid in the merged output. Driven by the MANIFEST, not by
+    # what happens to lie in raw/: a stateless run (CI) downloads only the new zips, so
+    # rows of reports whose zip isn't on this machine must still survive the merge.
+    # Only sources that fell out of the manifest (superseded resubmissions) are dropped.
+    wanted = set(latest) if latest is not None else {z.name for z in zip_files}
     existing_rows, existing_cov = [], []
     if incremental:
         existing_rows, dropped, parsed_sources = _load_existing(output_path, wanted)
         cov_path = output_path.parent / "filing_indicators.csv"
-        existing_cov, _, _ = _load_existing(cov_path, wanted)
+        existing_cov, _, cov_sources = _load_existing(cov_path, wanted)
+        # A submission can be parsed successfully and still yield no placeable facts
+        # (e.g. modules whose templates carry only filing indicators). Those never show
+        # up in the long-form, so the coverage matrix is the authoritative "already
+        # seen" ledger — without it they would be re-parsed on every single run.
+        parsed_sources |= cov_sources
         before = len(zip_files)
         zip_files = [z for z in zip_files if z.name not in parsed_sources]
         # a zip being (re)parsed must not keep its old coverage rows (would duplicate)

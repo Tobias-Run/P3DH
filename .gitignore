@@ -11,9 +11,12 @@ raw/*.csv
 # Processed Outputs (wird erzeugt) — CSV nur wenn klein
 processed/*.parquet
 processed/*.csv.gz
-# long_form_raw.csv wächst mit dem Bestand (>100 MB @ Voll-Load) → nicht auf main.
-# Regenerierbar via xbrl_csv_parser.py; nur der Legacy-CSV-Viewer braucht es (lokal).
+# Pipeline-Zustand: long_form_raw.csv (>100 MB @ Voll-Load) und die Coverage-Matrix
+# wachsen mit dem Bestand und sind abgeleitet. Sie leben auf dem `data`-Branch unter
+# state/ (publish_data_branch.sh) und werden mit scripts/fetch_state.sh geholt —
+# so bleibt main klein und es gibt keine zwei divergierenden Wahrheiten.
 processed/long_form_raw.csv
+processed/filing_indicators.csv
 
 # Notebooks Checkpoints
 notebooks/.ipynb_checkpoints/
@@ -36,6 +39,9 @@ venv/
 # captured live request may contain session tokens
 interim/edap_recon/query_request.json
 interim/edap_recon/query_response.json
+
+# Download-Plan, bei jedem Lauf neu erzeugt (plan_delta.py)
+interim/edap_recon/manifest_todo.csv
 
 # Zweig B analytics artifacts (regenerable via build_zweig_b.py)
 processed/long/
