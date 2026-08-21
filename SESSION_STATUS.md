@@ -89,6 +89,41 @@ Starten (vom **Repo-Root**): `python3 -m http.server 8766` (Config `p3dh-web` mi
 
 Politur offen: Open-Axis-Member (mehrere Werte je Zelle kollabieren im Gitter, wie im CSV-Viewer).
 
+## Session 2026-07-10 — Benchmark-Standortbestimmung & Roadmap
+
+Keine Code-Änderung, sondern strategische Bestandsaufnahme: **Wo stehen wir bei Benchmarking
+und Mehrwert ggü. EDAP?** EDAP ist ein Archiv (ein Bank-ZIP nach dem anderen, kein Quervergleich).
+Unser Mehrwert ist, die Population in *eine abfragbare Fläche* zu verwandeln.
+
+**Live & solide:** Peer-Benchmark mit 4 Profilen (KM1-Kennzahlen, Kapital-Headroom, Risikoprofil
+OV1, Liquidität), sortier-/filterbar, EUR-normiert (EZB-Kurs), Trend-Sparklines, Vergleichbarkeits-
+Caveat. Dazu Zeitreihe je Institut, Vergleich (bis 4 Pins), Zweig B als freie SQL-Fläche.
+
+**Befund — der Benchmark zieht erst aus ~5 % der Templates Werte** (nur 2 Head-Templates):
+- KM1 (61.00) in **483/553**, OV1 (60.00.A) in **476/553** Reports — Gerüst greift breit.
+- Ungenutzt, obwohl schon in Parquet/Shards: **NPL** CR1 (21.01.D, **413 rep**) + CQ3 (82.00.A,
+  401 rep); **ESG** 41.00 (135 rep); **Kreditrisiko** CR5 (25.00, 240 rep) + CR6-IRB (26.00.A,
+  93 rep); LIQ1/LIQ2/NSFR (73/74.00); **CCyB-Geo** 67.01.A (279 rep, liegt als `open_axis_dims`).
+- Text/Enum-Facts (1,8 %, 27.390) bleiben via `fact_value_raw` erhalten.
+- Nur **1 voller Stichtag** (31.12.2025) → Trend/Zeitreihe greift real nur für Institute mit
+  ≥2 Stichtagen; Peer-Ranking ist Momentaufnahme.
+
+### Benchmark-Roadmap (Mehrwert/Aufwand, höchster Hebel zuerst)
+
+1. **Benchmark-Profile ausdehnen** — NPL (CR1/CQ3), ESG (41.00), Kreditrisiko-Mix. Daten liegen
+   schon vor; nötig sind nur Profil-Definitionen im Viewer + Aufnahme weiterer Templates in
+   `benchmark.json` (`HEAD_TEMPLATES` in `build_zweig_a_shards.py`). **Größter Hebel, kleinster
+   Aufwand — nächster Schritt, wenn's weitergeht.**
+2. **Perzentil-/Quartil-Bänder** im Benchmark → aus Rangliste wird echte Peer-Einordnung
+   („Bank X im 78. Perzentil der Peer-Gruppe").
+3. **Disclosure-Transparenz-Matrix** (`filing_indicators.csv`, „Fehlt ≠ Null") als eigener Tab —
+   *wer meldet was vs. was deklariert wird*, struktureller Alleinstellungspunkt ggü. EDAP.
+   ⚗️ **Vom Nutzer als Experiment eingestuft** (explorativ, kein Kern-Deliverable) — niedrige Prio.
+4. **Open-Axis-Auflösung** (`eba_GA:NL` → „Niederlande") → Länder-Exposure-Benchmark (CCyB 67.01.A).
+
+**Entscheidung:** Richtung = Benchmark-Substanz vertiefen (1 → 2), Transparenz-Matrix (3) nur als
+Experiment, keine Priorität. Heute nichts gebaut — nur dokumentiert.
+
 ## Heute erledigt (2026-06-22)
 
 - Handy-Branch `claude/status-check-9vherq` gemergt (Doku + `resolve_latest_submissions.py`).
@@ -116,7 +151,10 @@ Politur offen: Open-Axis-Member (mehrere Werte je Zelle kollabieren im Gitter, w
 3. **Delta-Pipeline:** Harvest schreibt Katalog komplett neu (kein Diff); Parser Full-Rerun
    statt Append. Unkritisch bei ~20 Reports.
 4. **Erste Auswertung** auf der Coverage-Matrix (Transparenz-/Disclosure-Score je Institut,
-   Tier 1 aus `docs/phase4_analysis_ideas.md`) — netz-unabhängig machbar.
+   Tier 1 aus `docs/phase4_analysis_ideas.md`) — netz-unabhängig machbar. ⚗️ Als **Experiment**
+   eingestuft (= Roadmap-Punkt 3, s. Session 2026-07-10), niedrige Prio.
+6. **Benchmark-Substanz vertiefen (Roadmap 1+2):** weitere Templates in den Benchmark ziehen
+   (NPL CR1/CQ3, ESG 41.00, Kreditrisiko) + Perzentil-/Quartil-Bänder. Höchster Mehrwert/Aufwand.
 5. **STRATEGISCHE ENTSCHEIDUNG (offen):** Voll-Load 4.278 Submissions ⇒ Millionen Long-Form-
    Zeilen ⇒ **Zweig B (DuckDB/Parquet) wird Pflicht**, Browser-Viewer skaliert nicht (muss pro
    Report lazy-laden). Alternative: erst repräsentative Stichprobe (z. B. 1 Stichtag × alle

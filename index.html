@@ -47,12 +47,14 @@
     <p>Large EU/EEA banks must publicly disclose prudential (“Pillar 3”) information — capital,
        risk, liquidity. The EBA centralises these on the <a href="https://www.eba.europa.eu/risk-and-data-analysis/pillar-3-data-hub">Pillar 3 Data Hub</a>
        as machine-readable XBRL-CSV. This project ingests those filings, resolves the DPM
-       data-point dictionary, and reconstructs each bank's official templates (KM1, CCR1, …)
-       with full row/column labels — viewable right in your browser, no install.</p>
+       data-point dictionary, and reconstructs each bank's official templates (KM1, OV1, CCR1, …)
+       with full row/column labels — plus a cross-bank <b>peer benchmark, time series and
+       comparison</b>, viewable right in your browser, no install.</p>
     <p style="color:#555;margin-bottom:0">The viewer loads a lightweight index up front and fetches each
        report on demand as a per-report JSON shard (derived from the analytics layer, so the viewer and
-       machine-readable branch share one source). It currently shows a sample of institutions; the full
-       catalog covers 489 institutions / 4,278 filings.</p>
+       machine-readable branch share one source). Currently loaded: <b>553 reports · 1.26 M facts · 445
+       institutions · 30 countries</b> (including the full 2025-12-31 reference date); the complete
+       catalog covers 489 institutions / 4,278 filings and is loaded in waves.</p>
   </section>
 
   <section class="disclaimer">
