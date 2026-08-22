@@ -98,8 +98,9 @@ fertige `codebook/dpm_codebook.csv` liegt im Repo.
 
 ## Automatisierte Pipeline (GitHub Actions)
 
-`.github/workflows/pipeline.yml` fährt die ganze Kette ohne den Laptop — manuell
-(`workflow_dispatch`) oder wöchentlich per Cron:
+`.github/workflows/pipeline.yml` fährt die ganze Kette ohne den Laptop. Ausgelöst wird
+manuell (`workflow_dispatch`); ein wöchentlicher Cron liegt auskommentiert bereit und
+wird scharf geschaltet, sobald ein manueller Lauf sauber durch ist:
 
 ```
 fetch_state.sh → plan_delta.py → download (nur Neues) → parse (inkrementell)

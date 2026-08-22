@@ -20,8 +20,10 @@ on:
         description: "Alles neu parsen (nach Parser-/Codebook-Änderungen) — lädt den gesamten Korpus neu"
         type: boolean
         default: false
-  schedule:
-    - cron: "0 4 * * 1"     # montags 04:00 UTC
+  # Zeitplan bewusst noch nicht scharf: erst soll ein manueller Lauf sauber
+  # durchlaufen. Zum Aktivieren die beiden Zeilen einkommentieren.
+  # schedule:
+  #   - cron: "0 4 * * 1"   # montags 04:00 UTC
 
 permissions:
   contents: write           # push the data branch + refreshed manifests

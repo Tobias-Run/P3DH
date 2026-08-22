@@ -40,8 +40,9 @@ Optional weiter offen: `open_axis_dims` gegen DPM-Open-Axis-Member auflösen
   Regressionstests: `IncrementalMergeTest` (gegen die alte Logik gegengeprüft).
 - **Download-Delta** via `scripts/plan_delta.py` → `manifest_todo.csv` (Manifest minus
   bereits Verarbeitetes), statt sich auf den Dateibestand in `raw/` zu verlassen.
-- **Automatischer Trigger** da: `.github/workflows/pipeline.yml` (Cron wöchentlich +
-  `workflow_dispatch`), inklusive Sanity-Gate gegen schrumpfenden Bestand.
+- **Automatisierung** da: `.github/workflows/pipeline.yml` (`workflow_dispatch`,
+  inklusive Sanity-Gate gegen schrumpfenden Bestand). Der wöchentliche Cron ist
+  auskommentiert vorbereitet — scharf schalten, sobald ein manueller Lauf durch ist.
 
 Offen bleibt nur: **Harvest-Diff.** `harvest_catalog_query.py` schreibt den Katalog
 komplett neu, ohne Log, was seit dem letzten Harvest dazukam (`harvest_log.csv`/

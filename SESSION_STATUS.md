@@ -33,9 +33,11 @@ Nächste Wellen: weitere Stichtage aus `manifest_full.csv` (download → parse �
 → `publish_data_branch.sh`, alles inkrementell).
 
 **Deployment (wichtig):** Die JSON-Daten liegen **nicht** auf `main`, sondern auf dem Orphan-
-`data`-Branch und werden via **jsDelivr** ausgeliefert (Fallback raw.githubusercontent). `main`
-trägt nur Code + kleine CSVs; `long_form_raw.csv` (275 MB) und das Parquet sind gitignored
-(regenerierbar). Legacy-CSV-Viewer nur noch lokal (braucht die große CSV).
+`data`-Branch und werden via **jsDelivr** ausgeliefert (Fallback raw.githubusercontent). Dort
+liegt unter `state/` auch der **Pipeline-Zustand** (`long_form_raw.csv.gz`,
+`filing_indicators.csv.gz`, `p3dh_long.parquet`) — zurückholbar mit `scripts/fetch_state.sh`.
+`main` trägt nur Code + kleine Referenz-CSVs. Lokal sind das nur noch 358 MB (im Wesentlichen
+`raw/`); Legacy-CSV-Viewer braucht ein vorheriges `fetch_state.sh`.
 
 ## Pipeline-Artefakte (Reihenfolge)
 
@@ -64,7 +66,8 @@ processed/zweig_a/viewer.html       (Legacy: liest long_form + codebook + lei_na
 ```
 
 Die ganze Kette läuft auch als GitHub-Action (`.github/workflows/pipeline.yml`):
-`workflow_dispatch` (mit Schaltern `harvest` / `full_reparse`) oder wöchentlich per Cron.
+`workflow_dispatch` mit den Schaltern `harvest` / `full_reparse`. Der wöchentliche Cron
+ist auskommentiert — erst soll ein manueller Lauf sauber durchlaufen.
 
 ## DPM-Auflösung (Referenz)
 
@@ -158,7 +161,8 @@ Parquet auch ein öffentlicher Download der Analytik-Schicht.
 **Neu:** `plan_delta.py` (Download-Liste = Manifest minus Verarbeitetes; aktuell 17 statt
 2.073 — die 17 sind tote EDAP-Links). `.github/workflows/pipeline.yml`: restore → plan →
 download → parse → Zweig B → Shards → publish, mit **Sanity-Gate** (Publish bricht ab, wenn
-der Bestand schrumpft) und `concurrency`-Guard gegen parallele Force-Pushes.
+der Bestand schrumpft) und `concurrency`-Guard gegen parallele Force-Pushes. Vorerst nur
+manuell auslösbar; der Cron liegt auskommentiert bereit.
 
 **Tests wiederbelebt:** `pytest` + `requests` fehlten in `requirements.txt` (Downloader
 importiert `requests` — lief nur zufällig). Suite 8 → **11 Tests**, alle grün; die drei neuen
