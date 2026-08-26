@@ -1,169 +1,119 @@
 # Phase 4 — Analyse-Ideen (Brainstorm, datengeerdet)
 
-**Stand:** 2026-06-21. Geerdet an der tatsächlichen Datenabdeckung (nicht an den
-generischen Phase-4-Vorschlägen der Instructions).
+**Stand:** 2026-08-26 (Ursprung 2026-06-21 bei 8 Instituten; Datenrealität und
+Bewertungen seither grundlegend aktualisiert — Historie in Git).
 
 ## Datenrealität (Basis für Machbarkeit)
 
 | Dimension | Ist-Stand |
 |---|---|
-| Institute | 8 (LEIs), 16 aktuelle Submissions |
-| Stichtage | 4 (2025-06-30, -09-30, -12-31, 2026-03-31) |
-| Zeitreihen-fähig | 4 Institute mit ≥2 Stichtagen (1 davon mit allen 4) |
-| Länder | DE, SE, AT, MT, EE, DK, LV |
-| Konsolidierung | 11 CON / 5 IND (→ nicht naiv mischbar) |
-| Währungen | EUR, SEK, DKK (→ EUR-Normalisierung ist real nötig, nicht theoretisch) |
-| decimalsMonetary | -6, -3 und 2 gemischt (→ Präzisions-Semantik real nötig) |
-| Framework | 4.1 (94 %) **und** 4.2 (6 %) gemischt (→ Brücke jetzt schon relevant) |
-| Templates | 88 verschiedene über den Datensatz |
+| Geladen | 553 Reports · 445 Institute · 30 Länder · 7 Module · 1,26 Mio. Facts |
+| Gesamtbestand Hub | 4.278 Submissions · 489 Institute (`manifest_full.csv`) |
+| Stichtage | 1 volle Welle (2025-12-31) + 20-%-Sample-Rest (06/09-2025, 03-2026) |
+| Zeitreihen-fähig | nur Institute mit ≥2 Stichtagen; breite Trends erst nach weiteren Wellen |
+| Framework | 4.1 und 4.2 gemischt; 4.2 bisher nur Q1-2026-Meldungen (22 Reports) |
+| DPM-Labels | ✅ vollständig aufgelöst (`dpm_codebook.csv`); Filing-Indicators ✅ sauber |
+| Einheiten | EUR-Normalisierung (EZB-Kurse) in Zweig B; decimals-Semantik beachtet |
 
-**Zwei harte Einschränkungen, die die Reihenfolge bestimmen:**
-1. **DPM-Labels fehlen** — alle Datapoints sind `[TODO]`. Jede Analyse, die die
-   *Bedeutung* einzelner Datapoints braucht (CET1, RWA, GAR …), ist blockiert,
-   bis der DPM-Join steht.
-2. **Filing-Indicators defekt** — `template_reported` ist derzeit immer `False`
-   (BOM- + Key-Bug, siehe BACKLOG). „Fehlt ≠ Null" ist erst nach Fix vertrauenswürdig.
-3. **Kleine Stichprobe — und geschäftsmodell-fragmentiert** — 8 Institute tragen
-   kein robustes Peer-Benchmarking / Clustering. Verschärfend: die 8 verteilen sich
-   auf ~6 sehr unterschiedliche Geschäftsmodelle (siehe Abschnitt „Geschäftsmodell-
-   Abhängigkeit" unten), d. h. die *effektive* Peer-Gruppe ist eher 1–2 als 8.
-   Querschnitt-Analysen sind vorerst „Methode bauen, Insight nach Skalierung der
-   Ingestion".
+**Die früheren Blocker (DPM-Labels, Filing-Indicator-Bug, N=8) sind Geschichte.**
+Was die Reihenfolge heute bestimmt: erst *eine* volle Stichtags-Welle
+(Querschnitt ja, Zeitreihe dünn) und der laufende 4.1→4.2-Wechsel.
 
 ---
 
-## Geschäftsmodell-Abhängigkeit (Prüfung zu Einschränkung 3)
+## Geschäftsmodell-Abhängigkeit (Befund vom 22.06., gilt weiter)
 
-**Frage:** Trägt die Stichprobe von 8 Instituten ein Querschnitts-Benchmarking,
-wenn man die Geschäftsmodelle berücksichtigt? **Antwort: nein — eher weniger als
-die reine Zahl 8 suggeriert, aber die Heterogenität ist für die *Struktur*-Analyse
-(Idee A) ein Gewinn, kein Verlust.**
+Empirisch am N=8-Sample belegt, von der Skalierung auf 445 Institute nicht
+entkräftet: Der Template-Fußabdruck folgt **Regulierungskategorie ×
+Geschäftsmodell**. Kern (OV1, KM1, CC1/CC2) melden alle; Marktrisiko-, CCR-,
+Verbriefungs- und IRB-Templates nur Kapitalmarkt-/IRB-Häuser; kleine Sparkassen
+melden 4–9 Templates (Proportionalität, Art. 433a–c CRR). Spannweite im
+damaligen Sample: 4 (Rietumu) bis 45 (DekaBank) Templates — Faktor >10.
 
-### Die 8 Institute nach Geschäftsmodell-Archetyp
-
-| Institut | Land | Kons. | Archetyp | gemeldete Templates |
-|---|---|---|---|---|
-| DEKABANK | DE | CON | Sparkassen-Zentralinstitut / Kapitalmarkt & Asset Mgmt | **45** |
-| Aktiebolaget Svensk Exportkredit | SE | IND | Exportkreditagentur (Spezial-/Förderkredit) | 32 |
-| NOBA BANK GROUP | SE | CON | Consumer-Finance / Nischenbank | 28 |
-| HYPO TIROL BANK | AT | CON | Regionale Universalbank | 26 |
-| AS INBANK | EE | CON | Digitale Consumer-Finance-Bank | 26 |
-| SPARKASSE (HOLDINGS) MALTA | MT | CON | Kleine Sparkasse (Holding) | 9 |
-| RØNDE SPAREKASSE | DK | IND | Sehr kleine lokale Sparkasse | 7 |
-| RIETUMU BANKA | LV | CON | Commercial / Private Bank | **4** |
-
-→ ~6 Archetypen auf 8 Institute. Spannweite der gemeldeten Templates: **4 bis 45**
-(Faktor >10). Das sind keine 8 vergleichbaren Banken, sondern ein Spektrum vom
-winzigen Einlageninstitut bis zum vollen Kapitalmarkthaus.
-
-### Empirischer Beleg: der Template-Fußabdruck folgt dem Geschäftsmodell
-
-Aus `processed/filing_indicators.csv` (reported=true), nicht aus Annahmen:
-
-- **Universeller Kern (alle Archetypen melden):** `60 OV1` (Risikoexposure-Übersicht),
-  `61 KM1` (Key Metrics), `66.01/66.02 CC1/CC2` (Eigenmittel-Zusammensetzung). Das
-  ist das Pflicht-Rückgrat, das jede Bank einreicht.
-- **Nur DekaBank, NICHT bei den kleinen Sparkassen (Rønde/Rietumu/Malta):**
-  Marktrisiko (`10–13 MR1/MR2/MR3`), Kontrahentenrisiko (`02–08 CCR1–8`),
-  Verbriefung (`09 SEC1/4`), IRB-Kreditrisiko (`26–29 CR6–10`), operationelles
-  Risiko im Detail (`19 OR1–3`), LCR/NSFR (`73/74 LIQ1/2`), Prudent Valuation
-  (`65 PV1`), Krypto-Assets (`01 CAE1`).
-
-Diese Templates fehlen bei den Sparkassen **strukturell** — kein Handelsbuch, keine
-IRB-Modelle, keine Verbriefung. Das ist Geschäftsmodell, nicht Intransparenz.
-
-### Konsequenzen für die Analysen
-
-1. **Tier-2-Benchmarking (D/E) ist noch stärker limitiert als „N=8" andeutet.**
-   Eine CET1-/Leverage-/RWA-Dichte-Verteilung würde eine Exportkreditagentur mit
-   einer dänischen Dorfsparkasse vergleichen — ökonomisch sinnlos. Effektive
-   Peer-Gruppe ≈ 1–2. → erst Methode bauen, Insight nach Skalierung; und beim
-   Skalieren muss eine Geschäftsmodell-/Größenklassen-Schichtung *vor* jedem
-   Vergleich stehen.
-
-2. **„Fehlt ≠ Null" braucht einen dritten Zustand.** Nicht nur
-   `reported=true` vs. `false`, sondern auch **„strukturell nicht anwendbar"**
-   (Template gar nicht im Set des Instituts, weil geschäftsmodellbedingt irrelevant).
-   Ein fehlendes Marktrisiko-Template bei Rønde Sparekasse ist *erwartet*, kein
-   Versäumnis.
-
-3. **Idee A (Disclosure-Profil) wird durch die Heterogenität wertvoller, nicht
-   schwächer.** Schon bei N=8 ist ein archetyp-getriebener Offenlegungs-Fußabdruck
-   sichtbar. ABER: der Transparenz-Score darf **nicht** an der Gesamtzahl aller
-   Templates normiert werden (sonst „bestraft" man die Sparkasse für nicht
-   vorhandenes Handelsbuch-Risiko), sondern an der **geschäftsmodell-bedingten
-   Anwendbarkeit**. Methodisch: Score = gemeldet / (gemeldet + bewusst als
-   „nicht wesentlich/nicht anwendbar" gemeldet), nicht / Gesamtuniversum.
+**Konsequenzen (unverändert gültig):**
+1. Peer-Vergleiche brauchen **Schichtung** nach Geschäftsmodell/Größenklasse —
+   mit 445 Instituten und `entity_meta.csv` (Größe, Typ, G-SII) jetzt real möglich.
+2. „Fehlt ≠ Null" braucht den dritten Zustand **„strukturell nicht anwendbar"**
+   (Template fehlt, weil geschäftsmodellbedingt irrelevant — kein Versäumnis).
 
 ---
 
-## Tier 1 — analysierbar OHNE DPM-Dictionary (jetzt/bald, unblockiert)
+## ⚠️ Herabgestuft: Disclosure-/„Transparenz"-Profil (ehem. Idee A)
 
-Diese arbeiten auf der **Struktur** (welche Templates eingereicht, Filing-Indicator,
-Währung, Framework-Version), nicht auf der Semantik einzelner Datapoints. Sie
-brauchen die 423-MB-Access-DB **nicht**.
+**Einwand des Nutzers (26.08., übernommen):** Banken legen offen, wozu sie nach
+CRR Teil 8 verpflichtet sind — *welche* Templates, bestimmt die Institutskategorie
+(Art. 433a–c) plus Anwendbarkeit (IRB-Zulassung, Handelsbuch …). Ein
+„Transparenz-Score" auf dem Template-Fußabdruck misst daher im Wesentlichen die
+**Regulierungskategorie, nicht Offenherzigkeit**.
 
-### A. Disclosure-/Transparenz-Profil  ⭐ höchster Wert-zu-Aufwand
-- Je Institut: wie viele Templates `true` vs `false` vs leer gemeldet.
-- Welche Templates universell offengelegt werden vs. selten — „Transparenz-Score".
-- **Die originellste Achse**, die der zentrale Hub überhaupt erst ermöglicht, und
-  zugleich die am **wenigsten** von DPM-Labels abhängige.
-- Voraussetzung: Filing-Indicator-Bug fixen. Caveat: „nicht offenlegungspflichtig"
-  ≠ „freiwillig weggelassen" → braucht `frequency_of_disclosures` (Pflicht je
-  Institutstyp), um Pflicht von Wahl zu trennen.
-- **Wichtig:** Score an geschäftsmodell-bedingter Anwendbarkeit normieren, nicht am
-  Gesamt-Template-Universum — siehe Abschnitt „Geschäftsmodell-Abhängigkeit".
-  Der dritte Zustand „strukturell nicht anwendbar" muss von „bewusst weggelassen"
-  getrennt werden.
+Was bleibt davon:
+- eine **Anwendbarkeits-/Kategorie-Karte** — nützlich als QA-Fundament und als
+  Schichtungsgrundlage für Benchmarks, aber kein eigenständiges
+  Erkenntnis-Deliverable;
+- echter Ermessensspielraum sitzt eng begrenzt in **Art. 432 CRR**
+  (Auslassung als „nicht wesentlich / geschäftsgeheim / vertraulich"): erkennbar
+  höchstens als *Anomalie-Signal* — ein Institut meldet `false`, wo seine
+  geschichtete Peer-Gruppe `true` meldet. Mit N=445 erstmals prüfbar, aber
+  explorativ;
+- echte Offenheits-Unterschiede (Boilerplate vs. Substanz) stecken in den
+  narrativen PDFs → Idee G, nicht hier.
 
-### B. Framework 4.1 → 4.2 Struktur-Diff  ⭐ de-riskt Phase 3
-- Beide Versionen sind bereits im Datensatz → welche Templates/Datapoints sind in
-  4.2 neu/weg/verändert ggü. 4.1.
-- Baut die für Zeitreihen nötige Brücke aus reiner Struktur — adressiert direkt
-  das in den Instructions genannte Risiko „Versionswechsel bricht naive Zeitreihen".
+Deckt sich mit der Roadmap-Entscheidung vom 21.08. (Disclosure-Matrix nur
+⚗️ Experiment, niedrige Prio).
 
-### C. Währungs- & Präzisions-Landkarte (QA-Fundament)
-- 3 Währungen, 3 decimals-Stufen vorhanden → validiert EUR-Normalisierung und
-  decimals-Semantik, **bevor** irgendein monetärer Vergleich gezogen wird.
-- Eher QA-Gate als „Analyse", aber Voraussetzung für jede Tier-2-Auswertung.
+## ✅ Erledigt: Framework 4.1→4.2 Struktur-Diff (ehem. Idee B)
+
+Umgesetzt als **Phase 3b** → `docs/phase3_framework_bridge.md`,
+`codebook/framework_bridge.csv` (Builder + Tests im Repo). Kernbefund:
+Template-Ebene stabil (scheinbare Unterschiede waren Frequenz-Artefakte
+Jahres- vs. Quartalsmeldung); Zell-Ebene 916 stabil / **19 auf neue dp-Codes
+umgebunden** — ausgerechnet KM1-Leverage-Puffer, OV1-AIM, CVA, LR2-SFT.
+Zeitreihen daher über `(template, row, col)` oder die Brücke joinen, nie naiv
+über den dp-Code.
+
+## C. Währungs- & Präzisions-QA (offen, klein)
+
+30 Länder → viele Nicht-EUR-Währungen. Zweig B rechnet bereits EUR-normalisiert
+(`fx_rate`, `fact_value_eur`); ein systematischer QA-Pass steht aus (Ausreißer
+durch decimals-Fehlinterpretation, FX-Stichtagslogik). QA-Gate vor monetären
+Querschnitts-Aussagen.
 
 ---
 
-## Tier 2 — braucht den DPM-Join (blockiert bis Codebook steht)
+## Tier 2 — entblockt (DPM-Join steht, N=445)
 
-### D. Kapital-/Solvenz-Benchmarking (KM1/OV1)  — das Aushängeschild
-- CET1-, Leverage-, RWA-Verteilung über Institute/Länder; Quantile, Ausreißer.
-- Pilot-Scope laut Instructions. Braucht: DPM-Labels + EUR-Normalisierung +
-  Filing-Fix. Stichprobe noch zu klein für echtes Peer-Grouping → erst Methode,
-  Insight nach Skalierung.
+### D. Kapital-/Solvenz-Benchmarking (KM1/OV1) — läuft
+Im JSON-Viewer live (4 Benchmark-Profile, EUR-normiert, Sparklines). Nächster
+Ausbau laut Roadmap 21.08.: Profile ausdehnen (NPL CR1/CQ3, ESG 41.00,
+Kreditrisiko-Mix) + Perzentil-Bänder — je **geschichteter** Peer-Gruppe.
 
 ### E. Risiko-Komposition / Geschäftsmodell-Fingerprint
-- RWA-Aufschlüsselung (Kredit-/Markt-/Op-Risiko) als Cluster-Merkmal.
-- Ambitioniert: braucht DPM-Labels **und** größere Stichprobe.
+RWA-Mix (Kredit/Markt/Op) als Cluster-Merkmal — mit 445 Instituten methodisch
+erstmals sinnvoll; OV1 liegt für 476 Reports vor.
 
-### F. Kurze Zeitreihen (4 Institute)
-- 4 Institute mit 2–4 Stichtagen → Kapitalquoten-Trajektorie.
-- Ehrlich dünn, kreuzt zudem den 4.1→4.2-Wechsel (2026-03-31 ist 4.2) → hängt an B.
-- Vorerst eher Pipeline-Test als Insight.
+### F. Zeitreihen
+Erst nach der nächsten vollen Welle belastbar; über den 4.1→4.2-Wechsel **nur
+via `framework_bridge.csv`** (die 19 umgebundenen Zellen treffen KM1 direkt).
 
 ### G. NLP auf qualitativen PDF-Narrativen
-- Boilerplate-Erkennung, Themen/Sentiment.
-- Am spekulativsten: PDFs sind noch **gar nicht** ingestiert (nur XBRL-CSV-ZIPs),
-  PDF-Pfad muss erst gebaut werden. Nicht überverkaufen.
+Weiter spekulativ: `*DISDOCS`-PDFs bewusst nicht ingestiert. Wäre der einzige
+Ort, an dem sich die Frage messen ließe, die Idee A nicht beantworten kann —
+wie offenherzig ein Institut jenseits der Pflicht kommuniziert.
 
 ---
 
-## Empfohlene Reihenfolge
+## Empfohlene Reihenfolge (aktualisiert 26.08.)
 
-1. **Filing-Indicator-Bug fixen** (kleiner Code-Fix) — schaltet Tier 1 frei und
-   repariert „Fehlt ≠ Null" für alles Weitere.
-2. **A + B + C parallel zur DPM-Beschaffung** — voller Wert ohne auf die Access-DB
-   zu warten; B + C sind zugleich Fundament, das Tier 2 erst vertrauenswürdig macht.
-3. **D** sobald DPM-Labels stehen (Pilot KM1/OV1).
-4. **E/F/G** nach Skalierung der Ingestion bzw. Aufbau des PDF-Pfads.
+1. **Benchmark-Substanz vertiefen** (Roadmap 21.08., Punkt 1+2): mehr Profile,
+   Perzentil-Bänder — geschichtet nach Geschäftsmodell/Größe.
+2. **C (FX/decimals-QA)** als Gate parallel dazu.
+3. **Nächste Stichtags-Welle laden** → macht F (Zeitreihen) real und die
+   4.2-Seite der Brücke dicker.
+4. **E** (Fingerprint) danach; **G** (PDF-NLP) nur bei explizitem Bedarf.
 
 ## Querschnitts-Caveats (in jede Analyse)
-- CON vs IND nicht mischen; nationale Optionen, Rechnungslegung, Konsolidierung
-  brechen naive 1:1-Vergleiche.
-- 4.1 vs 4.2 nur über die Brücke (B) verbinden.
-- „Fehlt" ≠ „Null" durchhalten (Filing-Indicator), erst nach Fix belastbar.
+
+- CON vs IND nicht mischen; Rechnungslegung/nationale Optionen als Caveat benennen.
+- 4.1 vs 4.2 nur über `codebook/framework_bridge.csv` verbinden.
+- „Fehlt" ≠ „Null" ≠ „strukturell nicht anwendbar" (drei Zustände auseinanderhalten).
+- Peer-Aussagen nur innerhalb geschichteter Gruppen (Geschäftsmodell/Größe).

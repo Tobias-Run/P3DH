@@ -12,7 +12,7 @@
 | 2 — Parsing & DPM-Join | ✅ | `long_form_raw.csv` **209.231 Records / 218 Reports** (Multi-Modul); 9146/9146 Datapoints aufgelöst, gelabeltes `dpm_codebook.csv` (+ `data_type` aus DPM); Template-Titel via EBA-Layout |
 | 2.5 — Refinement | ✅ | offene Achse als `open_axis_dims` erfasst (Re-Parse über alle Reports durch) |
 | 3 — Multi-Modul | ✅ | CODIS + ESGDIS/FINDIS/GSIIDIS/IRRBBDIS/MRELTLACDIS (KM2)/REMDIS geparst; nur `*DISDOCS` (PDF) ausgenommen |
-| 3b — RF 4.1↔4.2-Mapping | ⬜ | Brücke für Zeitreihen (beide Versionen im Datensatz) |
+| 3b — RF 4.1↔4.2-Mapping | 🟡 | **Zell-Brücke steht** (`codebook/framework_bridge.csv`, beobachtungsbasiert): 916 Zellen stabil, **19 auf neue dp-Codes umgebunden** (KM1-Leverage-Puffer!, OV1-AIM, CVA, LR2). Details `docs/phase3_framework_bridge.md`. Wächst mit jeder 4.2-Welle (Re-Run); Konsumenten-Integration (Viewer-Zeitreihe/Zweig B) offen |
 | 4A — Zweig A | ✅ | **JSON-Viewer = Standard** (`viewer_json.html`): **Slim-`index.json`** (nur Report-Meta, ~0,01 MB gzip) + `codebook.json` vorab; **`benchmark.json`** (KM1/OV1-Head, ~0,14 MB) **lazy** für Benchmark/Zeitreihe; jeder Report lazy als `data/reports/<key>.json` (~3 KB). Featuregleich (typisierte Skalen, EUR, Filter, Benchmark-Profile, Zeitreihen, Vergleich, Dark, Deep-Links). **Voll-Load-tauglich**: Index-Projektion ~0,2 MB gzip @ 4.278 Reports; Shards inkrementell geschrieben. **CSV-Viewer** (`viewer.html`) = Legacy; Gabelseite `index.html` |
 | 4B — Zweig B | ✅ | `build_zweig_b.py` → `processed/long/p3dh_long.parquet` (self-contained, DuckDB; +`fact_value_raw`/`fx_rate`), Beispiele in `docs/zweig_b_queries.md`. **Speist auch Zweig A**: `build_zweig_a_shards.py` leitet die JSON-Shards allein aus dem Parquet ab → eine Transformationsstelle, kein Drift (Werte byte-identisch verifiziert) |
 | 4 — Explorationen | 🟡 geplant | Analyse-Ideen datengeerdet → `docs/phase4_analysis_ideas.md` |
@@ -172,6 +172,21 @@ decken die beiden Defekte ab und wurden **gegen die alte Logik gegengeprüft** (
 fragilste Teil der Kette; ohne ihn verarbeitet der Cron nur das committete Manifest.
 `raw/` (253 MB, 2.073 ZIPs) bleibt lokal: EDAP-Links sterben (17 belegt), der Actions-Cache
 taugt nicht als Archiv. Für echte Auslagerung wäre Object Storage (R2/B2) nötig.
+
+## Session 2026-08-26 (remote) — Framework-Brücke + Idee-A-Herabstufung
+
+- **Phase 3b erste Ausbaustufe:** `scripts/build_framework_bridge.py` →
+  `codebook/framework_bridge.csv` (937 Zellen in beiden RF-Versionen beobachtet:
+  916 stable / 19 rebound / 2 ambiguous=Codebook-Duplikat). Frequenz-kontrolliert
+  ist die Template-Ebene stabil — die scheinbaren 131 „nur-4.1"-Templates waren
+  Jahres- vs. Quartalsumfang. Tests: `tests/test_framework_bridge.py` (Suite 11 → 17).
+- **Idee A („Transparenz-Score") herabgestuft** nach Nutzer-Einwand: Template-
+  Fußabdruck misst Regulierungskategorie (CRR Art. 433a–c) + Anwendbarkeit, nicht
+  Offenherzigkeit. Rest-Wert: Kategorie-Karte fürs Schichten, Art.-432-Anomalien
+  als Experiment, echte Offenheit nur via PDF-NLP (G). `phase4_analysis_ideas.md`
+  komplett auf Stand 26.08. neu geschrieben (N=445-Realität, neue Reihenfolge).
+- Remote-Session kann den Pipeline-State jetzt ohne HTTP ziehen: `git show
+  origin/data:state/…` (fetch_state.sh geht über raw.githubusercontent → Egress-Block).
 
 ## Heute erledigt (2026-06-22)
 

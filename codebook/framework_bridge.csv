@@ -1,0 +1,939 @@
+template_id,cell_row,cell_col,row_label,col_label,dp_41,dp_42,status
+00.02,0010,0010,EU KM1  Key metrics template,Accompanying narrative,dp3530983,dp3530983,stable
+00.02,0020,0010,EU OV1 - Overview of total risk exposure amounts,Accompanying narrative,dp3530984,dp3530984,stable
+00.02,0030,0010,EU INS1 - Insurance participations,Accompanying narrative,dp3530985,dp3530985,stable
+00.02,0040,0010,EU INS2 - Financial conglomerates information on own funds and capital adequacy ratio,Accompanying narrative,dp3530986,dp3530986,stable
+00.02,0050,0010,EU CMS1 – Comparison of modelled and standardised risk weighted exposure amounts at risk level,Accompanying narrative,dp3530987,dp3530987,stable
+00.02,0060,0010,"EU CMS2 – Comparison of modelled and standardised risk weighted exposure amounts
+for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988,stable
+00.02,0070,0010,EU LI1 - Differences between the accounting scope and the scope of prudential consolidation and mapping of financial statement categories with regulatory risk categories,Accompanying narrative,dp3530989,dp3530989,stable
+00.02,0080,0010,EU LI3 - Outline of the differences in the scopes of consolidation (entity by entity),Accompanying narrative,dp3530990,dp3530990,stable
+00.02,0090,0010,EU LI2 - Main sources of differences between regulatory exposure amounts and carrying values in financial statements,Accompanying narrative,dp3530991,dp3530991,stable
+00.02,0100,0010,EU PV1: Prudent valuation adjustments (PVA),Accompanying narrative,dp3530992,dp3530992,stable
+00.02,0110,0010,EU CCyB1 - Geographical distribution of credit exposures relevant for the calculation of the countercyclical buffer,Accompanying narrative,dp3530993,dp3530993,stable
+00.02,0120,0010,EU CCyB2 - Amount of institution-specific countercyclical capital buffer,Accompanying narrative,dp3530994,dp3530994,stable
+00.02,0130,0010,EU LR1 - LRSum: Summary reconciliation of accounting assets and leverage ratio exposures,Accompanying narrative,dp3530995,dp3530995,stable
+00.02,0140,0010,EU LR2 - LRCom: Leverage ratio common disclosure,Accompanying narrative,dp3530996,dp3530996,stable
+00.02,0150,0010,"EU LR3 - LRSpl: Split-up of on balance sheet exposures (excluding derivatives, SFTs and exempted exposures)",Accompanying narrative,dp3531005,dp3531005,stable
+00.02,0160,0010,EU LIQ1 - Quantitative information of LCR,Accompanying narrative,dp3531006,dp3531006,stable
+00.02,0170,0010,EU LIQ2: Net Stable Funding Ratio,Accompanying narrative,dp3531007,dp3531007,stable
+00.02,0180,0010,EU CR3 –  CRM techniques overview:  Disclosure of the use of credit risk mitigation techniques,Accompanying narrative,dp3531008,dp3531008,stable
+00.02,0190,0010,EU CR4 – standardised approach – Credit risk exposure and CRM effects,Accompanying narrative,dp3531009,dp3531009,stable
+00.02,0200,0010,EU CR5 – standardised approach,Accompanying narrative,dp3531010,dp3531010,stable
+00.02,0210,0010,EU CR6-A – Scope of the use of IRB and SA approaches,Accompanying narrative,dp3531011,dp3531011,stable
+00.02,0220,0010,EU CR6 – IRB approach – Credit risk exposures by exposure class and PD range,Accompanying narrative,dp3531012,dp3531012,stable
+00.02,0230,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,Accompanying narrative,dp3531013,dp3531013,stable
+00.02,0240,0010,EU CR7-A – IRB approach – Disclosure of the extent of the use of CRM techniques,Accompanying narrative,dp3531014,dp3531014,stable
+00.02,0250,0010,EU CR8 –  RWEA flow statements of credit risk exposures under the IRB approach,Accompanying narrative,dp3531015,dp3531015,stable
+00.02,0260,0010,EU CR9 –IRB approach – Back-testing of PD per exposure class (fixed PD scale),Accompanying narrative,dp3531016,dp3531016,stable
+00.02,0270,0010,EU CR9.1 –IRB approach – Back-testing of PD per exposure class (only for  PD estimates according to point (f) of Article 180(1) CRR),Accompanying narrative,dp3531017,dp3531017,stable
+00.02,0280,0010,EU CR10 –  Specialised lending and equity exposures under the simple riskweighted approach,Accompanying narrative,dp3531018,dp3531018,stable
+00.02,0290,0010,EU CCR1 – Analysis of CCR exposure by approach,Accompanying narrative,dp3531019,dp3531019,stable
+00.02,0300,0010,EU CCR3 – Standardised approach – CCR exposures by regulatory exposure class and risk weights,Accompanying narrative,dp3531020,dp3531020,stable
+00.02,0310,0010,EU CCR4 – IRB approach – CCR exposures by exposure class and PD scale,Accompanying narrative,dp3531021,dp3531021,stable
+00.02,0320,0010,EU CCR5 – Composition of collateral for CCR exposures,Accompanying narrative,dp3531022,dp3531022,stable
+00.02,0330,0010,EU CCR6 – Credit derivatives exposures,Accompanying narrative,dp3531023,dp3531023,stable
+00.02,0340,0010,EU CCR7 – RWEA flow statements of CCR exposures under the IMM,Accompanying narrative,dp3531024,dp3531024,stable
+00.02,0350,0010,EU CCR8 – Exposures to CCPs,Accompanying narrative,dp3531025,dp3531025,stable
+00.02,0360,0010,EU-SEC1 - Securitisation exposures in the non-trading book,Accompanying narrative,dp3531026,dp3531026,stable
+00.02,0370,0010,EU-SEC2 - Securitisation exposures in the trading book,Accompanying narrative,dp3531027,dp3531027,stable
+00.02,0380,0010,EU-SEC3 - Securitisation exposures in the non-trading book and associated regulatory capital requirements - institution acting as originator or as sponsor,Accompanying narrative,dp3531028,dp3531028,stable
+00.02,0390,0010,EU-SEC4 - Securitisation exposures in the non-trading book and associated regulatory capital requirements - institution acting as investor,Accompanying narrative,dp3531029,dp3531029,stable
+00.02,0400,0010,EU-SEC5 - Exposures securitised by the institution - Exposures in default and specific credit risk adjustments,Accompanying narrative,dp3531030,dp3531030,stable
+00.02,0410,0010,EU MR1 - Market risk under the alternative standardised approach (ASA),Accompanying narrative,dp3531031,dp3531031,stable
+00.02,0420,0010,Template EU MR2 - Market risk under the alternative internal model approach (AIMA),Accompanying narrative,dp3531032,dp3531032,stable
+00.02,0430,0010,EU MR3 - Market risk under the simplified standardised approach (SSA),Accompanying narrative,dp3531033,dp3531033,stable
+00.02,0440,0010,EU MR1 - Market risk under the standardised approach,Accompanying narrative,dp3531084,dp3531084,stable
+00.02,0450,0010,EU MR2-A - Market risk under the internal Model Approach (IMA),Accompanying narrative,dp3531034,dp3531034,stable
+00.02,0460,0010,EU MR2-B - RWA flow statements of market risk exposures under the IMA,Accompanying narrative,dp3531035,dp3531035,stable
+00.02,0470,0010,EU MR3 - IMA values for trading portfolios,Accompanying narrative,dp3531083,dp3531083,stable
+00.02,0480,0010,EU CVA 1 – Credit valuation adjustment risk under the Reduced Basic Approach,Accompanying narrative,dp3531036,dp3531036,stable
+00.02,0490,0010,EU CVA 2 – Credit valuation adjustment risk under the Full Basic Approach,Accompanying narrative,dp3531037,dp3531037,stable
+00.02,0500,0010,EU CVA3 – Credit valuation adjustement risk under the Standardised Approach,Accompanying narrative,dp3531038,dp3531038,stable
+00.02,0510,0010,EU CVA4 – RWEA flow statements of credit valuation adjustment risk under the Standardised Approach,Accompanying narrative,dp3531039,dp3531039,stable
+00.02,0520,0010,EU OR1 -Operational risk losses,Accompanying narrative,dp3531040,dp3531040,stable
+00.02,0530,0010,"EU OR2 - Business Indicator, components and subcomponents",Accompanying narrative,dp3531041,dp3531041,stable
+00.02,0540,0010,EU OR3 - Operational risk own funds requirements and risk exposure amounts,Accompanying narrative,dp3531042,dp3531042,stable
+00.02,0550,0010,EU CAE1 – Exposures to crypto-assets,Accompanying narrative,dp3531043,dp3531043,stable
+00.02,0560,0010,EU CC1 - Composition of regulatory own funds (Art.437),Accompanying narrative,dp3531044,dp3531044,stable
+00.05,0010,0010,"EU KM2 - Key metrics - MREL and, where applicable, G-SII requirement for own funds and eligible liabilities",Accompanying narrative,dp3531076,dp3531076,stable
+00.05,0020,0010,"EU TLAC1 - Composition - MREL and, where applicable, G-SII requirement for own funds and eligible liabilities",Accompanying narrative,dp3531077,dp3531077,stable
+00.05,0030,0010,"EU ILAC - Internal loss absorbing capacity: internal MREL and, where applicable, requirement for own funds and eligible liabilities for non-EU G-SIIs",Accompanying narrative,dp3531078,dp3531078,stable
+00.05,0040,0010,EU TLAC2a - Creditor ranking - Entity that is not a resolution entity,Accompanying narrative,dp3531079,dp3531079,stable
+00.05,0050,0010,EU TLAC2b - Creditor ranking - Entity that is not a resolution entity,Accompanying narrative,dp3531080,dp3531080,stable
+00.05,0060,0010,EU TLAC3a - creditor ranking - resolution entity,Accompanying narrative,dp3531081,dp3531081,stable
+00.05,0070,0010,EU TLAC3b - creditor ranking - resolution entity,Accompanying narrative,dp3531082,dp3531082,stable
+02.00,0010,0040,EU1. EU - Original Exposure Method (for derivatives),d. Alpha used for computing regulatory exposure value,dp3526555,dp3526555,stable
+02.00,0020,0040,EU2. EU - Simplified SA-CCR (for derivatives),d. Alpha used for computing regulatory exposure value,dp3526556,dp3526556,stable
+02.00,0030,0040,1. SA-CCR (for derivatives),d. Alpha used for computing regulatory exposure value,dp3526557,dp3526557,stable
+12.00,0010,0010,1. RWEAs at previous period end,a. VaR,dp3529526,dp3529526,stable
+12.00,0010,0020,1. RWEAs at previous period end,b. SVaR,dp3529525,dp3529525,stable
+12.00,0010,0050,1. RWEAs at previous period end,e. Other,dp3529524,dp3529524,stable
+12.00,0010,0060,1. RWEAs at previous period end,f. Total RWEAs,dp3529591,dp3529591,stable
+12.00,0010,0070,1. RWEAs at previous period end,g. Total own funds requirements,dp3529405,dp3529405,stable
+12.00,0020,0010,1a. Regulatory adjustment,a. VaR,dp3529533,dp3529533,stable
+12.00,0020,0020,1a. Regulatory adjustment,b. SVaR,dp3529532,dp3529532,stable
+12.00,0020,0060,1a. Regulatory adjustment,f. Total RWEAs,dp3529519,dp3529519,stable
+12.00,0020,0070,1a. Regulatory adjustment,g. Total own funds requirements,dp3529406,dp3529406,stable
+12.00,0030,0010,1b. RWEAs at the previous quarter-end end of the day,a. VaR,dp3529658,dp3529658,stable
+12.00,0030,0020,1b. RWEAs at the previous quarter-end end of the day,b. SVaR,dp3529659,dp3529659,stable
+12.00,0030,0050,1b. RWEAs at the previous quarter-end end of the day,e. Other,dp3529537,dp3529537,stable
+12.00,0030,0060,1b. RWEAs at the previous quarter-end end of the day,f. Total RWEAs,dp3529521,dp3529521,stable
+12.00,0030,0070,1b. RWEAs at the previous quarter-end end of the day,g. Total own funds requirements,dp3529421,dp3529421,stable
+12.00,0040,0010,2. Movement in risk levels,a. VaR,dp3529686,dp3529686,stable
+12.00,0040,0020,2. Movement in risk levels,b. SVaR,dp3529717,dp3529717,stable
+12.00,0040,0060,2. Movement in risk levels,f. Total RWEAs,dp3529515,dp3529515,stable
+12.00,0040,0070,2. Movement in risk levels,g. Total own funds requirements,dp3529399,dp3529399,stable
+12.00,0090,0010,7. Other,a. VaR,dp3529697,dp3529697,stable
+12.00,0090,0020,7. Other,b. SVaR,dp3529812,dp3529812,stable
+12.00,0090,0050,7. Other,e. Other,dp3529695,dp3529695,stable
+12.00,0090,0060,7. Other,f. Total RWEAs,dp3529592,dp3529592,stable
+12.00,0090,0070,7. Other,g. Total own funds requirements,dp3529404,dp3529404,stable
+12.00,0100,0010,8a. RWEAs at the end of the disclosure period end of the day,a. VaR,dp3529536,dp3529536,stable
+12.00,0100,0020,8a. RWEAs at the end of the disclosure period end of the day,b. SVaR,dp3529535,dp3529535,stable
+12.00,0100,0050,8a. RWEAs at the end of the disclosure period end of the day,e. Other,dp3529534,dp3529534,stable
+12.00,0100,0060,8a. RWEAs at the end of the disclosure period end of the day,f. Total RWEAs,dp3529520,dp3529520,stable
+12.00,0100,0070,8a. RWEAs at the end of the disclosure period end of the day,g. Total own funds requirements,dp3529422,dp3529422,stable
+12.00,0110,0010,8b. Regulatory adjustment,a. VaR,dp3529583,dp3529583,stable
+12.00,0110,0020,8b. Regulatory adjustment,b. SVaR,dp3529584,dp3529584,stable
+12.00,0110,0060,8b. Regulatory adjustment,f. Total RWEAs,dp3529590,dp3529590,stable
+12.00,0110,0070,8b. Regulatory adjustment,g. Total own funds requirements,dp3529423,dp3529423,stable
+12.00,0120,0010,8. RWEAs at the end of the disclosure period,a. VaR,dp3529765,dp3529765,stable
+12.00,0120,0020,8. RWEAs at the end of the disclosure period,b. SVaR,dp3529699,dp3529699,stable
+12.00,0120,0050,8. RWEAs at the end of the disclosure period,e. Other,dp3529763,dp3529763,stable
+12.00,0120,0060,8. RWEAs at the end of the disclosure period,f. Total RWEAs,dp3529523,dp3529523,stable
+12.00,0120,0070,8. RWEAs at the end of the disclosure period,g. Total own funds requirements,dp3529407,dp3529407,stable
+28.00,0010,0010,1. Risk weighted exposure amount at the end of the previous reporting period,a. Risk weighted exposure amount,dp442283,dp442283,stable
+28.00,0020,0010,2. Asset size (+/-),a. Risk weighted exposure amount,dp442290,dp442290,stable
+28.00,0030,0010,3. Asset quality (+/-),a. Risk weighted exposure amount,dp442285,dp442285,stable
+28.00,0040,0010,4. Model updates (+/-),a. Risk weighted exposure amount,dp442286,dp442286,stable
+28.00,0050,0010,5. Methodology and policy (+/-),a. Risk weighted exposure amount,dp442287,dp442287,stable
+28.00,0060,0010,6. Acquisitions and disposals (+/-),a. Risk weighted exposure amount,dp442288,dp442288,stable
+28.00,0070,0010,7. Foreign exchange movements (+/-),a. Risk weighted exposure amount,dp442289,dp442289,stable
+28.00,0080,0010,8. Other (+/-),a. Risk weighted exposure amount,dp442291,dp442291,stable
+28.00,0090,0010,9. Risk weighted exposure amount at the end of the reporting period,a. Risk weighted exposure amount,dp442282,dp442282,stable
+60.00.A,0010,0010,01. Credit risk (excluding CCR),a. T,dp3530270,dp3530270,stable
+60.00.A,0010,0020,01. Credit risk (excluding CCR),b. T-1,dp472892,dp472892,stable
+60.00.A,0010,0030,01. Credit risk (excluding CCR),c. T,dp472891,dp472891,stable
+60.00.A,0020,0010,02. Of which the standardised approach,a. T,dp3530271,dp3530271,stable
+60.00.A,0020,0020,02. Of which the standardised approach,b. T-1,dp472887,dp472887,stable
+60.00.A,0020,0030,02. Of which the standardised approach,c. T,dp472886,dp472886,stable
+60.00.A,0030,0010,3. Of which the Foundation IRB (F-IRB) approach,a. T,dp3530272,dp3530272,stable
+60.00.A,0030,0020,3. Of which the Foundation IRB (F-IRB) approach,b. T-1,dp474693,dp474693,stable
+60.00.A,0030,0030,3. Of which the Foundation IRB (F-IRB) approach,c. T,dp474579,dp474579,stable
+60.00.A,0040,0010,4. Of which:  slotting approach,a. T,dp3530273,dp3530273,stable
+60.00.A,0040,0020,4. Of which:  slotting approach,b. T-1,dp475445,dp475445,stable
+60.00.A,0040,0030,4. Of which:  slotting approach,c. T,dp475429,dp475429,stable
+60.00.A,0060,0010,5. Of which the Advanced IRB (A-IRB) approach,a. T,dp3530279,dp3530279,stable
+60.00.A,0060,0020,5. Of which the Advanced IRB (A-IRB) approach,b. T-1,dp473436,dp473436,stable
+60.00.A,0060,0030,5. Of which the Advanced IRB (A-IRB) approach,c. T,dp473217,dp473217,stable
+60.00.A,0070,0010,6. Counterparty credit risk - CCR,a. T,dp3530283,dp3530283,stable
+60.00.A,0070,0020,6. Counterparty credit risk - CCR,b. T-1,dp475434,dp475434,stable
+60.00.A,0070,0030,6. Counterparty credit risk - CCR,c. T,dp475424,dp475424,stable
+60.00.A,0080,0010,7. Of which the standardised approach,a. T,dp3530280,dp3530280,stable
+60.00.A,0080,0020,7. Of which the standardised approach,b. T-1,dp475437,dp475437,stable
+60.00.A,0080,0030,7. Of which the standardised approach,c. T,dp475425,dp475425,stable
+60.00.A,0090,0010,8. Of which internal model method (IMM),a. T,dp3530281,dp3530281,stable
+60.00.A,0090,0020,8. Of which internal model method (IMM),b. T-1,dp475439,dp475439,stable
+60.00.A,0090,0030,8. Of which internal model method (IMM),c. T,dp475426,dp475426,stable
+60.00.A,0100,0010,EU 8a. Of which exposures to a CCP,a. T,dp3530261,dp3530261,stable
+60.00.A,0100,0020,EU 8a. Of which exposures to a CCP,b. T-1,dp475443,dp475443,stable
+60.00.A,0100,0030,EU 8a. Of which exposures to a CCP,c. T,dp475428,dp475428,stable
+60.00.A,0110,0010,9. Of which other CCR,a. T,dp3530282,dp3530282,stable
+60.00.A,0120,0010,10. Credit valuation adjustments risk - CVA risk,a. T,dp3295621,dp3295621,stable
+60.00.A,0120,0020,9. Of which other CCR,b. T-1,dp3530253|dp475441,dp3530253|dp475441,ambiguous
+60.00.A,0120,0030,10. Credit valuation adjustments risk - CVA risk,c. T,dp475427|dp475430,dp475427|dp475430,ambiguous
+60.00.A,0130,0010,EU 10a. Of which the standardised approach (SA),a. T,dp3295827,dp3295827,stable
+60.00.A,0130,0020,EU 10a. Of which the standardised approach (SA),b. T-1,dp3530252,dp3530252,stable
+60.00.A,0130,0030,EU 10a. Of which the standardised approach (SA),c. T,dp3529427,dp3529427,stable
+60.00.A,0140,0010,EU 10b. Of which the basic approach (F-BA and R-BA),a. T,dp3530275,dp3530275,stable
+60.00.A,0140,0020,EU 10b. Of which the basic approach (F-BA and R-BA),b. T-1,dp3530276,dp3530276,stable
+60.00.A,0140,0030,EU 10b. Of which the basic approach (F-BA and R-BA),c. T,dp3529397,dp3529397,stable
+60.00.A,0150,0010,EU 10c. Of which the simplified approach,a. T,dp3295657,dp3295657,stable
+60.00.A,0150,0020,EU 10c. Of which the simplified approach,b. T-1,dp3530251,dp3530251,stable
+60.00.A,0150,0030,EU 10c. Of which the simplified approach,c. T,dp3529387,dp3529387,stable
+60.00.A,0200,0010,15. Settlement risk,a. T,dp3295620,dp3295620,stable
+60.00.A,0200,0020,15. Settlement risk,b. T-1,dp475433,dp475433,stable
+60.00.A,0200,0030,15. Settlement risk,c. T,dp475423,dp475423,stable
+60.00.A,0210,0010,16. Securitisation exposures in the non-trading book (after the cap),a. T,dp3530256,dp3530256,stable
+60.00.A,0210,0020,16. Securitisation exposures in the non-trading book (after the cap),b. T-1,dp3530254,dp3530254,stable
+60.00.A,0210,0030,16. Securitisation exposures in the non-trading book (after the cap),c. T,dp3529424,dp3529424,stable
+60.00.A,0220,0010,17. Of which SEC-IRBA approach,a. T,dp3530262,dp3530262,stable
+60.00.A,0220,0020,17. Of which SEC-IRBA approach,b. T-1,dp475196,dp475196,stable
+60.00.A,0220,0030,17. Of which SEC-IRBA approach,c. T,dp475195,dp475195,stable
+60.00.A,0230,0010,18. Of which SEC-ERBA (including IAA),a. T,dp3530263,dp3530263,stable
+60.00.A,0230,0020,18. Of which SEC-ERBA (including IAA),b. T-1,dp475204,dp475204,stable
+60.00.A,0230,0030,18. Of which SEC-ERBA (including IAA),c. T,dp475203,dp475203,stable
+60.00.A,0240,0010,19. Of which SEC-SA approach,a. T,dp3530255,dp3530255,stable
+60.00.A,0240,0020,19. Of which SEC-SA approach,b. T-1,dp475199,dp475199,stable
+60.00.A,0240,0030,19. Of which SEC-SA approach,c. T,dp475198,dp475198,stable
+60.00.A,0250,0010,EU 19a. Of which 1250%/deductions,a. T,dp3530264,dp3530264,stable
+60.00.A,0250,0020,EU 19a. Of which 1250%/deductions,b. T-1,dp3530265,dp3530265,stable
+60.00.A,0250,0030,EU 19a. Of which 1250%/deductions,c. T,dp3529425,dp3529425,stable
+60.00.A,0260,0010,"20. Position, foreign exchange and commodities risks (Market risk)",a. T,dp3530277,dp3530277,stable
+60.00.A,0260,0020,"20. Position, foreign exchange and commodities risks (Market risk)",b. T-1,dp472901,dp472901,stable
+60.00.A,0260,0030,"20. Position, foreign exchange and commodities risks (Market risk)",c. T,dp472900,dp472900,stable
+60.00.A,0280,0010,EU 21a. Of which the Simplified standardised approach (S-SA),a. T,dp3295932,dp3295932,stable
+60.00.A,0280,0020,EU 21a. Of which the Simplified standardised approach (S-SA),b. T-1,dp3530269,dp3530269,stable
+60.00.A,0280,0030,EU 21a. Of which the Simplified standardised approach (S-SA),c. T,dp3529409,dp3529409,stable
+60.00.A,0290,0010,22. Of which the Alternative Internal Models Approach (A-IMA),a. T,dp3530257,dp3529781,rebound
+60.00.A,0290,0020,22. Of which the Alternative Internal Models Approach (A-IMA),b. T-1,dp3530259,dp5488488,rebound
+60.00.A,0290,0030,22. Of which the Alternative Internal Models Approach (A-IMA),c. T,dp3529408,dp5488315,rebound
+60.00.A,0300,0010,EU 22a. Large exposures,a. T,dp3530274,dp3530274,stable
+60.00.A,0300,0020,EU 22a. Large exposures,b. T-1,dp475456,dp475456,stable
+60.00.A,0300,0030,EU 22a. Large exposures,c. T,dp475432,dp475432,stable
+60.00.A,0310,0010,23. Reclassifications between the trading and non-trading books,a. T,dp3295598,dp3295598,stable
+60.00.A,0310,0020,23. Reclassifications between the trading and non-trading books,b. T-1,dp3530267,dp3530267,stable
+60.00.A,0310,0030,23. Reclassifications between the trading and non-trading books,c. T,dp3529396,dp3529396,stable
+60.00.A,0320,0010,24. Operational risk,a. T,dp3295823,dp3295823,stable
+60.00.A,0320,0020,24. Operational risk,b. T-1,dp472898,dp472898,stable
+60.00.A,0320,0030,24. Operational risk,c. T,dp472897,dp472897,stable
+60.00.A,0330,0010,EU 24a. Exposures to crypto-assets,a. T,dp3295889,dp3295889,stable
+60.00.A,0330,0020,EU 24a. Exposures to crypto-assets,b. T-1,dp3530268,dp3530268,stable
+60.00.A,0330,0030,EU 24a. Exposures to crypto-assets,c. T,dp3529388,dp3529388,stable
+60.00.A,0340,0010,25. Amounts below the thresholds for deduction (subject to 250% risk weight),a. T,dp3530285,dp3530285,stable
+60.00.A,0340,0020,25. Amounts below the thresholds for deduction (subject to 250% risk weight),b. T-1,dp3530266,dp3530266,stable
+60.00.A,0340,0030,25. Amounts below the thresholds for deduction (subject to 250% risk weight),c. T,dp475194,dp475194,stable
+60.00.A,0380,0010,29. Total,a. T,dp3530284,dp3530284,stable
+60.00.A,0380,0020,29. Total,b. T-1,dp475449,dp475449,stable
+60.00.A,0380,0030,29. Total,c. T,dp475431,dp475431,stable
+60.00.B,0350,0010,26. Output floor applied (%),a. T,dp3295265,dp3295265,stable
+60.00.B,0350,0020,26. Output floor applied (%),b. T-1,dp3529855,dp3529855,stable
+60.00.B,0360,0010,27. Floor adjustment (before application of transitional cap),a. T,dp3294909,dp3294909,stable
+60.00.B,0360,0020,27. Floor adjustment (before application of transitional cap),b. T-1,dp3529854,dp3529854,stable
+60.00.B,0370,0010,28. Floor adjustment (after application of transitional cap),a. T,dp3294913,dp3294913,stable
+60.00.B,0370,0020,28. Floor adjustment (after application of transitional cap),b. T-1,dp3529853,dp3529853,stable
+61.00,0010,0010,1. Common Equity Tier 1 (CET1) capital,a. T,dp33411,dp33411,stable
+61.00,0010,0020,1. Common Equity Tier 1 (CET1) capital,b. T-1,dp475223,dp475223,stable
+61.00,0010,0030,1. Common Equity Tier 1 (CET1) capital,c. T-2,dp475224,dp475224,stable
+61.00,0010,0040,1. Common Equity Tier 1 (CET1) capital,d. T-3,dp475225,dp475225,stable
+61.00,0010,0050,1. Common Equity Tier 1 (CET1) capital,e. T-4,dp475226,dp475226,stable
+61.00,0020,0010,2. Tier 1 capital,a. T,dp84817,dp84817,stable
+61.00,0020,0020,2. Tier 1 capital,b. T-1,dp475227,dp475227,stable
+61.00,0020,0030,2. Tier 1 capital,c. T-2,dp475228,dp475228,stable
+61.00,0020,0040,2. Tier 1 capital,d. T-3,dp475229,dp475229,stable
+61.00,0020,0050,2. Tier 1 capital,e. T-4,dp475230,dp475230,stable
+61.00,0030,0010,3. Total capital,a. T,dp33413,dp33413,stable
+61.00,0030,0020,3. Total capital,b. T-1,dp475231,dp475231,stable
+61.00,0030,0030,3. Total capital,c. T-2,dp475232,dp475232,stable
+61.00,0030,0040,3. Total capital,d. T-3,dp475233,dp475233,stable
+61.00,0030,0050,3. Total capital,e. T-4,dp475234,dp475234,stable
+61.00,0040,0010,4. Total risk-weighted exposure amount,a. T,dp38483,dp38483,stable
+61.00,0040,0020,4. Total risk-weighted exposure amount,b. T-1,dp475450,dp475450,stable
+61.00,0040,0030,4. Total risk-weighted exposure amount,c. T-2,dp475451,dp475451,stable
+61.00,0040,0040,4. Total risk-weighted exposure amount,d. T-3,dp475452,dp475452,stable
+61.00,0040,0050,4. Total risk-weighted exposure amount,e. T-4,dp475453,dp475453,stable
+61.00,0041,0010,4a. Total risk exposure pre-floor,a. T,dp3294908,dp3294908,stable
+61.00,0041,0020,4a. Total risk exposure pre-floor,b. T-1,dp3529852,dp3529852,stable
+61.00,0041,0030,4a. Total risk exposure pre-floor,c. T-2,dp3529851,dp3529851,stable
+61.00,0041,0040,4a. Total risk exposure pre-floor,d. T-3,dp3529850,dp3529850,stable
+61.00,0041,0050,4a. Total risk exposure pre-floor,e. T-4,dp3529849,dp3529849,stable
+61.00,0050,0010,5. Common Equity Tier 1 ratio (%),a. T,dp85151,dp85151,stable
+61.00,0050,0020,5. Common Equity Tier 1 ratio (%),b. T-1,dp475458,dp475458,stable
+61.00,0050,0030,5. Common Equity Tier 1 ratio (%),c. T-2,dp475459,dp475459,stable
+61.00,0050,0040,5. Common Equity Tier 1 ratio (%),d. T-3,dp475460,dp475460,stable
+61.00,0050,0050,5. Common Equity Tier 1 ratio (%),e. T-4,dp475461,dp475461,stable
+61.00,0051,0010,5b. Common Equity Tier 1 ratio considering unfloored TREA (%),a. T,dp3294198,dp3294198,stable
+61.00,0051,0020,5b. Common Equity Tier 1 ratio considering unfloored TREA (%),b. T-1,dp3529431,dp3529431,stable
+61.00,0051,0030,5b. Common Equity Tier 1 ratio considering unfloored TREA (%),c. T-2,dp3529430,dp3529430,stable
+61.00,0051,0040,5b. Common Equity Tier 1 ratio considering unfloored TREA (%),d. T-3,dp3529429,dp3529429,stable
+61.00,0051,0050,5b. Common Equity Tier 1 ratio considering unfloored TREA (%),e. T-4,dp3529428,dp3529428,stable
+61.00,0060,0010,6. Tier 1 ratio (%),a. T,dp85152,dp85152,stable
+61.00,0060,0020,6. Tier 1 ratio (%),b. T-1,dp475462,dp475462,stable
+61.00,0060,0030,6. Tier 1 ratio (%),c. T-2,dp475463,dp475463,stable
+61.00,0060,0040,6. Tier 1 ratio (%),d. T-3,dp475464,dp475464,stable
+61.00,0060,0050,6. Tier 1 ratio (%),e. T-4,dp475465,dp475465,stable
+61.00,0061,0010,6b. Tier 1 ratio considering unfloored TREA (%),a. T,dp3294199,dp3294199,stable
+61.00,0061,0020,6b. Tier 1 ratio considering unfloored TREA (%),b. T-1,dp3529440,dp3529440,stable
+61.00,0061,0030,6b. Tier 1 ratio considering unfloored TREA (%),c. T-2,dp3529438,dp3529438,stable
+61.00,0061,0040,6b. Tier 1 ratio considering unfloored TREA (%),d. T-3,dp3529436,dp3529436,stable
+61.00,0061,0050,6b. Tier 1 ratio considering unfloored TREA (%),e. T-4,dp3529434,dp3529434,stable
+61.00,0070,0010,7. Total capital ratio (%),a. T,dp85153,dp85153,stable
+61.00,0070,0020,7. Total capital ratio (%),b. T-1,dp475466,dp475466,stable
+61.00,0070,0030,7. Total capital ratio (%),c. T-2,dp475467,dp475467,stable
+61.00,0070,0040,7. Total capital ratio (%),d. T-3,dp475468,dp475468,stable
+61.00,0070,0050,7. Total capital ratio (%),e. T-4,dp475469,dp475469,stable
+61.00,0080,0010,EU 7a. Additional own funds requirements to address risks other than the risk of excessive leverage (%),a. T,dp410438,dp410438,stable
+61.00,0080,0020,EU 7a. Additional own funds requirements to address risks other than the risk of excessive leverage (%),b. T-1,dp475486,dp475486,stable
+61.00,0080,0030,EU 7a. Additional own funds requirements to address risks other than the risk of excessive leverage (%),c. T-2,dp475487,dp475487,stable
+61.00,0080,0040,EU 7a. Additional own funds requirements to address risks other than the risk of excessive leverage (%),d. T-3,dp475488,dp475488,stable
+61.00,0080,0050,EU 7a. Additional own funds requirements to address risks other than the risk of excessive leverage (%),e. T-4,dp475489,dp475489,stable
+61.00,0081,0010,7b. Total capital ratio considering unfloored TREA (%),a. T,dp3294197,dp3294197,stable
+61.00,0081,0020,7b. Total capital ratio considering unfloored TREA (%),b. T-1,dp3529433,dp3529433,stable
+61.00,0081,0030,7b. Total capital ratio considering unfloored TREA (%),c. T-2,dp3529439,dp3529439,stable
+61.00,0081,0040,7b. Total capital ratio considering unfloored TREA (%),d. T-3,dp3529437,dp3529437,stable
+61.00,0081,0050,7b. Total capital ratio considering unfloored TREA (%),e. T-4,dp3529435,dp3529435,stable
+61.00,0090,0010,EU 7b. of which: to be made up of CET1 capital (percentage points),a. T,dp424336,dp424336,stable
+61.00,0090,0020,EU 7b. of which: to be made up of CET1 capital (percentage points),b. T-1,dp475478,dp475478,stable
+61.00,0090,0030,EU 7b. of which: to be made up of CET1 capital (percentage points),c. T-2,dp475479,dp475479,stable
+61.00,0090,0040,EU 7b. of which: to be made up of CET1 capital (percentage points),d. T-3,dp475480,dp475480,stable
+61.00,0090,0050,EU 7b. of which: to be made up of CET1 capital (percentage points),e. T-4,dp475481,dp475481,stable
+61.00,0100,0010,EU 7c. of which: to be made up of Tier 1 capital (percentage points),a. T,dp424337,dp424337,stable
+61.00,0100,0020,EU 7c. of which: to be made up of Tier 1 capital (percentage points),b. T-1,dp475482,dp475482,stable
+61.00,0100,0030,EU 7c. of which: to be made up of Tier 1 capital (percentage points),c. T-2,dp475483,dp475483,stable
+61.00,0100,0040,EU 7c. of which: to be made up of Tier 1 capital (percentage points),d. T-3,dp475484,dp475484,stable
+61.00,0100,0050,EU 7c. of which: to be made up of Tier 1 capital (percentage points),e. T-4,dp475485,dp475485,stable
+61.00,0110,0010,EU 7g. Total SREP own funds requirements (%),a. T,dp85156,dp85156,stable
+61.00,0110,0020,EU 7g. Total SREP own funds requirements (%),b. T-1,dp475470,dp475470,stable
+61.00,0110,0030,EU 7g. Total SREP own funds requirements (%),c. T-2,dp475471,dp475471,stable
+61.00,0110,0040,EU 7g. Total SREP own funds requirements (%),d. T-3,dp475472,dp475472,stable
+61.00,0110,0050,EU 7g. Total SREP own funds requirements (%),e. T-4,dp475473,dp475473,stable
+61.00,0120,0010,8. Capital conservation buffer (%),a. T,dp475577,dp475577,stable
+61.00,0120,0020,8. Capital conservation buffer (%),b. T-1,dp475578,dp475578,stable
+61.00,0120,0030,8. Capital conservation buffer (%),c. T-2,dp475579,dp475579,stable
+61.00,0120,0040,8. Capital conservation buffer (%),d. T-3,dp475580,dp475580,stable
+61.00,0120,0050,8. Capital conservation buffer (%),e. T-4,dp475581,dp475581,stable
+61.00,0130,0010,EU 8a. Conservation buffer due to macro-prudential or systemic risk identified at the level of a Member State (%),a. T,dp475597,dp475597,stable
+61.00,0130,0020,EU 8a. Conservation buffer due to macro-prudential or systemic risk identified at the level of a Member State (%),b. T-1,dp475598,dp475598,stable
+61.00,0130,0030,EU 8a. Conservation buffer due to macro-prudential or systemic risk identified at the level of a Member State (%),c. T-2,dp475599,dp475599,stable
+61.00,0130,0040,EU 8a. Conservation buffer due to macro-prudential or systemic risk identified at the level of a Member State (%),d. T-3,dp475600,dp475600,stable
+61.00,0130,0050,EU 8a. Conservation buffer due to macro-prudential or systemic risk identified at the level of a Member State (%),e. T-4,dp475601,dp475601,stable
+61.00,0140,0010,9. Institution specific countercyclical capital buffer (%),a. T,dp475587,dp475587,stable
+61.00,0140,0020,9. Institution specific countercyclical capital buffer (%),b. T-1,dp475588,dp475588,stable
+61.00,0140,0030,9. Institution specific countercyclical capital buffer (%),c. T-2,dp475589,dp475589,stable
+61.00,0140,0040,9. Institution specific countercyclical capital buffer (%),d. T-3,dp475590,dp475590,stable
+61.00,0140,0050,9. Institution specific countercyclical capital buffer (%),e. T-4,dp475591,dp475591,stable
+61.00,0150,0010,EU 9a. Systemic risk buffer (%),a. T,dp475592,dp475592,stable
+61.00,0150,0020,EU 9a. Systemic risk buffer (%),b. T-1,dp475593,dp475593,stable
+61.00,0150,0030,EU 9a. Systemic risk buffer (%),c. T-2,dp475594,dp475594,stable
+61.00,0150,0040,EU 9a. Systemic risk buffer (%),d. T-3,dp475595,dp475595,stable
+61.00,0150,0050,EU 9a. Systemic risk buffer (%),e. T-4,dp475596,dp475596,stable
+61.00,0160,0010,10. Global Systemically Important Institution buffer (%),a. T,dp475602,dp475602,stable
+61.00,0160,0020,10. Global Systemically Important Institution buffer (%),b. T-1,dp475603,dp475603,stable
+61.00,0160,0030,10. Global Systemically Important Institution buffer (%),c. T-2,dp475604,dp475604,stable
+61.00,0160,0040,10. Global Systemically Important Institution buffer (%),d. T-3,dp475605,dp475605,stable
+61.00,0160,0050,10. Global Systemically Important Institution buffer (%),e. T-4,dp475606,dp475606,stable
+61.00,0170,0010,EU 10a. Other Systemically Important Institution buffer,a. T,dp475607,dp475607,stable
+61.00,0170,0020,EU 10a. Other Systemically Important Institution buffer,b. T-1,dp475608,dp475608,stable
+61.00,0170,0030,EU 10a. Other Systemically Important Institution buffer,c. T-2,dp475609,dp475609,stable
+61.00,0170,0040,EU 10a. Other Systemically Important Institution buffer,d. T-3,dp475610,dp475610,stable
+61.00,0170,0050,EU 10a. Other Systemically Important Institution buffer,e. T-4,dp475611,dp475611,stable
+61.00,0180,0010,11. Combined buffer requirement (%),a. T,dp475582,dp475582,stable
+61.00,0180,0020,11. Combined buffer requirement (%),b. T-1,dp475583,dp475583,stable
+61.00,0180,0030,11. Combined buffer requirement (%),c. T-2,dp475584,dp475584,stable
+61.00,0180,0040,11. Combined buffer requirement (%),d. T-3,dp475585,dp475585,stable
+61.00,0180,0050,11. Combined buffer requirement (%),e. T-4,dp475586,dp475586,stable
+61.00,0190,0010,EU 11a. Overall capital requirements (%),a. T,dp410432,dp410433,rebound
+61.00,0190,0020,EU 11a. Overall capital requirements (%),b. T-1,dp475474,dp475474,stable
+61.00,0190,0030,EU 11a. Overall capital requirements (%),c. T-2,dp475475,dp475475,stable
+61.00,0190,0040,EU 11a. Overall capital requirements (%),d. T-3,dp475476,dp475476,stable
+61.00,0190,0050,EU 11a. Overall capital requirements (%),e. T-4,dp475477,dp475477,stable
+61.00,0200,0010,12. CET1 available after meeting the total SREP own funds requirements (%),a. T,dp475209,dp475209,stable
+61.00,0200,0020,12. CET1 available after meeting the total SREP own funds requirements (%),b. T-1,dp475210,dp475210,stable
+61.00,0200,0030,12. CET1 available after meeting the total SREP own funds requirements (%),c. T-2,dp475211,dp475211,stable
+61.00,0200,0040,12. CET1 available after meeting the total SREP own funds requirements (%),d. T-3,dp475212,dp475212,stable
+61.00,0200,0050,12. CET1 available after meeting the total SREP own funds requirements (%),e. T-4,dp475213,dp475213,stable
+61.00,0210,0010,13. Leverage ratio total exposure measure,a. T,dp475214,dp475214,stable
+61.00,0210,0020,13. Leverage ratio total exposure measure,b. T-1,dp475215,dp475215,stable
+61.00,0210,0030,13. Leverage ratio total exposure measure,c. T-2,dp475216,dp475216,stable
+61.00,0210,0040,13. Leverage ratio total exposure measure,d. T-3,dp475217,dp475217,stable
+61.00,0210,0050,13. Leverage ratio total exposure measure,e. T-4,dp475218,dp475218,stable
+61.00,0220,0010,14. Leverage ratio,a. T,dp475724,dp475724,stable
+61.00,0220,0020,14. Leverage ratio,b. T-1,dp475725,dp475725,stable
+61.00,0220,0030,14. Leverage ratio,c. T-2,dp475726,dp475726,stable
+61.00,0220,0040,14. Leverage ratio,d. T-3,dp475727,dp475727,stable
+61.00,0220,0050,14. Leverage ratio,e. T-4,dp475728,dp475728,stable
+61.00,0230,0010,EU 14a. Additional own funds requirements to address the risk of excessive leverage (%),a. T,dp475719,dp475719,stable
+61.00,0230,0020,EU 14a. Additional own funds requirements to address the risk of excessive leverage (%),b. T-1,dp475720,dp475720,stable
+61.00,0230,0030,EU 14a. Additional own funds requirements to address the risk of excessive leverage (%),c. T-2,dp475721,dp475721,stable
+61.00,0230,0040,EU 14a. Additional own funds requirements to address the risk of excessive leverage (%),d. T-3,dp475722,dp475722,stable
+61.00,0230,0050,EU 14a. Additional own funds requirements to address the risk of excessive leverage (%),e. T-4,dp475723,dp475723,stable
+61.00,0240,0010,EU 14b. of which: to be made up of CET1 capital (percentage points),a. T,dp475714,dp475714,stable
+61.00,0240,0020,EU 14b. of which: to be made up of CET1 capital (percentage points),b. T-1,dp475715,dp475715,stable
+61.00,0240,0030,EU 14b. of which: to be made up of CET1 capital (percentage points),c. T-2,dp475716,dp475716,stable
+61.00,0240,0040,EU 14b. of which: to be made up of CET1 capital (percentage points),d. T-3,dp475717,dp475717,stable
+61.00,0240,0050,EU 14b. of which: to be made up of CET1 capital (percentage points),e. T-4,dp475718,dp475718,stable
+61.00,0250,0010,EU 14c. Total SREP leverage ratio requirements (%),a. T,dp457447,dp457447,stable
+61.00,0250,0020,EU 14c. Total SREP leverage ratio requirements (%),b. T-1,dp475547,dp475547,stable
+61.00,0250,0030,EU 14c. Total SREP leverage ratio requirements (%),c. T-2,dp475548,dp475548,stable
+61.00,0250,0040,EU 14c. Total SREP leverage ratio requirements (%),d. T-3,dp475549,dp475549,stable
+61.00,0250,0050,EU 14c. Total SREP leverage ratio requirements (%),e. T-4,dp475550,dp475550,stable
+61.00,0260,0010,EU 14d. Leverage ratio buffer requirement (%),a. T,dp457441,dp5490147,rebound
+61.00,0260,0020,EU 14d. Leverage ratio buffer requirement (%),b. T-1,dp475543,dp5490146,rebound
+61.00,0260,0030,EU 14d. Leverage ratio buffer requirement (%),c. T-2,dp475544,dp5490149,rebound
+61.00,0260,0040,EU 14d. Leverage ratio buffer requirement (%),d. T-3,dp475545,dp5490150,rebound
+61.00,0260,0050,EU 14d. Leverage ratio buffer requirement (%),e. T-4,dp475546,dp5490151,rebound
+61.00,0270,0010,EU 14e. Overall leverage ratio requirements (%),a. T,dp457448,dp457448,stable
+61.00,0270,0020,EU 14e. Overall leverage ratio requirements (%),b. T-1,dp475551,dp475551,stable
+61.00,0270,0030,EU 14e. Overall leverage ratio requirements (%),c. T-2,dp475552,dp475552,stable
+61.00,0270,0040,EU 14e. Overall leverage ratio requirements (%),d. T-3,dp475553,dp475553,stable
+61.00,0270,0050,EU 14e. Overall leverage ratio requirements (%),e. T-4,dp475554,dp475554,stable
+61.00,0280,0010,15. Total high-quality liquid assets (HQLA) (Weighted value -average),a. T,dp145637,dp145637,stable
+61.00,0280,0020,15. Total high-quality liquid assets (HQLA) (Weighted value -average),b. T-1,dp475499,dp475499,stable
+61.00,0280,0030,15. Total high-quality liquid assets (HQLA) (Weighted value -average),c. T-2,dp475500,dp475500,stable
+61.00,0280,0040,15. Total high-quality liquid assets (HQLA) (Weighted value -average),d. T-3,dp475501,dp475501,stable
+61.00,0280,0050,15. Total high-quality liquid assets (HQLA) (Weighted value -average),e. T-4,dp475502,dp475502,stable
+61.00,0290,0010,EU 16a. Cash outflows - Total weighted value,a. T,dp146049,dp146049,stable
+61.00,0290,0020,EU 16a. Cash outflows - Total weighted value,b. T-1,dp475503,dp475503,stable
+61.00,0290,0030,EU 16a. Cash outflows - Total weighted value,c. T-2,dp475504,dp475504,stable
+61.00,0290,0040,EU 16a. Cash outflows - Total weighted value,d. T-3,dp475505,dp475505,stable
+61.00,0290,0050,EU 16a. Cash outflows - Total weighted value,e. T-4,dp475506,dp475506,stable
+61.00,0300,0010,EU 16b. Cash inflows - Total weighted value,a. T,dp475494,dp475494,stable
+61.00,0300,0020,EU 16b. Cash inflows - Total weighted value,b. T-1,dp475495,dp475495,stable
+61.00,0300,0030,EU 16b. Cash inflows - Total weighted value,c. T-2,dp475496,dp475496,stable
+61.00,0300,0040,EU 16b. Cash inflows - Total weighted value,d. T-3,dp475497,dp475497,stable
+61.00,0300,0050,EU 16b. Cash inflows - Total weighted value,e. T-4,dp475498,dp475498,stable
+61.00,0310,0010,16. Total net cash outflows (adjusted value),a. T,dp134665,dp134665,stable
+61.00,0310,0020,16. Total net cash outflows (adjusted value),b. T-1,dp475219,dp475219,stable
+61.00,0310,0030,16. Total net cash outflows (adjusted value),c. T-2,dp475220,dp475220,stable
+61.00,0310,0040,16. Total net cash outflows (adjusted value),d. T-3,dp475221,dp475221,stable
+61.00,0310,0050,16. Total net cash outflows (adjusted value),e. T-4,dp475222,dp475222,stable
+61.00,0320,0010,17.  Liquidity coverage ratio (%),a. T,dp143076,dp143076,stable
+61.00,0320,0020,17.  Liquidity coverage ratio (%),b. T-1,dp475490,dp475490,stable
+61.00,0320,0030,17.  Liquidity coverage ratio (%),c. T-2,dp475491,dp475491,stable
+61.00,0320,0040,17.  Liquidity coverage ratio (%),d. T-3,dp475492,dp475492,stable
+61.00,0320,0050,17.  Liquidity coverage ratio (%),e. T-4,dp475493,dp475493,stable
+61.00,0330,0010,18. Total available stable funding,a. T,dp458851,dp458851,stable
+61.00,0330,0020,18. Total available stable funding,b. T-1,dp475573,dp475573,stable
+61.00,0330,0030,18. Total available stable funding,c. T-2,dp475574,dp475574,stable
+61.00,0330,0040,18. Total available stable funding,d. T-3,dp475575,dp475575,stable
+61.00,0330,0050,18. Total available stable funding,e. T-4,dp475576,dp475576,stable
+61.00,0340,0010,19. Total required stable funding,a. T,dp458581,dp458581,stable
+61.00,0340,0020,19. Total required stable funding,b. T-1,dp475569,dp475569,stable
+61.00,0340,0030,19. Total required stable funding,c. T-2,dp475570,dp475570,stable
+61.00,0340,0040,19. Total required stable funding,d. T-3,dp475571,dp475571,stable
+61.00,0340,0050,19. Total required stable funding,e. T-4,dp475572,dp475572,stable
+61.00,0350,0010,20.   NSFR ratio (%),a. T,dp458571,dp458571,stable
+61.00,0350,0020,20.   NSFR ratio (%),b. T-1,dp475564,dp475564,stable
+61.00,0350,0030,20.   NSFR ratio (%),c. T-2,dp475565,dp475565,stable
+61.00,0350,0040,20.   NSFR ratio (%),d. T-3,dp475566,dp475566,stable
+61.00,0350,0050,20.   NSFR ratio (%),e. T-4,dp475567,dp475567,stable
+62.02,0010,0010,1. Supplementary own fund requirements of the financial conglomerate (amount),a. T,dp3529895,dp3529895,stable
+62.02,0020,0010,2. Capital adequacy ratio of the financial conglomerate (%),a. T,dp3529432,dp3529432,stable
+63.01.A,0010,0010,1. Credit risk excluding counterparty credit risk,a. RWEAs for modelled approaches that banks have supervisory approval to use,dp3529572,dp3529572,stable
+63.01.A,0020,0010,2. Counterparty credit risk,a. RWEAs for modelled approaches that banks have supervisory approval to use,dp3529640,dp3529640,stable
+63.01.A,0040,0010,4. Securitisation exposures in the banking book,a. RWEAs for modelled approaches that banks have supervisory approval to use,dp3529655,dp3529655,stable
+63.01.A,0050,0010,5. Market risk,a. RWEAs for modelled approaches that banks have supervisory approval to use,dp3529781,dp3529781,stable
+63.01.A,0080,0010,8. Total,a. RWEAs for modelled approaches that banks have supervisory approval to use,dp3529647,dp3529647,stable
+63.01.B,0010,0020,1. Credit risk excluding counterparty credit risk,b. RWEAs for portfolios where standardised approaches are used,dp3529636,dp3529636,stable
+63.01.B,0020,0020,2. Counterparty credit risk,b. RWEAs for portfolios where standardised approaches are used,dp3529641,dp3529641,stable
+63.01.B,0030,0020,3. Credit valuation adjustment,b. RWEAs for portfolios where standardised approaches are used,dp3529623,dp3295621,rebound
+63.01.B,0040,0020,4. Securitisation exposures in the banking book,b. RWEAs for portfolios where standardised approaches are used,dp3529656,dp3529656,stable
+63.01.B,0050,0020,5. Market risk,b. RWEAs for portfolios where standardised approaches are used,dp3529642,dp3529642,stable
+63.01.B,0060,0020,6. Operational risk,b. RWEAs for portfolios where standardised approaches are used,dp3295823,dp3295823,stable
+63.01.B,0070,0020,7. Other risk weighted exposure amounts,b. RWEAs for portfolios where standardised approaches are used,dp3529562,dp3295812,rebound
+63.01.B,0080,0020,8. Total,b. RWEAs for portfolios where standardised approaches are used,dp3529595,dp3529595,stable
+63.01.C,0010,0030,1. Credit risk excluding counterparty credit risk,c. Total actual RWEAs,dp3529771,dp3529771,stable
+63.01.C,0020,0030,2. Counterparty credit risk,c. Total actual RWEAs,dp3529561,dp3529561,stable
+63.01.C,0030,0030,3. Credit valuation adjustment,c. Total actual RWEAs,dp3529623,dp3295621,rebound
+63.01.C,0040,0030,4. Securitisation exposures in the banking book,c. Total actual RWEAs,dp3529657,dp3529657,stable
+63.01.C,0050,0030,5. Market risk,c. Total actual RWEAs,dp3529780,dp3529780,stable
+63.01.C,0060,0030,6. Operational risk,c. Total actual RWEAs,dp3295823,dp3295823,stable
+63.01.C,0070,0030,7. Other risk weighted exposure amounts,c. Total actual RWEAs,dp3529562,dp3295812,rebound
+63.01.C,0080,0030,8. Total,c. Total actual RWEAs,dp3529563,dp3294908,rebound
+63.01.D,0010,0040,1. Credit risk excluding counterparty credit risk,d. RWEAs calculated using full standardised approach,dp3530765,dp3530765,stable
+63.01.D,0020,0040,2. Counterparty credit risk,d. RWEAs calculated using full standardised approach,dp3530795,dp3530795,stable
+63.01.D,0030,0040,3. Credit valuation adjustment,d. RWEAs calculated using full standardised approach,dp3295257,dp3295257,stable
+63.01.D,0040,0040,4. Securitisation exposures in the banking book,d. RWEAs calculated using full standardised approach,dp3530803,dp3530803,stable
+63.01.D,0050,0040,5. Market risk,d. RWEAs calculated using full standardised approach,dp3530808,dp3530808,stable
+63.01.D,0060,0040,6. Operational risk,d. RWEAs calculated using full standardised approach,dp3295222,dp3295222,stable
+63.01.D,0070,0040,7. Other risk weighted exposure amounts,d. RWEAs calculated using full standardised approach,dp3529562,dp3295812,rebound
+63.01.D,0080,0040,8. Total,d. RWEAs calculated using full standardised approach,dp3530792,dp3530792,stable
+63.01.E,0010,0050,1. Credit risk excluding counterparty credit risk,EU d. RWEAs that is the base of the output floor,dp3530821,dp3530821,stable
+63.01.E,0020,0050,2. Counterparty credit risk,EU d. RWEAs that is the base of the output floor,dp3530809,dp3530809,stable
+63.01.E,0030,0050,3. Credit valuation adjustment,EU d. RWEAs that is the base of the output floor,dp3295257,dp3295257,stable
+63.01.E,0040,0050,4. Securitisation exposures in the banking book,EU d. RWEAs that is the base of the output floor,dp3294936,dp3295234,rebound
+63.01.E,0050,0050,5. Market risk,EU d. RWEAs that is the base of the output floor,dp3295150,dp3295150,stable
+63.01.E,0060,0050,6. Operational risk,EU d. RWEAs that is the base of the output floor,dp3295222,dp3295222,stable
+63.01.E,0070,0050,7. Other risk weighted exposure amounts,EU d. RWEAs that is the base of the output floor,dp3530796,dp3530796,stable
+63.01.E,0080,0050,8. Total,EU d. RWEAs that is the base of the output floor,dp3294979,dp3294979,stable
+63.02.A,0010,0010,1. Central governments and central banks,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529756,dp3529756,stable
+63.02.A,0020,0010,EU 1a. Regional governments or local authorities,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529802,dp3529802,stable
+63.02.A,0030,0010,EU 1b. Public sector entities,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529753,dp3529753,stable
+63.02.A,0040,0010,EU 1c. Categorised as Multilateral Development Banks in SA,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529720,dp3529720,stable
+63.02.A,0050,0010,EU 1d. Categorised as International organisations in SA,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529721,dp3529721,stable
+63.02.A,0060,0010,2. Institutions,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529722,dp3529722,stable
+63.02.A,0070,0010,3. Equity,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529576,dp3529576,stable
+63.02.A,0090,0010,5. Corporates,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529723,dp3529723,stable
+63.02.A,0100,0010,5.1. Of which: F-IRB is applied,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529778,dp3529778,stable
+63.02.A,0110,0010,5.2. Of which: A-IRB is applied,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529639,dp3529639,stable
+63.02.A,0120,0010,EU 5a. Of which: Corporates - General,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529727,dp3529727,stable
+63.02.A,0130,0010,EU 5b. Of which: Corporates - Specialised lending,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529574,dp3529574,stable
+63.02.A,0140,0010,EU 5c. Of which: Corporates - Purchased receivables,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529726,dp3529726,stable
+63.02.A,0150,0010,6. Retail,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529820,dp3529820,stable
+63.02.A,0160,0010,6.1. Of which: Retail - Qualifying revolving,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529805,dp3529805,stable
+63.02.A,0170,0010,EU 6.1a. Of which: Retail - Purchased receivables,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529548,dp3529548,stable
+63.02.A,0180,0010,EU 6.1b. Of which: Retail - Other,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529730,dp3529730,stable
+63.02.A,0190,0010,6.2. Of which: Retail - Secured by residential real estate,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529550,dp3529550,stable
+63.02.A,0210,0010,EU 7a. Of which: Retail - Categorised as secured by mortgages on immovable properties and ADC exposures in SA,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529573,dp3529573,stable
+63.02.A,0220,0010,EU 7b. Collective investment undertakings CIU,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529577,dp3529577,stable
+63.02.A,0230,0010,EU 7c. Categorised as exposures in default in SA,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529725,dp3529725,stable
+63.02.A,0240,0010,EU 7d. Categorised as subordinated debt exposures in SA,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529575,dp3529575,stable
+63.02.A,0250,0010,EU 7e. Categorised as covered bonds in SA,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529724,dp3529724,stable
+63.02.A,0260,0010,EU 7f. Categorised as claims on institutions and corporates with a short-term credit assessment in SA,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529578,dp3529578,stable
+63.02.A,0270,0010,8. Others,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529719,dp3529719,stable
+63.02.A,0280,0010,9. Total,a. RWEAs for modelled approaches that institutions have supervisory approval to use,dp3529572,dp3529572,stable
+63.02.B,0010,0030,1. Central governments and central banks,c. Total actual RWEAs,dp3529782,dp3529782,stable
+63.02.B,0020,0030,EU 1a. Regional governments or local authorities,c. Total actual RWEAs,dp3529783,dp3529783,stable
+63.02.B,0030,0030,EU 1b. Public sector entities,c. Total actual RWEAs,dp3529644,dp3529644,stable
+63.02.B,0040,0030,EU 1c. Categorised as Multilateral Development Banks in SA,c. Total actual RWEAs,dp3529539,dp3529539,stable
+63.02.B,0050,0030,EU 1d. Categorised as International organisations in SA,c. Total actual RWEAs,dp3529653,dp3529653,stable
+63.02.B,0060,0030,2. Institutions,c. Total actual RWEAs,dp3529540,dp3529540,stable
+63.02.B,0070,0030,3. Equity,c. Total actual RWEAs,dp3529625,dp3529625,stable
+63.02.B,0090,0030,5. Corporates,c. Total actual RWEAs,dp3529652,dp3529652,stable
+63.02.B,0100,0030,5.1. Of which: F-IRB is applied,c. Total actual RWEAs,dp3529778,dp3529778,stable
+63.02.B,0110,0030,5.2. Of which: A-IRB is applied,c. Total actual RWEAs,dp3529639,dp3529639,stable
+63.02.B,0120,0030,EU 5a. Of which: Corporates - General,c. Total actual RWEAs,dp3529649,dp3529649,stable
+63.02.B,0130,0030,EU 5b. Of which: Corporates - Specialised lending,c. Total actual RWEAs,dp3529650,dp3529650,stable
+63.02.B,0140,0030,EU 5c. Of which: Corporates - Purchased receivables,c. Total actual RWEAs,dp3529786,dp3529786,stable
+63.02.B,0150,0030,6. Retail,c. Total actual RWEAs,dp3529654,dp3529654,stable
+63.02.B,0160,0030,6.1. Of which: Retail - Qualifying revolving,c. Total actual RWEAs,dp3529784,dp3529784,stable
+63.02.B,0170,0030,EU 6.1a. Of which: Retail - Purchased receivables,c. Total actual RWEAs,dp3529645,dp3529645,stable
+63.02.B,0180,0030,EU 6.1b. Of which: Retail - Other,c. Total actual RWEAs,dp3529785,dp3529785,stable
+63.02.B,0190,0030,6.2. Of which: Retail - Secured by residential real estate,c. Total actual RWEAs,dp3529646,dp3529646,stable
+63.02.B,0210,0030,EU 7a. Of which: Retail - Categorised as secured by mortgages on immovable properties and ADC exposures in SA,c. Total actual RWEAs,dp3529648,dp3529648,stable
+63.02.B,0220,0030,EU 7b. Collective investment undertakings CIU,c. Total actual RWEAs,dp3529651,dp3529651,stable
+63.02.B,0230,0030,EU 7c. Categorised as exposures in default in SA,c. Total actual RWEAs,dp3529624,dp3529624,stable
+63.02.B,0240,0030,EU 7d. Categorised as subordinated debt exposures in SA,c. Total actual RWEAs,dp3529787,dp3529787,stable
+63.02.B,0250,0030,EU 7e. Categorised as covered bonds in SA,c. Total actual RWEAs,dp3529542,dp3529542,stable
+63.02.B,0260,0030,EU 7f. Categorised as claims on institutions and corporates with a short-term credit assessment in SA,c. Total actual RWEAs,dp3529541,dp3529541,stable
+63.02.B,0270,0030,8. Others,c. Total actual RWEAs,dp3529538,dp3529538,stable
+63.02.B,0280,0030,9. Total,c. Total actual RWEAs,dp3529771,dp3529771,stable
+63.02.C,0010,0020,1. Central governments and central banks,b. RWEAs for column a if re-computed using the standardised approach,dp3530807,dp3530807,stable
+63.02.C,0010,0040,1. Central governments and central banks,d. RWEAs calculated using full standardised approach,dp3530797,dp3530797,stable
+63.02.C,0010,0050,1. Central governments and central banks,EU d. RWEAs that is the base of the output floor,dp3530811,dp3530811,stable
+63.02.C,0020,0020,EU 1a. Regional governments or local authorities,b. RWEAs for column a if re-computed using the standardised approach,dp3530801,dp3530801,stable
+63.02.C,0020,0040,EU 1a. Regional governments or local authorities,d. RWEAs calculated using full standardised approach,dp3530802,dp3530802,stable
+63.02.C,0020,0050,EU 1a. Regional governments or local authorities,EU d. RWEAs that is the base of the output floor,dp3530812,dp3530812,stable
+63.02.C,0030,0020,EU 1b. Public sector entities,b. RWEAs for column a if re-computed using the standardised approach,dp3530798,dp3530798,stable
+63.02.C,0030,0040,EU 1b. Public sector entities,d. RWEAs calculated using full standardised approach,dp3530800,dp3530800,stable
+63.02.C,0030,0050,EU 1b. Public sector entities,EU d. RWEAs that is the base of the output floor,dp3530799,dp3530799,stable
+63.02.C,0040,0020,EU 1c. Categorised as Multilateral Development Banks in SA,b. RWEAs for column a if re-computed using the standardised approach,dp3530842,dp3530842,stable
+63.02.C,0040,0040,EU 1c. Categorised as Multilateral Development Banks in SA,d. RWEAs calculated using full standardised approach,dp3530822,dp3530822,stable
+63.02.C,0040,0050,EU 1c. Categorised as Multilateral Development Banks in SA,EU d. RWEAs that is the base of the output floor,dp3530780,dp3530780,stable
+63.02.C,0050,0020,EU 1d. Categorised as International organisations in SA,b. RWEAs for column a if re-computed using the standardised approach,dp3530843,dp3530843,stable
+63.02.C,0050,0040,EU 1d. Categorised as International organisations in SA,d. RWEAs calculated using full standardised approach,dp3530789,dp3530789,stable
+63.02.C,0050,0050,EU 1d. Categorised as International organisations in SA,EU d. RWEAs that is the base of the output floor,dp3530831,dp3530831,stable
+63.02.C,0060,0020,2. Institutions,b. RWEAs for column a if re-computed using the standardised approach,dp3530773,dp3530773,stable
+63.02.C,0060,0040,2. Institutions,d. RWEAs calculated using full standardised approach,dp3530788,dp3530788,stable
+63.02.C,0060,0050,2. Institutions,EU d. RWEAs that is the base of the output floor,dp3530832,dp3530832,stable
+63.02.C,0070,0020,3. Equity,b. RWEAs for column a if re-computed using the standardised approach,dp3530770,dp3530770,stable
+63.02.C,0070,0040,3. Equity,d. RWEAs calculated using full standardised approach,dp3530828,dp3530828,stable
+63.02.C,0070,0050,3. Equity,EU d. RWEAs that is the base of the output floor,dp3530836,dp3530836,stable
+63.02.C,0090,0020,5. Corporates,b. RWEAs for column a if re-computed using the standardised approach,dp3530844,dp3530844,stable
+63.02.C,0090,0040,5. Corporates,d. RWEAs calculated using full standardised approach,dp3530824,dp3530824,stable
+63.02.C,0090,0050,5. Corporates,EU d. RWEAs that is the base of the output floor,dp3530834,dp3530834,stable
+63.02.C,0100,0020,5.1. Of which: F-IRB is applied,b. RWEAs for column a if re-computed using the standardised approach,dp3530818,dp3530818,stable
+63.02.C,0100,0040,5.1. Of which: F-IRB is applied,d. RWEAs calculated using full standardised approach,dp3530786,dp3530786,stable
+63.02.C,0100,0050,5.1. Of which: F-IRB is applied,EU d. RWEAs that is the base of the output floor,dp3530777,dp3530777,stable
+63.02.C,0110,0020,5.2. Of which: A-IRB is applied,b. RWEAs for column a if re-computed using the standardised approach,dp3530769,dp3530769,stable
+63.02.C,0110,0040,5.2. Of which: A-IRB is applied,d. RWEAs calculated using full standardised approach,dp3530787,dp3530787,stable
+63.02.C,0110,0050,5.2. Of which: A-IRB is applied,EU d. RWEAs that is the base of the output floor,dp3530837,dp3530837,stable
+63.02.C,0120,0020,EU 5a. Of which: Corporates - General,b. RWEAs for column a if re-computed using the standardised approach,dp3530766,dp3530766,stable
+63.02.C,0120,0040,EU 5a. Of which: Corporates - General,d. RWEAs calculated using full standardised approach,dp3530784,dp3530784,stable
+63.02.C,0120,0050,EU 5a. Of which: Corporates - General,EU d. RWEAs that is the base of the output floor,dp3530840,dp3530840,stable
+63.02.C,0130,0020,EU 5b. Of which: Corporates - Specialised lending,b. RWEAs for column a if re-computed using the standardised approach,dp3530768,dp3530768,stable
+63.02.C,0130,0040,EU 5b. Of which: Corporates - Specialised lending,d. RWEAs calculated using full standardised approach,dp3530830,dp3530830,stable
+63.02.C,0130,0050,EU 5b. Of which: Corporates - Specialised lending,EU d. RWEAs that is the base of the output floor,dp3530838,dp3530838,stable
+63.02.C,0140,0020,EU 5c. Of which: Corporates - Purchased receivables,b. RWEAs for column a if re-computed using the standardised approach,dp3530767,dp3530767,stable
+63.02.C,0140,0040,EU 5c. Of which: Corporates - Purchased receivables,d. RWEAs calculated using full standardised approach,dp3530785,dp3530785,stable
+63.02.C,0140,0050,EU 5c. Of which: Corporates - Purchased receivables,EU d. RWEAs that is the base of the output floor,dp3530839,dp3530839,stable
+63.02.C,0150,0020,6. Retail,b. RWEAs for column a if re-computed using the standardised approach,dp3530775,dp3530775,stable
+63.02.C,0150,0040,6. Retail,d. RWEAs calculated using full standardised approach,dp3530791,dp3530791,stable
+63.02.C,0150,0050,6. Retail,EU d. RWEAs that is the base of the output floor,dp3530782,dp3530782,stable
+63.02.C,0160,0020,6.1. Of which: Retail - Qualifying revolving,b. RWEAs for column a if re-computed using the standardised approach,dp3530813,dp3530813,stable
+63.02.C,0160,0040,6.1. Of which: Retail - Qualifying revolving,d. RWEAs calculated using full standardised approach,dp3530805,dp3530805,stable
+63.02.C,0160,0050,6.1. Of which: Retail - Qualifying revolving,EU d. RWEAs that is the base of the output floor,dp3530804,dp3530804,stable
+63.02.C,0170,0020,EU 6.1a. Of which: Retail - Purchased receivables,b. RWEAs for column a if re-computed using the standardised approach,dp3530806,dp3530806,stable
+63.02.C,0170,0040,EU 6.1a. Of which: Retail - Purchased receivables,d. RWEAs calculated using full standardised approach,dp3530814,dp3530814,stable
+63.02.C,0170,0050,EU 6.1a. Of which: Retail - Purchased receivables,EU d. RWEAs that is the base of the output floor,dp3530759,dp3530759,stable
+63.02.C,0180,0020,EU 6.1b. Of which: Retail - Other,b. RWEAs for column a if re-computed using the standardised approach,dp3530815,dp3530815,stable
+63.02.C,0180,0040,EU 6.1b. Of which: Retail - Other,d. RWEAs calculated using full standardised approach,dp3530764,dp3530764,stable
+63.02.C,0180,0050,EU 6.1b. Of which: Retail - Other,EU d. RWEAs that is the base of the output floor,dp3530763,dp3530763,stable
+63.02.C,0190,0020,6.2. Of which: Retail - Secured by residential real estate,b. RWEAs for column a if re-computed using the standardised approach,dp3530760,dp3530760,stable
+63.02.C,0190,0040,6.2. Of which: Retail - Secured by residential real estate,d. RWEAs calculated using full standardised approach,dp3530762,dp3530762,stable
+63.02.C,0190,0050,6.2. Of which: Retail - Secured by residential real estate,EU d. RWEAs that is the base of the output floor,dp3530761,dp3530761,stable
+63.02.C,0210,0020,EU 7a. Of which: Retail - Categorised as secured by mortgages on immovable properties and ADC exposures in SA,b. RWEAs for column a if re-computed using the standardised approach,dp3530816,dp3530816,stable
+63.02.C,0210,0040,EU 7a. Of which: Retail - Categorised as secured by mortgages on immovable properties and ADC exposures in SA,d. RWEAs calculated using full standardised approach,dp3530783,dp3530783,stable
+63.02.C,0210,0050,EU 7a. Of which: Retail - Categorised as secured by mortgages on immovable properties and ADC exposures in SA,EU d. RWEAs that is the base of the output floor,dp3530841,dp3530841,stable
+63.02.C,0220,0020,EU 7b. Collective investment undertakings CIU,b. RWEAs for column a if re-computed using the standardised approach,dp3530771,dp3530771,stable
+63.02.C,0220,0040,EU 7b. Collective investment undertakings CIU,d. RWEAs calculated using full standardised approach,dp3530825,dp3530825,stable
+63.02.C,0220,0050,EU 7b. Collective investment undertakings CIU,EU d. RWEAs that is the base of the output floor,dp3530835,dp3530835,stable
+63.02.C,0230,0020,EU 7c. Categorised as exposures in default in SA,b. RWEAs for column a if re-computed using the standardised approach,dp3530819,dp3530819,stable
+63.02.C,0230,0040,EU 7c. Categorised as exposures in default in SA,d. RWEAs calculated using full standardised approach,dp3530827,dp3530827,stable
+63.02.C,0230,0050,EU 7c. Categorised as exposures in default in SA,EU d. RWEAs that is the base of the output floor,dp3530778,dp3530778,stable
+63.02.C,0240,0020,EU 7d. Categorised as subordinated debt exposures in SA,b. RWEAs for column a if re-computed using the standardised approach,dp3530817,dp3530817,stable
+63.02.C,0240,0040,EU 7d. Categorised as subordinated debt exposures in SA,d. RWEAs calculated using full standardised approach,dp3530829,dp3530829,stable
+63.02.C,0240,0050,EU 7d. Categorised as subordinated debt exposures in SA,EU d. RWEAs that is the base of the output floor,dp3530776,dp3530776,stable
+63.02.C,0250,0020,EU 7e. Categorised as covered bonds in SA,b. RWEAs for column a if re-computed using the standardised approach,dp3530820,dp3530820,stable
+63.02.C,0250,0040,EU 7e. Categorised as covered bonds in SA,d. RWEAs calculated using full standardised approach,dp3530826,dp3530826,stable
+63.02.C,0250,0050,EU 7e. Categorised as covered bonds in SA,EU d. RWEAs that is the base of the output floor,dp3530779,dp3530779,stable
+63.02.C,0260,0020,EU 7f. Categorised as claims on institutions and corporates with a short-term credit assessment in SA,b. RWEAs for column a if re-computed using the standardised approach,dp3530772,dp3530772,stable
+63.02.C,0260,0040,EU 7f. Categorised as claims on institutions and corporates with a short-term credit assessment in SA,d. RWEAs calculated using full standardised approach,dp3530823,dp3530823,stable
+63.02.C,0260,0050,EU 7f. Categorised as claims on institutions and corporates with a short-term credit assessment in SA,EU d. RWEAs that is the base of the output floor,dp3530833,dp3530833,stable
+63.02.C,0270,0020,8. Others,b. RWEAs for column a if re-computed using the standardised approach,dp3530774,dp3530774,stable
+63.02.C,0270,0040,8. Others,d. RWEAs calculated using full standardised approach,dp3530790,dp3530790,stable
+63.02.C,0270,0050,8. Others,EU d. RWEAs that is the base of the output floor,dp3530781,dp3530781,stable
+63.02.C,0280,0020,9. Total,b. RWEAs for column a if re-computed using the standardised approach,dp3530810,dp3530810,stable
+63.02.C,0280,0040,9. Total,d. RWEAs calculated using full standardised approach,dp3530793,dp3530793,stable
+63.02.C,0280,0050,9. Total,EU d. RWEAs that is the base of the output floor,dp3530794,dp3530794,stable
+70.00,0010,0010,1. Total assets as per published financial statements,a. Applicable amount,dp32355,dp32355,stable
+70.00,0020,0010,2. Adjustment for entities which are consolidated for accounting purposes but are outside the scope of prudential consolidation,a. Applicable amount,dp3529845,dp3529845,stable
+70.00,0030,0010,3. (Adjustment for securitised exposures that meet the operational requirements for the recognition of risk transference),a. Applicable amount,dp454677,dp454677,stable
+70.00,0080,0010,8. Adjustment for derivative financial instruments,a. Applicable amount,dp3529868,dp3529868,stable
+70.00,0090,0010,9. Adjustment for securities financing transactions (SFTs),a. Applicable amount,dp3529866,dp3529866,stable
+70.00,0100,0010,10. Adjustment for off-balance sheet items (ie conversion to credit equivalent amounts of off-balance sheet exposures),a. Applicable amount,dp3529865,dp3529865,stable
+70.00,0110,0010,11. (Adjustment for prudent valuation adjustments and specific and general provisions which have reduced Tier 1 capital),a. Applicable amount,dp3529839,dp3529839,stable
+70.00,0140,0010,12. Other adjustments,a. Applicable amount,dp3529846,dp3529846,stable
+70.00,0150,0010,13. Total exposure measure,a. Applicable amount,dp3527653,dp3527653,stable
+71.00,0010,0010,"1. On-balance sheet items (excluding derivatives, SFTs, but including collateral)",a. T,dp3531003,dp3531003,stable
+71.00,0010,0020,"1. On-balance sheet items (excluding derivatives, SFTs, but including collateral)",b. T-1,dp3531004,dp3531004,stable
+71.00,0030,0010,3. (Deductions of receivables assets for cash variation margin provided in derivatives transactions),a. T,dp132925,dp132925,stable
+71.00,0030,0020,3. (Deductions of receivables assets for cash variation margin provided in derivatives transactions),b. T-1,dp3526450,dp3526450,stable
+71.00,0060,0010,6. (Asset amounts deducted in determining Tier 1 capital),a. T,dp3529877,dp3529877,stable
+71.00,0060,0020,6. (Asset amounts deducted in determining Tier 1 capital),b. T-1,dp3529878,dp3529878,stable
+71.00,0070,0010,7. Total on-balance sheet exposures (excluding derivatives and SFTs),a. T,dp3527642,dp3527642,stable
+71.00,0070,0020,7. Total on-balance sheet exposures (excluding derivatives and SFTs),b. T-1,dp3528329,dp3528329,stable
+71.00,0080,0010,8. Replacement cost associated with SA-CCR derivatives transactions (ie net of eligible cash variation margin),a. T,dp3529450,dp3529450,stable
+71.00,0080,0020,8. Replacement cost associated with SA-CCR derivatives transactions (ie net of eligible cash variation margin),b. T-1,dp3529451,dp3529451,stable
+71.00,0100,0010,9. Add-on amounts for potential future exposure associated with SA-CCR derivatives transactions,a. T,dp3526551,dp3526551,stable
+71.00,0100,0020,9. Add-on amounts for potential future exposure associated with SA-CCR derivatives transactions,b. T-1,dp3526552,dp3526552,stable
+71.00,0180,0010,13. Total derivatives exposures,a. T,dp3527641,dp3527641,stable
+71.00,0180,0020,13. Total derivatives exposures,b. T-1,dp3528328,dp3528328,stable
+71.00,0190,0010,"14. Gross SFT assets (with no recognition of netting), after adjustment for sales accounting transactions",a. T,dp454820,dp454820,stable
+71.00,0190,0020,"14. Gross SFT assets (with no recognition of netting), after adjustment for sales accounting transactions",b. T-1,dp3525534,dp5486059,rebound
+71.00,0200,0010,15. (Netted amounts of cash payables and cash receivables of gross SFT assets),a. T,dp3525569,dp3525569,stable
+71.00,0200,0020,15. (Netted amounts of cash payables and cash receivables of gross SFT assets),b. T-1,dp3525587,dp3525587,stable
+71.00,0210,0010,16. Counterparty credit risk exposure for SFT assets,a. T,dp3526554,dp132921,rebound
+71.00,0210,0020,16. Counterparty credit risk exposure for SFT assets,b. T-1,dp3526553,dp5487207,rebound
+71.00,0250,0010,18. Total securities financing transaction exposures,a. T,dp3527652,dp3527652,stable
+71.00,0250,0020,18. Total securities financing transaction exposures,b. T-1,dp3527917,dp3527917,stable
+71.00,0260,0010,19. Off-balance sheet exposures at gross notional amount,a. T,dp37598,dp37598,stable
+71.00,0260,0020,19. Off-balance sheet exposures at gross notional amount,b. T-1,dp3528964,dp3528964,stable
+71.00,0270,0010,20. (Adjustments for conversion to credit equivalent amounts),a. T,dp3529843,dp3529843,stable
+71.00,0270,0020,20. (Adjustments for conversion to credit equivalent amounts),b. T-1,dp3529835,dp3529835,stable
+71.00,0290,0010,22. Off-balance sheet exposures,a. T,dp3528966,dp3528966,stable
+71.00,0290,0020,22. Off-balance sheet exposures,b. T-1,dp3528971,dp3528971,stable
+71.00,0350,0010,EU-22f. (Excluded guaranteed parts of exposures arising from export credits),a. T,dp454675,dp454675,stable
+71.00,0350,0020,EU-22f. (Excluded guaranteed parts of exposures arising from export credits),b. T-1,dp3529875,dp3529875,stable
+71.00,0420,0010,EU-22m. (Total exempted exposures),a. T,dp3529864,dp3529864,stable
+71.00,0420,0020,EU-22m. (Total exempted exposures),b. T-1,dp3529857,dp3529857,stable
+71.00,0430,0010,23. Tier 1 capital,a. T,dp3529909,dp3529909,stable
+71.00,0430,0020,23. Tier 1 capital,b. T-1,dp3529882,dp3529882,stable
+71.00,0440,0010,24. Total exposure measure,a. T,dp3527653,dp3527653,stable
+71.00,0440,0020,24. Total exposure measure,b. T-1,dp3527643,dp3527643,stable
+71.00,0450,0010,25. Leverage ratio (%),a. T,dp3528951,dp3528951,stable
+71.00,0450,0020,25. Leverage ratio (%),b. T-1,dp3528948,dp3528948,stable
+71.00,0460,0010,EU-25. Leverage ratio (excluding the impact of the exemption of public sector investments and promotional loans) (%),a. T,dp3528943,dp3528943,stable
+71.00,0460,0020,EU-25. Leverage ratio (excluding the impact of the exemption of public sector investments and promotional loans) (%),b. T-1,dp3528942,dp3528942,stable
+71.00,0470,0010,25a. Leverage ratio (excluding the impact of any applicable temporary exemption of central bank reserves) (%),a. T,dp3528950,dp3528950,stable
+71.00,0470,0020,25a. Leverage ratio (excluding the impact of any applicable temporary exemption of central bank reserves) (%),b. T-1,dp3528949,dp3528949,stable
+71.00,0480,0010,26. Regulatory minimum leverage ratio requirement (%),a. T,dp457445,dp457445,stable
+71.00,0480,0020,26. Regulatory minimum leverage ratio requirement (%),b. T-1,dp3529913,dp3529913,stable
+71.00,0520,0010,EU-27a. Overall leverage ratio requirement (%),a. T,dp3528944,dp3528944,stable
+71.00,0520,0020,EU-27a. Overall leverage ratio requirement (%),b. T-1,dp3528941,dp3528941,stable
+71.00,0530,0010,EU-27b. Choice on transitional arrangements for the definition of the capital measure,a. T,dp3526446,dp3526446,stable
+71.00,0530,0020,EU-27b. Choice on transitional arrangements for the definition of the capital measure,b. T-1,dp3526447,dp3526447,stable
+71.00,0540,0010,"28. Mean of daily values of gross SFT assets, after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivable",a. T,dp3528327,dp3528327,stable
+71.00,0540,0020,"28. Mean of daily values of gross SFT assets, after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivable",b. T-1,dp3528378,dp3528378,stable
+71.00,0550,0010,"29. Quarter-end value of gross SFT assets, after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivables",a. T,dp3525641,dp3525641,stable
+71.00,0550,0020,"29. Quarter-end value of gross SFT assets, after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivables",b. T-1,dp3525503,dp3525503,stable
+71.00,0560,0010,30. Total exposure measure (including the impact of any applicable temporary exemption of central bank reserves) incorporating mean values from row 28 of gross SFT assets (after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivables),a. T,dp3527918,dp3527918,stable
+71.00,0560,0020,30. Total exposure measure (including the impact of any applicable temporary exemption of central bank reserves) incorporating mean values from row 28 of gross SFT assets (after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivables),b. T-1,dp3527851,dp3527851,stable
+71.00,0570,0010,30a. Total exposure measure (excluding the impact of any applicable temporary exemption of central bank reserves) incorporating mean values from row 28 of gross SFT assets (after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivables),a. T,dp3528326,dp3528326,stable
+71.00,0570,0020,30a. Total exposure measure (excluding the impact of any applicable temporary exemption of central bank reserves) incorporating mean values from row 28 of gross SFT assets (after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivables),b. T-1,dp3528377,dp3528377,stable
+71.00,0580,0010,31. Leverage ratio (including the impact of any applicable temporary exemption of central bank reserves) incorporating mean values from row 28 of gross SFT assets (after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivables),a. T,dp3528947,dp3528947,stable
+71.00,0580,0020,31. Leverage ratio (including the impact of any applicable temporary exemption of central bank reserves) incorporating mean values from row 28 of gross SFT assets (after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivables),b. T-1,dp3528945,dp3528945,stable
+71.00,0590,0010,31a. Leverage ratio (excluding the impact of any applicable temporary exemption of central bank reserves) incorporating mean values from row 28 of gross SFT assets (after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivables),a. T,dp3528940,dp3528940,stable
+71.00,0590,0020,31a. Leverage ratio (excluding the impact of any applicable temporary exemption of central bank reserves) incorporating mean values from row 28 of gross SFT assets (after adjustment for sale accounting transactions and netted of amounts of associated cash payables and cash receivables),b. T-1,dp3528946,dp3528946,stable
+72.00,0010,0010,"EU-1. Total on-balance sheet exposures (excluding derivatives, SFTs, and exempted exposures), of which:",a. CRR leverage ratio exposures,dp3527859,dp3527859,stable
+72.00,0020,0010,EU-2. Trading book exposures,a. CRR leverage ratio exposures,dp38876,dp38876,stable
+72.00,0030,0010,"EU-3. Banking book exposures, of which:",a. CRR leverage ratio exposures,dp3527875,dp3527875,stable
+72.00,0040,0010,EU-4. Covered bonds,a. CRR leverage ratio exposures,dp3527854,dp3527854,stable
+72.00,0050,0010,EU-5. Exposures treated as sovereigns,a. CRR leverage ratio exposures,dp3528376,dp3528376,stable
+72.00,0060,0010,"EU-6. Exposures to regional governments, MDB, international organisations and PSE, not treated as sovereigns",a. CRR leverage ratio exposures,dp3528375,dp3528375,stable
+72.00,0070,0010,EU-7. Institutions,a. CRR leverage ratio exposures,dp3527855,dp3527855,stable
+72.00,0080,0010,EU-8. Secured by mortgages of immovable properties,a. CRR leverage ratio exposures,dp3527856,dp3527856,stable
+72.00,0090,0010,EU-9. Retail exposures,a. CRR leverage ratio exposures,dp3527857,dp3527857,stable
+72.00,0100,0010,EU-10. Corporates,a. CRR leverage ratio exposures,dp3528374,dp3528374,stable
+72.00,0110,0010,EU-11. Exposures in default,a. CRR leverage ratio exposures,dp3527858,dp3527858,stable
+72.00,0120,0010,"EU-12. Other exposures (eg equity, securitisations, and other non-credit obligation assets)",a. CRR leverage ratio exposures,dp3528373,dp3528373,stable
+73.00.A,0010,0010,EU 1a. Quarter ending on DD Month YYY,a. T,dp3531098,dp3531098,stable
+73.00.A,0010,0020,EU 1a. Quarter ending on DD Month YYY,b. T-1,dp3525491,dp3525491,stable
+73.00.A,0010,0030,EU 1a. Quarter ending on DD Month YYY,c. T-2,dp3525496,dp3525496,stable
+73.00.A,0010,0040,EU 1a. Quarter ending on DD Month YYY,d. T-3,dp3525497,dp3525497,stable
+73.00.A,0010,0050,EU 1a. Quarter ending on DD Month YYY,e. T,dp3525495,dp3525495,stable
+73.00.A,0010,0060,EU 1a. Quarter ending on DD Month YYY,f. T-1,dp3525493,dp3525493,stable
+73.00.A,0010,0070,EU 1a. Quarter ending on DD Month YYY,g. T-2,dp3525492,dp3525492,stable
+73.00.A,0010,0080,EU 1a. Quarter ending on DD Month YYY,h. T-3,dp3525494,dp3525494,stable
+73.00.A,0020,0010,EU 1b. Number of data points used in the calculation of averages,a. T,dp3530904,dp3530904,stable
+73.00.A,0020,0020,EU 1b. Number of data points used in the calculation of averages,b. T-1,dp3530910,dp3530910,stable
+73.00.A,0020,0030,EU 1b. Number of data points used in the calculation of averages,c. T-2,dp3530911,dp3530911,stable
+73.00.A,0020,0040,EU 1b. Number of data points used in the calculation of averages,d. T-3,dp3530905,dp3530905,stable
+73.00.A,0020,0050,EU 1b. Number of data points used in the calculation of averages,e. T,dp3530908,dp3530908,stable
+73.00.A,0020,0060,EU 1b. Number of data points used in the calculation of averages,f. T-1,dp3530906,dp3530906,stable
+73.00.A,0020,0070,EU 1b. Number of data points used in the calculation of averages,g. T-2,dp3530909,dp3530909,stable
+73.00.A,0020,0080,EU 1b. Number of data points used in the calculation of averages,h. T-3,dp3530907,dp3530907,stable
+73.00.B,0030,0050,1. Total high-quality liquid assets HQLA,e. T,dp3525718,dp3525718,stable
+73.00.B,0030,0060,1. Total high-quality liquid assets HQLA,f. T-1,dp3525720,dp3525720,stable
+73.00.B,0030,0070,1. Total high-quality liquid assets HQLA,g. T-2,dp3525719,dp3525719,stable
+73.00.B,0030,0080,1. Total high-quality liquid assets HQLA,h. T-3,dp3525707,dp3525707,stable
+73.00.C,0040,0010,"2. Retail deposits and deposits from small business customers, of which:",a. T,dp3525706,dp3525706,stable
+73.00.C,0040,0020,"2. Retail deposits and deposits from small business customers, of which:",b. T-1,dp3525703,dp3525703,stable
+73.00.C,0040,0030,"2. Retail deposits and deposits from small business customers, of which:",c. T-2,dp3525704,dp3525704,stable
+73.00.C,0040,0040,"2. Retail deposits and deposits from small business customers, of which:",d. T-3,dp3525705,dp3525705,stable
+73.00.C,0040,0050,"2. Retail deposits and deposits from small business customers, of which:",e. T,dp3525270,dp3525270,stable
+73.00.C,0040,0060,"2. Retail deposits and deposits from small business customers, of which:",f. T-1,dp3525267,dp3525267,stable
+73.00.C,0040,0070,"2. Retail deposits and deposits from small business customers, of which:",g. T-2,dp3525268,dp3525268,stable
+73.00.C,0040,0080,"2. Retail deposits and deposits from small business customers, of which:",h. T-3,dp3525269,dp3525269,stable
+73.00.C,0050,0010,3. Stable deposits,a. T,dp3525698,dp3525698,stable
+73.00.C,0050,0020,3. Stable deposits,b. T-1,dp3525731,dp3525731,stable
+73.00.C,0050,0030,3. Stable deposits,c. T-2,dp3525730,dp3525730,stable
+73.00.C,0050,0040,3. Stable deposits,d. T-3,dp3525729,dp3525729,stable
+73.00.C,0050,0050,3. Stable deposits,e. T,dp3525260,dp3525260,stable
+73.00.C,0050,0060,3. Stable deposits,f. T-1,dp3525259,dp3525259,stable
+73.00.C,0050,0070,3. Stable deposits,g. T-2,dp3525321,dp3525321,stable
+73.00.C,0050,0080,3. Stable deposits,h. T-3,dp3525322,dp3525322,stable
+73.00.C,0060,0010,4. Less stable deposits,a. T,dp3525726,dp3525726,stable
+73.00.C,0060,0020,4. Less stable deposits,b. T-1,dp3525699,dp3525699,stable
+73.00.C,0060,0030,4. Less stable deposits,c. T-2,dp3525728,dp3525728,stable
+73.00.C,0060,0040,4. Less stable deposits,d. T-3,dp3525727,dp3525727,stable
+73.00.C,0060,0050,4. Less stable deposits,e. T,dp3525263,dp3525263,stable
+73.00.C,0060,0060,4. Less stable deposits,f. T-1,dp3525323,dp3525323,stable
+73.00.C,0060,0070,4. Less stable deposits,g. T-2,dp3525261,dp3525261,stable
+73.00.C,0060,0080,4. Less stable deposits,h. T-3,dp3525262,dp3525262,stable
+73.00.C,0070,0010,5. Unsecured wholesale funding,a. T,dp3525747,dp3525747,stable
+73.00.C,0070,0020,5. Unsecured wholesale funding,b. T-1,dp3525743,dp3525743,stable
+73.00.C,0070,0030,5. Unsecured wholesale funding,c. T-2,dp3525745,dp3525745,stable
+73.00.C,0070,0040,5. Unsecured wholesale funding,d. T-3,dp3525746,dp3525746,stable
+73.00.C,0070,0050,5. Unsecured wholesale funding,e. T,dp3525274,dp3525274,stable
+73.00.C,0070,0060,5. Unsecured wholesale funding,f. T-1,dp3525271,dp3525271,stable
+73.00.C,0070,0070,5. Unsecured wholesale funding,g. T-2,dp3525272,dp3525272,stable
+73.00.C,0070,0080,5. Unsecured wholesale funding,h. T-3,dp3525273,dp3525273,stable
+73.00.C,0080,0010,6. Operational deposits all counterparties and deposits in networks of cooperative banks,a. T,dp3525723,dp3525723,stable
+73.00.C,0080,0020,6. Operational deposits all counterparties and deposits in networks of cooperative banks,b. T-1,dp3525725,dp3525725,stable
+73.00.C,0080,0030,6. Operational deposits all counterparties and deposits in networks of cooperative banks,c. T-2,dp3525724,dp3525724,stable
+73.00.C,0080,0040,6. Operational deposits all counterparties and deposits in networks of cooperative banks,d. T-3,dp3525700,dp3525700,stable
+73.00.C,0080,0050,6. Operational deposits all counterparties and deposits in networks of cooperative banks,e. T,dp3525265,dp3525265,stable
+73.00.C,0080,0060,6. Operational deposits all counterparties and deposits in networks of cooperative banks,f. T-1,dp3525264,dp3525264,stable
+73.00.C,0080,0070,6. Operational deposits all counterparties and deposits in networks of cooperative banks,g. T-2,dp3525324,dp3525324,stable
+73.00.C,0080,0080,6. Operational deposits all counterparties and deposits in networks of cooperative banks,h. T-3,dp3525325,dp3525325,stable
+73.00.C,0090,0010,7. Non-operational deposits all counterparties,a. T,dp3525702,dp3525702,stable
+73.00.C,0090,0020,7. Non-operational deposits all counterparties,b. T-1,dp3525701,dp3525701,stable
+73.00.C,0090,0030,7. Non-operational deposits all counterparties,c. T-2,dp3525722,dp3525722,stable
+73.00.C,0090,0040,7. Non-operational deposits all counterparties,d. T-3,dp3525721,dp3525721,stable
+73.00.C,0090,0050,7. Non-operational deposits all counterparties,e. T,dp3525295,dp3525295,stable
+73.00.C,0090,0060,7. Non-operational deposits all counterparties,f. T-1,dp3525297,dp3525297,stable
+73.00.C,0090,0070,7. Non-operational deposits all counterparties,g. T-2,dp3525266,dp3525266,stable
+73.00.C,0090,0080,7. Non-operational deposits all counterparties,h. T-3,dp3525296,dp3525296,stable
+73.00.C,0100,0010,8. Unsecured debt,a. T,dp3525750,dp3525750,stable
+73.00.C,0100,0020,8. Unsecured debt,b. T-1,dp3525742,dp3525742,stable
+73.00.C,0100,0030,8. Unsecured debt,c. T-2,dp3525748,dp3525748,stable
+73.00.C,0100,0040,8. Unsecured debt,d. T-3,dp3525749,dp3525749,stable
+73.00.C,0100,0050,8. Unsecured debt,e. T,dp3525281,dp3525281,stable
+73.00.C,0100,0060,8. Unsecured debt,f. T-1,dp3525278,dp3525278,stable
+73.00.C,0100,0070,8. Unsecured debt,g. T-2,dp3525279,dp3525279,stable
+73.00.C,0100,0080,8. Unsecured debt,h. T-3,dp3525280,dp3525280,stable
+73.00.C,0110,0050,9. Secured wholesale funding,e. T,dp3525277,dp3525277,stable
+73.00.C,0110,0060,9. Secured wholesale funding,f. T-1,dp3525275,dp3525275,stable
+73.00.C,0110,0070,9. Secured wholesale funding,g. T-2,dp3525298,dp3525298,stable
+73.00.C,0110,0080,9. Secured wholesale funding,h. T-3,dp3525276,dp3525276,stable
+73.00.C,0120,0010,10. Additional requirements,a. T,dp3525717,dp3525717,stable
+73.00.C,0120,0020,10. Additional requirements,b. T-1,dp3525733,dp3525733,stable
+73.00.C,0120,0030,10. Additional requirements,c. T-2,dp3525732,dp3525732,stable
+73.00.C,0120,0040,10. Additional requirements,d. T-3,dp3525716,dp3525716,stable
+73.00.C,0120,0050,10. Additional requirements,e. T,dp3525315,dp3525315,stable
+73.00.C,0120,0060,10. Additional requirements,f. T-1,dp3525313,dp3525313,stable
+73.00.C,0120,0070,10. Additional requirements,g. T-2,dp3525314,dp3525314,stable
+73.00.C,0120,0080,10. Additional requirements,h. T-3,dp3525255,dp3525255,stable
+73.00.C,0130,0010,11. Outflows related to derivative exposures and other collateral requirements,a. T,dp3525753,dp3525753,stable
+73.00.C,0130,0020,11. Outflows related to derivative exposures and other collateral requirements,b. T-1,dp3525740,dp3525740,stable
+73.00.C,0130,0030,11. Outflows related to derivative exposures and other collateral requirements,c. T-2,dp3525738,dp3525738,stable
+73.00.C,0130,0040,11. Outflows related to derivative exposures and other collateral requirements,d. T-3,dp3525751,dp3525751,stable
+73.00.C,0130,0050,11. Outflows related to derivative exposures and other collateral requirements,e. T,dp3525249,dp3525249,stable
+73.00.C,0130,0060,11. Outflows related to derivative exposures and other collateral requirements,f. T-1,dp3525282,dp3525282,stable
+73.00.C,0130,0070,11. Outflows related to derivative exposures and other collateral requirements,g. T-2,dp3525246,dp3525246,stable
+73.00.C,0130,0080,11. Outflows related to derivative exposures and other collateral requirements,h. T-3,dp3525301,dp3525301,stable
+73.00.C,0140,0010,12. Outflows related to loss of funding on debt products,a. T,dp3525752,dp3525752,stable
+73.00.C,0140,0020,12. Outflows related to loss of funding on debt products,b. T-1,dp3525741,dp3525741,stable
+73.00.C,0140,0030,12. Outflows related to loss of funding on debt products,c. T-2,dp3525739,dp3525739,stable
+73.00.C,0140,0040,12. Outflows related to loss of funding on debt products,d. T-3,dp3525737,dp3525737,stable
+73.00.C,0140,0050,12. Outflows related to loss of funding on debt products,e. T,dp3525248,dp3525248,stable
+73.00.C,0140,0060,12. Outflows related to loss of funding on debt products,f. T-1,dp3525299,dp3525299,stable
+73.00.C,0140,0070,12. Outflows related to loss of funding on debt products,g. T-2,dp3525300,dp3525300,stable
+73.00.C,0140,0080,12. Outflows related to loss of funding on debt products,h. T-3,dp3525247,dp3525247,stable
+73.00.C,0150,0010,13. Credit and liquidity facilities,a. T,dp3525710,dp3525710,stable
+73.00.C,0150,0020,13. Credit and liquidity facilities,b. T-1,dp3525744,dp3525744,stable
+73.00.C,0150,0030,13. Credit and liquidity facilities,c. T-2,dp3525708,dp3525708,stable
+73.00.C,0150,0040,13. Credit and liquidity facilities,d. T-3,dp3525709,dp3525709,stable
+73.00.C,0150,0050,13. Credit and liquidity facilities,e. T,dp3525306,dp3525306,stable
+73.00.C,0150,0060,13. Credit and liquidity facilities,f. T-1,dp3525303,dp3525303,stable
+73.00.C,0150,0070,13. Credit and liquidity facilities,g. T-2,dp3525304,dp3525304,stable
+73.00.C,0150,0080,13. Credit and liquidity facilities,h. T-3,dp3525305,dp3525305,stable
+73.00.C,0160,0010,14. Other contractual funding obligations,a. T,dp3525713,dp3525713,stable
+73.00.C,0160,0020,14. Other contractual funding obligations,b. T-1,dp3525711,dp3525711,stable
+73.00.C,0160,0030,14. Other contractual funding obligations,c. T-2,dp3525712,dp3525712,stable
+73.00.C,0160,0040,14. Other contractual funding obligations,d. T-3,dp3525736,dp3525736,stable
+73.00.C,0160,0050,14. Other contractual funding obligations,e. T,dp3525309,dp3525309,stable
+73.00.C,0160,0060,14. Other contractual funding obligations,f. T-1,dp3525307,dp3525307,stable
+73.00.C,0160,0070,14. Other contractual funding obligations,g. T-2,dp3525253,dp3525253,stable
+73.00.C,0160,0080,14. Other contractual funding obligations,h. T-3,dp3525308,dp3525308,stable
+73.00.C,0170,0010,15. Other contingent funding obligations,a. T,dp3525734,dp3525734,stable
+73.00.C,0170,0020,15. Other contingent funding obligations,b. T-1,dp3525735,dp3525735,stable
+73.00.C,0170,0030,15. Other contingent funding obligations,c. T-2,dp3525714,dp3525714,stable
+73.00.C,0170,0040,15. Other contingent funding obligations,d. T-3,dp3525715,dp3525715,stable
+73.00.C,0170,0050,15. Other contingent funding obligations,e. T,dp3525312,dp3525312,stable
+73.00.C,0170,0060,15. Other contingent funding obligations,f. T-1,dp3525310,dp3525310,stable
+73.00.C,0170,0070,15. Other contingent funding obligations,g. T-2,dp3525254,dp3525254,stable
+73.00.C,0170,0080,15. Other contingent funding obligations,h. T-3,dp3525311,dp3525311,stable
+73.00.C,0180,0050,16. TOTAL CASH OUTFLOWS,e. T,dp3525230,dp3525230,stable
+73.00.C,0180,0060,16. TOTAL CASH OUTFLOWS,f. T-1,dp3525237,dp3525237,stable
+73.00.C,0180,0070,16. TOTAL CASH OUTFLOWS,g. T-2,dp3525235,dp3525235,stable
+73.00.C,0180,0080,16. TOTAL CASH OUTFLOWS,h. T-3,dp3525283,dp3525283,stable
+73.00.D,0190,0010,17. Secured lending e.g. reverse repos,a. T,dp3525345,dp3525345,stable
+73.00.D,0190,0020,17. Secured lending e.g. reverse repos,b. T-1,dp3525332,dp3525332,stable
+73.00.D,0190,0030,17. Secured lending e.g. reverse repos,c. T-2,dp3525330,dp3525330,stable
+73.00.D,0190,0040,17. Secured lending e.g. reverse repos,d. T-3,dp3525328,dp3525328,stable
+73.00.D,0190,0050,17. Secured lending e.g. reverse repos,e. T,dp3525232,dp3525232,stable
+73.00.D,0190,0060,17. Secured lending e.g. reverse repos,f. T-1,dp3525286,dp3525286,stable
+73.00.D,0190,0070,17. Secured lending e.g. reverse repos,g. T-2,dp3525236,dp3525236,stable
+73.00.D,0190,0080,17. Secured lending e.g. reverse repos,h. T-3,dp3525234,dp3525234,stable
+73.00.D,0200,0010,18. Inflows from fully performing exposures,a. T,dp3525340,dp3525340,stable
+73.00.D,0200,0020,18. Inflows from fully performing exposures,b. T-1,dp3525343,dp3525343,stable
+73.00.D,0200,0030,18. Inflows from fully performing exposures,c. T-2,dp3525342,dp3525342,stable
+73.00.D,0200,0040,18. Inflows from fully performing exposures,d. T-3,dp3525341,dp3525341,stable
+73.00.D,0200,0050,18. Inflows from fully performing exposures,e. T,dp3525292,dp3525292,stable
+73.00.D,0200,0060,18. Inflows from fully performing exposures,f. T-1,dp3525294,dp3525294,stable
+73.00.D,0200,0070,18. Inflows from fully performing exposures,g. T-2,dp3525245,dp3525245,stable
+73.00.D,0200,0080,18. Inflows from fully performing exposures,h. T-3,dp3525293,dp3525293,stable
+73.00.D,0210,0010,19. Other cash inflows,a. T,dp3525351,dp3525351,stable
+73.00.D,0210,0020,19. Other cash inflows,b. T-1,dp3525353,dp3525353,stable
+73.00.D,0210,0030,19. Other cash inflows,c. T-2,dp3525352,dp3525352,stable
+73.00.D,0210,0040,19. Other cash inflows,d. T-3,dp3525344,dp3525344,stable
+73.00.D,0210,0050,19. Other cash inflows,e. T,dp3525302,dp3525302,stable
+73.00.D,0210,0060,19. Other cash inflows,f. T-1,dp3525250,dp3525250,stable
+73.00.D,0210,0070,19. Other cash inflows,g. T-2,dp3525251,dp3525251,stable
+73.00.D,0210,0080,19. Other cash inflows,h. T-3,dp3525252,dp3525252,stable
+73.00.D,0220,0050,EU-19a. Difference between total weighted inflows and total weighted outflows arising from transactions in third countries where there are transfer restrictions or which are denominated in non-convertible currencies,e. T,dp3525258,dp3525258,stable
+73.00.D,0220,0060,EU-19a. Difference between total weighted inflows and total weighted outflows arising from transactions in third countries where there are transfer restrictions or which are denominated in non-convertible currencies,f. T-1,dp3525256,dp3525256,stable
+73.00.D,0220,0070,EU-19a. Difference between total weighted inflows and total weighted outflows arising from transactions in third countries where there are transfer restrictions or which are denominated in non-convertible currencies,g. T-2,dp3525257,dp3525257,stable
+73.00.D,0220,0080,EU-19a. Difference between total weighted inflows and total weighted outflows arising from transactions in third countries where there are transfer restrictions or which are denominated in non-convertible currencies,h. T-3,dp3525316,dp3525316,stable
+73.00.D,0230,0050,EU-19b. Excess inflows from a related specialised credit institution,e. T,dp3525320,dp3525320,stable
+73.00.D,0230,0060,EU-19b. Excess inflows from a related specialised credit institution,f. T-1,dp3525317,dp3525317,stable
+73.00.D,0230,0070,EU-19b. Excess inflows from a related specialised credit institution,g. T-2,dp3525318,dp3525318,stable
+73.00.D,0230,0080,EU-19b. Excess inflows from a related specialised credit institution,h. T-3,dp3525319,dp3525319,stable
+73.00.D,0240,0010,20. TOTAL CASH INFLOWS,a. T,dp3525326,dp3525326,stable
+73.00.D,0240,0020,20. TOTAL CASH INFLOWS,b. T-1,dp3525331,dp3525331,stable
+73.00.D,0240,0030,20. TOTAL CASH INFLOWS,c. T-2,dp3525329,dp3525329,stable
+73.00.D,0240,0040,20. TOTAL CASH INFLOWS,d. T-3,dp3525327,dp3525327,stable
+73.00.D,0240,0050,20. TOTAL CASH INFLOWS,e. T,dp3525231,dp3525231,stable
+73.00.D,0240,0060,20. TOTAL CASH INFLOWS,f. T-1,dp3525285,dp3525285,stable
+73.00.D,0240,0070,20. TOTAL CASH INFLOWS,g. T-2,dp3525284,dp3525284,stable
+73.00.D,0240,0080,20. TOTAL CASH INFLOWS,h. T-3,dp3525233,dp3525233,stable
+73.00.D,0250,0010,EU-20a. Fully exempt inflows,a. T,dp3525349,dp3525349,stable
+73.00.D,0250,0020,EU-20a. Fully exempt inflows,b. T-1,dp3525339,dp3525339,stable
+73.00.D,0250,0030,EU-20a. Fully exempt inflows,c. T-2,dp3525338,dp3525338,stable
+73.00.D,0250,0040,EU-20a. Fully exempt inflows,d. T-3,dp3525350,dp3525350,stable
+73.00.D,0250,0050,EU-20a. Fully exempt inflows,e. T,dp3525242,dp3525242,stable
+73.00.D,0250,0060,EU-20a. Fully exempt inflows,f. T-1,dp3525291,dp3525291,stable
+73.00.D,0250,0070,EU-20a. Fully exempt inflows,g. T-2,dp3525244,dp3525244,stable
+73.00.D,0250,0080,EU-20a. Fully exempt inflows,h. T-3,dp3525243,dp3525243,stable
+73.00.D,0260,0010,EU-20b. Inflows subject to 90% cap,a. T,dp3525333,dp3525333,stable
+73.00.D,0260,0020,EU-20b. Inflows subject to 90% cap,b. T-1,dp3525335,dp3525335,stable
+73.00.D,0260,0030,EU-20b. Inflows subject to 90% cap,c. T-2,dp3525346,dp3525346,stable
+73.00.D,0260,0040,EU-20b. Inflows subject to 90% cap,d. T-3,dp3525334,dp3525334,stable
+73.00.D,0260,0050,EU-20b. Inflows subject to 90% cap,e. T,dp3525287,dp3525287,stable
+73.00.D,0260,0060,EU-20b. Inflows subject to 90% cap,f. T-1,dp3525288,dp3525288,stable
+73.00.D,0260,0070,EU-20b. Inflows subject to 90% cap,g. T-2,dp3525239,dp3525239,stable
+73.00.D,0260,0080,EU-20b. Inflows subject to 90% cap,h. T-3,dp3525238,dp3525238,stable
+73.00.D,0270,0010,EU-20c. Inflows subject to 75% cap,a. T,dp3525336,dp3525336,stable
+73.00.D,0270,0020,EU-20c. Inflows subject to 75% cap,b. T-1,dp3525337,dp3525337,stable
+73.00.D,0270,0030,EU-20c. Inflows subject to 75% cap,c. T-2,dp3525348,dp3525348,stable
+73.00.D,0270,0040,EU-20c. Inflows subject to 75% cap,d. T-3,dp3525347,dp3525347,stable
+73.00.D,0270,0050,EU-20c. Inflows subject to 75% cap,e. T,dp3525289,dp3525289,stable
+73.00.D,0270,0060,EU-20c. Inflows subject to 75% cap,f. T-1,dp3525241,dp3525241,stable
+73.00.D,0270,0070,EU-20c. Inflows subject to 75% cap,g. T-2,dp3525290,dp3525290,stable
+73.00.D,0270,0080,EU-20c. Inflows subject to 75% cap,h. T-3,dp3525240,dp3525240,stable
+73.00.E,0280,0050,21. LIQUIDITY BUFFER,a. T,dp134663,dp134663,stable
+73.00.E,0280,0060,21. LIQUIDITY BUFFER,b. T-1,dp3525678,dp3525678,stable
+73.00.E,0280,0070,21. LIQUIDITY BUFFER,c. T-2,dp3525679,dp3525679,stable
+73.00.E,0280,0080,21. LIQUIDITY BUFFER,d. T-3,dp3525677,dp3525677,stable
+73.00.E,0290,0050,22. TOTAL NET CASH OUTFLOWS,a. T,dp134665,dp134665,stable
+73.00.E,0290,0060,22. TOTAL NET CASH OUTFLOWS,b. T-1,dp475219,dp475219,stable
+73.00.E,0290,0070,22. TOTAL NET CASH OUTFLOWS,c. T-2,dp475220,dp475220,stable
+73.00.E,0290,0080,22. TOTAL NET CASH OUTFLOWS,d. T-3,dp475221,dp475221,stable
+73.00.E,0300,0050,23. LIQUIDITY COVERAGE RATIO,a. T,dp143076,dp143076,stable
+73.00.E,0300,0060,23. LIQUIDITY COVERAGE RATIO,b. T-1,dp475490,dp475490,stable
+73.00.E,0300,0070,23. LIQUIDITY COVERAGE RATIO,c. T-2,dp475491,dp475491,stable
+73.00.E,0300,0080,23. LIQUIDITY COVERAGE RATIO,d. T-3,dp475492,dp475492,stable
+90.01,0010,0010,1. Own funds and eligible liabilities,a. T,dp459177,dp459177,stable
+90.01,0010,0020,1. Own funds and eligible liabilities,b. T,dp459222,dp459222,stable
+90.01,0010,0030,1. Own funds and eligible liabilities,c. T-1,dp3525673,dp3525673,stable
+90.01,0010,0040,1. Own funds and eligible liabilities,d. T-2,dp3525672,dp3525672,stable
+90.01,0010,0050,1. Own funds and eligible liabilities,e. T-3,dp3525687,dp3525687,stable
+90.01,0010,0060,1. Own funds and eligible liabilities,f. T-4,dp3525671,dp3525671,stable
+90.01,0020,0010,EU-1a. Of which own funds and subordinated liabilities,a. T,dp459168,dp459168,stable
+90.01,0030,0010,2. Total risk exposure amount of the resolution group TREA,a. T,dp459178,dp459178,stable
+90.01,0030,0020,2. Total risk exposure amount of the resolution group TREA,b. T,dp459223,dp459223,stable
+90.01,0030,0030,2. Total risk exposure amount of the resolution group TREA,c. T-1,dp3529512,dp3529512,stable
+90.01,0030,0040,2. Total risk exposure amount of the resolution group TREA,d. T-2,dp3529511,dp3529511,stable
+90.01,0030,0050,2. Total risk exposure amount of the resolution group TREA,e. T-3,dp3529596,dp3529596,stable
+90.01,0030,0060,2. Total risk exposure amount of the resolution group TREA,f. T-4,dp3529597,dp3529597,stable
+90.01,0040,0010,3. Own funds and eligible liabilities as a percentage of the TREA,a. T,dp459183,dp459183,stable
+90.01,0040,0020,3. Own funds and eligible liabilities as a percentage of the TREA,b. T,dp459228,dp459228,stable
+90.01,0040,0030,3. Own funds and eligible liabilities as a percentage of the TREA,c. T-1,dp3530310,dp3530310,stable
+90.01,0040,0040,3. Own funds and eligible liabilities as a percentage of the TREA,d. T-2,dp3530312,dp3530312,stable
+90.01,0040,0050,3. Own funds and eligible liabilities as a percentage of the TREA,e. T-3,dp3530311,dp3530311,stable
+90.01,0040,0060,3. Own funds and eligible liabilities as a percentage of the TREA,f. T-4,dp3530313,dp3530313,stable
+90.01,0050,0010,EU-3a. Of which own funds and subordinated liabilities,a. T,dp459185,dp459185,stable
+90.01,0060,0010,4. Total exposure measure TEM of the resolution group,a. T,dp459156,dp459156,stable
+90.01,0060,0020,4. Total exposure measure TEM of the resolution group,b. T,dp459198,dp459198,stable
+90.01,0060,0030,4. Total exposure measure TEM of the resolution group,c. T-1,dp3525686,dp3525686,stable
+90.01,0060,0040,4. Total exposure measure TEM of the resolution group,d. T-2,dp3525685,dp3525685,stable
+90.01,0060,0050,4. Total exposure measure TEM of the resolution group,e. T-3,dp3525684,dp3525684,stable
+90.01,0060,0060,4. Total exposure measure TEM of the resolution group,f. T-4,dp3525683,dp3525683,stable
+90.01,0070,0010,5. Own funds and eligible liabilities as percentage of the TEM,a. T,dp459182,dp459182,stable
+90.01,0070,0020,5. Own funds and eligible liabilities as percentage of the TEM,b. T,dp459227,dp459227,stable
+90.01,0070,0030,5. Own funds and eligible liabilities as percentage of the TEM,c. T-1,dp3530306,dp3530306,stable
+90.01,0070,0040,5. Own funds and eligible liabilities as percentage of the TEM,d. T-2,dp3530307,dp3530307,stable
+90.01,0070,0050,5. Own funds and eligible liabilities as percentage of the TEM,e. T-3,dp3530308,dp3530308,stable
+90.01,0070,0060,5. Own funds and eligible liabilities as percentage of the TEM,f. T-4,dp3530309,dp3530309,stable
+90.01,0080,0010,EU-5a. Of which own funds or subordinated liabilities,a. T,dp459184,dp459184,stable
+90.01,0090,0030,6a. Does the subordination exemption in Article 72b 4 of Regulation EU No 575/2013 apply? 5% exemption,c. T-1,dp3526405,dp3526405,stable
+90.01,0090,0040,6a. Does the subordination exemption in Article 72b 4 of Regulation EU No 575/2013 apply? 5% exemption,d. T-2,dp3526406,dp3526406,stable
+90.01,0090,0050,6a. Does the subordination exemption in Article 72b 4 of Regulation EU No 575/2013 apply? 5% exemption,e. T-3,dp3526407,dp3526407,stable
+90.01,0090,0060,6a. Does the subordination exemption in Article 72b 4 of Regulation EU No 575/2013 apply? 5% exemption,f. T-4,dp3526408,dp3526408,stable
+90.01,0100,0020,6b. Aggregate amount of permitted non-subordinated eligible liabilities instruments if the subordination discretion in accordance with Article 72b 3 of Regulation EU No 575/2013 is applied max 3.5% exemption,b. T,dp459153,dp459153,stable
+90.01,0100,0030,6b. Aggregate amount of permitted non-subordinated eligible liabilities instruments if the subordination discretion in accordance with Article 72b 3 of Regulation EU No 575/2013 is applied max 3.5% exemption,c. T-1,dp3525676,dp3525676,stable
+90.01,0100,0040,6b. Aggregate amount of permitted non-subordinated eligible liabilities instruments if the subordination discretion in accordance with Article 72b 3 of Regulation EU No 575/2013 is applied max 3.5% exemption,d. T-2,dp3525675,dp3525675,stable
+90.01,0100,0050,6b. Aggregate amount of permitted non-subordinated eligible liabilities instruments if the subordination discretion in accordance with Article 72b 3 of Regulation EU No 575/2013 is applied max 3.5% exemption,e. T-3,dp3525680,dp3525680,stable
+90.01,0100,0060,6b. Aggregate amount of permitted non-subordinated eligible liabilities instruments if the subordination discretion in accordance with Article 72b 3 of Regulation EU No 575/2013 is applied max 3.5% exemption,f. T-4,dp3525674,dp3525674,stable
+90.01,0110,0020,"6c. If a capped subordination exemption applies in accordance with Article 72b 3 of Regulation EU No 575/2013, the amount of funding issued that ranks pari passu with excluded liabilities and that is recognised under row 1, divided by funding issued that ranks pari passu with excluded liabilities and that would be recognised under row 1 if no cap was applied %",b. T,dp459154,dp459154,stable
+90.01,0110,0030,"6c. If a capped subordination exemption applies in accordance with Article 72b 3 of Regulation EU No 575/2013, the amount of funding issued that ranks pari passu with excluded liabilities and that is recognised under row 1, divided by funding issued that ranks pari passu with excluded liabilities and that would be recognised under row 1 if no cap was applied %",c. T-1,dp3530237,dp3530237,stable
+90.01,0110,0040,"6c. If a capped subordination exemption applies in accordance with Article 72b 3 of Regulation EU No 575/2013, the amount of funding issued that ranks pari passu with excluded liabilities and that is recognised under row 1, divided by funding issued that ranks pari passu with excluded liabilities and that would be recognised under row 1 if no cap was applied %",d. T-2,dp3530236,dp3530236,stable
+90.01,0110,0050,"6c. If a capped subordination exemption applies in accordance with Article 72b 3 of Regulation EU No 575/2013, the amount of funding issued that ranks pari passu with excluded liabilities and that is recognised under row 1, divided by funding issued that ranks pari passu with excluded liabilities and that would be recognised under row 1 if no cap was applied %",e. T-3,dp3530234,dp3530234,stable
+90.01,0110,0060,"6c. If a capped subordination exemption applies in accordance with Article 72b 3 of Regulation EU No 575/2013, the amount of funding issued that ranks pari passu with excluded liabilities and that is recognised under row 1, divided by funding issued that ranks pari passu with excluded liabilities and that would be recognised under row 1 if no cap was applied %",f. T-4,dp3530235,dp3530235,stable
+90.01,0120,0010,EU-7. MREL expressed as a percentage of the TREA,a. T,dp3530355,dp3530355,stable
+90.01,0130,0010,EU-8. Of which to be met with own funds or subordinated liabilities,a. T,dp3530354,dp3530354,stable
+90.01,0140,0010,EU-9. MREL expressed as a percentage of the TEM,a. T,dp3530358,dp3530358,stable
+90.01,0150,0010,EU-10. Of which to be met with own funds or subordinated liabilities,a. T,dp3530356,dp3530356,stable
+93.00,0010,0030,EU-1. Is the entity subject to a non-EU G-SII requirement for own funds and eligible liabilities? Y/N,c. Qualitative information,dp3530350,dp3530350,stable
+93.00,0020,0030,"EU-2. If EU-1 is answered by 'Yes', is the requirement applicable on a consolidated or individual basis? C/I",c. Qualitative information,dp3530902,dp3530902,stable
+93.00,0030,0030,EU-2a. Is the entity subject to an internal MREL? Y/N,c. Qualitative information,dp3530351,dp3530351,stable
+93.00,0040,0030,"EU-2b. If EU-2a is answered by 'Yes', is the requirement applicable on a consolidated or individual basis? C/I",c. Qualitative information,dp3530903,dp3530903,stable
+93.00,0050,0010,EU-3. Common Equity Tier 1 capital CET1,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp459289,dp459289,stable
+93.00,0050,0020,EU-3. Common Equity Tier 1 capital CET1,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp459319,dp459319,stable
+93.00,0070,0010,EU-5. Eligible Tier 2 capital,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp459292,dp459292,stable
+93.00,0070,0020,EU-5. Eligible Tier 2 capital,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp459322,dp459322,stable
+93.00,0080,0010,EU-6. Eligible own funds,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp459291,dp459291,stable
+93.00,0080,0020,EU-6. Eligible own funds,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp459321,dp459321,stable
+93.00,0090,0010,EU-7. Eligible liabilities,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp3530342,dp3530342,stable
+93.00,0090,0020,EU-7. Eligible liabilities,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp3530341,dp3530341,stable
+93.00,0120,0010,EU-9b. Own funds and eligible liabilities items after adjustments,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp459287,dp459287,stable
+93.00,0120,0020,EU-9b. Own funds and eligible liabilities items after adjustments,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp459318,dp459318,stable
+93.00,0130,0010,EU-10. Total risk exposure amount TREA,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp459296,dp459296,stable
+93.00,0130,0020,EU-10. Total risk exposure amount TREA,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp459326,dp459326,stable
+93.00,0140,0010,EU-11. Total exposure measure TEM,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp459285,dp459285,stable
+93.00,0140,0020,EU-11. Total exposure measure TEM,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp459317,dp459317,stable
+93.00,0150,0010,EU-12. Own funds and eligible liabilities as a percentage of the TREA,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp459301,dp459301,stable
+93.00,0150,0020,EU-12. Own funds and eligible liabilities as a percentage of the TREA,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp459329,dp459329,stable
+93.00,0170,0010,EU-14. Own funds and eligible liabilities as a percentage of the TEM,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp459300,dp459300,stable
+93.00,0170,0020,EU-14. Own funds and eligible liabilities as a percentage of the TEM,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp459328,dp459328,stable
+93.00,0190,0010,EU-16. CET1 as a percentage of the TREA available after meeting the entity’s requirements,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp459297,dp459297,stable
+93.00,0190,0020,EU-16. CET1 as a percentage of the TREA available after meeting the entity’s requirements,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp459327,dp459327,stable
+93.00,0200,0020,EU-17. Institution-specific combined buffer requirement,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp459331,dp459331,stable
+93.00,0210,0010,EU-18. Requirement expressed as a percentage of the TREA,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp3530352,dp3530352,stable
+93.00,0210,0020,EU-18. Requirement expressed as a percentage of the TREA,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp3530357,dp3530357,stable
+93.00,0230,0010,EU-20. Requirement expressed as percentage of the TEM,a. Minimum requirement for own funds and eligible liabilities internal MREL,dp3530957,dp3530957,stable
+93.00,0230,0020,EU-20. Requirement expressed as percentage of the TEM,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp3530958,dp3530958,stable
+93.00,0250,0020,EU-22. Total amount of excluded liabilities referred to in Article 72a 2 of Regulation EU No 575/2013,b. Non-EU G-SII requirement for own funds and eligible liabilities internal TLAC,dp3529094,dp3529094,stable
