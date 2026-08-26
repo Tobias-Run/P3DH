@@ -50,3 +50,7 @@ processed/long/
 # regenerable via build_zweig_a_shards.py + publish_data_branch.sh. Kept out of
 # main so the shard tree never bloats main's history.
 processed/zweig_a/data/
+
+# Placement-Guard: Report wird bei jedem Lauf neu erzeugt (die Baseline dagegen
+# ist der committete Vertrag und gehört ins Repo).
+interim/placement_report.csv

@@ -102,8 +102,20 @@ jobs:
             exit 1
           fi
 
+      # Guards the other silent failure: cell_row/cell_col entstehen erst durch
+      # einen dp-Lookup gegen dpm_codebook.csv. Kennt das Codebook einen dp nicht,
+      # bleiben die Koordinaten leer und der Fakt wird in den Shards weggefiltert —
+      # ohne Fehler. Der Guard bricht ab, sobald dieser Verlust wächst.
+      - name: Placement guard
+        run: python scripts/check_fact_placement.py
+
       - name: Build Zweig B (parquet)
         run: python scripts/build_zweig_b.py
+
+      # Die Brücke wird aus dem frischen Parquet abgeleitet; ohne diesen Schritt
+      # veraltet codebook/framework_bridge.csv still, sobald neue 4.2-Wellen kommen.
+      - name: Rebuild framework bridge
+        run: python scripts/build_framework_bridge.py
 
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
@@ -116,15 +128,14 @@ jobs:
       # Only the manifests live on main; everything else is derived and belongs
       # on the data branch.
       - name: Commit refreshed manifests
-        if: inputs.harvest
         run: |
           git config user.name  "P3DH pipeline bot"
           git config user.email "noreply@anthropic.com"
-          git add interim/edap_recon/*.csv
+          git add interim/edap_recon/*.csv codebook/framework_bridge.csv
           if git diff --cached --quiet; then
-            echo "Manifeste unverändert"
+            echo "Manifeste und Brücke unverändert"
           else
-            git commit -m "Katalog aktualisiert (automatischer Harvest)"
+            git commit -m "Katalog/Framework-Brücke aktualisiert (Pipeline)"
             git push
           fi
 

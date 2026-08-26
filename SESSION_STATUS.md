@@ -12,7 +12,7 @@
 | 2 — Parsing & DPM-Join | ✅ | `long_form_raw.csv` **209.231 Records / 218 Reports** (Multi-Modul); 9146/9146 Datapoints aufgelöst, gelabeltes `dpm_codebook.csv` (+ `data_type` aus DPM); Template-Titel via EBA-Layout |
 | 2.5 — Refinement | ✅ | offene Achse als `open_axis_dims` erfasst (Re-Parse über alle Reports durch) |
 | 3 — Multi-Modul | ✅ | CODIS + ESGDIS/FINDIS/GSIIDIS/IRRBBDIS/MRELTLACDIS (KM2)/REMDIS geparst; nur `*DISDOCS` (PDF) ausgenommen |
-| 3b — RF 4.1↔4.2-Mapping | 🟡 | **Zell-Brücke steht** (`codebook/framework_bridge.csv`, beobachtungsbasiert): 916 Zellen stabil, **19 auf neue dp-Codes umgebunden** (KM1-Leverage-Puffer!, OV1-AIM, CVA, LR2). Details `docs/phase3_framework_bridge.md`. Wächst mit jeder 4.2-Welle (Re-Run); Konsumenten-Integration (Viewer-Zeitreihe/Zweig B) offen |
+| 3b — RF 4.1↔4.2-Mapping | 🟡 | **Zell-Brücke steht** (`codebook/framework_bridge.csv`, beobachtungsbasiert): 916 Zellen stabil, **19 auf neue dp-Codes umgebunden** (KM1-Leverage-Puffer!, OV1-AIM, CVA, LR2). Details `docs/phase3_framework_bridge.md`. Wächst mit jeder 4.2-Welle (Re-Run); Konsumenten-Integration geprüft: **nicht nötig** — Zweig A/B joinen bereits zell-basiert. Stattdessen Placement-Guard gegen stillen Fact-Verlust (`check_fact_placement.py`) |
 | 4A — Zweig A | ✅ | **JSON-Viewer = Standard** (`viewer_json.html`): **Slim-`index.json`** (nur Report-Meta, ~0,01 MB gzip) + `codebook.json` vorab; **`benchmark.json`** (KM1/OV1-Head, ~0,14 MB) **lazy** für Benchmark/Zeitreihe; jeder Report lazy als `data/reports/<key>.json` (~3 KB). Featuregleich (typisierte Skalen, EUR, Filter, Benchmark-Profile, Zeitreihen, Vergleich, Dark, Deep-Links). **Voll-Load-tauglich**: Index-Projektion ~0,2 MB gzip @ 4.278 Reports; Shards inkrementell geschrieben. **CSV-Viewer** (`viewer.html`) = Legacy; Gabelseite `index.html` |
 | 4B — Zweig B | ✅ | `build_zweig_b.py` → `processed/long/p3dh_long.parquet` (self-contained, DuckDB; +`fact_value_raw`/`fx_rate`), Beispiele in `docs/zweig_b_queries.md`. **Speist auch Zweig A**: `build_zweig_a_shards.py` leitet die JSON-Shards allein aus dem Parquet ab → eine Transformationsstelle, kein Drift (Werte byte-identisch verifiziert) |
 | 4 — Explorationen | 🟡 geplant | Analyse-Ideen datengeerdet → `docs/phase4_analysis_ideas.md` |
@@ -57,7 +57,10 @@ xbrl_csv_parser.py            -> processed/long_form_raw.csv    (Fakten)
                               -> processed/filing_indicators.csv (Coverage-Matrix, „Fehlt ≠ Null")
 build_entity_meta.py          -> processed/entity_meta.csv      (Name/Land/Größe/G-SII aus EDAP)
 fetch_fx_rates.py             -> processed/fx_rates.csv          (EZB-Referenzkurse)
+check_fact_placement.py       -> interim/placement_report.csv    (GUARD: stiller Fact-Verlust,
+                                 Baseline interim/placement_baseline.json, Exit 1 bei Verschlechterung)
 build_zweig_b.py              -> processed/long/p3dh_long.parquet (EINE gejointe Wahrheit, DuckDB)
+build_framework_bridge.py     -> codebook/framework_bridge.csv   (RF 4.1<->4.2 Zell-Brücke)
 build_zweig_a_shards.py       -> processed/zweig_a/data/index.json + codebook.json + reports/<key>.json
                                  (JSON-Shards, allein aus dem Parquet abgeleitet)
 publish_data_branch.sh        -> data-Branch: Shards + state/ (long_form.gz, coverage.gz, parquet)
@@ -173,7 +176,37 @@ fragilste Teil der Kette; ohne ihn verarbeitet der Cron nur das committete Manif
 `raw/` (253 MB, 2.073 ZIPs) bleibt lokal: EDAP-Links sterben (17 belegt), der Actions-Cache
 taugt nicht als Archiv. Für echte Auslagerung wäre Object Storage (R2/B2) nötig.
 
-## Session 2026-08-26 (remote) — Framework-Brücke + Idee-A-Herabstufung
+## Session 2026-08-26 (Teil 2) — Placement-Guard
+
+Konsumenten-Integration der Brücke geprüft — **und dabei die Prämisse widerlegt:**
+Zweig A nutzt `datapoint_code` kein einziges Mal (Shards + Viewer joinen über
+`(template_id, cell_row, cell_col)`), auch die Zweig-B-Beispiel-Queries sind
+zell-basiert. Die Zeitreihen laufen über den 4.1→4.2-Wechsel bereits sauber durch
+(an DekaBank / OV1 `60.00.A r0290 c0030` über 4 Stichtage verifiziert). Es gab
+also keinen kaputten Join zu reparieren.
+
+**Das echte Risiko sitzt eine Stufe früher** und war bis jetzt unsichtbar:
+`cell_row`/`cell_col` entstehen erst durch einen dp-Lookup gegen
+`dpm_codebook.csv`; unbekannter dp → keine Koordinate → der Fakt wird in den
+Shards (`WHERE cell_row <> ''`) stillschweigend weggefiltert.
+
+- **Neu `scripts/check_fact_placement.py`** — klassifiziert jeden Fakt in
+  `placed` / `open_axis` (erwartet, kein Alarm) / `unplaceable`, prüft unbekannte
+  dp-Codes und die rebound-Zellen der Brücke. Baseline-Logik wie das Sanity-Gate:
+  Abbruch nur bei **Verschlechterung** (`interim/placement_baseline.json`,
+  `--update-baseline` hebt bewusst an).
+- **Befund: 5.344 Fakten gehen heute schon still verloren** (636 dem Codebook
+  unbekannte dp-Codes), konzentriert auf ESG-Templates (`47.00.A` 4.700). Der
+  Guard macht es sichtbar, behebt es nicht → 🔴 Backlog-Eintrag (Codebook/ESG-
+  Taxonomie). Vor jeder ESG-Auswertung zu klären.
+- **Workflow:** `Placement guard` zwischen Sanity-Gate und Zweig B; `Rebuild
+  framework bridge` nach Zweig B (die Brücke stand bisher gar nicht im Workflow
+  und wäre still veraltet); Commit-Schritt nimmt die Brücke mit und hängt nicht
+  mehr am `harvest`-Schalter.
+- Tests 17 → **31**, alle grün; Regressions-Probe gegen echte Daten (injizierter
+  unbekannter dp) rötet den Guard wie erwartet.
+
+## Session 2026-08-26 (Teil 1) — Framework-Brücke + Idee-A-Herabstufung
 
 - **Phase 3b erste Ausbaustufe:** `scripts/build_framework_bridge.py` →
   `codebook/framework_bridge.csv` (937 Zellen in beiden RF-Versionen beobachtet:

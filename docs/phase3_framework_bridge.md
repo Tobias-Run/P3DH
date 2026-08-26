@@ -57,3 +57,63 @@ Leverage-Puffer-Zeitreihe beim Versionswechsel unbemerkt ab.
   Offenlegungsdaten kein Beleg für Taxonomie-Änderung (Frequenz/Anwendbarkeit).
 - Taxonomie-seitige Vervollständigung (DPM 4.1- gegen 4.2-Release diffen) wäre
   der nächste Ausbau — braucht die Access-DBs (laptop-lokal, gitignored).
+
+---
+
+## Guard: `scripts/check_fact_placement.py`
+
+Die Brücke hat bei der Konsumenten-Prüfung eine unerwartete Erkenntnis geliefert:
+**es gibt keinen kaputten dp-Join zu reparieren.** Zweig A verwendet
+`datapoint_code` kein einziges Mal (Shards und Viewer joinen über
+`(template_id, cell_row, cell_col)`), und auch alle Beispiel-Queries in
+`docs/zweig_b_queries.md` sind zell-basiert. Die Zeitreihen laufen über den
+Versionswechsel bereits sauber durch — verifiziert an DekaBank / OV1
+`60.00.A r0290 c0030` über alle vier Stichtage.
+
+**Das echte Risiko liegt eine Stufe früher.** `cell_row`/`cell_col` entstehen erst
+durch einen dp-Lookup im Parser (`xbrl_csv_parser.py`) gegen `dpm_codebook.csv`.
+Kennt das Codebook einen dp-Code nicht, bleiben die Koordinaten leer — und der Fakt
+wird in `build_zweig_a_shards.py` (`WHERE cell_row <> ''`) **stillschweigend
+weggefiltert**. Die Zahl der Reports stimmt weiterhin, nur die Fakten fehlen.
+
+### Was der Guard prüft
+
+Jeder Fakt fällt in genau eine Klasse:
+
+| Klasse | Bedeutung | Alarm? |
+|---|---|---|
+| `placed` | Koordinate vorhanden | nein |
+| `open_axis` | keine Koordinate, aber `open_axis_dims` gesetzt — offene Tabellen haben im DPM keine statische (row, col) | **nein**, erwartet |
+| `unplaceable` | weder Koordinate noch Dimension | **ja** — stiller Verlust |
+
+Dazu: dp-Codes, die `dpm_codebook.csv` nicht kennt, und `rebound`-Zellen der
+Brücke, deren dp-Code im Codebook fehlt (die verlören beim Versionswechsel ihre
+Koordinaten).
+
+### Ist-Stand (553 Reports)
+
+| Kategorie | fw 4.1 | fw 4.2 |
+|---|---|---|
+| platziert | 1.251.461 | 7.867 |
+| offene Achse (erwartet) | 281.184 | 0 |
+| **unplatzierbar** | **5.344** | **0** |
+
+636 dp-Codes sind dem Codebook unbekannt. Die Verluste konzentrieren sich auf
+ESG-Templates: `47.00.A` (4.700), `00.03` (197), `49.01` (154), `47.00.B` (136),
+`96.00.B` (127).
+
+### Baseline statt Nullforderung
+
+Diese 5.344 sind Realität — „muss null sein" wäre sofort rot und damit wertlos.
+Stattdessen dieselbe Philosophie wie das Sanity-Gate (bricht bei schrumpfendem
+Bestand ab): `interim/placement_baseline.json` hält den akzeptierten Ist-Stand,
+der Guard bricht ab (Exit 1), sobald es **schlechter** wird — mehr unplatzierbare
+Fakten, ein *neuer* unbekannter dp-Code, oder eine rebound-Zelle ohne Codebook-dp.
+
+```bash
+python3 scripts/check_fact_placement.py                    # prüfen (CI)
+python3 scripts/check_fact_placement.py --update-baseline  # Zuwachs bewusst akzeptieren
+```
+
+Im Workflow läuft er zwischen Sanity-Gate und Zweig-B-Build; der Brücken-Rebuild
+folgt direkt nach Zweig B, damit `framework_bridge.csv` nicht still veraltet.

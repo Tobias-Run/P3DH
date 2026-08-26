@@ -1,5 +1,35 @@
 # Backlog
 
+## 🔴 OFFEN: 5.344 Fakten gehen still verloren (unbekannte dp-Codes, v. a. ESG)
+
+Vom Placement-Guard (`scripts/check_fact_placement.py`) sichtbar gemacht — der
+Guard **verhindert nur die Verschlechterung, er behebt den Befund nicht.**
+
+`cell_row`/`cell_col` entstehen erst durch einen dp-Lookup im Parser gegen
+`codebook/dpm_codebook.csv`. **636 dp-Codes kennt das Codebook nicht**; die
+betroffenen Fakten haben weder Koordinate noch offene-Achsen-Dimension und werden
+in `build_zweig_a_shards.py` (`WHERE cell_row <> ''`) weggefiltert — ohne Fehler,
+ohne Warnung. Betroffen sind 5.344 Fakten, konzentriert auf ESG-Templates:
+
+| Template | verlorene Fakten |
+|---|---|
+| `47.00.A` | 4.700 |
+| `00.03` | 197 |
+| `49.01` | 154 |
+| `47.00.B` | 136 |
+| `96.00.B` | 127 |
+
+**Vermutete Ursache:** `build_codebook.py` zieht die Taxonomie aus der DPM-
+Access-DB; die ESG-Templates (Modul ESGDIS) sind dort offenbar nicht oder nur
+teilweise abgedeckt. Zu prüfen: fehlt eine Tabelle/ein Release in der 4.2-DB,
+oder braucht ESG einen eigenen Layout-/Taxonomie-Pfad?
+
+**Wirkung:** ESG-Auswertungen (Idee A/ESG-Benchmark-Profil, Roadmap-Punkt 1) stehen
+auf unvollständigen Daten. Vor jeder ESG-Analyse zu klären.
+
+Nach einem Codebook-Fix: `python3 scripts/check_fact_placement.py --update-baseline`
+(die Baseline sinkt dann — der Guard akzeptiert Verbesserungen ohnehin still).
+
 ## ✅ ERLEDIGT: Filing-Indicators immer `False` („Fehlt ≠ Null")
 
 Behoben (utf-8-sig + Key-Normalisierung auf Basis-ID ohne `K_`-Präfix). Der
