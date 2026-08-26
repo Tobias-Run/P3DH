@@ -237,25 +237,34 @@ Shards (`WHERE cell_row <> ''`) stillschweigend weggefiltert.
 - **Loop-Konzept** („loop engineering") besprochen, vorerst **geparkt**: passt später als
   Cron-Delta-Loop (Hub wächst bis Mitte 2026), aber erst wenn die Skalen-Pipeline (Zweig B) steht.
 
-## Offene Punkte / Backlog (siehe `BACKLOG.md`)
+## Offene Punkte → GitHub-Issues
 
-1. ✅ **Phase 2.5 geklärt:** Die ~16 % ohne Zellkoordinate sind **offene-Achsen-Templates**
-   (typisierte Dimensionsspalte `RIO`/`qADP`/`qABI`/`qEEA`), kein Join-Bug. Parser erfasst
-   die Dimension jetzt als `open_axis_dims`. **Folgeschritt:** `long_form_raw.csv` auf dem
-   Laptop über alle 16 Reports neu erzeugen; optional Phase 3: Dimensionswerte gegen
-   DPM-Open-Axis-Member auflösen.
-2. **Unit-Handling:** % -Zellen als Dezimal (0.47 = 47 %); Long-Form trägt keine Pro-Zelle-Einheit.
-3. **Delta-Pipeline:** Harvest schreibt Katalog komplett neu (kein Diff); Parser Full-Rerun
-   statt Append. Unkritisch bei ~20 Reports.
-4. **Erste Auswertung** auf der Coverage-Matrix (Transparenz-/Disclosure-Score je Institut,
-   Tier 1 aus `docs/phase4_analysis_ideas.md`) — netz-unabhängig machbar. ⚗️ Als **Experiment**
-   eingestuft (= Roadmap-Punkt 3, s. Session 2026-08-21), niedrige Prio.
-6. **Benchmark-Substanz vertiefen (Roadmap 1+2):** weitere Templates in den Benchmark ziehen
-   (NPL CR1/CQ3, ESG 41.00, Kreditrisiko) + Perzentil-/Quartil-Bänder. Höchster Mehrwert/Aufwand.
-5. **STRATEGISCHE ENTSCHEIDUNG (offen):** Voll-Load 4.278 Submissions ⇒ Millionen Long-Form-
-   Zeilen ⇒ **Zweig B (DuckDB/Parquet) wird Pflicht**, Browser-Viewer skaliert nicht (muss pro
-   Report lazy-laden). Alternative: erst repräsentative Stichprobe (z. B. 1 Stichtag × alle
-   Länder) als Skalentest. Download via `manifest_full.csv` → `download_raw_reports.py`.
+Seit 2026-08-26 werden offene Punkte als **Issues** geführt, nicht mehr als Liste hier:
+https://github.com/Tobias-Run/P3DH/issues — `BACKLOG.md` behält nur noch die
+abgeschlossenen Befunde als Entscheidungs-Historie.
+
+| # | Thema | wo ausführbar |
+|---|---|---|
+| [#2](https://github.com/Tobias-Run/P3DH/issues/2) | 🔴 Referenzdaten veralten still (fx_rates/entity_meta/codebook nicht im Workflow) | CI / lokal mit Netz |
+| [#3](https://github.com/Tobias-Run/P3DH/issues/3) | 🔴 GAR/BTAR unplatzierbar — 636 dp-Codes fehlen im Codebook | CI / lokal mit Netz |
+| [#4](https://github.com/Tobias-Run/P3DH/issues/4) | Benchmark vertiefen: weitere Templates + Perzentil-Bänder (Roadmap 1+2) | überall |
+| [#5](https://github.com/Tobias-Run/P3DH/issues/5) | Open-Axis-Member auflösen → Länder-Exposure-Benchmark (CCyB1) | überall |
+| [#6](https://github.com/Tobias-Run/P3DH/issues/6) | Harvest-Diff scharf schalten | CI / lokal mit Netz |
+| [#7](https://github.com/Tobias-Run/P3DH/issues/7) | Nächste Stichtags-Welle laden (hängt an #2) | CI / lokal mit Netz |
+| [#8](https://github.com/Tobias-Run/P3DH/issues/8) | Wöchentlichen Cron scharf schalten | überall |
+
+**„Laptop-only" gilt nicht mehr.** Der Workflow läuft auf `ubuntu-latest` mit vollem
+Netzzugang (120 min, Playwright wird im Harvest-Schritt installiert) — auch der
+755-MB-DPM-Download ist CI-fähig. Die tatsächliche Grenze ist **„Remote-Chat-Session
+ohne Egress"**, nicht der Rechner.
+
+**Weiterhin offen, aber ohne eigenes Issue:**
+- **Unit-Handling:** %-Zellen als Dezimal (0.47 = 47 %); Long-Form trägt keine
+  Pro-Zelle-Einheit — `data_type` aus dem DPM ist inzwischen im Codebook, Nutzung im
+  Viewer geklärt. Bei Bedarf als Issue nachziehen.
+- **Voll-Load-Strategie:** 4.278 Submissions ⇒ Millionen Zeilen. Zweig B (Parquet/DuckDB)
+  steht inzwischen, Zweig A lädt Report-Shards lazy — die ursprüngliche Skalen-Sorge ist
+  damit weitgehend adressiert; offen bleibt nur, in welchen Wellen geladen wird (#7).
 
 ## Hardware
 

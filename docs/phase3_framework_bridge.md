@@ -56,7 +56,8 @@ Leverage-Puffer-Zeitreihe beim Versionswechsel unbemerkt ab.
 - Zellen „nur 4.1"/„nur 4.2" stehen bewusst **nicht** drin: Abwesenheit ist bei
   Offenlegungsdaten kein Beleg für Taxonomie-Änderung (Frequenz/Anwendbarkeit).
 - Taxonomie-seitige Vervollständigung (DPM 4.1- gegen 4.2-Release diffen) wäre
-  der nächste Ausbau — braucht die Access-DBs (laptop-lokal, gitignored).
+  der nächste Ausbau — braucht die Access-DBs (gitignored, per Download; läuft in
+  CI oder lokal mit Netz, siehe `build_codebook.py`).
 
 ---
 
