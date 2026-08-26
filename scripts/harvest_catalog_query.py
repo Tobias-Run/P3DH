@@ -89,6 +89,10 @@ def main():
         if window is not None:
             window["Count"] = 30000  # raise the page window; drain in one shot if allowed
         urls = set()
+        # Die Roh-Antworten werden mitgeschrieben: build_entity_meta.py leitet
+        # daraus Name/Land/Größenklasse/G-SII ab. Ohne diesen Dump hätte
+        # entity_meta.csv keine reproduzierbare Quelle im Repo.
+        responses = []
         print("Draining catalog via query (window=30000)...")
         for pageno in range(1, MAX_PAGES + 1):
             resp = ctx.request.post(capture["url"], headers=headers, data=json.dumps(body_obj))
@@ -100,6 +104,7 @@ def main():
             before = len(urls)
             urls.update(found)
             rj = json.loads(text)
+            responses.append(rj)
             rt = restart_token(rj)
             print(f"  page {pageno}: +{len(urls)-before} urls (total {len(urls)})  restart={'yes' if rt else 'no'}")
             if pageno == 1 and rt:
@@ -109,6 +114,15 @@ def main():
             window["Count"] = 500
             window["RestartTokens"] = [rt]
         browser.close()
+
+    # Seitenweise abgelegt (Liste), weil die DSR-Zeilenkodierung „wie vorige
+    # Zeile" pro Antwort zustandsbehaftet ist — Seiten dürfen nicht naiv
+    # zusammengeworfen werden. build_entity_meta.py dekodiert jede einzeln.
+    if responses:
+        OUT.mkdir(parents=True, exist_ok=True)
+        (OUT / "query_response.json").write_text(json.dumps(responses), encoding="utf-8")
+        print(f"  Roh-Antworten gesichert: {len(responses)} Seite(n) "
+              f"-> {OUT / 'query_response.json'}")
 
     # Build manifest from filenames
     rows = []

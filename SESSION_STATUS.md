@@ -59,6 +59,8 @@ build_entity_meta.py          -> processed/entity_meta.csv      (Name/Land/Grö�
 fetch_fx_rates.py             -> processed/fx_rates.csv          (EZB-Referenzkurse)
 check_fact_placement.py       -> interim/placement_report.csv    (GUARD: stiller Fact-Verlust,
                                  Baseline interim/placement_baseline.json, Exit 1 bei Verschlechterung)
+fetch_dpm_sources.py          -> codebook/DPM2_v4.2.accdb + dpm_table_layout.zip (opt-in, ~1 GB)
+check_reference_data.py       (GUARD: decken FX-Kurse + entity_meta die Fakten ab? harter Exit 1)
 build_zweig_b.py              -> processed/long/p3dh_long.parquet (EINE gejointe Wahrheit, DuckDB)
 build_framework_bridge.py     -> codebook/framework_bridge.csv   (RF 4.1<->4.2 Zell-Brücke)
 build_zweig_a_shards.py       -> processed/zweig_a/data/index.json + codebook.json + reports/<key>.json
@@ -69,8 +71,15 @@ processed/zweig_a/viewer.html       (Legacy: liest long_form + codebook + lei_na
 ```
 
 Die ganze Kette läuft auch als GitHub-Action (`.github/workflows/pipeline.yml`):
-`workflow_dispatch` mit den Schaltern `harvest` / `full_reparse`. Der wöchentliche Cron
-ist auskommentiert — erst soll ein manueller Lauf sauber durchlaufen.
+`workflow_dispatch` mit den Schaltern `harvest` / `full_reparse` / `refresh_codebook`.
+Der wöchentliche Cron ist auskommentiert — erst soll ein manueller Lauf sauber durchlaufen.
+
+**Referenzdaten laufen jetzt mit** (Issue #2): `fetch_fx_rates.py` vor jedem Zweig-B-Bau,
+`build_entity_meta.py` direkt nach dem Harvest (nur dort liegen die Roh-Antworten), der
+Codebook-Rebuild als opt-in **vor** dem Parse — der Parser leitet `cell_row`/`cell_col`
+aus dem Codebook ab, ein Rebuild danach käme zu spät; `refresh_codebook` erzwingt deshalb
+`--full`. Zwei Guards schützen die Kette: `check_fact_placement.py` (stiller Fact-Verlust,
+Baseline-basiert) und `check_reference_data.py` (FX-/entity_meta-Abdeckung, harter Abbruch).
 
 ## DPM-Auflösung (Referenz)
 

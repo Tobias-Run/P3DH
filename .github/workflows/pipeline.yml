@@ -20,6 +20,10 @@ on:
         description: "Alles neu parsen (nach Parser-/Codebook-Änderungen) — lädt den gesamten Korpus neu"
         type: boolean
         default: false
+      refresh_codebook:
+        description: "DPM-Codebook neu bauen (lädt ~1 GB DPM-Quellen) — nötig, wenn neue Templates unbekannte dp-Codes bringen"
+        type: boolean
+        default: false
   # Zeitplan bewusst noch nicht scharf: erst soll ein manueller Lauf sauber
   # durchlaufen. Zum Aktivieren die beiden Zeilen einkommentieren.
   # schedule:
@@ -68,6 +72,8 @@ jobs:
           python scripts/harvest_catalog_query.py
           python scripts/resolve_latest_submissions.py
           python scripts/build_parse_manifest.py
+          # Institutsmetadaten fallen aus derselben Query — nur hier verfügbar.
+          python scripts/build_entity_meta.py
 
       - name: Plan delta
         run: python scripts/plan_delta.py
@@ -80,9 +86,22 @@ jobs:
             python scripts/download_raw_reports.py interim/edap_recon/manifest_todo.csv
           fi
 
+      # Opt-in: nur nötig, wenn neue Templates dp-Codes mitbringen, die das
+      # Codebook nicht kennt. MUSS vor dem Parse laufen — der Parser leitet
+      # cell_row/cell_col aus dem Codebook ab; ein Rebuild danach käme zu spät.
+      - name: Refresh DPM codebook
+        if: inputs.refresh_codebook
+        run: |
+          python scripts/fetch_dpm_sources.py
+          python scripts/extract_template_titles.py
+          python scripts/build_codebook.py
+
+      # Ein frisches Codebook wirkt nur auf neu geparste Fakten — der Altbestand
+      # trägt die Koordinaten des alten Codebooks. Deshalb erzwingt ein
+      # Codebook-Refresh den vollen Reparse.
       - name: Parse
         run: |
-          if [ "${{ inputs.full_reparse }}" = "true" ]; then
+          if [ "${{ inputs.full_reparse }}" = "true" ] || [ "${{ inputs.refresh_codebook }}" = "true" ]; then
             python scripts/xbrl_csv_parser.py --full
           else
             python scripts/xbrl_csv_parser.py
@@ -92,7 +111,7 @@ jobs:
       # silently dropping the accumulated corpus. Shrinking is only ever legitimate
       # via a deliberate full re-parse.
       - name: Sanity gate
-        if: ${{ !inputs.full_reparse }}
+        if: ${{ !inputs.full_reparse && !inputs.refresh_codebook }}
         run: |
           after=$(( $(wc -l < processed/long_form_raw.csv) - 1 ))
           before=${{ steps.baseline.outputs.records }}
@@ -109,8 +128,18 @@ jobs:
       - name: Placement guard
         run: python scripts/check_fact_placement.py
 
+      # Referenzdaten VOR Zweig B: der Parquet-Bau joint sie per LEFT JOIN an,
+      # eine Lücke gäbe sonst still NULL statt eines Fehlers.
+      - name: Refresh FX rates
+        run: python scripts/fetch_fx_rates.py
+
       - name: Build Zweig B (parquet)
         run: python scripts/build_zweig_b.py
+
+      # Konsumentenseitige Gegenprobe: decken Kurse und Institutsmetadaten die
+      # geladenen Fakten wirklich ab? Bricht ab, bevor Unvollständiges publiziert wird.
+      - name: Reference data guard
+        run: python scripts/check_reference_data.py
 
       # Die Brücke wird aus dem frischen Parquet abgeleitet; ohne diesen Schritt
       # veraltet codebook/framework_bridge.csv still, sobald neue 4.2-Wellen kommen.
@@ -131,7 +160,9 @@ jobs:
         run: |
           git config user.name  "P3DH pipeline bot"
           git config user.email "noreply@anthropic.com"
-          git add interim/edap_recon/*.csv codebook/framework_bridge.csv
+          git add interim/edap_recon/*.csv codebook/framework_bridge.csv \
+                  codebook/dpm_codebook.csv codebook/template_titles.csv \
+                  processed/entity_meta.csv processed/fx_rates.csv
           if git diff --cached --quiet; then
             echo "Manifeste und Brücke unverändert"
           else

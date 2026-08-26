@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parent.parent
 #   https://www.eba.europa.eu/sites/default/files/2025-11/d67068fe-6327-4890-9163-3a9fcdabb58f/DPM2%20Database_v%204_2_20251125.zip
 DB_PATH = ROOT / "codebook" / "DPM2_v4.2.accdb"
 REPORT_CODES = ROOT / "codebook" / "mini_codebook_from_reports.csv"
+LONGFORM = ROOT / "processed" / "long_form_raw.csv"   # zusätzliche dp-Quelle (Zustand)
 OUT = ROOT / "codebook" / "dpm_codebook.csv"
 
 CELLCODE_RE = re.compile(r"\{([^,]+),\s*r(\w+),\s*c(\w+)")
@@ -204,11 +205,36 @@ def title_for(tmpl: str, titles: dict) -> str:
     return ""
 
 
-def load_report_codes(path: Path):
-    out = []
+def load_report_codes(path: Path, longform: Path = None):
+    """dp-Codes, für die Labels aufgelöst werden sollen.
+
+    Basis ist `mini_codebook_from_reports.csv` (aus den Roh-ZIPs, committet).
+    Zusätzlich wird — falls vorhanden — die Long Form ausgewertet: sie ist der
+    Zustand, der zwischen Läufen übertragen wird, und enthält damit auch die
+    dp-Codes neuer Wellen. Auf einem zustandslosen Runner ist `raw/` leer, das
+    Mini-Codebook also veraltet; ohne diese Vereinigung blieben neue Codes
+    unaufgelöst und ihre Fakten unplatzierbar.
+    """
+    seen = {}
     with open(path) as f:
         for r in csv.DictReader(f):
-            out.append((r["datapoint_code"], int(r["datapoint_code"].replace("dp", "")), r.get("frequency", "")))
+            seen[r["datapoint_code"]] = r.get("frequency", "")
+
+    if longform and longform.exists():
+        before = len(seen)
+        with open(longform, encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                dp = (r.get("datapoint_code") or "").strip()
+                if dp:
+                    seen.setdefault(dp, "")
+        if len(seen) > before:
+            print(f"  +{len(seen) - before} dp-Codes aus der Long Form ergänzt")
+
+    out = []
+    for dp, freq in sorted(seen.items()):
+        digits = dp.replace("dp", "")
+        if digits.isdigit():
+            out.append((dp, int(digits), freq))
     return out
 
 
@@ -223,7 +249,7 @@ def main():
     title_csv = load_template_titles()
     print(f"  template titles (EBA layout): {len(title_csv)}")
 
-    report_codes = load_report_codes(REPORT_CODES)
+    report_codes = load_report_codes(REPORT_CODES, LONGFORM)
     print(f"Resolving {len(report_codes)} datapoint codes...")
 
     rows = []

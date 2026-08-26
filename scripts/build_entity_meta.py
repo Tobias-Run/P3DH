@@ -1,6 +1,7 @@
 """Decode the EDAP catalog DSR response into per-institution metadata for clustering.
 
-The Power BI `query` response (dumped by _dump_query_response.py) carries, per
+The Power BI `query` response (seitenweise mitgeschrieben von
+harvest_catalog_query.py nach interim/edap_recon/query_response.json) carries, per
 submission row: EntityType, InstitutionType (EBA size class: Large/Other highest EEA,
 Large subsidiaries), official entity name, module name and country. G-SII status is
 derived authoritatively: institutions filing the "G-SIIs disclosures" module are G-SIIs.
@@ -17,6 +18,7 @@ from pathlib import Path
 import json
 import csv
 import re
+import sys
 from collections import defaultdict
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -24,6 +26,29 @@ SRC = ROOT / "interim" / "edap_recon" / "query_response.json"
 OUT = ROOT / "processed" / "entity_meta.csv"
 
 LEI_RE = re.compile(r"^([A-Z0-9]{20})\.(\w+)_")
+
+
+def decode_pages(payload):
+    """Dekodiert eine oder mehrere Query-Antworten zu (schema, rows).
+
+    `harvest_catalog_query.py` legt die Antworten seitenweise als Liste ab. Die
+    DSR-Kodierung „Wert wie vorige Zeile" ist **pro Antwort** zustandsbehaftet,
+    Seiten dürfen also nicht zusammengeworfen, sondern müssen einzeln dekodiert
+    und erst danach zusammengeführt werden. Ein einzelnes Objekt (altes Format)
+    wird weiterhin akzeptiert.
+    """
+    pages = payload if isinstance(payload, list) else [payload]
+    schema, rows = None, []
+    for page in pages:
+        try:
+            s, r = decode_rows(page)
+        except (KeyError, IndexError):
+            continue          # z. B. eine leere Schluss-Seite ohne DM0
+        schema = schema or s
+        rows.extend(r)
+    if schema is None:
+        raise ValueError("keine dekodierbare Query-Antwort gefunden")
+    return schema, rows
 
 
 def decode_rows(data):
@@ -59,8 +84,11 @@ def decode_rows(data):
 
 
 def main():
-    data = json.loads(SRC.read_text())
-    schema, rows = decode_rows(data)
+    if not SRC.exists():
+        print(f"ERROR: {SRC} fehlt — erst harvest_catalog_query.py ausführen "
+              f"(schreibt die Roh-Antworten mit)")
+        return 2
+    schema, rows = decode_pages(json.loads(SRC.read_text()))
     names = [s["N"] for s in schema]
     print(f"Decoded {len(rows)} rows, columns: {names}")
     # G0 url, G1 refdate, G2 EntityType, G3 InstitutionType, G4 ENT_NAM,
@@ -108,4 +136,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() or 0)
