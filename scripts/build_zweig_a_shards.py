@@ -37,7 +37,21 @@ PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
 OUT = ROOT / "processed" / "zweig_a" / "data"
 SHARDS = OUT / "reports"
 
-HEAD_TEMPLATES = {"61.00", "60.00.A"}   # KM1 + OV1: cross-report data for benchmark/time-series
+# Templates, deren Zellen report-übergreifend in benchmark.json landen (Benchmark
+# + Zeitreihe, lazy geladen). Wert = None -> alle Spalten; sonst nur die genannten.
+#
+# Die Spalten-Allowlist ist der Grund, warum weitere Templates hier überhaupt
+# tragbar sind: 41.00 hat 97k Zellen, davon braucht das ESG-Profil 3 Spalten.
+# Ohne Filter würde benchmark.json um ein Vielfaches wachsen — die Datei wird
+# zwar lazy geladen, aber nicht geshardet.
+HEAD_TEMPLATES = {
+    "61.00":   None,                      # KM1  — Kennzahlen + Zeitreihen-Basis
+    "60.00.A": None,                      # OV1  — Risikoprofil (Anteile an TREA)
+    "82.00.A": {"0010", "0040"},          # CQ3  — performing / non-performing
+    # ESG: Bezugsgröße + die "davon"-Spalten. Nur Quotienten daraus sind
+    # vergleichbar — die absoluten Beträge nicht, siehe Kommentar im Viewer.
+    "41.00":   {"0010", "0020", "0030", "0040", "0050"},
+}
 
 
 def dpm_code(tid):
@@ -136,7 +150,16 @@ def main():
         else:
             skipped += 1
         n_facts += sum(len(v) for v in rep["tpl"].values())
-        head = {t: rep["tpl"][t] for t in HEAD_TEMPLATES if t in rep["tpl"]}
+        head = {}
+        for t, cols in HEAD_TEMPLATES.items():
+            cells = rep["tpl"].get(t)
+            if not cells:
+                continue
+            if cols is not None:
+                cells = [c for c in cells if c[1] in cols]
+                if not cells:
+                    continue
+            head[t] = cells
         if head:
             benchmark[key] = head
         index_reports.append({

@@ -71,6 +71,25 @@ umgebunden** — ausgerechnet KM1-Leverage-Puffer, OV1-AIM, CVA, LR2-SFT.
 Zeitreihen daher über `(template, row, col)` oder die Brücke joinen, nie naiv
 über den dp-Code.
 
+## ⚠️ Befund: Absolutbeträge in Template 41.00 sind nicht vergleichbar
+
+Beim Bau des ESG-Benchmark-Profils aufgefallen: Spalte a von `41.00` ist als
+**„Gross carrying amount (Mln EUR)"** beschriftet, die Institute melden aber ganz
+überwiegend in **Währungseinheiten**. Die Werte von Zeile 0010 streuen über
+`10^2` bis `10^12` — eine Minderheit hat das Label wörtlich genommen, die Masse
+nicht. Beispiele: Raiffeisen-Holding NÖ-Wien meldet `9.520`, Groupe Crédit
+Agricole `440.552.425.122`; beides ist plausibel, aber in verschiedenen Einheiten.
+
+**Konsequenz:** Absolutbeträge aus 41.00 dürfen **nicht** institutsübergreifend
+verglichen werden. **Quotienten sind sicher** — Zähler und Nenner stammen aus
+demselben Report und derselben Einheit, die Einheit kürzt sich weg. Das
+ESG-Benchmark-Profil zeigt deshalb bewusst nur Anteile (nachhaltig,
+Paris-ausgeschlossen, Stage 2, notleidend), keine Beträge.
+
+Offen: Gilt das auch für andere Templates mit „(Mln EUR)"-Spaltenlabels? Ein
+systematischer Größenordnungs-Check über alle monetären Templates wäre die
+saubere Antwort — verwandt mit C.
+
 ## C. Währungs- & Präzisions-QA (offen, klein)
 
 30 Länder → viele Nicht-EUR-Währungen. Zweig B rechnet bereits EUR-normalisiert
