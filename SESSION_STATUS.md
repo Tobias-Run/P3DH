@@ -66,7 +66,10 @@ check_unit_consistency.py     -> interim/unit_consistency_report.csv (Größenor
                                  UNIT_AMBIGUOUS_TEMPLATES, importiert von build_zweig_b.py)
 build_zweig_b.py              -> processed/long/p3dh_long.parquet (EINE gejointe Wahrheit, DuckDB;
                                  + open_axis_country aus geo_names.csv, eba_GA:-Codes -> Ländername;
-                                 + unit_ambiguous-Flag für Templates mit gemischten Einheiten)
+                                 + unit_ambiguous-Flag für Templates mit gemischten Einheiten;
+                                 + Codebook-Fallback für offene Achsen: row_label/col_label/data_type/
+                                 fact_value_eur auch aus generischen Tabellencodes wie C_09.04, nur
+                                 für global eindeutige dp-Codes — 67.01.A dadurch 70% statt 0% belabelt)
 build_framework_bridge.py     -> codebook/framework_bridge.csv   (RF 4.1<->4.2 Zell-Brücke)
 build_zweig_a_shards.py       -> processed/zweig_a/data/index.json + codebook.json + reports/<key>.json
                                  (JSON-Shards, allein aus dem Parquet abgeleitet)

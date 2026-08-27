@@ -42,6 +42,25 @@ def main():
     CREATE VIEW em AS SELECT * FROM read_csv_auto('processed/entity_meta.csv', header=true, all_varchar=true);
     CREATE VIEW fx AS SELECT * FROM read_csv_auto('processed/fx_rates.csv', header=true, all_varchar=true);
     CREATE VIEW geo AS SELECT * FROM read_csv_auto('codebook/geo_names.csv', header=true, all_varchar=true);
+
+    -- Issue #10: offene-Achsen-Fakten (cell_row/cell_col NULL) treffen den
+    -- primären cb-Join nie (er verlangt cb.row = b.cell_row, NULL = NULL ist
+    -- nie wahr). Viele ihrer dp-Codes SIND im Codebook registriert, aber nur
+    -- unter einer generischen Tabelle (z. B. C_09.04 statt K_67.01.a) — die
+    -- eigentliche Meldetabelle wiederholt dasselbe Metrik-Grid einmal je
+    -- Dimensionswert (Land), das Grid selbst ist aber templateübergreifend
+    -- eindeutig definiert. Fallback nur für dp-Codes, die GLOBAL genau eine
+    -- (template,row,col)-Kombination im Codebook haben — 3.398 von 9.068
+    -- dp-Codes sind mehrdeutig (ein dp besetzt in verschiedenen Templates
+    -- verschiedene Zellen, z. B. dp33413 in 8 Templates) und bleiben bei
+    -- Mehrdeutigkeit unangetastet.
+    CREATE VIEW cb_fallback AS
+      SELECT datapoint_code, any_value(row) AS row, any_value(col) AS col,
+             any_value(row_label) AS row_label, any_value(col_label) AS col_label,
+             any_value(data_type) AS data_type
+      FROM cb
+      GROUP BY datapoint_code
+      HAVING count(DISTINCT template || '|' || row || '|' || col) = 1;
     """)
 
     con.execute(f"""
@@ -71,17 +90,19 @@ def main():
         (em.is_gsii = 'true')                                                   AS files_gsii_module,
         b.refPeriod, b.framework_version,
         b.template_id, cb.template_title,
-        b.cell_row, cb.row_label,
-        b.cell_col, cb.col_label,
+        b.cell_row, COALESCE(cb.row_label, cbf.row_label)                       AS row_label,
+        b.cell_col, COALESCE(cb.col_label, cbf.col_label)                       AS col_label,
         b.open_axis_dims,
         geo.name          AS open_axis_country,   -- aufgelöst aus eba_GA:-Codes, sonst NULL
         b.datapoint_code,
-        cb.data_type,
+        -- Fallback nur wirksam, wenn der primäre Join NICHTS lieferte (cb.*
+        -- ist dann komplett NULL) — überschreibt nie eine echte Auflösung.
+        COALESCE(cb.data_type, cbf.data_type)                                   AS data_type,
         b.fact_value_num          AS fact_value,
         b.fact_value              AS fact_value_raw,   -- original string: keeps ~1.3% non-numeric facts
         b.currency,
         TRY_CAST(fx.rate_to_eur AS DOUBLE)                                      AS fx_rate,
-        CASE WHEN cb.data_type='monetary'
+        CASE WHEN COALESCE(cb.data_type, cbf.data_type)='monetary'
              THEN b.fact_value_num * TRY_CAST(fx.rate_to_eur AS DOUBLE)
              END                                                                AS fact_value_eur,
         -- Issue #9: Institute melden in diesen Templates nachweislich in
@@ -96,6 +117,7 @@ def main():
       FROM base b
       LEFT JOIN cb ON cb.datapoint_code = b.datapoint_code AND cb.template = b.tcode
                   AND cb.row = b.cell_row AND cb.col = b.cell_col
+      LEFT JOIN cb_fallback cbf ON cbf.datapoint_code = b.datapoint_code
       LEFT JOIN em ON em.lei = b.lei
       LEFT JOIN fx ON fx.currency = b.currency AND fx.refdate = b.refPeriod
       LEFT JOIN geo ON geo.code = b.geo_code
