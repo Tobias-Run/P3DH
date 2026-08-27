@@ -10,8 +10,9 @@ Nutzen (CLI `duckdb` oder `python3 -c "import duckdb; ..."`), Pfade relativ zum 
 
 `bank_name, lei, scope (CON/IND), country, institution_type, files_gsii_module,
 refPeriod, framework_version, template_id, template_title, cell_row, row_label,
-cell_col, col_label, open_axis_dims, datapoint_code, data_type, fact_value,
-fact_value_raw, currency, fx_rate, fact_value_eur, template_reported, source_file`
+cell_col, col_label, open_axis_dims, open_axis_country, datapoint_code, data_type,
+fact_value, fact_value_raw, currency, fx_rate, fact_value_eur, unit_ambiguous,
+template_reported, source_file`
 
 `fact_value` ist numerisch gecastet (NULL bei Textfakten); `fact_value_raw` hält den
 Original-String (inkl. der ~1,3 % nicht-numerischen Text-/Enum-Fakten). `fx_rate` ist
@@ -67,7 +68,20 @@ offene-Achsen-Fakten `NULL`, weil `xbrl_csv_parser.py` strikt gegen
 `(datapoint_code, template_id)` joint — der DPM-Codebook registriert viele dieser
 Metriken aber nur unter einem generischen Tabellencode (z. B. `C_09.04` statt
 `K_67.01.a`). Für 67.01.A sind dadurch 9 von 13 Datapoint-Codes (70 % der Fakten)
-eigentlich auflösbar, werden aber nicht gejoint. Details/Fortschritt: GitHub Issue.
+eigentlich auflösbar, werden aber nicht gejoint. Details/Fortschritt: Issue #10.
+
+**Einheiten-Sperrliste (`unit_ambiguous`):** In den Templates `41.00` und
+`45.00.A` melden Institute nachweislich in gemischten Einheiten (manche in
+Basiswährung, manche in Millionen — siehe `docs/phase4_analysis_ideas.md`,
+Issue #9). `unit_ambiguous=true` markiert alle monetären Zellen dieser
+Templates; `fact_value`/`fact_value_eur` dort **nicht** institutsübergreifend
+vergleichen, nur Quotienten innerhalb desselben Reports bilden:
+```sql
+SELECT bank_name, fact_value AS gross_carrying_amount   -- Einheit je Report unklar!
+FROM 'processed/long/p3dh_long.parquet'
+WHERE unit_ambiguous AND template_id='41.00' AND cell_row='0010' AND cell_col='0010';
+-- Systematischer Scan über alle monetären Templates: scripts/check_unit_consistency.py
+```
 
 **Disclosure-Coverage („fehlt ≠ Null") kommt aus der zweiten Datei:**
 ```sql

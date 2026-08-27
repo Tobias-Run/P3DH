@@ -54,3 +54,4 @@ processed/zweig_a/data/
 # Placement-Guard: Report wird bei jedem Lauf neu erzeugt (die Baseline dagegen
 # ist der committete Vertrag und gehört ins Repo).
 interim/placement_report.csv
+interim/unit_consistency_report.csv

@@ -71,24 +71,43 @@ umgebunden** — ausgerechnet KM1-Leverage-Puffer, OV1-AIM, CVA, LR2-SFT.
 Zeitreihen daher über `(template, row, col)` oder die Brücke joinen, nie naiv
 über den dp-Code.
 
-## ⚠️ Befund: Absolutbeträge in Template 41.00 sind nicht vergleichbar
+## ✅ Erledigt (Issue #9): Einheiten-QA über alle monetären Templates
 
-Beim Bau des ESG-Benchmark-Profils aufgefallen: Spalte a von `41.00` ist als
-**„Gross carrying amount (Mln EUR)"** beschriftet, die Institute melden aber ganz
-überwiegend in **Währungseinheiten**. Die Werte von Zeile 0010 streuen über
-`10^2` bis `10^12` — eine Minderheit hat das Label wörtlich genommen, die Masse
-nicht. Beispiele: Raiffeisen-Holding NÖ-Wien meldet `9.520`, Groupe Crédit
-Agricole `440.552.425.122`; beides ist plausibel, aber in verschiedenen Einheiten.
+Ausgangsbefund: Spalte a von `41.00` ist als **„Gross carrying amount (Mln EUR)"**
+beschriftet, die Institute melden aber ganz überwiegend in **Währungseinheiten**.
+Die Werte von Zeile 0010 streuen bimodal über `10^2` bis `10^12` — eine
+Minderheit hat das Label wörtlich genommen, die Masse nicht (Raiffeisen-Holding
+NÖ-Wien `9.520`, Groupe Crédit Agricole `440.552.425.122`; beides plausibel,
+aber verschiedene Einheiten).
 
-**Konsequenz:** Absolutbeträge aus 41.00 dürfen **nicht** institutsübergreifend
-verglichen werden. **Quotienten sind sicher** — Zähler und Nenner stammen aus
-demselben Report und derselben Einheit, die Einheit kürzt sich weg. Das
-ESG-Benchmark-Profil zeigt deshalb bewusst nur Anteile (nachhaltig,
-Paris-ausgeschlossen, Stage 2, notleidend), keine Beträge.
+**Root Cause geklärt: kein Parser-Bug.** Das rohe XBRL-CSV trägt pro Fakt kein
+scale/decimals-Attribut jenseits des global deklarierten `decimalsMonetary`
+(Präzision, keine Skalierung — Sample-ZIP verifiziert `datapoint,factValue`,
+sonst nichts). Die Diskrepanz ist echtes Filer-Verhalten, keine Ingestion-Lücke,
+und institutsweise nicht sicher korrigierbar (ein kleiner Wert kann „echt klein"
+oder „in Mio gemeint" sein — beides nicht unterscheidbar).
 
-Offen: Gilt das auch für andere Templates mit „(Mln EUR)"-Spaltenlabels? Ein
-systematischer Größenordnungs-Check über alle monetären Templates wäre die
-saubere Antwort — verwandt mit C.
+**Systematischer Check** (`scripts/check_unit_consistency.py`): zwei unabhängige
+Prüfungen —
+1. Gap-Scan über alle 5.039 monetären Zellen mit ≥6 Instituten: 91 mit einer
+   Lücke ≥3 Größenordnungen. Größtenteils **falsch-positiv** durch legitime
+   Long-Tail-Verteilungen (wenige Großbanken mit nennenswertem Exposure in einer
+   Nischenkategorie, der Rest nahe null) — Kandidatenliste zur Sichtprüfung,
+   nicht automatisch verwertbar.
+2. Label-Cross-Check gegen `dpm_codebook.csv`: nur **`K_41.00`** und
+   **`K_45.00.a`** (beide „Gross carrying amount (Mln EUR)") nennen im Codebook
+   explizit eine Nicht-Basis-Einheit. `45.00.A` zeigt dieselbe Verdachtslage wie
+   41.00 (Streuung `10^0`–`10^11`), aber keinen sauberen bimodalen Split — die
+   beiden Prüfungen ergänzen sich, keine ersetzt die andere.
+
+**Konsequenz, jetzt maschinenlesbar statt nur dokumentiert:** neue Spalte
+`unit_ambiguous` in Zweig B (`build_zweig_b.py`), `True` für alle monetären
+Zellen in 41.00/45.00.A (97.249 + 46.466 Fakten). Konsumenten filtern/caveaten
+darauf, statt die Sperrliste in jedem Profil neu zu duplizieren. **Quotienten
+bleiben sicher** — Zähler und Nenner stammen aus demselben Report und derselben
+Einheit, die Einheit kürzt sich weg. Das ESG-Benchmark-Profil zeigt deshalb
+bewusst nur Anteile (nachhaltig, Paris-ausgeschlossen, Stage 2, notleidend),
+keine Beträge.
 
 ## C. Währungs- & Präzisions-QA (offen, klein)
 

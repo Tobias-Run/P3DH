@@ -20,7 +20,11 @@ More examples: docs/zweig_b_queries.md
 """
 
 from pathlib import Path
+import sys
 import duckdb
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from check_unit_consistency import UNIT_AMBIGUOUS_TEMPLATES  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = ROOT / "processed" / "long"
@@ -80,6 +84,12 @@ def main():
         CASE WHEN cb.data_type='monetary'
              THEN b.fact_value_num * TRY_CAST(fx.rate_to_eur AS DOUBLE)
              END                                                                AS fact_value_eur,
+        -- Issue #9: Institute melden in diesen Templates nachweislich in
+        -- gemischten Einheiten (manche in Basiswährung, manche in Mio) —
+        -- ohne Scale-Attribut im Roh-CSV lässt sich das nicht institutsweise
+        -- korrigieren. Absolutbeträge (fact_value/fact_value_eur) hier NICHT
+        -- institutsübergreifend vergleichen; Quotienten bleiben unbedenklich.
+        b.template_id IN ({",".join(f"'{t}'" for t in UNIT_AMBIGUOUS_TEMPLATES)}) AS unit_ambiguous,
         TRY_CAST(b.decimalsMonetary AS INTEGER)                                 AS decimals_monetary,
         b.template_reported = 'True'                                            AS template_reported,
         b.source_file
