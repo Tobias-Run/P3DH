@@ -160,7 +160,18 @@ jobs:
         run: |
           git config user.name  "P3DH pipeline bot"
           git config user.email "noreply@anthropic.com"
-          git add interim/edap_recon/*.csv codebook/framework_bridge.csv \
+          # Explizite Liste statt Glob: interim/edap_recon/*.csv würde auch
+          # manifest_todo.csv erfassen (gitignored, bei jedem Lauf neu erzeugt
+          # via plan_delta.py) — `git add` bricht dann mit Exit 1 ab, weil eine
+          # explizit ignorierte Datei gematcht wurde, und reißt unter bash -e
+          # den ganzen Schritt mit (so am 2026-08-27 passiert).
+          git add interim/edap_recon/manifest_full.csv \
+                  interim/edap_recon/manifest_latest.csv \
+                  interim/edap_recon/manifest_parse.csv \
+                  interim/edap_recon/manifest_sample.csv \
+                  interim/edap_recon/manifest_urls.csv \
+                  interim/edap_recon/manifest_wave.csv \
+                  codebook/framework_bridge.csv \
                   codebook/dpm_codebook.csv codebook/template_titles.csv \
                   processed/entity_meta.csv processed/fx_rates.csv
           if git diff --cached --quiet; then
