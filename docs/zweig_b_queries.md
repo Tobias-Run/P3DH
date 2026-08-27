@@ -45,12 +45,29 @@ WHERE lei='1FOLRR5RWTWWI397R131' AND template_id='61.00' AND cell_col='0010'
 ORDER BY cell_row, refPeriod;
 ```
 
-**Offene-Achsen-Daten (z. B. CCyB nach Land, Template 67.01):**
+**Offene-Achsen-Daten mit aufgelöstem Land (CCyB1, Template 67.01.A):**
+`open_axis_country` löst `RIO=eba_GA:NL` -> `Niederlande` bereits auf (98,2 % der
+181.696 Fakten mit `eba_GA:`-Dimension über drei Templates: 67.01.A, 83.01.C, 83.01.D).
 ```sql
-SELECT bank_name, open_axis_dims, fact_value
+SELECT open_axis_country, SUM(fact_value)/1e9 AS mrd_eur
 FROM 'processed/long/p3dh_long.parquet'
-WHERE template_id LIKE '67.01%' AND open_axis_dims LIKE '%RIO=%';
+WHERE template_id='67.01.A' AND datapoint_code IN ('dp149275','dp148983')  -- Exposure SA + IRB
+  AND lei='0W2PZJM8XOY22M4GG883' AND refPeriod='2025-12-31'
+GROUP BY 1 ORDER BY 2 DESC;
 ```
+⚠️ **Zwei Caveats:**
+- `fact_value_eur` ist für diese Fakten noch `NULL` (siehe unten) — `fact_value`
+  direkt nehmen und die Institutswährung selbst berücksichtigen.
+- `open_axis_country IS NULL` heißt nicht „fehlerhaft" — die Codes `eba_GA:x1`/`x28`
+  sind EBA-eigene Aggregat-Codes (vermutlich „übrige Länder"), nicht in ISO 3166-1,
+  bisher unaufgelöst.
+
+**Bekannte Lücke:** `cell_row`/`cell_col`/`row_label`/`col_label`/`data_type` sind für
+offene-Achsen-Fakten `NULL`, weil `xbrl_csv_parser.py` strikt gegen
+`(datapoint_code, template_id)` joint — der DPM-Codebook registriert viele dieser
+Metriken aber nur unter einem generischen Tabellencode (z. B. `C_09.04` statt
+`K_67.01.a`). Für 67.01.A sind dadurch 9 von 13 Datapoint-Codes (70 % der Fakten)
+eigentlich auflösbar, werden aber nicht gejoint. Details/Fortschritt: GitHub Issue.
 
 **Disclosure-Coverage („fehlt ≠ Null") kommt aus der zweiten Datei:**
 ```sql

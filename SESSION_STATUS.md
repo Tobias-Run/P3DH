@@ -61,7 +61,9 @@ check_fact_placement.py       -> interim/placement_report.csv    (GUARD: stiller
                                  Baseline interim/placement_baseline.json, Exit 1 bei Verschlechterung)
 fetch_dpm_sources.py          -> codebook/DPM2_v4.2.accdb + dpm_table_layout.zip (opt-in, ~1 GB)
 check_reference_data.py       (GUARD: decken FX-Kurse + entity_meta die Fakten ab? harter Exit 1)
-build_zweig_b.py              -> processed/long/p3dh_long.parquet (EINE gejointe Wahrheit, DuckDB)
+geo_names.csv                 -> codebook/geo_names.csv          (ISO-Ländercodes -> Namen, statisch)
+build_zweig_b.py              -> processed/long/p3dh_long.parquet (EINE gejointe Wahrheit, DuckDB;
+                                 + open_axis_country aus geo_names.csv, eba_GA:-Codes -> Ländername)
 build_framework_bridge.py     -> codebook/framework_bridge.csv   (RF 4.1<->4.2 Zell-Brücke)
 build_zweig_a_shards.py       -> processed/zweig_a/data/index.json + codebook.json + reports/<key>.json
                                  (JSON-Shards, allein aus dem Parquet abgeleitet)

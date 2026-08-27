@@ -37,6 +37,7 @@ def main():
     CREATE VIEW cb AS SELECT * FROM read_csv_auto('codebook/dpm_codebook.csv', header=true, all_varchar=true);
     CREATE VIEW em AS SELECT * FROM read_csv_auto('processed/entity_meta.csv', header=true, all_varchar=true);
     CREATE VIEW fx AS SELECT * FROM read_csv_auto('processed/fx_rates.csv', header=true, all_varchar=true);
+    CREATE VIEW geo AS SELECT * FROM read_csv_auto('codebook/geo_names.csv', header=true, all_varchar=true);
     """)
 
     con.execute(f"""
@@ -51,7 +52,10 @@ def main():
           -- long-form template id ('60.00.A') -> DPM codebook key ('K_60.00.a')
           CASE WHEN regexp_matches(lf.template_id, '\\.[A-Z]$')
                THEN 'K_' || left(lf.template_id, length(lf.template_id)-1) || lower(right(lf.template_id,1))
-               ELSE 'K_' || lf.template_id END                                  AS tcode
+               ELSE 'K_' || lf.template_id END                                  AS tcode,
+          -- Open-Achsen-Dimension mit geografischem Bezug ('RIO=eba_GA:NL' ->
+          -- 'NL'); andere Dimensionstypen (qEEA, GPR, ...) liefern NULL.
+          regexp_extract(lf.open_axis_dims, 'eba_GA:([A-Za-z0-9]+)', 1)         AS geo_code
         FROM lf
       )
       SELECT
@@ -66,6 +70,7 @@ def main():
         b.cell_row, cb.row_label,
         b.cell_col, cb.col_label,
         b.open_axis_dims,
+        geo.name          AS open_axis_country,   -- aufgelöst aus eba_GA:-Codes, sonst NULL
         b.datapoint_code,
         cb.data_type,
         b.fact_value_num          AS fact_value,
@@ -83,6 +88,7 @@ def main():
                   AND cb.row = b.cell_row AND cb.col = b.cell_col
       LEFT JOIN em ON em.lei = b.lei
       LEFT JOIN fx ON fx.currency = b.currency AND fx.refdate = b.refPeriod
+      LEFT JOIN geo ON geo.code = b.geo_code
     ) TO '{OUT}' (FORMAT PARQUET, COMPRESSION ZSTD);
     """)
 
