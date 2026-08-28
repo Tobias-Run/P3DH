@@ -164,13 +164,13 @@ die Verpackung.
 
 ## Bewertung
 
-| Idee | Wert | Aufwand | Blockiert durch |
-|---|---|---|---|
-| **A** Kreditverschlechterungs-Kette | hoch | mittel | — (Prototyp läuft) |
-| **B** Datenqualitäts-Profil | hoch | mittel | — |
-| **C** Vergütung | hoch (öffentlich) | klein | **B** |
-| **D** Länder-Aggregate | mittel–hoch | klein | #12 |
-| **E** Datensatz-Release | mittel | klein | — |
+| Idee | Issue | Wert | Aufwand | Blockiert durch |
+|---|---|---|---|---|
+| **A** Kreditverschlechterungs-Kette | [#16](https://github.com/Tobias-Run/P3DH/issues/16) | hoch | mittel | — (Prototyp läuft) |
+| **B** Datenqualitäts-Profil | [#17](https://github.com/Tobias-Run/P3DH/issues/17) | hoch | mittel | — |
+| **C** Vergütung | [#18](https://github.com/Tobias-Run/P3DH/issues/18) | hoch (öffentlich) | klein | **#17** |
+| **D** Länder-Aggregate | [#19](https://github.com/Tobias-Run/P3DH/issues/19) | mittel–hoch | klein | #12 |
+| **E** Datensatz-Release | [#20](https://github.com/Tobias-Run/P3DH/issues/20) | mittel | klein | — |
 
 **Empfohlene Reihenfolge:** A (eigenständiger Erkenntniswert, sofort) →
 B (schaltet C frei und härtet alles andere) → C → D/E.
