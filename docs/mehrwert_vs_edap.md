@@ -72,8 +72,10 @@ Der Benchmark zieht aus **4 Templates**. Breit gemeldet, aber nirgends genutzt:
 
 **Die Idee:** Kreditrisiko ist keine Zustandsgröße, sondern eine Kette:
 `performing → forborne (gestundet) → non-performing → ausgefallen`.
-Jede Stufe steht in einem *anderen* Template. EDAP kann sie prinzipiell nicht
-verbinden — wir schon.
+Jede Stufe steht in einem *anderen* Template, mit unterschiedlichen
+Bezugsgrößen. Ein Pivot-/Filterwerkzeug aggregiert dieselbe Größe über
+Dimensionen — es bildet keine Quotienten aus zwei Templates. Diese Kennzahl
+entsteht erst durch einen Join, den man definieren muss.
 
 **Prototyp gerechnet** (2025-12-31, Zeile „Loans and advances"):
 **340 Institute** lassen sich über CQ3 (`82.00.A`) und CQ1 (`80.00.A`) verknüpfen.
@@ -220,3 +222,73 @@ B (schaltet C frei und härtet alles andere) → C → D/E.
 Regulierungskategorie, nicht Verhalten — siehe `phase4_analysis_ideas.md`),
 Makro-Korrelationen (zu wenig Freiheitsgrade — siehe #11/#14), PDF-NLP
 (Ingestionspfad existiert nicht).
+
+---
+
+## F. Der Viewer als *interpretierende* Oberfläche (2026-08-28 ergänzt)
+
+EDAP hat einen kompetenten Webviewer (Template Rendering + Data Point Report).
+Ihn im Rendern schlagen zu wollen wäre aussichtslos und sinnlos. Der Unterschied
+muss derselbe sein wie oben: **er zeigt die Zahl, wir zeigen die Zahl im Urteil.**
+
+Konkrete Ansatzpunkte, jeweils gegen unseren Ist-Stand geprüft:
+
+### F1. „Fehlt ≠ Null" sichtbar machen ⭐ eklatante eigene Lücke
+
+`processed/filing_indicators.csv` hat **~41.000 Zeilen** Coverage-Matrix — und
+kommt im Viewer **nirgends** an (0 Treffer für `filing_indicator`/`template_reported`
+in `viewer_json.html` *und* `build_zweig_a_shards.py`). Das ist ausgerechnet das
+**erklärte Kernprinzip des Projekts** (`README.md`, Arbeitsprinzip 3), im
+Datenlayer sauber umgesetzt und im Produkt unsichtbar.
+
+Drei Zustände sind zu unterscheiden und werden heute alle als leere Zelle gezeigt:
+- **nicht offengelegt** (Filing-Indicator `false` → bewusste Auslassung)
+- **gemeldete Null** (echter Wert 0)
+- **strukturell nicht anwendbar** (Template gehört nicht zum Meldeumfang des
+  Instituts — siehe Geschäftsmodell-Befund in `phase4_analysis_ideas.md`)
+
+Das ist die billigste große Verbesserung im ganzen Backlog: Daten liegen fertig,
+es fehlt nur der Weg in die Shards und drei Zellzustände im Grid.
+
+### F2. Zahl im Kontext statt Zahl allein ⭐ größter UX-Hebel
+
+Ein Renderer zeigt `12,4 %`. Ein interpretierender Viewer zeigt `12,4 %` **und**
+dass der Peer-Median 15,1 % ist und das Institut im 23. Perzentil liegt. Wir haben
+die Perzentil-Logik bereits (geschichtet, `#4`) — aber nur im Benchmark-Tab, nicht
+an der einzelnen Zelle im Report.
+
+Für Nicht-Spezialisten ist das der Unterschied zwischen „eine Zahl" und „eine
+Aussage". Technisch: Tooltip/Sekundärzeile je Zelle, gespeist aus den ohnehin
+berechneten Peer-Statistiken.
+
+### F3. Anomalien inline markieren
+
+Sobald #17 steht: implausible Werte im Grid kennzeichnen statt sie wie normale
+Zahlen zu rendern. EDAP *muss* „11,7 Bio. EUR" originalgetreu anzeigen — wir
+dürfen dazuschreiben, dass der Wert um sechs Größenordnungen über dem Peer-Median
+liegt. Hängt an #17.
+
+### F4. Benannte Kennzahlen statt Zellkoordinaten
+
+Wer die NPL-Quote sucht, weiß nicht, dass sie aus `82.00.A` Zeile 0020 Spalten
+`0010`/`0040` entsteht. Ein Suchfeld über *Kennzahlen* (nicht über Templates)
+wäre ein echter Zugangsgewinn — und ist die Oberflächen-Seite von #16.
+
+### F5. Framework-Bruch in der Zeitreihe markieren
+
+Der Viewer zeigt `framework` heute nur als Textlabel im Report-Kopf
+(`viewer_json.html:452`). Die Brücke (`framework_bridge.csv`, 19 umgebundene
+Zellen) wird in der Oberfläche **nicht** genutzt. In einer Sparkline über den
+4.1→4.2-Wechsel gehört an genau dieser Stelle eine Markierung hin — sonst wirkt
+ein Sprung wie eine Geschäftsentwicklung, obwohl er eine Taxonomie-Änderung ist.
+
+### F6. Ähnliche Institute vorschlagen
+
+Statt Peer-Gruppen manuell zu filtern: „diese Institute haben ein ähnliches
+Exposure-Profil" — die Oberflächen-Seite von #13.
+
+### Was wir *nicht* versuchen sollten
+
+Vollständigkeit im Template-Rendering (EDAP kann das per Definition besser, es
+hat alle Daten), oder EDAPs Data Point Report nachbauen. Unsere Stärke ist die
+kuratierte, urteilende Sicht — nicht die vollständige.
