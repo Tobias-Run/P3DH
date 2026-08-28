@@ -4,24 +4,52 @@
 Bestand geprüft (553 Reports, 1,55 Mio. Fakten, 445 Institute), nicht aus der
 Fachliteratur abgeleitet. Prototypen-Zahlen stammen aus echten Abfragen.
 
-## Was EDAP ist — und wo die Lücke entsteht
+## ⚠️ Korrektur (2026-08-28): EDAP kann mehr, als hier zuerst stand
 
-EDAP ist ein **Archiv mit Suchmaske**: ein Institut, ein Stichtag, ein ZIP zum
-Herunterladen. Das ist für den regulatorischen Zweck (Offenlegung zugänglich
-machen) korrekt und ausreichend. Es bedeutet aber strukturell:
+Die erste Fassung dieses Dokuments beschrieb EDAP als „Archiv mit Suchmaske:
+ein Institut, ein Stichtag, ein ZIP". **Das war falsch** und stützte sich auf
+Recherche vom Projektstart, vor dem Live-Gang des Hubs am 26.01.2026.
 
-| EDAP kann nicht | weil |
+Laut EBA bietet EDAP tatsächlich:
+- **Template Rendering Report** — Darstellung im ITS-Template-Layout
+- **Data Point Report** — Filter auf Zeilen/Spalten, Vergleich einzelner
+  Datenpunkte *innerhalb* eines Instituts, **über Institute hinweg** und
+  **auf aggregierter Ebene mit verschiedenen Aggregationsstufen**
+- Filter nach Institut, Land, Stichtag, Report-Typ
+- **Bulk-Download** sowie Export der gefilterten Sicht
+- Download der Original-Einreichungen (PDF und XBRL-CSV)
+
+Damit sind drei Behauptungen der ersten Fassung hinfällig: EDAP *kann*
+Institute vergleichen, *kann* aggregieren und *bietet* Bulk-Zugang. Die
+ursprüngliche „EDAP kann nicht"-Tabelle ist ersatzlos gestrichen.
+
+## Wo der Mehrwert wirklich liegt
+
+Die richtige Abgrenzung ist nicht Zugang oder Slicing, sondern:
+
+> **EDAP ist ein originalgetreuer Renderer. Wir sind eine interpretierende
+> Schicht.** Ein Renderer muss zeigen, was eingereicht wurde — auch wenn es
+> falsch ist. Er darf nicht urteilen. Genau dort entsteht unser Beitrag.
+
+Fünf Dinge, die ein originalgetreues Anzeige-Werkzeug **kategorisch nicht
+leisten kann**, weil sie ein Urteil gegen die Population erfordern:
+
+| Wir | warum ein Renderer das nicht kann |
 |---|---|
-| Institute vergleichen | jede Einreichung ist ein separates Paket |
-| Kennzahlen über Templates hinweg bilden | Zähler und Nenner liegen in verschiedenen Dateien |
-| Aggregate über die Population | kein Quer-Zugriff |
-| Zeitreihen zeigen | Stichtage sind separate Pakete |
-| Datenqualität bewerten | kein Vergleichsmaßstab ohne Population |
+| **Implausible Meldungen markieren** | Er muss anzeigen, was gemeldet wurde. „11,7 Bio. EUR Vorstandsvergütung für 9 Personen" ist originalgetreu — und unbrauchbar. Ein Plausibilitätsurteil braucht die Population als Maßstab (→ #17). |
+| **Framework-Versionen semantisch brücken** | 19 Zellen wurden zwischen RF 4.1 und 4.2 auf neue dp-Codes umgebunden (u. a. KM1-Leverage-Puffer). Wer über dp-Code vergleicht, bekommt einen stillen Bruch — belegt in `phase3_framework_bridge.md`. |
+| **Abgeleitete Kennzahlen über Templates** | Pivot-/Filterwerkzeuge aggregieren *dieselbe* Größe. NPL-Deckungsquote, Vergütung pro Kopf, Forbearance-Quote haben Zähler und Nenner in **verschiedenen Templates mit verschiedenen Bezugsgrößen**. |
+| **Peer-Gruppen als fachliches Urteil** | „Vergleichbar" ist keine Filteroption. Unsere Perzentile sind nach Größenklasse × Konsolidierung × Stichtag geschichtet — sonst steht die Exportkreditagentur neben der Dorfsparkasse. |
+| **Fallen in der Datenstruktur entschärfen** | `eba_GA:x1` ist die Summenzeile „Total". Ein Renderer zeigt sie korrekt als Zeile; wer sie mitsummiert, verdoppelt das Exposure. Wir kennzeichnen sie (belegt an 89 von 96 Instituten). |
 
-**Unser struktureller Vorteil ist nicht „schöner", sondern kategorisch:** Wir haben
-die Population in *einer* abfragbaren Fläche (Parquet/DuckDB), mit aufgelösten
-Labels, EUR-Normierung, Peer-Schichtung und Framework-Brücke. Alles unten folgt
-aus genau dieser einen Eigenschaft.
+Dazu zwei praktische Vorteile, die kein Urteil erfordern, aber real sind:
+**freie Abfragbarkeit** (SQL über die Population statt vorgedachter Klickpfade)
+und **Reproduzierbarkeit** (versionierter, zitierfähiger Stand statt „was der
+Viewer heute zeigt") — letzteres ist für Forschung der eigentliche Knackpunkt.
+
+**Was wir dagegen nicht behaupten sollten:** dass wir besseren *Zugang* oder
+schönere *Darstellung* bieten. Beides macht EDAP kompetent, und dort zu
+konkurrieren wäre weder nötig noch gewinnbar.
 
 ---
 
@@ -138,27 +166,37 @@ Fehler in diesem Projekt.
 
 ---
 
-## D. Länder-Aggregate über die Population
+## D. Länder-Aggregate über die Population — abgewertet
 
-Aus CCyB1 (`67.01.A`, seit #5/#10 mit aufgelösten Ländern): **„Wie viel
-EU-Bankexposure trägt Land X insgesamt?"** — summiert über alle meldenden
-Institute. Diese Zahl existiert öffentlich nirgends; sie entsteht erst aus der
-Population.
+Aus CCyB1 (`67.01.A`, seit #5/#10 mit aufgelösten Ländern): „Wie viel
+EU-Bankexposure trägt Land X insgesamt?", summiert über alle meldenden Institute.
 
-Anwendungen: Konzentrations-Hotspots, Klumpenrisiken gegenüber Drittstaaten,
-Kontext für geopolitische Fragestellungen. Baut direkt auf #12/#13 auf.
+**Nach der Korrektur oben deutlich schwächer:** EDAPs Data Point Report bietet
+Aggregation über Institute mit verschiedenen Aggregationsstufen — die reine
+Summenbildung ist damit kein Alleinstellungsmerkmal mehr.
+
+Was bleibt, ist der **Fallen-Teil**: Wer in CCyB1 naiv über Länder summiert,
+zählt `eba_GA:x1` (die Summenzeile „Total") mit und verdoppelt das Ergebnis.
+Der Wert liegt also nicht im Aggregat selbst, sondern in einem Aggregat, dem
+man trauen kann — plus Abdeckungsgrad-Ausweis und `x28`-Qualitätsflag. Das ist
+eine Ergänzung zu #12, kein eigenständiges Produkt.
 
 ---
 
-## E. Der Datensatz selbst als Produkt
+## E. Datensatz-Release — abgewertet
 
-Das Parquet auf dem `data`-Branch ist bereits ein öffentlich abrufbares,
-analysefertiges Artefakt — mit aufgelösten Labels, EUR-Normierung und
-Qualitätsflags. EDAP bietet ausschließlich Roh-ZIPs.
+Die ursprüngliche Begründung („EDAP bietet ausschließlich Roh-ZIPs") ist
+**hinfällig** — EDAP hat Bulk-Download und gefilterten Export.
 
-Ausbaufähig zu: dokumentiertem Daten-Release mit Versionierung, Schema-Beschreibung
-und Zitierhinweis. Geringer Aufwand, weil die Substanz existiert — es fehlt nur
-die Verpackung.
+Der verbleibende Unterschied ist schmaler, aber real: unser Parquet ist bereits
+**gejoint und angereichert** (DPM-Labels, EUR-Normierung, Instituts-Metadaten,
+aufgelöste Länder, Qualitätsflags) und vor allem **versioniert und zitierfähig**
+— ein fixer Stand, auf den sich eine Auswertung berufen kann. Ein Live-Viewer
+zeigt immer den aktuellen Stand; für reproduzierbare Forschung ist das ein
+echtes Problem.
+
+Bleibt sinnvoll, aber als **Nebenprodukt der Pipeline**, nicht als eigenes
+Wertversprechen.
 
 ---
 
@@ -169,8 +207,11 @@ die Verpackung.
 | **A** Kreditverschlechterungs-Kette | [#16](https://github.com/Tobias-Run/P3DH/issues/16) | hoch | mittel | — (Prototyp läuft) |
 | **B** Datenqualitäts-Profil | [#17](https://github.com/Tobias-Run/P3DH/issues/17) | hoch | mittel | — |
 | **C** Vergütung | [#18](https://github.com/Tobias-Run/P3DH/issues/18) | hoch (öffentlich) | klein | **#17** |
-| **D** Länder-Aggregate | [#19](https://github.com/Tobias-Run/P3DH/issues/19) | mittel–hoch | klein | #12 |
-| **E** Datensatz-Release | [#20](https://github.com/Tobias-Run/P3DH/issues/20) | mittel | klein | — |
+| **D** Länder-Aggregate | [#19](https://github.com/Tobias-Run/P3DH/issues/19) | ~~mittel–hoch~~ **niedrig** | klein | #12 |
+| **E** Datensatz-Release | [#20](https://github.com/Tobias-Run/P3DH/issues/20) | ~~mittel~~ **niedrig** | klein | — |
+
+D und E nach der EDAP-Korrektur abgewertet: Aggregation und Bulk-Download bietet
+EDAP selbst. Beide bleiben sinnvoll, aber als Beiwerk — nicht als Wertversprechen.
 
 **Empfohlene Reihenfolge:** A (eigenständiger Erkenntniswert, sofort) →
 B (schaltet C frei und härtet alles andere) → C → D/E.
