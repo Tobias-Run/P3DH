@@ -57,11 +57,22 @@ SELECT open_axis_country, SUM(fact_value_eur)/1e9 AS mrd_eur
 FROM 'processed/long/p3dh_long.parquet'
 WHERE template_id='67.01.A' AND datapoint_code IN ('dp149275','dp148983')  -- Exposure SA + IRB
   AND lei='0W2PZJM8XOY22M4GG883' AND refPeriod='2025-12-31'
+  AND open_axis_country IS NOT NULL        -- ⚠️ PFLICHT, sonst Doppelzählung (s. u.)
 GROUP BY 1 ORDER BY 2 DESC;
 ```
-⚠️ `open_axis_country IS NULL` heißt nicht „fehlerhaft" — die Codes `eba_GA:x1`/`x28`
-sind EBA-eigene Aggregat-Codes (vermutlich „übrige Länder"), nicht in ISO 3166-1,
-bisher unaufgelöst.
+
+🚨 **`eba_GA:x1` ist die Summenzeile „Total", kein Land.** Empirisch belegt: bei
+89 von 96 Instituten, die diesen Bucket melden, gilt exakt
+`x1 = Summe(benannte Länder) + x28` (Median-Verhältnis 1,000). Wer die
+`open_axis_country IS NULL`-Zeilen mitsummiert, **zählt das Gesamtexposure
+doppelt** — im Beispiel oben wäre der größte „Posten" mit 34 Mrd EUR schlicht
+die Gesamtsumme. Immer `open_axis_country IS NOT NULL` filtern oder `x1`
+gezielt als Kontrollsumme verwenden.
+
+`eba_GA:x28` ist dagegen ein echter Residual-Bucket („übrige Länder"); seine
+Belegung schwankt stark je Melder (bei manchen Instituten liegt dort fast das
+gesamte Exposure). Beide Codes stehen nicht in ISO 3166-1 und bleiben in
+`open_axis_country` bewusst `NULL`.
 
 **Restlücke (Issue #10):** Der Fallback wirkt nur für dp-Codes, die **global
 eindeutig** im Codebook stehen (nur eine `(template,row,col)`-Kombination über
