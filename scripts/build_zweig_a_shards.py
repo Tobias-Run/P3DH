@@ -26,6 +26,7 @@ Run:  python3 scripts/build_zweig_b.py && python3 scripts/build_zweig_a_shards.p
 """
 
 from pathlib import Path
+import csv
 import json
 import gzip
 import re
@@ -74,6 +75,25 @@ def write_if_changed(path, text):
     return True
 
 
+def load_coverage_map(root: Path | None = None):
+    """Map report key -> template_id -> reported (True/False) from filing_indicators.csv."""
+    root = root or ROOT
+    cov_path = root / "processed" / "filing_indicators.csv"
+    if not cov_path.exists():
+        return {}
+    mapping = {}
+    with cov_path.open("r", newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            entity = (row.get("entityID") or "").strip()
+            period = (row.get("refPeriod") or "").strip()
+            tid = (row.get("template_id") or "").strip()
+            if not entity or not period or not tid:
+                continue
+            rep = mapping.setdefault(f"{entity}|{period}", {})
+            rep[tid] = str(row.get("reported", "")).strip().lower() == "true"
+    return mapping
+
+
 def main():
     if not PARQUET.exists():
         sys.exit(f"missing {PARQUET} — run scripts/build_zweig_b.py first")
@@ -81,6 +101,7 @@ def main():
 
     con = duckdb.connect()
     con.execute(f"CREATE VIEW p AS SELECT * FROM '{PARQUET}'")
+    coverage = load_coverage_map(ROOT)
 
     # --- pass 1: group placeable cells into reports (raw string values) ---
     reports = {}
@@ -95,8 +116,10 @@ def main():
         rep = reports.get(key)
         if rep is None:
             rep = reports[key] = {"entityID": eid, "refPeriod": rp,
-                                  "baseCurrency": cur or "", "framework": fw, "tpl": {}}
+                                  "baseCurrency": cur or "", "framework": fw,
+                                  "tpl": {}, "coverage": coverage.get(key, {})}
         rep["tpl"].setdefault(tid, []).append([r, c, "" if val is None else val])
+        rep["coverage"].setdefault(tid, coverage.get(key, {}).get(tid, True))
 
     # --- codebook (labels/titles/types), trimmed to the cells that occur ---
     cb, titles = {}, {}
@@ -144,7 +167,8 @@ def main():
     for key, rep in reports.items():
         fname = safe_name(rep["entityID"]) + "__" + rep["refPeriod"] + ".json"
         current.add(fname)
-        payload = json.dumps({"tpl": rep["tpl"]}, ensure_ascii=False, separators=(",", ":"))
+        payload = json.dumps({"tpl": rep["tpl"], "coverage": rep.get("coverage", {})},
+                             ensure_ascii=False, separators=(",", ":"))
         if write_if_changed(SHARDS / fname, payload):
             written += 1
         else:

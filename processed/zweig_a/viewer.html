@@ -77,6 +77,8 @@
   .cl{font-weight:400;opacity:.85;font-size:10px}
   td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:default}
   td.empty{background:var(--empty)}
+  td.coverage-false{background:#fff0ee;color:#8a2b19;font-weight:700;text-align:center}
+  td.coverage-na{background:#eef4ff;color:#285d9c;font-weight:700;text-align:center}
   .status{padding:2rem;color:var(--muted)}
   .prog{height:3px;background:var(--soft);border-radius:2px;overflow:hidden;margin-top:.6rem;width:340px}
   .prog i{display:block;height:100%;background:var(--blue);width:0%;transition:width .2s}
@@ -385,31 +387,54 @@ function wireControls(redraw){
 }
 
 /* ================= report view ================= */
+function coverageState(rep, tid){
+  const cov = rep.coverage || {};
+  if (cov[tid] === false) return 'not-reported';
+  if (cov[tid] === true) return 'reported';
+  return 'not-applicable';
+}
+
 function renderTemplate(tid, cells, rep){
   const tcode=dpmCode(tid);
   const title=TITLES.get(tcode)||'';
+  const state = coverageState(rep, tid);
   const {rate,cur}=fxOf(rep);
-  const rows=[...new Set(cells.map(c=>c.row))].sort();
-  const cols=[...new Set(cells.map(c=>c.col))].sort();
-  const val=new Map(cells.map(c=>[c.row+'|'+c.col,c.val]));
+  const cellList = Array.isArray(cells) ? cells : [];
+  const rows=[...new Set(cellList.map(c=>c.row))].sort();
+  const cols=[...new Set(cellList.map(c=>c.col))].sort();
+  const val=new Map(cellList.map(c=>[c.row+'|'+c.col,c.val]));
   const dtOf=(r,c)=>{ const e=CB.get(tcode+'|'+r+'|'+c); return e?e.dt:''; };
-  const rowLbl=r=>{ const e=CB.get(tcode+'|'+r+'|'+cols[0]); return e?e.rl:''; };
+  const rowLbl=r=>{ const e=CB.get(tcode+'|'+r+'|'+(cols[0]||'')); return e?e.rl:''; };
   const colLbl=c=>{ for(const r of rows){ const e=CB.get(tcode+'|'+r+'|'+c); if(e) return e.cl; } return ''; };
+  const coverageNote = state === 'not-reported'
+    ? '<span class="scalenote" style="background:#fff0ee;color:#8a2b19">nicht offengelegt / bewusst ausgelassen</span>'
+    : state === 'not-applicable'
+      ? '<span class="scalenote" style="background:#eef4ff;color:#285d9c">nicht im Meldeumfang / strukturell nicht anwendbar</span>'
+      : '';
   let maxAbs=0;
-  for(const c of cells) if(dtOf(c.row,c.col)==='monetary'){
+  for(const c of cellList) if(dtOf(c.row,c.col)==='monetary'){
     const n=Math.abs(Number(c.val))*rate; if(n>maxAbs) maxAbs=n; }
   const unit=maxAbs>0?pickUnit(maxAbs):1;
   const conv=EUR&&cur==='EUR'&&curOf(rep)!=='EUR';
   const note=unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${esc(cur)}${conv?' · EZB-Kurs':''}</span>`
              :(conv?`<span class="scalenote">EUR · EZB-Kurs</span>`:'');
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${note}</h3><table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
+  if(!cellList.length){
+    return `<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote || note}</h3>
+      <div class="status" style="padding:0.5rem 0;color:var(--muted)">Kein zellwertiges Grid für dieses Template; Status: ${state === 'not-reported' ? 'nicht offengelegt' : state === 'not-applicable' ? 'strukturell nicht anwendbar' : 'offengelegt'}</div></section>`;
+  }
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote || note}</h3><table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){
     h+=`<tr><th class="rh">${esc(r)}</th><td class="rl">${esc(rowLbl(r))}</td>`;
     for(const c of cols){
       const v=val.get(r+'|'+c);
-      if(v===undefined){ h+='<td class="empty"></td>'; continue; }
+      if(v===undefined){
+        if(state==='not-reported') h+='<td class="coverage-false" title="Template ausdrücklich nicht offengelegt">⊘</td>';
+        else if(state==='not-applicable') h+='<td class="coverage-na" title="Template nicht im Meldeumfang / strukturell nicht anwendbar">∅</td>';
+        else h+='<td class="empty"></td>';
+        continue;
+      }
       const dt=dtOf(r,c);
       const tip=dt==='monetary'?` title="${esc(fmt(v))} ${esc(curOf(rep))} (Originalwert)"`:
                 dt==='percentage'?` title="Rohwert ${esc(v)}"`:'';
@@ -423,7 +448,7 @@ function renderReport(rep){
   VIEW='reports'; setTabs();
   activeKey=repKey(rep);
   const main=document.getElementById('main');
-  const tids=[...rep.templates.keys()].sort();
+  const tids=[...new Set([...rep.templates.keys(), ...(rep.coverage ? Object.keys(rep.coverage) : [])])].sort();
   const {lei,scope}=leiParts(rep.entityID);
   const nrec=NAMES.get(lei)||{};
   main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2>

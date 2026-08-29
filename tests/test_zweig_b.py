@@ -17,6 +17,7 @@ import unittest
 import duckdb
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+import build_zweig_a_shards as a  # noqa: E402
 import build_zweig_b as z  # noqa: E402
 
 
@@ -136,6 +137,22 @@ class ZweigBFallbackTest(unittest.TestCase):
         con = duckdb.connect()
         n = con.execute(f"SELECT count(*) FROM '{z.OUT}'").fetchone()[0]
         self.assertEqual(n, 3)
+
+
+class ZweigAcoverageTest(unittest.TestCase):
+    def test_load_coverage_map_tracks_true_false_and_missing(self):
+        root = Path(tempfile.mkdtemp())
+        cov = root / "processed" / "filing_indicators.csv"
+        cov.parent.mkdir(parents=True, exist_ok=True)
+        with open(cov, "w", newline="", encoding="utf-8") as f:
+            f.write("entityID,refPeriod,framework_version,template_id,reported,source_file\n")
+            f.write("rs:LEI00000000000000001.CON,2025-12-31,4.1,61.00,True,x.zip\n")
+            f.write("rs:LEI00000000000000001.CON,2025-12-31,4.1,99.00,False,x.zip\n")
+
+        coverage = a.load_coverage_map(root)
+        self.assertTrue(coverage["rs:LEI00000000000000001.CON|2025-12-31"]["61.00"])
+        self.assertFalse(coverage["rs:LEI00000000000000001.CON|2025-12-31"]["99.00"])
+        self.assertNotIn("67.01", coverage["rs:LEI00000000000000001.CON|2025-12-31"])
 
 
 if __name__ == "__main__":
