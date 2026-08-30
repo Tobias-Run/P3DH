@@ -75,8 +75,20 @@ def write_if_changed(path, text):
     return True
 
 
+SUBLETTER_RE = re.compile(r"\.[A-Z]$")
+
+
+def base_tid(tid):
+    """'60.00.A' -> '60.00'. Filing indicators are declared per BASE template."""
+    return SUBLETTER_RE.sub("", tid)
+
+
 def load_coverage_map(root: Path | None = None):
-    """Map report key -> template_id -> reported (True/False) from filing_indicators.csv."""
+    """Map report key -> template_id -> reported (True/False) from filing_indicators.csv.
+
+    Straight read of the declarations, no normalisation — resolve_coverage()
+    does the mapping onto the templates the viewer renders.
+    """
     root = root or ROOT
     cov_path = root / "processed" / "filing_indicators.csv"
     if not cov_path.exists():
@@ -92,6 +104,51 @@ def load_coverage_map(root: Path | None = None):
             rep = mapping.setdefault(f"{entity}|{period}", {})
             rep[tid] = str(row.get("reported", "")).strip().lower() == "true"
     return mapping
+
+
+def resolve_coverage(declared, data_tids):
+    """Project the filing-indicator declarations of ONE report onto the template
+    ids the viewer actually renders.
+
+    `declared`:  {template_id: reported_bool} as filed by the institution.
+    `data_tids`: template ids that carry placeable facts in this report.
+
+    Institutions declare per BASE template ('01.00') while the data carries
+    sub-lettered variants ('01.00.A', '01.00.B') — hence exact-match-first,
+    then base. (14 of 114 declared ids DO carry a sub-letter, so the exact
+    match has to win; with this rule all 191 data templates / 1.545.856 facts
+    resolve and none is left over.)
+
+    Returns {template_id: state} with state in:
+      'reported'      — declared as disclosed, facts present
+      'not-reported'  — declared as NOT disclosed (deliberate omission, Art. 432)
+      'reported-empty'— declared as disclosed, but we hold no placeable cells.
+                        That is OUR gap (open axes / missing dp codes, #3),
+                        not an omission by the institution — never label it as
+                        one.
+    Templates without ANY declaration are deliberately ABSENT from the result;
+    the viewer has to show them as 'unknown'. Absence of a declaration is not
+    evidence of anything (Arbeitsprinzip 3, "Fehlt != Null").
+    """
+    out = {}
+    consumed = set()
+    for tid in data_tids:
+        if tid in declared:
+            key = tid
+        elif base_tid(tid) in declared:
+            key = base_tid(tid)
+        else:
+            continue          # no declaration -> viewer shows 'unknown'
+        out[tid] = "reported" if declared[key] else "not-reported"
+        consumed.add(key)
+    # Declared templates that produced no placeable cells at all. A base id
+    # whose sub-lettered variants carry data is already consumed above and
+    # must NOT resurface here (that was the phantom-section bug).
+    for tid, reported in declared.items():
+        if tid in consumed or tid in out:
+            continue
+        out[tid] = "reported-empty" if reported else "not-reported"
+    return out
 
 
 def main():
@@ -117,9 +174,14 @@ def main():
         if rep is None:
             rep = reports[key] = {"entityID": eid, "refPeriod": rp,
                                   "baseCurrency": cur or "", "framework": fw,
-                                  "tpl": {}, "coverage": coverage.get(key, {})}
+                                  "tpl": {}}
         rep["tpl"].setdefault(tid, []).append([r, c, "" if val is None else val])
-        rep["coverage"].setdefault(tid, coverage.get(key, {}).get(tid, True))
+
+    # --- coverage ("Fehlt != Null"): resolve declarations against the templates
+    # that actually carry cells. Done AFTER pass 1 so data_tids is complete, and
+    # per report so nothing aliases the shared declaration dict.
+    for key, rep in reports.items():
+        rep["coverage"] = resolve_coverage(coverage.get(key, {}), set(rep["tpl"]))
 
     # --- codebook (labels/titles/types), trimmed to the cells that occur ---
     cb, titles = {}, {}

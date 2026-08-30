@@ -117,7 +117,10 @@ vor dem Publish ab, falls der Bestand schrumpft.
 
 1. Reproduzierbarkeit: Roh-Layer immutable, jede Transformation skriptiert.
 2. Annahmen offenlegen (im Code/README), nicht bei Kleinigkeiten nachfragen.
-3. „Fehlt" ≠ „Null" durchgängig erhalten (`filing-indicators`).
+3. „Fehlt" ≠ „Null" durchgängig erhalten (`filing-indicators`) — **auch in der
+   Oberfläche**: der JSON-Viewer zeigt je Report, welche Templates bewusst nicht
+   offengelegt wurden, wo unser Bestand lückt und wo die Meldung sich selbst
+   widerspricht. Ohne Deklaration wird **keine** Aussage getroffen.
 4. Vergleichbarkeitsfallen (Rechnungslegung, Konsolidierung, nationale Optionen) als
    Caveat in jeder Analyse benennen.
 5. Resubmissions: pro (Institut, Modul, Stichtag) zählt nur die neueste Einreichung

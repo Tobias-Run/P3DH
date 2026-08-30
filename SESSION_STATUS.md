@@ -107,8 +107,15 @@ Zwei featuregleiche Vanilla-JS-Seiten, Gabelseite `processed/zweig_a/index.html`
   KM1/OV1 + meta/names/fx) + `data/codebook.json` vorab (~0,25 MB gzip), holt jeden Report
   lazy als `data/reports/<entityID>__<refPeriod>.json` (~3 KB median). Nativ `JSON.parse`,
   kein CSV-Parser. Skaliert Richtung Voll-Load (Browser lädt nur das Sichtbare).
+  Jeder Shard trägt zusätzlich `coverage` (Filing-Indicators, Issue #21): je Template
+  `reported` / `not-reported` / `reported-empty`. Deklariert wird auf Basis-IDs
+  (`60.00`), gemeldet auf Sub-Buchstaben (`60.00.A`) — `resolve_coverage()` bildet
+  exakt-zuerst-dann-Basis ab, womit alle 191 Daten-Templates auflösen. Templates
+  **ohne** Deklaration bleiben bewusst ohne Eintrag (Arbeitsprinzip 3).
 - **`viewer.html` (Legacy):** lädt die Roh-CSVs komplett und joint/typisiert im Browser —
-  unabhängige Gegenprobe.
+  unabhängige Gegenprobe. Kennt bewusst **keine** Coverage: sie hätte dafür keine
+  Quelle außer einer zweiten, divergenzanfälligen Implementierung von
+  `resolve_coverage` in JS.
 
 Die Shards kommen **allein aus dem Zweig-B-Parquet** (`build_zweig_a_shards.py`, deterministisch,
 Werte byte-identisch verifiziert) → Viewer und Analytics teilen eine Transformationsstelle.
