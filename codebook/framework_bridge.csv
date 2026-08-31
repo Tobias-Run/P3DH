@@ -66,24 +66,50 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 02.00,0010,0040,EU1. EU - Original Exposure Method (for derivatives),d. Alpha used for computing regulatory exposure value,dp3526555,dp3526555,stable
 02.00,0020,0040,EU2. EU - Simplified SA-CCR (for derivatives),d. Alpha used for computing regulatory exposure value,dp3526556,dp3526556,stable
 02.00,0030,0040,1. SA-CCR (for derivatives),d. Alpha used for computing regulatory exposure value,dp3526557,dp3526557,stable
+07.00,0010,0010,01. RWEA as at the end of the previous reporting period,a. RWEA,dp475556,dp475556,stable
+07.00,0020,0010,2. Asset size,a. RWEA,dp475563,dp475563,stable
+07.00,0030,0010,3. Credit quality of counterparties,a. RWEA,dp475557,dp475557,stable
+07.00,0040,0010,4. Model updates (IMM only),a. RWEA,dp475558,dp475558,stable
+07.00,0050,0010,5. Methodology and policy (IMM only),a. RWEA,dp475559,dp475559,stable
+07.00,0060,0010,6. Acquisitions and disposals,a. RWEA,dp475560,dp475560,stable
+07.00,0070,0010,7. Foreign exchange movements,a. RWEA,dp475561,dp475561,stable
+07.00,0080,0010,8. Other,a. RWEA,dp475562,dp475562,stable
+07.00,0090,0010,9. Risk weighted exposure amount at the end of the current reporting period,a. RWEA,dp475555,dp475555,stable
 12.00,0010,0010,1. RWEAs at previous period end,a. VaR,dp3529526,dp3529526,stable
 12.00,0010,0020,1. RWEAs at previous period end,b. SVaR,dp3529525,dp3529525,stable
+12.00,0010,0030,1. RWEAs at previous period end,c. IRC,dp3529585,dp3529585,stable
+12.00,0010,0040,1. RWEAs at previous period end,d. Comprehensive risk measure,dp3529586,dp3529586,stable
 12.00,0010,0050,1. RWEAs at previous period end,e. Other,dp3529524,dp3529524,stable
 12.00,0010,0060,1. RWEAs at previous period end,f. Total RWEAs,dp3529591,dp3529591,stable
 12.00,0010,0070,1. RWEAs at previous period end,g. Total own funds requirements,dp3529405,dp3529405,stable
 12.00,0020,0010,1a. Regulatory adjustment,a. VaR,dp3529533,dp3529533,stable
 12.00,0020,0020,1a. Regulatory adjustment,b. SVaR,dp3529532,dp3529532,stable
+12.00,0020,0030,1a. Regulatory adjustment,c. IRC,dp3529531,dp3529531,stable
+12.00,0020,0040,1a. Regulatory adjustment,d. Comprehensive risk measure,dp3529530,dp3529530,stable
+12.00,0020,0050,1a. Regulatory adjustment,e. Other,dp3529664,dp3529664,stable
 12.00,0020,0060,1a. Regulatory adjustment,f. Total RWEAs,dp3529519,dp3529519,stable
 12.00,0020,0070,1a. Regulatory adjustment,g. Total own funds requirements,dp3529406,dp3529406,stable
 12.00,0030,0010,1b. RWEAs at the previous quarter-end end of the day,a. VaR,dp3529658,dp3529658,stable
 12.00,0030,0020,1b. RWEAs at the previous quarter-end end of the day,b. SVaR,dp3529659,dp3529659,stable
+12.00,0030,0030,1b. RWEAs at the previous quarter-end end of the day,c. IRC,dp3529660,dp3529660,stable
+12.00,0030,0040,1b. RWEAs at the previous quarter-end end of the day,d. Comprehensive risk measure,dp3529661,dp3529661,stable
 12.00,0030,0050,1b. RWEAs at the previous quarter-end end of the day,e. Other,dp3529537,dp3529537,stable
 12.00,0030,0060,1b. RWEAs at the previous quarter-end end of the day,f. Total RWEAs,dp3529521,dp3529521,stable
 12.00,0030,0070,1b. RWEAs at the previous quarter-end end of the day,g. Total own funds requirements,dp3529421,dp3529421,stable
 12.00,0040,0010,2. Movement in risk levels,a. VaR,dp3529686,dp3529686,stable
 12.00,0040,0020,2. Movement in risk levels,b. SVaR,dp3529717,dp3529717,stable
+12.00,0040,0030,2. Movement in risk levels,c. IRC,dp3529718,dp3529718,stable
+12.00,0040,0040,2. Movement in risk levels,d. Comprehensive risk measure,dp3529685,dp3529685,stable
+12.00,0040,0050,2. Movement in risk levels,e. Other,dp3529684,dp3529684,stable
 12.00,0040,0060,2. Movement in risk levels,f. Total RWEAs,dp3529515,dp3529515,stable
 12.00,0040,0070,2. Movement in risk levels,g. Total own funds requirements,dp3529399,dp3529399,stable
+12.00,0050,0010,3. Model updates/changes,a. VaR,dp3529814,dp3529814,stable
+12.00,0050,0020,3. Model updates/changes,b. SVaR,dp3529816,dp3529816,stable
+12.00,0050,0030,3. Model updates/changes,c. IRC,dp3529817,dp3529817,stable
+12.00,0050,0040,3. Model updates/changes,d. Comprehensive risk measure,dp3529821,dp3529821,stable
+12.00,0050,0050,3. Model updates/changes,e. Other,dp3529823,dp3529823,stable
+12.00,0050,0060,3. Model updates/changes,f. Total RWEAs,dp3529593,dp3529593,stable
+12.00,0050,0070,3. Model updates/changes,g. Total own funds requirements,dp3529403,dp3529403,stable
 12.00,0090,0010,7. Other,a. VaR,dp3529697,dp3529697,stable
 12.00,0090,0020,7. Other,b. SVaR,dp3529812,dp3529812,stable
 12.00,0090,0050,7. Other,e. Other,dp3529695,dp3529695,stable
@@ -91,15 +117,22 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 12.00,0090,0070,7. Other,g. Total own funds requirements,dp3529404,dp3529404,stable
 12.00,0100,0010,8a. RWEAs at the end of the disclosure period end of the day,a. VaR,dp3529536,dp3529536,stable
 12.00,0100,0020,8a. RWEAs at the end of the disclosure period end of the day,b. SVaR,dp3529535,dp3529535,stable
+12.00,0100,0030,8a. RWEAs at the end of the disclosure period end of the day,c. IRC,dp3529662,dp3529662,stable
+12.00,0100,0040,8a. RWEAs at the end of the disclosure period end of the day,d. Comprehensive risk measure,dp3529663,dp3529663,stable
 12.00,0100,0050,8a. RWEAs at the end of the disclosure period end of the day,e. Other,dp3529534,dp3529534,stable
 12.00,0100,0060,8a. RWEAs at the end of the disclosure period end of the day,f. Total RWEAs,dp3529520,dp3529520,stable
 12.00,0100,0070,8a. RWEAs at the end of the disclosure period end of the day,g. Total own funds requirements,dp3529422,dp3529422,stable
 12.00,0110,0010,8b. Regulatory adjustment,a. VaR,dp3529583,dp3529583,stable
 12.00,0110,0020,8b. Regulatory adjustment,b. SVaR,dp3529584,dp3529584,stable
+12.00,0110,0030,8b. Regulatory adjustment,c. IRC,dp3529529,dp3529529,stable
+12.00,0110,0040,8b. Regulatory adjustment,d. Comprehensive risk measure,dp3529528,dp3529528,stable
+12.00,0110,0050,8b. Regulatory adjustment,e. Other,dp3529527,dp3529527,stable
 12.00,0110,0060,8b. Regulatory adjustment,f. Total RWEAs,dp3529590,dp3529590,stable
 12.00,0110,0070,8b. Regulatory adjustment,g. Total own funds requirements,dp3529423,dp3529423,stable
 12.00,0120,0010,8. RWEAs at the end of the disclosure period,a. VaR,dp3529765,dp3529765,stable
 12.00,0120,0020,8. RWEAs at the end of the disclosure period,b. SVaR,dp3529699,dp3529699,stable
+12.00,0120,0030,8. RWEAs at the end of the disclosure period,c. IRC,dp3529698,dp3529698,stable
+12.00,0120,0040,8. RWEAs at the end of the disclosure period,d. Comprehensive risk measure,dp3529764,dp3529764,stable
 12.00,0120,0050,8. RWEAs at the end of the disclosure period,e. Other,dp3529763,dp3529763,stable
 12.00,0120,0060,8. RWEAs at the end of the disclosure period,f. Total RWEAs,dp3529523,dp3529523,stable
 12.00,0120,0070,8. RWEAs at the end of the disclosure period,g. Total own funds requirements,dp3529407,dp3529407,stable
@@ -142,7 +175,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 60.00.A,0110,0010,9. Of which other CCR,a. T,dp3530282,dp3530282,stable
 60.00.A,0120,0010,10. Credit valuation adjustments risk - CVA risk,a. T,dp3295621,dp3295621,stable
 60.00.A,0120,0020,9. Of which other CCR,b. T-1,dp3530253|dp475441,dp3530253|dp475441,ambiguous
-60.00.A,0120,0030,10. Credit valuation adjustments risk - CVA risk,c. T,dp475427|dp475430,dp475427|dp475430,ambiguous
+60.00.A,0120,0030,9. Of which other CCR,c. T,dp475427|dp475430,dp475427|dp475430,ambiguous
 60.00.A,0130,0010,EU 10a. Of which the standardised approach (SA),a. T,dp3295827,dp3295827,stable
 60.00.A,0130,0020,EU 10a. Of which the standardised approach (SA),b. T-1,dp3530252,dp3530252,stable
 60.00.A,0130,0030,EU 10a. Of which the standardised approach (SA),c. T,dp3529427,dp3529427,stable
@@ -567,6 +600,9 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 63.02.C,0280,0020,9. Total,b. RWEAs for column a if re-computed using the standardised approach,dp3530810,dp3530810,stable
 63.02.C,0280,0040,9. Total,d. RWEAs calculated using full standardised approach,dp3530793,dp3530793,stable
 63.02.C,0280,0050,9. Total,EU d. RWEAs that is the base of the output floor,dp3530794,dp3530794,stable
+67.02,0010,0010,1 Total risk exposure amount,a,dp38483,dp38483,stable
+67.02,0020,0010,2 Institution specific countercyclical capital buffer rate,a,dp3526561,dp3526561,stable
+67.02,0030,0010,3 Institution specific countercyclical capital buffer requirement,a,dp85048,dp85048,stable
 70.00,0010,0010,1. Total assets as per published financial statements,a. Applicable amount,dp32355,dp32355,stable
 70.00,0020,0010,2. Adjustment for entities which are consolidated for accounting purposes but are outside the scope of prudential consolidation,a. Applicable amount,dp3529845,dp3529845,stable
 70.00,0030,0010,3. (Adjustment for securitised exposures that meet the operational requirements for the recognition of risk transference),a. Applicable amount,dp454677,dp454677,stable
@@ -889,6 +925,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 90.01,0070,0050,5. Own funds and eligible liabilities as percentage of the TEM,e. T-3,dp3530308,dp3530308,stable
 90.01,0070,0060,5. Own funds and eligible liabilities as percentage of the TEM,f. T-4,dp3530309,dp3530309,stable
 90.01,0080,0010,EU-5a. Of which own funds or subordinated liabilities,a. T,dp459184,dp459184,stable
+90.01,0090,0020,6a. Does the subordination exemption in Article 72b 4 of Regulation EU No 575/2013 apply? 5% exemption,b. T,dp459230,dp459230,stable
 90.01,0090,0030,6a. Does the subordination exemption in Article 72b 4 of Regulation EU No 575/2013 apply? 5% exemption,c. T-1,dp3526405,dp3526405,stable
 90.01,0090,0040,6a. Does the subordination exemption in Article 72b 4 of Regulation EU No 575/2013 apply? 5% exemption,d. T-2,dp3526406,dp3526406,stable
 90.01,0090,0050,6a. Does the subordination exemption in Article 72b 4 of Regulation EU No 575/2013 apply? 5% exemption,e. T-3,dp3526407,dp3526407,stable
