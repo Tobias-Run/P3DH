@@ -214,3 +214,127 @@ Alle Zahlen oben aus `processed/long/p3dh_long.parquet`,
 `processed/filing_indicators.csv`, `processed/quality_profile.csv` und
 `interim/edap_recon/manifest_full.csv` — Letzteres ist die einzige Quelle für
 Zeitstempel und Resubmissions und damit die Grundlage des ganzen Abschnitts A.
+
+---
+
+# Nachtrag: externe Quellen, die tatsächlich tragen
+
+Geschrieben nach der Erkenntnis aus C2: externe Makro-Indikatoren scheitern an
+der Auflösung. Das Auswahlkriterium lautet deshalb **„macht die Quelle eine
+Aussage je Institut?"** — nicht je Land, nicht je Monat. Jede Quelle unten ist
+auf Verknüpfbarkeit getestet, mit gemessener Trefferquote.
+
+## D1. Der DISDOCS-Korpus — Text gegen Zahl ⭐ liegt bereits vor
+
+Wir schließen ihn **absichtlich aus** (`build_parse_manifest.py`: `if "DISDOCS"
+in r["url"]: continue`), weil er kein XBRL-CSV ist. Umfang:
+
+```
+1.073 PDF-Pakete im Katalog (von 4.278)
+  424 von 489 Instituten haben mindestens eines
+  je Stichtag: 190 / 125 / 4 / 658 / 96
+```
+
+Das sind die **qualitativen Pillar-3-Berichte** — der Fließtext, mit dem die
+Institute ihre Zahlen erklären. Wir haben die URLs, und wir haben als einzige
+beide Korpora über (LEI, Stichtag) verknüpfbar.
+
+Die Analyse, die daraus folgt, gibt es nirgends: **sagt der Text, was die Zahlen
+sagen?** Ein Institut mit einer NPL-Quote im obersten Dezil, dessen Bericht von
+„solider Kreditqualität" spricht, ist ein Befund — und zwar einer, den weder ein
+Zahlenwerk noch ein Textkorpus allein hergibt. Ebenso: Berichtslänge gegen Anzahl
+tatsächlich offengelegter Templates (viel Text, wenig Substanz).
+
+Aufwand: PDF-Extraktion (`pdf`-Werkzeuge vorhanden), keine neue Datenquelle.
+Vorsicht: Sprachenvielfalt (31 Länder) macht eine naive Schlagwortsuche
+unbrauchbar; der erste Schritt ist ein ehrlicher Test der Extraktionsqualität,
+nicht gleich eine Auswertung.
+
+## D2. Ereignisstudie: Einreichungszeitstempel × Marktdaten ⭐ originellste Idee
+
+Wir besitzen den **Einreichungszeitpunkt auf die Sekunde** (`submission_ts`,
+4.278 Zeilen). Das ist ein Ereignisdatum — und Ereignisdaten sind die Währung der
+Kapitalmarktforschung.
+
+Verknüpfbarkeit gemessen (GLEIF `/isins`): **14 von 20 Stichproben-Instituten
+emittieren Wertpapiere (70 %)**, hochgerechnet ~331 von 474. Spannweite von 51
+ISINs (CaixaBank) bis 42.124 (BNP Paribas).
+
+Die Frage dahinter ist die Existenzfrage der Säule 3: **reagiert der Markt
+überhaupt auf Offenlegung?** Und die schärfere Variante: reagiert er *stärker*,
+wenn die Offenlegung etwas Unangenehmes enthält — hohe NPL-Quote, ein
+`hoch`-Befund aus #17, eine spätere Korrektur (#31)? Wenn ja, ist Säule 3
+informativ; wenn nein, ist sie Ritual. Das ist eine Aussage über das
+Regulierungsinstrument selbst, nicht über eine Bank.
+
+Warum das sonst niemand macht: EDAP zeigt die Datei, nicht den
+Zeitstempel-Datensatz. Wir haben ihn als Tabelle.
+
+Grenzen, ehrlich: ein Aktien-Ereignisfenster deckt nur die börsennotierten
+Institute ab — Genossenschaftsbanken und Sparkassen fallen heraus, und die sind
+in unserer Population zahlreich. Anleihe-ISINs decken mehr ab, sind aber illiquider.
+Und Marktdaten selbst sind keine offene Quelle; das ist die eigentliche Hürde,
+nicht die Verknüpfung.
+
+## D3. Wikidata — die Institution als Organisation
+
+Wikidata führt die LEI als Property `P1278`; **53.336 Entitäten** tragen sie.
+Trefferquote auf unserem Bestand: **26 von 40 Stichproben-LEIs (65 %)**, mit
+Gründungsjahr und Mitarbeiterzahl (z. B. Helaba 6.148, DZ Bank 24.642).
+
+Die interessante Verknüpfung ist nicht „Bank ist alt", sondern eine Kennzahl, die
+erst durch die Kombination entsteht: **Anteil der „identified staff" an der
+Gesamtbelegschaft.** REM1 (`30.01` r0010) liefert die Zahl der Risikoträger,
+Wikidata die Gesamtzahl der Mitarbeiter. Der Quotient sagt, wie breit ein Institut
+den Kreis der Risikoträger zieht — eine Governance-Aussage, die in keiner
+Einzelquelle steht und die aufsichtlich unmittelbar relevant ist (CRD Art. 92).
+
+## D4. OpenStreetMap — physische gegen bilanzielle Präsenz (ungeprüft)
+
+Bankfilialen sind in OSM mit `operator`-Tag erfasst. Die Idee: **stimmt der
+physische Fußabdruck mit dem gemeldeten Länderexposure überein?**
+
+Ein Institut mit Exposure in 40 Ländern und Filialen in zweien ist ein
+grenzüberschreitender Wholesale-Kreditgeber; eines mit 500 Filialen in einem Land
+ist Retail. Das ist ein **Geschäftsmodell-Klassifikator aus einer Quelle
+ausserhalb der Aufsichtsdaten** — und damit eine unabhängige Gegenprobe zu den
+Archetypen, die wir bisher nur aus dem Template-Fingerabdruck ableiten
+(`phase4_analysis_ideas.md`).
+
+Ungeprüft: die Verknüpfung läuft über den Namen, nicht über die LEI, und
+OSM-`operator`-Tags sind uneinheitlich. Vor jeder Analyse steht eine gemessene
+Trefferquote — dieselbe Disziplin wie bei D2/D3.
+
+## D5. Die Negativmenge — wer fehlt? ⭐ am nächsten am Projektkern
+
+Alle bisherigen Ideen fragen, was in den Daten steht. Diese fragt das Gegenteil
+und ist damit „Fehlt ≠ Null" auf Populationsebene:
+
+**Welche Institute müssten offenlegen und tauchen im EDAP-Katalog gar nicht auf?**
+
+Die EZB veröffentlicht die Liste der signifikanten Institute (SSM), die nationalen
+Aufseher ihre Listen der weniger signifikanten. Der Abgleich gegen unsere 489
+Katalog-Institute liefert die Menge derer, die fehlen. Jeder Eintrag darin ist
+entweder eine berechtigte Ausnahme (Proportionalität, CRR Art. 433a–c) oder eine
+Lücke im Hub selbst.
+
+Das ist die stärkste Form der Aussage, die dieses Projekt treffen kann: nicht
+„diese Zahl ist auffällig", sondern **„hier fehlt eine ganze Bank"**. Und es ist
+exakt Arbeitsprinzip 3, eine Ebene höher angewendet.
+
+Voraussetzung: #32 (Konzerngraph), sonst hält man Töchter für fehlend, die über
+die Mutter konsolidiert offenlegen — was legitim ist.
+
+## Auswahlregel für künftige Quellen
+
+Die drei Fehlschläge (BIP, EURIBOR, und beinahe die ISIN-Idee) und die vier
+Treffer folgen derselben Regel:
+
+> Eine externe Quelle trägt, wenn sie je **Institut** eine Aussage macht und über
+> LEI oder Katalog-Metadaten verknüpfbar ist. Quellen mit Auflösung je Land oder
+> je Monat erzeugen Scheinpräzision, weil unsere effektive Beobachtungszahl auf
+> die Zahl der Länder bzw. Stichtage zusammenfällt.
+
+Und: **erst die Trefferquote messen, dann die Analyse planen.** GLEIF-Parents
+28 %, Wikidata 65 %, ISINs 70 %, DISDOCS 87 % — diese Zahlen entscheiden, ob eine
+Idee ein Produkt oder eine Anekdote wird.
