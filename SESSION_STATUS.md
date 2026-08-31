@@ -64,6 +64,10 @@ check_reference_data.py       (GUARD: decken FX-Kurse + entity_meta die Fakten a
 geo_names.csv                 -> codebook/geo_names.csv          (ISO-Ländercodes -> Namen, statisch)
 check_unit_consistency.py     -> interim/unit_consistency_report.csv (Größenordnungs-Scan + Sperrliste
                                  UNIT_AMBIGUOUS_TEMPLATES, importiert von build_zweig_b.py)
+check_plausibility.py         -> processed/quality_profile.csv + interim/plausibility_{cells,findings}.csv
+                                 (#17: Werte gegen die eigene Zellpopulation, einseitig nach oben, in EUR;
+                                 + fachliche Ratio-Korridore. KEIN Guard — bricht nie ab, die Befunde
+                                 betreffen die Einreichungen, nicht unsere Pipeline. Läuft nach Zweig B.)
 build_zweig_b.py              -> processed/long/p3dh_long.parquet (EINE gejointe Wahrheit, DuckDB;
                                  + open_axis_country aus geo_names.csv, eba_GA:-Codes -> Ländername;
                                  + unit_ambiguous-Flag für Templates mit gemischten Einheiten;
