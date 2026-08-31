@@ -77,6 +77,23 @@
   .cl{font-weight:400;opacity:.85;font-size:10px}
   td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:default}
   td.empty{background:var(--empty)}
+  /* "Fehlt != Null": Coverage-Kasten + Sektions-Badge */
+  .covwrap{border:1px solid var(--soft);border-radius:6px;padding:.55rem .7rem;margin:.8rem 0}
+  .covhead{font-size:12px;color:var(--muted);margin-bottom:.3rem}
+  .covblock{margin-top:.35rem;font-size:12px}
+  .covblock>summary{cursor:pointer;padding:.2rem 0}
+  .covtip{margin:.25rem 0 .4rem;color:var(--muted);font-size:11px;max-width:70ch}
+  .covlist{display:flex;flex-wrap:wrap;gap:.25rem}
+  .covitem{font-family:ui-monospace,monospace;font-size:11px;background:var(--soft);
+           border-radius:3px;padding:.05rem .3rem;cursor:default}
+  .covbadge{font-size:10px;font-weight:600;border-radius:3px;padding:.05rem .35rem;
+            margin-left:.4rem;vertical-align:middle;cursor:help}
+  .cov-false>summary,.covbadge.cov-false{color:#8a2b19}
+  .covbadge.cov-false{background:#fff0ee}
+  .cov-gap>summary,.covbadge.cov-gap{color:#6b5300}
+  .covbadge.cov-gap{background:#fff8e0}
+  .cov-conflict>summary,.covbadge.cov-conflict{color:#7a4a00}
+  .covbadge.cov-conflict{background:#fff3e0}
   .status{padding:2rem;color:var(--muted)}
   .prog{height:3px;background:var(--soft);border-radius:2px;overflow:hidden;margin-top:.6rem;width:340px}
   .prog i{display:block;height:100%;background:var(--blue);width:0%;transition:width .2s}
@@ -277,6 +294,7 @@ async function ensureLoaded(rep){
   if(rep.loaded) return;
   const j=await getJSON('reports/'+rep.shard);
   for(const [tid,cells] of Object.entries(j.tpl)) rep.templates.set(tid, cellsFrom(cells));
+  rep.coverage = j.coverage || {};   // Filing-Indicators ("Fehlt != Null"); {} = keine Aussage
   rep.loaded=true;
 }
 /* head templates (KM1 61.00 / OV1 60.00.A) for ALL reports — the cross-report data the
@@ -397,30 +415,63 @@ function wireControls(redraw){
 }
 
 /* ================= report view ================= */
+/* ---- "Fehlt != Null" (README, Arbeitsprinzip 3) --------------------------
+   Vier Zustaende, streng nach Belegbarkeit. 'unknown' ist der Default: liegt
+   keine Filing-Indicator-Deklaration vor, treffen wir KEINE Aussage. Aus einer
+   fehlenden Deklaration eine Aussage zu machen waere genau der Fehler, den das
+   Arbeitsprinzip verbietet.                                                */
+const COV = {
+  'not-reported':   {sym:'⊘', cls:'cov-false',
+                     label:'nicht offengelegt',
+                     tip:'Im Filing-Indicator ausdrücklich als NICHT offengelegt deklariert — eine bewusste Auslassung des Instituts (vgl. CRR Art. 432), keine fehlende Zahl.'},
+  'reported-empty': {sym:'',   cls:'cov-gap',
+                     label:'gemeldet, bei uns ohne auswertbare Zellen',
+                     tip:'Als offengelegt deklariert, aber unser Bestand hält dazu keine platzierbaren Zellen — eine Lücke auf UNSERER Seite (offene Achsen / fehlende dp-Codes), keine Auslassung des Instituts.'},
+  'conflict':       {sym:'⚠',  cls:'cov-conflict',
+                     label:'als nicht offengelegt deklariert, aber Daten vorhanden',
+                     tip:'Widerspruch in der Meldung des Instituts: der Filing-Indicator sagt „nicht offengelegt", der Report enthält aber Fakten dazu. Beides bleibt unverändert sichtbar — wir korrigieren die Meldung nicht.'},
+  'reported':       {sym:'',   cls:'',  label:'', tip:''},
+  'unknown':        {sym:'',   cls:'',  label:'', tip:''},
+};
+function coverageState(rep, tid){
+  const s = (rep.coverage || {})[tid];
+  if (s === 'not-reported' && rep.templates.has(tid)) return 'conflict';
+  return COV[s] ? s : 'unknown';
+}
+
 function renderTemplate(tid, cells, rep){
   const tcode=dpmCode(tid);
   const title=TITLES.get(tcode)||'';
+  const state = coverageState(rep, tid);
   const {rate,cur}=fxOf(rep);
-  const rows=[...new Set(cells.map(c=>c.row))].sort();
-  const cols=[...new Set(cells.map(c=>c.col))].sort();
-  const val=new Map(cells.map(c=>[c.row+'|'+c.col,c.val]));
+  const cellList = Array.isArray(cells) ? cells : [];
+  const rows=[...new Set(cellList.map(c=>c.row))].sort();
+  const cols=[...new Set(cellList.map(c=>c.col))].sort();
+  const val=new Map(cellList.map(c=>[c.row+'|'+c.col,c.val]));
   const dtOf=(r,c)=>{ const e=CB.get(tcode+'|'+r+'|'+c); return e?e.dt:''; };
-  const rowLbl=r=>{ const e=CB.get(tcode+'|'+r+'|'+cols[0]); return e?e.rl:''; };
+  const rowLbl=r=>{ const e=CB.get(tcode+'|'+r+'|'+(cols[0]||'')); return e?e.rl:''; };
   const colLbl=c=>{ for(const r of rows){ const e=CB.get(tcode+'|'+r+'|'+c); if(e) return e.cl; } return ''; };
+  const c=COV[state];
+  const coverageNote = c.label
+    ? `<span class="covbadge ${c.cls}" title="${esc(c.tip)}">${c.sym?c.sym+' ':''}${esc(c.label)}</span>` : '';
   let maxAbs=0;
-  for(const c of cells) if(dtOf(c.row,c.col)==='monetary'){
+  for(const c of cellList) if(dtOf(c.row,c.col)==='monetary'){
     const n=Math.abs(Number(c.val))*rate; if(n>maxAbs) maxAbs=n; }
   const unit=maxAbs>0?pickUnit(maxAbs):1;
   const conv=EUR&&cur==='EUR'&&curOf(rep)!=='EUR';
   const note=unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${esc(cur)}${conv?' · EZB-Kurs':''}</span>`
              :(conv?`<span class="scalenote">EUR · EZB-Kurs</span>`:'');
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${note}</h3><table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
+  if(!cellList.length) return '';   // leere Templates stehen im Coverage-Block, nicht als Sektion
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3><table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){
     h+=`<tr><th class="rh">${esc(r)}</th><td class="rl">${esc(rowLbl(r))}</td>`;
     for(const c of cols){
       const v=val.get(r+'|'+c);
+      // Leere Zelle INNERHALB eines gemeldeten Templates: die Filing-Indicators
+      // sind template-, nicht zellgenau — ueber die einzelne Zelle wissen wir
+      // nichts und behaupten deshalb nichts.
       if(v===undefined){ h+='<td class="empty"></td>'; continue; }
       const dt=dtOf(r,c);
       const tip=dt==='monetary'?` title="${esc(fmt(v))} ${esc(curOf(rep))} (Originalwert)"`:
@@ -430,6 +481,40 @@ function renderTemplate(tid, cells, rep){
     h+='</tr>';
   }
   return h+'</tbody></table></section>';
+}
+/* Was NICHT im Report steht — der eigentliche "Fehlt != Null"-Block.
+   Als ein kompakter Kasten, nicht als ~43 leere Sektionen je Report: eine
+   Auslassung ist eine Zeile Information, kein Gitter aus Symbolen. */
+function coverageBlock(rep){
+  const cov=rep.coverage||{};
+  const keys=Object.keys(cov);
+  if(!keys.length) return '';        // keine Deklaration geladen -> kein Kasten, keine Aussage
+  const byState={};
+  for(const tid of keys){
+    // Widerspruch: als NICHT offengelegt deklariert, aber Fakten vorhanden.
+    // Eigener Zustand — die Deklaration stillschweigend zu ignorieren waere
+    // genauso falsch wie die Daten zu verschweigen.
+    (byState[coverageState(rep,tid)]=byState[coverageState(rep,tid)]||[]).push(tid);
+  }
+  const reported=(byState['reported']||[]).length;
+  const conflict=(byState['conflict']||[]).length;
+  let h='';
+  for(const st of ['not-reported','conflict','reported-empty']){
+    const list=(byState[st]||[]).sort();
+    if(!list.length) continue;
+    const c=COV[st];
+    h+=`<details class="covblock ${c.cls}"><summary>${c.sym?c.sym+' ':''}<b>${list.length}</b> Templates — ${esc(c.label)}</summary>
+      <p class="covtip">${esc(c.tip)}</p><div class="covlist">`;
+    for(const tid of list){
+      const t=TITLES.get(dpmCode(tid))||'';
+      h+=`<span class="covitem" title="${esc(t)}">${esc(tid)}</span>`;
+    }
+    h+='</div></details>';
+  }
+  if(!h) return '';
+  return `<div class="covwrap"><div class="covhead">Meldeumfang laut Filing-Indicators:
+    <b>${reported}</b> von <b>${keys.length}</b> deklarierten Templates offengelegt${
+    conflict?` · <b>${conflict}</b> widersprüchlich (unten)`:''}</div>${h}</div>`;
 }
 async function renderReport(rep){
   VIEW='reports'; setTabs();
@@ -451,6 +536,7 @@ async function renderReport(rep){
     <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(curOf(rep))}</b>
     · Framework <b>${esc(rep.framework)}</b></div></div>
     <div id="tsSection"></div>
+    ${coverageBlock(rep)}
     <div class="tfilter"><input id="tfilter" placeholder="Filter templates (code / title)…">${controlsHTML()}</div>
     <div id="tcontainer"></div>`;
   // Zeitreihe nur, wenn dieses Institut ≥2 Stichtage hat (aus dem Slim-Index bekannt) →
