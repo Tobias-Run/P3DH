@@ -17,7 +17,7 @@ Einreichungen** — 4.278 Zeilen mit Zeitstempel, Resubmission-Historie und
 Filing-Indicators. Diese Ebene ist bislang komplett ungenutzt, und sie beschreibt
 nicht die Bank, sondern **ihr Verhalten**. Drei Ideen daraus.
 
-### A1. Korrekturverhalten als unabhängiges Qualitätssignal ⭐ stärkster Fund
+### A1. Korrekturverhalten als unabhängiges Qualitätssignal ⭐ stärkster Fund — Issue #31
 
 Von 4.278 Einreichungen sind **472 Korrekturen**; 162 von 489 Instituten haben
 mindestens einmal nachgemeldet, ein Report wurde **zehnmal** eingereicht.
@@ -53,7 +53,7 @@ und das ist eine Liste, die es sonst nirgends gibt.
 Warum nur wir das können: es braucht den Katalog (Verhalten) *und* die
 Wertanalyse (#17) gleichzeitig. EDAP hat beides, verknüpft es aber nicht.
 
-### A2. Der Offenlegungs-Lag und seine Kompression
+### A2. Der Offenlegungs-Lag und seine Kompression — Issue #33
 
 Abstand zwischen Stichtag und Einreichung, Median über alle Einreichungen:
 
@@ -78,7 +78,7 @@ Vorsicht bei der Interpretation: die Rechtsfrist unterscheidet sich je
 Institutstyp (CRR Art. 433a–c). Ein Vergleich ist nur *innerhalb* einer
 Frequenzklasse zulässig — die lässt sich aus der Population lernen (siehe A3).
 
-### A3. Offenlegungs-Umfang als Zeitreihe
+### A3. Offenlegungs-Umfang als Zeitreihe — Issue #34
 
 199 von 209 Entitäten mit ≥2 Stichtagen ändern zwischen zwei Terminen, welche
 Templates sie offenlegen: 4.594 Templates neu, 5.168 eingestellt.
@@ -100,7 +100,7 @@ dort zeigen wir *dass* etwas nicht offengelegt wird, hier *seit wann*.
 
 ## Struktur statt Kennzahl
 
-### B1. Konzerngraph über GLEIF ⭐ methodisch am reizvollsten
+### B1. Konzerngraph über GLEIF ⭐ methodisch am reizvollsten — Issue #32
 
 Der Bestand hat eine merkwürdige Asymmetrie: **325 Institute melden konsolidiert
 (CON), 148 auf Einzelinstitutsebene (IND) — und genau eines beides.** Die
@@ -126,7 +126,7 @@ Zweiter Nutzen: **Doppelzählung erkennen.** Wer heute Länder-Exposures über a
 die Voraussetzung dafür, dass Aggregate über die Population überhaupt
 interpretierbar sind (betrifft #19 direkt).
 
-### B2. Bank↔Land als bipartiter Graph
+### B2. Bank↔Land als bipartiter Graph — Issue #35
 
 `67.01.A` (CCyB1) liefert Exposure je Land je Institut — 262 Institute, 1–203
 Länder, Mediandomestizität 83,8 % (aus der #11-Analyse). Als Graph gelesen:
@@ -140,7 +140,7 @@ Länder, Mediandomestizität 83,8 % (aus der #11-Analyse). Als Graph gelesen:
 - ⚠️ Setzt B1 voraus, sonst zählen Konzerne mehrfach; und `eba_GA:x1` ist die
   Summenzeile, kein Land (belegt an 89 von 96 Instituten).
 
-### B3. Intra-Instituts-Konsistenz über die Zeit
+### B3. Intra-Instituts-Konsistenz über die Zeit — Issue #36
 
 Prototypisch gemessen: 89.846 vergleichbare Zellpaare desselben Instituts über
 zwei Stichtage, davon **6.111 Sprünge über ≥3 und 2.584 über ≥6
@@ -156,7 +156,7 @@ Stichtagen: 88 → 209).
 
 ## Externe Daten: was trägt und was nicht
 
-### C1. Abgleich gegen die EBA-eigenen Aggregate ⭐ höchster Erkenntniswert je Aufwand
+### C1. Abgleich gegen die EBA-eigenen Aggregate ⭐ höchster Erkenntniswert je Aufwand — Issue #37
 
 Die EBA veröffentlicht selbst aggregierte Kennzahlen (Risk Dashboard,
 Transparency Exercise). **Niemand prüft, ob die Summe der Pillar-3-Einreichungen
@@ -224,7 +224,7 @@ der Auflösung. Das Auswahlkriterium lautet deshalb **„macht die Quelle eine
 Aussage je Institut?"** — nicht je Land, nicht je Monat. Jede Quelle unten ist
 auf Verknüpfbarkeit getestet, mit gemessener Trefferquote.
 
-## D1. Der DISDOCS-Korpus — Text gegen Zahl ⭐ liegt bereits vor
+## D1. Der DISDOCS-Korpus — Text gegen Zahl ⭐ liegt bereits vor — Issue #38
 
 Wir schließen ihn **absichtlich aus** (`build_parse_manifest.py`: `if "DISDOCS"
 in r["url"]: continue`), weil er kein XBRL-CSV ist. Umfang:
@@ -250,7 +250,7 @@ Vorsicht: Sprachenvielfalt (31 Länder) macht eine naive Schlagwortsuche
 unbrauchbar; der erste Schritt ist ein ehrlicher Test der Extraktionsqualität,
 nicht gleich eine Auswertung.
 
-## D2. Ereignisstudie: Einreichungszeitstempel × Marktdaten ⭐ originellste Idee
+## D2. Ereignisstudie: Einreichungszeitstempel × Marktdaten ⭐ originellste Idee — Issue #39
 
 Wir besitzen den **Einreichungszeitpunkt auf die Sekunde** (`submission_ts`,
 4.278 Zeilen). Das ist ein Ereignisdatum — und Ereignisdaten sind die Währung der
@@ -276,7 +276,7 @@ in unserer Population zahlreich. Anleihe-ISINs decken mehr ab, sind aber illiqui
 Und Marktdaten selbst sind keine offene Quelle; das ist die eigentliche Hürde,
 nicht die Verknüpfung.
 
-## D3. Wikidata — die Institution als Organisation
+## D3. Wikidata — die Institution als Organisation — Issue #40
 
 Wikidata führt die LEI als Property `P1278`; **53.336 Entitäten** tragen sie.
 Trefferquote auf unserem Bestand: **26 von 40 Stichproben-LEIs (65 %)**, mit
@@ -289,7 +289,7 @@ Wikidata die Gesamtzahl der Mitarbeiter. Der Quotient sagt, wie breit ein Instit
 den Kreis der Risikoträger zieht — eine Governance-Aussage, die in keiner
 Einzelquelle steht und die aufsichtlich unmittelbar relevant ist (CRD Art. 92).
 
-## D4. OpenStreetMap — physische gegen bilanzielle Präsenz (ungeprüft)
+## D4. OpenStreetMap — physische gegen bilanzielle Präsenz (ungeprüft) — Issue #41
 
 Bankfilialen sind in OSM mit `operator`-Tag erfasst. Die Idee: **stimmt der
 physische Fußabdruck mit dem gemeldeten Länderexposure überein?**
@@ -305,7 +305,7 @@ Ungeprüft: die Verknüpfung läuft über den Namen, nicht über die LEI, und
 OSM-`operator`-Tags sind uneinheitlich. Vor jeder Analyse steht eine gemessene
 Trefferquote — dieselbe Disziplin wie bei D2/D3.
 
-## D5. Die Negativmenge — wer fehlt? ⭐ am nächsten am Projektkern
+## D5. Die Negativmenge — wer fehlt? ⭐ am nächsten am Projektkern — Issue #42
 
 Alle bisherigen Ideen fragen, was in den Daten steht. Diese fragt das Gegenteil
 und ist damit „Fehlt ≠ Null" auf Populationsebene:
