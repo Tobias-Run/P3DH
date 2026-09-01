@@ -106,6 +106,48 @@ def load_coverage_map(root: Path | None = None):
     return mapping
 
 
+def load_quality_profile(root: Path | None = None):
+    """Plausibilitäts-Befunde je Report (Issue #17) -> {report_key: {...}}.
+
+    Der Viewer soll Ausreißer einordnen können, ohne sie zu verstecken (#48):
+    die Benchmark-Rangliste führte bisher mit Werten wie 387 % CET1 an, ohne
+    Hinweis darauf, dass wir sie selbst als auffällig einstufen.
+
+    Landet im INDEX, nicht im Shard: die Benchmark-Tabelle braucht die Angabe
+    für alle Zeilen gleichzeitig, ein Shard wird aber nur für den geöffneten
+    Report geladen. Der Aufschlag ist klein — nur Reports MIT Befunden stehen
+    drin (326 von 882), je Eintrag vier Zahlen.
+
+    Report-Key ist 'entityID|refPeriod' wie im Index; entityID wird aus
+    (lei, scope) rekonstruiert, weil quality_profile.csv beide getrennt führt.
+    """
+    root = root or ROOT
+    path = root / "processed" / "quality_profile.csv"
+    if not path.exists():
+        return {}
+    out = {}
+    with path.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            lei, scope, rp = r.get("lei"), r.get("scope"), r.get("refPeriod")
+            if not (lei and scope and rp):
+                continue
+            out[f"rs:{lei}.{scope}|{rp}"] = {
+                "n": int(r["n_findings"] or 0),
+                "h": int(r["n_hoch"] or 0),
+                "m": int(r["n_mittel"] or 0),
+                "d": round(float(r["max_deviation_orders"] or 0), 1),
+                # Betroffene Templates: der Viewer markiert template-GENAU, nicht
+                # pauschal. Der Schweregrad allein trägt das nicht — er ist auf
+                # Einheiten-Verwechslungen geeicht (6 Größenordnungen = "hoch")
+                # und stuft deshalb einen statistisch extremen Ausreißer in einer
+                # engen Quotenzelle als "niedrig" ein: Kommuninvest liegt bei
+                # KM1 r0050 mit robustem z = 10,3 weit außerhalb, aber nur 1,3
+                # Größenordnungen über dem Median. Siehe #53.
+                "t": [t for t in (r.get("templates") or "").split("|") if t],
+            }
+    return out
+
+
 def resolve_coverage(declared, data_tids):
     """Project the filing-indicator declarations of ONE report onto the template
     ids the viewer actually renders.
@@ -159,6 +201,7 @@ def main():
     con = duckdb.connect()
     con.execute(f"CREATE VIEW p AS SELECT * FROM '{PARQUET}'")
     coverage = load_coverage_map(ROOT)
+    quality = load_quality_profile(ROOT)
 
     # --- pass 1: group placeable cells into reports (raw string values) ---
     reports = {}
@@ -167,7 +210,12 @@ def main():
                template_id, cell_row, cell_col, fact_value_raw
         FROM p
         WHERE cell_row IS NOT NULL AND cell_row <> ''
-        ORDER BY entityID, refPeriod, template_id, cell_row, cell_col
+        -- fact_value_raw mit in die Sortierung: 74.905 Zellkoordinaten sind je
+        -- Report MEHRFACH und mit verschiedenen Werten belegt (65 % davon aus
+        -- offenen Achsen, deren Dimension der Shard nicht trägt — siehe #52).
+        -- Ohne diesen Schlüssel entscheidet die Zufallsreihenfolge, welcher
+        -- Wert im Viewer landet, und sie wechselt zwischen Läufen.
+        ORDER BY entityID, refPeriod, template_id, cell_row, cell_col, fact_value_raw
     """).fetchall():
         key = eid + "|" + rp
         rep = reports.get(key)
@@ -229,8 +277,14 @@ def main():
     for key, rep in reports.items():
         fname = safe_name(rep["entityID"]) + "__" + rep["refPeriod"] + ".json"
         current.add(fname)
+        # Deterministisch serialisieren: resolve_coverage() iteriert über ein
+        # set(), dessen Reihenfolge zwischen Läufen schwankt (String-Hash-
+        # Randomisierung). Ohne sort_keys schrieb jeder Lauf ~830 der 882
+        # Shards neu, obwohl sich inhaltlich nichts geändert hatte — das macht
+        # write_if_changed wirkungslos und erzeugt Churn auf dem data-Branch,
+        # der force-gepusht wird.
         payload = json.dumps({"tpl": rep["tpl"], "coverage": rep.get("coverage", {})},
-                             ensure_ascii=False, separators=(",", ":"))
+                             ensure_ascii=False, separators=(",", ":"), sort_keys=True)
         if write_if_changed(SHARDS / fname, payload):
             written += 1
         else:
@@ -248,11 +302,15 @@ def main():
             head[t] = cells
         if head:
             benchmark[key] = head
-        index_reports.append({
+        entry = {
             "k": key, "entityID": rep["entityID"], "refPeriod": rep["refPeriod"],
             "baseCurrency": rep["baseCurrency"], "framework": rep["framework"],
             "nt": len(rep["tpl"]), "f": fname,
-        })
+        }
+        q = quality.get(key)
+        if q:                       # nur Reports MIT Befunden tragen das Feld
+            entry["q"] = q
+        index_reports.append(entry)
 
     removed = 0
     for old in SHARDS.glob("*.json"):        # prune shards of reports that vanished
