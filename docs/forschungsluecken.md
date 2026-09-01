@@ -40,7 +40,7 @@ Das spricht direkt für #20 (dokumentiertes Release).
 
 ---
 
-## F1. Strategische Auslassung nach CRR Art. 432 ⭐ die klarste Lücke
+## F1. Strategische Auslassung nach CRR Art. 432 ⭐ die klarste Lücke — Issue #43
 
 **Der Regelungsrahmen.** Art. 432 erlaubt Instituten, Angaben wegzulassen, die
 nicht *wesentlich* sind, sowie solche, die *proprietär oder vertraulich* sind —
@@ -68,7 +68,7 @@ und — mit #34 — ob eine Auslassung dauerhaft ist oder wechselt.
 
 **Anschluss im Backlog:** #21 (Sichtbarkeit im Viewer), #34 (Zeitdimension).
 
-## F2. Wirkt die Proportionalität — und wie stark? ⭐
+## F2. Wirkt die Proportionalität — und wie stark? ⭐ — Issue #44
 
 **Die offene Frage.** Die CRD-V-Reform schuf für „kleine und nicht komplexe
 Institute" erleichterte Offenlegungspflichten (Art. 433b: nur jährlich, für
@@ -98,7 +98,7 @@ Handstichprobe.
 komplex" nach Art. 4(1)(145) CRR. Vor jeder Aussage ist die Abbildung zu
 prüfen; sonst misst man die falsche Klasse.
 
-## F3. RWA-Variabilität — der unerklärte Rest
+## F3. RWA-Variabilität — der unerklärte Rest — Issue #45
 
 **Stand der Forschung.** Die Streuung der Risikogewichte zwischen Banken ist
 eines der meistuntersuchten Themen der Bankenregulierung; sie war der Anlass für
@@ -133,7 +133,7 @@ gefunden hat (DNB meldet 100.000.000 statt 1,0; populationsweit 228 PD-Zellen
 über 100 %). Ohne den Plausibilitätsfilter aus #17 wäre jede Auswertung dieser
 Zellen wertlos — hier zahlt sich die Vorarbeit unmittelbar aus.
 
-## F4. Marktdisziplin — die Kernfrage, die wir nur halb bedienen können
+## F4. Marktdisziplin — die Kernfrage, die wir nur halb bedienen können — Issue #39
 
 **Stand der Forschung: gemischt.** Es gibt Belege für positive Wirkung
 (Offenlegung → höhere Kapitalpuffer; Risikooffenlegungsindex negativ korreliert
@@ -150,7 +150,7 @@ für die Ereignisstudie in #39.
 Lizenzfrage, und sie ist in #39 als Blockade benannt. Ohne sie können wir die
 Frage vorbereiten, aber nicht beantworten.
 
-## F5. Rechtzeitigkeit als eigene Dimension
+## F5. Rechtzeitigkeit als eigene Dimension — Issue #33
 
 In der gesichteten Literatur kommt **Zeit** fast nur als Berichtsjahr vor, nicht
 als Verzögerung. Das liegt daran, dass ein PDF auf einer Bankwebsite kein
