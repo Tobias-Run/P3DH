@@ -96,6 +96,10 @@
   .covbadge.cov-conflict{background:#fff3e0}
   /* Plausibilitäts-Marker (#48): einordnen, nicht warnen — deshalb dezent
      und bewusst NICHT rot; es sind Offenlegungsdaten, keine Bewertung. */
+  /* Dimensionswähler für Templates mit offener Achse (#52) */
+  .dimbar{display:flex;align-items:center;gap:.4rem;margin:.15rem 0 .35rem;font-size:11px;color:var(--muted)}
+  .dimbar select{font:inherit;font-size:11px;padding:.1rem .25rem;border:1px solid var(--line);
+                 border-radius:4px;background:var(--card);color:var(--ink);max-width:22rem}
   .qb{display:inline-block;font-size:10px;font-weight:600;border-radius:3px;padding:0 .3rem;
       margin-left:.3rem;background:#f3efe3;color:#6b5300;cursor:help;white-space:nowrap}
   tr.flagged td:first-child{box-shadow:inset 3px 0 0 #c9a227}
@@ -282,7 +286,13 @@ function fxOf(rep){
 }
 
 /* ================= data indexing ================= */
-const cellsFrom=arr=>arr.map(c=>({row:c[0], col:c[1], val:c[2]}));
+/* Vierte Stelle = Diskriminator (#52): sie steht nur an Koordinaten, die im
+   Report MEHRFACH belegt sind — offene Achsen (Land / Dimensionswert) oder
+   mehrere dp-Codes auf derselben Zelle. Ohne sie zeigte der Viewer einen
+   willkuerlich gewaehlten von bis zu sieben Werten. */
+const cellsFrom=arr=>arr.map(c=>({row:c[0], col:c[1], val:c[2], dim:c[3]||''}));
+/* Ausgewaehlter Dimensionswert je Template, waehrend ein Report offen ist. */
+let DIMSEL=new Map();
 function buildFromIndex(idx, codebook){
   for(const [k,v] of Object.entries(codebook.cb))     CB.set(k,{rl:v[0], cl:v[1], dt:v[2]||''});
   for(const [k,v] of Object.entries(codebook.titles)) TITLES.set(k, v);
@@ -451,7 +461,12 @@ function renderTemplate(tid, cells, rep){
   const title=TITLES.get(tcode)||'';
   const state = coverageState(rep, tid);
   const {rate,cur}=fxOf(rep);
-  const cellList = Array.isArray(cells) ? cells : [];
+  const allCells = Array.isArray(cells) ? cells : [];
+  // Dimensionswerte dieses Templates (#52). Zellen OHNE Diskriminator sind
+  // eindeutig und gehoeren zu jedem Schnitt — sie bleiben immer sichtbar.
+  const dims=[...new Set(allCells.map(c=>c.dim).filter(Boolean))].sort();
+  const dimSel = dims.length ? (dims.includes(DIMSEL.get(tid))?DIMSEL.get(tid):dims[0]) : '';
+  const cellList = dims.length ? allCells.filter(c=>!c.dim||c.dim===dimSel) : allCells;
   const rows=[...new Set(cellList.map(c=>c.row))].sort();
   const cols=[...new Set(cellList.map(c=>c.col))].sort();
   const val=new Map(cellList.map(c=>[c.row+'|'+c.col,c.val]));
@@ -469,7 +484,14 @@ function renderTemplate(tid, cells, rep){
   const note=unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${esc(cur)}${conv?' · EZB-Kurs':''}</span>`
              :(conv?`<span class="scalenote">EUR · EZB-Kurs</span>`:'');
   if(!cellList.length) return '';   // leere Templates stehen im Coverage-Block, nicht als Sektion
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3><table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
+  // Dimensionswaehler: diese Templates sind kein 2D-Gitter, sondern EIN Gitter
+  // je Dimensionswert. Ohne Auswahl saehe der Nutzer einen von vielen Werten,
+  // ohne zu erfahren, dass es mehrere gibt.
+  const dimBar = dims.length ? `<div class="dimbar">Dimension:
+    <select class="dimsel" data-tid="${esc(tid)}">${dims.map(d=>
+      `<option value="${esc(d)}"${d===dimSel?' selected':''}>${esc(d)}</option>`).join('')}</select>
+    <span class="cl">${dims.length} Werte — je Wert ein eigenes Gitter</span></div>` : '';
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}<table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){
@@ -564,6 +586,13 @@ async function renderReport(rep){
   };
   draw();
   document.getElementById('tfilter').addEventListener('input',draw);
+  // Dimensionswechsel (#52): Auswahl merken und nur neu zeichnen.
+  document.getElementById('tcontainer').addEventListener('change',e=>{
+    const sel=e.target.closest('.dimsel');
+    if(!sel) return;
+    DIMSEL.set(sel.dataset.tid, sel.value);
+    draw();
+  });
   wireControls(draw);
   renderReportList();
   main.scrollTop=0;

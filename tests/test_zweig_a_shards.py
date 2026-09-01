@@ -27,6 +27,62 @@ class BaseTidTest(unittest.TestCase):
         self.assertEqual(z.base_tid("00.01"), "00.01")
 
 
+class CellDiscriminatorTest(unittest.TestCase):
+    """#52: was unterscheidet zwei Fakten auf derselben (template,row,col)?"""
+
+    def test_country_wins(self):
+        self.assertEqual(z.cell_discriminator("Niederlande", "RIO=eba_GA:NL", "dp1"),
+                         "Niederlande")
+
+    def test_raw_dimension_when_no_country(self):
+        self.assertEqual(z.cell_discriminator(None, "qEEA=eba_qAE:qx2071", "dp1"),
+                         "qEEA=eba_qAE:qx2071")
+
+    def test_datapoint_as_last_resort(self):
+        """LIQ1 (74.00.C) hat vier dp-Codes auf r0150/c0050 mit identischen
+        Labels — unser Codebook kennt die unterscheidende Achse nicht."""
+        self.assertEqual(z.cell_discriminator(None, None, "dp3525361"), "dp3525361")
+
+    def test_nothing_yields_empty(self):
+        self.assertEqual(z.cell_discriminator(None, None, None), "")
+
+
+class CollapseCellsTest(unittest.TestCase):
+    def test_unique_cells_keep_three_elements(self):
+        """94 % der Zellen sind eindeutig — dort waere der Diskriminator nur
+        Ballast im Shard."""
+        out = z.collapse_cells([("0010", "0010", "5", "dpA"),
+                                ("0020", "0010", "7", "dpB")])
+        self.assertEqual(out, [["0010", "0010", "5"], ["0020", "0010", "7"]])
+
+    def test_colliding_cells_keep_discriminator(self):
+        out = z.collapse_cells([("0010", "0010", "5", "NL"),
+                                ("0010", "0010", "7", "DE")])
+        self.assertEqual(out, [["0010", "0010", "5", "NL"],
+                               ["0010", "0010", "7", "DE"]])
+
+    def test_collision_is_per_coordinate_not_per_template(self):
+        """Eine kollidierende Koordinate darf die uebrigen Zellen desselben
+        Templates nicht mit aufblaehen."""
+        out = z.collapse_cells([("0010", "0010", "5", "NL"),
+                                ("0010", "0010", "7", "DE"),
+                                ("0020", "0010", "9", "dpX")])
+        self.assertEqual(len(out[0]), 4)
+        self.assertEqual(len(out[2]), 3)
+
+    def test_input_order_is_preserved(self):
+        """Die Sortierung kommt aus SQL und traegt die Determiniertheit —
+        collapse_cells darf sie nicht antasten."""
+        rows = [("0010", "0010", str(i), f"d{i}") for i in range(5)]
+        self.assertEqual([c[2] for c in z.collapse_cells(rows)],
+                         ["0", "1", "2", "3", "4"])
+
+    def test_same_value_twice_still_counts_as_collision(self):
+        out = z.collapse_cells([("0010", "0010", "5", "NL"),
+                                ("0010", "0010", "5", "DE")])
+        self.assertTrue(all(len(c) == 4 for c in out))
+
+
 class LoadCoverageMapTest(unittest.TestCase):
     def _write(self, rows):
         root = Path(tempfile.mkdtemp())

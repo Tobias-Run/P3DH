@@ -106,6 +106,40 @@ def load_coverage_map(root: Path | None = None):
     return mapping
 
 
+def cell_discriminator(country, dims, dp):
+    """Was unterscheidet zwei Fakten auf DERSELBEN (template,row,col)?
+
+    Reihenfolge nach Lesbarkeit: aufgelöster Ländername vor roher Dimension
+    vor dp-Code. Der dp-Code ist die Rückfallebene für Fälle, in denen unser
+    Codebook die Unterscheidung nicht kennt — bei LIQ1 (`74.00.C`) etwa liegen
+    vier dp-Codes auf r0150/c0050 mit identischen Labels; die unterscheidende
+    Achse (vermutlich das Quartal des 12-Monats-Durchschnitts) steht im DPM,
+    aber nicht in `dpm_codebook.csv`. Gleiche Lückenklasse wie #3 und #29.
+    """
+    return country or dims or dp or ""
+
+
+def collapse_cells(rows):
+    """rows: Liste von (row, col, val, discriminator) EINES Templates.
+
+    Liefert die Shard-Darstellung: `[row, col, val]` für eindeutige Zellen,
+    `[row, col, val, disc]` für Koordinaten, die MEHRFACH belegt sind.
+
+    Hintergrund (#52): 88.155 der 1.540.802 Zellkoordinaten (5,7 %) tragen je
+    Report mehr als einen Fakt, 74.905 davon mit verschiedenen Werten. Der
+    Viewer baute daraus eine Map und behielt willkürlich einen Wert. Der
+    Diskriminator wird nur dort mitgeschrieben, wo er gebraucht wird — sonst
+    würde die Shard-Größe für 94 % unnötig wachsen.
+    """
+    seen = {}
+    for r, c, val, disc in rows:
+        seen[(r, c)] = seen.get((r, c), 0) + 1
+    out = []
+    for r, c, val, disc in rows:
+        out.append([r, c, val, disc] if seen[(r, c)] > 1 else [r, c, val])
+    return out
+
+
 def load_quality_profile(root: Path | None = None):
     """Plausibilitäts-Befunde je Report (Issue #17) -> {report_key: {...}}.
 
@@ -205,9 +239,10 @@ def main():
 
     # --- pass 1: group placeable cells into reports (raw string values) ---
     reports = {}
-    for eid, rp, cur, fw, tid, r, c, val in con.execute("""
+    for eid, rp, cur, fw, tid, r, c, val, oc, od, dp in con.execute("""
         SELECT entityID, refPeriod, currency, framework_version,
-               template_id, cell_row, cell_col, fact_value_raw
+               template_id, cell_row, cell_col, fact_value_raw,
+               open_axis_country, open_axis_dims, datapoint_code
         FROM p
         WHERE cell_row IS NOT NULL AND cell_row <> ''
         -- fact_value_raw mit in die Sortierung: 74.905 Zellkoordinaten sind je
@@ -215,7 +250,10 @@ def main():
         -- offenen Achsen, deren Dimension der Shard nicht trägt — siehe #52).
         -- Ohne diesen Schlüssel entscheidet die Zufallsreihenfolge, welcher
         -- Wert im Viewer landet, und sie wechselt zwischen Läufen.
-        ORDER BY entityID, refPeriod, template_id, cell_row, cell_col, fact_value_raw
+        -- ... und der Diskriminator hinterher, sonst bleiben Zeilen mit
+        -- GLEICHEM Wert aber verschiedener Dimension untereinander ungeordnet.
+        ORDER BY entityID, refPeriod, template_id, cell_row, cell_col,
+                 fact_value_raw, open_axis_country, open_axis_dims, datapoint_code
     """).fetchall():
         key = eid + "|" + rp
         rep = reports.get(key)
@@ -223,13 +261,16 @@ def main():
             rep = reports[key] = {"entityID": eid, "refPeriod": rp,
                                   "baseCurrency": cur or "", "framework": fw,
                                   "tpl": {}}
-        rep["tpl"].setdefault(tid, []).append([r, c, "" if val is None else val])
+        rep["tpl"].setdefault(tid, []).append(
+            (r, c, "" if val is None else val, cell_discriminator(oc, od, dp)))
 
     # --- coverage ("Fehlt != Null"): resolve declarations against the templates
     # that actually carry cells. Done AFTER pass 1 so data_tids is complete, and
     # per report so nothing aliases the shared declaration dict.
     for key, rep in reports.items():
         rep["coverage"] = resolve_coverage(coverage.get(key, {}), set(rep["tpl"]))
+        # Diskriminator nur an mehrfach belegten Koordinaten behalten (#52)
+        rep["tpl"] = {t: collapse_cells(rows) for t, rows in rep["tpl"].items()}
 
     # --- codebook (labels/titles/types), trimmed to the cells that occur ---
     cb, titles = {}, {}
