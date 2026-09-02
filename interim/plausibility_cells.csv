@@ -1730,7 +1730,7 @@ template_id,cell_row,cell_col,row_label,col_label,data_type,n_values,median_log1
 26.01,0080,0010,6. Retail,a. Total exposure value as defined in Article 166 CRR for exposures subject to IRB approach,monetary,75,10.509,0.510,1.90,auswertbar
 26.01,0080,0020,4. Retail,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,82,10.506,0.534,2.04,auswertbar
 26.01,0080,0030,4. Retail,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,69,-1.178,0.450,2.17,auswertbar
-26.01,0080,0050,4. Retail,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,120,-0.100,0.097,1.60,auswertbar
+26.01,0080,0050,6. Retail,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,120,-0.100,0.097,1.60,auswertbar
 26.01,0110,0020,6.1. Of which retail – qualifying revolving,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,39,9.166,0.493,2.74,auswertbar
 26.01,0110,0050,6.1. Of which retail – qualifying revolving,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,48,-0.018,0.018,2.96,auswertbar
 26.01,0120,0020,6.2. Of which Retail – Secured by residential immovable property,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,78,10.463,0.563,2.34,auswertbar
@@ -3656,7 +3656,7 @@ both reduction and sustitution effects",monetary,189,9.747,0.621,2.72,auswertbar
 60.00.A,0100,0030,EU 8a. Of which exposures to a CCP,c. T,monetary,452,6.097,0.822,3.29,auswertbar
 60.00.A,0110,0010,9. Of which other CCR,a. T,monetary,515,7.414,1.046,5.92,auswertbar
 60.00.A,0120,0010,10. Credit valuation adjustments risk - CVA risk,a. T,monetary,648,7.706,0.835,3.69,auswertbar
-60.00.A,0120,0020,10. Credit valuation adjustments risk - CVA risk,b. T-1,monetary,1116,7.563,0.921,4.48,auswertbar
+60.00.A,0120,0020,9. Of which other CCR,b. T-1,monetary,1116,7.563,0.921,4.48,auswertbar
 60.00.A,0120,0030,9. Of which other CCR,c. T,monetary,1144,6.480,0.922,3.87,auswertbar
 60.00.A,0130,0010,EU 10a. Of which the standardised approach (SA),a. T,monetary,66,8.404,0.458,3.03,auswertbar
 60.00.A,0130,0020,EU 10a. Of which the standardised approach (SA),b. T-1,monetary,77,8.215,0.737,2.97,auswertbar

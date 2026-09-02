@@ -70,6 +70,9 @@ import csv
 import math
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from determinism import ordered_query  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
 CELLS_OUT = ROOT / "interim" / "plausibility_cells.csv"
@@ -233,17 +236,22 @@ def main():
     COMPARABLE = ("CASE WHEN data_type='monetary' THEN fact_value_eur "
                   "ELSE fact_value END")
     cells = {}
-    rows = con.execute(f"""
+    # any_value() -> max(): any_value() greift sich ein beliebiges Element und
+    # ist damit zwischen Läufen instabil, sobald eine Zelle mehrere Labels
+    # trägt. LIST() ist hier unschädlich, weil cell_stats() intern sortiert —
+    # aber der Guard verlangt eine Sortierung, die das sichtbar macht.
+    rows = ordered_query(con, f"""
         SELECT template_id, cell_row, cell_col,
-               any_value(row_label), any_value(col_label), any_value(data_type),
-               LIST({COMPARABLE})
+               max(row_label), max(col_label), max(data_type),
+               LIST({COMPARABLE} ORDER BY {COMPARABLE})
         FROM '{PARQUET}'
         WHERE {COMPARABLE} IS NOT NULL AND {COMPARABLE} <> 0
           AND cell_row IS NOT NULL AND cell_row <> ''
           AND data_type IN ('monetary', 'percentage', 'decimal', 'integer')
         GROUP BY 1, 2, 3
         HAVING count(DISTINCT lei) >= {MIN_INSTITUTES}
-    """).fetchall()
+        ORDER BY 1, 2, 3
+    """, "Zellstatistik")
     labels = {}
     for t, r, c, rl, cl, dt, vals in rows:
         st = cell_stats(vals)
@@ -258,13 +266,15 @@ def main():
 
     # --- Einzelbefunde: Ausreißer in auswertbaren Zellen
     findings = []
-    for lei, scope, rp, bank, t, r, c, val in con.execute(f"""
+    for lei, scope, rp, bank, t, r, c, val in ordered_query(con, f"""
         SELECT lei, scope, refPeriod, bank_name, template_id, cell_row, cell_col,
                {COMPARABLE}
         FROM '{PARQUET}'
         WHERE {COMPARABLE} IS NOT NULL AND {COMPARABLE} <> 0
           AND cell_row IS NOT NULL AND cell_row <> ''
-    """).fetchall():
+        ORDER BY lei, scope, refPeriod, template_id, cell_row, cell_col,
+                 {COMPARABLE}, bank_name
+    """, "Einzelbefunde"):
         st = coherent.get((t, r, c))
         if st is None:
             continue
@@ -284,10 +294,10 @@ def main():
     for rule in RATIO_RULES:
         tpls = ",".join(f"'{t}'" for t in rule["templates"])
         pairs, meta = [], {}
-        for lei, scope, rp, bank, t, col, num, den in con.execute(f"""
+        for lei, scope, rp, bank, t, col, num, den in ordered_query(con, f"""
             WITH num AS (
               SELECT DISTINCT lei, scope, refPeriod, template_id, cell_col,
-                     any_value(bank_name) OVER (PARTITION BY lei) AS bank_name,
+                     max(bank_name) OVER (PARTITION BY lei) AS bank_name,
                      fact_value_eur AS v
               FROM '{PARQUET}'
               WHERE template_id IN ({tpls}) AND cell_row = '{rule["numerator_row"]}'
@@ -301,7 +311,9 @@ def main():
             SELECT num.lei, num.scope, num.refPeriod, num.bank_name,
                    num.template_id, num.cell_col, num.v, den.v
             FROM num JOIN den USING (lei, scope, refPeriod, template_id, cell_col)
-        """).fetchall():
+            ORDER BY num.lei, num.scope, num.refPeriod, num.template_id,
+                     num.cell_col, num.v, den.v, num.bank_name
+        """, f"Ratio-Regel {rule['id']}"):
             key = (lei, scope, rp, t, col)
             pairs.append((key, num, den))
             meta[key] = bank or ""
@@ -331,7 +343,15 @@ def main():
                         "unbrauchbar" if st["incoherent"] else "auswertbar"])
 
     # --- Ausgabe: Einzelbefunde
-    findings.sort(key=lambda f: -f["deviation_orders"])
+    # Vollständiger Sortierschlüssel: 97 % der Befunde teilen sich ihren
+    # deviation_orders-Wert (754 verschiedene Werte auf 5.969 Zeilen, größte
+    # Gruppe 150). Allein danach sortiert entschied die Einfügereihenfolge —
+    # also die Zufallsordnung aus SQL —, wie die CSV aussieht. Die Datei wird
+    # von der Pipeline nach main committet; der Churn landete dort in der
+    # Historie.
+    findings.sort(key=lambda f: (-f["deviation_orders"], f["lei"], f["scope"],
+                                 f["refPeriod"], f["template_id"],
+                                 f["cell_row"], f["cell_col"], f["rule"]))
     with open(FINDINGS_OUT, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["lei", "scope", "refPeriod", "bank_name", "template_id",
@@ -351,13 +371,14 @@ def main():
     # Zellen; Fakten in unbrauchbaren Zellen waren nie im Test und dürfen den
     # Nenner nicht aufblähen).
     checked = {}
-    for lei, scope, rp, t, r, c, n in con.execute(f"""
+    for lei, scope, rp, t, r, c, n in ordered_query(con, f"""
         SELECT lei, scope, refPeriod, template_id, cell_row, cell_col, count(*)
         FROM '{PARQUET}'
         WHERE {COMPARABLE} IS NOT NULL AND {COMPARABLE} <> 0
           AND cell_row IS NOT NULL AND cell_row <> ''
         GROUP BY 1, 2, 3, 4, 5, 6
-    """).fetchall():
+        ORDER BY 1, 2, 3, 4, 5, 6
+    """, "prüfbare Fakten"):
         if (t, r, c) in coherent:
             checked[(lei, scope, rp)] = checked.get((lei, scope, rp), 0) + n
 
@@ -378,7 +399,8 @@ def main():
                     "n_hoch", "n_mittel", "n_niedrig", "n_facts_checked",
                     "findings_per_1000", "n_templates", "templates",
                     "max_deviation_orders"])
-        for (lei, scope, rp), p in sorted(profile.items(), key=lambda kv: -kv[1]["n"]):
+        for (lei, scope, rp), p in sorted(profile.items(),
+                                          key=lambda kv: (-kv[1]["n"], kv[0])):
             nchk = checked.get((lei, scope, rp), 0)
             rate = f"{p['n'] / nchk * 1000:.2f}" if nchk else ""
             w.writerow([lei, scope, rp, p["bank_name"], p["n"], p["hoch"], p["mittel"],

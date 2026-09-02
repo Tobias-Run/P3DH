@@ -33,6 +33,9 @@ import re
 import sys
 import duckdb
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from determinism import ordered_query as ordered  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
 OUT = ROOT / "processed" / "zweig_a" / "data"
@@ -239,22 +242,25 @@ def main():
 
     # --- pass 1: group placeable cells into reports (raw string values) ---
     reports = {}
-    for eid, rp, cur, fw, tid, r, c, val, oc, od, dp in con.execute("""
+    for eid, rp, cur, fw, tid, r, c, val, oc, od, dp in ordered(con, """
         SELECT entityID, refPeriod, currency, framework_version,
                template_id, cell_row, cell_col, fact_value_raw,
                open_axis_country, open_axis_dims, datapoint_code
         FROM p
         WHERE cell_row IS NOT NULL AND cell_row <> ''
-        -- fact_value_raw mit in die Sortierung: 74.905 Zellkoordinaten sind je
-        -- Report MEHRFACH und mit verschiedenen Werten belegt (65 % davon aus
-        -- offenen Achsen, deren Dimension der Shard nicht trägt — siehe #52).
-        -- Ohne diesen Schlüssel entscheidet die Zufallsreihenfolge, welcher
-        -- Wert im Viewer landet, und sie wechselt zwischen Läufen.
-        -- ... und der Diskriminator hinterher, sonst bleiben Zeilen mit
-        -- GLEICHEM Wert aber verschiedener Dimension untereinander ungeordnet.
+        -- Die Sortierung deckt die GESAMTE Projektion ab, nicht nur die
+        -- Gruppierung: sonst entscheidet die Zufallsreihenfolge (DuckDB
+        -- sortiert parallel), welcher Wert in der Ausgabe landet.
+        --   template..cell_col  : die fachliche Ordnung im Shard
+        --   fact_value_raw + oc/od/dp : 74.905 Koordinaten sind je Report
+        --     MEHRFACH belegt (#52) — ohne diese Schlüssel wandert der Wert
+        --   currency/framework  : ZULETZT, damit sie die Zellordnung nicht
+        --     antasten; sie werden je Report aus der ersten Zeile gezogen und
+        --     wären ohne Sortierung bei 12 Reports mit zwei Währungen zufällig
         ORDER BY entityID, refPeriod, template_id, cell_row, cell_col,
-                 fact_value_raw, open_axis_country, open_axis_dims, datapoint_code
-    """).fetchall():
+                 fact_value_raw, open_axis_country, open_axis_dims, datapoint_code,
+                 currency, framework_version
+    """, "pass 1 / Zellen"):
         key = eid + "|" + rp
         rep = reports.get(key)
         if rep is None:
@@ -274,13 +280,13 @@ def main():
 
     # --- codebook (labels/titles/types), trimmed to the cells that occur ---
     cb, titles = {}, {}
-    for tid, r, c, rl, cl, dt, tt in con.execute("""
+    for tid, r, c, rl, cl, dt, tt in ordered(con, """
         SELECT template_id, cell_row, cell_col,
                max(row_label), max(col_label), max(data_type), max(template_title)
         FROM p WHERE cell_row IS NOT NULL AND cell_row <> ''
         GROUP BY template_id, cell_row, cell_col      -- one deterministic row per cell
         ORDER BY template_id, cell_row, cell_col
-    """).fetchall():
+    """, "codebook"):
         kc = dpm_code(tid)
         cb[kc + "|" + r + "|" + c] = [rl or "", cl or "", dt or ""]
         if tt:
@@ -288,27 +294,32 @@ def main():
     codebook = {"cb": cb, "titles": titles}
 
     # --- lookup maps, all straight from the same parquet ---
+    # Diese drei Maps werden je Schlüssel ÜBERSCHRIEBEN — bei mehreren Zeilen je
+    # LEI gewinnt also die letzte. Heute liefert build_entity_meta.py genau eine
+    # Zeile je LEI (geprüft: 0 mehrdeutige), aber das ist eine Eigenschaft der
+    # Daten, keine Zusage. Die vollständige Sortierung macht das Ergebnis auch
+    # dann reproduzierbar, wenn sich das ändert.
     meta = {}
-    for lei, country, itype, gsii in con.execute("""
+    for lei, country, itype, gsii in ordered(con, """
         SELECT DISTINCT lei, country, institution_type, files_gsii_module
         FROM p WHERE lei IS NOT NULL AND lei <> ''
-        ORDER BY lei
-    """).fetchall():
+        ORDER BY lei, country, institution_type, files_gsii_module
+    """, "meta"):
         meta[lei] = {"country": country or "", "institution_type": itype or "",
                      "is_gsii": "true" if gsii else "false"}
     names = {}
-    for lei, nm, country in con.execute("""
+    for lei, nm, country in ordered(con, """
         SELECT DISTINCT lei, bank_name, country
         FROM p WHERE lei IS NOT NULL AND lei <> ''
-        ORDER BY lei
-    """).fetchall():
+        ORDER BY lei, bank_name, country
+    """, "names"):
         names[lei] = {"name": nm or lei, "jur": country or ""}
     fx = {}
-    for cur, rp, rate in con.execute("""
+    for cur, rp, rate in ordered(con, """
         SELECT DISTINCT currency, refPeriod, fx_rate
         FROM p WHERE fx_rate IS NOT NULL AND currency <> 'EUR'
-        ORDER BY currency, refPeriod
-    """).fetchall():
+        ORDER BY currency, refPeriod, fx_rate
+    """, "fx"):
         fx[cur + "|" + rp] = rate
 
     # --- pass 2: shards (incremental) + slim index + benchmark aggregate ---
@@ -321,9 +332,16 @@ def main():
         # Deterministisch serialisieren: resolve_coverage() iteriert über ein
         # set(), dessen Reihenfolge zwischen Läufen schwankt (String-Hash-
         # Randomisierung). Ohne sort_keys schrieb jeder Lauf ~830 der 882
-        # Shards neu, obwohl sich inhaltlich nichts geändert hatte — das macht
-        # write_if_changed wirkungslos und erzeugt Churn auf dem data-Branch,
-        # der force-gepusht wird.
+        # Shards neu, obwohl sich inhaltlich nichts geändert hatte.
+        #
+        # Der Schaden ist NICHT der data-Branch — der wird als frisches
+        # Orphan-Commit force-gepusht, dort ist Churn folgenlos (eine frühere
+        # Fassung dieses Kommentars behauptete das Gegenteil). Er ist:
+        #   1. `written/skipped` verliert seinen Aussagewert — bei 830 von 882
+        #      erkennt niemand mehr, ob wirklich neue Daten da sind;
+        #   2. eine Pipeline, die auf gleichen Eingaben verschiedene Bytes
+        #      liefert, ist nicht reproduzierbar — und genau das behauptet das
+        #      README. Man kann eine Ausgabe dann gegen nichts prüfen.
         payload = json.dumps({"tpl": rep["tpl"], "coverage": rep.get("coverage", {})},
                              ensure_ascii=False, separators=(",", ":"), sort_keys=True)
         if write_if_changed(SHARDS / fname, payload):
