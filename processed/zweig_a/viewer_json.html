@@ -94,6 +94,16 @@
   .covbadge.cov-gap{background:#fff8e0}
   .cov-conflict>summary,.covbadge.cov-conflict{color:#7a4a00}
   .covbadge.cov-conflict{background:#fff3e0}
+  /* Plausibilitäts-Marker (#48): einordnen, nicht warnen — deshalb dezent
+     und bewusst NICHT rot; es sind Offenlegungsdaten, keine Bewertung. */
+  /* Dimensionswähler für Templates mit offener Achse (#52) */
+  .dimbar{display:flex;align-items:center;gap:.4rem;margin:.15rem 0 .35rem;font-size:11px;color:var(--muted)}
+  .dimbar select{font:inherit;font-size:11px;padding:.1rem .25rem;border:1px solid var(--line);
+                 border-radius:4px;background:var(--card);color:var(--ink);max-width:22rem}
+  .qb{display:inline-block;font-size:10px;font-weight:600;border-radius:3px;padding:0 .3rem;
+      margin-left:.3rem;background:#f3efe3;color:#6b5300;cursor:help;white-space:nowrap}
+  tr.flagged td:first-child{box-shadow:inset 3px 0 0 #c9a227}
+  [data-theme=dark] .qb{background:#3a3320;color:#e0c96b}
   .status{padding:2rem;color:var(--muted)}
   .prog{height:3px;background:var(--soft);border-radius:2px;overflow:hidden;margin-top:.6rem;width:340px}
   .prog i{display:block;height:100%;background:var(--blue);width:0%;transition:width .2s}
@@ -276,7 +286,13 @@ function fxOf(rep){
 }
 
 /* ================= data indexing ================= */
-const cellsFrom=arr=>arr.map(c=>({row:c[0], col:c[1], val:c[2]}));
+/* Vierte Stelle = Diskriminator (#52): sie steht nur an Koordinaten, die im
+   Report MEHRFACH belegt sind — offene Achsen (Land / Dimensionswert) oder
+   mehrere dp-Codes auf derselben Zelle. Ohne sie zeigte der Viewer einen
+   willkuerlich gewaehlten von bis zu sieben Werten. */
+const cellsFrom=arr=>arr.map(c=>({row:c[0], col:c[1], val:c[2], dim:c[3]||''}));
+/* Ausgewaehlter Dimensionswert je Template, waehrend ein Report offen ist. */
+let DIMSEL=new Map();
 function buildFromIndex(idx, codebook){
   for(const [k,v] of Object.entries(codebook.cb))     CB.set(k,{rl:v[0], cl:v[1], dt:v[2]||''});
   for(const [k,v] of Object.entries(codebook.titles)) TITLES.set(k, v);
@@ -286,6 +302,7 @@ function buildFromIndex(idx, codebook){
   REPORTS = idx.reports.map(r=>({    // slim index: metadata only, no cells
     entityID:r.entityID, refPeriod:r.refPeriod, baseCurrency:r.baseCurrency,
     framework:r.framework, nt:r.nt, shard:r.f,
+    quality:r.q||null,                   // Plausibilitaets-Befunde (#17); fehlt = keine Befunde
     templates:new Map(), loaded:false,   // filled lazily: head via benchmark.json, full via shard
   }));
 }
@@ -444,7 +461,12 @@ function renderTemplate(tid, cells, rep){
   const title=TITLES.get(tcode)||'';
   const state = coverageState(rep, tid);
   const {rate,cur}=fxOf(rep);
-  const cellList = Array.isArray(cells) ? cells : [];
+  const allCells = Array.isArray(cells) ? cells : [];
+  // Dimensionswerte dieses Templates (#52). Zellen OHNE Diskriminator sind
+  // eindeutig und gehoeren zu jedem Schnitt — sie bleiben immer sichtbar.
+  const dims=[...new Set(allCells.map(c=>c.dim).filter(Boolean))].sort();
+  const dimSel = dims.length ? (dims.includes(DIMSEL.get(tid))?DIMSEL.get(tid):dims[0]) : '';
+  const cellList = dims.length ? allCells.filter(c=>!c.dim||c.dim===dimSel) : allCells;
   const rows=[...new Set(cellList.map(c=>c.row))].sort();
   const cols=[...new Set(cellList.map(c=>c.col))].sort();
   const val=new Map(cellList.map(c=>[c.row+'|'+c.col,c.val]));
@@ -462,7 +484,14 @@ function renderTemplate(tid, cells, rep){
   const note=unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${esc(cur)}${conv?' · EZB-Kurs':''}</span>`
              :(conv?`<span class="scalenote">EUR · EZB-Kurs</span>`:'');
   if(!cellList.length) return '';   // leere Templates stehen im Coverage-Block, nicht als Sektion
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3><table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
+  // Dimensionswaehler: diese Templates sind kein 2D-Gitter, sondern EIN Gitter
+  // je Dimensionswert. Ohne Auswahl saehe der Nutzer einen von vielen Werten,
+  // ohne zu erfahren, dass es mehrere gibt.
+  const dimBar = dims.length ? `<div class="dimbar">Dimension:
+    <select class="dimsel" data-tid="${esc(tid)}">${dims.map(d=>
+      `<option value="${esc(d)}"${d===dimSel?' selected':''}>${esc(d)}</option>`).join('')}</select>
+    <span class="cl">${dims.length} Werte — je Wert ein eigenes Gitter</span></div>` : '';
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}<table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){
@@ -557,6 +586,13 @@ async function renderReport(rep){
   };
   draw();
   document.getElementById('tfilter').addEventListener('input',draw);
+  // Dimensionswechsel (#52): Auswahl merken und nur neu zeichnen.
+  document.getElementById('tcontainer').addEventListener('change',e=>{
+    const sel=e.target.closest('.dimsel');
+    if(!sel) return;
+    DIMSEL.set(sel.dataset.tid, sel.value);
+    draw();
+  });
   wireControls(draw);
   renderReportList();
   main.scrollTop=0;
@@ -727,6 +763,9 @@ const BM_PROFILES={
 const bmUsesKm1=prof=>prof.tpl==='61.00'||prof.cols.some(c=>c.tpl==='61.00'||c.kind==='shareOfTrea');
 let BMP = store.bmp && BM_PROFILES[store.bmp] ? store.bmp : 'km1';
 let BM_PCT = store.bmpct === true;   // Perzentil-Bänder (Peer-Gruppe), aus per Default
+// Auffällige Reports sind per Default SICHTBAR: Ausblenden waere eine
+// Vorentscheidung darueber, was der Nutzer sehen darf (#48).
+let BM_HIDEFLAG = store.bmhide === true;
 let bmSort={...BM_PROFILES[BMP].defaultSort};
 function benchmarkRows(){
   const prof=BM_PROFILES[BMP];
@@ -741,7 +780,8 @@ function benchmarkRows(){
     const fxr=cur==='EUR'?1:(FX.get(cur+'|'+rep.refPeriod)||null);
     const trea=km1Value(rep,'0040');
     const row={key:repKey(rep), lei, name:bankName(rep.entityID), country:m.country||'',
-               itype:shortItype(m.institution_type||''), scope, date:rep.refPeriod, gsii:m.is_gsii==='true'};
+               itype:shortItype(m.institution_type||''), scope, date:rep.refPeriod, gsii:m.is_gsii==='true',
+               q:rep.quality||null};
     for(const c of prof.cols){
       if(c.calc){ row[c.id]=c.calc(rep,{fxr,trea}); continue; }
       // Quelle je Spalte explizit: c.tpl (Default = Profil-Template), c.col (Default 'a').
@@ -812,6 +852,23 @@ function pctBadge(info){
        + `<span class="pctf" style="width:${Math.max(2,Math.min(100,info.p))}%"></span><i>P${p}</i></span>`;
 }
 
+/* ---- Plausibilitaets-Marker (#48) ---------------------------------------
+   Die Rangliste fuehrte mit Werten wie 387 % CET1 an, ohne Hinweis darauf,
+   dass wir sie selbst als auffaellig einstufen (#17). Der Marker ordnet ein,
+   er versteckt nichts: die Zeile bleibt an ihrer Sortierposition, der Wert
+   unveraendert. Ein Ausreisser kann eine korrekte Besonderheit sein — die
+   Formulierung bleibt deshalb beschreibend, nicht wertend.
+
+   Markiert wird TEMPLATE-GENAU: nur wenn die Befunde im gerade angezeigten
+   Template liegen. Ein Befund in 41.00 sagt nichts ueber die KM1-Spalten. */
+function flaggedFor(q, tpl){ return !!(q && q.t && q.t.includes(tpl)); }
+function qualityBadge(q, tpl){
+  if(!flaggedFor(q,tpl)) return '';
+  return `<span class="qb" title="Die Plausibilitaetspruefung hat in Template ${tpl} dieses Reports `
+       + `Werte gefunden, die ausserhalb der Verteilung ihrer Zellpopulation liegen `
+       + `(${q.n} Befund(e) im Report, groesste Abweichung ${q.d} Groessenordnungen). `
+       + `Das kann eine korrekte Besonderheit sein.">△ auffällig</span>`;
+}
 function bmCell(c,v,pinfo){
   if(v==null) return '<td class="empty"></td>';
   let txt;
@@ -830,14 +887,19 @@ async function renderBenchmark(){
     if(VIEW!=='benchmark') return;   // navigated away while loading
   }
   const prof=BM_PROFILES[BMP];
-  const rows=benchmarkRows();
+  const allRows=benchmarkRows();
+  // Perzentile IMMER auf der vollen Menge: ein ausgeblendeter Ausreisser darf
+  // die Verteilung nicht verschieben, sonst aendert das Einklappen die Zahlen.
+  const nFlag=allRows.filter(r=>flaggedFor(r.q,prof.tpl)).length;
+  const rows=BM_HIDEFLAG?allRows.filter(r=>!flaggedFor(r.q,prof.tpl)):allRows;
   const profSel=Object.entries(BM_PROFILES).map(([k,p])=>
     `<option value="${k}"${k===BMP?' selected':''}>${esc(p.label)}</option>`).join('');
   const pmaps=new Map();
-  if(BM_PCT) for(const c of prof.cols) pmaps.set(c.id,percentileMap(rows,c.id));
+  if(BM_PCT) for(const c of prof.cols) pmaps.set(c.id,percentileMap(allRows,c.id));
   let h=`<div class="rhead"><h2>Benchmark</h2></div>
     <div class="bmbar"><label class="ctl">Profil: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
+      <label class="ctl" title="Blendet Reports aus, in denen die Plausibilitätsprüfung Werte weit ausserhalb ihrer Zellpopulation gefunden hat. Perzentile bleiben auf der vollen Menge gerechnet."><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> auffällige einklappen${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
       <span class="meta" style="margin:0">Basis: Template ${esc(prof.tpl)}${bmUsesKm1(prof)?' + 61.00':''}${prof.cols.some(c=>c.kind==='eur')?' · Beträge in Mrd. EUR (EZB-Kurs)':''} · Sidebar-Filter aktiv · Klick auf Spalte sortiert</span></div>
     ${prof.note?`<div class="caveat">ⓘ ${esc(prof.note)}</div>`:''}
     <div class="caveat">⚠ Vergleichbarkeits-Caveat: Rechnungslegung, Konsolidierungskreis (CON/IND),
@@ -849,8 +911,8 @@ async function renderBenchmark(){
   if(prof.trendRow) h+=`<th title="Verlauf über verfügbare Stichtage (${esc((prof.cols.find(x=>x.row===prof.trendRow)||{}).label||'')})">Trend</th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){
-    h+=`<tr><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
-        ${r.gsii?'<span class="badge gs">G-SII</span>':''}
+    h+=`<tr${flaggedFor(r.q,prof.tpl)?' class="flagged"':''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
+        ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;
     for(const c of prof.cols) h+=bmCell(c,r[c.id],BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null);
@@ -865,6 +927,9 @@ async function renderBenchmark(){
   });
   document.getElementById('bmPct').addEventListener('change',e=>{
     BM_PCT=e.target.checked; store.bmpct=BM_PCT; persist(); renderBenchmark();
+  });
+  document.getElementById('bmHide').addEventListener('change',e=>{
+    BM_HIDEFLAG=e.target.checked; store.bmhide=BM_HIDEFLAG; persist(); renderBenchmark();
   });
   main.querySelectorAll('th[data-k]').forEach(th=>{
     const k=th.dataset.k;

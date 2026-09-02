@@ -115,7 +115,12 @@ vor dem Publish ab, falls der Bestand schrumpft.
 
 ## Arbeitsprinzipien
 
-1. Reproduzierbarkeit: Roh-Layer immutable, jede Transformation skriptiert.
+1. Reproduzierbarkeit: Roh-Layer immutable, jede Transformation skriptiert —
+   und **byte-genau**: gleiche Eingaben, gleiche Ausgaben. Die Regel, die das
+   trägt: *jedes Feld, das in die Ausgabe fließt, gehört in den `ORDER BY`.*
+   Durchgesetzt von `scripts/determinism.py` im Ausführungspfad, nicht bloß im
+   Test. Warum das ein eigenes Prinzip verdient hat und dreimal verletzt wurde:
+   `docs/reproduzierbarkeit.md`.
 2. Annahmen offenlegen (im Code/README), nicht bei Kleinigkeiten nachfragen.
 3. „Fehlt" ≠ „Null" durchgängig erhalten (`filing-indicators`) — **auch in der
    Oberfläche**: der JSON-Viewer zeigt je Report, welche Templates bewusst nicht

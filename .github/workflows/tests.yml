@@ -1,0 +1,48 @@
+name: Tests
+
+# Schnelle Absicherung für Pull Requests und Pushes auf main.
+#
+# BEWUSST getrennt von pipeline.yml: die Pipeline erntet, lädt herunter,
+# force-pusht den data-Branch und committet auf main (`permissions: contents:
+# write`). So etwas darf ein Pull Request niemals auslösen — schon gar nicht
+# aus einem Fork. Dieser Workflow liest nur und braucht deshalb keine
+# Schreibrechte.
+#
+# Die Testsuite läuft ohne den Datenbestand: long_form_raw.csv, das Parquet und
+# die Shards sind gitignored (sie leben auf dem data-Branch), und jeder Test,
+# der Daten braucht, baut sich seine eigene Fixture in einem Temp-Verzeichnis.
+# Verifiziert gegen einen frischen Checkout.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # Nur was die Tests wirklich brauchen. requirements.txt zieht zusätzlich
+      # playwright, access-parser und openpyxl — die gehören zum Harvest bzw.
+      # zum Codebook-Bau und kosten hier nur Zeit.
+      - name: Install test dependencies
+        run: pip install duckdb pyarrow
+
+      - name: Run test suite
+        run: python -m unittest discover tests -v

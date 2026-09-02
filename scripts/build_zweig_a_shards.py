@@ -33,6 +33,9 @@ import re
 import sys
 import duckdb
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from determinism import ordered_query as ordered  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
 OUT = ROOT / "processed" / "zweig_a" / "data"
@@ -106,6 +109,82 @@ def load_coverage_map(root: Path | None = None):
     return mapping
 
 
+def cell_discriminator(country, dims, dp):
+    """Was unterscheidet zwei Fakten auf DERSELBEN (template,row,col)?
+
+    Reihenfolge nach Lesbarkeit: aufgelöster Ländername vor roher Dimension
+    vor dp-Code. Der dp-Code ist die Rückfallebene für Fälle, in denen unser
+    Codebook die Unterscheidung nicht kennt — bei LIQ1 (`74.00.C`) etwa liegen
+    vier dp-Codes auf r0150/c0050 mit identischen Labels; die unterscheidende
+    Achse (vermutlich das Quartal des 12-Monats-Durchschnitts) steht im DPM,
+    aber nicht in `dpm_codebook.csv`. Gleiche Lückenklasse wie #3 und #29.
+    """
+    return country or dims or dp or ""
+
+
+def collapse_cells(rows):
+    """rows: Liste von (row, col, val, discriminator) EINES Templates.
+
+    Liefert die Shard-Darstellung: `[row, col, val]` für eindeutige Zellen,
+    `[row, col, val, disc]` für Koordinaten, die MEHRFACH belegt sind.
+
+    Hintergrund (#52): 88.155 der 1.540.802 Zellkoordinaten (5,7 %) tragen je
+    Report mehr als einen Fakt, 74.905 davon mit verschiedenen Werten. Der
+    Viewer baute daraus eine Map und behielt willkürlich einen Wert. Der
+    Diskriminator wird nur dort mitgeschrieben, wo er gebraucht wird — sonst
+    würde die Shard-Größe für 94 % unnötig wachsen.
+    """
+    seen = {}
+    for r, c, val, disc in rows:
+        seen[(r, c)] = seen.get((r, c), 0) + 1
+    out = []
+    for r, c, val, disc in rows:
+        out.append([r, c, val, disc] if seen[(r, c)] > 1 else [r, c, val])
+    return out
+
+
+def load_quality_profile(root: Path | None = None):
+    """Plausibilitäts-Befunde je Report (Issue #17) -> {report_key: {...}}.
+
+    Der Viewer soll Ausreißer einordnen können, ohne sie zu verstecken (#48):
+    die Benchmark-Rangliste führte bisher mit Werten wie 387 % CET1 an, ohne
+    Hinweis darauf, dass wir sie selbst als auffällig einstufen.
+
+    Landet im INDEX, nicht im Shard: die Benchmark-Tabelle braucht die Angabe
+    für alle Zeilen gleichzeitig, ein Shard wird aber nur für den geöffneten
+    Report geladen. Der Aufschlag ist klein — nur Reports MIT Befunden stehen
+    drin (326 von 882), je Eintrag vier Zahlen.
+
+    Report-Key ist 'entityID|refPeriod' wie im Index; entityID wird aus
+    (lei, scope) rekonstruiert, weil quality_profile.csv beide getrennt führt.
+    """
+    root = root or ROOT
+    path = root / "processed" / "quality_profile.csv"
+    if not path.exists():
+        return {}
+    out = {}
+    with path.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            lei, scope, rp = r.get("lei"), r.get("scope"), r.get("refPeriod")
+            if not (lei and scope and rp):
+                continue
+            out[f"rs:{lei}.{scope}|{rp}"] = {
+                "n": int(r["n_findings"] or 0),
+                "h": int(r["n_hoch"] or 0),
+                "m": int(r["n_mittel"] or 0),
+                "d": round(float(r["max_deviation_orders"] or 0), 1),
+                # Betroffene Templates: der Viewer markiert template-GENAU, nicht
+                # pauschal. Der Schweregrad allein trägt das nicht — er ist auf
+                # Einheiten-Verwechslungen geeicht (6 Größenordnungen = "hoch")
+                # und stuft deshalb einen statistisch extremen Ausreißer in einer
+                # engen Quotenzelle als "niedrig" ein: Kommuninvest liegt bei
+                # KM1 r0050 mit robustem z = 10,3 weit außerhalb, aber nur 1,3
+                # Größenordnungen über dem Median. Siehe #53.
+                "t": [t for t in (r.get("templates") or "").split("|") if t],
+            }
+    return out
+
+
 def resolve_coverage(declared, data_tids):
     """Project the filing-indicator declarations of ONE report onto the template
     ids the viewer actually renders.
@@ -159,39 +238,55 @@ def main():
     con = duckdb.connect()
     con.execute(f"CREATE VIEW p AS SELECT * FROM '{PARQUET}'")
     coverage = load_coverage_map(ROOT)
+    quality = load_quality_profile(ROOT)
 
     # --- pass 1: group placeable cells into reports (raw string values) ---
     reports = {}
-    for eid, rp, cur, fw, tid, r, c, val in con.execute("""
+    for eid, rp, cur, fw, tid, r, c, val, oc, od, dp in ordered(con, """
         SELECT entityID, refPeriod, currency, framework_version,
-               template_id, cell_row, cell_col, fact_value_raw
+               template_id, cell_row, cell_col, fact_value_raw,
+               open_axis_country, open_axis_dims, datapoint_code
         FROM p
         WHERE cell_row IS NOT NULL AND cell_row <> ''
-        ORDER BY entityID, refPeriod, template_id, cell_row, cell_col
-    """).fetchall():
+        -- Die Sortierung deckt die GESAMTE Projektion ab, nicht nur die
+        -- Gruppierung: sonst entscheidet die Zufallsreihenfolge (DuckDB
+        -- sortiert parallel), welcher Wert in der Ausgabe landet.
+        --   template..cell_col  : die fachliche Ordnung im Shard
+        --   fact_value_raw + oc/od/dp : 74.905 Koordinaten sind je Report
+        --     MEHRFACH belegt (#52) — ohne diese Schlüssel wandert der Wert
+        --   currency/framework  : ZULETZT, damit sie die Zellordnung nicht
+        --     antasten; sie werden je Report aus der ersten Zeile gezogen und
+        --     wären ohne Sortierung bei 12 Reports mit zwei Währungen zufällig
+        ORDER BY entityID, refPeriod, template_id, cell_row, cell_col,
+                 fact_value_raw, open_axis_country, open_axis_dims, datapoint_code,
+                 currency, framework_version
+    """, "pass 1 / Zellen"):
         key = eid + "|" + rp
         rep = reports.get(key)
         if rep is None:
             rep = reports[key] = {"entityID": eid, "refPeriod": rp,
                                   "baseCurrency": cur or "", "framework": fw,
                                   "tpl": {}}
-        rep["tpl"].setdefault(tid, []).append([r, c, "" if val is None else val])
+        rep["tpl"].setdefault(tid, []).append(
+            (r, c, "" if val is None else val, cell_discriminator(oc, od, dp)))
 
     # --- coverage ("Fehlt != Null"): resolve declarations against the templates
     # that actually carry cells. Done AFTER pass 1 so data_tids is complete, and
     # per report so nothing aliases the shared declaration dict.
     for key, rep in reports.items():
         rep["coverage"] = resolve_coverage(coverage.get(key, {}), set(rep["tpl"]))
+        # Diskriminator nur an mehrfach belegten Koordinaten behalten (#52)
+        rep["tpl"] = {t: collapse_cells(rows) for t, rows in rep["tpl"].items()}
 
     # --- codebook (labels/titles/types), trimmed to the cells that occur ---
     cb, titles = {}, {}
-    for tid, r, c, rl, cl, dt, tt in con.execute("""
+    for tid, r, c, rl, cl, dt, tt in ordered(con, """
         SELECT template_id, cell_row, cell_col,
                max(row_label), max(col_label), max(data_type), max(template_title)
         FROM p WHERE cell_row IS NOT NULL AND cell_row <> ''
         GROUP BY template_id, cell_row, cell_col      -- one deterministic row per cell
         ORDER BY template_id, cell_row, cell_col
-    """).fetchall():
+    """, "codebook"):
         kc = dpm_code(tid)
         cb[kc + "|" + r + "|" + c] = [rl or "", cl or "", dt or ""]
         if tt:
@@ -199,27 +294,32 @@ def main():
     codebook = {"cb": cb, "titles": titles}
 
     # --- lookup maps, all straight from the same parquet ---
+    # Diese drei Maps werden je Schlüssel ÜBERSCHRIEBEN — bei mehreren Zeilen je
+    # LEI gewinnt also die letzte. Heute liefert build_entity_meta.py genau eine
+    # Zeile je LEI (geprüft: 0 mehrdeutige), aber das ist eine Eigenschaft der
+    # Daten, keine Zusage. Die vollständige Sortierung macht das Ergebnis auch
+    # dann reproduzierbar, wenn sich das ändert.
     meta = {}
-    for lei, country, itype, gsii in con.execute("""
+    for lei, country, itype, gsii in ordered(con, """
         SELECT DISTINCT lei, country, institution_type, files_gsii_module
         FROM p WHERE lei IS NOT NULL AND lei <> ''
-        ORDER BY lei
-    """).fetchall():
+        ORDER BY lei, country, institution_type, files_gsii_module
+    """, "meta"):
         meta[lei] = {"country": country or "", "institution_type": itype or "",
                      "is_gsii": "true" if gsii else "false"}
     names = {}
-    for lei, nm, country in con.execute("""
+    for lei, nm, country in ordered(con, """
         SELECT DISTINCT lei, bank_name, country
         FROM p WHERE lei IS NOT NULL AND lei <> ''
-        ORDER BY lei
-    """).fetchall():
+        ORDER BY lei, bank_name, country
+    """, "names"):
         names[lei] = {"name": nm or lei, "jur": country or ""}
     fx = {}
-    for cur, rp, rate in con.execute("""
+    for cur, rp, rate in ordered(con, """
         SELECT DISTINCT currency, refPeriod, fx_rate
         FROM p WHERE fx_rate IS NOT NULL AND currency <> 'EUR'
-        ORDER BY currency, refPeriod
-    """).fetchall():
+        ORDER BY currency, refPeriod, fx_rate
+    """, "fx"):
         fx[cur + "|" + rp] = rate
 
     # --- pass 2: shards (incremental) + slim index + benchmark aggregate ---
@@ -229,8 +329,21 @@ def main():
     for key, rep in reports.items():
         fname = safe_name(rep["entityID"]) + "__" + rep["refPeriod"] + ".json"
         current.add(fname)
+        # Deterministisch serialisieren: resolve_coverage() iteriert über ein
+        # set(), dessen Reihenfolge zwischen Läufen schwankt (String-Hash-
+        # Randomisierung). Ohne sort_keys schrieb jeder Lauf ~830 der 882
+        # Shards neu, obwohl sich inhaltlich nichts geändert hatte.
+        #
+        # Der Schaden ist NICHT der data-Branch — der wird als frisches
+        # Orphan-Commit force-gepusht, dort ist Churn folgenlos (eine frühere
+        # Fassung dieses Kommentars behauptete das Gegenteil). Er ist:
+        #   1. `written/skipped` verliert seinen Aussagewert — bei 830 von 882
+        #      erkennt niemand mehr, ob wirklich neue Daten da sind;
+        #   2. eine Pipeline, die auf gleichen Eingaben verschiedene Bytes
+        #      liefert, ist nicht reproduzierbar — und genau das behauptet das
+        #      README. Man kann eine Ausgabe dann gegen nichts prüfen.
         payload = json.dumps({"tpl": rep["tpl"], "coverage": rep.get("coverage", {})},
-                             ensure_ascii=False, separators=(",", ":"))
+                             ensure_ascii=False, separators=(",", ":"), sort_keys=True)
         if write_if_changed(SHARDS / fname, payload):
             written += 1
         else:
@@ -248,11 +361,15 @@ def main():
             head[t] = cells
         if head:
             benchmark[key] = head
-        index_reports.append({
+        entry = {
             "k": key, "entityID": rep["entityID"], "refPeriod": rep["refPeriod"],
             "baseCurrency": rep["baseCurrency"], "framework": rep["framework"],
             "nt": len(rep["tpl"]), "f": fname,
-        })
+        }
+        q = quality.get(key)
+        if q:                       # nur Reports MIT Befunden tragen das Feld
+            entry["q"] = q
+        index_reports.append(entry)
 
     removed = 0
     for old in SHARDS.glob("*.json"):        # prune shards of reports that vanished

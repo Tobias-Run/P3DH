@@ -233,7 +233,7 @@ muss derselbe sein wie oben: **er zeigt die Zahl, wir zeigen die Zahl im Urteil.
 
 Konkrete Ansatzpunkte, jeweils gegen unseren Ist-Stand geprüft:
 
-### F1. „Fehlt ≠ Null" sichtbar machen ⭐ eklatante eigene Lücke
+### F1. „Fehlt ≠ Null" sichtbar machen ⭐ eklatante eigene Lücke — Issue #21
 
 `processed/filing_indicators.csv` hat **~41.000 Zeilen** Coverage-Matrix — und
 kommt im Viewer **nirgends** an (0 Treffer für `filing_indicator`/`template_reported`
@@ -250,7 +250,7 @@ Drei Zustände sind zu unterscheiden und werden heute alle als leere Zelle gezei
 Das ist die billigste große Verbesserung im ganzen Backlog: Daten liegen fertig,
 es fehlt nur der Weg in die Shards und drei Zellzustände im Grid.
 
-### F2. Zahl im Kontext statt Zahl allein ⭐ größter UX-Hebel
+### F2. Zahl im Kontext statt Zahl allein ⭐ größter UX-Hebel — Issue #23
 
 Ein Renderer zeigt `12,4 %`. Ein interpretierender Viewer zeigt `12,4 %` **und**
 dass der Peer-Median 15,1 % ist und das Institut im 23. Perzentil liegt. Wir haben
@@ -261,20 +261,20 @@ Für Nicht-Spezialisten ist das der Unterschied zwischen „eine Zahl" und „ei
 Aussage". Technisch: Tooltip/Sekundärzeile je Zelle, gespeist aus den ohnehin
 berechneten Peer-Statistiken.
 
-### F3. Anomalien inline markieren
+### F3. Anomalien inline markieren — Issue #24
 
 Sobald #17 steht: implausible Werte im Grid kennzeichnen statt sie wie normale
 Zahlen zu rendern. EDAP *muss* „11,7 Bio. EUR" originalgetreu anzeigen — wir
 dürfen dazuschreiben, dass der Wert um sechs Größenordnungen über dem Peer-Median
 liegt. Hängt an #17.
 
-### F4. Benannte Kennzahlen statt Zellkoordinaten
+### F4. Benannte Kennzahlen statt Zellkoordinaten — Issue #25
 
 Wer die NPL-Quote sucht, weiß nicht, dass sie aus `82.00.A` Zeile 0020 Spalten
 `0010`/`0040` entsteht. Ein Suchfeld über *Kennzahlen* (nicht über Templates)
 wäre ein echter Zugangsgewinn — und ist die Oberflächen-Seite von #16.
 
-### F5. Framework-Bruch in der Zeitreihe markieren
+### F5. Framework-Bruch in der Zeitreihe markieren — Issue #26
 
 Der Viewer zeigt `framework` heute nur als Textlabel im Report-Kopf
 (`viewer_json.html:452`). Die Brücke (`framework_bridge.csv`, 19 umgebundene
@@ -282,7 +282,7 @@ Zellen) wird in der Oberfläche **nicht** genutzt. In einer Sparkline über den
 4.1→4.2-Wechsel gehört an genau dieser Stelle eine Markierung hin — sonst wirkt
 ein Sprung wie eine Geschäftsentwicklung, obwohl er eine Taxonomie-Änderung ist.
 
-### F6. Ähnliche Institute vorschlagen
+### F6. Ähnliche Institute vorschlagen — Issue #27
 
 Statt Peer-Gruppen manuell zu filtern: „diese Institute haben ein ähnliches
 Exposure-Profil" — die Oberflächen-Seite von #13.

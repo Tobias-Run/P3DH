@@ -146,6 +146,13 @@ jobs:
       - name: Rebuild framework bridge
         run: python scripts/build_framework_bridge.py
 
+      # Plausibilitaet gegen die Population (#17). Kein Guard, sondern ein
+      # Produkt: bricht bewusst NICHT ab, wenn Institute auffaellige Werte
+      # melden — das sind Befunde ueber die Einreichungen, keine Fehler in
+      # unserer Pipeline. Muss nach Zweig B laufen (braucht fact_value_eur).
+      - name: Plausibility profile
+        run: python scripts/check_plausibility.py
+
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
 
@@ -173,11 +180,13 @@ jobs:
                   interim/edap_recon/manifest_wave.csv \
                   codebook/framework_bridge.csv \
                   codebook/dpm_codebook.csv codebook/template_titles.csv \
-                  processed/entity_meta.csv processed/fx_rates.csv
+                  processed/entity_meta.csv processed/fx_rates.csv \
+                  processed/quality_profile.csv \
+                  interim/plausibility_cells.csv interim/plausibility_findings.csv
           if git diff --cached --quiet; then
             echo "Manifeste und Brücke unverändert"
           else
-            git commit -m "Katalog/Framework-Brücke aktualisiert (Pipeline)"
+            git commit -m "Katalog/Brücke/Plausibilitätsprofil aktualisiert (Pipeline)"
             git push
           fi
 

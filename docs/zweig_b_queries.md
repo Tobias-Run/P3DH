@@ -94,6 +94,44 @@ WHERE unit_ambiguous AND template_id='41.00' AND cell_row='0010' AND cell_col='0
 -- Systematischer Scan über alle monetären Templates: scripts/check_unit_consistency.py
 ```
 
+**Plausibilität gegen die Population (`quality_profile.csv`, Issue #17):**
+`scripts/check_plausibility.py` misst jeden Wert an der Population **seiner
+eigenen Zelle** (Median/MAD auf log10, monetär in EUR) statt an einer globalen
+Schranke, und ergänzt fachliche Korridore auf abgeleiteten Verhältnissen.
+Ergebnis: 3.224 Befunde in 226 von 553 Reports.
+
+```sql
+-- Werte in einer Rangliste vorab entschärfen: auffällige Reports markieren
+SELECT p.bank_name, p.refPeriod, p.n_findings, p.findings_per_1000, p.templates
+FROM read_csv_auto('processed/quality_profile.csv', header=true) p
+WHERE p.n_hoch > 0 ORDER BY p.findings_per_1000 DESC;
+```
+
+⚠️ **`n_findings` ist keine Rangliste der Meldequalität.** Wer 136 Templates
+meldet, hat mehr Gelegenheiten aufzufallen als wer 4 meldet — dafür ist
+`findings_per_1000` (je 1.000 tatsächlich prüfbarer Fakten) da. Und ein
+Ausreißer kann eine korrekte Besonderheit sein; der Check sagt „passt nicht
+zur Population", nicht „ist falsch".
+
+Drei Dinge, die beim Nachnutzen zählen:
+
+- **Nur die obere Flanke** wird statistisch geprüft. Die untere ist bei
+  Exposure-Daten natürlich (viele Institute haben nahe null Exposure zu einer
+  Kategorie); symmetrisch geprüft waren 9.750 von 12.744 Befunden Rauschen,
+  darunter Rundungsreste wie `1,7·10⁻¹¹` EUR. Die untere Flanke deckt statt-
+  dessen `RATIO_RULES` mit fachlichem Wissen ab — dort fällt z. B. auf, wenn
+  ein Institut REM1 in Millionen meldet.
+- **`plausibility_cells.csv` mit `status='unbrauchbar'`** (199 Zellen) listet
+  Zellen, deren Rumpf über ≥ 6 Größenordnungen streut. Dort ist unklar, welche
+  Lesart gilt — kein Institut wird belastet, und diese Zellen taugen auch für
+  eigene Auswertungen nicht. Beispiel `09.05` c0020 („Of which exposures in
+  default", als `percentage` typisiert): 303 Werte ≤ 1 gegen 316 > 1.
+- Belegte Funde daraus: Rabobank meldet REM1 `30.01` mit 11,7 Bio. EUR fixer
+  Vergütung für 9 Vorstandsmitglieder (vom Gap-Scan aus #9 **nicht** gefunden,
+  weil dort keine scharfe Lücke liegt), DNB meldet PD als `100.000.000` statt
+  `1,0` (populationsweit 228 PD-Zellen mit > 100 % Ausfallwahrscheinlichkeit),
+  und Česká spořitelna füllt die Quotenzeile `61.00` r0200 mit einem Betrag.
+
 **Disclosure-Coverage („fehlt ≠ Null") kommt aus der zweiten Datei:**
 ```sql
 SELECT entityID, count(*) FILTER (reported='True')  AS reported,
