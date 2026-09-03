@@ -47,6 +47,16 @@
   .report .lei{font-weight:600;padding-right:26px}
   .report .rmeta{color:var(--muted);font-size:11px;margin-top:2px}
   .report .leicode{color:var(--muted);opacity:.6;font-size:10px;margin-top:1px;font-variant-numeric:tabular-nums;letter-spacing:.2px}
+  /* Stichtage als Umschalter INNERHALB des Instituts-Eintrags (#46) */
+  .report .dates{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+  .dchip{display:inline-block;font-size:10px;line-height:16px;padding:0 5px;border-radius:4px;
+         border:1px solid var(--line);color:var(--muted);text-decoration:none;background:var(--card);
+         font-variant-numeric:tabular-nums}
+  .dchip:hover{border-color:var(--blue);color:var(--blue)}
+  /* --card als Schriftfarbe: hell auf Blau im Light-, dunkel auf Hellblau im Dark-Mode */
+  .dchip.on{background:var(--blue);border-color:var(--blue);color:var(--card);font-weight:600}
+  .dchip.pinned::after{content:'⊞';margin-left:3px}
+  .report .rdet{font-size:10.5px;color:var(--muted);margin-top:3px}
   .badge{display:inline-block;font-size:9.5px;font-weight:600;border-radius:3px;padding:0 4px;margin-left:4px;vertical-align:1px}
   .badge.gs{background:#7a1fa2;color:#fff}
   .badge.it{background:var(--soft);color:var(--softink)}
@@ -357,29 +367,81 @@ function passFilters(rep,f){
   if(f.g && m.is_gsii!=='true') return false;
   return true;
 }
+/* ---- institutszentrische Gruppierung (#46) -------------------------------
+   Der Stichtag ist eine EIGENSCHAFT des Instituts, keine eigene Entitaet. Die
+   Liste fuehrte 882 Eintraege fuer 475 Institute, ABN AMRO dreimal untereinander.
+   Gruppiert sind es 475 — halb so lang wie die Zahl der Dinge, nach denen
+   jemand sucht.
+
+   Der Schluessel ist (LEI, Scope), NICHT der LEI allein: CON und IND sind nicht
+   dasselbe Institut (DISCLAIMER.md). Im Bestand meldet genau ein LEI beides —
+   die Regel muss trotzdem stimmen, nicht der Einzelfall.
+
+   Waehrung und Framework-Version bleiben am REPORT, nicht am Gruppenkopf:
+   4 Gruppen wechseln zwischen Stichtagen die Meldewaehrung, 103 von 475 die
+   Framework-Version (4.1 -> 4.2). Am Kopf angeschrieben waeren beide fuer
+   einen Teil der Stichtage schlicht falsch. */
+function groupReports(reps){
+  const g=new Map();
+  for(const rep of reps){
+    const {lei,scope}=leiParts(rep.entityID);
+    const k=lei+'|'+scope;
+    let e=g.get(k);
+    if(!e) g.set(k, e={lei, scope, name:bankName(rep.entityID), reps:[]});
+    e.reps.push(rep);
+  }
+  for(const e of g.values()) e.reps.sort((a,b)=>a.refPeriod.localeCompare(b.refPeriod));
+  return [...g.values()];   // REPORTS ist nach Name sortiert -> Map haelt die Reihenfolge
+}
+let TOTAL_GROUPS=0;   // ungefilterte Gruppenzahl, einmal beim Boot bestimmt
 function renderReportList(){
   const f=activeFilters();
-  const host=document.getElementById('reportList'); host.innerHTML='';
-  let shown=0;
-  REPORTS.forEach(rep=>{
-    if(!passFilters(rep,f)) return;
-    shown++;
-    const {lei,scope}=leiParts(rep.entityID);
-    const m=META.get(lei)||{};
-    const key=repKey(rep);
+  const host=document.getElementById('reportList');
+  // Gefiltert wird weiter je REPORT; eine Gruppe erscheint mit genau den
+  // Stichtagen, die den Filter passieren (Filter "Stichtag" -> ein Chip).
+  const groups=groupReports(REPORTS.filter(rep=>passFilters(rep,f)));
+  let nRep=0, h='';
+  for(const g of groups){
+    nRep+=g.reps.length;
+    const m=META.get(g.lei)||{};
+    // Ohne Auswahl fuehrt der juengste Stichtag — der Einstieg, den jemand
+    // erwartet, der nur den Namen kennt.
+    const cur=g.reps.find(r=>repKey(r)===activeKey) || g.reps[g.reps.length-1];
+    const active=repKey(cur)===activeKey;
     const badges=(m.is_gsii==='true'?'<span class="badge gs" title="reicht das G-SII-Offenlegungsmodul ein">G-SII</span>':'')+
                  (m.institution_type?`<span class="badge it">${esc(shortItype(m.institution_type))}</span>`:'');
-    const div=document.createElement('div');
-    div.className='report'+(key===activeKey?' active':'');
-    div.innerHTML=`<button class="pinbtn${PINS.has(key)?' on':''}" title="für Vergleich anpinnen">⊞</button>
-      <div class="lei">${esc(bankName(rep.entityID))}${badges}</div>
-      <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(scope))} · ${esc(rep.refPeriod)} · ${esc(curOf(rep))} · ${rep.nt} templates</div>
-      <div class="leicode">${esc(lei)}</div>`;
-    div.querySelector('.pinbtn').onclick=(ev)=>{ ev.stopPropagation(); togglePin(key); };
-    div.onclick=()=>{ location.hash='#r/'+lei+'/'+rep.refPeriod+'/'+scope; };
-    host.appendChild(div);
+    const chips=g.reps.map(r=>{
+      const k=repKey(r);
+      return `<a class="dchip${k===activeKey?' on':''}${PINS.has(k)?' pinned':''}"
+        href="#r/${g.lei}/${r.refPeriod}/${g.scope}"
+        title="${esc(r.refPeriod)} · ${r.nt} Templates · ${esc(curOf(r))} · Framework ${esc(r.framework)}${
+          PINS.has(k)?' · für Vergleich angepinnt':''}">${esc(r.refPeriod)}</a>`;
+    }).join('');
+    h+=`<div class="report${active?' active':''}" data-h="#r/${g.lei}/${cur.refPeriod}/${g.scope}">
+      <button class="pinbtn${PINS.has(repKey(cur))?' on':''}" data-k="${esc(repKey(cur))}"
+        title="Stichtag ${esc(cur.refPeriod)} für Vergleich anpinnen">⊞</button>
+      <div class="lei">${esc(g.name)}${badges}</div>
+      <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(g.scope))} · ${g.reps.length} Stichtag${g.reps.length>1?'e':''}</div>
+      <div class="dates">${chips}</div>
+      ${active?`<div class="rdet">${cur.nt} Templates · ${esc(curOf(cur))} · Framework ${esc(cur.framework)}</div>`:''}
+      <div class="leicode">${esc(g.lei)}</div></div>`;
+  }
+  host.innerHTML=h;
+  document.getElementById('fCount').textContent=
+    `${groups.length} von ${TOTAL_GROUPS} Instituten · ${nRep} von ${REPORTS.length} Reports`;
+  document.getElementById('fCount').title=
+    'Konsolidiert (CON) und Einzelinstitut (IND) zählen getrennt — es sind nicht dieselben Zahlen.';
+}
+/* Ereignisse delegiert: die Liste wird bei jedem Filtertastendruck neu
+   geschrieben, einzeln angehaengte Handler waeren 475-mal Arbeit je Anschlag. */
+function wireList(){
+  document.getElementById('reportList').addEventListener('click', ev=>{
+    const pin=ev.target.closest('.pinbtn');
+    if(pin){ ev.preventDefault(); ev.stopPropagation(); togglePin(pin.dataset.k); return; }
+    if(ev.target.closest('.dchip')) return;      // echter Link — der Browser navigiert
+    const row=ev.target.closest('.report');
+    if(row) location.hash=row.dataset.h;
   });
-  document.getElementById('fCount').textContent=`${shown} von ${REPORTS.length} Reports`;
 }
 function initFilters(){
   const countries=new Set(), itypes=new Set(), dates=new Set();
@@ -1103,9 +1165,10 @@ async function init(){
     if(bar) bar.style.width='100%';
     buildFromIndex(idx, codebook);
     REPORTS.sort((a,b)=>(bankName(a.entityID)+a.refPeriod).localeCompare(bankName(b.entityID)+b.refPeriod));
+    TOTAL_GROUPS=groupReports(REPORTS).length;
     const nf=idx.stats.facts;
-    document.getElementById('hsub').textContent=`${idx.stats.reports} Reports · ${nf.toLocaleString('en-US').split(',').join(NBSP)} Facts`;
-    initFilters(); updateCmpBadge(); renderReportList(); route();
+    document.getElementById('hsub').textContent=`${TOTAL_GROUPS} Institute · ${idx.stats.reports} Reports · ${nf.toLocaleString('en-US').split(',').join(NBSP)} Facts`;
+    initFilters(); wireList(); updateCmpBadge(); renderReportList(); route();
   }catch(err){
     document.getElementById('main').innerHTML='<div class="status">Fehler beim Laden: '+esc(err.message)+
       '<br><br>Vom Repo-Root ausliefern: <code>python3 -m http.server 8766</code> → <code>/processed/zweig_a/viewer_json.html</code></div>';
