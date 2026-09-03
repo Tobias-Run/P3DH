@@ -200,7 +200,7 @@ function persist(){ localStorage.setItem('p3dh', JSON.stringify({
 function applyTheme(){ document.documentElement.dataset.theme = DARK?'dark':'light'; }
 applyTheme();
 
-let REPORTS=[], CB=new Map(), TITLES=new Map(), NAMES=new Map(), META=new Map(), FX=new Map(), activeKey=null;
+let REPORTS=[], CB=new Map(), TITLES=new Map(), AXIS=new Map(), NAMES=new Map(), META=new Map(), FX=new Map(), activeKey=null;
 const repKey=r=>r.entityID+'|'+r.refPeriod;
 const byKey =k=>REPORTS.find(r=>repKey(r)===k);
 
@@ -296,6 +296,10 @@ let DIMSEL=new Map();
 function buildFromIndex(idx, codebook){
   for(const [k,v] of Object.entries(codebook.cb))     CB.set(k,{rl:v[0], cl:v[1], dt:v[2]||''});
   for(const [k,v] of Object.entries(codebook.titles)) TITLES.set(k, v);
+  // Offene Zeilenachsen (#56): dort IST die Zeile der Achsenwert, und AXIS
+  // loest ihn auf ('NL' -> 'Netherlands'). Vorhandensein markiert zugleich,
+  // dass die Zeilenreihenfolge dieses Templates KEINE Modellordnung ist.
+  for(const [k,v] of Object.entries(codebook.axis||{})) AXIS.set(k, v);
   for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
@@ -467,11 +471,36 @@ function renderTemplate(tid, cells, rep){
   const dims=[...new Set(allCells.map(c=>c.dim).filter(Boolean))].sort();
   const dimSel = dims.length ? (dims.includes(DIMSEL.get(tid))?DIMSEL.get(tid):dims[0]) : '';
   const cellList = dims.length ? allCells.filter(c=>!c.dim||c.dim===dimSel) : allCells;
-  const rows=[...new Set(cellList.map(c=>c.row))].sort();
   const cols=[...new Set(cellList.map(c=>c.col))].sort();
   const val=new Map(cellList.map(c=>[c.row+'|'+c.col,c.val]));
   const dtOf=(r,c)=>{ const e=CB.get(tcode+'|'+r+'|'+c); return e?e.dt:''; };
-  const rowLbl=r=>{ const e=CB.get(tcode+'|'+r+'|'+(cols[0]||'')); return e?e.rl:''; };
+  // Offene Zeilenachse (#56): die Zeile ist der Achsenwert, kein Modell-Code.
+  const axisMap = AXIS.get(tcode) || null;
+  const rowLbl=r=>{
+    if(axisMap && axisMap[r]) return axisMap[r];
+    const e=CB.get(tcode+'|'+r+'|'+(cols[0]||'')); return e?e.rl:''; };
+  // Zeilenreihenfolge: bei festen DPM-Zeilen ist die Codeordnung die
+  // MODELLORDNUNG (Zwischensummen, Gliederung) und muss bleiben. Bei einer
+  // offenen Achse gibt es keine solche Ordnung — alphabetisch nach ISO-Code
+  // heisst dort: Andorra, Afghanistan, Antigua zuerst, waehrend die
+  // Niederlande mit 231 Mrd hinter 150 fast leeren Zeilen stehen. Bei ING
+  // tragen 15 von 203 Laendern 90 % des Exposures.
+  const rows=[...new Set(cellList.map(c=>c.row))];
+  if(axisMap){
+    const w=new Map();
+    for(const c of cellList){
+      if(dtOf(c.row,c.col)!=='monetary') continue;   // Prozentspalten nicht mitwiegen
+      const n=Math.abs(Number(c.val));
+      if(Number.isFinite(n)) w.set(c.row,(w.get(c.row)||0)+n);
+    }
+    rows.sort((a,b)=>{
+      // Nicht aufloesbare Codes (x1 = Summenzeile, x28 = uebrige Laender) ans
+      // Ende: sie sind keine Staaten und wuerden oben wie einer aussehen.
+      const ra=axisMap[a]?0:1, rb=axisMap[b]?0:1;
+      if(ra!==rb) return ra-rb;
+      return ((w.get(b)||0)-(w.get(a)||0)) || (a<b?-1:a>b?1:0);
+    });
+  } else rows.sort();
   const colLbl=c=>{ for(const r of rows){ const e=CB.get(tcode+'|'+r+'|'+c); if(e) return e.cl; } return ''; };
   const c=COV[state];
   const coverageNote = c.label
@@ -491,7 +520,12 @@ function renderTemplate(tid, cells, rep){
     <select class="dimsel" data-tid="${esc(tid)}">${dims.map(d=>
       `<option value="${esc(d)}"${d===dimSel?' selected':''}>${esc(d)}</option>`).join('')}</select>
     <span class="cl">${dims.length} Werte — je Wert ein eigenes Gitter</span></div>` : '';
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}<table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
+  // Bei offener Achse ist die Reihenfolge unsere Wahl, nicht die des Modells —
+  // das gehoert dazugesagt, sonst wirkt sie wie die Meldereihenfolge.
+  const axisNote = axisMap
+    ? `<div class="dimbar"><span class="cl">Zeilen = Achsenwerte, nach Betrag geordnet
+       (die Meldung gibt hier keine Reihenfolge vor) · ${rows.length} Werte</span></div>` : '';
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}<table><thead><tr><th class="rh">${axisMap?'Code':'Row'}</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){

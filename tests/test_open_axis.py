@@ -139,6 +139,48 @@ class JoinFanOutTest(unittest.TestCase):
         self.assertEqual(both, [], f"Join würde Fakten verdoppeln: {both[:5]}")
 
 
+class AxisLabelMapTest(unittest.TestCase):
+    """codebook.json trägt seit dem Viewer-Fix eine `axis`-Map: {template:
+    {Achsenwert: Klartext}}. Sie leistet zweierlei — sie löst 'NL' zu
+    'Netherlands' auf, UND ihr Vorhandensein sagt dem Viewer, dass die
+    Zeilenreihenfolge dieses Templates keine Modellordnung ist (dort wird nach
+    Betrag sortiert statt alphabetisch).
+
+    Der Test läuft gegen die gebauten Daten, wenn sie da sind — die Map entsteht
+    aus dem Parquet, nicht aus einer reinen Funktion.
+    """
+
+    def _codebook(self):
+        import json
+        p = (Path(__file__).resolve().parent.parent
+             / "processed" / "zweig_a" / "data" / "codebook.json")
+        if not p.exists():
+            self.skipTest("codebook.json nicht gebaut")
+        return json.loads(p.read_text(encoding="utf-8"))
+
+    def test_axis_map_exists_and_resolves_ccyb1(self):
+        axis = self._codebook().get("axis", {})
+        self.assertIn("K_67.01.a", axis, "CCyB1 braucht die Länderauflösung")
+        self.assertEqual(axis["K_67.01.a"].get("NL"), "Netherlands")
+        self.assertEqual(axis["K_67.01.a"].get("DE"), "Germany")
+
+    def test_non_country_rows_stay_unresolved(self):
+        """'x1' (Summenzeile) und 'x28' (übrige Länder) sind keine Staaten. Sie
+        bekommen KEINEN erfundenen Klartext — der Viewer zeigt den Code und
+        sortiert sie ans Ende, statt sie oben wie ein Land aussehen zu lassen."""
+        axis = self._codebook().get("axis", {}).get("K_67.01.a", {})
+        self.assertNotIn("x1", axis)
+        self.assertNotIn("x28", axis)
+
+    def test_fixed_axis_templates_have_no_entry(self):
+        """Templates mit fester DPM-Zeile dürfen NICHT in der Map stehen —
+        sonst würde der Viewer ihre Modellordnung (Zwischensummen, Gliederung)
+        gegen eine Betragssortierung tauschen."""
+        axis = self._codebook().get("axis", {})
+        self.assertNotIn("K_61.00", axis, "KM1 hat feste Zeilen")
+        self.assertNotIn("K_60.00.a", axis, "OV1 hat feste Zeilen")
+
+
 class CodebookMarkerTest(unittest.TestCase):
     def test_open_axis_marker_is_the_star(self):
         """Parser und Codebook müssen sich auf dasselbe Zeichen einigen —

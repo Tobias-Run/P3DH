@@ -291,7 +291,28 @@ def main():
         cb[kc + "|" + r + "|" + c] = [rl or "", cl or "", dt or ""]
         if tt:
             titles[kc] = tt
-    codebook = {"cb": cb, "titles": titles}
+    # --- Achsenbeschriftung für offene Zeilenachsen (#56) ---
+    # Bei diesen Templates IST die Zeile der Achsenwert: CCyB1 führt 250 Zeilen,
+    # eine je Staat, und der Shard trägt dort den ISO-Code ('NL'). Ohne
+    # Auflösung liest der Nutzer 'AD, AE, AF, AG, AI, AL …' und muss selbst
+    # wissen, dass AD Andorra ist.
+    #
+    # Nur was in den Daten steht (open_axis_country), nichts Erfundenes: 'x1'
+    # (Summenzeile), 'x28' (übrige Länder) und 'qx2014' haben keinen
+    # Ländernamen und bleiben als Code stehen — der Nutzer sieht damit auch,
+    # dass sie keine Staaten sind. 15 KB für 8 Templates.
+    axis = {}
+    for tid, r, nm in ordered(con, """
+        SELECT template_id, cell_row, max(open_axis_country)
+        FROM p
+        WHERE open_axis_country IS NOT NULL AND open_axis_country <> ''
+          AND cell_row IS NOT NULL AND cell_row <> ''
+        GROUP BY template_id, cell_row
+        ORDER BY template_id, cell_row
+    """, "Achsenbeschriftung"):
+        axis.setdefault(dpm_code(tid), {})[r] = nm
+
+    codebook = {"cb": cb, "titles": titles, "axis": axis}
 
     # --- lookup maps, all straight from the same parquet ---
     # Diese drei Maps werden je Schlüssel ÜBERSCHRIEBEN — bei mehreren Zeilen je
