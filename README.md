@@ -127,7 +127,13 @@ vor dem Publish ab, falls der Bestand schrumpft.
    offengelegt wurden, wo unser Bestand lückt und wo die Meldung sich selbst
    widerspricht. Ohne Deklaration wird **keine** Aussage getroffen.
 4. Vergleichbarkeitsfallen (Rechnungslegung, Konsolidierung, nationale Optionen) als
-   Caveat in jeder Analyse benennen.
+   Caveat in jeder Analyse benennen. **Neu seit der offenen Zeilenachse (#56):**
+   Templates mit offener Achse zerfallen in zwei Klassen. Bei CCyB1 (`67.01.A`)
+   ist die Zeile ein ISO-Ländercode und damit institutsübergreifend vergleichbar;
+   bei CC2 (`66.02`) und LI2/LI3 (`64.01`, `64.02`) ist sie der **Bilanzposten
+   des Instituts**, also Freitext in Landessprache — 5.324 verschiedene Zeilen
+   allein in `64.02`. Diese sind innerhalb eines Reports auswertbar, aber ohne
+   vorherige Zuordnung **nicht** für Peer-Vergleiche.
 5. Resubmissions: pro (Institut, Modul, Stichtag) zählt nur die neueste Einreichung
    („latest wins"). Der **vollständige Katalog** inkl. älterer Fassungen bleibt als
    Audit-Trail in `interim/edap_recon/manifest_full.csv` (4.278 Einreichungen, Voll-Harvest
