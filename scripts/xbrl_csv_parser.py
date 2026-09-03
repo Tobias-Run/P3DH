@@ -24,8 +24,20 @@ def axis_member(open_dims: Dict[str, str]) -> str:
     verkettet. Welche davon fachlich "die Zeile" ist, sagt das DPM an dieser
     Stelle nicht — statt zu raten, geht die vollständige Kombination ein. Die
     Reihenfolge folgt den Spalten der Quelldatei und ist damit reproduzierbar.
+
+    Nicht jede offene Achse trägt einen Member-Code: CC2 (`66.02`) und LI2/LI3
+    (`64.01`) führen als Zeile den BILANZPOSTEN des Instituts, also Freitext —
+    `qADQ=100. Provisions for risks and charges:`. Endet der auf einen
+    Doppelpunkt, wäre der Teil dahinter leer und die Zeile fiele weg. Deshalb
+    wird nur abgeschnitten, wenn dabei etwas übrig bleibt.
     """
-    return "|".join(v.rsplit(":", 1)[-1] for v in open_dims.values() if v)
+    return "|".join(_member(v) for v in open_dims.values() if v)
+
+
+def _member(value: str) -> str:
+    """'eba_GA:AL' -> 'AL'; 'l. Fondi per rischi e oneri:' -> unverändert."""
+    tail = value.rsplit(":", 1)[-1].strip()
+    return tail or value.strip()
 
 
 class XBRLCSVParser:

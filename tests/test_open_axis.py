@@ -74,6 +74,22 @@ class AxisMemberTest(unittest.TestCase):
     def test_value_without_colon_passes_through(self):
         self.assertEqual(xp.axis_member({"qADP": "Freitext"}), "Freitext")
 
+    def test_freetext_ending_in_colon_keeps_the_whole_value(self):
+        """CC2 (66.02) und LI2/LI3 (64.01) führen als Zeile den Bilanzposten
+        des Instituts — Freitext, oft mit Doppelpunkt am Ende. Blind hinter dem
+        letzten ':' abzuschneiden lieferte einen leeren Schlüssel und liess
+        192 Fakten ohne Zeile zurück."""
+        self.assertEqual(
+            xp.axis_member({"qADQ": "100. Provisions for risks and charges:"}),
+            "100. Provisions for risks and charges:")
+        self.assertEqual(xp.axis_member({"qADQ": "l. Fondi per rischi e oneri:"}),
+                         "l. Fondi per rischi e oneri:")
+
+    def test_colon_inside_freetext_still_splits_only_at_the_end(self):
+        """Ein Doppelpunkt MITTEN im Text bleibt ein Trenner — das ist der
+        Normalfall 'domain:member' und darf nicht verloren gehen."""
+        self.assertEqual(xp.axis_member({"RIO": "eba_GA:DE"}), "DE")
+
     def test_several_dimensions_are_combined_not_guessed(self):
         """Form `r*,c#,s*`: welche Achse fachlich die Zeile ist, sagt das DPM
         hier nicht. Statt zu raten geht die Kombination ein."""

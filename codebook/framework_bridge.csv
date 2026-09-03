@@ -3795,6 +3795,118 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0120,0120,12. Repossessed collaterals,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp470618,dp470618,stable
 45.00.A,0120,0130,12. Repossessed collaterals,n. Of which Stage 2 exposures,dp470616,dp470616,stable
 45.00.A,0120,0140,12. Repossessed collaterals,o. Of which non-performing exposures,dp470617,dp470617,stable
+45.00.B,Central Europe|S,0010,,,dp471878,dp471878,stable
+45.00.B,Central Europe|S,0020,,,dp471881,dp471881,stable
+45.00.B,Central Europe|S,0030,,,dp471880,dp471880,stable
+45.00.B,Central Europe|S,0040,,,dp471882,dp471882,stable
+45.00.B,Central Europe|S,0050,,,dp471883,dp471883,stable
+45.00.B,Central Europe|S,0060,,,dp472307,dp472307,stable
+45.00.B,Central Europe|S,0070,,,dp471884,dp471884,stable
+45.00.B,Central Europe|S,0080,,,dp471885,dp471885,stable
+45.00.B,Central Europe|S,0090,,,dp471886,dp471886,stable
+45.00.B,Central Europe|S,0100,,,dp471859,dp471859,stable
+45.00.B,Central Europe|S,0110,,,dp471879,dp471879,stable
+45.00.B,Central Europe|S,0120,,,dp472085,dp472085,stable
+45.00.B,Central Europe|S,0130,,,dp472079,dp472079,stable
+45.00.B,Central Europe|S,0140,,,dp472084,dp472084,stable
+45.00.B,Eastern Europe|S,0010,,,dp471878,dp471878,stable
+45.00.B,Eastern Europe|S,0020,,,dp471881,dp471881,stable
+45.00.B,Eastern Europe|S,0030,,,dp471880,dp471880,stable
+45.00.B,Eastern Europe|S,0040,,,dp471882,dp471882,stable
+45.00.B,Eastern Europe|S,0050,,,dp471883,dp471883,stable
+45.00.B,Eastern Europe|S,0060,,,dp472307,dp472307,stable
+45.00.B,Eastern Europe|S,0070,,,dp471884,dp471884,stable
+45.00.B,Eastern Europe|S,0080,,,dp471885,dp471885,stable
+45.00.B,Eastern Europe|S,0090,,,dp471886,dp471886,stable
+45.00.B,Eastern Europe|S,0100,,,dp471859,dp471859,stable
+45.00.B,Eastern Europe|S,0110,,,dp471879,dp471879,stable
+45.00.B,Eastern Europe|S,0120,,,dp472085,dp472085,stable
+45.00.B,Eastern Europe|S,0130,,,dp472079,dp472079,stable
+45.00.B,Eastern Europe|S,0140,,,dp472084,dp472084,stable
+45.00.B,Northern Europe|S,0010,,,dp471878,dp471878,stable
+45.00.B,Northern Europe|S,0020,,,dp471881,dp471881,stable
+45.00.B,Northern Europe|S,0030,,,dp471880,dp471880,stable
+45.00.B,Northern Europe|S,0040,,,dp471882,dp471882,stable
+45.00.B,Northern Europe|S,0050,,,dp471883,dp471883,stable
+45.00.B,Northern Europe|S,0060,,,dp472307,dp472307,stable
+45.00.B,Northern Europe|S,0070,,,dp471884,dp471884,stable
+45.00.B,Northern Europe|S,0080,,,dp471885,dp471885,stable
+45.00.B,Northern Europe|S,0090,,,dp471886,dp471886,stable
+45.00.B,Northern Europe|S,0100,,,dp471859,dp471859,stable
+45.00.B,Northern Europe|S,0110,,,dp471879,dp471879,stable
+45.00.B,Northern Europe|S,0120,,,dp472085,dp472085,stable
+45.00.B,Northern Europe|S,0130,,,dp472079,dp472079,stable
+45.00.B,Northern Europe|S,0140,,,dp472084,dp472084,stable
+45.00.B,Rest of the World|S,0010,,,dp471878,dp471878,stable
+45.00.B,Rest of the World|S,0020,,,dp471881,dp471881,stable
+45.00.B,Rest of the World|S,0030,,,dp471880,dp471880,stable
+45.00.B,Rest of the World|S,0040,,,dp471882,dp471882,stable
+45.00.B,Rest of the World|S,0050,,,dp471883,dp471883,stable
+45.00.B,Rest of the World|S,0060,,,dp472307,dp472307,stable
+45.00.B,Rest of the World|S,0070,,,dp471884,dp471884,stable
+45.00.B,Rest of the World|S,0080,,,dp471885,dp471885,stable
+45.00.B,Rest of the World|S,0090,,,dp471886,dp471886,stable
+45.00.B,Rest of the World|S,0100,,,dp471859,dp471859,stable
+45.00.B,Rest of the World|S,0110,,,dp471879,dp471879,stable
+45.00.B,Rest of the World|S,0120,,,dp472085,dp472085,stable
+45.00.B,Rest of the World|S,0130,,,dp472079,dp472079,stable
+45.00.B,Rest of the World|S,0140,,,dp472084,dp472084,stable
+45.00.B,South-eastern Europe|S,0010,,,dp471878,dp471878,stable
+45.00.B,South-eastern Europe|S,0020,,,dp471881,dp471881,stable
+45.00.B,South-eastern Europe|S,0030,,,dp471880,dp471880,stable
+45.00.B,South-eastern Europe|S,0040,,,dp471882,dp471882,stable
+45.00.B,South-eastern Europe|S,0050,,,dp471883,dp471883,stable
+45.00.B,South-eastern Europe|S,0060,,,dp472307,dp472307,stable
+45.00.B,South-eastern Europe|S,0070,,,dp471884,dp471884,stable
+45.00.B,South-eastern Europe|S,0080,,,dp471885,dp471885,stable
+45.00.B,South-eastern Europe|S,0090,,,dp471886,dp471886,stable
+45.00.B,South-eastern Europe|S,0100,,,dp471859,dp471859,stable
+45.00.B,South-eastern Europe|S,0110,,,dp471879,dp471879,stable
+45.00.B,South-eastern Europe|S,0120,,,dp472085,dp472085,stable
+45.00.B,South-eastern Europe|S,0130,,,dp472079,dp472079,stable
+45.00.B,South-eastern Europe|S,0140,,,dp472084,dp472084,stable
+45.00.B,South-western Europe|S,0010,,,dp471878,dp471878,stable
+45.00.B,South-western Europe|S,0020,,,dp471881,dp471881,stable
+45.00.B,South-western Europe|S,0030,,,dp471880,dp471880,stable
+45.00.B,South-western Europe|S,0040,,,dp471882,dp471882,stable
+45.00.B,South-western Europe|S,0050,,,dp471883,dp471883,stable
+45.00.B,South-western Europe|S,0060,,,dp472307,dp472307,stable
+45.00.B,South-western Europe|S,0070,,,dp471884,dp471884,stable
+45.00.B,South-western Europe|S,0080,,,dp471885,dp471885,stable
+45.00.B,South-western Europe|S,0090,,,dp471886,dp471886,stable
+45.00.B,South-western Europe|S,0100,,,dp471859,dp471859,stable
+45.00.B,South-western Europe|S,0110,,,dp471879,dp471879,stable
+45.00.B,South-western Europe|S,0120,,,dp472085,dp472085,stable
+45.00.B,South-western Europe|S,0130,,,dp472079,dp472079,stable
+45.00.B,South-western Europe|S,0140,,,dp472084,dp472084,stable
+45.00.B,Southern Europe|S,0010,,,dp471878,dp471878,stable
+45.00.B,Southern Europe|S,0020,,,dp471881,dp471881,stable
+45.00.B,Southern Europe|S,0030,,,dp471880,dp471880,stable
+45.00.B,Southern Europe|S,0040,,,dp471882,dp471882,stable
+45.00.B,Southern Europe|S,0050,,,dp471883,dp471883,stable
+45.00.B,Southern Europe|S,0060,,,dp472307,dp472307,stable
+45.00.B,Southern Europe|S,0070,,,dp471884,dp471884,stable
+45.00.B,Southern Europe|S,0080,,,dp471885,dp471885,stable
+45.00.B,Southern Europe|S,0090,,,dp471886,dp471886,stable
+45.00.B,Southern Europe|S,0100,,,dp471859,dp471859,stable
+45.00.B,Southern Europe|S,0110,,,dp471879,dp471879,stable
+45.00.B,Southern Europe|S,0120,,,dp472085,dp472085,stable
+45.00.B,Southern Europe|S,0130,,,dp472079,dp472079,stable
+45.00.B,Southern Europe|S,0140,,,dp472084,dp472084,stable
+45.00.B,Western Europe|S,0010,,,dp471878,dp471878,stable
+45.00.B,Western Europe|S,0020,,,dp471881,dp471881,stable
+45.00.B,Western Europe|S,0030,,,dp471880,dp471880,stable
+45.00.B,Western Europe|S,0040,,,dp471882,dp471882,stable
+45.00.B,Western Europe|S,0050,,,dp471883,dp471883,stable
+45.00.B,Western Europe|S,0060,,,dp472307,dp472307,stable
+45.00.B,Western Europe|S,0070,,,dp471884,dp471884,stable
+45.00.B,Western Europe|S,0080,,,dp471885,dp471885,stable
+45.00.B,Western Europe|S,0090,,,dp471886,dp471886,stable
+45.00.B,Western Europe|S,0100,,,dp471859,dp471859,stable
+45.00.B,Western Europe|S,0110,,,dp471879,dp471879,stable
+45.00.B,Western Europe|S,0120,,,dp472085,dp472085,stable
+45.00.B,Western Europe|S,0130,,,dp472079,dp472079,stable
+45.00.B,Western Europe|S,0140,,,dp472084,dp472084,stable
 60.00.A,0010,0010,01. Credit risk (excluding CCR),a. T,dp3530270,dp3530270,stable
 60.00.A,0010,0020,01. Credit risk (excluding CCR),b. T-1,dp472892,dp472892,stable
 60.00.A,0010,0030,01. Credit risk (excluding CCR),c. T,dp472891,dp472891,stable
@@ -3825,7 +3937,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 60.00.A,0110,0010,9. Of which other CCR,a. T,dp3530282,dp3530282,stable
 60.00.A,0120,0010,10. Credit valuation adjustments risk - CVA risk,a. T,dp3295621,dp3295621,stable
 60.00.A,0120,0020,9. Of which other CCR,b. T-1,dp3530253|dp475441,dp3530253|dp475441,ambiguous
-60.00.A,0120,0030,10. Credit valuation adjustments risk - CVA risk,c. T,dp475427|dp475430,dp475427|dp475430,ambiguous
+60.00.A,0120,0030,9. Of which other CCR,c. T,dp475427|dp475430,dp475427|dp475430,ambiguous
 60.00.A,0130,0010,EU 10a. Of which the standardised approach (SA),a. T,dp3295827,dp3295827,stable
 60.00.A,0130,0020,EU 10a. Of which the standardised approach (SA),b. T-1,dp3530252,dp3530252,stable
 60.00.A,0130,0030,EU 10a. Of which the standardised approach (SA),c. T,dp3529427,dp3529427,stable
@@ -4318,6 +4430,26 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 64.03.B,0010,0030,12. Exposure amounts considered for regulatory purposes,c Securitisation framework,dp3528330,dp3528330,stable
 64.03.B,0010,0040,12. Exposure amounts considered for regulatory purposes,d CCR framework,dp3528319,dp3528319,stable
 64.03.B,0010,0050,12. Exposure amounts considered for regulatory purposes,e Market risk framework,dp3530248,dp3530248,stable
+65.00,0010,0010,1. Market price uncertainty,a Equity,dp3526509,dp409315,rebound
+65.00,0010,0020,1. Market price uncertainty,b Interest Rates,dp3526476,dp409313,rebound
+65.00,0010,0030,1. Market price uncertainty,c Foreign exchange,dp3526475,dp409316,rebound
+65.00,0010,0040,1. Market price uncertainty,d Credit,dp3526477,dp409312,rebound
+65.00,0010,0050,1. Market price uncertainty,e Commodities,dp3526510,dp409314,rebound
+65.00,0010,0060,1. Market price uncertainty,EU e1 Unearned credit spreads AVA,dp3526507,dp409308,rebound
+65.00,0010,0070,1. Market price uncertainty,EU e2 Investment and funding costs AVA,dp3526474,dp409309,rebound
+65.00,0010,0080,1. Market price uncertainty,f Total category level post-diversification,dp3526508,dp5487201,rebound
+65.00,0010,0090,1. Market price uncertainty,g Of which: Total core approach in the trading book,dp3526530,dp5487203,rebound
+65.00,0010,0100,1. Market price uncertainty,h Of which: Total core approach in the banking book,dp3526535,dp5487205,rebound
+65.00,0030,0010,3. Close-out cost,a Equity,dp3526544,dp409329,rebound
+65.00,0030,0020,3. Close-out cost,b Interest Rates,dp3526512,dp409327,rebound
+65.00,0030,0030,3. Close-out cost,c Foreign exchange,dp3526540,dp409330,rebound
+65.00,0030,0040,3. Close-out cost,d Credit,dp3526516,dp409326,rebound
+65.00,0030,0050,3. Close-out cost,e Commodities,dp3526499,dp409328,rebound
+65.00,0030,0060,3. Close-out cost,EU e1 Unearned credit spreads AVA,dp3526523,dp409322,rebound
+65.00,0030,0070,3. Close-out cost,EU e2 Investment and funding costs AVA,dp3526522,dp409323,rebound
+65.00,0030,0080,3. Close-out cost,f Total category level post-diversification,dp3526526,dp5487198,rebound
+65.00,0030,0090,3. Close-out cost,g Of which: Total core approach in the trading book,dp3526529,dp5487200,rebound
+65.00,0030,0100,3. Close-out cost,h Of which: Total core approach in the banking book,dp3526497,dp5487199,rebound
 65.00,0040,0010,4. Concentrated positions,a Equity,dp3526502,dp3526502,stable
 65.00,0040,0020,4. Concentrated positions,b Interest Rates,dp3526479,dp3526479,stable
 65.00,0040,0030,4. Concentrated positions,c Foreign exchange,dp3526504,dp3526504,stable
@@ -4338,6 +4470,16 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 65.00,0050,0080,5. Early termination,f Total category level post-diversification,dp3526525,dp3526525,stable
 65.00,0050,0090,5. Early termination,g Of which: Total core approach in the trading book,dp3526492,dp3526492,stable
 65.00,0050,0100,5. Early termination,h Of which: Total core approach in the banking book,dp3526496,dp3526496,stable
+65.00,0060,0010,6. Model risk,a Equity,dp3526545,dp409344,rebound
+65.00,0060,0020,6. Model risk,b Interest Rates,dp3526514,dp409342,rebound
+65.00,0060,0030,6. Model risk,c Foreign exchange,dp3526542,dp409345,rebound
+65.00,0060,0040,6. Model risk,d Credit,dp3526482,dp409341,rebound
+65.00,0060,0050,6. Model risk,e Commodities,dp3526549,dp409343,rebound
+65.00,0060,0060,6. Model risk,EU e1 Unearned credit spreads AVA,dp3526487,dp409336,rebound
+65.00,0060,0070,6. Model risk,EU e2 Investment and funding costs AVA,dp3526486,dp409337,rebound
+65.00,0060,0080,6. Model risk,f Total category level post-diversification,dp3526527,dp5487202,rebound
+65.00,0060,0090,6. Model risk,g Of which: Total core approach in the trading book,dp3526495,dp5487204,rebound
+65.00,0060,0100,6. Model risk,h Of which: Total core approach in the banking book,dp3526506,dp5487197,rebound
 65.00,0070,0010,7. Operational risk,a Equity,dp3526501,dp3526501,stable
 65.00,0070,0020,7. Operational risk,b Interest Rates,dp3526513,dp3526513,stable
 65.00,0070,0030,7. Operational risk,c Foreign exchange,dp3526541,dp3526541,stable
@@ -4424,6 +4566,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 66.01.A,0610,0010,49.    of which: instruments issued by subsidiaries subject to phase out,a Amounts,dp3529910,dp3529910,stable
 66.01.A,0620,0010,50. Credit risk adjustments,a Amounts,dp3529903,dp3529903,stable
 66.01.A,0630,0010,51. Tier 2 T2 capital before regulatory adjustments,a Amounts,dp3529907,dp3529907,stable
+66.01.A,0640,0010,"52. Direct, indirect and synthetic holdings by an institution of own T2 instruments and subordinated loans negative amount",a Amounts,dp33304,dp5488621,rebound
 66.01.A,0650,0010,"53. Direct, indirect and synthetic holdings of the T2 instruments and subordinated loans of financial sector entities where those entities have reciprocal cross holdings with the institution designed to inflate artificially the own funds of the institution negative amount",a Amounts,dp32686,dp32686,stable
 66.01.A,0660,0010,"54. Direct, indirect and synthetic holdings of the T2 instruments and subordinated loans of financial sector entities where the institution does not have a significant investment in those entities amount above 10% threshold and net of eligible short positions negative amount",a Amounts,dp33312,dp33312,stable
 66.01.A,0670,0010,"55. Direct, indirect and synthetic holdings by the institution of the T2 instruments and subordinated loans of financial sector entities where the institution has a significant investment in those entities net of eligible short positions negative amount",a Amounts,dp33315,dp33315,stable
@@ -4442,11 +4585,14 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 66.01.A,0800,0010,67. of which: systemic risk buffer requirement,a Amounts,dp3530602,dp3530602,stable
 66.01.A,0810,0010,EU-67a. of which: Global Systemically Important Institution G-SII or Other Systemically Important Institution O-SII buffer requirement,a Amounts,dp3530603,dp3530603,stable
 66.01.A,0820,0010,EU-67b. of which: additional own funds requirements to address the risks other than the risk of excessive leverage,a Amounts,dp3529880,dp3529880,stable
+66.01.A,0830,0010,68. Common Equity Tier 1 capital as a percentage of risk exposure amount available after meeting the minimum capital requirements,a Amounts,dp454688,dp5488612,rebound
 66.01.A,0870,0010,72. Direct and indirect holdings of own funds and  eligible liabilities of financial sector entities where the institution does not have a significant investment in those entities amount below 10% threshold and net of eligible short positions,a Amounts,dp3529911,dp3529911,stable
 66.01.A,0880,0010,73. Direct and indirect holdings by the institution of the CET1 instruments of financial sector entities where the institution has a significant investment in those entities amount below 17.65% thresholds and net of eligible short positions,a Amounts,dp3529891,dp3529891,stable
 66.01.A,0890,0010,"75. Deferred tax assets arising from temporary differences amount below 17,65% threshold, net of related tax liability where the conditions in Article 38 3 CRR are met",a Amounts,dp235707,dp235707,stable
 66.01.A,0900,0010,76. Credit risk adjustments included in T2 in respect of exposures subject to standardised approach prior to the application of the cap,a Amounts,dp17458,dp17458,stable
+66.01.A,0910,0010,77. Cap on inclusion of credit risk adjustments in T2 under standardised approach,a Amounts,dp76880,dp5488631,rebound
 66.01.A,0920,0010,78. Credit risk adjustments included in T2 in respect of exposures subject to internal ratings-based approach prior to the application of the cap,a Amounts,dp3529904,dp3529904,stable
+66.01.A,0930,0010,79. Cap for inclusion of credit risk adjustments in T2 under internal ratings-based approach,a Amounts,dp70027,dp5488632,rebound
 66.01.A,0940,0010,80. Current cap on CET1 instruments subject to phase out arrangements,a Amounts,dp37461,dp37461,stable
 66.01.A,0950,0010,81. Amount excluded from CET1 due to cap excess over cap after redemptions and maturities,a Amounts,dp32012,dp32012,stable
 66.01.A,0960,0010,82. Current cap on AT1 instruments subject to phase out arrangements,a Amounts,dp37462,dp37462,stable
@@ -4549,6 +4695,9 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 66.01.B,0970,0010,83. Amount excluded from AT1 due to cap excess over cap after redemptions and maturities,b Source based on reference numbers/letters of the balance sheet under the regulatory scope of consolidation,dp3530631,dp3530631,stable
 66.01.B,0980,0010,84. Current cap on T2 instruments subject to phase out arrangements,b Source based on reference numbers/letters of the balance sheet under the regulatory scope of consolidation,dp3530640,dp3530640,stable
 66.01.B,0990,0010,85. Amount excluded from T2 due to cap excess over cap after redemptions and maturities,b Source based on reference numbers/letters of the balance sheet under the regulatory scope of consolidation,dp3530632,dp3530632,stable
+66.02.A,Intangible assets,0010,,,dp3525514,dp3525514,stable
+66.02.A,Intangible assets,0020,,,dp3525510,dp3525510,stable
+66.02.A,Intangible assets,0030,,c Reference,dp3530643,dp3530643,stable
 66.02.B,0010,0010,Total assets,a As at period end,dp32355,dp32355,stable
 66.02.B,0010,0020,Total assets,b As at period end,dp3525577,dp3525577,stable
 66.02.B,0010,0030,Total assets,c Reference,dp3530698,dp3530698,stable
@@ -4558,6 +4707,59 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 66.02.F,0010,0010,Total shareholders' equity,a As at period end,dp32465,dp32465,stable
 66.02.F,0010,0020,Total shareholders' equity,b As at period end,dp3525640,dp3525640,stable
 66.02.F,0010,0030,Total shareholders' equity,c Reference,dp3530639,dp3530639,stable
+67.01.A,DE,0010,,,dp149275,dp149275,stable
+67.01.A,DE,0060,,f Total exposure value,dp3526957,dp3526957,stable
+67.01.A,DE,0070,,,dp149540,dp149540,stable
+67.01.A,DE,0100,,,dp149626,dp149626,stable
+67.01.A,DE,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
+67.01.A,DE,0120,,,dp149630,dp149630,stable
+67.01.A,DE,0130,,,dp149631,dp149631,stable
+67.01.A,DK,0010,,,dp149275,dp149275,stable
+67.01.A,DK,0060,,f Total exposure value,dp3526957,dp3526957,stable
+67.01.A,DK,0070,,,dp149540,dp149540,stable
+67.01.A,DK,0100,,,dp149626,dp149626,stable
+67.01.A,DK,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
+67.01.A,DK,0120,,,dp149630,dp149630,stable
+67.01.A,DK,0130,,,dp149631,dp149631,stable
+67.01.A,ES,0130,,,dp149631,dp149631,stable
+67.01.A,FI,0010,,,dp149275,dp149275,stable
+67.01.A,FI,0060,,f Total exposure value,dp3526957,dp3526957,stable
+67.01.A,FI,0070,,,dp149540,dp149540,stable
+67.01.A,FI,0100,,,dp149626,dp149626,stable
+67.01.A,FI,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
+67.01.A,FI,0120,,,dp149630,dp149630,stable
+67.01.A,FR,0010,,,dp149275,dp149275,stable
+67.01.A,FR,0060,,f Total exposure value,dp3526957,dp3526957,stable
+67.01.A,FR,0070,,,dp149540,dp149540,stable
+67.01.A,FR,0100,,,dp149626,dp149626,stable
+67.01.A,FR,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
+67.01.A,FR,0120,,,dp149630,dp149630,stable
+67.01.A,FR,0130,,,dp149631,dp149631,stable
+67.01.A,NL,0010,,,dp149275,dp149275,stable
+67.01.A,NL,0060,,f Total exposure value,dp3526957,dp3526957,stable
+67.01.A,NL,0070,,,dp149540,dp149540,stable
+67.01.A,NL,0100,,,dp149626,dp149626,stable
+67.01.A,NL,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
+67.01.A,NL,0120,,,dp149630,dp149630,stable
+67.01.A,NL,0130,,,dp149631,dp149631,stable
+67.01.A,NO,0010,,,dp149275,dp149275,stable
+67.01.A,NO,0060,,f Total exposure value,dp3526957,dp3526957,stable
+67.01.A,NO,0070,,,dp149540,dp149540,stable
+67.01.A,NO,0100,,,dp149626,dp149626,stable
+67.01.A,NO,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
+67.01.A,NO,0120,,,dp149630,dp149630,stable
+67.01.A,NO,0130,,,dp149631,dp149631,stable
+67.01.A,SE,0010,,,dp149275,dp149275,stable
+67.01.A,SE,0060,,f Total exposure value,dp3526957,dp3526957,stable
+67.01.A,SE,0070,,,dp149540,dp149540,stable
+67.01.A,SE,0100,,,dp149626,dp149626,stable
+67.01.A,SE,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
+67.01.A,SE,0120,,,dp149630,dp149630,stable
+67.01.A,SE,0130,,,dp149631,dp149631,stable
+67.01.A,US,0070,,,dp149540,dp149540,stable
+67.01.A,US,0100,,,dp149626,dp149626,stable
+67.01.A,US,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
+67.01.A,US,0120,,,dp149630,dp149630,stable
 67.01.B,0010,0010,Total,a Exposure value under the standardised approach,dp3527384,dp3527384,stable
 67.01.B,0010,0020,Total,b Exposure value under the IRB approach,dp3527383,dp3527383,stable
 67.01.B,0010,0030,Total,c Sum of long and short positions of trading book exposures for SA,dp3530249,dp3530249,stable
@@ -4647,6 +4849,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 71.00,0200,0020,15. (Netted amounts of cash payables and cash receivables of gross SFT assets),b. T-1,dp3525587,dp3525587,stable
 71.00,0210,0010,16. Counterparty credit risk exposure for SFT assets,a. T,dp3526554,dp132921,rebound
 71.00,0210,0020,16. Counterparty credit risk exposure for SFT assets,b. T-1,dp3526553,dp5487207,rebound
+71.00,0220,0010,EU-16a. Derogation for SFTs: Counterparty credit risk exposure in accordance with Articles 429e(5) and 222 CRR,a. T,dp3529827,dp132924,rebound
+71.00,0220,0020,EU-16a. Derogation for SFTs: Counterparty credit risk exposure in accordance with Articles 429e(5) and 222 CRR,b. T-1,dp3529828,dp5487208,rebound
+71.00,0230,0010,17. Agent transaction exposures,a. T,dp3525060,dp132920,rebound
+71.00,0230,0020,17. Agent transaction exposures,b. T-1,dp3525059,dp5487206,rebound
+71.00,0240,0010,EU-17a. (Exempted CCP leg of client-cleared SFT exposure),a. T,dp3525062,dp143086,rebound
+71.00,0240,0020,EU-17a. (Exempted CCP leg of client-cleared SFT exposure),b. T-1,dp3525061,dp5488540,rebound
 71.00,0250,0010,18. Total securities financing transaction exposures,a. T,dp3527652,dp3527652,stable
 71.00,0250,0020,18. Total securities financing transaction exposures,b. T-1,dp3527917,dp3527917,stable
 71.00,0260,0010,19. Off-balance sheet exposures at gross notional amount,a. T,dp37598,dp37598,stable
@@ -4675,6 +4883,8 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 71.00,0370,0020,EU-22h. (Excluded CSD related services of CSD/institutions in accordance with point (o) of Article 429a(1) CRR),b. T-1,dp3529874,dp3529874,stable
 71.00,0380,0010,EU-22i. (Excluded CSD related services of designated institutions in accordance with point (p) of Article 429a(1) CRR),a. T,dp454680,dp454680,stable
 71.00,0380,0020,EU-22i. (Excluded CSD related services of designated institutions in accordance with point (p) of Article 429a(1) CRR),b. T-1,dp3529860,dp3529860,stable
+71.00,0390,0010,EU-22j. (Reduction of the exposure value of pre-financing or intermediate loans),a. T,dp3525612,dp457437,rebound
+71.00,0390,0020,EU-22j. (Reduction of the exposure value of pre-financing or intermediate loans),b. T-1,dp3525588,dp5485874,rebound
 71.00,0400,0010,"EU-22k. (Excluded exposures to shareholders according to Article 429a (1), point (da) CRR)",a. T,dp3295268,dp3295268,stable
 71.00,0400,0020,"EU-22k. (Excluded exposures to shareholders according to Article 429a (1), point (da) CRR)",b. T-1,dp3529858,dp3529858,stable
 71.00,0410,0010,EU-22l. (Exposures deducted in accordance with point (q) of Article 429a(1) CRR),a. T,dp3295266,dp3295266,stable
@@ -4697,6 +4907,8 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 71.00,0490,0020,EU-26a. Additional own funds requirements to address the risk of excessive leverage (%),b. T-1,dp3530998,dp3530998,stable
 71.00,0500,0010,EU-26b. of which: to be made up of CET1 capital,a. T,dp3530999,dp3530999,stable
 71.00,0500,0020,EU-26b. of which: to be made up of CET1 capital,b. T-1,dp3531000,dp3531000,stable
+71.00,0510,0010,27. Leverage ratio buffer requirement (%),a. T,dp3531002,dp5490145,rebound
+71.00,0510,0020,27. Leverage ratio buffer requirement (%),b. T-1,dp3531001,dp5490148,rebound
 71.00,0520,0010,EU-27a. Overall leverage ratio requirement (%),a. T,dp3528944,dp3528944,stable
 71.00,0520,0020,EU-27a. Overall leverage ratio requirement (%),b. T-1,dp3528941,dp3528941,stable
 71.00,0530,0010,EU-27b. Choice on transitional arrangements for the definition of the capital measure,a. T,dp3526446,dp3526446,stable
