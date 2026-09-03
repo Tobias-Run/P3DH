@@ -114,6 +114,33 @@
       margin-left:.3rem;background:#f3efe3;color:#6b5300;cursor:help;white-space:nowrap}
   tr.flagged td:first-child{box-shadow:inset 3px 0 0 #c9a227}
   [data-theme=dark] .qb{background:#3a3320;color:#e0c96b}
+  /* Überblick (#47, R2): die Kennzahlen, mit denen ein Report anfängt */
+  .ovgrid{display:flex;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .45rem}
+  .ovcard{flex:1 1 136px;min-width:136px;max-width:212px;background:var(--card);
+          border:1px solid var(--line);border-radius:6px;padding:.4rem .55rem}
+  .ovlab{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ovval{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.25;margin:1px 0 3px}
+  .ovval .ovu{font-size:11px;font-weight:400;color:var(--muted);margin-left:2px}
+  .ovmiss{font-size:11px;color:var(--muted);margin:.1rem 0 .35rem;max-width:82ch}
+  .ovq{font-size:11.5px;margin:.35rem 0;background:#f3efe3;color:#6b5300;border-radius:4px;
+       padding:.3rem .6rem;max-width:82ch}
+  [data-theme=dark] .ovq{background:#3a3320;color:#e0c96b}
+  /* Themenblöcke: eingeklappt, mit Füllstand — die Rohtabellen bleiben
+     vollständig, sie führen nur nicht mehr. */
+  details.theme{border:1px solid var(--line);border-radius:6px;margin:.4rem 0;background:var(--card)}
+  details.theme>summary{cursor:pointer;padding:.45rem .7rem;display:flex;align-items:center;
+                        gap:.6rem;font-weight:600;font-size:13px;list-style:none}
+  /* display:flex verschluckt das Standard-Dreieck — ohne Ersatz sieht der Block
+     nicht aufklappbar aus, und die Rohtabellen waeren praktisch unauffindbar. */
+  details.theme>summary::-webkit-details-marker{display:none}
+  details.theme>summary::before{content:'▸';color:var(--muted);font-weight:400;font-size:11px}
+  details.theme[open]>summary::before{content:'▾'}
+  details.theme>summary:hover{background:var(--hover)}
+  details.theme[open]>summary{border-bottom:1px solid var(--line)}
+  .thcount{font-weight:400;font-size:11.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+  .thbar{flex:0 0 56px}
+  .tbody{padding:0 .7rem .2rem}
+  .tbody section{margin:.9rem 0 1rem}
   .status{padding:2rem;color:var(--muted)}
   .prog{height:3px;background:var(--soft);border-radius:2px;overflow:hidden;margin-top:.6rem;width:340px}
   .prog i{display:block;height:100%;background:var(--blue);width:0%;transition:width .2s}
@@ -206,11 +233,15 @@ let DARK  = store.dark ?? window.matchMedia('(prefers-color-scheme: dark)').matc
 let CMPTPL = store.cmptpl || '61.00';
 function persist(){ localStorage.setItem('p3dh', JSON.stringify({
   scale:SCALE, eur:EUR, pins:[...PINS], dark:DARK, cmptpl:CMPTPL,
+  themes:(typeof OPENTHEMES!=='undefined'?[...OPENTHEMES]:undefined),
   bmp:(typeof BMP!=='undefined'?BMP:undefined)})); }
 function applyTheme(){ document.documentElement.dataset.theme = DARK?'dark':'light'; }
 applyTheme();
 
 let REPORTS=[], CB=new Map(), TITLES=new Map(), AXIS=new Map(), NAMES=new Map(), META=new Map(), FX=new Map(), activeKey=null;
+/* Kuratierte Themen (#47) — aus codebook.json, nicht hier gefuehrt. */
+let THEME_ORDER=[], THEME_OF=new Map();
+let OPENTHEMES=new Set(store.themes||[]);   // aufgeklappte Bloecke, ueber Reports hinweg
 const repKey=r=>r.entityID+'|'+r.refPeriod;
 const byKey =k=>REPORTS.find(r=>repKey(r)===k);
 
@@ -310,6 +341,12 @@ function buildFromIndex(idx, codebook){
   // loest ihn auf ('NL' -> 'Netherlands'). Vorhandensein markiert zugleich,
   // dass die Zeilenreihenfolge dieses Templates KEINE Modellordnung ist.
   for(const [k,v] of Object.entries(codebook.axis||{})) AXIS.set(k, v);
+  // Themenzuordnung (#47): kuratiert in scripts/template_themes.py, hier nur
+  // gelesen. Fehlt sie (aelteres codebook.json), faellt alles in den
+  // Auffangblock — sichtbar bleibt jede Tabelle in jedem Fall.
+  const th=codebook.themes||{};
+  THEME_ORDER=(th.order||[]).map(([id,label])=>({id,label}));
+  for(const [tid,id] of Object.entries(th.map||{})) THEME_OF.set(tid,id);
   for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
@@ -641,6 +678,102 @@ function coverageBlock(rep){
     <b>${reported}</b> von <b>${keys.length}</b> deklarierten Templates offengelegt${
     conflict?` · <b>${conflict}</b> widersprüchlich (unten)`:''}</div>${h}</div>`;
 }
+/* ================= Überblick (#47, R2) ====================================
+   Der Report begann bisher mit 136 gleichrangigen Tabellen in Codereihenfolge
+   — das Erste nach dem Einstieg war eine fast leere Krypto-Tabelle, weil
+   `01.00` alphabetisch vorn steht. Der Überblick ist die erste der drei Ebenen:
+   wenige Kennzahlen, jede mit ihrer Stellung in der Peer-Gruppe.
+
+   Die Peer-Gruppe ist DIESELBE wie im Benchmark (Größenklasse ×
+   Konsolidierungskreis × Stichtag, ab n≥5) und wird IMMER auf der vollen
+   Population gerechnet — der Sidebar-Filter verengt die Ansicht, nicht den
+   Vergleichsmaßstab.                                                        */
+const km1Pct=(rep,row)=>{ const v=km1Value(rep,row); return (v==null||Math.abs(v)>10)?null:v*100; };
+function eurBn(rep,v){
+  if(v==null) return null;
+  const cur=curOf(rep), r=cur==='EUR'?1:(FX.get(cur+'|'+rep.refPeriod)||null);
+  return r==null?null:v*r/1e9;
+}
+const OV_METRICS=[
+  {id:'cet1',label:'CET1-Quote',       unit:'%',       get:r=>km1Pct(r,'0050')},
+  {id:'tc',  label:'Gesamtkapitalquote',unit:'%',      get:r=>km1Pct(r,'0070')},
+  // Der einzige gerechnete Wert im Überblick: Gesamtkapitalquote minus
+  // Gesamtanforderung. Beides Prozentpunkte aus demselben Template.
+  {id:'hr',  label:'Headroom TC−OCR',  unit:'pp',      get:r=>{
+      const t=km1Pct(r,'0070'), o=km1Pct(r,'0190');
+      return (t==null||o==null)?null:t-o; }},
+  {id:'lev', label:'Verschuldungsquote',unit:'%',      get:r=>km1Pct(r,'0220')},
+  {id:'lcr', label:'LCR',              unit:'%',       get:r=>km1Pct(r,'0320')},
+  {id:'nsfr',label:'NSFR',             unit:'%',       get:r=>km1Pct(r,'0350')},
+  {id:'npl', label:'NPL-Quote (CQ3)',  unit:'%',       get:r=>{
+      const pe=tplValue(r,'82.00.A','0020','0010'), npe=tplValue(r,'82.00.A','0020','0040');
+      if(pe==null||npe==null) return null;
+      const tot=pe+npe; return tot>0?npe/tot*100:null; }},
+  {id:'trea',label:'TREA',             unit:'Mrd EUR', get:r=>eurBn(r,km1Value(r,'0040'))},
+];
+let OV_PCT=null;
+function overviewPercentiles(){
+  if(!BM_LOADED) return null;          // ohne die anderen Reports keine Einordnung
+  if(OV_PCT) return OV_PCT;
+  const rows=REPORTS.map(rep=>{
+    const {lei,scope}=leiParts(rep.entityID);
+    const m=META.get(lei)||{};
+    const r={key:repKey(rep), itype:shortItype(m.institution_type||''), scope, date:rep.refPeriod};
+    for(const mt of OV_METRICS) r[mt.id]=mt.get(rep);
+    return r;
+  });
+  OV_PCT=new Map();
+  for(const mt of OV_METRICS) OV_PCT.set(mt.id, percentileMap(rows, mt.id));
+  return OV_PCT;
+}
+function renderOverview(rep){
+  const host=document.getElementById('ovSection');
+  if(!host) return;
+  const pm=overviewPercentiles();
+  const key=repKey(rep);
+  const have=[], miss=[];
+  for(const mt of OV_METRICS){
+    const v=mt.get(rep);
+    if(v==null) miss.push(mt.label); else have.push({mt,v});
+  }
+  let h='';
+  if(have.length){
+    h+='<div class="ovgrid">';
+    for(const {mt,v} of have){
+      const p=pm?(pm.get(mt.id)||new Map()).get(key):null;
+      h+=`<div class="ovcard"><div class="ovlab" title="${esc(mt.label)}">${esc(mt.label)}</div>
+        <div class="ovval">${esc(v.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1}).split(',').join(NBSP))}<span class="ovu">${esc(mt.unit)}</span></div>
+        ${p?pctBadge(p):''}</div>`;
+    }
+    h+='</div>';
+  }
+  // "Fehlt != Null": die nicht belegten Kennzahlen werden benannt, nicht
+  // weggelassen — sonst sähe ein Report mit zwei Karten aus wie einer, für den
+  // es nur zwei Kennzahlen gibt.
+  if(miss.length)
+    h+=`<div class="ovmiss">Ohne Wert in diesem Report: ${esc(miss.join(' · '))}
+      <span class="cl">— nicht offengelegt, nicht in unserem Bestand platzierbar oder ohne EZB-Kurs. Nicht „null".</span></div>`;
+  const q=rep.quality;
+  if(q && q.n)
+    h+=`<div class="ovq" title="Werte, die ausserhalb der Verteilung ihrer Zellpopulation liegen. Das kann eine korrekte Besonderheit sein.">△ Plausibilitätsprüfung: <b>${q.n}</b> Befund(e) in ${q.t?q.t.length:0} Template(s), größte Abweichung ${esc(q.d)} Größenordnungen${q.t&&q.t.length?` <span class="cl">· ${esc(q.t.slice(0,10).join(', '))}${q.t.length>10?' …':''}</span>`:''}</div>`;
+  if(!h){ host.innerHTML=''; return; }
+  const note=pm?'Balken = Perzentil der Peer-Gruppe (gleiche Größenklasse, Konsolidierung, Stichtag; ab 5 Reports)':'Peer-Einordnung wird geladen…';
+  host.innerHTML=`<section><h3>Überblick <span class="scalenote">${esc(note)}</span></h3>${h}</section>`;
+}
+
+/* ---- Themenblöcke (Ebene 2) ---------------------------------------------
+   Zuordnung je BASISTEMPLATE ('60.00.A' -> '60.00'): die Buchstaben-Suffixe
+   sind Teilblätter desselben Templates. Unbekanntes landet im Auffangblock,
+   nichts verschwindet. */
+const baseTid=t=>t.replace(/\.[A-Z]$/,'');
+const themeOf=t=>THEME_OF.get(baseTid(t))||'__rest';
+const THEME_REST={id:'__rest', label:'Nicht zugeordnet'};
+function themeBar(withData, declared){
+  if(!declared) return '';
+  const pct=Math.max(2,Math.min(100, withData/declared*100));
+  return `<span class="pctb thbar" title="${withData} von ${declared} in diesem Block deklarierten Templates tragen Daten"><span class="pctf" style="width:${pct}%"></span></span>`;
+}
+
 async function renderReport(rep){
   VIEW='reports'; setTabs();
   activeKey=repKey(rep);
@@ -660,30 +793,81 @@ async function renderReport(rep){
     <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
     <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(curOf(rep))}</b>
     · Framework <b>${esc(rep.framework)}</b></div></div>
+    <div id="ovSection"></div>
     <div id="tsSection"></div>
     ${coverageBlock(rep)}
     <div class="tfilter"><input id="tfilter" placeholder="Filter templates (code / title)…">${controlsHTML()}</div>
     <div id="tcontainer"></div>`;
-  // Zeitreihe nur, wenn dieses Institut ≥2 Stichtage hat (aus dem Slim-Index bekannt) →
-  // Benchmark-Aggregat lazy laden, dann #tsSection nachrendern
-  if(entityReports(rep).length>=2)
-    ensureBenchmark().then(()=>{ if(activeKey===repKey(rep)) renderTimeseries(rep); });
+  // Werte sofort aus dem eigenen Shard; die Peer-Einordnung braucht die anderen
+  // Reports und kommt nach, sobald benchmark.json da ist.
+  renderOverview(rep);
+  ensureBenchmark().then(()=>{
+    if(activeKey!==repKey(rep)) return;
+    renderOverview(rep);
+    if(entityReports(rep).length>=2) renderTimeseries(rep);
+  });
+  // Ebene 2+3: Themenblöcke, Rohtabellen erst beim Aufklappen gerendert. Das
+  // ist nicht nur Ordnung, sondern auch Tempo — 136 Gitter auf einmal zu bauen
+  // war der teuerste Schritt am Report.
+  const declared=new Map();
+  for(const t of Object.keys(rep.coverage||{}))
+    declared.set(themeOf(t), (declared.get(themeOf(t))||0)+1);
   const draw=()=>{
     const f=(document.getElementById('tfilter').value||'').toLowerCase();
-    const c=document.getElementById('tcontainer'); c.innerHTML='';
-    let shown=0;
-    for(const tid of tids){
-      const title=(TITLES.get(dpmCode(tid))||'').toLowerCase();
-      if(f && !tid.toLowerCase().includes(f) && !title.includes(f)) continue;
-      c.insertAdjacentHTML('beforeend', renderTemplate(tid, rep.templates.get(tid), rep));
-      shown++;
+    const c=document.getElementById('tcontainer');
+    const hit=tid=>!f || tid.toLowerCase().includes(f) ||
+                   (TITLES.get(dpmCode(tid))||'').toLowerCase().includes(f);
+    const all=new Map(), hits=new Map();
+    const push=(m,id,t)=>{ (m.get(id)||m.set(id,[]).get(id)).push(t); };
+    for(const tid of tids){ push(all,themeOf(tid),tid); if(hit(tid)) push(hits,themeOf(tid),tid); }
+    const order=[...THEME_ORDER, THEME_REST];
+    let h='', nHit=0;
+    for(const th of order){
+      const mine=all.get(th.id)||[], mh=hits.get(th.id)||[];
+      const dec=declared.get(th.id)||0;
+      if(!mine.length && !dec) continue;      // keine Daten, keine Deklaration -> keine Aussage
+      nHit+=mh.length;
+      // Beim Filtern führt der Treffer: Blöcke mit Treffern gehen auf, Blöcke
+      // ohne bleiben sichtbar, aber leer — der Filter sucht über ALLE
+      // Templates, auch über eingeklappte.
+      const open=f ? mh.length>0 : OPENTHEMES.has(th.id);
+      const count=f
+        ? `${mh.length} Treffer von ${mine.length}`
+        : (dec?`${mine.length} von ${dec} Templates mit Daten`:`${mine.length} Templates`);
+      h+=`<details class="theme" data-t="${esc(th.id)}"${open?' open':''}>
+        <summary>${esc(th.label)}<span class="thcount">${esc(count)}</span>${f?'':themeBar(mine.length,dec)}</summary>
+        <div class="tbody"></div></details>`;
     }
-    if(!shown) c.innerHTML='<div class="status">No templates match.</div>';
+    c.innerHTML=h||'<div class="status">Keine Templates in diesem Report.</div>';
+    if(f && !nHit) c.insertAdjacentHTML('afterbegin','<div class="status">Kein Template passt zum Filter.</div>');
+    // offene Blöcke jetzt füllen; der Rest wartet auf sein toggle-Ereignis
+    c.querySelectorAll('details.theme[open]').forEach(d=>fillTheme(rep,d,(f?hits:all).get(d.dataset.t)||[]));
+    c._lists=(f?hits:all); c._filtered=!!f;
+  };
+  const fillTheme=(rep,det,list)=>{
+    const body=det.querySelector('.tbody');
+    if(body.dataset.done==='1') return;
+    const cont=document.getElementById('tcontainer');
+    body.innerHTML=list.map(tid=>renderTemplate(tid, rep.templates.get(tid), rep)).join('')
+      || `<div class="status">${cont&&cont._filtered
+            ? 'Kein Template dieses Blocks passt zum Filter.'
+            : 'Für diesen Block liegen keine auswertbaren Zellen vor — er ist deklariert, aber ohne Daten in unserem Bestand.'}</div>`;
+    body.dataset.done='1';
   };
   draw();
   document.getElementById('tfilter').addEventListener('input',draw);
+  const cont=document.getElementById('tcontainer');
+  // `toggle` steigt nicht auf — deshalb in der Capture-Phase abgefangen.
+  cont.addEventListener('toggle',e=>{
+    const det=e.target;
+    if(!det.classList||!det.classList.contains('theme')) return;
+    const id=det.dataset.t;
+    if(det.open){ OPENTHEMES.add(id); fillTheme(rep,det,(cont._lists||new Map()).get(id)||[]); }
+    else OPENTHEMES.delete(id);
+    persist();
+  }, true);
   // Dimensionswechsel (#52): Auswahl merken und nur neu zeichnen.
-  document.getElementById('tcontainer').addEventListener('change',e=>{
+  cont.addEventListener('change',e=>{
     const sel=e.target.closest('.dimsel');
     if(!sel) return;
     DIMSEL.set(sel.dataset.tid, sel.value);

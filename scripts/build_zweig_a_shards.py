@@ -35,6 +35,7 @@ import duckdb
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from determinism import ordered_query as ordered  # noqa: E402
+from template_themes import theme_payload  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
@@ -312,7 +313,12 @@ def main():
     """, "Achsenbeschriftung"):
         axis.setdefault(dpm_code(tid), {})[r] = nm
 
-    codebook = {"cb": cb, "titles": titles, "axis": axis}
+    # --- kuratierte Themenzuordnung (#47) ---
+    # Eine Quelle für Oberfläche und Auswertung: die Registry liegt in
+    # scripts/template_themes.py, der Viewer bekommt sie hier mitgeliefert
+    # statt sie ein zweites Mal in JavaScript zu führen. ~3 KB.
+    themes = theme_payload()
+    codebook = {"cb": cb, "titles": titles, "axis": axis, "themes": themes}
 
     # --- lookup maps, all straight from the same parquet ---
     # Diese drei Maps werden je Schlüssel ÜBERSCHRIEBEN — bei mehreren Zeilen je
