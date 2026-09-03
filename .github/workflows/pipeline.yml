@@ -153,6 +153,12 @@ jobs:
       - name: Plausibility profile
         run: python scripts/check_plausibility.py
 
+      # Footprint-Kennzahlen aus dem Länder-Exposure (#12). Wie die
+      # Plausibilität eine reine Auswertung des Parquets — ohne Abbruch, die
+      # Befunde betreffen die Einreichungen, nicht unsere Pipeline.
+      - name: Footprint metrics
+        run: python scripts/build_footprint.py
+
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
 
@@ -181,7 +187,7 @@ jobs:
                   codebook/framework_bridge.csv \
                   codebook/dpm_codebook.csv codebook/template_titles.csv \
                   processed/entity_meta.csv processed/fx_rates.csv \
-                  processed/quality_profile.csv \
+                  processed/quality_profile.csv processed/footprint.csv \
                   interim/plausibility_cells.csv interim/plausibility_findings.csv
           if git diff --cached --quiet; then
             echo "Manifeste und Brücke unverändert"

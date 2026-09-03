@@ -43,17 +43,19 @@ def main():
     CREATE VIEW fx AS SELECT * FROM read_csv_auto('processed/fx_rates.csv', header=true, all_varchar=true);
     CREATE VIEW geo AS SELECT * FROM read_csv_auto('codebook/geo_names.csv', header=true, all_varchar=true);
 
-    -- Issue #10: offene-Achsen-Fakten (cell_row/cell_col NULL) treffen den
-    -- primären cb-Join nie (er verlangt cb.row = b.cell_row, NULL = NULL ist
-    -- nie wahr). Viele ihrer dp-Codes SIND im Codebook registriert, aber nur
-    -- unter einer generischen Tabelle (z. B. C_09.04 statt K_67.01.a) — die
-    -- eigentliche Meldetabelle wiederholt dasselbe Metrik-Grid einmal je
-    -- Dimensionswert (Land), das Grid selbst ist aber templateübergreifend
-    -- eindeutig definiert. Fallback nur für dp-Codes, die GLOBAL genau eine
-    -- (template,row,col)-Kombination im Codebook haben — 3.398 von 9.068
-    -- dp-Codes sind mehrdeutig (ein dp besetzt in verschiedenen Templates
-    -- verschiedene Zellen, z. B. dp33413 in 8 Templates) und bleiben bei
-    -- Mehrdeutigkeit unangetastet.
+    -- Issue #10: Notbehelf für dp-Codes, die der primäre cb-Join nicht trifft.
+    --
+    -- Die ursprüngliche Begründung ist mit #56 ÜBERHOLT: sie ging davon aus,
+    -- dass offene-Achsen-Fakten cell_row/cell_col NULL tragen und nur über
+    -- eine generische Tabelle (C_09.04 statt K_67.01.a) auffindbar sind. Seit
+    -- der Parser die Zeile aus dem Dimensionswert bildet und das Codebook die
+    -- offene Achse als '*' führt, trifft der primäre Join diese Fakten direkt —
+    -- unter ihrem eigenen Template, mit ihrem eigenen Spaltenlabel.
+    --
+    -- Der Fallback bleibt für den Rest: dp-Codes, die GLOBAL genau eine
+    -- (template,row,col)-Kombination haben. Mehrdeutige (ein dp besetzt in
+    -- verschiedenen Templates verschiedene Zellen, z. B. dp33413 in 8
+    -- Templates) bleiben unangetastet — any_value() wäre dort beliebig.
     CREATE VIEW cb_fallback AS
       SELECT datapoint_code, any_value(row) AS row, any_value(col) AS col,
              any_value(row_label) AS row_label, any_value(col_label) AS col_label,
@@ -115,8 +117,15 @@ def main():
         b.template_reported = 'True'                                            AS template_reported,
         b.source_file
       FROM base b
+      -- cb.row = '*' ist die OFFENE Zeilenachse (#56): das Codebook kennt dort
+      -- die Spalte, aber nicht die Zeile — die entsteht beim Einreichen aus dem
+      -- Dimensionswert, und der Parser schreibt sie als cell_row ('AL'). Ohne
+      -- diesen Zweig scheitert der Join an '*' <> 'AL' und 227.373 Fakten
+      -- verlieren ihr Spaltenlabel, obwohl es im Codebook steht.
+      -- Kein Fan-out: geprüft, dass KEIN (dp, template, col) sowohl '*' als
+      -- auch eine feste Zeile trägt (0 von 14.292 Einträgen).
       LEFT JOIN cb ON cb.datapoint_code = b.datapoint_code AND cb.template = b.tcode
-                  AND cb.row = b.cell_row AND cb.col = b.cell_col
+                  AND (cb.row = b.cell_row OR cb.row = '*') AND cb.col = b.cell_col
       LEFT JOIN cb_fallback cbf ON cbf.datapoint_code = b.datapoint_code
       LEFT JOIN em ON em.lei = b.lei
       LEFT JOIN fx ON fx.currency = b.currency AND fx.refdate = b.refPeriod

@@ -66,6 +66,12 @@ class ZweigBFallbackTest(unittest.TestCase):
                        ["rs:LEI00000000000000001.CON", "2025-12-31", "4.1", "67.01.A",
                         "True", "dpAMBIG", "", "", "RIO=eba_GA:DE", "9.0",
                         "iso4217:EUR", "-6", "x.zip"],
+                       # #56: offene ZEILENachse. Der Parser hat die Zeile aus der
+                       # Dimension gebildet ('NL'), das Codebook führt sie als '*'
+                       # und kennt die Spalte. Der primäre Join muss das treffen.
+                       ["rs:LEI00000000000000001.CON", "2025-12-31", "4.1", "67.01.A",
+                        "True", "dpSTAR", "NL", "0060", "RIO=eba_GA:NL", "7.0",
+                        "iso4217:EUR", "-6", "x.zip"],
                    ])
 
         # dpm_codebook.csv: dpCLOSED nur unter K_61.00 (normaler Fall),
@@ -83,6 +89,9 @@ class ZweigBFallbackTest(unittest.TestCase):
                         "monetary", "OV1"],
                        ["dpAMBIG", "K_71.00", "0020", "0030", "B-Label", "Amount",
                         "monetary", "LR2"],
+                       # offene Zeilenachse: Spalte bekannt, Zeile '*' (#56)
+                       ["dpSTAR", "K_67.01.a", "*", "0060", "", "Total exposure value",
+                        "monetary", "CCyB1"],
                    ])
 
         _write_csv(self.root / "processed" / "entity_meta.csv",
@@ -124,6 +133,29 @@ class ZweigBFallbackTest(unittest.TestCase):
         self.assertEqual(r[4], 50.0, "fact_value_eur muss ueber den Fallback-data_type berechnet werden")
         self.assertEqual(r[5], "Netherlands")
 
+    def test_open_row_axis_keeps_its_column_label(self):
+        """#56: das Codebook führt die Zeile als '*', der Parser hat sie aus der
+        Dimension gebildet ('NL'). Der Join `cb.row = b.cell_row` konnte das nie
+        treffen — 227.373 Fakten verloren dadurch Spaltenlabel UND data_type,
+        und ohne data_type auch die EUR-Normalisierung.
+        """
+        z.main()
+        r = self._rows()["dpSTAR"]
+        self.assertEqual(r[2], "Total exposure value",
+                         "col_label muss aus dem EIGENEN Template kommen")
+        self.assertEqual(r[3], "monetary", "ohne data_type keine EUR-Normalisierung")
+        self.assertEqual(r[4], 7.0, "fact_value_eur muss berechnet sein")
+        self.assertEqual(r[5], "Netherlands")
+
+    def test_open_row_axis_does_not_duplicate_facts(self):
+        """Der Join lautet `(cb.row = b.cell_row OR cb.row = '*')`. Träfe ein
+        Fakt zwei Codebook-Zeilen, würde er verdoppelt — still."""
+        z.main()
+        con = duckdb.connect()
+        n = con.execute(
+            f"SELECT count(*) FROM '{z.OUT}' WHERE datapoint_code = 'dpSTAR'").fetchone()[0]
+        self.assertEqual(n, 1, "Fakt darf durch den OR-Zweig nicht vervielfacht werden")
+
     def test_ambiguous_dp_not_resolved(self):
         z.main()
         rows = self._rows()
@@ -132,10 +164,15 @@ class ZweigBFallbackTest(unittest.TestCase):
         self.assertIsNone(r[4], "ohne data_type darf kein fact_value_eur entstehen")
 
     def test_row_count_parity(self):
+        """Der Join darf weder Zeilen verlieren noch welche erfinden — gegen die
+        Long-Form gezählt statt gegen eine feste Zahl, damit die Fixture wachsen
+        kann, ohne den Test zu einer Zahlenpflege zu machen."""
         z.main()
         con = duckdb.connect()
         n = con.execute(f"SELECT count(*) FROM '{z.OUT}'").fetchone()[0]
-        self.assertEqual(n, 3)
+        with open(self.root / "processed" / "long_form_raw.csv", encoding="utf-8") as f:
+            expected = sum(1 for _ in f) - 1
+        self.assertEqual(n, expected)
 
 
 if __name__ == "__main__":

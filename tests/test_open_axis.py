@@ -111,6 +111,34 @@ class AxisMemberTest(unittest.TestCase):
         self.assertEqual(xp.axis_member(d), "2|1")
 
 
+class JoinFanOutTest(unittest.TestCase):
+    """Der Label-Join in build_zweig_b.py lautet seit #56
+
+        AND (cb.row = b.cell_row OR cb.row = '*') AND cb.col = b.cell_col
+
+    Das ist nur dann kein Fan-out, wenn KEIN (datapoint, template, col) sowohl
+    eine offene als auch eine feste Zeile trägt — sonst träfe ein Fakt zwei
+    Codebook-Zeilen und würde verdoppelt. Still, versteht sich.
+
+    Heute gilt das (0 von 14.292 Einträgen). Es ist aber eine Eigenschaft des
+    DPM, keine Zusage — deshalb hier festgehalten statt im Kopf behalten.
+    """
+
+    def test_no_datapoint_has_both_an_open_and_a_fixed_row(self):
+        import collections
+        import csv
+        path = (Path(__file__).resolve().parent.parent
+                / "codebook" / "dpm_codebook.csv")
+        if not path.exists():
+            self.skipTest("Codebook nicht vorhanden")
+        seen = collections.defaultdict(set)
+        with path.open(encoding="utf-8") as fh:
+            for r in csv.DictReader(fh):
+                seen[(r["datapoint_code"], r["template"], r["col"])].add(r["row"])
+        both = [k for k, v in seen.items() if bc.OPEN_AXIS in v and len(v) > 1]
+        self.assertEqual(both, [], f"Join würde Fakten verdoppeln: {both[:5]}")
+
+
 class CodebookMarkerTest(unittest.TestCase):
     def test_open_axis_marker_is_the_star(self):
         """Parser und Codebook müssen sich auf dasselbe Zeichen einigen —
