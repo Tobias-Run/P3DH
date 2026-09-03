@@ -149,6 +149,42 @@ Alle drei sind dieselbe Klasse: *unsere Darstellung ist enger als die Daten.*
 Determinismus macht daraus aus einem unsichtbaren ein sichtbares Problem, löst
 es aber nicht.
 
+## Nachtrag: dieselbe Klasse, ein anderer Ort (#56)
+
+Kurz nach diesem Dokument fiel derselbe Fehlermodus an einer zweiten Stelle auf,
+und er hatte **409.057 Fakten** gekostet — 18 % des Bestands. In
+`build_codebook.py` stand:
+
+```python
+parsed = parse_cellcode(code)
+if not parsed:
+    continue          # <- 308 Zellen, spurlos
+```
+
+Das Muster verlangte `r(\w+)` und traf die DPM-Schreibweise für eine offene
+Zeilenachse (`{K_67.01.a, r*, c0010}`) nicht. Verworfen wurde dabei nicht nur
+die offene Zeile, sondern der **ganze** Eintrag — samt der Spalte, die im
+CellCode sehr wohl steht.
+
+Kein Fehler, keine Warnung, keine Zahl. Der Befund passt exakt auf U2
+(*unbeobachtbar*): das Ergebnis sah plausibel aus, weil niemand wusste, wie viel
+fehlte.
+
+Die Gegenmaßnahme ist dieselbe wie oben — **zählen statt schweigen**. Der Build
+gibt unparsbare CellCode-Formen jetzt mit Anzahl und Beispiel aus. Eine künftige
+Form (etwa ein `c*`, das es heute nicht gibt) fällt damit auf, statt still
+Fakten zu kosten.
+
+**Die Lehre, die über den Einzelfall hinausgeht:** ein `continue` in einer
+Schleife über Fremddaten ist eine stille Annahme darüber, was in den Daten
+vorkommen kann. Wo diese Annahme nicht geprüft wird, ist sie eine Wette — und
+hier stand ein Fünftel des Bestands darauf.
+
+Ein Nachspiel gab es auch: mein eigener Fix ließ 192 Fakten übrig, weil er
+Freitext-Achsen, die auf `:` enden, zu einem leeren Schlüssel verarbeitete.
+Gesamtzahlen allein (18,3 % → 0,01 %) hätten das verdeckt; sichtbar wurde es
+erst beim Nachzählen der Reste.
+
 ## Regel für künftige Änderungen
 
 Jede Änderung an einer Query, deren Ergebnis in eine Datei fließt, ist erst

@@ -43,6 +43,13 @@ interim/edap_recon/query_response.json
 # Download-Plan, bei jedem Lauf neu erzeugt (plan_delta.py)
 interim/edap_recon/manifest_todo.csv
 
+# Roh-Layer: die von EDAP geladenen ZIPs (download_raw_reports.py). Jederzeit
+# neu ladbar, aber im Voll-Load hunderte MB — ein `git add -A` würde sie sonst
+# einsaugen. Der Workflow committet zwar nur eine explizite Liste, lokal ist es
+# aber eine Falle. Das entpackte Referenzbeispiel interim/sample_DE/ bleibt
+# bewusst versioniert.
+interim/raw_reports/
+
 # Zweig B analytics artifacts (regenerable via build_zweig_b.py)
 processed/long/
 

@@ -29,7 +29,16 @@ REPORT_CODES = ROOT / "codebook" / "mini_codebook_from_reports.csv"
 LONGFORM = ROOT / "processed" / "long_form_raw.csv"   # zusätzliche dp-Quelle (Zustand)
 OUT = ROOT / "codebook" / "dpm_codebook.csv"
 
-CELLCODE_RE = re.compile(r"\{([^,]+),\s*r(\w+),\s*c(\w+)")
+# CellCode-Achsen: '{K_61.00, r0010, c0010}' — feste Koordinate, oder
+# '{K_67.01.a, r*, c0010}' — OFFENE Zeilenachse. Das '*' ist die DPM-Schreibweise
+# dafür, dass die Zeile nicht im Modell steht, sondern beim Einreichen aus einem
+# Dimensionswert entsteht (bei CCyB1 das Land: eine Zeile je Staat).
+#
+# Das frühere Muster verlangte r(\w+) und traf '*' nicht — 308 Zellen zu 78
+# Datenpunkten fielen still durch `if not parsed: continue`, und mit ihnen die
+# SPALTE, die im CellCode sehr wohl steht. Das ist die Ursache von #56.
+CELLCODE_RE = re.compile(r"\{([^,]+),\s*r([\w*]+),\s*c([\w*]+)")
+OPEN_AXIS = "*"        # Marker im Codebook: Koordinate kommt aus einer offenen Achse
 
 
 def _char_ok(c: str) -> bool:
@@ -172,6 +181,13 @@ def build_resolution_maps(db):
 
 
 def parse_cellcode(code: str):
+    """'{K_67.01.a, r*, c0010}' -> ('K_67.01.a', '*', '0010'), sonst None.
+
+    Ein '*' in row oder col heißt: diese Achse ist OFFEN — die Koordinate steht
+    nicht im Modell, sondern entsteht beim Einreichen aus einem Dimensionswert.
+    Der Aufrufer muss sie dort holen; der Rest des CellCodes (insbesondere die
+    jeweils andere, feste Achse) ist verwertbar und darf nicht verloren gehen.
+    """
     m = CELLCODE_RE.match(code.strip())
     if not m:
         return None
@@ -254,6 +270,7 @@ def main():
 
     rows = []
     resolved = 0
+    unparsed = defaultdict(int)     # CellCode-Formen, die das Muster nicht trifft
     for dp_str, dp_int, freq in report_codes:
         cells = set()
         for vvid in id2vid.get(dp_int, ()):
@@ -267,14 +284,23 @@ def main():
         for tvid, code in sorted(cells):
             parsed = parse_cellcode(code)
             if not parsed:
+                # NICHT stillschweigend fallen lassen: genau dieses `continue`
+                # hat 308 Zellen verschluckt, ohne eine Spur zu hinterlassen
+                # (#56). Wer die Zahl am Ende sieht, kann sie prüfen.
+                unparsed[code.strip()] += 1
                 continue
             tmpl, row, col = parsed
             rows.append({
                 "datapoint_code": dp_str, "variable_id": dp_int,
                 "template": tmpl, "row": row, "col": col,
                 "template_title": title_for(tmpl, title_csv) or title_by_tvid.get(tvid, ""),
-                "row_label": labels.get((tvid, "row", row.zfill(4)), ""),
-                "col_label": labels.get((tvid, "col", col.zfill(4)), ""),
+                # Für eine offene Achse gibt es kein Label im Modell — die
+                # Beschriftung ist der Dimensionswert selbst (bei CCyB1 der
+                # Ländername). Leer lassen statt einen Platzhalter erfinden.
+                "row_label": "" if row == OPEN_AXIS
+                             else labels.get((tvid, "row", row.zfill(4)), ""),
+                "col_label": "" if col == OPEN_AXIS
+                             else labels.get((tvid, "col", col.zfill(4)), ""),
                 "data_type": id2dt.get(dp_int, ""),
                 "frequency": freq,
             })
@@ -298,10 +324,19 @@ def main():
         w.writerows(rows)
 
     labelled = sum(1 for r in rows if r["row_label"] or r["col_label"])
+    open_row = sum(1 for r in rows if r["row"] == OPEN_AXIS)
+    open_col = sum(1 for r in rows if r["col"] == OPEN_AXIS)
     print(f"\n✓ Codebook: {OUT}")
     print(f"  Datapoints resolved: {resolved}/{len(report_codes)} ({100*resolved//len(report_codes)}%)")
     print(f"  Codebook rows (incl. multi-cell): {len(rows)}")
     print(f"  Rows with axis label: {labelled}")
+    print(f"  Offene Zeilenachse (r*): {open_row}   offene Spaltenachse (c*): {open_col}")
+    if unparsed:
+        # Sichtbar machen, nicht verschweigen — siehe #56.
+        total = sum(unparsed.values())
+        print(f"  ⚠ CellCodes ohne Muster-Treffer: {total} in {len(unparsed)} Formen")
+        for code, n in sorted(unparsed.items(), key=lambda kv: (-kv[1], kv[0]))[:5]:
+            print(f"      {n:5d}x  {code}")
 
 
 if __name__ == "__main__":

@@ -3525,12 +3525,26 @@ both reduction and sustitution effects",monetary,189,9.747,0.621,2.72,auswertbar
 47.00.A,0050,0030,"5. Debt securities, including UoP",c. Of which environmentally sustainable (Taxonomy-aligned),monetary,29,7.016,0.948,3.63,auswertbar
 47.00.A,0050,0120,"5. Debt securities, including UoP",l. Of which towards taxonomy relevant sectors (Taxonomy-eligible),monetary,28,8.261,0.619,2.60,auswertbar
 47.00.A,0050,0130,"5. Debt securities, including UoP",m. Of which environmentally sustainable (Taxonomy-aligned),monetary,26,7.048,0.843,3.61,auswertbar
+47.00.A,0070,0010,7. Other financial corporations,a. Total gross carrying amount,monetary,27,8.628,0.731,8.03,unbrauchbar
+47.00.A,0200,0010,20. Non-financial corporations (subject to NFRD disclosure obligations),a. Total gross carrying amount,monetary,31,9.285,0.624,3.34,auswertbar
+47.00.A,0200,0020,20. Non-financial corporations (subject to NFRD disclosure obligations),b. Of which towards taxonomy relevant sectors (Taxonomy-eligible),monetary,28,8.652,0.696,4.46,auswertbar
+47.00.A,0200,0030,20. Non-financial corporations (subject to NFRD disclosure obligations),c. Of which environmentally sustainable (Taxonomy-aligned),monetary,28,8.186,0.779,4.27,auswertbar
+47.00.A,0200,0050,20. Non-financial corporations (subject to NFRD disclosure obligations),e. Of which transitional,monetary,22,6.812,0.872,3.70,auswertbar
+47.00.A,0200,0120,20. Non-financial corporations (subject to NFRD disclosure obligations),l. Of which towards taxonomy relevant sectors (Taxonomy-eligible),monetary,25,8.817,0.693,4.31,auswertbar
+47.00.A,0200,0130,20. Non-financial corporations (subject to NFRD disclosure obligations),m. Of which environmentally sustainable (Taxonomy-aligned),monetary,25,8.383,0.697,4.27,auswertbar
+47.00.A,0200,0150,20. Non-financial corporations (subject to NFRD disclosure obligations),o. Of which transitional/adaptation,monetary,21,6.778,1.329,3.80,auswertbar
+47.00.A,0210,0010,21. Loans and advances,a. Total gross carrying amount,monetary,31,9.158,0.728,3.32,auswertbar
+47.00.A,0210,0020,21. Loans and advances,b. Of which towards taxonomy relevant sectors (Taxonomy-eligible),monetary,28,8.457,0.765,4.45,auswertbar
+47.00.A,0210,0030,21. Loans and advances,c. Of which environmentally sustainable (Taxonomy-aligned),monetary,28,8.030,0.930,4.24,auswertbar
+47.00.A,0210,0120,21. Loans and advances,l. Of which towards taxonomy relevant sectors (Taxonomy-eligible),monetary,25,8.665,0.790,4.30,auswertbar
+47.00.A,0210,0130,21. Loans and advances,m. Of which environmentally sustainable (Taxonomy-aligned),monetary,25,8.285,0.748,4.24,auswertbar
 47.00.A,0240,0010,24. Households,a. Total gross carrying amount,monetary,36,9.768,0.516,4.75,auswertbar
 47.00.A,0240,0020,24. Households,b. Of which towards taxonomy relevant sectors (Taxonomy-eligible),monetary,36,9.552,0.596,5.27,auswertbar
 47.00.A,0240,0120,24. Households,l. Of which towards taxonomy relevant sectors (Taxonomy-eligible),monetary,33,9.522,0.624,4.96,auswertbar
 47.00.A,0250,0010,25. Of which loans collateralised by residential immovable property,a. Total gross carrying amount,monetary,35,9.573,0.563,4.57,auswertbar
 47.00.A,0250,0020,25. Of which loans collateralised by residential immovable property,b. Of which towards taxonomy relevant sectors (Taxonomy-eligible),monetary,35,9.476,0.618,4.92,auswertbar
 47.00.A,0250,0120,25. Of which loans collateralised by residential immovable property,l. Of which towards taxonomy relevant sectors (Taxonomy-eligible),monetary,32,9.450,0.652,4.88,auswertbar
+47.00.A,0270,0010,27. Of which motor vehicle loans,a. Total gross carrying amount,monetary,27,8.234,0.501,2.36,auswertbar
 47.00.A,0320,0010,32. TOTAL GAR ASSETS,a. Total gross carrying amount,monetary,39,10.061,0.460,4.55,auswertbar
 47.00.A,0320,0020,32. TOTAL GAR ASSETS,b. Of which towards taxonomy relevant sectors (Taxonomy-eligible),monetary,39,9.659,0.539,5.23,auswertbar
 47.00.A,0320,0030,32. TOTAL GAR ASSETS,c. Of which environmentally sustainable (Taxonomy-aligned),monetary,34,8.326,0.887,4.12,auswertbar
@@ -3544,6 +3558,9 @@ both reduction and sustitution effects",monetary,189,9.747,0.621,2.72,auswertbar
 47.00.A,0330,0010,33. EU Non-financial corporations (not subject to NFRD disclosure obligations),a. Total gross carrying amount,monetary,39,9.800,0.510,4.13,auswertbar
 47.00.A,0340,0010,34. Loans and advances,a. Total gross carrying amount,monetary,39,9.771,0.522,4.13,auswertbar
 47.00.A,0350,0010,35. Debt securities,a. Total gross carrying amount,monetary,25,7.929,0.849,2.53,auswertbar
+47.00.A,0360,0010,36. Equity instruments,a. Total gross carrying amount,monetary,28,7.091,1.366,4.47,auswertbar
+47.00.A,0370,0010,37. Non-EU Non-financial corporations (not subject to NFRD disclosure obligations),a. Total gross carrying amount,monetary,33,8.544,1.097,4.24,auswertbar
+47.00.A,0380,0010,38. Loans and advances,a. Total gross carrying amount,monetary,32,8.519,1.121,6.46,unbrauchbar
 47.00.A,0410,0010,41. Derivatives,a. Total gross carrying amount,monetary,32,8.004,0.889,2.97,auswertbar
 47.00.A,0420,0010,42. On demand interbank loans,a. Total gross carrying amount,monetary,34,8.276,0.624,4.11,auswertbar
 47.00.A,0430,0010,43. Cash and cash-related assets,a. Total gross carrying amount,monetary,36,8.196,0.451,4.42,auswertbar
@@ -4043,6 +4060,16 @@ both reduction and sustitution effects",monetary,189,9.747,0.621,2.72,auswertbar
 63.02.C,0280,0020,9. Total,b. RWEAs for column a if re-computed using the standardised approach,monetary,307,10.401,0.425,1.93,auswertbar
 63.02.C,0280,0040,9. Total,d. RWEAs calculated using full standardised approach,monetary,360,10.449,0.535,2.85,auswertbar
 63.02.C,0280,0050,9. Total,EU d. RWEAs that is the base of the output floor,monetary,356,10.436,0.517,2.73,auswertbar
+64.01.A,Current tax assets,0030,,c Subject to the credit risk framework,monetary,34,7.019,1.180,4.84,auswertbar
+64.01.A,Deferred tax assets,0030,,c Subject to the credit risk framework,monetary,42,7.155,1.008,4.88,auswertbar
+64.01.A,Deferred tax assets,0070,,g Not subject to own funds requirements or subject to deduction from own funds,monetary,23,6.966,1.000,6.74,unbrauchbar
+64.01.A,Intangible assets,0030,,c Subject to the credit risk framework,monetary,42,7.236,0.889,7.03,unbrauchbar
+64.01.A,Intangible assets,0070,,g Not subject to own funds requirements or subject to deduction from own funds,monetary,60,7.715,1.050,5.91,auswertbar
+64.01.A,Loans and advances to customers,0030,,c Subject to the credit risk framework,monetary,32,10.028,0.642,6.39,unbrauchbar
+64.01.A,Other assets,0030,,c Subject to the credit risk framework,monetary,84,8.070,0.782,4.31,auswertbar
+64.01.A,Other assets,0070,,g Not subject to own funds requirements or subject to deduction from own funds,monetary,31,7.596,0.649,2.72,auswertbar
+64.01.A,Property and equipment,0030,,c Subject to the credit risk framework,monetary,23,8.172,0.668,4.02,auswertbar
+64.01.A,Tangible assets,0030,,c Subject to the credit risk framework,monetary,20,7.585,0.607,6.19,unbrauchbar
 64.01.B,0010,0010,Total assets,a Carrying values as reported in published financial statements,monetary,178,10.598,0.512,2.47,auswertbar
 64.01.B,0010,0020,Total assets,b Carrying values under scope of prudential consolidation,monetary,175,10.572,0.561,2.50,auswertbar
 64.01.B,0010,0030,Total assets,c Subject to the credit risk framework,monetary,170,10.533,0.536,2.35,auswertbar
@@ -4050,6 +4077,10 @@ both reduction and sustitution effects",monetary,189,9.747,0.621,2.72,auswertbar
 64.01.B,0010,0050,Total assets,e Subject to the securitisation framework,monetary,87,9.012,0.756,3.06,auswertbar
 64.01.B,0010,0060,Total assets,f  Subject to the market risk framework,monetary,132,8.859,1.289,4.82,auswertbar
 64.01.B,0010,0070,Total assets,g Not subject to own funds requirements or subject to deduction from own funds,monetary,151,8.405,0.696,3.31,auswertbar
+64.01.C,Current tax liabilities,0070,,g Not subject to own funds requirements or subject to deduction from own funds,monetary,23,7.305,0.967,4.40,auswertbar
+64.01.C,Deferred tax liabilities,0070,,g Not subject to own funds requirements or subject to deduction from own funds,monetary,25,7.134,0.776,4.28,auswertbar
+64.01.C,Other liabilities,0070,,g Not subject to own funds requirements or subject to deduction from own funds,monetary,63,8.232,0.671,3.01,auswertbar
+64.01.C,Provisions,0070,,g Not subject to own funds requirements or subject to deduction from own funds,monetary,42,8.061,0.823,4.68,auswertbar
 64.01.D,0010,0010,Total liabilities,a Carrying values as reported in published financial statements,monetary,176,10.575,0.527,2.54,auswertbar
 64.01.D,0010,0020,Total liabilities,b Carrying values under scope of prudential consolidation,monetary,173,10.550,0.578,3.10,auswertbar
 64.01.D,0010,0030,Total liabilities,c Subject to the credit risk framework,monetary,49,8.407,0.855,2.89,auswertbar
@@ -4098,23 +4129,23 @@ both reduction and sustitution effects",monetary,189,9.747,0.621,2.72,auswertbar
 64.03.B,0010,0040,12. Exposure amounts considered for regulatory purposes,d CCR framework,monetary,151,8.767,0.979,3.92,auswertbar
 64.03.B,0010,0050,12. Exposure amounts considered for regulatory purposes,e Market risk framework,monetary,98,8.300,1.182,4.81,auswertbar
 65.00,0010,0010,1. Market price uncertainty,a Equity,monetary,46,7.402,0.853,4.36,auswertbar
-65.00,0010,0020,1. Market price uncertainty,b Interest Rates,monetary,60,6.940,0.677,3.05,auswertbar
-65.00,0010,0030,1. Market price uncertainty,c Foreign exchange,monetary,47,5.890,0.743,3.44,auswertbar
-65.00,0010,0040,1. Market price uncertainty,d Credit,monetary,50,6.961,0.686,3.36,auswertbar
+65.00,0010,0020,1. Market price uncertainty,b Interest Rates,monetary,61,6.928,0.661,2.76,auswertbar
+65.00,0010,0030,1. Market price uncertainty,c Foreign exchange,monetary,48,5.899,0.781,3.46,auswertbar
+65.00,0010,0040,1. Market price uncertainty,d Credit,monetary,51,6.914,0.742,3.27,auswertbar
 65.00,0010,0060,1. Market price uncertainty,EU e1 Unearned credit spreads AVA,monetary,52,6.162,0.712,2.65,auswertbar
-65.00,0010,0070,1. Market price uncertainty,EU e2 Investment and funding costs AVA,monetary,47,5.815,0.971,3.67,auswertbar
-65.00,0010,0080,1. Market price uncertainty,f Total category level post-diversification,monetary,63,7.292,0.700,3.21,auswertbar
+65.00,0010,0070,1. Market price uncertainty,EU e2 Investment and funding costs AVA,monetary,48,5.793,0.970,3.67,auswertbar
+65.00,0010,0080,1. Market price uncertainty,f Total category level post-diversification,monetary,64,7.281,0.706,3.21,auswertbar
 65.00,0010,0090,1. Market price uncertainty,g Of which: Total core approach in the trading book,monetary,51,6.972,0.790,3.65,auswertbar
-65.00,0010,0100,1. Market price uncertainty,h Of which: Total core approach in the banking book,monetary,60,6.923,0.708,3.42,auswertbar
+65.00,0010,0100,1. Market price uncertainty,h Of which: Total core approach in the banking book,monetary,61,6.911,0.703,3.30,auswertbar
 65.00,0030,0010,3. Close-out cost,a Equity,monetary,36,7.134,1.014,3.55,auswertbar
-65.00,0030,0020,3. Close-out cost,b Interest Rates,monetary,56,7.115,0.666,3.12,auswertbar
+65.00,0030,0020,3. Close-out cost,b Interest Rates,monetary,57,7.113,0.684,3.15,auswertbar
 65.00,0030,0030,3. Close-out cost,c Foreign exchange,monetary,42,5.678,1.006,3.69,auswertbar
 65.00,0030,0040,3. Close-out cost,d Credit,monetary,38,6.699,0.618,2.14,auswertbar
-65.00,0030,0060,3. Close-out cost,EU e1 Unearned credit spreads AVA,monetary,40,6.141,0.710,2.39,auswertbar
+65.00,0030,0060,3. Close-out cost,EU e1 Unearned credit spreads AVA,monetary,41,6.140,0.721,2.38,auswertbar
 65.00,0030,0070,3. Close-out cost,EU e2 Investment and funding costs AVA,monetary,24,5.971,0.830,3.55,auswertbar
 65.00,0030,0080,3. Close-out cost,f Total category level post-diversification,monetary,56,7.401,0.536,2.80,auswertbar
 65.00,0030,0090,3. Close-out cost,g Of which: Total core approach in the trading book,monetary,44,7.187,0.610,3.36,auswertbar
-65.00,0030,0100,3. Close-out cost,h Of which: Total core approach in the banking book,monetary,52,6.788,0.600,2.39,auswertbar
+65.00,0030,0100,3. Close-out cost,h Of which: Total core approach in the banking book,monetary,53,6.705,0.589,2.39,auswertbar
 65.00,0040,0010,4. Concentrated positions,a Equity,monetary,34,7.129,0.841,3.32,auswertbar
 65.00,0040,0020,4. Concentrated positions,b Interest Rates,monetary,33,6.821,0.812,3.30,auswertbar
 65.00,0040,0040,4. Concentrated positions,d Credit,monetary,33,6.520,0.435,1.81,auswertbar
@@ -4187,7 +4218,7 @@ both reduction and sustitution effects",monetary,189,9.747,0.621,2.72,auswertbar
 66.01.A,0600,0010,48. Qualifying own funds instruments included in consolidated T2 capital including minority interests and AT1 instruments not included in rows 5 or 34 issued by subsidiaries and held by third parties,a Amounts,monetary,84,7.555,0.812,3.48,auswertbar
 66.01.A,0620,0010,50. Credit risk adjustments,a Amounts,monetary,154,7.617,0.516,2.64,auswertbar
 66.01.A,0630,0010,51. Tier 2 T2 capital before regulatory adjustments,a Amounts,monetary,401,8.304,0.727,3.34,auswertbar
-66.01.A,0640,0010,"52. Direct, indirect and synthetic holdings by an institution of own T2 instruments and subordinated loans negative amount",a Amounts,monetary,66,7.387,0.688,2.23,auswertbar
+66.01.A,0640,0010,"52. Direct, indirect and synthetic holdings by an institution of own T2 instruments and subordinated loans negative amount",a Amounts,monetary,68,7.398,0.697,2.23,auswertbar
 66.01.A,0670,0010,"55. Direct, indirect and synthetic holdings by the institution of the T2 instruments and subordinated loans of financial sector entities where the institution has a significant investment in those entities net of eligible short positions negative amount",a Amounts,monetary,52,7.929,0.641,2.88,auswertbar
 66.01.A,0700,0010,57. Total regulatory adjustments to Tier 2 T2 capital,a Amounts,monetary,119,7.398,0.766,2.84,auswertbar
 66.01.A,0710,0010,58. Tier 2 T2 capital,a Amounts,monetary,403,8.290,0.738,3.34,auswertbar
@@ -4202,20 +4233,392 @@ both reduction and sustitution effects",monetary,189,9.747,0.621,2.72,auswertbar
 66.01.A,0800,0010,67. of which: systemic risk buffer requirement,a Amounts,percentage,297,-2.301,0.337,1.68,auswertbar
 66.01.A,0810,0010,EU-67a. of which: Global Systemically Important Institution G-SII or Other Systemically Important Institution O-SII buffer requirement,a Amounts,percentage,214,-2.000,0.176,0.90,auswertbar
 66.01.A,0820,0010,EU-67b. of which: additional own funds requirements to address the risks other than the risk of excessive leverage,a Amounts,percentage,429,-1.896,0.127,0.60,auswertbar
-66.01.A,0830,0010,68. Common Equity Tier 1 capital as a percentage of risk exposure amount available after meeting the minimum capital requirements,a Amounts,monetary,493,-0.986,0.199,2.72,auswertbar
+66.01.A,0830,0010,68. Common Equity Tier 1 capital as a percentage of risk exposure amount available after meeting the minimum capital requirements,a Amounts,monetary,497,-0.990,0.196,2.76,auswertbar
 66.01.A,0870,0010,72. Direct and indirect holdings of own funds and  eligible liabilities of financial sector entities where the institution does not have a significant investment in those entities amount below 10% threshold and net of eligible short positions,a Amounts,monetary,326,7.537,0.827,3.41,auswertbar
 66.01.A,0880,0010,73. Direct and indirect holdings by the institution of the CET1 instruments of financial sector entities where the institution has a significant investment in those entities amount below 17.65% thresholds and net of eligible short positions,a Amounts,monetary,284,7.803,0.836,3.61,auswertbar
 66.01.A,0890,0010,"75. Deferred tax assets arising from temporary differences amount below 17,65% threshold, net of related tax liability where the conditions in Article 38 3 CRR are met",a Amounts,monetary,333,7.790,0.715,3.46,auswertbar
 66.01.A,0900,0010,76. Credit risk adjustments included in T2 in respect of exposures subject to standardised approach prior to the application of the cap,a Amounts,monetary,54,7.462,0.377,1.81,auswertbar
-66.01.A,0910,0010,77. Cap on inclusion of credit risk adjustments in T2 under standardised approach,a Amounts,monetary,252,7.824,0.479,2.56,auswertbar
+66.01.A,0910,0010,77. Cap on inclusion of credit risk adjustments in T2 under standardised approach,a Amounts,monetary,253,7.823,0.478,2.56,auswertbar
 66.01.A,0920,0010,78. Credit risk adjustments included in T2 in respect of exposures subject to internal ratings-based approach prior to the application of the cap,a Amounts,monetary,112,7.800,0.626,2.53,auswertbar
-66.01.A,0930,0010,79. Cap for inclusion of credit risk adjustments in T2 under internal ratings-based approach,a Amounts,monetary,193,7.922,0.490,2.10,auswertbar
+66.01.A,0930,0010,79. Cap for inclusion of credit risk adjustments in T2 under internal ratings-based approach,a Amounts,monetary,195,7.922,0.490,2.10,auswertbar
 66.02.B,0010,0010,Total assets,a As at period end,monetary,468,10.384,0.632,3.90,auswertbar
 66.02.B,0010,0020,Total assets,b As at period end,monetary,399,10.550,0.567,3.70,auswertbar
 66.02.D,0010,0010,Total liabilities,a As at period end,monetary,464,10.279,0.642,4.06,auswertbar
 66.02.D,0010,0020,Total liabilities,b As at period end,monetary,398,10.476,0.617,4.05,auswertbar
+66.02.E,Capital,0010,,a As at period end,monetary,32,8.331,0.696,1.85,auswertbar
+66.02.E,Capital,0020,,b As at period end,monetary,28,8.331,0.694,1.85,auswertbar
+66.02.E,Non-controlling interests,0010,,a As at period end,monetary,41,7.447,0.975,3.29,auswertbar
+66.02.E,Non-controlling interests,0020,,b As at period end,monetary,39,7.295,1.020,6.38,unbrauchbar
+66.02.E,Other reserves,0010,,a As at period end,monetary,71,8.193,1.011,4.62,auswertbar
+66.02.E,Other reserves,0020,,b As at period end,monetary,66,8.276,0.840,4.97,auswertbar
+66.02.E,Reserves,0010,,a As at period end,monetary,27,7.319,1.406,7.67,unbrauchbar
+66.02.E,Reserves,0020,,b As at period end,monetary,25,7.518,1.207,7.27,unbrauchbar
+66.02.E,Retained earnings,0010,,a As at period end,monetary,123,8.890,0.768,4.04,auswertbar
+66.02.E,Retained earnings,0020,,b As at period end,monetary,113,8.981,0.655,4.04,auswertbar
+66.02.E,Share capital,0010,,a As at period end,monetary,92,8.215,0.716,3.95,auswertbar
+66.02.E,Share capital,0020,,b As at period end,monetary,85,8.239,0.722,4.01,auswertbar
+66.02.E,Share premium,0010,,a As at period end,monetary,58,8.412,0.849,5.53,auswertbar
+66.02.E,Share premium,0020,,b As at period end,monetary,52,8.419,0.914,5.53,auswertbar
 66.02.F,0010,0010,Total shareholders' equity,a As at period end,monetary,452,9.331,0.631,4.02,auswertbar
 66.02.F,0010,0020,Total shareholders' equity,b As at period end,monetary,385,9.471,0.578,4.11,auswertbar
+67.01.A,AD,0060,,f Total exposure value,monetary,62,4.375,1.587,5.38,auswertbar
+67.01.A,AD,0110,,k Risk-weighted exposure amounts,monetary,61,3.938,1.312,5.20,auswertbar
+67.01.A,AE,0060,,f Total exposure value,monetary,168,6.515,1.296,5.72,auswertbar
+67.01.A,AE,0110,,k Risk-weighted exposure amounts,monetary,165,6.205,1.348,5.56,auswertbar
+67.01.A,AF,0060,,f Total exposure value,monetary,37,3.217,1.547,5.75,auswertbar
+67.01.A,AF,0110,,k Risk-weighted exposure amounts,monetary,36,2.561,1.121,4.84,auswertbar
+67.01.A,AL,0060,,f Total exposure value,monetary,82,4.533,1.269,5.09,auswertbar
+67.01.A,AL,0110,,k Risk-weighted exposure amounts,monetary,81,4.079,1.189,4.85,auswertbar
+67.01.A,AM,0060,,f Total exposure value,monetary,99,4.890,1.150,4.17,auswertbar
+67.01.A,AM,0110,,k Risk-weighted exposure amounts,monetary,93,4.422,1.078,3.74,auswertbar
+67.01.A,AO,0060,,f Total exposure value,monetary,58,3.699,1.843,6.37,unbrauchbar
+67.01.A,AO,0110,,k Risk-weighted exposure amounts,monetary,57,3.727,1.885,6.49,unbrauchbar
+67.01.A,AR,0060,,f Total exposure value,monetary,110,5.086,1.227,5.51,auswertbar
+67.01.A,AR,0110,,k Risk-weighted exposure amounts,monetary,106,4.493,1.190,5.51,auswertbar
+67.01.A,AT,0060,,f Total exposure value,monetary,210,7.732,1.032,5.41,auswertbar
+67.01.A,AT,0110,,k Risk-weighted exposure amounts,monetary,207,7.204,1.222,4.96,auswertbar
+67.01.A,AU,0060,,f Total exposure value,monetary,246,6.478,1.223,5.80,auswertbar
+67.01.A,AU,0110,,k Risk-weighted exposure amounts,monetary,242,6.134,1.238,5.92,auswertbar
+67.01.A,AZ,0060,,f Total exposure value,monetary,74,4.371,1.179,5.53,auswertbar
+67.01.A,AZ,0110,,k Risk-weighted exposure amounts,monetary,71,4.158,1.158,5.34,auswertbar
+67.01.A,BA,0060,,f Total exposure value,monetary,93,4.880,1.164,5.45,auswertbar
+67.01.A,BA,0110,,k Risk-weighted exposure amounts,monetary,93,3.916,1.342,4.92,auswertbar
+67.01.A,BB,0060,,f Total exposure value,monetary,48,5.111,1.535,7.05,unbrauchbar
+67.01.A,BB,0110,,k Risk-weighted exposure amounts,monetary,40,4.295,1.565,6.98,unbrauchbar
+67.01.A,BD,0060,,f Total exposure value,monetary,78,4.190,1.509,5.50,auswertbar
+67.01.A,BD,0110,,k Risk-weighted exposure amounts,monetary,74,4.011,1.517,5.56,auswertbar
+67.01.A,BE,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,39,7.968,0.570,5.85,auswertbar
+67.01.A,BE,0060,,f Total exposure value,monetary,298,7.682,1.044,4.58,auswertbar
+67.01.A,BE,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,38,6.000,0.464,2.85,auswertbar
+67.01.A,BE,0110,,k Risk-weighted exposure amounts,monetary,295,7.408,1.121,4.12,auswertbar
+67.01.A,BF,0060,,f Total exposure value,monetary,26,3.018,1.223,4.45,auswertbar
+67.01.A,BG,0060,,f Total exposure value,monetary,217,5.642,1.248,4.80,auswertbar
+67.01.A,BG,0110,,k Risk-weighted exposure amounts,monetary,214,4.934,1.255,4.94,auswertbar
+67.01.A,BH,0060,,f Total exposure value,monetary,72,5.442,1.230,6.04,unbrauchbar
+67.01.A,BH,0110,,k Risk-weighted exposure amounts,monetary,71,4.746,1.254,5.36,auswertbar
+67.01.A,BI,0060,,f Total exposure value,monetary,28,2.901,1.567,4.80,auswertbar
+67.01.A,BI,0110,,k Risk-weighted exposure amounts,monetary,28,2.685,0.978,3.83,auswertbar
+67.01.A,BJ,0060,,f Total exposure value,monetary,36,3.951,1.513,5.84,auswertbar
+67.01.A,BJ,0110,,k Risk-weighted exposure amounts,monetary,37,4.020,1.685,5.84,auswertbar
+67.01.A,BM,0060,,f Total exposure value,monetary,82,7.688,1.245,5.65,auswertbar
+67.01.A,BM,0110,,k Risk-weighted exposure amounts,monetary,81,7.315,1.351,6.22,unbrauchbar
+67.01.A,BN,0060,,f Total exposure value,monetary,32,4.776,0.801,3.70,auswertbar
+67.01.A,BN,0110,,k Risk-weighted exposure amounts,monetary,32,4.380,0.396,2.77,auswertbar
+67.01.A,BO,0060,,f Total exposure value,monetary,44,4.109,1.181,3.92,auswertbar
+67.01.A,BO,0110,,k Risk-weighted exposure amounts,monetary,45,3.695,1.121,2.88,auswertbar
+67.01.A,BR,0060,,f Total exposure value,monetary,135,5.975,1.484,6.18,unbrauchbar
+67.01.A,BR,0110,,k Risk-weighted exposure amounts,monetary,129,5.621,1.573,6.12,unbrauchbar
+67.01.A,BS,0060,,f Total exposure value,monetary,66,5.126,1.737,6.49,unbrauchbar
+67.01.A,BS,0110,,k Risk-weighted exposure amounts,monetary,64,4.328,1.924,6.49,unbrauchbar
+67.01.A,BW,0060,,f Total exposure value,monetary,37,4.928,1.447,6.48,unbrauchbar
+67.01.A,BW,0110,,k Risk-weighted exposure amounts,monetary,38,3.632,1.663,6.92,unbrauchbar
+67.01.A,BY,0060,,f Total exposure value,monetary,72,3.998,1.327,4.72,auswertbar
+67.01.A,BY,0110,,k Risk-weighted exposure amounts,monetary,66,3.910,1.189,4.05,auswertbar
+67.01.A,BZ,0060,,f Total exposure value,monetary,28,3.627,1.411,4.55,auswertbar
+67.01.A,BZ,0110,,k Risk-weighted exposure amounts,monetary,28,3.350,1.372,4.55,auswertbar
+67.01.A,CA,0060,,f Total exposure value,monetary,182,7.330,1.434,6.07,unbrauchbar
+67.01.A,CA,0110,,k Risk-weighted exposure amounts,monetary,179,6.674,1.501,6.00,auswertbar
+67.01.A,CD,0060,,f Total exposure value,monetary,42,4.753,1.198,5.66,auswertbar
+67.01.A,CD,0110,,k Risk-weighted exposure amounts,monetary,40,4.156,1.182,5.60,auswertbar
+67.01.A,CG,0060,,f Total exposure value,monetary,37,4.862,2.093,6.21,unbrauchbar
+67.01.A,CG,0110,,k Risk-weighted exposure amounts,monetary,37,3.918,1.629,6.03,unbrauchbar
+67.01.A,CH,0060,,f Total exposure value,monetary,215,7.660,1.072,5.20,auswertbar
+67.01.A,CH,0110,,k Risk-weighted exposure amounts,monetary,212,7.329,1.243,4.97,auswertbar
+67.01.A,CI,0060,,f Total exposure value,monetary,58,5.398,1.100,5.63,auswertbar
+67.01.A,CI,0110,,k Risk-weighted exposure amounts,monetary,57,4.715,1.118,5.20,auswertbar
+67.01.A,CL,0060,,f Total exposure value,monetary,156,5.866,1.701,7.32,unbrauchbar
+67.01.A,CL,0110,,k Risk-weighted exposure amounts,monetary,154,5.487,1.925,6.63,unbrauchbar
+67.01.A,CM,0060,,f Total exposure value,monetary,60,3.687,1.620,4.91,auswertbar
+67.01.A,CM,0110,,k Risk-weighted exposure amounts,monetary,57,3.764,1.299,4.25,auswertbar
+67.01.A,CN,0060,,f Total exposure value,monetary,142,6.188,1.357,6.01,unbrauchbar
+67.01.A,CN,0110,,k Risk-weighted exposure amounts,monetary,138,5.825,1.486,5.86,auswertbar
+67.01.A,CO,0060,,f Total exposure value,monetary,108,5.261,1.424,5.85,auswertbar
+67.01.A,CO,0110,,k Risk-weighted exposure amounts,monetary,106,4.894,1.485,5.56,auswertbar
+67.01.A,CR,0060,,f Total exposure value,monetary,64,4.139,1.432,4.21,auswertbar
+67.01.A,CR,0110,,k Risk-weighted exposure amounts,monetary,61,3.907,1.199,3.67,auswertbar
+67.01.A,CU,0060,,f Total exposure value,monetary,53,3.730,1.706,5.64,auswertbar
+67.01.A,CU,0110,,k Risk-weighted exposure amounts,monetary,46,2.800,1.235,4.18,auswertbar
+67.01.A,CV,0060,,f Total exposure value,monetary,33,3.941,1.163,4.48,auswertbar
+67.01.A,CV,0110,,k Risk-weighted exposure amounts,monetary,32,2.779,1.293,4.10,auswertbar
+67.01.A,CW,0060,,f Total exposure value,monetary,43,4.107,1.241,5.15,auswertbar
+67.01.A,CW,0110,,k Risk-weighted exposure amounts,monetary,41,3.743,1.061,5.53,auswertbar
+67.01.A,CY,0060,,f Total exposure value,monetary,237,6.160,1.499,5.75,auswertbar
+67.01.A,CY,0110,,k Risk-weighted exposure amounts,monetary,229,5.752,1.599,5.69,auswertbar
+67.01.A,CZ,0060,,f Total exposure value,monetary,257,6.748,1.420,5.68,auswertbar
+67.01.A,CZ,0110,,k Risk-weighted exposure amounts,monetary,252,6.470,1.550,5.94,auswertbar
+67.01.A,DE,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,70,8.861,0.780,3.34,auswertbar
+67.01.A,DE,0060,,f Total exposure value,monetary,323,8.370,1.224,5.58,auswertbar
+67.01.A,DE,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,69,6.903,0.826,2.92,auswertbar
+67.01.A,DE,0110,,k Risk-weighted exposure amounts,monetary,320,8.199,1.270,5.77,auswertbar
+67.01.A,DK,0060,,f Total exposure value,monetary,283,7.464,1.170,5.16,auswertbar
+67.01.A,DK,0110,,k Risk-weighted exposure amounts,monetary,278,7.162,1.089,5.22,auswertbar
+67.01.A,DO,0060,,f Total exposure value,monetary,69,3.982,1.038,4.51,auswertbar
+67.01.A,DO,0110,,k Risk-weighted exposure amounts,monetary,67,3.847,1.319,4.46,auswertbar
+67.01.A,DZ,0060,,f Total exposure value,monetary,70,3.982,2.116,6.51,unbrauchbar
+67.01.A,DZ,0110,,k Risk-weighted exposure amounts,monetary,65,3.974,2.076,5.53,auswertbar
+67.01.A,EC,0060,,f Total exposure value,monetary,67,4.641,1.493,5.97,auswertbar
+67.01.A,EC,0110,,k Risk-weighted exposure amounts,monetary,63,4.373,1.490,5.43,auswertbar
+67.01.A,EE,0060,,f Total exposure value,monetary,206,5.788,1.350,5.84,auswertbar
+67.01.A,EE,0110,,k Risk-weighted exposure amounts,monetary,199,5.369,1.392,5.91,auswertbar
+67.01.A,EG,0060,,f Total exposure value,monetary,113,5.135,1.804,6.41,unbrauchbar
+67.01.A,EG,0110,,k Risk-weighted exposure amounts,monetary,111,4.666,1.795,5.92,auswertbar
+67.01.A,ES,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,73,7.940,0.919,3.42,auswertbar
+67.01.A,ES,0060,,f Total exposure value,monetary,281,7.885,1.168,5.51,auswertbar
+67.01.A,ES,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,72,6.381,0.683,2.57,auswertbar
+67.01.A,ES,0110,,k Risk-weighted exposure amounts,monetary,278,7.618,1.308,5.63,auswertbar
+67.01.A,ET,0060,,f Total exposure value,monetary,57,4.064,1.560,6.02,unbrauchbar
+67.01.A,ET,0110,,k Risk-weighted exposure amounts,monetary,56,3.516,1.207,4.11,auswertbar
+67.01.A,FI,0060,,f Total exposure value,monetary,210,7.605,1.196,6.16,unbrauchbar
+67.01.A,FI,0110,,k Risk-weighted exposure amounts,monetary,208,7.214,1.131,5.93,auswertbar
+67.01.A,FR,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,83,8.720,0.797,2.39,auswertbar
+67.01.A,FR,0060,,f Total exposure value,monetary,313,8.530,1.096,5.55,auswertbar
+67.01.A,FR,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,82,6.794,0.845,2.40,auswertbar
+67.01.A,FR,0110,,k Risk-weighted exposure amounts,monetary,310,8.186,1.059,5.48,auswertbar
+67.01.A,GA,0060,,f Total exposure value,monetary,33,4.377,0.864,3.97,auswertbar
+67.01.A,GA,0110,,k Risk-weighted exposure amounts,monetary,33,3.739,1.093,3.96,auswertbar
+67.01.A,GB,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,74,8.332,0.601,2.33,auswertbar
+67.01.A,GB,0060,,f Total exposure value,monetary,313,7.997,1.283,5.38,auswertbar
+67.01.A,GB,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,74,6.607,0.637,2.02,auswertbar
+67.01.A,GB,0110,,k Risk-weighted exposure amounts,monetary,311,7.779,1.293,5.22,auswertbar
+67.01.A,GE,0060,,f Total exposure value,monetary,95,4.602,1.526,5.87,auswertbar
+67.01.A,GE,0110,,k Risk-weighted exposure amounts,monetary,94,4.299,1.358,5.70,auswertbar
+67.01.A,GG,0060,,f Total exposure value,monetary,71,7.566,0.913,5.56,auswertbar
+67.01.A,GG,0110,,k Risk-weighted exposure amounts,monetary,70,7.271,1.016,6.48,unbrauchbar
+67.01.A,GH,0060,,f Total exposure value,monetary,76,4.911,2.057,6.61,unbrauchbar
+67.01.A,GH,0110,,k Risk-weighted exposure amounts,monetary,75,4.275,1.746,6.26,unbrauchbar
+67.01.A,GI,0060,,f Total exposure value,monetary,63,4.428,1.572,5.78,auswertbar
+67.01.A,GI,0110,,k Risk-weighted exposure amounts,monetary,62,3.894,1.602,4.64,auswertbar
+67.01.A,GM,0060,,f Total exposure value,monetary,30,2.954,1.769,4.95,auswertbar
+67.01.A,GM,0110,,k Risk-weighted exposure amounts,monetary,28,2.800,1.138,3.93,auswertbar
+67.01.A,GN,0060,,f Total exposure value,monetary,37,4.796,1.543,5.83,auswertbar
+67.01.A,GN,0110,,k Risk-weighted exposure amounts,monetary,36,3.957,1.516,5.91,auswertbar
+67.01.A,GR,0060,,f Total exposure value,monetary,209,6.124,1.239,5.68,auswertbar
+67.01.A,GR,0110,,k Risk-weighted exposure amounts,monetary,204,5.442,1.526,5.36,auswertbar
+67.01.A,GT,0060,,f Total exposure value,monetary,50,4.083,1.146,5.95,auswertbar
+67.01.A,GT,0110,,k Risk-weighted exposure amounts,monetary,49,3.795,1.307,5.53,auswertbar
+67.01.A,HK,0060,,f Total exposure value,monetary,195,6.407,1.172,6.25,unbrauchbar
+67.01.A,HK,0110,,k Risk-weighted exposure amounts,monetary,192,6.042,1.397,6.50,unbrauchbar
+67.01.A,HN,0060,,f Total exposure value,monetary,42,3.849,1.164,5.87,auswertbar
+67.01.A,HN,0110,,k Risk-weighted exposure amounts,monetary,40,3.589,1.203,4.37,auswertbar
+67.01.A,HR,0060,,f Total exposure value,monetary,208,5.766,1.593,5.99,auswertbar
+67.01.A,HR,0110,,k Risk-weighted exposure amounts,monetary,207,5.498,1.707,6.41,unbrauchbar
+67.01.A,HU,0060,,f Total exposure value,monetary,245,6.345,1.383,5.63,auswertbar
+67.01.A,HU,0110,,k Risk-weighted exposure amounts,monetary,242,6.040,1.572,5.88,auswertbar
+67.01.A,ID,0060,,f Total exposure value,monetary,104,5.269,1.830,5.82,auswertbar
+67.01.A,ID,0110,,k Risk-weighted exposure amounts,monetary,102,4.607,1.824,5.59,auswertbar
+67.01.A,IE,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,75,8.442,0.777,2.88,auswertbar
+67.01.A,IE,0060,,f Total exposure value,monetary,291,7.596,1.277,4.89,auswertbar
+67.01.A,IE,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,76,6.567,0.675,3.26,auswertbar
+67.01.A,IE,0110,,k Risk-weighted exposure amounts,monetary,287,7.346,1.369,5.05,auswertbar
+67.01.A,IL,0060,,f Total exposure value,monetary,137,5.811,1.469,5.69,auswertbar
+67.01.A,IL,0110,,k Risk-weighted exposure amounts,monetary,133,5.481,1.442,5.76,auswertbar
+67.01.A,IM,0060,,f Total exposure value,monetary,61,5.795,2.283,6.94,unbrauchbar
+67.01.A,IM,0110,,k Risk-weighted exposure amounts,monetary,60,5.495,2.008,6.97,unbrauchbar
+67.01.A,IN,0060,,f Total exposure value,monetary,126,5.805,1.338,4.82,auswertbar
+67.01.A,IN,0110,,k Risk-weighted exposure amounts,monetary,121,5.452,1.401,4.68,auswertbar
+67.01.A,IQ,0060,,f Total exposure value,monetary,52,4.586,1.414,4.29,auswertbar
+67.01.A,IQ,0110,,k Risk-weighted exposure amounts,monetary,50,3.824,0.897,4.58,auswertbar
+67.01.A,IR,0060,,f Total exposure value,monetary,47,5.111,1.125,5.54,auswertbar
+67.01.A,IR,0110,,k Risk-weighted exposure amounts,monetary,42,3.970,1.114,3.36,auswertbar
+67.01.A,IS,0060,,f Total exposure value,monetary,166,4.941,1.118,5.31,auswertbar
+67.01.A,IS,0110,,k Risk-weighted exposure amounts,monetary,161,4.683,1.110,4.80,auswertbar
+67.01.A,IT,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,57,8.686,0.558,2.18,auswertbar
+67.01.A,IT,0060,,f Total exposure value,monetary,228,7.635,1.409,6.81,unbrauchbar
+67.01.A,IT,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,56,6.924,0.566,2.40,auswertbar
+67.01.A,IT,0110,,k Risk-weighted exposure amounts,monetary,224,7.498,1.667,6.42,unbrauchbar
+67.01.A,JE,0060,,f Total exposure value,monetary,80,7.732,1.235,6.19,unbrauchbar
+67.01.A,JE,0110,,k Risk-weighted exposure amounts,monetary,79,7.449,1.134,5.64,auswertbar
+67.01.A,JM,0060,,f Total exposure value,monetary,34,3.907,1.190,4.86,auswertbar
+67.01.A,JM,0110,,k Risk-weighted exposure amounts,monetary,34,3.784,0.875,3.81,auswertbar
+67.01.A,JO,0060,,f Total exposure value,monetary,75,4.724,1.520,5.60,auswertbar
+67.01.A,JO,0110,,k Risk-weighted exposure amounts,monetary,71,3.843,1.570,5.53,auswertbar
+67.01.A,JP,0060,,f Total exposure value,monetary,136,6.427,1.436,6.85,unbrauchbar
+67.01.A,JP,0110,,k Risk-weighted exposure amounts,monetary,133,6.252,1.391,6.53,unbrauchbar
+67.01.A,KE,0060,,f Total exposure value,monetary,85,4.976,1.087,4.48,auswertbar
+67.01.A,KE,0110,,k Risk-weighted exposure amounts,monetary,80,4.179,0.962,4.28,auswertbar
+67.01.A,KG,0060,,f Total exposure value,monetary,50,3.152,0.736,3.86,auswertbar
+67.01.A,KG,0110,,k Risk-weighted exposure amounts,monetary,48,2.958,0.956,4.00,auswertbar
+67.01.A,KH,0060,,f Total exposure value,monetary,40,4.406,1.378,5.78,auswertbar
+67.01.A,KH,0110,,k Risk-weighted exposure amounts,monetary,39,3.859,1.324,4.96,auswertbar
+67.01.A,KR,0060,,f Total exposure value,monetary,172,5.962,1.397,5.33,auswertbar
+67.01.A,KR,0110,,k Risk-weighted exposure amounts,monetary,170,5.560,1.479,5.46,auswertbar
+67.01.A,KW,0060,,f Total exposure value,monetary,78,5.176,1.562,6.63,unbrauchbar
+67.01.A,KW,0110,,k Risk-weighted exposure amounts,monetary,77,4.726,1.618,5.29,auswertbar
+67.01.A,KY,0060,,f Total exposure value,monetary,96,7.366,1.327,5.36,auswertbar
+67.01.A,KY,0110,,k Risk-weighted exposure amounts,monetary,93,7.114,1.230,5.47,auswertbar
+67.01.A,KZ,0060,,f Total exposure value,monetary,97,4.681,1.760,5.51,auswertbar
+67.01.A,KZ,0110,,k Risk-weighted exposure amounts,monetary,90,4.467,1.862,5.32,auswertbar
+67.01.A,LA,0060,,f Total exposure value,monetary,32,4.011,1.251,4.09,auswertbar
+67.01.A,LA,0110,,k Risk-weighted exposure amounts,monetary,32,3.305,0.914,3.47,auswertbar
+67.01.A,LB,0060,,f Total exposure value,monetary,72,4.396,1.607,5.40,auswertbar
+67.01.A,LB,0110,,k Risk-weighted exposure amounts,monetary,68,4.103,1.228,4.87,auswertbar
+67.01.A,LI,0060,,f Total exposure value,monetary,100,5.732,1.536,6.87,unbrauchbar
+67.01.A,LI,0110,,k Risk-weighted exposure amounts,monetary,97,5.079,1.808,6.68,unbrauchbar
+67.01.A,LK,0060,,f Total exposure value,monetary,66,4.187,1.291,5.03,auswertbar
+67.01.A,LK,0110,,k Risk-weighted exposure amounts,monetary,64,3.793,1.259,4.78,auswertbar
+67.01.A,LR,0060,,f Total exposure value,monetary,51,7.777,1.143,6.78,unbrauchbar
+67.01.A,LR,0110,,k Risk-weighted exposure amounts,monetary,50,7.499,0.982,7.66,unbrauchbar
+67.01.A,LT,0060,,f Total exposure value,monetary,200,5.907,1.485,6.00,auswertbar
+67.01.A,LT,0110,,k Risk-weighted exposure amounts,monetary,197,5.371,1.508,5.79,auswertbar
+67.01.A,LU,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,58,8.203,0.730,4.63,auswertbar
+67.01.A,LU,0060,,f Total exposure value,monetary,291,8.231,1.048,4.59,auswertbar
+67.01.A,LU,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,57,6.301,0.600,2.74,auswertbar
+67.01.A,LU,0110,,k Risk-weighted exposure amounts,monetary,288,8.097,0.887,4.87,auswertbar
+67.01.A,LV,0060,,f Total exposure value,monetary,188,5.263,1.392,5.35,auswertbar
+67.01.A,LV,0110,,k Risk-weighted exposure amounts,monetary,187,4.673,1.420,5.80,auswertbar
+67.01.A,LY,0060,,f Total exposure value,monetary,41,2.545,1.001,4.10,auswertbar
+67.01.A,LY,0110,,k Risk-weighted exposure amounts,monetary,40,2.346,0.983,3.79,auswertbar
+67.01.A,MA,0060,,f Total exposure value,monetary,102,5.384,1.493,4.95,auswertbar
+67.01.A,MA,0110,,k Risk-weighted exposure amounts,monetary,99,5.434,1.572,5.17,auswertbar
+67.01.A,MC,0060,,f Total exposure value,monetary,90,6.085,1.533,7.02,unbrauchbar
+67.01.A,MC,0110,,k Risk-weighted exposure amounts,monetary,89,5.143,1.561,6.62,unbrauchbar
+67.01.A,MD,0060,,f Total exposure value,monetary,71,4.055,1.023,3.96,auswertbar
+67.01.A,MD,0110,,k Risk-weighted exposure amounts,monetary,70,4.019,0.912,4.93,auswertbar
+67.01.A,ME,0060,,f Total exposure value,monetary,79,4.478,1.129,5.06,auswertbar
+67.01.A,ME,0110,,k Risk-weighted exposure amounts,monetary,76,4.186,1.304,4.95,auswertbar
+67.01.A,MG,0060,,f Total exposure value,monetary,41,4.327,1.371,5.47,auswertbar
+67.01.A,MG,0110,,k Risk-weighted exposure amounts,monetary,40,3.995,1.087,5.65,auswertbar
+67.01.A,MH,0060,,f Total exposure value,monetary,56,7.488,1.274,6.88,unbrauchbar
+67.01.A,MH,0110,,k Risk-weighted exposure amounts,monetary,56,7.008,1.217,6.51,unbrauchbar
+67.01.A,MK,0060,,f Total exposure value,monetary,87,5.016,1.399,5.01,auswertbar
+67.01.A,MK,0110,,k Risk-weighted exposure amounts,monetary,83,4.552,1.599,4.75,auswertbar
+67.01.A,ML,0060,,f Total exposure value,monetary,36,3.680,1.205,4.28,auswertbar
+67.01.A,ML,0110,,k Risk-weighted exposure amounts,monetary,35,2.949,1.093,3.35,auswertbar
+67.01.A,MM,0060,,f Total exposure value,monetary,32,3.010,0.972,4.55,auswertbar
+67.01.A,MM,0110,,k Risk-weighted exposure amounts,monetary,31,2.354,0.797,3.71,auswertbar
+67.01.A,MN,0060,,f Total exposure value,monetary,43,3.363,1.240,7.10,unbrauchbar
+67.01.A,MN,0110,,k Risk-weighted exposure amounts,monetary,44,3.092,1.213,6.50,unbrauchbar
+67.01.A,MT,0060,,f Total exposure value,monetary,143,6.426,1.407,6.24,unbrauchbar
+67.01.A,MT,0110,,k Risk-weighted exposure amounts,monetary,139,6.033,1.563,5.96,auswertbar
+67.01.A,MU,0060,,f Total exposure value,monetary,74,5.150,1.993,7.11,unbrauchbar
+67.01.A,MU,0110,,k Risk-weighted exposure amounts,monetary,72,4.613,2.316,7.44,unbrauchbar
+67.01.A,MW,0060,,f Total exposure value,monetary,28,4.084,1.238,4.18,auswertbar
+67.01.A,MW,0110,,k Risk-weighted exposure amounts,monetary,28,2.981,0.751,2.98,auswertbar
+67.01.A,MX,0060,,f Total exposure value,monetary,128,6.345,1.946,6.26,unbrauchbar
+67.01.A,MX,0110,,k Risk-weighted exposure amounts,monetary,127,6.259,1.774,6.06,unbrauchbar
+67.01.A,MY,0060,,f Total exposure value,monetary,101,5.963,1.378,6.31,unbrauchbar
+67.01.A,MY,0110,,k Risk-weighted exposure amounts,monetary,98,5.459,1.719,6.29,unbrauchbar
+67.01.A,MZ,0060,,f Total exposure value,monetary,40,4.272,1.610,7.89,unbrauchbar
+67.01.A,MZ,0110,,k Risk-weighted exposure amounts,monetary,40,3.592,1.379,8.23,unbrauchbar
+67.01.A,NA,0060,,f Total exposure value,monetary,56,4.234,1.155,4.32,auswertbar
+67.01.A,NA,0110,,k Risk-weighted exposure amounts,monetary,56,3.603,1.177,3.78,auswertbar
+67.01.A,NC,0060,,f Total exposure value,monetary,25,5.167,1.231,4.89,auswertbar
+67.01.A,NC,0110,,k Risk-weighted exposure amounts,monetary,25,5.004,1.486,5.88,auswertbar
+67.01.A,NG,0060,,f Total exposure value,monetary,96,4.717,1.382,6.90,unbrauchbar
+67.01.A,NG,0110,,k Risk-weighted exposure amounts,monetary,92,4.194,1.403,5.87,auswertbar
+67.01.A,NI,0060,,f Total exposure value,monetary,39,3.544,0.825,4.19,auswertbar
+67.01.A,NI,0110,,k Risk-weighted exposure amounts,monetary,38,3.026,0.678,4.12,auswertbar
+67.01.A,NL,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,79,8.362,0.621,2.73,auswertbar
+67.01.A,NL,0060,,f Total exposure value,monetary,303,8.359,0.909,4.95,auswertbar
+67.01.A,NL,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,79,6.423,0.409,2.71,auswertbar
+67.01.A,NL,0110,,k Risk-weighted exposure amounts,monetary,300,8.113,0.945,4.68,auswertbar
+67.01.A,NO,0060,,f Total exposure value,monetary,306,7.548,1.309,6.04,unbrauchbar
+67.01.A,NO,0110,,k Risk-weighted exposure amounts,monetary,300,7.162,1.252,6.01,unbrauchbar
+67.01.A,NP,0060,,f Total exposure value,monetary,47,3.730,0.891,3.02,auswertbar
+67.01.A,NP,0110,,k Risk-weighted exposure amounts,monetary,45,3.089,0.844,2.93,auswertbar
+67.01.A,NZ,0060,,f Total exposure value,monetary,109,5.875,1.399,5.21,auswertbar
+67.01.A,NZ,0110,,k Risk-weighted exposure amounts,monetary,105,5.334,1.369,5.09,auswertbar
+67.01.A,OM,0060,,f Total exposure value,monetary,78,5.276,1.848,6.53,unbrauchbar
+67.01.A,OM,0110,,k Risk-weighted exposure amounts,monetary,70,4.983,1.761,5.17,auswertbar
+67.01.A,PA,0060,,f Total exposure value,monetary,80,5.764,2.161,7.32,unbrauchbar
+67.01.A,PA,0110,,k Risk-weighted exposure amounts,monetary,78,5.040,2.102,6.26,unbrauchbar
+67.01.A,PE,0060,,f Total exposure value,monetary,94,5.013,1.922,5.92,auswertbar
+67.01.A,PE,0110,,k Risk-weighted exposure amounts,monetary,93,4.652,1.855,5.67,auswertbar
+67.01.A,PF,0060,,f Total exposure value,monetary,27,4.503,0.956,3.49,auswertbar
+67.01.A,PH,0060,,f Total exposure value,monetary,114,4.978,1.375,4.63,auswertbar
+67.01.A,PH,0110,,k Risk-weighted exposure amounts,monetary,110,4.550,1.328,4.63,auswertbar
+67.01.A,PK,0060,,f Total exposure value,monetary,80,3.895,1.486,4.93,auswertbar
+67.01.A,PK,0110,,k Risk-weighted exposure amounts,monetary,76,3.533,1.196,4.46,auswertbar
+67.01.A,PL,0060,,f Total exposure value,monetary,246,7.250,1.570,5.80,auswertbar
+67.01.A,PL,0110,,k Risk-weighted exposure amounts,monetary,243,7.069,1.702,6.20,unbrauchbar
+67.01.A,PR,0060,,f Total exposure value,monetary,30,4.497,2.447,7.46,unbrauchbar
+67.01.A,PR,0110,,k Risk-weighted exposure amounts,monetary,30,3.906,2.383,6.96,unbrauchbar
+67.01.A,PS,0060,,f Total exposure value,monetary,33,2.360,1.319,3.82,auswertbar
+67.01.A,PS,0110,,k Risk-weighted exposure amounts,monetary,31,2.283,1.584,4.06,auswertbar
+67.01.A,PT,0060,,f Total exposure value,monetary,185,7.005,1.270,4.64,auswertbar
+67.01.A,PT,0110,,k Risk-weighted exposure amounts,monetary,181,6.465,1.423,4.78,auswertbar
+67.01.A,PY,0060,,f Total exposure value,monetary,68,4.725,1.156,4.93,auswertbar
+67.01.A,PY,0110,,k Risk-weighted exposure amounts,monetary,68,3.999,0.907,5.39,auswertbar
+67.01.A,QA,0060,,f Total exposure value,monetary,107,5.744,1.550,5.43,auswertbar
+67.01.A,QA,0110,,k Risk-weighted exposure amounts,monetary,106,5.102,1.121,4.90,auswertbar
+67.01.A,RE,0060,,f Total exposure value,monetary,29,4.602,1.317,5.17,auswertbar
+67.01.A,RE,0110,,k Risk-weighted exposure amounts,monetary,29,3.933,1.167,4.60,auswertbar
+67.01.A,RO,0060,,f Total exposure value,monetary,240,6.193,1.178,5.82,auswertbar
+67.01.A,RO,0110,,k Risk-weighted exposure amounts,monetary,238,5.858,1.448,5.65,auswertbar
+67.01.A,RS,0060,,f Total exposure value,monetary,121,5.169,1.644,6.37,unbrauchbar
+67.01.A,RS,0110,,k Risk-weighted exposure amounts,monetary,119,4.668,1.807,6.40,unbrauchbar
+67.01.A,RU,0060,,f Total exposure value,monetary,153,5.362,1.414,5.43,auswertbar
+67.01.A,RU,0110,,k Risk-weighted exposure amounts,monetary,149,4.864,1.399,5.54,auswertbar
+67.01.A,RW,0060,,f Total exposure value,monetary,37,3.633,1.355,4.52,auswertbar
+67.01.A,RW,0110,,k Risk-weighted exposure amounts,monetary,36,3.574,1.135,3.70,auswertbar
+67.01.A,SA,0060,,f Total exposure value,monetary,108,5.953,1.610,5.87,auswertbar
+67.01.A,SA,0110,,k Risk-weighted exposure amounts,monetary,107,5.454,1.669,5.48,auswertbar
+67.01.A,SC,0060,,f Total exposure value,monetary,45,3.546,1.400,4.74,auswertbar
+67.01.A,SC,0110,,k Risk-weighted exposure amounts,monetary,43,2.850,0.912,4.08,auswertbar
+67.01.A,SE,0060,,f Total exposure value,monetary,309,7.738,1.207,5.01,auswertbar
+67.01.A,SE,0110,,k Risk-weighted exposure amounts,monetary,305,7.342,1.204,4.91,auswertbar
+67.01.A,SG,0060,,f Total exposure value,monetary,139,6.308,1.543,7.03,unbrauchbar
+67.01.A,SG,0110,,k Risk-weighted exposure amounts,monetary,138,5.952,1.614,6.85,unbrauchbar
+67.01.A,SI,0060,,f Total exposure value,monetary,195,5.774,1.456,5.28,auswertbar
+67.01.A,SI,0110,,k Risk-weighted exposure amounts,monetary,193,5.572,1.564,5.37,auswertbar
+67.01.A,SK,0060,,f Total exposure value,monetary,234,6.558,1.223,5.54,auswertbar
+67.01.A,SK,0110,,k Risk-weighted exposure amounts,monetary,230,6.153,1.392,5.44,auswertbar
+67.01.A,SM,0060,,f Total exposure value,monetary,33,5.353,1.051,4.38,auswertbar
+67.01.A,SM,0110,,k Risk-weighted exposure amounts,monetary,33,4.878,1.209,4.41,auswertbar
+67.01.A,SN,0060,,f Total exposure value,monetary,59,5.258,1.406,7.36,unbrauchbar
+67.01.A,SN,0110,,k Risk-weighted exposure amounts,monetary,59,4.277,1.376,5.85,auswertbar
+67.01.A,SV,0060,,f Total exposure value,monetary,33,4.987,1.441,4.44,auswertbar
+67.01.A,SV,0110,,k Risk-weighted exposure amounts,monetary,33,4.602,1.257,4.85,auswertbar
+67.01.A,SY,0060,,f Total exposure value,monetary,33,3.250,1.223,4.75,auswertbar
+67.01.A,SY,0110,,k Risk-weighted exposure amounts,monetary,31,3.140,1.114,4.85,auswertbar
+67.01.A,TG,0060,,f Total exposure value,monetary,34,4.073,0.861,4.37,auswertbar
+67.01.A,TG,0110,,k Risk-weighted exposure amounts,monetary,34,3.494,0.759,4.65,auswertbar
+67.01.A,TH,0060,,f Total exposure value,monetary,118,5.301,1.381,6.08,unbrauchbar
+67.01.A,TH,0110,,k Risk-weighted exposure amounts,monetary,116,4.904,1.427,5.91,auswertbar
+67.01.A,TJ,0060,,f Total exposure value,monetary,38,3.000,1.136,4.40,auswertbar
+67.01.A,TJ,0110,,k Risk-weighted exposure amounts,monetary,37,3.000,1.096,4.06,auswertbar
+67.01.A,TN,0060,,f Total exposure value,monetary,90,5.021,1.235,4.21,auswertbar
+67.01.A,TN,0110,,k Risk-weighted exposure amounts,monetary,88,4.897,1.297,3.86,auswertbar
+67.01.A,TR,0060,,f Total exposure value,monetary,158,6.015,1.520,5.55,auswertbar
+67.01.A,TR,0110,,k Risk-weighted exposure amounts,monetary,155,5.756,1.542,5.42,auswertbar
+67.01.A,TT,0060,,f Total exposure value,monetary,33,3.599,0.779,4.31,auswertbar
+67.01.A,TT,0110,,k Risk-weighted exposure amounts,monetary,32,2.836,1.067,3.48,auswertbar
+67.01.A,TW,0060,,f Total exposure value,monetary,89,5.513,1.706,6.71,unbrauchbar
+67.01.A,TW,0110,,k Risk-weighted exposure amounts,monetary,87,4.940,1.559,6.44,unbrauchbar
+67.01.A,TZ,0060,,f Total exposure value,monetary,61,4.132,1.208,3.98,auswertbar
+67.01.A,TZ,0110,,k Risk-weighted exposure amounts,monetary,60,3.912,1.238,3.87,auswertbar
+67.01.A,UA,0060,,f Total exposure value,monetary,118,5.447,1.208,4.65,auswertbar
+67.01.A,UA,0110,,k Risk-weighted exposure amounts,monetary,115,4.730,1.313,4.71,auswertbar
+67.01.A,UG,0060,,f Total exposure value,monetary,49,4.467,0.599,3.79,auswertbar
+67.01.A,UG,0110,,k Risk-weighted exposure amounts,monetary,50,3.551,0.699,3.40,auswertbar
+67.01.A,US,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,48,8.733,0.854,4.16,auswertbar
+67.01.A,US,0060,,f Total exposure value,monetary,234,7.812,1.259,5.48,auswertbar
+67.01.A,US,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,47,6.875,0.780,3.47,auswertbar
+67.01.A,US,0110,,k Risk-weighted exposure amounts,monetary,233,7.553,1.336,5.18,auswertbar
+67.01.A,UY,0060,,f Total exposure value,monetary,77,5.303,1.213,5.04,auswertbar
+67.01.A,UY,0110,,k Risk-weighted exposure amounts,monetary,75,4.973,1.361,4.56,auswertbar
+67.01.A,UZ,0060,,f Total exposure value,monetary,75,4.930,1.768,6.27,unbrauchbar
+67.01.A,UZ,0110,,k Risk-weighted exposure amounts,monetary,74,4.583,1.728,6.03,unbrauchbar
+67.01.A,VE,0060,,f Total exposure value,monetary,69,4.000,1.375,5.96,auswertbar
+67.01.A,VE,0110,,k Risk-weighted exposure amounts,monetary,69,3.528,1.767,5.63,auswertbar
+67.01.A,VG,0060,,f Total exposure value,monetary,77,7.139,1.814,6.67,unbrauchbar
+67.01.A,VG,0110,,k Risk-weighted exposure amounts,monetary,75,6.411,1.941,5.67,auswertbar
+67.01.A,VN,0060,,f Total exposure value,monetary,93,5.476,1.655,6.09,unbrauchbar
+67.01.A,VN,0110,,k Risk-weighted exposure amounts,monetary,89,4.587,1.874,6.42,unbrauchbar
+67.01.A,ZA,0060,,f Total exposure value,monetary,124,5.747,1.304,5.75,auswertbar
+67.01.A,ZA,0110,,k Risk-weighted exposure amounts,monetary,121,5.378,1.360,5.14,auswertbar
+67.01.A,ZM,0060,,f Total exposure value,monetary,41,4.208,1.792,5.31,auswertbar
+67.01.A,ZM,0110,,k Risk-weighted exposure amounts,monetary,39,3.321,1.377,5.33,auswertbar
+67.01.A,ZW,0060,,f Total exposure value,monetary,48,3.420,1.219,3.92,auswertbar
+67.01.A,ZW,0110,,k Risk-weighted exposure amounts,monetary,46,2.866,1.049,3.81,auswertbar
+67.01.A,x1,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,52,8.998,0.966,4.23,auswertbar
+67.01.A,x1,0060,,f Total exposure value,monetary,142,10.313,0.620,3.49,auswertbar
+67.01.A,x1,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,53,7.301,1.012,3.40,auswertbar
+67.01.A,x1,0110,,k Risk-weighted exposure amounts,monetary,140,9.926,0.609,3.23,auswertbar
+67.01.A,x28,0050,,e Securitisation exposures  Exposure value for non-trading book,monetary,29,8.770,0.885,5.46,auswertbar
+67.01.A,x28,0060,,f Total exposure value,monetary,167,8.020,1.294,6.93,unbrauchbar
+67.01.A,x28,0090,,i Relevant credit exposures – Securitisation positions in the non-trading book,monetary,28,7.001,0.693,5.72,auswertbar
+67.01.A,x28,0110,,k Risk-weighted exposure amounts,monetary,169,7.458,1.598,7.38,unbrauchbar
 67.01.B,0010,0010,Total,a Exposure value under the standardised approach,monetary,379,9.905,0.529,3.02,auswertbar
 67.01.B,0010,0020,Total,b Exposure value under the IRB approach,monetary,206,10.649,0.466,2.04,auswertbar
 67.01.B,0010,0030,Total,c Sum of long and short positions of trading book exposures for SA,monetary,161,8.187,0.968,3.80,auswertbar
@@ -4907,6 +5310,478 @@ d"" 1 year",monetary,354,7.340,0.677,4.21,auswertbar
 83.01.B,0020,0010,070 Other Countries,e Accumulated impairment,monetary,270,6.689,1.101,5.34,auswertbar
 83.01.B,0030,0020,080 Off balance sheet exposures,f Provisions on off-balance sheet commitments and financial guarantees given,monetary,296,7.327,0.687,4.09,auswertbar
 83.01.B,0040,0020,140 Other countries,f Provisions on off-balance sheet commitments and financial guarantees given,monetary,209,5.572,1.179,4.34,auswertbar
+83.01.C,AD,0010,,a Gross carrying/nominal amount,monetary,30,5.701,0.817,5.96,auswertbar
+83.01.C,AE,0010,,a Gross carrying/nominal amount,monetary,70,6.698,1.127,6.34,unbrauchbar
+83.01.C,AE,0020,,b Of which non-performing,monetary,32,5.577,0.969,4.61,auswertbar
+83.01.C,AE,0030,,c Of which defaulted,monetary,36,5.600,0.991,4.38,auswertbar
+83.01.C,AE,0040,,d Of which subject to impairment,monetary,62,6.653,1.136,6.17,unbrauchbar
+83.01.C,AE,0050,,f Accumulated impairment,monetary,63,4.497,1.235,5.57,auswertbar
+83.01.C,AR,0010,,a Gross carrying/nominal amount,monetary,40,5.775,1.510,6.05,unbrauchbar
+83.01.C,AR,0040,,d Of which subject to impairment,monetary,37,5.743,1.774,6.05,unbrauchbar
+83.01.C,AR,0050,,f Accumulated impairment,monetary,34,3.243,1.233,4.91,auswertbar
+83.01.C,AT,0010,,a Gross carrying/nominal amount,monetary,132,8.272,0.869,5.07,auswertbar
+83.01.C,AT,0020,,b Of which non-performing,monetary,76,5.432,2.397,6.83,unbrauchbar
+83.01.C,AT,0030,,c Of which defaulted,monetary,86,6.335,2.276,6.34,unbrauchbar
+83.01.C,AT,0040,,d Of which subject to impairment,monetary,112,8.144,0.931,5.35,auswertbar
+83.01.C,AT,0050,,f Accumulated impairment,monetary,121,5.176,1.746,6.13,unbrauchbar
+83.01.C,AU,0010,,a Gross carrying/nominal amount,monetary,80,6.864,1.482,6.36,unbrauchbar
+83.01.C,AU,0030,,c Of which defaulted,monetary,31,5.199,0.826,5.93,auswertbar
+83.01.C,AU,0040,,d Of which subject to impairment,monetary,68,6.781,1.411,5.33,auswertbar
+83.01.C,AU,0050,,f Accumulated impairment,monetary,71,3.895,2.074,6.16,unbrauchbar
+83.01.C,BA,0010,,a Gross carrying/nominal amount,monetary,38,4.218,1.779,5.53,auswertbar
+83.01.C,BA,0040,,d Of which subject to impairment,monetary,35,3.699,1.990,5.13,auswertbar
+83.01.C,BA,0050,,f Accumulated impairment,monetary,32,2.929,1.874,6.25,unbrauchbar
+83.01.C,BE,0010,,a Gross carrying/nominal amount,monetary,134,8.346,0.990,6.34,unbrauchbar
+83.01.C,BE,0020,,b Of which non-performing,monetary,61,5.983,1.969,6.56,unbrauchbar
+83.01.C,BE,0030,,c Of which defaulted,monetary,70,6.401,1.671,6.65,unbrauchbar
+83.01.C,BE,0040,,d Of which subject to impairment,monetary,116,8.096,1.117,6.17,unbrauchbar
+83.01.C,BE,0050,,f Accumulated impairment,monetary,125,5.263,1.309,6.85,unbrauchbar
+83.01.C,BG,0010,,a Gross carrying/nominal amount,monetary,69,6.035,1.740,6.30,unbrauchbar
+83.01.C,BG,0020,,b Of which non-performing,monetary,34,3.902,1.606,6.87,unbrauchbar
+83.01.C,BG,0030,,c Of which defaulted,monetary,37,4.090,1.643,6.87,unbrauchbar
+83.01.C,BG,0040,,d Of which subject to impairment,monetary,66,5.941,1.625,6.05,unbrauchbar
+83.01.C,BG,0050,,f Accumulated impairment,monetary,56,3.927,1.261,5.89,auswertbar
+83.01.C,BH,0010,,a Gross carrying/nominal amount,monetary,30,5.607,2.101,6.76,unbrauchbar
+83.01.C,BM,0010,,a Gross carrying/nominal amount,monetary,25,8.092,1.231,6.11,unbrauchbar
+83.01.C,BR,0010,,a Gross carrying/nominal amount,monetary,61,6.558,1.730,6.83,unbrauchbar
+83.01.C,BR,0020,,b Of which non-performing,monetary,26,5.802,1.826,5.45,auswertbar
+83.01.C,BR,0030,,c Of which defaulted,monetary,29,5.902,1.618,5.45,auswertbar
+83.01.C,BR,0040,,d Of which subject to impairment,monetary,53,6.157,1.881,6.30,unbrauchbar
+83.01.C,BR,0050,,f Accumulated impairment,monetary,53,4.053,2.275,7.34,unbrauchbar
+83.01.C,CA,0010,,a Gross carrying/nominal amount,monetary,96,7.984,1.383,4.94,auswertbar
+83.01.C,CA,0020,,b Of which non-performing,monetary,35,5.292,1.297,3.75,auswertbar
+83.01.C,CA,0030,,c Of which defaulted,monetary,44,5.284,1.236,4.44,auswertbar
+83.01.C,CA,0040,,d Of which subject to impairment,monetary,79,7.635,1.414,4.80,auswertbar
+83.01.C,CA,0050,,f Accumulated impairment,monetary,89,4.483,1.483,5.26,auswertbar
+83.01.C,CH,0010,,a Gross carrying/nominal amount,monetary,112,8.255,1.109,4.11,auswertbar
+83.01.C,CH,0020,,b Of which non-performing,monetary,77,6.288,1.129,4.97,auswertbar
+83.01.C,CH,0030,,c Of which defaulted,monetary,88,6.288,1.219,5.27,auswertbar
+83.01.C,CH,0040,,d Of which subject to impairment,monetary,97,8.096,1.065,5.18,auswertbar
+83.01.C,CH,0050,,f Accumulated impairment,monetary,109,5.723,1.080,4.19,auswertbar
+83.01.C,CI,0010,,a Gross carrying/nominal amount,monetary,34,6.040,2.381,7.57,unbrauchbar
+83.01.C,CI,0040,,d Of which subject to impairment,monetary,30,5.709,2.495,8.07,unbrauchbar
+83.01.C,CI,0050,,f Accumulated impairment,monetary,30,4.307,1.283,5.82,auswertbar
+83.01.C,CL,0010,,a Gross carrying/nominal amount,monetary,49,5.863,1.934,7.47,unbrauchbar
+83.01.C,CL,0040,,d Of which subject to impairment,monetary,44,5.682,1.994,7.47,unbrauchbar
+83.01.C,CL,0050,,f Accumulated impairment,monetary,45,3.806,2.841,7.55,unbrauchbar
+83.01.C,CN,0010,,a Gross carrying/nominal amount,monetary,53,6.290,1.243,6.79,unbrauchbar
+83.01.C,CN,0040,,d Of which subject to impairment,monetary,50,6.276,1.160,7.00,unbrauchbar
+83.01.C,CN,0050,,f Accumulated impairment,monetary,47,3.587,1.615,5.36,auswertbar
+83.01.C,CO,0010,,a Gross carrying/nominal amount,monetary,45,5.468,1.570,5.46,auswertbar
+83.01.C,CO,0040,,d Of which subject to impairment,monetary,41,5.398,1.500,5.68,auswertbar
+83.01.C,CO,0050,,f Accumulated impairment,monetary,39,3.504,1.492,6.34,unbrauchbar
+83.01.C,CR,0010,,a Gross carrying/nominal amount,monetary,26,4.211,1.288,5.09,auswertbar
+83.01.C,CY,0010,,a Gross carrying/nominal amount,monetary,64,6.649,1.517,4.68,auswertbar
+83.01.C,CY,0020,,b Of which non-performing,monetary,32,4.346,1.962,4.90,auswertbar
+83.01.C,CY,0030,,c Of which defaulted,monetary,35,4.308,1.921,5.52,auswertbar
+83.01.C,CY,0040,,d Of which subject to impairment,monetary,59,6.109,1.407,5.65,auswertbar
+83.01.C,CY,0050,,f Accumulated impairment,monetary,59,3.803,1.251,6.33,unbrauchbar
+83.01.C,CZ,0010,,a Gross carrying/nominal amount,monetary,90,7.379,1.623,5.06,auswertbar
+83.01.C,CZ,0020,,b Of which non-performing,monetary,50,5.533,2.026,6.02,unbrauchbar
+83.01.C,CZ,0030,,c Of which defaulted,monetary,55,5.437,2.114,5.79,auswertbar
+83.01.C,CZ,0040,,d Of which subject to impairment,monetary,80,7.284,1.681,4.99,auswertbar
+83.01.C,CZ,0050,,f Accumulated impairment,monetary,82,5.273,1.709,6.62,unbrauchbar
+83.01.C,DE,0010,,a Gross carrying/nominal amount,monetary,209,9.137,0.883,5.34,auswertbar
+83.01.C,DE,0020,,b Of which non-performing,monetary,137,6.996,1.816,6.77,unbrauchbar
+83.01.C,DE,0030,,c Of which defaulted,monetary,164,7.064,1.773,6.47,unbrauchbar
+83.01.C,DE,0040,,d Of which subject to impairment,monetary,172,8.849,1.018,5.32,auswertbar
+83.01.C,DE,0050,,f Accumulated impairment,monetary,198,6.498,1.601,5.68,auswertbar
+83.01.C,DK,0010,,a Gross carrying/nominal amount,monetary,91,7.969,0.993,4.33,auswertbar
+83.01.C,DK,0020,,b Of which non-performing,monetary,33,4.750,1.923,5.56,auswertbar
+83.01.C,DK,0030,,c Of which defaulted,monetary,45,6.170,1.845,6.49,unbrauchbar
+83.01.C,DK,0040,,d Of which subject to impairment,monetary,74,7.557,1.048,4.78,auswertbar
+83.01.C,DK,0050,,f Accumulated impairment,monetary,83,4.746,1.578,7.41,unbrauchbar
+83.01.C,DO,0010,,a Gross carrying/nominal amount,monetary,36,4.157,1.154,4.20,auswertbar
+83.01.C,DO,0040,,d Of which subject to impairment,monetary,32,4.061,1.154,4.20,auswertbar
+83.01.C,DO,0050,,f Accumulated impairment,monetary,28,2.862,1.001,5.38,auswertbar
+83.01.C,DZ,0010,,a Gross carrying/nominal amount,monetary,30,4.765,1.425,6.66,unbrauchbar
+83.01.C,EE,0010,,a Gross carrying/nominal amount,monetary,63,5.987,1.656,7.24,unbrauchbar
+83.01.C,EE,0030,,c Of which defaulted,monetary,30,4.776,2.317,6.05,unbrauchbar
+83.01.C,EE,0040,,d Of which subject to impairment,monetary,56,5.581,1.729,5.96,auswertbar
+83.01.C,EE,0050,,f Accumulated impairment,monetary,50,3.464,1.775,7.24,unbrauchbar
+83.01.C,EG,0010,,a Gross carrying/nominal amount,monetary,35,5.630,2.276,8.15,unbrauchbar
+83.01.C,EG,0040,,d Of which subject to impairment,monetary,32,5.589,2.229,8.15,unbrauchbar
+83.01.C,EG,0050,,f Accumulated impairment,monetary,32,4.095,1.753,5.87,auswertbar
+83.01.C,ES,0010,,a Gross carrying/nominal amount,monetary,178,8.773,0.850,4.82,auswertbar
+83.01.C,ES,0020,,b Of which non-performing,monetary,104,6.046,1.607,5.76,auswertbar
+83.01.C,ES,0030,,c Of which defaulted,monetary,125,6.000,1.753,5.71,auswertbar
+83.01.C,ES,0040,,d Of which subject to impairment,monetary,149,8.683,0.961,4.82,auswertbar
+83.01.C,ES,0050,,f Accumulated impairment,monetary,166,5.870,1.177,5.36,auswertbar
+83.01.C,FI,0010,,a Gross carrying/nominal amount,monetary,109,8.233,0.864,5.15,auswertbar
+83.01.C,FI,0020,,b Of which non-performing,monetary,40,5.402,2.027,6.81,unbrauchbar
+83.01.C,FI,0030,,c Of which defaulted,monetary,47,5.398,1.746,6.70,unbrauchbar
+83.01.C,FI,0040,,d Of which subject to impairment,monetary,90,7.964,0.877,5.18,auswertbar
+83.01.C,FI,0050,,f Accumulated impairment,monetary,95,4.886,1.050,5.62,auswertbar
+83.01.C,FR,0010,,a Gross carrying/nominal amount,monetary,215,9.361,0.815,4.49,auswertbar
+83.01.C,FR,0020,,b Of which non-performing,monetary,131,7.325,1.523,6.27,unbrauchbar
+83.01.C,FR,0030,,c Of which defaulted,monetary,160,7.356,1.506,6.25,unbrauchbar
+83.01.C,FR,0040,,d Of which subject to impairment,monetary,180,9.233,0.898,4.79,auswertbar
+83.01.C,FR,0050,,f Accumulated impairment,monetary,208,6.273,1.417,5.91,auswertbar
+83.01.C,GB,0010,,a Gross carrying/nominal amount,monetary,171,9.073,1.070,4.22,auswertbar
+83.01.C,GB,0020,,b Of which non-performing,monetary,107,6.653,1.358,5.16,auswertbar
+83.01.C,GB,0030,,c Of which defaulted,monetary,132,6.686,1.372,5.08,auswertbar
+83.01.C,GB,0040,,d Of which subject to impairment,monetary,138,8.677,1.139,4.78,auswertbar
+83.01.C,GB,0050,,f Accumulated impairment,monetary,160,6.456,1.173,4.20,auswertbar
+83.01.C,GG,0010,,a Gross carrying/nominal amount,monetary,27,7.792,1.032,5.00,auswertbar
+83.01.C,GH,0010,,a Gross carrying/nominal amount,monetary,31,5.756,2.056,6.86,unbrauchbar
+83.01.C,GH,0040,,d Of which subject to impairment,monetary,28,5.653,1.933,7.25,unbrauchbar
+83.01.C,GH,0050,,f Accumulated impairment,monetary,28,2.443,2.102,8.41,unbrauchbar
+83.01.C,GR,0010,,a Gross carrying/nominal amount,monetary,67,6.257,1.725,7.60,unbrauchbar
+83.01.C,GR,0020,,b Of which non-performing,monetary,40,4.090,1.444,4.87,auswertbar
+83.01.C,GR,0030,,c Of which defaulted,monetary,44,4.395,1.208,4.79,auswertbar
+83.01.C,GR,0040,,d Of which subject to impairment,monetary,62,5.981,1.753,7.15,unbrauchbar
+83.01.C,GR,0050,,f Accumulated impairment,monetary,60,4.028,1.611,5.84,auswertbar
+83.01.C,HK,0010,,a Gross carrying/nominal amount,monetary,61,6.705,1.520,6.56,unbrauchbar
+83.01.C,HK,0040,,d Of which subject to impairment,monetary,55,6.705,1.468,6.24,unbrauchbar
+83.01.C,HK,0050,,f Accumulated impairment,monetary,56,3.959,1.996,7.90,unbrauchbar
+83.01.C,HR,0010,,a Gross carrying/nominal amount,monetary,78,6.775,1.867,7.84,unbrauchbar
+83.01.C,HR,0020,,b Of which non-performing,monetary,43,5.313,2.038,6.81,unbrauchbar
+83.01.C,HR,0030,,c Of which defaulted,monetary,46,4.977,1.747,6.81,unbrauchbar
+83.01.C,HR,0040,,d Of which subject to impairment,monetary,74,6.708,1.951,7.84,unbrauchbar
+83.01.C,HR,0050,,f Accumulated impairment,monetary,65,4.542,1.968,7.54,unbrauchbar
+83.01.C,HU,0010,,a Gross carrying/nominal amount,monetary,84,6.917,0.837,5.84,auswertbar
+83.01.C,HU,0020,,b Of which non-performing,monetary,47,4.258,1.505,6.02,unbrauchbar
+83.01.C,HU,0030,,c Of which defaulted,monetary,52,4.258,1.424,6.02,unbrauchbar
+83.01.C,HU,0040,,d Of which subject to impairment,monetary,76,6.706,0.895,5.79,auswertbar
+83.01.C,HU,0050,,f Accumulated impairment,monetary,72,4.858,0.970,4.26,auswertbar
+83.01.C,ID,0010,,a Gross carrying/nominal amount,monetary,45,5.762,2.246,6.41,unbrauchbar
+83.01.C,ID,0040,,d Of which subject to impairment,monetary,42,5.614,2.095,6.41,unbrauchbar
+83.01.C,ID,0050,,f Accumulated impairment,monetary,39,3.476,1.473,5.83,auswertbar
+83.01.C,IE,0010,,a Gross carrying/nominal amount,monetary,122,8.405,1.168,4.40,auswertbar
+83.01.C,IE,0020,,b Of which non-performing,monetary,63,5.711,0.986,5.11,auswertbar
+83.01.C,IE,0030,,c Of which defaulted,monetary,72,5.825,1.116,5.13,auswertbar
+83.01.C,IE,0040,,d Of which subject to impairment,monetary,98,8.339,1.161,4.88,auswertbar
+83.01.C,IE,0050,,f Accumulated impairment,monetary,115,5.364,1.315,5.69,auswertbar
+83.01.C,IL,0010,,a Gross carrying/nominal amount,monetary,47,5.489,2.262,6.79,unbrauchbar
+83.01.C,IL,0040,,d Of which subject to impairment,monetary,43,5.055,2.413,6.60,unbrauchbar
+83.01.C,IL,0050,,f Accumulated impairment,monetary,38,2.718,1.997,6.98,unbrauchbar
+83.01.C,IM,0010,,a Gross carrying/nominal amount,monetary,30,5.761,2.326,7.79,unbrauchbar
+83.01.C,IN,0010,,a Gross carrying/nominal amount,monetary,53,5.865,1.460,5.45,auswertbar
+83.01.C,IN,0040,,d Of which subject to impairment,monetary,46,5.808,1.149,4.64,auswertbar
+83.01.C,IN,0050,,f Accumulated impairment,monetary,47,3.594,1.590,5.15,auswertbar
+83.01.C,IS,0010,,a Gross carrying/nominal amount,monetary,49,4.959,1.020,4.55,auswertbar
+83.01.C,IS,0040,,d Of which subject to impairment,monetary,45,4.924,1.080,4.32,auswertbar
+83.01.C,IS,0050,,f Accumulated impairment,monetary,41,3.000,1.176,4.31,auswertbar
+83.01.C,IT,0010,,a Gross carrying/nominal amount,monetary,166,8.769,1.258,6.19,unbrauchbar
+83.01.C,IT,0020,,b Of which non-performing,monetary,110,6.862,1.890,7.13,unbrauchbar
+83.01.C,IT,0030,,c Of which defaulted,monetary,122,7.186,1.844,6.40,unbrauchbar
+83.01.C,IT,0040,,d Of which subject to impairment,monetary,148,8.618,1.313,6.37,unbrauchbar
+83.01.C,IT,0050,,f Accumulated impairment,monetary,158,5.988,1.752,6.51,unbrauchbar
+83.01.C,JE,0010,,a Gross carrying/nominal amount,monetary,38,7.517,1.419,6.70,unbrauchbar
+83.01.C,JE,0040,,d Of which subject to impairment,monetary,35,7.002,1.594,6.70,unbrauchbar
+83.01.C,JE,0050,,f Accumulated impairment,monetary,31,5.369,1.132,4.26,auswertbar
+83.01.C,JO,0010,,a Gross carrying/nominal amount,monetary,27,5.699,1.025,5.91,auswertbar
+83.01.C,JP,0010,,a Gross carrying/nominal amount,monetary,75,7.461,1.723,6.69,unbrauchbar
+83.01.C,JP,0040,,d Of which subject to impairment,monetary,65,6.966,1.584,6.87,unbrauchbar
+83.01.C,JP,0050,,f Accumulated impairment,monetary,62,3.552,2.245,5.53,auswertbar
+83.01.C,KE,0010,,a Gross carrying/nominal amount,monetary,31,5.639,1.642,4.67,auswertbar
+83.01.C,KE,0040,,d Of which subject to impairment,monetary,28,5.536,1.213,4.87,auswertbar
+83.01.C,KR,0010,,a Gross carrying/nominal amount,monetary,41,6.010,1.576,5.73,auswertbar
+83.01.C,KR,0040,,d Of which subject to impairment,monetary,37,5.944,1.469,4.79,auswertbar
+83.01.C,KR,0050,,f Accumulated impairment,monetary,34,3.004,1.701,5.11,auswertbar
+83.01.C,KY,0010,,a Gross carrying/nominal amount,monetary,37,8.314,1.150,4.91,auswertbar
+83.01.C,KY,0040,,d Of which subject to impairment,monetary,29,7.748,0.982,6.71,unbrauchbar
+83.01.C,KY,0050,,f Accumulated impairment,monetary,30,5.610,1.051,6.63,unbrauchbar
+83.01.C,KZ,0010,,a Gross carrying/nominal amount,monetary,33,5.766,2.114,7.21,unbrauchbar
+83.01.C,KZ,0040,,d Of which subject to impairment,monetary,29,5.317,2.165,9.02,unbrauchbar
+83.01.C,KZ,0050,,f Accumulated impairment,monetary,27,3.169,1.388,4.50,auswertbar
+83.01.C,LI,0010,,a Gross carrying/nominal amount,monetary,38,6.103,1.099,5.04,auswertbar
+83.01.C,LI,0040,,d Of which subject to impairment,monetary,34,5.846,0.893,4.04,auswertbar
+83.01.C,LI,0050,,f Accumulated impairment,monetary,29,4.260,1.165,5.67,auswertbar
+83.01.C,LK,0010,,a Gross carrying/nominal amount,monetary,27,5.144,1.349,5.06,auswertbar
+83.01.C,LT,0010,,a Gross carrying/nominal amount,monetary,71,6.956,1.683,7.43,unbrauchbar
+83.01.C,LT,0030,,c Of which defaulted,monetary,32,5.229,1.951,5.78,auswertbar
+83.01.C,LT,0040,,d Of which subject to impairment,monetary,60,6.478,1.417,7.11,unbrauchbar
+83.01.C,LT,0050,,f Accumulated impairment,monetary,54,3.809,2.110,7.35,unbrauchbar
+83.01.C,LU,0010,,a Gross carrying/nominal amount,monetary,156,8.660,0.978,4.42,auswertbar
+83.01.C,LU,0020,,b Of which non-performing,monetary,83,7.236,1.274,5.30,auswertbar
+83.01.C,LU,0030,,c Of which defaulted,monetary,98,7.360,1.099,5.31,auswertbar
+83.01.C,LU,0040,,d Of which subject to impairment,monetary,131,8.617,0.981,4.39,auswertbar
+83.01.C,LU,0050,,f Accumulated impairment,monetary,146,6.255,1.440,4.63,auswertbar
+83.01.C,LV,0010,,a Gross carrying/nominal amount,monetary,70,6.487,1.372,6.43,unbrauchbar
+83.01.C,LV,0030,,c Of which defaulted,monetary,29,4.415,2.128,5.27,auswertbar
+83.01.C,LV,0040,,d Of which subject to impairment,monetary,59,6.014,1.460,5.26,auswertbar
+83.01.C,LV,0050,,f Accumulated impairment,monetary,56,3.616,0.995,6.64,unbrauchbar
+83.01.C,MA,0010,,a Gross carrying/nominal amount,monetary,46,5.633,1.345,5.01,auswertbar
+83.01.C,MA,0030,,c Of which defaulted,monetary,31,3.785,1.078,4.24,auswertbar
+83.01.C,MA,0040,,d Of which subject to impairment,monetary,42,5.429,1.198,5.01,auswertbar
+83.01.C,MA,0050,,f Accumulated impairment,monetary,40,3.703,1.160,6.17,unbrauchbar
+83.01.C,MC,0010,,a Gross carrying/nominal amount,monetary,56,6.685,1.840,7.20,unbrauchbar
+83.01.C,MC,0040,,d Of which subject to impairment,monetary,50,6.397,1.816,7.82,unbrauchbar
+83.01.C,MC,0050,,f Accumulated impairment,monetary,49,4.114,1.879,5.12,auswertbar
+83.01.C,ME,0010,,a Gross carrying/nominal amount,monetary,26,4.693,1.571,5.60,auswertbar
+83.01.C,MT,0010,,a Gross carrying/nominal amount,monetary,70,6.343,1.592,6.16,unbrauchbar
+83.01.C,MT,0020,,b Of which non-performing,monetary,29,4.462,1.844,5.85,auswertbar
+83.01.C,MT,0030,,c Of which defaulted,monetary,28,4.616,0.778,5.42,auswertbar
+83.01.C,MT,0040,,d Of which subject to impairment,monetary,63,6.284,1.551,5.20,auswertbar
+83.01.C,MT,0050,,f Accumulated impairment,monetary,62,4.314,1.424,5.82,auswertbar
+83.01.C,MU,0010,,a Gross carrying/nominal amount,monetary,31,5.922,2.497,9.10,unbrauchbar
+83.01.C,MU,0040,,d Of which subject to impairment,monetary,28,5.523,2.641,9.14,unbrauchbar
+83.01.C,MX,0010,,a Gross carrying/nominal amount,monetary,59,6.788,1.542,5.65,auswertbar
+83.01.C,MX,0040,,d Of which subject to impairment,monetary,55,6.519,1.379,5.60,auswertbar
+83.01.C,MX,0050,,f Accumulated impairment,monetary,52,4.493,1.570,6.18,unbrauchbar
+83.01.C,MY,0010,,a Gross carrying/nominal amount,monetary,43,5.739,1.915,6.37,unbrauchbar
+83.01.C,MY,0040,,d Of which subject to impairment,monetary,39,5.455,1.879,6.37,unbrauchbar
+83.01.C,MY,0050,,f Accumulated impairment,monetary,35,3.683,1.437,6.36,unbrauchbar
+83.01.C,NG,0010,,a Gross carrying/nominal amount,monetary,35,5.719,2.166,8.36,unbrauchbar
+83.01.C,NG,0040,,d Of which subject to impairment,monetary,31,5.230,1.947,8.44,unbrauchbar
+83.01.C,NG,0050,,f Accumulated impairment,monetary,29,2.904,1.132,5.76,auswertbar
+83.01.C,NL,0010,,a Gross carrying/nominal amount,monetary,150,8.867,0.829,5.00,auswertbar
+83.01.C,NL,0020,,b Of which non-performing,monetary,82,6.103,1.412,5.62,auswertbar
+83.01.C,NL,0030,,c Of which defaulted,monetary,101,6.301,1.438,5.28,auswertbar
+83.01.C,NL,0040,,d Of which subject to impairment,monetary,122,8.626,0.820,4.88,auswertbar
+83.01.C,NL,0050,,f Accumulated impairment,monetary,147,5.938,1.131,5.09,auswertbar
+83.01.C,NO,0010,,a Gross carrying/nominal amount,monetary,103,7.739,1.191,4.70,auswertbar
+83.01.C,NO,0020,,b Of which non-performing,monetary,41,5.286,1.992,5.64,auswertbar
+83.01.C,NO,0030,,c Of which defaulted,monetary,52,5.403,1.868,5.13,auswertbar
+83.01.C,NO,0040,,d Of which subject to impairment,monetary,85,7.530,1.360,4.42,auswertbar
+83.01.C,NO,0050,,f Accumulated impairment,monetary,88,4.850,1.055,5.47,auswertbar
+83.01.C,NZ,0010,,a Gross carrying/nominal amount,monetary,49,5.702,0.682,6.21,unbrauchbar
+83.01.C,NZ,0040,,d Of which subject to impairment,monetary,44,5.445,0.934,5.75,auswertbar
+83.01.C,NZ,0050,,f Accumulated impairment,monetary,40,2.392,1.208,4.36,auswertbar
+83.01.C,PA,0010,,a Gross carrying/nominal amount,monetary,37,7.754,1.506,8.44,unbrauchbar
+83.01.C,PA,0040,,d Of which subject to impairment,monetary,34,6.661,1.780,8.44,unbrauchbar
+83.01.C,PA,0050,,f Accumulated impairment,monetary,32,4.166,1.597,5.70,auswertbar
+83.01.C,PE,0010,,a Gross carrying/nominal amount,monetary,38,4.782,2.268,8.37,unbrauchbar
+83.01.C,PE,0040,,d Of which subject to impairment,monetary,34,4.443,1.818,8.37,unbrauchbar
+83.01.C,PE,0050,,f Accumulated impairment,monetary,32,2.948,1.927,6.88,unbrauchbar
+83.01.C,PH,0010,,a Gross carrying/nominal amount,monetary,39,5.310,1.840,7.72,unbrauchbar
+83.01.C,PH,0040,,d Of which subject to impairment,monetary,36,4.850,1.746,7.02,unbrauchbar
+83.01.C,PL,0010,,a Gross carrying/nominal amount,monetary,103,8.086,1.450,6.45,unbrauchbar
+83.01.C,PL,0020,,b Of which non-performing,monetary,56,7.245,1.846,6.87,unbrauchbar
+83.01.C,PL,0030,,c Of which defaulted,monetary,63,7.477,1.688,6.71,unbrauchbar
+83.01.C,PL,0040,,d Of which subject to impairment,monetary,91,7.857,1.387,6.40,unbrauchbar
+83.01.C,PL,0050,,f Accumulated impairment,monetary,95,5.169,2.169,6.91,unbrauchbar
+83.01.C,PT,0010,,a Gross carrying/nominal amount,monetary,90,7.936,1.470,6.18,unbrauchbar
+83.01.C,PT,0020,,b Of which non-performing,monetary,44,6.575,2.058,5.99,auswertbar
+83.01.C,PT,0030,,c Of which defaulted,monetary,50,6.103,2.108,6.03,unbrauchbar
+83.01.C,PT,0040,,d Of which subject to impairment,monetary,81,7.776,1.613,5.90,auswertbar
+83.01.C,PT,0050,,f Accumulated impairment,monetary,81,4.721,1.958,7.16,unbrauchbar
+83.01.C,QA,0010,,a Gross carrying/nominal amount,monetary,38,6.432,2.079,5.20,auswertbar
+83.01.C,QA,0040,,d Of which subject to impairment,monetary,34,6.376,1.704,4.76,auswertbar
+83.01.C,QA,0050,,f Accumulated impairment,monetary,31,3.179,0.951,2.79,auswertbar
+83.01.C,RO,0010,,a Gross carrying/nominal amount,monetary,90,6.806,1.702,7.16,unbrauchbar
+83.01.C,RO,0020,,b Of which non-performing,monetary,60,4.955,2.580,6.84,unbrauchbar
+83.01.C,RO,0030,,c Of which defaulted,monetary,64,5.171,2.541,6.82,unbrauchbar
+83.01.C,RO,0040,,d Of which subject to impairment,monetary,84,6.761,1.386,6.27,unbrauchbar
+83.01.C,RO,0050,,f Accumulated impairment,monetary,79,4.877,2.157,8.10,unbrauchbar
+83.01.C,RS,0010,,a Gross carrying/nominal amount,monetary,65,6.121,1.733,6.56,unbrauchbar
+83.01.C,RS,0020,,b Of which non-performing,monetary,35,4.637,1.437,6.10,unbrauchbar
+83.01.C,RS,0030,,c Of which defaulted,monetary,38,4.346,1.368,6.10,unbrauchbar
+83.01.C,RS,0040,,d Of which subject to impairment,monetary,62,6.084,1.650,6.34,unbrauchbar
+83.01.C,RS,0050,,f Accumulated impairment,monetary,54,4.321,1.245,5.88,auswertbar
+83.01.C,RU,0010,,a Gross carrying/nominal amount,monetary,58,5.560,2.631,8.96,unbrauchbar
+83.01.C,RU,0020,,b Of which non-performing,monetary,32,4.399,2.040,6.23,unbrauchbar
+83.01.C,RU,0030,,c Of which defaulted,monetary,35,4.862,2.435,7.11,unbrauchbar
+83.01.C,RU,0040,,d Of which subject to impairment,monetary,51,5.563,2.590,7.13,unbrauchbar
+83.01.C,RU,0050,,f Accumulated impairment,monetary,47,4.380,2.001,6.88,unbrauchbar
+83.01.C,SA,0010,,a Gross carrying/nominal amount,monetary,49,6.254,1.409,6.09,unbrauchbar
+83.01.C,SA,0040,,d Of which subject to impairment,monetary,43,6.161,1.054,5.80,auswertbar
+83.01.C,SA,0050,,f Accumulated impairment,monetary,44,3.166,1.615,5.65,auswertbar
+83.01.C,SE,0010,,a Gross carrying/nominal amount,monetary,124,8.453,1.153,6.45,unbrauchbar
+83.01.C,SE,0020,,b Of which non-performing,monetary,52,6.513,1.874,5.39,auswertbar
+83.01.C,SE,0030,,c Of which defaulted,monetary,67,7.122,1.435,5.41,auswertbar
+83.01.C,SE,0040,,d Of which subject to impairment,monetary,99,7.968,1.066,6.20,unbrauchbar
+83.01.C,SE,0050,,f Accumulated impairment,monetary,114,5.517,1.618,6.62,unbrauchbar
+83.01.C,SG,0010,,a Gross carrying/nominal amount,monetary,68,6.844,1.748,7.46,unbrauchbar
+83.01.C,SG,0020,,b Of which non-performing,monetary,27,6.016,1.353,5.23,auswertbar
+83.01.C,SG,0030,,c Of which defaulted,monetary,29,6.016,1.317,5.23,auswertbar
+83.01.C,SG,0040,,d Of which subject to impairment,monetary,60,6.372,1.454,7.48,unbrauchbar
+83.01.C,SG,0050,,f Accumulated impairment,monetary,57,3.993,1.766,6.40,unbrauchbar
+83.01.C,SI,0010,,a Gross carrying/nominal amount,monetary,65,6.702,1.240,5.83,auswertbar
+83.01.C,SI,0030,,c Of which defaulted,monetary,26,3.540,1.662,6.15,unbrauchbar
+83.01.C,SI,0040,,d Of which subject to impairment,monetary,57,6.332,1.501,5.68,auswertbar
+83.01.C,SI,0050,,f Accumulated impairment,monetary,52,4.021,1.066,5.29,auswertbar
+83.01.C,SK,0010,,a Gross carrying/nominal amount,monetary,95,7.686,1.368,5.77,auswertbar
+83.01.C,SK,0020,,b Of which non-performing,monetary,48,5.482,2.405,5.98,auswertbar
+83.01.C,SK,0030,,c Of which defaulted,monetary,53,5.651,2.043,5.90,auswertbar
+83.01.C,SK,0040,,d Of which subject to impairment,monetary,87,7.478,1.539,5.77,auswertbar
+83.01.C,SK,0050,,f Accumulated impairment,monetary,79,4.665,1.338,5.70,auswertbar
+83.01.C,SN,0010,,a Gross carrying/nominal amount,monetary,34,5.794,2.128,8.09,unbrauchbar
+83.01.C,SN,0040,,d Of which subject to impairment,monetary,31,5.299,2.740,8.12,unbrauchbar
+83.01.C,SN,0050,,f Accumulated impairment,monetary,27,3.718,1.997,6.83,unbrauchbar
+83.01.C,TH,0010,,a Gross carrying/nominal amount,monetary,48,5.792,1.260,7.14,unbrauchbar
+83.01.C,TH,0040,,d Of which subject to impairment,monetary,43,5.792,1.219,5.04,auswertbar
+83.01.C,TH,0050,,f Accumulated impairment,monetary,39,3.200,1.516,4.93,auswertbar
+83.01.C,TN,0010,,a Gross carrying/nominal amount,monetary,41,5.040,1.871,6.15,unbrauchbar
+83.01.C,TN,0040,,d Of which subject to impairment,monetary,38,5.033,1.095,6.18,unbrauchbar
+83.01.C,TN,0050,,f Accumulated impairment,monetary,36,3.313,1.699,6.08,unbrauchbar
+83.01.C,TR,0010,,a Gross carrying/nominal amount,monetary,67,6.983,1.363,4.97,auswertbar
+83.01.C,TR,0020,,b Of which non-performing,monetary,32,5.170,1.936,5.50,auswertbar
+83.01.C,TR,0030,,c Of which defaulted,monetary,37,5.341,2.195,6.27,unbrauchbar
+83.01.C,TR,0040,,d Of which subject to impairment,monetary,60,6.914,1.297,4.72,auswertbar
+83.01.C,TR,0050,,f Accumulated impairment,monetary,64,4.780,1.325,5.78,auswertbar
+83.01.C,TW,0010,,a Gross carrying/nominal amount,monetary,38,5.409,2.006,7.84,unbrauchbar
+83.01.C,TW,0040,,d Of which subject to impairment,monetary,34,4.967,1.900,6.93,unbrauchbar
+83.01.C,TW,0050,,f Accumulated impairment,monetary,29,2.813,1.980,6.88,unbrauchbar
+83.01.C,TZ,0010,,a Gross carrying/nominal amount,monetary,30,5.633,0.968,4.63,auswertbar
+83.01.C,UA,0010,,a Gross carrying/nominal amount,monetary,55,5.506,1.502,5.29,auswertbar
+83.01.C,UA,0020,,b Of which non-performing,monetary,30,4.069,1.611,6.48,unbrauchbar
+83.01.C,UA,0030,,c Of which defaulted,monetary,33,4.255,1.802,6.12,unbrauchbar
+83.01.C,UA,0040,,d Of which subject to impairment,monetary,50,5.293,1.583,4.63,auswertbar
+83.01.C,UA,0050,,f Accumulated impairment,monetary,48,3.708,1.868,6.12,unbrauchbar
+83.01.C,US,0010,,a Gross carrying/nominal amount,monetary,185,8.744,1.211,4.48,auswertbar
+83.01.C,US,0020,,b Of which non-performing,monetary,108,6.000,1.711,6.26,unbrauchbar
+83.01.C,US,0030,,c Of which defaulted,monetary,128,6.082,1.713,5.91,auswertbar
+83.01.C,US,0040,,d Of which subject to impairment,monetary,151,8.434,1.150,5.09,auswertbar
+83.01.C,US,0050,,f Accumulated impairment,monetary,170,5.595,1.436,5.52,auswertbar
+83.01.C,UY,0010,,a Gross carrying/nominal amount,monetary,28,4.856,1.682,5.88,auswertbar
+83.01.C,UZ,0010,,a Gross carrying/nominal amount,monetary,29,4.465,2.508,8.57,unbrauchbar
+83.01.C,VG,0010,,a Gross carrying/nominal amount,monetary,28,7.474,1.648,6.15,unbrauchbar
+83.01.C,VG,0050,,f Accumulated impairment,monetary,27,5.022,1.718,6.18,unbrauchbar
+83.01.C,VN,0010,,a Gross carrying/nominal amount,monetary,33,5.316,2.172,7.87,unbrauchbar
+83.01.C,VN,0040,,d Of which subject to impairment,monetary,30,5.250,1.852,7.36,unbrauchbar
+83.01.C,VN,0050,,f Accumulated impairment,monetary,29,3.362,1.794,5.66,auswertbar
+83.01.C,ZA,0010,,a Gross carrying/nominal amount,monetary,52,5.559,1.699,5.89,auswertbar
+83.01.C,ZA,0040,,d Of which subject to impairment,monetary,48,5.435,1.724,5.99,auswertbar
+83.01.C,ZA,0050,,f Accumulated impairment,monetary,40,3.003,1.493,4.85,auswertbar
+83.01.C,x28,0010,,a Gross carrying/nominal amount,monetary,84,8.721,1.157,7.38,unbrauchbar
+83.01.C,x28,0020,,b Of which non-performing,monetary,46,6.822,1.325,7.65,unbrauchbar
+83.01.C,x28,0030,,c Of which defaulted,monetary,49,6.847,1.322,6.69,unbrauchbar
+83.01.C,x28,0040,,d Of which subject to impairment,monetary,77,8.676,1.078,7.26,unbrauchbar
+83.01.C,x28,0050,,f Accumulated impairment,monetary,70,5.488,1.733,7.86,unbrauchbar
+83.01.D,AE,0010,,a Gross carrying/nominal amount,monetary,50,6.550,1.554,5.30,auswertbar
+83.01.D,AE,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,37,3.186,1.671,4.40,auswertbar
+83.01.D,AR,0010,,a Gross carrying/nominal amount,monetary,33,4.863,1.036,4.14,auswertbar
+83.01.D,AT,0010,,a Gross carrying/nominal amount,monetary,98,7.654,1.423,5.36,auswertbar
+83.01.D,AT,0020,,b Of which non-performing,monetary,33,5.585,2.167,6.02,unbrauchbar
+83.01.D,AT,0030,,Of which defaulted,monetary,38,5.793,2.007,6.27,unbrauchbar
+83.01.D,AT,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,79,4.810,1.163,5.88,auswertbar
+83.01.D,AU,0010,,a Gross carrying/nominal amount,monetary,60,6.222,2.082,6.12,unbrauchbar
+83.01.D,AU,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,40,3.943,1.935,5.59,auswertbar
+83.01.D,BE,0010,,a Gross carrying/nominal amount,monetary,107,7.427,1.561,6.20,unbrauchbar
+83.01.D,BE,0020,,b Of which non-performing,monetary,32,5.868,1.738,4.90,auswertbar
+83.01.D,BE,0030,,Of which defaulted,monetary,37,5.948,1.834,4.90,auswertbar
+83.01.D,BE,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,82,4.458,1.666,6.36,unbrauchbar
+83.01.D,BG,0010,,a Gross carrying/nominal amount,monetary,56,5.135,1.423,5.68,auswertbar
+83.01.D,BG,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,32,2.912,1.888,5.42,auswertbar
+83.01.D,BR,0010,,a Gross carrying/nominal amount,monetary,48,7.354,1.157,5.49,auswertbar
+83.01.D,BR,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,33,4.597,1.295,5.76,auswertbar
+83.01.D,CA,0010,,a Gross carrying/nominal amount,monetary,68,6.446,1.612,5.57,auswertbar
+83.01.D,CA,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,44,3.810,1.451,5.54,auswertbar
+83.01.D,CH,0010,,a Gross carrying/nominal amount,monetary,109,7.592,1.480,5.66,auswertbar
+83.01.D,CH,0020,,b Of which non-performing,monetary,39,4.235,1.084,4.64,auswertbar
+83.01.D,CH,0030,,Of which defaulted,monetary,46,4.529,1.518,4.63,auswertbar
+83.01.D,CH,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,84,4.798,1.350,5.00,auswertbar
+83.01.D,CL,0010,,a Gross carrying/nominal amount,monetary,38,5.912,1.595,5.81,auswertbar
+83.01.D,CL,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,31,2.628,1.343,5.88,auswertbar
+83.01.D,CN,0010,,a Gross carrying/nominal amount,monetary,53,6.917,2.335,5.50,auswertbar
+83.01.D,CN,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,38,3.612,1.636,5.67,auswertbar
+83.01.D,CO,0010,,a Gross carrying/nominal amount,monetary,29,4.877,1.993,5.32,auswertbar
+83.01.D,CY,0010,,a Gross carrying/nominal amount,monetary,54,6.858,1.597,4.34,auswertbar
+83.01.D,CY,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,37,3.602,1.704,5.38,auswertbar
+83.01.D,CZ,0010,,a Gross carrying/nominal amount,monetary,64,7.076,1.547,5.43,auswertbar
+83.01.D,CZ,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,47,4.562,1.497,5.57,auswertbar
+83.01.D,DE,0010,,a Gross carrying/nominal amount,monetary,179,8.721,1.304,5.61,auswertbar
+83.01.D,DE,0020,,b Of which non-performing,monetary,87,6.477,1.497,5.82,auswertbar
+83.01.D,DE,0030,,Of which defaulted,monetary,106,6.754,1.418,5.96,auswertbar
+83.01.D,DE,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,147,5.819,1.330,5.39,auswertbar
+83.01.D,DK,0010,,a Gross carrying/nominal amount,monetary,69,7.059,1.862,6.55,unbrauchbar
+83.01.D,DK,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,53,4.491,1.735,6.90,unbrauchbar
+83.01.D,DZ,0010,,a Gross carrying/nominal amount,monetary,33,5.370,1.445,5.68,auswertbar
+83.01.D,EE,0010,,a Gross carrying/nominal amount,monetary,45,5.179,1.806,5.42,auswertbar
+83.01.D,EG,0010,,a Gross carrying/nominal amount,monetary,33,4.980,1.711,5.16,auswertbar
+83.01.D,ES,0010,,a Gross carrying/nominal amount,monetary,153,8.046,1.447,5.11,auswertbar
+83.01.D,ES,0020,,b Of which non-performing,monetary,51,5.204,1.727,5.16,auswertbar
+83.01.D,ES,0030,,Of which defaulted,monetary,65,6.000,1.603,4.54,auswertbar
+83.01.D,ES,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,123,5.494,1.349,4.64,auswertbar
+83.01.D,FI,0010,,a Gross carrying/nominal amount,monetary,79,7.011,1.858,6.39,unbrauchbar
+83.01.D,FI,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,60,4.415,1.601,6.55,unbrauchbar
+83.01.D,FR,0010,,a Gross carrying/nominal amount,monetary,177,8.339,1.254,5.35,auswertbar
+83.01.D,FR,0020,,b Of which non-performing,monetary,72,6.900,1.354,5.31,auswertbar
+83.01.D,FR,0030,,Of which defaulted,monetary,87,6.849,1.357,6.03,unbrauchbar
+83.01.D,FR,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,143,5.628,1.452,4.97,auswertbar
+83.01.D,GB,0010,,a Gross carrying/nominal amount,monetary,145,8.631,1.176,4.57,auswertbar
+83.01.D,GB,0020,,b Of which non-performing,monetary,56,5.004,1.357,4.67,auswertbar
+83.01.D,GB,0030,,Of which defaulted,monetary,69,6.000,1.578,4.15,auswertbar
+83.01.D,GB,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,116,5.634,1.242,4.46,auswertbar
+83.01.D,GR,0010,,a Gross carrying/nominal amount,monetary,55,5.483,1.869,6.65,unbrauchbar
+83.01.D,GR,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,39,3.000,2.176,7.73,unbrauchbar
+83.01.D,HK,0010,,a Gross carrying/nominal amount,monetary,50,7.292,1.802,5.82,auswertbar
+83.01.D,HK,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,29,5.037,1.338,4.43,auswertbar
+83.01.D,HR,0010,,a Gross carrying/nominal amount,monetary,60,6.275,1.414,7.03,unbrauchbar
+83.01.D,HR,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,42,3.763,1.853,6.31,unbrauchbar
+83.01.D,HU,0010,,a Gross carrying/nominal amount,monetary,71,6.253,1.451,5.84,auswertbar
+83.01.D,HU,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,50,3.567,1.692,6.30,unbrauchbar
+83.01.D,ID,0010,,a Gross carrying/nominal amount,monetary,34,4.591,1.532,4.82,auswertbar
+83.01.D,IE,0010,,a Gross carrying/nominal amount,monetary,97,7.854,1.396,5.67,auswertbar
+83.01.D,IE,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,76,5.275,1.191,6.35,unbrauchbar
+83.01.D,IL,0010,,a Gross carrying/nominal amount,monetary,44,5.655,1.414,4.21,auswertbar
+83.01.D,IL,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,30,2.445,1.241,5.04,auswertbar
+83.01.D,IN,0010,,a Gross carrying/nominal amount,monetary,45,5.761,1.311,4.51,auswertbar
+83.01.D,IN,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,36,2.683,1.466,5.30,auswertbar
+83.01.D,IT,0010,,a Gross carrying/nominal amount,monetary,136,8.042,1.563,5.42,auswertbar
+83.01.D,IT,0020,,b Of which non-performing,monetary,63,6.000,1.580,5.38,auswertbar
+83.01.D,IT,0030,,Of which defaulted,monetary,73,6.008,1.563,5.38,auswertbar
+83.01.D,IT,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,110,4.990,1.676,5.47,auswertbar
+83.01.D,JE,0010,,a Gross carrying/nominal amount,monetary,36,6.940,1.909,5.77,auswertbar
+83.01.D,JP,0010,,a Gross carrying/nominal amount,monetary,49,6.506,2.156,5.23,auswertbar
+83.01.D,JP,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,30,3.032,1.967,4.95,auswertbar
+83.01.D,KR,0010,,a Gross carrying/nominal amount,monetary,33,6.524,1.774,6.03,unbrauchbar
+83.01.D,KW,0010,,a Gross carrying/nominal amount,monetary,28,5.443,1.444,4.75,auswertbar
+83.01.D,LI,0010,,a Gross carrying/nominal amount,monetary,29,4.808,1.641,8.85,unbrauchbar
+83.01.D,LT,0010,,a Gross carrying/nominal amount,monetary,43,5.436,1.194,5.31,auswertbar
+83.01.D,LT,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,28,3.000,1.432,5.31,auswertbar
+83.01.D,LU,0010,,a Gross carrying/nominal amount,monetary,120,8.091,1.272,4.97,auswertbar
+83.01.D,LU,0020,,b Of which non-performing,monetary,36,6.872,0.862,4.24,auswertbar
+83.01.D,LU,0030,,Of which defaulted,monetary,46,6.885,0.679,4.24,auswertbar
+83.01.D,LU,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,102,5.686,1.251,4.77,auswertbar
+83.01.D,LV,0010,,a Gross carrying/nominal amount,monetary,46,4.871,1.413,5.82,auswertbar
+83.01.D,MA,0010,,a Gross carrying/nominal amount,monetary,34,6.586,1.297,3.90,auswertbar
+83.01.D,MC,0010,,a Gross carrying/nominal amount,monetary,48,5.473,1.652,4.79,auswertbar
+83.01.D,MC,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,36,2.835,1.478,5.09,auswertbar
+83.01.D,MT,0010,,a Gross carrying/nominal amount,monetary,57,5.516,1.701,5.16,auswertbar
+83.01.D,MT,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,39,3.161,1.043,4.48,auswertbar
+83.01.D,MX,0010,,a Gross carrying/nominal amount,monetary,42,5.796,2.410,6.27,unbrauchbar
+83.01.D,NL,0010,,a Gross carrying/nominal amount,monetary,133,8.222,1.173,4.82,auswertbar
+83.01.D,NL,0020,,b Of which non-performing,monetary,34,4.145,1.151,4.89,auswertbar
+83.01.D,NL,0030,,Of which defaulted,monetary,45,5.301,1.930,5.09,auswertbar
+83.01.D,NL,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,106,5.247,1.083,3.78,auswertbar
+83.01.D,NO,0010,,a Gross carrying/nominal amount,monetary,75,7.633,1.720,5.50,auswertbar
+83.01.D,NO,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,57,4.632,1.387,6.84,unbrauchbar
+83.01.D,NZ,0010,,a Gross carrying/nominal amount,monetary,37,4.772,1.471,4.46,auswertbar
+83.01.D,PE,0010,,a Gross carrying/nominal amount,monetary,28,5.079,1.481,4.62,auswertbar
+83.01.D,PH,0010,,a Gross carrying/nominal amount,monetary,33,4.000,0.979,4.81,auswertbar
+83.01.D,PL,0010,,a Gross carrying/nominal amount,monetary,81,7.980,1.544,6.59,unbrauchbar
+83.01.D,PL,0030,,Of which defaulted,monetary,34,6.862,0.852,4.15,auswertbar
+83.01.D,PL,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,61,5.274,1.319,6.23,unbrauchbar
+83.01.D,PT,0010,,a Gross carrying/nominal amount,monetary,77,7.494,1.933,5.94,auswertbar
+83.01.D,PT,0020,,b Of which non-performing,monetary,28,6.186,2.209,4.88,auswertbar
+83.01.D,PT,0030,,Of which defaulted,monetary,32,5.304,1.566,4.37,auswertbar
+83.01.D,PT,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,59,3.477,1.800,6.32,unbrauchbar
+83.01.D,QA,0010,,a Gross carrying/nominal amount,monetary,38,5.192,1.266,4.01,auswertbar
+83.01.D,RO,0010,,a Gross carrying/nominal amount,monetary,66,5.766,1.834,7.16,unbrauchbar
+83.01.D,RO,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,43,3.745,1.662,6.51,unbrauchbar
+83.01.D,RS,0010,,a Gross carrying/nominal amount,monetary,47,5.256,1.576,6.69,unbrauchbar
+83.01.D,RS,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,31,2.797,1.988,6.78,unbrauchbar
+83.01.D,RU,0010,,a Gross carrying/nominal amount,monetary,41,4.241,0.918,5.38,auswertbar
+83.01.D,SA,0010,,a Gross carrying/nominal amount,monetary,36,5.857,2.068,6.10,unbrauchbar
+83.01.D,SA,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,27,2.478,1.815,4.80,auswertbar
+83.01.D,SE,0010,,a Gross carrying/nominal amount,monetary,104,7.925,1.373,5.58,auswertbar
+83.01.D,SE,0020,,b Of which non-performing,monetary,29,6.853,1.594,5.90,auswertbar
+83.01.D,SE,0030,,Of which defaulted,monetary,39,6.938,1.454,6.02,unbrauchbar
+83.01.D,SE,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,76,5.111,1.325,4.09,auswertbar
+83.01.D,SG,0010,,a Gross carrying/nominal amount,monetary,59,6.809,2.332,6.63,unbrauchbar
+83.01.D,SG,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,37,3.602,2.023,5.31,auswertbar
+83.01.D,SI,0010,,a Gross carrying/nominal amount,monetary,46,5.411,1.207,6.34,unbrauchbar
+83.01.D,SI,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,29,2.808,1.408,6.50,unbrauchbar
+83.01.D,SK,0010,,a Gross carrying/nominal amount,monetary,67,5.858,1.846,6.16,unbrauchbar
+83.01.D,SK,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,48,4.130,2.097,6.73,unbrauchbar
+83.01.D,TH,0010,,a Gross carrying/nominal amount,monetary,39,5.137,1.359,5.03,auswertbar
+83.01.D,TN,0010,,a Gross carrying/nominal amount,monetary,28,5.218,1.040,3.42,auswertbar
+83.01.D,TR,0010,,a Gross carrying/nominal amount,monetary,54,6.994,1.579,5.17,auswertbar
+83.01.D,TR,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,42,4.689,0.976,6.42,unbrauchbar
+83.01.D,TW,0010,,a Gross carrying/nominal amount,monetary,31,5.380,1.602,5.46,auswertbar
+83.01.D,UA,0010,,a Gross carrying/nominal amount,monetary,35,4.655,1.262,4.79,auswertbar
+83.01.D,US,0010,,a Gross carrying/nominal amount,monetary,136,8.152,1.476,5.72,auswertbar
+83.01.D,US,0020,,b Of which non-performing,monetary,54,5.662,1.677,5.10,auswertbar
+83.01.D,US,0030,,Of which defaulted,monetary,60,5.967,1.908,5.10,auswertbar
+83.01.D,US,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,115,4.953,1.561,5.91,auswertbar
+83.01.D,ZA,0010,,a Gross carrying/nominal amount,monetary,40,5.411,1.277,5.14,auswertbar
+83.01.D,ZA,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,29,3.301,1.301,6.20,unbrauchbar
+83.01.D,x28,0010,,a Gross carrying/nominal amount,monetary,53,8.014,1.626,8.28,unbrauchbar
+83.01.D,x28,0030,,Of which defaulted,monetary,28,6.544,1.377,4.81,auswertbar
+83.01.D,x28,0040,,f  Provisions on off-balance-sheet commitments and financial guarantees given,monetary,42,5.517,1.205,4.69,auswertbar
 83.01.E,0010,0010,150 Total,a Gross carrying/Nominal amount,monetary,325,10.738,0.490,2.66,auswertbar
 83.01.E,0010,0020,150 Total,b of which: non-performing,monetary,283,8.804,0.621,3.64,auswertbar
 83.01.E,0010,0030,150 Total,c of which: defaulted,monetary,310,8.813,0.585,3.17,auswertbar
@@ -5218,6 +6093,8 @@ d"" 1 year",monetary,354,7.340,0.677,4.21,auswertbar
 93.00,0210,0010,EU-18. Requirement expressed as a percentage of the TREA,a. Minimum requirement for own funds and eligible liabilities internal MREL,percentage,85,-0.663,0.052,0.22,auswertbar
 93.00,0230,0010,EU-20. Requirement expressed as percentage of the TEM,a. Minimum requirement for own funds and eligible liabilities internal MREL,percentage,84,-1.228,0.001,0.01,auswertbar
 95.00.B,0020,0080,3. Liabilities and own funds,Sum of 1 to n,monetary,32,10.291,0.683,2.42,auswertbar
+96.00.B,0050,0080,6. Subset of liabilities and own funds less excluded liabilities that are own funds and eligible liabilities for the purpose of [choose as a appropriate: internal MREL/internal TLAC],Sum of 1 to n,monetary,27,9.673,0.243,3.26,auswertbar
+96.00.B,0100,0080,11. of which perpetual securities,Sum of 1 to n,monetary,25,9.530,0.318,3.41,auswertbar
 97.00.A,0020,0010,2. Liabilities and own funds,Amount,monetary,301,9.226,0.978,3.76,auswertbar
 97.00.A,0030,0010,3. of which excluded liabilities,Amount,monetary,111,9.027,1.314,4.82,auswertbar
 97.00.A,0040,0010,4. Liabilities and own funds less excluded liabilities,Amount,monetary,235,9.208,0.895,3.60,auswertbar

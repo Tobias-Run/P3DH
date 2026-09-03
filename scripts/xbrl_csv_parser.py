@@ -7,6 +7,38 @@ import zipfile
 import json
 from typing import Dict, List, Tuple
 
+# Marker aus build_codebook.py: die Achse steht nicht im DPM-Modell, sondern
+# entsteht beim Einreichen aus einem Dimensionswert.
+OPEN_AXIS = "*"
+
+
+def axis_member(open_dims: Dict[str, str]) -> str:
+    """Dimensionswerte -> Zeilenschlüssel. {'RIO': 'eba_GA:AL'} -> 'AL'.
+
+    Bei CCyB1 ist die Zeile das Land: die Datei trägt je Zeile eine Spalte `RIO`
+    mit `eba_GA:AL`. Der Member-Code hinter dem letzten ':' ist der kompakte,
+    stabile Schlüssel — bei geografischen Achsen zugleich der ISO-Code, den
+    codebook/geo_names.csv auf den Ländernamen abbildet.
+
+    Mehrere Dimensionen (Form `r*,c#,s*`: Zeile UND Blatt offen) werden
+    verkettet. Welche davon fachlich "die Zeile" ist, sagt das DPM an dieser
+    Stelle nicht — statt zu raten, geht die vollständige Kombination ein. Die
+    Reihenfolge folgt den Spalten der Quelldatei und ist damit reproduzierbar.
+
+    Nicht jede offene Achse trägt einen Member-Code: CC2 (`66.02`) und LI2/LI3
+    (`64.01`) führen als Zeile den BILANZPOSTEN des Instituts, also Freitext —
+    `qADQ=100. Provisions for risks and charges:`. Endet der auf einen
+    Doppelpunkt, wäre der Teil dahinter leer und die Zeile fiele weg. Deshalb
+    wird nur abgeschnitten, wenn dabei etwas übrig bleibt.
+    """
+    return "|".join(_member(v) for v in open_dims.values() if v)
+
+
+def _member(value: str) -> str:
+    """'eba_GA:AL' -> 'AL'; 'l. Fondi per rischi e oneri:' -> unverändert."""
+    tail = value.rsplit(":", 1)[-1].strip()
+    return tail or value.strip()
+
 
 class XBRLCSVParser:
     """Parse XBRL-CSV report package into long-form tidy data."""
@@ -139,15 +171,24 @@ class XBRLCSVParser:
                     # 64.0x LI2/LI3, 29.0x CR9/CR10) carry typed-dimension columns
                     # beyond datapoint/factValue (RIO=country, qADP/qABI=free text).
                     # The "row" of such a table is defined at filing time by this
-                    # dimension value, not by a static DPM cell — so there is no
-                    # codebook coordinate to join. Capture the dimension instead of
-                    # dropping it (otherwise e.g. the country of each CCyB1 exposure
-                    # is lost). Serialized as "col=value;col=value".
+                    # dimension value, not by a static DPM cell.
                     open_dims = {
                         k: v for k, v in row.items()
                         if k not in ("datapoint", "factValue") and (v or "").strip()
                     }
                     open_axis_dims = ";".join(f"{k}={v}" for k, v in open_dims.items())
+
+                    # ... aber eine Koordinate gibt es sehr wohl: das DPM führt
+                    # solche Zellen als '{K_67.01.a, r*, c0010}' — die SPALTE ist
+                    # fest, nur die Zeile offen. Eine frühere Fassung hat den
+                    # ganzen Eintrag verworfen und damit auch die bekannte Spalte;
+                    # 409.057 Fakten (18 % des Bestands) blieben unplatzierbar (#56).
+                    cell_row = cb_entry.get("row", "")
+                    cell_col = cb_entry.get("col", "")
+                    if cell_row == OPEN_AXIS:
+                        # Leere Dimension -> leere Zeile: ohne Achsenwert gibt es
+                        # keine Zeile, und geraten wird nicht ("Fehlt != Null").
+                        cell_row = axis_member(open_dims)
 
                     record = {
                         "entityID": self.metadata.get("entityID", ""),
@@ -156,8 +197,8 @@ class XBRLCSVParser:
                         "template_id": template_id,
                         "template_reported": reported,
                         "datapoint_code": dp_code,
-                        "cell_row": cb_entry.get("row", ""),
-                        "cell_col": cb_entry.get("col", ""),
+                        "cell_row": cell_row,
+                        "cell_col": cell_col,
                         "open_axis_dims": open_axis_dims,
                         "fact_value": fact_value,
                         "baseCurrency": self.metadata.get("baseCurrency", ""),
