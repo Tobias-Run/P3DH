@@ -71,6 +71,7 @@ import math
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import metrics  # noqa: E402
 from determinism import ordered_query  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -137,23 +138,26 @@ INCOHERENT_SPREAD = 6.0
 # innerhalb EINES Reports (lei, scope, refPeriod) und einer Spalte den Quotienten
 # zweier Zeilen und prüft ihn gegen einen Korridor.
 #
-# REM1 (30.01/30.02): Zeile 0010 ist die Kopfzahl der "identified staff"
-# (typisiert integer), Zeile 0020 die fixe Gesamtvergütung derselben Gruppe —
-# der Quotient ist die Vergütung pro Kopf. Beobachtet über 1.324 Paare:
-#   p25 46.500 · Median 142.516 · p75 305.537 EUR
-# Der Korridor 1.000 .. 20.000.000 EUR ist bewusst weit ausserhalb dieser
-# Perzentile gewählt: unten deckt er auch geringfügige Aufsichtsratsvergütungen
-# ab, oben die höchstbezahlten Banker Europas. Was darunter oder darüber liegt,
-# ist keine Gehaltsfrage mehr, sondern eine Einheitenfrage.
+# Zeile 0010 ist die Kopfzahl der "identified staff" (typisiert integer), Zeile
+# 0020 der zugehörige Gesamtbetrag — der Quotient ist eine Vergütung pro Kopf.
+# In REM1 (30.01) ist das die FIXE Vergütung, in REM2 (30.02) die GARANTIERTE
+# VARIABLE; verschiedene Konzepte, aber dieselbe Größenordnungsfrage, und der
+# Korridor prüft nichts anderes.
+#
+# Die Grenzen stehen in scripts/metrics.py und werden von dort geholt: der
+# Viewer filtert mit denselben Zahlen die Vergütungs-Rangliste (#18). Zwei
+# Zahlenpaare an zwei Orten wären hier gefährlich — eine Rangliste, die nach
+# einem anderen Korridor filtert als der, gegen den geprüft wurde.
 RATIO_RULES = [
     {
         "id": "rem_per_head",
         "templates": ("30.01", "30.02"),
-        "numerator_row": "0020",     # Total fixed remuneration (monetary, EUR)
+        "numerator_row": "0020",     # Gesamtbetrag (monetary, in EUR gerechnet)
         "denominator_row": "0010",   # Number of identified staff (integer)
-        "lo": 1_000.0,
-        "hi": 20_000_000.0,
-        "label": "Fixe Vergütung pro identifiziertem Mitarbeiter",
+        "lo": metrics.REM_PER_HEAD[0],
+        "hi": metrics.REM_PER_HEAD[1],
+        "label": "Vergütung pro identifiziertem Mitarbeiter "
+                 "(REM1: fix · REM2: garantiert variabel)",
         "unit": "EUR",
     },
 ]
@@ -250,16 +254,23 @@ def ratio_violations(rule, pairs):
         if rule["lo"] <= ratio <= rule["hi"]:
             continue
         if ratio <= 0:
-            # Eine gemeldete Null bei positiver Kopfzahl. log10(0) ist nicht
-            # definiert, und vorher wurde hier SEVERITY_HIGH als Platzhalter
-            # eingesetzt — der anschließend als gemessener Abstand eingestuft
-            # wurde. So bekam eine Null "hoch", während Rabobanks 1,3 Bio.
-            # "mittel" bekam. Der Schweregrad steht jetzt fachlich da: keine
-            # Vergütung für vorhandene Mitarbeiter ist keine Größenfrage mehr.
-            # Der Abstand bleibt, was er ist — nicht messbar.
-            out.append({"key": key, "rule": rule["id"], "ratio": ratio,
-                        "bound": rule["lo"], "center": center,
-                        "deviation_orders": None, "severity": "hoch"})
+            # Eine gemeldete Null bei positiver Kopfzahl — KEIN Befund.
+            #
+            # Zuerst stand hier `SEVERITY_HIGH` als Platzhalter für den
+            # undefinierten log10(0), der anschließend als gemessener Abstand
+            # eingestuft wurde; eine Null bekam damit "hoch", während Rabobanks
+            # 1,3 Bio. pro Kopf "mittel" bekam. Der Platzhalter fiel mit #53 —
+            # aber "hoch" blieb, jetzt fachlich begründet. Auch das war zu viel,
+            # und die Fälle zeigen es: 8 der 10 Nullen stehen in REM2, also bei
+            # der GARANTIERTEN VARIABLEN Vergütung, wo null der Normalfall ist
+            # (BBVA, Agence France Locale, Raiffeisen-Landesbank Tirol). Die
+            # übrigen zwei sind unentgeltlich arbeitende Aufsichtsräte in REM1.
+            #
+            # Dieser Korridor ist eine EINHEITENPRÜFUNG. Keine Zehnerpotenz
+            # bildet einen echten Betrag auf null ab; eine Null kann also gar
+            # kein Einheitenfehler sein. Sie ist eine Angabe — und die als
+            # Fehler zu führen, wäre dieselbe Verwechslung wie "Fehlt = Null",
+            # nur andersherum.
             continue
         bound = rule["lo"] if ratio < rule["lo"] else rule["hi"]
         dev = abs(math.log10(ratio / center))
@@ -419,15 +430,9 @@ def main():
     # also die Zufallsordnung aus SQL —, wie die CSV aussieht. Die Datei wird
     # von der Pipeline nach main committet; der Churn landete dort in der
     # Historie.
-    # Sortiert nach Schweregrad, darin nach gemessenem Abstand. Ein nicht
-    # messbarer Abstand (gemeldete Null) steht am ENDE seiner Klasse: er ist
-    # fachlich als `hoch` eingestuft, nicht weil er der extremste Wert wäre —
-    # er würde sonst die tatsächlich extremsten Befunde aus dem Kopf der Datei
-    # verdrängen.
+    # Sortiert nach Schweregrad, darin nach gemessenem Abstand.
     SEV_RANK = {"hoch": 0, "mittel": 1, "niedrig": 2}
-    findings.sort(key=lambda f: (SEV_RANK[f["severity"]],
-                                 -(f["deviation_orders"]
-                                   if f["deviation_orders"] is not None else -1e9),
+    findings.sort(key=lambda f: (SEV_RANK[f["severity"]], -f["deviation_orders"],
                                  f["lei"], f["scope"], f["refPeriod"],
                                  f["template_id"], f["cell_row"], f["cell_col"],
                                  f["rule"]))
@@ -479,8 +484,7 @@ def main():
         # Befund gleich stark zu zeigen.
         if fi["severity"] == "hoch":
             p["hoch_templates"].add(fi["template_id"])
-        if fi["deviation_orders"] is not None:
-            p["max_dev"] = max(p["max_dev"], fi["deviation_orders"])
+        p["max_dev"] = max(p["max_dev"], fi["deviation_orders"])
 
     with open(PROFILE_OUT, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
@@ -506,11 +510,9 @@ def main():
 
     print("\nTop-8 Befunde (schwerste zuerst):")
     for fi in findings[:8]:
-        d = fi["deviation_orders"]
         print(f"  {str(fi['bank_name'])[:34]:34s} {fi['template_id']:8s} "
               f"r{fi['cell_row']} c{fi['cell_col']}  {fi['rule']:13s} "
-              + (f"{d:5.1f} Größenordnungen" if d is not None
-                 else "  Abstand nicht messbar (gemeldete Null)"))
+              f"{fi['deviation_orders']:5.1f} Größenordnungen")
 
     for path in (CELLS_OUT, FINDINGS_OUT, PROFILE_OUT):
         print(f"→ {_rel(path)}")

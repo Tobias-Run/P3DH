@@ -69,6 +69,32 @@ _KM1 = "61.00"
 _OV1 = "60.00.A"
 _CQ3 = "82.00.A"
 _ESG = "41.00"
+_REM = "30.01"
+
+# Plausibilitätskorridor für "Vergütung pro identifiziertem Mitarbeiter", in EUR.
+# EINE Definition für zwei Verwender: `check_plausibility.RATIO_RULES` prüft
+# damit den Bestand, der Viewer schließt damit Meldungen aus der Rangliste aus
+# (#18). Zwei Zahlenpaare an zwei Orten wären genau die Doppelung, die #25
+# beseitigt hat — und hier wäre sie gefährlich: eine Rangliste, die nach einem
+# anderen Korridor filtert als der, gegen den geprüft wurde.
+#
+# Beobachtet über 1.784 Paare: p25 46.500 · Median 142.516 · p75 305.537 EUR.
+# Der Korridor ist bewusst weit ausserhalb dieser Perzentile gewählt: unten
+# deckt er geringfügige Aufsichtsratsvergütungen ab, oben die höchstbezahlten
+# Banker Europas. Was darunter oder darüber liegt, ist keine Gehaltsfrage mehr,
+# sondern eine Einheitenfrage.
+REM_PER_HEAD = (1_000.0, 20_000_000.0)
+
+# Funktionsstufen in REM1: die vier Spalten des Templates.
+_MB_SB, _MB_MB, _SM, _OT = "0010", "0020", "0030", "0040"
+
+_REM_NOTE = (
+    "**Keine Schwelle, und keine Gehaltsstatistik.** „Identified staff“ ist eine "
+    "aufsichtliche Teilmenge (CRD Art. 92 (3)) — nicht die Belegschaft. Teilzeit "
+    "und unterjährige Zu- und Abgänge sind nicht bereinigt, ein Kopf ist also "
+    "nicht zwingend ein volles Jahr. Und der Konsolidierungskreis (CON/IND) "
+    "entscheidet mit, wessen Vergütung überhaupt mitgezählt wird."
+)
 _OCR = [_KM1, "0190", "0010"]
 
 # Gemeinsamer Hinweis der fünf OV1-Anteile. Zwei Dinge, die man dem Prozentwert
@@ -483,6 +509,122 @@ METRICS = [
                    "der allgemeinen NPL-Quote desselben Instituts.",
         "note": "Nur als Verhältnis auswertbar — siehe „Anteil nachhaltig“.",
     },
+    # ---- Vergütung (REM1, 30.01) ----------------------------------------
+    # Zeile 0010 = Kopfzahl der identified staff, 0020 = fixe Gesamtvergütung,
+    # 0090 = variable Gesamtvergütung; die vier Spalten sind die Funktionsstufen.
+    # Zähler und Nenner stammen aus derselben Zelle-Spalte desselben Reports.
+    {
+        "id": "rem_head_mb", "label": "Fixvergütung/Kopf Vorstand",
+        "en": "Fixed remuneration per head, management body", "unit": "EUR",
+        "syn": ["Vorstandsvergütung", "Gehalt Vorstand", "Vergütung", "Boni",
+                "remuneration", "management function"],
+        "op": "perhead", "kind": "eurPlain", "plausible": list(REM_PER_HEAD),
+        "cells": [[_REM, "0020", _MB_MB, "fixe Vergütung"],
+                  [_REM, "0010", _MB_MB, "Köpfe"]],
+        "formula": "fixe Vergütung / Köpfe",
+        "definition": "Fixe Gesamtvergütung der Geschäftsleitung (MB Management "
+                      "function) geteilt durch die Zahl der dort gemeldeten "
+                      "identified staff, umgerechnet zum EZB-Referenzkurs.",
+        "purpose": "Die öffentlich meistbeachtete Zahl im ganzen Datensatz — und "
+                   "eine, die EDAP nicht aggregiert: sie entsteht erst aus der "
+                   "Population.",
+        "note": _REM_NOTE,
+    },
+    {
+        "id": "rem_head_sb", "label": "Fixvergütung/Kopf Aufsichtsrat",
+        "en": "Fixed remuneration per head, supervisory function", "unit": "EUR",
+        "syn": ["Aufsichtsratsvergütung", "supervisory function", "Aufsichtsrat"],
+        "op": "perhead", "kind": "eurPlain", "plausible": list(REM_PER_HEAD),
+        "cells": [[_REM, "0020", _MB_SB, "fixe Vergütung"],
+                  [_REM, "0010", _MB_SB, "Köpfe"]],
+        "formula": "fixe Vergütung / Köpfe",
+        "definition": "Fixe Gesamtvergütung des Aufsichtsorgans (MB Supervisory "
+                      "function) je gemeldetem Kopf.",
+        "purpose": "Aufsichtsratsmandate sind Nebenämter — die Größenordnung "
+                   "liegt deshalb systematisch unter der Geschäftsleitung und "
+                   "sagt etwas über die Governance-Struktur, nicht über Gehälter.",
+        "note": _REM_NOTE,
+    },
+    {
+        "id": "rem_head_sm", "label": "Fixvergütung/Kopf Senior Management",
+        "en": "Fixed remuneration per head, other senior management", "unit": "EUR",
+        "syn": ["Senior Management", "Führungsebene", "senior management"],
+        "op": "perhead", "kind": "eurPlain", "plausible": list(REM_PER_HEAD),
+        "cells": [[_REM, "0020", _SM, "fixe Vergütung"],
+                  [_REM, "0010", _SM, "Köpfe"]],
+        "formula": "fixe Vergütung / Köpfe",
+        "definition": "Fixe Gesamtvergütung der übrigen oberen Führungsebene je "
+                      "gemeldetem Kopf.",
+        "purpose": "Die Ebene unterhalb des Vorstands — der Abstand zu ihm zeigt, "
+                   "wie steil die Vergütungspyramide eines Hauses ist.",
+        "note": _REM_NOTE,
+    },
+    {
+        "id": "rem_head_ot", "label": "Fixvergütung/Kopf übrige Risk-Taker",
+        "en": "Fixed remuneration per head, other identified staff", "unit": "EUR",
+        "syn": ["Risk-Taker", "identified staff", "übrige Mitarbeiter"],
+        "op": "perhead", "kind": "eurPlain", "plausible": list(REM_PER_HEAD),
+        "cells": [[_REM, "0020", _OT, "fixe Vergütung"],
+                  [_REM, "0010", _OT, "Köpfe"]],
+        "formula": "fixe Vergütung / Köpfe",
+        "definition": "Fixe Gesamtvergütung der übrigen identified staff je "
+                      "gemeldetem Kopf.",
+        "purpose": "Die mit Abstand größte Gruppe — hier steht die Breite des "
+                   "Risikonehmerkreises, nicht die Spitze.",
+        "note": _REM_NOTE,
+    },
+    {
+        "id": "rem_varfix_mb", "label": "Variabel/Fix Vorstand",
+        "en": "Variable to fixed ratio, management body", "unit": "%",
+        "syn": ["Bonus", "Bonuskultur", "variable Vergütung", "Bonus-Cap"],
+        "op": "share", "kind": "ratio",
+        "cells": [[_REM, "0090", _MB_MB, "variable Vergütung"],
+                  [_REM, "0020", _MB_MB, "fixe Vergütung"]],
+        "formula": "variable Vergütung / fixe Vergütung",
+        "definition": "Variable Gesamtvergütung der Geschäftsleitung im Verhältnis "
+                      "zur fixen, in Prozent.",
+        "purpose": "Der aufsichtlich gedeckelte Teil der Vergütung — und damit "
+                   "die Kennzahl, an der sich Anreizstruktur und Bonuskultur "
+                   "zwischen Häusern und Ländern unterscheiden.",
+        "floor": 100.0,
+        "floor_src": "CRD Art. 94 (1) (g) — variabel höchstens 100 % des fixen "
+                     "Anteils; per Hauptversammlungsbeschluss bis 200 %",
+        "note": "Die Obergrenze gilt je **Person**, nicht für den hier gebildeten "
+                "Gruppendurchschnitt: eine Quote unter 100 % schließt eine "
+                "Überschreitung im Einzelfall nicht aus, und eine darüber ist "
+                "nicht ohne Weiteres ein Verstoß. " + _REM_NOTE,
+    },
+    {
+        "id": "rem_varfix_ot", "label": "Variabel/Fix übrige Risk-Taker",
+        "en": "Variable to fixed ratio, other identified staff", "unit": "%",
+        "syn": ["Bonus Risk-Taker", "variable Vergütung übrige"],
+        "op": "share", "kind": "ratio",
+        "cells": [[_REM, "0090", _OT, "variable Vergütung"],
+                  [_REM, "0020", _OT, "fixe Vergütung"]],
+        "formula": "variable Vergütung / fixe Vergütung",
+        "definition": "Variable Gesamtvergütung der übrigen identified staff im "
+                      "Verhältnis zur fixen, in Prozent.",
+        "purpose": "Zeigt, ob die Bonusorientierung eines Hauses auf die Spitze "
+                   "beschränkt ist oder den ganzen Risikonehmerkreis erfasst.",
+        "floor": 100.0,
+        "floor_src": "CRD Art. 94 (1) (g) — variabel höchstens 100 % des fixen "
+                     "Anteils; per Hauptversammlungsbeschluss bis 200 %",
+        "note": "Obergrenze je Person, nicht für den Gruppendurchschnitt. "
+                + _REM_NOTE,
+    },
+    {
+        "id": "rem_staff_ot", "label": "Identified staff (übrige)",
+        "en": "Number of other identified staff", "unit": "Personen",
+        "syn": ["Anzahl Risk-Taker", "Kopfzahl", "number of identified staff"],
+        "op": "cell", "kind": "num",
+        "cells": [[_REM, "0010", _OT, "wert"]],
+        "definition": "Zahl der übrigen identified staff, wie im Report gemeldet.",
+        "purpose": "Der Bezugsmaßstab für die Vergütungsspalten — und selbst eine "
+                   "Aussage: wie weit ein Haus den Kreis der Risikonehmer zieht, "
+                   "ist eine Ermessensentscheidung.",
+        "note": "Größe, keine Anforderung: eine Schwelle gibt es nicht. "
+                + _REM_NOTE,
+    },
 ]
 
 # Benchmark-Profile: nur noch eine Reihenfolge von Kennzahl-IDs. Vorher
@@ -508,6 +650,23 @@ PROFILES = [
     {"id": "liq", "label": "Liquidität", "tpl": _KM1, "trend": "0320",
      "sort": ["lcr", -1],
      "metrics": ["lcr", "nsfr", "hqla", "outflow", "asf"]},
+    # Vergütung (#18). `gate` ist hier keine Kür: eine Vergütungs-Rangliste mit
+    # falschen Zahlen wäre der schädlichste denkbare Fehler in diesem Projekt.
+    # Ein Report fliegt aus der Liste, sobald IRGENDEINE seiner Funktionsstufen
+    # ausserhalb von REM_PER_HEAD liegt — gemessen: 59 von 354 Reports, meist
+    # alle vier Stufen zugleich (35 von 59), was die Diagnose stützt: das ist
+    # eine falsche Meldeeinheit für das ganze Template, kein einzelner Wert.
+    # Der Viewer weist die Ausschlussquote aus und nennt die Ausgeschlossenen.
+    {"id": "verg", "label": "Vergütung (REM1)", "tpl": _REM, "trend": None,
+     "sort": ["rem_head_mb", -1],
+     "gate": ["rem_head_sb", "rem_head_mb", "rem_head_sm", "rem_head_ot"],
+     "note": "Vergütung pro Kopf, nicht pro Person: „identified staff“ ist eine "
+             "aufsichtliche Teilmenge, Teilzeit und unterjährige Wechsel sind "
+             "nicht bereinigt, und der Konsolidierungskreis entscheidet mit, "
+             "wer mitzählt. Ein Vergleich zweier Häuser ist damit ein Vergleich "
+             "zweier Meldungen — keine Gehaltsstatistik.",
+     "metrics": ["rem_head_mb", "rem_head_sb", "rem_head_sm", "rem_head_ot",
+                 "rem_varfix_mb", "rem_varfix_ot", "rem_staff_ot"]},
 ]
 
 METRIC_IDS = [m["id"] for m in METRICS]

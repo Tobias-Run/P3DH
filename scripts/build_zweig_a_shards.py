@@ -57,6 +57,10 @@ HEAD_TEMPLATES = {
     # ESG: Bezugsgröße + die "davon"-Spalten. Nur Quotienten daraus sind
     # vergleichbar — die absoluten Beträge nicht, siehe Kommentar im Viewer.
     "41.00":   {"0010", "0020", "0030", "0040", "0050"},
+    # REM1 — Vergütung (#18). Vier Spalten = Funktionsstufen; die Zeilen 0010
+    # (Kopfzahl), 0020 (fix) und 0090 (variabel) tragen das Profil. Das ganze
+    # Template sind 16.338 Fakten über 359 Reports, also tragbar.
+    "30.01":   {"0010", "0020", "0030", "0040"},
 }
 
 

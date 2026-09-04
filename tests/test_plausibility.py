@@ -205,23 +205,34 @@ class RatioViolationsTest(unittest.TestCase):
         v = cp.ratio_violations(self.rule, [("k", 900.0, 1)])[0]
         self.assertEqual(v["severity"], "niedrig")
 
-    def test_a_reported_zero_is_graded_on_its_merits_not_by_a_placeholder(self):
-        """Vorher stand hier `dev = ... if ratio > 0 else SEVERITY_HIGH`: ein
-        Platzhalter für einen undefinierten Logarithmus, der anschließend als
-        gemessener Abstand eingestuft wurde. So bekam eine gemeldete Null
-        `hoch` und Rabobanks 1,3 Bio. pro Kopf `mittel` — die Null stand eine
-        Stufe über dem extremsten Wert im ganzen Bestand."""
-        v = cp.ratio_violations(self.rule, [("k", 0.0, 9)])[0]
-        self.assertEqual(v["severity"], "hoch")
-        self.assertIsNone(v["deviation_orders"],
-                          "ein nicht definierter Abstand wird wieder als Zahl "
-                          "ausgewiesen")
+    def test_a_reported_zero_is_no_finding_at_all(self):
+        """Zweimal korrigiert, und die Fälle waren beide Male der Grund.
 
-    def test_a_zero_never_outranks_a_measured_extreme(self):
+        Zuerst stand hier `dev = ... if ratio > 0 else SEVERITY_HIGH` — ein
+        Platzhalter für den undefinierten log10(0), der anschließend als
+        gemessener Abstand eingestuft wurde; eine Null bekam `hoch`, während
+        Rabobanks 1,3 Bio. pro Kopf `mittel` bekam. Mit #53 fiel der
+        Platzhalter, `hoch` blieb. Auch das war zu viel: **8 der 10 Nullen im
+        Bestand stehen in REM2**, also bei der garantierten variablen
+        Vergütung, wo null der Normalfall ist; die übrigen zwei sind
+        unentgeltlich arbeitende Aufsichtsräte in REM1.
+
+        Der Korridor ist eine Einheitenprüfung. Keine Zehnerpotenz bildet einen
+        echten Betrag auf null ab — eine Null kann also gar kein Einheitenfehler
+        sein. Sie als Fehler zu führen wäre „Fehlt = Null", nur andersherum."""
+        self.assertEqual(cp.ratio_violations(self.rule, [("k", 0.0, 9)]), [])
+
+    def test_a_zero_does_not_crowd_out_the_measured_extremes(self):
         rows = cp.ratio_violations(self.rule, [("null", 0.0, 9), ("rabo", 1.1736e13, 9)])
-        by_key = {r["key"]: r for r in rows}
-        self.assertIsNone(by_key["null"]["deviation_orders"])
-        self.assertGreater(by_key["rabo"]["deviation_orders"], cp.SEVERITY_HIGH)
+        self.assertEqual([r["key"] for r in rows], ["rabo"])
+        self.assertGreater(rows[0]["deviation_orders"], cp.SEVERITY_HIGH)
+
+    def test_every_finding_carries_a_measurable_distance(self):
+        """Nachdem die Null draußen ist, gibt es keinen Befund mehr ohne Abstand
+        — die Sortierung und das Profil dürfen sich darauf verlassen."""
+        pairs = [("a", 0.0, 5), ("b", 0.15, 5), ("c", 2e13, 1), ("d", 1e6, 5)]
+        for v in cp.ratio_violations(self.rule, pairs):
+            self.assertIsInstance(v["deviation_orders"], float)
 
 
 if __name__ == "__main__":
