@@ -318,7 +318,28 @@ def main():
     # scripts/template_themes.py, der Viewer bekommt sie hier mitgeliefert
     # statt sie ein zweites Mal in JavaScript zu führen. ~3 KB.
     themes = theme_payload()
-    codebook = {"cb": cb, "titles": titles, "axis": axis, "themes": themes}
+    # --- Framework-Brücke: nur die NICHT stabilen Zellen (#26) ---
+    # Der Viewer joint über die Koordinate (row, col), nicht über den dp-Code.
+    # Ein Rebound bricht deshalb nicht sichtbar — er bricht still: der Wert wird
+    # weiter gefunden, nur misst die Zelle danach womöglich etwas anderes.
+    #
+    # Übertragen werden ausschließlich `rebound` und `ambiguous`. Die 5.087
+    # stabilen Zellen wären 40× so viel Nutzlast für eine Aussage, die der
+    # Viewer nicht braucht — und Zellen, die nur in EINER Version beobachtet
+    # wurden, stehen bewusst gar nicht in der Brücke: Abwesenheit ist bei
+    # Offenlegungsdaten kein Beleg für eine Taxonomie-Änderung, sondern kann
+    # Frequenz oder Anwendbarkeit sein (Arbeitsprinzip 3).
+    bridge = {}
+    bridge_path = ROOT / "codebook" / "framework_bridge.csv"
+    if bridge_path.exists():
+        with bridge_path.open(encoding="utf-8") as fh:
+            for row in csv.DictReader(fh):
+                if row.get("status") in ("rebound", "ambiguous"):
+                    bridge.setdefault(row["template_id"], {})[
+                        row["cell_row"] + "|" + row["cell_col"]] = row["status"]
+
+    codebook = {"cb": cb, "titles": titles, "axis": axis, "themes": themes,
+                "bridge": bridge}
 
     # --- lookup maps, all straight from the same parquet ---
     # Diese drei Maps werden je Schlüssel ÜBERSCHRIEBEN — bei mehreren Zeilen je

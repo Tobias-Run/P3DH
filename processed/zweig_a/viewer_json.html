@@ -207,6 +207,14 @@
   .caveat{font-size:var(--f1);line-height:1.5;color:var(--ink2);background:transparent;
           border-left:2px solid var(--line);padding:.15rem 0 .15rem .8rem;
           margin:.5rem 0 1rem;max-width:74ch}
+  /* Framework-Bruch (#26): gestrichelte Senkrechte durch Kopf und Koerper der
+     Zeitreihe. Bewusst NICHT der Akzent — der Bruch ist eine Eigenschaft der
+     Taxonomie, kein Fokus und keine Wertung. */
+  .fwbreak{border-left:2px dashed var(--muted)}
+  .fwb{color:var(--muted);cursor:help;font-size:var(--f0)}
+  /* Zelle auf einer umgebundenen Koordinate: erkennbar beim Lesen, ohne die
+     Zahl zu stoeren. */
+  td.fwcell{text-decoration:underline dotted var(--muted);text-underline-offset:3px;cursor:help}
   .spark{color:var(--blue);vertical-align:middle}
   .ts td.num a{color:inherit;text-decoration:none}
   .ts th.datecol a{color:var(--theadink);text-decoration:underline dotted}
@@ -327,6 +335,15 @@ applyTheme();
 let REPORTS=[], CB=new Map(), TITLES=new Map(), AXIS=new Map(), NAMES=new Map(), META=new Map(), FX=new Map(), activeKey=null;
 /* Kuratierte Themen (#47) — aus codebook.json, nicht hier gefuehrt. */
 let THEME_ORDER=[], THEME_OF=new Map();
+/* Framework-Bruecke (#26): nur die NICHT stabilen Zellen. Der Viewer joint
+   ueber die Koordinate (row, col), nicht ueber den dp-Code — ein Rebound
+   bricht deshalb nicht sichtbar, sondern still. */
+let BRIDGE=new Map();
+const bridgeAt=(tid,row,col)=>{ const m=BRIDGE.get(tid); return m?(m[row+'|'+col]||''):''; };
+const BRIDGE_TIP={
+  rebound:'Diese Zelle wurde zwischen Framework 4.1 und 4.2 auf einen neuen Datenpunkt umgebunden. Der Wert wird über die Koordinate weiter gefunden — ob er danach noch dasselbe misst, ist offen. Vergleiche über den Versionswechsel mit Vorbehalt.',
+  ambiguous:'Für diese Zelle liegen in beiden Framework-Versionen mehrere Datenpunkte auf derselben Koordinate; die Brücke konnte sie nicht eindeutig zuordnen. Noch schwächer belegt als ein Rebound.'};
+const BRIDGE_MARK={rebound:'⇄', ambiguous:'≟'};
 let OPENTHEMES=new Set(store.themes||[]);   // aufgeklappte Bloecke, ueber Reports hinweg
 const repKey=r=>r.entityID+'|'+r.refPeriod;
 const byKey =k=>REPORTS.find(r=>repKey(r)===k);
@@ -433,6 +450,7 @@ function buildFromIndex(idx, codebook){
   const th=codebook.themes||{};
   THEME_ORDER=(th.order||[]).map(([id,label])=>({id,label}));
   for(const [tid,id] of Object.entries(th.map||{})) THEME_OF.set(tid,id);
+  for(const [tid,cells] of Object.entries(codebook.bridge||{})) BRIDGE.set(tid,cells);
   for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
@@ -722,9 +740,14 @@ function renderTemplate(tid, cells, rep){
       // nichts und behaupten deshalb nichts.
       if(v===undefined){ h+='<td class="empty"></td>'; continue; }
       const dt=dtOf(r,c);
-      const tip=dt==='monetary'?` title="${esc(fmt(v))} ${esc(curOf(rep))} (Originalwert)"`:
-                dt==='percentage'?` title="Rohwert ${esc(v)}"`:'';
-      h+=`<td class="num"${tip}>${fmtTyped(v,dt,unit,dt==='monetary'?rate:1)}</td>`;
+      // Koordinate zwischen den Framework-Versionen umgebunden oder mehrdeutig
+      // (#26)? Dann steht die Zahl unter Vorbehalt — sichtbar beim Lesen,
+      // ohne die Zahl selbst zu stören.
+      const bs=bridgeAt(tid,r,c);
+      const base=dt==='monetary'?`${esc(fmt(v))} ${esc(curOf(rep))} (Originalwert)`:
+                 dt==='percentage'?`Rohwert ${esc(v)}`:'';
+      const tip=(base||bs)?` title="${esc(base)}${base&&bs?' · ':''}${bs?esc(BRIDGE_TIP[bs]):''}"`:'';
+      h+=`<td class="num${bs?' fwcell':''}"${tip}>${fmtTyped(v,dt,unit,dt==='monetary'?rate:1)}</td>`;
     }
     h+='</tr>';
   }
@@ -780,23 +803,38 @@ function eurBn(rep,v){
   const cur=curOf(rep), r=cur==='EUR'?1:(FX.get(cur+'|'+rep.refPeriod)||null);
   return r==null?null:v*r/1e9;
 }
+/* `cells` nennt die Koordinaten, aus denen die Kennzahl entsteht. Sie dienen
+   heute dem Framework-Marker (#26) — eine Kennzahl auf einer umgebundenen
+   Zelle traegt ⇄ — und sind zugleich die Grundlage fuer die Herleitung, die
+   #63 fordert. */
 const OV_METRICS=[
-  {id:'cet1',label:'CET1-Quote',       unit:'%',       get:r=>km1Pct(r,'0050')},
-  {id:'tc',  label:'Gesamtkapitalquote',unit:'%',      get:r=>km1Pct(r,'0070')},
+  {id:'cet1',label:'CET1-Quote',       unit:'%',       cells:[['61.00','0050','0010']],
+   get:r=>km1Pct(r,'0050')},
+  {id:'tc',  label:'Gesamtkapitalquote',unit:'%',      cells:[['61.00','0070','0010']],
+   get:r=>km1Pct(r,'0070')},
   // Der einzige gerechnete Wert im Überblick: Gesamtkapitalquote minus
   // Gesamtanforderung. Beides Prozentpunkte aus demselben Template.
-  {id:'hr',  label:'Headroom TC−OCR',  unit:'pp',      get:r=>{
+  // r0190 ist in RF 4.2 auf einen neuen Datenpunkt umgebunden — genau
+  // deshalb steht die Zellliste hier.
+  {id:'hr',  label:'Headroom TC−OCR',  unit:'pp',
+   cells:[['61.00','0070','0010'],['61.00','0190','0010']], get:r=>{
       const t=km1Pct(r,'0070'), o=km1Pct(r,'0190');
       return (t==null||o==null)?null:t-o; }},
-  {id:'lev', label:'Verschuldungsquote',unit:'%',      get:r=>km1Pct(r,'0220')},
-  {id:'lcr', label:'LCR',              unit:'%',       get:r=>km1Pct(r,'0320')},
-  {id:'nsfr',label:'NSFR',             unit:'%',       get:r=>km1Pct(r,'0350')},
-  {id:'npl', label:'NPL-Quote (CQ3)',  unit:'%',       get:r=>{
+  {id:'lev', label:'Verschuldungsquote',unit:'%',      cells:[['61.00','0220','0010']],
+   get:r=>km1Pct(r,'0220')},
+  {id:'lcr', label:'LCR',              unit:'%',       cells:[['61.00','0320','0010']],
+   get:r=>km1Pct(r,'0320')},
+  {id:'nsfr',label:'NSFR',             unit:'%',       cells:[['61.00','0350','0010']],
+   get:r=>km1Pct(r,'0350')},
+  {id:'npl', label:'NPL-Quote (CQ3)',  unit:'%',
+   cells:[['82.00.A','0020','0010'],['82.00.A','0020','0040']], get:r=>{
       const pe=tplValue(r,'82.00.A','0020','0010'), npe=tplValue(r,'82.00.A','0020','0040');
       if(pe==null||npe==null) return null;
       const tot=pe+npe; return tot>0?npe/tot*100:null; }},
-  {id:'trea',label:'TREA',             unit:'Mrd EUR', get:r=>eurBn(r,km1Value(r,'0040'))},
+  {id:'trea',label:'TREA',             unit:'Mrd EUR', cells:[['61.00','0040','0010']],
+   get:r=>eurBn(r,km1Value(r,'0040'))},
 ];
+const metricBridge=mt=>(mt.cells||[]).map(c=>bridgeAt(c[0],c[1],c[2])).find(Boolean)||'';
 let OV_PCT=null;
 function overviewPercentiles(){
   if(!BM_LOADED) return null;          // ohne die anderen Reports keine Einordnung
@@ -827,7 +865,9 @@ function renderOverview(rep){
     h+='<div class="ovgrid">';
     for(const {mt,v} of have){
       const p=pm?(pm.get(mt.id)||new Map()).get(key):null;
-      h+=`<div class="ovcard"><div class="ovlab" title="${esc(mt.label)}">${esc(mt.label)}</div>
+      const bs=metricBridge(mt);
+      h+=`<div class="ovcard"><div class="ovlab" title="${esc(mt.label)}">${esc(mt.label)}${
+        bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</div>
         <div class="ovval">${esc(v.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1}).split(',').join(NBSP))}<span class="ovu">${esc(mt.unit)}</span></div>
         ${p?pctBadge(p):''}</div>`;
     }
@@ -980,12 +1020,19 @@ function renderTimeseries(rep){
     {row:'0040',label:'TREA (Mrd)',kind:'eur'},
     {row:'0010',label:'CET1 (Mrd)',kind:'eur'},
   ];
+  // Framework-Bruch (#26): wo wechselt zwischen zwei benachbarten Stichtagen
+  // die Taxonomie? Der Viewer zeichnete bisher darueber hinweg — ein Sprung an
+  // dieser Stelle sah aus wie Geschaeftsentwicklung.
+  const brk=series.map((s,i)=> i>0 && series[i-1].framework!==s.framework);
+  const anyBreak=brk.some(Boolean);
   let ts=`<section class="ts"><h3>Zeitreihe — EU KM1 <span class="scalenote">${series.length} Stichtage</span></h3>
     <table><thead><tr><th class="rl">Kennzahl</th>`;
-  for(const s of series){
+  series.forEach((s,i)=>{
     const on=s.refPeriod===rep.refPeriod;
-    ts+=`<th class="datecol"><a href="#r/${lei}/${s.refPeriod}/${scope}">${esc(s.refPeriod)}</a>${on?' •':''}</th>`;
-  }
+    ts+=`<th class="datecol${brk[i]?' fwbreak':''}"${brk[i]?` title="Taxonomiewechsel: Framework ${esc(series[i-1].framework)} → ${esc(s.framework)}"`:''}>`
+      + `<a href="#r/${lei}/${s.refPeriod}/${scope}">${esc(s.refPeriod)}</a>${on?' •':''}`
+      + `<br><span class="cl">RF ${esc(s.framework)}</span></th>`;
+  });
   ts+='<th>Trend</th></tr></thead><tbody>';
   let any=false;
   for(const m of METRICS){
@@ -998,12 +1045,28 @@ function renderTimeseries(rep){
     });
     if(vals.filter(x=>x!=null).length<2) continue;
     any=true;
-    ts+=`<tr><td class="rl">${esc(m.label)}${m.kind==='eur'?' <span class="cl">EUR</span>':''}</td>`;
-    for(const v of vals) ts+= v==null?'<td class="empty"></td>':
-      `<td class="num">${m.kind==='pct'?zdash(v.toFixed(1)+NBSP+'%'):zdash(v.toLocaleString('en-US',{maximumFractionDigits:1}).split(',').join(NBSP))}</td>`;
-    ts+=`<td>${sparkline(vals)}</td></tr>`;
+    // Liegt die Zelle dieser Kennzahl selbst auf einem Rebound? Dann ist der
+    // Bruch nicht nur zeitlich, sondern trifft genau diese Zahl.
+    const bs=bridgeAt('61.00', m.row, '0010');
+    ts+=`<tr><td class="rl">${esc(m.label)}${m.kind==='eur'?' <span class="cl">EUR</span>':''}`
+      + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:'')+`</td>`;
+    vals.forEach((v,i)=>{ const cls=(v==null?'empty':'num')+(brk[i]?' fwbreak':'');
+      ts+= v==null?`<td class="${cls}"></td>`:
+        `<td class="${cls}">${m.kind==='pct'?zdash(v.toFixed(1)+NBSP+'%'):zdash(v.toLocaleString('en-US',{maximumFractionDigits:1}).split(',').join(NBSP))}</td>`; });
+    ts+=`<td>${sparkline(vals,null,null,brk)}</td></tr>`;
   }
-  ts+='</tbody></table></section>';
+  ts+='</tbody></table>';
+  if(anyBreak){
+    const at=series.map((s,i)=>brk[i]?`${series[i-1].refPeriod} → ${s.refPeriod} (RF ${series[i-1].framework} → ${s.framework})`:null).filter(Boolean);
+    ts+=`<div class="caveat">⇄ Die Meldetaxonomie wechselt in dieser Reihe: ${esc(at.join(', '))}.
+      Die gestrichelte Senkrechte markiert die Stelle; die Trendlinie ist dort ebenfalls
+      gestrichelt — sie sagt „über eine Versionsgrenze hinweg", nicht „unvergleichbar".
+      Der Viewer verbindet Zellen über die Koordinate, nicht über den Datenpunkt: Werte werden
+      also weiter gefunden, auch wo die Taxonomie sie umgebunden hat. <b>Welche</b> Zellen das
+      betrifft, sagt das ⇄ an der Kennzahl — über die übrigen wird keine Aussage getroffen,
+      weil die Brücke nur beobachtete Zellen kennt.</div>`;
+  }
+  ts+='</section>';
   if(any) host.innerHTML=ts;
 }
 function entityReports(rep){
@@ -1011,20 +1074,42 @@ function entityReports(rep){
   return REPORTS.filter(r=>{ const p=leiParts(r.entityID); return p.lei===lei&&p.scope===scope; })
     .sort((a,b)=>a.refPeriod.localeCompare(b.refPeriod));
 }
-function sparkline(vals,w,h){
+/* `breaks[i] === true` heisst: VOR diesem Punkt wechselt die Taxonomie. Das
+   verbindende Stueck wird dort GESTRICHELT statt durchgezogen (#26) — ein
+   durchgezogener Sprung an einem Versionswechsel liest sich als
+   Geschaeftsentwicklung.
+   Bewusst gestrichelt und nicht unterbrochen: eine Luecke behauptet
+   "nicht vergleichbar", und das waere fuer die meisten Zellen falsch. Der
+   KM1-Trend laeuft auf r0050, das die Bruecke ausdruecklich als `stable`
+   fuehrt. Die gestrichelte Linie sagt "ueber eine Versionsgrenze hinweg",
+   nicht "unvergleichbar" — welche Zellen wirklich umgebunden sind, sagt das
+   ⇄ an der Kennzahl. */
+function sparkline(vals,w,h,breaks){
   w=w||86; h=h||20;
   const present=vals.filter(x=>x!=null);
   if(present.length<2) return '';
   const min=Math.min(...present), max=Math.max(...present), span=(max-min)||1;
   const pts=vals.map((x,i)=> x==null?null:
     [ (vals.length>1 ? i/(vals.length-1) : 0)*(w-6)+3, h-3-((x-min)/span)*(h-7) ]);
-  let d='', started=false;
-  for(const p of pts){ if(!p){started=false;continue;}
-    d+=(started?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1); started=true; }
+  // Je Verbindungsstueck entscheiden: durchgezogen oder gestrichelt. Ein
+  // Punkt, dessen beide Nachbarn fehlen, haengt an keinem Stueck und waere
+  // sonst unsichtbar — er bekommt einen eigenen Marker.
+  let d='', dash='', dots='', prev=null;
+  pts.forEach((p,i)=>{
+    if(!p){ prev=null; return; }
+    if(prev){
+      const seg=`M${prev[0].toFixed(1)} ${prev[1].toFixed(1)}L${p[0].toFixed(1)} ${p[1].toFixed(1)}`;
+      if(breaks&&breaks[i]) dash+=seg; else d+=seg;
+    } else if(!pts[i+1]){
+      dots+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="1.4" fill="currentColor"/>`;
+    }
+    prev=p;
+  });
   const last=[...pts].reverse().find(Boolean);
   return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">`+
     `<path d="${d}" fill="none" stroke="currentColor" stroke-width="1.4"/>`+
-    `<circle cx="${last[0]}" cy="${last[1]}" r="1.8" fill="currentColor"/></svg>`;
+    (dash?`<path d="${dash}" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2.5 2"/>`:'')+
+    dots+`<circle cx="${last[0]}" cy="${last[1]}" r="1.8" fill="currentColor"/></svg>`;
 }
 function tplValue(rep,tid,row,col){
   const cells=rep.templates.get(tid);
@@ -1159,11 +1244,14 @@ function benchmarkRows(){
     }
     // trend sparkline data (metric across the entity's ref dates)
     if(prof.trendRow){
-      const series=entityReports(rep).map(r=>{
+      const reps=entityReports(rep);
+      const series=reps.map(r=>{
         const t=km1Value(r,prof.trendRow);
         return (t==null||Math.abs(t)>10)?null:t*100;
       });
       row._trend = series.filter(x=>x!=null).length>=2 ? series : null;
+      // Auch hier darf die Linie nicht ueber den Taxonomiewechsel laufen (#26).
+      row._breaks = reps.map((r,i)=> i>0 && reps[i-1].framework!==r.framework);
     } else row._trend=null;
     out.push(row);
   }
@@ -1417,7 +1505,16 @@ async function renderBenchmark(){
     ${distributionRow(allRows, prof)}
     <table class="bmtable"><thead><tr>
       <th data-k="name">Institut <span class="dir"></span></th><th data-k="date">Stichtag <span class="dir"></span></th>`;
-  for(const c of prof.cols) h+=`<th class="num" data-k="${c.id}">${esc(c.label)} <span class="dir"></span></th>`;
+  // Spalten, deren Zelle zwischen den Frameworks umgebunden wurde (#26): der
+  // Wert wird ueber die Koordinate weiter gefunden, aber die Rangliste mischt
+  // dann Stichtage beiderseits eines Taxonomiewechsels.
+  const colBridge=c=>c.calc?'':bridgeAt(c.tpl||prof.tpl, c.row, c.col||'0010');
+  for(const c of prof.cols){
+    const bs=colBridge(c);
+    h+=`<th class="num" data-k="${c.id}">${esc(c.label)}`
+     + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:'')
+     + ` <span class="dir"></span></th>`;
+  }
   if(prof.trendRow) h+=`<th title="Verlauf über verfügbare Stichtage (${esc((prof.cols.find(x=>x.row===prof.trendRow)||{}).label||'')})">Trend</th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){
@@ -1427,7 +1524,7 @@ async function renderBenchmark(){
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;
     for(const c of prof.cols) h+=bmCell(c,r[c.id],BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null);
-    if(prof.trendRow) h+=`<td>${r._trend?sparkline(r._trend):''}</td>`;
+    if(prof.trendRow) h+=`<td>${r._trend?sparkline(r._trend,null,null,r._breaks):''}</td>`;
     h+='</tr>';
   }
   h+=`</tbody></table><div class="meta" style="margin-top:.5rem">${rows.length} Reports mit Template ${esc(prof.tpl)}</div>`;
