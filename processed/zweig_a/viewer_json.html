@@ -5,31 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pillar 3 Viewer (JSON) — P3DH</title>
 <style>
+  /* ======================================================================
+     Gestaltungssystem (#61). Redaktionelles Idiom statt Software-Chrome:
+     ruhiger Kopf, EIN Akzent, Typo-Skala mit Serif für Überschriften,
+     Grafiken auf eigener Fläche mit Quellzeile.
+
+     --accent (Rot) markiert AUSSCHLIESSLICH Identität und Fokus — nie gut
+     oder schlecht. Das sind Offenlegungsdaten, keine Bewertung; die Regel
+     stand schon in docs/viewer_redesign.md und gilt weiter. Rot heißt hier
+     „darum geht es gerade", nicht „das ist schlimm".
+
+     Schriften: freie System-Stacks. Die Hausschriften der Vorbild-
+     publikation sind lizenziert, und eine Web-Font-CDN wäre eine
+     Netzabhängigkeit — der Viewer soll eine Datei ohne Build und ohne
+     fremde Hosts bleiben.
+     ====================================================================== */
   :root{
-    --blue:#0b3d91; --line:#e2e2e2; --bg:#fafafa; --card:#fff; --ink:#1a1a1a;
-    --muted:#666; --soft:#f0f3fa; --softink:#0b3d91; --empty:#f7f7f7; --hover:#f3f6fc;
-    --active:#e7eefb; --thead:#0b3d91; --theadink:#fff;
+    color-scheme:light;
+    /* Flächen: Papier / Karte / Grafikfläche */
+    --bg:#f4f1ec; --card:#ffffff; --panel:#dae6ec; --grid:#ffffff;
+    --line:#dcd7ce; --rule:#191919;
+    --ink:#121212; --ink2:#3a3a3a; --muted:#6c6862;
+    --accent:#c8102e;                 /* Identität + Fokus. NIE Wertung. */
+    --blue:#12556e; --blue2:#3f95b4;  /* Datenfarben */
+    --soft:#e6edf1; --softink:#12556e; --empty:#f7f5f1; --hover:#efebe4;
+    --active:#e3ecf1; --thead:#efebe4; --theadink:#121212;
+    /* Typo-Skala 11/13/15/20/28, Gewichte 400/600/700 */
+    --f0:11px; --f1:13px; --f2:15px; --f3:20px; --f4:28px;
+    --serif:"Iowan Old Style",Palatino,"Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
+  /* Dunkle Ableitung: das Vorbild ist für Druck auf Weiß gebaut und hat
+     keine. Übernommen wird die IDEE — Grafikfläche hebt sich vom Grund ab,
+     Gitterlinien sind heller als die Fläche —, mit invertierter Helligkeit. */
   [data-theme=dark]{
-    --blue:#7ea8ff; --line:#333a45; --bg:#12151a; --card:#1a1f27; --ink:#e6e9ee;
-    --muted:#9aa3b0; --soft:#232c3d; --softink:#9db9f5; --empty:#171b22; --hover:#212836;
-    --active:#27334a; --thead:#1f3460; --theadink:#dfe7ff;
+    color-scheme:dark;
+    --bg:#14161a; --card:#1c1f24; --panel:#22303a; --grid:#33454f;
+    --line:#333941; --rule:#4a5058;
+    --ink:#e9e6e1; --ink2:#c3bfb8; --muted:#948f88;
+    --accent:#ff5a5a;
+    --blue:#6fb6d3; --blue2:#9ad2e6;
+    --soft:#242c33; --softink:#9ad2e6; --empty:#191c21; --hover:#232830;
+    --active:#26333c; --thead:#232830; --theadink:#e9e6e1;
   }
   *{box-sizing:border-box}
-  body{font:13px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:var(--ink);background:var(--bg)}
-  header{background:var(--thead);color:var(--theadink);padding:.6rem 1rem;position:sticky;top:0;z-index:10;
-         display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
-  header h1{font-size:1.02rem;margin:0;font-weight:600;white-space:nowrap}
-  .pill{display:inline-block;background:rgba(255,255,255,.16);border-radius:10px;padding:1px 8px;font-size:11px}
-  nav.tabs{display:flex;gap:.25rem;margin-left:.5rem}
-  nav.tabs button{background:transparent;color:var(--theadink);border:1px solid rgba(255,255,255,.35);
-    border-radius:6px;padding:3px 11px;font:inherit;font-size:12px;cursor:pointer;opacity:.85}
-  nav.tabs button:hover{opacity:1;background:rgba(255,255,255,.1)}
-  nav.tabs button.on{background:rgba(255,255,255,.22);opacity:1;font-weight:600}
-  .hright{margin-left:auto;display:flex;gap:.4rem;align-items:center}
-  .hlink,.iconbtn{color:var(--theadink);font-size:12px;text-decoration:none;opacity:.9;
-    border:1px solid rgba(255,255,255,.4);border-radius:5px;padding:2px 8px;background:transparent;cursor:pointer;font-family:inherit}
-  .hlink:hover,.iconbtn:hover{opacity:1;background:rgba(255,255,255,.12)}
+  body{font:var(--f1)/1.5 var(--sans);margin:0;color:var(--ink);background:var(--bg)}
+  /* Die rote Oberkante ist ein Zeitungsmittel, kein fremdes Logo. */
+  header{background:var(--card);color:var(--ink);padding:.45rem 1rem;position:sticky;top:0;z-index:10;
+         display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;
+         border-top:3px solid var(--accent);border-bottom:1px solid var(--rule)}
+  header h1{font:700 var(--f3)/1.15 var(--serif);margin:0;white-space:nowrap;letter-spacing:-.01em}
+  .pill{font-size:var(--f0);color:var(--muted);letter-spacing:.02em;
+        font-variant-numeric:tabular-nums;white-space:nowrap}
+  /* Tabs als Rubrikleiste: Unterstrich statt Kasten. */
+  nav.tabs{display:flex;gap:1rem;margin-left:.4rem;align-self:flex-end}
+  nav.tabs button{background:transparent;color:var(--ink2);border:0;border-bottom:2px solid transparent;
+    padding:2px 0 3px;font:600 var(--f1)/1.2 var(--sans);cursor:pointer}
+  nav.tabs button:hover{color:var(--ink)}
+  nav.tabs button.on{color:var(--ink);border-bottom-color:var(--accent)}
+  nav.tabs button:focus-visible,.hlink:focus-visible,.iconbtn:focus-visible,
+  .dchip:focus-visible,summary:focus-visible,.dcard:focus-visible{
+    outline:2px solid var(--accent);outline-offset:2px}
+  .hright{margin-left:auto;display:flex;gap:.75rem;align-items:baseline}
+  .hlink,.iconbtn{color:var(--muted);font:400 var(--f0)/1.2 var(--sans);text-decoration:none;
+    border:0;background:transparent;cursor:pointer;padding:0}
+  .hlink:hover,.iconbtn:hover{color:var(--ink);text-decoration:underline}
   .layout{display:flex;min-height:calc(100vh - 46px)}
   aside{width:300px;flex:0 0 300px;border-right:1px solid var(--line);background:var(--card);
         overflow:auto;max-height:calc(100vh - 46px);position:sticky;top:46px}
@@ -43,20 +83,36 @@
   .fcount{font-size:11px;color:var(--muted);margin-top:.35rem}
   .report{padding:.5rem .6rem .5rem .75rem;border-bottom:1px solid var(--line);cursor:pointer;position:relative}
   .report:hover{background:var(--hover)}
-  .report.active{background:var(--active);border-left:3px solid var(--blue)}
+  /* „Sie sind hier" ist der Fokus-Fall, für den der Akzent da ist. */
+  .report.active{background:var(--active);box-shadow:inset 3px 0 0 var(--accent)}
   .report .lei{font-weight:600;padding-right:26px}
   .report .rmeta{color:var(--muted);font-size:11px;margin-top:2px}
   .report .leicode{color:var(--muted);opacity:.6;font-size:10px;margin-top:1px;font-variant-numeric:tabular-nums;letter-spacing:.2px}
-  .badge{display:inline-block;font-size:9.5px;font-weight:600;border-radius:3px;padding:0 4px;margin-left:4px;vertical-align:1px}
-  .badge.gs{background:#7a1fa2;color:#fff}
-  .badge.it{background:var(--soft);color:var(--softink)}
+  /* Stichtage als Umschalter INNERHALB des Instituts-Eintrags (#46) */
+  .report .dates{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+  .dchip{display:inline-block;font-size:10px;line-height:16px;padding:0 5px;border-radius:4px;
+         border:1px solid var(--line);color:var(--muted);text-decoration:none;background:var(--card);
+         font-variant-numeric:tabular-nums}
+  .dchip:hover{border-color:var(--blue);color:var(--blue)}
+  /* --card als Schriftfarbe: hell auf Blau im Light-, dunkel auf Hellblau im Dark-Mode */
+  .dchip.on{background:var(--blue);border-color:var(--blue);color:var(--card);font-weight:600}
+  .dchip.pinned::after{content:'⊞';margin-left:3px}
+  .report .rdet{font-size:10.5px;color:var(--muted);margin-top:3px}
+  /* Kennzeichen als Umriss statt als Farbfläche — sie sind Metadaten, keine
+     Warnungen, und konkurrieren so nicht mit dem einen Akzent. */
+  .badge{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.04em;
+         text-transform:uppercase;border:1px solid var(--line);border-radius:2px;
+         padding:0 4px;margin-left:5px;vertical-align:1px;color:var(--muted)}
+  .badge.gs{border-color:var(--ink2);color:var(--ink2)}
+  .badge.it{border-color:var(--line);color:var(--muted)}
   .pinbtn{position:absolute;top:.45rem;right:.4rem;border:1px solid var(--line);background:var(--card);color:var(--muted);
     border-radius:5px;width:22px;height:22px;font-size:12px;line-height:1;cursor:pointer;padding:0}
   .pinbtn:hover{color:var(--blue);border-color:var(--blue)}
   .pinbtn.on{background:var(--blue);border-color:var(--blue);color:#fff}
-  main{flex:1;padding:1rem 1.25rem 2.5rem;overflow:auto;max-height:calc(100vh - 46px)}
-  .rhead h2{font-size:1.2rem;margin:.2rem 0}
-  .meta{color:var(--muted);margin:.2rem 0 .6rem}
+  main{flex:1;padding:1.1rem 1.5rem 2.5rem;overflow:auto;max-height:calc(100vh - 46px)}
+  .rhead{margin-bottom:1rem;padding-bottom:.55rem;border-bottom:1px solid var(--rule)}
+  .rhead h2{font:700 var(--f4)/1.15 var(--serif);margin:.1rem 0 .25rem;letter-spacing:-.015em}
+  .meta{color:var(--muted);margin:.15rem 0;font-size:var(--f0)}
   .meta .leicode{color:var(--muted);opacity:.7;font-size:11px;font-variant-numeric:tabular-nums;letter-spacing:.3px}
   .tfilter{margin:.3rem 0 .8rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
   .tfilter input{padding:.35rem .5rem;border:1px solid var(--line);border-radius:5px;font:inherit;width:250px;
@@ -64,17 +120,24 @@
   .ctl{font-size:12.5px;color:var(--ink);display:inline-flex;align-items:center;gap:.3rem}
   .ctl select{padding:.25rem .3rem;border:1px solid var(--line);border-radius:5px;font:inherit;font-size:12px;
               background:var(--card);color:var(--ink)}
-  section{margin-bottom:1.4rem}
-  section h3{font-size:.95rem;margin:.2rem 0 .35rem;color:var(--blue)}
-  .scalenote{font-size:11px;font-weight:400;color:var(--muted);background:var(--soft);border-radius:4px;padding:1px 7px;margin-left:.5rem;vertical-align:2px}
-  table{border-collapse:separate;border-spacing:0;background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.08)}
-  th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:3px 7px;vertical-align:top}
-  table tr>*:first-child{border-left:1px solid var(--line)}
-  thead th{background:var(--thead);color:var(--theadink);font-weight:600;text-align:left;font-size:11px;
-           position:sticky;top:0;z-index:2;border-top:1px solid var(--line)}
-  .rh{background:var(--soft);color:var(--softink);font-weight:600;text-align:center;width:48px}
-  .rl{max-width:340px;font-size:12px}
-  .cl{font-weight:400;opacity:.85;font-size:10px}
+  section{margin-bottom:1.6rem}
+  /* Überschriften in Serif — der Bruch zur Sans der Daten macht die
+     Hierarchie, nicht Farbe und nicht Fettung allein. */
+  section h3{font:700 var(--f2)/1.25 var(--serif);margin:.2rem 0 .4rem;color:var(--ink);
+             padding-bottom:.25rem;border-bottom:1px solid var(--line)}
+  .scalenote{font:400 var(--f0)/1.4 var(--sans);color:var(--muted);margin-left:.5rem;vertical-align:1px}
+  table{border-collapse:separate;border-spacing:0;background:var(--card)}
+  th,td{border-bottom:1px solid var(--line);padding:4px 8px;vertical-align:top}
+  /* Keine senkrechten Gitterlinien: Spalten trennt der Weißraum. Das ist
+     der sichtbarste Einzelgewinn gegenüber dem Kästchengitter vorher. */
+  thead th{background:var(--thead);color:var(--theadink);font-weight:600;text-align:left;
+           font-size:var(--f0);position:sticky;top:0;z-index:2;
+           border-top:1px solid var(--line);border-bottom:2px solid var(--rule)}
+  tbody tr:hover{background:var(--hover)}
+  .rh{color:var(--muted);font-weight:600;text-align:right;width:52px;
+      font-variant-numeric:tabular-nums;font-size:var(--f0)}
+  .rl{max-width:340px;font-size:var(--f1)}
+  .cl{font-weight:400;color:var(--muted);font-size:var(--f0)}
   td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:default}
   td.empty{background:var(--empty)}
   /* "Fehlt != Null": Coverage-Kasten + Sektions-Badge */
@@ -104,6 +167,33 @@
       margin-left:.3rem;background:#f3efe3;color:#6b5300;cursor:help;white-space:nowrap}
   tr.flagged td:first-child{box-shadow:inset 3px 0 0 #c9a227}
   [data-theme=dark] .qb{background:#3a3320;color:#e0c96b}
+  /* Überblick (#47, R2): die Kennzahlen, mit denen ein Report anfängt */
+  .ovgrid{display:flex;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .45rem}
+  .ovcard{flex:1 1 136px;min-width:136px;max-width:212px;background:var(--card);
+          border:1px solid var(--line);border-radius:6px;padding:.4rem .55rem}
+  .ovlab{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ovval{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.25;margin:1px 0 3px}
+  .ovval .ovu{font-size:11px;font-weight:400;color:var(--muted);margin-left:2px}
+  .ovmiss{font-size:11px;color:var(--muted);margin:.1rem 0 .35rem;max-width:82ch}
+  .ovq{font-size:11.5px;margin:.35rem 0;background:#f3efe3;color:#6b5300;border-radius:4px;
+       padding:.3rem .6rem;max-width:82ch}
+  [data-theme=dark] .ovq{background:#3a3320;color:#e0c96b}
+  /* Themenblöcke: eingeklappt, mit Füllstand — die Rohtabellen bleiben
+     vollständig, sie führen nur nicht mehr. */
+  details.theme{border:1px solid var(--line);border-radius:6px;margin:.4rem 0;background:var(--card)}
+  details.theme>summary{cursor:pointer;padding:.45rem .7rem;display:flex;align-items:center;
+                        gap:.6rem;font-weight:600;font-size:13px;list-style:none}
+  /* display:flex verschluckt das Standard-Dreieck — ohne Ersatz sieht der Block
+     nicht aufklappbar aus, und die Rohtabellen waeren praktisch unauffindbar. */
+  details.theme>summary::-webkit-details-marker{display:none}
+  details.theme>summary::before{content:'▸';color:var(--muted);font-weight:400;font-size:11px}
+  details.theme[open]>summary::before{content:'▾'}
+  details.theme>summary:hover{background:var(--hover)}
+  details.theme[open]>summary{border-bottom:1px solid var(--line)}
+  .thcount{font-weight:400;font-size:11.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+  .thbar{flex:0 0 56px}
+  .tbody{padding:0 .7rem .2rem}
+  .tbody section{margin:.9rem 0 1rem}
   .status{padding:2rem;color:var(--muted)}
   .prog{height:3px;background:var(--soft);border-radius:2px;overflow:hidden;margin-top:.6rem;width:340px}
   .prog i{display:block;height:100%;background:var(--blue);width:0%;transition:width .2s}
@@ -112,8 +202,11 @@
   .bmtable th .dir{opacity:.7;font-size:9px}
   .bmtable td.bank{font-weight:600;max-width:260px}
   .bmtable td .sub{display:block;font-weight:400;font-size:10px;color:var(--muted)}
-  .caveat{font-size:11.5px;color:var(--muted);background:var(--soft);border-left:3px solid var(--blue);
-          padding:.5rem .8rem;border-radius:0 6px 6px 0;margin:.6rem 0 1rem;max-width:860px}
+  /* Anmerkung im redaktionellen Sinn: gehört zur Grafik, nicht daneben.
+     Kein Kasten, kein Akzent — sie erklärt, sie warnt nicht. */
+  .caveat{font-size:var(--f1);line-height:1.5;color:var(--ink2);background:transparent;
+          border-left:2px solid var(--line);padding:.15rem 0 .15rem .8rem;
+          margin:.5rem 0 1rem;max-width:74ch}
   .spark{color:var(--blue);vertical-align:middle}
   .ts td.num a{color:inherit;text-decoration:none}
   .ts th.datecol a{color:var(--theadink);text-decoration:underline dotted}
@@ -124,12 +217,41 @@
   .pctf{display:block;height:100%;background:var(--blue);opacity:.35}
   .pctb i{position:absolute;inset:0;font-style:normal;font-size:8.5px;line-height:9px;
           text-align:right;padding-right:3px;color:var(--muted);font-variant-numeric:tabular-nums}
+  /* Verteilung über der Rangliste (#48, R3) */
+  .dgrid{display:flex;flex-wrap:wrap;gap:.6rem;margin:.35rem 0 .8rem}
+  svg.dist{display:block;width:100%;height:auto}
+  /* Grafik-Idiom: Titelblock oben links, Fläche mit hellen Horizontallinien,
+     keine Achsen-Ticks, Quellzeile unten. Die Quellzeile ist bei uns mehr
+     wert als beim Vorbild — sie kann die exakte Herkunft nennen statt nur
+     die Institution. */
+  .dcard{background:var(--card);border:1px solid var(--line);padding:.45rem .55rem .4rem;
+         cursor:pointer;flex:1 1 306px;min-width:266px;max-width:430px}
+  .dcard:hover{border-color:var(--ink2)}
+  .dcard.on{border-color:var(--rule);box-shadow:inset 0 2px 0 var(--accent)}
+  .dlab{font:700 var(--f1)/1.25 var(--serif);color:var(--ink)}
+  .dnote{font-size:var(--f0);color:var(--muted);margin-bottom:3px}
+  .dsum{font-size:var(--f0);color:var(--muted);font-variant-numeric:tabular-nums}
+  .dsrc{font-size:9.5px;color:var(--muted);margin-top:2px;border-top:1px solid var(--line);
+        padding-top:2px;letter-spacing:.01em}
+  .dax{display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);
+       font-variant-numeric:tabular-nums}
+  svg.dist rect.dpanel{fill:var(--panel)}
+  svg.dist line.dgrid{stroke:var(--grid);stroke-width:1}
+  svg.dist rect{fill:var(--blue);opacity:.85}
+  svg.dist rect.dout{fill:var(--blue);opacity:1}
+  svg.dist line.dmed{stroke:var(--ink);stroke-width:1.2;opacity:.65}
+  svg.dist line.dsep{stroke:var(--muted);stroke-width:1;opacity:.55}
+  .fb{display:inline-block;font-size:10px;font-weight:600;border-radius:3px;padding:0 .3rem;
+      margin-left:.3rem;background:var(--soft);color:var(--softink);cursor:help;white-space:nowrap}
   .cmp-pick{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.4rem 0 .8rem}
   .chip{display:inline-flex;align-items:center;gap:.35rem;background:var(--soft);color:var(--softink);
         border-radius:12px;padding:2px 9px;font-size:11.5px}
   .chip button{border:0;background:transparent;color:inherit;cursor:pointer;font-size:12px;padding:0}
-  footer.disc{font-size:11.5px;color:var(--muted);padding:.7rem 1rem;border-top:1px solid var(--line);background:var(--card)}
-  footer.disc a{color:var(--blue)}
+  footer.disc{font-size:var(--f0);line-height:1.55;color:var(--muted);padding:.8rem 1.5rem;
+              border-top:1px solid var(--rule);background:var(--card)}
+  footer.disc a{color:var(--muted)}
+  .colophon{margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--line);max-width:78ch;
+            font-style:normal;color:var(--muted)}
   a{color:var(--blue)}
   @media (max-width:860px){
     .layout{flex-direction:column}
@@ -141,7 +263,6 @@
 <body>
 <header>
   <h1>Pillar 3 Viewer</h1>
-  <span class="pill" style="background:#1f8a4c;color:#fff" title="Lädt per-Report-JSON-Shards, lazy">JSON · Lazy-Shards</span>
   <span class="pill" id="hsub">lädt…</span>
   <nav class="tabs">
     <button id="tabReports" class="on">Reports</button>
@@ -182,6 +303,9 @@
   Public Pillar&nbsp;3 data © European Banking Authority; entity names © GLEIF; FX = ECB reference rates.
   Re-presented “as is” for scientific/educational use (fair use) — verify figures against the official EBA
   source. Not investment or legal advice. <a href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md">Full disclaimer</a>.
+  <div class="colophon">Gestaltung inspiriert von <i>The Economist</i> — dem wir die Einsicht verdanken, dass
+  eine Grafik eine Meinung haben darf, solange sie ihre Quelle nennt. Mit der Publikation in keiner Weise
+  verbunden; Schriften und Farbwerte sind eigene, und das rote Rechteck haben wir ihnen gelassen.</div>
 </footer>
 
 <script>
@@ -196,11 +320,15 @@ let DARK  = store.dark ?? window.matchMedia('(prefers-color-scheme: dark)').matc
 let CMPTPL = store.cmptpl || '61.00';
 function persist(){ localStorage.setItem('p3dh', JSON.stringify({
   scale:SCALE, eur:EUR, pins:[...PINS], dark:DARK, cmptpl:CMPTPL,
+  themes:(typeof OPENTHEMES!=='undefined'?[...OPENTHEMES]:undefined),
   bmp:(typeof BMP!=='undefined'?BMP:undefined)})); }
 function applyTheme(){ document.documentElement.dataset.theme = DARK?'dark':'light'; }
 applyTheme();
 
-let REPORTS=[], CB=new Map(), TITLES=new Map(), NAMES=new Map(), META=new Map(), FX=new Map(), activeKey=null;
+let REPORTS=[], CB=new Map(), TITLES=new Map(), AXIS=new Map(), NAMES=new Map(), META=new Map(), FX=new Map(), activeKey=null;
+/* Kuratierte Themen (#47) — aus codebook.json, nicht hier gefuehrt. */
+let THEME_ORDER=[], THEME_OF=new Map();
+let OPENTHEMES=new Set(store.themes||[]);   // aufgeklappte Bloecke, ueber Reports hinweg
 const repKey=r=>r.entityID+'|'+r.refPeriod;
 const byKey =k=>REPORTS.find(r=>repKey(r)===k);
 
@@ -296,6 +424,16 @@ let DIMSEL=new Map();
 function buildFromIndex(idx, codebook){
   for(const [k,v] of Object.entries(codebook.cb))     CB.set(k,{rl:v[0], cl:v[1], dt:v[2]||''});
   for(const [k,v] of Object.entries(codebook.titles)) TITLES.set(k, v);
+  // Offene Zeilenachsen (#56): dort IST die Zeile der Achsenwert, und AXIS
+  // loest ihn auf ('NL' -> 'Netherlands'). Vorhandensein markiert zugleich,
+  // dass die Zeilenreihenfolge dieses Templates KEINE Modellordnung ist.
+  for(const [k,v] of Object.entries(codebook.axis||{})) AXIS.set(k, v);
+  // Themenzuordnung (#47): kuratiert in scripts/template_themes.py, hier nur
+  // gelesen. Fehlt sie (aelteres codebook.json), faellt alles in den
+  // Auffangblock — sichtbar bleibt jede Tabelle in jedem Fall.
+  const th=codebook.themes||{};
+  THEME_ORDER=(th.order||[]).map(([id,label])=>({id,label}));
+  for(const [tid,id] of Object.entries(th.map||{})) THEME_OF.set(tid,id);
   for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
@@ -353,29 +491,81 @@ function passFilters(rep,f){
   if(f.g && m.is_gsii!=='true') return false;
   return true;
 }
+/* ---- institutszentrische Gruppierung (#46) -------------------------------
+   Der Stichtag ist eine EIGENSCHAFT des Instituts, keine eigene Entitaet. Die
+   Liste fuehrte 882 Eintraege fuer 475 Institute, ABN AMRO dreimal untereinander.
+   Gruppiert sind es 475 — halb so lang wie die Zahl der Dinge, nach denen
+   jemand sucht.
+
+   Der Schluessel ist (LEI, Scope), NICHT der LEI allein: CON und IND sind nicht
+   dasselbe Institut (DISCLAIMER.md). Im Bestand meldet genau ein LEI beides —
+   die Regel muss trotzdem stimmen, nicht der Einzelfall.
+
+   Waehrung und Framework-Version bleiben am REPORT, nicht am Gruppenkopf:
+   4 Gruppen wechseln zwischen Stichtagen die Meldewaehrung, 103 von 475 die
+   Framework-Version (4.1 -> 4.2). Am Kopf angeschrieben waeren beide fuer
+   einen Teil der Stichtage schlicht falsch. */
+function groupReports(reps){
+  const g=new Map();
+  for(const rep of reps){
+    const {lei,scope}=leiParts(rep.entityID);
+    const k=lei+'|'+scope;
+    let e=g.get(k);
+    if(!e) g.set(k, e={lei, scope, name:bankName(rep.entityID), reps:[]});
+    e.reps.push(rep);
+  }
+  for(const e of g.values()) e.reps.sort((a,b)=>a.refPeriod.localeCompare(b.refPeriod));
+  return [...g.values()];   // REPORTS ist nach Name sortiert -> Map haelt die Reihenfolge
+}
+let TOTAL_GROUPS=0;   // ungefilterte Gruppenzahl, einmal beim Boot bestimmt
 function renderReportList(){
   const f=activeFilters();
-  const host=document.getElementById('reportList'); host.innerHTML='';
-  let shown=0;
-  REPORTS.forEach(rep=>{
-    if(!passFilters(rep,f)) return;
-    shown++;
-    const {lei,scope}=leiParts(rep.entityID);
-    const m=META.get(lei)||{};
-    const key=repKey(rep);
+  const host=document.getElementById('reportList');
+  // Gefiltert wird weiter je REPORT; eine Gruppe erscheint mit genau den
+  // Stichtagen, die den Filter passieren (Filter "Stichtag" -> ein Chip).
+  const groups=groupReports(REPORTS.filter(rep=>passFilters(rep,f)));
+  let nRep=0, h='';
+  for(const g of groups){
+    nRep+=g.reps.length;
+    const m=META.get(g.lei)||{};
+    // Ohne Auswahl fuehrt der juengste Stichtag — der Einstieg, den jemand
+    // erwartet, der nur den Namen kennt.
+    const cur=g.reps.find(r=>repKey(r)===activeKey) || g.reps[g.reps.length-1];
+    const active=repKey(cur)===activeKey;
     const badges=(m.is_gsii==='true'?'<span class="badge gs" title="reicht das G-SII-Offenlegungsmodul ein">G-SII</span>':'')+
                  (m.institution_type?`<span class="badge it">${esc(shortItype(m.institution_type))}</span>`:'');
-    const div=document.createElement('div');
-    div.className='report'+(key===activeKey?' active':'');
-    div.innerHTML=`<button class="pinbtn${PINS.has(key)?' on':''}" title="für Vergleich anpinnen">⊞</button>
-      <div class="lei">${esc(bankName(rep.entityID))}${badges}</div>
-      <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(scope))} · ${esc(rep.refPeriod)} · ${esc(curOf(rep))} · ${rep.nt} templates</div>
-      <div class="leicode">${esc(lei)}</div>`;
-    div.querySelector('.pinbtn').onclick=(ev)=>{ ev.stopPropagation(); togglePin(key); };
-    div.onclick=()=>{ location.hash='#r/'+lei+'/'+rep.refPeriod+'/'+scope; };
-    host.appendChild(div);
+    const chips=g.reps.map(r=>{
+      const k=repKey(r);
+      return `<a class="dchip${k===activeKey?' on':''}${PINS.has(k)?' pinned':''}"
+        href="#r/${g.lei}/${r.refPeriod}/${g.scope}"
+        title="${esc(r.refPeriod)} · ${r.nt} Templates · ${esc(curOf(r))} · Framework ${esc(r.framework)}${
+          PINS.has(k)?' · für Vergleich angepinnt':''}">${esc(r.refPeriod)}</a>`;
+    }).join('');
+    h+=`<div class="report${active?' active':''}" data-h="#r/${g.lei}/${cur.refPeriod}/${g.scope}">
+      <button class="pinbtn${PINS.has(repKey(cur))?' on':''}" data-k="${esc(repKey(cur))}"
+        title="Stichtag ${esc(cur.refPeriod)} für Vergleich anpinnen">⊞</button>
+      <div class="lei">${esc(g.name)}${badges}</div>
+      <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(g.scope))} · ${g.reps.length} Stichtag${g.reps.length>1?'e':''}</div>
+      <div class="dates">${chips}</div>
+      ${active?`<div class="rdet">${cur.nt} Templates · ${esc(curOf(cur))} · Framework ${esc(cur.framework)}</div>`:''}
+      <div class="leicode">${esc(g.lei)}</div></div>`;
+  }
+  host.innerHTML=h;
+  document.getElementById('fCount').textContent=
+    `${groups.length} von ${TOTAL_GROUPS} Instituten · ${nRep} von ${REPORTS.length} Reports`;
+  document.getElementById('fCount').title=
+    'Konsolidiert (CON) und Einzelinstitut (IND) zählen getrennt — es sind nicht dieselben Zahlen.';
+}
+/* Ereignisse delegiert: die Liste wird bei jedem Filtertastendruck neu
+   geschrieben, einzeln angehaengte Handler waeren 475-mal Arbeit je Anschlag. */
+function wireList(){
+  document.getElementById('reportList').addEventListener('click', ev=>{
+    const pin=ev.target.closest('.pinbtn');
+    if(pin){ ev.preventDefault(); ev.stopPropagation(); togglePin(pin.dataset.k); return; }
+    if(ev.target.closest('.dchip')) return;      // echter Link — der Browser navigiert
+    const row=ev.target.closest('.report');
+    if(row) location.hash=row.dataset.h;
   });
-  document.getElementById('fCount').textContent=`${shown} von ${REPORTS.length} Reports`;
 }
 function initFilters(){
   const countries=new Set(), itypes=new Set(), dates=new Set();
@@ -467,11 +657,36 @@ function renderTemplate(tid, cells, rep){
   const dims=[...new Set(allCells.map(c=>c.dim).filter(Boolean))].sort();
   const dimSel = dims.length ? (dims.includes(DIMSEL.get(tid))?DIMSEL.get(tid):dims[0]) : '';
   const cellList = dims.length ? allCells.filter(c=>!c.dim||c.dim===dimSel) : allCells;
-  const rows=[...new Set(cellList.map(c=>c.row))].sort();
   const cols=[...new Set(cellList.map(c=>c.col))].sort();
   const val=new Map(cellList.map(c=>[c.row+'|'+c.col,c.val]));
   const dtOf=(r,c)=>{ const e=CB.get(tcode+'|'+r+'|'+c); return e?e.dt:''; };
-  const rowLbl=r=>{ const e=CB.get(tcode+'|'+r+'|'+(cols[0]||'')); return e?e.rl:''; };
+  // Offene Zeilenachse (#56): die Zeile ist der Achsenwert, kein Modell-Code.
+  const axisMap = AXIS.get(tcode) || null;
+  const rowLbl=r=>{
+    if(axisMap && axisMap[r]) return axisMap[r];
+    const e=CB.get(tcode+'|'+r+'|'+(cols[0]||'')); return e?e.rl:''; };
+  // Zeilenreihenfolge: bei festen DPM-Zeilen ist die Codeordnung die
+  // MODELLORDNUNG (Zwischensummen, Gliederung) und muss bleiben. Bei einer
+  // offenen Achse gibt es keine solche Ordnung — alphabetisch nach ISO-Code
+  // heisst dort: Andorra, Afghanistan, Antigua zuerst, waehrend die
+  // Niederlande mit 231 Mrd hinter 150 fast leeren Zeilen stehen. Bei ING
+  // tragen 15 von 203 Laendern 90 % des Exposures.
+  const rows=[...new Set(cellList.map(c=>c.row))];
+  if(axisMap){
+    const w=new Map();
+    for(const c of cellList){
+      if(dtOf(c.row,c.col)!=='monetary') continue;   // Prozentspalten nicht mitwiegen
+      const n=Math.abs(Number(c.val));
+      if(Number.isFinite(n)) w.set(c.row,(w.get(c.row)||0)+n);
+    }
+    rows.sort((a,b)=>{
+      // Nicht aufloesbare Codes (x1 = Summenzeile, x28 = uebrige Laender) ans
+      // Ende: sie sind keine Staaten und wuerden oben wie einer aussehen.
+      const ra=axisMap[a]?0:1, rb=axisMap[b]?0:1;
+      if(ra!==rb) return ra-rb;
+      return ((w.get(b)||0)-(w.get(a)||0)) || (a<b?-1:a>b?1:0);
+    });
+  } else rows.sort();
   const colLbl=c=>{ for(const r of rows){ const e=CB.get(tcode+'|'+r+'|'+c); if(e) return e.cl; } return ''; };
   const c=COV[state];
   const coverageNote = c.label
@@ -491,7 +706,12 @@ function renderTemplate(tid, cells, rep){
     <select class="dimsel" data-tid="${esc(tid)}">${dims.map(d=>
       `<option value="${esc(d)}"${d===dimSel?' selected':''}>${esc(d)}</option>`).join('')}</select>
     <span class="cl">${dims.length} Werte — je Wert ein eigenes Gitter</span></div>` : '';
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}<table><thead><tr><th class="rh">Row</th><th class="rl"></th>`;
+  // Bei offener Achse ist die Reihenfolge unsere Wahl, nicht die des Modells —
+  // das gehoert dazugesagt, sonst wirkt sie wie die Meldereihenfolge.
+  const axisNote = axisMap
+    ? `<div class="dimbar"><span class="cl">Zeilen = Achsenwerte, nach Betrag geordnet
+       (die Meldung gibt hier keine Reihenfolge vor) · ${rows.length} Werte</span></div>` : '';
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}<table><thead><tr><th class="rh">${axisMap?'Code':'Row'}</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){
@@ -545,6 +765,102 @@ function coverageBlock(rep){
     <b>${reported}</b> von <b>${keys.length}</b> deklarierten Templates offengelegt${
     conflict?` · <b>${conflict}</b> widersprüchlich (unten)`:''}</div>${h}</div>`;
 }
+/* ================= Überblick (#47, R2) ====================================
+   Der Report begann bisher mit 136 gleichrangigen Tabellen in Codereihenfolge
+   — das Erste nach dem Einstieg war eine fast leere Krypto-Tabelle, weil
+   `01.00` alphabetisch vorn steht. Der Überblick ist die erste der drei Ebenen:
+   wenige Kennzahlen, jede mit ihrer Stellung in der Peer-Gruppe.
+
+   Die Peer-Gruppe ist DIESELBE wie im Benchmark (Größenklasse ×
+   Konsolidierungskreis × Stichtag, ab n≥5) und wird IMMER auf der vollen
+   Population gerechnet — der Sidebar-Filter verengt die Ansicht, nicht den
+   Vergleichsmaßstab.                                                        */
+const km1Pct=(rep,row)=>{ const v=km1Value(rep,row); return (v==null||Math.abs(v)>10)?null:v*100; };
+function eurBn(rep,v){
+  if(v==null) return null;
+  const cur=curOf(rep), r=cur==='EUR'?1:(FX.get(cur+'|'+rep.refPeriod)||null);
+  return r==null?null:v*r/1e9;
+}
+const OV_METRICS=[
+  {id:'cet1',label:'CET1-Quote',       unit:'%',       get:r=>km1Pct(r,'0050')},
+  {id:'tc',  label:'Gesamtkapitalquote',unit:'%',      get:r=>km1Pct(r,'0070')},
+  // Der einzige gerechnete Wert im Überblick: Gesamtkapitalquote minus
+  // Gesamtanforderung. Beides Prozentpunkte aus demselben Template.
+  {id:'hr',  label:'Headroom TC−OCR',  unit:'pp',      get:r=>{
+      const t=km1Pct(r,'0070'), o=km1Pct(r,'0190');
+      return (t==null||o==null)?null:t-o; }},
+  {id:'lev', label:'Verschuldungsquote',unit:'%',      get:r=>km1Pct(r,'0220')},
+  {id:'lcr', label:'LCR',              unit:'%',       get:r=>km1Pct(r,'0320')},
+  {id:'nsfr',label:'NSFR',             unit:'%',       get:r=>km1Pct(r,'0350')},
+  {id:'npl', label:'NPL-Quote (CQ3)',  unit:'%',       get:r=>{
+      const pe=tplValue(r,'82.00.A','0020','0010'), npe=tplValue(r,'82.00.A','0020','0040');
+      if(pe==null||npe==null) return null;
+      const tot=pe+npe; return tot>0?npe/tot*100:null; }},
+  {id:'trea',label:'TREA',             unit:'Mrd EUR', get:r=>eurBn(r,km1Value(r,'0040'))},
+];
+let OV_PCT=null;
+function overviewPercentiles(){
+  if(!BM_LOADED) return null;          // ohne die anderen Reports keine Einordnung
+  if(OV_PCT) return OV_PCT;
+  const rows=REPORTS.map(rep=>{
+    const {lei,scope}=leiParts(rep.entityID);
+    const m=META.get(lei)||{};
+    const r={key:repKey(rep), itype:shortItype(m.institution_type||''), scope, date:rep.refPeriod};
+    for(const mt of OV_METRICS) r[mt.id]=mt.get(rep);
+    return r;
+  });
+  OV_PCT=new Map();
+  for(const mt of OV_METRICS) OV_PCT.set(mt.id, percentileMap(rows, mt.id));
+  return OV_PCT;
+}
+function renderOverview(rep){
+  const host=document.getElementById('ovSection');
+  if(!host) return;
+  const pm=overviewPercentiles();
+  const key=repKey(rep);
+  const have=[], miss=[];
+  for(const mt of OV_METRICS){
+    const v=mt.get(rep);
+    if(v==null) miss.push(mt.label); else have.push({mt,v});
+  }
+  let h='';
+  if(have.length){
+    h+='<div class="ovgrid">';
+    for(const {mt,v} of have){
+      const p=pm?(pm.get(mt.id)||new Map()).get(key):null;
+      h+=`<div class="ovcard"><div class="ovlab" title="${esc(mt.label)}">${esc(mt.label)}</div>
+        <div class="ovval">${esc(v.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1}).split(',').join(NBSP))}<span class="ovu">${esc(mt.unit)}</span></div>
+        ${p?pctBadge(p):''}</div>`;
+    }
+    h+='</div>';
+  }
+  // "Fehlt != Null": die nicht belegten Kennzahlen werden benannt, nicht
+  // weggelassen — sonst sähe ein Report mit zwei Karten aus wie einer, für den
+  // es nur zwei Kennzahlen gibt.
+  if(miss.length)
+    h+=`<div class="ovmiss">Ohne Wert in diesem Report: ${esc(miss.join(' · '))}
+      <span class="cl">— nicht offengelegt, nicht in unserem Bestand platzierbar oder ohne EZB-Kurs. Nicht „null".</span></div>`;
+  const q=rep.quality;
+  if(q && q.n)
+    h+=`<div class="ovq" title="Werte, die ausserhalb der Verteilung ihrer Zellpopulation liegen. Das kann eine korrekte Besonderheit sein.">△ Plausibilitätsprüfung: <b>${q.n}</b> Befund(e) in ${q.t?q.t.length:0} Template(s), größte Abweichung ${esc(q.d)} Größenordnungen${q.t&&q.t.length?` <span class="cl">· ${esc(q.t.slice(0,10).join(', '))}${q.t.length>10?' …':''}</span>`:''}</div>`;
+  if(!h){ host.innerHTML=''; return; }
+  const note=pm?'Balken = Perzentil der Peer-Gruppe (gleiche Größenklasse, Konsolidierung, Stichtag; ab 5 Reports)':'Peer-Einordnung wird geladen…';
+  host.innerHTML=`<section><h3>Überblick <span class="scalenote">${esc(note)}</span></h3>${h}</section>`;
+}
+
+/* ---- Themenblöcke (Ebene 2) ---------------------------------------------
+   Zuordnung je BASISTEMPLATE ('60.00.A' -> '60.00'): die Buchstaben-Suffixe
+   sind Teilblätter desselben Templates. Unbekanntes landet im Auffangblock,
+   nichts verschwindet. */
+const baseTid=t=>t.replace(/\.[A-Z]$/,'');
+const themeOf=t=>THEME_OF.get(baseTid(t))||'__rest';
+const THEME_REST={id:'__rest', label:'Nicht zugeordnet'};
+function themeBar(withData, declared){
+  if(!declared) return '';
+  const pct=Math.max(2,Math.min(100, withData/declared*100));
+  return `<span class="pctb thbar" title="${withData} von ${declared} in diesem Block deklarierten Templates tragen Daten"><span class="pctf" style="width:${pct}%"></span></span>`;
+}
+
 async function renderReport(rep){
   VIEW='reports'; setTabs();
   activeKey=repKey(rep);
@@ -564,30 +880,81 @@ async function renderReport(rep){
     <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
     <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(curOf(rep))}</b>
     · Framework <b>${esc(rep.framework)}</b></div></div>
+    <div id="ovSection"></div>
     <div id="tsSection"></div>
     ${coverageBlock(rep)}
     <div class="tfilter"><input id="tfilter" placeholder="Filter templates (code / title)…">${controlsHTML()}</div>
     <div id="tcontainer"></div>`;
-  // Zeitreihe nur, wenn dieses Institut ≥2 Stichtage hat (aus dem Slim-Index bekannt) →
-  // Benchmark-Aggregat lazy laden, dann #tsSection nachrendern
-  if(entityReports(rep).length>=2)
-    ensureBenchmark().then(()=>{ if(activeKey===repKey(rep)) renderTimeseries(rep); });
+  // Werte sofort aus dem eigenen Shard; die Peer-Einordnung braucht die anderen
+  // Reports und kommt nach, sobald benchmark.json da ist.
+  renderOverview(rep);
+  ensureBenchmark().then(()=>{
+    if(activeKey!==repKey(rep)) return;
+    renderOverview(rep);
+    if(entityReports(rep).length>=2) renderTimeseries(rep);
+  });
+  // Ebene 2+3: Themenblöcke, Rohtabellen erst beim Aufklappen gerendert. Das
+  // ist nicht nur Ordnung, sondern auch Tempo — 136 Gitter auf einmal zu bauen
+  // war der teuerste Schritt am Report.
+  const declared=new Map();
+  for(const t of Object.keys(rep.coverage||{}))
+    declared.set(themeOf(t), (declared.get(themeOf(t))||0)+1);
   const draw=()=>{
     const f=(document.getElementById('tfilter').value||'').toLowerCase();
-    const c=document.getElementById('tcontainer'); c.innerHTML='';
-    let shown=0;
-    for(const tid of tids){
-      const title=(TITLES.get(dpmCode(tid))||'').toLowerCase();
-      if(f && !tid.toLowerCase().includes(f) && !title.includes(f)) continue;
-      c.insertAdjacentHTML('beforeend', renderTemplate(tid, rep.templates.get(tid), rep));
-      shown++;
+    const c=document.getElementById('tcontainer');
+    const hit=tid=>!f || tid.toLowerCase().includes(f) ||
+                   (TITLES.get(dpmCode(tid))||'').toLowerCase().includes(f);
+    const all=new Map(), hits=new Map();
+    const push=(m,id,t)=>{ (m.get(id)||m.set(id,[]).get(id)).push(t); };
+    for(const tid of tids){ push(all,themeOf(tid),tid); if(hit(tid)) push(hits,themeOf(tid),tid); }
+    const order=[...THEME_ORDER, THEME_REST];
+    let h='', nHit=0;
+    for(const th of order){
+      const mine=all.get(th.id)||[], mh=hits.get(th.id)||[];
+      const dec=declared.get(th.id)||0;
+      if(!mine.length && !dec) continue;      // keine Daten, keine Deklaration -> keine Aussage
+      nHit+=mh.length;
+      // Beim Filtern führt der Treffer: Blöcke mit Treffern gehen auf, Blöcke
+      // ohne bleiben sichtbar, aber leer — der Filter sucht über ALLE
+      // Templates, auch über eingeklappte.
+      const open=f ? mh.length>0 : OPENTHEMES.has(th.id);
+      const count=f
+        ? `${mh.length} Treffer von ${mine.length}`
+        : (dec?`${mine.length} von ${dec} Templates mit Daten`:`${mine.length} Templates`);
+      h+=`<details class="theme" data-t="${esc(th.id)}"${open?' open':''}>
+        <summary>${esc(th.label)}<span class="thcount">${esc(count)}</span>${f?'':themeBar(mine.length,dec)}</summary>
+        <div class="tbody"></div></details>`;
     }
-    if(!shown) c.innerHTML='<div class="status">No templates match.</div>';
+    c.innerHTML=h||'<div class="status">Keine Templates in diesem Report.</div>';
+    if(f && !nHit) c.insertAdjacentHTML('afterbegin','<div class="status">Kein Template passt zum Filter.</div>');
+    // offene Blöcke jetzt füllen; der Rest wartet auf sein toggle-Ereignis
+    c.querySelectorAll('details.theme[open]').forEach(d=>fillTheme(rep,d,(f?hits:all).get(d.dataset.t)||[]));
+    c._lists=(f?hits:all); c._filtered=!!f;
+  };
+  const fillTheme=(rep,det,list)=>{
+    const body=det.querySelector('.tbody');
+    if(body.dataset.done==='1') return;
+    const cont=document.getElementById('tcontainer');
+    body.innerHTML=list.map(tid=>renderTemplate(tid, rep.templates.get(tid), rep)).join('')
+      || `<div class="status">${cont&&cont._filtered
+            ? 'Kein Template dieses Blocks passt zum Filter.'
+            : 'Für diesen Block liegen keine auswertbaren Zellen vor — er ist deklariert, aber ohne Daten in unserem Bestand.'}</div>`;
+    body.dataset.done='1';
   };
   draw();
   document.getElementById('tfilter').addEventListener('input',draw);
+  const cont=document.getElementById('tcontainer');
+  // `toggle` steigt nicht auf — deshalb in der Capture-Phase abgefangen.
+  cont.addEventListener('toggle',e=>{
+    const det=e.target;
+    if(!det.classList||!det.classList.contains('theme')) return;
+    const id=det.dataset.t;
+    if(det.open){ OPENTHEMES.add(id); fillTheme(rep,det,(cont._lists||new Map()).get(id)||[]); }
+    else OPENTHEMES.delete(id);
+    persist();
+  }, true);
   // Dimensionswechsel (#52): Auswahl merken und nur neu zeichnen.
-  document.getElementById('tcontainer').addEventListener('change',e=>{
+  cont.addEventListener('change',e=>{
     const sel=e.target.closest('.dimsel');
     if(!sel) return;
     DIMSEL.set(sel.dataset.tid, sel.value);
@@ -760,7 +1127,7 @@ const BM_PROFILES={
 };
 /* Greift das Profil (direkt oder über eine Spalte) auf KM1 zu? Steuert nur den
    Hinweistext in der Kopfzeile — npl/esg kommen ohne KM1 aus. */
-const bmUsesKm1=prof=>prof.tpl==='61.00'||prof.cols.some(c=>c.tpl==='61.00'||c.kind==='shareOfTrea');
+const bmUsesKm1=prof=>prof.tpl!=='61.00'&&prof.cols.some(c=>c.tpl==='61.00'||c.kind==='shareOfTrea');
 let BMP = store.bmp && BM_PROFILES[store.bmp] ? store.bmp : 'km1';
 let BM_PCT = store.bmpct === true;   // Perzentil-Bänder (Peer-Gruppe), aus per Default
 // Auffällige Reports sind per Default SICHTBAR: Ausblenden waere eine
@@ -852,6 +1219,102 @@ function pctBadge(info){
        + `<span class="pctf" style="width:${Math.max(2,Math.min(100,info.p))}%"></span><i>P${p}</i></span>`;
 }
 
+/* ---- Verteilung statt Rangliste (#48, R3) --------------------------------
+   Der Benchmark oeffnete mit vier Zeilen Kommuninvest um 370 % CET1. Fuer eine
+   schwedische Kommunalfinanzierungsagentur mag das stimmen — aber als ERSTER
+   Eindruck einer Rangliste liest es sich als „die Daten sind kaputt". Das
+   Problem ist die Darstellungsform selbst: eine Rangliste sagt „Bester", sie
+   hat keine Stelle, an der ein Randwert wie ein Randwert aussieht.
+
+   Deshalb steht die Verteilung UEBER der Liste. Derselbe Wert liegt dort
+   sichtbar am Rand. Entfernt oder umsortiert wird nichts — die Rangliste
+   bleibt vollstaendig und an ihrer Sortierung.                              */
+function quart(sorted){
+  const q=p=>{ const i=(sorted.length-1)*p, lo=Math.floor(i), hi=Math.ceil(i);
+               return sorted[lo]+(sorted[hi]-sorted[lo])*(i-lo); };
+  return {q1:q(.25), med:q(.5), q3:q(.75)};
+}
+/* Tukey-Zaeune. Robust gegen genau die Werte, um die es geht: Mittelwert und
+   Standardabweichung wuerden von einem 370-%-Wert selbst verschoben, Quartile
+   nicht. */
+const FENCE=1.5;
+function fences(sorted){
+  const {q1,med,q3}=quart(sorted);
+  const iqr=q3-q1;
+  return {q1,med,q3,iqr, lo:q1-FENCE*iqr, hi:q3+FENCE*iqr};
+}
+const DBINS=30, DW=252, DH=44, DPAD=12;
+/* Histogramm ueber die Zaun-Spanne, mit ABGESCHNITTENER Achse: was darueber
+   hinausgeht, steht als Ueberlaufbalken im Randstreifen — als Anzahl, nicht als
+   Position. Ohne den Schnitt draengte sich die gesamte Verteilung in den ersten
+   Balken, sobald ein einziger Wert bei 400 % liegt; mit ihm bleibt der Rumpf
+   lesbar UND der Rand sichtbar. Der Trennstrich zeigt, dass die Achse bricht. */
+function distChart(vals){
+  const s=[...vals].filter(v=>v!=null&&isFinite(v)).sort((a,b)=>a-b);
+  if(s.length<5) return null;
+  const f=fences(s);
+  const lo=Math.max(s[0],f.lo), hi=Math.min(s[s.length-1],f.hi);
+  const nLo=s.filter(x=>x<lo).length, nHi=s.filter(x=>x>hi).length;
+  const span=(hi-lo)||1;
+  const bins=new Array(DBINS).fill(0);
+  for(const x of s){ if(x<lo||x>hi) continue;
+    bins[Math.min(DBINS-1, Math.floor((x-lo)/span*DBINS))]++; }
+  const peak=Math.max(1,...bins), inner=DW-2*DPAD, bw=inner/DBINS, base=DH-6, top=DH-10;
+  // Fläche + helle Horizontallinien statt Achsenkreuz und Ticks (#61): die
+  // Linien liegen HINTER den Balken und tragen die Ablesbarkeit, ohne einen
+  // Rahmen zu ziehen.
+  let g=`<rect class="dpanel" x="0" y="0" width="${DW}" height="${base+1}"/>`;
+  for(let k=1;k<=3;k++){
+    const y=(base-top*k/3).toFixed(1);
+    g+=`<line class="dgrid" x1="0" x2="${DW}" y1="${y}" y2="${y}"/>`;
+  }
+  bins.forEach((n,i)=>{ if(!n) return;
+    const h=Math.max(1, n/peak*top);
+    g+=`<rect x="${(DPAD+i*bw).toFixed(1)}" y="${(base-h).toFixed(1)}" width="${Math.max(1,bw-.5).toFixed(1)}" height="${h.toFixed(1)}"/>`; });
+  const x=v=>DPAD+(v-lo)/span*inner;
+  g+=`<line class="dmed" x1="${x(f.med).toFixed(1)}" x2="${x(f.med).toFixed(1)}" y1="2" y2="${base}"/>`;
+  // Randstreifen: gestrichelter Trennstrich, weil die Achse dort BRICHT. Der
+  // Balken ist eine Anzahl, keine Position — ohne den Strich laese man ihn als
+  // "ganz weit rechts" statt als "jenseits der Skala".
+  const gut=(n,left)=>{
+    if(!n) return '';
+    const h=Math.max(3, Math.min(1,n/peak)*top);
+    const sx=left?DPAD-5:DW-DPAD+5;
+    return `<line class="dsep" x1="${sx}" x2="${sx}" y1="1" y2="${base}" stroke-dasharray="2 2"/>`
+         + `<rect class="dout" x="${left?1:DW-5}" y="${(base-h).toFixed(1)}" width="4" height="${h.toFixed(1)}"/>`;
+  };
+  g+=gut(nLo,true)+gut(nHi,false);
+  return {svg:`<svg class="dist" width="${DW}" height="${DH}" viewBox="0 0 ${DW} ${DH}">${g}</svg>`,
+          n:s.length, med:f.med, q1:f.q1, q3:f.q3, lo, hi, nLo, nHi};
+}
+/* Randwerte je PEER-GRUPPE, nicht ueber die ganze Anzeige. Ueber alle Groessen-
+   klassen zu zaeunen hiesse, eine Exportkreditagentur an einer Dorfsparkasse zu
+   messen — dieselbe Ueberlegung wie bei den Perzentilbaendern. Das Histogramm
+   oben BESCHREIBT dagegen die angezeigte Menge; nur die Aussage ueber eine
+   einzelne Zeile ist peer-relativ. */
+function fenceOutliers(rows,colId){
+  const groups=new Map();
+  for(const r of rows){ const v=r[colId];
+    if(v==null||!isFinite(v)) continue;
+    const k=peerKeyOf(r); (groups.get(k)||groups.set(k,[]).get(k)).push(v); }
+  const fen=new Map();
+  for(const [k,arr] of groups){
+    if(arr.length<PCT_MIN_GROUP) continue;      // darunter ist ein Zaun Rauschen
+    arr.sort((a,b)=>a-b); fen.set(k, fences(arr));
+  }
+  const out=new Map();
+  for(const r of rows){
+    const v=r[colId]; if(v==null||!isFinite(v)) continue;
+    const f=fen.get(peerKeyOf(r)); if(!f) continue;
+    if(v>f.hi) out.set(r.key,'hoch'); else if(v<f.lo) out.set(r.key,'niedrig');
+  }
+  return out;
+}
+function fenceBadge(dir,label){
+  if(!dir) return '';
+  return `<span class="fb" title="Der Wert in der sortierten Spalte „${label}" liegt ausserhalb der Tukey-Zäune seiner Peer-Gruppe (Q1−1,5·IQR bis Q3+1,5·IQR, ab 5 Reports). Das beschreibt die Lage in der Verteilung — es sagt nichts darüber, ob die Meldung richtig ist.">◇ Randwert ${esc(dir)}</span>`;
+}
+
 /* ---- Plausibilitaets-Marker (#48) ---------------------------------------
    Die Rangliste fuehrte mit Werten wie 387 % CET1 an, ohne Hinweis darauf,
    dass wir sie selbst als auffaellig einstufen (#17). Der Marker ordnet ein,
@@ -878,6 +1341,48 @@ function bmCell(c,v,pinfo){
   else txt=v.toFixed(1)+NBSP+'%';
   return `<td class="num">${zdash(txt)}${pinfo?pctBadge(pinfo):''}</td>`;
 }
+/* Eine Karte je Profilspalte, ueber der Rangliste. Klick setzt die Sortierung —
+   damit fuehrt die Verteilung zur Liste und nicht umgekehrt. */
+function distributionRow(rows, prof){
+  const fmtv=v=>{
+    if(v==null) return '–';
+    const d=Math.abs(v)>=100?0:1;
+    return v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}).split(',').join(NBSP);
+  };
+  // Anmerkung unter dem Titel: klärt die Größe, bevor die Zahl gelesen wird.
+  const NOTE={pct:'Quote aus KM1, in Prozent', ratio:'Verhältniszahl, in Prozent',
+              shareOfTrea:'Anteil an der Gesamtrisikoposition (TREA)',
+              pp:'Differenz in Prozentpunkten', eur:'Beträge in Mrd. EUR (EZB-Kurs)',
+              num:'Absolutzahl'};
+  // Quellzeile je Grafik — die exakte Herkunft, nicht nur die Institution:
+  // Template, Zelle, Stichtage, Zahl der Reports. Das ist die
+  // Reproduzierbarkeitslinie des Projekts als Gestaltungselement.
+  const dates=[...new Set(rows.map(r=>r.date))].sort();
+  const period=dates.length===1?dates[0]
+    :`${dates[0]}–${dates[dates.length-1]} (${dates.length} Stichtage)`;
+  let cards='';
+  for(const c of prof.cols){
+    const d=distChart(rows.map(r=>r[c.id]));
+    if(!d) continue;
+    const tail=[d.nLo?`${d.nLo} links`:'', d.nHi?`${d.nHi} rechts`:''].filter(Boolean).join(' · ');
+    const cell=c.calc?`abgeleitet aus ${c.tpl||prof.tpl}`
+                     :`${c.tpl||prof.tpl} · r${c.row} c${c.col||'0010'}`;
+    cards+=`<div class="dcard${c.id===bmSort.col?' on':''}" data-k="${esc(c.id)}" tabindex="0"
+      title="Verteilung über die ${d.n} angezeigten Reports. Die Achse ist an den Tukey-Zäunen abgeschnitten; was darüber hinausgeht, steht als Balken im Randstreifen — als Anzahl, nicht als Position. Klick sortiert die Liste nach dieser Spalte.">
+      <div class="dlab">${esc(c.label)}</div>
+      <div class="dnote">${esc(NOTE[c.kind]||'')}</div>${d.svg}
+      <div class="dax"><span>${esc(fmtv(d.lo))}</span><span>${esc(fmtv(d.hi))}</span></div>
+      <div class="dsum">n=${d.n} · Median ${esc(fmtv(d.med))} · Q1–Q3 ${esc(fmtv(d.q1))}–${esc(fmtv(d.q3))}${
+        tail?` · <b>${esc(tail)}</b> außerhalb`:''}</div>
+      <div class="dsrc">Quelle: EBA Pillar 3 Data Hub · ${esc(cell)} · ${esc(period)}</div></div>`;
+  }
+  if(!cards) return '';
+  return `<div class="dgrid">${cards}</div>
+    <div class="caveat" style="border-left-color:var(--muted)">Die Liste unten <b>sortiert</b>, die Verteilung oben <b>ordnet ein</b>.
+    Ein Spitzenplatz kann ein Randwert sein — 370 % CET1 stehen in einer Rangliste ganz oben und in einer
+    Verteilung ganz außen. Beides ist derselbe Wert; nur das eine sieht aus wie „Bester". Zeilen, deren Wert
+    in der sortierten Spalte außerhalb der Zäune ihrer Peer-Gruppe liegt, sind mit ◇ markiert.</div>`;
+}
 async function renderBenchmark(){
   VIEW='benchmark'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
@@ -896,6 +1401,11 @@ async function renderBenchmark(){
     `<option value="${k}"${k===BMP?' selected':''}>${esc(p.label)}</option>`).join('');
   const pmaps=new Map();
   if(BM_PCT) for(const c of prof.cols) pmaps.set(c.id,percentileMap(allRows,c.id));
+  // Randwert-Marker nur fuer die Spalte, nach der gerade sortiert wird: genau
+  // die entscheidet, wer die Liste anfuehrt. Bei Sortierung nach Name/Stichtag
+  // gibt es keine Metrik und damit keinen Marker.
+  const sortCol=prof.cols.find(c=>c.id===bmSort.col);
+  const fmarks=sortCol?fenceOutliers(allRows, sortCol.id):new Map();
   let h=`<div class="rhead"><h2>Benchmark</h2></div>
     <div class="bmbar"><label class="ctl">Profil: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
@@ -905,6 +1415,7 @@ async function renderBenchmark(){
     <div class="caveat">⚠ Vergleichbarkeits-Caveat: Rechnungslegung, Konsolidierungskreis (CON/IND),
     nationale Optionen und Framework-Version (4.1/4.2) unterscheiden sich — Ranglisten sind indikativ,
     keine Aufsichtsmetrik. Quelle: öffentliche Pillar-3-Meldungen (© EBA).</div>
+    ${distributionRow(allRows, prof)}
     <table class="bmtable"><thead><tr>
       <th data-k="name">Institut <span class="dir"></span></th><th data-k="date">Stichtag <span class="dir"></span></th>`;
   for(const c of prof.cols) h+=`<th class="num" data-k="${c.id}">${esc(c.label)} <span class="dir"></span></th>`;
@@ -912,7 +1423,8 @@ async function renderBenchmark(){
   h+='</tr></thead><tbody>';
   for(const r of rows){
     h+=`<tr${flaggedFor(r.q,prof.tpl)?' class="flagged"':''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
-        ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}
+        ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}${
+          sortCol?fenceBadge(fmarks.get(r.key), sortCol.label):''}
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;
     for(const c of prof.cols) h+=bmCell(c,r[c.id],BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null);
@@ -930,6 +1442,13 @@ async function renderBenchmark(){
   });
   document.getElementById('bmHide').addEventListener('change',e=>{
     BM_HIDEFLAG=e.target.checked; store.bmhide=BM_HIDEFLAG; persist(); renderBenchmark();
+  });
+  main.querySelectorAll('.dcard').forEach(card=>{
+    card.onclick=()=>{
+      const k=card.dataset.k;
+      if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:-1};
+      renderBenchmark();
+    };
   });
   main.querySelectorAll('th[data-k]').forEach(th=>{
     const k=th.dataset.k;
@@ -1069,9 +1588,10 @@ async function init(){
     if(bar) bar.style.width='100%';
     buildFromIndex(idx, codebook);
     REPORTS.sort((a,b)=>(bankName(a.entityID)+a.refPeriod).localeCompare(bankName(b.entityID)+b.refPeriod));
+    TOTAL_GROUPS=groupReports(REPORTS).length;
     const nf=idx.stats.facts;
-    document.getElementById('hsub').textContent=`${idx.stats.reports} Reports · ${nf.toLocaleString('en-US').split(',').join(NBSP)} Facts`;
-    initFilters(); updateCmpBadge(); renderReportList(); route();
+    document.getElementById('hsub').textContent=`${TOTAL_GROUPS} Institute · ${idx.stats.reports} Reports · ${nf.toLocaleString('en-US').split(',').join(NBSP)} Facts`;
+    initFilters(); wireList(); updateCmpBadge(); renderReportList(); route();
   }catch(err){
     document.getElementById('main').innerHTML='<div class="status">Fehler beim Laden: '+esc(err.message)+
       '<br><br>Vom Repo-Root ausliefern: <code>python3 -m http.server 8766</code> → <code>/processed/zweig_a/viewer_json.html</code></div>';

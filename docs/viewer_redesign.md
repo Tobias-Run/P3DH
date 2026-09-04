@@ -1,5 +1,8 @@
 # Viewer: was zu einem modernen Analytics-Produkt fehlt
 
+**Ein Werkzeug scheitert selten daran, wie es aussieht. Es scheitert daran, was
+es den Nutzer mitdenken lässt.**
+
 Bestandsaufnahme am gerenderten Ist-Zustand (Chromium, 1600×950, Voll-Load mit
 882 Reports), nicht am Quelltext. Screenshots von Benchmark- und Report-Ansicht.
 
@@ -175,17 +178,57 @@ Coverage-Symbole (⊘ ∅ ⚠) ohne Farbe verständlich bleiben.
 
 ## Reihenfolge
 
-| | | Aufwand | Wirkung |
-|---|---|---|---|
-| R1 | Institutszentrische Navigation | mittel | hoch — betrifft jeden Einstieg |
-| R2 | Überblick + Themenblöcke | hoch | hoch — löst das „136 Tabellen"-Problem |
-| R3 | Ausreißer einordnen statt anführen | klein | hoch — Glaubwürdigkeit |
-| R4 | Visuelle Kodierung in Tabellen | mittel | mittel |
-| R5 | Teilbarer Zustand, Auswahl, Export | mittel | mittel |
-| R6 | Gestaltungssystem | mittel | mittel — wirkt erst mit R1–R3 |
+| | | Aufwand | Wirkung | Stand |
+|---|---|---|---|---|
+| R1 | Institutszentrische Navigation | mittel | hoch — betrifft jeden Einstieg | ✅ #46 |
+| R2 | Überblick + Themenblöcke | hoch | hoch — löst das „136 Tabellen"-Problem | ✅ #47 |
+| R3 | Ausreißer einordnen statt anführen | klein | hoch — Glaubwürdigkeit | ✅ #48 |
+| R4 | Visuelle Kodierung in Tabellen | mittel | mittel | offen #49 |
+| R5 | Teilbarer Zustand, Auswahl, Export | mittel | mittel | offen #50 |
+| R6 | Gestaltungssystem | mittel | mittel — wirkt erst mit R1–R3 | ✅ #61 (ersetzt #51) |
 
-**R3 zuerst**, wenn schnell etwas Sichtbares her soll: kleiner Eingriff, und er
-behebt den schlechtesten ersten Eindruck, den das Produkt heute macht.
+**Nachtrag zu R6.** Der Abschnitt unten sagte „Typo-Skala, Flächenebenen,
+Farbdisziplin". Das ist ein Wunsch, kein Ziel — man kann hinterher nicht sagen,
+ob es erreicht ist. Umgesetzt wurde es deshalb erst, als #61 ein **überprüfbares**
+Idiom vorgab: ruhiger Kopf, ein Akzent, Serif für Überschriften, Grafiken auf
+eigener Fläche mit Quellzeile. Die Vorlage ist redaktionell, nicht softwaretypisch;
+was daran über das Vorbild hinausgeht, ist die Quellzeile — sie nennt bei uns
+Template, Zelle, Stichtage und Reportzahl statt nur der Institution. Und die Regel
+„nie Rot/Grün als Wertung" ist nicht bloß erhalten geblieben, sondern von einem
+Test bewacht: der Akzent darf ausschließlich auf Fokus-Selektoren stehen.
+
+Die Barrierefreiheitsfrage am Ende dieses Abschnitts („heute nicht geprüft") ist
+damit ebenfalls beantwortet: WCAG-Kontrast wird für jede Text-auf-Fläche-Paarung
+in beiden Themes geprüft, der schwächste Wert liegt bei 4,91:1. Die
+Coverage-Symbole tragen ohnehin Klartext neben dem Zeichen und bleiben ohne Farbe
+verständlich.
+
+### Was R1–R3 tatsächlich verändert haben
+
+**R1.** 882 Einträge → 475, einer je (LEI, Konsolidierungskreis), Stichtage als
+Chips darin. Zwei Dinge kamen aus den Daten, nicht aus dem Entwurf: der
+Schlüssel muss den Scope enthalten (CON ≠ IND), und Währung wie
+Framework-Version dürfen **nicht** an den Gruppenkopf — 4 Gruppen wechseln
+zwischen Stichtagen die Meldewährung, 103 von 475 die Framework-Version.
+
+**R2.** Überblick (8 Kennzahlen mit Peer-Perzentil und Qualitätssignal) →
+12 kuratierte Themenblöcke mit Füllstand → Rohtabellen auf Klick. Die
+Zuordnung liegt in `scripts/template_themes.py` und geht über `codebook.json`
+an den Viewer: **eine** Registry, kein zweiter Katalog in JavaScript. Nichts
+verschwindet — Unzugeordnetes fällt in einen sichtbaren Auffangblock, der
+Filter sucht weiter über alle Templates. Nebeneffekt: die Gitter entstehen erst
+beim Aufklappen statt 136 auf einmal.
+
+**R3.** Über der Rangliste steht jetzt die Verteilung — eine Karte je
+Profilspalte, Histogramm über die Tukey-Spanne mit gebrochener Achse und
+Überlaufbalken. Zeilen außerhalb der Zäune **ihrer Peer-Gruppe** tragen ein ◇.
+Gemessen: 6,5 % der Reports sind Randwerte in der CET1-Quote — selten genug,
+dass die Markierung etwas heißt. Die Rangliste selbst bleibt unverändert
+sortier- und vollzählig.
+
+Was dabei sichtbar wurde und vorher niemandem auffiel: **Lunar Group A/S mit
+0,3 % CET1** — der untere Rand derselben Verteilung. Eine Rangliste, die nach
+oben sortiert, zeigt so etwas nie.
 
 ## Was wir nicht tun sollten
 

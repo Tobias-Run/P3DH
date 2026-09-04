@@ -19,7 +19,16 @@ from collections import defaultdict
 import csv
 import re
 
-from access_parser import AccessParser
+# `access_parser` wird ERST IN main() importiert. Der Import auf Modulebene hat
+# die Testsuite in CI vier Läufe lang rot gehalten: tests/test_open_axis.py
+# importiert dieses Modul wegen parse_cellcode() und OPEN_AXIS — reine
+# Funktionen ohne Datenbankbezug —, und der Testworkflow installiert bewusst
+# nur duckdb + pyarrow. Ein ImportError beim Laden EINER Testdatei lässt
+# unittest den ganzen Lauf als Fehlschlag melden.
+#
+# Die Abhängigkeit selbst ist der Grund, sie nicht in CI zu installieren: sie
+# baut nur mit setuptools<60 und ohne Build-Isolation, und sie wird ausschließlich
+# für den (opt-in) Codebook-Bau aus der 755-MB-DPM-Datenbank gebraucht.
 
 ROOT = Path(__file__).resolve().parent.parent
 # Cumulative DPM 2.0 dictionary (RF 4.0/4.1/4.2). Download (755 MB unzipped, gitignored):
@@ -255,6 +264,8 @@ def load_report_codes(path: Path, longform: Path = None):
 
 
 def main():
+    from access_parser import AccessParser   # siehe Kommentar am Dateikopf
+
     print(f"Reading DPM dictionary: {DB_PATH.name}")
     db = AccessParser(str(DB_PATH))
     print("  building label index...")

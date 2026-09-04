@@ -1,8 +1,24 @@
 # EBA Pillar 3 Data Hub (P3DH) — Datenanalyse-Pipeline
 
-Reproduzierbare Pipeline: öffentlich publizierte Pillar-3-Daten aus dem EBA Pillar 3
-Data Hub (P3DH) auf dem European Data Access Portal (EDAP) beziehen, aus XBRL-CSV in
-analysefertige Form überführen und Data-Science darauf ermöglichen.
+**Europas Banken legen alles offen. Lesen kann es fast niemand.**
+
+Die EBA veröffentlicht die aufsichtlichen Offenlegungen der großen EU- und
+EEA-Institute an einer Stelle, maschinenlesbar als XBRL-CSV. Das war ein
+echter Fortschritt — und es löste die falsche Hälfte des Problems. Das Portal
+gibt ein Bankarchiv nach dem anderen heraus. Ob eine Kapitalquote hoch ist, ob
+ein Länderexposure ungewöhnlich aussieht oder ob eine gemeldete Zahl überhaupt
+plausibel ist, sagt es nicht.
+
+Diese Fragen brauchen die Population als Maßstab. Also haben wir sie gebaut:
+jede Einreichung geparst, jeden Datenpunkt gegen das DPM aufgelöst, jedes
+Template mit echten Zeilen- und Spaltenlabels rekonstruiert — und dann über die
+Institute hinweg verglichen.
+
+Der Unterschied zeigt sich schnell. Eine Meldung im Bestand weist **11,7 Bio.
+EUR fixe Vorstandsvergütung für neun Personen** aus, rund das Dreifache des
+deutschen BIP. Für sich gelesen ist das eine Zahl. Gegen 330 vergleichbare
+Meldungen gelesen, deren Median bei 1,6 Mio. EUR liegt, ist es ein Befund. Wir
+korrigieren sie nicht — wir markieren sie und sagen, warum.
 
 > **Aktueller Projektstatus:** siehe `SESSION_STATUS.md` — wird laufend aktuell gehalten.
 > `P3DH agent instructions.txt` war nur das initiale Briefing zu Projektstart und wird
@@ -13,10 +29,21 @@ analysefertige Form überführen und Data-Science darauf ermöglichen.
 **Öffentlich live:** **https://tobias-run.github.io/P3DH/** — kein Klonen/Server nötig.
 
 Der **Zweig-A-Viewer** rekonstruiert die Bank-Templates (KM1, OV1, CCR1 …) mit vollen
-Zeilen-/Spalten-Labels direkt im Browser und bietet **Peer-Benchmark, Zeitreihen und
-Vergleich** über die Institute. Aktuell geladen: **553 Reports · 1,26 Mio. Fakten · 445
-Institute · 30 Länder** (u. a. der volle Stichtag 31.12.2025); Voll-Katalog = 489 Institute /
-4.278 Einreichungen, wellenweise nachladbar.
+Zeilen-/Spalten-Labels und bietet **Peer-Benchmark, Zeitreihen und Vergleich** über die
+Institute. Aktuell geladen: **882 Reports · 2,30 Mio. platzierte Fakten · 474 Institute ·
+30 Länder** über fünf Stichtage; Voll-Katalog = 489 Institute / 4.278 Einreichungen,
+wellenweise nachladbar.
+
+Drei Dinge, die das offizielle Portal nicht leistet:
+
+- **Verteilung statt Rangliste.** Peer-Gruppen nach Größenklasse, Konsolidierungskreis
+  und Stichtag; Perzentilbänder statt nackter Tabellenführung. Ein Randwert liegt am Rand
+  einer Verteilung, nicht an der Spitze einer Liste. Gemessen sind rund **6 %** der
+  Reports in einer gegebenen Kennzahl Randwerte.
+- **Plausibilität gegen die Population** — markiert, nie versteckt, nie verändert.
+- **Länderexposure über Institute hinweg**: Heimatanteil, Länder-HHI und ein ehrliches
+  Qualitätsflag für den Residualbucket. Der Median liegt bei **82,3 %** Heimatanteil
+  (363 belastbare Reports).
 
 - **Landing:** `index.html` · **Viewer (Standard):** `processed/zweig_a/viewer_json.html`
 - **Wie es lädt:** Der JSON-Viewer holt einen schlanken `index.json` vorab und jeden Report
@@ -25,8 +52,25 @@ Institute · 30 Länder** (u. a. der volle Stichtag 31.12.2025); Voll-Katalog = 
   abgeleitet** (eine Transformationsstelle) und über den Orphan-`data`-Branch via **jsDelivr**
   ausgeliefert (Fallback: `raw.githubusercontent.com`).
 - **Gabelseite** `processed/zweig_a/index.html`: JSON-Viewer (Standard) vs. CSV-Viewer (Legacy,
-  nur lokal — braucht die 275-MB-`long_form_raw.csv`).
+  nur lokal — braucht die 413 MB große `long_form_raw.csv`).
 - **Lokal:** `python3 -m http.server 8766` im Repo-Root → `http://localhost:8766/`
+- **Gestaltung:** ein redaktionelles System (#61) — ruhiger Kopf, Serif für Überschriften,
+  ein einziger Akzent, und **Rot bedeutet Fokus, nie Wertung**. Zwei Tests halten das fest:
+  die Akzentfarbe darf nur auf Fokus-Selektoren stehen, und jede Text-auf-Fläche-Paarung
+  muss in beiden Themes WCAG AA erfüllen.
+
+## Was es nicht ist
+
+Keine Aufsicht und keine Bestenliste. Die Vergleichbarkeit über Institute hinweg ist
+tatsächlich begrenzt: Rechnungslegung, Konsolidierungskreise und nationale Optionen
+unterscheiden sich, und die Meldetaxonomie hat sich mitten im Bestand geändert. Jede
+Rangliste trägt diesen Vorbehalt sichtbar mit. Uns ist ein „das können wir nicht sagen"
+lieber als eine Genauigkeit, die die Daten nicht hergeben.
+
+Und: **Fehlt ist nicht Null.** Institute dürfen nach CRR Art. 432 rechtmäßig auslassen,
+und ein Template, das *wir* nicht platzieren können, ist unsere Lücke, nicht ihre. Der
+Viewer unterscheidet beides überall — die zwei zu vermengen hieße, Schweigen still in
+einen Befund zu verwandeln.
 
 ## ⚠ Disclaimer / Datenquellen
 
@@ -93,14 +137,20 @@ fertige `codebook/dpm_codebook.csv` liegt im Repo.
 - **Phase 0** — Scoping & Zugangsklärung ✅ → `docs/phase0_decision_memo.md`
 - **Phase 1** — Ingestion: Voll-Katalog-Harvester (`harvest_catalog_query.py`) + wellenweiser Download ✅
 - **Phase 2** — Parsing & DPM-Join → Codebook + Long-Form ✅
-- **Phase 3** — Zweig B (Parquet/DuckDB) + Zweig A (JSON-Viewer, aus Zweig B gespeist) ✅ · RF-4.1↔4.2-Brücke offen
-- **Phase 4** — Explorationen: Peer-Benchmark live; NPL/ESG-Profile, Perzentile, Transparenz-Matrix offen
+- **Phase 3** — Zweig B (Parquet/DuckDB) + Zweig A (JSON-Viewer, aus Zweig B gespeist) ✅ ·
+  RF-4.1↔4.2-Brücke gebaut (5.275 beobachtete Zellen: 5.087 stabil, 63 umgebunden,
+  125 mehrdeutig); ihre **Darstellung** in Zeitreihe und Sparkline ist offen (#26) —
+  103 von 475 Instituten haben inzwischen Reports beiderseits des Bruchs
+- **Phase 4** — Explorationen: sechs Benchmark-Profile (KM1, Headroom, Risiko, Liquidität,
+  NPL/CQ3, ESG/41.00) ✅ · Perzentilbänder je Peer-Gruppe ✅ · Plausibilitätsprofil (#17) ✅ ·
+  Footprint-Kennzahlen (#12) ✅ · Clustering und Transparenz-Matrix offen
 
 ## Automatisierte Pipeline (GitHub Actions)
 
 `.github/workflows/pipeline.yml` fährt die ganze Kette ohne den Laptop. Ausgelöst wird
-manuell (`workflow_dispatch`); ein wöchentlicher Cron liegt auskommentiert bereit und
-wird scharf geschaltet, sobald ein manueller Lauf sauber durch ist:
+manuell (`workflow_dispatch`). Ein wöchentlicher Cron liegt auskommentiert bereit; die
+Vorbedingung „ein manueller Lauf muss sauber durchlaufen" ist seit Lauf #5 erfüllt, offen
+ist nur noch die Entscheidung über den Harvest (#8):
 
 ```
 fetch_state.sh → plan_delta.py → download (nur Neues) → parse (inkrementell)
@@ -138,3 +188,10 @@ vor dem Publish ab, falls der Bestand schrumpft.
    („latest wins"). Der **vollständige Katalog** inkl. älterer Fassungen bleibt als
    Audit-Trail in `interim/edap_recon/manifest_full.csv` (4.278 Einreichungen, Voll-Harvest
    via `harvest_catalog_query.py`).
+
+---
+
+*Gestaltung inspiriert von The Economist — dem wir die Einsicht verdanken, dass eine
+Grafik eine Meinung haben darf, solange sie ihre Quelle nennt. Mit der Publikation in
+keiner Weise verbunden; Schriften und Farbwerte sind eigene, und das rote Rechteck haben
+wir ihnen gelassen.*
