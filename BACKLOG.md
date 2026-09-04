@@ -83,8 +83,11 @@ Optional weiter offen: `open_axis_dims` gegen DPM-Open-Axis-Member auflösen
   inklusive Sanity-Gate gegen schrumpfenden Bestand). Der wöchentliche Cron ist
   auskommentiert vorbereitet — scharf schalten, sobald ein manueller Lauf durch ist.
 
-Offen bleibt nur: **Harvest-Diff** → Issue #6. `harvest_catalog_query.py` schreibt
-den Katalog komplett neu, ohne Log, was seit dem letzten Harvest dazukam
-(`harvest_log.csv`/`manifest_delta.csv` sind angelegt, aber der Vergleich ist nicht
-scharf geschaltet). Im Workflow ist der Harvest deshalb bewusst **opt-in** — er ist
-der fragilste Teil der Kette (headless Power-BI-Embed).
+**Harvest-Diff** (Issue #6) ist seit 2026-09 geschlossen: `scripts/harvest_delta.py`
+klassifiziert jede Änderung (neu · resubmission · überholt · zurückgezogen),
+`harvest_log.csv` und `manifest_delta.csv` werden committet — vorher entstand die
+append-only-Historie auf einem Wegwerf-Runner und begann bei jedem Lauf neu —,
+und die Lauf-Zusammenfassung liest den Diff. Dazu ein Schrumpf-Gate **vor** dem
+Überschreiben von `manifest_full.csv`: danach wäre die Vergleichsgrundlage weg.
+Im Workflow bleibt der Harvest bewusst **opt-in** — er ist der fragilste Teil der
+Kette (headless Power-BI-Embed).

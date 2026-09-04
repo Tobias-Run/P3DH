@@ -75,6 +75,12 @@ jobs:
           # Institutsmetadaten fallen aus derselben Query — nur hier verfügbar.
           python scripts/build_entity_meta.py
 
+      # Der Konsument des Diffs (#6). Bis hierher war er reine Ausgabe in einem
+      # Runner-Log: berechnet, gedruckt, verworfen.
+      - name: Harvest-Delta
+        if: inputs.harvest
+        run: python scripts/harvest_delta.py >> "$GITHUB_STEP_SUMMARY"
+
       - name: Plan delta
         run: python scripts/plan_delta.py
 
@@ -198,10 +204,18 @@ jobs:
                   processed/entity_meta.csv processed/fx_rates.csv \
                   processed/quality_profile.csv processed/footprint.csv \
                   interim/plausibility_cells.csv interim/plausibility_findings.csv
+          # Harvest-Delta: entsteht nur bei inputs.harvest, deshalb einzeln und
+          # bedingt. harvest_log.csv ist append-only — ohne diesen Commit stirbt
+          # die Historie mit dem Runner, und der nächste Lauf beginnt wieder bei
+          # einer einzigen Zeile (#6).
+          for f in interim/edap_recon/harvest_log.csv \
+                   interim/edap_recon/manifest_delta.csv; do
+            if [ -f "$f" ]; then git add "$f"; fi
+          done
           if git diff --cached --quiet; then
             echo "Manifeste und Brücke unverändert"
           else
-            git commit -m "Katalog/Brücke/Plausibilitätsprofil aktualisiert (Pipeline)"
+            git commit -m "Katalog/Brücke/Plausibilitätsprofil/Harvest-Log aktualisiert (Pipeline)"
             git push
           fi
 
