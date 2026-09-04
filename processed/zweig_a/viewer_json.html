@@ -359,9 +359,14 @@ let THEME_ORDER=[], THEME_OF=new Map();
    bricht deshalb nicht sichtbar, sondern still. */
 let BRIDGE=new Map(), METRICDOC=new Map(), OPENMETRIC=null;
 const bridgeAt=(tid,row,col)=>{ const m=BRIDGE.get(tid); return m?(m[row+'|'+col]||''):''; };
+/* Zum Ton der Rebound-Meldung: gemessen tragen ALLE 63 umgebundenen Zellen in
+   4.1 und 4.2 dasselbe Zeilenlabel — 63 von 63, keine Ausnahme. Die Bindung
+   hat gewechselt, die Bezeichnung nicht. Das ist ein Grund fuer einen
+   Vorbehalt, aber keiner fuer die Warnung "misst womoeglich etwas anderes",
+   die hier zuerst stand. */
 const BRIDGE_TIP={
-  rebound:'Diese Zelle wurde zwischen Framework 4.1 und 4.2 auf einen neuen Datenpunkt umgebunden. Der Wert wird über die Koordinate weiter gefunden — ob er danach noch dasselbe misst, ist offen. Vergleiche über den Versionswechsel mit Vorbehalt.',
-  ambiguous:'Für diese Zelle liegen in beiden Framework-Versionen mehrere Datenpunkte auf derselben Koordinate; die Brücke konnte sie nicht eindeutig zuordnen. Noch schwächer belegt als ein Rebound.'};
+  rebound:'Diese Zelle wurde zwischen Framework 4.1 und 4.2 auf einen neuen Datenpunkt umgebunden. Die Bezeichnung ist in beiden Versionen dieselbe (gilt für alle 63 umgebundenen Zellen), die Kennung nicht — der Viewer verbindet über die Koordinate und findet den Wert deshalb weiter. Ein Vorbehalt bleibt: gleiche Bezeichnung ist keine Zusage gleicher Definition.',
+  ambiguous:'Für diese Zelle liegen in beiden Framework-Versionen mehrere Datenpunkte auf derselben Koordinate; die Brücke konnte sie nicht eindeutig zuordnen. Schwächer belegt als ein Rebound.'};
 const BRIDGE_MARK={rebound:'⇄', ambiguous:'≟'};
 /* Nicht eindeutig platzierte Koordinaten (#54). Andere Ursache als die
    Bruecke oben: dort ist die VERSIONSzuordnung unklar, hier die PLATZIERUNG.
