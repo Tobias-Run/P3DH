@@ -1,8 +1,22 @@
 # Mehrwert gegenüber dem offiziellen EBA Pillar 3 Data Hub
 
-**Stand:** 2026-08-28. Datengeerdet — jede Idee unten ist gegen den tatsächlichen
-Bestand geprüft (553 Reports, 1,55 Mio. Fakten, 445 Institute), nicht aus der
-Fachliteratur abgeleitet. Prototypen-Zahlen stammen aus echten Abfragen.
+**Der Unterschied ist nicht der Zugang. Es ist das Urteil.**
+
+EDAP muss zeigen, was eingereicht wurde — auch wenn es falsch ist. Das ist
+keine Schwäche, sondern die Aufgabe eines Renderers, und er erfüllt sie
+kompetent. Wir haben diese Pflicht nicht. Genau darin liegt der einzige
+Beitrag, den wir mit Aussicht auf Erfolg leisten können: an eine Zahl zu
+schreiben, dass sie gegen die Population nicht plausibel ist.
+
+Wer stattdessen auf besseren Zugang oder schönere Darstellung setzt, tritt
+gegen ein gut finanziertes Portal an — auf dessen eigenem Feld. Das wäre weder
+nötig noch zu gewinnen.
+
+**Stand:** 2026-09-04. Datengeerdet — jede Idee unten ist gegen den tatsächlichen
+Bestand geprüft (882 Reports, 2,30 Mio. platzierte Fakten, 474 Institute), nicht
+aus der Fachliteratur abgeleitet. Prototypen-Zahlen stammen aus echten Abfragen;
+ältere Zahlen im Fließtext sind als solche erkennbar und bewusst stehen geblieben,
+wo sie eine damalige Beobachtung belegen.
 
 ## ⚠️ Korrektur (2026-08-28): EDAP kann mehr, als hier zuerst stand
 
@@ -37,7 +51,7 @@ leisten kann**, weil sie ein Urteil gegen die Population erfordern:
 | Wir | warum ein Renderer das nicht kann |
 |---|---|
 | **Implausible Meldungen markieren** | Er muss anzeigen, was gemeldet wurde. „11,7 Bio. EUR Vorstandsvergütung für 9 Personen" ist originalgetreu — und unbrauchbar. Ein Plausibilitätsurteil braucht die Population als Maßstab (→ #17). |
-| **Framework-Versionen semantisch brücken** | 19 Zellen wurden zwischen RF 4.1 und 4.2 auf neue dp-Codes umgebunden (u. a. KM1-Leverage-Puffer). Wer über dp-Code vergleicht, bekommt einen stillen Bruch — belegt in `phase3_framework_bridge.md`. |
+| **Framework-Versionen semantisch brücken** | Inzwischen **63** Zellen wurden zwischen RF 4.1 und 4.2 auf neue dp-Codes umgebunden (u. a. KM1-Leverage-Puffer, 30 allein in PV1), dazu 125 mehrdeutige. Wer über dp-Code vergleicht, bekommt einen stillen Bruch — belegt in `phase3_framework_bridge.md`. 103 von 475 Instituten melden inzwischen beiderseits des Bruchs. |
 | **Abgeleitete Kennzahlen über Templates** | Pivot-/Filterwerkzeuge aggregieren *dieselbe* Größe. NPL-Deckungsquote, Vergütung pro Kopf, Forbearance-Quote haben Zähler und Nenner in **verschiedenen Templates mit verschiedenen Bezugsgrößen**. |
 | **Peer-Gruppen als fachliches Urteil** | „Vergleichbar" ist keine Filteroption. Unsere Perzentile sind nach Größenklasse × Konsolidierung × Stichtag geschichtet — sonst steht die Exportkreditagentur neben der Dorfsparkasse. |
 | **Fallen in der Datenstruktur entschärfen** | `eba_GA:x1` ist die Summenzeile „Total". Ein Renderer zeigt sie korrekt als Zeile; wer sie mitsummiert, verdoppelt das Exposure. Wir kennzeichnen sie (belegt an 89 von 96 Instituten). |

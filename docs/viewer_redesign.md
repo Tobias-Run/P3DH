@@ -1,5 +1,8 @@
 # Viewer: was zu einem modernen Analytics-Produkt fehlt
 
+**Ein Werkzeug scheitert selten daran, wie es aussieht. Es scheitert daran, was
+es den Nutzer mitdenken lässt.**
+
 Bestandsaufnahme am gerenderten Ist-Zustand (Chromium, 1600×950, Voll-Load mit
 882 Reports), nicht am Quelltext. Screenshots von Benchmark- und Report-Ansicht.
 
@@ -182,7 +185,23 @@ Coverage-Symbole (⊘ ∅ ⚠) ohne Farbe verständlich bleiben.
 | R3 | Ausreißer einordnen statt anführen | klein | hoch — Glaubwürdigkeit | ✅ #48 |
 | R4 | Visuelle Kodierung in Tabellen | mittel | mittel | offen #49 |
 | R5 | Teilbarer Zustand, Auswahl, Export | mittel | mittel | offen #50 |
-| R6 | Gestaltungssystem | mittel | mittel — wirkt erst mit R1–R3 | offen #51 |
+| R6 | Gestaltungssystem | mittel | mittel — wirkt erst mit R1–R3 | ✅ #61 (ersetzt #51) |
+
+**Nachtrag zu R6.** Der Abschnitt unten sagte „Typo-Skala, Flächenebenen,
+Farbdisziplin". Das ist ein Wunsch, kein Ziel — man kann hinterher nicht sagen,
+ob es erreicht ist. Umgesetzt wurde es deshalb erst, als #61 ein **überprüfbares**
+Idiom vorgab: ruhiger Kopf, ein Akzent, Serif für Überschriften, Grafiken auf
+eigener Fläche mit Quellzeile. Die Vorlage ist redaktionell, nicht softwaretypisch;
+was daran über das Vorbild hinausgeht, ist die Quellzeile — sie nennt bei uns
+Template, Zelle, Stichtage und Reportzahl statt nur der Institution. Und die Regel
+„nie Rot/Grün als Wertung" ist nicht bloß erhalten geblieben, sondern von einem
+Test bewacht: der Akzent darf ausschließlich auf Fokus-Selektoren stehen.
+
+Die Barrierefreiheitsfrage am Ende dieses Abschnitts („heute nicht geprüft") ist
+damit ebenfalls beantwortet: WCAG-Kontrast wird für jede Text-auf-Fläche-Paarung
+in beiden Themes geprüft, der schwächste Wert liegt bei 4,91:1. Die
+Coverage-Symbole tragen ohnehin Klartext neben dem Zeichen und bleiben ohne Farbe
+verständlich.
 
 ### Was R1–R3 tatsächlich verändert haben
 
