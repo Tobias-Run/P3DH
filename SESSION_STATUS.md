@@ -78,8 +78,9 @@ build_framework_bridge.py     -> codebook/framework_bridge.csv   (RF 4.1<->4.2 Z
 build_zweig_a_shards.py       -> processed/zweig_a/data/index.json + codebook.json + reports/<key>.json
                                  (JSON-Shards, allein aus dem Parquet abgeleitet)
 publish_data_branch.sh        -> data-Branch: Shards + state/ (long_form.gz, coverage.gz, parquet)
-processed/zweig_a/viewer_json.html  (Standard: lädt index/codebook vorab, Reports lazy als Shards)
-processed/zweig_a/viewer.html       (Legacy: liest long_form + codebook + lei_names live im Browser)
+check_branch_parity.py        -> GUARD: Shards gegen long_form_raw.csv, je (Report, Template)
+                                 die Multimenge (Zeile, Spalte, Wert). Vor dem Publish.
+processed/zweig_a/viewer_json.html  (der Viewer: lädt index/codebook vorab, Reports lazy als Shards)
 ```
 
 Die ganze Kette läuft auch als GitHub-Action (`.github/workflows/pipeline.yml`):
@@ -116,10 +117,14 @@ Zwei featuregleiche Vanilla-JS-Seiten, Gabelseite `processed/zweig_a/index.html`
   (`60.00`), gemeldet auf Sub-Buchstaben (`60.00.A`) — `resolve_coverage()` bildet
   exakt-zuerst-dann-Basis ab, womit alle 191 Daten-Templates auflösen. Templates
   **ohne** Deklaration bleiben bewusst ohne Eintrag (Arbeitsprinzip 3).
-- **`viewer.html` (Legacy):** lädt die Roh-CSVs komplett und joint/typisiert im Browser —
-  unabhängige Gegenprobe. Kennt bewusst **keine** Coverage: sie hätte dafür keine
-  Quelle außer einer zweiten, divergenzanfälligen Implementierung von
-  `resolve_coverage` in JS.
+- **`viewer.html` (Legacy) — zurückgezogen (2026-09-04).** Er las die Roh-CSVs komplett
+  im Browser und war als unabhängige Gegenprobe gedacht. Bei 413 MB und 2,3 Mio. Fakten
+  stirbt der Tab am Speicher (auch lokal, mit vorhandener Datei), und er war seit dem
+  07.07. nicht mehr gepflegt: 13 Commits am JSON-Viewer gingen an ihm vorbei — offene
+  Zeilenachse (#56), Zell-Diskriminator (#52), Coverage, Qualitätsmarker, Perzentile.
+  Eine Gegenprobe, die planmäßig abweicht, ist keine. Ersetzt durch
+  `scripts/check_branch_parity.py`, das dasselbe ohne Browser und schärfer prüft (Werte
+  statt Anzeige) und in der Pipeline vor dem Publish läuft.
 
 Die Shards kommen **allein aus dem Zweig-B-Parquet** (`build_zweig_a_shards.py`, deterministisch,
 Werte byte-identisch verifiziert) → Viewer und Analytics teilen eine Transformationsstelle.
