@@ -1570,12 +1570,19 @@ function fenceBadge(dir,label){
    Markiert wird TEMPLATE-GENAU: nur wenn die Befunde im gerade angezeigten
    Template liegen. Ein Befund in 41.00 sagt nichts ueber die KM1-Spalten. */
 function flaggedFor(q, tpl){ return !!(q && q.t && q.t.includes(tpl)); }
+/* Abstufung seit #53: `th` fuehrt die Templates mit mindestens einem
+   hoch-Befund. Vorher war jeder Befund gleich stark markiert, weil der
+   Schweregrad die Unterscheidung nicht trug. */
+const flaggedHigh=(q,tpl)=>!!(q && q.th && q.th.includes(tpl));
 function qualityBadge(q, tpl){
   if(!flaggedFor(q,tpl)) return '';
-  return `<span class="qb" title="Die Plausibilitaetspruefung hat in Template ${tpl} dieses Reports `
-       + `Werte gefunden, die ausserhalb der Verteilung ihrer Zellpopulation liegen `
-       + `(${q.n} Befund(e) im Report, groesste Abweichung ${q.d} Groessenordnungen). `
-       + `Das kann eine korrekte Besonderheit sein.">△ auffällig</span>`;
+  const hi=flaggedHigh(q,tpl);
+  return `<span class="qb" title="Die Plausibilitätsprüfung hat in Template ${tpl} dieses Reports `
+       + `Werte gefunden, die ausserhalb der Verteilung ihrer Zellpopulation liegen`
+       + (hi ? `, davon mindestens einen weit ausserhalb — mehr als fünf Rumpfbreiten `
+             + `der Zelle über deren Median` : '')
+       + ` (${q.n} Befund(e) im Report, größte Abweichung ${q.d} Größenordnungen). `
+       + `Das kann eine korrekte Besonderheit sein.">${hi?'△△ stark auffällig':'△ auffällig'}</span>`;
 }
 function bmCell(c,v,pinfo){
   if(v==null) return '<td class="empty"></td>';

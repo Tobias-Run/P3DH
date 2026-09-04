@@ -92,6 +92,13 @@ schwedische Kommunalfinanzierungsagentur sogar stimmen — aber als *erster
 Eindruck* einer Rangliste ist es ein Glaubwürdigkeitsproblem: der Nutzer denkt
 „die Daten sind kaputt", bevor er irgendetwas anderes sieht.
 
+> Nachgeprüft mit #53: es stimmt. 12,026 Mrd SEK CET1-Kapital gegen 3,385 Mrd
+> SEK Gesamtrisikobetrag ergeben genau die gemeldeten 355 % — ein
+> Kommunalfinanzierer hält fast nur nullgewichtete Aktiva. Derselbe Report
+> enthält aber einen echten Meldefehler, nur eine Zeile weiter: KM1 r0190 meldet
+> 8.860 statt 8,86 %. Genau diese Unterscheidung — korrekter Ausreißer neben
+> Artefakt, im selben Template — ist der Fall, an dem der Schweregrad geeicht ist.
+
 **Das Bittere daran:** Wir haben die Daten, um das einzuordnen, und nutzen sie
 nicht. `processed/quality_profile.csv` (#17) kennt 5.969 Befunde in 326
 Reports; R1 würde die vier Zeilen zu einer zusammenfassen.

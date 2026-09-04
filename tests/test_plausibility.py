@@ -8,9 +8,16 @@ wurden und beim Weiterentwickeln leicht wieder verloren gehen:
     natürlichen unteren Flanke von Exposure-Verteilungen.
   * eine Zelle, deren Rumpf über >= 6 Größenordnungen streut, gilt als
     unbrauchbar; dort darf KEIN Institut belastet werden.
+
+Dazu seit #53 der Schweregrad. Er misst nicht mehr nur absolute
+Größenordnungen — diese Skala war auf Einheiten-Verwechslungen geeicht und
+stufte deshalb 14 beweisbare Meldeartefakte in der CET1-Zelle als `niedrig`
+ein, gemeinsam mit dem einen Institut, dessen Ausreißer nachprüfbar KORREKT
+ist. Beide Fälle stehen jetzt als Test da, mit ihren echten Zahlen.
 """
 
 from pathlib import Path
+import math
 import sys
 import unittest
 
@@ -87,10 +94,60 @@ class RobustZTest(unittest.TestCase):
 
 
 class SeverityTest(unittest.TestCase):
-    def test_thresholds(self):
+    """Schweregrad aus zwei Maßen (#53).
+
+    Die absolute Skala allein war auf Einheiten-Verwechslungen geeicht und für
+    enge Zellen unbrauchbar: eine Quote in Prozent statt als Bruch zu melden
+    sind genau 2 Größenordnungen und lag damit unter jeder Schwelle. Die
+    absoluten Schwellen bleiben, weil sie für ihren Zweck richtig sind —
+    dazugekommen ist der Abstand in Rumpfbreiten der eigenen Zelle.
+    """
+
+    def test_the_absolute_scale_is_unchanged(self):
         self.assertEqual(cp.severity(6.0), "hoch")     # volle Einheiten-Verwechslung
         self.assertEqual(cp.severity(4.0), "mittel")
         self.assertEqual(cp.severity(1.0), "niedrig")
+
+    def test_a_narrow_cell_is_judged_by_its_own_body_width(self):
+        """Der Fall, an dem die alte Skala scheiterte: 2 Größenordnungen sind
+        absolut wenig und in einer Quotenzelle enorm."""
+        self.assertEqual(cp.severity(2.0), "niedrig")            # ohne Rumpfbreite
+        self.assertEqual(cp.severity(2.0, relative=5.3), "hoch")  # 5,3 Rumpfbreiten
+
+    def test_the_higher_of_the_two_wins(self):
+        """Ein absoluter Einheitenfehler bleibt `hoch`, auch wenn die Zelle so
+        breit ist, dass er relativ unauffällig wirkt."""
+        self.assertEqual(cp.severity(7.0, relative=0.5), "hoch")
+        self.assertEqual(cp.severity(0.5, relative=7.0), "hoch")
+
+    def test_a_missing_body_width_falls_back_to_the_absolute_scale(self):
+        """Bei spread ~ 0 und bei den fachlichen Korridoren gibt es keine
+        Rumpfbreite — dann darf nicht stillschweigend `niedrig` herauskommen,
+        sondern es gilt das absolute Maß."""
+        self.assertEqual(cp.severity(6.5, relative=None), "hoch")
+        self.assertEqual(cp.severity(3.5, relative=None), "mittel")
+
+    def test_the_calibration_separates_the_documented_cases(self):
+        """Die Eichung stammt nicht aus einem Perzentil, sondern aus 20
+        Befunden in KM1 r0050 c0010, deren Wahrheit unabhängig feststeht — am
+        Kapital und am Gesamtrisikobetrag derselben Meldung.
+
+        Rumpfbreite dieser Zelle: 0,35 Größenordnungen.
+        """
+        spread = 0.35
+        # Beweisbare Artefakte: Quote in Prozent statt als Bruch gemeldet.
+        # Der kleinste Fall ist RCI Banque mit 12,519 (Kapital/TREA = 0,1252).
+        for dev in (1.83, 1.87, 2.16, 3.35, 8.97):
+            self.assertEqual(cp.severity(dev, dev / spread), "hoch",
+                             f"Artefakt bei {dev} Größenordnungen nicht als hoch erkannt")
+        # Kommuninvest: 355 % CET1 sind korrekt — 12,026 Mrd SEK Kapital gegen
+        # 3,385 Mrd SEK TREA. Ein Kommunalfinanzierer hält fast nur
+        # nullgewichtete Aktiva. Das darf NICHT `hoch` werden.
+        for dev in (1.28, 1.29, 1.31, 1.32):
+            self.assertEqual(cp.severity(dev, dev / spread), "mittel",
+                             "Kommuninvests nachprüfbar korrekter Wert wird als "
+                             "hoch eingestuft — die Prüfung behauptet damit einen "
+                             "Meldefehler, den es nicht gibt")
 
 
 class RatioViolationsTest(unittest.TestCase):
@@ -119,14 +176,52 @@ class RatioViolationsTest(unittest.TestCase):
         pairs = [("a", 1e6, 0), ("b", 1e6, None), ("c", None, 5), ("d", 1e6, -3)]
         self.assertEqual(cp.ratio_violations(self.rule, pairs), [])
 
-    def test_deviation_is_measured_against_the_violated_bound(self):
+    def test_the_violated_bound_is_still_named(self):
         v = cp.ratio_violations(self.rule, [("k", 2e9, 1)])[0]   # 100x über hi
         self.assertEqual(v["bound"], self.rule["hi"])
-        self.assertAlmostEqual(v["deviation_orders"], 2.0, places=6)
 
-    def test_severity_is_attached(self):
-        v = cp.ratio_violations(self.rule, [("k", 2e13, 1)])[0]
+    def test_deviation_is_measured_from_the_centre_not_the_edge(self):
+        """Geändert mit #53, und zwar bewusst. Der Rand ist der falsche
+        Nullpunkt: bei den Zell-Ausreißern ist der Bezug der Median, also die
+        Mitte. Dieser Korridor ist 4,3 Größenordnungen weit, und ab seinem Rand
+        gemessen erschien der schlimmste Fall im Bestand als `mittel`."""
+        centre = math.sqrt(self.rule["lo"] * self.rule["hi"])
+        v = cp.ratio_violations(self.rule, [("k", 2e9, 1)])[0]
+        self.assertEqual(v["center"], centre)
+        self.assertAlmostEqual(v["deviation_orders"],
+                               math.log10(2e9 / centre), places=6)
+
+    def test_the_worst_case_in_the_corpus_is_graded_high(self):
+        """Rabobank: 11,7 Bio. EUR fixe Vergütung für 9 Vorstandsmitglieder,
+        also 1,3 Bio. pro Kopf. Am Korridorrand gemessen waren das 4,81
+        Größenordnungen und damit `mittel` — bei der öffentlich am meisten
+        beachteten Kennzahl des Datensatzes (#18)."""
+        v = cp.ratio_violations(self.rule, [("k", 1.1736e13, 9)])[0]
         self.assertEqual(v["severity"], "hoch")
+
+    def test_a_value_just_outside_the_corridor_stays_low(self):
+        """Die Gegenprobe: der Korridor ist bewusst weit gewählt, damit ein
+        knappes Überschreiten keine Behauptung ist."""
+        v = cp.ratio_violations(self.rule, [("k", 900.0, 1)])[0]
+        self.assertEqual(v["severity"], "niedrig")
+
+    def test_a_reported_zero_is_graded_on_its_merits_not_by_a_placeholder(self):
+        """Vorher stand hier `dev = ... if ratio > 0 else SEVERITY_HIGH`: ein
+        Platzhalter für einen undefinierten Logarithmus, der anschließend als
+        gemessener Abstand eingestuft wurde. So bekam eine gemeldete Null
+        `hoch` und Rabobanks 1,3 Bio. pro Kopf `mittel` — die Null stand eine
+        Stufe über dem extremsten Wert im ganzen Bestand."""
+        v = cp.ratio_violations(self.rule, [("k", 0.0, 9)])[0]
+        self.assertEqual(v["severity"], "hoch")
+        self.assertIsNone(v["deviation_orders"],
+                          "ein nicht definierter Abstand wird wieder als Zahl "
+                          "ausgewiesen")
+
+    def test_a_zero_never_outranks_a_measured_extreme(self):
+        rows = cp.ratio_violations(self.rule, [("null", 0.0, 9), ("rabo", 1.1736e13, 9)])
+        by_key = {r["key"]: r for r in rows}
+        self.assertIsNone(by_key["null"]["deviation_orders"])
+        self.assertGreater(by_key["rabo"]["deviation_orders"], cp.SEVERITY_HIGH)
 
 
 if __name__ == "__main__":

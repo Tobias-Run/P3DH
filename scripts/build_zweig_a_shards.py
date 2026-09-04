@@ -186,13 +186,16 @@ def load_quality_profile(root: Path | None = None):
                 "m": int(r["n_mittel"] or 0),
                 "d": round(float(r["max_deviation_orders"] or 0), 1),
                 # Betroffene Templates: der Viewer markiert template-GENAU, nicht
-                # pauschal. Der Schweregrad allein trägt das nicht — er ist auf
-                # Einheiten-Verwechslungen geeicht (6 Größenordnungen = "hoch")
-                # und stuft deshalb einen statistisch extremen Ausreißer in einer
-                # engen Quotenzelle als "niedrig" ein: Kommuninvest liegt bei
-                # KM1 r0050 mit robustem z = 10,3 weit außerhalb, aber nur 1,3
-                # Größenordnungen über dem Median. Siehe #53.
+                # pauschal — ein Befund in 41.00 sagt nichts über die KM1-Spalten.
                 "t": [t for t in (r.get("templates") or "").split("|") if t],
+                # Templates mit mindestens einem `hoch`-Befund. Seit #53 trägt
+                # der Schweregrad die Abstufung wirklich: er misst nicht mehr nur
+                # absolute Größenordnungen (auf Einheiten-Verwechslungen geeicht),
+                # sondern auch den Abstand in Rumpfbreiten der eigenen Zelle. Erst
+                # damit sind die 16 beweisbaren Prozent-statt-Bruch-Meldungen in
+                # KM1 r0050 `hoch` — und Kommuninvests nachprüfbar korrekte 355 %
+                # bleiben es nicht.
+                "th": [t for t in (r.get("templates_hoch") or "").split("|") if t],
             }
     return out
 

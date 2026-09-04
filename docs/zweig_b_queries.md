@@ -102,10 +102,20 @@ Ergebnis: 3.224 Befunde in 226 von 553 Reports.
 
 ```sql
 -- Werte in einer Rangliste vorab entschärfen: auffällige Reports markieren
-SELECT p.bank_name, p.refPeriod, p.n_findings, p.findings_per_1000, p.templates
+SELECT p.bank_name, p.refPeriod, p.n_findings, p.findings_per_1000, p.templates_hoch
 FROM read_csv_auto('processed/quality_profile.csv', header=true) p
 WHERE p.n_hoch > 0 ORDER BY p.findings_per_1000 DESC;
 ```
+
+Der **Schweregrad** (`n_hoch`, Spalte `severity` in den Einzelbefunden) misst
+seit #53 zwei Dinge und nimmt das jeweils höhere: den absoluten Abstand vom
+Zellmedian in Größenordnungen — geeicht auf Einheiten-Verwechslungen — und den
+Abstand in **Rumpfbreiten** (p10..p90) derselben Zelle. Ohne das zweite Maß war
+`n_hoch` für jede Quotenzelle unbrauchbar: eine Quote in Prozent statt als
+Bruch zu melden sind exakt 2 Größenordnungen und lag damit unter jeder
+Schwelle. `templates_hoch` nennt die Templates mit mindestens einem
+`hoch`-Befund; `spread_widths` und `robust_z` in
+`interim/plausibility_findings.csv` machen beide Maße je Befund nachvollziehbar.
 
 ⚠️ **`n_findings` ist keine Rangliste der Meldequalität.** Wer 136 Templates
 meldet, hat mehr Gelegenheiten aufzufallen als wer 4 meldet — dafür ist
