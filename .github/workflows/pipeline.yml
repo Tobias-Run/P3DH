@@ -162,6 +162,15 @@ jobs:
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
 
+      # Gegenprobe VOR dem Publish: tragen die Shards dieselben Werte wie die
+      # Long-Form? Zweig A entsteht über das Parquet, also über zwei
+      # Transformationen — und der README verspricht, dass dabei nichts driftet.
+      # Geprüft hat das bis 2026-09 niemand: der einzige Mechanismus war der
+      # CSV-Viewer, der bei 413 MB nicht mehr lädt und deshalb zurückgezogen
+      # wurde. Bricht ab, bevor abweichende Zahlen veröffentlicht werden.
+      - name: Zweig-A-Parität
+        run: python scripts/check_branch_parity.py
+
       - name: Publish data branch
         env:
           P3DH_PUSH_URL: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
