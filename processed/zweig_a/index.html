@@ -5,37 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pillar 3 Viewer — Variante wählen</title>
 <style>
-  :root{--blue:#0b3d91;--ink:#1a1a1a;--muted:#666;--line:#e2e2e2;--bg:#fafafa;--card:#fff;--green:#1f8a4c}
+  /* Gestaltungssystem wie im Viewer (#61) — Tokens bewusst dupliziert, damit
+     diese Seite ohne weitere Datei ausliefert. */
+  :root{
+    color-scheme:light;
+    --bg:#f4f1ec; --card:#fff; --line:#dcd7ce; --rule:#191919;
+    --ink:#121212; --ink2:#3a3a3a; --muted:#6c6862; --accent:#c8102e; --blue:#12556e;
+    --serif:"Iowan Old Style",Palatino,"Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
   @media (prefers-color-scheme:dark){
-    :root{--blue:#7ea8ff;--ink:#e6e9ee;--muted:#9aa3b0;--line:#333a45;--bg:#12151a;--card:#1a1f27;--green:#3ecf77}
+    :root{color-scheme:dark;
+      --bg:#14161a; --card:#1c1f24; --line:#333941; --rule:#4a5058;
+      --ink:#e9e6e1; --ink2:#c3bfb8; --muted:#948f88; --accent:#ff5a5a; --blue:#6fb6d3}
   }
   *{box-sizing:border-box}
-  body{font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:var(--ink);background:var(--bg);
+  body{font:15px/1.6 var(--sans);margin:0;color:var(--ink);background:var(--bg);
        display:flex;flex-direction:column;min-height:100vh}
-  header{background:var(--blue);color:#fff;padding:1rem 1.25rem}
-  header h1{margin:0;font-size:1.2rem}
-  header p{margin:.3rem 0 0;opacity:.9;font-size:.9rem}
-  main{flex:1;max-width:900px;margin:0 auto;padding:1.5rem 1.25rem 2rem;width:100%}
-  .lead{color:var(--muted);margin:.2rem 0 1.4rem}
+  header{background:var(--card);color:var(--ink);padding:.9rem 1.5rem;
+         border-top:3px solid var(--accent);border-bottom:1px solid var(--rule)}
+  header h1{margin:0;font:700 1.35rem/1.15 var(--serif);letter-spacing:-.01em}
+  header p{margin:.2rem 0 0;color:var(--muted);font-size:.85rem}
+  main{flex:1;max-width:56rem;margin:0 auto;padding:1.6rem 1.5rem 2rem;width:100%}
+  .lead{color:var(--ink2);margin:.2rem 0 1.5rem;max-width:44rem}
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
   @media (max-width:720px){.cards{grid-template-columns:1fr}}
-  .card{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:1.15rem 1.15rem 1.25rem;
-        display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:box-shadow .15s,transform .15s}
-  .card:hover{box-shadow:0 6px 22px rgba(0,0,0,.12);transform:translateY(-2px)}
-  .tag{display:inline-block;font-size:11px;font-weight:700;border-radius:20px;padding:2px 10px;margin-bottom:.6rem;align-self:flex-start}
-  .tag.csv{background:#eef2fb;color:var(--blue)}
-  .tag.json{background:#e7f6ed;color:var(--green)}
-  .card h2{margin:.1rem 0 .3rem;font-size:1.1rem}
-  .card .sub{color:var(--muted);font-size:.86rem;margin-bottom:.7rem}
+  .card{border:1px solid var(--line);background:var(--card);padding:1rem 1.1rem 1.15rem;
+        display:flex;flex-direction:column;text-decoration:none;color:inherit}
+  .card:hover{border-color:var(--ink2)}
+  .tag{display:inline-block;font:600 .68rem/1.4 var(--sans);letter-spacing:.08em;
+       text-transform:uppercase;border:1px solid var(--line);color:var(--muted);
+       padding:1px 7px;margin-bottom:.6rem;align-self:flex-start}
+  .tag.json{border-color:var(--ink2);color:var(--ink2)}
+  .card h2{margin:.1rem 0 .3rem;font:700 1.1rem/1.25 var(--serif)}
+  .card .sub{color:var(--muted);font-size:.85rem;margin-bottom:.7rem}
   ul{margin:.2rem 0 .9rem;padding-left:1.1rem}
-  li{margin:.15rem 0;font-size:.9rem}
+  li{margin:.2rem 0;font-size:.88rem}
   .metric{font-variant-numeric:tabular-nums;font-weight:600}
-  .go{margin-top:auto;font-weight:600;color:var(--blue)}
-  .go.json{color:var(--green)}
-  .note{margin-top:1.5rem;font-size:.82rem;color:var(--muted);background:var(--card);border:1px solid var(--line);
-        border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:.7rem .9rem}
-  footer{color:var(--muted);font-size:.78rem;padding:1rem 1.25rem;border-top:1px solid var(--line);text-align:center}
+  .go{margin-top:auto;font-weight:600;color:var(--blue);font-size:.9rem}
+  .note{margin-top:1.6rem;font-size:.85rem;line-height:1.55;color:var(--ink2);
+        border-left:2px solid var(--line);padding:.15rem 0 .15rem .8rem;max-width:52rem}
+  footer{color:var(--muted);font-size:.78rem;padding:1rem 1.5rem;
+         border-top:1px solid var(--rule);text-align:center;background:var(--card)}
   a{color:var(--blue)}
+  code{font-size:.9em}
 </style>
 </head>
 <body>
@@ -44,8 +57,8 @@
   <p>JSON-Viewer ist Standard — CSV bleibt als Legacy verfügbar.</p>
 </header>
 <main>
-  <p class="lead">Aktueller Stand: <b>553 Reports · 1,26 Mio. Fakten</b> (u. a. der volle Stichtag
-  31.12.2025 über 30 Länder). Der JSON-Viewer ist Standard und live; der CSV-Viewer bleibt als
+  <p class="lead">Aktueller Stand: <b>882 Reports · 2,30 Mio. Fakten</b> aus 474 Instituten und 30 Ländern,
+  über fünf Stichtage. Der JSON-Viewer ist Standard und live; der CSV-Viewer bleibt als
   lokales Gegenprüf-Werkzeug — er lädt alles vorab und skaliert bei diesem Volumen nicht mehr im Browser.</p>
 
   <div class="cards">
@@ -58,7 +71,7 @@
         <li>Pro Report: <span class="metric">~8&nbsp;KB</span> (median, lazy)</li>
         <li>Gespeist aus Zweig B · via <code>data</code>-Branch/jsDelivr · Voll-Load-tauglich</li>
       </ul>
-      <span class="go json">JSON-Viewer öffnen →</span>
+      <span class="go">JSON-Viewer öffnen →</span>
     </a>
 
     <a class="card" href="viewer.html">
@@ -66,7 +79,7 @@
       <h2>CSV-Viewer</h2>
       <div class="sub">Lädt die Roh-CSVs komplett und joint/typisiert im Browser.</div>
       <ul>
-        <li>Braucht die lokale <code>long_form_raw.csv</code> (275 MB) — nicht deployt</li>
+        <li>Braucht die lokale <code>long_form_raw.csv</code> — nicht deployt</li>
         <li>Lädt alles vorab → bei diesem Volumen im Browser nicht mehr tragfähig</li>
         <li>Bleibt für lokale Gegenproben auf kleinen Ständen</li>
       </ul>

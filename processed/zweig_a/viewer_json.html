@@ -5,31 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pillar 3 Viewer (JSON) — P3DH</title>
 <style>
+  /* ======================================================================
+     Gestaltungssystem (#61). Redaktionelles Idiom statt Software-Chrome:
+     ruhiger Kopf, EIN Akzent, Typo-Skala mit Serif für Überschriften,
+     Grafiken auf eigener Fläche mit Quellzeile.
+
+     --accent (Rot) markiert AUSSCHLIESSLICH Identität und Fokus — nie gut
+     oder schlecht. Das sind Offenlegungsdaten, keine Bewertung; die Regel
+     stand schon in docs/viewer_redesign.md und gilt weiter. Rot heißt hier
+     „darum geht es gerade", nicht „das ist schlimm".
+
+     Schriften: freie System-Stacks. Die Hausschriften der Vorbild-
+     publikation sind lizenziert, und eine Web-Font-CDN wäre eine
+     Netzabhängigkeit — der Viewer soll eine Datei ohne Build und ohne
+     fremde Hosts bleiben.
+     ====================================================================== */
   :root{
-    --blue:#0b3d91; --line:#e2e2e2; --bg:#fafafa; --card:#fff; --ink:#1a1a1a;
-    --muted:#666; --soft:#f0f3fa; --softink:#0b3d91; --empty:#f7f7f7; --hover:#f3f6fc;
-    --active:#e7eefb; --thead:#0b3d91; --theadink:#fff;
+    color-scheme:light;
+    /* Flächen: Papier / Karte / Grafikfläche */
+    --bg:#f4f1ec; --card:#ffffff; --panel:#dae6ec; --grid:#ffffff;
+    --line:#dcd7ce; --rule:#191919;
+    --ink:#121212; --ink2:#3a3a3a; --muted:#6c6862;
+    --accent:#c8102e;                 /* Identität + Fokus. NIE Wertung. */
+    --blue:#12556e; --blue2:#3f95b4;  /* Datenfarben */
+    --soft:#e6edf1; --softink:#12556e; --empty:#f7f5f1; --hover:#efebe4;
+    --active:#e3ecf1; --thead:#efebe4; --theadink:#121212;
+    /* Typo-Skala 11/13/15/20/28, Gewichte 400/600/700 */
+    --f0:11px; --f1:13px; --f2:15px; --f3:20px; --f4:28px;
+    --serif:"Iowan Old Style",Palatino,"Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
+  /* Dunkle Ableitung: das Vorbild ist für Druck auf Weiß gebaut und hat
+     keine. Übernommen wird die IDEE — Grafikfläche hebt sich vom Grund ab,
+     Gitterlinien sind heller als die Fläche —, mit invertierter Helligkeit. */
   [data-theme=dark]{
-    --blue:#7ea8ff; --line:#333a45; --bg:#12151a; --card:#1a1f27; --ink:#e6e9ee;
-    --muted:#9aa3b0; --soft:#232c3d; --softink:#9db9f5; --empty:#171b22; --hover:#212836;
-    --active:#27334a; --thead:#1f3460; --theadink:#dfe7ff;
+    color-scheme:dark;
+    --bg:#14161a; --card:#1c1f24; --panel:#22303a; --grid:#33454f;
+    --line:#333941; --rule:#4a5058;
+    --ink:#e9e6e1; --ink2:#c3bfb8; --muted:#948f88;
+    --accent:#ff5a5a;
+    --blue:#6fb6d3; --blue2:#9ad2e6;
+    --soft:#242c33; --softink:#9ad2e6; --empty:#191c21; --hover:#232830;
+    --active:#26333c; --thead:#232830; --theadink:#e9e6e1;
   }
   *{box-sizing:border-box}
-  body{font:13px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:var(--ink);background:var(--bg)}
-  header{background:var(--thead);color:var(--theadink);padding:.6rem 1rem;position:sticky;top:0;z-index:10;
-         display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
-  header h1{font-size:1.02rem;margin:0;font-weight:600;white-space:nowrap}
-  .pill{display:inline-block;background:rgba(255,255,255,.16);border-radius:10px;padding:1px 8px;font-size:11px}
-  nav.tabs{display:flex;gap:.25rem;margin-left:.5rem}
-  nav.tabs button{background:transparent;color:var(--theadink);border:1px solid rgba(255,255,255,.35);
-    border-radius:6px;padding:3px 11px;font:inherit;font-size:12px;cursor:pointer;opacity:.85}
-  nav.tabs button:hover{opacity:1;background:rgba(255,255,255,.1)}
-  nav.tabs button.on{background:rgba(255,255,255,.22);opacity:1;font-weight:600}
-  .hright{margin-left:auto;display:flex;gap:.4rem;align-items:center}
-  .hlink,.iconbtn{color:var(--theadink);font-size:12px;text-decoration:none;opacity:.9;
-    border:1px solid rgba(255,255,255,.4);border-radius:5px;padding:2px 8px;background:transparent;cursor:pointer;font-family:inherit}
-  .hlink:hover,.iconbtn:hover{opacity:1;background:rgba(255,255,255,.12)}
+  body{font:var(--f1)/1.5 var(--sans);margin:0;color:var(--ink);background:var(--bg)}
+  /* Die rote Oberkante ist ein Zeitungsmittel, kein fremdes Logo. */
+  header{background:var(--card);color:var(--ink);padding:.45rem 1rem;position:sticky;top:0;z-index:10;
+         display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;
+         border-top:3px solid var(--accent);border-bottom:1px solid var(--rule)}
+  header h1{font:700 var(--f3)/1.15 var(--serif);margin:0;white-space:nowrap;letter-spacing:-.01em}
+  .pill{font-size:var(--f0);color:var(--muted);letter-spacing:.02em;
+        font-variant-numeric:tabular-nums;white-space:nowrap}
+  /* Tabs als Rubrikleiste: Unterstrich statt Kasten. */
+  nav.tabs{display:flex;gap:1rem;margin-left:.4rem;align-self:flex-end}
+  nav.tabs button{background:transparent;color:var(--ink2);border:0;border-bottom:2px solid transparent;
+    padding:2px 0 3px;font:600 var(--f1)/1.2 var(--sans);cursor:pointer}
+  nav.tabs button:hover{color:var(--ink)}
+  nav.tabs button.on{color:var(--ink);border-bottom-color:var(--accent)}
+  nav.tabs button:focus-visible,.hlink:focus-visible,.iconbtn:focus-visible,
+  .dchip:focus-visible,summary:focus-visible,.dcard:focus-visible{
+    outline:2px solid var(--accent);outline-offset:2px}
+  .hright{margin-left:auto;display:flex;gap:.75rem;align-items:baseline}
+  .hlink,.iconbtn{color:var(--muted);font:400 var(--f0)/1.2 var(--sans);text-decoration:none;
+    border:0;background:transparent;cursor:pointer;padding:0}
+  .hlink:hover,.iconbtn:hover{color:var(--ink);text-decoration:underline}
   .layout{display:flex;min-height:calc(100vh - 46px)}
   aside{width:300px;flex:0 0 300px;border-right:1px solid var(--line);background:var(--card);
         overflow:auto;max-height:calc(100vh - 46px);position:sticky;top:46px}
@@ -43,7 +83,8 @@
   .fcount{font-size:11px;color:var(--muted);margin-top:.35rem}
   .report{padding:.5rem .6rem .5rem .75rem;border-bottom:1px solid var(--line);cursor:pointer;position:relative}
   .report:hover{background:var(--hover)}
-  .report.active{background:var(--active);border-left:3px solid var(--blue)}
+  /* „Sie sind hier" ist der Fokus-Fall, für den der Akzent da ist. */
+  .report.active{background:var(--active);box-shadow:inset 3px 0 0 var(--accent)}
   .report .lei{font-weight:600;padding-right:26px}
   .report .rmeta{color:var(--muted);font-size:11px;margin-top:2px}
   .report .leicode{color:var(--muted);opacity:.6;font-size:10px;margin-top:1px;font-variant-numeric:tabular-nums;letter-spacing:.2px}
@@ -57,16 +98,21 @@
   .dchip.on{background:var(--blue);border-color:var(--blue);color:var(--card);font-weight:600}
   .dchip.pinned::after{content:'⊞';margin-left:3px}
   .report .rdet{font-size:10.5px;color:var(--muted);margin-top:3px}
-  .badge{display:inline-block;font-size:9.5px;font-weight:600;border-radius:3px;padding:0 4px;margin-left:4px;vertical-align:1px}
-  .badge.gs{background:#7a1fa2;color:#fff}
-  .badge.it{background:var(--soft);color:var(--softink)}
+  /* Kennzeichen als Umriss statt als Farbfläche — sie sind Metadaten, keine
+     Warnungen, und konkurrieren so nicht mit dem einen Akzent. */
+  .badge{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.04em;
+         text-transform:uppercase;border:1px solid var(--line);border-radius:2px;
+         padding:0 4px;margin-left:5px;vertical-align:1px;color:var(--muted)}
+  .badge.gs{border-color:var(--ink2);color:var(--ink2)}
+  .badge.it{border-color:var(--line);color:var(--muted)}
   .pinbtn{position:absolute;top:.45rem;right:.4rem;border:1px solid var(--line);background:var(--card);color:var(--muted);
     border-radius:5px;width:22px;height:22px;font-size:12px;line-height:1;cursor:pointer;padding:0}
   .pinbtn:hover{color:var(--blue);border-color:var(--blue)}
   .pinbtn.on{background:var(--blue);border-color:var(--blue);color:#fff}
-  main{flex:1;padding:1rem 1.25rem 2.5rem;overflow:auto;max-height:calc(100vh - 46px)}
-  .rhead h2{font-size:1.2rem;margin:.2rem 0}
-  .meta{color:var(--muted);margin:.2rem 0 .6rem}
+  main{flex:1;padding:1.1rem 1.5rem 2.5rem;overflow:auto;max-height:calc(100vh - 46px)}
+  .rhead{margin-bottom:1rem;padding-bottom:.55rem;border-bottom:1px solid var(--rule)}
+  .rhead h2{font:700 var(--f4)/1.15 var(--serif);margin:.1rem 0 .25rem;letter-spacing:-.015em}
+  .meta{color:var(--muted);margin:.15rem 0;font-size:var(--f0)}
   .meta .leicode{color:var(--muted);opacity:.7;font-size:11px;font-variant-numeric:tabular-nums;letter-spacing:.3px}
   .tfilter{margin:.3rem 0 .8rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
   .tfilter input{padding:.35rem .5rem;border:1px solid var(--line);border-radius:5px;font:inherit;width:250px;
@@ -74,17 +120,24 @@
   .ctl{font-size:12.5px;color:var(--ink);display:inline-flex;align-items:center;gap:.3rem}
   .ctl select{padding:.25rem .3rem;border:1px solid var(--line);border-radius:5px;font:inherit;font-size:12px;
               background:var(--card);color:var(--ink)}
-  section{margin-bottom:1.4rem}
-  section h3{font-size:.95rem;margin:.2rem 0 .35rem;color:var(--blue)}
-  .scalenote{font-size:11px;font-weight:400;color:var(--muted);background:var(--soft);border-radius:4px;padding:1px 7px;margin-left:.5rem;vertical-align:2px}
-  table{border-collapse:separate;border-spacing:0;background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.08)}
-  th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:3px 7px;vertical-align:top}
-  table tr>*:first-child{border-left:1px solid var(--line)}
-  thead th{background:var(--thead);color:var(--theadink);font-weight:600;text-align:left;font-size:11px;
-           position:sticky;top:0;z-index:2;border-top:1px solid var(--line)}
-  .rh{background:var(--soft);color:var(--softink);font-weight:600;text-align:center;width:48px}
-  .rl{max-width:340px;font-size:12px}
-  .cl{font-weight:400;opacity:.85;font-size:10px}
+  section{margin-bottom:1.6rem}
+  /* Überschriften in Serif — der Bruch zur Sans der Daten macht die
+     Hierarchie, nicht Farbe und nicht Fettung allein. */
+  section h3{font:700 var(--f2)/1.25 var(--serif);margin:.2rem 0 .4rem;color:var(--ink);
+             padding-bottom:.25rem;border-bottom:1px solid var(--line)}
+  .scalenote{font:400 var(--f0)/1.4 var(--sans);color:var(--muted);margin-left:.5rem;vertical-align:1px}
+  table{border-collapse:separate;border-spacing:0;background:var(--card)}
+  th,td{border-bottom:1px solid var(--line);padding:4px 8px;vertical-align:top}
+  /* Keine senkrechten Gitterlinien: Spalten trennt der Weißraum. Das ist
+     der sichtbarste Einzelgewinn gegenüber dem Kästchengitter vorher. */
+  thead th{background:var(--thead);color:var(--theadink);font-weight:600;text-align:left;
+           font-size:var(--f0);position:sticky;top:0;z-index:2;
+           border-top:1px solid var(--line);border-bottom:2px solid var(--rule)}
+  tbody tr:hover{background:var(--hover)}
+  .rh{color:var(--muted);font-weight:600;text-align:right;width:52px;
+      font-variant-numeric:tabular-nums;font-size:var(--f0)}
+  .rl{max-width:340px;font-size:var(--f1)}
+  .cl{font-weight:400;color:var(--muted);font-size:var(--f0)}
   td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:default}
   td.empty{background:var(--empty)}
   /* "Fehlt != Null": Coverage-Kasten + Sektions-Badge */
@@ -149,8 +202,11 @@
   .bmtable th .dir{opacity:.7;font-size:9px}
   .bmtable td.bank{font-weight:600;max-width:260px}
   .bmtable td .sub{display:block;font-weight:400;font-size:10px;color:var(--muted)}
-  .caveat{font-size:11.5px;color:var(--muted);background:var(--soft);border-left:3px solid var(--blue);
-          padding:.5rem .8rem;border-radius:0 6px 6px 0;margin:.6rem 0 1rem;max-width:860px}
+  /* Anmerkung im redaktionellen Sinn: gehört zur Grafik, nicht daneben.
+     Kein Kasten, kein Akzent — sie erklärt, sie warnt nicht. */
+  .caveat{font-size:var(--f1);line-height:1.5;color:var(--ink2);background:transparent;
+          border-left:2px solid var(--line);padding:.15rem 0 .15rem .8rem;
+          margin:.5rem 0 1rem;max-width:74ch}
   .spark{color:var(--blue);vertical-align:middle}
   .ts td.num a{color:inherit;text-decoration:none}
   .ts th.datecol a{color:var(--theadink);text-decoration:underline dotted}
@@ -162,27 +218,40 @@
   .pctb i{position:absolute;inset:0;font-style:normal;font-size:8.5px;line-height:9px;
           text-align:right;padding-right:3px;color:var(--muted);font-variant-numeric:tabular-nums}
   /* Verteilung über der Rangliste (#48, R3) */
-  .dgrid{display:flex;flex-wrap:wrap;gap:.5rem;margin:.25rem 0 .7rem}
-  .dcard{background:var(--card);border:1px solid var(--line);border-radius:6px;
-         padding:.35rem .45rem .3rem;cursor:pointer}
-  .dcard:hover{border-color:var(--blue)}
-  .dcard.on{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
-  .dlab{font-size:11px;font-weight:600}
-  .dsum{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .dgrid{display:flex;flex-wrap:wrap;gap:.6rem;margin:.35rem 0 .8rem}
+  svg.dist{display:block;width:100%;height:auto}
+  /* Grafik-Idiom: Titelblock oben links, Fläche mit hellen Horizontallinien,
+     keine Achsen-Ticks, Quellzeile unten. Die Quellzeile ist bei uns mehr
+     wert als beim Vorbild — sie kann die exakte Herkunft nennen statt nur
+     die Institution. */
+  .dcard{background:var(--card);border:1px solid var(--line);padding:.45rem .55rem .4rem;
+         cursor:pointer;flex:1 1 306px;min-width:266px;max-width:430px}
+  .dcard:hover{border-color:var(--ink2)}
+  .dcard.on{border-color:var(--rule);box-shadow:inset 0 2px 0 var(--accent)}
+  .dlab{font:700 var(--f1)/1.25 var(--serif);color:var(--ink)}
+  .dnote{font-size:var(--f0);color:var(--muted);margin-bottom:3px}
+  .dsum{font-size:var(--f0);color:var(--muted);font-variant-numeric:tabular-nums}
+  .dsrc{font-size:9.5px;color:var(--muted);margin-top:2px;border-top:1px solid var(--line);
+        padding-top:2px;letter-spacing:.01em}
   .dax{display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);
-       font-variant-numeric:tabular-nums;margin-top:-2px}
-  svg.dist rect{fill:var(--blue);opacity:.5}
-  svg.dist rect.dout{opacity:.95}
-  svg.dist line.dmed{stroke:var(--ink);stroke-width:1;opacity:.5}
-  svg.dist line.dsep{stroke:var(--line);stroke-width:1}
+       font-variant-numeric:tabular-nums}
+  svg.dist rect.dpanel{fill:var(--panel)}
+  svg.dist line.dgrid{stroke:var(--grid);stroke-width:1}
+  svg.dist rect{fill:var(--blue);opacity:.85}
+  svg.dist rect.dout{fill:var(--blue);opacity:1}
+  svg.dist line.dmed{stroke:var(--ink);stroke-width:1.2;opacity:.65}
+  svg.dist line.dsep{stroke:var(--muted);stroke-width:1;opacity:.55}
   .fb{display:inline-block;font-size:10px;font-weight:600;border-radius:3px;padding:0 .3rem;
       margin-left:.3rem;background:var(--soft);color:var(--softink);cursor:help;white-space:nowrap}
   .cmp-pick{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.4rem 0 .8rem}
   .chip{display:inline-flex;align-items:center;gap:.35rem;background:var(--soft);color:var(--softink);
         border-radius:12px;padding:2px 9px;font-size:11.5px}
   .chip button{border:0;background:transparent;color:inherit;cursor:pointer;font-size:12px;padding:0}
-  footer.disc{font-size:11.5px;color:var(--muted);padding:.7rem 1rem;border-top:1px solid var(--line);background:var(--card)}
-  footer.disc a{color:var(--blue)}
+  footer.disc{font-size:var(--f0);line-height:1.55;color:var(--muted);padding:.8rem 1.5rem;
+              border-top:1px solid var(--rule);background:var(--card)}
+  footer.disc a{color:var(--muted)}
+  .colophon{margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--line);max-width:78ch;
+            font-style:normal;color:var(--muted)}
   a{color:var(--blue)}
   @media (max-width:860px){
     .layout{flex-direction:column}
@@ -194,7 +263,6 @@
 <body>
 <header>
   <h1>Pillar 3 Viewer</h1>
-  <span class="pill" style="background:#1f8a4c;color:#fff" title="Lädt per-Report-JSON-Shards, lazy">JSON · Lazy-Shards</span>
   <span class="pill" id="hsub">lädt…</span>
   <nav class="tabs">
     <button id="tabReports" class="on">Reports</button>
@@ -235,6 +303,9 @@
   Public Pillar&nbsp;3 data © European Banking Authority; entity names © GLEIF; FX = ECB reference rates.
   Re-presented “as is” for scientific/educational use (fair use) — verify figures against the official EBA
   source. Not investment or legal advice. <a href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md">Full disclaimer</a>.
+  <div class="colophon">Gestaltung inspiriert von <i>The Economist</i> — dem wir die Einsicht verdanken, dass
+  eine Grafik eine Meinung haben darf, solange sie ihre Quelle nennt. Mit der Publikation in keiner Weise
+  verbunden; Schriften und Farbwerte sind eigene, und das rote Rechteck haben wir ihnen gelassen.</div>
 </footer>
 
 <script>
@@ -1056,7 +1127,7 @@ const BM_PROFILES={
 };
 /* Greift das Profil (direkt oder über eine Spalte) auf KM1 zu? Steuert nur den
    Hinweistext in der Kopfzeile — npl/esg kommen ohne KM1 aus. */
-const bmUsesKm1=prof=>prof.tpl==='61.00'||prof.cols.some(c=>c.tpl==='61.00'||c.kind==='shareOfTrea');
+const bmUsesKm1=prof=>prof.tpl!=='61.00'&&prof.cols.some(c=>c.tpl==='61.00'||c.kind==='shareOfTrea');
 let BMP = store.bmp && BM_PROFILES[store.bmp] ? store.bmp : 'km1';
 let BM_PCT = store.bmpct === true;   // Perzentil-Bänder (Peer-Gruppe), aus per Default
 // Auffällige Reports sind per Default SICHTBAR: Ausblenden waere eine
@@ -1189,7 +1260,14 @@ function distChart(vals){
   for(const x of s){ if(x<lo||x>hi) continue;
     bins[Math.min(DBINS-1, Math.floor((x-lo)/span*DBINS))]++; }
   const peak=Math.max(1,...bins), inner=DW-2*DPAD, bw=inner/DBINS, base=DH-6, top=DH-10;
-  let g='';
+  // Fläche + helle Horizontallinien statt Achsenkreuz und Ticks (#61): die
+  // Linien liegen HINTER den Balken und tragen die Ablesbarkeit, ohne einen
+  // Rahmen zu ziehen.
+  let g=`<rect class="dpanel" x="0" y="0" width="${DW}" height="${base+1}"/>`;
+  for(let k=1;k<=3;k++){
+    const y=(base-top*k/3).toFixed(1);
+    g+=`<line class="dgrid" x1="0" x2="${DW}" y1="${y}" y2="${y}"/>`;
+  }
   bins.forEach((n,i)=>{ if(!n) return;
     const h=Math.max(1, n/peak*top);
     g+=`<rect x="${(DPAD+i*bw).toFixed(1)}" y="${(base-h).toFixed(1)}" width="${Math.max(1,bw-.5).toFixed(1)}" height="${h.toFixed(1)}"/>`; });
@@ -1271,17 +1349,32 @@ function distributionRow(rows, prof){
     const d=Math.abs(v)>=100?0:1;
     return v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}).split(',').join(NBSP);
   };
+  // Anmerkung unter dem Titel: klärt die Größe, bevor die Zahl gelesen wird.
+  const NOTE={pct:'Quote aus KM1, in Prozent', ratio:'Verhältniszahl, in Prozent',
+              shareOfTrea:'Anteil an der Gesamtrisikoposition (TREA)',
+              pp:'Differenz in Prozentpunkten', eur:'Beträge in Mrd. EUR (EZB-Kurs)',
+              num:'Absolutzahl'};
+  // Quellzeile je Grafik — die exakte Herkunft, nicht nur die Institution:
+  // Template, Zelle, Stichtage, Zahl der Reports. Das ist die
+  // Reproduzierbarkeitslinie des Projekts als Gestaltungselement.
+  const dates=[...new Set(rows.map(r=>r.date))].sort();
+  const period=dates.length===1?dates[0]
+    :`${dates[0]}–${dates[dates.length-1]} (${dates.length} Stichtage)`;
   let cards='';
   for(const c of prof.cols){
     const d=distChart(rows.map(r=>r[c.id]));
     if(!d) continue;
     const tail=[d.nLo?`${d.nLo} links`:'', d.nHi?`${d.nHi} rechts`:''].filter(Boolean).join(' · ');
-    cards+=`<div class="dcard${c.id===bmSort.col?' on':''}" data-k="${esc(c.id)}"
+    const cell=c.calc?`abgeleitet aus ${c.tpl||prof.tpl}`
+                     :`${c.tpl||prof.tpl} · r${c.row} c${c.col||'0010'}`;
+    cards+=`<div class="dcard${c.id===bmSort.col?' on':''}" data-k="${esc(c.id)}" tabindex="0"
       title="Verteilung über die ${d.n} angezeigten Reports. Die Achse ist an den Tukey-Zäunen abgeschnitten; was darüber hinausgeht, steht als Balken im Randstreifen — als Anzahl, nicht als Position. Klick sortiert die Liste nach dieser Spalte.">
-      <div class="dlab">${esc(c.label)}</div>${d.svg}
+      <div class="dlab">${esc(c.label)}</div>
+      <div class="dnote">${esc(NOTE[c.kind]||'')}</div>${d.svg}
       <div class="dax"><span>${esc(fmtv(d.lo))}</span><span>${esc(fmtv(d.hi))}</span></div>
       <div class="dsum">n=${d.n} · Median ${esc(fmtv(d.med))} · Q1–Q3 ${esc(fmtv(d.q1))}–${esc(fmtv(d.q3))}${
-        tail?` · <b>${esc(tail)}</b> außerhalb`:''}</div></div>`;
+        tail?` · <b>${esc(tail)}</b> außerhalb`:''}</div>
+      <div class="dsrc">Quelle: EBA Pillar 3 Data Hub · ${esc(cell)} · ${esc(period)}</div></div>`;
   }
   if(!cards) return '';
   return `<div class="dgrid">${cards}</div>
