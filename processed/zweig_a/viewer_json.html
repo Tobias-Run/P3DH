@@ -161,6 +161,22 @@
   .pctf{display:block;height:100%;background:var(--blue);opacity:.35}
   .pctb i{position:absolute;inset:0;font-style:normal;font-size:8.5px;line-height:9px;
           text-align:right;padding-right:3px;color:var(--muted);font-variant-numeric:tabular-nums}
+  /* Verteilung über der Rangliste (#48, R3) */
+  .dgrid{display:flex;flex-wrap:wrap;gap:.5rem;margin:.25rem 0 .7rem}
+  .dcard{background:var(--card);border:1px solid var(--line);border-radius:6px;
+         padding:.35rem .45rem .3rem;cursor:pointer}
+  .dcard:hover{border-color:var(--blue)}
+  .dcard.on{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+  .dlab{font-size:11px;font-weight:600}
+  .dsum{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .dax{display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);
+       font-variant-numeric:tabular-nums;margin-top:-2px}
+  svg.dist rect{fill:var(--blue);opacity:.5}
+  svg.dist rect.dout{opacity:.95}
+  svg.dist line.dmed{stroke:var(--ink);stroke-width:1;opacity:.5}
+  svg.dist line.dsep{stroke:var(--line);stroke-width:1}
+  .fb{display:inline-block;font-size:10px;font-weight:600;border-radius:3px;padding:0 .3rem;
+      margin-left:.3rem;background:var(--soft);color:var(--softink);cursor:help;white-space:nowrap}
   .cmp-pick{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.4rem 0 .8rem}
   .chip{display:inline-flex;align-items:center;gap:.35rem;background:var(--soft);color:var(--softink);
         border-radius:12px;padding:2px 9px;font-size:11.5px}
@@ -1132,6 +1148,95 @@ function pctBadge(info){
        + `<span class="pctf" style="width:${Math.max(2,Math.min(100,info.p))}%"></span><i>P${p}</i></span>`;
 }
 
+/* ---- Verteilung statt Rangliste (#48, R3) --------------------------------
+   Der Benchmark oeffnete mit vier Zeilen Kommuninvest um 370 % CET1. Fuer eine
+   schwedische Kommunalfinanzierungsagentur mag das stimmen — aber als ERSTER
+   Eindruck einer Rangliste liest es sich als „die Daten sind kaputt". Das
+   Problem ist die Darstellungsform selbst: eine Rangliste sagt „Bester", sie
+   hat keine Stelle, an der ein Randwert wie ein Randwert aussieht.
+
+   Deshalb steht die Verteilung UEBER der Liste. Derselbe Wert liegt dort
+   sichtbar am Rand. Entfernt oder umsortiert wird nichts — die Rangliste
+   bleibt vollstaendig und an ihrer Sortierung.                              */
+function quart(sorted){
+  const q=p=>{ const i=(sorted.length-1)*p, lo=Math.floor(i), hi=Math.ceil(i);
+               return sorted[lo]+(sorted[hi]-sorted[lo])*(i-lo); };
+  return {q1:q(.25), med:q(.5), q3:q(.75)};
+}
+/* Tukey-Zaeune. Robust gegen genau die Werte, um die es geht: Mittelwert und
+   Standardabweichung wuerden von einem 370-%-Wert selbst verschoben, Quartile
+   nicht. */
+const FENCE=1.5;
+function fences(sorted){
+  const {q1,med,q3}=quart(sorted);
+  const iqr=q3-q1;
+  return {q1,med,q3,iqr, lo:q1-FENCE*iqr, hi:q3+FENCE*iqr};
+}
+const DBINS=30, DW=252, DH=44, DPAD=12;
+/* Histogramm ueber die Zaun-Spanne, mit ABGESCHNITTENER Achse: was darueber
+   hinausgeht, steht als Ueberlaufbalken im Randstreifen — als Anzahl, nicht als
+   Position. Ohne den Schnitt draengte sich die gesamte Verteilung in den ersten
+   Balken, sobald ein einziger Wert bei 400 % liegt; mit ihm bleibt der Rumpf
+   lesbar UND der Rand sichtbar. Der Trennstrich zeigt, dass die Achse bricht. */
+function distChart(vals){
+  const s=[...vals].filter(v=>v!=null&&isFinite(v)).sort((a,b)=>a-b);
+  if(s.length<5) return null;
+  const f=fences(s);
+  const lo=Math.max(s[0],f.lo), hi=Math.min(s[s.length-1],f.hi);
+  const nLo=s.filter(x=>x<lo).length, nHi=s.filter(x=>x>hi).length;
+  const span=(hi-lo)||1;
+  const bins=new Array(DBINS).fill(0);
+  for(const x of s){ if(x<lo||x>hi) continue;
+    bins[Math.min(DBINS-1, Math.floor((x-lo)/span*DBINS))]++; }
+  const peak=Math.max(1,...bins), inner=DW-2*DPAD, bw=inner/DBINS, base=DH-6, top=DH-10;
+  let g='';
+  bins.forEach((n,i)=>{ if(!n) return;
+    const h=Math.max(1, n/peak*top);
+    g+=`<rect x="${(DPAD+i*bw).toFixed(1)}" y="${(base-h).toFixed(1)}" width="${Math.max(1,bw-.5).toFixed(1)}" height="${h.toFixed(1)}"/>`; });
+  const x=v=>DPAD+(v-lo)/span*inner;
+  g+=`<line class="dmed" x1="${x(f.med).toFixed(1)}" x2="${x(f.med).toFixed(1)}" y1="2" y2="${base}"/>`;
+  // Randstreifen: gestrichelter Trennstrich, weil die Achse dort BRICHT. Der
+  // Balken ist eine Anzahl, keine Position — ohne den Strich laese man ihn als
+  // "ganz weit rechts" statt als "jenseits der Skala".
+  const gut=(n,left)=>{
+    if(!n) return '';
+    const h=Math.max(3, Math.min(1,n/peak)*top);
+    const sx=left?DPAD-5:DW-DPAD+5;
+    return `<line class="dsep" x1="${sx}" x2="${sx}" y1="1" y2="${base}" stroke-dasharray="2 2"/>`
+         + `<rect class="dout" x="${left?1:DW-5}" y="${(base-h).toFixed(1)}" width="4" height="${h.toFixed(1)}"/>`;
+  };
+  g+=gut(nLo,true)+gut(nHi,false);
+  return {svg:`<svg class="dist" width="${DW}" height="${DH}" viewBox="0 0 ${DW} ${DH}">${g}</svg>`,
+          n:s.length, med:f.med, q1:f.q1, q3:f.q3, lo, hi, nLo, nHi};
+}
+/* Randwerte je PEER-GRUPPE, nicht ueber die ganze Anzeige. Ueber alle Groessen-
+   klassen zu zaeunen hiesse, eine Exportkreditagentur an einer Dorfsparkasse zu
+   messen — dieselbe Ueberlegung wie bei den Perzentilbaendern. Das Histogramm
+   oben BESCHREIBT dagegen die angezeigte Menge; nur die Aussage ueber eine
+   einzelne Zeile ist peer-relativ. */
+function fenceOutliers(rows,colId){
+  const groups=new Map();
+  for(const r of rows){ const v=r[colId];
+    if(v==null||!isFinite(v)) continue;
+    const k=peerKeyOf(r); (groups.get(k)||groups.set(k,[]).get(k)).push(v); }
+  const fen=new Map();
+  for(const [k,arr] of groups){
+    if(arr.length<PCT_MIN_GROUP) continue;      // darunter ist ein Zaun Rauschen
+    arr.sort((a,b)=>a-b); fen.set(k, fences(arr));
+  }
+  const out=new Map();
+  for(const r of rows){
+    const v=r[colId]; if(v==null||!isFinite(v)) continue;
+    const f=fen.get(peerKeyOf(r)); if(!f) continue;
+    if(v>f.hi) out.set(r.key,'hoch'); else if(v<f.lo) out.set(r.key,'niedrig');
+  }
+  return out;
+}
+function fenceBadge(dir,label){
+  if(!dir) return '';
+  return `<span class="fb" title="Der Wert in der sortierten Spalte „${label}" liegt ausserhalb der Tukey-Zäune seiner Peer-Gruppe (Q1−1,5·IQR bis Q3+1,5·IQR, ab 5 Reports). Das beschreibt die Lage in der Verteilung — es sagt nichts darüber, ob die Meldung richtig ist.">◇ Randwert ${esc(dir)}</span>`;
+}
+
 /* ---- Plausibilitaets-Marker (#48) ---------------------------------------
    Die Rangliste fuehrte mit Werten wie 387 % CET1 an, ohne Hinweis darauf,
    dass wir sie selbst als auffaellig einstufen (#17). Der Marker ordnet ein,
@@ -1158,6 +1263,33 @@ function bmCell(c,v,pinfo){
   else txt=v.toFixed(1)+NBSP+'%';
   return `<td class="num">${zdash(txt)}${pinfo?pctBadge(pinfo):''}</td>`;
 }
+/* Eine Karte je Profilspalte, ueber der Rangliste. Klick setzt die Sortierung —
+   damit fuehrt die Verteilung zur Liste und nicht umgekehrt. */
+function distributionRow(rows, prof){
+  const fmtv=v=>{
+    if(v==null) return '–';
+    const d=Math.abs(v)>=100?0:1;
+    return v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}).split(',').join(NBSP);
+  };
+  let cards='';
+  for(const c of prof.cols){
+    const d=distChart(rows.map(r=>r[c.id]));
+    if(!d) continue;
+    const tail=[d.nLo?`${d.nLo} links`:'', d.nHi?`${d.nHi} rechts`:''].filter(Boolean).join(' · ');
+    cards+=`<div class="dcard${c.id===bmSort.col?' on':''}" data-k="${esc(c.id)}"
+      title="Verteilung über die ${d.n} angezeigten Reports. Die Achse ist an den Tukey-Zäunen abgeschnitten; was darüber hinausgeht, steht als Balken im Randstreifen — als Anzahl, nicht als Position. Klick sortiert die Liste nach dieser Spalte.">
+      <div class="dlab">${esc(c.label)}</div>${d.svg}
+      <div class="dax"><span>${esc(fmtv(d.lo))}</span><span>${esc(fmtv(d.hi))}</span></div>
+      <div class="dsum">n=${d.n} · Median ${esc(fmtv(d.med))} · Q1–Q3 ${esc(fmtv(d.q1))}–${esc(fmtv(d.q3))}${
+        tail?` · <b>${esc(tail)}</b> außerhalb`:''}</div></div>`;
+  }
+  if(!cards) return '';
+  return `<div class="dgrid">${cards}</div>
+    <div class="caveat" style="border-left-color:var(--muted)">Die Liste unten <b>sortiert</b>, die Verteilung oben <b>ordnet ein</b>.
+    Ein Spitzenplatz kann ein Randwert sein — 370 % CET1 stehen in einer Rangliste ganz oben und in einer
+    Verteilung ganz außen. Beides ist derselbe Wert; nur das eine sieht aus wie „Bester". Zeilen, deren Wert
+    in der sortierten Spalte außerhalb der Zäune ihrer Peer-Gruppe liegt, sind mit ◇ markiert.</div>`;
+}
 async function renderBenchmark(){
   VIEW='benchmark'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
@@ -1176,6 +1308,11 @@ async function renderBenchmark(){
     `<option value="${k}"${k===BMP?' selected':''}>${esc(p.label)}</option>`).join('');
   const pmaps=new Map();
   if(BM_PCT) for(const c of prof.cols) pmaps.set(c.id,percentileMap(allRows,c.id));
+  // Randwert-Marker nur fuer die Spalte, nach der gerade sortiert wird: genau
+  // die entscheidet, wer die Liste anfuehrt. Bei Sortierung nach Name/Stichtag
+  // gibt es keine Metrik und damit keinen Marker.
+  const sortCol=prof.cols.find(c=>c.id===bmSort.col);
+  const fmarks=sortCol?fenceOutliers(allRows, sortCol.id):new Map();
   let h=`<div class="rhead"><h2>Benchmark</h2></div>
     <div class="bmbar"><label class="ctl">Profil: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
@@ -1185,6 +1322,7 @@ async function renderBenchmark(){
     <div class="caveat">⚠ Vergleichbarkeits-Caveat: Rechnungslegung, Konsolidierungskreis (CON/IND),
     nationale Optionen und Framework-Version (4.1/4.2) unterscheiden sich — Ranglisten sind indikativ,
     keine Aufsichtsmetrik. Quelle: öffentliche Pillar-3-Meldungen (© EBA).</div>
+    ${distributionRow(allRows, prof)}
     <table class="bmtable"><thead><tr>
       <th data-k="name">Institut <span class="dir"></span></th><th data-k="date">Stichtag <span class="dir"></span></th>`;
   for(const c of prof.cols) h+=`<th class="num" data-k="${c.id}">${esc(c.label)} <span class="dir"></span></th>`;
@@ -1192,7 +1330,8 @@ async function renderBenchmark(){
   h+='</tr></thead><tbody>';
   for(const r of rows){
     h+=`<tr${flaggedFor(r.q,prof.tpl)?' class="flagged"':''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
-        ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}
+        ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}${
+          sortCol?fenceBadge(fmarks.get(r.key), sortCol.label):''}
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;
     for(const c of prof.cols) h+=bmCell(c,r[c.id],BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null);
@@ -1210,6 +1349,13 @@ async function renderBenchmark(){
   });
   document.getElementById('bmHide').addEventListener('change',e=>{
     BM_HIDEFLAG=e.target.checked; store.bmhide=BM_HIDEFLAG; persist(); renderBenchmark();
+  });
+  main.querySelectorAll('.dcard').forEach(card=>{
+    card.onclick=()=>{
+      const k=card.dataset.k;
+      if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:-1};
+      renderBenchmark();
+    };
   });
   main.querySelectorAll('th[data-k]').forEach(th=>{
     const k=th.dataset.k;
