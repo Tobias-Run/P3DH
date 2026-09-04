@@ -36,6 +36,7 @@ import duckdb
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from determinism import ordered_query as ordered  # noqa: E402
 from template_themes import theme_payload  # noqa: E402
+from metrics import metric_payload  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
@@ -338,8 +339,10 @@ def main():
                     bridge.setdefault(row["template_id"], {})[
                         row["cell_row"] + "|" + row["cell_col"]] = row["status"]
 
+    # Kennzahlen-Registry (#63): Definition, Zweck, Schwelle, Herkunft. Die
+    # Rechenvorschrift bleibt im Viewer — sie ist Code, keine Daten.
     codebook = {"cb": cb, "titles": titles, "axis": axis, "themes": themes,
-                "bridge": bridge}
+                "bridge": bridge, "metrics": metric_payload()}
 
     # --- lookup maps, all straight from the same parquet ---
     # Diese drei Maps werden je Schlüssel ÜBERSCHRIEBEN — bei mehreren Zeilen je

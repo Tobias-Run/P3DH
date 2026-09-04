@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -170,7 +170,26 @@
   /* Überblick (#47, R2): die Kennzahlen, mit denen ein Report anfängt */
   .ovgrid{display:flex;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .45rem}
   .ovcard{flex:1 1 136px;min-width:136px;max-width:212px;background:var(--card);
-          border:1px solid var(--line);border-radius:6px;padding:.4rem .55rem}
+          border:1px solid var(--line);border-radius:6px;padding:.4rem .55rem;cursor:pointer}
+  .ovcard:hover{border-color:var(--ink2)}
+  .ovcard.on{border-color:var(--rule);box-shadow:inset 0 2px 0 var(--accent)}
+  /* Kennzahl-Detail (#63): Definition, Zweck, Schwelle, Herleitung */
+  .mdet{border:1px solid var(--rule);background:var(--card);padding:.75rem .95rem .8rem;
+        margin:.1rem 0 .7rem;max-width:82ch}
+  .mdet h4{font:700 var(--f2)/1.25 var(--serif);margin:0 0 .1rem}
+  .mdet p{margin:.35rem 0;font-size:var(--f1);line-height:1.55}
+  .mdet .mclose{float:right;border:0;background:transparent;color:var(--muted);
+                cursor:pointer;font:inherit;font-size:var(--f2);line-height:1;padding:0}
+  .mdet .mclose:hover{color:var(--ink)}
+  .mdl{font:600 var(--f0)/1.4 var(--sans);letter-spacing:.07em;text-transform:uppercase;
+       color:var(--muted);margin:.7rem 0 .1rem}
+  .mdet table{width:100%;margin:.15rem 0 .1rem}
+  .mdet td,.mdet th{font-size:var(--f0);padding:3px 8px 3px 0}
+  .mdet .role{font-weight:600;white-space:nowrap}
+  .mdet .coord{font-family:ui-monospace,monospace;color:var(--muted);white-space:nowrap}
+  .mdet .rv{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .mdet .res{border-top:1px solid var(--rule);font-weight:700}
+  .mnote{font-size:var(--f0);color:var(--muted);line-height:1.55;margin:.45rem 0 0}
   .ovlab{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .ovval{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.25;margin:1px 0 3px}
   .ovval .ovu{font-size:11px;font-weight:400;color:var(--muted);margin-left:2px}
@@ -338,7 +357,7 @@ let THEME_ORDER=[], THEME_OF=new Map();
 /* Framework-Bruecke (#26): nur die NICHT stabilen Zellen. Der Viewer joint
    ueber die Koordinate (row, col), nicht ueber den dp-Code — ein Rebound
    bricht deshalb nicht sichtbar, sondern still. */
-let BRIDGE=new Map();
+let BRIDGE=new Map(), METRICDOC=new Map(), OPENMETRIC=null;
 const bridgeAt=(tid,row,col)=>{ const m=BRIDGE.get(tid); return m?(m[row+'|'+col]||''):''; };
 const BRIDGE_TIP={
   rebound:'Diese Zelle wurde zwischen Framework 4.1 und 4.2 auf einen neuen Datenpunkt umgebunden. Der Wert wird über die Koordinate weiter gefunden — ob er danach noch dasselbe misst, ist offen. Vergleiche über den Versionswechsel mit Vorbehalt.',
@@ -373,11 +392,35 @@ async function getJSON(path){
 /* ================= formatting ================= */
 const esc=s=>String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const NBSP=' ';
+/* ---- EINE Stelle fuer Zahlformatierung (#63) -----------------------------
+   Vorher lagen acht `toLocaleString('en-US')` mit handgemachter
+   Tausendertrennung und vier `toFixed()` nebeneinander; die Sprache war damit
+   an zwoelf Stellen verankert, und `toFixed()` umging sie ohnehin.
+
+   Deutsch heisst Komma als Dezimaltrenner. Als Tausendertrenner bleibt das
+   schmale geschuetzte Leerzeichen (U+202F) statt des deutschen Punkts: bei
+   Betraegen wie `1 234,5` ist es eindeutig, waehrend `1.234,5` neben
+   englischsprachigen Templatelabels zur Verwechslung einlaedt.
+
+   ⚠ SVG-Koordinaten duerfen NIE hierdurch. Ein Pfad mit Komma als
+   Dezimaltrenner ist kaputt — dort bleibt `toFixed()`.
+
+   Ein spaeterer Export (#50) braucht die Gegenrichtung: maschinenlesbar mit
+   Punkt und ohne Trennzeichen. Deshalb steht die Sprache hier als Konstante
+   und nicht verstreut. */
+const LOCALE='de-DE';
+function nf(v, min, max){
+  const n=Number(v);
+  if(!Number.isFinite(n)) return '';
+  const lo=min==null?0:min;
+  return n.toLocaleString(LOCALE, {minimumFractionDigits:lo,
+                                   maximumFractionDigits:max==null?lo:max})
+          .split('.').join(NBSP);   // in de-DE ist '.' der Tausendertrenner
+}
 function fmt(v){
   const n=Number(v);
   if(v==='' || isNaN(n)) return esc(v);
-  const s=(Number.isInteger(n)? n.toLocaleString('en-US') : n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
-  return s.split(',').join(NBSP);
+  return Number.isInteger(n) ? nf(n,0,0) : nf(n,2,2);
 }
 const ZERO_RE=/^-?0([.,]0+)?$/;
 const zdash=s=>ZERO_RE.test(String(s).replace(/[\s  ]|%/g,''))?'–':s;
@@ -390,12 +433,11 @@ function pickUnit(maxAbs){
 function fmtTyped(v, dt, unit, fx){
   const n=Number(v);
   if(v==='' || isNaN(n)) return esc(v);
-  if(dt==='percentage'){ const p=n*100; return zdash(p.toFixed(Math.abs(p)<10?2:1)+NBSP+'%'); }
+  if(dt==='percentage'){ const p=n*100; return zdash(nf(p, Math.abs(p)<10?2:1)+NBSP+'%'); }
   if(dt==='integer') return zdash(fmt(v));
   if(dt==='monetary'){
     const m=n*(fx||1);
-    if(unit>1){ const s=(m/unit).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
-      return zdash(s.split(',').join(NBSP)); }
+    if(unit>1) return zdash(nf(m/unit, 1));
     return zdash(fmt(m));
   }
   return zdash(fmt(v));
@@ -451,6 +493,9 @@ function buildFromIndex(idx, codebook){
   THEME_ORDER=(th.order||[]).map(([id,label])=>({id,label}));
   for(const [tid,id] of Object.entries(th.map||{})) THEME_OF.set(tid,id);
   for(const [tid,cells] of Object.entries(codebook.bridge||{})) BRIDGE.set(tid,cells);
+  // Kennzahlen-Dokumentation (#63) — kuratiert in scripts/metrics.py. Die
+  // Rechenvorschrift steht in OV_METRICS; verbunden ueber `id`.
+  for(const m of (codebook.metrics||[])) METRICDOC.set(m.id, m);
   for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
@@ -850,6 +895,92 @@ function overviewPercentiles(){
   for(const mt of OV_METRICS) OV_PCT.set(mt.id, percentileMap(rows, mt.id));
   return OV_PCT;
 }
+/* Aus der Erklaerung in die Rohtabelle springen: der Templatefilter oeffnet
+   den Themenblock, der sie traegt (#47), und macht sie damit erreichbar. Dass
+   dabei der Filter gesetzt wird, ist sichtbar — er steht im Eingabefeld. */
+function jumpToTemplate(tid){
+  const f=document.getElementById('tfilter');
+  if(!f) return;
+  f.value=tid;
+  f.dispatchEvent(new Event('input'));
+  const sec=document.querySelector('#tcontainer section');
+  if(sec) sec.scrollIntoView({block:'start', behavior:'smooth'});
+}
+
+/* ---- Kennzahl-Detail (#63) ------------------------------------------------
+   Definition, Zweck, Schwelle — und die Herleitung aus dem Meldetemplate
+   DIESES Instituts, mit seinen eigenen Zahlen.
+
+   Zwei Faelle sehen bewusst verschieden aus. Bei einer direkten Zelle wird
+   nichts gerechnet; dort ist der Wert eine gemeldete Zahl, und so zu tun, als
+   gaebe es eine Formel, waere eine Erfindung. Nur abgeleitete Kennzahlen
+   zeigen einen Rechenweg. */
+function metricCellRow(rep, tid, r, c, role){
+  const e=CB.get(dpmCode(tid)+'|'+r+'|'+c)||{};
+  const raw=tplValue(rep, tid, r, c);
+  const label=[e.rl,e.cl].filter(Boolean).join(' · ');
+  let shown='–';
+  if(raw!=null){
+    shown = e.dt==='percentage' ? nf(raw*100,2)+NBSP+'%'
+          : e.dt==='monetary'   ? nf(raw,0,2)+' '+esc(curOf(rep))
+          : nf(raw,0,2);
+  }
+  const bs=bridgeAt(tid,r,c);
+  return `<tr><td class="role">${esc(role)}</td>
+    <td class="coord">${esc(tid)} · r${esc(r)} c${esc(c)}${
+      bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</td>
+    <td>${esc(label)||'<span class="cl">ohne Label</span>'}</td>
+    <td class="rv">${shown}</td></tr>`;
+}
+function metricDetail(rep, id){
+  const mt=OV_METRICS.find(m=>m.id===id);
+  const doc=METRICDOC.get(id);
+  if(!mt) return '';
+  if(!doc) return `<div class="mdet"><button class="mclose" data-close="1" title="schließen">✕</button>
+    <h4>${esc(mt.label)}</h4><p class="mnote">Für diese Kennzahl liegt keine Beschreibung vor
+    (ältere <code>codebook.json</code>).</p></div>`;
+  const v=mt.get(rep);
+  let h=`<div class="mdet"><button class="mclose" data-close="1" title="schließen">✕</button>
+    <h4>${esc(mt.label)}</h4>
+    <p>${esc(doc.definition||'')}</p>`;
+  if(doc.purpose) h+=`<div class="mdl">Wozu</div><p>${esc(doc.purpose)}</p>`;
+
+  // --- Schwelle: gesetzlicher Boden UND die eigene Anforderung ---
+  const own = doc.own_req ? tplValue(rep, doc.own_req[0], doc.own_req[1], doc.own_req[2]) : null;
+  if(doc.floor!=null || own!=null || doc.note){
+    h+='<div class="mdl">Einordnung</div>';
+    if(doc.floor!=null)
+      h+=`<p>Gesetzlicher Boden: <b>${esc(nf(doc.floor,1))}${NBSP}${esc(mt.unit)}</b>
+        <span class="cl">— ${esc(doc.floor_src||'')}</span></p>`;
+    if(own!=null)
+      h+=`<p><b>Für dieses Institut bindend</b> ist die gemeldete Gesamtanforderung:
+        <b>${esc(nf(own*100,2))}${NBSP}%</b>
+        <span class="cl">(KM1 r${esc(doc.own_req[1])} — Säule-2-Aufschlag und kombinierte
+        Pufferanforderung eingeschlossen). Sie bezieht sich auf genau diese Quote. Der
+        Boden oben gilt für alle gleich und wird praktisch nie zur wirksamen Grenze.</span></p>`;
+    if(doc.note) h+=`<p class="mnote">${doc.note.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')}</p>`;
+  }
+
+  // --- Herleitung aus dem eigenen Meldetemplate ---
+  h+=`<div class="mdl">${doc.formula?'Herleitung aus der Meldung':'Herkunft in der Meldung'}</div>`;
+  h+='<table><tbody>';
+  for(const [tid,r,c,role] of (doc.cells||[])) h+=metricCellRow(rep,tid,r,c,role);
+  if(doc.formula){
+    h+=`<tr class="res"><td class="role">Ergebnis</td><td class="coord"></td>
+      <td>${esc(doc.formula)}</td>
+      <td class="rv">${v==null?'–':esc(nf(v,1))+NBSP+esc(mt.unit)}</td></tr>`;
+  }
+  h+='</tbody></table>';
+  if(!doc.formula)
+    h+=`<p class="mnote">Eine gemeldete Zelle — hier wird nichts gerechnet.
+      Die Karte zeigt den Wert${mt.unit==='%'?' als Prozentwert':''}${
+      mt.unit==='Mrd EUR'?', umgerechnet zum EZB-Referenzkurs und in Milliarden':''}.</p>`;
+  const tids=[...new Set((doc.cells||[]).map(c=>c[0]))].filter(t=>rep.templates.has(t));
+  if(tids.length)
+    h+=`<p class="mnote">Im Report nachschlagen: ${tids.map(t=>
+      `<a href="#" data-goto="${esc(t)}">${esc(t)} — ${esc(TITLES.get(dpmCode(t))||'')}</a>`).join(' · ')}</p>`;
+  return h+'</div>';
+}
 function renderOverview(rep){
   const host=document.getElementById('ovSection');
   if(!host) return;
@@ -866,12 +997,15 @@ function renderOverview(rep){
     for(const {mt,v} of have){
       const p=pm?(pm.get(mt.id)||new Map()).get(key):null;
       const bs=metricBridge(mt);
-      h+=`<div class="ovcard"><div class="ovlab" title="${esc(mt.label)}">${esc(mt.label)}${
+      h+=`<div class="ovcard${mt.id===OPENMETRIC?' on':''}" data-m="${esc(mt.id)}" tabindex="0"
+        title="Klick: Definition, Zweck, Schwelle und Herleitung aus dem Meldetemplate">
+        <div class="ovlab">${esc(mt.label)}${
         bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</div>
-        <div class="ovval">${esc(v.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1}).split(',').join(NBSP))}<span class="ovu">${esc(mt.unit)}</span></div>
+        <div class="ovval">${esc(nf(v,1))}<span class="ovu">${esc(mt.unit)}</span></div>
         ${p?pctBadge(p):''}</div>`;
     }
     h+='</div>';
+    if(OPENMETRIC) h+=metricDetail(rep, OPENMETRIC);
   }
   // "Fehlt != Null": die nicht belegten Kennzahlen werden benannt, nicht
   // weggelassen — sonst sähe ein Report mit zwei Karten aus wie einer, für den
@@ -926,7 +1060,27 @@ async function renderReport(rep){
     <div id="tcontainer"></div>`;
   // Werte sofort aus dem eigenen Shard; die Peer-Einordnung braucht die anderen
   // Reports und kommt nach, sobald benchmark.json da ist.
+  OPENMETRIC=null;                 // je Report frisch: die Auswahl gilt nicht weiter
   renderOverview(rep);
+  // Klick auf eine Karte oeffnet ihre Erklaerung; der Link darin springt in die
+  // Rohtabelle und klappt den Themenblock auf, der sie traegt.
+  document.getElementById('ovSection').addEventListener('click',e=>{
+    const goto=e.target.closest('[data-goto]');
+    if(goto){ e.preventDefault(); jumpToTemplate(goto.dataset.goto); return; }
+    if(e.target.closest('[data-close]')){ OPENMETRIC=null; renderOverview(rep); return; }
+    const card=e.target.closest('.ovcard');
+    if(!card) return;
+    OPENMETRIC = OPENMETRIC===card.dataset.m ? null : card.dataset.m;
+    renderOverview(rep);
+  });
+  document.getElementById('ovSection').addEventListener('keydown',e=>{
+    if(e.key!=='Enter'&&e.key!==' ') return;
+    const card=e.target.closest('.ovcard');
+    if(!card) return;
+    e.preventDefault();
+    OPENMETRIC = OPENMETRIC===card.dataset.m ? null : card.dataset.m;
+    renderOverview(rep);
+  });
   ensureBenchmark().then(()=>{
     if(activeKey!==repKey(rep)) return;
     renderOverview(rep);
@@ -1052,7 +1206,7 @@ function renderTimeseries(rep){
       + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:'')+`</td>`;
     vals.forEach((v,i)=>{ const cls=(v==null?'empty':'num')+(brk[i]?' fwbreak':'');
       ts+= v==null?`<td class="${cls}"></td>`:
-        `<td class="${cls}">${m.kind==='pct'?zdash(v.toFixed(1)+NBSP+'%'):zdash(v.toLocaleString('en-US',{maximumFractionDigits:1}).split(',').join(NBSP))}</td>`; });
+        `<td class="${cls}">${m.kind==='pct'?zdash(nf(v,1)+NBSP+'%'):zdash(nf(v,0,1))}</td>`; });
     ts+=`<td>${sparkline(vals,null,null,brk)}</td></tr>`;
   }
   ts+='</tbody></table>';
@@ -1422,10 +1576,10 @@ function qualityBadge(q, tpl){
 function bmCell(c,v,pinfo){
   if(v==null) return '<td class="empty"></td>';
   let txt;
-  if(c.kind==='eur') txt=v.toLocaleString('en-US',{maximumFractionDigits:1}).split(',').join(NBSP);
-  else if(c.kind==='pp') txt=v.toFixed(1)+NBSP+'pp';
-  else if(c.kind==='num') txt=v.toLocaleString('en-US',{maximumFractionDigits:0}).split(',').join(NBSP);
-  else txt=v.toFixed(1)+NBSP+'%';
+  if(c.kind==='eur') txt=nf(v,0,1);
+  else if(c.kind==='pp') txt=nf(v,1)+NBSP+'pp';
+  else if(c.kind==='num') txt=nf(v,0,0);
+  else txt=nf(v,1)+NBSP+'%';
   return `<td class="num">${zdash(txt)}${pinfo?pctBadge(pinfo):''}</td>`;
 }
 /* Eine Karte je Profilspalte, ueber der Rangliste. Klick setzt die Sortierung —
@@ -1434,7 +1588,7 @@ function distributionRow(rows, prof){
   const fmtv=v=>{
     if(v==null) return '–';
     const d=Math.abs(v)>=100?0:1;
-    return v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}).split(',').join(NBSP);
+    return nf(v,d);
   };
   // Anmerkung unter dem Titel: klärt die Größe, bevor die Zahl gelesen wird.
   const NOTE={pct:'Quote aus KM1, in Prozent', ratio:'Verhältniszahl, in Prozent',
@@ -1685,8 +1839,8 @@ async function init(){
     buildFromIndex(idx, codebook);
     REPORTS.sort((a,b)=>(bankName(a.entityID)+a.refPeriod).localeCompare(bankName(b.entityID)+b.refPeriod));
     TOTAL_GROUPS=groupReports(REPORTS).length;
-    const nf=idx.stats.facts;
-    document.getElementById('hsub').textContent=`${TOTAL_GROUPS} Institute · ${idx.stats.reports} Reports · ${nf.toLocaleString('en-US').split(',').join(NBSP)} Facts`;
+    document.getElementById('hsub').textContent=
+      `${nf(TOTAL_GROUPS,0,0)} Institute · ${nf(idx.stats.reports,0,0)} Reports · ${nf(idx.stats.facts,0,0)} Fakten`;
     initFilters(); wireList(); updateCmpBadge(); renderReportList(); route();
   }catch(err){
     document.getElementById('main').innerHTML='<div class="status">Fehler beim Laden: '+esc(err.message)+
