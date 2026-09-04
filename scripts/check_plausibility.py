@@ -71,6 +71,7 @@ import math
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import metrics  # noqa: E402
 from determinism import ordered_query  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -87,6 +88,42 @@ MIN_INSTITUTES = 20
 # entspräche das ~1 Fehlalarm auf 10^9. Wir wollen wenige, harte Befunde.
 OUTLIER_Z = 6.0
 
+# --- Schweregrad (#53) ------------------------------------------------------
+# Erkannt wird über den robusten z-Wert, eingestuft wurde bis 2026-09 allein
+# über den Abstand vom Zellmedian in Größenordnungen. Diese Skala ist auf
+# Einheiten-Verwechslungen geeicht und dort richtig — für eine ENGE Zelle ist
+# sie es nicht: zwei Größenordnungen sind in einer Quotenzelle gewaltig und in
+# einer Betragszelle mit 3,8 Größenordnungen Rumpfstreuung gewöhnlich.
+#
+# Der Beleg, an dem die neue Skala geeicht ist, steht in KM1 r0050 c0010
+# (CET1-Quote). Dort liegen 20 Befunde, und sie zerfallen in zwei Gruppen, die
+# sich unabhängig von jeder Statistik nachprüfen lassen — am Kapital und am
+# Gesamtrisikobetrag DERSELBEN Meldung:
+#
+#   16 beweisbare Meldeartefakte. Die Quote ist in Prozent statt als Bruch
+#      gemeldet (Faktor exakt 100: Société générale, Belfius, Česká spořitelna,
+#      RCI Banque, NEST Bank, Bank Frick, Caisse régionale, Erwerbsgesellschaft
+#      der S-Finanzgruppe), einmal Faktor 1000 (Aresbank) und einmal völlig
+#      entgleist (Citfin, 1,7·10^8).
+#    4 korrekte Werte. Kommuninvest meldet 355 % CET1 — und 12,026 Mrd SEK
+#      Kapital gegen 3,385 Mrd SEK TREA ergeben genau das. Ein Kommunal-
+#      finanzierer hat praktisch nur nullgewichtete Aktiva.
+#
+# Auf der alten Skala stehen 14 der 16 Artefakte auf `niedrig`, gemeinsam mit
+# Kommuninvest: eine Verwechslung des Faktors 100 sind nur 2 Größenordnungen.
+# Gemessen in RUMPFBREITEN der eigenen Zelle trennen sich beide Gruppen sauber:
+# die Artefakte liegen bei 5,19 bis 25,4, Kommuninvest bei 3,63 bis 3,75.
+# SEVERITY_REL_HIGH = 5,0 liegt in dieser Lücke.
+#
+# Was `hoch` damit heißt: der Wert liegt mehr als fünfmal so weit über dem
+# Median, wie der Rumpf der Zelle überhaupt breit ist. Es heißt NICHT "dieses
+# Institut meldet falsch" — Kommuninvest zeigt, dass ein weit außen liegender
+# Wert korrekt sein kann, und diese Entscheidung bleibt beim Leser.
+SEVERITY_HIGH = 6.0          # absolut: volle Einheiten-Verwechslung (10^6)
+SEVERITY_MID = 3.0           # absolut: Faktor 1000
+SEVERITY_REL_HIGH = 5.0      # relativ: Rumpfbreiten (p10..p90) über dem Median
+SEVERITY_REL_MID = 2.5
+
 # Zelle gilt als unbrauchbar, wenn schon ihr Rumpf (p10..p90) >= 6 Größen-
 # ordnungen streut. Geeicht an der beobachteten Verteilung über 4.569 Zellen
 # mit >= 20 Instituten: Median 3,76 · p75 4,45 · p90 5,12 · p95 5,85 · p99 7,05.
@@ -95,34 +132,32 @@ OUTLIER_Z = 6.0
 # breit wie eine volle Einheiten-Verwechslung, ist keine Zuschreibung sicher.
 INCOHERENT_SPREAD = 6.0
 
-# Schweregrad nach Abstand vom Zellmedian, in Größenordnungen. 6 = eine volle
-# Einheiten-Verwechslung, 3 = Faktor 1000.
-SEVERITY_HIGH = 6.0
-SEVERITY_MID = 3.0
-
 
 # --- Fachliche Ratio-Regeln ------------------------------------------------
 # Deklarativ, damit neue Regeln ohne Codeänderung dazukommen. Jede Regel bildet
 # innerhalb EINES Reports (lei, scope, refPeriod) und einer Spalte den Quotienten
 # zweier Zeilen und prüft ihn gegen einen Korridor.
 #
-# REM1 (30.01/30.02): Zeile 0010 ist die Kopfzahl der "identified staff"
-# (typisiert integer), Zeile 0020 die fixe Gesamtvergütung derselben Gruppe —
-# der Quotient ist die Vergütung pro Kopf. Beobachtet über 1.324 Paare:
-#   p25 46.500 · Median 142.516 · p75 305.537 EUR
-# Der Korridor 1.000 .. 20.000.000 EUR ist bewusst weit ausserhalb dieser
-# Perzentile gewählt: unten deckt er auch geringfügige Aufsichtsratsvergütungen
-# ab, oben die höchstbezahlten Banker Europas. Was darunter oder darüber liegt,
-# ist keine Gehaltsfrage mehr, sondern eine Einheitenfrage.
+# Zeile 0010 ist die Kopfzahl der "identified staff" (typisiert integer), Zeile
+# 0020 der zugehörige Gesamtbetrag — der Quotient ist eine Vergütung pro Kopf.
+# In REM1 (30.01) ist das die FIXE Vergütung, in REM2 (30.02) die GARANTIERTE
+# VARIABLE; verschiedene Konzepte, aber dieselbe Größenordnungsfrage, und der
+# Korridor prüft nichts anderes.
+#
+# Die Grenzen stehen in scripts/metrics.py und werden von dort geholt: der
+# Viewer filtert mit denselben Zahlen die Vergütungs-Rangliste (#18). Zwei
+# Zahlenpaare an zwei Orten wären hier gefährlich — eine Rangliste, die nach
+# einem anderen Korridor filtert als der, gegen den geprüft wurde.
 RATIO_RULES = [
     {
         "id": "rem_per_head",
         "templates": ("30.01", "30.02"),
-        "numerator_row": "0020",     # Total fixed remuneration (monetary, EUR)
+        "numerator_row": "0020",     # Gesamtbetrag (monetary, in EUR gerechnet)
         "denominator_row": "0010",   # Number of identified staff (integer)
-        "lo": 1_000.0,
-        "hi": 20_000_000.0,
-        "label": "Fixe Vergütung pro identifiziertem Mitarbeiter",
+        "lo": metrics.REM_PER_HEAD[0],
+        "hi": metrics.REM_PER_HEAD[1],
+        "label": "Vergütung pro identifiziertem Mitarbeiter "
+                 "(REM1: fix · REM2: garantiert variabel)",
         "unit": "EUR",
     },
 ]
@@ -172,10 +207,21 @@ def robust_z(value, stats):
     return d / scale if scale > 1e-9 else d
 
 
-def severity(deviation_orders):
-    if deviation_orders >= SEVERITY_HIGH:
+def severity(deviation_orders, relative=None):
+    """Schweregrad aus BEIDEN Maßen — dem absoluten Abstand in Größenordnungen
+    und, wo eine Zelle eine messbare Rumpfbreite hat, dem Abstand in
+    Rumpfbreiten. Es gilt der jeweils höhere; Begründung und Eichung stehen bei
+    den Konstanten.
+
+    `relative` ist None, wo es keine Rumpfbreite gibt: bei den fachlichen
+    Korridoren (dort ersetzt der Korridor selbst die Population) und bei Zellen
+    mit Rumpfbreite ~0. Dann entscheidet der absolute Abstand allein.
+    """
+    if deviation_orders >= SEVERITY_HIGH or (relative is not None
+                                             and relative >= SEVERITY_REL_HIGH):
         return "hoch"
-    if deviation_orders >= SEVERITY_MID:
+    if deviation_orders >= SEVERITY_MID or (relative is not None
+                                            and relative >= SEVERITY_REL_MID):
         return "mittel"
     return "niedrig"
 
@@ -190,6 +236,16 @@ def ratio_violations(rule, pairs):
     übersprungen — eine Kopfzahl von 0 ist keine Plausibilitätsaussage über
     die Vergütung, sondern eine eigene (hier nicht behandelte) Frage.
     """
+    # Gemessen wird ab der MITTE des Korridors, nicht ab dem verletzten Rand
+    # (#53). Der Rand ist der falsche Nullpunkt: bei den Zell-Ausreißern ist
+    # der Bezug der Median, also die Mitte der Population. Der Korridor hier
+    # ist bewusst weit — 1.000 bis 20.000.000 EUR sind 4,3 Größenordnungen —,
+    # und ab seinem Rand gemessen erschien der schlimmste Fall im ganzen
+    # Bestand als "mittel": Rabobank meldet 1,3 Bio. EUR fixe Vergütung pro
+    # Vorstandsmitglied, das sind 4,81 Größenordnungen über der Obergrenze,
+    # aber 6,97 über der Mitte. Erst der zweite Wert ist mit dem Abstandsmaß
+    # der Zell-Ausreißer vergleichbar — und erst er ergibt "hoch".
+    center = math.sqrt(rule["lo"] * rule["hi"])
     out = []
     for key, num, den in pairs:
         if den is None or num is None or den <= 0:
@@ -197,13 +253,29 @@ def ratio_violations(rule, pairs):
         ratio = num / den
         if rule["lo"] <= ratio <= rule["hi"]:
             continue
-        # Abstand zum verletzten Rand, in Größenordnungen — vergleichbar mit
-        # dem Abstandsmaß der Zell-Ausreißer, damit ein Schweregrad über beide
-        # Verfahren dasselbe bedeutet.
+        if ratio <= 0:
+            # Eine gemeldete Null bei positiver Kopfzahl — KEIN Befund.
+            #
+            # Zuerst stand hier `SEVERITY_HIGH` als Platzhalter für den
+            # undefinierten log10(0), der anschließend als gemessener Abstand
+            # eingestuft wurde; eine Null bekam damit "hoch", während Rabobanks
+            # 1,3 Bio. pro Kopf "mittel" bekam. Der Platzhalter fiel mit #53 —
+            # aber "hoch" blieb, jetzt fachlich begründet. Auch das war zu viel,
+            # und die Fälle zeigen es: 8 der 10 Nullen stehen in REM2, also bei
+            # der GARANTIERTEN VARIABLEN Vergütung, wo null der Normalfall ist
+            # (BBVA, Agence France Locale, Raiffeisen-Landesbank Tirol). Die
+            # übrigen zwei sind unentgeltlich arbeitende Aufsichtsräte in REM1.
+            #
+            # Dieser Korridor ist eine EINHEITENPRÜFUNG. Keine Zehnerpotenz
+            # bildet einen echten Betrag auf null ab; eine Null kann also gar
+            # kein Einheitenfehler sein. Sie ist eine Angabe — und die als
+            # Fehler zu führen, wäre dieselbe Verwechslung wie "Fehlt = Null",
+            # nur andersherum.
+            continue
         bound = rule["lo"] if ratio < rule["lo"] else rule["hi"]
-        dev = abs(math.log10(ratio / bound)) if ratio > 0 else SEVERITY_HIGH
+        dev = abs(math.log10(ratio / center))
         out.append({"key": key, "rule": rule["id"], "ratio": ratio,
-                    "bound": bound, "deviation_orders": dev,
+                    "bound": bound, "center": center, "deviation_orders": dev,
                     "severity": severity(dev)})
     return out
 
@@ -282,12 +354,17 @@ def main():
         if z <= OUTLIER_Z:
             continue
         dev = math.log10(abs(val)) - st["median"]
+        # Abstand in Rumpfbreiten der eigenen Zelle (#53). Bei spread ~ 0 ist
+        # der Quotient nicht definiert — dann entscheidet der absolute Abstand
+        # allein, wie schon bei mad == 0 in robust_z().
+        rel = dev / st["spread"] if st["spread"] > 1e-9 else None
         findings.append({
             "lei": lei, "scope": scope, "refPeriod": rp, "bank_name": bank or "",
             "template_id": t, "cell_row": r, "cell_col": c,
             "rule": "cell_outlier", "value": val,
             "reference": 10 ** st["median"], "n_population": st["n"],
-            "deviation_orders": dev, "severity": severity(dev),
+            "deviation_orders": dev, "spread_widths": rel, "robust_z": z,
+            "severity": severity(dev, rel),
         })
 
     # --- 3: fachliche Ratio-Regeln
@@ -325,9 +402,13 @@ def main():
             findings.append({
                 "lei": lei, "scope": scope, "refPeriod": rp, "bank_name": meta[v["key"]],
                 "template_id": t, "cell_row": rule["numerator_row"], "cell_col": col,
-                "rule": rule["id"], "value": v["ratio"], "reference": v["bound"],
+                "rule": rule["id"], "value": v["ratio"], "reference": v["center"],
                 "n_population": len(pairs),
-                "deviation_orders": v["deviation_orders"], "severity": v["severity"],
+                "deviation_orders": v["deviation_orders"],
+                # Der Korridor ersetzt hier die Population: eine Rumpfbreite
+                # gibt es nicht, und der z-Wert auch nicht.
+                "spread_widths": None, "robust_z": None,
+                "severity": v["severity"],
             })
 
     # --- Ausgabe: Zellstatistik
@@ -349,19 +430,25 @@ def main():
     # also die Zufallsordnung aus SQL —, wie die CSV aussieht. Die Datei wird
     # von der Pipeline nach main committet; der Churn landete dort in der
     # Historie.
-    findings.sort(key=lambda f: (-f["deviation_orders"], f["lei"], f["scope"],
-                                 f["refPeriod"], f["template_id"],
-                                 f["cell_row"], f["cell_col"], f["rule"]))
+    # Sortiert nach Schweregrad, darin nach gemessenem Abstand.
+    SEV_RANK = {"hoch": 0, "mittel": 1, "niedrig": 2}
+    findings.sort(key=lambda f: (SEV_RANK[f["severity"]], -f["deviation_orders"],
+                                 f["lei"], f["scope"], f["refPeriod"],
+                                 f["template_id"], f["cell_row"], f["cell_col"],
+                                 f["rule"]))
+    num = lambda v, fmt: "" if v is None else format(v, fmt)   # noqa: E731
     with open(FINDINGS_OUT, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["lei", "scope", "refPeriod", "bank_name", "template_id",
                     "cell_row", "cell_col", "rule", "value", "reference",
-                    "n_population", "deviation_orders", "severity"])
+                    "n_population", "deviation_orders", "spread_widths",
+                    "robust_z", "severity"])
         for fi in findings:
             w.writerow([fi["lei"], fi["scope"], fi["refPeriod"], fi["bank_name"],
                         fi["template_id"], fi["cell_row"], fi["cell_col"], fi["rule"],
                         f"{fi['value']:.6g}", f"{fi['reference']:.6g}",
-                        fi["n_population"], f"{fi['deviation_orders']:.2f}",
+                        fi["n_population"], num(fi["deviation_orders"], ".2f"),
+                        num(fi["spread_widths"], ".2f"), num(fi["robust_z"], ".1f"),
                         fi["severity"]])
 
     # --- Ausgabe: Profil je Institut/Report
@@ -387,10 +474,16 @@ def main():
         key = (fi["lei"], fi["scope"], fi["refPeriod"])
         p = profile.setdefault(key, {"bank_name": fi["bank_name"], "n": 0,
                                      "hoch": 0, "mittel": 0, "niedrig": 0,
-                                     "templates": set(), "max_dev": 0.0})
+                                     "templates": set(), "hoch_templates": set(),
+                                     "max_dev": 0.0})
         p["n"] += 1
         p[fi["severity"]] += 1
         p["templates"].add(fi["template_id"])
+        # Templates MIT einem hoch-Befund getrennt (#53): der Viewer markiert
+        # template-genau, und erst damit kann er auch abstufen, statt jeden
+        # Befund gleich stark zu zeigen.
+        if fi["severity"] == "hoch":
+            p["hoch_templates"].add(fi["template_id"])
         p["max_dev"] = max(p["max_dev"], fi["deviation_orders"])
 
     with open(PROFILE_OUT, "w", newline="", encoding="utf-8") as f:
@@ -398,14 +491,16 @@ def main():
         w.writerow(["lei", "scope", "refPeriod", "bank_name", "n_findings",
                     "n_hoch", "n_mittel", "n_niedrig", "n_facts_checked",
                     "findings_per_1000", "n_templates", "templates",
-                    "max_deviation_orders"])
+                    "templates_hoch", "max_deviation_orders"])
         for (lei, scope, rp), p in sorted(profile.items(),
                                           key=lambda kv: (-kv[1]["n"], kv[0])):
             nchk = checked.get((lei, scope, rp), 0)
             rate = f"{p['n'] / nchk * 1000:.2f}" if nchk else ""
             w.writerow([lei, scope, rp, p["bank_name"], p["n"], p["hoch"], p["mittel"],
                         p["niedrig"], nchk, rate, len(p["templates"]),
-                        "|".join(sorted(p["templates"])), f"{p['max_dev']:.2f}"])
+                        "|".join(sorted(p["templates"])),
+                        "|".join(sorted(p["hoch_templates"])),
+                        f"{p['max_dev']:.2f}"])
 
     n_reports = con.execute(
         f"SELECT count(*) FROM (SELECT DISTINCT lei, scope, refPeriod FROM '{PARQUET}')").fetchone()[0]
@@ -413,7 +508,7 @@ def main():
     for sev in ("hoch", "mittel", "niedrig"):
         print(f"  {sev:8s} {sum(1 for f in findings if f['severity']==sev):,}")
 
-    print("\nTop-8 Befunde (größter Abstand zum Referenzwert):")
+    print("\nTop-8 Befunde (schwerste zuerst):")
     for fi in findings[:8]:
         print(f"  {str(fi['bank_name'])[:34]:34s} {fi['template_id']:8s} "
               f"r{fi['cell_row']} c{fi['cell_col']}  {fi['rule']:13s} "

@@ -68,14 +68,21 @@ class RegistryShapeTest(unittest.TestCase):
 
     def test_formula_only_uses_declared_roles(self):
         """Die Formel beschriftet die Herleitungstabelle. Ein Rollenname, den
-        die Zellen nicht führen, stünde in der Formel und nirgends sonst."""
+        die Zellen nicht führen, stünde in der Formel und nirgends sonst — und
+        eine Rolle, die in der Formel fehlt, wäre eine Quellzelle, die
+        offenbar in nichts eingeht."""
         for m in mx.METRICS:
             if not m.get("formula"):
                 continue
             roles = {c[3] for c in m["cells"]}
-            used = set(re.findall(r"[A-Za-zÄÖÜäöüß_]+", m["formula"]))
-            self.assertEqual(used - roles, set(),
-                             f"{m['id']}: Formel nennt unbekannte Rollen")
+            rest = m["formula"]
+            for r in sorted(roles, key=len, reverse=True):
+                if r not in rest:
+                    self.fail(f"{m['id']}: Rolle „{r}“ kommt in der Formel nicht vor")
+                rest = rest.replace(r, " ")
+            self.assertEqual(
+                set(re.findall(r"[A-Za-zÄÖÜäöüß_]+", rest)), set(),
+                f"{m['id']}: Formel nennt Namen, die keine Rolle sind")
 
 
 class ThresholdSemanticsTest(unittest.TestCase):
@@ -109,6 +116,80 @@ class ThresholdSemanticsTest(unittest.TestCase):
         self.assertIn("keine Grenze", note)
 
 
+class ProfileTest(unittest.TestCase):
+    """Die Benchmark-Profile sind seit #25 nur noch eine Reihenfolge von IDs.
+    Das macht sie billig zu ändern — und leise falsch, wenn eine ID nicht
+    existiert: der Viewer filtert unbekannte Spalten weg, die Tabelle wäre
+    einfach eine Spalte schmaler."""
+
+    def test_every_profile_column_exists(self):
+        known = set(mx.METRIC_IDS)
+        for p in mx.PROFILES:
+            unknown = [i for i in p["metrics"] if i not in known]
+            self.assertEqual(unknown, [], f"{p['id']}: unbekannte Kennzahlen {unknown}")
+
+    def test_the_default_sort_column_is_in_the_profile(self):
+        """Nach einer Spalte zu sortieren, die nicht angezeigt wird, ergäbe
+        eine Reihenfolge ohne sichtbaren Grund."""
+        for p in mx.PROFILES:
+            self.assertIn(p["sort"][0], p["metrics"],
+                          f"{p['id']}: sortiert nach einer Spalte, die es nicht zeigt")
+            self.assertIn(p["sort"][1], (1, -1), f"{p['id']}: Sortierrichtung")
+
+    def test_profile_ids_and_labels_are_unique(self):
+        ids = [p["id"] for p in mx.PROFILES]
+        self.assertEqual(len(ids), len(set(ids)))
+        labels = [p["label"] for p in mx.PROFILES]
+        self.assertEqual(len(labels), len(set(labels)))
+
+    def test_every_metric_is_reachable(self):
+        """Eine Kennzahl, die weder im Überblick noch in einem Profil steht,
+        wäre nur über die Suche zu finden — gepflegt würde sie nicht."""
+        used = set(mx.OVERVIEW_IDS)
+        for p in mx.PROFILES:
+            used |= set(p["metrics"])
+        self.assertEqual(set(mx.METRIC_IDS) - used, set(),
+                         "Kennzahlen, die nirgends angezeigt werden")
+
+    def test_the_columns_of_a_profile_come_from_its_own_template(self):
+        """Sonst steht in der Tabelle eine Spalte, die für die meisten Zeilen
+        leer bleibt: die Zeilenmenge kommt aus `tpl`. Ausnahme sind die beiden
+        Bezugsgrößen aus KM1 — TREA und der Anteil daran —, die der Viewer
+        bewusst dazuholt und in der Kopfzeile auch ausweist."""
+        for p in mx.PROFILES:
+            for mid in p["metrics"]:
+                m = next(x for x in mx.METRICS if x["id"] == mid)
+                tpls = {c[0] for c in m["cells"]}
+                extra = tpls - {p["tpl"], "61.00"}
+                self.assertEqual(extra, set(),
+                                 f"{p['id']}/{mid}: Spalte aus {extra} statt {p['tpl']}")
+
+
+class SearchTest(unittest.TestCase):
+    """Die Suche (#25) soll die Kennzahl finden, ohne dass man ihre Koordinate
+    kennt. Sie greift auf Bezeichnung, englischen Namen, ID und Synonyme zu —
+    fehlt eines davon, findet sie nur, wer die deutsche Bezeichnung schon weiß."""
+
+    def test_every_metric_is_searchable_in_both_languages(self):
+        for m in mx.METRICS:
+            self.assertTrue(m.get("en"), f"{m['id']}: kein englischer Name")
+            self.assertTrue(m.get("syn"), f"{m['id']}: keine Synonyme")
+
+    def test_labels_are_unique(self):
+        """Zwei Kennzahlen mit derselben Bezeichnung wären in der Trefferliste
+        nicht auseinanderzuhalten."""
+        labels = [m["label"] for m in mx.METRICS]
+        dupes = {l for l in labels if labels.count(l) > 1}
+        self.assertEqual(dupes, set(), f"doppelte Bezeichnungen: {dupes}")
+
+    def test_the_viewer_searches_all_of_those_fields(self):
+        src = VIEWER.read_text(encoding="utf-8")
+        m = re.search(r"const metricMatches=\(m,q\)=>\[(.*?)\]", src, re.S)
+        self.assertIsNotNone(m, "metricMatches nicht gefunden")
+        for field in ("m.label", "m.en", "m.id", "m.syn"):
+            self.assertIn(field, m.group(1), f"Suche ignoriert {field}")
+
+
 class WiringTest(unittest.TestCase):
     """Registry, Shard und Viewer müssen dieselben Kennzahlen kennen."""
 
@@ -119,16 +200,35 @@ class WiringTest(unittest.TestCase):
         self.assertEqual(payload, mx.metric_payload(),
                          "codebook.json ist gegenüber scripts/metrics.py veraltet")
 
-    def test_viewer_and_registry_cover_the_same_metrics(self):
-        """Die Rechenvorschrift bleibt im Viewer, die Beschreibung in der
-        Registry — verbunden über `id`. Fällt eine Seite auseinander, zeigt der
-        Viewer eine Karte ohne Erklärung oder umgekehrt."""
+    def test_the_viewer_keeps_no_second_list_of_metrics(self):
+        """Der Kern von #25. Vorher stand dieselbe Kennzahl bis zu dreimal:
+        in `OV_METRICS`, in `BM_PROFILES` und in der Registry — die NPL-Quote
+        war der Fall, an dem es auffiel. Jetzt leitet der Viewer beides aus
+        `METRICDOC` ab. Eine wiederauferstandene Literal-Liste wäre genau der
+        Zustand, den dieses Issue beseitigt hat, und niemandem fiele es auf,
+        solange beide Listen zufällig übereinstimmen."""
         src = VIEWER.read_text(encoding="utf-8")
-        block = re.search(r"const OV_METRICS=\[(.*?)\n\];", src, re.S)
-        self.assertIsNotNone(block, "OV_METRICS nicht gefunden")
-        ids = re.findall(r"\{id:'([a-z0-9]+)'", block.group(1))
-        self.assertEqual(ids, mx.METRIC_IDS,
-                         "OV_METRICS und scripts/metrics.py führen verschiedene Kennzahlen")
+        self.assertIsNone(re.search(r"^\s*const (OV_METRICS|BM_PROFILES)\s*=\s*[\[{]",
+                                    src, re.M),
+                          "Der Viewer führt wieder eine eigene Kennzahlenliste")
+        self.assertIn("const OV_METRICS=()=>[...METRICDOC.values()]", src,
+                      "Überblick leitet die Kennzahlen nicht aus der Registry ab")
+        self.assertIn("for(const p of PROFILES)", src,
+                      "Benchmark-Profile kommen nicht aus der Registry")
+
+    def test_the_viewer_can_evaluate_every_declared_op(self):
+        """`op` ist eine Rechenvorschrift ohne Code — sie funktioniert nur,
+        solange der generische Auswerter im Viewer jede Form kennt. Eine neue
+        Form in der Registry ergäbe sonst still eine leere Karte."""
+        src = VIEWER.read_text(encoding="utf-8")
+        body = re.search(r"function metricValue\(rep, m\)\{(.*?)\n\}", src, re.S)
+        self.assertIsNotNone(body, "metricValue nicht gefunden")
+        handled = set(re.findall(r"case '(\w+)':", body.group(1)))
+        declared = {m["op"] for m in mx.METRICS}
+        self.assertEqual(declared - handled, set(),
+                         f"Rechenformen ohne Auswertung im Viewer: {declared - handled}")
+        self.assertEqual(handled - declared, set(),
+                         f"Auswertung für Rechenformen, die niemand nutzt: {handled - declared}")
 
     def test_every_cell_exists_in_the_codebook(self):
         """Ein Tippfehler in einer Koordinate fällt sonst nie auf: eine

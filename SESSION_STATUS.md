@@ -8,7 +8,7 @@
 | Phase | Status | Stand |
 |---|---|---|
 | 0 — Scoping & Zugang | ✅ | Decision Memo, Format-Analyse, EDAP-Zugang, Git/GitHub |
-| 1 — Ingestion | ✅ | Voll-Katalog-Harvester `harvest_catalog_query.py` (Power-BI-`query`, alter Scroll deprecated) → **4.278 Submissions / 489 Institute**. **20%-Stichprobe geladen** (346 ZIPs). **Delta-Pipeline**: Harvest-Diff (`harvest_log.csv`/`manifest_delta.csv`) + inkrementeller Parser (`source_file`, `--full`) |
+| 1 — Ingestion | ✅ | Voll-Katalog-Harvester `harvest_catalog_query.py` (Power-BI-`query`, alter Scroll deprecated) → **4.278 Submissions / 489 Institute**. **20%-Stichprobe geladen** (346 ZIPs). **Delta-Pipeline**: Harvest-Diff mit Klassifikation und Schrumpf-Gate (`harvest_delta.py` → `harvest_log.csv`/`manifest_delta.csv`, beide committet) + inkrementeller Parser (`source_file`, `--full`) |
 | 2 — Parsing & DPM-Join | ✅ | `long_form_raw.csv` **209.231 Records / 218 Reports** (Multi-Modul); 9146/9146 Datapoints aufgelöst, gelabeltes `dpm_codebook.csv` (+ `data_type` aus DPM); Template-Titel via EBA-Layout |
 | 2.5 — Refinement | ✅ | offene Achse als `open_axis_dims` erfasst (Re-Parse über alle Reports durch) |
 | 3 — Multi-Modul | ✅ | CODIS + ESGDIS/FINDIS/GSIIDIS/IRRBBDIS/MRELTLACDIS (KM2)/REMDIS geparst; nur `*DISDOCS` (PDF) ausgenommen |

@@ -79,7 +79,8 @@ def main():
         page.wait_for_timeout(10000)
         if not capture:
             print("ERROR: table query not captured")
-            return
+            browser.close()
+            return 1
 
         # Replay with RestartToken pagination, reusing the live session (context.request).
         headers = {k: v for k, v in capture["headers"].items()
@@ -144,44 +145,42 @@ def main():
 
     out = OUT / "manifest_full.csv"
 
-    # Delta against the previous harvest: what is new, what disappeared.
-    prev_urls = set()
-    if out.exists():
-        with open(out, encoding="utf-8") as fh:
-            prev_urls = {r["url"] for r in csv.DictReader(fh)}
-    new_urls = {r["url"] for r in rows} - prev_urls
-    gone_urls = prev_urls - {r["url"] for r in rows}
+    # Delta gegen den letzten Harvest — die Logik steht in harvest_delta.py,
+    # ohne Playwright im Importpfad und damit prüfbar (#6).
+    import sys
+    from datetime import datetime, timezone
+    import harvest_delta as hd
+
+    prev_urls = hd.read_urls(out)
+    delta_rows = hd.classify(prev_urls, {r["url"] for r in rows})
+    n = hd.counts(delta_rows)
+
+    # Das Gate steht VOR dem Schreiben: danach ist die Vergleichsgrundlage weg,
+    # und der nächste Lauf misst gegen den bereits beschädigten Katalog.
+    verdict = hd.shrink_verdict(len(prev_urls), len(rows))
+    if verdict and "--allow-shrink" not in sys.argv:
+        print(f"\n✗ {verdict}")
+        print(f"  {out.name} bleibt unverändert. Mit --allow-shrink überschreiben, "
+              "wenn der Rückgang wirklich aus dem Katalog kommt.")
+        return 1
 
     with open(out, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=["url", "lei", "consolidation", "country", "module", "refdate", "submission_ts"])
         w.writeheader()
         w.writerows(rows)
 
-    # Append-only harvest log + delta file for downstream incremental steps.
-    from datetime import datetime, timezone
     ts_now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    log = OUT / "harvest_log.csv"
-    new_file = not log.exists()
-    with open(log, "a", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=["harvested_at", "total", "institutions", "new", "gone"])
-        if new_file:
-            w.writeheader()
-        w.writerow({"harvested_at": ts_now, "total": len(rows), "institutions": len(leis),
-                    "new": len(new_urls), "gone": len(gone_urls)})
-    delta = OUT / "manifest_delta.csv"
-    with open(delta, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=["change", "url"])
-        w.writeheader()
-        for u in sorted(new_urls):
-            w.writerow({"change": "new", "url": u})
-        for u in sorted(gone_urls):
-            w.writerow({"change": "gone", "url": u})
+    hd.append_log(ts_now, len(rows), len(leis), delta_rows)
+    hd.write_delta(delta_rows)
 
     print(f"\n✓ {out}")
     print(f"  Submissions: {len(rows)}  ·  Institutionen (LEI): {len(leis)}")
-    print(f"  Delta seit letztem Harvest: +{len(new_urls)} neu, -{len(gone_urls)} verschwunden")
-    print(f"  Log: {log.name} · Delta: {delta.name}")
+    print(f"  Delta seit letztem Harvest: +{n['neu']} neu, "
+          f"{n['resubmission']} Resubmission(s), {n['ueberholt']} überholt, "
+          f"{n['zurueckgezogen']} zurückgezogen")
+    print(f"  Log: {hd.LOG.name} · Delta: {hd.DELTA.name}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

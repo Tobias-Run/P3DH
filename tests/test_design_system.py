@@ -31,6 +31,7 @@ ACCENT_ALLOWED = {
     ".report.active",         # ausgewähltes Institut
     ".dcard.on",              # Spalte, nach der sortiert wird
     ".ovcard.on",             # Kennzahl, deren Erklärung offen ist
+    ".mchip.on",              # Kennzahl-Suchtreffer, dessen Erklärung offen ist
     # Fokusring — Tastaturbedienung, Barrierefreiheit
     "nav.tabs button:focus-visible", ".hlink:focus-visible", ".iconbtn:focus-visible",
     ".dchip:focus-visible", "summary:focus-visible", ".dcard:focus-visible",

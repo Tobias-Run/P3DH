@@ -163,7 +163,7 @@ sind robuster als Verteilungsformen, weil sie fachliches Wissen einbringen.
 
 ---
 
-## C. Vergütung (REM1) — hohe öffentliche Relevanz, aber blockiert
+## C. Vergütung (REM1) — umgesetzt (2026-09)
 
 `30.01` liefert **Anzahl identified staff** *und* **fixe/variable Vergütung**,
 getrennt nach Aufsichtsrat / Vorstand / Senior Management / übrige Risk-Taker —
@@ -175,10 +175,27 @@ für **~350 Institute**. Daraus wären unmittelbar ableitbar:
 Das ist die öffentlich meistbeachtete Kennzahl im ganzen Datensatz und im Viewer
 bislang **gar nicht vorhanden**.
 
-**Aber:** ohne den Einheiten-Fix aus B ist es unbrauchbar — mein Prototyp
-lieferte „1,3 Mrd. TEUR pro Kopf" für Rabobank. **Strikte Reihenfolge: B vor C.**
-Eine Vergütungs-Rangliste mit falschen Zahlen wäre der schädlichste denkbare
-Fehler in diesem Projekt.
+**Der Vorbehalt hat sich bestätigt und ist abgearbeitet.** Ungefiltert führte
+Rabobank die Rangliste mit 1,3 Bio. EUR pro Kopf an. Das Profil „Vergütung
+(REM1)" filtert deshalb über ein **Plausibilitäts-Tor**: fällt eine
+Funktionsstufe eines Reports aus dem Korridor 1.000–20.000.000 EUR pro Kopf,
+fliegt der ganze Report aus der Liste. Gemessen sind das 57 von 359 Reports
+(15,9 %) — bei 35 von ihnen liegen alle vier Stufen daneben, es ist also eine
+falsche Meldeeinheit für das ganze Template.
+
+Zwei Dinge, die das Tor tragen:
+
+- **Ein Korridor, nicht zwei.** `metrics.REM_PER_HEAD` ist die einzige
+  Definition; `check_plausibility.RATIO_RULES` prüft den Bestand damit, der
+  Viewer filtert die Liste damit. Sonst filterte die Rangliste nach anderen
+  Grenzen als die, gegen die geprüft wurde — und niemand sähe es.
+- **Der Ausschluss ist sichtbar.** Quote, Anzahl und die ausgeschlossenen
+  Institute stehen unter der Tabelle, jeweils mit dem Wert, der den Ausschluss
+  ausgelöst hat. Ein stiller Filter wäre eine unbelegte Behauptung über
+  Institute.
+
+Nach dem Filter führt Mediobanca mit 5,69 Mio. EUR fixer Vergütung pro
+Vorstandsmitglied; der Median liegt bei 403.381 EUR.
 
 ---
 
@@ -222,7 +239,7 @@ Wertversprechen.
 |---|---|---|---|---|
 | **A** Kreditverschlechterungs-Kette | [#16](https://github.com/Tobias-Run/P3DH/issues/16) | hoch | mittel | — (Prototyp läuft) |
 | **B** Datenqualitäts-Profil | [#17](https://github.com/Tobias-Run/P3DH/issues/17) | hoch | mittel | — |
-| **C** Vergütung | [#18](https://github.com/Tobias-Run/P3DH/issues/18) | hoch (öffentlich) | klein | **#17** |
+| **C** Vergütung | [#18](https://github.com/Tobias-Run/P3DH/issues/18) | hoch (öffentlich) | klein | ~~#17~~ **umgesetzt** |
 | **D** Länder-Aggregate | [#19](https://github.com/Tobias-Run/P3DH/issues/19) | ~~mittel–hoch~~ **niedrig** | klein | #12 |
 | **E** Datensatz-Release | [#20](https://github.com/Tobias-Run/P3DH/issues/20) | ~~mittel~~ **niedrig** | klein | — |
 
