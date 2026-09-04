@@ -349,6 +349,31 @@ def main():
         for code, n in sorted(unparsed.items(), key=lambda kv: (-kv[1], kv[0]))[:5]:
             print(f"      {n:5d}x  {code}")
 
+    # --- Mehrdeutige Platzierung (#54) -------------------------------------
+    # Die Deduplizierung oben fasst zusammen, was MEHRERE TableVersions auf
+    # DIESELBE Zelle legen. Legen sie den Datenpunkt auf VERSCHIEDENE Zellen —
+    # das DPM führt 463 von 549 Templatecodes in mehreren Versionen, und
+    # zwischen ihnen verschieben sich Zeilennummern —, überleben beide Zeilen.
+    #
+    # Der Parser schlüsselt nur nach (dp, template) und nimmt dann
+    # stillschweigend die letzte Zeile der Datei. Für eine der beiden
+    # Meldeversionen ist diese Platzierung falsch. Das darf nicht schweigend
+    # passieren; die eigentliche Behebung braucht eine framework-bewusste
+    # Auflösung (TableVersion.StartReleaseID) und damit einen vollen Reparse.
+    placed = defaultdict(set)
+    for r in rows:
+        if r["template"]:
+            placed[(r["datapoint_code"], r["template"])].add((r["row"], r["col"]))
+    multi = {k: v for k, v in placed.items() if len(v) > 1}
+    if multi:
+        by_tmpl = defaultdict(int)
+        for dp, tmpl in multi:
+            by_tmpl[tmpl] += 1
+        print(f"  ⚠ Nicht eindeutig platziert: {len(multi)} (dp, Template)-Paare — "
+              f"der Parser wählt dort willkürlich (#54)")
+        for tmpl, n in sorted(by_tmpl.items(), key=lambda kv: (-kv[1], kv[0]))[:6]:
+            print(f"      {n:5d}x  {tmpl}")
+
 
 if __name__ == "__main__":
     main()

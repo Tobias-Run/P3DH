@@ -68,6 +68,16 @@ def dpm_code(tid):
     return "K_" + ".".join(p)
 
 
+def viewer_tid(code):
+    """'K_60.00.a' -> '60.00.A'. Umkehrung von dpm_code(); der Viewer und das
+    Parquet führen die Templates in dieser Schreibweise."""
+    t = code[2:] if code.startswith("K_") else code
+    p = t.split(".")
+    if p and len(p[-1]) == 1 and p[-1].isalpha():
+        p[-1] = p[-1].upper()
+    return ".".join(p)
+
+
 def safe_name(s):
     return re.sub(r"[^A-Za-z0-9._-]", "_", s)
 
@@ -339,10 +349,36 @@ def main():
                     bridge.setdefault(row["template_id"], {})[
                         row["cell_row"] + "|" + row["cell_col"]] = row["status"]
 
+    # --- nicht eindeutig platzierte Koordinaten (#54) ---
+    # Das DPM führt je Template MEHRERE TableVersions (463 von 549 Codes), und
+    # zwischen ihnen verschieben sich die Zeilennummern. `build_codebook.py`
+    # dedupliziert über (dp, template, row, col) — dieser Schlüssel fängt den
+    # Fall, dass zwei Versionen dieselbe Zelle meinen, aber nicht den Fall, dass
+    # sie VERSCHIEDENE meinen. Dann überleben beide, und der Parser (Schlüssel
+    # nur (dp, template)) nimmt stillschweigend die letzte Zeile der Datei.
+    #
+    # Folge: an 31 Koordinaten stehen zwei fachlich verschiedene DPM-Zeilen.
+    # In OV1 fällt „20. Position, foreign exchange and commodities risks" mit
+    # „15. Settlement risk" zusammen. Bis die Platzierung eindeutig ist, wird
+    # das wenigstens angezeigt statt behauptet.
+    ambig, seen = {}, {}
+    cb_path = ROOT / "codebook" / "dpm_codebook.csv"
+    if cb_path.exists():
+        with cb_path.open(encoding="utf-8") as fh:
+            for row in csv.DictReader(fh):
+                if not row["row"]:
+                    continue
+                k = (row["template"], row["row"], row["col"])
+                seen.setdefault(k, set()).add((row["row_label"], row["col_label"]))
+        for (tmpl, r, c), labels in seen.items():
+            if len({rl for rl, _ in labels}) > 1 or len({cl for _, cl in labels}) > 1:
+                ambig.setdefault(viewer_tid(tmpl), {})[r + "|" + c] = sorted(
+                    {rl for rl, _ in labels if rl})[:2]
+
     # Kennzahlen-Registry (#63): Definition, Zweck, Schwelle, Herkunft. Die
     # Rechenvorschrift bleibt im Viewer — sie ist Code, keine Daten.
     codebook = {"cb": cb, "titles": titles, "axis": axis, "themes": themes,
-                "bridge": bridge, "metrics": metric_payload()}
+                "bridge": bridge, "metrics": metric_payload(), "ambig": ambig}
 
     # --- lookup maps, all straight from the same parquet ---
     # Diese drei Maps werden je Schlüssel ÜBERSCHRIEBEN — bei mehreren Zeilen je

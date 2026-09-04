@@ -363,6 +363,19 @@ const BRIDGE_TIP={
   rebound:'Diese Zelle wurde zwischen Framework 4.1 und 4.2 auf einen neuen Datenpunkt umgebunden. Der Wert wird über die Koordinate weiter gefunden — ob er danach noch dasselbe misst, ist offen. Vergleiche über den Versionswechsel mit Vorbehalt.',
   ambiguous:'Für diese Zelle liegen in beiden Framework-Versionen mehrere Datenpunkte auf derselben Koordinate; die Brücke konnte sie nicht eindeutig zuordnen. Noch schwächer belegt als ein Rebound.'};
 const BRIDGE_MARK={rebound:'⇄', ambiguous:'≟'};
+/* Nicht eindeutig platzierte Koordinaten (#54). Andere Ursache als die
+   Bruecke oben: dort ist die VERSIONSzuordnung unklar, hier die PLATZIERUNG.
+   Das DPM fuehrt je Template mehrere TableVersions, zwischen denen sich die
+   Zeilennummern verschieben; wo zwei davon dieselbe Zelle verschieden belegen,
+   ueberleben beide im Codebook und der Parser nimmt stillschweigend eine.
+   31 Koordinaten, in OV1 faellt "20. Position, foreign exchange and
+   commodities risks" mit "15. Settlement risk" zusammen. */
+let AMBIG=new Map();
+const ambigAt=(tid,row,col)=>{ const m=AMBIG.get(tid); return m?(m[row+'|'+col]||null):null; };
+const ambigTip=lbl=>'Diese Koordinate ist nicht eindeutig platziert: das DPM führt hier zwei '
+  +'verschiedene Zeilen — „'+lbl.join('“ und „')+'“. Welche der Wert trägt, hängt an der '
+  +'Meldeversion, und unser Codebook unterscheidet sie noch nicht (#54). Der Wert ist '
+  +'unverändert der gemeldete; unsicher ist, in welcher Zeile er stehen müsste.';
 let OPENTHEMES=new Set(store.themes||[]);   // aufgeklappte Bloecke, ueber Reports hinweg
 const repKey=r=>r.entityID+'|'+r.refPeriod;
 const byKey =k=>REPORTS.find(r=>repKey(r)===k);
@@ -496,6 +509,7 @@ function buildFromIndex(idx, codebook){
   // Kennzahlen-Dokumentation (#63) — kuratiert in scripts/metrics.py. Die
   // Rechenvorschrift steht in OV_METRICS; verbunden ueber `id`.
   for(const m of (codebook.metrics||[])) METRICDOC.set(m.id, m);
+  for(const [tid,cells] of Object.entries(codebook.ambig||{})) AMBIG.set(tid,cells);
   for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
@@ -773,11 +787,23 @@ function renderTemplate(tid, cells, rep){
   const axisNote = axisMap
     ? `<div class="dimbar"><span class="cl">Zeilen = Achsenwerte, nach Betrag geordnet
        (die Meldung gibt hier keine Reihenfolge vor) · ${rows.length} Werte</span></div>` : '';
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}<table><thead><tr><th class="rh">${axisMap?'Code':'Row'}</th><th class="rl"></th>`;
+  // Sagen, bevor gelesen wird: in diesem Template ist die Platzierung an N
+  // Koordinaten nicht eindeutig (#54).
+  const nAmbig=AMBIG.has(tid)?Object.keys(AMBIG.get(tid)).length:0;
+  const ambigNote = nAmbig ? `<div class="dimbar"><span class="cl">≟ ${nAmbig} Koordinate${
+    nAmbig>1?'n':''} in diesem Template sind nicht eindeutig platziert: das DPM führt dort je
+    zwei verschiedene Zeilen, und unser Codebook unterscheidet die Meldeversionen noch nicht
+    (#54). Betroffene Zeilen sind markiert.</span></div>` : '';
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}<table><thead><tr><th class="rh">${axisMap?'Code':'Row'}</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
+  // Am Zeilenlabel ist die Mehrdeutigkeit am wichtigsten: dort steht EINE
+  // Beschriftung, obwohl das Modell zwei kennt (#54).
+  const rowAmbig=r=>{ for(const c of cols){ const a=ambigAt(tid,r,c); if(a) return a; } return null; };
   for(const r of rows){
-    h+=`<tr><th class="rh">${esc(r)}</th><td class="rl">${esc(rowLbl(r))}</td>`;
+    const ra=rowAmbig(r);
+    h+=`<tr><th class="rh">${esc(r)}</th><td class="rl">${esc(rowLbl(r))}${
+      ra?` <span class="fwb" title="${esc(ambigTip(ra))}">≟</span>`:''}</td>`;
     for(const c of cols){
       const v=val.get(r+'|'+c);
       // Leere Zelle INNERHALB eines gemeldeten Templates: die Filing-Indicators
@@ -789,10 +815,14 @@ function renderTemplate(tid, cells, rep){
       // (#26)? Dann steht die Zahl unter Vorbehalt — sichtbar beim Lesen,
       // ohne die Zahl selbst zu stören.
       const bs=bridgeAt(tid,r,c);
-      const base=dt==='monetary'?`${esc(fmt(v))} ${esc(curOf(rep))} (Originalwert)`:
-                 dt==='percentage'?`Rohwert ${esc(v)}`:'';
-      const tip=(base||bs)?` title="${esc(base)}${base&&bs?' · ':''}${bs?esc(BRIDGE_TIP[bs]):''}"`:'';
-      h+=`<td class="num${bs?' fwcell':''}"${tip}>${fmtTyped(v,dt,unit,dt==='monetary'?rate:1)}</td>`;
+      const am=ambigAt(tid,r,c);
+      const parts=[
+        dt==='monetary'?`${fmt(v)} ${curOf(rep)} (Originalwert)`:
+        dt==='percentage'?`Rohwert ${v}`:'',
+        bs?BRIDGE_TIP[bs]:'',
+        am?ambigTip(am):''].filter(Boolean);
+      const tip=parts.length?` title="${esc(parts.join(' · '))}"`:'';
+      h+=`<td class="num${bs||am?' fwcell':''}"${tip}>${fmtTyped(v,dt,unit,dt==='monetary'?rate:1)}</td>`;
     }
     h+='</tr>';
   }
