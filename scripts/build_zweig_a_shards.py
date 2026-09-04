@@ -36,6 +36,7 @@ import duckdb
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from determinism import ordered_query as ordered  # noqa: E402
 from template_themes import theme_payload  # noqa: E402
+from metrics import metric_payload  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
@@ -65,6 +66,16 @@ def dpm_code(tid):
     if p and len(p[-1]) == 1 and p[-1].isalpha() and p[-1].isupper():
         p[-1] = p[-1].lower()
     return "K_" + ".".join(p)
+
+
+def viewer_tid(code):
+    """'K_60.00.a' -> '60.00.A'. Umkehrung von dpm_code(); der Viewer und das
+    Parquet führen die Templates in dieser Schreibweise."""
+    t = code[2:] if code.startswith("K_") else code
+    p = t.split(".")
+    if p and len(p[-1]) == 1 and p[-1].isalpha():
+        p[-1] = p[-1].upper()
+    return ".".join(p)
 
 
 def safe_name(s):
@@ -318,7 +329,56 @@ def main():
     # scripts/template_themes.py, der Viewer bekommt sie hier mitgeliefert
     # statt sie ein zweites Mal in JavaScript zu führen. ~3 KB.
     themes = theme_payload()
-    codebook = {"cb": cb, "titles": titles, "axis": axis, "themes": themes}
+    # --- Framework-Brücke: nur die NICHT stabilen Zellen (#26) ---
+    # Der Viewer joint über die Koordinate (row, col), nicht über den dp-Code.
+    # Ein Rebound bricht deshalb nicht sichtbar — er bricht still: der Wert wird
+    # weiter gefunden, nur misst die Zelle danach womöglich etwas anderes.
+    #
+    # Übertragen werden ausschließlich `rebound` und `ambiguous`. Die 5.087
+    # stabilen Zellen wären 40× so viel Nutzlast für eine Aussage, die der
+    # Viewer nicht braucht — und Zellen, die nur in EINER Version beobachtet
+    # wurden, stehen bewusst gar nicht in der Brücke: Abwesenheit ist bei
+    # Offenlegungsdaten kein Beleg für eine Taxonomie-Änderung, sondern kann
+    # Frequenz oder Anwendbarkeit sein (Arbeitsprinzip 3).
+    bridge = {}
+    bridge_path = ROOT / "codebook" / "framework_bridge.csv"
+    if bridge_path.exists():
+        with bridge_path.open(encoding="utf-8") as fh:
+            for row in csv.DictReader(fh):
+                if row.get("status") in ("rebound", "ambiguous"):
+                    bridge.setdefault(row["template_id"], {})[
+                        row["cell_row"] + "|" + row["cell_col"]] = row["status"]
+
+    # --- nicht eindeutig platzierte Koordinaten (#54) ---
+    # Das DPM führt je Template MEHRERE TableVersions (463 von 549 Codes), und
+    # zwischen ihnen verschieben sich die Zeilennummern. `build_codebook.py`
+    # dedupliziert über (dp, template, row, col) — dieser Schlüssel fängt den
+    # Fall, dass zwei Versionen dieselbe Zelle meinen, aber nicht den Fall, dass
+    # sie VERSCHIEDENE meinen. Dann überleben beide, und der Parser (Schlüssel
+    # nur (dp, template)) nimmt stillschweigend die letzte Zeile der Datei.
+    #
+    # Folge: an 31 Koordinaten stehen zwei fachlich verschiedene DPM-Zeilen.
+    # In OV1 fällt „20. Position, foreign exchange and commodities risks" mit
+    # „15. Settlement risk" zusammen. Bis die Platzierung eindeutig ist, wird
+    # das wenigstens angezeigt statt behauptet.
+    ambig, seen = {}, {}
+    cb_path = ROOT / "codebook" / "dpm_codebook.csv"
+    if cb_path.exists():
+        with cb_path.open(encoding="utf-8") as fh:
+            for row in csv.DictReader(fh):
+                if not row["row"]:
+                    continue
+                k = (row["template"], row["row"], row["col"])
+                seen.setdefault(k, set()).add((row["row_label"], row["col_label"]))
+        for (tmpl, r, c), labels in seen.items():
+            if len({rl for rl, _ in labels}) > 1 or len({cl for _, cl in labels}) > 1:
+                ambig.setdefault(viewer_tid(tmpl), {})[r + "|" + c] = sorted(
+                    {rl for rl, _ in labels if rl})[:2]
+
+    # Kennzahlen-Registry (#63): Definition, Zweck, Schwelle, Herkunft. Die
+    # Rechenvorschrift bleibt im Viewer — sie ist Code, keine Daten.
+    codebook = {"cb": cb, "titles": titles, "axis": axis, "themes": themes,
+                "bridge": bridge, "metrics": metric_payload(), "ambig": ambig}
 
     # --- lookup maps, all straight from the same parquet ---
     # Diese drei Maps werden je Schlüssel ÜBERSCHRIEBEN — bei mehreren Zeilen je
