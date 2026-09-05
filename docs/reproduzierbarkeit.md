@@ -137,17 +137,28 @@ Determinismus herzustellen zwingt dazu, jede willkürliche Auswahl zu benennen.
 Drei davon sind **inhaltliche** Probleme, die vorher unter der Zufallsordnung
 verborgen lagen:
 
-- **12 Reports tragen zwei Währungen.** `baseCurrency` im Index wird aus der
-  ersten Zeile gezogen. Jetzt deterministisch — aber immer noch willkürlich.
-- **10 Zellkoordinaten tragen mehrere Labels.** Bei OV1 (`60.00.A`) r0120/c0020
-  liegen „9. Of which other CCR" und „10. CVA risk" auf derselben Koordinate,
-  und zwar in *beiden* Framework-Versionen. Das ist kein 4.1/4.2-Bruch, sondern
-  eine mehrdeutige Platzierung — und OV1 ist ein Benchmark-Template.
+- **12 Reports tragen zwei Währungen** (#55, behoben 2026-09-05). `baseCurrency`
+  wurde aus der ersten Zeile gezogen, und der Viewer rechnete damit *jeden*
+  monetären Wert des Reports um — gemessen 9.086 Fakten mit dem falschen Kurs.
+  Sichtbar wurde es an ausgelieferten Zahlen: NOBA Group zeigte 441.335 EUR
+  Vorstandsvergütung pro Kopf statt 4.775.833, weil ein in EUR gemeldeter
+  Betrag mit dem SEK-Kurs multipliziert wurde. `baseCurrency` ist jetzt die
+  nach Faktenzahl **dominierende** Währung, und daneben steht eine
+  Ausnahmeliste je Template (123 Einträge). Dass eine Liste je Template
+  genügt, ist gemessen: **0 von 919** (Report, Template)-Paaren tragen intern
+  mehr als eine Währung.
+- **31 Zellkoordinaten tragen mehrere Labels** (#54, offen). Bei OV1
+  (`60.00.A`) r0120/c0020 liegen „9. Of which other CCR" und „10. CVA risk" auf
+  derselben Koordinate, und zwar in *beiden* Framework-Versionen. Das ist kein
+  4.1/4.2-Bruch, sondern eine mehrdeutige Platzierung. OV1 ist ein
+  Benchmark-Template — die ausgewerteten Spalten (`c0010`) sind aber
+  nachgemessen **nicht** betroffen.
 - **Mehrfach belegte Zellkoordinaten** — das war bereits #52.
 
 Alle drei sind dieselbe Klasse: *unsere Darstellung ist enger als die Daten.*
 Determinismus macht daraus aus einem unsichtbaren ein sichtbares Problem, löst
-es aber nicht.
+es aber nicht — und im Fall der Währung war das sichtbar gemachte Problem
+größer als der Determinismusfehler, der es freigelegt hat.
 
 ## Nachtrag: dieselbe Klasse, ein anderer Ort (#56)
 

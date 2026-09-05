@@ -501,10 +501,29 @@ function shortItype(t){
   return t==='Large highest EEA'?'Large':t==='Other highest EEA'?'Other':
          t==='Large subsidiaries'?'Large sub.':t;
 }
-function curOf(rep){ return (rep.baseCurrency||'').replace('iso4217:',''); }
-function fxOf(rep){
-  if(!EUR) return {rate:1, cur:curOf(rep)};
-  const cur=curOf(rep);
+/* Waehrung eines Reports — und, wo sie abweicht, die des TEMPLATES (#55).
+   12 Reports melden in zwei Waehrungen (Landeswaehrung + EUR). `baseCurrency`
+   ist die nach Faktenzahl dominierende; `cur` listet die Templates, fuer die
+   sie nicht gilt. Ohne `tid` bekommt man die Report-Aussage — richtig fuer
+   die Mehrheit der Fakten, aber eben nicht fuer alle. */
+const stripIso=c=>(c||'').replace('iso4217:','');
+function curOf(rep, tid){
+  const ov = tid && rep.cur ? rep.cur[tid] : null;
+  return stripIso(ov || rep.baseCurrency);
+}
+/* Meldet dieser Report ueberhaupt in mehr als einer Waehrung? */
+const isMixedCur=rep=>!!(rep.cur && Object.keys(rep.cur).length);
+/* Beschriftung auf REPORT-Ebene: eine Waehrung zu nennen, wo zwei gemeldet
+   werden, waere genau die Behauptung, die #55 aufgedeckt hat. */
+function curLabel(rep){
+  if(!isMixedCur(rep)) return curOf(rep);
+  const others=[...new Set(Object.values(rep.cur).map(stripIso))]
+    .filter(c=>c!==curOf(rep)).sort();
+  return curOf(rep)+'/'+others.join('/');
+}
+function fxOf(rep, tid){
+  const cur=curOf(rep, tid);
+  if(!EUR) return {rate:1, cur};
   if(cur==='EUR') return {rate:1, cur:'EUR'};
   const r=FX.get(cur+'|'+rep.refPeriod);
   return r ? {rate:r, cur:'EUR'} : {rate:1, cur:cur};   // missing rate -> keep original
@@ -543,7 +562,7 @@ function buildFromIndex(idx, codebook){
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
   REPORTS = idx.reports.map(r=>({    // slim index: metadata only, no cells
-    entityID:r.entityID, refPeriod:r.refPeriod, baseCurrency:r.baseCurrency,
+    entityID:r.entityID, refPeriod:r.refPeriod, baseCurrency:r.baseCurrency, cur:r.cur||null,
     framework:r.framework, nt:r.nt, shard:r.f,
     quality:r.q||null,                   // Plausibilitaets-Befunde (#17); fehlt = keine Befunde
     templates:new Map(), loaded:false,   // filled lazily: head via benchmark.json, full via shard
@@ -643,7 +662,7 @@ function renderReportList(){
       const k=repKey(r);
       return `<a class="dchip${k===activeKey?' on':''}${PINS.has(k)?' pinned':''}"
         href="#r/${g.lei}/${r.refPeriod}/${g.scope}"
-        title="${esc(r.refPeriod)} · ${r.nt} Templates · ${esc(curOf(r))} · Framework ${esc(r.framework)}${
+        title="${esc(r.refPeriod)} · ${r.nt} Templates · ${esc(curLabel(r))} · Framework ${esc(r.framework)}${
           PINS.has(k)?' · für Vergleich angepinnt':''}">${esc(r.refPeriod)}</a>`;
     }).join('');
     h+=`<div class="report${active?' active':''}" data-h="#r/${g.lei}/${cur.refPeriod}/${g.scope}">
@@ -652,7 +671,7 @@ function renderReportList(){
       <div class="lei">${esc(g.name)}${badges}</div>
       <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(g.scope))} · ${g.reps.length} Stichtag${g.reps.length>1?'e':''}</div>
       <div class="dates">${chips}</div>
-      ${active?`<div class="rdet">${cur.nt} Templates · ${esc(curOf(cur))} · Framework ${esc(cur.framework)}</div>`:''}
+      ${active?`<div class="rdet">${cur.nt} Templates · ${esc(curLabel(cur))} · Framework ${esc(cur.framework)}</div>`:''}
       <div class="leicode">${esc(g.lei)}</div></div>`;
   }
   host.innerHTML=h;
@@ -755,7 +774,7 @@ function renderTemplate(tid, cells, rep){
   const tcode=dpmCode(tid);
   const title=TITLES.get(tcode)||'';
   const state = coverageState(rep, tid);
-  const {rate,cur}=fxOf(rep);
+  const {rate,cur}=fxOf(rep, tid);
   const allCells = Array.isArray(cells) ? cells : [];
   // Dimensionswerte dieses Templates (#52). Zellen OHNE Diskriminator sind
   // eindeutig und gehoeren zu jedem Schnitt — sie bleiben immer sichtbar.
@@ -800,7 +819,7 @@ function renderTemplate(tid, cells, rep){
   for(const c of cellList) if(dtOf(c.row,c.col)==='monetary'){
     const n=Math.abs(Number(c.val))*rate; if(n>maxAbs) maxAbs=n; }
   const unit=maxAbs>0?pickUnit(maxAbs):1;
-  const conv=EUR&&cur==='EUR'&&curOf(rep)!=='EUR';
+  const conv=EUR&&cur==='EUR'&&curOf(rep,tid)!=='EUR';
   const note=unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${esc(cur)}${conv?' · EZB-Kurs':''}</span>`
              :(conv?`<span class="scalenote">EUR · EZB-Kurs</span>`:'');
   if(!cellList.length) return '';   // leere Templates stehen im Coverage-Block, nicht als Sektion
@@ -846,7 +865,7 @@ function renderTemplate(tid, cells, rep){
       const bs=bridgeAt(tid,r,c);
       const am=ambigAt(tid,r,c);
       const parts=[
-        dt==='monetary'?`${fmt(v)} ${curOf(rep)} (Originalwert)`:
+        dt==='monetary'?`${fmt(v)} ${curOf(rep,tid)} (Originalwert)`:
         dt==='percentage'?`Rohwert ${v}`:'',
         bs?BRIDGE_TIP[bs]:'',
         am?ambigTip(am):''].filter(Boolean);
@@ -902,12 +921,12 @@ function coverageBlock(rep){
    Population gerechnet — der Sidebar-Filter verengt die Ansicht, nicht den
    Vergleichsmaßstab.                                                        */
 const km1Pct=(rep,row)=>{ const v=km1Value(rep,row); return (v==null||Math.abs(v)>10)?null:v*100; };
-function eurOf(rep,v){
+function eurOf(rep,v,tid){
   if(v==null) return null;
-  const cur=curOf(rep), r=cur==='EUR'?1:(FX.get(cur+'|'+rep.refPeriod)||null);
+  const cur=curOf(rep,tid), r=cur==='EUR'?1:(FX.get(cur+'|'+rep.refPeriod)||null);
   return r==null?null:v*r;
 }
-const eurBn=(rep,v)=>{ const e=eurOf(rep,v); return e==null?null:e/1e9; };
+const eurBn=(rep,v,tid)=>{ const e=eurOf(rep,v,tid); return e==null?null:e/1e9; };
 /* ---- Kennzahlen aus der Registry (#25) -----------------------------------
    Vorher standen dieselben Kennzahlen dreimal: in OV_METRICS, in BM_PROFILES
    und (als Beschreibung) in scripts/metrics.py. Jetzt kommt alles aus der
@@ -922,7 +941,7 @@ function metricValue(rep, m){
       // |v|>10 faengt Quoten, die als Betrag gemeldet wurden — eine Quote von
       // 1000 % ist keine, sondern eine Einheitenverwechslung.
       if(m.kind==='pct') return Math.abs(v)>10?null:v*100;
-      if(m.kind==='eur') return eurBn(rep, v);
+      if(m.kind==='eur') return eurBn(rep, v, m.cells[0][0]);
       return v;
     }
     case 'diff': {
@@ -942,7 +961,7 @@ function metricValue(rep, m){
        Beide aus DERSELBEN Spalte desselben Reports, der Kurs kuerzt sich also
        nicht heraus — deshalb die Umrechnung, sonst vergliche man Waehrungen. */
     case 'perhead': {
-      const amt=eurOf(rep, at(0)), heads=at(1);
+      const amt=eurOf(rep, at(0), m.cells[0][0]), heads=at(1);
       return (amt==null||heads==null||heads<=0)?null:amt/heads;
     }
   }
@@ -1006,7 +1025,7 @@ function metricCellRow(rep, tid, r, c, role){
   let shown='–';
   if(raw!=null){
     shown = e.dt==='percentage' ? nf(raw*100,2)+NBSP+'%'
-          : e.dt==='monetary'   ? nf(raw,0,2)+' '+esc(curOf(rep))
+          : e.dt==='monetary'   ? nf(raw,0,2)+' '+esc(curOf(rep,tid))
           : nf(raw,0,2);
   }
   const bs=bridgeAt(tid,r,c);
@@ -1136,7 +1155,8 @@ async function renderReport(rep){
   const nrec=NAMES.get(lei)||{};
   main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2>
     <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
-    <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(curOf(rep))}</b>
+    <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(curLabel(rep))}</b>${
+      isMixedCur(rep)?` <span class="cl" title="Dieser Report meldet nicht durchgehend in einer Währung. Die zuerst genannte trägt die Mehrheit der Fakten; die abweichenden Templates rechnen mit ihrem eigenen Kurs (#55).">— je Template verschieden</span>`:''}
     · Framework <b>${esc(rep.framework)}</b></div></div>
     <div id="ovSection"></div>
     <div id="tsSection"></div>
@@ -1298,7 +1318,7 @@ function renderTimeseries(rep){
       const v=km1Value(s,m.row);
       if(v==null) return null;
       if(m.kind==='pct') return Math.abs(v)>10?null:v*100;
-      const cur=curOf(s); const fxr=cur==='EUR'?1:(FX.get(cur+'|'+s.refPeriod)||null);
+      const cur=curOf(s,'61.00'); const fxr=cur==='EUR'?1:(FX.get(cur+'|'+s.refPeriod)||null);
       return fxr==null?null:v*fxr/1e9;
     });
     if(vals.filter(x=>x!=null).length<2) continue;
@@ -1845,7 +1865,7 @@ async function renderCompare(){
     const tcode=dpmCode(CMPTPL);
     const per=reps.map(rep=>{
       const cells=rep.templates.get(CMPTPL)||[];
-      const {rate,cur}=fxOf(rep);
+      const {rate,cur}=fxOf(rep, CMPTPL);
       return {rep,rate,cur,val:new Map(cells.map(c=>[c.row+'|'+c.col,c.val]))};
     });
     const keys=new Set();
@@ -1857,14 +1877,14 @@ async function renderCompare(){
       if(dt==='monetary'){ const n=Math.abs(Number(v))*p.rate; if(n>maxAbs) maxAbs=n; }
     }));
     const unit=maxAbs>0?pickUnit(maxAbs):1;
-    const anyFx=per.some(p=>p.cur==='EUR'&&curOf(p.rep)!=='EUR');
-    const mixedCur=new Set(per.map(p=>EUR?p.cur:curOf(p.rep))).size>1;
+    const anyFx=per.some(p=>p.cur==='EUR'&&curOf(p.rep,CMPTPL)!=='EUR');
+    const mixedCur=new Set(per.map(p=>EUR?p.cur:curOf(p.rep,CMPTPL))).size>1;
     const ttl=TITLES.get(tcode)||'';
     let t=`<section><h3>${esc(CMPTPL)} — ${esc(ttl)}
-      ${unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${EUR?'EUR':esc(curOf(per[0].rep))}${anyFx?' · EZB-Kurs':''}</span>`:''}
+      ${unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${EUR?'EUR':esc(curOf(per[0].rep,CMPTPL))}${anyFx?' · EZB-Kurs':''}</span>`:''}
       ${mixedCur?'<span class="scalenote" style="color:#b26b00">⚠ verschiedene Währungen — EUR-Toggle empfohlen</span>':''}
       </h3><table><thead><tr><th class="rh">Zelle</th><th class="rl"></th>`;
-    per.forEach(p=>{ t+=`<th>${esc(bankName(p.rep.entityID).slice(0,24))}<br><span class="cl">${esc(p.rep.refPeriod)} · ${esc(curOf(p.rep))}</span></th>`; });
+    per.forEach(p=>{ t+=`<th>${esc(bankName(p.rep.entityID).slice(0,24))}<br><span class="cl">${esc(p.rep.refPeriod)} · ${esc(curOf(p.rep,CMPTPL))}</span></th>`; });
     t+='</tr></thead><tbody>';
     for(const k of sorted){
       const [row,col]=k.split('|');

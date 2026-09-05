@@ -213,8 +213,12 @@ class WiringTest(unittest.TestCase):
         (28 Mio. SEK, 2 Köpfe) wären das 14 Mio. statt 1,29 Mio. EUR."""
         src = VIEWER.read_text(encoding="utf-8")
         body = re.search(r"case 'perhead': \{(.*?)\n    \}", src, re.S).group(1)
-        self.assertIn("eurOf(rep, at(0))", body,
-                      "Betrag wird ohne EZB-Kurs durch die Kopfzahl geteilt")
+        self.assertIn("eurOf(rep, at(0), m.cells[0][0])", body,
+                      "Betrag wird ohne EZB-Kurs durch die Kopfzahl geteilt — "
+                      "und der Kurs muss der des TEMPLATES sein, nicht der des "
+                      "Reports (#55): NOBA meldet REM1 in EUR und den Rest in "
+                      "SEK, was ohne das dritte Argument 441.335 statt "
+                      "4.775.833 EUR ergab")
 
     def test_a_headcount_of_zero_yields_no_value_instead_of_infinity(self):
         src = VIEWER.read_text(encoding="utf-8")
