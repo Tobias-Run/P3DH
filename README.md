@@ -106,8 +106,11 @@ Zweig A wird **immer aus** Zweig B abgeleitet, nie parallel geparst. Dass dabei 
 driftet, ist keine Behauptung mehr: `scripts/check_branch_parity.py` vergleicht je (Report,
 Template) die **Multimenge** aller `(Zeile, Spalte, Wert)` zwischen den Shards und
 `long_form_raw.csv` — als Zeichenkette, nicht über `float()`, damit auch eine
-Formatierungsänderung auffällt. Läuft in der Pipeline **vor** dem Publish (24 s über 882
-Reports / 2,3 Mio. Zellen) und bricht ab, bevor abweichende Zahlen veröffentlicht werden.
+Formatierungsänderung auffällt. Dazu je (Report, Template) die **Währung**: gleiche Zahl in
+anderer Einheit ist derselbe Fehler, und die Wertprüfung allein war dafür blind (#55 —
+9.086 Fakten mit dem falschen Kurs, Parität grün). Läuft in der Pipeline **vor** dem
+Publish (33 s über 882 Reports / 2,3 Mio. Zellen / 41.902 Währungspaare) und bricht ab,
+bevor abweichende Zahlen veröffentlicht werden.
 
 > **Zurückgezogen:** der Legacy-CSV-Viewer (`viewer.html`) las die Long-Form direkt im
 > Browser und war als unabhängige Gegenprobe gedacht. Bei 413 MB und 2,3 Mio. Fakten

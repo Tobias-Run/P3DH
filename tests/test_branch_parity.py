@@ -58,6 +58,8 @@ class ParityTest(unittest.TestCase):
             "61.00": [["0010", "0010", "100.0"], ["0050", "0010", "0.184"]],
             "67.01.A": [["NL", "0060", "5.0", "dpA"], ["NL", "0060", "7.0", "dpB"]],
         })
+        self._write_index([{"entityID": self.eid, "refPeriod": self.rp,
+                            "baseCurrency": "EUR"}])
 
     def tearDown(self):
         bp.LONG_FORM, bp.SHARDS = self._orig
@@ -73,6 +75,12 @@ class ParityTest(unittest.TestCase):
         name = eid.replace(":", "_") + "__" + rp + ".json"
         (bp.SHARDS / name).write_text(
             json.dumps({"tpl": tpl, "coverage": coverage or {}}), encoding="utf-8")
+
+    def _write_index(self, entries):
+        """index.json neben dem Shard-Verzeichnis — von dort liest die Prüfung
+        die Währung, die der Viewer benutzen würde (#55)."""
+        (bp.SHARDS.parent / "index.json").write_text(
+            json.dumps({"reports": entries}), encoding="utf-8")
 
     def _run(self):
         """-> Exit-Code. 0 heißt Parität."""
@@ -96,6 +104,50 @@ class ParityTest(unittest.TestCase):
         Das ist so gebaut und darf nicht als Abweichung gelten — sonst wäre die
         Prüfung ab dem ersten Lauf rot und damit wertlos."""
         self.assertEqual(self._run(), 0)
+
+    # ---- Einheit statt Wert (#55) -----------------------------------------
+
+    def test_a_wrong_currency_is_caught_even_when_every_value_matches(self):
+        """Der Fehler, für den diese Prüfung blind war. Die Rohwerte stimmen
+        beidseitig — falsch ist nur die Einheit, mit der der Viewer sie
+        umrechnet. Bei NOBA Group wurden daraus 441.335 statt 4.775.833 EUR,
+        und die Parität blieb grün."""
+        self.rows.append(_row(self.eid, self.rp, "30.01", "0020", "0020", "9551666"))
+        self.rows[-1][HEADER.index("baseCurrency")] = "iso4217:EUR"
+        for r in self.rows[:2]:
+            r[HEADER.index("baseCurrency")] = "iso4217:SEK"
+        self._write_long_form(self.rows)
+        self._write_shard(self.eid, self.rp, {
+            "61.00": [["0010", "0010", "100.0"], ["0050", "0010", "0.184"]],
+            "67.01.A": [["NL", "0060", "5.0", "dpA"], ["NL", "0060", "7.0", "dpB"]],
+            "30.01": [["0020", "0020", "9551666"]],
+        })
+        # Der Index behauptet SEK für den ganzen Report — der Zustand vor #55.
+        self._write_index([{"entityID": self.eid, "refPeriod": self.rp,
+                            "baseCurrency": "SEK"}])
+        self.assertEqual(self._run(), 1)
+
+    def test_the_exception_list_makes_it_pass_again(self):
+        """Und mit der Ausnahme je Template ist derselbe Bestand in Ordnung."""
+        self.rows.append(_row(self.eid, self.rp, "30.01", "0020", "0020", "9551666"))
+        for r in self.rows[:2]:
+            r[HEADER.index("baseCurrency")] = "iso4217:SEK"
+        self._write_long_form(self.rows)
+        self._write_shard(self.eid, self.rp, {
+            "61.00": [["0010", "0010", "100.0"], ["0050", "0010", "0.184"]],
+            "67.01.A": [["NL", "0060", "5.0", "dpA"], ["NL", "0060", "7.0", "dpB"]],
+            "30.01": [["0020", "0020", "9551666"]],
+        })
+        self._write_index([{"entityID": self.eid, "refPeriod": self.rp,
+                            "baseCurrency": "SEK",
+                            "cur": {"30.01": "EUR", "67.01.A": "EUR"}}])
+        self.assertEqual(self._run(), 0)
+
+    def test_a_missing_index_is_an_error_not_a_silent_pass(self):
+        """Ohne Index ist die Währung ungeprüft. Das darf nicht wie „geprüft
+        und in Ordnung" aussehen — genau so ist der Fehler entstanden."""
+        (bp.SHARDS.parent / "index.json").unlink()
+        self.assertEqual(self._run(), 1)
 
     # ---- Drift, die sie fangen muss ---------------------------------------
 
