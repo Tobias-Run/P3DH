@@ -105,6 +105,12 @@ jobs:
       # Ein frisches Codebook wirkt nur auf neu geparste Fakten — der Altbestand
       # trägt die Koordinaten des alten Codebooks. Deshalb erzwingt ein
       # Codebook-Refresh den vollen Reparse.
+      #
+      # Die Bedingung unten ist seit #57 nur noch die BEQUEME Variante: der
+      # Parser vergleicht selbst den Fingerabdruck des Codebooks gegen den, mit
+      # dem der Bestand entstanden ist, und schaltet auf --full um. Das greift
+      # auch dann, wenn dpm_codebook.csv per Commit geändert wurde und niemand
+      # den Input gesetzt hat — der Fall, für den es kein Fehlerbild gibt.
       - name: Parse
         run: |
           if [ "${{ inputs.full_reparse }}" = "true" ] || [ "${{ inputs.refresh_codebook }}" = "true" ]; then

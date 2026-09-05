@@ -41,6 +41,11 @@ rc=0
 fetch long_form_raw.csv.gz    "$ROOT/processed/long_form_raw.csv"      gz || rc=1
 fetch filing_indicators.csv.gz "$ROOT/processed/filing_indicators.csv" gz || rc=1
 fetch p3dh_long.parquet       "$ROOT/processed/long/p3dh_long.parquet"    || rc=1
+# Der Codebook-Fingerabdruck (#57) gehoert zum Zustand: ohne ihn kann der
+# Parser nicht wissen, mit welchem Codebook der Bestand entstanden ist. Er darf
+# fehlen (Zustaende von vor #57) — dann sagt der Parser das und uebernimmt den
+# aktuellen. Deshalb KEIN rc=1: ein fehlender Abdruck ist kein kaputter Zustand.
+fetch codebook_fingerprint.txt "$ROOT/processed/codebook_fingerprint.txt" || true
 
 if [ "$rc" -ne 0 ]; then
   echo "⚠ Teile des Zustands fehlen — ein voller Rebuild (download + parse --full) wäre nötig."

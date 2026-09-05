@@ -242,6 +242,68 @@ def _load_existing(path: Path, wanted: set):
     return kept, dropped, parsed
 
 
+def codebook_fingerprint(path: Path):
+    """SHA-256 des Codebooks — die Identität, mit der ein Bestand geparst wurde.
+
+    Über den Dateiinhalt, nicht über mtime oder Zeilenzahl: eine geänderte
+    Koordinate bei gleicher Zeilenzahl ist genau der Fall, um den es geht.
+    """
+    import hashlib
+    h = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def fingerprint_path(output_path: Path):
+    return output_path.parent / "codebook_fingerprint.txt"
+
+
+def codebook_changed(codebook_path: Path, output_path: Path):
+    """(hat sich das Codebook geändert?, Grund) — reine Entscheidung, #57.
+
+    ## Warum die Kopplung nicht am Workflow-Input hängen darf
+
+    `pipeline.yml` erzwang den vollen Reparse über `inputs.refresh_codebook`.
+    Die Begründung stimmt — „ein frisches Codebook wirkt nur auf neu geparste
+    Fakten, der Altbestand trägt die Koordinaten des alten" —, aber sie war an
+    die *Bedienung* geknüpft. `codebook/dpm_codebook.csv` ist versioniert: wer
+    es per Commit ändert und einen normalen Lauf auslöst, bekommt einen
+    Mischzustand, und es gibt kein Fehlerbild. Der Placement-Guard prüft
+    `unplaceable > baseline` und schweigt, weil nichts unplatzierbar wird — die
+    alten Fakten tragen *eine* Koordinate, nur die falsche.
+
+    Deshalb hängt die Kopplung jetzt am Artefakt: neben dem Bestand liegt der
+    Fingerabdruck des Codebooks, mit dem er entstanden ist.
+
+    Fehlt die Datei, wird der aktuelle Abdruck übernommen und das laut gesagt.
+    Ein fehlender Abdruck ist keine Aussage über den Bestand — ihn stumm als
+    „passt schon" zu lesen wäre derselbe Fehler wie der, den er verhindern soll.
+    """
+    fp = fingerprint_path(output_path)
+    if not output_path.exists():
+        return False, "kein Bestand — der volle Parse ist ohnehin der erste"
+    now = codebook_fingerprint(codebook_path)
+    if not fp.exists():
+        return False, (f"kein Fingerabdruck neben {output_path.name} — der "
+                       f"aktuelle wird übernommen. Ob der Bestand wirklich mit "
+                       f"diesem Codebook entstanden ist, sagt uns hier niemand "
+                       f"(#57)")
+    was = fp.read_text(encoding="utf-8").strip()
+    if was == now:
+        return False, ""
+    return True, (f"Codebook geändert ({was[:12]}… → {now[:12]}…) — der "
+                  f"Altbestand trägt die Koordinaten des alten Codebooks, ein "
+                  f"inkrementeller Lauf ergäbe einen Mischzustand (#57)")
+
+
+def _stamp_codebook(codebook_path: Path, output_path: Path):
+    """Den Fingerabdruck neben den Bestand schreiben (#57)."""
+    fingerprint_path(output_path).write_text(
+        codebook_fingerprint(codebook_path) + "\n", encoding="utf-8")
+
+
 def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path,
                       manifest_path: Path = None, incremental: bool = True):
     """Parse the latest-wins .zip submissions in raw_dir → combined long-form CSV.
@@ -253,6 +315,16 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path,
     existing output, only new zips are parsed, and rows of source files that fell out
     of the manifest (superseded resubmissions) are dropped. Pass incremental=False
     (CLI: --full) to re-parse everything, e.g. after parser or codebook changes."""
+    # Kopplung am Artefakt statt am Workflow-Input (#57): ein geändertes
+    # Codebook erzwingt den vollen Reparse, egal wie es hierhergekommen ist.
+    if incremental:
+        changed, why = codebook_changed(codebook_path, output_path)
+        if why:
+            print(f"⚠ {why}")
+        if changed:
+            print("→ Voller Reparse erzwungen.")
+            incremental = False
+
     coverage = []  # report × template × reported (the "fehlt ≠ Null" matrix)
     zip_files = sorted(raw_dir.glob("*.zip"))
 
@@ -290,6 +362,9 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path,
         print(f"Inkrementell: {before - len(zip_files)} bereits geparst, {len(zip_files)} neu zu parsen")
         if not zip_files and not dropped:
             print("✓ Nichts zu tun — Long-Form ist aktuell")
+            # Auch hier festhalten: sonst fehlte der Abdruck genau dann weiter,
+            # wenn nie etwas zu tun ist — und die Kopplung griffe nie (#57).
+            _stamp_codebook(codebook_path, output_path)
             return
 
     all_records = []
@@ -324,6 +399,9 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path,
             writer.writerows(merged)
         print(f"\n✓ Long-form data: {output_path}")
         print(f"  Total records: {len(merged)} ({len(all_records)} neu, {len(existing_rows)} übernommen)")
+        # Erst NACH dem erfolgreichen Schreiben (#57): ein abgebrochener Lauf
+        # darf nicht behaupten, der Bestand sei mit diesem Codebook entstanden.
+        _stamp_codebook(codebook_path, output_path)
     else:
         print("ERROR: No records extracted")
 

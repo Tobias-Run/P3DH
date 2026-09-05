@@ -17,6 +17,9 @@ processed/*.csv.gz
 # so bleibt main klein und es gibt keine zwei divergierenden Wahrheiten.
 processed/long_form_raw.csv
 processed/filing_indicators.csv
+# Mit welchem Codebook der Bestand entstanden ist (#57). Gehoert zum Zustand,
+# nicht auf main — er wandert mit long_form_raw.csv auf den `data`-Branch.
+processed/codebook_fingerprint.txt
 
 # Notebooks Checkpoints
 notebooks/.ipynb_checkpoints/
