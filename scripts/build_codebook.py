@@ -174,18 +174,76 @@ def build_datatype_map(db):
     return id2dt
 
 
-def build_resolution_maps(db):
-    """VariableID -> set(VariableVID); VariableVID -> set((TableVID, decoded CellCode))."""
+# --- Welche DPM-Releases unser Bestand überhaupt benutzt (#54) --------------
+#
+# Das DPM-Dictionary ist kumulativ: es führt jede Tabellenfassung mit, die es
+# je gab, in fünf Releases. Ohne Filter landen Zeilenbeschriftungen und
+# Platzierungen aus Fassungen im Codebook, die unser Korpus nie meldet — und
+# `xbrl_csv_parser._load_codebook()` schlüsselt nur nach (dp, template) und
+# nimmt dann die letzte Zeile der Datei. Gemessen: 31 Koordinaten mit zwei
+# konkurrierenden Zeilenlabels (7.994 Fakten) und 73 (dp, Template)-Paare mit
+# zwei Platzierungen.
+#
+# Die Zuordnung Release <-> Framework-Version ist gemessen, nicht geschätzt.
+# Für jede Framework-Version wurde gezählt, welcher Anteil ihrer Fakten einen
+# (Datenpunkt, Template)-Eintrag in der jeweiligen Release findet:
+#
+#     RF     Fakten      Release 3   Release 4   Release 5
+#     4.1   2.231.690      25,3 %     100,0 %      95,9 %
+#     4.2      63.534      34,6 %      97,6 %     100,0 %
+#
+# Jede Version wird von GENAU EINER Release vollständig gedeckt. RF 4.1 ist
+# Release 4, RF 4.2 ist Release 5. Die Asymmetrie stützt es: 4,1 % der
+# 4.1-Datenpunkte gibt es in 4.2 nicht mehr, 2,4 % der 4.2-Datenpunkte sind
+# dort neu — genau das Bild eines Versionsschritts.
+#
+# Deshalb 4: alles davor ist Altbestand. Ein Filter auf 5 allein würde zwar
+# auch die letzten Platzierungspaare beseitigen, aber 4,1 % der 4.1-Fakten
+# (rund 91.500) unplatzierbar machen. Kommt eine RF 4.3, gehört diese Zahl
+# geprüft — der Test in tests/test_placement_ambiguity.py hält sie fest.
+MIN_RELEASE = 4
+
+
+def alive_from(rel_range, min_release=MIN_RELEASE):
+    """Gilt diese Fassung in `min_release` oder später?
+
+    `EndReleaseID` ist EXKLUSIV — die Fassung gilt bis ausschließlich dieser
+    Release. Das ist nicht dokumentiert, sondern gemessen: unter der
+    inklusiven Lesart überlappen alle 31 mehrdeutigen Koordinaten in genau
+    einer Release, unter der exklusiven sind alle 31 disjunkt. Eine Konvention,
+    die 31 von 31 Fällen sauber trennt, ist die richtige.
+    """
+    _, end = rel_range
+    return end is None or end == 0 or end > min_release
+
+
+def build_resolution_maps(db, min_release=MIN_RELEASE):
+    """VariableID -> set(VariableVID); VariableVID -> set((TableVID, decoded CellCode)).
+
+    Tabellenfassungen, die vor `min_release` endeten, fallen heraus (#54).
+    """
     vv = db.parse_table("VariableVersion")
     id2vid = defaultdict(set)
     for vid, varid in zip(vv["VariableVID"], vv["VariableID"]):
         id2vid[varid].add(vid)
 
+    tv = db.parse_table("TableVersion")
+    keep = {int(v) for v, s, e in zip(tv["TableVID"], tv["StartReleaseID"],
+                                     tv["EndReleaseID"])
+            if alive_from((s, e), min_release)}
+    print(f"  TableVersions ab Release {min_release}: {len(keep)} von {len(tv['TableVID'])}")
+
     tvc = db.parse_table("TableVersionCell")
     vid2cell = defaultdict(set)
+    dropped = 0
     for vvid, tvid, code in zip(tvc["VariableVID"], tvc["TableVID"], tvc["CellCode"]):
-        if code:
-            vid2cell[vvid].add((int(tvid), dpm_decode(code)))
+        if not code:
+            continue
+        if int(tvid) not in keep:
+            dropped += 1
+            continue
+        vid2cell[vvid].add((int(tvid), dpm_decode(code)))
+    print(f"  Zellen aus abgelösten Fassungen verworfen: {dropped:,}".replace(",", "."))
     return id2vid, vid2cell
 
 
@@ -350,16 +408,22 @@ def main():
             print(f"      {n:5d}x  {code}")
 
     # --- Mehrdeutige Platzierung (#54) -------------------------------------
-    # Die Deduplizierung oben fasst zusammen, was MEHRERE TableVersions auf
-    # DIESELBE Zelle legen. Legen sie den Datenpunkt auf VERSCHIEDENE Zellen —
-    # das DPM führt 463 von 549 Templatecodes in mehreren Versionen, und
-    # zwischen ihnen verschieben sich Zeilennummern —, überleben beide Zeilen.
+    # Der Release-Filter oben nimmt den größten Teil weg: 73 -> 12 Paare, und
+    # die 31 Koordinaten mit konkurrierenden Zeilenlabels verschwinden ganz.
     #
-    # Der Parser schlüsselt nur nach (dp, template) und nimmt dann
-    # stillschweigend die letzte Zeile der Datei. Für eine der beiden
-    # Meldeversionen ist diese Platzierung falsch. Das darf nicht schweigend
-    # passieren; die eigentliche Behebung braucht eine framework-bewusste
-    # Auflösung (TableVersion.StartReleaseID) und damit einen vollen Reparse.
+    # Was bleibt, ist eine andere Sache und NICHT über Versionen auflösbar:
+    # dieselbe Variablenfassung liegt in derselben Tabellenfassung auf zwei
+    # verschiedenen Zellen. In OV1 sind das „21. Of which the Alternative
+    # standardised approach (A-SA)" und „22. Of which the Alternative Internal
+    # Models Approach (A-IMA)" — zwei Ansätze, nicht zwei Schreibweisen. Die
+    # Meldung hilft nicht weiter: OV1 trägt keine einzige Dimension, die Zeile
+    # steht dort nirgends.
+    #
+    # Der Parser schlüsselt nur nach (dp, template) und nimmt die letzte Zeile
+    # der Datei. Für eine der beiden Zellen ist das falsch — sichtbar daran,
+    # dass die gewählte Zeile doppelt so viele Datenpunkte trägt wie ihre
+    # Nachbarn, während die andere fast leer bleibt. Das darf nicht schweigend
+    # passieren.
     placed = defaultdict(set)
     for r in rows:
         if r["template"]:

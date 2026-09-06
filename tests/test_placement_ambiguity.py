@@ -1,44 +1,62 @@
 """Nicht eindeutig platzierte Koordinaten (#54).
 
-## Was der Fall ist
+## Was der Fall war
 
-Das DPM führt je Templatecode **mehrere `TableVersion`s** (463 von 549 Codes),
-und zwischen ihnen verschieben sich die Zeilennummern. `build_codebook.py`
-dedupliziert über `(dp, template, row, col)` — dieser Schlüssel fasst zusammen,
-was zwei Versionen auf *dieselbe* Zelle legen, aber er fängt nicht den Fall,
-dass sie den Datenpunkt auf *verschiedene* Zellen legen. Dann überleben beide
-Zeilen.
-
+Das DPM-Dictionary ist **kumulativ**: es führt jede Tabellenfassung mit, die es
+je gab, über fünf Releases. `build_codebook.py` löste jeden Datenpunkt gegen
+*alle* Fassungen auf. Damit standen Zeilenbeschriftungen und Platzierungen aus
+Fassungen im Codebook, die unser Korpus nie meldet — und
 `xbrl_csv_parser._load_codebook()` schlüsselt nur nach `(dp, template)` und
-überschreibt:
+nimmt die letzte Zeile der Datei.
 
-    codebook[key] = {...}      # die letzte Zeile der Datei gewinnt
+Gemessen waren das **31** Koordinaten mit zwei konkurrierenden Zeilenlabels
+(7.994 Fakten) und **73** `(dp, Template)`-Paare mit zwei Platzierungen.
 
-Für **eine** der beiden Meldeversionen ist die gewählte Platzierung damit
-falsch — und zwar für alle Reports gleich, weil die Framework-Version im
-Schlüssel gar nicht vorkommt.
+## Was der Release-Filter geleistet hat
 
-## Die Größenordnung
+Welche Release zu welcher Framework-Version gehört, ist gemessen: für jede
+Version wurde gezählt, welcher Anteil ihrer Fakten in welcher Release einen
+Eintrag findet. RF 4.1 wird zu 100 % von Release 4 gedeckt (95,9 % von 5),
+RF 4.2 zu 100 % von Release 5 (97,6 % von 4). Jede Version hat genau eine
+Release, die sie vollständig trägt.
 
-Gemessen: **73** `(dp, Template)`-Paare, daraus **31** Koordinaten mit zwei
-konkurrierenden Zeilenlabels, und **13.027** betroffene Fakten im Bestand —
-9.559 davon in OV1 unter RF 4.1, 1.398 unter 4.2, 1.199 in CR6-A.
+`MIN_RELEASE = 4` verwirft alles davor:
 
-In OV1 fällt „20. Position, foreign exchange and commodities risks" mit
-„15. Settlement risk" zusammen. Das sind keine Label-Varianten derselben
-Zeile, sondern verschiedene Risikoarten.
+    Koordinaten mit zwei Zeilenlabels     31  ->   0
+    mehrdeutige (dp, Template)-Paare      73  ->  38
+    aufgelöste Datenpunkte                     9.775 / 9.775 (100 %)
+
+Kein Paar kam hinzu; 35 fielen weg.
+
+## Was übrig bleibt, und warum es zwei verschiedene Dinge sind
+
+**26 Paare sind auflösbar, aber nicht so.** Der Filter behält die Vereinigung
+der Releases 4 und 5, weil unser Bestand beide Framework-Versionen enthält. Ein
+Datenpunkt, der in Release 4 auf einer anderen Zeile sitzt als in Release 5, ist
+in jeder Release für sich eindeutig — in der Vereinigung nicht. Das ist der
+Framework-Bruch aus #26, und dagegen hülfe ein Schlüssel
+`(dp, template, framework_version)`.
+
+**12 Paare sind es nicht.** Dort liegt dieselbe Variablenfassung in derselben
+Tabellenfassung auf zwei verschiedenen Zellen — in OV1 „21. Of which the
+Alternative standardised approach (A-SA)" gegen „22. Of which the Alternative
+Internal Models Approach (A-IMA)". Zwei Ansätze, nicht zwei Schreibweisen. Die
+Meldung hilft nicht: OV1 trägt **keine einzige** Dimension. Sichtbar ist die
+Fehlplatzierung an der Struktur — die gewählte Zeile trägt sechs Datenpunkte,
+wo jede Nachbarzeile drei trägt, und die andere bleibt fast leer.
+
+Fünf der 12 betreffen Templates, die unser Korpus gar nicht meldet (`C_76.00.a`,
+`D_07.00.b`: 0 Fakten). Von den übrigen sieben sind 2.413 Fakten betroffen, alle
+unter RF 4.1.
 
 ## Was diese Tests halten
 
-Die Behebung braucht eine framework-bewusste Auflösung über
-`TableVersion.StartReleaseID`, einen Codebook-Neubau (755-MB-DPM) und einen
-vollen Reparse — das ist Sache der Pipeline. Bis dahin gilt:
-
-1. Die Zahl darf nicht **wachsen**, ohne dass es auffällt.
-2. Der Viewer muss die betroffenen Zellen **markieren** statt eine der beiden
-   Zeilen zu behaupten.
-3. Kennzahlen, die wir ausliefern, dürfen **nicht** auf so einer Koordinate
-   liegen.
+1. Die Zahlen dürfen nicht **wachsen**, ohne dass es auffällt.
+2. Die Label-Mehrdeutigkeit muss bei **null** bleiben — der Filter ist die
+   Zusage, nicht ein glücklicher Zufall.
+3. Kennzahlen, die wir ausliefern, dürfen nicht auf so einer Koordinate liegen.
+4. Der Viewer behält seine Markierung, obwohl sie heute nichts zu markieren
+   findet: sie ist der Auffangmechanismus, falls die Mehrdeutigkeit zurückkommt.
 """
 
 from pathlib import Path
@@ -52,15 +70,17 @@ import unittest
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import metrics as mx  # noqa: E402
+import build_codebook as mx_bc  # noqa: E402
 
 CODEBOOK_CSV = ROOT / "codebook" / "dpm_codebook.csv"
 CODEBOOK_JSON = ROOT / "processed" / "zweig_a" / "data" / "codebook.json"
 VIEWER = ROOT / "processed" / "zweig_a" / "viewer_json.html"
 
-# Beobachteter Stand 2026-09-04. Eine Obergrenze, kein Ziel: sie darf sinken,
-# und wenn sie das tut, gehört sie nachgezogen.
-MAX_AMBIGUOUS_PAIRS = 73
-MAX_AMBIGUOUS_CELLS = 31
+# Beobachteter Stand 2026-09-06, nach dem Release-Filter. Eine Obergrenze, kein
+# Ziel: sie darf sinken, und wenn sie das tut, gehört sie nachgezogen.
+MAX_AMBIGUOUS_PAIRS = 38
+# Bei den Labels ist es keine Obergrenze mehr, sondern eine Zusage.
+MAX_AMBIGUOUS_CELLS = 0
 
 
 def rows():
@@ -99,18 +119,56 @@ class ScopeTest(unittest.TestCase):
             "gegen die zuletzt geprüft wurde. Jede zusätzliche bedeutet Fakten in "
             "einer willkürlich gewählten Zeile (#54).")
 
-    def test_the_affected_cells_do_not_grow(self):
-        n = len(ambiguous_cells(self.rows))
-        self.assertLessEqual(n, MAX_AMBIGUOUS_CELLS,
-                             f"{n} Koordinaten mit konkurrierenden Labels (#54)")
+    def test_no_coordinate_carries_two_row_labels(self):
+        """Der Release-Filter beseitigt die Label-Mehrdeutigkeit vollständig.
+        Kommt sie zurück, ist entweder MIN_RELEASE falsch oder das DPM hat eine
+        neue Release gebracht, die wir noch nicht kennen — beides gehört
+        angesehen und nicht als „nur ein paar" durchgewinkt."""
+        cells = ambiguous_cells(self.rows)
+        self.assertEqual(len(cells), MAX_AMBIGUOUS_CELLS,
+                         f"{len(cells)} Koordinaten mit konkurrierenden Labels, "
+                         f"z. B. {sorted(cells)[:3]} (#54)")
 
     def test_it_is_still_a_real_problem(self):
-        """Sinkt die Zahl auf null, prüfen die Obergrenzen oben nichts mehr —
-        dann sollen sie nachgezogen und dieser Test entfernt werden, statt
-        still grün zu bleiben."""
+        """Sinkt auch die Paarzahl auf null, prüft die Obergrenze oben nichts
+        mehr — dann sollen sie nachgezogen und dieser Test entfernt werden,
+        statt still grün zu bleiben."""
         self.assertGreater(len(ambiguous_pairs(self.rows)), 0,
-                           "keine Mehrdeutigkeit mehr — Obergrenzen nachziehen und "
+                           "keine Mehrdeutigkeit mehr — Obergrenze nachziehen und "
                            "#54 schließen")
+
+
+class ReleaseFilterTest(unittest.TestCase):
+    """Die beiden Annahmen, auf denen der Filter ruht.
+
+    Beide sind gemessen, nicht dokumentiert — das DPM sagt nirgends, wie
+    `EndReleaseID` zu lesen ist, und die Release-Nummern tragen keine Namen.
+    Genau deshalb gehören sie in einen Test: eine falsch geratene Konvention
+    verschöbe 2,3 Mio. Fakten, ohne dass irgendetwas rot würde.
+    """
+
+    def test_the_end_release_is_exclusive(self):
+        """Unter der inklusiven Lesart überlappten alle 31 mehrdeutigen
+        Koordinaten in genau einer Release, unter der exklusiven sind alle 31
+        disjunkt. Eine Konvention, die 31 von 31 Fällen trennt, ist die
+        richtige."""
+        self.assertFalse(mx_bc.alive_from((1, 4), 4),
+                         "eine Fassung, die mit Release 4 endet, gilt IN 4 nicht mehr")
+        self.assertTrue(mx_bc.alive_from((1, 5), 4))
+        self.assertTrue(mx_bc.alive_from((5, None), 4), "offenes Ende gilt weiter")
+        self.assertTrue(mx_bc.alive_from((4, 0), 4), "0 steht im DPM für „offen\"")
+
+    def test_the_cutoff_covers_both_framework_versions(self):
+        """RF 4.1 ist Release 4, RF 4.2 ist Release 5 — gemessen über die
+        Deckung (100 % gegen 95,9 % bzw. 97,6 %). Ein Schnitt bei 5 würde
+        4,1 % der 4.1-Datenpunkte unplatzierbar machen, rund 91.500 Fakten."""
+        self.assertEqual(mx_bc.MIN_RELEASE, 4)
+        self.assertTrue(mx_bc.alive_from((4, 5), mx_bc.MIN_RELEASE),
+                        "die RF-4.1-Fassung fiele heraus")
+        self.assertTrue(mx_bc.alive_from((5, None), mx_bc.MIN_RELEASE),
+                        "die RF-4.2-Fassung fiele heraus")
+        self.assertFalse(mx_bc.alive_from((1, 3), mx_bc.MIN_RELEASE),
+                         "Altbestand bliebe drin — das war der Fehler")
 
 
 class ShippedMetricsTest(unittest.TestCase):
