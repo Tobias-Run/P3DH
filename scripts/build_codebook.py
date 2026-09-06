@@ -217,6 +217,41 @@ def alive_from(rel_range, min_release=MIN_RELEASE):
     return end is None or end == 0 or end > min_release
 
 
+def prefer_live_placement(rows, live):
+    """Konkurrierende Platzierungen auf die geltende Fassung reduzieren (#54).
+
+    `rows`: Codebook-Zeilen mit `_tvid`; `live`: TableVIDs, die in MIN_RELEASE
+    gelten. Liefert (Zeilen, Zahl der verworfenen).
+
+    Greift NUR, wenn ein Datenpunkt in einem Template auf verschiedenen Zellen
+    liegt UND die geltende Fassung eine echte Teilmenge davon platziert. Liegen
+    alle konkurrierenden Zellen in derselben geltenden Fassung, bleibt alles
+    stehen — dort ist die Mehrdeutigkeit echt (OV1: A-SA gegen A-IMA) und wird
+    gemeldet statt stillschweigend aufgelöst.
+    """
+    by_pair = defaultdict(list)
+    for r in rows:
+        by_pair[(r["datapoint_code"], r["template"])].append(r)
+    out, dropped = [], 0
+    for _, group in sorted(by_pair.items()):
+        coords = {(r["row"], r["col"]) for r in group}
+        if len(coords) > 1:
+            keep = [r for r in group if r["_tvid"] in live]
+            if keep and {(r["row"], r["col"]) for r in keep} != coords:
+                dropped += len(group) - len(keep)
+                group = keep
+        out.extend(group)
+    return out, dropped
+
+
+def live_tvids(db, min_release=MIN_RELEASE):
+    """TableVIDs, die in `min_release` gelten — Start erreicht, Ende noch nicht."""
+    tv = db.parse_table("TableVersion")
+    return {int(v) for v, s, e in zip(tv["TableVID"], tv["StartReleaseID"],
+                                      tv["EndReleaseID"])
+            if (s or 1) <= min_release and alive_from((s, e), min_release)}
+
+
 def build_resolution_maps(db, min_release=MIN_RELEASE):
     """VariableID -> set(VariableVID); VariableVID -> set((TableVID, decoded CellCode)).
 
@@ -372,6 +407,7 @@ def main():
                              else labels.get((tvid, "col", col.zfill(4)), ""),
                 "data_type": id2dt.get(dp_int, ""),
                 "frequency": freq,
+                "_tvid": tvid,
             })
 
     # A datapoint resolves through several table-version releases that collapse to the
@@ -383,6 +419,37 @@ def main():
         if key not in best or completeness > best[key][0]:
             best[key] = (completeness, r)
     rows = [r for _, r in best.values()]
+
+    # --- Vorzugsregel bei konkurrierenden Platzierungen (#54) --------------
+    #
+    # Bis hierher deduplizieren wir je (dp, template, row, col). Legt ein
+    # Datenpunkt aber auf VERSCHIEDENE Zellen desselben Templates, überleben
+    # beide — und `xbrl_csv_parser._load_codebook()` schlüsselt nur nach
+    # (dp, template) und nimmt die letzte Zeile der Datei, also die höchste
+    # (Zeile, Spalte). Das ist deterministisch, aber es hat mit der Wahrheit
+    # nichts zu tun: gemessen wählt es bei 14 von 26 auflösbaren Paaren die
+    # falsche Zelle. In K_26.01 landen dadurch Werte durchweg in c0050,
+    # während c0040 leer bleibt.
+    #
+    # Auflösbar sind die Fälle, in denen die Platzierungen aus verschiedenen
+    # Releases stammen — der Framework-Bruch aus #26. Dann gilt die Fassung
+    # aus MIN_RELEASE: unser Bestand ist zu 97,2 % RF 4.1, und auf genau
+    # diesen Paaren liegt KEIN einziger RF-4.2-Fakt. Es gibt also nichts zu
+    # unterscheiden, sondern nur eine richtige Zelle.
+    #
+    # Ein Schlüssel (dp, template, framework_version) leistete dasselbe, würde
+    # aber das Codebook-Format, den Kern-Lookup des Parsers und sechs weitere
+    # Skripte anfassen — und eine neue Art schaffen, Fakten zu verlieren
+    # (Datenpunkt ohne Eintrag für seine Version). Für 0,06 % des Bestands.
+    #
+    # Bleiben mehrere Platzierungen AUS DERSELBEN Fassung übrig, ändert die
+    # Regel nichts: dort ist die Mehrdeutigkeit echt und wird unten gemeldet.
+    rows, dropped_stale = prefer_live_placement(rows, live_tvids(db))
+    if dropped_stale:
+        print(f"  Platzierungen aus abgelösten Fassungen verworfen: {dropped_stale}")
+
+    for r in rows:
+        r.pop("_tvid", None)
     rows.sort(key=lambda r: (r["template"], r["row"], r["col"], r["datapoint_code"]))
 
     fields = ["datapoint_code", "variable_id", "template", "row", "col",

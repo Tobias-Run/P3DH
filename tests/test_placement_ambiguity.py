@@ -76,9 +76,10 @@ CODEBOOK_CSV = ROOT / "codebook" / "dpm_codebook.csv"
 CODEBOOK_JSON = ROOT / "processed" / "zweig_a" / "data" / "codebook.json"
 VIEWER = ROOT / "processed" / "zweig_a" / "viewer_json.html"
 
-# Beobachteter Stand 2026-09-06, nach dem Release-Filter. Eine Obergrenze, kein
-# Ziel: sie darf sinken, und wenn sie das tut, gehört sie nachgezogen.
-MAX_AMBIGUOUS_PAIRS = 38
+# Beobachteter Stand 2026-09-06, nach Release-Filter UND Vorzugsregel. Eine
+# Obergrenze, kein Ziel: sie darf sinken, und wenn sie das tut, gehört sie
+# nachgezogen. 73 -> 38 (Filter) -> 12 (Vorzug).
+MAX_AMBIGUOUS_PAIRS = 12
 # Bei den Labels ist es keine Obergrenze mehr, sondern eine Zusage.
 MAX_AMBIGUOUS_CELLS = 0
 
@@ -169,6 +170,72 @@ class ReleaseFilterTest(unittest.TestCase):
                         "die RF-4.2-Fassung fiele heraus")
         self.assertFalse(mx_bc.alive_from((1, 3), mx_bc.MIN_RELEASE),
                          "Altbestand bliebe drin — das war der Fehler")
+
+
+class PreferenceRuleTest(unittest.TestCase):
+    """Die Vorzugsregel bei konkurrierenden Platzierungen (#54).
+
+    Der Filter allein liess 38 Paare uebrig. 26 davon waren Koordinaten, die
+    zwischen Release 4 und 5 umgebunden wurden — in jeder Release fuer sich
+    eindeutig, nur in der Vereinigung nicht. `_load_codebook()` nimmt dort die
+    letzte CSV-Zeile, also die hoechste (Zeile, Spalte). Gemessen trifft das
+    bei 14 von 26 Paaren die falsche Zelle; in K_26.01 landen Werte durchweg
+    in c0050, waehrend c0040 leer bleibt.
+
+    Die Alternative waere ein Schluessel (dp, template, framework_version)
+    gewesen — sechs Skripte, fuenf Testdateien, der Kern-Lookup des Parsers und
+    eine neue Art, Fakten zu verlieren. Fuer 1.465 Fakten, 0,06 % des Bestands.
+    Die Vorzugsregel leistet dasselbe in einer Funktion.
+    """
+
+    def _row(self, dp, tmpl, row, col, tvid):
+        return {"datapoint_code": dp, "template": tmpl, "row": row, "col": col,
+                "_tvid": tvid}
+
+    def test_the_stale_placement_loses(self):
+        rows = [self._row("dp1", "K_26.01", "0020", "0040", 6261),   # gilt
+                self._row("dp1", "K_26.01", "0020", "0050", 2329)]   # abgeloest
+        out, dropped = mx_bc.prefer_live_placement(rows, live={6261})
+        self.assertEqual(dropped, 1)
+        self.assertEqual([(r["row"], r["col"]) for r in out], [("0020", "0040")])
+
+    def test_a_real_ambiguity_survives(self):
+        """Zwei Zellen AUS DERSELBEN geltenden Fassung — OV1 A-SA gegen A-IMA.
+        Die Regel darf hier nicht eine Seite waehlen; sie soll gemeldet werden.
+        Waehlte sie doch, waere aus einer sichtbaren Unsicherheit eine
+        unsichtbare Behauptung geworden."""
+        rows = [self._row("dp3529408", "K_60.00.a", "0270", "0030", 6280),
+                self._row("dp3529408", "K_60.00.a", "0290", "0030", 6280)]
+        out, dropped = mx_bc.prefer_live_placement(rows, live={6280})
+        self.assertEqual(dropped, 0)
+        self.assertEqual(len(out), 2)
+
+    def test_an_unambiguous_datapoint_is_untouched(self):
+        rows = [self._row("dp1", "K_61.00", "0050", "0010", 999)]
+        out, dropped = mx_bc.prefer_live_placement(rows, live=set())
+        self.assertEqual((out, dropped), (rows, 0))
+
+    def test_nothing_is_dropped_when_no_placement_is_live(self):
+        """Sonst bliebe der Datenpunkt ganz ohne Koordinate — unplatzierbar,
+        und das ist der stille Verlust, gegen den der Placement-Guard steht."""
+        rows = [self._row("dp1", "K_26.01", "0020", "0040", 1),
+                self._row("dp1", "K_26.01", "0020", "0050", 2)]
+        out, dropped = mx_bc.prefer_live_placement(rows, live={999})
+        self.assertEqual(dropped, 0)
+        self.assertEqual(len(out), 2)
+
+    def test_the_rule_rests_on_an_assumption_that_holds_today(self):
+        """Die Regel waehlt die Fassung aus MIN_RELEASE. Das ist richtig, weil
+        auf den betroffenen Paaren KEIN einziger RF-4.2-Fakt liegt — es gibt
+        also nichts zu unterscheiden. Meldet ein spaeterer Bestand dasselbe
+        Template unter beiden Versionen mit gewechselter Koordinate, greift sie
+        zu kurz, und der Schluessel waere faellig.
+
+        Dieser Test haelt die Annahme fest, damit sie auffaellt statt vergessen
+        zu werden: er prueft, dass die Begruendung im Code steht."""
+        src = (ROOT / "scripts" / "build_codebook.py").read_text(encoding="utf-8")
+        self.assertIn("KEIN einziger RF-4.2-Fakt", src,
+                      "Die Annahme der Vorzugsregel ist nicht mehr dokumentiert")
 
 
 class ShippedMetricsTest(unittest.TestCase):

@@ -7246,35 +7246,25 @@ dp456157,456157,K_26.01,0010,0010,EU CR6-A – Scope of the use of IRB and SA ap
 dp456782,456782,K_26.01,0010,0020,EU CR6-A – Scope of the use of IRB and SA approaches,01. Central governments or central banks,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,10
 dp447228,447228,K_26.01,0010,0030,EU CR6-A – Scope of the use of IRB and SA approaches,01. Central governments or central banks,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,8
 dp442342,442342,K_26.01,0010,0040,EU CR6-A – Scope of the use of IRB and SA approaches,01. Central governments or central banks,d. Percentage of total exposure value subject to IRB approach (%),percentage,7
-dp442343,442343,K_26.01,0010,0040,EU CR6-A – Scope of the use of IRB and SA approaches,01. Central governments or central banks,d. Percentage of total exposure value subject to IRB approach (%),percentage,3
-dp442342,442342,K_26.01,0010,0050,EU CR6-A – Scope of the use of IRB and SA approaches,01. Central governments or central banks,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,7
 dp442343,442343,K_26.01,0010,0050,EU CR6-A – Scope of the use of IRB and SA approaches,01. Central governments or central banks,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,3
 dp456150,456150,K_26.01,0020,0010,EU CR6-A – Scope of the use of IRB and SA approaches,2. Regional governments or local authorities,a. Total exposure value as defined in Article 166 CRR for exposures subject to IRB approach,monetary,6
 dp456775,456775,K_26.01,0020,0020,EU CR6-A – Scope of the use of IRB and SA approaches,2. Regional governments or local authorities,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,8
 dp447221,447221,K_26.01,0020,0030,EU CR6-A – Scope of the use of IRB and SA approaches,2. Regional governments or local authorities,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,7
 dp442328,442328,K_26.01,0020,0040,EU CR6-A – Scope of the use of IRB and SA approaches,2. Regional governments or local authorities,d. Percentage of total exposure value subject to IRB approach (%),percentage,4
-dp442329,442329,K_26.01,0020,0040,EU CR6-A – Scope of the use of IRB and SA approaches,2. Regional governments or local authorities,d. Percentage of total exposure value subject to IRB approach (%),percentage,3
-dp442328,442328,K_26.01,0020,0050,EU CR6-A – Scope of the use of IRB and SA approaches,2. Regional governments or local authorities,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,4
 dp442329,442329,K_26.01,0020,0050,EU CR6-A – Scope of the use of IRB and SA approaches,2. Regional governments or local authorities,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,3
 dp456149,456149,K_26.01,0030,0010,EU CR6-A – Scope of the use of IRB and SA approaches,3. Public sector entities,a. Total exposure value as defined in Article 166 CRR for exposures subject to IRB approach,monetary,5
 dp456774,456774,K_26.01,0030,0020,EU CR6-A – Scope of the use of IRB and SA approaches,3. Public sector entities,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,6
 dp447220,447220,K_26.01,0030,0030,EU CR6-A – Scope of the use of IRB and SA approaches,3. Public sector entities,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,6
 dp442326,442326,K_26.01,0030,0040,EU CR6-A – Scope of the use of IRB and SA approaches,3. Public sector entities,d. Percentage of total exposure value subject to IRB approach (%),percentage,5
-dp442327,442327,K_26.01,0030,0040,EU CR6-A – Scope of the use of IRB and SA approaches,3. Public sector entities,d. Percentage of total exposure value subject to IRB approach (%),percentage,3
-dp442326,442326,K_26.01,0030,0050,EU CR6-A – Scope of the use of IRB and SA approaches,3. Public sector entities,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,5
 dp442327,442327,K_26.01,0030,0050,EU CR6-A – Scope of the use of IRB and SA approaches,3. Public sector entities,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,3
 dp456773,456773,K_26.01,0040,0020,EU CR6-A – Scope of the use of IRB and SA approaches,4. Institutions,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,10
 dp447219,447219,K_26.01,0040,0030,EU CR6-A – Scope of the use of IRB and SA approaches,4. Institutions,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,8
 dp442324,442324,K_26.01,0040,0040,EU CR6-A – Scope of the use of IRB and SA approaches,4. Institutions,d. Percentage of total exposure value subject to IRB approach (%),percentage,7
-dp442325,442325,K_26.01,0040,0040,EU CR6-A – Scope of the use of IRB and SA approaches,4. Institutions,d. Percentage of total exposure value subject to IRB approach (%),percentage,3
-dp442324,442324,K_26.01,0040,0050,EU CR6-A – Scope of the use of IRB and SA approaches,4. Institutions,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,7
 dp442325,442325,K_26.01,0040,0050,EU CR6-A – Scope of the use of IRB and SA approaches,4. Institutions,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,3
 dp456161,456161,K_26.01,0050,0010,EU CR6-A – Scope of the use of IRB and SA approaches,5. Corporates,a. Total exposure value as defined in Article 166 CRR for exposures subject to IRB approach,monetary,10
 dp456786,456786,K_26.01,0050,0020,EU CR6-A – Scope of the use of IRB and SA approaches,5. Corporates,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,10
 dp447232,447232,K_26.01,0050,0030,EU CR6-A – Scope of the use of IRB and SA approaches,5. Corporates,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,10
 dp442350,442350,K_26.01,0050,0040,EU CR6-A – Scope of the use of IRB and SA approaches,5. Corporates,d. Percentage of total exposure value subject to IRB approach (%),percentage,9
-dp442351,442351,K_26.01,0050,0040,EU CR6-A – Scope of the use of IRB and SA approaches,5. Corporates,d. Percentage of total exposure value subject to IRB approach (%),percentage,4
-dp442350,442350,K_26.01,0050,0050,EU CR6-A – Scope of the use of IRB and SA approaches,5. Corporates,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,9
 dp442351,442351,K_26.01,0050,0050,EU CR6-A – Scope of the use of IRB and SA approaches,5. Corporates,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,4
 dp3528955,3528955,K_26.01,0051,0020,EU CR6-A – Scope of the use of IRB and SA approaches,5.1. Of which Corporates - General,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,9
 dp3530321,3530321,K_26.01,0051,0030,EU CR6-A – Scope of the use of IRB and SA approaches,5.1. Of which Corporates - General,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,6
@@ -7287,14 +7277,10 @@ dp3530325,3530325,K_26.01,0052,0050,EU CR6-A – Scope of the use of IRB and SA 
 dp456783,456783,K_26.01,0060,0020,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.1. Of which: corporates - specialised lending, excluding slotting approach",b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,7
 dp447229,447229,K_26.01,0060,0030,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.1. Of which: corporates - specialised lending, excluding slotting approach",c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,3
 dp442344,442344,K_26.01,0060,0040,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.1. Of which: corporates - specialised lending, excluding slotting approach",d. Percentage of total exposure value subject to IRB approach (%),percentage,7
-dp442345,442345,K_26.01,0060,0040,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.1. Of which: corporates - specialised lending, excluding slotting approach",d. Percentage of total exposure value subject to IRB approach (%),percentage,3
-dp442344,442344,K_26.01,0060,0050,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.1. Of which: corporates - specialised lending, excluding slotting approach",e. Percentage of total exposure value subject to a roll-out plan (%),percentage,7
 dp442345,442345,K_26.01,0060,0050,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.1. Of which: corporates - specialised lending, excluding slotting approach",e. Percentage of total exposure value subject to a roll-out plan (%),percentage,3
 dp456784,456784,K_26.01,0070,0020,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.2. Of which: corporates - specialised lending, including slotting approach",b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,7
 dp447230,447230,K_26.01,0070,0030,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.2. Of which: corporates - specialised lending, including slotting approach",c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,3
 dp442346,442346,K_26.01,0070,0040,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.2. Of which: corporates - specialised lending, including slotting approach",d. Percentage of total exposure value subject to IRB approach (%),percentage,5
-dp442347,442347,K_26.01,0070,0040,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.2. Of which: corporates - specialised lending, including slotting approach",d. Percentage of total exposure value subject to IRB approach (%),percentage,3
-dp442346,442346,K_26.01,0070,0050,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.2. Of which: corporates - specialised lending, including slotting approach",e. Percentage of total exposure value subject to a roll-out plan (%),percentage,5
 dp442347,442347,K_26.01,0070,0050,EU CR6-A – Scope of the use of IRB and SA approaches,"5.2.2. Of which: corporates - specialised lending, including slotting approach",e. Percentage of total exposure value subject to a roll-out plan (%),percentage,3
 dp3293636,3293636,K_26.01,0075,0020,EU CR6-A – Scope of the use of IRB and SA approaches,5.3. Of which Corporates - Purchased Receivables,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,5
 dp3296035,3296035,K_26.01,0075,0030,EU CR6-A – Scope of the use of IRB and SA approaches,5.3. Of which Corporates - Purchased Receivables,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,3
@@ -7304,14 +7290,10 @@ dp456156,456156,K_26.01,0080,0010,EU CR6-A – Scope of the use of IRB and SA ap
 dp456781,456781,K_26.01,0080,0020,EU CR6-A – Scope of the use of IRB and SA approaches,6. Retail,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,8
 dp447227,447227,K_26.01,0080,0030,EU CR6-A – Scope of the use of IRB and SA approaches,6. Retail,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,8
 dp442340,442340,K_26.01,0080,0040,EU CR6-A – Scope of the use of IRB and SA approaches,6. Retail,d. Percentage of total exposure value subject to IRB approach (%),percentage,6
-dp442341,442341,K_26.01,0080,0040,EU CR6-A – Scope of the use of IRB and SA approaches,6. Retail,d. Percentage of total exposure value subject to IRB approach (%),percentage,4
-dp442340,442340,K_26.01,0080,0050,EU CR6-A – Scope of the use of IRB and SA approaches,6. Retail,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,6
 dp442341,442341,K_26.01,0080,0050,EU CR6-A – Scope of the use of IRB and SA approaches,6. Retail,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,4
 dp456777,456777,K_26.01,0110,0020,EU CR6-A – Scope of the use of IRB and SA approaches,6.1. Of which retail – qualifying revolving,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,4
 dp447223,447223,K_26.01,0110,0030,EU CR6-A – Scope of the use of IRB and SA approaches,6.1. Of which retail – qualifying revolving,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,4
 dp442332,442332,K_26.01,0110,0040,EU CR6-A – Scope of the use of IRB and SA approaches,6.1. Of which retail – qualifying revolving,d. Percentage of total exposure value subject to IRB approach (%),percentage,4
-dp442333,442333,K_26.01,0110,0040,EU CR6-A – Scope of the use of IRB and SA approaches,6.1. Of which retail – qualifying revolving,d. Percentage of total exposure value subject to IRB approach (%),percentage,3
-dp442332,442332,K_26.01,0110,0050,EU CR6-A – Scope of the use of IRB and SA approaches,6.1. Of which retail – qualifying revolving,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,4
 dp442333,442333,K_26.01,0110,0050,EU CR6-A – Scope of the use of IRB and SA approaches,6.1. Of which retail – qualifying revolving,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,3
 dp3528953,3528953,K_26.01,0120,0020,EU CR6-A – Scope of the use of IRB and SA approaches,6.2. Of which Retail – Secured by residential immovable property,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,7
 dp3530319,3530319,K_26.01,0120,0030,EU CR6-A – Scope of the use of IRB and SA approaches,6.2. Of which Retail – Secured by residential immovable property,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,3
@@ -7331,8 +7313,6 @@ dp456208,456208,K_26.01,0140,0010,EU CR6-A – Scope of the use of IRB and SA ap
 dp456787,456787,K_26.01,0140,0020,EU CR6-A – Scope of the use of IRB and SA approaches,7. Equity,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,6
 dp447233,447233,K_26.01,0140,0030,EU CR6-A – Scope of the use of IRB and SA approaches,7. Equity,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,6
 dp442352,442352,K_26.01,0140,0040,EU CR6-A – Scope of the use of IRB and SA approaches,7. Equity,d. Percentage of total exposure value subject to IRB approach (%),percentage,4
-dp442353,442353,K_26.01,0140,0040,EU CR6-A – Scope of the use of IRB and SA approaches,7. Equity,d. Percentage of total exposure value subject to IRB approach (%),percentage,3
-dp442352,442352,K_26.01,0140,0050,EU CR6-A – Scope of the use of IRB and SA approaches,7. Equity,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,4
 dp442353,442353,K_26.01,0140,0050,EU CR6-A – Scope of the use of IRB and SA approaches,7. Equity,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,3
 dp3293098,3293098,K_26.01,0145,0010,EU CR6-A – Scope of the use of IRB and SA approaches,EU 7a. Collective investment undertakings (CIU),a. Total exposure value as defined in Article 166 CRR for exposures subject to IRB approach,monetary,5
 dp3293640,3293640,K_26.01,0145,0020,EU CR6-A – Scope of the use of IRB and SA approaches,EU 7a. Collective investment undertakings (CIU),b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,5
@@ -7343,15 +7323,11 @@ dp456209,456209,K_26.01,0150,0010,EU CR6-A – Scope of the use of IRB and SA ap
 dp456788,456788,K_26.01,0150,0020,EU CR6-A – Scope of the use of IRB and SA approaches,8. Other non-credit obligation assets,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,7
 dp447234,447234,K_26.01,0150,0030,EU CR6-A – Scope of the use of IRB and SA approaches,8. Other non-credit obligation assets,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,5
 dp442354,442354,K_26.01,0150,0040,EU CR6-A – Scope of the use of IRB and SA approaches,8. Other non-credit obligation assets,d. Percentage of total exposure value subject to IRB approach (%),percentage,7
-dp442355,442355,K_26.01,0150,0040,EU CR6-A – Scope of the use of IRB and SA approaches,8. Other non-credit obligation assets,d. Percentage of total exposure value subject to IRB approach (%),percentage,3
-dp442354,442354,K_26.01,0150,0050,EU CR6-A – Scope of the use of IRB and SA approaches,8. Other non-credit obligation assets,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,7
 dp442355,442355,K_26.01,0150,0050,EU CR6-A – Scope of the use of IRB and SA approaches,8. Other non-credit obligation assets,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,3
 dp456214,456214,K_26.01,0160,0010,EU CR6-A – Scope of the use of IRB and SA approaches,9. Total,a. Total exposure value as defined in Article 166 CRR for exposures subject to IRB approach,monetary,10
 dp456790,456790,K_26.01,0160,0020,EU CR6-A – Scope of the use of IRB and SA approaches,9. Total,b.Total exposure value for exposures subject to the Standardised approach and to the IRB approach,monetary,10
 dp447235,447235,K_26.01,0160,0030,EU CR6-A – Scope of the use of IRB and SA approaches,9. Total,c. Percentage of total exposure value subject to permanent partial use of SA (%),percentage,9
 dp442356,442356,K_26.01,0160,0040,EU CR6-A – Scope of the use of IRB and SA approaches,9. Total,d. Percentage of total exposure value subject to IRB approach (%),percentage,9
-dp442357,442357,K_26.01,0160,0040,EU CR6-A – Scope of the use of IRB and SA approaches,9. Total,d. Percentage of total exposure value subject to IRB approach (%),percentage,3
-dp442356,442356,K_26.01,0160,0050,EU CR6-A – Scope of the use of IRB and SA approaches,9. Total,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,9
 dp442357,442357,K_26.01,0160,0050,EU CR6-A – Scope of the use of IRB and SA approaches,9. Total,e. Percentage of total exposure value subject to a roll-out plan (%),percentage,3
 dp3529740,3529740,K_27.01,0010,0010,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,1 Central governments and central banks - F-IRB,a Pre-credit derivatives risk weighted exposure amount,monetary,10
 dp3529739,3529739,K_27.01,0010,0020,EU CR7 – IRB approach – Effect on the RWEAs of credit derivatives used as CRM techniques,1 Central governments and central banks - F-IRB,b Actual risk weighted exposure amount,monetary,10
@@ -13118,9 +13094,6 @@ dp3528650,3528650,K_82.00.a,0060,0020,EU CQ3: Credit quality of performing and n
 dp3528635,3528635,K_82.00.a,0060,0030,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,"c Past due > 30 days d"" 90 days",monetary,14
 dp3528617,3528617,K_82.00.a,0060,0040,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,d Non-performing exposures,monetary,39
 dp3528868,3528868,K_82.00.a,0060,0050,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,e Unlikely to pay that are not past due or are past due ≤ 90 days,monetary,12
-dp3528783,3528783,K_82.00.a,0060,0060,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,"f Past due
-> 90 days
-d"" 180 days",monetary,10
 dp3528788,3528788,K_82.00.a,0060,0070,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,"g Past due
 > 180 days
 d"" 1 year",monetary,12
@@ -14445,7 +14418,6 @@ dp469904,469904,R_12.00.a,0060,0040,,Of which: variable remuneration,Investment 
 dp469903,469903,R_12.00.a,0060,0050,,Of which: variable remuneration,Retail banking,monetary,6
 dp469902,469902,R_12.00.a,0060,0060,,Of which: variable remuneration,Asset management,monetary,4
 dp469905,469905,R_12.00.a,0060,0070,,Of which: variable remuneration,Corporate functions,monetary,7
-dp469906,469906,R_12.00.a,0060,0080,,Of which: variable remuneration,Independent internal control functions,monetary,8
 dp469907,469907,R_12.00.a,0060,0090,,Of which: variable remuneration,All other,monetary,6
 dp469887,469887,R_12.00.a,0070,0010,,Of which: fixed remuneration,MB Supervisory function,monetary,8
 dp469890,469890,R_12.00.a,0070,0020,,Of which: fixed remuneration,MB Management function,monetary,9
