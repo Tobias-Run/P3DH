@@ -364,7 +364,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 07.00,0070,0010,7. Foreign exchange movements,a. RWEA,dp475561,dp475561,stable
 07.00,0080,0010,8. Other,a. RWEA,dp475562,dp475562,stable
 07.00,0090,0010,9. Risk weighted exposure amount at the end of the current reporting period,a. RWEA,dp475555,dp475555,stable
-08.00,0010,0020,1. Exposures to QCCPs (total),b. RWEA,dp457955,dp457955,stable
+08.00,0010,0020,1 Exposures to QCCPs (total),b. RWEA,dp457955,dp457955,stable
 08.00,0020,0010,2. Exposures for trades at QCCPs (excluding initial margin and default fund contributions); of which,a. Exposure value,dp456204,dp456204,stable
 08.00,0020,0020,2. Exposures for trades at QCCPs (excluding initial margin and default fund contributions); of which,b. RWEA,dp457951,dp457951,stable
 08.00,0030,0010,3. (i) OTC derivatives,a. Exposure value,dp456199,dp456199,stable
@@ -2589,12 +2589,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 28.00,0070,0010,7. Foreign exchange movements (+/-),a. Risk weighted exposure amount,dp442289,dp442289,stable
 28.00,0080,0010,8. Other (+/-),a. Risk weighted exposure amount,dp442291,dp442291,stable
 28.00,0090,0010,9. Risk weighted exposure amount at the end of the reporting period,a. Risk weighted exposure amount,dp442282,dp442282,stable
-41.00,0010,0010,1. Exposures towards sectors that highly contribute to climate change,a. Gross carrying amount (Mln EUR),dp470662,dp470662,stable
+41.00,0010,0010,1. Exposures towards sectors that highly contribute to climate change,a. Gross carrying amount,dp470662,dp470662,stable
 41.00,0010,0020,1. Exposures towards sectors that highly contribute to climate change,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470659,dp470659,stable
 41.00,0010,0030,1. Exposures towards sectors that highly contribute to climate change,c. Of which environmentally sustainable (CCM),dp470660,dp470660,stable
 41.00,0010,0040,1. Exposures towards sectors that highly contribute to climate change,d. Of which stage 2 exposures,dp470661,dp470661,stable
 41.00,0010,0050,1. Exposures towards sectors that highly contribute to climate change,e. Of which non-performing exposures,dp470663,dp470663,stable
-41.00,0010,0060,1. Exposures towards sectors that highly contribute to climate change,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp470669,dp470669,stable
+41.00,0010,0060,1. Exposures towards sectors that highly contribute to climate change,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp470669,dp470669,stable
 41.00,0010,0070,1. Exposures towards sectors that highly contribute to climate change,g. Of which Stage 2 exposures,dp470668,dp470668,stable
 41.00,0010,0080,1. Exposures towards sectors that highly contribute to climate change,h. Of which non-performing exposures,dp470670,dp470670,stable
 41.00,0010,0090,1. Exposures towards sectors that highly contribute to climate change,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp470671,dp470671,stable
@@ -2605,12 +2605,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0010,0140,1. Exposures towards sectors that highly contribute to climate change,n. > 10 year <= 20 years,dp470666,dp470666,stable
 41.00,0010,0150,1. Exposures towards sectors that highly contribute to climate change,o. > 20 years,dp470667,dp470667,stable
 41.00,0010,0160,1. Exposures towards sectors that highly contribute to climate change,p. Average weighted maturity,dp470674,dp470674,stable
-41.00,0020,0010,"2. A - Agriculture, forestry and fishing",a. Gross carrying amount (Mln EUR),dp471266,dp471266,stable
+41.00,0020,0010,"2. A - Agriculture, forestry and fishing",a. Gross carrying amount,dp471266,dp471266,stable
 41.00,0020,0020,"2. A - Agriculture, forestry and fishing",b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470809,dp470809,stable
 41.00,0020,0030,"2. A - Agriculture, forestry and fishing",c. Of which environmentally sustainable (CCM),dp471072,dp471072,stable
 41.00,0020,0040,"2. A - Agriculture, forestry and fishing",d. Of which stage 2 exposures,dp471214,dp471214,stable
 41.00,0020,0050,"2. A - Agriculture, forestry and fishing",e. Of which non-performing exposures,dp471267,dp471267,stable
-41.00,0020,0060,"2. A - Agriculture, forestry and fishing","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471940,dp471940,stable
+41.00,0020,0060,"2. A - Agriculture, forestry and fishing","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471940,dp471940,stable
 41.00,0020,0070,"2. A - Agriculture, forestry and fishing",g. Of which Stage 2 exposures,dp471888,dp471888,stable
 41.00,0020,0080,"2. A - Agriculture, forestry and fishing",h. Of which non-performing exposures,dp471941,dp471941,stable
 41.00,0020,0090,"2. A - Agriculture, forestry and fishing","i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472086,dp472086,stable
@@ -2621,12 +2621,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0020,0140,"2. A - Agriculture, forestry and fishing",n. > 10 year <= 20 years,dp471270,dp471270,stable
 41.00,0020,0150,"2. A - Agriculture, forestry and fishing",o. > 20 years,dp471271,dp471271,stable
 41.00,0020,0160,"2. A - Agriculture, forestry and fishing",p. Average weighted maturity,dp472251,dp472251,stable
-41.00,0030,0010,3. B - Mining and quarrying,a. Gross carrying amount (Mln EUR),dp471272,dp471272,stable
+41.00,0030,0010,3. B - Mining and quarrying,a. Gross carrying amount,dp471272,dp471272,stable
 41.00,0030,0020,3. B - Mining and quarrying,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470810,dp470810,stable
 41.00,0030,0030,3. B - Mining and quarrying,c. Of which environmentally sustainable (CCM),dp471073,dp471073,stable
 41.00,0030,0040,3. B - Mining and quarrying,d. Of which stage 2 exposures,dp471215,dp471215,stable
 41.00,0030,0050,3. B - Mining and quarrying,e. Of which non-performing exposures,dp471273,dp471273,stable
-41.00,0030,0060,3. B - Mining and quarrying,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471942,dp471942,stable
+41.00,0030,0060,3. B - Mining and quarrying,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471942,dp471942,stable
 41.00,0030,0070,3. B - Mining and quarrying,g. Of which Stage 2 exposures,dp471889,dp471889,stable
 41.00,0030,0080,3. B - Mining and quarrying,h. Of which non-performing exposures,dp471943,dp471943,stable
 41.00,0030,0090,3. B - Mining and quarrying,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472087,dp472087,stable
@@ -2637,12 +2637,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0030,0140,3. B - Mining and quarrying,n. > 10 year <= 20 years,dp471276,dp471276,stable
 41.00,0030,0150,3. B - Mining and quarrying,o. > 20 years,dp471277,dp471277,stable
 41.00,0030,0160,3. B - Mining and quarrying,p. Average weighted maturity,dp472252,dp472252,stable
-41.00,0040,0010,4. B.05 - Mining of coal and lignite,a. Gross carrying amount (Mln EUR),dp471326,dp471326,stable
+41.00,0040,0010,4. B.05 - Mining of coal and lignite,a. Gross carrying amount,dp471326,dp471326,stable
 41.00,0040,0020,4. B.05 - Mining of coal and lignite,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470819,dp470819,stable
 41.00,0040,0030,4. B.05 - Mining of coal and lignite,c. Of which environmentally sustainable (CCM),dp471082,dp471082,stable
 41.00,0040,0040,4. B.05 - Mining of coal and lignite,d. Of which stage 2 exposures,dp471224,dp471224,stable
 41.00,0040,0050,4. B.05 - Mining of coal and lignite,e. Of which non-performing exposures,dp471327,dp471327,stable
-41.00,0040,0060,4. B.05 - Mining of coal and lignite,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471960,dp471960,stable
+41.00,0040,0060,4. B.05 - Mining of coal and lignite,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471960,dp471960,stable
 41.00,0040,0070,4. B.05 - Mining of coal and lignite,g. Of which Stage 2 exposures,dp471898,dp471898,stable
 41.00,0040,0080,4. B.05 - Mining of coal and lignite,h. Of which non-performing exposures,dp471961,dp471961,stable
 41.00,0040,0090,4. B.05 - Mining of coal and lignite,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472096,dp472096,stable
@@ -2653,12 +2653,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0040,0140,4. B.05 - Mining of coal and lignite,n. > 10 year <= 20 years,dp471330,dp471330,stable
 41.00,0040,0150,4. B.05 - Mining of coal and lignite,o. > 20 years,dp471331,dp471331,stable
 41.00,0040,0160,4. B.05 - Mining of coal and lignite,p. Average weighted maturity,dp472261,dp472261,stable
-41.00,0050,0010,5. B.06 - Extraction of crude petroleum and natural gas,a. Gross carrying amount (Mln EUR),dp471332,dp471332,stable
+41.00,0050,0010,5. B.06 - Extraction of crude petroleum and natural gas,a. Gross carrying amount,dp471332,dp471332,stable
 41.00,0050,0020,5. B.06 - Extraction of crude petroleum and natural gas,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470820,dp470820,stable
 41.00,0050,0030,5. B.06 - Extraction of crude petroleum and natural gas,c. Of which environmentally sustainable (CCM),dp471083,dp471083,stable
 41.00,0050,0040,5. B.06 - Extraction of crude petroleum and natural gas,d. Of which stage 2 exposures,dp471225,dp471225,stable
 41.00,0050,0050,5. B.06 - Extraction of crude petroleum and natural gas,e. Of which non-performing exposures,dp471333,dp471333,stable
-41.00,0050,0060,5. B.06 - Extraction of crude petroleum and natural gas,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471962,dp471962,stable
+41.00,0050,0060,5. B.06 - Extraction of crude petroleum and natural gas,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471962,dp471962,stable
 41.00,0050,0070,5. B.06 - Extraction of crude petroleum and natural gas,g. Of which Stage 2 exposures,dp471899,dp471899,stable
 41.00,0050,0080,5. B.06 - Extraction of crude petroleum and natural gas,h. Of which non-performing exposures,dp471963,dp471963,stable
 41.00,0050,0090,5. B.06 - Extraction of crude petroleum and natural gas,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472097,dp472097,stable
@@ -2669,12 +2669,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0050,0140,5. B.06 - Extraction of crude petroleum and natural gas,n. > 10 year <= 20 years,dp471336,dp471336,stable
 41.00,0050,0150,5. B.06 - Extraction of crude petroleum and natural gas,o. > 20 years,dp471337,dp471337,stable
 41.00,0050,0160,5. B.06 - Extraction of crude petroleum and natural gas,p. Average weighted maturity,dp472262,dp472262,stable
-41.00,0060,0010,6. B.07 - Mining of metal ores,a. Gross carrying amount (Mln EUR),dp471338,dp471338,stable
+41.00,0060,0010,6. B.07 - Mining of metal ores,a. Gross carrying amount,dp471338,dp471338,stable
 41.00,0060,0020,6. B.07 - Mining of metal ores,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470821,dp470821,stable
 41.00,0060,0030,6. B.07 - Mining of metal ores,c. Of which environmentally sustainable (CCM),dp471084,dp471084,stable
 41.00,0060,0040,6. B.07 - Mining of metal ores,d. Of which stage 2 exposures,dp471226,dp471226,stable
 41.00,0060,0050,6. B.07 - Mining of metal ores,e. Of which non-performing exposures,dp471339,dp471339,stable
-41.00,0060,0060,6. B.07 - Mining of metal ores,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471964,dp471964,stable
+41.00,0060,0060,6. B.07 - Mining of metal ores,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471964,dp471964,stable
 41.00,0060,0070,6. B.07 - Mining of metal ores,g. Of which Stage 2 exposures,dp471900,dp471900,stable
 41.00,0060,0080,6. B.07 - Mining of metal ores,h. Of which non-performing exposures,dp471965,dp471965,stable
 41.00,0060,0090,6. B.07 - Mining of metal ores,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472098,dp472098,stable
@@ -2685,12 +2685,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0060,0140,6. B.07 - Mining of metal ores,n. > 10 year <= 20 years,dp471342,dp471342,stable
 41.00,0060,0150,6. B.07 - Mining of metal ores,o. > 20 years,dp471343,dp471343,stable
 41.00,0060,0160,6. B.07 - Mining of metal ores,p. Average weighted maturity,dp472263,dp472263,stable
-41.00,0070,0010,7. B.08 - Other mining and quarrying,a. Gross carrying amount (Mln EUR),dp471344,dp471344,stable
+41.00,0070,0010,7. B.08 - Other mining and quarrying,a. Gross carrying amount,dp471344,dp471344,stable
 41.00,0070,0020,7. B.08 - Other mining and quarrying,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470822,dp470822,stable
 41.00,0070,0030,7. B.08 - Other mining and quarrying,c. Of which environmentally sustainable (CCM),dp471085,dp471085,stable
 41.00,0070,0040,7. B.08 - Other mining and quarrying,d. Of which stage 2 exposures,dp471227,dp471227,stable
 41.00,0070,0050,7. B.08 - Other mining and quarrying,e. Of which non-performing exposures,dp471345,dp471345,stable
-41.00,0070,0060,7. B.08 - Other mining and quarrying,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471966,dp471966,stable
+41.00,0070,0060,7. B.08 - Other mining and quarrying,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471966,dp471966,stable
 41.00,0070,0070,7. B.08 - Other mining and quarrying,g. Of which Stage 2 exposures,dp471901,dp471901,stable
 41.00,0070,0080,7. B.08 - Other mining and quarrying,h. Of which non-performing exposures,dp471967,dp471967,stable
 41.00,0070,0090,7. B.08 - Other mining and quarrying,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472099,dp472099,stable
@@ -2701,12 +2701,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0070,0140,7. B.08 - Other mining and quarrying,n. > 10 year <= 20 years,dp471348,dp471348,stable
 41.00,0070,0150,7. B.08 - Other mining and quarrying,o. > 20 years,dp471349,dp471349,stable
 41.00,0070,0160,7. B.08 - Other mining and quarrying,p. Average weighted maturity,dp472264,dp472264,stable
-41.00,0080,0010,8. B.09 - Mining support service activities,a. Gross carrying amount (Mln EUR),dp471350,dp471350,stable
+41.00,0080,0010,8. B.09 - Mining support service activities,a. Gross carrying amount,dp471350,dp471350,stable
 41.00,0080,0020,8. B.09 - Mining support service activities,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470823,dp470823,stable
 41.00,0080,0030,8. B.09 - Mining support service activities,c. Of which environmentally sustainable (CCM),dp471086,dp471086,stable
 41.00,0080,0040,8. B.09 - Mining support service activities,d. Of which stage 2 exposures,dp471228,dp471228,stable
 41.00,0080,0050,8. B.09 - Mining support service activities,e. Of which non-performing exposures,dp471351,dp471351,stable
-41.00,0080,0060,8. B.09 - Mining support service activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471968,dp471968,stable
+41.00,0080,0060,8. B.09 - Mining support service activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471968,dp471968,stable
 41.00,0080,0070,8. B.09 - Mining support service activities,g. Of which Stage 2 exposures,dp471902,dp471902,stable
 41.00,0080,0080,8. B.09 - Mining support service activities,h. Of which non-performing exposures,dp471969,dp471969,stable
 41.00,0080,0090,8. B.09 - Mining support service activities,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472100,dp472100,stable
@@ -2717,12 +2717,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0080,0140,8. B.09 - Mining support service activities,n. > 10 year <= 20 years,dp471354,dp471354,stable
 41.00,0080,0150,8. B.09 - Mining support service activities,o. > 20 years,dp471355,dp471355,stable
 41.00,0080,0160,8. B.09 - Mining support service activities,p. Average weighted maturity,dp472265,dp472265,stable
-41.00,0090,0010,9. C - Manufacturing,a. Gross carrying amount (Mln EUR),dp471278,dp471278,stable
+41.00,0090,0010,9. C - Manufacturing,a. Gross carrying amount,dp471278,dp471278,stable
 41.00,0090,0020,9. C - Manufacturing,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470811,dp470811,stable
 41.00,0090,0030,9. C - Manufacturing,c. Of which environmentally sustainable (CCM),dp471074,dp471074,stable
 41.00,0090,0040,9. C - Manufacturing,d. Of which stage 2 exposures,dp471216,dp471216,stable
 41.00,0090,0050,9. C - Manufacturing,e. Of which non-performing exposures,dp471279,dp471279,stable
-41.00,0090,0060,9. C - Manufacturing,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471944,dp471944,stable
+41.00,0090,0060,9. C - Manufacturing,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471944,dp471944,stable
 41.00,0090,0070,9. C - Manufacturing,g. Of which Stage 2 exposures,dp471890,dp471890,stable
 41.00,0090,0080,9. C - Manufacturing,h. Of which non-performing exposures,dp471945,dp471945,stable
 41.00,0090,0090,9. C - Manufacturing,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472088,dp472088,stable
@@ -2733,12 +2733,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0090,0140,9. C - Manufacturing,n. > 10 year <= 20 years,dp471282,dp471282,stable
 41.00,0090,0150,9. C - Manufacturing,o. > 20 years,dp471283,dp471283,stable
 41.00,0090,0160,9. C - Manufacturing,p. Average weighted maturity,dp472253,dp472253,stable
-41.00,0100,0010,10. C.10 - Manufacture of food products,a. Gross carrying amount (Mln EUR),dp471356,dp471356,stable
+41.00,0100,0010,10. C.10 - Manufacture of food products,a. Gross carrying amount,dp471356,dp471356,stable
 41.00,0100,0020,10. C.10 - Manufacture of food products,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470824,dp470824,stable
 41.00,0100,0030,10. C.10 - Manufacture of food products,c. Of which environmentally sustainable (CCM),dp471087,dp471087,stable
 41.00,0100,0040,10. C.10 - Manufacture of food products,d. Of which stage 2 exposures,dp471229,dp471229,stable
 41.00,0100,0050,10. C.10 - Manufacture of food products,e. Of which non-performing exposures,dp471357,dp471357,stable
-41.00,0100,0060,10. C.10 - Manufacture of food products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471970,dp471970,stable
+41.00,0100,0060,10. C.10 - Manufacture of food products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471970,dp471970,stable
 41.00,0100,0070,10. C.10 - Manufacture of food products,g. Of which Stage 2 exposures,dp471903,dp471903,stable
 41.00,0100,0080,10. C.10 - Manufacture of food products,h. Of which non-performing exposures,dp471971,dp471971,stable
 41.00,0100,0090,10. C.10 - Manufacture of food products,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472101,dp472101,stable
@@ -2749,12 +2749,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0100,0140,10. C.10 - Manufacture of food products,n. > 10 year <= 20 years,dp471360,dp471360,stable
 41.00,0100,0150,10. C.10 - Manufacture of food products,o. > 20 years,dp471361,dp471361,stable
 41.00,0100,0160,10. C.10 - Manufacture of food products,p. Average weighted maturity,dp472266,dp472266,stable
-41.00,0110,0010,11. C.11 - Manufacture of beverages,a. Gross carrying amount (Mln EUR),dp471362,dp471362,stable
+41.00,0110,0010,11. C.11 - Manufacture of beverages,a. Gross carrying amount,dp471362,dp471362,stable
 41.00,0110,0020,11. C.11 - Manufacture of beverages,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470825,dp470825,stable
 41.00,0110,0030,11. C.11 - Manufacture of beverages,c. Of which environmentally sustainable (CCM),dp471088,dp471088,stable
 41.00,0110,0040,11. C.11 - Manufacture of beverages,d. Of which stage 2 exposures,dp471230,dp471230,stable
 41.00,0110,0050,11. C.11 - Manufacture of beverages,e. Of which non-performing exposures,dp471363,dp471363,stable
-41.00,0110,0060,11. C.11 - Manufacture of beverages,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471972,dp471972,stable
+41.00,0110,0060,11. C.11 - Manufacture of beverages,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471972,dp471972,stable
 41.00,0110,0070,11. C.11 - Manufacture of beverages,g. Of which Stage 2 exposures,dp471904,dp471904,stable
 41.00,0110,0080,11. C.11 - Manufacture of beverages,h. Of which non-performing exposures,dp471973,dp471973,stable
 41.00,0110,0090,11. C.11 - Manufacture of beverages,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472102,dp472102,stable
@@ -2765,12 +2765,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0110,0140,11. C.11 - Manufacture of beverages,n. > 10 year <= 20 years,dp471366,dp471366,stable
 41.00,0110,0150,11. C.11 - Manufacture of beverages,o. > 20 years,dp471367,dp471367,stable
 41.00,0110,0160,11. C.11 - Manufacture of beverages,p. Average weighted maturity,dp472267,dp472267,stable
-41.00,0120,0010,12. C.12 - Manufacture of tobacco products,a. Gross carrying amount (Mln EUR),dp471368,dp471368,stable
+41.00,0120,0010,12. C.12 - Manufacture of tobacco products,a. Gross carrying amount,dp471368,dp471368,stable
 41.00,0120,0020,12. C.12 - Manufacture of tobacco products,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470826,dp470826,stable
 41.00,0120,0030,12. C.12 - Manufacture of tobacco products,c. Of which environmentally sustainable (CCM),dp471089,dp471089,stable
 41.00,0120,0040,12. C.12 - Manufacture of tobacco products,d. Of which stage 2 exposures,dp471231,dp471231,stable
 41.00,0120,0050,12. C.12 - Manufacture of tobacco products,e. Of which non-performing exposures,dp471369,dp471369,stable
-41.00,0120,0060,12. C.12 - Manufacture of tobacco products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471974,dp471974,stable
+41.00,0120,0060,12. C.12 - Manufacture of tobacco products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471974,dp471974,stable
 41.00,0120,0070,12. C.12 - Manufacture of tobacco products,g. Of which Stage 2 exposures,dp471905,dp471905,stable
 41.00,0120,0080,12. C.12 - Manufacture of tobacco products,h. Of which non-performing exposures,dp471975,dp471975,stable
 41.00,0120,0090,12. C.12 - Manufacture of tobacco products,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472103,dp472103,stable
@@ -2781,12 +2781,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0120,0140,12. C.12 - Manufacture of tobacco products,n. > 10 year <= 20 years,dp471372,dp471372,stable
 41.00,0120,0150,12. C.12 - Manufacture of tobacco products,o. > 20 years,dp471373,dp471373,stable
 41.00,0120,0160,12. C.12 - Manufacture of tobacco products,p. Average weighted maturity,dp472268,dp472268,stable
-41.00,0130,0010,13. C.13 - Manufacture of textiles,a. Gross carrying amount (Mln EUR),dp471374,dp471374,stable
+41.00,0130,0010,13. C.13 - Manufacture of textiles,a. Gross carrying amount,dp471374,dp471374,stable
 41.00,0130,0020,13. C.13 - Manufacture of textiles,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470827,dp470827,stable
 41.00,0130,0030,13. C.13 - Manufacture of textiles,c. Of which environmentally sustainable (CCM),dp471090,dp471090,stable
 41.00,0130,0040,13. C.13 - Manufacture of textiles,d. Of which stage 2 exposures,dp471232,dp471232,stable
 41.00,0130,0050,13. C.13 - Manufacture of textiles,e. Of which non-performing exposures,dp471375,dp471375,stable
-41.00,0130,0060,13. C.13 - Manufacture of textiles,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471976,dp471976,stable
+41.00,0130,0060,13. C.13 - Manufacture of textiles,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471976,dp471976,stable
 41.00,0130,0070,13. C.13 - Manufacture of textiles,g. Of which Stage 2 exposures,dp471906,dp471906,stable
 41.00,0130,0080,13. C.13 - Manufacture of textiles,h. Of which non-performing exposures,dp471977,dp471977,stable
 41.00,0130,0090,13. C.13 - Manufacture of textiles,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472104,dp472104,stable
@@ -2797,12 +2797,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0130,0140,13. C.13 - Manufacture of textiles,n. > 10 year <= 20 years,dp471378,dp471378,stable
 41.00,0130,0150,13. C.13 - Manufacture of textiles,o. > 20 years,dp471379,dp471379,stable
 41.00,0130,0160,13. C.13 - Manufacture of textiles,p. Average weighted maturity,dp472269,dp472269,stable
-41.00,0140,0010,14. C.14 - Manufacture of wearing apparel,a. Gross carrying amount (Mln EUR),dp471380,dp471380,stable
+41.00,0140,0010,14. C.14 - Manufacture of wearing apparel,a. Gross carrying amount,dp471380,dp471380,stable
 41.00,0140,0020,14. C.14 - Manufacture of wearing apparel,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470828,dp470828,stable
 41.00,0140,0030,14. C.14 - Manufacture of wearing apparel,c. Of which environmentally sustainable (CCM),dp471091,dp471091,stable
 41.00,0140,0040,14. C.14 - Manufacture of wearing apparel,d. Of which stage 2 exposures,dp471233,dp471233,stable
 41.00,0140,0050,14. C.14 - Manufacture of wearing apparel,e. Of which non-performing exposures,dp471381,dp471381,stable
-41.00,0140,0060,14. C.14 - Manufacture of wearing apparel,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471978,dp471978,stable
+41.00,0140,0060,14. C.14 - Manufacture of wearing apparel,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471978,dp471978,stable
 41.00,0140,0070,14. C.14 - Manufacture of wearing apparel,g. Of which Stage 2 exposures,dp471907,dp471907,stable
 41.00,0140,0080,14. C.14 - Manufacture of wearing apparel,h. Of which non-performing exposures,dp471979,dp471979,stable
 41.00,0140,0090,14. C.14 - Manufacture of wearing apparel,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472105,dp472105,stable
@@ -2813,12 +2813,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0140,0140,14. C.14 - Manufacture of wearing apparel,n. > 10 year <= 20 years,dp471384,dp471384,stable
 41.00,0140,0150,14. C.14 - Manufacture of wearing apparel,o. > 20 years,dp471385,dp471385,stable
 41.00,0140,0160,14. C.14 - Manufacture of wearing apparel,p. Average weighted maturity,dp472270,dp472270,stable
-41.00,0150,0010,15. C.15 - Manufacture of leather and related products,a. Gross carrying amount (Mln EUR),dp471386,dp471386,stable
+41.00,0150,0010,15. C.15 - Manufacture of leather and related products,a. Gross carrying amount,dp471386,dp471386,stable
 41.00,0150,0020,15. C.15 - Manufacture of leather and related products,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470829,dp470829,stable
 41.00,0150,0030,15. C.15 - Manufacture of leather and related products,c. Of which environmentally sustainable (CCM),dp471092,dp471092,stable
 41.00,0150,0040,15. C.15 - Manufacture of leather and related products,d. Of which stage 2 exposures,dp471234,dp471234,stable
 41.00,0150,0050,15. C.15 - Manufacture of leather and related products,e. Of which non-performing exposures,dp471387,dp471387,stable
-41.00,0150,0060,15. C.15 - Manufacture of leather and related products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471980,dp471980,stable
+41.00,0150,0060,15. C.15 - Manufacture of leather and related products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471980,dp471980,stable
 41.00,0150,0070,15. C.15 - Manufacture of leather and related products,g. Of which Stage 2 exposures,dp471908,dp471908,stable
 41.00,0150,0080,15. C.15 - Manufacture of leather and related products,h. Of which non-performing exposures,dp471981,dp471981,stable
 41.00,0150,0090,15. C.15 - Manufacture of leather and related products,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472106,dp472106,stable
@@ -2829,12 +2829,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0150,0140,15. C.15 - Manufacture of leather and related products,n. > 10 year <= 20 years,dp471390,dp471390,stable
 41.00,0150,0150,15. C.15 - Manufacture of leather and related products,o. > 20 years,dp471391,dp471391,stable
 41.00,0150,0160,15. C.15 - Manufacture of leather and related products,p. Average weighted maturity,dp472271,dp472271,stable
-41.00,0160,0010,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",a. Gross carrying amount (Mln EUR),dp471392,dp471392,stable
+41.00,0160,0010,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",a. Gross carrying amount,dp471392,dp471392,stable
 41.00,0160,0020,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470830,dp470830,stable
 41.00,0160,0030,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",c. Of which environmentally sustainable (CCM),dp471093,dp471093,stable
 41.00,0160,0040,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",d. Of which stage 2 exposures,dp471235,dp471235,stable
 41.00,0160,0050,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",e. Of which non-performing exposures,dp471393,dp471393,stable
-41.00,0160,0060,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471982,dp471982,stable
+41.00,0160,0060,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471982,dp471982,stable
 41.00,0160,0070,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",g. Of which Stage 2 exposures,dp471909,dp471909,stable
 41.00,0160,0080,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",h. Of which non-performing exposures,dp471983,dp471983,stable
 41.00,0160,0090,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials","i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472107,dp472107,stable
@@ -2845,12 +2845,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0160,0140,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",n. > 10 year <= 20 years,dp471396,dp471396,stable
 41.00,0160,0150,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",o. > 20 years,dp471397,dp471397,stable
 41.00,0160,0160,"16. C.16 - Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",p. Average weighted maturity,dp472272,dp472272,stable
-41.00,0170,0010,17. C.17 - Manufacture of paper and paper products,a. Gross carrying amount (Mln EUR),dp471398,dp471398,stable
+41.00,0170,0010,17. C.17 - Manufacture of paper and paper products,a. Gross carrying amount,dp471398,dp471398,stable
 41.00,0170,0020,17. C.17 - Manufacture of paper and paper products,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470831,dp470831,stable
 41.00,0170,0030,17. C.17 - Manufacture of paper and paper products,c. Of which environmentally sustainable (CCM),dp471094,dp471094,stable
 41.00,0170,0040,17. C.17 - Manufacture of paper and paper products,d. Of which stage 2 exposures,dp471236,dp471236,stable
 41.00,0170,0050,17. C.17 - Manufacture of paper and paper products,e. Of which non-performing exposures,dp471399,dp471399,stable
-41.00,0170,0060,17. C.17 - Manufacture of paper and paper products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471984,dp471984,stable
+41.00,0170,0060,17. C.17 - Manufacture of paper and paper products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471984,dp471984,stable
 41.00,0170,0070,17. C.17 - Manufacture of paper and paper products,g. Of which Stage 2 exposures,dp471910,dp471910,stable
 41.00,0170,0080,17. C.17 - Manufacture of paper and paper products,h. Of which non-performing exposures,dp471985,dp471985,stable
 41.00,0170,0090,17. C.17 - Manufacture of paper and paper products,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472108,dp472108,stable
@@ -2861,12 +2861,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0170,0140,17. C.17 - Manufacture of paper and paper products,n. > 10 year <= 20 years,dp471402,dp471402,stable
 41.00,0170,0150,17. C.17 - Manufacture of paper and paper products,o. > 20 years,dp471403,dp471403,stable
 41.00,0170,0160,17. C.17 - Manufacture of paper and paper products,p. Average weighted maturity,dp472273,dp472273,stable
-41.00,0180,0010,18. C.18 - Printing and reproduction of recorded media,a. Gross carrying amount (Mln EUR),dp471404,dp471404,stable
+41.00,0180,0010,18. C.18 - Printing and reproduction of recorded media,a. Gross carrying amount,dp471404,dp471404,stable
 41.00,0180,0020,18. C.18 - Printing and reproduction of recorded media,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470832,dp470832,stable
 41.00,0180,0030,18. C.18 - Printing and reproduction of recorded media,c. Of which environmentally sustainable (CCM),dp471095,dp471095,stable
 41.00,0180,0040,18. C.18 - Printing and reproduction of recorded media,d. Of which stage 2 exposures,dp471237,dp471237,stable
 41.00,0180,0050,18. C.18 - Printing and reproduction of recorded media,e. Of which non-performing exposures,dp471405,dp471405,stable
-41.00,0180,0060,18. C.18 - Printing and reproduction of recorded media,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471986,dp471986,stable
+41.00,0180,0060,18. C.18 - Printing and reproduction of recorded media,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471986,dp471986,stable
 41.00,0180,0070,18. C.18 - Printing and reproduction of recorded media,g. Of which Stage 2 exposures,dp471911,dp471911,stable
 41.00,0180,0080,18. C.18 - Printing and reproduction of recorded media,h. Of which non-performing exposures,dp471987,dp471987,stable
 41.00,0180,0090,18. C.18 - Printing and reproduction of recorded media,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472109,dp472109,stable
@@ -2877,12 +2877,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0180,0140,18. C.18 - Printing and reproduction of recorded media,n. > 10 year <= 20 years,dp471408,dp471408,stable
 41.00,0180,0150,18. C.18 - Printing and reproduction of recorded media,o. > 20 years,dp471409,dp471409,stable
 41.00,0180,0160,18. C.18 - Printing and reproduction of recorded media,p. Average weighted maturity,dp472274,dp472274,stable
-41.00,0190,0010,19. C.19 - Manufacture of coke and refined petroleum products,a. Gross carrying amount (Mln EUR),dp471410,dp471410,stable
+41.00,0190,0010,19. C.19 - Manufacture of coke and refined petroleum products,a. Gross carrying amount,dp471410,dp471410,stable
 41.00,0190,0020,19. C.19 - Manufacture of coke and refined petroleum products,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470833,dp470833,stable
 41.00,0190,0030,19. C.19 - Manufacture of coke and refined petroleum products,c. Of which environmentally sustainable (CCM),dp471096,dp471096,stable
 41.00,0190,0040,19. C.19 - Manufacture of coke and refined petroleum products,d. Of which stage 2 exposures,dp471238,dp471238,stable
 41.00,0190,0050,19. C.19 - Manufacture of coke and refined petroleum products,e. Of which non-performing exposures,dp471411,dp471411,stable
-41.00,0190,0060,19. C.19 - Manufacture of coke and refined petroleum products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471988,dp471988,stable
+41.00,0190,0060,19. C.19 - Manufacture of coke and refined petroleum products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471988,dp471988,stable
 41.00,0190,0070,19. C.19 - Manufacture of coke and refined petroleum products,g. Of which Stage 2 exposures,dp471912,dp471912,stable
 41.00,0190,0080,19. C.19 - Manufacture of coke and refined petroleum products,h. Of which non-performing exposures,dp471989,dp471989,stable
 41.00,0190,0090,19. C.19 - Manufacture of coke and refined petroleum products,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472110,dp472110,stable
@@ -2893,12 +2893,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0190,0140,19. C.19 - Manufacture of coke and refined petroleum products,n. > 10 year <= 20 years,dp471414,dp471414,stable
 41.00,0190,0150,19. C.19 - Manufacture of coke and refined petroleum products,o. > 20 years,dp471415,dp471415,stable
 41.00,0190,0160,19. C.19 - Manufacture of coke and refined petroleum products,p. Average weighted maturity,dp472275,dp472275,stable
-41.00,0200,0010,20. C.20 - Manufacture of chemicals and chemical products,a. Gross carrying amount (Mln EUR),dp471416,dp471416,stable
+41.00,0200,0010,20. C.20 - Manufacture of chemicals and chemical products,a. Gross carrying amount,dp471416,dp471416,stable
 41.00,0200,0020,20. C.20 - Manufacture of chemicals and chemical products,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470834,dp470834,stable
 41.00,0200,0030,20. C.20 - Manufacture of chemicals and chemical products,c. Of which environmentally sustainable (CCM),dp471097,dp471097,stable
 41.00,0200,0040,20. C.20 - Manufacture of chemicals and chemical products,d. Of which stage 2 exposures,dp471239,dp471239,stable
 41.00,0200,0050,20. C.20 - Manufacture of chemicals and chemical products,e. Of which non-performing exposures,dp471417,dp471417,stable
-41.00,0200,0060,20. C.20 - Manufacture of chemicals and chemical products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471990,dp471990,stable
+41.00,0200,0060,20. C.20 - Manufacture of chemicals and chemical products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471990,dp471990,stable
 41.00,0200,0070,20. C.20 - Manufacture of chemicals and chemical products,g. Of which Stage 2 exposures,dp471913,dp471913,stable
 41.00,0200,0080,20. C.20 - Manufacture of chemicals and chemical products,h. Of which non-performing exposures,dp471991,dp471991,stable
 41.00,0200,0090,20. C.20 - Manufacture of chemicals and chemical products,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472111,dp472111,stable
@@ -2909,12 +2909,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0200,0140,20. C.20 - Manufacture of chemicals and chemical products,n. > 10 year <= 20 years,dp471420,dp471420,stable
 41.00,0200,0150,20. C.20 - Manufacture of chemicals and chemical products,o. > 20 years,dp471421,dp471421,stable
 41.00,0200,0160,20. C.20 - Manufacture of chemicals and chemical products,p. Average weighted maturity,dp472276,dp472276,stable
-41.00,0210,0010,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,a. Gross carrying amount (Mln EUR),dp471422,dp471422,stable
+41.00,0210,0010,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,a. Gross carrying amount,dp471422,dp471422,stable
 41.00,0210,0020,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470835,dp470835,stable
 41.00,0210,0030,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,c. Of which environmentally sustainable (CCM),dp471098,dp471098,stable
 41.00,0210,0040,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,d. Of which stage 2 exposures,dp471240,dp471240,stable
 41.00,0210,0050,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,e. Of which non-performing exposures,dp471423,dp471423,stable
-41.00,0210,0060,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471992,dp471992,stable
+41.00,0210,0060,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471992,dp471992,stable
 41.00,0210,0070,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,g. Of which Stage 2 exposures,dp471914,dp471914,stable
 41.00,0210,0080,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,h. Of which non-performing exposures,dp471993,dp471993,stable
 41.00,0210,0090,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472112,dp472112,stable
@@ -2925,12 +2925,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0210,0140,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,n. > 10 year <= 20 years,dp471426,dp471426,stable
 41.00,0210,0150,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,o. > 20 years,dp471427,dp471427,stable
 41.00,0210,0160,21. C.21 - Manufacture of basic pharmaceutical products and pharmaceutical preparations,p. Average weighted maturity,dp472277,dp472277,stable
-41.00,0220,0010,22. C.22 - Manufacture of rubber products,a. Gross carrying amount (Mln EUR),dp471428,dp471428,stable
+41.00,0220,0010,22. C.22 - Manufacture of rubber products,a. Gross carrying amount,dp471428,dp471428,stable
 41.00,0220,0020,22. C.22 - Manufacture of rubber products,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470836,dp470836,stable
 41.00,0220,0030,22. C.22 - Manufacture of rubber products,c. Of which environmentally sustainable (CCM),dp471099,dp471099,stable
 41.00,0220,0040,22. C.22 - Manufacture of rubber products,d. Of which stage 2 exposures,dp471241,dp471241,stable
 41.00,0220,0050,22. C.22 - Manufacture of rubber products,e. Of which non-performing exposures,dp471429,dp471429,stable
-41.00,0220,0060,22. C.22 - Manufacture of rubber products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471994,dp471994,stable
+41.00,0220,0060,22. C.22 - Manufacture of rubber products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471994,dp471994,stable
 41.00,0220,0070,22. C.22 - Manufacture of rubber products,g. Of which Stage 2 exposures,dp471915,dp471915,stable
 41.00,0220,0080,22. C.22 - Manufacture of rubber products,h. Of which non-performing exposures,dp471995,dp471995,stable
 41.00,0220,0090,22. C.22 - Manufacture of rubber products,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472113,dp472113,stable
@@ -2941,12 +2941,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0220,0140,22. C.22 - Manufacture of rubber products,n. > 10 year <= 20 years,dp471432,dp471432,stable
 41.00,0220,0150,22. C.22 - Manufacture of rubber products,o. > 20 years,dp471433,dp471433,stable
 41.00,0220,0160,22. C.22 - Manufacture of rubber products,p. Average weighted maturity,dp472278,dp472278,stable
-41.00,0230,0010,23. C.23 - Manufacture of other non-metallic mineral products,a. Gross carrying amount (Mln EUR),dp471434,dp471434,stable
+41.00,0230,0010,23. C.23 - Manufacture of other non-metallic mineral products,a. Gross carrying amount,dp471434,dp471434,stable
 41.00,0230,0020,23. C.23 - Manufacture of other non-metallic mineral products,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470837,dp470837,stable
 41.00,0230,0030,23. C.23 - Manufacture of other non-metallic mineral products,c. Of which environmentally sustainable (CCM),dp471100,dp471100,stable
 41.00,0230,0040,23. C.23 - Manufacture of other non-metallic mineral products,d. Of which stage 2 exposures,dp471242,dp471242,stable
 41.00,0230,0050,23. C.23 - Manufacture of other non-metallic mineral products,e. Of which non-performing exposures,dp471435,dp471435,stable
-41.00,0230,0060,23. C.23 - Manufacture of other non-metallic mineral products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471996,dp471996,stable
+41.00,0230,0060,23. C.23 - Manufacture of other non-metallic mineral products,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471996,dp471996,stable
 41.00,0230,0070,23. C.23 - Manufacture of other non-metallic mineral products,g. Of which Stage 2 exposures,dp471916,dp471916,stable
 41.00,0230,0080,23. C.23 - Manufacture of other non-metallic mineral products,h. Of which non-performing exposures,dp471997,dp471997,stable
 41.00,0230,0090,23. C.23 - Manufacture of other non-metallic mineral products,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472114,dp472114,stable
@@ -2957,12 +2957,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0230,0140,23. C.23 - Manufacture of other non-metallic mineral products,n. > 10 year <= 20 years,dp471438,dp471438,stable
 41.00,0230,0150,23. C.23 - Manufacture of other non-metallic mineral products,o. > 20 years,dp471439,dp471439,stable
 41.00,0230,0160,23. C.23 - Manufacture of other non-metallic mineral products,p. Average weighted maturity,dp472279,dp472279,stable
-41.00,0240,0010,24. C.24 - Manufacture of basic metals,a. Gross carrying amount (Mln EUR),dp471440,dp471440,stable
+41.00,0240,0010,24. C.24 - Manufacture of basic metals,a. Gross carrying amount,dp471440,dp471440,stable
 41.00,0240,0020,24. C.24 - Manufacture of basic metals,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470838,dp470838,stable
 41.00,0240,0030,24. C.24 - Manufacture of basic metals,c. Of which environmentally sustainable (CCM),dp471101,dp471101,stable
 41.00,0240,0040,24. C.24 - Manufacture of basic metals,d. Of which stage 2 exposures,dp471243,dp471243,stable
 41.00,0240,0050,24. C.24 - Manufacture of basic metals,e. Of which non-performing exposures,dp471441,dp471441,stable
-41.00,0240,0060,24. C.24 - Manufacture of basic metals,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471998,dp471998,stable
+41.00,0240,0060,24. C.24 - Manufacture of basic metals,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471998,dp471998,stable
 41.00,0240,0070,24. C.24 - Manufacture of basic metals,g. Of which Stage 2 exposures,dp471917,dp471917,stable
 41.00,0240,0080,24. C.24 - Manufacture of basic metals,h. Of which non-performing exposures,dp471999,dp471999,stable
 41.00,0240,0090,24. C.24 - Manufacture of basic metals,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472115,dp472115,stable
@@ -2973,12 +2973,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0240,0140,24. C.24 - Manufacture of basic metals,n. > 10 year <= 20 years,dp471444,dp471444,stable
 41.00,0240,0150,24. C.24 - Manufacture of basic metals,o. > 20 years,dp471445,dp471445,stable
 41.00,0240,0160,24. C.24 - Manufacture of basic metals,p. Average weighted maturity,dp472280,dp472280,stable
-41.00,0250,0010,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",a. Gross carrying amount (Mln EUR),dp471446,dp471446,stable
+41.00,0250,0010,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",a. Gross carrying amount,dp471446,dp471446,stable
 41.00,0250,0020,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470839,dp470839,stable
 41.00,0250,0030,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",c. Of which environmentally sustainable (CCM),dp471102,dp471102,stable
 41.00,0250,0040,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",d. Of which stage 2 exposures,dp471244,dp471244,stable
 41.00,0250,0050,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",e. Of which non-performing exposures,dp471447,dp471447,stable
-41.00,0250,0060,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472000,dp472000,stable
+41.00,0250,0060,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472000,dp472000,stable
 41.00,0250,0070,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",g. Of which Stage 2 exposures,dp471918,dp471918,stable
 41.00,0250,0080,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",h. Of which non-performing exposures,dp472001,dp472001,stable
 41.00,0250,0090,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment","i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472116,dp472116,stable
@@ -2989,12 +2989,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0250,0140,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",n. > 10 year <= 20 years,dp471450,dp471450,stable
 41.00,0250,0150,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",o. > 20 years,dp471451,dp471451,stable
 41.00,0250,0160,"25. C.25 - Manufacture of fabricated metal products, except machinery and equipment",p. Average weighted maturity,dp472281,dp472281,stable
-41.00,0260,0010,"26. C.26 - Manufacture of computer, electronic and optical products",a. Gross carrying amount (Mln EUR),dp471452,dp471452,stable
+41.00,0260,0010,"26. C.26 - Manufacture of computer, electronic and optical products",a. Gross carrying amount,dp471452,dp471452,stable
 41.00,0260,0020,"26. C.26 - Manufacture of computer, electronic and optical products",b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470840,dp470840,stable
 41.00,0260,0030,"26. C.26 - Manufacture of computer, electronic and optical products",c. Of which environmentally sustainable (CCM),dp471103,dp471103,stable
 41.00,0260,0040,"26. C.26 - Manufacture of computer, electronic and optical products",d. Of which stage 2 exposures,dp471245,dp471245,stable
 41.00,0260,0050,"26. C.26 - Manufacture of computer, electronic and optical products",e. Of which non-performing exposures,dp471453,dp471453,stable
-41.00,0260,0060,"26. C.26 - Manufacture of computer, electronic and optical products","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472002,dp472002,stable
+41.00,0260,0060,"26. C.26 - Manufacture of computer, electronic and optical products","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472002,dp472002,stable
 41.00,0260,0070,"26. C.26 - Manufacture of computer, electronic and optical products",g. Of which Stage 2 exposures,dp471919,dp471919,stable
 41.00,0260,0080,"26. C.26 - Manufacture of computer, electronic and optical products",h. Of which non-performing exposures,dp472003,dp472003,stable
 41.00,0260,0090,"26. C.26 - Manufacture of computer, electronic and optical products","i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472117,dp472117,stable
@@ -3005,12 +3005,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0260,0140,"26. C.26 - Manufacture of computer, electronic and optical products",n. > 10 year <= 20 years,dp471456,dp471456,stable
 41.00,0260,0150,"26. C.26 - Manufacture of computer, electronic and optical products",o. > 20 years,dp471457,dp471457,stable
 41.00,0260,0160,"26. C.26 - Manufacture of computer, electronic and optical products",p. Average weighted maturity,dp472282,dp472282,stable
-41.00,0270,0010,27. C.27 - Manufacture of electrical equipment,a. Gross carrying amount (Mln EUR),dp471458,dp471458,stable
+41.00,0270,0010,27. C.27 - Manufacture of electrical equipment,a. Gross carrying amount,dp471458,dp471458,stable
 41.00,0270,0020,27. C.27 - Manufacture of electrical equipment,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470841,dp470841,stable
 41.00,0270,0030,27. C.27 - Manufacture of electrical equipment,c. Of which environmentally sustainable (CCM),dp471104,dp471104,stable
 41.00,0270,0040,27. C.27 - Manufacture of electrical equipment,d. Of which stage 2 exposures,dp471246,dp471246,stable
 41.00,0270,0050,27. C.27 - Manufacture of electrical equipment,e. Of which non-performing exposures,dp471459,dp471459,stable
-41.00,0270,0060,27. C.27 - Manufacture of electrical equipment,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472004,dp472004,stable
+41.00,0270,0060,27. C.27 - Manufacture of electrical equipment,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472004,dp472004,stable
 41.00,0270,0070,27. C.27 - Manufacture of electrical equipment,g. Of which Stage 2 exposures,dp471920,dp471920,stable
 41.00,0270,0080,27. C.27 - Manufacture of electrical equipment,h. Of which non-performing exposures,dp472005,dp472005,stable
 41.00,0270,0090,27. C.27 - Manufacture of electrical equipment,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472118,dp472118,stable
@@ -3021,12 +3021,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0270,0140,27. C.27 - Manufacture of electrical equipment,n. > 10 year <= 20 years,dp471462,dp471462,stable
 41.00,0270,0150,27. C.27 - Manufacture of electrical equipment,o. > 20 years,dp471463,dp471463,stable
 41.00,0270,0160,27. C.27 - Manufacture of electrical equipment,p. Average weighted maturity,dp472283,dp472283,stable
-41.00,0280,0010,28. C.28 - Manufacture of machinery and equipment n.e.c.,a. Gross carrying amount (Mln EUR),dp471464,dp471464,stable
+41.00,0280,0010,28. C.28 - Manufacture of machinery and equipment n.e.c.,a. Gross carrying amount,dp471464,dp471464,stable
 41.00,0280,0020,28. C.28 - Manufacture of machinery and equipment n.e.c.,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470842,dp470842,stable
 41.00,0280,0030,28. C.28 - Manufacture of machinery and equipment n.e.c.,c. Of which environmentally sustainable (CCM),dp471105,dp471105,stable
 41.00,0280,0040,28. C.28 - Manufacture of machinery and equipment n.e.c.,d. Of which stage 2 exposures,dp471247,dp471247,stable
 41.00,0280,0050,28. C.28 - Manufacture of machinery and equipment n.e.c.,e. Of which non-performing exposures,dp471465,dp471465,stable
-41.00,0280,0060,28. C.28 - Manufacture of machinery and equipment n.e.c.,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472006,dp472006,stable
+41.00,0280,0060,28. C.28 - Manufacture of machinery and equipment n.e.c.,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472006,dp472006,stable
 41.00,0280,0070,28. C.28 - Manufacture of machinery and equipment n.e.c.,g. Of which Stage 2 exposures,dp471921,dp471921,stable
 41.00,0280,0080,28. C.28 - Manufacture of machinery and equipment n.e.c.,h. Of which non-performing exposures,dp472007,dp472007,stable
 41.00,0280,0090,28. C.28 - Manufacture of machinery and equipment n.e.c.,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472119,dp472119,stable
@@ -3037,12 +3037,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0280,0140,28. C.28 - Manufacture of machinery and equipment n.e.c.,n. > 10 year <= 20 years,dp471468,dp471468,stable
 41.00,0280,0150,28. C.28 - Manufacture of machinery and equipment n.e.c.,o. > 20 years,dp471469,dp471469,stable
 41.00,0280,0160,28. C.28 - Manufacture of machinery and equipment n.e.c.,p. Average weighted maturity,dp472284,dp472284,stable
-41.00,0290,0010,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",a. Gross carrying amount (Mln EUR),dp471470,dp471470,stable
+41.00,0290,0010,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",a. Gross carrying amount,dp471470,dp471470,stable
 41.00,0290,0020,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470843,dp470843,stable
 41.00,0290,0030,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",c. Of which environmentally sustainable (CCM),dp471106,dp471106,stable
 41.00,0290,0040,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",d. Of which stage 2 exposures,dp471248,dp471248,stable
 41.00,0290,0050,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",e. Of which non-performing exposures,dp471471,dp471471,stable
-41.00,0290,0060,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472008,dp472008,stable
+41.00,0290,0060,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472008,dp472008,stable
 41.00,0290,0070,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",g. Of which Stage 2 exposures,dp471922,dp471922,stable
 41.00,0290,0080,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",h. Of which non-performing exposures,dp472009,dp472009,stable
 41.00,0290,0090,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers","i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472120,dp472120,stable
@@ -3053,12 +3053,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0290,0140,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",n. > 10 year <= 20 years,dp471474,dp471474,stable
 41.00,0290,0150,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",o. > 20 years,dp471475,dp471475,stable
 41.00,0290,0160,"29. C.29 - Manufacture of motor vehicles, trailers and semi-trailers",p. Average weighted maturity,dp472285,dp472285,stable
-41.00,0300,0010,30. C.30 - Manufacture of other transport equipment,a. Gross carrying amount (Mln EUR),dp471476,dp471476,stable
+41.00,0300,0010,30. C.30 - Manufacture of other transport equipment,a. Gross carrying amount,dp471476,dp471476,stable
 41.00,0300,0020,30. C.30 - Manufacture of other transport equipment,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470844,dp470844,stable
 41.00,0300,0030,30. C.30 - Manufacture of other transport equipment,c. Of which environmentally sustainable (CCM),dp471107,dp471107,stable
 41.00,0300,0040,30. C.30 - Manufacture of other transport equipment,d. Of which stage 2 exposures,dp471249,dp471249,stable
 41.00,0300,0050,30. C.30 - Manufacture of other transport equipment,e. Of which non-performing exposures,dp471477,dp471477,stable
-41.00,0300,0060,30. C.30 - Manufacture of other transport equipment,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472010,dp472010,stable
+41.00,0300,0060,30. C.30 - Manufacture of other transport equipment,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472010,dp472010,stable
 41.00,0300,0070,30. C.30 - Manufacture of other transport equipment,g. Of which Stage 2 exposures,dp471923,dp471923,stable
 41.00,0300,0080,30. C.30 - Manufacture of other transport equipment,h. Of which non-performing exposures,dp472011,dp472011,stable
 41.00,0300,0090,30. C.30 - Manufacture of other transport equipment,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472121,dp472121,stable
@@ -3069,12 +3069,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0300,0140,30. C.30 - Manufacture of other transport equipment,n. > 10 year <= 20 years,dp471480,dp471480,stable
 41.00,0300,0150,30. C.30 - Manufacture of other transport equipment,o. > 20 years,dp471481,dp471481,stable
 41.00,0300,0160,30. C.30 - Manufacture of other transport equipment,p. Average weighted maturity,dp472286,dp472286,stable
-41.00,0310,0010,31. C.31 - Manufacture of furniture,a. Gross carrying amount (Mln EUR),dp471482,dp471482,stable
+41.00,0310,0010,31. C.31 - Manufacture of furniture,a. Gross carrying amount,dp471482,dp471482,stable
 41.00,0310,0020,31. C.31 - Manufacture of furniture,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470845,dp470845,stable
 41.00,0310,0030,31. C.31 - Manufacture of furniture,c. Of which environmentally sustainable (CCM),dp471108,dp471108,stable
 41.00,0310,0040,31. C.31 - Manufacture of furniture,d. Of which stage 2 exposures,dp471250,dp471250,stable
 41.00,0310,0050,31. C.31 - Manufacture of furniture,e. Of which non-performing exposures,dp471483,dp471483,stable
-41.00,0310,0060,31. C.31 - Manufacture of furniture,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472012,dp472012,stable
+41.00,0310,0060,31. C.31 - Manufacture of furniture,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472012,dp472012,stable
 41.00,0310,0070,31. C.31 - Manufacture of furniture,g. Of which Stage 2 exposures,dp471924,dp471924,stable
 41.00,0310,0080,31. C.31 - Manufacture of furniture,h. Of which non-performing exposures,dp472013,dp472013,stable
 41.00,0310,0090,31. C.31 - Manufacture of furniture,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472122,dp472122,stable
@@ -3085,12 +3085,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0310,0140,31. C.31 - Manufacture of furniture,n. > 10 year <= 20 years,dp471486,dp471486,stable
 41.00,0310,0150,31. C.31 - Manufacture of furniture,o. > 20 years,dp471487,dp471487,stable
 41.00,0310,0160,31. C.31 - Manufacture of furniture,p. Average weighted maturity,dp472287,dp472287,stable
-41.00,0320,0010,32. C.32 - Other manufacturing,a. Gross carrying amount (Mln EUR),dp471488,dp471488,stable
+41.00,0320,0010,32. C.32 - Other manufacturing,a. Gross carrying amount,dp471488,dp471488,stable
 41.00,0320,0020,32. C.32 - Other manufacturing,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470846,dp470846,stable
 41.00,0320,0030,32. C.32 - Other manufacturing,c. Of which environmentally sustainable (CCM),dp471109,dp471109,stable
 41.00,0320,0040,32. C.32 - Other manufacturing,d. Of which stage 2 exposures,dp471251,dp471251,stable
 41.00,0320,0050,32. C.32 - Other manufacturing,e. Of which non-performing exposures,dp471489,dp471489,stable
-41.00,0320,0060,32. C.32 - Other manufacturing,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472014,dp472014,stable
+41.00,0320,0060,32. C.32 - Other manufacturing,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472014,dp472014,stable
 41.00,0320,0070,32. C.32 - Other manufacturing,g. Of which Stage 2 exposures,dp471925,dp471925,stable
 41.00,0320,0080,32. C.32 - Other manufacturing,h. Of which non-performing exposures,dp472015,dp472015,stable
 41.00,0320,0090,32. C.32 - Other manufacturing,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472123,dp472123,stable
@@ -3101,12 +3101,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0320,0140,32. C.32 - Other manufacturing,n. > 10 year <= 20 years,dp471492,dp471492,stable
 41.00,0320,0150,32. C.32 - Other manufacturing,o. > 20 years,dp471493,dp471493,stable
 41.00,0320,0160,32. C.32 - Other manufacturing,p. Average weighted maturity,dp472288,dp472288,stable
-41.00,0330,0010,33. C.33 - Repair and installation of machinery and equipment,a. Gross carrying amount (Mln EUR),dp471494,dp471494,stable
+41.00,0330,0010,33. C.33 - Repair and installation of machinery and equipment,a. Gross carrying amount,dp471494,dp471494,stable
 41.00,0330,0020,33. C.33 - Repair and installation of machinery and equipment,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470847,dp470847,stable
 41.00,0330,0030,33. C.33 - Repair and installation of machinery and equipment,c. Of which environmentally sustainable (CCM),dp471110,dp471110,stable
 41.00,0330,0040,33. C.33 - Repair and installation of machinery and equipment,d. Of which stage 2 exposures,dp471252,dp471252,stable
 41.00,0330,0050,33. C.33 - Repair and installation of machinery and equipment,e. Of which non-performing exposures,dp471495,dp471495,stable
-41.00,0330,0060,33. C.33 - Repair and installation of machinery and equipment,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472016,dp472016,stable
+41.00,0330,0060,33. C.33 - Repair and installation of machinery and equipment,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472016,dp472016,stable
 41.00,0330,0070,33. C.33 - Repair and installation of machinery and equipment,g. Of which Stage 2 exposures,dp471926,dp471926,stable
 41.00,0330,0080,33. C.33 - Repair and installation of machinery and equipment,h. Of which non-performing exposures,dp472017,dp472017,stable
 41.00,0330,0090,33. C.33 - Repair and installation of machinery and equipment,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472124,dp472124,stable
@@ -3117,12 +3117,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0330,0140,33. C.33 - Repair and installation of machinery and equipment,n. > 10 year <= 20 years,dp471498,dp471498,stable
 41.00,0330,0150,33. C.33 - Repair and installation of machinery and equipment,o. > 20 years,dp471499,dp471499,stable
 41.00,0330,0160,33. C.33 - Repair and installation of machinery and equipment,p. Average weighted maturity,dp472289,dp472289,stable
-41.00,0340,0010,"34. D - Electricity, gas, steam and air conditioning supply",a. Gross carrying amount (Mln EUR),dp471284,dp471284,stable
+41.00,0340,0010,"34. D - Electricity, gas, steam and air conditioning supply",a. Gross carrying amount,dp471284,dp471284,stable
 41.00,0340,0020,"34. D - Electricity, gas, steam and air conditioning supply",b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470812,dp470812,stable
 41.00,0340,0030,"34. D - Electricity, gas, steam and air conditioning supply",c. Of which environmentally sustainable (CCM),dp471075,dp471075,stable
 41.00,0340,0040,"34. D - Electricity, gas, steam and air conditioning supply",d. Of which stage 2 exposures,dp471217,dp471217,stable
 41.00,0340,0050,"34. D - Electricity, gas, steam and air conditioning supply",e. Of which non-performing exposures,dp471285,dp471285,stable
-41.00,0340,0060,"34. D - Electricity, gas, steam and air conditioning supply","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471946,dp471946,stable
+41.00,0340,0060,"34. D - Electricity, gas, steam and air conditioning supply","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471946,dp471946,stable
 41.00,0340,0070,"34. D - Electricity, gas, steam and air conditioning supply",g. Of which Stage 2 exposures,dp471891,dp471891,stable
 41.00,0340,0080,"34. D - Electricity, gas, steam and air conditioning supply",h. Of which non-performing exposures,dp471947,dp471947,stable
 41.00,0340,0090,"34. D - Electricity, gas, steam and air conditioning supply","i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472089,dp472089,stable
@@ -3133,12 +3133,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0340,0140,"34. D - Electricity, gas, steam and air conditioning supply",n. > 10 year <= 20 years,dp471288,dp471288,stable
 41.00,0340,0150,"34. D - Electricity, gas, steam and air conditioning supply",o. > 20 years,dp471289,dp471289,stable
 41.00,0340,0160,"34. D - Electricity, gas, steam and air conditioning supply",p. Average weighted maturity,dp472254,dp472254,stable
-41.00,0350,0010,"35. D35.1 - Electric power generation, transmission and distribution",a. Gross carrying amount (Mln EUR),dp471554,dp471554,stable
+41.00,0350,0010,"35. D35.1 - Electric power generation, transmission and distribution",a. Gross carrying amount,dp471554,dp471554,stable
 41.00,0350,0020,"35. D35.1 - Electric power generation, transmission and distribution",b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470857,dp470857,stable
 41.00,0350,0030,"35. D35.1 - Electric power generation, transmission and distribution",c. Of which environmentally sustainable (CCM),dp471120,dp471120,stable
 41.00,0350,0040,"35. D35.1 - Electric power generation, transmission and distribution",d. Of which stage 2 exposures,dp471262,dp471262,stable
 41.00,0350,0050,"35. D35.1 - Electric power generation, transmission and distribution",e. Of which non-performing exposures,dp471555,dp471555,stable
-41.00,0350,0060,"35. D35.1 - Electric power generation, transmission and distribution","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472036,dp472036,stable
+41.00,0350,0060,"35. D35.1 - Electric power generation, transmission and distribution","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472036,dp472036,stable
 41.00,0350,0070,"35. D35.1 - Electric power generation, transmission and distribution",g. Of which Stage 2 exposures,dp471936,dp471936,stable
 41.00,0350,0080,"35. D35.1 - Electric power generation, transmission and distribution",h. Of which non-performing exposures,dp472037,dp472037,stable
 41.00,0350,0090,"35. D35.1 - Electric power generation, transmission and distribution","i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472133,dp472133,stable
@@ -3149,12 +3149,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0350,0140,"35. D35.1 - Electric power generation, transmission and distribution",n. > 10 year <= 20 years,dp471558,dp471558,stable
 41.00,0350,0150,"35. D35.1 - Electric power generation, transmission and distribution",o. > 20 years,dp471559,dp471559,stable
 41.00,0350,0160,"35. D35.1 - Electric power generation, transmission and distribution",p. Average weighted maturity,dp472299,dp472299,stable
-41.00,0360,0010,36. D35.11 - Production of electricity,a. Gross carrying amount (Mln EUR),dp471560,dp471560,stable
+41.00,0360,0010,36. D35.11 - Production of electricity,a. Gross carrying amount,dp471560,dp471560,stable
 41.00,0360,0020,36. D35.11 - Production of electricity,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470858,dp470858,stable
 41.00,0360,0030,36. D35.11 - Production of electricity,c. Of which environmentally sustainable (CCM),dp471121,dp471121,stable
 41.00,0360,0040,36. D35.11 - Production of electricity,d. Of which stage 2 exposures,dp471263,dp471263,stable
 41.00,0360,0050,36. D35.11 - Production of electricity,e. Of which non-performing exposures,dp471561,dp471561,stable
-41.00,0360,0060,36. D35.11 - Production of electricity,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472038,dp472038,stable
+41.00,0360,0060,36. D35.11 - Production of electricity,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472038,dp472038,stable
 41.00,0360,0070,36. D35.11 - Production of electricity,g. Of which Stage 2 exposures,dp471937,dp471937,stable
 41.00,0360,0080,36. D35.11 - Production of electricity,h. Of which non-performing exposures,dp472039,dp472039,stable
 41.00,0360,0090,36. D35.11 - Production of electricity,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472134,dp472134,stable
@@ -3165,12 +3165,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0360,0140,36. D35.11 - Production of electricity,n. > 10 year <= 20 years,dp471564,dp471564,stable
 41.00,0360,0150,36. D35.11 - Production of electricity,o. > 20 years,dp471565,dp471565,stable
 41.00,0360,0160,36. D35.11 - Production of electricity,p. Average weighted maturity,dp472300,dp472300,stable
-41.00,0370,0010,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,a. Gross carrying amount (Mln EUR),dp471566,dp471566,stable
+41.00,0370,0010,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,a. Gross carrying amount,dp471566,dp471566,stable
 41.00,0370,0020,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470859,dp470859,stable
 41.00,0370,0030,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,c. Of which environmentally sustainable (CCM),dp471122,dp471122,stable
 41.00,0370,0040,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,d. Of which stage 2 exposures,dp471264,dp471264,stable
 41.00,0370,0050,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,e. Of which non-performing exposures,dp471567,dp471567,stable
-41.00,0370,0060,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472040,dp472040,stable
+41.00,0370,0060,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472040,dp472040,stable
 41.00,0370,0070,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,g. Of which Stage 2 exposures,dp471938,dp471938,stable
 41.00,0370,0080,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,h. Of which non-performing exposures,dp472041,dp472041,stable
 41.00,0370,0090,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472135,dp472135,stable
@@ -3181,12 +3181,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0370,0140,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,n. > 10 year <= 20 years,dp471570,dp471570,stable
 41.00,0370,0150,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,o. > 20 years,dp471571,dp471571,stable
 41.00,0370,0160,37. D35.2 - Manufacture of gas; distribution of gaseous fuels through mains,p. Average weighted maturity,dp472301,dp472301,stable
-41.00,0380,0010,38. D35.3 - Steam and air conditioning supply,a. Gross carrying amount (Mln EUR),dp471572,dp471572,stable
+41.00,0380,0010,38. D35.3 - Steam and air conditioning supply,a. Gross carrying amount,dp471572,dp471572,stable
 41.00,0380,0020,38. D35.3 - Steam and air conditioning supply,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470860,dp470860,stable
 41.00,0380,0030,38. D35.3 - Steam and air conditioning supply,c. Of which environmentally sustainable (CCM),dp471123,dp471123,stable
 41.00,0380,0040,38. D35.3 - Steam and air conditioning supply,d. Of which stage 2 exposures,dp471265,dp471265,stable
 41.00,0380,0050,38. D35.3 - Steam and air conditioning supply,e. Of which non-performing exposures,dp471573,dp471573,stable
-41.00,0380,0060,38. D35.3 - Steam and air conditioning supply,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472042,dp472042,stable
+41.00,0380,0060,38. D35.3 - Steam and air conditioning supply,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472042,dp472042,stable
 41.00,0380,0070,38. D35.3 - Steam and air conditioning supply,g. Of which Stage 2 exposures,dp471939,dp471939,stable
 41.00,0380,0080,38. D35.3 - Steam and air conditioning supply,h. Of which non-performing exposures,dp472043,dp472043,stable
 41.00,0380,0090,38. D35.3 - Steam and air conditioning supply,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472136,dp472136,stable
@@ -3197,12 +3197,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0380,0140,38. D35.3 - Steam and air conditioning supply,n. > 10 year <= 20 years,dp471576,dp471576,stable
 41.00,0380,0150,38. D35.3 - Steam and air conditioning supply,o. > 20 years,dp471577,dp471577,stable
 41.00,0380,0160,38. D35.3 - Steam and air conditioning supply,p. Average weighted maturity,dp472302,dp472302,stable
-41.00,0390,0010,"39. E - Water supply; sewerage, waste management and remediation activities",a. Gross carrying amount (Mln EUR),dp471290,dp471290,stable
+41.00,0390,0010,"39. E - Water supply; sewerage, waste management and remediation activities",a. Gross carrying amount,dp471290,dp471290,stable
 41.00,0390,0020,"39. E - Water supply; sewerage, waste management and remediation activities",b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470813,dp470813,stable
 41.00,0390,0030,"39. E - Water supply; sewerage, waste management and remediation activities",c. Of which environmentally sustainable (CCM),dp471076,dp471076,stable
 41.00,0390,0040,"39. E - Water supply; sewerage, waste management and remediation activities",d. Of which stage 2 exposures,dp471218,dp471218,stable
 41.00,0390,0050,"39. E - Water supply; sewerage, waste management and remediation activities",e. Of which non-performing exposures,dp471291,dp471291,stable
-41.00,0390,0060,"39. E - Water supply; sewerage, waste management and remediation activities","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471948,dp471948,stable
+41.00,0390,0060,"39. E - Water supply; sewerage, waste management and remediation activities","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471948,dp471948,stable
 41.00,0390,0070,"39. E - Water supply; sewerage, waste management and remediation activities",g. Of which Stage 2 exposures,dp471892,dp471892,stable
 41.00,0390,0080,"39. E - Water supply; sewerage, waste management and remediation activities",h. Of which non-performing exposures,dp471949,dp471949,stable
 41.00,0390,0090,"39. E - Water supply; sewerage, waste management and remediation activities","i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472090,dp472090,stable
@@ -3213,12 +3213,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0390,0140,"39. E - Water supply; sewerage, waste management and remediation activities",n. > 10 year <= 20 years,dp471294,dp471294,stable
 41.00,0390,0150,"39. E - Water supply; sewerage, waste management and remediation activities",o. > 20 years,dp471295,dp471295,stable
 41.00,0390,0160,"39. E - Water supply; sewerage, waste management and remediation activities",p. Average weighted maturity,dp472255,dp472255,stable
-41.00,0400,0010,40. F - Construction,a. Gross carrying amount (Mln EUR),dp471296,dp471296,stable
+41.00,0400,0010,40. F - Construction,a. Gross carrying amount,dp471296,dp471296,stable
 41.00,0400,0020,40. F - Construction,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470814,dp470814,stable
 41.00,0400,0030,40. F - Construction,c. Of which environmentally sustainable (CCM),dp471077,dp471077,stable
 41.00,0400,0040,40. F - Construction,d. Of which stage 2 exposures,dp471219,dp471219,stable
 41.00,0400,0050,40. F - Construction,e. Of which non-performing exposures,dp471297,dp471297,stable
-41.00,0400,0060,40. F - Construction,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471950,dp471950,stable
+41.00,0400,0060,40. F - Construction,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471950,dp471950,stable
 41.00,0400,0070,40. F - Construction,g. Of which Stage 2 exposures,dp471893,dp471893,stable
 41.00,0400,0080,40. F - Construction,h. Of which non-performing exposures,dp471951,dp471951,stable
 41.00,0400,0090,40. F - Construction,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472091,dp472091,stable
@@ -3229,12 +3229,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0400,0140,40. F - Construction,n. > 10 year <= 20 years,dp471300,dp471300,stable
 41.00,0400,0150,40. F - Construction,o. > 20 years,dp471301,dp471301,stable
 41.00,0400,0160,40. F - Construction,p. Average weighted maturity,dp472256,dp472256,stable
-41.00,0410,0010,41. F.41 - Construction of buildings,a. Gross carrying amount (Mln EUR),dp471500,dp471500,stable
+41.00,0410,0010,41. F.41 - Construction of buildings,a. Gross carrying amount,dp471500,dp471500,stable
 41.00,0410,0020,41. F.41 - Construction of buildings,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470848,dp470848,stable
 41.00,0410,0030,41. F.41 - Construction of buildings,c. Of which environmentally sustainable (CCM),dp471111,dp471111,stable
 41.00,0410,0040,41. F.41 - Construction of buildings,d. Of which stage 2 exposures,dp471253,dp471253,stable
 41.00,0410,0050,41. F.41 - Construction of buildings,e. Of which non-performing exposures,dp471501,dp471501,stable
-41.00,0410,0060,41. F.41 - Construction of buildings,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472018,dp472018,stable
+41.00,0410,0060,41. F.41 - Construction of buildings,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472018,dp472018,stable
 41.00,0410,0070,41. F.41 - Construction of buildings,g. Of which Stage 2 exposures,dp471927,dp471927,stable
 41.00,0410,0080,41. F.41 - Construction of buildings,h. Of which non-performing exposures,dp472019,dp472019,stable
 41.00,0410,0090,41. F.41 - Construction of buildings,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472125,dp472125,stable
@@ -3245,12 +3245,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0410,0140,41. F.41 - Construction of buildings,n. > 10 year <= 20 years,dp471504,dp471504,stable
 41.00,0410,0150,41. F.41 - Construction of buildings,o. > 20 years,dp471505,dp471505,stable
 41.00,0410,0160,41. F.41 - Construction of buildings,p. Average weighted maturity,dp472290,dp472290,stable
-41.00,0420,0010,42. F.42 - Civil engineering,a. Gross carrying amount (Mln EUR),dp471506,dp471506,stable
+41.00,0420,0010,42. F.42 - Civil engineering,a. Gross carrying amount,dp471506,dp471506,stable
 41.00,0420,0020,42. F.42 - Civil engineering,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470849,dp470849,stable
 41.00,0420,0030,42. F.42 - Civil engineering,c. Of which environmentally sustainable (CCM),dp471112,dp471112,stable
 41.00,0420,0040,42. F.42 - Civil engineering,d. Of which stage 2 exposures,dp471254,dp471254,stable
 41.00,0420,0050,42. F.42 - Civil engineering,e. Of which non-performing exposures,dp471507,dp471507,stable
-41.00,0420,0060,42. F.42 - Civil engineering,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472020,dp472020,stable
+41.00,0420,0060,42. F.42 - Civil engineering,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472020,dp472020,stable
 41.00,0420,0070,42. F.42 - Civil engineering,g. Of which Stage 2 exposures,dp471928,dp471928,stable
 41.00,0420,0080,42. F.42 - Civil engineering,h. Of which non-performing exposures,dp472021,dp472021,stable
 41.00,0420,0090,42. F.42 - Civil engineering,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472126,dp472126,stable
@@ -3261,12 +3261,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0420,0140,42. F.42 - Civil engineering,n. > 10 year <= 20 years,dp471510,dp471510,stable
 41.00,0420,0150,42. F.42 - Civil engineering,o. > 20 years,dp471511,dp471511,stable
 41.00,0420,0160,42. F.42 - Civil engineering,p. Average weighted maturity,dp472291,dp472291,stable
-41.00,0430,0010,43. F.43 - Specialised construction activities,a. Gross carrying amount (Mln EUR),dp471512,dp471512,stable
+41.00,0430,0010,43. F.43 - Specialised construction activities,a. Gross carrying amount,dp471512,dp471512,stable
 41.00,0430,0020,43. F.43 - Specialised construction activities,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470850,dp470850,stable
 41.00,0430,0030,43. F.43 - Specialised construction activities,c. Of which environmentally sustainable (CCM),dp471113,dp471113,stable
 41.00,0430,0040,43. F.43 - Specialised construction activities,d. Of which stage 2 exposures,dp471255,dp471255,stable
 41.00,0430,0050,43. F.43 - Specialised construction activities,e. Of which non-performing exposures,dp471513,dp471513,stable
-41.00,0430,0060,43. F.43 - Specialised construction activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472022,dp472022,stable
+41.00,0430,0060,43. F.43 - Specialised construction activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472022,dp472022,stable
 41.00,0430,0070,43. F.43 - Specialised construction activities,g. Of which Stage 2 exposures,dp471929,dp471929,stable
 41.00,0430,0080,43. F.43 - Specialised construction activities,h. Of which non-performing exposures,dp472023,dp472023,stable
 41.00,0430,0090,43. F.43 - Specialised construction activities,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472127,dp472127,stable
@@ -3277,12 +3277,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0430,0140,43. F.43 - Specialised construction activities,n. > 10 year <= 20 years,dp471516,dp471516,stable
 41.00,0430,0150,43. F.43 - Specialised construction activities,o. > 20 years,dp471517,dp471517,stable
 41.00,0430,0160,43. F.43 - Specialised construction activities,p. Average weighted maturity,dp472292,dp472292,stable
-41.00,0440,0010,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,a. Gross carrying amount (Mln EUR),dp471302,dp471302,stable
+41.00,0440,0010,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,a. Gross carrying amount,dp471302,dp471302,stable
 41.00,0440,0020,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470815,dp470815,stable
 41.00,0440,0030,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,c. Of which environmentally sustainable (CCM),dp471078,dp471078,stable
 41.00,0440,0040,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,d. Of which stage 2 exposures,dp471220,dp471220,stable
 41.00,0440,0050,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,e. Of which non-performing exposures,dp471303,dp471303,stable
-41.00,0440,0060,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471952,dp471952,stable
+41.00,0440,0060,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471952,dp471952,stable
 41.00,0440,0070,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,g. Of which Stage 2 exposures,dp471894,dp471894,stable
 41.00,0440,0080,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,h. Of which non-performing exposures,dp471953,dp471953,stable
 41.00,0440,0090,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472092,dp472092,stable
@@ -3293,12 +3293,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0440,0140,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,n. > 10 year <= 20 years,dp471306,dp471306,stable
 41.00,0440,0150,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,o. > 20 years,dp471307,dp471307,stable
 41.00,0440,0160,44. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,p. Average weighted maturity,dp472257,dp472257,stable
-41.00,0450,0010,45. H - Transportation and storage,a. Gross carrying amount (Mln EUR),dp471308,dp471308,stable
+41.00,0450,0010,45. H - Transportation and storage,a. Gross carrying amount,dp471308,dp471308,stable
 41.00,0450,0020,45. H - Transportation and storage,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470816,dp470816,stable
 41.00,0450,0030,45. H - Transportation and storage,c. Of which environmentally sustainable (CCM),dp471079,dp471079,stable
 41.00,0450,0040,45. H - Transportation and storage,d. Of which stage 2 exposures,dp471221,dp471221,stable
 41.00,0450,0050,45. H - Transportation and storage,e. Of which non-performing exposures,dp471309,dp471309,stable
-41.00,0450,0060,45. H - Transportation and storage,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471954,dp471954,stable
+41.00,0450,0060,45. H - Transportation and storage,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471954,dp471954,stable
 41.00,0450,0070,45. H - Transportation and storage,g. Of which Stage 2 exposures,dp471895,dp471895,stable
 41.00,0450,0080,45. H - Transportation and storage,h. Of which non-performing exposures,dp471955,dp471955,stable
 41.00,0450,0090,45. H - Transportation and storage,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472093,dp472093,stable
@@ -3309,12 +3309,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0450,0140,45. H - Transportation and storage,n. > 10 year <= 20 years,dp471312,dp471312,stable
 41.00,0450,0150,45. H - Transportation and storage,o. > 20 years,dp471313,dp471313,stable
 41.00,0450,0160,45. H - Transportation and storage,p. Average weighted maturity,dp472258,dp472258,stable
-41.00,0460,0010,46. H.49 - Land transport and transport via pipelines,a. Gross carrying amount (Mln EUR),dp471518,dp471518,stable
+41.00,0460,0010,46. H.49 - Land transport and transport via pipelines,a. Gross carrying amount,dp471518,dp471518,stable
 41.00,0460,0020,46. H.49 - Land transport and transport via pipelines,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470851,dp470851,stable
 41.00,0460,0030,46. H.49 - Land transport and transport via pipelines,c. Of which environmentally sustainable (CCM),dp471114,dp471114,stable
 41.00,0460,0040,46. H.49 - Land transport and transport via pipelines,d. Of which stage 2 exposures,dp471256,dp471256,stable
 41.00,0460,0050,46. H.49 - Land transport and transport via pipelines,e. Of which non-performing exposures,dp471519,dp471519,stable
-41.00,0460,0060,46. H.49 - Land transport and transport via pipelines,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472024,dp472024,stable
+41.00,0460,0060,46. H.49 - Land transport and transport via pipelines,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472024,dp472024,stable
 41.00,0460,0070,46. H.49 - Land transport and transport via pipelines,g. Of which Stage 2 exposures,dp471930,dp471930,stable
 41.00,0460,0080,46. H.49 - Land transport and transport via pipelines,h. Of which non-performing exposures,dp472025,dp472025,stable
 41.00,0460,0090,46. H.49 - Land transport and transport via pipelines,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472128,dp472128,stable
@@ -3325,12 +3325,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0460,0140,46. H.49 - Land transport and transport via pipelines,n. > 10 year <= 20 years,dp471522,dp471522,stable
 41.00,0460,0150,46. H.49 - Land transport and transport via pipelines,o. > 20 years,dp471523,dp471523,stable
 41.00,0460,0160,46. H.49 - Land transport and transport via pipelines,p. Average weighted maturity,dp472293,dp472293,stable
-41.00,0470,0010,47. H.50 - Water transport,a. Gross carrying amount (Mln EUR),dp471524,dp471524,stable
+41.00,0470,0010,47. H.50 - Water transport,a. Gross carrying amount,dp471524,dp471524,stable
 41.00,0470,0020,47. H.50 - Water transport,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470852,dp470852,stable
 41.00,0470,0030,47. H.50 - Water transport,c. Of which environmentally sustainable (CCM),dp471115,dp471115,stable
 41.00,0470,0040,47. H.50 - Water transport,d. Of which stage 2 exposures,dp471257,dp471257,stable
 41.00,0470,0050,47. H.50 - Water transport,e. Of which non-performing exposures,dp471525,dp471525,stable
-41.00,0470,0060,47. H.50 - Water transport,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472026,dp472026,stable
+41.00,0470,0060,47. H.50 - Water transport,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472026,dp472026,stable
 41.00,0470,0070,47. H.50 - Water transport,g. Of which Stage 2 exposures,dp471931,dp471931,stable
 41.00,0470,0080,47. H.50 - Water transport,h. Of which non-performing exposures,dp472027,dp472027,stable
 41.00,0470,0090,47. H.50 - Water transport,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472129,dp472129,stable
@@ -3341,12 +3341,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0470,0140,47. H.50 - Water transport,n. > 10 year <= 20 years,dp471528,dp471528,stable
 41.00,0470,0150,47. H.50 - Water transport,o. > 20 years,dp471529,dp471529,stable
 41.00,0470,0160,47. H.50 - Water transport,p. Average weighted maturity,dp472294,dp472294,stable
-41.00,0480,0010,48. H.51 - Air transport,a. Gross carrying amount (Mln EUR),dp471530,dp471530,stable
+41.00,0480,0010,48. H.51 - Air transport,a. Gross carrying amount,dp471530,dp471530,stable
 41.00,0480,0020,48. H.51 - Air transport,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470853,dp470853,stable
 41.00,0480,0030,48. H.51 - Air transport,c. Of which environmentally sustainable (CCM),dp471116,dp471116,stable
 41.00,0480,0040,48. H.51 - Air transport,d. Of which stage 2 exposures,dp471258,dp471258,stable
 41.00,0480,0050,48. H.51 - Air transport,e. Of which non-performing exposures,dp471531,dp471531,stable
-41.00,0480,0060,48. H.51 - Air transport,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472028,dp472028,stable
+41.00,0480,0060,48. H.51 - Air transport,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472028,dp472028,stable
 41.00,0480,0070,48. H.51 - Air transport,g. Of which Stage 2 exposures,dp471932,dp471932,stable
 41.00,0480,0080,48. H.51 - Air transport,h. Of which non-performing exposures,dp472029,dp472029,stable
 41.00,0480,0090,48. H.51 - Air transport,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472130,dp472130,stable
@@ -3357,12 +3357,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0480,0140,48. H.51 - Air transport,n. > 10 year <= 20 years,dp471534,dp471534,stable
 41.00,0480,0150,48. H.51 - Air transport,o. > 20 years,dp471535,dp471535,stable
 41.00,0480,0160,48. H.51 - Air transport,p. Average weighted maturity,dp472295,dp472295,stable
-41.00,0490,0010,49. H.52 - Warehousing and support activities for transportation,a. Gross carrying amount (Mln EUR),dp471536,dp471536,stable
+41.00,0490,0010,49. H.52 - Warehousing and support activities for transportation,a. Gross carrying amount,dp471536,dp471536,stable
 41.00,0490,0020,49. H.52 - Warehousing and support activities for transportation,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470854,dp470854,stable
 41.00,0490,0030,49. H.52 - Warehousing and support activities for transportation,c. Of which environmentally sustainable (CCM),dp471117,dp471117,stable
 41.00,0490,0040,49. H.52 - Warehousing and support activities for transportation,d. Of which stage 2 exposures,dp471259,dp471259,stable
 41.00,0490,0050,49. H.52 - Warehousing and support activities for transportation,e. Of which non-performing exposures,dp471537,dp471537,stable
-41.00,0490,0060,49. H.52 - Warehousing and support activities for transportation,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472030,dp472030,stable
+41.00,0490,0060,49. H.52 - Warehousing and support activities for transportation,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472030,dp472030,stable
 41.00,0490,0070,49. H.52 - Warehousing and support activities for transportation,g. Of which Stage 2 exposures,dp471933,dp471933,stable
 41.00,0490,0080,49. H.52 - Warehousing and support activities for transportation,h. Of which non-performing exposures,dp472031,dp472031,stable
 41.00,0490,0090,49. H.52 - Warehousing and support activities for transportation,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472131,dp472131,stable
@@ -3373,12 +3373,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0490,0140,49. H.52 - Warehousing and support activities for transportation,n. > 10 year <= 20 years,dp471540,dp471540,stable
 41.00,0490,0150,49. H.52 - Warehousing and support activities for transportation,o. > 20 years,dp471541,dp471541,stable
 41.00,0490,0160,49. H.52 - Warehousing and support activities for transportation,p. Average weighted maturity,dp472296,dp472296,stable
-41.00,0500,0010,50. H.53 - Postal and courier activities,a. Gross carrying amount (Mln EUR),dp471542,dp471542,stable
+41.00,0500,0010,50. H.53 - Postal and courier activities,a. Gross carrying amount,dp471542,dp471542,stable
 41.00,0500,0020,50. H.53 - Postal and courier activities,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470855,dp470855,stable
 41.00,0500,0030,50. H.53 - Postal and courier activities,c. Of which environmentally sustainable (CCM),dp471118,dp471118,stable
 41.00,0500,0040,50. H.53 - Postal and courier activities,d. Of which stage 2 exposures,dp471260,dp471260,stable
 41.00,0500,0050,50. H.53 - Postal and courier activities,e. Of which non-performing exposures,dp471543,dp471543,stable
-41.00,0500,0060,50. H.53 - Postal and courier activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472032,dp472032,stable
+41.00,0500,0060,50. H.53 - Postal and courier activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472032,dp472032,stable
 41.00,0500,0070,50. H.53 - Postal and courier activities,g. Of which Stage 2 exposures,dp471934,dp471934,stable
 41.00,0500,0080,50. H.53 - Postal and courier activities,h. Of which non-performing exposures,dp472033,dp472033,stable
 41.00,0500,0090,50. H.53 - Postal and courier activities,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472132,dp472132,stable
@@ -3389,12 +3389,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0500,0140,50. H.53 - Postal and courier activities,n. > 10 year <= 20 years,dp471546,dp471546,stable
 41.00,0500,0150,50. H.53 - Postal and courier activities,o. > 20 years,dp471547,dp471547,stable
 41.00,0500,0160,50. H.53 - Postal and courier activities,p. Average weighted maturity,dp472297,dp472297,stable
-41.00,0510,0010,51. I - Accommodation and food service activities,a. Gross carrying amount (Mln EUR),dp471314,dp471314,stable
+41.00,0510,0010,51. I - Accommodation and food service activities,a. Gross carrying amount,dp471314,dp471314,stable
 41.00,0510,0020,51. I - Accommodation and food service activities,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470817,dp470817,stable
 41.00,0510,0030,51. I - Accommodation and food service activities,c. Of which environmentally sustainable (CCM),dp471080,dp471080,stable
 41.00,0510,0040,51. I - Accommodation and food service activities,d. Of which stage 2 exposures,dp471222,dp471222,stable
 41.00,0510,0050,51. I - Accommodation and food service activities,e. Of which non-performing exposures,dp471315,dp471315,stable
-41.00,0510,0060,51. I - Accommodation and food service activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471956,dp471956,stable
+41.00,0510,0060,51. I - Accommodation and food service activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471956,dp471956,stable
 41.00,0510,0070,51. I - Accommodation and food service activities,g. Of which Stage 2 exposures,dp471896,dp471896,stable
 41.00,0510,0080,51. I - Accommodation and food service activities,h. Of which non-performing exposures,dp471957,dp471957,stable
 41.00,0510,0090,51. I - Accommodation and food service activities,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472094,dp472094,stable
@@ -3405,12 +3405,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0510,0140,51. I - Accommodation and food service activities,n. > 10 year <= 20 years,dp471318,dp471318,stable
 41.00,0510,0150,51. I - Accommodation and food service activities,o. > 20 years,dp471319,dp471319,stable
 41.00,0510,0160,51. I - Accommodation and food service activities,p. Average weighted maturity,dp472259,dp472259,stable
-41.00,0520,0010,52. L - Real estate activities,a. Gross carrying amount (Mln EUR),dp471320,dp471320,stable
+41.00,0520,0010,52. L - Real estate activities,a. Gross carrying amount,dp471320,dp471320,stable
 41.00,0520,0020,52. L - Real estate activities,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470818,dp470818,stable
 41.00,0520,0030,52. L - Real estate activities,c. Of which environmentally sustainable (CCM),dp471081,dp471081,stable
 41.00,0520,0040,52. L - Real estate activities,d. Of which stage 2 exposures,dp471223,dp471223,stable
 41.00,0520,0050,52. L - Real estate activities,e. Of which non-performing exposures,dp471321,dp471321,stable
-41.00,0520,0060,52. L - Real estate activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp471958,dp471958,stable
+41.00,0520,0060,52. L - Real estate activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp471958,dp471958,stable
 41.00,0520,0070,52. L - Real estate activities,g. Of which Stage 2 exposures,dp471897,dp471897,stable
 41.00,0520,0080,52. L - Real estate activities,h. Of which non-performing exposures,dp471959,dp471959,stable
 41.00,0520,0090,52. L - Real estate activities,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472095,dp472095,stable
@@ -3421,12 +3421,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0520,0140,52. L - Real estate activities,n. > 10 year <= 20 years,dp471324,dp471324,stable
 41.00,0520,0150,52. L - Real estate activities,o. > 20 years,dp471325,dp471325,stable
 41.00,0520,0160,52. L - Real estate activities,p. Average weighted maturity,dp472260,dp472260,stable
-41.00,0530,0010,53. Exposures towards sectors other than those that highly contribute to climate change*,a. Gross carrying amount (Mln EUR),dp470678,dp470678,stable
+41.00,0530,0010,53. Exposures towards sectors other than those that highly contribute to climate change*,a. Gross carrying amount,dp470678,dp470678,stable
 41.00,0530,0020,53. Exposures towards sectors other than those that highly contribute to climate change*,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470675,dp470675,stable
 41.00,0530,0030,53. Exposures towards sectors other than those that highly contribute to climate change*,c. Of which environmentally sustainable (CCM),dp470676,dp470676,stable
 41.00,0530,0040,53. Exposures towards sectors other than those that highly contribute to climate change*,d. Of which stage 2 exposures,dp470677,dp470677,stable
 41.00,0530,0050,53. Exposures towards sectors other than those that highly contribute to climate change*,e. Of which non-performing exposures,dp470679,dp470679,stable
-41.00,0530,0060,53. Exposures towards sectors other than those that highly contribute to climate change*,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp470685,dp470685,stable
+41.00,0530,0060,53. Exposures towards sectors other than those that highly contribute to climate change*,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp470685,dp470685,stable
 41.00,0530,0070,53. Exposures towards sectors other than those that highly contribute to climate change*,g. Of which Stage 2 exposures,dp470684,dp470684,stable
 41.00,0530,0080,53. Exposures towards sectors other than those that highly contribute to climate change*,h. Of which non-performing exposures,dp470686,dp470686,stable
 41.00,0530,0120,53. Exposures towards sectors other than those that highly contribute to climate change*,l. <= 5 years,dp470681,dp470681,stable
@@ -3434,12 +3434,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0530,0140,53. Exposures towards sectors other than those that highly contribute to climate change*,n. > 10 year <= 20 years,dp470682,dp470682,stable
 41.00,0530,0150,53. Exposures towards sectors other than those that highly contribute to climate change*,o. > 20 years,dp470683,dp470683,stable
 41.00,0530,0160,53. Exposures towards sectors other than those that highly contribute to climate change*,p. Average weighted maturity,dp470687,dp470687,stable
-41.00,0540,0010,54. K - Financial and insurance activities,a. Gross carrying amount (Mln EUR),dp471829,dp471829,stable
+41.00,0540,0010,54. K - Financial and insurance activities,a. Gross carrying amount,dp471829,dp471829,stable
 41.00,0540,0020,54. K - Financial and insurance activities,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp471823,dp471823,stable
 41.00,0540,0030,54. K - Financial and insurance activities,c. Of which environmentally sustainable (CCM),dp471825,dp471825,stable
 41.00,0540,0040,54. K - Financial and insurance activities,d. Of which stage 2 exposures,dp471826,dp471826,stable
 41.00,0540,0050,54. K - Financial and insurance activities,e. Of which non-performing exposures,dp471830,dp471830,stable
-41.00,0540,0060,54. K - Financial and insurance activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472047,dp472047,stable
+41.00,0540,0060,54. K - Financial and insurance activities,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472047,dp472047,stable
 41.00,0540,0070,54. K - Financial and insurance activities,g. Of which Stage 2 exposures,dp472044,dp472044,stable
 41.00,0540,0080,54. K - Financial and insurance activities,h. Of which non-performing exposures,dp472048,dp472048,stable
 41.00,0540,0120,54. K - Financial and insurance activities,l. <= 5 years,dp471832,dp471832,stable
@@ -3447,12 +3447,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0540,0140,54. K - Financial and insurance activities,n. > 10 year <= 20 years,dp471833,dp471833,stable
 41.00,0540,0150,54. K - Financial and insurance activities,o. > 20 years,dp471834,dp471834,stable
 41.00,0540,0160,54. K - Financial and insurance activities,p. Average weighted maturity,dp472304,dp472304,stable
-41.00,0550,0010,"55. Exposures to other sectors (NACE codes J, M - U)",a. Gross carrying amount (Mln EUR),dp471548,dp471548,stable
+41.00,0550,0010,"55. Exposures to other sectors (NACE codes J, M - U)",a. Gross carrying amount,dp471548,dp471548,stable
 41.00,0550,0020,"55. Exposures to other sectors (NACE codes J, M - U)",b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp470856,dp470856,stable
 41.00,0550,0030,"55. Exposures to other sectors (NACE codes J, M - U)",c. Of which environmentally sustainable (CCM),dp471119,dp471119,stable
 41.00,0550,0040,"55. Exposures to other sectors (NACE codes J, M - U)",d. Of which stage 2 exposures,dp471261,dp471261,stable
 41.00,0550,0050,"55. Exposures to other sectors (NACE codes J, M - U)",e. Of which non-performing exposures,dp471549,dp471549,stable
-41.00,0550,0060,"55. Exposures to other sectors (NACE codes J, M - U)","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472034,dp472034,stable
+41.00,0550,0060,"55. Exposures to other sectors (NACE codes J, M - U)","f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472034,dp472034,stable
 41.00,0550,0070,"55. Exposures to other sectors (NACE codes J, M - U)",g. Of which Stage 2 exposures,dp471935,dp471935,stable
 41.00,0550,0080,"55. Exposures to other sectors (NACE codes J, M - U)",h. Of which non-performing exposures,dp472035,dp472035,stable
 41.00,0550,0120,"55. Exposures to other sectors (NACE codes J, M - U)",l. <= 5 years,dp471551,dp471551,stable
@@ -3460,12 +3460,12 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0550,0140,"55. Exposures to other sectors (NACE codes J, M - U)",n. > 10 year <= 20 years,dp471552,dp471552,stable
 41.00,0550,0150,"55. Exposures to other sectors (NACE codes J, M - U)",o. > 20 years,dp471553,dp471553,stable
 41.00,0550,0160,"55. Exposures to other sectors (NACE codes J, M - U)",p. Average weighted maturity,dp472298,dp472298,stable
-41.00,0560,0010,56. TOTAL,a. Gross carrying amount (Mln EUR),dp471828,dp471828,stable
+41.00,0560,0010,56. TOTAL,a. Gross carrying amount,dp471828,dp471828,stable
 41.00,0560,0020,56. TOTAL,b. Of which exposures towards companies excluded from EU Paris-aligned Benchmarks in accordance with Article 12(1) points (d) to (g)  and Article 12(2) of Regulation (EU) 2020/1818,dp471822,dp471822,stable
 41.00,0560,0030,56. TOTAL,c. Of which environmentally sustainable (CCM),dp471824,dp471824,stable
 41.00,0560,0040,56. TOTAL,d. Of which stage 2 exposures,dp471827,dp471827,stable
 41.00,0560,0050,56. TOTAL,e. Of which non-performing exposures,dp471835,dp471835,stable
-41.00,0560,0060,56. TOTAL,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions (Mln EUR)",dp472046,dp472046,stable
+41.00,0560,0060,56. TOTAL,"f. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472046,dp472046,stable
 41.00,0560,0070,56. TOTAL,g. Of which Stage 2 exposures,dp472045,dp472045,stable
 41.00,0560,0080,56. TOTAL,h. Of which non-performing exposures,dp472049,dp472049,stable
 41.00,0560,0090,56. TOTAL,"i. GHG financed emissions (scope 1, scope 2 and scope 3 emissions of the counterparty) (in tons of CO2 equivalent)",dp472137,dp472137,stable
@@ -3476,7 +3476,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 41.00,0560,0140,56. TOTAL,n. > 10 year <= 20 years,dp471838,dp471838,stable
 41.00,0560,0150,56. TOTAL,o. > 20 years,dp471839,dp471839,stable
 41.00,0560,0160,56. TOTAL,p. Average weighted maturity,dp472303,dp472303,stable
-42.00.A,0010,0010,1. Total EU area,a. Total gross carrying amount (in MEUR),dp475640,dp475640,stable
+42.00.A,0010,0010,1. Total EU area,a. Total gross carrying amount,dp475640,dp475640,stable
 42.00.A,0010,0020,1. Total EU area,b. 0; <= 100,dp475612,dp475612,stable
 42.00.A,0010,0030,1. Total EU area,c. > 100; <= 200,dp475614,dp475614,stable
 42.00.A,0010,0040,1. Total EU area,d. > 200; <= 300,dp475616,dp475616,stable
@@ -3491,7 +3491,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 42.00.A,0010,0130,1. Total EU area,m. F,dp475634,dp475634,stable
 42.00.A,0010,0140,1. Total EU area,n. G,dp475636,dp475636,stable
 42.00.A,0010,0150,1. Total EU area,o. Without EPC label of collateral,dp475638,dp475638,stable
-42.00.A,0020,0010,2. Of which Loans collateralised by commercial immovable property,a. Total gross carrying amount (in MEUR),dp475411,dp475411,stable
+42.00.A,0020,0010,2. Of which Loans collateralised by commercial immovable property,a. Total gross carrying amount,dp475411,dp475411,stable
 42.00.A,0020,0020,2. Of which Loans collateralised by commercial immovable property,b. 0; <= 100,dp475339,dp475339,stable
 42.00.A,0020,0030,2. Of which Loans collateralised by commercial immovable property,c. > 100; <= 200,dp475345,dp475345,stable
 42.00.A,0020,0040,2. Of which Loans collateralised by commercial immovable property,d. > 200; <= 300,dp475351,dp475351,stable
@@ -3506,7 +3506,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 42.00.A,0020,0130,2. Of which Loans collateralised by commercial immovable property,m. F,dp475397,dp475397,stable
 42.00.A,0020,0140,2. Of which Loans collateralised by commercial immovable property,n. G,dp475401,dp475401,stable
 42.00.A,0020,0150,2. Of which Loans collateralised by commercial immovable property,o. Without EPC label of collateral,dp475405,dp475405,stable
-42.00.A,0030,0010,3. Of which Loans collateralised by residential immovable property,a. Total gross carrying amount (in MEUR),dp475413,dp475413,stable
+42.00.A,0030,0010,3. Of which Loans collateralised by residential immovable property,a. Total gross carrying amount,dp475413,dp475413,stable
 42.00.A,0030,0020,3. Of which Loans collateralised by residential immovable property,b. 0; <= 100,dp475341,dp475341,stable
 42.00.A,0030,0030,3. Of which Loans collateralised by residential immovable property,c. > 100; <= 200,dp475347,dp475347,stable
 42.00.A,0030,0040,3. Of which Loans collateralised by residential immovable property,d. > 200; <= 300,dp475353,dp475353,stable
@@ -3521,7 +3521,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 42.00.A,0030,0130,3. Of which Loans collateralised by residential immovable property,m. F,dp475399,dp475399,stable
 42.00.A,0030,0140,3. Of which Loans collateralised by residential immovable property,n. G,dp475403,dp475403,stable
 42.00.A,0030,0150,3. Of which Loans collateralised by residential immovable property,o. Without EPC label of collateral,dp475407,dp475407,stable
-42.00.A,0040,0010,4. Of which Collateral obtained by taking possession: residential and commercial immovable properties,a. Total gross carrying amount (in MEUR),dp475535,dp475535,stable
+42.00.A,0040,0010,4. Of which Collateral obtained by taking possession: residential and commercial immovable properties,a. Total gross carrying amount,dp475535,dp475535,stable
 42.00.A,0040,0020,4. Of which Collateral obtained by taking possession: residential and commercial immovable properties,b. 0; <= 100,dp475507,dp475507,stable
 42.00.A,0040,0030,4. Of which Collateral obtained by taking possession: residential and commercial immovable properties,c. > 100; <= 200,dp475509,dp475509,stable
 42.00.A,0040,0040,4. Of which Collateral obtained by taking possession: residential and commercial immovable properties,d. > 200; <= 300,dp475511,dp475511,stable
@@ -3536,7 +3536,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 42.00.A,0040,0130,4. Of which Collateral obtained by taking possession: residential and commercial immovable properties,m. F,dp475529,dp475529,stable
 42.00.A,0040,0140,4. Of which Collateral obtained by taking possession: residential and commercial immovable properties,n. G,dp475531,dp475531,stable
 42.00.A,0040,0150,4. Of which Collateral obtained by taking possession: residential and commercial immovable properties,o. Without EPC label of collateral,dp475533,dp475533,stable
-42.00.A,0050,0010,5. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,a. Total gross carrying amount (in MEUR),dp475415,dp475415,stable
+42.00.A,0050,0010,5. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,a. Total gross carrying amount,dp475415,dp475415,stable
 42.00.A,0050,0020,5. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,b. 0; <= 100,dp475343,dp475343,stable
 42.00.A,0050,0030,5. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,c. > 100; <= 200,dp475349,dp475349,stable
 42.00.A,0050,0040,5. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,d. > 200; <= 300,dp475355,dp475355,stable
@@ -3544,7 +3544,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 42.00.A,0050,0060,5. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,f. > 400; <= 500,dp475367,dp475367,stable
 42.00.A,0050,0070,5. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,g. > 500,dp475373,dp475373,stable
 42.00.A,0050,0150,5. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,o. Without EPC label of collateral,dp475409,dp475409,stable
-42.00.A,0060,0010,6. Total non-EU area,a. Total gross carrying amount (in MEUR),dp475641,dp475641,stable
+42.00.A,0060,0010,6. Total non-EU area,a. Total gross carrying amount,dp475641,dp475641,stable
 42.00.A,0060,0020,6. Total non-EU area,b. 0; <= 100,dp475613,dp475613,stable
 42.00.A,0060,0030,6. Total non-EU area,c. > 100; <= 200,dp475615,dp475615,stable
 42.00.A,0060,0040,6. Total non-EU area,d. > 200; <= 300,dp475617,dp475617,stable
@@ -3559,7 +3559,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 42.00.A,0060,0130,6. Total non-EU area,m. F,dp475635,dp475635,stable
 42.00.A,0060,0140,6. Total non-EU area,n. G,dp475637,dp475637,stable
 42.00.A,0060,0150,6. Total non-EU area,o. Without EPC label of collateral,dp475639,dp475639,stable
-42.00.A,0070,0010,7. Of which Loans collateralised by commercial immovable property,a. Total gross carrying amount (in MEUR),dp475412,dp475412,stable
+42.00.A,0070,0010,7. Of which Loans collateralised by commercial immovable property,a. Total gross carrying amount,dp475412,dp475412,stable
 42.00.A,0070,0020,7. Of which Loans collateralised by commercial immovable property,b. 0; <= 100,dp475340,dp475340,stable
 42.00.A,0070,0030,7. Of which Loans collateralised by commercial immovable property,c. > 100; <= 200,dp475346,dp475346,stable
 42.00.A,0070,0040,7. Of which Loans collateralised by commercial immovable property,d. > 200; <= 300,dp475352,dp475352,stable
@@ -3574,7 +3574,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 42.00.A,0070,0130,7. Of which Loans collateralised by commercial immovable property,m. F,dp475398,dp475398,stable
 42.00.A,0070,0140,7. Of which Loans collateralised by commercial immovable property,n. G,dp475402,dp475402,stable
 42.00.A,0070,0150,7. Of which Loans collateralised by commercial immovable property,o. Without EPC label of collateral,dp475406,dp475406,stable
-42.00.A,0080,0010,8. Of which Loans collateralised by residential immovable property,a. Total gross carrying amount (in MEUR),dp475414,dp475414,stable
+42.00.A,0080,0010,8. Of which Loans collateralised by residential immovable property,a. Total gross carrying amount,dp475414,dp475414,stable
 42.00.A,0080,0020,8. Of which Loans collateralised by residential immovable property,b. 0; <= 100,dp475342,dp475342,stable
 42.00.A,0080,0030,8. Of which Loans collateralised by residential immovable property,c. > 100; <= 200,dp475348,dp475348,stable
 42.00.A,0080,0040,8. Of which Loans collateralised by residential immovable property,d. > 200; <= 300,dp475354,dp475354,stable
@@ -3589,7 +3589,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 42.00.A,0080,0130,8. Of which Loans collateralised by residential immovable property,m. F,dp475400,dp475400,stable
 42.00.A,0080,0140,8. Of which Loans collateralised by residential immovable property,n. G,dp475404,dp475404,stable
 42.00.A,0080,0150,8. Of which Loans collateralised by residential immovable property,o. Without EPC label of collateral,dp475408,dp475408,stable
-42.00.A,0090,0010,9. Of which Collateral obtained by taking possession: residential and commercial immovable properties,a. Total gross carrying amount (in MEUR),dp475536,dp475536,stable
+42.00.A,0090,0010,9. Of which Collateral obtained by taking possession: residential and commercial immovable properties,a. Total gross carrying amount,dp475536,dp475536,stable
 42.00.A,0090,0020,9. Of which Collateral obtained by taking possession: residential and commercial immovable properties,b. 0; <= 100,dp475508,dp475508,stable
 42.00.A,0090,0030,9. Of which Collateral obtained by taking possession: residential and commercial immovable properties,c. > 100; <= 200,dp475510,dp475510,stable
 42.00.A,0090,0040,9. Of which Collateral obtained by taking possession: residential and commercial immovable properties,d. > 200; <= 300,dp475512,dp475512,stable
@@ -3604,7 +3604,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 42.00.A,0090,0130,9. Of which Collateral obtained by taking possession: residential and commercial immovable properties,m. F,dp475530,dp475530,stable
 42.00.A,0090,0140,9. Of which Collateral obtained by taking possession: residential and commercial immovable properties,n. G,dp475532,dp475532,stable
 42.00.A,0090,0150,9. Of which Collateral obtained by taking possession: residential and commercial immovable properties,o. Without EPC label of collateral,dp475534,dp475534,stable
-42.00.A,0100,0010,10. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,a. Total gross carrying amount (in MEUR),dp475416,dp475416,stable
+42.00.A,0100,0010,10. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,a. Total gross carrying amount,dp475416,dp475416,stable
 42.00.A,0100,0020,10. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,b. 0; <= 100,dp475344,dp475344,stable
 42.00.A,0100,0030,10. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,c. > 100; <= 200,dp475350,dp475350,stable
 42.00.A,0100,0040,10. Of which Level of energy efficiency (EP score in kWh/m² of collateral) estimated,d. > 200; <= 300,dp475356,dp475356,stable
@@ -3627,7 +3627,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 44.00,0010,0030,1. Counterparty,c. Of which environmentally sustainable (CCM),dp471840,dp471840,stable
 44.00,0010,0040,1. Counterparty,d. Weighted average maturity,dp475742,dp475742,stable
 44.00,0010,0050,1. Counterparty,e. Number of top 20 polluting firms included,dp475713,dp475713,stable
-45.00.A,0010,0010,"1. A - Agriculture, forestry and fishing",b. Gross carrying amount (Mln EUR),dp471133,dp471133,stable
+45.00.A,0010,0010,"1. A - Agriculture, forestry and fishing",b. Gross carrying amount,dp471133,dp471133,stable
 45.00.A,0010,0020,"1. A - Agriculture, forestry and fishing",c. <= 5 years,dp471136,dp471136,stable
 45.00.A,0010,0030,"1. A - Agriculture, forestry and fishing",d. > 5 year <= 10 years,dp471135,dp471135,stable
 45.00.A,0010,0040,"1. A - Agriculture, forestry and fishing",e. > 10 year <= 20 years,dp471137,dp471137,stable
@@ -3641,7 +3641,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0010,0120,"1. A - Agriculture, forestry and fishing","m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472060,dp472060,stable
 45.00.A,0010,0130,"1. A - Agriculture, forestry and fishing",n. Of which Stage 2 exposures,dp472050,dp472050,stable
 45.00.A,0010,0140,"1. A - Agriculture, forestry and fishing",o. Of which non-performing exposures,dp472059,dp472059,stable
-45.00.A,0020,0010,2. B - Mining and quarrying,b. Gross carrying amount (Mln EUR),dp471142,dp471142,stable
+45.00.A,0020,0010,2. B - Mining and quarrying,b. Gross carrying amount,dp471142,dp471142,stable
 45.00.A,0020,0020,2. B - Mining and quarrying,c. <= 5 years,dp471145,dp471145,stable
 45.00.A,0020,0030,2. B - Mining and quarrying,d. > 5 year <= 10 years,dp471144,dp471144,stable
 45.00.A,0020,0040,2. B - Mining and quarrying,e. > 10 year <= 20 years,dp471146,dp471146,stable
@@ -3655,7 +3655,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0020,0120,2. B - Mining and quarrying,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472062,dp472062,stable
 45.00.A,0020,0130,2. B - Mining and quarrying,n. Of which Stage 2 exposures,dp472051,dp472051,stable
 45.00.A,0020,0140,2. B - Mining and quarrying,o. Of which non-performing exposures,dp472061,dp472061,stable
-45.00.A,0030,0010,3. C - Manufacturing,b. Gross carrying amount (Mln EUR),dp471151,dp471151,stable
+45.00.A,0030,0010,3. C - Manufacturing,b. Gross carrying amount,dp471151,dp471151,stable
 45.00.A,0030,0020,3. C - Manufacturing,c. <= 5 years,dp471154,dp471154,stable
 45.00.A,0030,0030,3. C - Manufacturing,d. > 5 year <= 10 years,dp471153,dp471153,stable
 45.00.A,0030,0040,3. C - Manufacturing,e. > 10 year <= 20 years,dp471155,dp471155,stable
@@ -3669,7 +3669,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0030,0120,3. C - Manufacturing,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472064,dp472064,stable
 45.00.A,0030,0130,3. C - Manufacturing,n. Of which Stage 2 exposures,dp472052,dp472052,stable
 45.00.A,0030,0140,3. C - Manufacturing,o. Of which non-performing exposures,dp472063,dp472063,stable
-45.00.A,0040,0010,"4. D - Electricity, gas, steam and air conditioning supply",b. Gross carrying amount (Mln EUR),dp471160,dp471160,stable
+45.00.A,0040,0010,"4. D - Electricity, gas, steam and air conditioning supply",b. Gross carrying amount,dp471160,dp471160,stable
 45.00.A,0040,0020,"4. D - Electricity, gas, steam and air conditioning supply",c. <= 5 years,dp471163,dp471163,stable
 45.00.A,0040,0030,"4. D - Electricity, gas, steam and air conditioning supply",d. > 5 year <= 10 years,dp471162,dp471162,stable
 45.00.A,0040,0040,"4. D - Electricity, gas, steam and air conditioning supply",e. > 10 year <= 20 years,dp471164,dp471164,stable
@@ -3683,7 +3683,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0040,0120,"4. D - Electricity, gas, steam and air conditioning supply","m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472066,dp472066,stable
 45.00.A,0040,0130,"4. D - Electricity, gas, steam and air conditioning supply",n. Of which Stage 2 exposures,dp472053,dp472053,stable
 45.00.A,0040,0140,"4. D - Electricity, gas, steam and air conditioning supply",o. Of which non-performing exposures,dp472065,dp472065,stable
-45.00.A,0050,0010,"5. E - Water supply; sewerage, waste management and remediation activities",b. Gross carrying amount (Mln EUR),dp471169,dp471169,stable
+45.00.A,0050,0010,"5. E - Water supply; sewerage, waste management and remediation activities",b. Gross carrying amount,dp471169,dp471169,stable
 45.00.A,0050,0020,"5. E - Water supply; sewerage, waste management and remediation activities",c. <= 5 years,dp471172,dp471172,stable
 45.00.A,0050,0030,"5. E - Water supply; sewerage, waste management and remediation activities",d. > 5 year <= 10 years,dp471171,dp471171,stable
 45.00.A,0050,0040,"5. E - Water supply; sewerage, waste management and remediation activities",e. > 10 year <= 20 years,dp471173,dp471173,stable
@@ -3697,7 +3697,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0050,0120,"5. E - Water supply; sewerage, waste management and remediation activities","m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472068,dp472068,stable
 45.00.A,0050,0130,"5. E - Water supply; sewerage, waste management and remediation activities",n. Of which Stage 2 exposures,dp472054,dp472054,stable
 45.00.A,0050,0140,"5. E - Water supply; sewerage, waste management and remediation activities",o. Of which non-performing exposures,dp472067,dp472067,stable
-45.00.A,0060,0010,6. F - Construction,b. Gross carrying amount (Mln EUR),dp471178,dp471178,stable
+45.00.A,0060,0010,6. F - Construction,b. Gross carrying amount,dp471178,dp471178,stable
 45.00.A,0060,0020,6. F - Construction,c. <= 5 years,dp471181,dp471181,stable
 45.00.A,0060,0030,6. F - Construction,d. > 5 year <= 10 years,dp471180,dp471180,stable
 45.00.A,0060,0040,6. F - Construction,e. > 10 year <= 20 years,dp471182,dp471182,stable
@@ -3711,7 +3711,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0060,0120,6. F - Construction,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472070,dp472070,stable
 45.00.A,0060,0130,6. F - Construction,n. Of which Stage 2 exposures,dp472055,dp472055,stable
 45.00.A,0060,0140,6. F - Construction,o. Of which non-performing exposures,dp472069,dp472069,stable
-45.00.A,0070,0010,7. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,b. Gross carrying amount (Mln EUR),dp471187,dp471187,stable
+45.00.A,0070,0010,7. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,b. Gross carrying amount,dp471187,dp471187,stable
 45.00.A,0070,0020,7. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,c. <= 5 years,dp471190,dp471190,stable
 45.00.A,0070,0030,7. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,d. > 5 year <= 10 years,dp471189,dp471189,stable
 45.00.A,0070,0040,7. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,e. > 10 year <= 20 years,dp471191,dp471191,stable
@@ -3725,7 +3725,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0070,0120,7. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472072,dp472072,stable
 45.00.A,0070,0130,7. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,n. Of which Stage 2 exposures,dp472056,dp472056,stable
 45.00.A,0070,0140,7. G - Wholesale and retail trade; repair of motor vehicles and motorcycles,o. Of which non-performing exposures,dp472071,dp472071,stable
-45.00.A,0080,0010,8. H - Transportation and storage,b. Gross carrying amount (Mln EUR),dp471196,dp471196,stable
+45.00.A,0080,0010,8. H - Transportation and storage,b. Gross carrying amount,dp471196,dp471196,stable
 45.00.A,0080,0020,8. H - Transportation and storage,c. <= 5 years,dp471199,dp471199,stable
 45.00.A,0080,0030,8. H - Transportation and storage,d. > 5 year <= 10 years,dp471198,dp471198,stable
 45.00.A,0080,0040,8. H - Transportation and storage,e. > 10 year <= 20 years,dp471200,dp471200,stable
@@ -3739,7 +3739,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0080,0120,8. H - Transportation and storage,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472074,dp472074,stable
 45.00.A,0080,0130,8. H - Transportation and storage,n. Of which Stage 2 exposures,dp472057,dp472057,stable
 45.00.A,0080,0140,8. H - Transportation and storage,o. Of which non-performing exposures,dp472073,dp472073,stable
-45.00.A,0090,0010,9. L - Real estate activities,b. Gross carrying amount (Mln EUR),dp471205,dp471205,stable
+45.00.A,0090,0010,9. L - Real estate activities,b. Gross carrying amount,dp471205,dp471205,stable
 45.00.A,0090,0020,9. L - Real estate activities,c. <= 5 years,dp471208,dp471208,stable
 45.00.A,0090,0030,9. L - Real estate activities,d. > 5 year <= 10 years,dp471207,dp471207,stable
 45.00.A,0090,0040,9. L - Real estate activities,e. > 10 year <= 20 years,dp471209,dp471209,stable
@@ -3753,7 +3753,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0090,0120,9. L - Real estate activities,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472076,dp472076,stable
 45.00.A,0090,0130,9. L - Real estate activities,n. Of which Stage 2 exposures,dp472058,dp472058,stable
 45.00.A,0090,0140,9. L - Real estate activities,o. Of which non-performing exposures,dp472075,dp472075,stable
-45.00.A,0100,0010,10. Loans collateralised by residential immovable property,b. Gross carrying amount (Mln EUR),dp471869,dp471869,stable
+45.00.A,0100,0010,10. Loans collateralised by residential immovable property,b. Gross carrying amount,dp471869,dp471869,stable
 45.00.A,0100,0020,10. Loans collateralised by residential immovable property,c. <= 5 years,dp471872,dp471872,stable
 45.00.A,0100,0030,10. Loans collateralised by residential immovable property,d. > 5 year <= 10 years,dp471871,dp471871,stable
 45.00.A,0100,0040,10. Loans collateralised by residential immovable property,e. > 10 year <= 20 years,dp471873,dp471873,stable
@@ -3767,7 +3767,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0100,0120,10. Loans collateralised by residential immovable property,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472083,dp472083,stable
 45.00.A,0100,0130,10. Loans collateralised by residential immovable property,n. Of which Stage 2 exposures,dp472078,dp472078,stable
 45.00.A,0100,0140,10. Loans collateralised by residential immovable property,o. Of which non-performing exposures,dp472082,dp472082,stable
-45.00.A,0110,0010,11. Loans collateralised by commercial immovable property,b. Gross carrying amount (Mln EUR),dp471860,dp471860,stable
+45.00.A,0110,0010,11. Loans collateralised by commercial immovable property,b. Gross carrying amount,dp471860,dp471860,stable
 45.00.A,0110,0020,11. Loans collateralised by commercial immovable property,c. <= 5 years,dp471863,dp471863,stable
 45.00.A,0110,0030,11. Loans collateralised by commercial immovable property,d. > 5 year <= 10 years,dp471862,dp471862,stable
 45.00.A,0110,0040,11. Loans collateralised by commercial immovable property,e. > 10 year <= 20 years,dp471864,dp471864,stable
@@ -3781,7 +3781,7 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0110,0120,11. Loans collateralised by commercial immovable property,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472081,dp472081,stable
 45.00.A,0110,0130,11. Loans collateralised by commercial immovable property,n. Of which Stage 2 exposures,dp472077,dp472077,stable
 45.00.A,0110,0140,11. Loans collateralised by commercial immovable property,o. Of which non-performing exposures,dp472080,dp472080,stable
-45.00.A,0120,0010,12. Repossessed collaterals,b. Gross carrying amount (Mln EUR),dp470607,dp470607,stable
+45.00.A,0120,0010,12. Repossessed collaterals,b. Gross carrying amount,dp470607,dp470607,stable
 45.00.A,0120,0020,12. Repossessed collaterals,c. <= 5 years,dp470610,dp470610,stable
 45.00.A,0120,0030,12. Repossessed collaterals,d. > 5 year <= 10 years,dp470609,dp470609,stable
 45.00.A,0120,0040,12. Repossessed collaterals,e. > 10 year <= 20 years,dp470611,dp470611,stable
@@ -3795,118 +3795,118 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 45.00.A,0120,0120,12. Repossessed collaterals,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp470618,dp470618,stable
 45.00.A,0120,0130,12. Repossessed collaterals,n. Of which Stage 2 exposures,dp470616,dp470616,stable
 45.00.A,0120,0140,12. Repossessed collaterals,o. Of which non-performing exposures,dp470617,dp470617,stable
-45.00.B,Central Europe|S,0010,,,dp471878,dp471878,stable
-45.00.B,Central Europe|S,0020,,,dp471881,dp471881,stable
-45.00.B,Central Europe|S,0030,,,dp471880,dp471880,stable
-45.00.B,Central Europe|S,0040,,,dp471882,dp471882,stable
-45.00.B,Central Europe|S,0050,,,dp471883,dp471883,stable
-45.00.B,Central Europe|S,0060,,,dp472307,dp472307,stable
-45.00.B,Central Europe|S,0070,,,dp471884,dp471884,stable
-45.00.B,Central Europe|S,0080,,,dp471885,dp471885,stable
-45.00.B,Central Europe|S,0090,,,dp471886,dp471886,stable
-45.00.B,Central Europe|S,0100,,,dp471859,dp471859,stable
-45.00.B,Central Europe|S,0110,,,dp471879,dp471879,stable
-45.00.B,Central Europe|S,0120,,,dp472085,dp472085,stable
-45.00.B,Central Europe|S,0130,,,dp472079,dp472079,stable
-45.00.B,Central Europe|S,0140,,,dp472084,dp472084,stable
-45.00.B,Eastern Europe|S,0010,,,dp471878,dp471878,stable
-45.00.B,Eastern Europe|S,0020,,,dp471881,dp471881,stable
-45.00.B,Eastern Europe|S,0030,,,dp471880,dp471880,stable
-45.00.B,Eastern Europe|S,0040,,,dp471882,dp471882,stable
-45.00.B,Eastern Europe|S,0050,,,dp471883,dp471883,stable
-45.00.B,Eastern Europe|S,0060,,,dp472307,dp472307,stable
-45.00.B,Eastern Europe|S,0070,,,dp471884,dp471884,stable
-45.00.B,Eastern Europe|S,0080,,,dp471885,dp471885,stable
-45.00.B,Eastern Europe|S,0090,,,dp471886,dp471886,stable
-45.00.B,Eastern Europe|S,0100,,,dp471859,dp471859,stable
-45.00.B,Eastern Europe|S,0110,,,dp471879,dp471879,stable
-45.00.B,Eastern Europe|S,0120,,,dp472085,dp472085,stable
-45.00.B,Eastern Europe|S,0130,,,dp472079,dp472079,stable
-45.00.B,Eastern Europe|S,0140,,,dp472084,dp472084,stable
-45.00.B,Northern Europe|S,0010,,,dp471878,dp471878,stable
-45.00.B,Northern Europe|S,0020,,,dp471881,dp471881,stable
-45.00.B,Northern Europe|S,0030,,,dp471880,dp471880,stable
-45.00.B,Northern Europe|S,0040,,,dp471882,dp471882,stable
-45.00.B,Northern Europe|S,0050,,,dp471883,dp471883,stable
-45.00.B,Northern Europe|S,0060,,,dp472307,dp472307,stable
-45.00.B,Northern Europe|S,0070,,,dp471884,dp471884,stable
-45.00.B,Northern Europe|S,0080,,,dp471885,dp471885,stable
-45.00.B,Northern Europe|S,0090,,,dp471886,dp471886,stable
-45.00.B,Northern Europe|S,0100,,,dp471859,dp471859,stable
-45.00.B,Northern Europe|S,0110,,,dp471879,dp471879,stable
-45.00.B,Northern Europe|S,0120,,,dp472085,dp472085,stable
-45.00.B,Northern Europe|S,0130,,,dp472079,dp472079,stable
-45.00.B,Northern Europe|S,0140,,,dp472084,dp472084,stable
-45.00.B,Rest of the World|S,0010,,,dp471878,dp471878,stable
-45.00.B,Rest of the World|S,0020,,,dp471881,dp471881,stable
-45.00.B,Rest of the World|S,0030,,,dp471880,dp471880,stable
-45.00.B,Rest of the World|S,0040,,,dp471882,dp471882,stable
-45.00.B,Rest of the World|S,0050,,,dp471883,dp471883,stable
-45.00.B,Rest of the World|S,0060,,,dp472307,dp472307,stable
-45.00.B,Rest of the World|S,0070,,,dp471884,dp471884,stable
-45.00.B,Rest of the World|S,0080,,,dp471885,dp471885,stable
-45.00.B,Rest of the World|S,0090,,,dp471886,dp471886,stable
-45.00.B,Rest of the World|S,0100,,,dp471859,dp471859,stable
-45.00.B,Rest of the World|S,0110,,,dp471879,dp471879,stable
-45.00.B,Rest of the World|S,0120,,,dp472085,dp472085,stable
-45.00.B,Rest of the World|S,0130,,,dp472079,dp472079,stable
-45.00.B,Rest of the World|S,0140,,,dp472084,dp472084,stable
-45.00.B,South-eastern Europe|S,0010,,,dp471878,dp471878,stable
-45.00.B,South-eastern Europe|S,0020,,,dp471881,dp471881,stable
-45.00.B,South-eastern Europe|S,0030,,,dp471880,dp471880,stable
-45.00.B,South-eastern Europe|S,0040,,,dp471882,dp471882,stable
-45.00.B,South-eastern Europe|S,0050,,,dp471883,dp471883,stable
-45.00.B,South-eastern Europe|S,0060,,,dp472307,dp472307,stable
-45.00.B,South-eastern Europe|S,0070,,,dp471884,dp471884,stable
-45.00.B,South-eastern Europe|S,0080,,,dp471885,dp471885,stable
-45.00.B,South-eastern Europe|S,0090,,,dp471886,dp471886,stable
-45.00.B,South-eastern Europe|S,0100,,,dp471859,dp471859,stable
-45.00.B,South-eastern Europe|S,0110,,,dp471879,dp471879,stable
-45.00.B,South-eastern Europe|S,0120,,,dp472085,dp472085,stable
-45.00.B,South-eastern Europe|S,0130,,,dp472079,dp472079,stable
-45.00.B,South-eastern Europe|S,0140,,,dp472084,dp472084,stable
-45.00.B,South-western Europe|S,0010,,,dp471878,dp471878,stable
-45.00.B,South-western Europe|S,0020,,,dp471881,dp471881,stable
-45.00.B,South-western Europe|S,0030,,,dp471880,dp471880,stable
-45.00.B,South-western Europe|S,0040,,,dp471882,dp471882,stable
-45.00.B,South-western Europe|S,0050,,,dp471883,dp471883,stable
-45.00.B,South-western Europe|S,0060,,,dp472307,dp472307,stable
-45.00.B,South-western Europe|S,0070,,,dp471884,dp471884,stable
-45.00.B,South-western Europe|S,0080,,,dp471885,dp471885,stable
-45.00.B,South-western Europe|S,0090,,,dp471886,dp471886,stable
-45.00.B,South-western Europe|S,0100,,,dp471859,dp471859,stable
-45.00.B,South-western Europe|S,0110,,,dp471879,dp471879,stable
-45.00.B,South-western Europe|S,0120,,,dp472085,dp472085,stable
-45.00.B,South-western Europe|S,0130,,,dp472079,dp472079,stable
-45.00.B,South-western Europe|S,0140,,,dp472084,dp472084,stable
-45.00.B,Southern Europe|S,0010,,,dp471878,dp471878,stable
-45.00.B,Southern Europe|S,0020,,,dp471881,dp471881,stable
-45.00.B,Southern Europe|S,0030,,,dp471880,dp471880,stable
-45.00.B,Southern Europe|S,0040,,,dp471882,dp471882,stable
-45.00.B,Southern Europe|S,0050,,,dp471883,dp471883,stable
-45.00.B,Southern Europe|S,0060,,,dp472307,dp472307,stable
-45.00.B,Southern Europe|S,0070,,,dp471884,dp471884,stable
-45.00.B,Southern Europe|S,0080,,,dp471885,dp471885,stable
-45.00.B,Southern Europe|S,0090,,,dp471886,dp471886,stable
-45.00.B,Southern Europe|S,0100,,,dp471859,dp471859,stable
-45.00.B,Southern Europe|S,0110,,,dp471879,dp471879,stable
-45.00.B,Southern Europe|S,0120,,,dp472085,dp472085,stable
-45.00.B,Southern Europe|S,0130,,,dp472079,dp472079,stable
-45.00.B,Southern Europe|S,0140,,,dp472084,dp472084,stable
-45.00.B,Western Europe|S,0010,,,dp471878,dp471878,stable
-45.00.B,Western Europe|S,0020,,,dp471881,dp471881,stable
-45.00.B,Western Europe|S,0030,,,dp471880,dp471880,stable
-45.00.B,Western Europe|S,0040,,,dp471882,dp471882,stable
-45.00.B,Western Europe|S,0050,,,dp471883,dp471883,stable
-45.00.B,Western Europe|S,0060,,,dp472307,dp472307,stable
-45.00.B,Western Europe|S,0070,,,dp471884,dp471884,stable
-45.00.B,Western Europe|S,0080,,,dp471885,dp471885,stable
-45.00.B,Western Europe|S,0090,,,dp471886,dp471886,stable
-45.00.B,Western Europe|S,0100,,,dp471859,dp471859,stable
-45.00.B,Western Europe|S,0110,,,dp471879,dp471879,stable
-45.00.B,Western Europe|S,0120,,,dp472085,dp472085,stable
-45.00.B,Western Europe|S,0130,,,dp472079,dp472079,stable
-45.00.B,Western Europe|S,0140,,,dp472084,dp472084,stable
+45.00.B,Central Europe|S,0010,,b. Gross carrying amount,dp471878,dp471878,stable
+45.00.B,Central Europe|S,0020,,c. <= 5 years,dp471881,dp471881,stable
+45.00.B,Central Europe|S,0030,,d. > 5 year <= 10 years,dp471880,dp471880,stable
+45.00.B,Central Europe|S,0040,,e. > 10 year <= 20 years,dp471882,dp471882,stable
+45.00.B,Central Europe|S,0050,,f. > 20 years,dp471883,dp471883,stable
+45.00.B,Central Europe|S,0060,,g. Average weighted maturity,dp472307,dp472307,stable
+45.00.B,Central Europe|S,0070,,h. Of which exposures sensitive to impact from chronic climate change events,dp471884,dp471884,stable
+45.00.B,Central Europe|S,0080,,i. Of which exposures sensitive to impact from acute climate change events,dp471885,dp471885,stable
+45.00.B,Central Europe|S,0090,,j. Of which exposures sensitive to impact both from chronic and acute climate change events,dp471886,dp471886,stable
+45.00.B,Central Europe|S,0100,,k. Of which Stage 2 exposures,dp471859,dp471859,stable
+45.00.B,Central Europe|S,0110,,l. Of which non-performing exposures,dp471879,dp471879,stable
+45.00.B,Central Europe|S,0120,,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472085,dp472085,stable
+45.00.B,Central Europe|S,0130,,n. Of which Stage 2 exposures,dp472079,dp472079,stable
+45.00.B,Central Europe|S,0140,,o. Of which non-performing exposures,dp472084,dp472084,stable
+45.00.B,Eastern Europe|S,0010,,b. Gross carrying amount,dp471878,dp471878,stable
+45.00.B,Eastern Europe|S,0020,,c. <= 5 years,dp471881,dp471881,stable
+45.00.B,Eastern Europe|S,0030,,d. > 5 year <= 10 years,dp471880,dp471880,stable
+45.00.B,Eastern Europe|S,0040,,e. > 10 year <= 20 years,dp471882,dp471882,stable
+45.00.B,Eastern Europe|S,0050,,f. > 20 years,dp471883,dp471883,stable
+45.00.B,Eastern Europe|S,0060,,g. Average weighted maturity,dp472307,dp472307,stable
+45.00.B,Eastern Europe|S,0070,,h. Of which exposures sensitive to impact from chronic climate change events,dp471884,dp471884,stable
+45.00.B,Eastern Europe|S,0080,,i. Of which exposures sensitive to impact from acute climate change events,dp471885,dp471885,stable
+45.00.B,Eastern Europe|S,0090,,j. Of which exposures sensitive to impact both from chronic and acute climate change events,dp471886,dp471886,stable
+45.00.B,Eastern Europe|S,0100,,k. Of which Stage 2 exposures,dp471859,dp471859,stable
+45.00.B,Eastern Europe|S,0110,,l. Of which non-performing exposures,dp471879,dp471879,stable
+45.00.B,Eastern Europe|S,0120,,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472085,dp472085,stable
+45.00.B,Eastern Europe|S,0130,,n. Of which Stage 2 exposures,dp472079,dp472079,stable
+45.00.B,Eastern Europe|S,0140,,o. Of which non-performing exposures,dp472084,dp472084,stable
+45.00.B,Northern Europe|S,0010,,b. Gross carrying amount,dp471878,dp471878,stable
+45.00.B,Northern Europe|S,0020,,c. <= 5 years,dp471881,dp471881,stable
+45.00.B,Northern Europe|S,0030,,d. > 5 year <= 10 years,dp471880,dp471880,stable
+45.00.B,Northern Europe|S,0040,,e. > 10 year <= 20 years,dp471882,dp471882,stable
+45.00.B,Northern Europe|S,0050,,f. > 20 years,dp471883,dp471883,stable
+45.00.B,Northern Europe|S,0060,,g. Average weighted maturity,dp472307,dp472307,stable
+45.00.B,Northern Europe|S,0070,,h. Of which exposures sensitive to impact from chronic climate change events,dp471884,dp471884,stable
+45.00.B,Northern Europe|S,0080,,i. Of which exposures sensitive to impact from acute climate change events,dp471885,dp471885,stable
+45.00.B,Northern Europe|S,0090,,j. Of which exposures sensitive to impact both from chronic and acute climate change events,dp471886,dp471886,stable
+45.00.B,Northern Europe|S,0100,,k. Of which Stage 2 exposures,dp471859,dp471859,stable
+45.00.B,Northern Europe|S,0110,,l. Of which non-performing exposures,dp471879,dp471879,stable
+45.00.B,Northern Europe|S,0120,,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472085,dp472085,stable
+45.00.B,Northern Europe|S,0130,,n. Of which Stage 2 exposures,dp472079,dp472079,stable
+45.00.B,Northern Europe|S,0140,,o. Of which non-performing exposures,dp472084,dp472084,stable
+45.00.B,Rest of the World|S,0010,,b. Gross carrying amount,dp471878,dp471878,stable
+45.00.B,Rest of the World|S,0020,,c. <= 5 years,dp471881,dp471881,stable
+45.00.B,Rest of the World|S,0030,,d. > 5 year <= 10 years,dp471880,dp471880,stable
+45.00.B,Rest of the World|S,0040,,e. > 10 year <= 20 years,dp471882,dp471882,stable
+45.00.B,Rest of the World|S,0050,,f. > 20 years,dp471883,dp471883,stable
+45.00.B,Rest of the World|S,0060,,g. Average weighted maturity,dp472307,dp472307,stable
+45.00.B,Rest of the World|S,0070,,h. Of which exposures sensitive to impact from chronic climate change events,dp471884,dp471884,stable
+45.00.B,Rest of the World|S,0080,,i. Of which exposures sensitive to impact from acute climate change events,dp471885,dp471885,stable
+45.00.B,Rest of the World|S,0090,,j. Of which exposures sensitive to impact both from chronic and acute climate change events,dp471886,dp471886,stable
+45.00.B,Rest of the World|S,0100,,k. Of which Stage 2 exposures,dp471859,dp471859,stable
+45.00.B,Rest of the World|S,0110,,l. Of which non-performing exposures,dp471879,dp471879,stable
+45.00.B,Rest of the World|S,0120,,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472085,dp472085,stable
+45.00.B,Rest of the World|S,0130,,n. Of which Stage 2 exposures,dp472079,dp472079,stable
+45.00.B,Rest of the World|S,0140,,o. Of which non-performing exposures,dp472084,dp472084,stable
+45.00.B,South-eastern Europe|S,0010,,b. Gross carrying amount,dp471878,dp471878,stable
+45.00.B,South-eastern Europe|S,0020,,c. <= 5 years,dp471881,dp471881,stable
+45.00.B,South-eastern Europe|S,0030,,d. > 5 year <= 10 years,dp471880,dp471880,stable
+45.00.B,South-eastern Europe|S,0040,,e. > 10 year <= 20 years,dp471882,dp471882,stable
+45.00.B,South-eastern Europe|S,0050,,f. > 20 years,dp471883,dp471883,stable
+45.00.B,South-eastern Europe|S,0060,,g. Average weighted maturity,dp472307,dp472307,stable
+45.00.B,South-eastern Europe|S,0070,,h. Of which exposures sensitive to impact from chronic climate change events,dp471884,dp471884,stable
+45.00.B,South-eastern Europe|S,0080,,i. Of which exposures sensitive to impact from acute climate change events,dp471885,dp471885,stable
+45.00.B,South-eastern Europe|S,0090,,j. Of which exposures sensitive to impact both from chronic and acute climate change events,dp471886,dp471886,stable
+45.00.B,South-eastern Europe|S,0100,,k. Of which Stage 2 exposures,dp471859,dp471859,stable
+45.00.B,South-eastern Europe|S,0110,,l. Of which non-performing exposures,dp471879,dp471879,stable
+45.00.B,South-eastern Europe|S,0120,,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472085,dp472085,stable
+45.00.B,South-eastern Europe|S,0130,,n. Of which Stage 2 exposures,dp472079,dp472079,stable
+45.00.B,South-eastern Europe|S,0140,,o. Of which non-performing exposures,dp472084,dp472084,stable
+45.00.B,South-western Europe|S,0010,,b. Gross carrying amount,dp471878,dp471878,stable
+45.00.B,South-western Europe|S,0020,,c. <= 5 years,dp471881,dp471881,stable
+45.00.B,South-western Europe|S,0030,,d. > 5 year <= 10 years,dp471880,dp471880,stable
+45.00.B,South-western Europe|S,0040,,e. > 10 year <= 20 years,dp471882,dp471882,stable
+45.00.B,South-western Europe|S,0050,,f. > 20 years,dp471883,dp471883,stable
+45.00.B,South-western Europe|S,0060,,g. Average weighted maturity,dp472307,dp472307,stable
+45.00.B,South-western Europe|S,0070,,h. Of which exposures sensitive to impact from chronic climate change events,dp471884,dp471884,stable
+45.00.B,South-western Europe|S,0080,,i. Of which exposures sensitive to impact from acute climate change events,dp471885,dp471885,stable
+45.00.B,South-western Europe|S,0090,,j. Of which exposures sensitive to impact both from chronic and acute climate change events,dp471886,dp471886,stable
+45.00.B,South-western Europe|S,0100,,k. Of which Stage 2 exposures,dp471859,dp471859,stable
+45.00.B,South-western Europe|S,0110,,l. Of which non-performing exposures,dp471879,dp471879,stable
+45.00.B,South-western Europe|S,0120,,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472085,dp472085,stable
+45.00.B,South-western Europe|S,0130,,n. Of which Stage 2 exposures,dp472079,dp472079,stable
+45.00.B,South-western Europe|S,0140,,o. Of which non-performing exposures,dp472084,dp472084,stable
+45.00.B,Southern Europe|S,0010,,b. Gross carrying amount,dp471878,dp471878,stable
+45.00.B,Southern Europe|S,0020,,c. <= 5 years,dp471881,dp471881,stable
+45.00.B,Southern Europe|S,0030,,d. > 5 year <= 10 years,dp471880,dp471880,stable
+45.00.B,Southern Europe|S,0040,,e. > 10 year <= 20 years,dp471882,dp471882,stable
+45.00.B,Southern Europe|S,0050,,f. > 20 years,dp471883,dp471883,stable
+45.00.B,Southern Europe|S,0060,,g. Average weighted maturity,dp472307,dp472307,stable
+45.00.B,Southern Europe|S,0070,,h. Of which exposures sensitive to impact from chronic climate change events,dp471884,dp471884,stable
+45.00.B,Southern Europe|S,0080,,i. Of which exposures sensitive to impact from acute climate change events,dp471885,dp471885,stable
+45.00.B,Southern Europe|S,0090,,j. Of which exposures sensitive to impact both from chronic and acute climate change events,dp471886,dp471886,stable
+45.00.B,Southern Europe|S,0100,,k. Of which Stage 2 exposures,dp471859,dp471859,stable
+45.00.B,Southern Europe|S,0110,,l. Of which non-performing exposures,dp471879,dp471879,stable
+45.00.B,Southern Europe|S,0120,,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472085,dp472085,stable
+45.00.B,Southern Europe|S,0130,,n. Of which Stage 2 exposures,dp472079,dp472079,stable
+45.00.B,Southern Europe|S,0140,,o. Of which non-performing exposures,dp472084,dp472084,stable
+45.00.B,Western Europe|S,0010,,b. Gross carrying amount,dp471878,dp471878,stable
+45.00.B,Western Europe|S,0020,,c. <= 5 years,dp471881,dp471881,stable
+45.00.B,Western Europe|S,0030,,d. > 5 year <= 10 years,dp471880,dp471880,stable
+45.00.B,Western Europe|S,0040,,e. > 10 year <= 20 years,dp471882,dp471882,stable
+45.00.B,Western Europe|S,0050,,f. > 20 years,dp471883,dp471883,stable
+45.00.B,Western Europe|S,0060,,g. Average weighted maturity,dp472307,dp472307,stable
+45.00.B,Western Europe|S,0070,,h. Of which exposures sensitive to impact from chronic climate change events,dp471884,dp471884,stable
+45.00.B,Western Europe|S,0080,,i. Of which exposures sensitive to impact from acute climate change events,dp471885,dp471885,stable
+45.00.B,Western Europe|S,0090,,j. Of which exposures sensitive to impact both from chronic and acute climate change events,dp471886,dp471886,stable
+45.00.B,Western Europe|S,0100,,k. Of which Stage 2 exposures,dp471859,dp471859,stable
+45.00.B,Western Europe|S,0110,,l. Of which non-performing exposures,dp471879,dp471879,stable
+45.00.B,Western Europe|S,0120,,"m. Accumulated impairment, accumulated negative changes in fair value due to credit risk and provisions",dp472085,dp472085,stable
+45.00.B,Western Europe|S,0130,,n. Of which Stage 2 exposures,dp472079,dp472079,stable
+45.00.B,Western Europe|S,0140,,o. Of which non-performing exposures,dp472084,dp472084,stable
 60.00.A,0010,0010,01. Credit risk (excluding CCR),a. T,dp3530270,dp3530270,stable
 60.00.A,0010,0020,01. Credit risk (excluding CCR),b. T-1,dp472892,dp472892,stable
 60.00.A,0010,0030,01. Credit risk (excluding CCR),c. T,dp472891,dp472891,stable
@@ -3935,9 +3935,11 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 60.00.A,0100,0020,EU 8a. Of which exposures to a CCP,b. T-1,dp475443,dp475443,stable
 60.00.A,0100,0030,EU 8a. Of which exposures to a CCP,c. T,dp475428,dp475428,stable
 60.00.A,0110,0010,9. Of which other CCR,a. T,dp3530282,dp3530282,stable
+60.00.A,0110,0020,9. Of which other CCR,b. T-1,dp475441,dp475441,stable
+60.00.A,0110,0030,9. Of which other CCR,c. T,dp475427,dp475427,stable
 60.00.A,0120,0010,10. Credit valuation adjustments risk - CVA risk,a. T,dp3295621,dp3295621,stable
-60.00.A,0120,0020,9. Of which other CCR,b. T-1,dp3530253|dp475441,dp3530253|dp475441,ambiguous
-60.00.A,0120,0030,9. Of which other CCR,c. T,dp475427|dp475430,dp475427|dp475430,ambiguous
+60.00.A,0120,0020,10. Credit valuation adjustments risk - CVA risk,b. T-1,dp3530253,dp3530253,stable
+60.00.A,0120,0030,10. Credit valuation adjustments risk - CVA risk,c. T,dp475430,dp475430,stable
 60.00.A,0130,0010,EU 10a. Of which the standardised approach (SA),a. T,dp3295827,dp3295827,stable
 60.00.A,0130,0020,EU 10a. Of which the standardised approach (SA),b. T-1,dp3530252,dp3530252,stable
 60.00.A,0130,0030,EU 10a. Of which the standardised approach (SA),c. T,dp3529427,dp3529427,stable
@@ -4048,26 +4050,26 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 61.00,0070,0030,7. Total capital ratio (%),c. T-2,dp475467,dp475467,stable
 61.00,0070,0040,7. Total capital ratio (%),d. T-3,dp475468,dp475468,stable
 61.00,0070,0050,7. Total capital ratio (%),e. T-4,dp475469,dp475469,stable
-61.00,0080,0010,EU 7a. Additional own funds requirements to address risks other than the risk of excessive leverage (%),a. T,dp410438,dp410438,stable
-61.00,0080,0020,EU 7a. Additional own funds requirements to address risks other than the risk of excessive leverage (%),b. T-1,dp475486,dp475486,stable
-61.00,0080,0030,EU 7a. Additional own funds requirements to address risks other than the risk of excessive leverage (%),c. T-2,dp475487,dp475487,stable
-61.00,0080,0040,EU 7a. Additional own funds requirements to address risks other than the risk of excessive leverage (%),d. T-3,dp475488,dp475488,stable
-61.00,0080,0050,EU 7a. Additional own funds requirements to address risks other than the risk of excessive leverage (%),e. T-4,dp475489,dp475489,stable
+61.00,0080,0010,EU 7d. Additional own funds requirements to address risks other than the risk of excessive leverage (%),a. T,dp410438,dp410438,stable
+61.00,0080,0020,EU 7d. Additional own funds requirements to address risks other than the risk of excessive leverage (%),b. T-1,dp475486,dp475486,stable
+61.00,0080,0030,EU 7d. Additional own funds requirements to address risks other than the risk of excessive leverage (%),c. T-2,dp475487,dp475487,stable
+61.00,0080,0040,EU 7d. Additional own funds requirements to address risks other than the risk of excessive leverage (%),d. T-3,dp475488,dp475488,stable
+61.00,0080,0050,EU 7d. Additional own funds requirements to address risks other than the risk of excessive leverage (%),e. T-4,dp475489,dp475489,stable
 61.00,0081,0010,7b. Total capital ratio considering unfloored TREA (%),a. T,dp3294197,dp3294197,stable
 61.00,0081,0020,7b. Total capital ratio considering unfloored TREA (%),b. T-1,dp3529433,dp3529433,stable
 61.00,0081,0030,7b. Total capital ratio considering unfloored TREA (%),c. T-2,dp3529439,dp3529439,stable
 61.00,0081,0040,7b. Total capital ratio considering unfloored TREA (%),d. T-3,dp3529437,dp3529437,stable
 61.00,0081,0050,7b. Total capital ratio considering unfloored TREA (%),e. T-4,dp3529435,dp3529435,stable
-61.00,0090,0010,EU 7b. of which: to be made up of CET1 capital (percentage points),a. T,dp424336,dp424336,stable
-61.00,0090,0020,EU 7b. of which: to be made up of CET1 capital (percentage points),b. T-1,dp475478,dp475478,stable
-61.00,0090,0030,EU 7b. of which: to be made up of CET1 capital (percentage points),c. T-2,dp475479,dp475479,stable
-61.00,0090,0040,EU 7b. of which: to be made up of CET1 capital (percentage points),d. T-3,dp475480,dp475480,stable
-61.00,0090,0050,EU 7b. of which: to be made up of CET1 capital (percentage points),e. T-4,dp475481,dp475481,stable
-61.00,0100,0010,EU 7c. of which: to be made up of Tier 1 capital (percentage points),a. T,dp424337,dp424337,stable
-61.00,0100,0020,EU 7c. of which: to be made up of Tier 1 capital (percentage points),b. T-1,dp475482,dp475482,stable
-61.00,0100,0030,EU 7c. of which: to be made up of Tier 1 capital (percentage points),c. T-2,dp475483,dp475483,stable
-61.00,0100,0040,EU 7c. of which: to be made up of Tier 1 capital (percentage points),d. T-3,dp475484,dp475484,stable
-61.00,0100,0050,EU 7c. of which: to be made up of Tier 1 capital (percentage points),e. T-4,dp475485,dp475485,stable
+61.00,0090,0010,EU 7e. of which: to be made up of CET1 capital (percentage points),a. T,dp424336,dp424336,stable
+61.00,0090,0020,EU 7e. of which: to be made up of CET1 capital (percentage points),b. T-1,dp475478,dp475478,stable
+61.00,0090,0030,EU 7e. of which: to be made up of CET1 capital (percentage points),c. T-2,dp475479,dp475479,stable
+61.00,0090,0040,EU 7e. of which: to be made up of CET1 capital (percentage points),d. T-3,dp475480,dp475480,stable
+61.00,0090,0050,EU 7e. of which: to be made up of CET1 capital (percentage points),e. T-4,dp475481,dp475481,stable
+61.00,0100,0010,EU 7f. of which: to be made up of Tier 1 capital (percentage points),a. T,dp424337,dp424337,stable
+61.00,0100,0020,EU 7f. of which: to be made up of Tier 1 capital (percentage points),b. T-1,dp475482,dp475482,stable
+61.00,0100,0030,EU 7f. of which: to be made up of Tier 1 capital (percentage points),c. T-2,dp475483,dp475483,stable
+61.00,0100,0040,EU 7f. of which: to be made up of Tier 1 capital (percentage points),d. T-3,dp475484,dp475484,stable
+61.00,0100,0050,EU 7f. of which: to be made up of Tier 1 capital (percentage points),e. T-4,dp475485,dp475485,stable
 61.00,0110,0010,EU 7g. Total SREP own funds requirements (%),a. T,dp85156,dp85156,stable
 61.00,0110,0020,EU 7g. Total SREP own funds requirements (%),b. T-1,dp475470,dp475470,stable
 61.00,0110,0030,EU 7g. Total SREP own funds requirements (%),c. T-2,dp475471,dp475471,stable
@@ -4695,8 +4697,8 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 66.01.B,0970,0010,83. Amount excluded from AT1 due to cap excess over cap after redemptions and maturities,b Source based on reference numbers/letters of the balance sheet under the regulatory scope of consolidation,dp3530631,dp3530631,stable
 66.01.B,0980,0010,84. Current cap on T2 instruments subject to phase out arrangements,b Source based on reference numbers/letters of the balance sheet under the regulatory scope of consolidation,dp3530640,dp3530640,stable
 66.01.B,0990,0010,85. Amount excluded from T2 due to cap excess over cap after redemptions and maturities,b Source based on reference numbers/letters of the balance sheet under the regulatory scope of consolidation,dp3530632,dp3530632,stable
-66.02.A,Intangible assets,0010,,,dp3525514,dp3525514,stable
-66.02.A,Intangible assets,0020,,,dp3525510,dp3525510,stable
+66.02.A,Intangible assets,0010,,a As at period end,dp3525514,dp3525514,stable
+66.02.A,Intangible assets,0020,,b As at period end,dp3525510,dp3525510,stable
 66.02.A,Intangible assets,0030,,c Reference,dp3530643,dp3530643,stable
 66.02.B,0010,0010,Total assets,a As at period end,dp32355,dp32355,stable
 66.02.B,0010,0020,Total assets,b As at period end,dp3525577,dp3525577,stable
@@ -4707,59 +4709,66 @@ for credit risk at asset class level",Accompanying narrative,dp3530988,dp3530988
 66.02.F,0010,0010,Total shareholders' equity,a As at period end,dp32465,dp32465,stable
 66.02.F,0010,0020,Total shareholders' equity,b As at period end,dp3525640,dp3525640,stable
 66.02.F,0010,0030,Total shareholders' equity,c Reference,dp3530639,dp3530639,stable
-67.01.A,DE,0010,,,dp149275,dp149275,stable
+67.01.A,DE,0010,,a Exposure value under the standardised approach,dp149275,dp149275,stable
 67.01.A,DE,0060,,f Total exposure value,dp3526957,dp3526957,stable
-67.01.A,DE,0070,,,dp149540,dp149540,stable
-67.01.A,DE,0100,,,dp149626,dp149626,stable
+67.01.A,DE,0070,,g Relevant credit risk exposures - Credit risk,dp149540,dp149540,stable
+67.01.A,DE,0100,,j Total,dp149626,dp149626,stable
 67.01.A,DE,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
-67.01.A,DE,0120,,,dp149630,dp149630,stable
-67.01.A,DE,0130,,,dp149631,dp149631,stable
-67.01.A,DK,0010,,,dp149275,dp149275,stable
+67.01.A,DE,0120,,l Own fund requirements weights %,dp149630,dp149630,stable
+67.01.A,DE,0130,,"m Countercyclical buffer rate
+%",dp149631,dp149631,stable
+67.01.A,DK,0010,,a Exposure value under the standardised approach,dp149275,dp149275,stable
 67.01.A,DK,0060,,f Total exposure value,dp3526957,dp3526957,stable
-67.01.A,DK,0070,,,dp149540,dp149540,stable
-67.01.A,DK,0100,,,dp149626,dp149626,stable
+67.01.A,DK,0070,,g Relevant credit risk exposures - Credit risk,dp149540,dp149540,stable
+67.01.A,DK,0100,,j Total,dp149626,dp149626,stable
 67.01.A,DK,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
-67.01.A,DK,0120,,,dp149630,dp149630,stable
-67.01.A,DK,0130,,,dp149631,dp149631,stable
-67.01.A,ES,0130,,,dp149631,dp149631,stable
-67.01.A,FI,0010,,,dp149275,dp149275,stable
+67.01.A,DK,0120,,l Own fund requirements weights %,dp149630,dp149630,stable
+67.01.A,DK,0130,,"m Countercyclical buffer rate
+%",dp149631,dp149631,stable
+67.01.A,ES,0130,,"m Countercyclical buffer rate
+%",dp149631,dp149631,stable
+67.01.A,FI,0010,,a Exposure value under the standardised approach,dp149275,dp149275,stable
 67.01.A,FI,0060,,f Total exposure value,dp3526957,dp3526957,stable
-67.01.A,FI,0070,,,dp149540,dp149540,stable
-67.01.A,FI,0100,,,dp149626,dp149626,stable
+67.01.A,FI,0070,,g Relevant credit risk exposures - Credit risk,dp149540,dp149540,stable
+67.01.A,FI,0100,,j Total,dp149626,dp149626,stable
 67.01.A,FI,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
-67.01.A,FI,0120,,,dp149630,dp149630,stable
-67.01.A,FR,0010,,,dp149275,dp149275,stable
+67.01.A,FI,0120,,l Own fund requirements weights %,dp149630,dp149630,stable
+67.01.A,FR,0010,,a Exposure value under the standardised approach,dp149275,dp149275,stable
 67.01.A,FR,0060,,f Total exposure value,dp3526957,dp3526957,stable
-67.01.A,FR,0070,,,dp149540,dp149540,stable
-67.01.A,FR,0100,,,dp149626,dp149626,stable
+67.01.A,FR,0070,,g Relevant credit risk exposures - Credit risk,dp149540,dp149540,stable
+67.01.A,FR,0100,,j Total,dp149626,dp149626,stable
 67.01.A,FR,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
-67.01.A,FR,0120,,,dp149630,dp149630,stable
-67.01.A,FR,0130,,,dp149631,dp149631,stable
-67.01.A,NL,0010,,,dp149275,dp149275,stable
+67.01.A,FR,0120,,l Own fund requirements weights %,dp149630,dp149630,stable
+67.01.A,FR,0130,,"m Countercyclical buffer rate
+%",dp149631,dp149631,stable
+67.01.A,NL,0010,,a Exposure value under the standardised approach,dp149275,dp149275,stable
 67.01.A,NL,0060,,f Total exposure value,dp3526957,dp3526957,stable
-67.01.A,NL,0070,,,dp149540,dp149540,stable
-67.01.A,NL,0100,,,dp149626,dp149626,stable
+67.01.A,NL,0070,,g Relevant credit risk exposures - Credit risk,dp149540,dp149540,stable
+67.01.A,NL,0100,,j Total,dp149626,dp149626,stable
 67.01.A,NL,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
-67.01.A,NL,0120,,,dp149630,dp149630,stable
-67.01.A,NL,0130,,,dp149631,dp149631,stable
-67.01.A,NO,0010,,,dp149275,dp149275,stable
+67.01.A,NL,0120,,l Own fund requirements weights %,dp149630,dp149630,stable
+67.01.A,NL,0130,,"m Countercyclical buffer rate
+%",dp149631,dp149631,stable
+67.01.A,NO,0010,,a Exposure value under the standardised approach,dp149275,dp149275,stable
 67.01.A,NO,0060,,f Total exposure value,dp3526957,dp3526957,stable
-67.01.A,NO,0070,,,dp149540,dp149540,stable
-67.01.A,NO,0100,,,dp149626,dp149626,stable
+67.01.A,NO,0070,,g Relevant credit risk exposures - Credit risk,dp149540,dp149540,stable
+67.01.A,NO,0100,,j Total,dp149626,dp149626,stable
 67.01.A,NO,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
-67.01.A,NO,0120,,,dp149630,dp149630,stable
-67.01.A,NO,0130,,,dp149631,dp149631,stable
-67.01.A,SE,0010,,,dp149275,dp149275,stable
+67.01.A,NO,0120,,l Own fund requirements weights %,dp149630,dp149630,stable
+67.01.A,NO,0130,,"m Countercyclical buffer rate
+%",dp149631,dp149631,stable
+67.01.A,SE,0010,,a Exposure value under the standardised approach,dp149275,dp149275,stable
 67.01.A,SE,0060,,f Total exposure value,dp3526957,dp3526957,stable
-67.01.A,SE,0070,,,dp149540,dp149540,stable
-67.01.A,SE,0100,,,dp149626,dp149626,stable
+67.01.A,SE,0070,,g Relevant credit risk exposures - Credit risk,dp149540,dp149540,stable
+67.01.A,SE,0100,,j Total,dp149626,dp149626,stable
 67.01.A,SE,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
-67.01.A,SE,0120,,,dp149630,dp149630,stable
-67.01.A,SE,0130,,,dp149631,dp149631,stable
-67.01.A,US,0070,,,dp149540,dp149540,stable
-67.01.A,US,0100,,,dp149626,dp149626,stable
+67.01.A,SE,0120,,l Own fund requirements weights %,dp149630,dp149630,stable
+67.01.A,SE,0130,,"m Countercyclical buffer rate
+%",dp149631,dp149631,stable
+67.01.A,US,0070,,g Relevant credit risk exposures - Credit risk,dp149540,dp149540,stable
+67.01.A,US,0100,,j Total,dp149626,dp149626,stable
 67.01.A,US,0110,,k Risk-weighted exposure amounts,dp3529788,dp3529788,stable
-67.01.A,US,0120,,,dp149630,dp149630,stable
+67.01.A,US,0120,,l Own fund requirements weights %,dp149630,dp149630,stable
 67.01.B,0010,0010,Total,a Exposure value under the standardised approach,dp3527384,dp3527384,stable
 67.01.B,0010,0020,Total,b Exposure value under the IRB approach,dp3527383,dp3527383,stable
 67.01.B,0010,0030,Total,c Sum of long and short positions of trading book exposures for SA,dp3530249,dp3530249,stable
