@@ -84,9 +84,37 @@ jobs:
       - name: Plan delta
         run: python scripts/plan_delta.py
 
+      # EINE Entscheidung, drei Konsumenten: Download, Parse, Sanity-Gate.
+      #
+      # Vorher fragte der Download `inputs.full_reparse`, der Parse zusätzlich
+      # `inputs.refresh_codebook`, und der Fingerabdruck aus #57 sprach nur mit
+      # dem Parser. Jede Kombination, in der die drei auseinanderliefen, lud das
+      # Delta und parste den Bestand voll neu — aus einem `raw/`, das nur die
+      # neuen ZIPs enthält (die Pipeline ist stateless, `raw/` beginnt leer).
+      # Das traf zwei Fälle: ein per Commit geändertes Codebook ohne Input, und
+      # `refresh_codebook` ohne `full_reparse`. Der zweite hätte sogar publiziert,
+      # weil das Sanity-Gate ausgerechnet bei diesem Input übersprungen wurde.
+      #
+      # Muss VOR dem Download stehen und NACH dem State-Restore: der
+      # Fingerabdruck kommt mit dem Bestand vom data-Branch.
+      - name: Reparse-Modus bestimmen
+        id: mode
+        run: |
+          forced=""
+          if [ "${{ inputs.full_reparse }}" = "true" ] || [ "${{ inputs.refresh_codebook }}" = "true" ]; then
+            forced="--forced"
+          fi
+          mode=$(python scripts/xbrl_csv_parser.py --decide $forced)
+          echo "Reparse-Modus: $mode"
+          if [ "$mode" = "full" ]; then
+            echo "full=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "full=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Download new submissions
         run: |
-          if [ "${{ inputs.full_reparse }}" = "true" ]; then
+          if [ "${{ steps.mode.outputs.full }}" = "true" ]; then
             python scripts/download_raw_reports.py interim/edap_recon/manifest_parse.csv
           else
             python scripts/download_raw_reports.py interim/edap_recon/manifest_todo.csv
@@ -104,16 +132,15 @@ jobs:
 
       # Ein frisches Codebook wirkt nur auf neu geparste Fakten — der Altbestand
       # trägt die Koordinaten des alten Codebooks. Deshalb erzwingt ein
-      # Codebook-Refresh den vollen Reparse.
+      # geändertes Codebook den vollen Reparse, entschieden oben in einem Schritt.
       #
-      # Die Bedingung unten ist seit #57 nur noch die BEQUEME Variante: der
-      # Parser vergleicht selbst den Fingerabdruck des Codebooks gegen den, mit
-      # dem der Bestand entstanden ist, und schaltet auf --full um. Das greift
-      # auch dann, wenn dpm_codebook.csv per Commit geändert wurde und niemand
-      # den Input gesetzt hat — der Fall, für den es kein Fehlerbild gibt.
+      # Der Parser prüft den Fingerabdruck trotzdem noch einmal selbst (#57):
+      # die Zusage gehört in den Ausführungspfad, nicht allein in den Workflow.
+      # Beide Wege kommen zur selben Antwort — der Schritt oben sorgt nur dafür,
+      # dass der Download sie rechtzeitig kennt.
       - name: Parse
         run: |
-          if [ "${{ inputs.full_reparse }}" = "true" ] || [ "${{ inputs.refresh_codebook }}" = "true" ]; then
+          if [ "${{ steps.mode.outputs.full }}" = "true" ]; then
             python scripts/xbrl_csv_parser.py --full
           else
             python scripts/xbrl_csv_parser.py
@@ -122,13 +149,26 @@ jobs:
       # Guards the failure mode that matters: a bug in the incremental merge
       # silently dropping the accumulated corpus. Shrinking is only ever legitimate
       # via a deliberate full re-parse.
+      #
+      # Der Schritt läuft in JEDEM Modus und meldet die Zahlen; hart bricht er
+      # nur inkrementell ab. Vorher hing die Bedingung an den Inputs — seit der
+      # Fingerabdruck den vollen Reparse von sich aus auslösen kann, wären damit
+      # Läufe ganz ohne Zahlenvergleich durchgelaufen, ohne dass sie jemand
+      # angefordert hat. Ein Schrumpfen ist beim Voll-Reparse legitim, aber es
+      # unerwähnt zu lassen wäre genau das Schweigen, um das es hier die ganze
+      # Zeit geht.
       - name: Sanity gate
-        if: ${{ !inputs.full_reparse && !inputs.refresh_codebook }}
         run: |
           after=$(( $(wc -l < processed/long_form_raw.csv) - 1 ))
           before=${{ steps.baseline.outputs.records }}
           echo "vorher: $before · nachher: $after"
-          if [ "$after" -lt "$before" ]; then
+          if [ "$after" -ge "$before" ]; then exit 0; fi
+          if [ "${{ steps.mode.outputs.full }}" = "true" ]; then
+            echo "::warning::Bestand geschrumpft ($before → $after) beim vollen Reparse. \
+          Legitim, wenn Einreichungen zurückgezogen wurden — sonst hat der Download \
+          nicht den ganzen Korpus geholt."
+            echo "- ⚠ Bestand geschrumpft: $before → $after (voller Reparse)" >> "$GITHUB_STEP_SUMMARY"
+          else
             echo "::error::Bestand geschrumpft ($before → $after) — Merge-Fehler, Publish abgebrochen."
             exit 1
           fi
