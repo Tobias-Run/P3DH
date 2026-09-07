@@ -298,6 +298,34 @@ def codebook_changed(codebook_path: Path, output_path: Path):
                   f"inkrementeller Lauf ergäbe einen Mischzustand (#57)")
 
 
+def reparse_mode(codebook_path: Path, output_path: Path, forced: bool = False):
+    """('full'|'incremental', Grund) — die EINE Entscheidung, vor dem Download.
+
+    ## Warum die Entscheidung nach vorne muss
+
+    #57 hat die Kopplung an den Bestand gehängt: ändert sich das Codebook,
+    schaltet der Parser selbst auf `--full`. Der DOWNLOAD wusste davon nichts —
+    er fragte weiter `inputs.full_reparse` und holte sonst nur das Delta. Die
+    Pipeline ist stateless, `raw/` beginnt leer: ein voller Parse über ein
+    `raw/`, das nur die neuen ZIPs enthält, baut den Bestand aus einem Bruchteil
+    der Quellen neu.
+
+    Dieselbe Lücke klaffte längst zwischen den Inputs selbst:
+    `refresh_codebook=true` ohne `full_reparse` parste voll, lud aber das Delta —
+    und übersprang dabei sogar das Sanity-Gate. Der Fall wäre still
+    durchgelaufen.
+
+    Deshalb entscheidet das hier einmal, und Download, Parse und Gate lesen
+    dieselbe Antwort. `forced` trägt die Workflow-Inputs herein: bei
+    `refresh_codebook` ändert sich das Codebook erst NACH dem Download, der
+    Fingerabdruck kann davon zum Entscheidungszeitpunkt noch nichts wissen.
+    """
+    if forced:
+        return "full", "per Workflow-Input erzwungen"
+    changed, why = codebook_changed(codebook_path, output_path)
+    return ("full" if changed else "incremental"), why
+
+
 def _stamp_codebook(codebook_path: Path, output_path: Path):
     """Den Fingerabdruck neben den Bestand schreiben (#57)."""
     fingerprint_path(output_path).write_text(
@@ -430,6 +458,16 @@ if __name__ == "__main__":
     import sys
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     full = "--full" in sys.argv
+
+    # --decide: nur die Entscheidung, ohne zu parsen. Der Workflow ruft das vor
+    # dem Download auf, damit Download und Parse dieselbe Antwort benutzen.
+    # 'full'/'incremental' auf stdout (maschinenlesbar), der Grund auf stderr.
+    if "--decide" in sys.argv:
+        mode, why = reparse_mode(CODEBOOK, OUTPUT, forced="--forced" in sys.argv)
+        if why:
+            print(why, file=sys.stderr)
+        print(mode)
+        sys.exit(0)
     # Manifest to parse: CLI arg wins, else the CODIS parse manifest, else latest-wins.
     if args:
         MANIFEST = Path(args[0])
