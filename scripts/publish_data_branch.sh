@@ -39,6 +39,10 @@ for f in "$ROOT/processed/long_form_raw.csv" "$ROOT/processed/filing_indicators.
 done
 [ -f "$ROOT/processed/long/p3dh_long.parquet" ] && \
   cp "$ROOT/processed/long/p3dh_long.parquet" "$TMP/state/"
+# Mit welchem Codebook der Bestand entstanden ist (#57) — ohne diese Datei
+# beginnt jeder frische Runner ohne Gedaechtnis, und die Kopplung greift nie.
+[ -f "$ROOT/processed/codebook_fingerprint.txt" ] && \
+  cp "$ROOT/processed/codebook_fingerprint.txt" "$TMP/state/"
 
 n_shards=$(find "$TMP/reports" -name '*.json' 2>/dev/null | wc -l | tr -d ' ')
 state_sz=$(du -sh "$TMP/state" 2>/dev/null | cut -f1)

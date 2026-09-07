@@ -26,6 +26,7 @@ Run:  python3 scripts/build_zweig_b.py && python3 scripts/build_zweig_a_shards.p
 """
 
 from pathlib import Path
+import collections
 import csv
 import json
 import gzip
@@ -159,6 +160,52 @@ def collapse_cells(rows):
     return out
 
 
+def report_currencies(rows):
+    """Währung je Report auflösen (#55) -> {report_key: (dominant, {tid: cur})}.
+
+    `rows`: (report_key, template_id, currency, n_facts) — beliebige Reihenfolge.
+
+    ## Warum das nicht eine Zahl je Report ist
+
+    `baseCurrency` stand bisher aus der ERSTEN Zeile des Pass-1-Ergebnisses
+    fest. Bei 12 Reports trägt der Bestand aber zwei Währungen — durchweg
+    Landeswährung plus EUR —, und der Viewer rechnet jeden monetären Wert mit
+    dieser einen Währung in EUR um. Gemessen sind **9.086 monetäre Fakten** mit
+    dem falschen Kurs umgerechnet worden, darunter die Vorstandsvergütung von
+    NOBA (441.335 statt 4.775.833 EUR, Faktor 10,8) und die von BRD-Groupe
+    Société Générale (65.562 statt 334.161 EUR).
+
+    ## Warum eine Karte je Template genügt
+
+    Gemessen: **0 von 919** (Report, Template)-Paaren tragen intern mehr als
+    eine Währung. Die Währung wechselt zwischen Templates, nie innerhalb eines.
+    Damit reicht eine Ausnahmeliste — 123 Einträge über 882 Reports — statt
+    einer Währung je Zelle.
+
+    Der Rückfallwert bleibt eine Währung je Report, jetzt aber die **nach
+    Faktenzahl dominierende** statt einer zufällig erstsortierten. Das ist eine
+    Aussage, die für die Mehrheit der Fakten stimmt, und für die Minderheit
+    steht die Ausnahme daneben.
+    """
+    per_report = collections.defaultdict(collections.Counter)
+    per_tpl = {}
+    for key, tid, cur, n in rows:
+        if not cur:
+            continue
+        per_report[key][cur] += n
+        per_tpl[(key, tid)] = cur
+    out = {}
+    for key, counts in per_report.items():
+        # Gleichstand deterministisch brechen: mehr Fakten gewinnt, sonst der
+        # alphabetisch kleinere Code. Ohne den zweiten Schlüssel entschiede die
+        # Einfügereihenfolge — genau der Fehler, den #55 aufgedeckt hat.
+        dominant = max(counts.items(), key=lambda kv: (kv[1], [-ord(ch) for ch in kv[0]]))[0]
+        override = {tid: c for (k, tid), c in per_tpl.items()
+                    if k == key and c != dominant}
+        out[key] = (dominant, dict(sorted(override.items())))
+    return out
+
+
 def load_quality_profile(root: Path | None = None):
     """Plausibilitäts-Befunde je Report (Issue #17) -> {report_key: {...}}.
 
@@ -274,8 +321,8 @@ def main():
         --   fact_value_raw + oc/od/dp : 74.905 Koordinaten sind je Report
         --     MEHRFACH belegt (#52) — ohne diese Schlüssel wandert der Wert
         --   currency/framework  : ZULETZT, damit sie die Zellordnung nicht
-        --     antasten; sie werden je Report aus der ersten Zeile gezogen und
-        --     wären ohne Sortierung bei 12 Reports mit zwei Währungen zufällig
+        --     antasten. Die Währung wird NICHT mehr aus der ersten Zeile
+        --     gezogen (#55) — siehe report_currencies() unten.
         ORDER BY entityID, refPeriod, template_id, cell_row, cell_col,
                  fact_value_raw, open_axis_country, open_axis_dims, datapoint_code,
                  currency, framework_version
@@ -284,10 +331,25 @@ def main():
         rep = reports.get(key)
         if rep is None:
             rep = reports[key] = {"entityID": eid, "refPeriod": rp,
-                                  "baseCurrency": cur or "", "framework": fw,
-                                  "tpl": {}}
+                                  "framework": fw, "tpl": {}, "cur": {}}
         rep["tpl"].setdefault(tid, []).append(
             (r, c, "" if val is None else val, cell_discriminator(oc, od, dp)))
+
+    # --- Währung je Report UND je Template (#55). Eigene Abfrage statt aus
+    # Pass 1 mitgezählt: dort steht je Zelle nur EIN Fakt (der Wert, der in den
+    # Shard geht), hier zählt jeder Fakt. Der Nenner der Mehrheit soll die
+    # Meldung sein, nicht unsere Auswahl daraus.
+    cur_map = report_currencies(ordered(con, """
+        SELECT entityID || '|' || refPeriod, template_id, currency, count(*)
+        FROM p
+        WHERE cell_row IS NOT NULL AND cell_row <> ''
+        GROUP BY 1, 2, 3
+        ORDER BY 1, 2, 3
+    """, "pass 1 / Währungen"))
+    for key, rep in reports.items():
+        dominant, override = cur_map.get(key, ("", {}))
+        rep["baseCurrency"] = dominant
+        rep["cur"] = override
 
     # --- coverage ("Fehlt != Null"): resolve declarations against the templates
     # that actually carry cells. Done AFTER pass 1 so data_tids is complete, and
@@ -460,6 +522,11 @@ def main():
             "baseCurrency": rep["baseCurrency"], "framework": rep["framework"],
             "nt": len(rep["tpl"]), "f": fname,
         }
+        # Abweichende Template-Währungen (#55): nur die 12 gemischten Reports
+        # tragen das Feld, zusammen 123 Einträge. `baseCurrency` daneben ist
+        # die dominierende — für den Rest gilt sie.
+        if rep["cur"]:
+            entry["cur"] = rep["cur"]
         q = quality.get(key)
         if q:                       # nur Reports MIT Befunden tragen das Feld
             entry["q"] = q

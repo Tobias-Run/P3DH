@@ -37,10 +37,25 @@ im Parquet ist eine VARCHAR-Kopie der CSV-Spalte; ein Vergleich über `float()`
 würde eine Formatierungsänderung (`1.0` vs `1`) verschlucken, und genau die
 wäre ein Drift.
 
-Nicht verglichen werden Labels, Datentypen und EUR-Normalisierung: die
-entstehen erst im Parquet und haben in der Long-Form keine Entsprechung. Diese
-Prüfung beantwortet „stehen dieselben Zahlen da", nicht „sind sie richtig
-beschriftet".
+## Und die Währung je Template (#55)
+
+Die Wertprüfung oben war strukturell blind für den Fehler, der sie am meisten
+gebraucht hätte. Sie vergleicht **Rohwerte**, und die stimmten: `104.236.671.752`
+stand im Shard wie in der Long-Form. Falsch war die **Einheit** — der Index
+behauptete für dieses Template SEK, gemeldet war EUR. Der Viewer rechnete daraus
+441.335 statt 4.775.833 EUR Vorstandsvergütung pro Kopf, und die Parität blieb
+grün. Über den ganzen Bestand: 9.086 monetäre Fakten mit dem falschen Kurs, ohne
+dass eine Prüfung anschlug.
+
+Die EUR-Umrechnung selbst lässt sich hier nicht vergleichen — sie entsteht erst
+im Browser und steht nirgends als Wert. Ihre **Eingabe** aber schon: für jedes
+(Report, Template) muss die Währung, die der Viewer benutzen würde
+(`cur[tid]` sonst `baseCurrency` aus `index.json`), die sein, die die Long-Form
+für dieses Template führt. Genau diese Gleichung war verletzt.
+
+Nicht verglichen werden Labels und Datentypen: die entstehen erst im Parquet und
+haben in der Long-Form keine Entsprechung. Diese Prüfung beantwortet „stehen
+dieselben Zahlen in derselben Einheit da", nicht „sind sie richtig beschriftet".
 
 ## Bekannte, erlaubte Abweichung
 
@@ -105,6 +120,69 @@ def shard_cells(path):
         for cell in cells:
             cnt[(cell[0], cell[1], cell[2])] += 1
         out[tid] = cnt
+    return out
+
+
+def long_form_currencies(con, path, sample=None):
+    """{report_key: {template: {währung: n}}} aus der Long-Form (#55).
+
+    `baseCurrency` steht dort JE FAKT — die Spalte heißt nur so wie das Feld,
+    das im Index je Report steht. Genau diese Namensgleichheit hat den Fehler
+    getarnt: der Shard-Builder zog eine Spalte, die je Fakt gilt, und schrieb
+    sie als Report-Eigenschaft fest.
+    """
+    rows = ordered(con, f"""
+        SELECT entityID, refPeriod, template_id, baseCurrency, count(*)
+        FROM read_csv_auto('{path}', all_varchar=true)
+        WHERE cell_row IS NOT NULL AND cell_row <> ''
+          AND baseCurrency IS NOT NULL AND baseCurrency <> ''
+        GROUP BY 1, 2, 3, 4
+        ORDER BY 1, 2, 3, 4
+    """, "Long-Form-Währungen")
+    out = collections.defaultdict(lambda: collections.defaultdict(dict))
+    for eid, rp, tid, cur, n in rows:
+        key = f"{eid}|{rp}"
+        if sample is not None and key not in sample:
+            continue
+        out[key][tid][cur.replace("iso4217:", "")] = n
+    return out
+
+
+def viewer_currency(entry, tid):
+    """Die Währung, die der Viewer für dieses Template benutzen würde.
+
+    Spiegel von `curOf(rep, tid)` im Viewer. Ein Spiegel ist immer eine zweite
+    Wahrheit — hier ist er eine Zeile lang und steht neben dem Original im
+    Test, was billiger ist, als die Umrechnung selbst zu vergleichen (sie
+    entsteht erst im Browser).
+    """
+    ov = (entry.get("cur") or {}).get(tid)
+    return (ov or entry.get("baseCurrency") or "").replace("iso4217:", "")
+
+
+def currency_problems(index_reports, lf_cur, keys):
+    """Reine Funktion: wo weicht die Viewer-Währung von der gemeldeten ab?"""
+    by_key = {r["entityID"] + "|" + r["refPeriod"]: r for r in index_reports}
+    out = []
+    for key in sorted(keys):
+        entry = by_key.get(key)
+        if entry is None:
+            continue                      # Index/Shard-Abgleich macht main()
+        for tid, counts in sorted(lf_cur.get(key, {}).items()):
+            if len(counts) > 1:
+                # Das Modell kennt eine Währung je Template. Träfe das nicht
+                # mehr zu, wäre die Ausnahmeliste selbst zu grob — dann muss
+                # sie auf Zellebene, nicht stillschweigend eine Währung wählen.
+                out.append(f"{key} {tid}: mehrere Währungen im selben Template "
+                           f"({', '.join(sorted(counts))}) — die Ausnahmeliste "
+                           f"je Template kann das nicht ausdrücken")
+                continue
+            reported = next(iter(counts))
+            used = viewer_currency(entry, tid)
+            if used != reported:
+                out.append(f"{key} {tid}: gemeldet in {reported}, der Viewer "
+                           f"rechnet mit {used or '(keine)'} — "
+                           f"{counts[reported]} Fakten mit falschem Kurs")
     return out
 
 
@@ -175,9 +253,25 @@ def main():
                 detail.append(f"{sum(extra.values())} zusätzlich im Shard, z. B. {s}")
             problems.append(f"{key} · {tid}: " + " · ".join(detail))
 
+    # --- Einheit statt Wert (#55): die Rohwerte oben koennen stimmen und die
+    # Zahl im Viewer trotzdem falsch sein, wenn die Waehrung nicht passt.
+    lf_cur = long_form_currencies(con, LONG_FORM,
+                                  sample=set(by_key) if args.sample else None)
+    index_path = SHARDS.parent / "index.json"
+    n_cur = 0
+    if index_path.exists():
+        reports = json.loads(index_path.read_text(encoding="utf-8"))["reports"]
+        cur_problems = currency_problems(reports, lf_cur, set(by_key))
+        n_cur = sum(len(v) for k, v in lf_cur.items() if k in by_key)
+        problems.extend(cur_problems)
+    else:
+        problems.append(f"{index_path.name} fehlt — die Waehrung je Template "
+                        "ist damit ungeprueft (#55)")
+
     print(f"Zweig-A-Parität gegen {LONG_FORM.name}")
     print(f"  Reports verglichen : {n_reports}")
     print(f"  Zellen verglichen  : {n_cells:,}".replace(",", "."))
+    print(f"  Währungen geprüft  : {n_cur:,}".replace(",", ".") + " (Report, Template)")
     if only_long_form:
         # #28: ein Report kann Deklarationen ohne einen einzigen platzierbaren
         # Fakt haben. Dann existiert er hier gar nicht — und das ist richtig so.
@@ -196,7 +290,8 @@ def main():
               "andere Zahlen als der Bestand — das ist die Zusage aus dem README.")
         sys.exit(1)
 
-    print("\n✓ Jeder Wert im Viewer steht so auch in der Long-Form, und umgekehrt.")
+    print("\n✓ Jeder Wert im Viewer steht so auch in der Long-Form, in derselben\n"
+          "  Währung, und umgekehrt.")
 
 
 if __name__ == "__main__":
