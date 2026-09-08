@@ -18,6 +18,25 @@ educational research purposes only** (fair use / research and study exemptions):
 The underlying Pillar 3 disclosures are information that credit institutions are **legally
 required to publish** and that the EBA makes publicly accessible through a single portal.
 
+## What the MIT licence covers — and what it does not
+
+`LICENSE` (MIT) applies to the **software in this repository**: everything under
+`scripts/`, `tests/`, `.github/`, the viewer (`processed/zweig_a/viewer_json.html`),
+the landing pages, and the prose written for this project (`README.md`, `docs/`).
+
+It does **not** — and cannot — apply to material derived from third-party sources:
+
+| Path | Content | Governed by |
+|---|---|---|
+| `codebook/dpm_codebook.csv`, `codebook/template_titles.csv` | Datapoint and template labels from the EBA DPM 2.0 dictionary | © European Banking Authority — see sources above |
+| `interim/edap_recon/manifest_*.csv` | Submission catalogue harvested from EDAP | © European Banking Authority |
+| `processed/lei_names.csv`, `processed/entity_meta.csv` | Legal entity names via GLEIF | © GLEIF, CC0 |
+| The published dataset (`data` branch, release assets) | Re-presented Pillar 3 disclosures | © European Banking Authority |
+
+We hold no rights in that material and grant none. It is included and
+redistributed here under the research/education terms set out on this page; reuse
+is subject to the original providers' conditions, not to the MIT licence.
+
 ## Terms of use of this repository
 
 - **Research use.** The processed data and viewer are provided for transparency research,

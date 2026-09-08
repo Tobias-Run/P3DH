@@ -20,9 +20,11 @@ deutschen BIP. Für sich gelesen ist das eine Zahl. Gegen 330 vergleichbare
 Meldungen gelesen, deren Median bei 1,6 Mio. EUR liegt, ist es ein Befund. Wir
 korrigieren sie nicht — wir markieren sie und sagen, warum.
 
-> **Aktueller Projektstatus:** siehe `SESSION_STATUS.md` — wird laufend aktuell gehalten.
-> `P3DH agent instructions.txt` war nur das initiale Briefing zu Projektstart und wird
-> seitdem nicht mehr fortgeschrieben; für den heutigen Stand nicht verlässlich.
+> **Aktueller Projektstatus:** siehe `STATUS.md`. Offene Arbeit läuft über
+> [GitHub-Issues](https://github.com/Tobias-Run/P3DH/issues), abgeschlossene Befunde
+> stehen als Entscheidungshistorie in `BACKLOG.md`.
+> `docs/projektbriefing_2026-06.txt` ist das ursprüngliche Briefing zum Projektstart —
+> Zeitdokument, für den heutigen Stand nicht verlässlich.
 
 ## 🔗 Live-Viewer (im Browser, ohne Installation)
 
@@ -30,9 +32,14 @@ korrigieren sie nicht — wir markieren sie und sagen, warum.
 
 Der **Zweig-A-Viewer** rekonstruiert die Bank-Templates (KM1, OV1, CCR1 …) mit vollen
 Zeilen-/Spalten-Labels und bietet **Peer-Benchmark, Zeitreihen und Vergleich** über die
-Institute. Aktuell geladen: **882 Reports · 2,30 Mio. platzierte Fakten · 474 Institute ·
-30 Länder** über fünf Stichtage; Voll-Katalog = 489 Institute / 4.278 Einreichungen,
-wellenweise nachladbar.
+Institute. Geladen: **882 Reports · 2,295 Mio. Fakten · 474 Institute · 30 Länder** über
+fünf Stichtage.
+
+Das ist **keine Stichprobe**. Von den 489 Instituten im Katalog reichen 476 XBRL-CSV ein,
+und alle 476 sind verarbeitet; die übrigen 13 veröffentlichen nur qualitative PDF-Pakete
+(`*DISDOCS`, außerhalb des Scopes). Dass der Katalog 4.278 Einreichungen zählt und wir
+882 Reports zeigen, liegt an Resubmissions: 2.539 Einträge sind Korrekturfassungen
+derselben Meldung, von denen nur die neueste zählt.
 
 Drei Dinge, die das offizielle Portal nicht leistet:
 
@@ -51,8 +58,8 @@ Drei Dinge, die das offizielle Portal nicht leistet:
   Browser). So skaliert er Richtung Voll-Load. Die Shards werden **aus dem Zweig-B-Parquet
   abgeleitet** (eine Transformationsstelle) und über den Orphan-`data`-Branch via **jsDelivr**
   ausgeliefert (Fallback: `raw.githubusercontent.com`).
-- **Gabelseite** `processed/zweig_a/index.html`: JSON-Viewer (Standard) vs. CSV-Viewer (Legacy,
-  nur lokal — braucht die 413 MB große `long_form_raw.csv`).
+- **Einstieg** `processed/zweig_a/index.html`: leitet auf den Viewer weiter (früher die
+  Gabelseite JSON vs. CSV — der CSV-Viewer ist zurückgezogen, siehe unten).
 - **Lokal:** `python3 -m http.server 8766` im Repo-Root → `http://localhost:8766/`
 - **Gestaltung:** ein redaktionelles System (#61) — ruhiger Kopf, Serif für Überschriften,
   ein einziger Akzent, und **Rot bedeutet Fokus, nie Wertung**. Zwei Tests halten das fest:
@@ -80,6 +87,22 @@ GLEIF verbunden. Alle externen Daten sind **öffentlich** und werden ausschließ
 Data Hub (© EBA), EBA DPM 2.0, GLEIF (LEI-Namen). Bereitstellung „as is", ohne Gewähr —
 Zahlen stets gegen die offizielle EBA-Quelle prüfen; keine Anlage-/Rechtsberatung.
 Volltext: **`DISCLAIMER.md`**.
+
+## Lizenz & Zitation
+
+Der **Code** steht unter der **MIT-Lizenz** (`LICENSE`) — `scripts/`, `tests/`,
+`.github/`, der Viewer, die Landing-Pages und die Projekttexte.
+
+Die MIT-Lizenz gilt **nicht** für das Material, das aus fremden Quellen stammt und hier
+nur weitergereicht wird: `codebook/dpm_codebook.csv` und `codebook/template_titles.csv`
+(EBA DPM 2.0), `interim/edap_recon/manifest_*.csv` (EDAP-Katalog), `processed/lei_names.csv`
+und `processed/entity_meta.csv` (GLEIF) sowie der veröffentlichte Datensatz selbst. Daran
+halten wir keine Rechte und vergeben keine. Die Abgrenzung steht vollständig in
+`DISCLAIMER.md`.
+
+Zum Zitieren der Software: `CITATION.cff` (GitHub zeigt daraus „Cite this repository").
+**Die ausgewerteten Offenlegungsdaten sind gesondert zu zitieren** — sie stammen von der
+EBA, nicht von uns.
 
 ## Zwei Ausgabe-Zweige, ein gemeinsamer Kern
 
@@ -138,11 +161,11 @@ fertige `codebook/dpm_codebook.csv` liegt im Repo.
 | `raw/` | Roh-XBRL-CSV-Pakete, **immutable**, nie überschreiben (gitignored) |
 | `interim/edap_recon/` | Kataloge/Manifeste (Voll-Harvest, Wellen, latest-wins) |
 | `processed/long/` | **Zweig B**: `p3dh_long.parquet` — die gejointe Wahrheit, speist die Shards (gitignored, regenerierbar) |
-| `processed/zweig_a/` | **Zweig A**: `viewer_json.html` (Standard) + `viewer.html` (Legacy) + Gabelseite `index.html`; die JSON-Shards liegen auf dem `data`-Branch |
+| `processed/zweig_a/` | **Zweig A**: `viewer_json.html` + Weiterleitung `index.html`; die JSON-Shards liegen auf dem `data`-Branch |
 | `codebook/` | DPM-Mapping Code → Label/Einheit/Titel |
 | `scripts/` | Harvester, Downloader, Parser, Zweig-B/A-Builder, Publish-Skript |
-| `notebooks/` | Data-Science-Explorationen (Phase 4) |
-| `docs/` | Decision-Memos, Format-Notizen, Query-Beispiele |
+| `tests/` | Testsuite (352 Tests), läuft bei jedem Push |
+| `docs/` | Decision-Memos, Format-Notizen, Query-Beispiele, Projektbriefing |
 
 ## Phasen
 
@@ -150,19 +173,20 @@ fertige `codebook/dpm_codebook.csv` liegt im Repo.
 - **Phase 1** — Ingestion: Voll-Katalog-Harvester (`harvest_catalog_query.py`) + wellenweiser Download ✅
 - **Phase 2** — Parsing & DPM-Join → Codebook + Long-Form ✅
 - **Phase 3** — Zweig B (Parquet/DuckDB) + Zweig A (JSON-Viewer, aus Zweig B gespeist) ✅ ·
-  RF-4.1↔4.2-Brücke gebaut (5.275 beobachtete Zellen: 5.087 stabil, 63 umgebunden,
-  125 mehrdeutig); ihre **Darstellung** in Zeitreihe und Sparkline ist offen (#26) —
-  103 von 475 Instituten haben inzwischen Reports beiderseits des Bruchs
-- **Phase 4** — Explorationen: sechs Benchmark-Profile (KM1, Headroom, Risiko, Liquidität,
-  NPL/CQ3, ESG/41.00) ✅ · Perzentilbänder je Peer-Gruppe ✅ · Plausibilitätsprofil (#17) ✅ ·
-  Footprint-Kennzahlen (#12) ✅ · Clustering und Transparenz-Matrix offen
+  RF-4.1↔4.2-Brücke gebaut (5.277 beobachtete Zellen: 5.091 stabil, 63 umgebunden,
+  123 mehrdeutig) und im Viewer markiert (#26) ✅ — die 123 liegen sämtlich in LIQ2
+  (`74.00.a`–`f`), festgehalten als #70
+- **Phase 4** — Explorationen: sieben Benchmark-Profile (KM1, Headroom, Risiko, Liquidität,
+  NPL/CQ3, ESG/41.00, Vergütung/REM1) ✅ · Perzentilbänder je Peer-Gruppe ✅ ·
+  Plausibilitätsprofil (#17) ✅ · Footprint-Kennzahlen (#12) ✅ · Clustering und
+  Transparenz-Matrix offen
 
 ## Automatisierte Pipeline (GitHub Actions)
 
 `.github/workflows/pipeline.yml` fährt die ganze Kette ohne den Laptop. Ausgelöst wird
 manuell (`workflow_dispatch`). Ein wöchentlicher Cron liegt auskommentiert bereit; die
-Vorbedingung „ein manueller Lauf muss sauber durchlaufen" ist seit Lauf #5 erfüllt, offen
-ist nur noch die Entscheidung über den Harvest (#8):
+Vorbedingung „ein manueller Lauf muss sauber durchlaufen" ist erfüllt (Lauf #6, 10:45
+inklusive vollem Reparse), offen ist nur noch die Entscheidung über den Harvest (#8):
 
 ```
 fetch_state.sh → plan_delta.py → download (nur Neues) → parse (inkrementell)
@@ -171,9 +195,19 @@ fetch_state.sh → plan_delta.py → download (nur Neues) → parse (inkrementel
 
 Der Lauf ist **zustandslos**: `raw/` startet leer, der Bestand kommt aus `state/` auf dem
 `data`-Branch, und die Coverage-Matrix sagt, was schon verarbeitet ist — geladen wird nur
-die Differenz. Zwei Schalter: `harvest` (Katalog neu ernten, opt-in, weil der
-Playwright-/Power-BI-Teil der fragilste ist) und `full_reparse`. Ein **Sanity-Gate** bricht
-vor dem Publish ab, falls der Bestand schrumpft.
+die Differenz. Drei Schalter: `harvest` (Katalog neu ernten, opt-in, weil der
+Playwright-/Power-BI-Teil der fragilste ist), `full_reparse` und `refresh_codebook`.
+
+Ob voll oder inkrementell gearbeitet wird, entscheidet der Lauf allerdings **nicht** allein
+an diesen Schaltern, sondern einmal vor dem Download — und Download, Parse und Gate lesen
+dieselbe Antwort. Ein per Commit geändertes Codebook erzwingt den vollen Reparse von sich
+aus, weil neben dem Bestand der Fingerabdruck des Codebooks liegt, mit dem er entstanden
+ist (#57). Ein **Sanity-Gate** vergleicht in jedem Modus den Bestand vorher/nachher und
+bricht vor dem Publish ab, wenn er inkrementell schrumpft.
+
+> Der `data`-Branch wird **force-gepusht und trägt genau einen Commit**. Er hat keine
+> Historie: jeder Lauf ersetzt den vorigen Stand vollständig. Wer einen bestimmten Stand
+> zitieren will, braucht das Release-Asset, nicht den Branch.
 
 ## Arbeitsprinzipien
 

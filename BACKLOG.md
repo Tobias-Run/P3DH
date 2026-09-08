@@ -5,39 +5,28 @@
 > Diese Datei behält die *abgeschlossenen* Befunde als Entscheidungs-Historie
 > (warum etwas so gebaut ist) — sie ist kein Aufgaben-Tracker mehr.
 
-## 🔴 OFFEN → Issue #3: GAR/BTAR-Fakten unplatzierbar (636 dp-Codes fehlen)
+## ✅ ERLEDIGT: GAR/BTAR-Fakten unplatzierbar (Issue #3, geschlossen)
 
-Vom Placement-Guard (`scripts/check_fact_placement.py`) sichtbar gemacht — der
-Guard **verhindert nur die Verschlechterung, er behebt den Befund nicht.**
+Vom Placement-Guard (`scripts/check_fact_placement.py`) sichtbar gemacht: 636
+dp-Codes kannte das Codebook nicht, 5.344 Fakten wurden dadurch in
+`build_zweig_a_shards.py` (`WHERE cell_row <> ''`) weggefiltert — ohne Fehler,
+ohne Warnung. Schwerpunkt `47.00.A` (GAR I, 4.700 von 6.197) und `96.00.B`
+(TLAC2b Creditor ranking, 127 von 132).
 
-`cell_row`/`cell_col` entstehen erst durch einen dp-Lookup im Parser gegen
-`codebook/dpm_codebook.csv`. **636 dp-Codes kennt das Codebook nicht**; die
-betroffenen Fakten haben weder Koordinate noch offene-Achsen-Dimension und werden
-in `build_zweig_a_shards.py` (`WHERE cell_row <> ''`) weggefiltert — ohne Fehler,
-ohne Warnung. Betroffen sind 5.344 Fakten:
+**Die vermutete Ursache war falsch.** Der Verdacht lag auf einer Lücke der
+ESGDIS-Templates in der DPM-Access-DB. Tatsächlich war das Codebook schlicht
+**veraltet**: der Refresh-Schritt im Workflow ist opt-in und lief beim Voll-Load
+nicht mit. Der Neubau im Zuge von #56 löste 9.775 von 9.775 dp-Codes auf (vorher
+9.068) und deckte damit 14.283 zusätzliche Fakten in `47.00.A`/`49.01`/`96.00.A`
+und `96.00.B` ab.
 
-| Template | Inhalt | verlorene Fakten |
-|---|---|---|
-| `47.00.A` | GAR (I) | 4.700 von 6.197 (76 %) |
-| `00.03` | Narrative ESGDIS | 197 |
-| `49.01` | BTAR | 154 |
-| `47.00.B` | GAR (II) | 136 |
-| `96.00.B` | TLAC2b Creditor ranking | 127 von 132 (96 %) |
+Stand nach Pipeline-Lauf #6: **dem Codebook unbekannte dp-Codes: 0.** Es
+verbleiben 35 unplatzierbare Fakten (0,0015 %) — Fakten ohne jeden Achsenwert,
+bei denen die Zeile bewusst leer bleibt, statt eine zu erfinden (Arbeitsprinzip 3).
 
-**Abgrenzung (Korrektur einer früheren, zu breiten Formulierung):** Betroffen ist
-**nur die GAR/BTAR-Kennzahl**, nicht ESG insgesamt. Das ESG-Template der
-Benchmark-Roadmap, **`41.00` (Klima-Transitionsrisiko), ist sauber** — 97.249
-Fakten aus 135 Reports, null Verluste. Ebenso NPL (`21.01.D`, `82.00.A`),
-Kreditrisiko (`25.00`, `26.00.A`), Liquidität (`73/74.00`), KM1, OV1.
-Roadmap-Punkt 1 ist also **nicht** blockiert.
-
-**Vermutete Ursache:** `build_codebook.py` zieht die Taxonomie aus der DPM-
-Access-DB; die ESGDIS-Templates sind dort offenbar nicht oder nur teilweise
-abgedeckt. Zu prüfen: fehlt eine Tabelle/ein Release in der 4.2-DB, oder braucht
-ESG einen eigenen Layout-/Taxonomie-Pfad?
-
-Nach einem Codebook-Fix: `python3 scripts/check_fact_placement.py --update-baseline`
-(die Baseline sinkt dann — der Guard akzeptiert Verbesserungen ohnehin still).
+Genau dieser Fehlermodus — ein Codebook-Wechsel, der still nur auf neue Fakten
+wirkt — ist anschließend als #57 abgesichert worden: der Fingerabdruck des
+Codebooks liegt neben dem Bestand und erzwingt den vollen Reparse.
 
 ## ✅ ERLEDIGT: Filing-Indicators immer `False` („Fehlt ≠ Null")
 

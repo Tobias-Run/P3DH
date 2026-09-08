@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+title: "P3DH — Analysepipeline für den EBA Pillar 3 Data Hub"
+message: >-
+  Wenn Sie diese Software verwenden, zitieren Sie sie bitte wie unten angegeben.
+  Die ausgewerteten Offenlegungsdaten stammen von der Europäischen
+  Bankenaufsichtsbehörde (EBA) und sind gesondert zu zitieren — siehe
+  DISCLAIMER.md.
+type: software
+authors:
+  - name: "Tobias-Run"
+    website: "https://github.com/Tobias-Run"
+repository-code: "https://github.com/Tobias-Run/P3DH"
+url: "https://tobias-run.github.io/P3DH/"
+abstract: >-
+  Reproduzierbare Pipeline, die die XBRL-CSV-Offenlegungen aus dem EBA Pillar 3
+  Data Hub einliest, jeden Datenpunkt gegen das DPM 2.0 auflöst, die
+  Meldetabellen mit echten Zeilen- und Spaltenlabels rekonstruiert und sie über
+  die Population hinweg vergleichbar macht — mit Peer-Benchmarks,
+  Plausibilitätsprüfung gegen die Population und einer beobachtungsbasierten
+  Brücke über den Taxonomiewechsel 4.1 → 4.2. Die Pipeline unterscheidet
+  durchgängig zwischen einer bewusst unterlassenen Offenlegung und einer Lücke
+  im eigenen Bestand.
+keywords:
+  - Pillar 3
+  - banking supervision
+  - regulatory disclosure
+  - XBRL
+  - EBA
+  - DPM
+  - open data
+  - reproducible research
+license: MIT
