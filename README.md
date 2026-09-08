@@ -104,6 +104,10 @@ Zum Zitieren der Software: `CITATION.cff` (GitHub zeigt daraus „Cite this repo
 **Die ausgewerteten Offenlegungsdaten sind gesondert zu zitieren** — sie stammen von der
 EBA, nicht von uns.
 
+Der Datensatz selbst ist in `docs/datensatz.md` beschrieben: alle 29 Spalten mit Herkunft
+und Semantik, dazu die dokumentierten Fallen an einer Stelle. Wie ein Release entsteht,
+steht in `docs/release.md`.
+
 ## Zwei Ausgabe-Zweige, ein gemeinsamer Kern
 
 Der teure, fehleranfällige Teil (DPM-Join, Einheiten-Semantik, `filing-indicators`,
