@@ -123,6 +123,12 @@ def dpm_decode(v) -> str:
     return _repair_mangled_punct(best)
 
 
+def _norm_ws(s: str) -> str:
+    """Weissraumfolgen zu einem Leerzeichen. Fuer Labels aus der EBA-Layouttabelle,
+    deren Zellenumbrueche als \\n im Text landen."""
+    return re.sub(r"\s+", " ", s).strip() if s else s
+
+
 def clean_text(s: str) -> str:
     """Drop values access-parser failed to decode (memo-overflow rows come back as
     binary junk). Keep only clean printable text."""
@@ -151,7 +157,11 @@ def build_label_index(db):
     dir_by_hid = {int(h): _direction(d) for h, d in zip(hdr["HeaderID"], hdr["Direction"])}
 
     hv = db.parse_table("HeaderVersion")
-    cl_by_hvid = {int(vid): (dpm_decode(c), dpm_decode(l))
+    # Zeilenumbrueche normalisieren: sie stammen aus dem Zellenumbruch der
+    # EBA-Layouttabelle, nicht aus dem Text. 213 Labels tragen sie und lesen
+    # sich dadurch als "f Past due\n> 90 days\n<= 180 days". Nur Weissraum wird
+    # zusammengefasst — kein Zeichen faellt weg.
+    cl_by_hvid = {int(vid): (dpm_decode(c), _norm_ws(dpm_decode(l)))
                   for vid, c, l in zip(hv["HeaderVID"], hv["Code"], hv["Label"])}
 
     labels = {}
@@ -313,6 +323,73 @@ def parse_cellcode(code: str):
     return m.group(1).strip(), m.group(2), m.group(3)
 
 
+ORDINATE_RE = re.compile(r"^\d{4}$")
+
+
+def _wohlgeformt(code: str) -> bool:
+    """Eine Modellkoordinate ist vierstellig — oder die offene Achse."""
+    return code == OPEN_AXIS or bool(ORDINATE_RE.match(code))
+
+
+def repair_truncated_ordinates(rows, axis="col"):
+    """Abgeschnittene Koordinaten aus dem Modell der Schwesterzeilen herstellen.
+
+    ## Der Befund
+
+    Zwei Zellen im ganzen Codebook tragen den Spaltencode `00` statt der sonst
+    durchgängigen vier Ziffern — beide in Zeile 0060:
+
+        K_82.00.a r0060 c00   die Zeile hat 12 Spalten wie alle 14 Schwestern,
+                              aber ihr fehlt 0060
+        R_12.00.a r0060 c00   dieselbe Konstellation, dort fehlt 0080
+
+    `00` ist in beiden Fällen der auf zwei Zeichen gekürzte echte Code. Bei
+    Adyen N.V. hängt daran ein realer Wert (3.325,29 EUR): 82.00.A Spalte 0040
+    ist die Summe ihrer Komponenten, und genau dieser Betrag fehlt darin.
+
+    Der Wert war also nie verloren — er stand nur in einer namenlosen Spalte,
+    und niemand konnte ihm ansehen, in welches Verzugsband er gehört.
+
+    ## Warum das eine Regel und kein Raten ist
+
+    Wiederhergestellt wird ausschliesslich, wenn das Modell die Antwort selbst
+    erzwingt: Die Spaltenmenge des Templates ergibt sich aus allen wohlgeformten
+    Codes seiner Zeilen. Fehlt der betroffenen Zeile daraus **genau eine**
+    Spalte, und ist der kaputte Code ein **Präfix** davon, dann gibt es keine
+    zweite Möglichkeit.
+
+    Ist es nicht eindeutig, bleibt der Code kaputt und wird gemeldet. Lieber
+    eine sichtbare Lücke als eine erfundene Koordinate (Arbeitsprinzip 3).
+
+    Gibt (repariert, ungeklaert) zurueck — beide als Liste zum Ausgeben.
+    """
+    other = "row" if axis == "col" else "col"
+    modell = defaultdict(set)
+    for r in rows:
+        if _wohlgeformt(r[axis]):
+            modell[r["template"]].add(r[axis])
+
+    belegt = defaultdict(set)
+    for r in rows:
+        if _wohlgeformt(r[axis]):
+            belegt[(r["template"], r[other])].add(r[axis])
+
+    repariert, ungeklaert = [], []
+    for r in rows:
+        if _wohlgeformt(r[axis]):
+            continue
+        kaputt = r[axis]
+        kandidaten = {c for c in modell[r["template"]] - belegt[(r["template"], r[other])]
+                      if c.startswith(kaputt)}
+        if len(kandidaten) == 1:
+            heil = kandidaten.pop()
+            repariert.append((r["template"], r[other], kaputt, heil, r["datapoint_code"]))
+            r[axis] = heil
+        else:
+            ungeklaert.append((r["template"], r[other], kaputt, sorted(kandidaten)))
+    return repariert, ungeklaert
+
+
 def load_template_titles():
     """Authoritative template titles from the EBA Annotated Table Layout TOC
     (extract_template_titles.py). Keyed by DPM code 'K_61.00'. Empty if absent."""
@@ -426,6 +503,23 @@ def main():
                 "frequency": freq,
                 "_tvid": tvid,
             })
+
+    # Abgeschnittene Koordinaten VOR der Deduplizierung herstellen: danach wäre
+    # die reparierte Zelle womöglich ein Duplikat einer bereits vorhandenen und
+    # müsste erneut zusammengeführt werden.
+    for achse in ("col", "row"):
+        heil, offen = repair_truncated_ordinates(rows, achse)
+        for tmpl, andere, kaputt, neu, dp in heil:
+            print(f"  Koordinate hergestellt: {tmpl} {andere} {achse} "
+                  f"'{kaputt}' -> '{neu}'  ({dp})")
+        for tmpl, andere, kaputt, kand in offen:
+            print(f"  ⚠ {achse}-Code '{kaputt}' in {tmpl} {andere} nicht eindeutig "
+                  f"herstellbar — Kandidaten: {kand or 'keine'}")
+        # Das Label hängt an der Koordinate: nach der Reparatur neu nachschlagen.
+        for tmpl, andere, kaputt, neu, dp in heil:
+            for r in rows:
+                if r["template"] == tmpl and r[achse] == neu and r["datapoint_code"] == dp:
+                    r[f"{achse}_label"] = labels.get((r["_tvid"], achse, neu.zfill(4)), "")
 
     # A datapoint resolves through several table-version releases that collapse to the
     # same (template, row, col); keep the most complete-labelled variant per cell.
