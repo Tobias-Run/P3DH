@@ -66,13 +66,30 @@ def _printable_ratio(s: str) -> float:
 
 _GP_MANGLED = re.compile(r"([\x10-\x1f])\x20")
 
+# Dasselbe Byte-Paar-Problem, anderer Unicode-Block: ≤ (U+2264) und ≥ (U+2265)
+# ueberleben als 'd"' bzw. 'e"' — low byte 0x64/0x65, high byte 0x22 als
+# Anfuehrungszeichen. Aufgefallen an Adyens 82.00.A, wo die Spaltenkoepfe
+# „Past due > 30 days d" 90 days" lauteten.
+#
+# BEWUSST als Tabelle statt als Regel `(.)"` -> chr(0x2200|ord(.)): eine
+# allgemeine Regel wuerde jedes Zeichen vor einem Anfuehrungszeichen umdeuten
+# und damit auch legitime Labels treffen (5" als Zollangabe etwa). Gemessen ueber
+# das ganze Codebook kommen genau diese zwei Paare vor, 121x und 144x.
+_MATH_MANGLED = {'d"': "≤", 'e"': "≥"}
+
 
 def _repair_mangled_punct(s: str) -> str:
     """A UTF-16LE char from the General Punctuation block (U+2010–U+201F: – — ' ")
     sometimes survives decoding as its two bytes: a control char 0x10–0x1F followed by
     the 0x20 high byte rendered as a space. Recombine: chr(0x2000+low). Plain ASCII
-    (e.g. '&' 0x26) is never touched."""
-    return _GP_MANGLED.sub(lambda m: chr(0x2000 + ord(m.group(1))), s)
+    (e.g. '&' 0x26) is never touched.
+
+    Die Mathematik-Operatoren ≤/≥ tragen dasselbe Muster mit druckbarem low byte
+    und werden namentlich ersetzt — siehe `_MATH_MANGLED`."""
+    s = _GP_MANGLED.sub(lambda m: chr(0x2000 + ord(m.group(1))), s)
+    for kaputt, heil in _MATH_MANGLED.items():
+        s = s.replace(kaputt, heil)
+    return s
 
 
 def dpm_decode(v) -> str:
