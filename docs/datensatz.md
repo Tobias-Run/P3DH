@@ -1,0 +1,223 @@
+# Der Datensatz
+
+Beschreibung von `p3dh_long.parquet` — die aufgelöste, EUR-normalisierte Long-Form
+aller verarbeiteten Pillar-3-Offenlegungen. Eine Zeile = **ein gemeldeter Fakt**
+(Institut × Stichtag × Template × Zelle).
+
+Diese Datei ist die Datensatz-Beschreibung. `zweig_b_queries.md` ist das
+Query-Kochbuch — dort stehen Beispiele, hier steht, was die Spalten bedeuten und
+wo die Fallen liegen.
+
+## Bezug
+
+| | |
+|---|---|
+| Parquet | `https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@data/state/p3dh_long.parquet` |
+| Manifest | `.../state/manifest.json` — gezählte Kennzahlen, Commit, Codebook-Fingerabdruck |
+| Größe | ~30 MB |
+
+```python
+import duckdb
+con = duckdb.connect()
+con.execute("CREATE VIEW p AS SELECT * FROM 'p3dh_long.parquet'")
+```
+
+> ⚠️ **Der `data`-Branch hat keine Historie.** Er wird bei jedem Pipeline-Lauf
+> force-gepusht und trägt genau einen Commit; der vorige Stand ist danach weg. Wer
+> einen bestimmten Stand zitieren oder reproduzieren muss, nimmt das
+> **Release-Asset**, nicht den Branch. `manifest.json` sagt, welcher Stand vorliegt.
+
+## Abdeckung
+
+Alle Zahlen stammen aus `manifest.json` und werden bei jedem Lauf aus dem Parquet
+**gezählt**, nicht gepflegt.
+
+| | |
+|---|---|
+| Fakten | 2.295.224 |
+| Reports | 882 (Institut × Konsolidierungskreis × Stichtag) |
+| Institute | 474 |
+| Länder | 30 |
+| Templates | 192 |
+| Stichtage | 2025-06-30 · 2025-09-30 · 2025-10-31 · 2025-12-31 · 2026-03-31 |
+
+**Es ist keine Stichprobe.** Von 489 Instituten im EDAP-Katalog reichen 476
+XBRL-CSV ein, und alle 476 sind verarbeitet; die übrigen 13 veröffentlichen
+ausschließlich qualitative PDF-Pakete (`*DISDOCS`), die außerhalb des Scopes
+liegen. Der Katalog zählt 4.278 Einreichungen, weil 2.539 davon Korrekturfassungen
+derselben Meldung sind — es zählt jeweils nur die neueste („latest wins").
+
+## Schema
+
+29 Spalten. `NULL` heißt durchgängig „nicht bekannt", nie „null".
+
+### Wer meldet
+
+| Spalte | Typ | Bedeutung |
+|---|---|---|
+| `entityID` | VARCHAR | Melder-Identität wie eingereicht, `rs:<LEI>.<CON\|IND>` |
+| `lei` | VARCHAR | Legal Entity Identifier |
+| `scope` | VARCHAR | Konsolidierungskreis: `CON` (konsolidiert) oder `IND` (Einzelinstitut). **Nicht mischen** — dasselbe Institut kann beides melden |
+| `bank_name` | VARCHAR | Name über GLEIF; `NULL`, wenn der LEI dort nicht auflösbar war |
+| `country` | VARCHAR | Sitzland des Melders |
+| `entity_type` | VARCHAR | Rechtsform-/Einheitstyp aus den EDAP-Metadaten |
+| `institution_type` | VARCHAR | Größenklasse aus den EDAP-Metadaten — die Schichtungsvariable für Peer-Gruppen |
+| `files_gsii_module` | BOOLEAN | reicht das GSIIDIS-Modul ein (global systemrelevant) |
+
+### Wann und nach welchem Meldewerk
+
+| Spalte | Typ | Bedeutung |
+|---|---|---|
+| `refPeriod` | VARCHAR | Stichtag der Offenlegung, `YYYY-MM-DD` |
+| `framework_version` | VARCHAR | Reporting Framework `4.1` oder `4.2` |
+
+> 🚨 **`framework_version` und `refPeriod` sind hier nicht unabhängig.** RF 4.2
+> umfasst **ausschließlich** den Stichtag 2026-03-31, alle übrigen Stichtage sind
+> RF 4.1. Jeder Vergleich zwischen den Meldewerk-Versionen ist damit zugleich ein
+> Zeitvergleich — die beiden Effekte lassen sich in diesem Bestand **nicht**
+> trennen.
+
+### Wo in der Tabelle
+
+| Spalte | Typ | Bedeutung |
+|---|---|---|
+| `template_id` | VARCHAR | Meldetabelle, z. B. `60.00.A` (OV1) |
+| `template_title` | VARCHAR | Klartexttitel aus dem EBA-Layout |
+| `cell_row` / `cell_col` | VARCHAR | Zeilen-/Spaltencode, z. B. `0120` / `0010` |
+| `row_label` / `col_label` | VARCHAR | aufgelöste Beschriftung aus dem DPM |
+| `open_axis_dims` | VARCHAR | Rohdimensionen offener Achsen, `spalte=wert;…` |
+| `open_axis_country` | VARCHAR | aus `eba_GA:`-Codes aufgelöstes Land — **nur** wenn ISO 3166-1, sonst `NULL` |
+| `datapoint_code` | VARCHAR | DPM-Datenpunkt (`dp…`) |
+
+### Der Wert
+
+| Spalte | Typ | Bedeutung |
+|---|---|---|
+| `fact_value` | DOUBLE | gemeldeter Wert, typisiert |
+| `fact_value_raw` | VARCHAR | gemeldeter Wert als Zeichenkette, unverändert |
+| `data_type` | VARCHAR | DPM-Datentyp (monetär, Prozent, Anzahl …) |
+| `currency` | VARCHAR | Meldewährung **des Fakts** — kann innerhalb eines Reports wechseln |
+| `fx_rate` | DOUBLE | EZB-Kurs zum Stichtag |
+| `fact_value_eur` | DOUBLE | `fact_value × fx_rate` für monetäre Fakten, sonst `NULL` |
+| `decimals_monetary` | INTEGER | gemeldete Genauigkeit |
+
+### Qualität und Herkunft
+
+| Spalte | Typ | Bedeutung |
+|---|---|---|
+| `unit_ambiguous` | BOOLEAN | Template auf der Sperrliste, siehe unten |
+| `template_reported` | BOOLEAN | hat das Institut dieses Template als gemeldet **deklariert** (`filing-indicators`) |
+| `source_file` | VARCHAR | Quell-ZIP, aus dem der Fakt stammt |
+
+## Bekannte Einschränkungen
+
+Ein Datensatz ohne dokumentierte Fallen wird falsch verwendet. Die folgenden sind
+gemessen, nicht vermutet.
+
+### 1. `eba_GA:x1` ist die Summenzeile, kein Land
+
+Wer die Zeilen mit `open_axis_country IS NULL` mitsummiert, **zählt das
+Gesamtexposure doppelt**. Empirisch: bei 89 von 96 Instituten gilt exakt
+`x1 = Summe(benannte Länder) + x28` (Median-Verhältnis 1,000).
+
+```sql
+-- richtig
+WHERE open_axis_country IS NOT NULL
+```
+
+`eba_GA:x28` ist dagegen ein echter Residual-Bucket („übrige Länder"), dessen
+Belegung je Melder stark schwankt — bei manchen Instituten liegt dort fast das
+gesamte Exposure. Beide Codes stehen nicht in ISO 3166-1 und bleiben in
+`open_axis_country` bewusst `NULL`.
+
+Diese Falle hat in unserer *eigenen* Beispielabfrage zugeschlagen.
+
+### 2. `unit_ambiguous`: zwei Templates mit uneinheitlicher Einheit
+
+`41.00` und `45.00.A` werden von verschiedenen Instituten in unterschiedlichen
+Einheiten gemeldet, ohne dass die Meldung sagt, welche gemeint ist. Wir
+korrigieren das **nicht** — eine Skalierung zu raten hieße, eine Zahl zu erfinden.
+Stattdessen sind die Zeilen markiert. Für institutsübergreifende Aggregate
+ausschließen oder gesondert behandeln.
+
+### 3. „Fehlt" ist nicht „Null"
+
+Institute dürfen nach CRR Art. 432 rechtmäßig auslassen. `template_reported` sagt,
+ob das Institut ein Template als gemeldet **deklariert** hat. Eine fehlende Zeile
+kann dreierlei heißen: bewusst nicht offengelegt, nicht anwendbar, oder eine Lücke
+in *unserer* Verarbeitung. Ein Aggregat, das fehlende Werte als 0 behandelt,
+verwandelt Schweigen in einen Befund.
+
+### 4. 35 Fakten ohne Zeilenkoordinate
+
+0,0015 % des Bestands tragen keinerlei Achsenwert. Dort bleibt `cell_row` leer,
+statt eine Zeile zu erfinden. `WHERE cell_row <> ''` filtert sie.
+
+Historisch waren es 409.057 (18 %) — Ursache war ein Parser-Defekt bei offenen
+Zeilenachsen, behoben in `#56`/`#3`. Unbekannte dp-Codes gibt es heute **null**.
+
+### 5. Zwölf mehrdeutige Datenpunkt-Platzierungen
+
+Zwölf `(datapoint_code, template)`-Paare tragen im Codebook mehr als eine
+Koordinate: dort zeigt eine DPM-VariableVersion auf zwei Zellen **derselben**
+Tabelle (OV1 A-SA gegen A-IMA), und die Tabelle trägt keine Dimension, die sie
+unterscheidet. Betrifft 948 Fakten (0,04 %); fünf der zwölf liegen in Templates,
+die der Korpus nie meldet. Details: `#54`.
+
+### 6. 123 Zellen ohne belastbare Brücke über den Meldewerkswechsel
+
+Die Brücke RF 4.1 ↔ 4.2 ist beobachtungsbasiert: 5.277 Zellen, davon 5.091 stabil,
+63 auf neue dp-Codes umgebunden, **123 mehrdeutig**. Die 123 liegen sämtlich in
+LIQ2 (`74.00.a`–`f`). Für diese Zellen lässt sich eine Zeitreihe über den Bruch
+hinweg nicht belegen; der Viewer markiert sie und behauptet nichts. Details: `#70`.
+
+Zellen, die nur in *einer* Version vorkommen, stehen bewusst **nicht** in der
+Brücke: Abwesenheit ist bei Offenlegungsdaten kein Beleg für eine
+Taxonomie-Änderung.
+
+### 7. Vergleichbarkeit über Institute hinweg
+
+Rechnungslegung, Konsolidierungskreis (`scope`), nationale Optionen und
+Meldewährung unterscheiden sich. Zwei Fälle verdienen besondere Vorsicht:
+
+- **Freitext-Zeilen.** Bei CC2 (`66.02`) und LI2/LI3 (`64.01`, `64.02`) ist die
+  offene Zeilenachse der **Bilanzposten des Instituts** — Freitext in
+  Landessprache, allein in `64.02` 5.324 verschiedene Zeilen. Innerhalb eines
+  Reports auswertbar, ohne Zuordnung **nicht** für Peer-Vergleiche.
+- **Gemischte Währungen.** Ein Report kann Templates in verschiedenen Währungen
+  enthalten. `currency` gilt je Fakt — nie je Report annehmen.
+
+### 8. Auffällige Werte sind markiert, nicht korrigiert
+
+Der Bestand enthält Meldungen, die offensichtlich falsch skaliert sind (fixe
+Vorstandsvergütung im Billionenbereich, Prozentwerte als Bruchteile). Wir ändern
+sie nicht — sie stehen so in der offiziellen Offenlegung. `quality_profile.csv`
+und `plausibility_findings.csv` sagen, welche und warum.
+
+## Reproduktion
+
+```bash
+bash scripts/fetch_state.sh          # Bestand vom data-Branch
+python3 scripts/build_zweig_b.py     # Parquet neu bauen
+python3 scripts/build_dataset_manifest.py
+```
+
+Die Pipeline ist byte-deterministisch: gleiche Eingaben ergeben gleiche Ausgaben
+(`docs/reproduzierbarkeit.md`). Einzige Ausnahme ist `generated_at_utc` im
+Manifest — bewusst, weil der `data`-Branch keine Historie führt.
+
+## Zitation und Rechte
+
+**Die Offenlegungsdaten stammen von der Europäischen Bankenaufsichtsbehörde und
+sind gesondert zu zitieren.** Die MIT-Lizenz dieses Repositories deckt den Code,
+**nicht** den Datensatz.
+
+| | |
+|---|---|
+| Primärquelle | EBA Pillar 3 Data Hub, © European Banking Authority |
+| Institutsnamen | GLEIF, CC0 |
+| Aufbereitung | diese Pipeline — `CITATION.cff` |
+
+Vollständige Abgrenzung: `DISCLAIMER.md`. Das Projekt ist weder mit der EBA noch
+mit GLEIF verbunden. Zahlen vor jeder Verwendung gegen die offizielle Quelle
+prüfen.
