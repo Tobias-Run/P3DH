@@ -261,6 +261,38 @@ class LabelWhitespaceTest(unittest.TestCase):
             with self.subTest(s=s):
                 self.assertEqual(self.norm(s), s)
 
+class RepairPlacementTest(unittest.TestCase):
+    """Die Regel muss NACH dem Release-Filter laufen.
+
+    Beim ersten Anlauf stand der Aufruf vor der Deduplizierung — und dort greift
+    er nicht: solange die Fassungen mehrerer DPM-Releases nebeneinander liegen,
+    traegt Zeile 0060 bereits ein wohlgeformtes '0060' aus einer anderen Fassung.
+    Die Luecke, aus der die Regel ihre Eindeutigkeit zieht, ist dann nicht leer;
+    sie verweigert korrekt, und der kaputte Code ueberlebt.
+
+    Der Lauf war gruen, die Tests waren gruen, und das Codebook trug den Defekt
+    weiter. Geprueft war die Regel, nicht ihre Stelle im Ablauf.
+    """
+
+    def setUp(self):
+        self.src = (ROOT / "scripts" / "build_codebook.py").read_text(encoding="utf-8")
+
+    def test_the_repair_runs_after_the_release_filter(self):
+        aufruf = self.src.index("heil, offen = repair_truncated_ordinates(")
+        filter_ = self.src.index("rows, dropped_stale = prefer_live_placement(")
+        self.assertLess(filter_, aufruf,
+                        "Die Reparatur laeuft vor dem Release-Filter — dort "
+                        "verdecken konkurrierende Fassungen die Luecke, und sie "
+                        "greift nie")
+
+    def test_the_repair_runs_before_the_rows_are_written(self):
+        aufruf = self.src.index("heil, offen = repair_truncated_ordinates(")
+        schreiben = self.src.index('fields = ["datapoint_code"')
+        self.assertLess(aufruf, schreiben)
+
+    def test_both_axes_are_repaired(self):
+        self.assertIn('for achse in ("col", "row"):', self.src)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -504,23 +504,6 @@ def main():
                 "_tvid": tvid,
             })
 
-    # Abgeschnittene Koordinaten VOR der Deduplizierung herstellen: danach wäre
-    # die reparierte Zelle womöglich ein Duplikat einer bereits vorhandenen und
-    # müsste erneut zusammengeführt werden.
-    for achse in ("col", "row"):
-        heil, offen = repair_truncated_ordinates(rows, achse)
-        for tmpl, andere, kaputt, neu, dp in heil:
-            print(f"  Koordinate hergestellt: {tmpl} {andere} {achse} "
-                  f"'{kaputt}' -> '{neu}'  ({dp})")
-        for tmpl, andere, kaputt, kand in offen:
-            print(f"  ⚠ {achse}-Code '{kaputt}' in {tmpl} {andere} nicht eindeutig "
-                  f"herstellbar — Kandidaten: {kand or 'keine'}")
-        # Das Label hängt an der Koordinate: nach der Reparatur neu nachschlagen.
-        for tmpl, andere, kaputt, neu, dp in heil:
-            for r in rows:
-                if r["template"] == tmpl and r[achse] == neu and r["datapoint_code"] == dp:
-                    r[f"{achse}_label"] = labels.get((r["_tvid"], achse, neu.zfill(4)), "")
-
     # A datapoint resolves through several table-version releases that collapse to the
     # same (template, row, col); keep the most complete-labelled variant per cell.
     best = {}
@@ -558,6 +541,29 @@ def main():
     rows, dropped_stale = prefer_live_placement(rows, live_tvids(db))
     if dropped_stale:
         print(f"  Platzierungen aus abgelösten Fassungen verworfen: {dropped_stale}")
+
+    # Abgeschnittene Koordinaten herstellen — NACH dem Release-Filter.
+    #
+    # Zuerst stand das vor der Deduplizierung, und dort greift es nicht: solange
+    # die Fassungen mehrerer DPM-Releases nebeneinander liegen, trägt Zeile 0060
+    # bereits ein wohlgeformtes '0060' aus einer anderen Fassung. Die Lücke, aus
+    # der die Regel ihre Eindeutigkeit zieht, ist dann gar nicht leer — die Regel
+    # verweigert korrekt, und der kaputte Code überlebt.
+    #
+    # Erst hier ist der Zeilenbestand der, den das Codebook auch ausliefert.
+    for achse in ("col", "row"):
+        heil, offen = repair_truncated_ordinates(rows, achse)
+        for tmpl, andere, kaputt, neu, dp in heil:
+            print(f"  Koordinate hergestellt: {tmpl} {andere} {achse} "
+                  f"'{kaputt}' -> '{neu}'  ({dp})")
+        for tmpl, andere, kaputt, kand in offen:
+            print(f"  ⚠ {achse}-Code '{kaputt}' in {tmpl} {andere} nicht eindeutig "
+                  f"herstellbar — Kandidaten: {kand or 'keine'}")
+        # Das Label hängt an der Koordinate: nach der Reparatur neu nachschlagen.
+        for tmpl, andere, kaputt, neu, dp in heil:
+            for r in rows:
+                if r["template"] == tmpl and r[achse] == neu and r["datapoint_code"] == dp:
+                    r[f"{achse}_label"] = labels.get((r["_tvid"], achse, neu.zfill(4)), "")
 
     for r in rows:
         r.pop("_tvid", None)
