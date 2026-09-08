@@ -786,9 +786,22 @@ function renderTemplate(tid, cells, rep){
   const dtOf=(r,c)=>{ const e=CB.get(tcode+'|'+r+'|'+c); return e?e.dt:''; };
   // Offene Zeilenachse (#56): die Zeile ist der Achsenwert, kein Modell-Code.
   const axisMap = AXIS.get(tcode) || null;
+  // Ueber ALLE Spalten suchen, nicht nur ueber cols[0]. Das Zeilenlabel haengt
+  // im DPM an der Zelle, also an (Zeile, Spalte) — und welche Spalten ein Report
+  // meldet, entscheidet der Melder. Faellt die erste gemeldete Spalte im
+  // Codebook aus, verschwand bisher das Label JEDER Zeile.
+  //
+  // Adyen 82.00.A war der Fund: dort ist cols[0] die Spalte '00', die das
+  // Codebook nur ein einziges Mal kennt (K_82.00.a|0060|00). Genau eine Zeile
+  // bekam ihr Label, alle anderen blieben leer — die Tabelle sah aus, als
+  // fehlten die Daten, dabei fehlte nur der Schluessel.
+  //
+  // Gemessen ueber den Bestand: 15.350 Zeilen in 744 Reports bekommen so ihr
+  // Label zurueck, ohne einen einzigen mehrdeutigen Fall.
   const rowLbl=r=>{
     if(axisMap && axisMap[r]) return axisMap[r];
-    const e=CB.get(tcode+'|'+r+'|'+(cols[0]||'')); return e?e.rl:''; };
+    for(const c of cols){ const e=CB.get(tcode+'|'+r+'|'+c); if(e && e.rl) return e.rl; }
+    return ''; };
   // Zeilenreihenfolge: bei festen DPM-Zeilen ist die Codeordnung die
   // MODELLORDNUNG (Zwischensummen, Gliederung) und muss bleiben. Bei einer
   // offenen Achse gibt es keine solche Ordnung — alphabetisch nach ISO-Code
@@ -811,7 +824,11 @@ function renderTemplate(tid, cells, rep){
       return ((w.get(b)||0)-(w.get(a)||0)) || (a<b?-1:a>b?1:0);
     });
   } else rows.sort();
-  const colLbl=c=>{ for(const r of rows){ const e=CB.get(tcode+'|'+r+'|'+c); if(e) return e.cl; } return ''; };
+  // Symmetrisch zu rowLbl: bis zu einem NICHT LEEREN Label weitersuchen. Beim
+  // ersten Treffer stehenzubleiben genuegte nicht — die Zelle K_82.00.a|0060|00
+  // existiert, traegt aber ein leeres Spaltenlabel, und der Kopf blieb leer,
+  // obwohl weiter unten eines gestanden haette.
+  const colLbl=c=>{ for(const r of rows){ const e=CB.get(tcode+'|'+r+'|'+c); if(e && e.cl) return e.cl; } return ''; };
   const c=COV[state];
   const coverageNote = c.label
     ? `<span class="covbadge ${c.cls}" title="${esc(c.tip)}">${c.sym?c.sym+' ':''}${esc(c.label)}</span>` : '';
