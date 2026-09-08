@@ -223,6 +223,13 @@ jobs:
       - name: Zweig-A-Parität
         run: python scripts/check_branch_parity.py
 
+      # Herkunftsnachweis neben dem Parquet (#20). Muss nach allen Guards laufen
+      # und vor dem Publish: der data-Branch traegt keine Historie, ohne Manifest
+      # ist ein heruntergeladener Bestand nicht identifizierbar. Alle Zahlen
+      # werden aus dem Parquet gezaehlt, nicht gepflegt.
+      - name: Datensatz-Manifest
+        run: python scripts/build_dataset_manifest.py
+
       - name: Publish data branch
         env:
           P3DH_PUSH_URL: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
