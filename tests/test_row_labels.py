@@ -171,5 +171,96 @@ class MangledLabelTest(unittest.TestCase):
             with self.subTest(s=s):
                 self.assertEqual(self.repair(s), s)
 
+class TruncatedOrdinateTest(unittest.TestCase):
+    """Der Spaltencode `00` war ein abgeschnittener Vierstelliger.
+
+    Im ganzen Codebook zweimal, beide in Zeile 0060:
+
+        K_82.00.a r0060 c00 — die Zeile hat 12 Spalten wie ihre 14 Schwestern,
+                              aber ihr fehlt 0060
+        R_12.00.a r0060 c00 — dieselbe Konstellation, dort fehlt 0080
+
+    Bei Adyen hing daran ein realer Wert: 82.00.A Spalte 0040 ist die Summe
+    ihrer Komponenten, und genau die fehlenden 3.325,29 EUR standen in der
+    namenlosen Spalte. Der Wert war nie verloren — nur nicht zuzuordnen.
+    """
+
+    def setUp(self):
+        import sys
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import build_codebook as bc
+        self.bc = bc
+
+    def _zeilen(self, spalten_je_zeile):
+        return [{"template": "T", "row": r, "col": c, "datapoint_code": f"dp{r}{c}"}
+                for r, cols in spalten_je_zeile.items() for c in cols]
+
+    def test_the_real_case_is_restored(self):
+        """K_82.00.a: Schwesterzeilen definieren 0010..0030, die Zeile 0060
+        hat 0010, 0020, 0030 nicht vollstaendig — genau 0030 fehlt ihr."""
+        rows = self._zeilen({"0010": ["0010", "0020", "0030"],
+                             "0060": ["0010", "0020", "00"]})
+        heil, offen = self.bc.repair_truncated_ordinates(rows, "col")
+        self.assertEqual(offen, [])
+        self.assertEqual([(h[2], h[3]) for h in heil], [("00", "0030")])
+        self.assertEqual(sorted(r["col"] for r in rows if r["row"] == "0060"),
+                         ["0010", "0020", "0030"])
+
+    def test_it_refuses_when_two_columns_are_missing(self):
+        """Zwei Kandidaten heisst: das Modell erzwingt die Antwort nicht.
+        Dann bleibt die Luecke sichtbar, statt geraten zu werden."""
+        rows = self._zeilen({"0010": ["0010", "0020", "0030", "0040"],
+                             "0060": ["0010", "00"]})
+        heil, offen = self.bc.repair_truncated_ordinates(rows, "col")
+        self.assertEqual(heil, [])
+        self.assertEqual(len(offen), 1)
+        self.assertEqual(offen[0][3], ["0020", "0030", "0040"])
+        self.assertEqual([r["col"] for r in rows if r["row"] == "0060"], ["0010", "00"])
+
+    def test_the_broken_code_must_be_a_prefix(self):
+        """`00` darf nur zu `00xx` werden. Ohne diese Bedingung wuerde jede
+        fehlende Spalte auf jeden kaputten Code passen."""
+        rows = self._zeilen({"0010": ["0010", "0020", "0030"],
+                             "0060": ["0010", "0020", "77"]})
+        heil, offen = self.bc.repair_truncated_ordinates(rows, "col")
+        self.assertEqual(heil, [])
+        self.assertEqual(offen[0][3], [], "0030 ist kein Kandidat fuer '77'")
+
+    def test_the_open_axis_is_not_a_defect(self):
+        """`*` ist die offene Achse (#56), keine kaputte Koordinate."""
+        rows = self._zeilen({"0010": ["0010", "0020"], "0060": ["*", "0020"]})
+        heil, offen = self.bc.repair_truncated_ordinates(rows, "col")
+        self.assertEqual((heil, offen), ([], []))
+
+    def test_a_well_formed_codebook_reports_nothing(self):
+        rows = self._zeilen({"0010": ["0010", "0020"], "0060": ["0010", "0020"]})
+        self.assertEqual(self.bc.repair_truncated_ordinates(rows, "col"), ([], []))
+
+
+class LabelWhitespaceTest(unittest.TestCase):
+    """Zeilenumbrueche in Labels stammen aus dem Zellenumbruch der
+    EBA-Layouttabelle, nicht aus dem Text — 213 Labels tragen sie."""
+
+    def setUp(self):
+        import sys
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import build_codebook as bc
+        self.norm = bc._norm_ws
+
+    def test_the_wrapped_header_reads_as_one_line(self):
+        self.assertEqual(self.norm("f Past due\n> 90 days\n\u2264 180 days"),
+                         "f Past due > 90 days \u2264 180 days")
+
+    def test_no_character_is_dropped(self):
+        """Nur Weissraum wird zusammengefasst."""
+        roh = "a\nb\tc  d"
+        self.assertEqual(self.norm(roh).replace(" ", ""), "abcd")
+
+    def test_a_clean_label_is_untouched(self):
+        for s in ("a Performing exposures", "", None):
+            with self.subTest(s=s):
+                self.assertEqual(self.norm(s), s)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
