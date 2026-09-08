@@ -5972,12 +5972,12 @@ template_id,cell_row,cell_col,row_label,col_label,data_type,n_values,median_log1
 82.00.A,0050,0080,040 Credit institutions,h Past due > 1 year ≤ 2 years,monetary,20,5.408,1.178,3.57,auswertbar
 82.00.A,0050,0090,040 Credit institutions,I Past due > 2 years ≤ 5 years,monetary,29,5.921,0.857,4.34,auswertbar
 82.00.A,0050,0120,040 Credit institutions,l Of which defaulted,monetary,73,6.147,1.185,4.69,auswertbar
-82.00.A,0060,00,050 Other financial corporations,,monetary,138,4.917,1.209,4.49,auswertbar
 82.00.A,0060,0010,050 Other financial corporations,a Performing exposures,monetary,379,8.326,0.833,4.36,auswertbar
 82.00.A,0060,0020,050 Other financial corporations,b Not past due or past due ≤ 30 days,monetary,380,8.353,0.850,4.40,auswertbar
 82.00.A,0060,0030,050 Other financial corporations,c Past due > 30 days ≤ 90 days,monetary,196,4.629,1.567,5.36,auswertbar
 82.00.A,0060,0040,050 Other financial corporations,d Non-performing exposures,monetary,272,6.131,1.308,4.97,auswertbar
 82.00.A,0060,0050,050 Other financial corporations,e Unlikely to pay that are not past due or are past due ≤ 90 days,monetary,223,6.150,1.418,5.75,auswertbar
+82.00.A,0060,0060,050 Other financial corporations,f Past due > 90 days ≤ 180 days,monetary,138,4.917,1.209,4.49,auswertbar
 82.00.A,0060,0070,050 Other financial corporations,g Past due > 180 days ≤ 1 year,monetary,150,5.151,1.282,4.48,auswertbar
 82.00.A,0060,0080,050 Other financial corporations,h Past due > 1 year ≤ 2 years,monetary,151,5.091,1.144,4.76,auswertbar
 82.00.A,0060,0090,050 Other financial corporations,I Past due > 2 years ≤ 5 years,monetary,159,5.385,1.061,4.63,auswertbar

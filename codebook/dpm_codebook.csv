@@ -12919,12 +12919,12 @@ dp3528776,3528776,K_82.00.a,0050,0090,EU CQ3: Credit quality of performing and n
 dp3528629,3528629,K_82.00.a,0050,0100,EU CQ3: Credit quality of performing and non-performing exposures by past due days,040 Credit institutions,j Past due > 5 years ≤ 7 years,monetary,7
 dp3528888,3528888,K_82.00.a,0050,0110,EU CQ3: Credit quality of performing and non-performing exposures by past due days,040 Credit institutions,k Past due > 7 years,monetary,8
 dp3528820,3528820,K_82.00.a,0050,0120,EU CQ3: Credit quality of performing and non-performing exposures by past due days,040 Credit institutions,l Of which defaulted,monetary,9
-dp3528783,3528783,K_82.00.a,0060,00,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,,monetary,10
 dp3528600,3528600,K_82.00.a,0060,0010,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,a Performing exposures,monetary,44
 dp3528650,3528650,K_82.00.a,0060,0020,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,b Not past due or past due ≤ 30 days,monetary,16
 dp3528635,3528635,K_82.00.a,0060,0030,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,c Past due > 30 days ≤ 90 days,monetary,14
 dp3528617,3528617,K_82.00.a,0060,0040,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,d Non-performing exposures,monetary,39
 dp3528868,3528868,K_82.00.a,0060,0050,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,e Unlikely to pay that are not past due or are past due ≤ 90 days,monetary,12
+dp3528783,3528783,K_82.00.a,0060,0060,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,f Past due > 90 days ≤ 180 days,monetary,10
 dp3528788,3528788,K_82.00.a,0060,0070,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,g Past due > 180 days ≤ 1 year,monetary,12
 dp3528512,3528512,K_82.00.a,0060,0080,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,h Past due > 1 year ≤ 2 years,monetary,10
 dp3528503,3528503,K_82.00.a,0060,0090,EU CQ3: Credit quality of performing and non-performing exposures by past due days,050 Other financial corporations,I Past due > 2 years ≤ 5 years,monetary,11
@@ -14166,7 +14166,6 @@ dp469908,469908,R_12.00.a,0050,0060,,Total remuneration of identified staff,Asse
 dp469911,469911,R_12.00.a,0050,0070,,Total remuneration of identified staff,Corporate functions,monetary,8
 dp469912,469912,R_12.00.a,0050,0080,,Total remuneration of identified staff,Independent internal control functions,monetary,9
 dp469913,469913,R_12.00.a,0050,0090,,Total remuneration of identified staff,All other,monetary,8
-dp469906,469906,R_12.00.a,0060,00,,Of which: variable remuneration,,monetary,8
 dp469888,469888,R_12.00.a,0060,0010,,Of which: variable remuneration,MB Supervisory function,monetary,6
 dp469891,469891,R_12.00.a,0060,0020,,Of which: variable remuneration,MB Management function,monetary,7
 dp469894,469894,R_12.00.a,0060,0030,,Of which: variable remuneration,Total MB,monetary,8
@@ -14174,6 +14173,7 @@ dp469904,469904,R_12.00.a,0060,0040,,Of which: variable remuneration,Investment 
 dp469903,469903,R_12.00.a,0060,0050,,Of which: variable remuneration,Retail banking,monetary,6
 dp469902,469902,R_12.00.a,0060,0060,,Of which: variable remuneration,Asset management,monetary,4
 dp469905,469905,R_12.00.a,0060,0070,,Of which: variable remuneration,Corporate functions,monetary,7
+dp469906,469906,R_12.00.a,0060,0080,,Of which: variable remuneration,Independent internal control functions,monetary,8
 dp469907,469907,R_12.00.a,0060,0090,,Of which: variable remuneration,All other,monetary,6
 dp469887,469887,R_12.00.a,0070,0010,,Of which: fixed remuneration,MB Supervisory function,monetary,8
 dp469890,469890,R_12.00.a,0070,0020,,Of which: fixed remuneration,MB Management function,monetary,9
