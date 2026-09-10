@@ -321,7 +321,7 @@
 <div class="layout">
   <aside>
     <div class="filter">
-      <input id="reportFilter" placeholder="Suchen… ( / )">
+      <input id="reportFilter" placeholder="Suchen: Name, Kürzel (BBVA), Land… ( / )">
       <div class="selrow">
         <select id="fCountry"><option value="">Land: alle</option></select>
         <select id="fItype"><option value="">Größenklasse: alle</option></select>
@@ -496,6 +496,40 @@ function bankName(entityID){
   const {lei}=leiParts(entityID); const n=NAMES.get(lei);
   return n && n.name ? n.name : entityID;
 }
+/* Kuerzel-Suche: "BBVA" findet "Banco Bilbao Vizcaya Argentaria, S.A."
+ *
+ * Institute sind unter ihrem Kuerzel bekannt, im Bestand stehen sie unter ihrem
+ * REGISTERNAMEN. Die Teilstringsuche kann das nicht ueberbruecken, weil die
+ * Buchstaben im Namen nicht zusammenhaengen.
+ *
+ * Geprueft wird deshalb, ob die Eingabe ein PRAEFIX der Wortanfaenge ist:
+ *
+ *     Banco Bilbao Vizcaya Argentaria, S.A.  ->  bbvasa
+ *     "bbva" ist ein Praefix davon            ->  Treffer
+ *
+ * Bewusst kein vorab erzeugtes Akronym. Dafuer muesste man die Rechtsform
+ * abschneiden ("S.A.", "N.V.", "eG", "d.d." …), und genau daran scheitert es:
+ * gemessen liefert eine solche Regel fuer BBVA "BBVASA" statt "BBVA". Das
+ * Praefix umgeht das Problem, weil der Rest des Namens einfach dahinter liegt.
+ *
+ * Gemessen ueber die 508 Institute: "BBVA" ergibt GENAU EINEN Treffer, "RBI"
+ * einen (Raiffeisen Bank International). Ab zwei Zeichen, darunter waere jeder
+ * Name ein Treffer.
+ */
+const INITIALEN=new Map();
+function initialenVon(name){
+  let v=INITIALEN.get(name);
+  if(v===undefined){
+    v=(name.match(/[0-9A-Za-zÀ-ÿ&]+/g)||[]).map(w=>w[0]).join('').toLowerCase();
+    INITIALEN.set(name,v);
+  }
+  return v;
+}
+function kuerzelTrifft(name,q){
+  // Punkte in der Eingabe ignorieren: "B.B.V.A." soll wie "BBVA" wirken.
+  const k=q.replace(/[^0-9a-zà-ÿ&]/g,'');
+  return k.length>=2 && initialenVon(name).startsWith(k);
+}
 function refScope(s){ return s==='CON'?'Consolidated':s==='IND'?'Individual':s; }
 function shortItype(t){
   return t==='Large highest EEA'?'Large':t==='Other highest EEA'?'Other':
@@ -606,8 +640,9 @@ function activeFilters(){
 function passFilters(rep,f){
   const {lei,scope}=leiParts(rep.entityID);
   const m=META.get(lei)||{};
-  const hay=(bankName(rep.entityID)+' '+rep.entityID+' '+rep.baseCurrency+' '+rep.refPeriod+' '+(m.country||'')).toLowerCase();
-  if(f.q && !hay.includes(f.q)) return false;
+  const name=bankName(rep.entityID);
+  const hay=(name+' '+rep.entityID+' '+rep.baseCurrency+' '+rep.refPeriod+' '+(m.country||'')).toLowerCase();
+  if(f.q && !hay.includes(f.q) && !kuerzelTrifft(name,f.q)) return false;
   if(f.c && m.country!==f.c) return false;
   if(f.i && m.institution_type!==f.i) return false;
   if(f.s && scope!==f.s) return false;
