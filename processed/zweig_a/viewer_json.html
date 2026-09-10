@@ -496,6 +496,26 @@ function bankName(entityID){
   const {lei}=leiParts(entityID); const n=NAMES.get(lei);
   return n && n.name ? n.name : entityID;
 }
+/* Gepflegte Kurznamen aus codebook/bank_aliases.csv.
+ *
+ * Sie decken ab, was die Kuerzel-Regel unten NICHT herleiten kann: "Helaba" ist
+ * eine Zusammenziehung (HEssen LAndesBAnk), keine Initialenfolge, und
+ * "BayernLB" bezieht sich auf ein Wort, das im Registernamen ("Bayerische
+ * Landesbank") gar nicht steht. GLEIF fuehrt beide nicht — abgefragt traegt
+ * Helaba dort keinen weiteren Namen, BayernLB nur einen frueheren
+ * Registernamen. Also von Hand gepflegt, mit Kontrollspalte und Test. */
+function bankAliases(entityID){
+  const {lei}=leiParts(entityID); const n=NAMES.get(lei);
+  return (n && n.alias) ? n.alias : [];
+}
+/* Beim Vergleich Leer- und Sonderzeichen wegwerfen: geschrieben wird
+ * "BayernLB", "Bayern LB" und "NORD/LB" gleichermaessen, und keine dieser
+ * Schreibweisen ist falsch. Normalisiert fallen sie zusammen. */
+const alnum=s=>s.toLowerCase().replace(/[^0-9a-zà-ÿ&]/g,'');
+function aliasTrifft(entityID,q){
+  const k=alnum(q);
+  return k.length>=2 && bankAliases(entityID).some(a=>alnum(a).includes(k));
+}
 /* Kuerzel-Suche: "BBVA" findet "Banco Bilbao Vizcaya Argentaria, S.A."
  *
  * Institute sind unter ihrem Kuerzel bekannt, im Bestand stehen sie unter ihrem
@@ -641,8 +661,10 @@ function passFilters(rep,f){
   const {lei,scope}=leiParts(rep.entityID);
   const m=META.get(lei)||{};
   const name=bankName(rep.entityID);
-  const hay=(name+' '+rep.entityID+' '+rep.baseCurrency+' '+rep.refPeriod+' '+(m.country||'')).toLowerCase();
-  if(f.q && !hay.includes(f.q) && !kuerzelTrifft(name,f.q)) return false;
+  const hay=(name+' '+rep.entityID+' '+rep.baseCurrency+' '+rep.refPeriod+' '
+             +(m.country||'')).toLowerCase();
+  if(f.q && !hay.includes(f.q) && !kuerzelTrifft(name,f.q)
+        && !aliasTrifft(rep.entityID,f.q)) return false;
   if(f.c && m.country!==f.c) return false;
   if(f.i && m.institution_type!==f.i) return false;
   if(f.s && scope!==f.s) return false;
