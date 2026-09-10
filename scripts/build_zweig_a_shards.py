@@ -42,6 +42,31 @@ from metrics import metric_payload  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
 OUT = ROOT / "processed" / "zweig_a" / "data"
+ALIASES = ROOT / "codebook" / "bank_aliases.csv"
+
+
+def load_bank_aliases(path=ALIASES):
+    """LEI -> [Kurzname, …] aus der gepflegten Liste.
+
+    Kurznamen, die weder als Teilstring noch als Initialenfolge im Registernamen
+    stecken — „Helaba" (HEssen LAndesBAnk) oder „BayernLB", wo der Registername
+    „Bayerische" lautet. Die Suchregel im Viewer kann sie nicht herleiten.
+
+    GLEIF liefert sie nicht: abgefragt trägt Helaba dort gar keinen weiteren
+    Namen, BayernLB nur einen früheren Registernamen. Deshalb von Hand gepflegt
+    und mit dem Registernamen als Kontrollspalte, damit ein Test merkt, wenn ein
+    LEI nicht mehr dorthin zeigt, wo wir ihn vermuten.
+    """
+    out = {}
+    if not path.exists():
+        return out
+    with path.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            lei, alias = (r.get("lei") or "").strip(), (r.get("alias") or "").strip()
+            if lei and alias:
+                out.setdefault(lei, []).append(alias)
+    return {k: sorted(v) for k, v in sorted(out.items())}
+
 SHARDS = OUT / "reports"
 
 # Templates, deren Zellen report-übergreifend in benchmark.json landen (Benchmark
@@ -470,6 +495,14 @@ def main():
         ORDER BY lei, bank_name, country
     """, "names"):
         names[lei] = {"name": nm or lei, "jur": country or ""}
+    # Kurznamen, die weder als Teilstring noch als Initialenfolge im
+    # Registernamen stecken: "Helaba" für die Landesbank Hessen-Thüringen,
+    # "BayernLB" für die Bayerische Landesbank. GLEIF führt sie nicht — geprüft,
+    # dort steht für Helaba gar kein weiterer Name und für BayernLB nur ein
+    # früherer Registername. Deshalb eine gepflegte Liste.
+    for lei, aliase in load_bank_aliases().items():
+        if lei in names:
+            names[lei]["alias"] = aliase
     fx = {}
     for cur, rp, rate in ordered(con, """
         SELECT DISTINCT currency, refPeriod, fx_rate

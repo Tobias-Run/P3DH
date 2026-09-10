@@ -147,6 +147,113 @@ class ViewerTest(unittest.TestCase):
         """Eine Suchfunktion, die niemand kennt, hilft nicht."""
         self.assertIn("Kürzel", self.src)
 
+ALIASES = ROOT / "codebook" / "bank_aliases.csv"
+
+
+def alias_zeilen():
+    if not ALIASES.exists():
+        return []
+    with ALIASES.open(encoding="utf-8") as fh:
+        return list(csv.DictReader(fh))
+
+
+class GepflegteAliaseTest(unittest.TestCase):
+    """Kurznamen, die die Kuerzel-Regel NICHT herleiten kann.
+
+    „Helaba" ist eine Zusammenziehung (HEssen LAndesBAnk), keine Initialenfolge.
+    „BayernLB" bezieht sich auf „Bayern" — ein Wort, das im Registernamen
+    („Bayerische Landesbank") gar nicht vorkommt.
+
+    GLEIF liefert sie nicht: abgefragt traegt Helaba dort keinen weiteren Namen,
+    BayernLB nur einen frueheren Registernamen. Deshalb gepflegt.
+    """
+
+    def setUp(self):
+        self.zeilen = alias_zeilen()
+        if not self.zeilen:
+            self.skipTest("bank_aliases.csv fehlt")
+        self.meta = {r["lei"]: r["name"] for r in
+                     csv.DictReader(META.open(encoding="utf-8"))} if META.exists() else {}
+
+    def test_the_two_cases_that_were_reported(self):
+        aliase = {r["alias"].lower() for r in self.zeilen}
+        self.assertIn("helaba", aliase)
+        self.assertIn("bayernlb", aliase)
+
+    def test_every_lei_is_in_the_corpus(self):
+        """Ein Alias auf einen LEI, den es nicht gibt, ist tote Pflege."""
+        if not self.meta:
+            self.skipTest("entity_meta.csv fehlt")
+        fehlend = sorted({r["lei"] for r in self.zeilen} - set(self.meta))
+        self.assertEqual(fehlend, [], f"LEIs nicht im Bestand: {fehlend}")
+
+    def test_the_control_column_still_matches(self):
+        """Die Kontrollspalte faengt den Fall ab, dass ein LEI nicht mehr
+        dorthin zeigt, wo wir ihn vermuten — dann haenge der Alias an der
+        falschen Bank, und niemand saehe es."""
+        if not self.meta:
+            self.skipTest("entity_meta.csv fehlt")
+        for r in self.zeilen:
+            with self.subTest(alias=r["alias"]):
+                self.assertEqual(self.meta[r["lei"]], r["legal_name_zur_kontrolle"],
+                                 f"{r['alias']}: LEI zeigt auf "
+                                 f"{self.meta[r['lei']]!r}")
+
+    def test_no_alias_is_already_findable(self):
+        """Ein Alias, den Teilstring oder Kuerzel ohnehin finden, ist Ballast —
+        und verdeckt, dass die Regel ihn schon abdeckt."""
+        for r in self.zeilen:
+            with self.subTest(alias=r["alias"]):
+                self.assertFalse(trifft(r["legal_name_zur_kontrolle"], r["alias"]),
+                                 f"{r['alias']} wird bereits ohne Liste gefunden")
+
+    def test_the_loader_groups_by_lei(self):
+        """Mehrere Zeilen je LEI muessen zu einer Liste zusammenkommen."""
+        import sys
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import build_zweig_a_shards as b
+        geladen = b.load_bank_aliases()
+        self.assertEqual(len(geladen), len({r["lei"] for r in self.zeilen}))
+        for r in self.zeilen:
+            with self.subTest(alias=r["alias"]):
+                self.assertIn(r["alias"], geladen[r["lei"]])
+
+    def test_no_two_aliases_collapse_to_the_same_string(self):
+        """Verglichen wird ohne Leer- und Sonderzeichen. "NORD/LB" und "NordLB"
+        faellen dabei zusammen — die zweite Zeile waere Ballast."""
+        norm = lambda s: re.sub(r"[^0-9a-zà-ÿ&]", "", s.lower())  # noqa: E731
+        gesehen = {}
+        for r in self.zeilen:
+            k = (r["lei"], norm(r["alias"]))
+            self.assertNotIn(k, gesehen,
+                             f"{r['alias']} und {gesehen.get(k)} sind normalisiert gleich")
+            gesehen[k] = r["alias"]
+
+
+class AliasVerdrahtungTest(unittest.TestCase):
+    def setUp(self):
+        self.src = VIEWER.read_text(encoding="utf-8")
+
+    def test_the_shard_builder_writes_them_into_the_index(self):
+        src = (ROOT / "scripts" / "build_zweig_a_shards.py").read_text(encoding="utf-8")
+        self.assertIn("load_bank_aliases()", src)
+        self.assertIn('names[lei]["alias"]', src)
+
+    def test_the_viewer_searches_them(self):
+        self.assertIn("aliasTrifft(rep.entityID,f.q)", self.src,
+                      "Die Kurznamen stehen im Index, werden aber nicht "
+                      "durchsucht — gepflegt und wirkungslos")
+
+    def test_spelling_of_the_query_does_not_matter(self):
+        """„Bayern LB", „BayernLB" und „NORD/LB" sind alle richtig geschrieben.
+        Verglichen wird deshalb ohne Leer- und Sonderzeichen."""
+        self.assertIn("const alnum=s=>s.toLowerCase().replace(", self.src)
+        self.assertIn("alnum(a).includes(k)", self.src)
+
+    def test_a_missing_alias_list_is_harmless(self):
+        """Bestaende von vor dieser Liste tragen kein `alias`."""
+        self.assertIn("(n && n.alias) ? n.alias : []", self.src)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
