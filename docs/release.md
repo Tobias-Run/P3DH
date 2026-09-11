@@ -101,6 +101,17 @@ Dann auf GitHub das Release aus dem Tag erzeugen, `p3dh_long.parquet` und
 
 Nach dem ersten Release den DOI in `CITATION.cff` und README eintragen.
 
+> **Erledigt seit v0.1.1.** Concept-DOI: `10.5281/zenodo.22666716`. Er steht in
+> `CITATION.cff` (Feld `doi`) und als Badge im README und muss nicht erneut
+> geändert werden — er löst von sich aus auf die jeweils neueste Fassung auf.
+> Zu pflegen bleiben je Release nur `version` und `date-released` in
+> `CITATION.cff`.
+
+> **Zur Schreibweise der Tags:** veröffentlicht sind `v.0.1.0` und `v.0.1.1` —
+> mit Punkt nach dem `v`. Das weicht von der oben genannten Form ab. Die Tags
+> bleiben, wie sie sind: Zenodo hat gegen sie DOIs vergeben, und ein Umbenennen
+> änderte daran nichts, sondern machte die Archiveinträge nur unauffindbar.
+
 ## Was ein Release blockiert
 
 | Prüfung | Warum |
