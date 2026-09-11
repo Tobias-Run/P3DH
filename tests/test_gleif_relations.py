@@ -67,9 +67,15 @@ class GrundlagenTest(unittest.TestCase):
     def test_transient_errors_are_retried(self):
         """Von 60 Probeabrufen scheiterten 3 sporadisch. Eine fehlende Kante
         sieht aus wie Eigenstaendigkeit — genau der Fehler, den dieses Issue
-        vermeiden will."""
+        vermeiden will.
+
+        Drei Versuche reichten nicht: der erste Vollabruf starb nach rund 1.000
+        Anfragen an `Connection reset by peer`. Deshalb wird hier eine
+        Untergrenze geprueft, keine feste Zahl."""
+        import inspect
+        n = inspect.signature(self.f._get).parameters["versuche"].default
+        self.assertGreaterEqual(n, 6, "zu wenige Versuche fuer 1.500 Abrufe am Stueck")
         src = (ROOT / "scripts" / "fetch_gleif_relations.py").read_text(encoding="utf-8")
-        self.assertIn("versuche=3", src)
         self.assertIn("time.sleep(2 ** i)", src)
         for code in ("429", "500", "503"):
             self.assertIn(code, src)
@@ -85,8 +91,23 @@ class GrundlagenTest(unittest.TestCase):
         """474 Abrufe sind hoeflich nur einmal. Ein zweiter Lauf darf nur
         Neuzugaenge holen."""
         src = (ROOT / "scripts" / "fetch_gleif_relations.py").read_text(encoding="utf-8")
-        self.assertIn("if lei in schon:", src)
+        self.assertIn("offen = [l for l in leis if l not in schon]", src)
+        self.assertIn("for lei in offen:", src)
         self.assertIn("--refresh", src)
+
+    def test_a_crash_does_not_discard_what_was_already_fetched(self):
+        """Das Versprechen „holt nur Neuzugaenge" ist wertlos, wenn der Lauf
+        erst am Ende schreibt: der erste Vollabruf lief 30 Minuten und starb
+        ohne eine einzige Zeile Ergebnis. Zwischenstand und Abbruchsicherung
+        sind deshalb Teil der Zusage, nicht Komfort."""
+        src = (ROOT / "scripts" / "fetch_gleif_relations.py").read_text(encoding="utf-8")
+        self.assertIn("if neu % checkpoint == 0:", src)
+        rumpf = src.split("def build(", 1)[1]
+        ausser = rumpf.split("except Exception as e:", 1)
+        self.assertEqual(len(ausser), 2, "kein Abbruchzweig in build()")
+        vor_raise = ausser[1].split("raise", 1)[0]
+        self.assertIn("_schreibe(zeilen)", vor_raise,
+                      "Abbruch wirft weiter, ohne den Zwischenstand zu sichern")
 
 
 class TabelleTest(unittest.TestCase):
