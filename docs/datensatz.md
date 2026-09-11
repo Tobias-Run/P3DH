@@ -109,6 +109,41 @@ derselben Meldung sind — es zählt jeweils nur die neueste („latest wins").
 | `template_reported` | BOOLEAN | hat das Institut dieses Template als gemeldet **deklariert** (`filing-indicators`) |
 | `source_file` | VARCHAR | Quell-ZIP, aus dem der Fakt stammt |
 
+## Referenztabellen
+
+Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
+
+| Datei | Inhalt | Herkunft |
+|---|---|---|
+| `codebook/dpm_codebook.csv` | Datenpunkt → Template/Zeile/Spalte + Labels | EBA DPM 2.0 |
+| `codebook/template_titles.csv` | Template → Klartexttitel | EBA Annotated Table Layout |
+| `codebook/framework_bridge.csv` | Zellen über den Meldewerkswechsel 4.1 ↔ 4.2 | beobachtungsbasiert aus dem Bestand |
+| `codebook/geo_names.csv` | ISO-2 → Ländername | ISO 3166-1 |
+| `codebook/country_gdp.csv` | Land → BIP (laufende US-Dollar) + Jahr | Weltbank, `NY.GDP.MKTP.CD` |
+| `codebook/bank_aliases.csv` | LEI → Kurzname des Instituts | gepflegt |
+
+### `country_gdp.csv` ist **deskriptiv**
+
+Gedacht zur **Normierung**, nicht als Regressor: ein Länderexposure von 5 Mrd EUR
+bedeutet in Malta etwas anderes als in Deutschland, und erst am BIP relativiert
+werden Exposures über unterschiedlich große Volkswirtschaften vergleichbar.
+
+Als Grundlage für Korrelationen taugt es **nicht**. Der Wert ist je Land
+konstant, die effektive Stichprobe damit ~30 statt ~450; und Länder mit hohem BIP
+haben strukturell andere Bankensysteme, sodass ein Zusammenhang „hohes BIP ↔
+höhere Kapitalquote" vermutlich ein Größenklassen-Effekt wäre.
+
+| | |
+|---|---|
+| Abgedeckt | 212 von 250 Ländern · **99,68 %** des Exposures |
+| Nicht abgedeckt | Offshore-Plätze (Britische Jungferninseln, Jersey, Guernsey) und Taiwan — die Weltbank veröffentlicht dafür kein BIP |
+| Jahr | je Land der jüngste verfügbare Wert, in der Zeile mitgeführt |
+| Währung | laufende US-Dollar. Wer gegen `fact_value_eur` rechnet, muss umrechnen |
+
+Der Join läuft über den **ISO-Code**, nicht über den Namen: von 216 gemeinsamen
+Codes tragen 32 bei der Weltbank einen anderen Namen als bei uns („Korea, Rep."
+gegen „Korea, Republic of"). Ein Namensabgleich hätte sie verloren.
+
 ## Bekannte Einschränkungen
 
 Ein Datensatz ohne dokumentierte Fallen wird falsch verwendet. Die folgenden sind

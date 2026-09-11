@@ -764,7 +764,7 @@ function initFilters(){
       o.textContent=(label?label(v):v); sel.appendChild(o); });
   };
   fill('fCountry',countries); fill('fItype',itypes,shortItype); fill('fDate',dates);
-  const rerender=()=>{ renderReportList(); if(VIEW==='benchmark') renderBenchmark(); };
+  const rerender=()=>{ renderReportList(); if(VIEW==='benchmark') renderBenchmark(); shareState(); };
   ['fCountry','fItype','fScope','fDate'].forEach(id=>
     document.getElementById(id).addEventListener('change',rerender));
   document.getElementById('fGsii').addEventListener('change',rerender);
@@ -1877,13 +1877,13 @@ async function renderBenchmark(){
   main.innerHTML=h;
   document.getElementById('bmProfile').addEventListener('change',e=>{
     BMP=e.target.value; bmSort={...bmAll()[BMP].defaultSort};
-    store.bmp=BMP; persist(); renderBenchmark();
+    store.bmp=BMP; persist(); renderBenchmark(); shareState();
   });
   document.getElementById('bmPct').addEventListener('change',e=>{
-    BM_PCT=e.target.checked; store.bmpct=BM_PCT; persist(); renderBenchmark();
+    BM_PCT=e.target.checked; store.bmpct=BM_PCT; persist(); renderBenchmark(); shareState();
   });
   document.getElementById('bmHide').addEventListener('change',e=>{
-    BM_HIDEFLAG=e.target.checked; store.bmhide=BM_HIDEFLAG; persist(); renderBenchmark();
+    BM_HIDEFLAG=e.target.checked; store.bmhide=BM_HIDEFLAG; persist(); renderBenchmark(); shareState();
   });
   main.querySelectorAll('.dcard').forEach(card=>{
     card.onclick=()=>{
@@ -1982,13 +1982,87 @@ async function renderCompare(){
 }
 
 /* ================= routing & tabs ================= */
+/* ---- Teilbarer Zustand (#50) ---------------------------------------------
+ *
+ * Ein Analysewerkzeug, dessen Zustand sich nicht verlinken laesst, erzeugt
+ * Screenshots statt Zusammenarbeit: wer eine Auffaelligkeit findet, kann sie
+ * nur beschreiben — „setz mal Land auf Schweden und such nach …".
+ *
+ * Der Zustand haengt deshalb als Klartext-Parameter HINTER dem bestehenden
+ * Hash:
+ *
+ *     #r/LEI/2025-12-31/CON?q=helaba&c=Germany
+ *     #benchmark?prof=npl&pct=1
+ *
+ * Zwei Zusagen dabei:
+ *
+ * 1. BESTEHENDE LINKS BRECHEN NICHT. Alles hinter '?' ist optional; ein Link
+ *    ohne Parameter ergibt exakt die heutigen Vorgaben. Die Routen `#r/…`,
+ *    `#benchmark` und `#compare` sind unveraendert.
+ * 2. LESBAR, nicht kodiert. Wer den Link sieht, sieht den Zustand. Eine
+ *    undurchsichtige Kodierung widerspraeche einem Werkzeug, das fuer
+ *    Nachvollziehbarkeit gebaut ist.
+ *
+ * Geschrieben wird mit replaceState: das loest KEIN hashchange aus (sonst
+ * riefe sich route() bei jedem Tastendruck selbst auf) und fuellt nicht die
+ * Zurueck-Historie mit jedem Filterschritt.
+ */
+const SHARE_FIELDS = {q:'reportFilter', c:'fCountry', i:'fItype', s:'fScope', d:'fDate'};
+
+function shareParams(){
+  const p=new URLSearchParams();
+  for(const [k,id] of Object.entries(SHARE_FIELDS)){
+    const el=document.getElementById(id);
+    if(el && el.value) p.set(k, el.value);
+  }
+  const g=document.getElementById('fGsii');
+  if(g && g.checked) p.set('g','1');
+  if(VIEW==='benchmark'){
+    if(BMP!=='km1')  p.set('prof', BMP);
+    if(BM_PCT)       p.set('pct','1');
+    if(BM_HIDEFLAG)  p.set('hide','1');
+  }
+  return p;
+}
+/* Nur der Routenteil, ohne Parameter — die Basis, an die angehaengt wird. */
+function hashRoute(){
+  return (location.hash||'').split('?')[0];
+}
+function shareState(){
+  const p=shareParams().toString();
+  const neu=hashRoute()+(p?'?'+p:'');
+  if(neu!==(location.hash||'')) history.replaceState(null,'',location.pathname+location.search+neu);
+}
+/* Zustand aus dem Hash uebernehmen. Fehlende Parameter bleiben auf ihrer
+ * Vorgabe — deshalb wird jedes Feld gesetzt, auch wenn der Link es nicht
+ * nennt: sonst haengt der alte Filter nach einem Sprung noch. */
+function applyShared(){
+  const roh=(location.hash||'').split('?')[1]||'';
+  const p=new URLSearchParams(roh);
+  for(const [k,id] of Object.entries(SHARE_FIELDS)){
+    const el=document.getElementById(id);
+    if(!el) continue;
+    const v=p.get(k)||'';
+    // Ein Wert, den dieses Auswahlfeld nicht kennt (veralteter Link, anderer
+    // Bestand), wird verworfen statt den Filter auf etwas Leeres zu setzen.
+    if(el.tagName==='SELECT' && v && ![...el.options].some(o=>o.value===v)) continue;
+    el.value=v;
+  }
+  const g=document.getElementById('fGsii');
+  if(g) g.checked = p.get('g')==='1';
+  if(p.has('prof')) BMP=p.get('prof');
+  if(p.has('pct'))  BM_PCT  = p.get('pct')==='1';
+  if(p.has('hide')) BM_HIDEFLAG = p.get('hide')==='1';
+}
 function setTabs(){
   document.getElementById('tabReports').classList.toggle('on',VIEW==='reports');
   document.getElementById('tabBenchmark').classList.toggle('on',VIEW==='benchmark');
   document.getElementById('tabCompare').classList.toggle('on',VIEW==='compare');
 }
 function route(){
-  const hsh=decodeURIComponent(location.hash||'');
+  const hsh=decodeURIComponent(hashRoute());
+  applyShared();                       // Filter VOR dem Rendern setzen
+  renderReportList();
   if(hsh.startsWith('#benchmark')){ renderBenchmark(); return; }
   if(hsh.startsWith('#compare')){ renderCompare(); return; }
   const m=hsh.match(/^#r\/([A-Z0-9]{20})\/([\d-]+)(?:\/(\w+))?/);
@@ -2002,11 +2076,14 @@ function route(){
   if(REPORTS.length) renderReport(REPORTS[0]);
 }
 document.getElementById('tabReports').onclick=()=>{
-  if(activeKey){ const r=byKey(activeKey); location.hash='#r/'+leiParts(r.entityID).lei+'/'+r.refPeriod+'/'+leiParts(r.entityID).scope; }
+  if(activeKey){ const r=byKey(activeKey); location.hash='#r/'+leiParts(r.entityID).lei+'/'+r.refPeriod+'/'+leiParts(r.entityID).scope+hashQuery(); }
   else{ history.replaceState(null,'',location.pathname); route(); }
 };
-document.getElementById('tabBenchmark').onclick=()=>{ location.hash='#benchmark'; };
-document.getElementById('tabCompare').onclick=()=>{ location.hash='#compare'; };
+// Beim Tabwechsel die Parameter mitnehmen — ein Filter, der beim Umschalten
+// verfaellt, macht den Vergleich zwischen den Sichten unmoeglich.
+const hashQuery=()=>{ const i=(location.hash||'').indexOf('?'); return i<0?'':location.hash.slice(i); };
+document.getElementById('tabBenchmark').onclick=()=>{ location.hash='#benchmark'+hashQuery(); };
+document.getElementById('tabCompare').onclick=()=>{ location.hash='#compare'+hashQuery(); };
 window.addEventListener('hashchange',route);
 
 /* theme + keyboard */

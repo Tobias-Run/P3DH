@@ -1,0 +1,213 @@
+iso2,country,year,gdp_usd,worldbank_name
+AD,Andorra,2025,4500982732,Andorra
+AE,United Arab Emirates,2024,552324919096,United Arab Emirates
+AF,Afghanistan,2024,17778508876,Afghanistan
+AG,Antigua and Barbuda,2025,2338196296,Antigua and Barbuda
+AL,Albania,2025,30540188271,Albania
+AM,Armenia,2025,29243452882,Armenia
+AO,Angola,2025,122174889424,Angola
+AR,Argentina,2025,683097891619,Argentina
+AS,American Samoa,2022,871000000,American Samoa
+AT,Austria,2025,579470021095,Austria
+AU,Australia,2025,1798518933689,Australia
+AW,Aruba,2024,4167588070,Aruba
+AZ,Azerbaijan,2025,75937647059,Azerbaijan
+BA,Bosnia and Herzegovina,2025,32599982936,Bosnia and Herzegovina
+BB,Barbados,2025,8016550000,Barbados
+BD,Bangladesh,2025,456319229256,Bangladesh
+BE,Belgium,2025,725466462860,Belgium
+BF,Burkina Faso,2025,27627297461,Burkina Faso
+BG,Bulgaria,2025,130777235530,Bulgaria
+BH,Bahrain,2025,48965725532,Bahrain
+BI,Burundi,2025,3364713864,Burundi
+BJ,Benin,2025,24566420904,Benin
+BM,Bermuda,2024,9194499000,Bermuda
+BN,Brunei Darussalam,2025,15031980994,Brunei Darussalam
+BO,"Bolivia, Plurinational State of",2025,64768947525,Bolivia
+BR,Brazil,2025,2279920092492,Brazil
+BS,Bahamas,2024,15832800000,"Bahamas, The"
+BT,Bhutan,2025,3579320145,Bhutan
+BW,Botswana,2025,19928479839,Botswana
+BY,Belarus,2025,93397215864,Belarus
+BZ,Belize,2025,3326500000,Belize
+CA,Canada,2025,2319899772426,Canada
+CD,"Congo, The Democratic Republic of the",2025,91030531317,"Congo, Dem. Rep."
+CF,Central African Republic,2025,3066109226,Central African Republic
+CG,Congo,2025,16306633779,"Congo, Rep."
+CH,Switzerland,2025,1043529899251,Switzerland
+CI,Côte d'Ivoire,2025,99773555666,Cote d'Ivoire
+CL,Chile,2025,357371159575,Chile
+CM,Cameroon,2025,58933453924,Cameroon
+CN,China,2025,19498039388043,China
+CO,Colombia,2025,457410034203,Colombia
+CR,Costa Rica,2025,102904921157,Costa Rica
+CU,Cuba,2020,107352000000,Cuba
+CV,Cabo Verde,2025,3056630435,Cabo Verde
+CW,Curaçao,2024,3561178212,Curacao
+CY,Cyprus,2025,41225787247,Cyprus
+CZ,Czechia,2025,391026962800,Czechia
+DE,Germany,2025,5050922925047,Germany
+DJ,Djibouti,2025,4624533092,Djibouti
+DK,Denmark,2025,462526660468,Denmark
+DM,Dominica,2025,723859259,Dominica
+DO,Dominican Republic,2025,127407463759,Dominican Republic
+DZ,Algeria,2025,287031225988,Algeria
+EC,Ecuador,2025,130320560400,Ecuador
+EE,Estonia,2025,47030833799,Estonia
+EG,Egypt,2025,365254630180,"Egypt, Arab Rep."
+ES,Spain,2025,1906453309986,Spain
+ET,Ethiopia,2025,126358758448,Ethiopia
+FI,Finland,2025,317039368820,Finland
+FJ,Fiji,2025,6198013062,Fiji
+FM,"Micronesia, Federated States of",2025,501797600,"Micronesia, Fed. Sts."
+FO,Faroe Islands,2024,4052937170,Faroe Islands
+FR,France,2025,3366315927447,France
+GA,Gabon,2025,21427119323,Gabon
+GB,United Kingdom,2025,4002587541846,United Kingdom
+GD,Grenada,2025,1420173229,Grenada
+GE,Georgia,2025,38143612855,Georgia
+GH,Ghana,2025,114209905279,Ghana
+GL,Greenland,2023,3326543974,Greenland
+GM,Gambia,2025,2593673988,"Gambia, The"
+GN,Guinea,2025,28346024753,Guinea
+GQ,Equatorial Guinea,2025,12823210426,Equatorial Guinea
+GR,Greece,2025,280635521324,Greece
+GT,Guatemala,2025,123306008821,Guatemala
+GU,Guam,2022,6910000000,Guam
+GW,Guinea-Bissau,2025,2527930273,Guinea-Bissau
+GY,Guyana,2025,27097477218,Guyana
+HK,Hong Kong,2025,427310315922,"Hong Kong SAR, China"
+HN,Honduras,2025,39601409103,Honduras
+HR,Croatia,2025,105060182186,Croatia
+HT,Haiti,2025,32077278409,Haiti
+HU,Hungary,2025,246490213513,Hungary
+ID,Indonesia,2025,1445642584164,Indonesia
+IE,Ireland,2025,721701359046,Ireland
+IL,Israel,2025,610777842874,Israel
+IM,Isle of Man,2023,7576129933,Isle of Man
+IN,India,2025,3956067115772,India
+IQ,Iraq,2025,254367293538,Iraq
+IR,"Iran, Islamic Republic of",2025,362682115433,"Iran, Islamic Rep."
+IS,Iceland,2025,38582528789,Iceland
+IT,Italy,2025,2551556954100,Italy
+JM,Jamaica,2025,22704903218,Jamaica
+JO,Jordan,2025,61610052535,Jordan
+JP,Japan,2025,4435162999977,Japan
+KE,Kenya,2025,135941278879,Kenya
+KG,Kyrgyzstan,2025,22623752095,Kyrgyz Republic
+KH,Cambodia,2025,51267065843,Cambodia
+KI,Kiribati,2025,349227254,Kiribati
+KM,Comoros,2025,1814920856,Comoros
+KN,Saint Kitts and Nevis,2025,1183514815,St. Kitts and Nevis
+KR,"Korea, Republic of",2025,1872374961553,"Korea, Rep."
+KW,Kuwait,2025,157209026926,Kuwait
+KY,Cayman Islands,2024,7765336505,Cayman Islands
+KZ,Kazakhstan,2025,306239209650,Kazakhstan
+LA,Lao People's Democratic Republic,2025,18302970219,Lao PDR
+LB,Lebanon,2024,25971643441,Lebanon
+LC,Saint Lucia,2025,2656444444,St. Lucia
+LI,Liechtenstein,2024,8905764270,Liechtenstein
+LK,Sri Lanka,2025,108825231671,Sri Lanka
+LR,Liberia,2025,5245938900,Liberia
+LS,Lesotho,2025,2573572920,Lesotho
+LT,Lithuania,2025,95210150818,Lithuania
+LU,Luxembourg,2025,101157829491,Luxembourg
+LV,Latvia,2025,48618869160,Latvia
+LY,Libya,2025,48098909614,Libya
+MA,Morocco,2025,182374250612,Morocco
+MC,Monaco,2024,11125788838,Monaco
+MD,"Moldova, Republic of",2025,20351796275,Moldova
+ME,Montenegro,2025,9232801465,Montenegro
+MF,Saint Martin (French part),2021,649206263,St. Martin (French part)
+MG,Madagascar,2025,19620352036,Madagascar
+MH,Marshall Islands,2025,308000000,Marshall Islands
+MK,North Macedonia,2025,19101199817,North Macedonia
+ML,Mali,2025,30069148581,Mali
+MM,Myanmar,2025,81665773810,Myanmar
+MN,Mongolia,2025,25369107325,Mongolia
+MO,Macao,2025,52061007670,"Macao SAR, China"
+MP,Northern Mariana Islands,2022,1096000000,Northern Mariana Islands
+MR,Mauritania,2025,11679910946,Mauritania
+MT,Malta,2025,27771821561,Malta
+MU,Mauritius,2025,16157804492,Mauritius
+MV,Maldives,2025,7741066861,Maldives
+MW,Malawi,2025,14918276698,Malawi
+MX,Mexico,2025,1832641364776,Mexico
+MY,Malaysia,2025,472193128645,Malaysia
+MZ,Mozambique,2025,22337997046,Mozambique
+NA,Namibia,2025,15080340654,Namibia
+NC,New Caledonia,2024,8548919387,New Caledonia
+NE,Niger,2025,21646191388,Niger
+NG,Nigeria,2025,290794361542,Nigeria
+NI,Nicaragua,2025,22237167113,Nicaragua
+NL,Netherlands,2025,1332767651100,Netherlands
+NO,Norway,2025,530755719439,Norway
+NP,Nepal,2025,45489810283,Nepal
+NR,Nauru,2025,176040044,Naoero
+NZ,New Zealand,2025,264057413740,New Zealand
+OM,Oman,2025,109604780696,Oman
+PA,Panama,2025,90462600000,Panama
+PE,Peru,2025,334854659182,Peru
+PF,French Polynesia,2024,6323716355,French Polynesia
+PG,Papua New Guinea,2025,32498658654,Papua New Guinea
+PH,Philippines,2025,487086123720,Philippines
+PK,Pakistan,2025,407307214476,Pakistan
+PL,Poland,2025,1035491784197,Poland
+PR,Puerto Rico,2025,129368484000,Puerto Rico (US)
+PS,"Palestine, State of",2025,17167100000,West Bank and Gaza
+PT,Portugal,2025,346639825142,Portugal
+PW,Palau,2025,345000000,Palau
+PY,Paraguay,2025,49278227554,Paraguay
+QA,Qatar,2025,215559615385,Qatar
+RO,Romania,2025,428677977855,Romania
+RS,Serbia,2025,99953324473,Serbia
+RU,Russian Federation,2025,2561310169359,Russian Federation
+RW,Rwanda,2025,16372132990,Rwanda
+SA,Saudi Arabia,2025,1276942933333,Saudi Arabia
+SB,Solomon Islands,2025,1749572443,Solomon Islands
+SC,Seychelles,2025,2387022853,Seychelles
+SD,Sudan,2025,60162634574,Sudan
+SE,Sweden,2025,668998664082,Sweden
+SG,Singapore,2025,603869516999,Singapore
+SI,Slovenia,2025,79648204979,Slovenia
+SK,Slovakia,2025,154530066507,Slovak Republic
+SL,Sierra Leone,2025,7464157904,Sierra Leone
+SM,San Marino,2023,2027243194,San Marino
+SN,Senegal,2025,37006536238,Senegal
+SO,Somalia,2025,12995200000,"Somalia, Fed. Rep."
+SR,Suriname,2025,4523657797,Suriname
+SS,South Sudan,2015,11997800760,South Sudan
+ST,Sao Tome and Principe,2025,981293587,Sao Tome and Principe
+SV,El Salvador,2025,36708110000,El Salvador
+SX,Sint Maarten (Dutch part),2025,1887728480,Sint Maarten (Dutch part)
+SY,Syrian Arab Republic,2022,23737634644,Syrian Arab Republic
+SZ,Eswatini,2025,5160679613,Eswatini
+TC,Turks and Caicos Islands,2024,1745378000,Turks and Caicos Islands
+TD,Chad,2025,21472835225,Chad
+TG,Togo,2025,11889949067,Togo
+TH,Thailand,2025,577009981112,Thailand
+TJ,Tajikistan,2025,17660626562,Tajikistan
+TL,Timor-Leste,2025,1902180258,Timor-Leste
+TM,Turkmenistan,2025,49828621356,Turkmenistan
+TN,Tunisia,2025,57502836548,Tunisia
+TO,Tonga,2025,679218219,Tonga
+TR,Türkiye,2025,1597293229287,Turkiye
+TT,Trinidad and Tobago,2025,25942749718,Trinidad and Tobago
+TV,Tuvalu,2025,57345435,Tuvalu
+TZ,"Tanzania, United Republic of",2025,90143496090,Tanzania
+UA,Ukraine,2025,214233312784,Ukraine
+UG,Uganda,2025,61985829288,Uganda
+US,United States,2025,30769700000000,United States
+UY,Uruguay,2025,85347696278,Uruguay
+UZ,Uzbekistan,2025,147038081129,Uzbekistan
+VC,Saint Vincent and the Grenadines,2025,1255222222,St. Vincent and the Grenadines
+VE,"Venezuela, Bolivarian Republic of",2025,99661244156,"Venezuela, RB"
+VI,"Virgin Islands, U.S.",2022,4672000000,Virgin Islands (U.S.)
+VN,Viet Nam,2025,514697215165,Viet Nam
+VU,Vanuatu,2025,1353658841,Vanuatu
+WS,Samoa,2025,1287936622,Samoa
+XK,Kosovo,2025,12456403307,Kosovo
+YE,Yemen,2018,21606160663,"Yemen, Rep."
+ZA,South Africa,2025,427184325997,South Africa
+ZM,Zambia,2025,28879806220,Zambia
+ZW,Zimbabwe,2025,51215643906,Zimbabwe
