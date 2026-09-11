@@ -58,12 +58,15 @@ FELDER = ["lei", "direct_parent_lei", "direct_parent_status", "direct_parent_rea
 EIGENSTAENDIG = {"NO_KNOWN_PERSON", "NON_CONSOLIDATING", "NO_KNOWN_PERSON_ENTITY"}
 
 
-def _get(url, versuche=3):
+def _get(url, versuche=6):
     """(status, payload). 404 ist eine Antwort, kein Fehler.
 
-    Wiederholung mit Backoff: von 60 Probeabrufen scheiterten 3 sporadisch.
-    Ohne sie fehlten still einzelne Kanten — und eine fehlende Kante sieht aus
-    wie Eigenständigkeit.
+    Sechs Versuche mit Backoff, nicht drei: der erste Vollabruf starb nach rund
+    1.000 Anfragen an `Connection reset by peer`. Bei 1.500 Abrufen am Stück ist
+    ein zurückgesetzter Verbindungsaufbau normal, kein Ausnahmefall.
+
+    Eine fehlende Kante sieht aus wie Eigenständigkeit — deshalb wird hier
+    hartnäckig wiederholt statt stillschweigend weiterzugehen.
     """
     for i in range(versuche):
         try:
@@ -103,33 +106,53 @@ def vorhandene():
         return {r["lei"]: r for r in csv.DictReader(fh)}
 
 
-def build(refresh=False, pause=0.05):
-    with META.open(encoding="utf-8") as fh:
-        leis = sorted({r["lei"] for r in csv.DictReader(fh) if r["lei"]})
-    schon = {} if refresh else vorhandene()
-    zeilen, neu = [], 0
-
-    for i, lei in enumerate(leis, 1):
-        if lei in schon:
-            zeilen.append(schon[lei])
-            continue
-        dp, dps, dpr = beziehung(lei, "direct")
-        up, ups, upr = beziehung(lei, "ultimate")
-        zeilen.append({"lei": lei,
-                       "direct_parent_lei": dp, "direct_parent_status": dps,
-                       "direct_parent_reason": dpr,
-                       "ultimate_parent_lei": up, "ultimate_parent_status": ups,
-                       "ultimate_parent_reason": upr})
-        neu += 1
-        if neu % 50 == 0:
-            print(f"  … {i}/{len(leis)}")
-        time.sleep(pause)
-
-    zeilen.sort(key=lambda r: r["lei"])
+def _schreibe(zeilen):
+    zeilen = sorted(zeilen, key=lambda r: r["lei"])
     with OUT.open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, FELDER)
         w.writeheader()
         w.writerows(zeilen)
+
+
+def build(refresh=False, pause=0.05, checkpoint=25):
+    """Der Abruf schreibt UNTERWEGS, nicht erst am Ende.
+
+    Der erste Vollabruf lief rund 30 Minuten und starb dann an einem
+    zurückgesetzten Verbindungsaufbau — ohne eine einzige Zeile Ergebnis. Die
+    Zusage „idempotent, holt nur Neuzugänge" trägt nur, wenn Teilergebnisse den
+    Abbruch überleben. Jetzt steht nach spätestens `checkpoint` Instituten der
+    Zwischenstand auf der Platte, und ein neuer Aufruf setzt dort fort.
+    """
+    with META.open(encoding="utf-8") as fh:
+        leis = sorted({r["lei"] for r in csv.DictReader(fh) if r["lei"]})
+    schon = {} if refresh else vorhandene()
+    zeilen = [schon[l] for l in leis if l in schon]
+    offen = [l for l in leis if l not in schon]
+    if schon:
+        print(f"  {len(schon)} bereits abgerufen, {len(offen)} offen")
+    neu = 0
+
+    try:
+        for lei in offen:
+            dp, dps, dpr = beziehung(lei, "direct")
+            up, ups, upr = beziehung(lei, "ultimate")
+            zeilen.append({"lei": lei,
+                           "direct_parent_lei": dp, "direct_parent_status": dps,
+                           "direct_parent_reason": dpr,
+                           "ultimate_parent_lei": up, "ultimate_parent_status": ups,
+                           "ultimate_parent_reason": upr})
+            neu += 1
+            if neu % checkpoint == 0:
+                _schreibe(zeilen)
+                print(f"  … {len(zeilen)}/{len(leis)} gesichert")
+            time.sleep(pause)
+    except Exception as e:
+        _schreibe(zeilen)
+        print(f"⚠ abgebrochen nach {len(zeilen)}/{len(leis)}: {e}")
+        print(f"  Zwischenstand gesichert — erneuter Aufruf setzt fort.")
+        raise
+
+    _schreibe(zeilen)
 
     bestand = set(leis)
     kanten = [r for r in zeilen if r["direct_parent_lei"] in bestand]
