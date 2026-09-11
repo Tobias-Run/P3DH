@@ -57,6 +57,18 @@ FELDER = ["lei", "direct_parent_lei", "direct_parent_status", "direct_parent_rea
 # „unbekannt", nicht „eigenständig".
 EIGENSTAENDIG = {"NO_KNOWN_PERSON", "NON_CONSOLIDATING", "NO_KNOWN_PERSON_ENTITY"}
 
+# Für die Doppelzählungsfrage ist das eine ANDERE Menge, und die Differenz ist
+# `NATURAL_PERSONS`: neun Institute im Bestand — überwiegend dänische Sparkassen
+# — werden von natürlichen Personen kontrolliert. Die sind nicht eigenständig,
+# es gibt sehr wohl jemanden über ihnen. Aber eine natürliche Person kann
+# niemals im Bestand stehen, der ist nach LEI verschlüsselt; sie meldet keine
+# Säule-3-Daten und kann folglich niemanden doppelt zählen.
+#
+# Beide Mengen in eine zu legen hiesse, eine der beiden Fragen falsch zu
+# beantworten: entweder behaupteten wir Eigenständigkeit, wo Kontrolle besteht,
+# oder wir zählten ein Doppelzählungsrisiko, das es nicht geben kann.
+KEINE_MUTTER_IM_BESTAND_MOEGLICH = EIGENSTAENDIG | {"NATURAL_PERSONS"}
+
 
 def _get(url, versuche=6):
     """(status, payload). 404 ist eine Antwort, kein Fehler.
@@ -154,22 +166,37 @@ def build(refresh=False, pause=0.05, checkpoint=25):
 
     _schreibe(zeilen)
 
-    bestand = set(leis)
+    print(f"✓ {OUT}  ({len(zeilen)} Institute, {neu} neu abgerufen)")
+    for zeile in bericht(zeilen, set(leis)):
+        print("  " + zeile)
+    return zeilen
+
+
+def bericht(zeilen, bestand):
+    """Die drei Zahlen, auf die es ankommt — und die vierte, die man nicht
+    unterschlagen darf.
+
+    Doppelzählung entsteht nur dort, wo die Mutter SELBST meldet. „Hat
+    irgendwo eine Mutter" ist dafür die falsche Zahl und wäre viel zu gross.
+    """
+    mit_parent = [r for r in zeilen if r["direct_parent_lei"]]
     kanten = [r for r in zeilen if r["direct_parent_lei"] in bestand]
     ukanten = [r for r in zeilen if r["ultimate_parent_lei"] in bestand]
-    mit_parent = [r for r in zeilen if r["direct_parent_lei"]]
-    belegt_eigen = [r for r in zeilen
-                    if r["direct_parent_reason"] in EIGENSTAENDIG]
-    unbekannt = [r for r in zeilen if not r["direct_parent_lei"]
-                 and r["direct_parent_reason"] not in EIGENSTAENDIG]
-
-    print(f"✓ {OUT}  ({len(zeilen)} Institute, {neu} neu abgerufen)")
-    print(f"  mit direkter Mutter (irgendwo) : {len(mit_parent):>4}")
-    print(f"  Mutter SELBST im Bestand       : {len(kanten):>4}  <- Doppelzählung")
-    print(f"  Ultimate-Mutter im Bestand     : {len(ukanten):>4}")
-    print(f"  Eigenständigkeit belegt        : {len(belegt_eigen):>4}")
-    print(f"  unbekannt (keine Aussage)      : {len(unbekannt):>4}")
-    return zeilen
+    kopf = [r for r in zeilen
+            if r["direct_parent_reason"] in KEINE_MUTTER_IM_BESTAND_MOEGLICH]
+    # Jemand ist über ihnen, und wir wissen nicht wer — die ehrliche Restmenge.
+    offen = [r for r in zeilen if not r["direct_parent_lei"]
+             and r["direct_parent_reason"] not in KEINE_MUTTER_IM_BESTAND_MOEGLICH]
+    n = len(zeilen) or 1
+    return [
+        f"Mutter SELBST im Bestand     : {len(kanten):>4}  "
+        f"({100 * len(kanten) / n:.1f} %)  <- Doppelzählung",
+        f"Ultimate-Mutter im Bestand   : {len(ukanten):>4}",
+        f"mit Mutter irgendwo          : {len(mit_parent):>4}  "
+        f"(davon {len(mit_parent) - len(kanten)} ausserhalb)",
+        f"keine Mutter möglich         : {len(kopf):>4}",
+        f"Mutter da, aber unbekannt    : {len(offen):>4}  <- untere Schranke",
+    ]
 
 
 if __name__ == "__main__":

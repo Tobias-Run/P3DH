@@ -56,6 +56,52 @@ class GrundlagenTest(unittest.TestCase):
         self.assertNotIn("NO_LEI", self.f.EIGENSTAENDIG)
         self.assertNotIn("LEGAL_OBSTACLES", self.f.EIGENSTAENDIG)
 
+    def test_natural_persons_answers_one_question_but_not_the_other(self):
+        """Neun Institute — überwiegend dänische Sparkassen — werden von
+        natürlichen Personen kontrolliert. Sie sind NICHT eigenstaendig, es gibt
+        jemanden ueber ihnen. Aber eine natuerliche Person kann nie im Bestand
+        stehen (der ist nach LEI verschluesselt) und niemanden doppelt zaehlen.
+
+        Eine einzige Menge fuer beide Fragen muesste eine davon falsch
+        beantworten."""
+        self.assertNotIn("NATURAL_PERSONS", self.f.EIGENSTAENDIG,
+                         "behauptet Eigenstaendigkeit, wo Kontrolle besteht")
+        self.assertIn("NATURAL_PERSONS", self.f.KEINE_MUTTER_IM_BESTAND_MOEGLICH,
+                      "zaehlt ein Doppelzaehlungsrisiko, das es nicht geben kann")
+        self.assertTrue(self.f.EIGENSTAENDIG < self.f.KEINE_MUTTER_IM_BESTAND_MOEGLICH,
+                        "die strengere Menge muss die Teilmenge sein")
+
+    def test_no_lei_stays_unknown_in_both_sets(self):
+        """`NO_LEI` heisst: es GIBT eine Mutter, sie hat nur keinen LEI. Der
+        direkte Weg ist damit versperrt — aber eine Ur-Mutter weiter oben kann
+        sehr wohl im Bestand stehen. Also unbekannt, nicht 'kopflos'."""
+        for menge in (self.f.EIGENSTAENDIG, self.f.KEINE_MUTTER_IM_BESTAND_MOEGLICH):
+            self.assertNotIn("NO_LEI", menge)
+            self.assertNotIn("LEGAL_OBSTACLES", menge)
+            self.assertNotIn("NON_PUBLIC", menge)
+
+    def test_double_counting_is_measured_on_parents_that_report_themselves(self):
+        """„Hat irgendwo eine Mutter" waere die falsche Zahl: Doppelzaehlung
+        entsteht nur, wo die Mutter SELBST im Bestand meldet."""
+        zeilen = [
+            {"lei": "A", "direct_parent_lei": "B", "direct_parent_reason": "",
+             "ultimate_parent_lei": "B"},                      # Mutter meldet mit
+            {"lei": "B", "direct_parent_lei": "", "direct_parent_reason": "NO_KNOWN_PERSON",
+             "ultimate_parent_lei": ""},
+            {"lei": "C", "direct_parent_lei": "Z", "direct_parent_reason": "",
+             "ultimate_parent_lei": "Z"},                      # Mutter ausserhalb
+            {"lei": "D", "direct_parent_lei": "", "direct_parent_reason": "NATURAL_PERSONS",
+             "ultimate_parent_lei": ""},
+            {"lei": "E", "direct_parent_lei": "", "direct_parent_reason": "NO_LEI",
+             "ultimate_parent_lei": ""},
+        ]
+        t = "\n".join(self.f.bericht(zeilen, {"A", "B", "C", "D", "E"}))
+        self.assertRegex(t, r"Mutter SELBST im Bestand\s*:\s*1\b")
+        self.assertRegex(t, r"mit Mutter irgendwo\s*:\s*2\b")
+        self.assertRegex(t, r"\(davon 1 ausserhalb\)")
+        self.assertRegex(t, r"keine Mutter möglich\s*:\s*2\b")   # B und D
+        self.assertRegex(t, r"Mutter da, aber unbekannt\s*:\s*1\b")  # E
+
     def test_a_404_is_an_answer_not_an_error(self):
         """Kein hinterlegter Parent ist eine Aussage der Quelle, kein
         Abrufproblem — sonst braeche der Lauf bei jedem eigenstaendigen
