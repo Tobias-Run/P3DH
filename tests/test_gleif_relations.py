@@ -2,9 +2,13 @@
 
 ## Warum das die Voraussetzung für jedes Populationsaggregat ist
 
-325 Institute melden nur konsolidiert, 148 nur auf Einzelinstitutsebene. Die
-IND-Melder sind fast alle Toechter von irgendwem — von wem, steht nirgends in
-den Daten. Wer ueber alle Institute summiert, zaehlt Mutter und Tochter doppelt.
+Laut #32 melden 325 Institute nur konsolidiert und 148 nur auf
+Einzelinstitutsebene (Stand: 474 Institute; der Bestand ist seither auf 508
+gewachsen, die Scope-Verteilung ist hier nicht nachgerechnet). Die IND-Melder
+sind fast alle Toechter von irgendwem — von wem, steht nirgends in den Daten.
+Wer ueber alle Institute summiert, zaehlt Mutter und Tochter doppelt.
+
+Gemessen ueber alle 508: bei 66 liegt die direkte Mutter SELBST im Bestand.
 
 ## Die Unterscheidung, an der alles haengt
 
@@ -22,6 +26,7 @@ Eigenstaendigkeit, wo die Quelle das Gegenteil sagt (Arbeitsprinzip 3).
 """
 
 from pathlib import Path
+import collections
 import csv
 import sys
 import unittest
@@ -57,7 +62,7 @@ class GrundlagenTest(unittest.TestCase):
         self.assertNotIn("LEGAL_OBSTACLES", self.f.EIGENSTAENDIG)
 
     def test_natural_persons_answers_one_question_but_not_the_other(self):
-        """Neun Institute — überwiegend dänische Sparkassen — werden von
+        """25 Institute — überwiegend dänische Sparkassen — werden von
         natürlichen Personen kontrolliert. Sie sind NICHT eigenstaendig, es gibt
         jemanden ueber ihnen. Aber eine natuerliche Person kann nie im Bestand
         stehen (der ist nach LEI verschluesselt) und niemanden doppelt zaehlen.
@@ -134,7 +139,7 @@ class GrundlagenTest(unittest.TestCase):
             self.assertIn(zustand, src)
 
     def test_the_run_is_idempotent(self):
-        """474 Abrufe sind hoeflich nur einmal. Ein zweiter Lauf darf nur
+        """508 Abrufe sind hoeflich nur einmal. Ein zweiter Lauf darf nur
         Neuzugaenge holen."""
         src = (ROOT / "scripts" / "fetch_gleif_relations.py").read_text(encoding="utf-8")
         self.assertIn("offen = [l for l in leis if l not in schon]", src)
@@ -224,6 +229,29 @@ class TabelleTest(unittest.TestCase):
     def test_the_order_is_stable(self):
         leis = [r["lei"] for r in self.rows]
         self.assertEqual(leis, sorted(leis))
+
+    def test_the_documented_counts_are_measured_not_estimated(self):
+        """Ich habe die Gründe-Tabelle in `docs/datensatz.md` zuerst aus einem
+        Teilstand HOCHGERECHNET — alle fünf Zahlen waren falsch (194/91/15/15/6
+        statt 164/111/25/12/5). Eine hochgerechnete Zahl sieht in der Doku
+        genauso aus wie eine gemessene; nur dieser Test unterscheidet sie."""
+        doc = (ROOT / "docs" / "datensatz.md").read_text(encoding="utf-8")
+        ist = collections.Counter(r["direct_parent_reason"] for r in self.rows
+                                  if r["direct_parent_reason"])
+        self.assertTrue(ist, "keine Gründe in der Tabelle")
+        for grund, zahl in ist.items():
+            with self.subTest(grund=grund):
+                self.assertRegex(
+                    doc, rf"`{grund}`\s*\|\s*{zahl}\b",
+                    f"docs/datensatz.md nennt für {grund} nicht die gemessenen {zahl}")
+
+    def test_the_documented_edge_count_matches_the_table(self):
+        """Die 66 sind die Kernzahl des Issues — die Menge, bei der
+        Doppelzählung real auftritt."""
+        doc = (ROOT / "docs" / "datensatz.md").read_text(encoding="utf-8")
+        kanten = sum(1 for r in self.rows if r["direct_parent_lei"] in self.bestand)
+        self.assertRegex(doc, rf"\*\*{kanten}\*\*",
+                         f"dokumentierte Kantenzahl weicht von den gemessenen {kanten} ab")
 
     def test_the_edges_inside_our_population_are_the_point(self):
         """Nur dort tritt Doppelzaehlung real auf. Faende sich keine einzige,

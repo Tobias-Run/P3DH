@@ -121,6 +121,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `codebook/geo_names.csv` | ISO-2 → Ländername | ISO 3166-1 |
 | `codebook/country_gdp.csv` | Land → BIP (laufende US-Dollar) + Jahr | Weltbank, `NY.GDP.MKTP.CD` |
 | `codebook/bank_aliases.csv` | LEI → Kurzname des Instituts | gepflegt |
+| `processed/lei_relations.csv` | LEI → direkte und oberste Konzernmutter | GLEIF Level-2-Daten |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -143,6 +144,75 @@ höhere Kapitalquote" vermutlich ein Größenklassen-Effekt wäre.
 Der Join läuft über den **ISO-Code**, nicht über den Namen: von 216 gemeinsamen
 Codes tragen 32 bei der Weltbank einen anderen Namen als bei uns („Korea, Rep."
 gegen „Korea, Republic of"). Ein Namensabgleich hätte sie verloren.
+
+### `lei_relations.csv` — wer gehört zu wem
+
+Je Institut eine Zeile mit der direkten und der obersten Konzernmutter. **Wer
+über Institute summiert, braucht diese Tabelle**, sonst zählt er Konzernmutter
+und Tochter doppelt.
+
+| Spalte | Bedeutung |
+|---|---|
+| `lei` | das Institut |
+| `direct_parent_lei` / `ultimate_parent_lei` | Mutter, sofern GLEIF eine kennt |
+| `direct_parent_status` / `ultimate_parent_status` | `parent`, `exception` oder `nichts_gemeldet` |
+| `direct_parent_reason` / `ultimate_parent_reason` | bei `exception` der GLEIF-Grund |
+
+Gemessen über alle 508 Institute:
+
+| | | |
+|---|---:|---|
+| Mutter **selbst im Bestand** | **66** | 13,0 % — hier tritt Doppelzählung real auf |
+| oberste Mutter im Bestand | 74 | |
+| Mutter irgendwo, aber außerhalb | 121 | unkritisch, die meldet hier nicht |
+| keine Mutter im Bestand möglich | 300 | |
+| Mutter da, wer, ist unbekannt | 21 | die Dunkelziffer |
+
+#### „Kein Parent" ist nicht „eigenständig"
+
+Der wichtigste Punkt an dieser Tabelle. Antwortet GLEIF auf die Parent-Abfrage
+mit 404, heißt das **nicht**, dass keine Mutter existiert — nur, dass keine
+hinterlegt ist. Daneben gibt es die *Reporting Exception* mit einem Grund, und
+die Gründe sagen Verschiedenes:
+
+| Grund | Zahl | heißt |
+|---|---:|---|
+| `NO_KNOWN_PERSON` | 164 | wirklich niemand darüber |
+| `NON_CONSOLIDATING` | 111 | niemand konsolidiert das Institut |
+| `NATURAL_PERSONS` | 25 | natürliche Personen kontrollieren es |
+| `NO_LEI` | 12 | es **gibt** eine Mutter, sie hat nur keinen LEI |
+| `NON_PUBLIC` | 5 | Beziehung nicht öffentlich — unbekannt |
+
+Dazu 187 Institute mit hinterlegter Mutter und 4, zu denen GLEIF weder das eine
+noch das andere sagt (`nichts_gemeldet`).
+
+Daraus folgen **zwei verschiedene Mengen**, die man nicht vermischen darf:
+
+- *eigenständig* sind nur die ersten beiden Gründe.
+- *kann niemanden doppelt zählen* umfasst zusätzlich `NATURAL_PERSONS` — diese
+  Institute werden zwar kontrolliert, aber von natürlichen Personen. Die stehen
+  nie im Bestand (der ist nach LEI verschlüsselt) und melden keine Säule-3-Daten.
+
+`NO_LEI` gehört in **keine** von beiden: der direkte Weg ist versperrt, eine
+Ur-Mutter weiter oben kann aber sehr wohl im Bestand stehen.
+
+#### Drei Einschränkungen
+
+**Untere Schranke, kein vollständiges Bild.** GLEIF-Meldung ist teils
+freiwillig. Die Tabelle behauptet nur positiv belegte Kanten; für 21 Institute
+ist eine Mutter bekannt-unbekannt. Die wahre Verflechtung ist also mindestens
+so groß wie hier ausgewiesen, nicht genau so groß.
+
+**Rechtliches Eigentum, nicht der aufsichtliche Konsolidierungskreis.** GLEIF
+bildet Eigentumsverhältnisse ab. Der Kreis nach CRR ist etwas anderes und weicht
+ab — eine Abweichung zwischen Mutter-CON und Tochter-IND ist deshalb nicht
+automatisch ein Meldefehler.
+
+**GLEIF ist ein Heute-Stand, die Meldedaten sind ein Stichtagsstand.** Ein nach
+dem Stichtag verkauftes Institut trägt hier bereits die neue Mutter. Beispiel aus
+dem Bestand: *Santander Bank Polska* steht unter *Erste Group Bank AG*, weil
+Erste die Bank 2025 übernommen hat — die Meldedaten stammen aber teils aus der
+Zeit davor. Wer Kanten mit Stichtagen kombiniert, muss das mitdenken.
 
 ## Bekannte Einschränkungen
 
