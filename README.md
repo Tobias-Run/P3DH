@@ -1,5 +1,7 @@
 # EBA Pillar 3 Data Hub (P3DH) — Datenanalyse-Pipeline
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22666716.svg)](https://doi.org/10.5281/zenodo.22666716)
+
 **Europas Banken legen alles offen. Lesen kann es fast niemand.**
 
 Die EBA veröffentlicht die aufsichtlichen Offenlegungen der großen EU- und
@@ -103,6 +105,11 @@ halten wir keine Rechte und vergeben keine. Die Abgrenzung steht vollständig in
 Zum Zitieren der Software: `CITATION.cff` (GitHub zeigt daraus „Cite this repository").
 **Die ausgewerteten Offenlegungsdaten sind gesondert zu zitieren** — sie stammen von der
 EBA, nicht von uns.
+
+Die Software ist über Zenodo archiviert. Der **Concept-DOI**
+[10.5281/zenodo.22666716](https://doi.org/10.5281/zenodo.22666716) zeigt immer auf die
+neueste Fassung; wer einen bestimmten Stand zitiert, nimmt den Versions-DOI aus dem
+jeweiligen Zenodo-Eintrag. Der DOI deckt die **Software** ab — nicht den Datensatz.
 
 Der Datensatz selbst ist in `docs/datensatz.md` beschrieben: alle 29 Spalten mit Herkunft
 und Semantik, dazu die dokumentierten Fallen an einer Stelle. Wie ein Release entsteht,

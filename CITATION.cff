@@ -11,6 +11,18 @@ authors:
     website: "https://github.com/Tobias-Run"
 repository-code: "https://github.com/Tobias-Run/P3DH"
 url: "https://tobias-run.github.io/P3DH/"
+# Concept-DOI: zeigt immer auf die NEUESTE Fassung. Wer einen bestimmten Stand
+# zitiert, nimmt den Versions-DOI unter `identifiers`.
+doi: "10.5281/zenodo.22666716"
+version: "0.1.1"
+date-released: "2026-09-11"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22666716"
+    description: "Concept-DOI — alle Versionen, löst auf die neueste auf"
+  - type: doi
+    value: "10.5281/zenodo.22714073"
+    description: "Versions-DOI dieser Fassung (v0.1.1)"
 abstract: >-
   Reproduzierbare Pipeline, die die XBRL-CSV-Offenlegungen aus dem EBA Pillar 3
   Data Hub einliest, jeden Datenpunkt gegen das DPM 2.0 auflöst, die
