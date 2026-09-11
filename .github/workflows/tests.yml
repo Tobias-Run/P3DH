@@ -8,10 +8,22 @@ name: Tests
 # aus einem Fork. Dieser Workflow liest nur und braucht deshalb keine
 # Schreibrechte.
 #
-# Die Testsuite läuft ohne den Datenbestand: long_form_raw.csv, das Parquet und
-# die Shards sind gitignored (sie leben auf dem data-Branch), und jeder Test,
-# der Daten braucht, baut sich seine eigene Fixture in einem Temp-Verzeichnis.
-# Verifiziert gegen einen frischen Checkout.
+# Die Suite läuft in ZWEI Durchgängen.
+#
+# `unittest` braucht keinen Datenbestand und ist in Sekunden durch — die
+# schnelle Rückmeldung am Pull Request.
+#
+# `artifacts` schließt die Lücke aus #69: 24 Tests prüfen, ob die
+# Zweig-A-Artefakte (index/codebook/benchmark.json) tragen, was das Repo
+# verspricht — Brücke, Kennzahlen-Registry, Achsenkarte, Währungsausnahmen. Die
+# Dateien sind gitignored, und ohne sie übersprangen sich die Tests: jeder Lauf
+# meldete `OK`, geprüft hatte niemand etwas. Eine Prüfung, die sich bei
+# Abwesenheit für erfüllt erklärt, ist genau der Fehlermodus, den dieses Projekt
+# sonst jagt.
+#
+# Die Artefakte werden dafür NEU GEBAUT, nicht heruntergeladen. Die publizierten
+# stammen vom letzten Pipeline-Lauf; ein Pull Request ändert die Repo-Seite
+# davor, und der Vergleich ginge rot, obwohl beides richtig ist.
 
 on:
   pull_request:
@@ -46,3 +58,56 @@ jobs:
 
       - name: Run test suite
         run: python -m unittest discover tests -v
+
+  # Dieselbe Suite, aber mit gebauten Zweig-A-Artefakten — damit die 24 Tests,
+  # die sie brauchen, tatsächlich laufen (#69).
+  artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install test dependencies
+        run: pip install duckdb pyarrow
+
+      # Nur die zwei Dateien, die der Shard-Bau braucht und die gitignored sind.
+      # NICHT fetch_state.sh: das holt zusätzlich long_form_raw.csv (~300 MB),
+      # was hier niemand liest.
+      - name: Zustand holen (Parquet + Coverage-Matrix)
+        run: |
+          BASE=https://raw.githubusercontent.com/${{ github.repository }}/data/state
+          mkdir -p processed/long
+          curl -fsSL --max-time 300 -o processed/long/p3dh_long.parquet "$BASE/p3dh_long.parquet"
+          curl -fsSL --max-time 300 "$BASE/filing_indicators.csv.gz" | gunzip > processed/filing_indicators.csv
+          ls -lh processed/long/p3dh_long.parquet processed/filing_indicators.csv
+
+      - name: Zweig A bauen
+        run: python scripts/build_zweig_a_shards.py
+
+      - name: Datensatz-Manifest bauen
+        run: python scripts/build_dataset_manifest.py
+
+      # Der Guard gegen den Rückfall. Mit gebauten Artefakten überspringt sich
+      # NICHTS mehr — gemessen 411 von 411. Deshalb ist hier jede Auslassung ein
+      # Fehler, nicht nur eine fehlende Datei: sonst kehrt die Lücke über einen
+      # anderen Grund zurück, und unittest meldet weiter `OK`.
+      #
+      # Sollte eine Auslassung einmal berechtigt sein, gehört sie hier
+      # ausgenommen — als Entscheidung, nicht als Schweigen.
+      - name: Run test suite (mit Artefakten)
+        run: |
+          set -o pipefail
+          python -m unittest discover tests -v 2>&1 | tee /tmp/tests.log
+          n=$(grep -c '\.\.\. skipped ' /tmp/tests.log || true)
+          if [ "$n" -gt 0 ]; then
+            echo "::error::$n Test(s) übersprungen, obwohl die Artefakte gebaut sind:"
+            grep '\.\.\. skipped ' /tmp/tests.log
+            exit 1
+          fi
+          echo "Keine Auslassung — alle Tests sind gelaufen."
