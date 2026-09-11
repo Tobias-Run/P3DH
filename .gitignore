@@ -20,6 +20,10 @@ processed/filing_indicators.csv
 # Mit welchem Codebook der Bestand entstanden ist (#57). Gehoert zum Zustand,
 # nicht auf main — er wandert mit long_form_raw.csv auf den `data`-Branch.
 processed/codebook_fingerprint.txt
+# Zwischenstand des GLEIF-Abrufs (#32). Der Abruf laeuft ~40 Minuten und sichert
+# alle 25 Institute; waehrenddessen ist die Tabelle unvollstaendig. Sie wird erst
+# unter ihrem richtigen Namen veroeffentlicht, wenn alle Institute drin sind.
+processed/lei_relations.csv.teil
 
 # Notebooks Checkpoints
 notebooks/.ipynb_checkpoints/

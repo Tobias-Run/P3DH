@@ -40,6 +40,7 @@ Aufruf:  python3 scripts/fetch_gleif_relations.py [--refresh]
 from pathlib import Path
 import csv
 import json
+import os
 import sys
 import time
 import urllib.error
@@ -48,6 +49,12 @@ import urllib.request
 ROOT = Path(__file__).resolve().parent.parent
 META = ROOT / "processed" / "entity_meta.csv"
 OUT = ROOT / "processed" / "lei_relations.csv"
+# Zwischenstände gehören NICHT auf den veröffentlichten Dateinamen. Ein Abruf
+# über 40 Minuten liegt die meiste Zeit unvollständig auf der Platte; stünde er
+# unter `OUT`, sähe jeder Leser — Test, Auswertung, Commit — eine Tabelle, der
+# hunderte Institute fehlen, ohne dass ihr das anzusehen wäre. Deshalb erscheint
+# `OUT` erst vollständig, in einem einzigen `os.replace`.
+TEIL = OUT.with_suffix(".csv.teil")
 
 API = "https://api.gleif.org/api/v1/lei-records"
 FELDER = ["lei", "direct_parent_lei", "direct_parent_status", "direct_parent_reason",
@@ -112,18 +119,31 @@ def beziehung(lei, art):
 
 
 def vorhandene():
-    if not OUT.exists():
-        return {}
-    with OUT.open(encoding="utf-8") as fh:
-        return {r["lei"]: r for r in csv.DictReader(fh)}
+    """Zuerst der Zwischenstand, dann die fertige Tabelle.
+
+    Nach einem Abbruch liegt der Teilstand unter TEIL und ist der weitere von
+    beiden; nach einem sauberen Lauf gibt es nur OUT.
+    """
+    for quelle in (TEIL, OUT):
+        if quelle.exists():
+            with quelle.open(encoding="utf-8") as fh:
+                return {r["lei"]: r for r in csv.DictReader(fh)}
+    return {}
 
 
-def _schreibe(zeilen):
+def _schreibe(zeilen, endgueltig=False):
+    """Schreibt nach TEIL — und nur bei `endgueltig` wird daraus OUT.
+
+    `os.replace` ist atomar: es gibt keinen Moment, in dem `lei_relations.csv`
+    halb dasteht. Entweder die vorige vollständige Fassung oder die neue.
+    """
     zeilen = sorted(zeilen, key=lambda r: r["lei"])
-    with OUT.open("w", newline="", encoding="utf-8") as fh:
+    with TEIL.open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, FELDER)
         w.writeheader()
         w.writerows(zeilen)
+    if endgueltig:
+        os.replace(TEIL, OUT)
 
 
 def build(refresh=False, pause=0.05, checkpoint=25):
@@ -164,7 +184,12 @@ def build(refresh=False, pause=0.05, checkpoint=25):
         print(f"  Zwischenstand gesichert — erneuter Aufruf setzt fort.")
         raise
 
-    _schreibe(zeilen)
+    fehlend = sorted(set(leis) - {r["lei"] for r in zeilen})
+    if fehlend:
+        raise RuntimeError(
+            f"{len(fehlend)} Institute ohne Beziehungszeile — unvollständig "
+            f"veröffentlichen hiesse, Kantenlosigkeit zu behaupten: {fehlend[:3]}")
+    _schreibe(zeilen, endgueltig=True)
 
     print(f"✓ {OUT}  ({len(zeilen)} Institute, {neu} neu abgerufen)")
     for zeile in bericht(zeilen, set(leis)):

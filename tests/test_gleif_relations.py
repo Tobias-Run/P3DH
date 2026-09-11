@@ -141,6 +141,43 @@ class GrundlagenTest(unittest.TestCase):
         self.assertIn("for lei in offen:", src)
         self.assertIn("--refresh", src)
 
+    def test_an_incomplete_table_never_reaches_the_published_name(self):
+        """Der Abruf laeuft ~40 Minuten und ist die meiste Zeit unvollstaendig.
+        Stuende der Zwischenstand unter `lei_relations.csv`, saehe jeder Leser
+        — Test, Auswertung, Commit — eine Tabelle, der hunderte Institute
+        fehlen, ohne dass ihr das anzusehen waere: fehlende Kanten sehen aus
+        wie Eigenstaendigkeit, und genau das ist der Fehler, den #32 vermeiden
+        will. Deshalb Zwischenstand unter TEIL, Veroeffentlichung per
+        `os.replace` — atomar, es gibt kein halbes `OUT`."""
+        self.assertEqual(self.f.TEIL.suffixes[-1], ".teil")
+        self.assertNotEqual(self.f.TEIL, self.f.OUT)
+        src = (ROOT / "scripts" / "fetch_gleif_relations.py").read_text(encoding="utf-8")
+        self.assertIn("os.replace(TEIL, OUT)", src)
+        # Checkpoints duerfen NICHT endgueltig sein, sonst ist die Trennung hin.
+        rumpf = src.split("def build(", 1)[1]
+        for ruf in ("_schreibe(zeilen)",):
+            self.assertIn(ruf, rumpf, "Zwischenstand wird nicht mehr gesichert")
+        self.assertEqual(rumpf.count("endgueltig=True"), 1,
+                         "genau ein Aufruf darf veroeffentlichen")
+
+    def test_the_partial_file_is_not_committed(self):
+        """Sonst landete der Halbstand doch im Repo — auf dem Umweg ueber
+        `git add`."""
+        ign = (ROOT / ".gitignore").read_text(encoding="utf-8")
+        self.assertIn("processed/lei_relations.csv.teil", ign)
+
+    def test_publishing_is_refused_while_institutions_are_missing(self):
+        """Die atomare Umbenennung allein genuegt nicht: sie koennte auch eine
+        vollstaendig geschriebene, aber inhaltlich lueckenhafte Tabelle
+        veroeffentlichen. Fehlt ein Institut, ist das kein leerer Datensatz —
+        es ist die stille Behauptung, es habe keine Mutter."""
+        src = (ROOT / "scripts" / "fetch_gleif_relations.py").read_text(encoding="utf-8")
+        rumpf = src.split("def build(", 1)[1]
+        vor = rumpf.split("endgueltig=True", 1)[0]
+        self.assertIn("fehlend", vor)
+        self.assertIn("raise RuntimeError", vor,
+                      "unvollstaendig wird veroeffentlicht statt abgelehnt")
+
     def test_a_crash_does_not_discard_what_was_already_fetched(self):
         """Das Versprechen „holt nur Neuzugaenge" ist wertlos, wenn der Lauf
         erst am Ende schreibt: der erste Vollabruf lief 30 Minuten und starb
