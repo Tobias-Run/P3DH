@@ -1,0 +1,236 @@
+{
+  "breakdown": {
+    "currencies": [
+      [
+        "EUR",
+        1828026
+      ],
+      [
+        "PLN",
+        89592
+      ],
+      [
+        "SEK",
+        83357
+      ],
+      [
+        "HUF",
+        59284
+      ],
+      [
+        "RON",
+        59140
+      ],
+      [
+        "DKK",
+        49186
+      ],
+      [
+        "NOK",
+        44261
+      ],
+      [
+        "BGN",
+        32881
+      ],
+      [
+        "CZK",
+        30939
+      ],
+      [
+        "ISK",
+        8461
+      ],
+      [
+        "CHF",
+        7866
+      ],
+      [
+        "USD",
+        1893
+      ]
+    ],
+    "framework_versions": [
+      [
+        "4.1",
+        2231690
+      ],
+      [
+        "4.2",
+        63534
+      ]
+    ],
+    "reference_dates": [
+      [
+        "2025-06-30",
+        706914
+      ],
+      [
+        "2025-09-30",
+        65334
+      ],
+      [
+        "2025-10-31",
+        2310
+      ],
+      [
+        "2025-12-31",
+        1457132
+      ],
+      [
+        "2026-03-31",
+        63534
+      ]
+    ]
+  },
+  "coverage": {
+    "countries": 30,
+    "datapoints": 9775,
+    "facts": 2295224,
+    "facts_without_row": 35,
+    "institutions": 474,
+    "monetary_facts_eur": 1833148,
+    "reports": 882,
+    "templates": 192
+  },
+  "dataset": "P3DH — EBA Pillar 3 Offenlegungen, aufgelöst und normalisiert",
+  "documentation": "docs/datensatz.md",
+  "generated_at_utc": "2026-09-12T08:20:59+00:00",
+  "generator": {
+    "commit": "48d267623f181e63d7dc327b481ca42c76fcf8c8",
+    "commit_date_utc": "2026-09-12T09:55:47+02:00",
+    "commit_short": "48d2676",
+    "describe": "48d2676",
+    "repository": "https://github.com/Tobias-Run/P3DH"
+  },
+  "known_limitations": "docs/datensatz.md#bekannte-einschränkungen",
+  "provenance": {
+    "catalogue_submissions": 4278,
+    "codebook_rows": 14221,
+    "codebook_sha256": "e88e366f7a9ce4cb5b02d7ef8ca2536ff660f4b50c871d163771195204909fe0"
+  },
+  "schema": [
+    {
+      "column": "entityID",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "lei",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "scope",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "bank_name",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "country",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "entity_type",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "institution_type",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "files_gsii_module",
+      "type": "BOOLEAN"
+    },
+    {
+      "column": "refPeriod",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "framework_version",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "template_id",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "template_title",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "cell_row",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "row_label",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "cell_col",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "col_label",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "open_axis_dims",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "open_axis_country",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "datapoint_code",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "data_type",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "fact_value",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "fact_value_raw",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "currency",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "fx_rate",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "fact_value_eur",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "unit_ambiguous",
+      "type": "BOOLEAN"
+    },
+    {
+      "column": "decimals_monetary",
+      "type": "INTEGER"
+    },
+    {
+      "column": "template_reported",
+      "type": "BOOLEAN"
+    },
+    {
+      "column": "source_file",
+      "type": "VARCHAR"
+    }
+  ],
+  "source": {
+    "name": "EBA Pillar 3 Data Hub",
+    "overview": "https://www.eba.europa.eu/risk-and-data-analysis/pillar-3-data-hub",
+    "portal": "https://edap-public.eba.europa.eu/Report/index/MTE1",
+    "rights": "Die Offenlegungsdaten stammen von der Europäischen Bankenaufsichtsbehörde (EBA) und sind gesondert zu zitieren. Siehe DISCLAIMER.md — die MIT-Lizenz dieses Repositories deckt den Datensatz NICHT ab."
+  }
+}
