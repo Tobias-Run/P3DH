@@ -124,6 +124,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/lei_relations.csv` | LEI → direkte und oberste Konzernmutter | GLEIF Level-2-Daten |
 | `processed/disclosure_lag.csv` | Einreichung → Abstand zum Stichtag + Perzentil in der Klasse | `submission_ts` aus dem Harvest-Manifest |
 | `processed/rwa_density.csv` | Institut → RWA-Dichte, Risikomix, Ansatz (SA/IRB) | KM1 `61.00` + OV1 `60.00.A` |
+| `processed/coverage_gap.csv` | beaufsichtigte Einheit → meldet sie, ihre Gruppe, oder niemand | EZB-Liste der beaufsichtigten Einheiten |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -308,6 +309,65 @@ Portfolioeigenschaft mehr sein können. Institute mit nur einem Stichtag und
 unauffälliger Dichte bekommen `unbekannt`, nicht `false`.
 
 Korrigiert wird nichts. Die Werte stehen unverändert; markiert ist markiert.
+
+### `coverage_gap.csv` — die Umkehrung der Frage
+
+Nicht „was steht in den Daten", sondern: **welche beaufsichtigte Einheit taucht
+gar nicht auf?** Das ist „Fehlt ≠ Null" auf Populationsebene.
+
+Die rohe Differenz zwischen der EZB-Liste (2.863 Einheiten) und unserem Bestand
+(508) sind 2.479 — und die Zahl ist wertlos. Sie misst Proportionalität und
+Schreibweisen, keine Lücke:
+
+| Schritt | Rest |
+|---|---:|
+| rohe Differenz | 2.479 |
+| nur signifikante Institute, Gruppenabdeckung über die EZB-Hierarchie | 126 |
+| Abgleich über den 18-stelligen LEI-Kern | 19 |
+| teilweise meldende Gruppen anerkannt | **12** |
+
+Jeder Schritt entfernt Scheinbefunde, keinen echten.
+
+| Einordnung | SI | LSI |
+|---|---:|---:|
+| `meldet_selbst` | 185 | 201 |
+| `ueber_gruppe` | 593 | — |
+| `gruppe_meldet_teilweise` | 7 | — |
+| `keine_gruppe_bekannt` | — | 1.865 |
+| `nicht_abgedeckt` | **12** | — |
+
+Von den verbleibenden 12 sind 11 erklärbar: neun österreichische Volksbanken
+hängen an Volksbank Wien, die bei uns unter einem nationalen Code statt einem
+LEI steht, und zwei griechische an Piraeus, das bei uns als *Piraeus Financial
+Holdings* meldet.
+
+**Drei Fallen, die gemessen zugeschlagen haben.** Die Proportionalität nach CRR
+Art. 433b/c (1.093 deutsche und 363 österreichische Kleininstitute legen gar
+nicht einzeln quartalsweise offen). Die Konzernstruktur (593 Töchter, deren Kopf
+meldet — ohne die Hierarchie zählte jede als fehlend). Und die Schreibweise des
+Kennzeichens: drei Einträge unseres Bestands sind keine LEIs, sondern
+Länderpräfix plus abgeschnittener LEI —
+
+```
+EZB             9695005MSX1OYEMGDF46   BPCE S.A.
+unser Bestand   FR9695005MSX1OYEMGDF   Groupe BPCE
+```
+
+— und diese drei Zeilen allein erklärten 104 der 126.
+
+**Die EZB-Hierarchie ist flach.** Kopf, darunter alle Einheiten, ohne
+Zwischenstufen. Bei Novo Banco ist der Kopf ein Private-Equity-Halter, der nicht
+meldet, während die Bank in der Mitte sehr wohl meldet — `gruppe_meldet_teilweise`
+sagt genau das und nicht mehr.
+
+**Die Grundgesamtheiten decken sich nicht.** Die SSM-Liste umfasst den Euroraum,
+unser Bestand 31 Länder. Die 122 Institute, die nur bei uns stehen, sind
+Dänemark (28), Polen (22), Schweden (19), Norwegen (13) und weitere — kein
+Fehler der EZB-Liste, sondern außerhalb ihres Geltungsbereichs. Eine EU-weite
+Vollständigkeit wird nirgends behauptet.
+
+**Ein fehlendes Institut ist kein Vorwurf.** Die Spalte heißt `einordnung` und
+nicht `verstoss`.
 
 ## Bekannte Einschränkungen
 
