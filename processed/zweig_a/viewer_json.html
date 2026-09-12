@@ -250,6 +250,12 @@
   /* Zelle auf einer umgebundenen Koordinate: erkennbar beim Lesen, ohne die
      Zahl zu stoeren. */
   td.fwcell{text-decoration:underline dotted var(--muted);text-underline-offset:3px;cursor:help}
+  /* Auffaelliger Wert (#24). Bewusst kein Alarmrot: der Wert ist gemeldet und
+     bleibt unveraendert lesbar, die Markierung ist additiv. Ein Meldefehler
+     waere eine Hypothese, kein Befund. */
+  td.oddcell{background:rgba(201,162,39,.10);cursor:help}
+  td.oddcell::after{content:"\00a0▵";color:#c9a227;font-size:.85em}
+  td.oddcell.sev-h::after{content:"\00a0▲"}
   .spark{color:var(--blue);vertical-align:middle}
   .ts td.num a{color:inherit;text-decoration:none}
   .ts th.datecol a{color:var(--theadink);text-decoration:underline dotted}
@@ -402,6 +408,29 @@ const ambigTip=lbl=>'Diese Koordinate ist nicht eindeutig platziert: das DPM fü
   +'verschiedene Zeilen — „'+lbl.join('“ und „')+'“. Welche der Wert trägt, hängt an der '
   +'Meldeversion, und unser Codebook unterscheidet sie noch nicht (#54). Der Wert ist '
   +'unverändert der gemeldete; unsicher ist, in welcher Zeile er stehen müsste.';
+/* Zellgenaue Plausibilitaets-Befunde (#24).
+   Eintrag: [schweregrad, abweichung_in_groessenordnungen, referenzwert, (anzahl)].
+   EDAP MUSS einen gemeldeten Wert originalgetreu rendern — wir nicht. Genau
+   darin liegt der Mehrwert: wir duerfen dazuschreiben, dass der Wert gegen die
+   Population nicht plausibel ist. Der Wert selbst bleibt unveraendert. */
+let UA=new Set();                            // Templates mit strittiger Einheit
+const flagAt=(rep,tid,row,col)=>{
+  const m=(rep.flags||{})[tid]; return m?(m[row+'|'+col]||null):null; };
+const SEVW={h:'deutlich', m:'auffällig', n:'leicht erhöht'};
+function flagTip(tid,f){
+  const [sev,dev,ref,n]=f;
+  // Neutral formulieren: „liegt N Groessenordnungen ueber dem Vergleichswert",
+  // nicht „falsch". Ein Meldefehler ist eine Hypothese, kein Befund.
+  let t='Gegen die Population '+(SEVW[sev]||'auffällig')+': rund '+nf(dev,1)
+    +' Größenordnungen vom Vergleichswert '+nf(ref,4,1)+' entfernt';
+  if(n>1) t+=' ('+n+' Befunde auf dieser Koordinate, stärkster gezeigt)';
+  // In den Sperrlisten-Templates ist die EINHEIT strittig (#9). Dort kann eine
+  // Abweichung um Groessenordnungen schlicht Tausend gegen Eins heissen — das
+  // gehoert dazugesagt, sonst liest sich der Hinweis als Meldefehler.
+  if(UA.has(tid)) t+=' — Achtung: in diesem Template ist die gemeldete Einheit '
+    +'uneinheitlich (#9), die Abweichung kann daher eine Einheitenfrage sein';
+  return t+'.';
+}
 let OPENTHEMES=new Set(store.themes||[]);   // aufgeklappte Bloecke, ueber Reports hinweg
 const repKey=r=>r.entityID+'|'+r.refPeriod;
 const byKey =k=>REPORTS.find(r=>repKey(r)===k);
@@ -615,6 +644,7 @@ function buildFromIndex(idx, codebook){
   for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
+  UA=new Set(idx.ua||[]);   // Sperrliste aus check_unit_consistency.py (#9)
   REPORTS = idx.reports.map(r=>({    // slim index: metadata only, no cells
     entityID:r.entityID, refPeriod:r.refPeriod, baseCurrency:r.baseCurrency, cur:r.cur||null,
     framework:r.framework, nt:r.nt, shard:r.f,
@@ -628,6 +658,7 @@ async function ensureLoaded(rep){
   const j=await getJSON('reports/'+rep.shard);
   for(const [tid,cells] of Object.entries(j.tpl)) rep.templates.set(tid, cellsFrom(cells));
   rep.coverage = j.coverage || {};   // Filing-Indicators ("Fehlt != Null"); {} = keine Aussage
+  rep.flags = j.flags || {};         // Zellgenaue Plausibilitaets-Befunde (#24); {} = keine
   rep.loaded=true;
 }
 /* head templates (KM1 61.00 / OV1 60.00.A) for ALL reports — the cross-report data the
@@ -916,7 +947,16 @@ function renderTemplate(tid, cells, rep){
     nAmbig>1?'n':''} in diesem Template sind nicht eindeutig platziert: das DPM führt dort je
     zwei verschiedene Zeilen, und unser Codebook unterscheidet die Meldeversionen noch nicht
     (#54). Betroffene Zeilen sind markiert.</span></div>` : '';
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}<table><thead><tr><th class="rh">${axisMap?'Code':'Row'}</th><th class="rl"></th>`;
+  // Sagen, bevor gelesen wird — wie bei den mehrdeutigen Koordinaten: in
+  // diesem Template halten WIR N Werte fuer unplausibel. Ohne diese Zeile
+  // waere die Markierung an der Zelle ein Symbol ohne Herkunft.
+  const nFlag=Object.keys((rep.flags||{})[tid]||{}).length;
+  const flagNote = nFlag ? `<div class="dimbar"><span class="cl">▲ ${nFlag} Wert${
+    nFlag>1?'e in diesem Template weichen':' in diesem Template weicht'} so stark von der
+    Population ab, dass wir ${nFlag>1?'sie':'ihn'} als auffällig einstufen (#24). Der gemeldete
+    Wert bleibt unverändert stehen — die Markierung ist ein Hinweis, kein Urteil über
+    Richtigkeit.${UA.has(tid)?' In diesem Template ist zusätzlich die gemeldete Einheit uneinheitlich (#9), die Abweichung kann also eine Einheitenfrage sein.':''}</span></div>` : '';
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}${flagNote}<table><thead><tr><th class="rh">${axisMap?'Code':'Row'}</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   // Am Zeilenlabel ist die Mehrdeutigkeit am wichtigsten: dort steht EINE
@@ -938,13 +978,18 @@ function renderTemplate(tid, cells, rep){
       // ohne die Zahl selbst zu stören.
       const bs=bridgeAt(tid,r,c);
       const am=ambigAt(tid,r,c);
+      // Zellgenauer Plausibilitaets-Befund (#24): der Wert bleibt unveraendert
+      // stehen, die Markierung kommt dazu.
+      const fg=flagAt(rep,tid,r,c);
       const parts=[
         dt==='monetary'?`${fmt(v)} ${curOf(rep,tid)} (Originalwert)`:
         dt==='percentage'?`Rohwert ${v}`:'',
         bs?BRIDGE_TIP[bs]:'',
-        am?ambigTip(am):''].filter(Boolean);
+        am?ambigTip(am):'',
+        fg?flagTip(tid,fg):''].filter(Boolean);
       const tip=parts.length?` title="${esc(parts.join(' · '))}"`:'';
-      h+=`<td class="num${bs||am?' fwcell':''}"${tip}>${fmtTyped(v,dt,unit,dt==='monetary'?rate:1)}</td>`;
+      const cls=`num${bs||am?' fwcell':''}${fg?' oddcell sev-'+fg[0]:''}`;
+      h+=`<td class="${cls}"${tip}>${fmtTyped(v,dt,unit,dt==='monetary'?rate:1)}</td>`;
     }
     h+='</tr>';
   }

@@ -38,6 +38,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from determinism import ordered_query as ordered  # noqa: E402
 from template_themes import theme_payload  # noqa: E402
 from metrics import metric_payload  # noqa: E402
+from check_unit_consistency import UNIT_AMBIGUOUS_TEMPLATES  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
@@ -276,6 +277,66 @@ def load_quality_profile(root: Path | None = None):
     return out
 
 
+SEV = {"hoch": "h", "mittel": "m", "niedrig": "n"}
+SEV_RANG = {"h": 3, "m": 2, "n": 1}
+
+
+def load_cell_findings(root: Path | None = None):
+    """Plausibilitäts-Befunde je ZELLE (#24) -> {report_key: {tid: {"r|c": [...]}}}.
+
+    ## Warum zellgenau und nicht wie bisher template-genau
+
+    `load_quality_profile()` liefert je Report, welche Templates Befunde
+    tragen. Das reicht, um eine Benchmark-Zeile zu relativieren — aber nicht,
+    um in der Report-Ansicht die *eine* auffällige Zahl zu zeigen. Genau das
+    ist #24: EDAP muss einen gemeldeten Wert originalgetreu rendern, wir nicht.
+
+    ## Der stärkste Befund gewinnt, und die Zahl steht dabei
+
+    620 Koordinaten tragen mehr als einen Befund — dieselbe Mehrfachbelegung
+    wie in `collapse_cells()`: auf (template, row, col) liegen mehrere Fakten,
+    unterschieden durch Land oder Dimension. Einen davon stillschweigend zu
+    behalten hiesse, dem Leser eine Auswahl zu verschweigen, die wir getroffen
+    haben. Deshalb: stärkster Befund plus Anzahl.
+
+    Eintrag: [sev, abweichung_groessenordnungen, referenzwert] — und ein
+    viertes Feld mit der Befundzahl, wenn es mehr als einer war.
+    """
+    root = root or ROOT
+    path = root / "interim" / "plausibility_findings.csv"
+    if not path.exists():
+        return {}
+    roh = {}
+    with path.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            lei, scope, rp = r.get("lei"), r.get("scope"), r.get("refPeriod")
+            tid, row, col = r.get("template_id"), r.get("cell_row"), r.get("cell_col")
+            if not (lei and scope and rp and tid and row and col):
+                continue
+            sev = SEV.get(r.get("severity") or "", "n")
+            try:
+                dev = round(float(r.get("deviation_orders") or 0), 1)
+                ref = float(r.get("reference") or 0)
+            except ValueError:
+                continue
+            k = f"rs:{lei}.{scope}|{rp}"
+            roh.setdefault(k, {}).setdefault(tid, {}).setdefault(f"{row}|{col}", []) \
+                .append((sev, dev, ref))
+    out = {}
+    for k, tpl in roh.items():
+        out[k] = {}
+        for tid, zellen in tpl.items():
+            out[k][tid] = {}
+            for rc, treffer in zellen.items():
+                # Stärkster zuerst: Schweregrad, dann Abweichung.
+                sev, dev, ref = max(treffer, key=lambda t: (SEV_RANG[t[0]], t[1]))
+                eintrag = [sev, dev, ref]
+                if len(treffer) > 1:
+                    eintrag.append(len(treffer))
+                out[k][tid][rc] = eintrag
+    return out
+
+
 def resolve_coverage(declared, data_tids):
     """Project the filing-indicator declarations of ONE report onto the template
     ids the viewer actually renders.
@@ -330,6 +391,7 @@ def main():
     con.execute(f"CREATE VIEW p AS SELECT * FROM '{PARQUET}'")
     coverage = load_coverage_map(ROOT)
     quality = load_quality_profile(ROOT)
+    befunde = load_cell_findings(ROOT)
 
     # --- pass 1: group placeable cells into reports (raw string values) ---
     reports = {}
@@ -531,8 +593,15 @@ def main():
         #   2. eine Pipeline, die auf gleichen Eingaben verschiedene Bytes
         #      liefert, ist nicht reproduzierbar — und genau das behauptet das
         #      README. Man kann eine Ausgabe dann gegen nichts prüfen.
-        payload = json.dumps({"tpl": rep["tpl"], "coverage": rep.get("coverage", {})},
-                             ensure_ascii=False, separators=(",", ":"), sort_keys=True)
+        # Zellgenaue Befunde (#24) gehören in den SHARD, nicht in den Index:
+        # sie werden nur beim Öffnen genau dieses Reports gebraucht, und der
+        # Index trägt bereits alle 882 Reports auf einmal.
+        inhalt = {"tpl": rep["tpl"], "coverage": rep.get("coverage", {})}
+        b = befunde.get(key)
+        if b:                       # nur Reports MIT Befunden tragen das Feld
+            inhalt["flags"] = b
+        payload = json.dumps(inhalt, ensure_ascii=False,
+                             separators=(",", ":"), sort_keys=True)
         if write_if_changed(SHARDS / fname, payload):
             written += 1
         else:
@@ -572,7 +641,13 @@ def main():
             removed += 1
 
     index = {"stats": {"reports": len(index_reports), "facts": n_facts},
-             "reports": index_reports, "meta": meta, "names": names, "fx": fx}
+             "reports": index_reports, "meta": meta, "names": names, "fx": fx,
+             # Sperrliste aus check_unit_consistency.py. Der Viewer braucht sie,
+             # um bei einem Zellbefund (#24) dazuzusagen, dass in diesem Template
+             # die EINHEIT strittig ist — dort kann eine Abweichung um
+             # Größenordnungen auch schlicht Tausend gegen Eins heissen. Über den
+             # Index statt als Kopie im HTML: zwei Listen laufen auseinander.
+             "ua": sorted(UNIT_AMBIGUOUS_TEMPLATES)}
     write_if_changed(OUT / "index.json", json.dumps(index, ensure_ascii=False, separators=(",", ":")))
     write_if_changed(OUT / "benchmark.json", json.dumps(benchmark, ensure_ascii=False, separators=(",", ":")))
     write_if_changed(OUT / "codebook.json", json.dumps(codebook, ensure_ascii=False, separators=(",", ":")))
