@@ -125,6 +125,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/disclosure_lag.csv` | Einreichung → Abstand zum Stichtag + Perzentil in der Klasse | `submission_ts` aus dem Harvest-Manifest |
 | `processed/rwa_density.csv` | Institut → RWA-Dichte, Risikomix, Ansatz (SA/IRB) | KM1 `61.00` + OV1 `60.00.A` |
 | `processed/coverage_gap.csv` | beaufsichtigte Einheit → meldet sie, ihre Gruppe, oder niemand | EZB-Liste der beaufsichtigten Einheiten |
+| `processed/eba_reconciliation.csv` | unsere Länderaggregate gegen die EBA-eigenen | EBA Risk Dashboard, Datenanhang |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -368,6 +369,53 @@ Vollständigkeit wird nirgends behauptet.
 
 **Ein fehlendes Institut ist kein Vorwurf.** Die Spalte heißt `einordnung` und
 nicht `verstoss`.
+
+### `eba_reconciliation.csv` — die externe Bestätigung
+
+Bisher validiert das Projekt nur gegen sich selbst (Zeilenzahl-Parität, Guards,
+OV1 gegen KM1). Hier wird zum ersten Mal gegen eine **fremde Quelle** geprüft:
+die EBA veröffentlicht aggregierte Kennzahlen je Land, wir haben die
+Einzelmeldungen, aus denen solche Aggregate entstehen.
+
+Verglichen werden die vier Kapitalkennzahlen, die sich vollständig aus KM1
+rechnen lassen — CET1-, Tier-1-, Gesamtkapital- und Verschuldungsquote — über
+29 Länder und vier Stichtage.
+
+| Kennzahl | n | Median \|Differenz\| | p90 |
+|---|---:|---:|---:|
+| SVC_3 CET1 | 102 | 1,02 pp | 4,96 pp |
+| SVC_1 Tier 1 | 102 | 0,76 pp | 5,31 pp |
+| SVC_2 Gesamtkapital | 102 | 0,75 pp | 4,68 pp |
+| SVC_13 Verschuldung | 101 | 0,45 pp | 1,89 pp |
+
+60 % aller 407 Vergleichspunkte liegen innerhalb eines Prozentpunkts.
+
+**Die Abweichung fällt monoton mit der Zahl der Institute je Land:**
+
+| Institute je Land | Median \|Differenz\| | innerhalb 1 pp |
+|---|---:|---:|
+| 1 | 2,07 pp | 27 % |
+| 2–4 | 0,62 pp | 66 % |
+| 5–9 | 0,53 pp | 70 % |
+| **≥ 10** | **0,23 pp** | **82 %** |
+
+Das ist die Signatur eines **Abdeckungsunterschieds**, nicht eines
+systematischen Fehlers: ein Rechenfehler in unserer Kette wäre von der Zahl der
+Institute unabhängig, ein Stichprobenunterschied verschwindet mit wachsender
+Zahl. Damit ist die Kette vom Parser über die Zellplatzierung bis zur
+EUR-Normierung extern bestätigt.
+
+**Drei Dinge, ohne die der Vergleich Unsinn misst.** Gewichtet statt gemittelt
+(die EBA weist Summe-durch-Summe aus). Keine Doppelzählung — 90 Institutszeilen
+sind ausgeschlossen, weil ihre Mutter selbst meldet. Keine kaputten Nenner —
+5 Zeilen mit Skalenverdacht sind ausgeschlossen, denn in einem Summenaggregat
+verschwindet ein 10⁶-Fehler nicht, er verzerrt es.
+
+**Die Grundgesamtheiten sind verschieden, und das ist kein Fehler.** Das EBA
+Risk Dashboard beruht auf aufsichtlichem Meldewesen über eine definierte
+Stichprobe, P3DH auf Offenlegung nach CRR Teil 8. Eine Abweichung ist erwartbar;
+deshalb steht `n_institute` in jeder Zeile, und bei `n = 1` misst die Differenz
+die Grundgesamtheit, nicht unsere Rechnung.
 
 ## Bekannte Einschränkungen
 
