@@ -8,12 +8,20 @@ the analytics layer share one source and cannot drift.
 
 Outputs under processed/zweig_a/data/ (sized to scale toward the full catalog):
   index.json          SLIM: per-report metadata (entityID/date/currency/framework/nt/
-                      shard-file) + meta/names/fx lookup maps + stats.  This is the only
-                      up-front payload — it stays small even at thousands of reports.
+                      shard-file) + meta/names/fx lookup maps + stats.  Up-front, together
+                      with codebook.json — together ~105 KB gzipped, and it stays small
+                      even at thousands of reports.  (This line used to claim index.json
+                      was the ONLY up-front payload while codebook.json was fetched in the
+                      same Promise.all — 9.5 MB of it.  Measured: 2.0 s to the first usable
+                      view on a 4 Mbit line; 0.63 s after the split.)
   benchmark.json      per-report head templates (KM1 61.00, OV1 60.00.A) — the cross-report
                       data the benchmark and time-series need.  Loaded LAZILY (first time
                       the benchmark tab or a time-series is shown), not on boot.
-  codebook.json       {cb, titles} trimmed to the cells that actually occur.
+  codebook.json       SMALL: titles/axis/themes/bridge/metrics/ambig — the structure the
+                      first view needs (70 KB).
+  labels.json         the per-cell row/column labels (9.4 MB, 99.3 % of the old
+                      codebook.json). Loaded LAZILY: only an expanded raw table, a metric
+                      derivation or the compare view reads them.
   reports/<key>.json  {tpl:{template_id:[[row,col,val],...]}} — the full grid of ONE
                       report, fetched lazily when the user opens it.  Written INCREMENTALLY:
                       only shards whose bytes changed are rewritten; vanished reports are
@@ -631,8 +639,15 @@ def main():
 
     # Kennzahlen-Registry (#63): Definition, Zweck, Schwelle, Herkunft. Die
     # Rechenvorschrift bleibt im Viewer — sie ist Code, keine Daten.
-    codebook = {"cb": cb, "titles": titles, "axis": axis, "themes": themes,
+    # Die Zelllabels (`cb`) liegen SEPARAT — gemessen sind sie 9,41 von 9,48 MB,
+    # also 99,3 % der Datei. Gebraucht werden sie erst, wenn jemand eine
+    # Rohtabelle aufklappt, einen Kennzahlen-Beleg oeffnet oder die
+    # Vergleichsansicht benutzt. Im Bündel kosteten sie beim BOOT 257 ms
+    # (116 fetch + 54 parse + 87 Map-Aufbau ueber 94.398 Einträge) — für etwas,
+    # das die erste Ansicht nie anfasst.
+    codebook = {"titles": titles, "axis": axis, "themes": themes,
                 "bridge": bridge, "metrics": metric_payload(), "ambig": ambig}
+    labels = {"cb": cb}
 
     # --- lookup maps, all straight from the same parquet ---
     # Diese drei Maps werden je Schlüssel ÜBERSCHRIEBEN — bei mehreren Zeilen je
@@ -752,6 +767,7 @@ def main():
     write_if_changed(OUT / "index.json", json.dumps(index, ensure_ascii=False, separators=(",", ":")))
     write_if_changed(OUT / "benchmark.json", json.dumps(benchmark, ensure_ascii=False, separators=(",", ":")))
     write_if_changed(OUT / "codebook.json", json.dumps(codebook, ensure_ascii=False, separators=(",", ":")))
+    write_if_changed(OUT / "labels.json", json.dumps(labels, ensure_ascii=False, separators=(",", ":")))
 
     # --- sizes (raw + gzip, since Pages serves gzip) ---
     def sz(name):
@@ -764,11 +780,13 @@ def main():
     idx_r, idx_g = sz("index.json")
     bm_r, bm_g = sz("benchmark.json")
     cb_r, cb_g = sz("codebook.json")
+    lb_r, lb_g = sz("labels.json")
 
     print(f"✓ {OUT.relative_to(ROOT)}/  (Quelle: Zweig-B-Parquet)")
     print(f"  index.json     {idx_r:6.2f} MB raw · {idx_g:5.2f} MB gzip   ← UPFRONT (slim)")
     print(f"  benchmark.json {bm_r:6.2f} MB raw · {bm_g:5.2f} MB gzip   ← lazy (Benchmark/Zeitreihe)")
-    print(f"  codebook.json  {cb_r:6.2f} MB raw · {cb_g:5.2f} MB gzip   ← lazy? (Detail/Vergleich)")
+    print(f"  codebook.json  {cb_r:6.2f} MB raw · {cb_g:5.2f} MB gzip   ← UPFRONT (Titel/Themen/Kennzahlen)")
+    print(f"  labels.json    {lb_r:6.2f} MB raw · {lb_g:5.2f} MB gzip   ← lazy (erst beim Aufklappen)")
     print(f"  reports/       {len(shard_files)} shards · {shard_raw:.2f} MB raw · "
           f"geschrieben {written} / unverändert {skipped} / entfernt {removed}")
     if shard_files:
