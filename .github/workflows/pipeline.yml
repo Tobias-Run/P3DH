@@ -211,6 +211,18 @@ jobs:
       - name: Footprint metrics
         run: python scripts/build_footprint.py
 
+      # Die beiden Auswertungen, die ohne Netz auskommen. Sie liegen als CSV im
+      # Repo und wuerden sonst mit jeder neuen Welle veralten, ohne dass es
+      # jemandem auffaellt — eine committete Tabelle sieht nicht alt aus.
+      #
+      # NICHT hier: coverage_gap und eba_reconciliation. Die holen ihre
+      # Bezugsgroessen von der EZB bzw. der EBA und gehoeren damit zu einem
+      # eigenen, selteneren Lauf.
+      - name: Rechtzeitigkeit und RWA-Dichte
+        run: |
+          python scripts/build_disclosure_lag.py
+          python scripts/build_rwa_density.py
+
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
 
@@ -256,6 +268,7 @@ jobs:
                   codebook/dpm_codebook.csv codebook/template_titles.csv \
                   processed/entity_meta.csv processed/fx_rates.csv \
                   processed/quality_profile.csv processed/footprint.csv \
+                  processed/disclosure_lag.csv processed/rwa_density.csv \
                   interim/plausibility_cells.csv interim/plausibility_findings.csv
           # Harvest-Delta: entsteht nur bei inputs.harvest, deshalb einzeln und
           # bedingt. harvest_log.csv ist append-only — ohne diesen Commit stirbt

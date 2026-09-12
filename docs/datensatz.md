@@ -123,6 +123,9 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `codebook/bank_aliases.csv` | LEI → Kurzname des Instituts | gepflegt |
 | `processed/lei_relations.csv` | LEI → direkte und oberste Konzernmutter | GLEIF Level-2-Daten |
 | `processed/disclosure_lag.csv` | Einreichung → Abstand zum Stichtag + Perzentil in der Klasse | `submission_ts` aus dem Harvest-Manifest |
+| `processed/rwa_density.csv` | Institut → RWA-Dichte, Risikomix, Ansatz (SA/IRB) | KM1 `61.00` + OV1 `60.00.A` |
+| `processed/coverage_gap.csv` | beaufsichtigte Einheit → meldet sie, ihre Gruppe, oder niemand | EZB-Liste der beaufsichtigten Einheiten |
+| `processed/eba_reconciliation.csv` | unsere Länderaggregate gegen die EBA-eigenen | EBA Risk Dashboard, Datenanhang |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -255,6 +258,164 @@ Pflicht nach Art. 433a. **Für rund die Hälfte des Bestands ist Rechtzeitigkeit
 am eingeschwungenen Stichtag nicht messbar.** Das ist keine Lücke im Skript,
 sondern eine Eigenschaft der Pflicht; wer die Kennzahl für flächendeckend hält,
 liest sie falsch.
+
+### `rwa_density.csv` — die Zerlegung, die die EBA-Übung nicht liefert
+
+Je (Institut, Konsolidierungskreis, Stichtag) die RWA-Dichte plus die Zerlegung
+nach Risikoarten und Ansatz.
+
+**Der Nenner ist nicht die Bilanzsumme.** Gerechnet wird TREA (`61.00` r0040)
+geteilt durch die Gesamtrisikopositionsmessgröße der Verschuldungsquote
+(`61.00` r0210, jeweils Spalte `c0010`). Die enthält außerbilanzielle Positionen
+und folgt aufsichtlichen Anrechnungsregeln — wer die Zahl gegen Literatur hält,
+die TREA/Total Assets rechnet, vergleicht Verschiedenes.
+
+Der Befund, den die EBA-Benchmarking-Übung strukturell nicht liefern kann, weil
+sie nur IRB-Institute abdeckt:
+
+| Ansatz | n | Median RWA-Dichte |
+|---|---:|---:|
+| Standardansatz | 379 | 0,425 |
+| gemischt | 316 | 0,339 |
+| IRB (rein) | 11 | 0,205 |
+
+Der Ansatz wird aus den OV1-„davon"-Zeilen gelesen (`0020` SA, `0030`/`0060`
+IRB), nicht aus den gemeldeten Templates geschlossen. Nur 11 Institute melden
+rein IRB — die großen IRB-Nutzer haben fast alle auch SA-Portfolios und stehen
+deshalb unter „gemischt".
+
+#### Zwei Gegenproben, die der Datensatz sich selbst gibt
+
+**OV1 gegen KM1.** `60.00.A` r0380 trägt dieselbe Gesamtsumme wie KM1 r0040.
+Über 694 Paare: Median-Abweichung **0,0000 %**, 15 über 1 %. Zwei unabhängig
+gemeldete Templates, dieselbe Zahl.
+
+**Die OV1-Teile gegen ihre eigene Summenzeile.** 632 von 694 Reports summieren
+sich exakt. `r0340` ist dabei eine Nachrichtenzeile und kein Summand — nimmt man
+sie hinzu, stimmen nur noch 196. Die Spalte `ov1_teile_stimmt` hält es fest;
+Československá obchodná banka meldet etwa Teile, die das Ganze übersteigen.
+
+#### Unplausibel ist nicht dasselbe wie falsch
+
+| | Dichte | |
+|---|---:|---|
+| Kommuninvest (4 Stichtage) | 0,031–0,059 | **echt** — Kommunalfinanzierer, Risikogewicht 0 % |
+| National Bank of Greece | 475.095 | Nenner um 10⁶ zu klein |
+
+Beide sehen nach Ausreißer aus. Ein pauschaler Filter hätte Kommuninvest
+genauso gelöscht wie Athen — und damit die interessanteste Beobachtung des
+Datensatzes. `skalenverdacht` belegt den Defekt deshalb **am Nenner**: gegen das
+Maximum der eigenen Zeitreihe, plus eine Schranke für Dichten über 10, die keine
+Portfolioeigenschaft mehr sein können. Institute mit nur einem Stichtag und
+unauffälliger Dichte bekommen `unbekannt`, nicht `false`.
+
+Korrigiert wird nichts. Die Werte stehen unverändert; markiert ist markiert.
+
+### `coverage_gap.csv` — die Umkehrung der Frage
+
+Nicht „was steht in den Daten", sondern: **welche beaufsichtigte Einheit taucht
+gar nicht auf?** Das ist „Fehlt ≠ Null" auf Populationsebene.
+
+Die rohe Differenz zwischen der EZB-Liste (2.863 Einheiten) und unserem Bestand
+(508) sind 2.479 — und die Zahl ist wertlos. Sie misst Proportionalität und
+Schreibweisen, keine Lücke:
+
+| Schritt | Rest |
+|---|---:|
+| rohe Differenz | 2.479 |
+| nur signifikante Institute, Gruppenabdeckung über die EZB-Hierarchie | 126 |
+| Abgleich über den 18-stelligen LEI-Kern | 19 |
+| teilweise meldende Gruppen anerkannt | **12** |
+
+Jeder Schritt entfernt Scheinbefunde, keinen echten.
+
+| Einordnung | SI | LSI |
+|---|---:|---:|
+| `meldet_selbst` | 185 | 201 |
+| `ueber_gruppe` | 593 | — |
+| `gruppe_meldet_teilweise` | 7 | — |
+| `keine_gruppe_bekannt` | — | 1.865 |
+| `nicht_abgedeckt` | **12** | — |
+
+Von den verbleibenden 12 sind 11 erklärbar: neun österreichische Volksbanken
+hängen an Volksbank Wien, die bei uns unter einem nationalen Code statt einem
+LEI steht, und zwei griechische an Piraeus, das bei uns als *Piraeus Financial
+Holdings* meldet.
+
+**Drei Fallen, die gemessen zugeschlagen haben.** Die Proportionalität nach CRR
+Art. 433b/c (1.093 deutsche und 363 österreichische Kleininstitute legen gar
+nicht einzeln quartalsweise offen). Die Konzernstruktur (593 Töchter, deren Kopf
+meldet — ohne die Hierarchie zählte jede als fehlend). Und die Schreibweise des
+Kennzeichens: drei Einträge unseres Bestands sind keine LEIs, sondern
+Länderpräfix plus abgeschnittener LEI —
+
+```
+EZB             9695005MSX1OYEMGDF46   BPCE S.A.
+unser Bestand   FR9695005MSX1OYEMGDF   Groupe BPCE
+```
+
+— und diese drei Zeilen allein erklärten 104 der 126.
+
+**Die EZB-Hierarchie ist flach.** Kopf, darunter alle Einheiten, ohne
+Zwischenstufen. Bei Novo Banco ist der Kopf ein Private-Equity-Halter, der nicht
+meldet, während die Bank in der Mitte sehr wohl meldet — `gruppe_meldet_teilweise`
+sagt genau das und nicht mehr.
+
+**Die Grundgesamtheiten decken sich nicht.** Die SSM-Liste umfasst den Euroraum,
+unser Bestand 31 Länder. Die 122 Institute, die nur bei uns stehen, sind
+Dänemark (28), Polen (22), Schweden (19), Norwegen (13) und weitere — kein
+Fehler der EZB-Liste, sondern außerhalb ihres Geltungsbereichs. Eine EU-weite
+Vollständigkeit wird nirgends behauptet.
+
+**Ein fehlendes Institut ist kein Vorwurf.** Die Spalte heißt `einordnung` und
+nicht `verstoss`.
+
+### `eba_reconciliation.csv` — die externe Bestätigung
+
+Bisher validiert das Projekt nur gegen sich selbst (Zeilenzahl-Parität, Guards,
+OV1 gegen KM1). Hier wird zum ersten Mal gegen eine **fremde Quelle** geprüft:
+die EBA veröffentlicht aggregierte Kennzahlen je Land, wir haben die
+Einzelmeldungen, aus denen solche Aggregate entstehen.
+
+Verglichen werden die vier Kapitalkennzahlen, die sich vollständig aus KM1
+rechnen lassen — CET1-, Tier-1-, Gesamtkapital- und Verschuldungsquote — über
+29 Länder und vier Stichtage.
+
+| Kennzahl | n | Median \|Differenz\| | p90 |
+|---|---:|---:|---:|
+| SVC_3 CET1 | 102 | 1,02 pp | 4,96 pp |
+| SVC_1 Tier 1 | 102 | 0,76 pp | 5,31 pp |
+| SVC_2 Gesamtkapital | 102 | 0,75 pp | 4,68 pp |
+| SVC_13 Verschuldung | 101 | 0,45 pp | 1,89 pp |
+
+60 % aller 407 Vergleichspunkte liegen innerhalb eines Prozentpunkts.
+
+**Die Abweichung fällt monoton mit der Zahl der Institute je Land:**
+
+| Institute je Land | Median \|Differenz\| | innerhalb 1 pp |
+|---|---:|---:|
+| 1 | 2,07 pp | 27 % |
+| 2–4 | 0,62 pp | 66 % |
+| 5–9 | 0,53 pp | 70 % |
+| **≥ 10** | **0,23 pp** | **82 %** |
+
+Das ist die Signatur eines **Abdeckungsunterschieds**, nicht eines
+systematischen Fehlers: ein Rechenfehler in unserer Kette wäre von der Zahl der
+Institute unabhängig, ein Stichprobenunterschied verschwindet mit wachsender
+Zahl. Damit ist die Kette vom Parser über die Zellplatzierung bis zur
+EUR-Normierung extern bestätigt.
+
+**Drei Dinge, ohne die der Vergleich Unsinn misst.** Gewichtet statt gemittelt
+(die EBA weist Summe-durch-Summe aus). Keine Doppelzählung — 90 Institutszeilen
+sind ausgeschlossen, weil ihre Mutter selbst meldet. Keine kaputten Nenner —
+5 Zeilen mit Skalenverdacht sind ausgeschlossen, denn in einem Summenaggregat
+verschwindet ein 10⁶-Fehler nicht, er verzerrt es.
+
+**Die Grundgesamtheiten sind verschieden, und das ist kein Fehler.** Das EBA
+Risk Dashboard beruht auf aufsichtlichem Meldewesen über eine definierte
+Stichprobe, P3DH auf Offenlegung nach CRR Teil 8. Eine Abweichung ist erwartbar;
+deshalb steht `n_institute` in jeder Zeile, und bei `n = 1` misst die Differenz
+die Grundgesamtheit, nicht unsere Rechnung.
 
 ## Bekannte Einschränkungen
 
