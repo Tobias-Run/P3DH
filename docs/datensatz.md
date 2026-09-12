@@ -123,6 +123,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `codebook/bank_aliases.csv` | LEI → Kurzname des Instituts | gepflegt |
 | `processed/lei_relations.csv` | LEI → direkte und oberste Konzernmutter | GLEIF Level-2-Daten |
 | `processed/disclosure_lag.csv` | Einreichung → Abstand zum Stichtag + Perzentil in der Klasse | `submission_ts` aus dem Harvest-Manifest |
+| `processed/rwa_density.csv` | Institut → RWA-Dichte, Risikomix, Ansatz (SA/IRB) | KM1 `61.00` + OV1 `60.00.A` |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -255,6 +256,58 @@ Pflicht nach Art. 433a. **Für rund die Hälfte des Bestands ist Rechtzeitigkeit
 am eingeschwungenen Stichtag nicht messbar.** Das ist keine Lücke im Skript,
 sondern eine Eigenschaft der Pflicht; wer die Kennzahl für flächendeckend hält,
 liest sie falsch.
+
+### `rwa_density.csv` — die Zerlegung, die die EBA-Übung nicht liefert
+
+Je (Institut, Konsolidierungskreis, Stichtag) die RWA-Dichte plus die Zerlegung
+nach Risikoarten und Ansatz.
+
+**Der Nenner ist nicht die Bilanzsumme.** Gerechnet wird TREA (`61.00` r0040)
+geteilt durch die Gesamtrisikopositionsmessgröße der Verschuldungsquote
+(`61.00` r0210, jeweils Spalte `c0010`). Die enthält außerbilanzielle Positionen
+und folgt aufsichtlichen Anrechnungsregeln — wer die Zahl gegen Literatur hält,
+die TREA/Total Assets rechnet, vergleicht Verschiedenes.
+
+Der Befund, den die EBA-Benchmarking-Übung strukturell nicht liefern kann, weil
+sie nur IRB-Institute abdeckt:
+
+| Ansatz | n | Median RWA-Dichte |
+|---|---:|---:|
+| Standardansatz | 379 | 0,425 |
+| gemischt | 316 | 0,339 |
+| IRB (rein) | 11 | 0,205 |
+
+Der Ansatz wird aus den OV1-„davon"-Zeilen gelesen (`0020` SA, `0030`/`0060`
+IRB), nicht aus den gemeldeten Templates geschlossen. Nur 11 Institute melden
+rein IRB — die großen IRB-Nutzer haben fast alle auch SA-Portfolios und stehen
+deshalb unter „gemischt".
+
+#### Zwei Gegenproben, die der Datensatz sich selbst gibt
+
+**OV1 gegen KM1.** `60.00.A` r0380 trägt dieselbe Gesamtsumme wie KM1 r0040.
+Über 694 Paare: Median-Abweichung **0,0000 %**, 15 über 1 %. Zwei unabhängig
+gemeldete Templates, dieselbe Zahl.
+
+**Die OV1-Teile gegen ihre eigene Summenzeile.** 632 von 694 Reports summieren
+sich exakt. `r0340` ist dabei eine Nachrichtenzeile und kein Summand — nimmt man
+sie hinzu, stimmen nur noch 196. Die Spalte `ov1_teile_stimmt` hält es fest;
+Československá obchodná banka meldet etwa Teile, die das Ganze übersteigen.
+
+#### Unplausibel ist nicht dasselbe wie falsch
+
+| | Dichte | |
+|---|---:|---|
+| Kommuninvest (4 Stichtage) | 0,031–0,059 | **echt** — Kommunalfinanzierer, Risikogewicht 0 % |
+| National Bank of Greece | 475.095 | Nenner um 10⁶ zu klein |
+
+Beide sehen nach Ausreißer aus. Ein pauschaler Filter hätte Kommuninvest
+genauso gelöscht wie Athen — und damit die interessanteste Beobachtung des
+Datensatzes. `skalenverdacht` belegt den Defekt deshalb **am Nenner**: gegen das
+Maximum der eigenen Zeitreihe, plus eine Schranke für Dichten über 10, die keine
+Portfolioeigenschaft mehr sein können. Institute mit nur einem Stichtag und
+unauffälliger Dichte bekommen `unbekannt`, nicht `false`.
+
+Korrigiert wird nichts. Die Werte stehen unverändert; markiert ist markiert.
 
 ## Bekannte Einschränkungen
 
