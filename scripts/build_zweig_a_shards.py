@@ -29,6 +29,7 @@ from pathlib import Path
 import collections
 import csv
 import json
+import math
 import gzip
 import re
 import sys
@@ -337,6 +338,102 @@ def load_cell_findings(root: Path | None = None):
     return out
 
 
+PEER_MIN = 5      # wie PCT_MIN_GROUP im Viewer: darunter ist ein Perzentil Rauschen
+
+
+def _sig(x, n=4):
+    """Auf n signifikante Stellen runden.
+
+    Der Peer-Median ist ein ANZEIGEWERT, keine Rechengrundlage — volle
+    Float-Stellen kosten 23 % Shard-Größe und tragen nichts, was im Tooltip
+    sichtbar wäre.
+    """
+    if not x or not math.isfinite(x):
+        return 0
+    return round(x, -int(math.floor(math.log10(abs(x)))) + (n - 1))
+
+
+def peer_stats(con, root: Path | None = None):
+    """Peer-Median und Perzentil je Zelle (#23) -> {report_key: {tid: {"r|c": [...]}}}.
+
+    ## Warum vorberechnet und nicht im Browser
+
+    Die Peer-Verteilung einer Zelle braucht ALLE Reports der Gruppe. Im Browser
+    hiesse das, für einen geöffneten Report die Shards seiner ganzen Peer-Gruppe
+    nachzuladen — für eine Randnotiz am Zellwert.
+
+    ## Peer-Gruppe: identisch mit dem Benchmark-Tab
+
+    Größenklasse (`institution_type`) × Konsolidierungskreis × Stichtag, ab
+    `PEER_MIN` Reports. Dieselbe Definition wie `peerKeyOf()` im Viewer — zwei
+    Peer-Begriffe im selben Produkt wären der sichere Weg zu zwei Antworten auf
+    dieselbe Frage.
+
+    ## Was ausdrücklich KEINE Kontextzahl bekommt
+
+    `UNIT_AMBIGUOUS_TEMPLATES` (#9): wo die gemeldete Einheit strittig ist, ist
+    der Median über die Gruppe eine Mischung aus Tausendern und Einern. Ein
+    Perzentil darauf wäre eine Scheinaussage — 207.983 Fakten fallen dadurch raus.
+
+    Mehrfach belegte Koordinaten (#52): dort liegen je Report mehrere Fakten auf
+    derselben (Zeile, Spalte), unterschieden durch Land oder Dimension. Welcher
+    davon gegen den Peer-Median gehört, ist nicht entscheidbar; 64.357 Zellen
+    (3,8 %) bleiben deshalb ohne Kontextzahl. Lieber keine Aussage als die
+    falsche — der Wert steht ja unverändert da.
+
+    Eintrag je Zelle: [perzentil, peer_median, n_peers].
+    """
+    root = root or ROOT
+    itype = {}
+    pfad = root / "processed" / "entity_meta.csv"
+    if pfad.exists():
+        with pfad.open(encoding="utf-8") as fh:
+            itype = {r["lei"]: (r.get("institution_type") or "?")
+                     for r in csv.DictReader(fh)}
+    roh = ordered(con, """
+        SELECT entityID, refPeriod, template_id, cell_row, cell_col,
+               COALESCE(fact_value_eur, TRY_CAST(fact_value AS DOUBLE)) AS v
+        FROM p
+        WHERE data_type IN ('monetary','percentage')
+          AND cell_row IS NOT NULL AND cell_row <> ''
+          AND COALESCE(fact_value_eur, TRY_CAST(fact_value AS DOUBLE)) IS NOT NULL
+          AND template_id NOT IN ({})
+        ORDER BY entityID, refPeriod, template_id, cell_row, cell_col, v
+    """.format(",".join(f"'{t}'" for t in sorted(UNIT_AMBIGUOUS_TEMPLATES))),
+        "Peer-Statistik / Zellen")
+
+    # Mehrfach belegte (Report, Koordinate) fallen raus — siehe Docstring.
+    je_zelle = collections.defaultdict(list)
+    for eid, rp, tid, r, c, v in roh:
+        je_zelle[(eid, rp, tid, r, c)].append(v)
+    eindeutig = {k: v[0] for k, v in je_zelle.items() if len(v) == 1}
+
+    gruppen = collections.defaultdict(list)
+    for (eid, rp, tid, r, c), v in eindeutig.items():
+        lei, _, scope = eid.partition("rs:")[2].rpartition(".")
+        gruppen[(tid, r, c, itype.get(lei, "?"), scope, rp)].append(v)
+    for arr in gruppen.values():
+        arr.sort()
+
+    out = {}
+    for (eid, rp, tid, r, c), v in eindeutig.items():
+        lei, _, scope = eid.partition("rs:")[2].rpartition(".")
+        arr = gruppen[(tid, r, c, itype.get(lei, "?"), scope, rp)]
+        if len(arr) < PEER_MIN:
+            continue
+        # Mid-Rank wie percentileMap() im Viewer: Anteil echt kleinerer Werte
+        # plus halbe Bindungen — stabil, wenn viele Institute denselben Wert
+        # melden (bei Prozentzellen die Regel, nicht die Ausnahme).
+        kleiner = sum(1 for x in arr if x < v)
+        gleich = sum(1 for x in arr if x == v)
+        p = round((kleiner + gleich / 2) / len(arr) * 100)
+        med = arr[len(arr) // 2] if len(arr) % 2 else (arr[len(arr) // 2 - 1]
+                                                       + arr[len(arr) // 2]) / 2
+        out.setdefault(f"{eid}|{rp}", {}).setdefault(tid, {})[f"{r}|{c}"] = \
+            [p, _sig(med), len(arr)]
+    return out
+
+
 def resolve_coverage(declared, data_tids):
     """Project the filing-indicator declarations of ONE report onto the template
     ids the viewer actually renders.
@@ -392,6 +489,7 @@ def main():
     coverage = load_coverage_map(ROOT)
     quality = load_quality_profile(ROOT)
     befunde = load_cell_findings(ROOT)
+    peers = peer_stats(con)
 
     # --- pass 1: group placeable cells into reports (raw string values) ---
     reports = {}
@@ -600,6 +698,9 @@ def main():
         b = befunde.get(key)
         if b:                       # nur Reports MIT Befunden tragen das Feld
             inhalt["flags"] = b
+        pk = peers.get(key)
+        if pk:                      # Kontextzahlen je Zelle (#23)
+            inhalt["peer"] = pk
         payload = json.dumps(inhalt, ensure_ascii=False,
                              separators=(",", ":"), sort_keys=True)
         if write_if_changed(SHARDS / fname, payload):

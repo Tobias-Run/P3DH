@@ -205,24 +205,43 @@ class ShardBuildIsReproducibleTest(unittest.TestCase):
         (Path(root) / "processed" / "zweig_a" / "data" / "reports").mkdir(
             parents=True, exist_ok=True)
         templates = ["%02d.00" % t for t in range(10, 40)]
+        # SECHS Institute, nicht vier: die Peer-Statistik (#23) verlangt
+        # mindestens fuenf Reports je Gruppe. Mit vier bliebe der neue
+        # Rechenweg im Determinismus-Test unausgefuehrt — gruen, ohne etwas zu
+        # beweisen, genau wie es dieser Docstring oben verbietet.
+        N_BANKS = 6
         rows = []
+
+        def zeile(eid, tid, row, col, val, dp, lei):
+            return (eid, "2025-12-31", "EUR" if hash(eid) % 7 else "PLN", "4.1",
+                    tid, row, col, val, None, None, dp,
+                    lei, "CON", "Bank " + lei[-1], "DE", "Large", False,
+                    "T " + tid, "Zeile", "Spalte", "monetary", 1.0,
+                    float(val), float(val))
+
         for i in range(60):
             tid = templates[i % len(templates)]
+            lei = "LEI%016d" % (i % N_BANKS)
+            eid = "rs:%s.CON" % lei
             # zwei Fakten auf DERSELBEN Koordinate, unterschieden nur durch dp
             for dp, val in (("dpA", "11.5"), ("dpB", "22.5")):
-                rows.append(("rs:LEI%016d.CON" % (i % 4), "2025-12-31",
-                             "EUR" if i % 7 else "PLN", "4.1", tid,
-                             "%04d" % i, "0010", val, None, None, dp,
-                             "LEI%016d" % (i % 4), "CON", "Bank %d" % (i % 4),
-                             "DE", "Large", False, "T " + tid, "Zeile", "Spalte",
-                             "monetary", 1.0))
+                rows.append(zeile(eid, tid, "%04d" % i, "0010", val, dp, lei))
+        # EINDEUTIGE Koordinaten, die alle sechs Institute melden: nur solche
+        # bekommen eine Peer-Statistik. Verschiedene Werte, damit die
+        # Perzentile nicht alle gleich sind und eine vertauschte Reihenfolge
+        # auffiele.
+        for t in templates[:5]:
+            for b in range(N_BANKS):
+                lei = "LEI%016d" % b
+                rows.append(zeile("rs:%s.CON" % lei, t, "9000", "0010",
+                                  str(100 + b * 7), "dpS", lei))
         # Filing-Indicators: erst dadurch hat resolve_coverage() eine Map mit
         # vielen Schlüsseln, deren Iterationsordnung vom Hash-Seed abhängt.
         cov = Path(root) / "processed" / "filing_indicators.csv"
         cov.write_text(
             "entityID,refPeriod,framework_version,template_id,reported,source_file\n"
             + "".join("rs:LEI%016d.CON,2025-12-31,4.1,%s,%s,x.zip\n" % (e, t, bool(j % 3))
-                      for e in range(4) for j, t in enumerate(templates)),
+                      for e in range(N_BANKS) for j, t in enumerate(templates)),
             encoding="utf-8")
         con = duckdb.connect()
         con.execute("""CREATE TABLE t (entityID VARCHAR, refPeriod VARCHAR,
@@ -231,8 +250,9 @@ class ShardBuildIsReproducibleTest(unittest.TestCase):
             open_axis_country VARCHAR, open_axis_dims VARCHAR, datapoint_code VARCHAR,
             lei VARCHAR, scope VARCHAR, bank_name VARCHAR, country VARCHAR,
             institution_type VARCHAR, files_gsii_module BOOLEAN, template_title VARCHAR,
-            row_label VARCHAR, col_label VARCHAR, data_type VARCHAR, fx_rate DOUBLE)""")
-        con.executemany("INSERT INTO t VALUES (" + ",".join("?" * 22) + ")", rows)
+            row_label VARCHAR, col_label VARCHAR, data_type VARCHAR, fx_rate DOUBLE,
+            fact_value DOUBLE, fact_value_eur DOUBLE)""")
+        con.executemany("INSERT INTO t VALUES (" + ",".join("?" * 24) + ")", rows)
         con.execute(f"COPY t TO '{root}/processed/long/p3dh_long.parquet' (FORMAT PARQUET)")
         con.close()
 
@@ -260,6 +280,13 @@ class ShardBuildIsReproducibleTest(unittest.TestCase):
         self.assertGreater(len(doc["coverage"]), 5,
                            "Fixture erzeugt keine Coverage-Map — die Set-Iteration, "
                            "die den ersten Vorfall verursacht hat, wäre nicht auslösbar")
+        # Peer-Statistik (#23): eigener Rechenweg mit eigener Dict-Iteration.
+        # Ohne Eintrag im Shard liefe der Doppellauf daran vorbei und waere
+        # gruen, ohne ihn je ausgefuehrt zu haben.
+        self.assertIn("peer", doc,
+                      "Fixture erzeugt keine Peer-Statistik — sie braucht "
+                      "EINDEUTIGE Koordinaten und mindestens 5 Reports je Gruppe")
+        self.assertTrue(any(zellen for zellen in doc["peer"].values()))
 
 
 if __name__ == "__main__":
