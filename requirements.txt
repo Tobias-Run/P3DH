@@ -15,6 +15,11 @@ openpyxl>=3.1
 duckdb>=1.0
 pyarrow>=15
 
+# DISDOCS-Korpus (#38): Textausbeute der qualitativen PDF-Berichte messen.
+# scripts/probe_disdocs.py importiert es erst beim Messen, damit der Rest der
+# Pipeline ohne die Abhängigkeit läuft.
+pypdf>=5.0
+
 # Tests (tests/test_xbrl_csv_parser.py — parser regressions: BOM, filing
 # indicators, open axis). Run: python -m pytest tests/ -q
 pytest>=8.0

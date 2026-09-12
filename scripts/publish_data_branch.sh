@@ -115,7 +115,13 @@ fi
 echo "✓ pushed orphan branch 'data' (1 commit)"
 
 # Purge jsDelivr's branch cache for the files that change every publish.
-for f in index.json codebook.json benchmark.json; do
+# Jede Datei, die der Viewer per getJSON() aus dem Wurzelverzeichnis holt,
+# gehoert hier hinein. jsDelivr cacht Branch-URLs bis zu 12 Stunden JE DATEI:
+# faellt eine heraus, liefert es alte Inhalte neben frischen. Bei labels.json
+# (#23/#82) hiesse das neue Zellen ohne Beschriftung — kein Fehler, nur eine
+# Luecke, und damit unsichtbar. tests/test_publish_coupling.py haelt die Liste
+# gegen die tatsaechlichen getJSON-Aufrufe im Viewer.
+for f in index.json codebook.json labels.json benchmark.json; do
   curl -fsS "https://purge.jsdelivr.net/gh/Tobias-Run/P3DH@data/$f" >/dev/null \
     && echo "  purged $f" || echo "  purge $f failed (non-fatal)"
 done
