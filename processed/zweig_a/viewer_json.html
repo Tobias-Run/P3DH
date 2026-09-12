@@ -250,6 +250,17 @@
   /* Zelle auf einer umgebundenen Koordinate: erkennbar beim Lesen, ohne die
      Zahl zu stoeren. */
   td.fwcell{text-decoration:underline dotted var(--muted);text-underline-offset:3px;cursor:help}
+  /* Auffaelliger Wert (#24). Bewusst kein Alarmrot: der Wert ist gemeldet und
+     bleibt unveraendert lesbar, die Markierung ist additiv. Ein Meldefehler
+     waere eine Hypothese, kein Befund. */
+  td.oddcell{background:rgba(201,162,39,.10);cursor:help}
+  td.oddcell::after{content:"\00a0▵";color:#c9a227;font-size:.85em}
+  td.oddcell.sev-h::after{content:"\00a0▲"}
+  /* Peer-Kontext (#23): zweite Zeile unter dem Wert, deutlich leiser als er.
+     Der gemeldete Wert bleibt die Hauptsache — die Einordnung tritt daneben,
+     nicht davor. */
+  span.ctxline{display:block;font-size:.72em;color:var(--muted);line-height:1.15;
+    white-space:nowrap;font-variant-numeric:tabular-nums}
   .spark{color:var(--blue);vertical-align:middle}
   .ts td.num a{color:inherit;text-decoration:none}
   .ts th.datecol a{color:var(--theadink);text-decoration:underline dotted}
@@ -360,6 +371,12 @@ let EUR   = store.eur ?? false;           // EUR normalization
 let PINS  = new Set(store.pins||[]);      // report keys for compare
 let DARK  = store.dark ?? window.matchMedia('(prefers-color-scheme: dark)').matches;
 let CMPTPL = store.cmptpl || '61.00';
+/* Peer-Kontext an der Zelle (#23). AN per Default — anders als der
+   Benchmark-Schalter, denn hier ist die Einordnung der Zweck: „12,4 %" allein
+   ist eine Zahl, „12,4 % bei einem Peer-Median von 15,1 %" eine Aussage. Wer
+   den reinen Meldewert will, schaltet ihn ab; der Wert selbst ändert sich
+   dadurch nie. */
+let CTX = store.ctx ?? true;
 function persist(){ localStorage.setItem('p3dh', JSON.stringify({
   scale:SCALE, eur:EUR, pins:[...PINS], dark:DARK, cmptpl:CMPTPL,
   themes:(typeof OPENTHEMES!=='undefined'?[...OPENTHEMES]:undefined),
@@ -402,6 +419,44 @@ const ambigTip=lbl=>'Diese Koordinate ist nicht eindeutig platziert: das DPM fü
   +'verschiedene Zeilen — „'+lbl.join('“ und „')+'“. Welche der Wert trägt, hängt an der '
   +'Meldeversion, und unser Codebook unterscheidet sie noch nicht (#54). Der Wert ist '
   +'unverändert der gemeldete; unsicher ist, in welcher Zeile er stehen müsste.';
+/* Zellgenaue Plausibilitaets-Befunde (#24).
+   Eintrag: [schweregrad, abweichung_in_groessenordnungen, referenzwert, (anzahl)].
+   EDAP MUSS einen gemeldeten Wert originalgetreu rendern — wir nicht. Genau
+   darin liegt der Mehrwert: wir duerfen dazuschreiben, dass der Wert gegen die
+   Population nicht plausibel ist. Der Wert selbst bleibt unveraendert. */
+let UA=new Set();                            // Templates mit strittiger Einheit
+const flagAt=(rep,tid,row,col)=>{
+  const m=(rep.flags||{})[tid]; return m?(m[row+'|'+col]||null):null; };
+const SEVW={h:'deutlich', m:'auffällig', n:'leicht erhöht'};
+function flagTip(tid,f){
+  const [sev,dev,ref,n]=f;
+  // Neutral formulieren: „liegt N Groessenordnungen ueber dem Vergleichswert",
+  // nicht „falsch". Ein Meldefehler ist eine Hypothese, kein Befund.
+  let t='Gegen die Population '+(SEVW[sev]||'auffällig')+': rund '+nf(dev,1)
+    +' Größenordnungen vom Vergleichswert '+nf(ref,0,4)+' entfernt';
+  if(n>1) t+=' ('+n+' Befunde auf dieser Koordinate, stärkster gezeigt)';
+  // In den Sperrlisten-Templates ist die EINHEIT strittig (#9). Dort kann eine
+  // Abweichung um Groessenordnungen schlicht Tausend gegen Eins heissen — das
+  // gehoert dazugesagt, sonst liest sich der Hinweis als Meldefehler.
+  if(UA.has(tid)) t+=' — Achtung: in diesem Template ist die gemeldete Einheit '
+    +'uneinheitlich (#9), die Abweichung kann daher eine Einheitenfrage sein';
+  return t+'.';
+}
+/* Peer-Kontext je Zelle (#23). Eintrag: [perzentil, peer_median, n_peers].
+   Vorberechnet im Shard-Builder — die Verteilung einer Zelle braucht ALLE
+   Reports der Peer-Gruppe, im Browser hiesse das, für eine Randnotiz die
+   halbe Population nachzuladen. */
+const peerAt=(rep,tid,row,col)=>{
+  const m=(rep.peer||{})[tid]; return m?(m[row+'|'+col]||null):null; };
+function peerTip(pc,dt,cur){
+  const [p,med,n]=pc;
+  // nf(v, MINIMUM, MAXIMUM) — nicht (v, Stellen, Mindeststellen). Vertauscht
+  // wirft toLocaleString 'maximumFractionDigits value is out of range' und
+  // reisst das ganze Tabellen-Rendering mit.
+  return 'Peer-Median '+nf(med,0,dt==='percentage'?2:0)+(dt==='percentage'?' %':' '+(cur||''))
+    +' · dieses Institut im '+p+'. Perzentil von '+n+' vergleichbaren Reports '
+    +'(gleiche Größenklasse, Konsolidierung, Stichtag)';
+}
 let OPENTHEMES=new Set(store.themes||[]);   // aufgeklappte Bloecke, ueber Reports hinweg
 const repKey=r=>r.entityID+'|'+r.refPeriod;
 const byKey =k=>REPORTS.find(r=>repKey(r)===k);
@@ -592,7 +647,11 @@ const cellsFrom=arr=>arr.map(c=>({row:c[0], col:c[1], val:c[2], dim:c[3]||''}));
 /* Ausgewaehlter Dimensionswert je Template, waehrend ein Report offen ist. */
 let DIMSEL=new Map();
 function buildFromIndex(idx, codebook){
-  for(const [k,v] of Object.entries(codebook.cb))     CB.set(k,{rl:v[0], cl:v[1], dt:v[2]||''});
+  // `cb` liegt seit der Aufteilung in labels.json und wird erst geladen, wenn
+  // eine Rohtabelle, ein Kennzahlen-Beleg oder die Vergleichsansicht es
+  // braucht — siehe ensureLabels(). Ein älteres codebook.json, das `cb` noch
+  // mitbringt, wird weiter akzeptiert: dann ist nur nichts gewonnen.
+  if(codebook.cb){ setLabels(codebook.cb); LABELS_LOADED=true; }
   for(const [k,v] of Object.entries(codebook.titles)) TITLES.set(k, v);
   // Offene Zeilenachsen (#56): dort IST die Zeile der Achsenwert, und AXIS
   // loest ihn auf ('NL' -> 'Netherlands'). Vorhandensein markiert zugleich,
@@ -615,6 +674,7 @@ function buildFromIndex(idx, codebook){
   for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
+  UA=new Set(idx.ua||[]);   // Sperrliste aus check_unit_consistency.py (#9)
   REPORTS = idx.reports.map(r=>({    // slim index: metadata only, no cells
     entityID:r.entityID, refPeriod:r.refPeriod, baseCurrency:r.baseCurrency, cur:r.cur||null,
     framework:r.framework, nt:r.nt, shard:r.f,
@@ -622,12 +682,39 @@ function buildFromIndex(idx, codebook){
     templates:new Map(), loaded:false,   // filled lazily: head via benchmark.json, full via shard
   }));
 }
+/* ---- Zelllabels: 9,41 MB, und die erste Ansicht fasst sie nie an ----------
+   Sie lagen bis eben mit im codebook.json und wurden beim BOOT geladen, obwohl
+   der Modul-Docstring index.json als „the only up-front payload" beschrieb.
+   Gemessen kostete das 257 ms blockierende Bootzeit (116 fetch + 54 parse +
+   87 Map-Aufbau ueber 94.398 Eintraege) — fuer Labels, die erst eine
+   aufgeklappte Rohtabelle, ein Kennzahlen-Beleg oder die Vergleichsansicht
+   braucht.
+
+   Wichtig: NICHT einfach im Hintergrund nachladen und hoffen. Eine Tabelle,
+   die vor dem Eintreffen rendert, saehe aus wie eine Tabelle ohne Labels — ein
+   stiller Fehler, kein sichtbarer. Deshalb warten die drei Stellen, die CB
+   lesen, ausdruecklich auf ensureLabels(). Der Vorabruf beschleunigt nur, er
+   garantiert nichts. */
+let LABELS_LOADED=false, LABELS_PROMISE=null;
+function setLabels(cb){
+  for(const [k,v] of Object.entries(cb)) CB.set(k,{rl:v[0], cl:v[1], dt:v[2]||''});
+}
+function ensureLabels(){
+  if(LABELS_LOADED) return Promise.resolve();
+  if(!LABELS_PROMISE) LABELS_PROMISE=getJSON('labels.json').then(j=>{
+    setLabels(j.cb||{}); LABELS_LOADED=true;
+  }).catch(e=>{ LABELS_PROMISE=null; throw e; });
+  return LABELS_PROMISE;
+}
+
 /* fetch a report's full grid on demand */
 async function ensureLoaded(rep){
   if(rep.loaded) return;
   const j=await getJSON('reports/'+rep.shard);
   for(const [tid,cells] of Object.entries(j.tpl)) rep.templates.set(tid, cellsFrom(cells));
   rep.coverage = j.coverage || {};   // Filing-Indicators ("Fehlt != Null"); {} = keine Aussage
+  rep.flags = j.flags || {};         // Zellgenaue Plausibilitaets-Befunde (#24); {} = keine
+  rep.peer  = j.peer  || {};         // Peer-Median/Perzentil je Zelle (#23); {} = keine
   rep.loaded=true;
 }
 /* head templates (KM1 61.00 / OV1 60.00.A) for ALL reports — the cross-report data the
@@ -791,7 +878,8 @@ function controlsHTML(){
         <option value="1000">Tsd.</option><option value="1000000">Mio.</option>
         <option value="1000000000">Mrd.</option>
       </select></label>
-    <label class="ctl"><input type="checkbox" id="eurChk"> in EUR (EZB-Kurs)</label>`;
+    <label class="ctl"><input type="checkbox" id="eurChk"> in EUR (EZB-Kurs)</label>
+    <label class="ctl" title="Zeigt unter jedem vergleichbaren Wert den Median seiner Peer-Gruppe (gleiche Größenklasse, Konsolidierung, Stichtag) und das Perzentil des Instituts darin. Ab 5 Reports je Gruppe; nicht bei strittiger Einheit (#9) und nicht bei mehrfach belegten Koordinaten (#52)."><input type="checkbox" id="ctxChk"${CTX?' checked':''}> Peer-Kontext an der Zelle</label>`;
 }
 function wireControls(redraw){
   const sel=document.getElementById('scaleSel');
@@ -800,6 +888,9 @@ function wireControls(redraw){
   const chk=document.getElementById('eurChk');
   if(chk){ chk.checked=EUR;
     chk.addEventListener('change',()=>{ EUR=chk.checked; persist(); redraw(); }); }
+  const cx=document.getElementById('ctxChk');
+  if(cx){ cx.checked=CTX;
+    cx.addEventListener('change',()=>{ CTX=cx.checked; store.ctx=CTX; persist(); redraw(); }); }
 }
 
 /* ================= report view ================= */
@@ -916,7 +1007,16 @@ function renderTemplate(tid, cells, rep){
     nAmbig>1?'n':''} in diesem Template sind nicht eindeutig platziert: das DPM führt dort je
     zwei verschiedene Zeilen, und unser Codebook unterscheidet die Meldeversionen noch nicht
     (#54). Betroffene Zeilen sind markiert.</span></div>` : '';
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}<table><thead><tr><th class="rh">${axisMap?'Code':'Row'}</th><th class="rl"></th>`;
+  // Sagen, bevor gelesen wird — wie bei den mehrdeutigen Koordinaten: in
+  // diesem Template halten WIR N Werte fuer unplausibel. Ohne diese Zeile
+  // waere die Markierung an der Zelle ein Symbol ohne Herkunft.
+  const nFlag=Object.keys((rep.flags||{})[tid]||{}).length;
+  const flagNote = nFlag ? `<div class="dimbar"><span class="cl">▲ ${nFlag} Wert${
+    nFlag>1?'e in diesem Template weichen':' in diesem Template weicht'} so stark von der
+    Population ab, dass wir ${nFlag>1?'sie':'ihn'} als auffällig einstufen (#24). Der gemeldete
+    Wert bleibt unverändert stehen — die Markierung ist ein Hinweis, kein Urteil über
+    Richtigkeit.${UA.has(tid)?' In diesem Template ist zusätzlich die gemeldete Einheit uneinheitlich (#9), die Abweichung kann also eine Einheitenfrage sein.':''}</span></div>` : '';
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}${flagNote}<table><thead><tr><th class="rh">${axisMap?'Code':'Row'}</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   // Am Zeilenlabel ist die Mehrdeutigkeit am wichtigsten: dort steht EINE
@@ -938,13 +1038,26 @@ function renderTemplate(tid, cells, rep){
       // ohne die Zahl selbst zu stören.
       const bs=bridgeAt(tid,r,c);
       const am=ambigAt(tid,r,c);
+      // Zellgenauer Plausibilitaets-Befund (#24): der Wert bleibt unveraendert
+      // stehen, die Markierung kommt dazu.
+      const fg=flagAt(rep,tid,r,c);
+      // Peer-Kontext (#23): die Zahl allein ist eine Zahl, die Zahl neben dem
+      // Median ihrer Vergleichsgruppe ist eine Aussage.
+      const pc=peerAt(rep,tid,r,c);
       const parts=[
         dt==='monetary'?`${fmt(v)} ${curOf(rep,tid)} (Originalwert)`:
         dt==='percentage'?`Rohwert ${v}`:'',
+        pc?peerTip(pc,dt,curOf(rep,tid)):'',
         bs?BRIDGE_TIP[bs]:'',
-        am?ambigTip(am):''].filter(Boolean);
+        am?ambigTip(am):'',
+        fg?flagTip(tid,fg):''].filter(Boolean);
       const tip=parts.length?` title="${esc(parts.join(' · '))}"`:'';
-      h+=`<td class="num${bs||am?' fwcell':''}"${tip}>${fmtTyped(v,dt,unit,dt==='monetary'?rate:1)}</td>`;
+      const cls=`num${bs||am?' fwcell':''}${fg?' oddcell sev-'+fg[0]:''}`;
+      // Sekundaerzeile nur, wenn eingeschaltet UND eine Peer-Gruppe da war.
+      // Fehlt sie, steht dort NICHTS — kein Platzhalter, der nach Null aussieht.
+      const ctx = (CTX&&pc) ? `<span class="ctxline">P${pc[0]} · ⌀${
+        esc(fmtTyped(pc[1],dt,unit,dt==='monetary'?rate:1))}</span>` : '';
+      h+=`<td class="${cls}"${tip}>${fmtTyped(v,dt,unit,dt==='monetary'?rate:1)}${ctx}</td>`;
     }
     h+='</tr>';
   }
@@ -1250,6 +1363,9 @@ async function renderReport(rep){
     const card=e.target.closest('.ovcard');
     if(!card) return;
     OPENMETRIC = OPENMETRIC===card.dataset.m ? null : card.dataset.m;
+    // Der Beleg zeigt Zeilen-/Spaltenlabels der Herleitung — ohne sie stuenden
+    // dort nackte Koordinaten.
+    if(OPENMETRIC && !LABELS_LOADED){ ensureLabels().then(()=>renderOverview(rep)); return; }
     renderOverview(rep);
   });
   document.getElementById('ovSection').addEventListener('keydown',e=>{
@@ -1258,6 +1374,9 @@ async function renderReport(rep){
     if(!card) return;
     e.preventDefault();
     OPENMETRIC = OPENMETRIC===card.dataset.m ? null : card.dataset.m;
+    // Der Beleg zeigt Zeilen-/Spaltenlabels der Herleitung — ohne sie stuenden
+    // dort nackte Koordinaten.
+    if(OPENMETRIC && !LABELS_LOADED){ ensureLabels().then(()=>renderOverview(rep)); return; }
     renderOverview(rep);
   });
   ensureBenchmark().then(()=>{
@@ -1313,10 +1432,19 @@ async function renderReport(rep){
     c.querySelectorAll('details.theme[open]').forEach(d=>fillTheme(rep,d,(f?hits:all).get(d.dataset.t)||[]));
     c._lists=(f?hits:all); c._filtered=!!f;
   };
-  const fillTheme=(rep,det,list)=>{
+  const fillTheme=async (rep,det,list)=>{
     const body=det.querySelector('.tbody');
     if(body.dataset.done==='1') return;
     const cont=document.getElementById('tcontainer');
+    // Ohne Labels waere das eine Tabelle aus nackten Codes — sichtbar falsch,
+    // aber nicht als Fehler erkennbar. Also warten statt raten.
+    if(!LABELS_LOADED){
+      body.innerHTML='<div class="status">Beschriftungen werden geladen …</div>';
+      try{ await ensureLabels(); }
+      catch(e){ body.innerHTML='<div class="status">Beschriftungen nicht ladbar: '
+        +esc(e.message)+'</div>'; return; }
+      if(body.dataset.done==='1') return;   // inzwischen anderweitig gefuellt
+    }
     body.innerHTML=list.map(tid=>renderTemplate(tid, rep.templates.get(tid), rep)).join('')
       || `<div class="status">${cont&&cont._filtered
             ? 'Kein Template dieses Blocks passt zum Filter.'
@@ -1342,6 +1470,7 @@ async function renderReport(rep){
     const chip=e.target.closest('[data-ms]');
     if(!chip) return;
     OPENSEARCH = OPENSEARCH===chip.dataset.ms ? null : chip.dataset.ms;
+    if(OPENSEARCH && !LABELS_LOADED){ ensureLabels().then(draw); return; }
     draw();
   });
   // Dimensionswechsel (#52): Auswahl merken und nur neu zeichnen.
@@ -1905,6 +2034,9 @@ async function renderBenchmark(){
 
 /* ================= compare view ================= */
 async function renderCompare(){
+  // Die Vergleichstabelle beschriftet jede Zelle — ohne Labels waere sie eine
+  // Matrix aus Koordinaten.
+  try{ await ensureLabels(); }catch(e){}
   VIEW='compare'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
   const reps=[...PINS].map(byKey).filter(Boolean);
@@ -2111,6 +2243,12 @@ async function init(){
     document.getElementById('hsub').textContent=
       `${nf(TOTAL_GROUPS,0,0)} Institute · ${nf(idx.stats.reports,0,0)} Reports · ${nf(idx.stats.facts,0,0)} Fakten`;
     initFilters(); wireList(); updateCmpBadge(); renderReportList(); route();
+    // Labels NACH dem ersten Rendern nachziehen. Das ist reine Beschleunigung:
+    // wer sofort eine Tabelle aufklappt, wartet ueber ensureLabels() ohnehin
+    // korrekt. Fehlschlaege bleiben hier still — sie werden an der Stelle
+    // gemeldet, an der die Labels wirklich gebraucht werden.
+    requestIdleCallback ? requestIdleCallback(()=>ensureLabels().catch(()=>{}))
+                        : setTimeout(()=>ensureLabels().catch(()=>{}), 0);
   }catch(err){
     document.getElementById('main').innerHTML='<div class="status">Fehler beim Laden: '+esc(err.message)+
       '<br><br>Vom Repo-Root ausliefern: <code>python3 -m http.server 8766</code> → <code>/processed/zweig_a/viewer_json.html</code></div>';

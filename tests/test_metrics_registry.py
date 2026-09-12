@@ -24,6 +24,9 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import metrics as mx  # noqa: E402
 
 CODEBOOK = ROOT / "processed" / "zweig_a" / "data" / "codebook.json"
+# Die Zelllabels liegen seit der Aufteilung des Boot-Payloads separat:
+# codebook.json traegt nur noch Struktur (70 KB), labels.json die 9,41 MB.
+LABELS = ROOT / "processed" / "zweig_a" / "data" / "labels.json"
 VIEWER = ROOT / "processed" / "zweig_a" / "viewer_json.html"
 
 
@@ -234,9 +237,9 @@ class WiringTest(unittest.TestCase):
         """Ein Tippfehler in einer Koordinate fällt sonst nie auf: eine
         Herleitung, die nichts findet, sieht aus wie eine, für die es keine
         Daten gibt."""
-        if not CODEBOOK.exists():
-            self.skipTest("codebook.json nicht gebaut")
-        cb = json.loads(CODEBOOK.read_text(encoding="utf-8"))["cb"]
+        if not LABELS.exists():
+            self.skipTest("labels.json nicht gebaut")
+        cb = json.loads(LABELS.read_text(encoding="utf-8"))["cb"]
 
         def dpm(tid):                      # Spiegel von dpmCode() im Viewer
             p = tid.split(".")

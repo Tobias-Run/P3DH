@@ -8,12 +8,20 @@ the analytics layer share one source and cannot drift.
 
 Outputs under processed/zweig_a/data/ (sized to scale toward the full catalog):
   index.json          SLIM: per-report metadata (entityID/date/currency/framework/nt/
-                      shard-file) + meta/names/fx lookup maps + stats.  This is the only
-                      up-front payload — it stays small even at thousands of reports.
+                      shard-file) + meta/names/fx lookup maps + stats.  Up-front, together
+                      with codebook.json — together ~105 KB gzipped, and it stays small
+                      even at thousands of reports.  (This line used to claim index.json
+                      was the ONLY up-front payload while codebook.json was fetched in the
+                      same Promise.all — 9.5 MB of it.  Measured: 2.0 s to the first usable
+                      view on a 4 Mbit line; 0.63 s after the split.)
   benchmark.json      per-report head templates (KM1 61.00, OV1 60.00.A) — the cross-report
                       data the benchmark and time-series need.  Loaded LAZILY (first time
                       the benchmark tab or a time-series is shown), not on boot.
-  codebook.json       {cb, titles} trimmed to the cells that actually occur.
+  codebook.json       SMALL: titles/axis/themes/bridge/metrics/ambig — the structure the
+                      first view needs (70 KB).
+  labels.json         the per-cell row/column labels (9.4 MB, 99.3 % of the old
+                      codebook.json). Loaded LAZILY: only an expanded raw table, a metric
+                      derivation or the compare view reads them.
   reports/<key>.json  {tpl:{template_id:[[row,col,val],...]}} — the full grid of ONE
                       report, fetched lazily when the user opens it.  Written INCREMENTALLY:
                       only shards whose bytes changed are rewritten; vanished reports are
@@ -29,6 +37,7 @@ from pathlib import Path
 import collections
 import csv
 import json
+import math
 import gzip
 import re
 import sys
@@ -38,6 +47,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from determinism import ordered_query as ordered  # noqa: E402
 from template_themes import theme_payload  # noqa: E402
 from metrics import metric_payload  # noqa: E402
+from check_unit_consistency import UNIT_AMBIGUOUS_TEMPLATES  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
@@ -276,6 +286,162 @@ def load_quality_profile(root: Path | None = None):
     return out
 
 
+SEV = {"hoch": "h", "mittel": "m", "niedrig": "n"}
+SEV_RANG = {"h": 3, "m": 2, "n": 1}
+
+
+def load_cell_findings(root: Path | None = None):
+    """Plausibilitäts-Befunde je ZELLE (#24) -> {report_key: {tid: {"r|c": [...]}}}.
+
+    ## Warum zellgenau und nicht wie bisher template-genau
+
+    `load_quality_profile()` liefert je Report, welche Templates Befunde
+    tragen. Das reicht, um eine Benchmark-Zeile zu relativieren — aber nicht,
+    um in der Report-Ansicht die *eine* auffällige Zahl zu zeigen. Genau das
+    ist #24: EDAP muss einen gemeldeten Wert originalgetreu rendern, wir nicht.
+
+    ## Der stärkste Befund gewinnt, und die Zahl steht dabei
+
+    620 Koordinaten tragen mehr als einen Befund — dieselbe Mehrfachbelegung
+    wie in `collapse_cells()`: auf (template, row, col) liegen mehrere Fakten,
+    unterschieden durch Land oder Dimension. Einen davon stillschweigend zu
+    behalten hiesse, dem Leser eine Auswahl zu verschweigen, die wir getroffen
+    haben. Deshalb: stärkster Befund plus Anzahl.
+
+    Eintrag: [sev, abweichung_groessenordnungen, referenzwert] — und ein
+    viertes Feld mit der Befundzahl, wenn es mehr als einer war.
+    """
+    root = root or ROOT
+    path = root / "interim" / "plausibility_findings.csv"
+    if not path.exists():
+        return {}
+    roh = {}
+    with path.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            lei, scope, rp = r.get("lei"), r.get("scope"), r.get("refPeriod")
+            tid, row, col = r.get("template_id"), r.get("cell_row"), r.get("cell_col")
+            if not (lei and scope and rp and tid and row and col):
+                continue
+            sev = SEV.get(r.get("severity") or "", "n")
+            try:
+                dev = round(float(r.get("deviation_orders") or 0), 1)
+                ref = float(r.get("reference") or 0)
+            except ValueError:
+                continue
+            k = f"rs:{lei}.{scope}|{rp}"
+            roh.setdefault(k, {}).setdefault(tid, {}).setdefault(f"{row}|{col}", []) \
+                .append((sev, dev, ref))
+    out = {}
+    for k, tpl in roh.items():
+        out[k] = {}
+        for tid, zellen in tpl.items():
+            out[k][tid] = {}
+            for rc, treffer in zellen.items():
+                # Stärkster zuerst: Schweregrad, dann Abweichung.
+                sev, dev, ref = max(treffer, key=lambda t: (SEV_RANG[t[0]], t[1]))
+                eintrag = [sev, dev, ref]
+                if len(treffer) > 1:
+                    eintrag.append(len(treffer))
+                out[k][tid][rc] = eintrag
+    return out
+
+
+PEER_MIN = 5      # wie PCT_MIN_GROUP im Viewer: darunter ist ein Perzentil Rauschen
+
+
+def _sig(x, n=4):
+    """Auf n signifikante Stellen runden.
+
+    Der Peer-Median ist ein ANZEIGEWERT, keine Rechengrundlage — volle
+    Float-Stellen kosten 23 % Shard-Größe und tragen nichts, was im Tooltip
+    sichtbar wäre.
+    """
+    if not x or not math.isfinite(x):
+        return 0
+    return round(x, -int(math.floor(math.log10(abs(x)))) + (n - 1))
+
+
+def peer_stats(con, root: Path | None = None):
+    """Peer-Median und Perzentil je Zelle (#23) -> {report_key: {tid: {"r|c": [...]}}}.
+
+    ## Warum vorberechnet und nicht im Browser
+
+    Die Peer-Verteilung einer Zelle braucht ALLE Reports der Gruppe. Im Browser
+    hiesse das, für einen geöffneten Report die Shards seiner ganzen Peer-Gruppe
+    nachzuladen — für eine Randnotiz am Zellwert.
+
+    ## Peer-Gruppe: identisch mit dem Benchmark-Tab
+
+    Größenklasse (`institution_type`) × Konsolidierungskreis × Stichtag, ab
+    `PEER_MIN` Reports. Dieselbe Definition wie `peerKeyOf()` im Viewer — zwei
+    Peer-Begriffe im selben Produkt wären der sichere Weg zu zwei Antworten auf
+    dieselbe Frage.
+
+    ## Was ausdrücklich KEINE Kontextzahl bekommt
+
+    `UNIT_AMBIGUOUS_TEMPLATES` (#9): wo die gemeldete Einheit strittig ist, ist
+    der Median über die Gruppe eine Mischung aus Tausendern und Einern. Ein
+    Perzentil darauf wäre eine Scheinaussage — 207.983 Fakten fallen dadurch raus.
+
+    Mehrfach belegte Koordinaten (#52): dort liegen je Report mehrere Fakten auf
+    derselben (Zeile, Spalte), unterschieden durch Land oder Dimension. Welcher
+    davon gegen den Peer-Median gehört, ist nicht entscheidbar; 64.357 Zellen
+    (3,8 %) bleiben deshalb ohne Kontextzahl. Lieber keine Aussage als die
+    falsche — der Wert steht ja unverändert da.
+
+    Eintrag je Zelle: [perzentil, peer_median, n_peers].
+    """
+    root = root or ROOT
+    itype = {}
+    pfad = root / "processed" / "entity_meta.csv"
+    if pfad.exists():
+        with pfad.open(encoding="utf-8") as fh:
+            itype = {r["lei"]: (r.get("institution_type") or "?")
+                     for r in csv.DictReader(fh)}
+    roh = ordered(con, """
+        SELECT entityID, refPeriod, template_id, cell_row, cell_col,
+               COALESCE(fact_value_eur, TRY_CAST(fact_value AS DOUBLE)) AS v
+        FROM p
+        WHERE data_type IN ('monetary','percentage')
+          AND cell_row IS NOT NULL AND cell_row <> ''
+          AND COALESCE(fact_value_eur, TRY_CAST(fact_value AS DOUBLE)) IS NOT NULL
+          AND template_id NOT IN ({})
+        ORDER BY entityID, refPeriod, template_id, cell_row, cell_col, v
+    """.format(",".join(f"'{t}'" for t in sorted(UNIT_AMBIGUOUS_TEMPLATES))),
+        "Peer-Statistik / Zellen")
+
+    # Mehrfach belegte (Report, Koordinate) fallen raus — siehe Docstring.
+    je_zelle = collections.defaultdict(list)
+    for eid, rp, tid, r, c, v in roh:
+        je_zelle[(eid, rp, tid, r, c)].append(v)
+    eindeutig = {k: v[0] for k, v in je_zelle.items() if len(v) == 1}
+
+    gruppen = collections.defaultdict(list)
+    for (eid, rp, tid, r, c), v in eindeutig.items():
+        lei, _, scope = eid.partition("rs:")[2].rpartition(".")
+        gruppen[(tid, r, c, itype.get(lei, "?"), scope, rp)].append(v)
+    for arr in gruppen.values():
+        arr.sort()
+
+    out = {}
+    for (eid, rp, tid, r, c), v in eindeutig.items():
+        lei, _, scope = eid.partition("rs:")[2].rpartition(".")
+        arr = gruppen[(tid, r, c, itype.get(lei, "?"), scope, rp)]
+        if len(arr) < PEER_MIN:
+            continue
+        # Mid-Rank wie percentileMap() im Viewer: Anteil echt kleinerer Werte
+        # plus halbe Bindungen — stabil, wenn viele Institute denselben Wert
+        # melden (bei Prozentzellen die Regel, nicht die Ausnahme).
+        kleiner = sum(1 for x in arr if x < v)
+        gleich = sum(1 for x in arr if x == v)
+        p = round((kleiner + gleich / 2) / len(arr) * 100)
+        med = arr[len(arr) // 2] if len(arr) % 2 else (arr[len(arr) // 2 - 1]
+                                                       + arr[len(arr) // 2]) / 2
+        out.setdefault(f"{eid}|{rp}", {}).setdefault(tid, {})[f"{r}|{c}"] = \
+            [p, _sig(med), len(arr)]
+    return out
+
+
 def resolve_coverage(declared, data_tids):
     """Project the filing-indicator declarations of ONE report onto the template
     ids the viewer actually renders.
@@ -330,6 +496,8 @@ def main():
     con.execute(f"CREATE VIEW p AS SELECT * FROM '{PARQUET}'")
     coverage = load_coverage_map(ROOT)
     quality = load_quality_profile(ROOT)
+    befunde = load_cell_findings(ROOT)
+    peers = peer_stats(con)
 
     # --- pass 1: group placeable cells into reports (raw string values) ---
     reports = {}
@@ -471,8 +639,15 @@ def main():
 
     # Kennzahlen-Registry (#63): Definition, Zweck, Schwelle, Herkunft. Die
     # Rechenvorschrift bleibt im Viewer — sie ist Code, keine Daten.
-    codebook = {"cb": cb, "titles": titles, "axis": axis, "themes": themes,
+    # Die Zelllabels (`cb`) liegen SEPARAT — gemessen sind sie 9,41 von 9,48 MB,
+    # also 99,3 % der Datei. Gebraucht werden sie erst, wenn jemand eine
+    # Rohtabelle aufklappt, einen Kennzahlen-Beleg oeffnet oder die
+    # Vergleichsansicht benutzt. Im Bündel kosteten sie beim BOOT 257 ms
+    # (116 fetch + 54 parse + 87 Map-Aufbau ueber 94.398 Einträge) — für etwas,
+    # das die erste Ansicht nie anfasst.
+    codebook = {"titles": titles, "axis": axis, "themes": themes,
                 "bridge": bridge, "metrics": metric_payload(), "ambig": ambig}
+    labels = {"cb": cb}
 
     # --- lookup maps, all straight from the same parquet ---
     # Diese drei Maps werden je Schlüssel ÜBERSCHRIEBEN — bei mehreren Zeilen je
@@ -531,8 +706,18 @@ def main():
         #   2. eine Pipeline, die auf gleichen Eingaben verschiedene Bytes
         #      liefert, ist nicht reproduzierbar — und genau das behauptet das
         #      README. Man kann eine Ausgabe dann gegen nichts prüfen.
-        payload = json.dumps({"tpl": rep["tpl"], "coverage": rep.get("coverage", {})},
-                             ensure_ascii=False, separators=(",", ":"), sort_keys=True)
+        # Zellgenaue Befunde (#24) gehören in den SHARD, nicht in den Index:
+        # sie werden nur beim Öffnen genau dieses Reports gebraucht, und der
+        # Index trägt bereits alle 882 Reports auf einmal.
+        inhalt = {"tpl": rep["tpl"], "coverage": rep.get("coverage", {})}
+        b = befunde.get(key)
+        if b:                       # nur Reports MIT Befunden tragen das Feld
+            inhalt["flags"] = b
+        pk = peers.get(key)
+        if pk:                      # Kontextzahlen je Zelle (#23)
+            inhalt["peer"] = pk
+        payload = json.dumps(inhalt, ensure_ascii=False,
+                             separators=(",", ":"), sort_keys=True)
         if write_if_changed(SHARDS / fname, payload):
             written += 1
         else:
@@ -572,10 +757,17 @@ def main():
             removed += 1
 
     index = {"stats": {"reports": len(index_reports), "facts": n_facts},
-             "reports": index_reports, "meta": meta, "names": names, "fx": fx}
+             "reports": index_reports, "meta": meta, "names": names, "fx": fx,
+             # Sperrliste aus check_unit_consistency.py. Der Viewer braucht sie,
+             # um bei einem Zellbefund (#24) dazuzusagen, dass in diesem Template
+             # die EINHEIT strittig ist — dort kann eine Abweichung um
+             # Größenordnungen auch schlicht Tausend gegen Eins heissen. Über den
+             # Index statt als Kopie im HTML: zwei Listen laufen auseinander.
+             "ua": sorted(UNIT_AMBIGUOUS_TEMPLATES)}
     write_if_changed(OUT / "index.json", json.dumps(index, ensure_ascii=False, separators=(",", ":")))
     write_if_changed(OUT / "benchmark.json", json.dumps(benchmark, ensure_ascii=False, separators=(",", ":")))
     write_if_changed(OUT / "codebook.json", json.dumps(codebook, ensure_ascii=False, separators=(",", ":")))
+    write_if_changed(OUT / "labels.json", json.dumps(labels, ensure_ascii=False, separators=(",", ":")))
 
     # --- sizes (raw + gzip, since Pages serves gzip) ---
     def sz(name):
@@ -588,11 +780,13 @@ def main():
     idx_r, idx_g = sz("index.json")
     bm_r, bm_g = sz("benchmark.json")
     cb_r, cb_g = sz("codebook.json")
+    lb_r, lb_g = sz("labels.json")
 
     print(f"✓ {OUT.relative_to(ROOT)}/  (Quelle: Zweig-B-Parquet)")
     print(f"  index.json     {idx_r:6.2f} MB raw · {idx_g:5.2f} MB gzip   ← UPFRONT (slim)")
     print(f"  benchmark.json {bm_r:6.2f} MB raw · {bm_g:5.2f} MB gzip   ← lazy (Benchmark/Zeitreihe)")
-    print(f"  codebook.json  {cb_r:6.2f} MB raw · {cb_g:5.2f} MB gzip   ← lazy? (Detail/Vergleich)")
+    print(f"  codebook.json  {cb_r:6.2f} MB raw · {cb_g:5.2f} MB gzip   ← UPFRONT (Titel/Themen/Kennzahlen)")
+    print(f"  labels.json    {lb_r:6.2f} MB raw · {lb_g:5.2f} MB gzip   ← lazy (erst beim Aufklappen)")
     print(f"  reports/       {len(shard_files)} shards · {shard_raw:.2f} MB raw · "
           f"geschrieben {written} / unverändert {skipped} / entfernt {removed}")
     if shard_files:

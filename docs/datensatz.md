@@ -122,6 +122,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `codebook/country_gdp.csv` | Land → BIP (laufende US-Dollar) + Jahr | Weltbank, `NY.GDP.MKTP.CD` |
 | `codebook/bank_aliases.csv` | LEI → Kurzname des Instituts | gepflegt |
 | `processed/lei_relations.csv` | LEI → direkte und oberste Konzernmutter | GLEIF Level-2-Daten |
+| `processed/disclosure_lag.csv` | Einreichung → Abstand zum Stichtag + Perzentil in der Klasse | `submission_ts` aus dem Harvest-Manifest |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -213,6 +214,47 @@ dem Stichtag verkauftes Institut trägt hier bereits die neue Mutter. Beispiel a
 dem Bestand: *Santander Bank Polska* steht unter *Erste Group Bank AG*, weil
 Erste die Bank 2025 übernommen hat — die Meldedaten stammen aber teils aus der
 Zeit davor. Wer Kanten mit Stichtagen kombiniert, muss das mitdenken.
+
+### `disclosure_lag.csv` — Rechtzeitigkeit, mit drei Vorbehalten
+
+Je (Institut, Stichtag, Modul) der Abstand zwischen Stichtag und **erster**
+Einreichung, dazu das Perzentil innerhalb der Proportionalitätsklasse.
+
+**Die erste Einreichung zählt, nicht die letzte.** 66 % aller Kombinationen
+(1.141 von 1.739) haben mehr als eine. Die letzte zu messen hieße,
+Korrekturverhalten zu messen — und Institute zu bestrafen, die nachbessern.
+`lag_days_last` steht daneben, trägt aber die Kennzahl nicht.
+
+**Verglichen wird nur innerhalb der Klasse.** CRR Art. 433a–c geben großen,
+anderen sowie kleinen und nicht komplexen Instituten verschiedene Fristen.
+Gemessen am belastbaren Stichtag:
+
+| Klasse | n | Median |
+|---|---:|---:|
+| Large highest EEA | 155 | 58 Tage |
+| Large subsidiaries | 62 | 69 Tage |
+| Other highest EEA | 1 | — |
+
+11 Tage Klassenunterschied bei einem Median von 58 — ein roher Vergleich über
+alle Institute hätte die Proportionalitätsklasse gemessen und als Sorgfalt
+gelesen. Unter fünf Instituten je Klasse wird kein Perzentil ausgewiesen.
+
+**Nur ein Stichtag ist belastbar.** P3DH ging am 26.01.2026 live; alles davor
+wurde nachgereicht. Die Spalte `belastbar` hält das fest:
+
+| Stichtag | n | Median-Lag | |
+|---|---:|---:|---|
+| 2025-06-30 | 404 | 246 | nachgereicht |
+| 2025-09-30 | 237 | 160 | nachgereicht |
+| 2025-10-31 | 5 | 180 | nachgereicht |
+| 2025-12-31 | 875 | 131 | nachgereicht |
+| **2026-03-31** | **218** | **58** | eingeschwungen |
+
+Und dort melden fast nur große Institute — quartalsweise Offenlegung ist eine
+Pflicht nach Art. 433a. **Für rund die Hälfte des Bestands ist Rechtzeitigkeit
+am eingeschwungenen Stichtag nicht messbar.** Das ist keine Lücke im Skript,
+sondern eine Eigenschaft der Pflicht; wer die Kennzahl für flächendeckend hält,
+liest sie falsch.
 
 ## Bekannte Einschränkungen
 

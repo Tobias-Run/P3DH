@@ -74,7 +74,16 @@ jobs:
           cache: pip
 
       - name: Install test dependencies
-        run: pip install duckdb pyarrow
+        run: pip install duckdb pyarrow pypdf playwright
+
+      # Chromium fuer die Laufzeitpruefung des Viewers. Zwei Funktionen (#23,
+      # #24) sind fertig gebaut, getestet und committet worden und haben
+      # trotzdem NICHTS getan — ein nicht zugewiesenes Feld und vertauschte
+      # Zahlenformat-Argumente, die das ganze Rendern mitrissen. Beide Male
+      # waren die Tests gruen: sie pruefen Shard-Inhalt und Quelltext, nie das
+      # Ergebnis. Deshalb faehrt hier ein echter Browser mit.
+      - name: Chromium holen
+        run: python -m playwright install --with-deps chromium
 
       # Nur die zwei Dateien, die der Shard-Bau braucht und die gitignored sind.
       # NICHT fetch_state.sh: das holt zusätzlich long_form_raw.csv (~300 MB),
@@ -111,3 +120,8 @@ jobs:
             exit 1
           fi
           echo "Keine Auslassung — alle Tests sind gelaufen."
+
+      # Der Test, den kein Quelltext-Test ersetzt: startet den Viewer gegen die
+      # eben gebauten Artefakte und fragt, ob danach etwas dasteht.
+      - name: Viewer-Laufzeitprüfung
+        run: python scripts/check_viewer_runtime.py
