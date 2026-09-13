@@ -286,6 +286,64 @@ def load_quality_profile(root: Path | None = None):
     return out
 
 
+def load_scale_flags(root: Path | None = None):
+    """Skalenbefunde je Report (#83) -> {report_key: {"u","f","s","t"}}.
+
+    Muss in den Index, und zwar UNABHÄNGIG von den Plausibilitäts-Befunden.
+    Sonst zeigt der Viewer ausgerechnet die schwersten Fälle als unauffällig:
+    ein Skalenfehler macht Werte zu klein, `robust_z` in #17 sieht nur nach
+    oben, und die Deutsche Pfandbriefbank steht deshalb mit **null** Befunden
+    im quality_profile — bei 67 von 69 skalierten Templates. Ohne diese Marke
+    wäre der Report im Viewer von einem sauberen nicht zu unterscheiden.
+
+    `t` ist die Liste betroffener Templates auf der TEMPLATE-Ebene und leer,
+    wenn das Urteil für den ganzen Report gilt. Leer heisst damit „alle", nicht
+    „keine" — der Viewer muss beide Fälle getrennt formulieren.
+
+    Nur `skaliert` und `verdacht` landen hier; `unauffaellig` ist die grosse
+    Mehrheit und trüge nur Gewicht in den Index.
+    """
+    root = root or ROOT
+    path = root / "processed" / "scale_flags.csv"
+    if not path.exists():
+        return {}
+    out = {}
+    with path.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            urteil = r.get("urteil") or ""
+            eid, rp = r.get("entityID"), r.get("refPeriod")
+            if urteil not in ("skaliert", "verdacht") or not (eid and rp):
+                continue
+            key = f"{eid}|{rp}"
+            e = out.setdefault(key, {"u": urteil, "f": r.get("faktor_geschaetzt") or "",
+                                     "s": r.get("signale") or "", "t": []})
+            # Ein `skaliert` auf Reportebene schlägt eine Template-Zeile: die
+            # build_report_scale.py schreibt beides nie für denselben Report,
+            # aber der Viewer darf sich darauf nicht verlassen.
+            if urteil == "skaliert":
+                e["u"] = "skaliert"
+            if r.get("ebene") == "template" and r.get("template_id"):
+                e["t"].append(r["template_id"])
+    for e in out.values():
+        e["t"].sort()
+    return out
+
+
+def merge_scale_flags(quality, flags):
+    """Skalenmarken in das Qualitätsprofil mischen — IN PLACE, und legt an.
+
+    Eigene Funktion, weil genau hier der Fehler sitzt, den man nicht sieht:
+    hinge die Marke an einem vorhandenen Eintrag, fehlte sie ausgerechnet den
+    schwersten Fällen. 50 der 100 markierten Reports haben NULL Plausibilitäts-
+    Befunde — der Ausreissertest sieht nur nach oben, ein Skalenfehler zeigt
+    nach unten. Sie stünden dann als unauffällig im Index.
+    """
+    for key, sc in flags.items():
+        quality.setdefault(key, {"n": 0, "h": 0, "m": 0, "d": 0, "t": [], "th": []})
+        quality[key]["sc"] = sc
+    return quality
+
+
 SEV = {"hoch": "h", "mittel": "m", "niedrig": "n"}
 SEV_RANG = {"h": 3, "m": 2, "n": 1}
 
@@ -496,6 +554,7 @@ def main():
     con.execute(f"CREATE VIEW p AS SELECT * FROM '{PARQUET}'")
     coverage = load_coverage_map(ROOT)
     quality = load_quality_profile(ROOT)
+    merge_scale_flags(quality, load_scale_flags(ROOT))
     befunde = load_cell_findings(ROOT)
     peers = peer_stats(con)
 

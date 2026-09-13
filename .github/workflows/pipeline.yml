@@ -198,6 +198,15 @@ jobs:
       - name: Rebuild framework bridge
         run: python scripts/build_framework_bridge.py
 
+      # Skalenbefunde je Report (#83). MUSS vor der Plausibilitaet laufen: die
+      # Zellstatistik dort nimmt die als `skaliert` belegten Reports aus ihrem
+      # Nenner, und fehlt processed/scale_flags.csv, schliesst sie stillschweigend
+      # nichts aus. Der Reihenfolgetest in tests/test_report_scale.py haelt das
+      # fest — eine vertauschte Reihenfolge faellt sonst nicht auf, sie liefert
+      # nur schlechtere Zahlen.
+      - name: Report-Skalenbefunde
+        run: python scripts/build_report_scale.py
+
       # Plausibilitaet gegen die Population (#17). Kein Guard, sondern ein
       # Produkt: bricht bewusst NICHT ab, wenn Institute auffaellige Werte
       # melden — das sind Befunde ueber die Einreichungen, keine Fehler in
