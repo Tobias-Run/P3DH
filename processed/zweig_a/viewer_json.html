@@ -167,6 +167,12 @@
       margin-left:.3rem;background:#f3efe3;color:#6b5300;cursor:help;white-space:nowrap}
   tr.flagged td:first-child{box-shadow:inset 3px 0 0 #c9a227}
   [data-theme=dark] .qb{background:#3a3320;color:#e0c96b}
+  /* Skalenbefund (#83) optisch abgesetzt vom Plausibilitäts-Gelb: die beiden
+     Marken sagen Verschiedenes und dürfen nicht als dieselbe gelesen werden. */
+  .qb.sb{background:#f6e3e3;color:#8a2b2b}
+  [data-theme=dark] .qb.sb{background:#3d2424;color:#e8a0a0}
+  tr.scaled td:first-child{box-shadow:inset 3px 0 0 #b03a3a}
+  tr.flagged.scaled td:first-child{box-shadow:inset 3px 0 0 #b03a3a, inset 6px 0 0 #c9a227}
   /* Überblick (#47, R2): die Kennzahlen, mit denen ein Report anfängt */
   .ovgrid{display:flex;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .45rem}
   .ovcard{flex:1 1 136px;min-width:136px;max-width:212px;background:var(--card);
@@ -205,6 +211,8 @@
   .ovq{font-size:11.5px;margin:.35rem 0;background:#f3efe3;color:#6b5300;border-radius:4px;
        padding:.3rem .6rem;max-width:82ch}
   [data-theme=dark] .ovq{background:#3a3320;color:#e0c96b}
+  .ovq.ovsc{background:#f6e3e3;color:#8a2b2b}
+  [data-theme=dark] .ovq.ovsc{background:#3d2424;color:#e8a0a0}
   /* Themenblöcke: eingeklappt, mit Füllstand — die Rohtabellen bleiben
      vollständig, sie führen nur nicht mehr. */
   details.theme{border:1px solid var(--line);border-radius:6px;margin:.4rem 0;background:var(--card)}
@@ -1305,6 +1313,12 @@ function renderOverview(rep){
     h+=`<div class="ovmiss">Ohne Wert in diesem Report: ${esc(miss.join(' · '))}
       <span class="cl">— nicht offengelegt, nicht in unserem Bestand platzierbar oder ohne EZB-Kurs. Nicht „null".</span></div>`;
   const q=rep.quality;
+  /* Skalenbefund (#83) ZUERST, und getrennt von der Plausibilitätsprüfung.
+     Er sagt etwas anderes: nicht „ein Wert passt nicht zur Verteilung", sondern
+     „die absoluten Grössen dieses Reports sind um einen Faktor daneben". Und er
+     steht auch dann da, wenn q.n === 0 — genau das ist der typische Fall, weil
+     ein Skalenfehler nach UNTEN zeigt und der Ausreissertest nur nach oben sieht. */
+  if(q && q.sc) h+=scaleNote(q.sc);
   if(q && q.n)
     h+=`<div class="ovq" title="Werte, die ausserhalb der Verteilung ihrer Zellpopulation liegen. Das kann eine korrekte Besonderheit sein.">△ Plausibilitätsprüfung: <b>${q.n}</b> Befund(e) in ${q.t?q.t.length:0} Template(s), größte Abweichung ${esc(q.d)} Größenordnungen${q.t&&q.t.length?` <span class="cl">· ${esc(q.t.slice(0,10).join(', '))}${q.t.length>10?' …':''}</span>`:''}</div>`;
   if(!h){ host.innerHTML=''; return; }
@@ -1830,6 +1844,35 @@ function fenceBadge(dir,label){
    Markiert wird TEMPLATE-GENAU: nur wenn die Befunde im gerade angezeigten
    Template liegen. Ein Befund in 41.00 sagt nichts ueber die KM1-Spalten. */
 function flaggedFor(q, tpl){ return !!(q && q.t && q.t.includes(tpl)); }
+/* ---- Skalenbefund (#83) --------------------------------------------------
+   Eigene Marke, nicht in `qualityBadge` hineinverhandelt: die Aussage ist eine
+   andere. `sc.t` leer heisst „gilt für den ganzen Report", nicht „für kein
+   Template" — wer das verwechselt, markiert ausgerechnet die schwersten Fälle
+   gar nicht. */
+const SIG_TEXT={untergrenze:'der Gesamtrisikobetrag liegt unter jeder fachlich möglichen Grenze',
+  versatz:'die Werte liegen durchgängig unter dem Median ihrer Zellpopulation',
+  zeitreihe:'ein Sprung gegen die eigenen anderen Stichtage',
+  decimals:'der erklärten Meldegenauigkeit widerspricht fast jeder Wert',
+  template_sprung:'ein Sprung gegen dieselben Templates an den eigenen anderen Stichtagen'};
+const scaleFor=(q,tpl)=>!!(q && q.sc && (!q.sc.t.length || q.sc.t.includes(tpl)));
+function scaleNote(sc){
+  const wo=sc.t.length?`in ${esc(sc.t.join(', '))}`:'im gesamten Report';
+  const gruende=sc.s.split('|').filter(Boolean).map(x=>SIG_TEXT[x]||x);
+  const f=sc.f?` Geschätzter Faktor <b>${esc(sc.f)}</b>.`:'';
+  return `<div class="ovq ovsc" title="Verhältniszahlen bleiben davon unberührt: ein gleichmässiger Faktor kürzt sich im Quotienten heraus.">`
+    +`⚠ Skalenbefund: die <b>absoluten Beträge</b> ${wo} sind `
+    +(sc.u==='skaliert'?'mit hoher Sicherheit':'mutmasslich')
+    +` um einen Faktor zu klein.${f}`
+    +(gruende.length?` <span class="cl">Grund: ${esc(gruende.join('; '))}.</span>`:'')
+    +` <span class="cl">Quoten und Verhältnisse dieses Reports bleiben gültig; korrigiert wird nichts.</span></div>`;
+}
+function scaleBadge(q, tpl){
+  if(!scaleFor(q,tpl)) return '';
+  const sc=q.sc;
+  return `<span class="qb sb" title="Die absoluten Beträge dieses Templates sind um einen Faktor zu klein`
+       + (sc.f?` (geschätzt ${sc.f})`:'') + `. Verhältniszahlen sind davon nicht betroffen.`
+       + `">${sc.u==='skaliert'?'⚠ Skala':'⚠ Skala?'}</span>`;
+}
 /* Abstufung seit #53: `th` fuehrt die Templates mit mindestens einem
    hoch-Befund. Vorher war jeder Befund gleich stark markiert, weil der
    Schweregrad die Unterscheidung nicht trug. */
@@ -1992,8 +2035,13 @@ async function renderBenchmark(){
   if(prof.trendRow) h+=`<th title="Verlauf über verfügbare Stichtage (${esc((prof.cols.find(x=>x.row===prof.trendRow)||{}).label||'')})">Trend</th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){
-    h+=`<tr${flaggedFor(r.q,prof.tpl)?' class="flagged"':''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
-        ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}${
+    // Skalenbefund markiert die Zeile ebenfalls: in einer Rangliste ABSOLUTER
+    // Beträge ist ein um 10^6 zu kleiner Report der irreführendste Eintrag, den
+    // es gibt — er steht ganz unten und sieht nach einem winzigen Institut aus.
+    const cls=[flaggedFor(r.q,prof.tpl)?'flagged':'', scaleFor(r.q,prof.tpl)?'scaled':'']
+                .filter(Boolean).join(' ');
+    h+=`<tr${cls?` class="${cls}"`:''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
+        ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}${scaleBadge(r.q,prof.tpl)}${
           sortCol?fenceBadge(fmarks.get(r.key), sortCol.label):''}
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;

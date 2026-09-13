@@ -287,6 +287,29 @@ def _rel(path):
         return path
 
 
+SCALE_FLAGS = ROOT / "processed" / "scale_flags.csv"
+
+
+def lade_skalenmarken(pfad=None):
+    """{(lei, scope, refPeriod)} der Reports mit belegtem Skalenfehler (#83).
+
+    Nur die REPORT-Ebene und nur das Urteil `skaliert`. Ein Verdacht reicht
+    nicht, um jemanden aus der Grundgesamtheit zu nehmen, und die
+    Templateebene betrifft ohnehin nur einzelne Zellen.
+
+    Fehlt die Datei, wird nichts ausgeschlossen — dann verhält sich die
+    Prüfung wie vorher, statt stillschweigend die halbe Population zu
+    verlieren.
+    """
+    pfad = pfad or SCALE_FLAGS
+    if not Path(pfad).exists():
+        return set()
+    with Path(pfad).open(encoding="utf-8") as fh:
+        return {(r["lei"], r["scope"], r["refPeriod"]) for r in csv.DictReader(fh)
+                if r.get("ebene") == "report" and r.get("urteil") == "skaliert"
+                and r.get("lei")}
+
+
 def main():
     import duckdb
 
@@ -307,6 +330,31 @@ def main():
     # institutsübergreifend schlicht nicht vergleichbar.
     COMPARABLE = ("CASE WHEN data_type='monetary' THEN fact_value_eur "
                   "ELSE fact_value END")
+    # Skalierte Reports (#83) aus der STATISTIK nehmen, nicht aus der Prüfung.
+    #
+    # Wichtig ist, wem das nützt — nämlich NICHT den ausgeschlossenen Reports.
+    # Ein Skalenfehler macht Werte immer zu klein und landet damit unter dem
+    # Zellmedian, wo `robust_z` bewusst nicht hinsieht (Docstring 1a). Diese
+    # Prüfung kann ihn also gar nicht finden, und das ist Absicht; dafür gibt es
+    # scripts/build_report_scale.py und processed/scale_flags.csv.
+    #
+    # Der Schaden trifft die ANDEREN Institute derselben Zellen: ein Report, der
+    # um 10^6 danebenliegt, weitet die Population genau der Zellen, in denen er
+    # steht, über INCOHERENT_SPREAD. Die Zelle gilt dann als unbrauchbar, und
+    # die Ausreisser aller übrigen Melder darin werden mitgedeckelt.
+    # Gemessen sinken die unbrauchbaren Zellen dadurch von 592 auf 246.
+    #
+    # Ausgeschlossen wird nur aus dem Nenner. Die Reports werden weiterhin
+    # geprüft — sonst verschwänden ihre übrigen Befunde mit dem Skalenurteil.
+    ausschluss = lade_skalenmarken()
+    if ausschluss:
+        print(f"Aus der Zellstatistik ausgeschlossen (#83): {len(ausschluss)} Reports")
+    ausschluss_sql = "TRUE"
+    if ausschluss:
+        paare = ",".join(
+            "('%s','%s','%s')" % (l.replace("'", ""), sc.replace("'", ""), rp)
+            for l, sc, rp in sorted(ausschluss))
+        ausschluss_sql = f"(lei, scope, refPeriod) NOT IN ({paare})"
     cells = {}
     # any_value() -> max(): any_value() greift sich ein beliebiges Element und
     # ist damit zwischen Läufen instabil, sobald eine Zelle mehrere Labels
@@ -320,6 +368,7 @@ def main():
         WHERE {COMPARABLE} IS NOT NULL AND {COMPARABLE} <> 0
           AND cell_row IS NOT NULL AND cell_row <> ''
           AND data_type IN ('monetary', 'percentage', 'decimal', 'integer')
+          AND {ausschluss_sql}
         GROUP BY 1, 2, 3
         HAVING count(DISTINCT lei) >= {MIN_INSTITUTES}
         ORDER BY 1, 2, 3

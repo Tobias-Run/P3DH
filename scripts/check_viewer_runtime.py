@@ -123,6 +123,22 @@ def pruefe():
                       ctx: bd.querySelectorAll('span.ctxline').length,
                       flags: document.querySelectorAll('td.oddcell').length};
             }""")
+            # Skalenbefund (#83): einen markierten Report oeffnen und
+            # nachsehen, ob die Marke im DOM ankommt. Sie ist der einzige
+            # Hinweis darauf, dass die absoluten Betraege dieses Reports nicht
+            # zu gebrauchen sind — bei 50 der 100 markierten Reports meldet die
+            # Plausibilitaetspruefung NULL Befunde, dort steht sonst nichts.
+            skala = pg.evaluate("""async () => {
+              const rep = REPORTS.find(r => r.quality && r.quality.sc);
+              if(!rep) return {keine:1};
+              const p = leiParts(rep.entityID);
+              location.hash = '#r/'+p.lei+'/'+rep.refPeriod+'/'+p.scope;
+              for(let g=0; g<400 && !document.querySelector('.ovsc'); g++)
+                await new Promise(s=>setTimeout(s,10));
+              const n=document.querySelector('.ovsc');
+              return {urteil:rep.quality.sc.u, n:REPORTS.filter(r=>r.quality&&r.quality.sc).length,
+                      text:n?n.textContent.replace(/\\s+/g,' ').trim():''};
+            }""")
             b.close()
     finally:
         srv.shutdown()
@@ -132,6 +148,14 @@ def pruefe():
 
     print(f"  Block '{res['block']}': {res['templates']} Templates · "
           f"{res['tds']} Zellen · {res['ctx']} Kontextzeilen · {res['flags']} markiert")
+    if skala.get("keine"):
+        print("  (kein Report mit Skalenmarke im Index — Prüfung übersprungen)")
+    else:
+        print(f"  Skalenmarke: {skala['n']} Reports · gerendert: "
+              f"{skala['text'][:110] or '— NICHTS —'}")
+        if not skala["text"]:
+            fehler.append("Report mit Skalenbefund (#83) zeigt keine Marke — "
+                          "der Index trägt sie, der Viewer rendert sie nicht")
 
     if seitenfehler:
         fehler.append(f"JavaScript-Fehler beim Rendern: {seitenfehler[0]}")

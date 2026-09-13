@@ -98,7 +98,7 @@ WHERE unit_ambiguous AND template_id='41.00' AND cell_row='0010' AND cell_col='0
 `scripts/check_plausibility.py` misst jeden Wert an der Population **seiner
 eigenen Zelle** (Median/MAD auf log10, monetär in EUR) statt an einer globalen
 Schranke, und ergänzt fachliche Korridore auf abgeleiteten Verhältnissen.
-Ergebnis: 3.224 Befunde in 226 von 553 Reports.
+Ergebnis: 6.030 Befunde in 321 von 882 Reports.
 
 ```sql
 -- Werte in einer Rangliste vorab entschärfen: auffällige Reports markieren
@@ -131,7 +131,15 @@ Drei Dinge, die beim Nachnutzen zählen:
   darunter Rundungsreste wie `1,7·10⁻¹¹` EUR. Die untere Flanke deckt statt-
   dessen `RATIO_RULES` mit fachlichem Wissen ab — dort fällt z. B. auf, wenn
   ein Institut REM1 in Millionen meldet.
-- **`plausibility_cells.csv` mit `status='unbrauchbar'`** (199 Zellen) listet
+
+  ⚠️ **Was das kostet, steht in `processed/scale_flags.csv`** (#83). Ein
+  Skalenfehler macht Werte *immer zu klein* und liegt damit auf genau der
+  Flanke, die hier nicht geprüft wird. Die Deutsche Pfandbriefbank hat am
+  2025-06-30 null Befunde in dieser Datei — bei 67 von 69 um rund 10⁶
+  danebenliegenden Templates und 1.524 von 1.966 prüfbaren Fakten mindestens
+  drei Größenordnungen unter ihrem Zellmedian. Ein leeres Befundprofil ist
+  **kein** Freibrief; die zweite Datei gehört dazugelesen.
+- **`plausibility_cells.csv` mit `status='unbrauchbar'`** (246 Zellen) listet
   Zellen, deren Rumpf über ≥ 6 Größenordnungen streut. Dort ist unklar, welche
   Lesart gilt — kein Institut wird belastet, und diese Zellen taugen auch für
   eigene Auswertungen nicht. Beispiel `09.05` c0020 („Of which exposures in

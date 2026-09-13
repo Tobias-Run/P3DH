@@ -126,6 +126,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/rwa_density.csv` | Institut → RWA-Dichte, Risikomix, Ansatz (SA/IRB) | KM1 `61.00` + OV1 `60.00.A` |
 | `processed/coverage_gap.csv` | beaufsichtigte Einheit → meldet sie, ihre Gruppe, oder niemand | EZB-Liste der beaufsichtigten Einheiten |
 | `processed/eba_reconciliation.csv` | unsere Länderaggregate gegen die EBA-eigenen | EBA Risk Dashboard, Datenanhang |
+| `processed/scale_flags.csv` | Report bzw. Template → Skalenurteil, Signale, geschätzter Faktor | abgeleitet aus dem Bestand |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -417,6 +418,111 @@ Stichprobe, P3DH auf Offenlegung nach CRR Teil 8. Eine Abweichung ist erwartbar;
 deshalb steht `n_institute` in jeder Zeile, und bei `n = 1` misst die Differenz
 die Grundgesamtheit, nicht unsere Rechnung.
 
+### `scale_flags.csv` — Meldungen, deren absolute Beträge um einen Faktor danebenliegen
+
+Je (Institut, Konsolidierungskreis, Stichtag) ein Urteil: `skaliert`,
+`verdacht` oder `unauffaellig`. 54 von 882 Reports sind als skaliert
+eingestuft, 17 als Verdacht; dazu 48 einzelne Templates in sonst sauberen
+Reports.
+
+#### Warum das eine eigene Ebene braucht
+
+Die Plausibilitätsprüfung (`check_plausibility.py`) misst den Abstand **über**
+dem Median der Zellpopulation. Das ist eine bewusste Entscheidung: die untere
+Flanke einer Exposure-Verteilung ist natürlich — sehr viele Institute haben nahe
+null Exposure zu einer gegebenen Kategorie, und ein Betrag von 100 EUR in einer
+Zelle mit Median 10⁸ ist eine kleine Position, kein Meldefehler.
+
+Ein Skalenfehler macht Werte aber **immer zu klein**. Er landet damit genau
+dort, wo nicht hingesehen wird. Für die Deutsche Pfandbriefbank am 2025-06-30
+liegen 1.524 der 1.966 prüfbaren Fakten mindestens drei Größenordnungen unter
+ihrem Zellmedian — und die Prüfung meldet **null** Befunde, bei 67 von 69
+danebenliegenden Templates.
+
+Die Zellprüfung kann diesen Fehler also nicht finden, ohne die Regel aufzugeben,
+die sie überhaupt brauchbar macht. Deshalb eine eigene Ebene.
+
+#### Drei Klassen
+
+| | Ebene | Beispiel | |
+|---|---|---|---|
+| A | Report | Deutsche Pfandbriefbank, Bank of Valletta | fast alle Templates |
+| B | Template | ING Bank Śląski, `67.01.A` | der übrige Report ist sauber |
+| C | Einzelzelle | National Bank of Greece | Sache der Zellprüfung |
+
+Klasse B fällt ohne die Spalte `ebene` durch beide Netze: reportweit ist ING
+Bank Śląski unauffällig (Versatz −0,15), und in den betroffenen Zellen schweigt
+die Zellprüfung.
+
+#### Vier Signale, und warum kein einzelnes reicht
+
+Die TREA-Verteilung ist ein **Tal, keine leere Lücke**: 50 Reports unter 10⁶ EUR
+(fachlich unmöglich), 25 dazwischen, 723 über 10⁸. In der Grauzone kann ein sehr
+kleines Institut echt liegen — dort verlangt das Urteil zwei unabhängige
+Signale.
+
+| Signal | was es misst | n |
+|---|---|---:|
+| `untergrenze` | TREA unter jeder fachlich möglichen Grenze | 50 |
+| `versatz` | Median des Abstands zum Populationsmedian derselben Zelle | 72 |
+| `zeitreihe` | Sprung ≥ 100 gegen den **größten** eigenen Stichtag | 5 |
+| `decimals` | erklärte Meldegenauigkeit, die fast kein Wert erreicht | 10 |
+
+Zwei Signale entscheiden für sich allein: die Untergrenze, und ein Versatz unter
+−4 Größenordnungen. Das zweite ist nötig, weil **84 der 882 Reports gar keinen
+TREA melden** — dort greift die Untergrenze nicht, es bliebe bei einem Signal,
+und die Prüfung erklärte sich für zufrieden, *weil* die Kennzahl fehlt, an der
+sie hängt. Zwei Reports hängen daran: DLR Kredit A/S (598 Werte, Median 23 EUR,
+Maximum 29.712 EUR — bei einer dänischen Realkreditbank) und Banco Santander
+Totta zum 2025-06-30.
+
+Ein widerlegtes Signal wird als widerlegt geführt, nicht gelöscht. Axa banque
+meldet nur KM1 in Millionen und die übrigen 317 monetären Werte in Einheiten;
+die Reportzeile trägt deshalb `untergrenze_widerlegt` und `unauffaellig`,
+während der Befund selbst als Templatezeile auf `61.00` steht.
+
+`zeitreihe` feuert selten, und das hat einen Grund: wer wie Zagrebačka banka an
+allen vier Stichtagen skaliert meldet, hat keinen sauberen eigenen Bezug mehr.
+Solche Fälle fängt die Untergrenze.
+
+Der **Negativfall** ist so wichtig wie die Treffer: Kommuninvest — 3,4 Mrd SEK
+TREA, 355 % CET1, nachprüfbar korrekt für einen Kommunalfinanzierer mit fast nur
+nullgewichteten Aktiva — ist an allen Stichtagen `unauffaellig`. Eine Regel, die
+kleine Häuser systematisch markiert, wäre wertlos.
+
+#### Was mit einem markierten Report NICHT passiert
+
+**Er wird nicht korrigiert.** `decimals_monetary` sagt formal etwas anderes als
+„in Millionen gemeldet"; wer das geraderückt, entscheidet eine Auslegungsfrage
+still und erfindet Daten, falls die Vermutung falsch ist.
+
+**Er wird nicht verworfen.** Ein Verhältnis überlebt einen gleichmäßigen
+Skalenfehler: die RWA-Dichte der Deutschen Pfandbriefbank ist mit 0,43
+**richtig**, obwohl Zähler und Nenner beide zu klein sind. Das Urteil betrifft
+die absoluten Beträge, nicht den Report.
+
+**Und es gilt nicht durchgängig.** Bei der pbb sind 67 von 69 Templates
+skaliert, `64.03.B` und `68.00` aber nicht.
+
+#### Wo die Marke hinwirkt
+
+Zwei Stellen, und beide sind Teil des Befunds:
+
+1. **Aus dem Nenner der Zellstatistik.** Ein um 10⁶ danebenliegender Report
+   weitet die Zellen, in denen er steht, über die Unbrauchbarkeitsschwelle —
+   der Schaden trifft die *anderen* Institute derselben Zellen, deren Ausreißer
+   mitgedeckelt werden. Der Ausschluss senkt die unbrauchbaren Zellen von 592
+   auf 246 und die Median-Rumpfbreite von 3,85 auf 3,15 Größenordnungen.
+   Ausgeschlossen wird nur aus dem Nenner; geprüft werden die Reports weiter.
+2. **In den Viewer.** 50 der 100 markierten Reports haben null
+   Plausibilitätsbefunde — ohne die Marke wären sie dort von einem sauberen
+   Report nicht zu unterscheiden.
+
+`faktor_geschaetzt` ist ein Hinweis, keine Feststellung, und wird nirgends zum
+Rechnen benutzt: gemessen 10³ (62×) und 10⁶ (56×) — plus ein 10⁹ bei Société
+générale `27.02.B`, wo der Sprung real ist, die Zahl als Meldeskala aber
+unplausibel.
+
 ## Bekannte Einschränkungen
 
 Ein Datensatz ohne dokumentierte Fallen wird falsch verwendet. Die folgenden sind
@@ -501,6 +607,14 @@ Der Bestand enthält Meldungen, die offensichtlich falsch skaliert sind (fixe
 Vorstandsvergütung im Billionenbereich, Prozentwerte als Bruchteile). Wir ändern
 sie nicht — sie stehen so in der offiziellen Offenlegung. `quality_profile.csv`
 und `plausibility_findings.csv` sagen, welche und warum.
+
+**Zwei Marken, zwei verschiedene Aussagen — sie sind nicht austauschbar.**
+`plausibility_findings.csv` sagt „*dieser* Wert passt nicht zur Verteilung
+seiner Zellpopulation"; `scale_flags.csv` sagt „die absoluten Beträge *dieses
+Reports* liegen um einen Faktor daneben". Die erste Prüfung kann die zweite Sorte
+gar nicht finden — sie sieht nur nach oben, ein Skalenfehler zeigt nach unten
+(Abschnitt `scale_flags.csv`). Wer allein aus einem leeren Befundprofil auf einen
+sauberen Report schließt, liegt bei 50 von 100 markierten Reports falsch.
 
 ## Reproduktion
 
