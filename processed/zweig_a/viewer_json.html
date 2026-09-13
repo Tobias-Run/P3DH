@@ -873,13 +873,18 @@ function initFilters(){
   document.getElementById('fGsii').addEventListener('change',rerender);
   document.getElementById('reportFilter').addEventListener('input',rerender);
 }
+/* Vier ist keine technische Grenze, sondern eine Lesbarkeitsgrenze: ab der
+   fuenften Spalte wird die Vergleichstabelle auf Telefonbreite unlesbar. Die
+   Konstante steht hier, weil applyShared() dieselbe Grenze auf einen geteilten
+   Link anwenden muss — sonst umgeht ein Link, was die Schaltflaeche verbietet. */
+const PIN_MAX=4;
 function togglePin(key){
   if(PINS.has(key)) PINS.delete(key);
   else{
-    if(PINS.size>=4){ alert('Maximal 4 Reports vergleichen.'); return; }
+    if(PINS.size>=PIN_MAX){ alert('Maximal '+PIN_MAX+' Reports vergleichen.'); return; }
     PINS.add(key);
   }
-  persist(); updateCmpBadge(); renderReportList();
+  persist(); updateCmpBadge(); renderReportList(); shareState();
   if(VIEW==='compare') renderCompare();
 }
 function updateCmpBadge(){
@@ -2099,6 +2104,7 @@ async function renderBenchmark(){
     <div class="bmbar"><label class="ctl">Profil: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
       <label class="ctl" title="Blendet Reports aus, in denen die Plausibilitätsprüfung Werte weit ausserhalb ihrer Zellpopulation gefunden hat. Perzentile bleiben auf der vollen Menge gerechnet."><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> auffällige einklappen${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
+      <button class="ctl" id="bmCsv" title="Die Tabelle in ihrem aktuellen Zustand als CSV. Caveats, Filter und die Ansichts-URL stehen als Kopfkommentar darin, Skalen- und Plausibilitätsbefunde als eigene Spalten — eine nackte Tabelle verlöre genau die Warnungen, die hier danebenstehen.">⭳ CSV</button>
       <span class="meta" style="margin:0">Basis: Template ${esc(prof.tpl)}${bmUsesKm1(prof)?' + 61.00':''}${prof.cols.some(c=>c.kind==='eur')?' · Beträge in Mrd. EUR (EZB-Kurs)':''} · Sidebar-Filter aktiv · Klick auf Spalte sortiert</span></div>
     ${prof.note?`<div class="caveat">ⓘ ${esc(prof.note)}</div>`:''}
     ${barMax.size?`<div class="bmlegend"><span class="k"></span> Balken = Anteil am
@@ -2153,11 +2159,19 @@ async function renderBenchmark(){
   document.getElementById('bmHide').addEventListener('change',e=>{
     BM_HIDEFLAG=e.target.checked; store.bmhide=BM_HIDEFLAG; persist(); renderBenchmark(); shareState();
   });
+  // Exportiert wird, was der Nutzer SIEHT — `rows`, nicht `allRows`. Hat er die
+  // auffaelligen eingeklappt, sind sie auch nicht in der Datei; die Zeilenzahl
+  // im Kopf sagt, wie viele es waren.
+  document.getElementById('bmCsv').onclick=()=>{
+    const name=`p3dh_${prof.tpl.replace(/\./g,'')}_${BMP}_${
+      new Date().toISOString().slice(0,10)}.csv`;
+    ladeHerunter(name, benchmarkCSV(rows, prof));
+  };
   main.querySelectorAll('.dcard').forEach(card=>{
     card.onclick=()=>{
       const k=card.dataset.k;
       if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:-1};
-      renderBenchmark();
+      renderBenchmark(); shareState();
     };
   });
   main.querySelectorAll('th[data-k]').forEach(th=>{
@@ -2165,10 +2179,101 @@ async function renderBenchmark(){
     if(k===bmSort.col) th.querySelector('.dir').textContent=bmSort.dir<0?'▼':'▲';
     th.onclick=()=>{
       if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:(k==='name'||k==='date')?1:-1};
-      renderBenchmark();
+      renderBenchmark(); shareState();
     };
   });
   main.scrollTop=0;
+}
+
+/* ---- CSV-Export (#50) -----------------------------------------------------
+ *
+ * Der Punkt, an dem ein Export gefaehrlich wird: die Tabelle im Viewer steht
+ * zwischen Caveats — Konsolidierungskreis, Framework-Version, strittige
+ * Meldeeinheit, Skalenbefund, Plausibilitaetsbefunde. Eine nackte CSV verliert
+ * genau die und wandert als scheinbar sauberer Datensatz weiter. Wer sie in
+ * drei Wochen wiederfindet, sieht Zahlen ohne jede Einschraenkung.
+ *
+ * Deshalb zwei Dinge:
+ *
+ * 1. Ein KOPFKOMMENTAR mit allen Caveats, die im Viewer danebenstehen, plus
+ *    Profil, Filter, Sortierung, Stand und die Quell-URL mit dem vollen
+ *    Zustand — der Export ist damit auf seine eigene Ansicht zurueckfuehrbar.
+ * 2. Die Marken als SPALTEN, nicht nur als Prosa: `skalenbefund` und
+ *    `plausibilitaet` stehen je Zeile. Ein Caveat im Kopf erklaert die Tabelle,
+ *    aber es sagt nicht, WELCHE Zeile betroffen ist — und wer nach Excel
+ *    kopiert, verliert den Kopf zuerst.
+ *
+ * `#` als Kommentarzeichen, weil pandas (`comment='#'`) und DuckDB
+ * (`read_csv(..., comment='#')`) es lesen, ohne dass jemand die Datei von Hand
+ * aufraeumen muss. Ein Export, den man erst reparieren muss, wird nicht
+ * benutzt.
+ */
+const CSV_CAVEATS = [
+ 'Quelle: oeffentliche Pillar-3-Offenlegungen aus dem EBA Pillar 3 Data Hub ((c) EBA).',
+ 'Rechnungslegung, Konsolidierungskreis (CON/IND), nationale Optionen und',
+ 'Framework-Version (4.1 vs 4.2) unterscheiden sich zwischen Instituten —',
+ 'diese Tabelle ist indikativ und KEINE Aufsichtsmetrik.',
+ 'RF 4.2 umfasst ausschliesslich den Stichtag 2026-03-31: jeder Vergleich',
+ 'zwischen den Meldewerk-Versionen ist zugleich ein Zeitvergleich.',
+ 'Spalte skalenbefund: die absoluten Betraege dieses Reports liegen um einen',
+ 'Faktor daneben (Verhaeltniszahlen bleiben gueltig). Spalte plausibilitaet:',
+ 'Werte ausserhalb der Verteilung ihrer Zellpopulation — kann eine korrekte',
+ 'Besonderheit sein. Beides ist markiert, nicht korrigiert.',
+ 'Fehlende Werte sind LEER und bedeuten "nicht offengelegt oder nicht',
+ 'platzierbar" — nicht null.',
+];
+
+function csvFeld(v){
+  const s = v==null ? '' : String(v);
+  return /[",;\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
+}
+/* Gleitkomma-Rest abschneiden, ohne Inhalt zu verlieren.
+   `387.59999999999997` behauptet 17 signifikante Stellen fuer einen Wert, der
+   im Meldebogen vier hatte — das ist keine Genauigkeit, das ist der
+   Binaerrest von 0,3876*1000. Zwoelf Stellen sind mehr, als irgendeine Zahl
+   in diesem Bestand traegt, und machen die Datei lesbar. */
+const csvZahl=v=>(v==null||!isFinite(v)) ? '' : String(Number(v.toPrecision(12)));
+function benchmarkCSV(rows, prof){
+  const jetzt=new Date().toISOString().slice(0,19)+'Z';
+  const filter=[...shareParams().entries()].map(([k,v])=>k+'='+v).join(' · ')||'keine';
+  const k=['# EBA Pillar 3 Data Hub — Benchmark-Export',
+           '# erzeugt: '+jetzt,
+           '# Profil: '+prof.label+'  (Basis: Template '+prof.tpl+')',
+           '# Filter/Zustand: '+filter,
+           '# Sortierung: '+bmSort.col+(bmSort.dir<0?' absteigend':' aufsteigend'),
+           '# Zeilen: '+rows.length,
+           '# Ansicht: '+location.href,
+           '#'];
+  for(const z of CSV_CAVEATS) k.push('# '+z);
+  k.push('#');
+  if(UA.has(prof.tpl)) k.push(
+    '# ACHTUNG: Template '+prof.tpl+' steht auf der Einheiten-Sperrliste —',
+    '# Institute melden dort nachweislich in verschiedenen Einheiten.',
+    '# Absolutbetraege sind institutsuebergreifend NICHT vergleichbar.','#');
+
+  // `framework` gehoert in die Tabelle, nicht nur in den Caveat. Der Kopf warnt,
+  // dass RF 4.1 und 4.2 nicht vergleichbar sind — ohne die Spalte kann niemand
+  // danach handeln, und eine Warnung ohne Handhabe ist Dekoration.
+  const kopf=['institut','lei','land','groessenklasse','konsolidierung','stichtag',
+              'framework', ...prof.cols.map(c=>c.id), 'skalenbefund','plausibilitaet'];
+  const zeilen=[kopf.map(csvFeld).join(',')];
+  for(const r of rows){
+    const sc=r.q&&r.q.sc;
+    const skal=!sc?'':(sc.u+(sc.f?' '+sc.f:'')+(sc.t.length?' ('+sc.t.join(' ')+')':' (Report)'));
+    const q=r.q&&r.q.n?`${r.q.n} Befund(e)${r.q.t&&r.q.t.length?' in '+r.q.t.join(' '):''}`:'';
+    const rep=byKey(r.key);
+    zeilen.push([r.name, r.lei, r.country, r.itype, r.scope, r.date,
+                 rep?rep.framework:'',
+                 ...prof.cols.map(c=>csvZahl(r[c.id])), skal, q]
+                .map(csvFeld).join(','));
+  }
+  return k.join('\n')+'\n'+zeilen.join('\n')+'\n';
+}
+function ladeHerunter(name, text){
+  const b=new Blob([text], {type:'text/csv;charset=utf-8'});
+  const u=URL.createObjectURL(b), a=document.createElement('a');
+  a.href=u; a.download=name; document.body.appendChild(a); a.click();
+  a.remove(); setTimeout(()=>URL.revokeObjectURL(u), 1000);
 }
 
 /* ================= compare view ================= */
@@ -2292,7 +2397,16 @@ function shareParams(){
     if(BMP!=='km1')  p.set('prof', BMP);
     if(BM_PCT)       p.set('pct','1');
     if(BM_HIDEFLAG)  p.set('hide','1');
+    // Sortierung gehoert dazu: WER die Liste anfuehrt, ist die halbe Aussage
+    // eines Benchmarks. Ein Link ohne sie zeigt dem Empfaenger eine andere
+    // Reihenfolge als dem Absender — und damit eine andere Spitze.
+    const prof=bmProf(), s=prof&&bmSort;
+    if(s && prof && (s.col!==prof.defaultSort.col || s.dir!==prof.defaultSort.dir))
+      p.set('sort', s.col + (s.dir<0 ? '.desc' : '.asc'));
   }
+  // Die Auswahl (#50). Ohne sie laesst sich ein Vergleich nicht weitergeben —
+  // man kann nur AUFZAEHLEN, welche vier Reports der andere anpinnen soll.
+  if(PINS.size) p.set('pin', [...PINS].sort().join(','));
   return p;
 }
 /* Nur der Routenteil, ohne Parameter — die Basis, an die angehaengt wird. */
@@ -2324,6 +2438,24 @@ function applyShared(){
   if(p.has('prof')) BMP=p.get('prof');
   if(p.has('pct'))  BM_PCT  = p.get('pct')==='1';
   if(p.has('hide')) BM_HIDEFLAG = p.get('hide')==='1';
+  if(p.has('sort')){
+    const [col,dir]=p.get('sort').split('.');
+    // Eine Spalte, die dieses Profil nicht kennt (veralteter Link, anderes
+    // Profil), wird verworfen — sonst sortierte die Tabelle nach nichts und
+    // saehe aus wie unsortiert, ohne dass jemand den Grund saehe.
+    const prof=bmProf();
+    if(prof && prof.cols.some(c=>c.id===col))
+      bmSort={col, dir: dir==='desc' ? -1 : 1};
+  }
+  if(p.has('pin')){
+    // Nur Schluessel, die es im Bestand wirklich gibt: ein Link aus einer
+    // aelteren Welle nennt womoeglich Reports, die hier nicht stehen. Sie
+    // stillschweigend zu behalten hiesse, einen leeren Vergleich zu zeigen.
+    const wollte=p.get('pin').split(',').filter(Boolean);
+    const gibt=wollte.filter(k=>byKey(k));
+    PINS=new Set(gibt.slice(0, PIN_MAX));
+    store.pins=[...PINS]; persist();
+  }
 }
 function setTabs(){
   document.getElementById('tabReports').classList.toggle('on',VIEW==='reports');

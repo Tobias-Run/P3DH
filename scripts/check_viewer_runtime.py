@@ -28,6 +28,7 @@ import functools
 import gzip
 import http.server
 import os
+import re
 import socketserver
 import sys
 import threading
@@ -76,6 +77,73 @@ def _serve():
     srv = socketserver.TCPServer(("", PORT), h)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     return srv
+
+
+def pruefe_export(res):
+    """Der Export (#50) — und zwar sein INHALT, nicht sein Vorhandensein.
+
+    Eine CSV ohne die Caveats, die im Viewer danebenstehen, ist gefährlicher als
+    keine: sie wandert als scheinbar sauberer Datensatz weiter. Geprüft wird
+    deshalb, dass die Warnungen drin sind, dass die Marken je ZEILE stehen (ein
+    Kopfkommentar sagt nicht, welche Zeile betroffen ist) und dass die Datei
+    sich mit `comment='#'` wieder einlesen lässt.
+    """
+    import csv as _csv
+    import io
+
+    fehler = []
+    text = res.get("csv") or ""
+    if not res.get("knopf"):
+        fehler.append("kein Export-Knopf in der Benchmark-Leiste (#50)")
+    if not text:
+        fehler.append("benchmarkCSV() liefert nichts")
+        return fehler
+
+    kopf = [z for z in text.splitlines() if z.startswith("#")]
+    daten = [z for z in text.splitlines() if not z.startswith("#")]
+    print(f"  CSV-Export: {len(kopf)} Kommentarzeilen · {len(daten)-1} Datenzeilen")
+
+    for pflicht, was in [("Aufsichtsmetrik", "der Vergleichbarkeits-Caveat"),
+                         ("nicht null", "der Hinweis „Fehlt ≠ Null\""),
+                         ("skalenbefund", "die Erklärung der Skalenspalte"),
+                         ("Ansicht: http", "die Rück-URL auf die eigene Ansicht"),
+                         ("Filter/Zustand", "der Filterzustand")]:
+        if pflicht not in text:
+            fehler.append(f"CSV-Export ohne {was}")
+
+    try:
+        zeilen = list(_csv.DictReader(io.StringIO("\n".join(daten))))
+    except Exception as e:                       # noqa: BLE001
+        fehler.append(f"CSV nicht lesbar: {e}")
+        return fehler
+    if not zeilen:
+        fehler.append("CSV-Export ohne Datenzeilen")
+        return fehler
+    fehlend = [s for s in ("institut", "lei", "stichtag", "framework",
+                           "skalenbefund", "plausibilitaet") if s not in zeilen[0]]
+    for spalte in fehlend:
+        fehler.append(f"CSV-Export ohne Spalte '{spalte}' — ein Caveat im Kopf "
+                      "sagt nicht, WELCHE Zeile betroffen ist")
+    if None in zeilen[0]:
+        # DictReader legt ueberzaehlige Felder unter None ab: die Kopfzeile hat
+        # weniger Spalten als die Datenzeilen. Ohne diesen Zweig stuerzt die
+        # Zahlenpruefung unten ab, statt den Fehler zu melden — ein Absturz ist
+        # kein Befund, er sieht nur aus wie einer.
+        fehler.append("CSV-Kopfzeile und Datenzeilen haben verschiedene Spaltenzahlen")
+        return fehler
+    # Gleitkomma-Rest: `387.59999999999997` behauptet 17 SIGNIFIKANTE Stellen
+    # fuer einen Wert, der im Meldebogen vier hatte. Gezaehlt werden
+    # signifikante Stellen, nicht Nachkommastellen — `0.00057464628999` hat 14
+    # Nachkommastellen und ist mit 8 signifikanten voellig in Ordnung.
+    def signifikant(w):
+        z = w.lstrip("-").replace(".", "").lstrip("0")
+        return len(z.rstrip("0")) if z else 0
+    lang = [(s, w) for z in zeilen for s, w in z.items()
+            if w and re.fullmatch(r"-?\d*\.?\d+", w) and signifikant(w) > 12]
+    if lang:
+        fehler.append(f"{len(lang)} Zahlen im Export mit Gleitkomma-Rest, z. B. "
+                      f"{lang[0][0]}={lang[0][1]} — das ist Binärrest, keine Genauigkeit")
+    return fehler
 
 
 def pruefe():
@@ -184,6 +252,22 @@ def pruefe():
                 tplTrifft: barErlaubt({tpl:'61.00'}, tplSkal),
                 tplDaneben: barErlaubt({tpl:'60.00.A'}, tplSkal),
                 strittig: ua ? barErlaubt({tpl:bmAll()[ua].tpl}, sauber) : null};
+              // CSV-Export (#50): den Text direkt erzeugen, nicht den Download
+              // anstossen — geprueft wird der INHALT, und ein Klick lieferte im
+              // Headless-Browser nur eine Datei, die niemand liest.
+              sel.value='km1'; sel.dispatchEvent(new Event('change'));
+              await new Promise(s=>setTimeout(s,600));
+              const p2=bmAll()['km1'];
+              const zeilen2=benchmarkRows();
+              res.csv=benchmarkCSV(zeilen2.slice(0,50), p2);
+              res.knopf=!!document.getElementById('bmCsv');
+              // Teilbarer Zustand (#50): Sortierung und Auswahl im Hash.
+              const erste=REPORTS[0], zweite=REPORTS[1];
+              PINS=new Set([repKey(erste), repKey(zweite)]);
+              bmSort={col:'cet1', dir:1};
+              const par=shareParams();
+              res.teilbar={pin:par.get('pin')||'', sort:par.get('sort')||''};
+              PINS=new Set();
               return res;
             }""")
             b.close()
@@ -236,6 +320,18 @@ def pruefe():
                           "Template steht auf der Einheiten-Sperrliste, ein "
                           "Längenvergleich behauptet dort Vergleichbarkeit, die es "
                           "nicht gibt")
+
+    fehler += pruefe_export(balken)
+
+    t = balken.get("teilbar") or {}
+    print(f"  Teilbarer Zustand: pin='{t.get('pin','')}' sort='{t.get('sort','')}'")
+    if not t.get("pin"):
+        fehler.append("die Auswahl (#50) landet nicht im Hash — ein Vergleich "
+                      "lässt sich dann nur beschreiben, nicht weitergeben")
+    if not t.get("sort"):
+        fehler.append("die Sortierung (#50) landet nicht im Hash — der Empfänger "
+                      "eines Links sieht eine andere Reihenfolge und damit eine "
+                      "andere Spitze")
 
     if seitenfehler:
         fehler.append(f"JavaScript-Fehler beim Rendern: {seitenfehler[0]}")
