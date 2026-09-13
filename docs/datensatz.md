@@ -127,6 +127,8 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/coverage_gap.csv` | beaufsichtigte Einheit → meldet sie, ihre Gruppe, oder niemand | EZB-Liste der beaufsichtigten Einheiten |
 | `processed/eba_reconciliation.csv` | unsere Länderaggregate gegen die EBA-eigenen | EBA Risk Dashboard, Datenanhang |
 | `processed/scale_flags.csv` | Report bzw. Template → Skalenurteil, Signale, geschätzter Faktor | abgeleitet aus dem Bestand |
+| `processed/omission_profile.csv` | Report → was wird weggelassen, gemessen an den direkten Peers | `filing_indicators.csv` |
+| `processed/omission_templates.csv` | Klasse × Stichtag × Template → Offenlegungsquote der Peer-Gruppe | ebenda |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -522,6 +524,98 @@ Zwei Stellen, und beide sind Teil des Befunds:
 Rechnen benutzt: gemessen 10³ (62×) und 10⁶ (56×) — plus ein 10⁹ bei Société
 générale `27.02.B`, wo der Sprung real ist, die Zahl als Meldeskala aber
 unplausibel.
+
+### `omission_profile.csv` — was Institute nach Art. 432 weglassen
+
+Art. 432 CRR erlaubt, nicht wesentliche sowie proprietäre oder vertrauliche
+Angaben wegzulassen. Zu diesem Ermessensspielraum gibt es Leitlinien, aber keine
+auffindbare empirische Arbeit — weil man je Institut wissen müsste, was es
+*weglässt*, und das aus einem PDF nicht rekonstruierbar ist.
+
+`processed/filing_indicators.csv` ist genau diese Aussage, vom Melder selbst,
+Template für Template: 64.898 Zeilen, 23.525 „offengelegt", 41.373 „nicht
+offengelegt".
+
+#### Die naheliegende Kennzahl misst den Meldekalender
+
+| Stichtag | offengelegt |
+|---|---:|
+| 2025-06-30 | 35,4 % |
+| 2025-09-30 | 11,9 % |
+| 2025-12-31 | 45,1 % |
+| 2026-03-31 | 12,9 % |
+
+Das ist die Frequenz nach Art. 433a–c, kein Verhalten. `19.03` (OR3) steht an
+drei Stichtagen bei rund 2 % und am 2025-12-31 bei 53,9 % — jährlich. `74.00`
+(LIQ2) bei 62,8 / 2,5 / 62,9 / 2,8 — halbjährlich. `61.00` (KM1) bei rund 95 %
+an jedem Stichtag — vierteljährlich. Und ungeschichtet misst dieselbe Zahl
+zusätzlich die Institutsgröße: ein kleines Haus lässt mehr weg, weil es weniger
+hat.
+
+#### Gemessen wird gegen die Population derselben Koordinate
+
+Dieselbe Konstruktion wie bei der Zellprüfung (#17). Die Koordinate ist
+(Größenklasse, Stichtag, Template) — sie absorbiert Kalender **und** Größe. Je
+Koordinate wird die Offenlegungsquote der Peer-Gruppe gemessen (n ≥ 20) und in
+drei Bänder gelegt:
+
+| Band | Quote der Peers | n Koordinaten |
+|---|---|---:|
+| `erwartbar` | ≥ 80 % | 124 |
+| `uneinheitlich` | 20–80 % | 254 |
+| `untypisch` | < 20 % | 367 |
+
+Gezählt wird nur im Band `erwartbar`: **ein Institut lässt etwas weg, das seine
+direkten Peers am selben Stichtag offenlegen.** Der breite Mittelbau bekommt ein
+eigenes Band, statt an einer 50-%-Schwelle in eines der anderen gezwungen zu
+werden — eine Erwartung, die die Daten nicht hergeben, wäre erfunden.
+
+Das Ergebnis ist konservativ: von 850 prüfbaren Reports weichen **596 gar nicht
+ab**, der Median liegt bei 0, p90 bei 0,167.
+
+#### Drei Vorbehalte, und alle drei stehen in Spalten
+
+**1. Die Hälfte der Abweichungen ist eine gemeinsame Regel, kein Ermessen.**
+Sechs Institute in vier Ländern lassen *exakt* dieselben elf Templates weg
+(`02.00|24.00|25.00|60.00|66.01|70.00|71.00|72.00|73.00|74.00|90.01`) —
+darunter J.P. Morgan SE, BofA Securities Europe, Citigroup Global Markets Europe
+und BNY Mellon. Unabhängige Einzelentscheidungen sehen anders aus; das ist eine
+feinere Proportionalitätsstufe, die `institution_type` nicht abbildet. 48 % der
+abweichenden Reports teilen ihre Auslassungsmenge mit mindestens zwei anderen.
+`n_signatur_geteilt` hält das je Zeile fest.
+
+**2. Acht Deklarationen widersprechen ihrer eigenen Lieferung.** PPF Financial
+Holdings deklariert am 2025-12-31 *jedes* Template als nicht offengelegt und
+liefert Daten für 46; OTP Luxembourg für 25. Das ist ein Deklarationsfehler, und
+mit einer Quote von 1,0 stünden sie an der Spitze jeder Rangliste.
+`deklaration = unbrauchbar` nimmt sie aus allen Kennzahlen.
+
+**3. Nichtanwendbarkeit ist nicht sauber abgetrennt.** Der Filing-Indicator sagt
+„nicht offengelegt", nicht warum. Die Peer-Gruppe drückt den Anteil, den
+Geschäftsmodelle erklären, sie eliminiert ihn nicht. `n_gegen_erwartung` ist
+deshalb eine **Obergrenze** für Ermessensausübung, keine Messung davon — die
+Spalte heißt nicht `n_ermessen`.
+
+#### Die Gegenprobe gegen die Lieferung, in zwei getrennten Spalten
+
+| | Zeilen | zuschreibbar? |
+|---|---:|---|
+| `n_false_mit_daten` — „nicht offengelegt", aber Fakten vorhanden | 175 | **ja** — liegen Fakten vor, wurden sie gemeldet |
+| `n_true_ohne_daten` — „offengelegt", aber kein Fakt im Bestand | 2.001 | **nein** — kann auch eine Lücke unserer Platzierung sein |
+
+In einer Spalte addiert wären 175 belastbare Zeilen unter 2.001 unzuschreibbaren
+verschwunden.
+
+#### Art. 432(2) kennt eine Ausnahme von der Ausnahme
+
+Die Angaben nach Art. 437 (Eigenmittel: CC1 `66.01`, CC2 `66.02`) und Art. 450
+(Vergütung: REM1–REM5) sind von der Proprietäts-Ausnahme **ausgenommen** — eine
+Auslassung dort kann sich nicht auf Vertraulichkeit stützen. Gemessen: 95 solche
+Auslassungen, `n_art432_2` führt sie getrennt.
+
+⚠️ **Auslassung ist kein Fehlverhalten.** Art. 432 ist eine ausdrückliche
+Erlaubnis. Die Zahl sagt „hier weicht ein Institut von seinen Peers ab", nicht
+„hier wird etwas verschwiegen".
 
 ## Bekannte Einschränkungen
 

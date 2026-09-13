@@ -277,6 +277,14 @@
   .pctb{display:block;position:relative;height:9px;margin-top:1px;background:var(--soft);
         border-radius:2px;overflow:hidden;min-width:52px}
   .pctf{display:block;height:100%;background:var(--blue);opacity:.35}
+  /* Groessenbalken (#49). Optisch klar vom Perzentilband getrennt: dort eine
+     Spur mit Marke und Beschriftung, hier ein schlichter Balken ohne Spur —
+     „wie gross" und „wo in der Gruppe" duerfen nicht gleich aussehen. */
+  .szb{display:block;height:4px;margin-top:2px;background:transparent}
+  .szf{display:block;height:100%;background:var(--ink);opacity:.28;border-radius:2px}
+  .bmlegend{font-size:11px;color:var(--muted);margin:.25rem 0 .1rem}
+  .bmlegend .k{display:inline-block;width:26px;height:4px;background:var(--ink);
+               opacity:.28;border-radius:2px;vertical-align:middle;margin:0 .25rem}
   .pctb i{position:absolute;inset:0;font-style:normal;font-size:8.5px;line-height:9px;
           text-align:right;padding-right:3px;color:var(--muted);font-variant-numeric:tabular-nums}
   /* Verteilung über der Rangliste (#48, R3) */
@@ -865,13 +873,18 @@ function initFilters(){
   document.getElementById('fGsii').addEventListener('change',rerender);
   document.getElementById('reportFilter').addEventListener('input',rerender);
 }
+/* Vier ist keine technische Grenze, sondern eine Lesbarkeitsgrenze: ab der
+   fuenften Spalte wird die Vergleichstabelle auf Telefonbreite unlesbar. Die
+   Konstante steht hier, weil applyShared() dieselbe Grenze auf einen geteilten
+   Link anwenden muss — sonst umgeht ein Link, was die Schaltflaeche verbietet. */
+const PIN_MAX=4;
 function togglePin(key){
   if(PINS.has(key)) PINS.delete(key);
   else{
-    if(PINS.size>=4){ alert('Maximal 4 Reports vergleichen.'); return; }
+    if(PINS.size>=PIN_MAX){ alert('Maximal '+PIN_MAX+' Reports vergleichen.'); return; }
     PINS.add(key);
   }
-  persist(); updateCmpBadge(); renderReportList();
+  persist(); updateCmpBadge(); renderReportList(); shareState();
   if(VIEW==='compare') renderCompare();
 }
 function updateCmpBadge(){
@@ -1923,7 +1936,78 @@ function gateNote(prof, out, total){
   }
   return h+'</div>';
 }
-function bmCell(c,v,pinfo){
+/* ---- Groessenbalken in der Zelle (#49, R4) --------------------------------
+ *
+ * Zwei verschiedene Fragen, zwei verschiedene Bilder — und sie duerfen nicht
+ * gleich aussehen:
+ *
+ *   „Wie GROSS ist das?"   -> Balken, linear gegen das Spaltenmaximum.
+ *   „Wo STEHT das?"        -> Perzentilmarke in der Peer-Gruppe (pctBadge).
+ *
+ * Der Balken ist bewusst LINEAR und nicht logarithmisch. Die Verteilung der
+ * Betraege ist extrem schief — der Median-TREA liegt bei rund einem Fuenfzigstel
+ * des groessten —, und ein Logbalken wuerde das kaschieren: er machte aus
+ * Faktor 50 optisch Faktor 2 und schmeichelte damit den kleinen Haeusern. Dass
+ * die meisten Balken kurz sind, IST das Ergebnis.
+ *
+ * Nur fuer Groessenspalten. Fuer eine Quote waere ein Balken gegen das Maximum
+ * sinnlos: 15 % CET1 sind nicht „ein Drittel von 45 %", sie sind ein eigener
+ * Wert. Dort steht die Perzentilmarke.
+ *
+ * KEIN Rot/Gruen. Es sind Offenlegungsdaten, keine Bewertung — eine niedrige
+ * Quote ist nicht „schlecht". Und die Laenge traegt das Signal, nicht die
+ * Farbe: wer keine Farben unterscheidet, liest den Balken trotzdem, und die
+ * Zahl steht ohnehin daneben.
+ *
+ * Zwei Faelle, in denen der Balken UNTERDRUECKT wird, weil er dort das
+ * Gegenteil von dem sagt, was gilt:
+ *
+ *   1. Strittige Einheit (#9, `41.00` und `45.00.A`): dort melden Institute
+ *      nachweislich in verschiedenen Einheiten. Ein Laengenvergleich ueber
+ *      Institute hinweg behauptet Vergleichbarkeit, die es nicht gibt.
+ *   2. Skalenbefund (#83): ein Report, dessen Betraege um 10^6 zu klein sind,
+ *      bekaeme einen Balken nahe null — und saehe damit aus wie ein winziges
+ *      Institut statt wie ein Meldefehler. Das ist die irrefuehrendste Marke,
+ *      die diese Tabelle vergeben koennte.
+ */
+const BAR_KINDS = new Set(['eur','eurPlain','num']);
+
+function barBasis(rows, cols){
+  /* Maximum je Groessenspalte ueber die SICHTBAREN Zeilen. Die Filter sind Teil
+     der Frage: wer auf Schweden filtert, will schwedische Groessen vergleichen,
+     nicht gegen BNP Paribas. */
+  const out=new Map();
+  for(const c of cols){
+    if(!BAR_KINDS.has(c.kind)) continue;
+    let mx=0;
+    for(const r of rows){ const v=r[c.id]; if(v!=null&&isFinite(v)&&v>mx) mx=v; }
+    if(mx>0) out.set(c.id, mx);
+  }
+  return out;
+}
+/* Traegt dieser Report ueberhaupt vergleichbare Absolutbetraege?
+ *
+ * Die Sperrlisten-Bedingung feuert HEUTE nie: das einzige Profil auf einem
+ * strittigen Template (`esg` auf 41.00) hat ausschliesslich Quotenspalten, und
+ * die bekommen ohnehin keinen Balken. Sie steht trotzdem hier — bekaeme dieses
+ * Profil eine Betragsspalte, waere der Balken sofort falsch, und niemand
+ * saehe es. Geprueft wird sie deshalb als FUNKTION (check_viewer_runtime.py)
+ * und nicht an der gerenderten Tabelle; ein Test an der Seite waere gruen,
+ * ohne irgendetwas zu belegen. */
+function barErlaubt(prof, row){
+  if(UA.has(prof.tpl)) return false;                    // strittige Einheit (#9)
+  const sc=row.q && row.q.sc;                           // Skalenbefund (#83)
+  return !(sc && (!sc.t.length || sc.t.includes(prof.tpl)));
+}
+function sizeBar(v, max){
+  if(!(max>0) || v==null || !isFinite(v) || v<=0) return '';
+  const pct=Math.max(1, Math.min(100, v/max*100));
+  return `<span class="szb" aria-hidden="true" title="${esc(nf(pct,0,1))}${NBSP}% des`
+       + ` groessten Werts dieser Spalte in der aktuellen Auswahl">`
+       + `<span class="szf" style="width:${pct}%"></span></span>`;
+}
+
+function bmCell(c,v,pinfo,barMax){
   if(v==null) return '<td class="empty"></td>';
   let txt;
   if(c.kind==='eur') txt=nf(v,0,1);
@@ -1931,7 +2015,8 @@ function bmCell(c,v,pinfo){
   else if(c.kind==='pp') txt=nf(v,1)+NBSP+'pp';
   else if(c.kind==='num') txt=nf(v,0,0);
   else txt=nf(v,1)+NBSP+'%';
-  return `<td class="num">${zdash(txt)}${pinfo?pctBadge(pinfo):''}</td>`;
+  return `<td class="num">${zdash(txt)}${barMax?sizeBar(v,barMax):''}`
+       + `${pinfo?pctBadge(pinfo):''}</td>`;
 }
 /* Eine Karte je Profilspalte, ueber der Rangliste. Klick setzt die Sortierung —
    damit fuehrt die Verteilung zur Liste und nicht umgekehrt. */
@@ -2006,6 +2091,10 @@ async function renderBenchmark(){
     `<option value="${k}"${k===BMP?' selected':''}>${esc(p.label)}</option>`).join('');
   const pmaps=new Map();
   if(BM_PCT) for(const c of prof.cols) pmaps.set(c.id,percentileMap(allRows,c.id));
+  // Bezug der Groessenbalken (#49): das Maximum der SICHTBAREN Zeilen. Berechnet
+  // auf `rows`, nicht auf `allRows` — blendet jemand die auffaelligen Reports
+  // aus, soll der Balken sich auf das beziehen, was er sieht.
+  const barMax=barBasis(rows, prof.cols);
   // Randwert-Marker nur fuer die Spalte, nach der gerade sortiert wird: genau
   // die entscheidet, wer die Liste anfuehrt. Bei Sortierung nach Name/Stichtag
   // gibt es keine Metrik und damit keinen Marker.
@@ -2015,8 +2104,13 @@ async function renderBenchmark(){
     <div class="bmbar"><label class="ctl">Profil: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
       <label class="ctl" title="Blendet Reports aus, in denen die Plausibilitätsprüfung Werte weit ausserhalb ihrer Zellpopulation gefunden hat. Perzentile bleiben auf der vollen Menge gerechnet."><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> auffällige einklappen${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
+      <button class="ctl" id="bmCsv" title="Die Tabelle in ihrem aktuellen Zustand als CSV. Caveats, Filter und die Ansichts-URL stehen als Kopfkommentar darin, Skalen- und Plausibilitätsbefunde als eigene Spalten — eine nackte Tabelle verlöre genau die Warnungen, die hier danebenstehen.">⭳ CSV</button>
       <span class="meta" style="margin:0">Basis: Template ${esc(prof.tpl)}${bmUsesKm1(prof)?' + 61.00':''}${prof.cols.some(c=>c.kind==='eur')?' · Beträge in Mrd. EUR (EZB-Kurs)':''} · Sidebar-Filter aktiv · Klick auf Spalte sortiert</span></div>
     ${prof.note?`<div class="caveat">ⓘ ${esc(prof.note)}</div>`:''}
+    ${barMax.size?`<div class="bmlegend"><span class="k"></span> Balken = Anteil am
+      grössten Wert der Spalte in der aktuellen Auswahl, linear. Kein Werturteil —
+      und keiner bei strittiger Meldeeinheit oder Skalenbefund, dort wäre die Länge
+      eine Behauptung über Vergleichbarkeit, die nicht gilt.</div>`:''}
     <div class="caveat">⚠ Vergleichbarkeits-Caveat: Rechnungslegung, Konsolidierungskreis (CON/IND),
     nationale Optionen und Framework-Version (4.1/4.2) unterscheiden sich — Ranglisten sind indikativ,
     keine Aufsichtsmetrik. Quelle: öffentliche Pillar-3-Meldungen (© EBA).</div>
@@ -2045,7 +2139,10 @@ async function renderBenchmark(){
           sortCol?fenceBadge(fmarks.get(r.key), sortCol.label):''}
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;
-    for(const c of prof.cols) h+=bmCell(c,r[c.id],BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null);
+    const balken=barErlaubt(prof, r);
+    for(const c of prof.cols)
+      h+=bmCell(c, r[c.id], BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null,
+                balken?barMax.get(c.id):null);
     if(prof.trendRow) h+=`<td>${r._trend?sparkline(r._trend,null,null,r._breaks):''}</td>`;
     h+='</tr>';
   }
@@ -2062,11 +2159,19 @@ async function renderBenchmark(){
   document.getElementById('bmHide').addEventListener('change',e=>{
     BM_HIDEFLAG=e.target.checked; store.bmhide=BM_HIDEFLAG; persist(); renderBenchmark(); shareState();
   });
+  // Exportiert wird, was der Nutzer SIEHT — `rows`, nicht `allRows`. Hat er die
+  // auffaelligen eingeklappt, sind sie auch nicht in der Datei; die Zeilenzahl
+  // im Kopf sagt, wie viele es waren.
+  document.getElementById('bmCsv').onclick=()=>{
+    const name=`p3dh_${prof.tpl.replace(/\./g,'')}_${BMP}_${
+      new Date().toISOString().slice(0,10)}.csv`;
+    ladeHerunter(name, benchmarkCSV(rows, prof));
+  };
   main.querySelectorAll('.dcard').forEach(card=>{
     card.onclick=()=>{
       const k=card.dataset.k;
       if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:-1};
-      renderBenchmark();
+      renderBenchmark(); shareState();
     };
   });
   main.querySelectorAll('th[data-k]').forEach(th=>{
@@ -2074,10 +2179,101 @@ async function renderBenchmark(){
     if(k===bmSort.col) th.querySelector('.dir').textContent=bmSort.dir<0?'▼':'▲';
     th.onclick=()=>{
       if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:(k==='name'||k==='date')?1:-1};
-      renderBenchmark();
+      renderBenchmark(); shareState();
     };
   });
   main.scrollTop=0;
+}
+
+/* ---- CSV-Export (#50) -----------------------------------------------------
+ *
+ * Der Punkt, an dem ein Export gefaehrlich wird: die Tabelle im Viewer steht
+ * zwischen Caveats — Konsolidierungskreis, Framework-Version, strittige
+ * Meldeeinheit, Skalenbefund, Plausibilitaetsbefunde. Eine nackte CSV verliert
+ * genau die und wandert als scheinbar sauberer Datensatz weiter. Wer sie in
+ * drei Wochen wiederfindet, sieht Zahlen ohne jede Einschraenkung.
+ *
+ * Deshalb zwei Dinge:
+ *
+ * 1. Ein KOPFKOMMENTAR mit allen Caveats, die im Viewer danebenstehen, plus
+ *    Profil, Filter, Sortierung, Stand und die Quell-URL mit dem vollen
+ *    Zustand — der Export ist damit auf seine eigene Ansicht zurueckfuehrbar.
+ * 2. Die Marken als SPALTEN, nicht nur als Prosa: `skalenbefund` und
+ *    `plausibilitaet` stehen je Zeile. Ein Caveat im Kopf erklaert die Tabelle,
+ *    aber es sagt nicht, WELCHE Zeile betroffen ist — und wer nach Excel
+ *    kopiert, verliert den Kopf zuerst.
+ *
+ * `#` als Kommentarzeichen, weil pandas (`comment='#'`) und DuckDB
+ * (`read_csv(..., comment='#')`) es lesen, ohne dass jemand die Datei von Hand
+ * aufraeumen muss. Ein Export, den man erst reparieren muss, wird nicht
+ * benutzt.
+ */
+const CSV_CAVEATS = [
+ 'Quelle: oeffentliche Pillar-3-Offenlegungen aus dem EBA Pillar 3 Data Hub ((c) EBA).',
+ 'Rechnungslegung, Konsolidierungskreis (CON/IND), nationale Optionen und',
+ 'Framework-Version (4.1 vs 4.2) unterscheiden sich zwischen Instituten —',
+ 'diese Tabelle ist indikativ und KEINE Aufsichtsmetrik.',
+ 'RF 4.2 umfasst ausschliesslich den Stichtag 2026-03-31: jeder Vergleich',
+ 'zwischen den Meldewerk-Versionen ist zugleich ein Zeitvergleich.',
+ 'Spalte skalenbefund: die absoluten Betraege dieses Reports liegen um einen',
+ 'Faktor daneben (Verhaeltniszahlen bleiben gueltig). Spalte plausibilitaet:',
+ 'Werte ausserhalb der Verteilung ihrer Zellpopulation — kann eine korrekte',
+ 'Besonderheit sein. Beides ist markiert, nicht korrigiert.',
+ 'Fehlende Werte sind LEER und bedeuten "nicht offengelegt oder nicht',
+ 'platzierbar" — nicht null.',
+];
+
+function csvFeld(v){
+  const s = v==null ? '' : String(v);
+  return /[",;\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
+}
+/* Gleitkomma-Rest abschneiden, ohne Inhalt zu verlieren.
+   `387.59999999999997` behauptet 17 signifikante Stellen fuer einen Wert, der
+   im Meldebogen vier hatte — das ist keine Genauigkeit, das ist der
+   Binaerrest von 0,3876*1000. Zwoelf Stellen sind mehr, als irgendeine Zahl
+   in diesem Bestand traegt, und machen die Datei lesbar. */
+const csvZahl=v=>(v==null||!isFinite(v)) ? '' : String(Number(v.toPrecision(12)));
+function benchmarkCSV(rows, prof){
+  const jetzt=new Date().toISOString().slice(0,19)+'Z';
+  const filter=[...shareParams().entries()].map(([k,v])=>k+'='+v).join(' · ')||'keine';
+  const k=['# EBA Pillar 3 Data Hub — Benchmark-Export',
+           '# erzeugt: '+jetzt,
+           '# Profil: '+prof.label+'  (Basis: Template '+prof.tpl+')',
+           '# Filter/Zustand: '+filter,
+           '# Sortierung: '+bmSort.col+(bmSort.dir<0?' absteigend':' aufsteigend'),
+           '# Zeilen: '+rows.length,
+           '# Ansicht: '+location.href,
+           '#'];
+  for(const z of CSV_CAVEATS) k.push('# '+z);
+  k.push('#');
+  if(UA.has(prof.tpl)) k.push(
+    '# ACHTUNG: Template '+prof.tpl+' steht auf der Einheiten-Sperrliste —',
+    '# Institute melden dort nachweislich in verschiedenen Einheiten.',
+    '# Absolutbetraege sind institutsuebergreifend NICHT vergleichbar.','#');
+
+  // `framework` gehoert in die Tabelle, nicht nur in den Caveat. Der Kopf warnt,
+  // dass RF 4.1 und 4.2 nicht vergleichbar sind — ohne die Spalte kann niemand
+  // danach handeln, und eine Warnung ohne Handhabe ist Dekoration.
+  const kopf=['institut','lei','land','groessenklasse','konsolidierung','stichtag',
+              'framework', ...prof.cols.map(c=>c.id), 'skalenbefund','plausibilitaet'];
+  const zeilen=[kopf.map(csvFeld).join(',')];
+  for(const r of rows){
+    const sc=r.q&&r.q.sc;
+    const skal=!sc?'':(sc.u+(sc.f?' '+sc.f:'')+(sc.t.length?' ('+sc.t.join(' ')+')':' (Report)'));
+    const q=r.q&&r.q.n?`${r.q.n} Befund(e)${r.q.t&&r.q.t.length?' in '+r.q.t.join(' '):''}`:'';
+    const rep=byKey(r.key);
+    zeilen.push([r.name, r.lei, r.country, r.itype, r.scope, r.date,
+                 rep?rep.framework:'',
+                 ...prof.cols.map(c=>csvZahl(r[c.id])), skal, q]
+                .map(csvFeld).join(','));
+  }
+  return k.join('\n')+'\n'+zeilen.join('\n')+'\n';
+}
+function ladeHerunter(name, text){
+  const b=new Blob([text], {type:'text/csv;charset=utf-8'});
+  const u=URL.createObjectURL(b), a=document.createElement('a');
+  a.href=u; a.download=name; document.body.appendChild(a); a.click();
+  a.remove(); setTimeout(()=>URL.revokeObjectURL(u), 1000);
 }
 
 /* ================= compare view ================= */
@@ -2201,7 +2397,16 @@ function shareParams(){
     if(BMP!=='km1')  p.set('prof', BMP);
     if(BM_PCT)       p.set('pct','1');
     if(BM_HIDEFLAG)  p.set('hide','1');
+    // Sortierung gehoert dazu: WER die Liste anfuehrt, ist die halbe Aussage
+    // eines Benchmarks. Ein Link ohne sie zeigt dem Empfaenger eine andere
+    // Reihenfolge als dem Absender — und damit eine andere Spitze.
+    const prof=bmProf(), s=prof&&bmSort;
+    if(s && prof && (s.col!==prof.defaultSort.col || s.dir!==prof.defaultSort.dir))
+      p.set('sort', s.col + (s.dir<0 ? '.desc' : '.asc'));
   }
+  // Die Auswahl (#50). Ohne sie laesst sich ein Vergleich nicht weitergeben —
+  // man kann nur AUFZAEHLEN, welche vier Reports der andere anpinnen soll.
+  if(PINS.size) p.set('pin', [...PINS].sort().join(','));
   return p;
 }
 /* Nur der Routenteil, ohne Parameter — die Basis, an die angehaengt wird. */
@@ -2233,6 +2438,24 @@ function applyShared(){
   if(p.has('prof')) BMP=p.get('prof');
   if(p.has('pct'))  BM_PCT  = p.get('pct')==='1';
   if(p.has('hide')) BM_HIDEFLAG = p.get('hide')==='1';
+  if(p.has('sort')){
+    const [col,dir]=p.get('sort').split('.');
+    // Eine Spalte, die dieses Profil nicht kennt (veralteter Link, anderes
+    // Profil), wird verworfen — sonst sortierte die Tabelle nach nichts und
+    // saehe aus wie unsortiert, ohne dass jemand den Grund saehe.
+    const prof=bmProf();
+    if(prof && prof.cols.some(c=>c.id===col))
+      bmSort={col, dir: dir==='desc' ? -1 : 1};
+  }
+  if(p.has('pin')){
+    // Nur Schluessel, die es im Bestand wirklich gibt: ein Link aus einer
+    // aelteren Welle nennt womoeglich Reports, die hier nicht stehen. Sie
+    // stillschweigend zu behalten hiesse, einen leeren Vergleich zu zeigen.
+    const wollte=p.get('pin').split(',').filter(Boolean);
+    const gibt=wollte.filter(k=>byKey(k));
+    PINS=new Set(gibt.slice(0, PIN_MAX));
+    store.pins=[...PINS]; persist();
+  }
 }
 function setTabs(){
   document.getElementById('tabReports').classList.toggle('on',VIEW==='reports');
