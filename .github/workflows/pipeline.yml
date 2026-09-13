@@ -232,6 +232,13 @@ jobs:
           python scripts/build_disclosure_lag.py
           python scripts/build_rwa_density.py
 
+      # Ermessensausuebung nach Art. 432 (#43). Braucht BEIDE Quellen frisch:
+      # die Filing-Indicators fuer die Deklaration und das Parquet fuer die
+      # Gegenprobe, was wirklich geliefert wurde. Laeuft die Auswertung auf
+      # altem Parquet, meldet die Gegenprobe Widersprueche, die keine sind.
+      - name: Auslassungsprofil (Art. 432)
+        run: python scripts/build_omission_profile.py
+
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
 
