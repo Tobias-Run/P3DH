@@ -139,6 +139,53 @@ def pruefe():
               return {urteil:rep.quality.sc.u, n:REPORTS.filter(r=>r.quality&&r.quality.sc).length,
                       text:n?n.textContent.replace(/\\s+/g,' ').trim():''};
             }""")
+            # Groessenbalken (#49): erscheinen sie — und bleiben sie dort WEG,
+            # wo sie luegen wuerden? Ein Balken fuer einen um 10^6 zu kleinen
+            # Betrag zeigt ein winziges Institut statt eines Meldefehlers.
+            balken = pg.evaluate("""async () => {
+              location.hash = '#benchmark';
+              for(let g=0; g<600 && !document.querySelector('table tbody tr'); g++)
+                await new Promise(s=>setTimeout(s,10));
+              await new Promise(s=>setTimeout(s,300));
+              const zeilen=[...document.querySelectorAll('table tbody tr')];
+              let mitMarke=0, markeMitBalken=0;
+              for(const tr of zeilen){
+                const skaliert = tr.classList.contains('scaled');
+                if(!skaliert) continue;
+                mitMarke++;
+                if(tr.querySelector('.szf')) markeMitBalken++;
+              }
+              const res = {zeilen:zeilen.length,
+                      balken:document.querySelectorAll('.szf').length,
+                      legende:!!document.querySelector('.bmlegend'),
+                      mitMarke, markeMitBalken, strittig:null};
+              // Und dasselbe fuer ein Profil auf der Einheiten-Sperrliste (#9).
+              // `esg` laeuft auf 41.00, wo Institute nachweislich in
+              // verschiedenen Einheiten melden — dort darf KEIN Balken stehen.
+              const sel=document.getElementById('bmProfile');
+              const ua=[...sel.options].map(o=>o.value)
+                 .find(v=>{ const p=bmAll()[v]; return p && UA.has(p.tpl); });
+              if(ua){
+                sel.value=ua; sel.dispatchEvent(new Event('change'));
+                await new Promise(s=>setTimeout(s,600));
+                res.strittig={profil:ua,
+                  zeilen:document.querySelectorAll('table tbody tr').length,
+                  balken:document.querySelectorAll('.szf').length};
+              }
+              // Die beiden Sperren als FUNKTION. Kein heutiges Profil verbindet
+              // ein strittiges Template mit einer Betragsspalte, also belegt die
+              // gerenderte Tabelle dort nichts — ein Test an ihr waere gruen,
+              // ohne irgendetwas zu pruefen.
+              const sauber={q:null}, skal={q:{sc:{u:'skaliert',t:[]}}};
+              const tplSkal={q:{sc:{u:'skaliert',t:['61.00']}}};
+              res.regel={
+                normal:  barErlaubt({tpl:'61.00'}, sauber),
+                skala:   barErlaubt({tpl:'61.00'}, skal),
+                tplTrifft: barErlaubt({tpl:'61.00'}, tplSkal),
+                tplDaneben: barErlaubt({tpl:'60.00.A'}, tplSkal),
+                strittig: ua ? barErlaubt({tpl:bmAll()[ua].tpl}, sauber) : null};
+              return res;
+            }""")
             b.close()
     finally:
         srv.shutdown()
@@ -156,6 +203,39 @@ def pruefe():
         if not skala["text"]:
             fehler.append("Report mit Skalenbefund (#83) zeigt keine Marke — "
                           "der Index trägt sie, der Viewer rendert sie nicht")
+
+    print(f"  Benchmark: {balken['zeilen']} Zeilen · {balken['balken']} Größenbalken · "
+          f"skaliert markiert {balken['mitMarke']}, davon mit Balken {balken['markeMitBalken']}")
+    if balken["zeilen"] and not balken["balken"]:
+        fehler.append("kein einziger Größenbalken (#49) in der Benchmark-Tabelle — "
+                      "die Spalten tragen Beträge, die Zellen zeigen nur Zahlen")
+    if balken["zeilen"] and not balken["legende"]:
+        fehler.append("Größenbalken ohne Legende — eine Länge ohne Bezug ist "
+                      "eine Behauptung, die niemand prüfen kann")
+    if balken["markeMitBalken"]:
+        fehler.append(f"{balken['markeMitBalken']} skalierte Reports (#83) tragen einen "
+                      "Größenbalken — er zeigt dort ein winziges Institut statt "
+                      "eines Meldefehlers")
+    # Die Regel selbst, unabhaengig davon, ob ein heutiges Profil sie ausloest.
+    regel = balken.get("regel") or {}
+    erwartet = {"normal": True, "skala": False, "tplTrifft": False,
+                "tplDaneben": True, "strittig": False}
+    falsch = [k for k, v in erwartet.items()
+              if regel.get(k) is not None and regel[k] is not v]
+    print("  Balkenregel: " + "  ".join(
+        f"{k}={'ja' if regel.get(k) else 'nein'}" for k in erwartet))
+    if falsch:
+        fehler.append("barErlaubt() entscheidet falsch bei: " + ", ".join(falsch))
+
+    s = balken.get("strittig")
+    if s:
+        print(f"  Profil '{s['profil']}' (strittige Einheit, #9): {s['zeilen']} Zeilen · "
+              f"{s['balken']} Größenbalken")
+        if s["zeilen"] and s["balken"]:
+            fehler.append(f"{s['balken']} Größenbalken im Profil '{s['profil']}' — dessen "
+                          "Template steht auf der Einheiten-Sperrliste, ein "
+                          "Längenvergleich behauptet dort Vergleichbarkeit, die es "
+                          "nicht gibt")
 
     if seitenfehler:
         fehler.append(f"JavaScript-Fehler beim Rendern: {seitenfehler[0]}")

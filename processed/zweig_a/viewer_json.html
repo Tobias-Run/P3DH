@@ -277,6 +277,14 @@
   .pctb{display:block;position:relative;height:9px;margin-top:1px;background:var(--soft);
         border-radius:2px;overflow:hidden;min-width:52px}
   .pctf{display:block;height:100%;background:var(--blue);opacity:.35}
+  /* Groessenbalken (#49). Optisch klar vom Perzentilband getrennt: dort eine
+     Spur mit Marke und Beschriftung, hier ein schlichter Balken ohne Spur —
+     „wie gross" und „wo in der Gruppe" duerfen nicht gleich aussehen. */
+  .szb{display:block;height:4px;margin-top:2px;background:transparent}
+  .szf{display:block;height:100%;background:var(--ink);opacity:.28;border-radius:2px}
+  .bmlegend{font-size:11px;color:var(--muted);margin:.25rem 0 .1rem}
+  .bmlegend .k{display:inline-block;width:26px;height:4px;background:var(--ink);
+               opacity:.28;border-radius:2px;vertical-align:middle;margin:0 .25rem}
   .pctb i{position:absolute;inset:0;font-style:normal;font-size:8.5px;line-height:9px;
           text-align:right;padding-right:3px;color:var(--muted);font-variant-numeric:tabular-nums}
   /* Verteilung über der Rangliste (#48, R3) */
@@ -1923,7 +1931,78 @@ function gateNote(prof, out, total){
   }
   return h+'</div>';
 }
-function bmCell(c,v,pinfo){
+/* ---- Groessenbalken in der Zelle (#49, R4) --------------------------------
+ *
+ * Zwei verschiedene Fragen, zwei verschiedene Bilder — und sie duerfen nicht
+ * gleich aussehen:
+ *
+ *   „Wie GROSS ist das?"   -> Balken, linear gegen das Spaltenmaximum.
+ *   „Wo STEHT das?"        -> Perzentilmarke in der Peer-Gruppe (pctBadge).
+ *
+ * Der Balken ist bewusst LINEAR und nicht logarithmisch. Die Verteilung der
+ * Betraege ist extrem schief — der Median-TREA liegt bei rund einem Fuenfzigstel
+ * des groessten —, und ein Logbalken wuerde das kaschieren: er machte aus
+ * Faktor 50 optisch Faktor 2 und schmeichelte damit den kleinen Haeusern. Dass
+ * die meisten Balken kurz sind, IST das Ergebnis.
+ *
+ * Nur fuer Groessenspalten. Fuer eine Quote waere ein Balken gegen das Maximum
+ * sinnlos: 15 % CET1 sind nicht „ein Drittel von 45 %", sie sind ein eigener
+ * Wert. Dort steht die Perzentilmarke.
+ *
+ * KEIN Rot/Gruen. Es sind Offenlegungsdaten, keine Bewertung — eine niedrige
+ * Quote ist nicht „schlecht". Und die Laenge traegt das Signal, nicht die
+ * Farbe: wer keine Farben unterscheidet, liest den Balken trotzdem, und die
+ * Zahl steht ohnehin daneben.
+ *
+ * Zwei Faelle, in denen der Balken UNTERDRUECKT wird, weil er dort das
+ * Gegenteil von dem sagt, was gilt:
+ *
+ *   1. Strittige Einheit (#9, `41.00` und `45.00.A`): dort melden Institute
+ *      nachweislich in verschiedenen Einheiten. Ein Laengenvergleich ueber
+ *      Institute hinweg behauptet Vergleichbarkeit, die es nicht gibt.
+ *   2. Skalenbefund (#83): ein Report, dessen Betraege um 10^6 zu klein sind,
+ *      bekaeme einen Balken nahe null — und saehe damit aus wie ein winziges
+ *      Institut statt wie ein Meldefehler. Das ist die irrefuehrendste Marke,
+ *      die diese Tabelle vergeben koennte.
+ */
+const BAR_KINDS = new Set(['eur','eurPlain','num']);
+
+function barBasis(rows, cols){
+  /* Maximum je Groessenspalte ueber die SICHTBAREN Zeilen. Die Filter sind Teil
+     der Frage: wer auf Schweden filtert, will schwedische Groessen vergleichen,
+     nicht gegen BNP Paribas. */
+  const out=new Map();
+  for(const c of cols){
+    if(!BAR_KINDS.has(c.kind)) continue;
+    let mx=0;
+    for(const r of rows){ const v=r[c.id]; if(v!=null&&isFinite(v)&&v>mx) mx=v; }
+    if(mx>0) out.set(c.id, mx);
+  }
+  return out;
+}
+/* Traegt dieser Report ueberhaupt vergleichbare Absolutbetraege?
+ *
+ * Die Sperrlisten-Bedingung feuert HEUTE nie: das einzige Profil auf einem
+ * strittigen Template (`esg` auf 41.00) hat ausschliesslich Quotenspalten, und
+ * die bekommen ohnehin keinen Balken. Sie steht trotzdem hier — bekaeme dieses
+ * Profil eine Betragsspalte, waere der Balken sofort falsch, und niemand
+ * saehe es. Geprueft wird sie deshalb als FUNKTION (check_viewer_runtime.py)
+ * und nicht an der gerenderten Tabelle; ein Test an der Seite waere gruen,
+ * ohne irgendetwas zu belegen. */
+function barErlaubt(prof, row){
+  if(UA.has(prof.tpl)) return false;                    // strittige Einheit (#9)
+  const sc=row.q && row.q.sc;                           // Skalenbefund (#83)
+  return !(sc && (!sc.t.length || sc.t.includes(prof.tpl)));
+}
+function sizeBar(v, max){
+  if(!(max>0) || v==null || !isFinite(v) || v<=0) return '';
+  const pct=Math.max(1, Math.min(100, v/max*100));
+  return `<span class="szb" aria-hidden="true" title="${esc(nf(pct,0,1))}${NBSP}% des`
+       + ` groessten Werts dieser Spalte in der aktuellen Auswahl">`
+       + `<span class="szf" style="width:${pct}%"></span></span>`;
+}
+
+function bmCell(c,v,pinfo,barMax){
   if(v==null) return '<td class="empty"></td>';
   let txt;
   if(c.kind==='eur') txt=nf(v,0,1);
@@ -1931,7 +2010,8 @@ function bmCell(c,v,pinfo){
   else if(c.kind==='pp') txt=nf(v,1)+NBSP+'pp';
   else if(c.kind==='num') txt=nf(v,0,0);
   else txt=nf(v,1)+NBSP+'%';
-  return `<td class="num">${zdash(txt)}${pinfo?pctBadge(pinfo):''}</td>`;
+  return `<td class="num">${zdash(txt)}${barMax?sizeBar(v,barMax):''}`
+       + `${pinfo?pctBadge(pinfo):''}</td>`;
 }
 /* Eine Karte je Profilspalte, ueber der Rangliste. Klick setzt die Sortierung —
    damit fuehrt die Verteilung zur Liste und nicht umgekehrt. */
@@ -2006,6 +2086,10 @@ async function renderBenchmark(){
     `<option value="${k}"${k===BMP?' selected':''}>${esc(p.label)}</option>`).join('');
   const pmaps=new Map();
   if(BM_PCT) for(const c of prof.cols) pmaps.set(c.id,percentileMap(allRows,c.id));
+  // Bezug der Groessenbalken (#49): das Maximum der SICHTBAREN Zeilen. Berechnet
+  // auf `rows`, nicht auf `allRows` — blendet jemand die auffaelligen Reports
+  // aus, soll der Balken sich auf das beziehen, was er sieht.
+  const barMax=barBasis(rows, prof.cols);
   // Randwert-Marker nur fuer die Spalte, nach der gerade sortiert wird: genau
   // die entscheidet, wer die Liste anfuehrt. Bei Sortierung nach Name/Stichtag
   // gibt es keine Metrik und damit keinen Marker.
@@ -2017,6 +2101,10 @@ async function renderBenchmark(){
       <label class="ctl" title="Blendet Reports aus, in denen die Plausibilitätsprüfung Werte weit ausserhalb ihrer Zellpopulation gefunden hat. Perzentile bleiben auf der vollen Menge gerechnet."><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> auffällige einklappen${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
       <span class="meta" style="margin:0">Basis: Template ${esc(prof.tpl)}${bmUsesKm1(prof)?' + 61.00':''}${prof.cols.some(c=>c.kind==='eur')?' · Beträge in Mrd. EUR (EZB-Kurs)':''} · Sidebar-Filter aktiv · Klick auf Spalte sortiert</span></div>
     ${prof.note?`<div class="caveat">ⓘ ${esc(prof.note)}</div>`:''}
+    ${barMax.size?`<div class="bmlegend"><span class="k"></span> Balken = Anteil am
+      grössten Wert der Spalte in der aktuellen Auswahl, linear. Kein Werturteil —
+      und keiner bei strittiger Meldeeinheit oder Skalenbefund, dort wäre die Länge
+      eine Behauptung über Vergleichbarkeit, die nicht gilt.</div>`:''}
     <div class="caveat">⚠ Vergleichbarkeits-Caveat: Rechnungslegung, Konsolidierungskreis (CON/IND),
     nationale Optionen und Framework-Version (4.1/4.2) unterscheiden sich — Ranglisten sind indikativ,
     keine Aufsichtsmetrik. Quelle: öffentliche Pillar-3-Meldungen (© EBA).</div>
@@ -2045,7 +2133,10 @@ async function renderBenchmark(){
           sortCol?fenceBadge(fmarks.get(r.key), sortCol.label):''}
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;
-    for(const c of prof.cols) h+=bmCell(c,r[c.id],BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null);
+    const balken=barErlaubt(prof, r);
+    for(const c of prof.cols)
+      h+=bmCell(c, r[c.id], BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null,
+                balken?barMax.get(c.id):null);
     if(prof.trendRow) h+=`<td>${r._trend?sparkline(r._trend,null,null,r._breaks):''}</td>`;
     h+='</tr>';
   }
