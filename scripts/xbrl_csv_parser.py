@@ -336,8 +336,9 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path,
                       manifest_path: Path = None, incremental: bool = True):
     """Parse the latest-wins .zip submissions in raw_dir → combined long-form CSV.
 
-    If manifest_path (manifest_latest.csv) is given, only the submissions it lists are
-    parsed — older resubmissions present in raw/ are skipped (Resubmission-Policy).
+    If manifest_path (default: manifest_parse.csv) is given, only the submissions it
+    lists are parsed — older resubmissions present in raw/ are skipped
+    (Resubmission-Policy; die Regel steht in scripts/submissions.py, siehe #88).
 
     Incremental (default): rows of already-parsed source files are kept from the
     existing output, only new zips are parsed, and rows of source files that fell out
@@ -363,7 +364,8 @@ def parse_all_reports(raw_dir: Path, codebook_path: Path, output_path: Path,
         skipped = len(zip_files) - len(kept_zips)
         zip_files = kept_zips
         if skipped:
-            print(f"Resubmission-Policy: {skipped} ältere ZIP(s) übersprungen (nicht in manifest_latest.csv)")
+            print(f"Resubmission-Policy: {skipped} ältere ZIP(s) übersprungen "
+                  f"(nicht in {manifest_path.name})")
 
     # Which source files stay valid in the merged output. Driven by the MANIFEST, not by
     # what happens to lie in raw/: a stateless run (CI) downloads only the new zips, so
@@ -468,12 +470,18 @@ if __name__ == "__main__":
             print(why, file=sys.stderr)
         print(mode)
         sys.exit(0)
-    # Manifest to parse: CLI arg wins, else the CODIS parse manifest, else latest-wins.
+    # Manifest to parse: CLI arg wins, else the parse manifest.
+    #
+    # Der Rückfall auf `manifest_latest.csv` ist mit #88 entfallen. Er war
+    # still: fehlte das Parse-Manifest, parste der Lauf einen Bruchteil des
+    # Bestands und meldete das als Erfolg. Fehlt es, ist die Kette unvollständig
+    # — und das gehört gesagt, nicht umgangen.
     if args:
         MANIFEST = Path(args[0])
     else:
         MANIFEST = ROOT / "interim" / "edap_recon" / "manifest_parse.csv"
         if not MANIFEST.exists():
-            MANIFEST = ROOT / "interim" / "edap_recon" / "manifest_latest.csv"
+            print(f"ERROR: {MANIFEST} fehlt — erst scripts/build_parse_manifest.py")
+            sys.exit(2)
 
     parse_all_reports(RAW_DIR, CODEBOOK, OUTPUT, MANIFEST, incremental=not full)
