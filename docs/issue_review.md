@@ -7,6 +7,10 @@ trotzdem im Repo, weil die Alternative — die Einschätzung nur im Issue-Verlau
 sie über 29 Threads verteilt und damit unlesbar macht. Jede Zahl darin ist am
 Bestand gemessen, nicht aus den Issue-Texten übernommen.
 
+Die Befunde stehen zusätzlich als Kommentar an den jeweiligen Issues, damit
+niemand dieses Dokument kennen muss, um den Stand seines Issues zu sehen:
+#14, #31, #32, #34, #44, #45, #59, #83.
+
 ## Zusammenfassung
 
 | | Anzahl |
@@ -30,11 +34,25 @@ Rest ist jeweils benannt.
 skalierte Templates. Der Viewer markiert 100 Reports, 50 davon ohne jeden
 Plausibilitätsbefund.
 
-**Offen: Klasse C — einzelne Zellen** (National Bank of Greece). Sie gehört zur
-Zellprüfung und liegt dort auf derselben ungeprüften unteren Flanke, die den
-Report-Detektor überhaupt nötig gemacht hat. Der ursprüngliche Aufhänger —
-22 Zeilen in `footprint.csv` mit `reliable = true` — ist damit **noch nicht**
-geschlossen: `build_footprint.py` liest `scale_flags.csv` nicht.
+**Klasse C ist teilweise gedeckt — durch #45, nicht durch #83.** Nachgerechnet
+markiert `rwa_density.skalenverdacht = true` neun Reports; fünf davon kennt auch
+`scale_flags.csv`, die übrigen **vier sind exakt die Klasse-C-Fälle**: National
+Bank of Greece, Banca Transilvania, AB Artea bankas, Banque Banorient France.
+
+| Klasse | Detektor | Stand |
+|---|---|---|
+| A — ganzer Report | `scale_flags.csv`, Reportebene | ✅ |
+| B — einzelnes Template | `scale_flags.csv`, Templateebene | ✅ |
+| C — einzelne Zelle | `rwa_density.skalenverdacht` | nur für die LR-Zelle |
+
+Die beiden Detektoren sind also **komplementär, nicht redundant**. Offen bleibt
+eine *allgemeine* Erkennung einzelner skalierter Zellen — was existiert, ist
+eine Prüfung für eine bestimmte Zelle, geschrieben für einen anderen Zweck.
+
+**Und der ursprüngliche Aufhänger ist unverändert offen:** 22 Zeilen in
+`footprint.csv` mit `reliable = true`. `build_footprint.py` liest
+`scale_flags.csv` nicht. Die Ursache ist erkannt und in einer Datei, die
+Konsequenz fehlt — das ist der billigste nächste Schritt im ganzen Backlog.
 
 ### #43 — Ermessensausübung nach Art. 432
 
@@ -50,12 +68,25 @@ kein Aufsichtsraum-Effekt.
 
 Alle drei mit Artefakt (`rwa_density.csv`, `coverage_gap.csv`,
 `eba_reconciliation.csv`) und in PR #85 dokumentiert. Offen ist jeweils die
-Ausweitung, nicht der Kern.
+Ausweitung, nicht der Kern. Zu #45 siehe zusätzlich die Klassenaufteilung
+unter #83 — `skalenverdacht` deckt dort die Klasse C ab.
 
 ### #32 — Konzerngraph
 
-`processed/lei_relations.csv`, 508 Institute. Offen sind die Punkte 3–5 des
-Issues (Aggregate, die den Graphen *benutzen*).
+`processed/lei_relations.csv`, **508 Institute**: 187 mit gemeldeter direkter
+Mutter, 317 mit begründeter Ausnahme (`NO_KNOWN_PERSON` 164,
+`NON_CONSOLIDATING` 111, `NATURAL_PERSONS` 25, `NO_LEI` 12, `NON_PUBLIC` 5),
+4 ohne Meldung.
+
+Offen sind die Punkte 3–5 (Aggregate, die den Graphen *benutzen*). Heute hat er
+genau einen Konsumenten: `build_eba_reconciliation.py` schliesst über ihn 90
+Institutszeilen aus, deren Mutter selbst meldet.
+
+⚠️ **Im Repo liegen zwei Konzerngraphen, die nie gegeneinander geprüft wurden.**
+`coverage_gap.csv` (#42) erkennt Gruppenabdeckung über die **EZB-Hierarchie**,
+nicht über GLEIF — weil die EZB-Liste den Graphen selbst mitbringt. Das ist kein
+Mangel, aber ein Abgleich der beiden wäre eine billige externe Validierung nach
+dem Muster von #37.
 
 ### #38 — DISDOCS-Korpus
 
@@ -77,8 +108,13 @@ Ort, den der Browser ohnehin verwaltet.
 
 ### #14 — BIP als Kontextspalte
 
-`codebook/country_gdp.csv`, 212 Länder, in `datensatz.md` dokumentiert.
-Absichtlich offen gelassen, weil die Nutzung im Viewer fehlt.
+`codebook/country_gdp.csv`, 212 Länder, 99,68 % des Exposures, in
+`datensatz.md` mit der Regressor-Warnung dokumentiert.
+
+**Die Spalte wird nirgends benutzt** — ausser vom Abrufskript und der Doku liest
+sie niemand. Der Zweck aus dem Titel, „Kontextspalte", ist damit nicht
+eingelöst: ein Exposure von 5 Mrd EUR relativiert sich am maltesischen BIP
+anders als am deutschen, und genau diese Relativierung sieht heute niemand.
 
 ---
 
@@ -246,5 +282,14 @@ Messung nicht.
 hatte `country` enthalten und damit die Korrektur eines falschen Ländercodes als
 zweiten Report gezählt. Der produktive Schlüssel lässt `country` zu Recht weg.
 
-In beiden Fällen lag der Fehler im Schlüssel, mit dem gemessen wurde — nicht in
-dem, was gemessen wurde.
+**„248 gegen 54 — zwei Skalendetektoren widersprechen sich".** Sie widersprechen
+sich nicht. `rwa_density.skalenverdacht` ist **dreiwertig**: `true` (9), `false`
+(537), `unbekannt` (239). Ich hatte „nicht false" gefiltert und damit 239-mal
+„nicht prüfbar" als Verdacht gezählt — ausgerechnet den Fehler, gegen den die
+Dreiwertigkeit gebaut wurde. Richtig gerechnet ergänzen sich beide Dateien.
+
+Dreimal derselbe Fehlertyp: der **Schlüssel bzw. Filter**, mit dem gemessen
+wurde, war falsch — nicht das, was gemessen wurde. Und jedes Mal sah die Zahl
+nach einem Befund aus. Wer hier weitermisst, prüfe zuerst, ob eine Spalte mehr
+als zwei Zustände kennt und ob ein Gruppenschlüssel wirklich das identifiziert,
+was er zu identifizieren vorgibt.
