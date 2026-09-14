@@ -6,6 +6,12 @@ hätte 1.091 von 1.946 Quelldateien als vermeintlich überholte Resubmissions
 verworfen, weil unter EINEM Modulcode mehrere fachlich verschiedene Meldungen
 liegen (CODIS, FINDIS, ESGDIS, ...). Der Fehler ist teuer und unauffällig:
 das Manifest sieht danach sauber aus, der Bestand schrumpft still.
+
+Und genau dieser Anlauf stand bis #88 unbemerkt in einem ZWEITEN Skript
+(`resolve_latest_submissions.py`) — dieselbe Regel, zweimal implementiert,
+einmal falsch. Die Regel liegt seit #88 in `scripts/submissions.py`; die Tests
+hier prüfen sie weiter über den Konsumenten, `tests/test_submissions.py`
+zusätzlich direkt und gegen den echten Katalog.
 """
 
 from pathlib import Path
@@ -14,6 +20,11 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import build_parse_manifest as m  # noqa: E402
+import submissions  # noqa: E402
+
+# Die Funktion ist mit #88 in das gemeinsame Modul gewandert. Der Alias haelt
+# die Tests an ihrem Gegenstand — sie pruefen die Regel, nicht ihren Wohnort.
+m.report_type = submissions.report_type
 
 BASE = "https://errp.eba.europa.eu/public-documents/CODIS/input/"
 

@@ -13,9 +13,15 @@ import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
 
-# Manifest to download: CLI arg wins, else the latest-wins default.
+# Manifest to download: CLI arg wins, else the parse manifest.
+#
+# Der Default war bis #88 `manifest_latest.csv` — abgeleitet aus dem
+# Roh-Katalog `manifest_urls.csv`, der nur ein Ausschnitt ist. Ein Aufruf ohne
+# Argument lud damit einen Bruchteil des Bestands, ohne dass irgendetwas
+# fehlschlug: weniger Reports, alle Kennzahlen plausibel. Der Default ist jetzt
+# derselbe Satz, den die Pipeline explizit übergibt.
 _RECON = Path(__file__).resolve().parent.parent / "interim" / "edap_recon"
-MANIFEST = Path(sys.argv[1]) if len(sys.argv) > 1 else _RECON / "manifest_latest.csv"
+MANIFEST = Path(sys.argv[1]) if len(sys.argv) > 1 else _RECON / "manifest_parse.csv"
 RAW_DIR = Path(__file__).resolve().parent.parent / "raw"
 RAW_DIR.mkdir(exist_ok=True)
 

@@ -69,3 +69,4 @@ processed/zweig_a/data/
 # ist der committete Vertrag und gehört ins Repo).
 interim/placement_report.csv
 interim/unit_consistency_report.csv
+interim/osm_cache/
