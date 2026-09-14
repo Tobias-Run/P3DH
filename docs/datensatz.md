@@ -139,6 +139,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/omission_templates.csv` | Klasse × Stichtag × Template → Offenlegungsquote der Peer-Gruppe | ebenda |
 | `processed/irb_risk_weights.csv` | Institut × Forderungsklasse × PD-Band → Risikogewicht, PD, LGD | CR6 `26.00.A` |
 | `processed/footprint.csv` | Institut → Länderstreuung des Exposures, Domestizitätsquote, HHI | CCyB1 `67.01.A` |
+| `processed/disclosure_frequency.csv` | Klasse × Template → gemessene Offenlegungsfrequenz | `filing_indicators.csv` |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -739,6 +740,75 @@ keine Summe eingehen darf.
 
 Gemessen: 377 Zeilen, davon 335 ohne Vorbehalt, 31 mit `skala`, 14 mit
 `residual`.
+
+### `disclosure_frequency.csv` — die Frequenz, gemessen statt abgeschrieben
+
+Je (Größenklasse, Template) die Offenlegungsfrequenz, abgeleitet aus dem
+Verhalten der Melder. Sie steht in Art. 433a–c CRR; sie zu kodieren wäre
+möglich, aber schwächer — gemessen wird, was Institute **tun**, und Abweichungen
+davon sind selbst ein Befund.
+
+Ohne dieses Modell stolpert jede Auswertung über Stichtage hinweg: ein
+halbjährlich offengelegtes Template „verschwindet" zwischen den Quartalen und
+sieht dabei aus wie eine Auslassung (#43) oder wie ein Sprung (#36).
+
+#### Muster je Institut, nicht Quote je Population
+
+Die naheliegende Messung — der Anteil der Melder je (Template, Stichtag) — ist
+unbrauchbar: **ein Drittel der Quoten liegt zwischen 20 und 80 %**. Eine
+Schwelle darauf erfände eine Trennung, die die Zahlen nicht hergeben.
+
+Gemessen wird deshalb das **Muster eines einzelnen Instituts** über die vier
+Stichtage, als Vierer-Kette `06-30 · 09-30 · 12-31 · 03-31`. Das ist scharf:
+über 4.407 vollständige Paare fallen **96,5 % in genau vier Muster**.
+
+| Muster | Anteil | Bedeutung |
+|---|---:|---|
+| `1010` | 36,2 % | halbjährlich |
+| `0000` | 33,6 % | nie (Template trifft dieses Institut nicht) |
+| `0010` | 15,6 % | jährlich |
+| `1111` | 11,1 % | vierteljährlich |
+| Rest | 3,5 % | uneinheitlich |
+
+Eine Koordinate trägt nur dann eine Frequenz, wenn mindestens 5 Institute
+beitragen **und** das Modalmuster ≥ 60 % erreicht — sonst steht dort
+`uneinheitlich`. Von 184 Koordinaten sind 88 eindeutig.
+
+#### Die Gegenprobe
+
+Drei Frequenzen sind bei #43 unabhängig aus den Populationsquoten abgelesen
+worden und kommen hier wieder heraus:
+
+| Template | | gemessen | Modalanteil |
+|---|---|---|---:|
+| `61.00` | KM1 | vierteljährlich | 98 % von 58 |
+| `74.00` | LIQ2 | halbjährlich | 93 % von 58 |
+| `19.03` | OR3 | jährlich | 93 % von 58 |
+
+#### Der inhaltliche Befund: Proportionalität, sichtbar gemacht
+
+Dieselbe Angabe hat je nach Größenklasse eine andere Frequenz. `19.03` (OR3) ist
+für große EEA-Institute **jährlich**, für Tochtergesellschaften **nie** — Art.
+433a gegen 433b/c, an den Daten abgelesen.
+
+#### Drei Vorbehalte
+
+**1. Nur 82 der 476 Institute tragen ein Muster bei.** Ein Muster braucht alle
+vier Stichtage — und wer nur zum Jahresende meldet, hat keines. Das ist keine
+Stichprobe, sondern eine Auswahl nach genau der Eigenschaft, die gemessen wird.
+Für `Other highest EEA` bleiben **8 Paare**; für diese Klasse sagt die Datei
+nichts.
+
+**2. Vier Stichtage unterscheiden „jährlich" nicht von „einmalig".** Das
+entscheidet erst die nächste Welle.
+
+**3. `nie` heißt nicht „müsste nicht".** Die Trennung von Nichtanwendbarkeit und
+Ermessen bleibt offen (#43).
+
+⚠️ **Geprüft, nicht angenommen:** 2026-03-31 ist zugleich der einzige
+RF-4.2-Stichtag, und ein geänderter Meldebogen sähe aus wie eine geänderte
+Frequenz. Nachgemessen trägt der Filing-Indicator-Bogen an **allen** Stichtagen
+dieselben 114 Templates — keines fällt weg, keines kommt dazu.
 
 ## Bekannte Einschränkungen
 
