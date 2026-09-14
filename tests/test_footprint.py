@@ -19,7 +19,8 @@ from pathlib import Path
 import sys
 import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
 import build_footprint as fp  # noqa: E402
 
 
@@ -93,6 +94,43 @@ class FootprintTest(unittest.TestCase):
         r = fp.footprint([("France", 100.0)], "")
         self.assertFalse(r["reliable"])
 
+    def test_a_scale_finding_invalidates_the_amount_not_the_quota(self):
+        """Der Aufhänger von #83, und der Kern der Unterscheidung.
+
+        ING Bank Śląski meldet am 2025-06-30 ein Gesamtexposure von 39.863 EUR
+        und am 2025-12-31 von 41,8 Mrd — Faktor 10^6. Die Domestizitätsquote
+        liegt bei 0,9820 gegen 0,9858, also praktisch unverändert.
+
+        Ein gleichmässiger Skalenfehler kürzt sich in jedem Verhältnis heraus.
+        Deshalb: `reliable` wird falsch (die Zeile ist nicht im Ganzen zu
+        gebrauchen), aber `vorbehalt` nennt den Grund, damit eine reine
+        Domestizitätsauswertung die Zeile zurückholen kann."""
+        ohne = fp.footprint([("Poland", 98.2), ("Germany", 1.8)], "Poland")
+        mit = fp.footprint([("Poland", 98.2), ("Germany", 1.8)], "Poland",
+                           skalenbefund="skaliert")
+        self.assertTrue(ohne["reliable"])
+        self.assertFalse(mit["reliable"])
+        self.assertEqual(mit["vorbehalt"], "skala")
+        self.assertEqual(mit["skalenbefund"], "skaliert")
+        # Und die Quoten sind Zeichen fuer Zeichen dieselben.
+        for feld in ("domestic_share", "country_hhi", "x28_share", "n_countries"):
+            with self.subTest(feld=feld):
+                self.assertEqual(ohne[feld], mit[feld])
+
+    def test_the_reason_names_every_reservation_not_just_one(self):
+        """Bank of Valletta traegt beide: dominanter Residualbucket UND
+        Skalenbefund. Wer nur den ersten sieht, haelt den Betrag fuer nutzbar."""
+        r = fp.footprint([("Malta", 0.9), (None, 101.4)], "Malta",
+                         skalenbefund="skaliert")
+        self.assertEqual(r["vorbehalt"], "residual|skala")
+
+    def test_an_unflagged_report_carries_no_reservation(self):
+        """Eine leere Spalte muss auch wirklich leer sein — sonst filtert
+        niemand danach."""
+        r = fp.footprint([("Germany", 80.0), ("France", 20.0)], "Germany")
+        self.assertEqual(r["vorbehalt"], "")
+        self.assertEqual(r["skalenbefund"], "")
+
     def test_largest_country_differs_from_seat(self):
         """67 von 377 Reports. Santander meldet mehr in UK als in Spanien; die
         Spalte macht den Unterschied sichtbar, statt ihn in einer niedrigen
@@ -115,6 +153,79 @@ class FootprintTest(unittest.TestCase):
     def test_no_exposure_yields_nothing(self):
         self.assertIsNone(fp.footprint([], "Germany"))
         self.assertIsNone(fp.footprint([("Germany", 0.0)], "Germany"))
+
+
+class SkalenmarkenTest(unittest.TestCase):
+    """Welche Marken aus #83 hier ueberhaupt zaehlen — und warum beide Ebenen."""
+
+    def _datei(self, zeilen):
+        import csv as _csv
+        import tempfile
+        fh = tempfile.NamedTemporaryFile("w", suffix=".csv", newline="",
+                                         delete=False, encoding="utf-8")
+        w = _csv.DictWriter(fh, ["ebene", "lei", "scope", "refPeriod",
+                                 "template_id", "urteil"])
+        w.writeheader()
+        w.writerows(zeilen)
+        fh.close()
+        return fh.name
+
+    def test_the_template_level_of_ccyb1_counts(self):
+        """Der Fall, den eine Filterung nur auf die Reportebene durchliesse:
+        ING Bank Śląski ist reportweit unauffaellig (Versatz -0,15), skaliert
+        ist genau `67.01.A` — die QUELLE dieser Datei."""
+        pfad = self._datei([{"ebene": "template", "lei": "A", "scope": "CON",
+                             "refPeriod": "2025-06-30", "template_id": "67.01.A",
+                             "urteil": "skaliert"}])
+        self.assertEqual(fp.lade_skalenmarken(pfad),
+                         {("A", "CON", "2025-06-30"): "skaliert"})
+        Path(pfad).unlink()
+
+    def test_a_scaled_template_elsewhere_does_not_count(self):
+        """Ein skaliertes `30.01` (Verguetung) sagt nichts ueber das
+        Laenderexposure. Wer jede Templatemarke uebernimmt, verwirft Zeilen
+        wegen eines Defekts in einer ganz anderen Tabelle."""
+        pfad = self._datei([{"ebene": "template", "lei": "A", "scope": "CON",
+                             "refPeriod": "2025-06-30", "template_id": "30.01",
+                             "urteil": "skaliert"}])
+        self.assertEqual(fp.lade_skalenmarken(pfad), {})
+        Path(pfad).unlink()
+
+    def test_a_suspicion_is_reservation_enough_for_an_amount(self):
+        """Bei einer Zahl, die in keine Summe eingehen darf, reicht ein
+        Verdacht. Das ist strenger als in check_plausibility.py — dort geht es
+        um die Grundgesamtheit, hier um einen einzelnen Betrag."""
+        pfad = self._datei([{"ebene": "report", "lei": "B", "scope": "CON",
+                             "refPeriod": "2025-06-30", "template_id": "",
+                             "urteil": "verdacht"}])
+        self.assertEqual(fp.lade_skalenmarken(pfad),
+                         {("B", "CON", "2025-06-30"): "verdacht"})
+        Path(pfad).unlink()
+
+    def test_scaled_beats_suspicion_when_both_apply(self):
+        pfad = self._datei([
+            {"ebene": "report", "lei": "C", "scope": "CON",
+             "refPeriod": "2025-06-30", "template_id": "", "urteil": "verdacht"},
+            {"ebene": "template", "lei": "C", "scope": "CON",
+             "refPeriod": "2025-06-30", "template_id": "67.01.A",
+             "urteil": "skaliert"}])
+        self.assertEqual(fp.lade_skalenmarken(pfad),
+                         {("C", "CON", "2025-06-30"): "skaliert"})
+        Path(pfad).unlink()
+
+    def test_a_missing_file_marks_nothing(self):
+        """Fehlt scale_flags.csv, verhaelt sich die Auswertung wie vor #83 —
+        statt stillschweigend jeden Report zu verdaechtigen."""
+        self.assertEqual(fp.lade_skalenmarken(ROOT / "gibt_es_nicht.csv"), {})
+
+    def test_the_scale_flags_are_built_before_the_footprint(self):
+        """Laeuft build_footprint.py zuerst, findet es keine scale_flags.csv,
+        markiert nichts — und SCHEITERT NICHT. Genau der Zustand, den #83
+        beanstandet hat, waere damit zurueck."""
+        pl = (ROOT / ".github" / "workflows" / "pipeline.yml").read_text(
+            encoding="utf-8")
+        self.assertLess(pl.index("scripts/build_report_scale.py"),
+                        pl.index("scripts/build_footprint.py"))
 
 
 if __name__ == "__main__":

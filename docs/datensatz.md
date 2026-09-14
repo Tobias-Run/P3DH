@@ -138,6 +138,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/omission_profile.csv` | Report → was wird weggelassen, gemessen an den direkten Peers | `filing_indicators.csv` |
 | `processed/omission_templates.csv` | Klasse × Stichtag × Template → Offenlegungsquote der Peer-Gruppe | ebenda |
 | `processed/irb_risk_weights.csv` | Institut × Forderungsklasse × PD-Band → Risikogewicht, PD, LGD | CR6 `26.00.A` |
+| `processed/footprint.csv` | Institut → Länderstreuung des Exposures, Domestizitätsquote, HHI | CCyB1 `67.01.A` |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -695,6 +696,49 @@ echte Widersprüche zwischen zwei Spalten desselben Reports.
 Achsenauflösung. Der Code steht roh in `klasse_code`. Für den Vergleich reicht
 das — er läuft innerhalb einer Klasse —, aber ohne Klartextnamen ist die Zeile
 fachlich nicht einzuordnen (Lücke im Codebook, #3).
+
+### `footprint.csv` — Länderstreuung, und was `reliable` seit #83 bedeutet
+
+Je (Institut, Konsolidierungskreis, Stichtag) die geografische Verteilung des
+Exposures aus CCyB1 (`67.01.A`, Spalte `c0060`): Domestizitätsquote, Herfindahl
+über die Länderanteile, Zahl der benannten Länder.
+
+#### Zwei Spalten für zwei verschiedene Fragen
+
+| Spalte | sagt |
+|---|---|
+| `reliable` | ist die Zeile **im Ganzen** zu gebrauchen? |
+| `vorbehalt` | **welcher** Einwand greift — `kein_heimatland`, `residual`, `skala` (mehrere mit `\|` verbunden) |
+
+Der Unterschied ist nicht kosmetisch. Bis #83 stand `reliable` bei **28 Zeilen**
+auf `true`, deren Exposure um Größenordnungen zu klein ist. Der Beleg:
+
+| ING Bank Śląski | Gesamtexposure | `domestic_share` |
+|---|---:|---:|
+| 2025-06-30 | 39.863 EUR | 0,9820 |
+| 2025-12-31 | 41.827.858.555 EUR | 0,9858 |
+
+Faktor 10⁶ im Betrag, die Quote praktisch unverändert. Ein gleichmäßiger
+Skalenfehler **kürzt sich in jedem Verhältnis heraus**.
+
+⚠️ **Daraus folgt eine Leseregel.** Wer `total_exposure_eur` summiert, nimmt nur
+`reliable = true`. Wer Domestizität oder Konzentration auswertet, holt sich die
+Zeilen mit `vorbehalt = skala` ausdrücklich **zurück** — dort sind die Quoten
+gültig, und sie wegzulassen verkleinerte die Grundgesamtheit ohne Grund.
+
+#### Warum die Templateebene mitgelesen wird
+
+`scale_flags.csv` kennt Report- und Templateebene. Hier zählen beide — und die
+zweite ist kein Sonderfall: ING Bank Śląski ist **reportweit unauffällig**
+(Versatz −0,15), skaliert ist genau `67.01.*`, also die Quelle dieser Datei. Ein
+Filter nur auf die Reportebene hätte ihn durchgelassen.
+
+Ein `verdacht` genügt hier als Vorbehalt, anders als in `check_plausibility.py`:
+dort geht es um eine Grundgesamtheit, hier um einen einzelnen Betrag, der in
+keine Summe eingehen darf.
+
+Gemessen: 377 Zeilen, davon 335 ohne Vorbehalt, 31 mit `skala`, 14 mit
+`residual`.
 
 ## Bekannte Einschränkungen
 

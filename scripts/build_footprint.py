@@ -36,7 +36,27 @@ DREI FALLEN, an den Daten geprüft (Zahlen aus dem aktuellen Bestand):
       8 Institute; ohne Normalisierung fallen die tschechischen Banken still
       auf 0 % Heimatanteil.
 
+  (d) DER SKALENFEHLER (#83). Bis dahin stand `reliable` bei 28 Zeilen auf
+      `true`, deren Exposure um Größenordnungen zu klein ist — das war der
+      Aufhänger jenes Issues. Der Beleg ist ING Bank Śląski:
+
+          2025-06-30    39.863 EUR Gesamtexposure   domestic_share 0,9820
+          2025-12-31    41.827.858.555 EUR          domestic_share 0,9858
+
+      Faktor 10^6 im Betrag, die Quote praktisch unverändert. Genau das ist der
+      Grund für die Spalte `vorbehalt` statt eines blossen Ja/Nein: ein
+      gleichmässiger Skalenfehler **kürzt sich in jedem Verhältnis heraus**.
+      `domestic_share`, `country_hhi` und `x28_share` bleiben gültig, nur
+      `total_exposure_eur` ist unbrauchbar.
+
+      Śląski ist zugleich der Grund, warum die Templateebene von
+      `scale_flags.csv` mitgelesen wird: reportweit ist das Institut
+      unauffällig (Versatz -0,15), skaliert ist genau `67.01.*` — also die
+      Quelle dieser Datei.
+
 Run:  python3 scripts/build_footprint.py
+      (liest processed/scale_flags.csv, wenn vorhanden — erst
+       scripts/build_report_scale.py)
 """
 
 from pathlib import Path
@@ -75,6 +95,44 @@ def normalize_country(name):
     return COUNTRY_ALIAS.get((name or "").strip(), (name or "").strip())
 
 
+SCALE_FLAGS = ROOT / "processed" / "scale_flags.csv"
+
+
+def lade_skalenmarken(pfad=None):
+    """{(lei, scope, refPeriod): Urteil} — was #83 über diesen Report sagt.
+
+    Beide Ebenen zählen, aber aus verschiedenen Gründen:
+
+    **Report** — liegt der ganze Report um einen Faktor daneben, liegt sein
+    CCyB1-Exposure mit. `verdacht` zählt hier mit: bei einem Betrag, der in
+    keine Summe eingehen darf, ist ein Verdacht Vorbehalt genug.
+
+    **Template** — und zwar nur `67.01.*`. Das ist die Quelle GENAU DIESER
+    Datei, und es ist kein hypothetischer Fall: ING Bank Śląski ist reportweit
+    unauffällig (Versatz -0,15) und hat trotzdem ein skaliertes CCyB1. Ein
+    Filter nur auf die Reportebene hätte ihn durchgelassen.
+
+    Fehlt die Datei, wird nichts markiert — die Prüfung verhält sich dann wie
+    vor #83, statt stillschweigend jeden Report zu verdächtigen.
+    """
+    pfad = Path(pfad or SCALE_FLAGS)
+    if not pfad.exists():
+        return {}
+    aus = {}
+    with pfad.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            if r.get("urteil") not in ("skaliert", "verdacht") or not r.get("lei"):
+                continue
+            if r.get("ebene") == "template" and not r.get("template_id", "").startswith(
+                    TEMPLATE.split(".")[0] + "." + TEMPLATE.split(".")[1]):
+                continue
+            k = (r["lei"], r["scope"], r["refPeriod"])
+            # `skaliert` schlägt `verdacht`, falls beide Ebenen zutreffen.
+            if aus.get(k) != "skaliert":
+                aus[k] = r["urteil"]
+    return aus
+
+
 def hhi(values):
     """Herfindahl-Index über Exposure-Beträge -> 0..1.
 
@@ -90,10 +148,13 @@ def hhi(values):
     return sum((w / total) ** 2 for w in weights)
 
 
-def footprint(rows, home_country):
+def footprint(rows, home_country, skalenbefund=""):
     """rows: [(country_name, exposure_eur)] EINES Reports, x1 bereits entfernt.
 
     `country_name` ist None für den Residualbucket x28.
+    `skalenbefund` ist das Urteil aus `processed/scale_flags.csv` (#83) — leer,
+    wenn der Report unauffällig ist.
+
     Liefert None, wenn kein verwertbares Exposure vorliegt — kein Wert ist
     besser als ein aus Null gerechneter (Arbeitsprinzip 3).
     """
@@ -128,9 +189,33 @@ def footprint(rows, home_country):
         "x28_share": residual / grand_total,
         "home_country": home,
         "largest_country": largest,
-        # Ohne Heimatland in den Meldedaten ist die Quote nicht interpretierbar
-        # (nicht "0 %" — das wäre eine Aussage, die wir nicht treffen können).
-        "reliable": bool(home) and residual / grand_total <= X28_UNRELIABLE,
+        # WELCHER Vorbehalt greift — nicht nur DASS einer greift. Die drei sind
+        # verschieden schwer, und wer nur `reliable` liest, kann sie nicht
+        # auseinanderhalten:
+        #
+        #   kein_heimatland  die Domestizitätsquote ist gar nicht bildbar
+        #   residual         sie ist bildbar, aber der Grossteil des Exposures
+        #                    ist keinem Land zugeordnet
+        #   skala            die QUOTEN stimmen, der absolute Betrag nicht
+        #
+        # Der dritte ist der Grund für diese Spalte. Ein gleichmässiger
+        # Skalenfehler kürzt sich in jedem Verhältnis heraus: `domestic_share`,
+        # `country_hhi` und `x28_share` bleiben gültig, nur
+        # `total_exposure_eur` ist unbrauchbar. Wer die Domestizität auswertet,
+        # holt sich diese Reports also mit `vorbehalt == 'skala'` zurück; wer
+        # Beträge summiert, darf das nicht.
+        "vorbehalt": "|".join(filter(None, [
+            "" if home else "kein_heimatland",
+            "residual" if residual / grand_total > X28_UNRELIABLE else "",
+            "skala" if skalenbefund else "",
+        ])),
+        # `reliable` sagt, was sein Name sagt: die Zeile ist im Ganzen zu
+        # gebrauchen. Bis #83 blieb es bei skalierten Reports auf `true` — 28
+        # Zeilen trugen ein um Grössenordnungen zu kleines Exposure und
+        # meldeten sich als belastbar. Das war der Aufhänger des Issues.
+        "reliable": (bool(home) and residual / grand_total <= X28_UNRELIABLE
+                     and not skalenbefund),
+        "skalenbefund": skalenbefund,
     }
 
 
@@ -155,11 +240,15 @@ def main():
         reports.setdefault(key, []).append((land, val))
         meta.setdefault(key, (name or "", country or ""))
 
+    marken = lade_skalenmarken()
+    if marken:
+        print(f"  Skalenmarken aus #83 geladen: {len(marken)} Reports")
+
     rows = []
     for key in sorted(reports):
         lei, scope, rp = key
         name, home = meta[key]
-        fp = footprint(reports[key], home)
+        fp = footprint(reports[key], home, marken.get(key, ""))
         if fp is None:
             continue
         rows.append({
@@ -172,11 +261,14 @@ def main():
             "country_hhi": "" if fp["country_hhi"] is None else f"{fp['country_hhi']:.4f}",
             "x28_share": f"{fp['x28_share']:.4f}",
             "reliable": "true" if fp["reliable"] else "false",
+            "vorbehalt": fp["vorbehalt"],
+            "skalenbefund": fp["skalenbefund"],
         })
 
     fields = ["lei", "scope", "refPeriod", "bank_name", "home_country",
               "largest_country", "n_countries", "total_exposure_eur",
-              "domestic_share", "country_hhi", "x28_share", "reliable"]
+              "domestic_share", "country_hhi", "x28_share", "reliable",
+              "vorbehalt", "skalenbefund"]
     with OUT.open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fields)
         w.writeheader()
@@ -189,10 +281,17 @@ def main():
     if shares:
         print(f"  Domestizitätsquote  Median {shares[len(shares)//2]:.1%} · "
               f"über 90 % heimatzentriert: {sum(1 for s in shares if s > 0.9)}")
+    import collections
+    gruende = collections.Counter(g for r in rows for g in r["vorbehalt"].split("|") if g)
     unreliable = len(rows) - len(ok)
     if unreliable:
-        print(f"  ⚠ {unreliable} Reports ohne belastbare Quote (Heimatland fehlt "
-              f"oder Exposure überwiegend im Residualbucket)")
+        print(f"  ⚠ {unreliable} Reports mit Vorbehalt: "
+              + "  ".join(f"{k}={v}" for k, v in sorted(gruende.items())))
+        skal = [r for r in rows if "skala" in r["vorbehalt"]]
+        if skal:
+            print(f"    Die {len(skal)} mit Skalenbefund (#83) tragen GUELTIGE Quoten — "
+                  f"nur ihr absoluter Betrag ist unbrauchbar. Fuer eine reine "
+                  f"Domestizitaetsauswertung gehoeren sie wieder dazu.")
 
     print("\nAm stärksten international (belastbar, kleinste Domestizitätsquote):")
     for r in sorted(ok, key=lambda r: float(r["domestic_share"]))[:5]:
