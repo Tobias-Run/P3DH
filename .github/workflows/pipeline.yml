@@ -239,6 +239,12 @@ jobs:
       - name: Auslassungsprofil (Art. 432)
         run: python scripts/build_omission_profile.py
 
+      # IRB-Risikogewichte je PD-Band (#45). Reine Auswertung des Parquets,
+      # kein Netz — und sie veraltet mit jeder Welle, weil CR6 quartalsweise
+      # gemeldet wird.
+      - name: IRB-Risikogewichte (CR6)
+        run: python scripts/build_irb_risk_weights.py
+
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
 

@@ -162,12 +162,17 @@ Auswertung, keine neue Datenbeschaffung.
 ### #31 — Korrekturverhalten
 
 `interim/edap_recon/manifest_full.csv`, 4.278 Einreichungen, ist im Repo.
-Gemessen **466 Korrekturen bei 160 Instituten**; ein Report wurde zehnmal
-eingereicht (Bulgarien, CODIS, 2025-06-30, alle zehn Fassungen innerhalb von
-zwei Tagen).
+Gemessen **472 Korrekturen**; ein Report wurde zehnmal eingereicht
+(Bulgarien, CODIS, 2025-06-30, alle zehn Fassungen innerhalb von zwei Tagen).
+Übrig bleiben 3.806 eigenständige Meldungen.
+
+Diese Zahl stammt jetzt aus `scripts/submissions.py` (#88) und stimmt damit
+exakt mit `docs/analysen_nach_vollload.md` überein. Die 466 in einer früheren
+Fassung dieses Dokuments waren ein vierter Messfehler derselben Art: ein
+URL-Präfix als Ersatzschlüssel, der sechs Korrekturen übersah.
 
 ⚠️ **Die Zahl hängt vollständig an der Definition von „dieselbe Meldung".** Drei
-plausible Schlüssel geben 466, 2.539 und 3.353 Korrekturen — Faktor 7. Richtig
+plausible Schlüssel geben 472, 2.539 und 3.353 Korrekturen — Faktor 7. Richtig
 ist nur der Schlüssel *mit* dem Modultyp aus dem Dateinamen: die Spalte `module`
 trägt nur den PILLAR3-Code (`020000`), und unter einem Code liegen CODIS, ESGDIS
 und FINDIS als eigenständige Meldungen. Wer sie zusammenwirft, zählt

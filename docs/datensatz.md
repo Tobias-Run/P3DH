@@ -44,8 +44,16 @@ Alle Zahlen stammen aus `manifest.json` und werden bei jedem Lauf aus dem Parque
 **Es ist keine Stichprobe.** Von 489 Instituten im EDAP-Katalog reichen 476
 XBRL-CSV ein, und alle 476 sind verarbeitet; die übrigen 13 veröffentlichen
 ausschließlich qualitative PDF-Pakete (`*DISDOCS`), die außerhalb des Scopes
-liegen. Der Katalog zählt 4.278 Einreichungen, weil 2.539 davon Korrekturfassungen
-derselben Meldung sind — es zählt jeweils nur die neueste („latest wins").
+liegen. Der Katalog zählt 4.278 Einreichungen, weil **472** davon
+Korrekturfassungen derselben Meldung sind — es zählt jeweils nur die neueste
+(„latest wins"). Übrig bleiben 3.806 eigenständige Meldungen, davon 2.825
+XBRL-Pakete und 981 reine PDF-Pakete.
+
+> ⚠️ Diese Zahl hängt daran, was „dieselbe Meldung" heißt, und die naheliegende
+> Antwort ist falsch: die Spalte `module` im Katalog trägt nur den numerischen
+> PILLAR3-Code, nicht den Modultyp. Wer danach gruppiert, zählt CODIS, ESGDIS und
+> FINDIS desselben Instituts als Korrekturen voneinander und kommt auf 2.539.
+> Die Regel steht seit #88 an einer Stelle: `scripts/submissions.py`.
 
 ## Schema
 
@@ -129,6 +137,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/scale_flags.csv` | Report bzw. Template → Skalenurteil, Signale, geschätzter Faktor | abgeleitet aus dem Bestand |
 | `processed/omission_profile.csv` | Report → was wird weggelassen, gemessen an den direkten Peers | `filing_indicators.csv` |
 | `processed/omission_templates.csv` | Klasse × Stichtag × Template → Offenlegungsquote der Peer-Gruppe | ebenda |
+| `processed/irb_risk_weights.csv` | Institut × Forderungsklasse × PD-Band → Risikogewicht, PD, LGD | CR6 `26.00.A` |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -616,6 +625,76 @@ Auslassungen, `n_art432_2` führt sie getrennt.
 ⚠️ **Auslassung ist kein Fehlverhalten.** Art. 432 ist eine ausdrückliche
 Erlaubnis. Die Zahl sagt „hier weicht ein Institut von seinen Peers ab", nicht
 „hier wird etwas verschwiegen".
+
+### `irb_risk_weights.csv` — Risikogewichte je PD-Band
+
+Was die EBA-Benchmarking-Übung misst, aber nicht institutsgenau veröffentlicht:
+CR6 (`26.00.A`) trägt je Institut, Forderungsklasse und PD-Band das Exposure,
+die ausfallgewichtete PD, die LGD und den Risikogewichtsbetrag. **90 Institute**
+melden es, 16.464 Zeilen.
+
+#### Der Befund
+
+Bei gleicher Ausfallwahrscheinlichkeit und gleicher Forderungsklasse streuen die
+Risikogewichte über die Institute um einen Faktor von **4,5 bis 6,6** (p90/p10,
+nur wesentliche Zellen). Der sauberste Fall ist das **Defaultband**: dort ist
+die PD auf 100 % fixiert und kann die Streuung nicht erklären —
+
+| Forderungsklasse | n | p10 | Median | p90 | Faktor |
+|---|---:|---:|---:|---:|---:|
+| `qx2081` | 88 | 0,348 | 0,809 | 1,916 | 5,5 |
+| `qx2013` | 79 | 0,351 | 0,711 | 1,861 | 5,3 |
+| `qx2009` | 44 | 0,541 | 0,891 | 2,428 | 4,5 |
+
+Was übrig bleibt, sind LGD-Schätzung und Wertberichtigungen. Deskriptiv, nicht
+kausal: eine niedrige Dichte kann ein besichertes Portfolio *oder* eine
+großzügige Modellierung bedeuten — und genau deshalb gibt es den Output-Floor.
+
+#### Vier Fallen, und jede einzelne zerstört die Auswertung
+
+**1. Die PD-Spalte heißt „(%)" und ist meistens keine.** 15.638 von 15.997
+Werten liegen bei ≤ 1. Geraten werden muss das nicht: die Zeilenbeschriftung
+nennt das Band (`0.25 to <0.50`, in Prozent), und daran lässt sich die Einheit
+**messen**. Über 11.177 Werte: 82,1 % passen nur als Bruch, 3,2 % nur als
+Prozent, 12,0 % als beides. Die Einheit gehört dem **Report**, nicht der Zelle —
+135 von 142 melden als Bruch, 4 in Prozent, 3 bleiben `unklar` und werden nicht
+normiert.
+
+**2. Die Bänder überlappen sich.** `r0010` (0,00–0,15) enthält `r0020` und
+`r0030`; ebenso `r0070`, `r0100`, `r0130`. Wer alle 18 Zeilen summiert, zählt
+das Exposure doppelt. Die Hierarchie ist nachgemessen exakt (Medianabweichung
+0,00000); die Spalte `ebene` trennt `grob` (8 Bänder) von `fein` (13) und
+`summe`. **Nie über Ebenen hinweg aggregieren.**
+
+**3. Das Gitter ist dünn besetzt.** 2.736 Zellen führen PD = 0 *und*
+Exposure = 0 — sie sind keine Meldung, sondern eine Leerstelle. Eine erste
+Fassung wertete jede davon als „PD unterhalb ihres Bandes" und meldete 3.016
+Verstöße statt 230.
+
+**4. Kleinstbeträge messen Rundung, nicht Modellierung.** Ein Risikogewicht von
+0,008 bei 20 % PD ist intern konsistent — es steht auf 87.671 EUR Exposure und
+699 EUR RWEA. Zellen unter 10 Mio EUR sind 19 % der besetzten Zellen und tragen
+**0,017 %** des Exposures; die Spalte `wesentlich` nimmt sie aus der Statistik
+und lässt sie in der Datei.
+
+#### Zwei Gegenproben
+
+**Die gemeldete Dichte gegen die gerechnete.** `c0100` ist unabhängig gemeldet
+und muss `c0090 / c0040` sein: über 12.671 Paare Medianabweichung **0,0000** —
+und zwar als Bruch, die Spalte ist trotz ihres Namens keine Prozentangabe. 846
+Zellen weichen ab: 140 melden die Dichte in Prozent, 212 umgekehrt, 282 sind
+echte Widersprüche zwischen zwei Spalten desselben Reports.
+
+**Die PD gegen ihr eigenes Band.** `c0050` ist die exposure-gewichtete PD
+*innerhalb* des Bandes und muss dort liegen. Von 11.546 besetzten Zellen tun das
+11.316; die 230 Abweichungen sind überwiegend Randwerte (PD = 0,15 im Band
+„0.10 to <0.15").
+
+⚠️ **Die Forderungsklasse ist nicht auflösbar.** CR6 führt sie als offene Achse
+(`qEEA=eba_qAE:qx2012`), und für `26.00` liegt im Codebook keine
+Achsenauflösung. Der Code steht roh in `klasse_code`. Für den Vergleich reicht
+das — er läuft innerhalb einer Klasse —, aber ohne Klartextnamen ist die Zeile
+fachlich nicht einzuordnen (Lücke im Codebook, #3).
 
 ## Bekannte Einschränkungen
 
