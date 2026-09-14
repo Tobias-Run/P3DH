@@ -147,6 +147,18 @@ class ErgebnisTest(unittest.TestCase):
                 self.assertTrue(r["beispiel_osm"])
                 self.assertIn(r["feld"], ("operator", "name", "brand"))
 
+    def test_a_failed_country_is_visible_in_the_file(self):
+        """Der Fehler gehört IN die Ausgabe, nicht nur ins Log. Ein Lauf, der
+        bei sechs von sieben Ländern scheiterte, schrieb eine Datei, die
+        vollständig aussah — und überschrieb damit ein bereits committetes
+        Ergebnis. Wer die CSV liest, muss sehen, was fehlt."""
+        self.assertIn("status", self.land[0])
+        for z in self.land:
+            self.assertIn(z["status"], ("erhoben", "abruf_fehlgeschlagen"))
+            if z["status"] == "abruf_fehlgeschlagen":
+                self.assertEqual(z["n_poi"], "",
+                                 "ein fehlgeschlagener Abruf trägt keine Zahlen")
+
     def test_the_order_is_stable(self):
         k = [(r["land"], r["lei"]) for r in self.rows]
         self.assertEqual(k, sorted(k))

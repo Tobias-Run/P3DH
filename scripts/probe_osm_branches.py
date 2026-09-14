@@ -29,19 +29,20 @@ Trefferquote. Geprüft werden deshalb `operator`, `name` und `brand`.
 
 ## Das Ergebnis: die Abbruchschwelle des Issues ist erreicht
 
-Fünf Länder, 43 Institute, 3.966 Bank-POIs.
+Sechs Länder (MT, LV, EE, HR, PT, GR), 47 Institute, 5.471 Bank-POIs.
 
-    Treffer          24 -> 19      (nach Korrektur eines Fehltreffers)
+    Treffer          23
     kein Treffer      7
     Name zu kurz     15
     Verbundmarke      2
 
-    Trefferquote unter den BEWERTBAREN   73,1 %   (19 von 26)
-    Trefferquote über ALLE Institute     44,2 %   (19 von 43)
+    Trefferquote unter den BEWERTBAREN   76,7 %   (23 von 30)
+    Trefferquote über ALLE Institute     48,9 %   (23 von 47)
 
-**Massgeblich ist die zweite.** Ein Verfahren, das bei 40 % der Institute gar
-nicht erst greift, hat keine Abdeckung von 73 % — es hat eine von 44 %, und
-damit liegt es unter der Schwelle, die das Issue selbst als Abbruchgrund nennt.
+**Massgeblich ist die zweite.** Ein Verfahren, das bei einem Drittel der
+Institute gar nicht erst greift, hat keine Abdeckung von 77 % — es hat eine von
+49 %, und damit liegt es unter der Schwelle, die das Issue selbst als
+Abbruchgrund nennt.
 
 Die Lücke sind kurze Namen. `OTP`, `APS`, `MDB`, `SEB`, `LHV`, `BNF` sind als
 Zeichenkette nicht sicher zuzuordnen — `seb` steckt in `Liepājas SEBiznesa
@@ -66,8 +67,9 @@ Quote sähe grossartig aus.
    Seiten weg. Der Fall, der das erzwungen hat: `Banco de Portugal`, die
    portugiesische **Zentralbank**, schrumpfte auf `banco de` und war damit in
    `banco de investimento global` enthalten. 36 Zentralbank-POIs zählten als
-   Filialen einer Investmentbank. Nach der Korrektur fiel die Gesamtquote von
-   55,8 % auf 44,2 % — der Fix hat die Zahl gesenkt, nicht gehoben.
+   Filialen einer Investmentbank. Nach der Korrektur fiel die Gesamtquote um
+   gut zehn Punkte — der Fix hat die Zahl gesenkt, nicht gehoben, und das ist
+   die Probe darauf, dass hier nicht auf ein Ergebnis hin optimiert wurde.
 
 ## Was diese Prüfung NICHT leisten kann
 
@@ -167,8 +169,8 @@ LANDESWORT = re.compile(
 
 FELDER = ["land", "lei", "bank_name", "kern", "urteil", "n_treffer",
           "beispiel_osm", "feld"]
-FELDER_LAND = ["land", "iso", "n_poi", "n_operator", "n_name", "n_brand",
-               "n_institute", "n_getroffen", "trefferquote"]
+FELDER_LAND = ["iso", "land", "status", "n_poi", "n_operator", "n_name",
+               "n_brand", "n_institute", "n_getroffen", "trefferquote"]
 
 
 def kern(name):
@@ -286,7 +288,7 @@ def pruefe_land(iso, land, inst):
         })
     t = lambda f: sum(1 for e in el if (e.get("tags") or {}).get(f))  # noqa: E731
     land_zeile = {
-        "land": land, "iso": iso, "n_poi": len(el),
+        "iso": iso, "land": land, "status": "erhoben", "n_poi": len(el),
         "n_operator": t("operator"), "n_name": t("name"), "n_brand": t("brand"),
         "n_institute": len(zeilen),
         "n_getroffen": sum(1 for z in zeilen if z["urteil"] == "treffer"),
@@ -316,8 +318,16 @@ def build(isos=None):
         try:
             z, lz = pruefe_land(iso, land, inst)
         except Exception as e:                       # noqa: BLE001
+            # Der Fehler gehoert IN die Ausgabe, nicht nur ins Log. Ein Lauf,
+            # der bei sechs von sieben Laendern scheitert, schrieb sonst eine
+            # Datei, die vollstaendig aussieht — genau das ist hier einmal
+            # passiert und hat ein committetes Artefakt ueberschrieben.
             print(f"  {iso}: Abruf fehlgeschlagen ({type(e).__name__}) — "
                   f"NICHT als 'keine Treffer' gewertet")
+            land_zeilen.append({
+                "iso": iso, "land": land, "status": "abruf_fehlgeschlagen",
+                "n_poi": "", "n_operator": "", "n_name": "", "n_brand": "",
+                "n_institute": len(inst), "n_getroffen": "", "trefferquote": ""})
             continue
         zeilen += z
         land_zeilen.append(lz)
@@ -368,9 +378,15 @@ def urteil(zeilen, land_zeilen):
     f = collections.Counter(z["feld"] for z in zeilen if z["feld"])
     if f:
         aus.append("Treffer über Tag: " + "  ".join(f"{k}={v}" for k, v in f.most_common()))
-    if land_zeilen:
+    fehlt = [lz for lz in land_zeilen if lz["status"] != "erhoben"]
+    if fehlt:
+        aus.append("⚠ NICHT erhoben (Abruf fehlgeschlagen): "
+                   + ", ".join(lz["iso"] for lz in fehlt)
+                   + " — die Quoten oben gelten nur fuer die uebrigen Laender")
+    erhoben = [lz for lz in land_zeilen if lz["status"] == "erhoben"]
+    if erhoben:
         aus.append("Mapping-Dichte je Land (Bank-POIs je Institut im Bestand):")
-        for lz in sorted(land_zeilen, key=lambda x: -x["n_poi"]):
+        for lz in sorted(erhoben, key=lambda x: -x["n_poi"]):
             aus.append(f"  {lz['iso']} {lz['land'][:14]:16s} {lz['n_poi']:5d} POIs · "
                        f"operator {100*lz['n_operator']//max(lz['n_poi'],1):3d} % · "
                        f"Quote {lz['trefferquote']}")

@@ -1,6 +1,7 @@
-land,iso,n_poi,n_operator,n_name,n_brand,n_institute,n_getroffen,trefferquote
-Estonia,EE,87,28,79,41,6,1,0.333
-Croatia,HR,870,185,837,478,7,5,1.0
-Latvia,LV,110,34,104,50,6,5,1.0
-Malta,MT,88,32,83,25,12,2,0.5
-Portugal,PT,2811,2711,2804,2771,12,6,0.667
+iso,land,status,n_poi,n_operator,n_name,n_brand,n_institute,n_getroffen,trefferquote
+EE,Estonia,erhoben,87,28,79,41,6,1,0.333
+GR,Greece,erhoben,1505,270,1432,1242,4,4,1.0
+HR,Croatia,erhoben,870,185,837,478,7,5,1.0
+LV,Latvia,erhoben,110,34,104,50,6,5,1.0
+MT,Malta,erhoben,88,32,83,25,12,2,0.5
+PT,Portugal,erhoben,2811,2711,2804,2771,12,6,0.667
