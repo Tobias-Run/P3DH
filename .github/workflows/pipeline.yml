@@ -252,6 +252,12 @@ jobs:
       - name: Offenlegungsfrequenz
         run: python scripts/build_disclosure_frequency.py
 
+      # Die zwei Konzerngraphen gegeneinander (#32, #42). Braucht beide Dateien
+      # frisch; laeuft ohne Netz und bricht NICHT ab — ein Widerspruch waere ein
+      # Befund ueber die Quellen, kein Fehler dieser Kette.
+      - name: Konzerngraphen-Abgleich
+        run: python scripts/check_group_graphs.py
+
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
 

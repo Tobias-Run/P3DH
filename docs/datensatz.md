@@ -140,6 +140,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/irb_risk_weights.csv` | Institut × Forderungsklasse × PD-Band → Risikogewicht, PD, LGD | CR6 `26.00.A` |
 | `processed/footprint.csv` | Institut → Länderstreuung des Exposures, Domestizitätsquote, HHI | CCyB1 `67.01.A` |
 | `processed/disclosure_frequency.csv` | Klasse × Template → gemessene Offenlegungsfrequenz | `filing_indicators.csv` |
+| `processed/group_graph_check.csv` | GLEIF-Konzernmutter gegen EZB-Gruppenkopf | beide Graphen |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -809,6 +810,55 @@ Ermessen bleibt offen (#43).
 RF-4.2-Stichtag, und ein geänderter Meldebogen sähe aus wie eine geänderte
 Frequenz. Nachgemessen trägt der Filing-Indicator-Bogen an **allen** Stichtagen
 dieselben 114 Templates — keines fällt weg, keines kommt dazu.
+
+### `group_graph_check.csv` — die zwei Konzerngraphen gegeneinander
+
+Im Repo liegen **zwei** Konzerngraphen: GLEIF Level-2 (`lei_relations.csv`, 189
+oberste Mütter) und die EZB-Hierarchie (`coverage_gap.csv`, 797 Gruppenköpfe).
+`build_eba_reconciliation.py` schließt über den ersten 90 Institutszeilen aus,
+damit ein Länderaggregat Mutter und Tochter nicht doppelt zählt — wäre er
+falsch, wären es die Aggregate auch.
+
+97 Institute haben in beiden Quellen einen Kopf:
+
+| Urteil | n |
+|---|---:|
+| `identisch` | 67 |
+| `ssm_schnitt` | 30 |
+| `konflikt` | **0** |
+
+#### Die 30 Abweichungen sind kein Fehler, sondern die Perimetergrenze
+
+Die beiden Graphen beantworten verschiedene Fragen: die EZB nennt den Kopf der
+**beaufsichtigten Gruppe im SSM**, GLEIF den **Konzern**. In allen 30
+Abweichungen liegt der GLEIF-Kopf außerhalb der EZB-Liste, und bei 27 davon ist
+der EZB-Kopf das Institut selbst — es *ist* die Spitze seiner beaufsichtigten
+Gruppe.
+
+| Institut | EZB-Kopf | GLEIF-Kopf |
+|---|---|---|
+| BofA Securities Europe SA | sie selbst | Bank of America (US) |
+| HSBC Continental Europe | sie selbst | HSBC Holdings (UK) |
+| AB SEB bankas (LT) | sie selbst | SEB AB (SE, außerhalb SSM) |
+
+Die Gegenprobe stützt das: bei **allen 67** Übereinstimmungen liegt der Kopf
+innerhalb der EZB-Liste.
+
+⚠️ **Keiner der beiden ersetzt den anderen.** Für Aggregate ohne Doppelzählung
+ist der EZB-Kopf richtig — eine US-Mutter meldet nicht nach CRR Teil 8 und kann
+in einem EU-Aggregat gar nicht doppelt zählen. Für die Frage, wem ein Institut
+gehört, ist es GLEIF.
+
+#### Warum „0 Konflikte" hier eine Aussage ist
+
+`konflikt` heißt: der GLEIF-Kopf steht in der EZB-Liste, ist dort aber ein
+anderer. Diese Kategorie ist leer — und eine Prüfung, deren interessante
+Kategorie leer ist, sieht aus wie eine, die nichts tut.
+
+Der Unterschied ist die Gegenprobe: 97 Vergleichspaare, davon 30 mit
+abweichendem Kopf. Der Vergleich **greift**, er findet nur keinen Widerspruch.
+Ein Test hält genau das fest — fände er nirgends eine Abweichung, wäre „kein
+Konflikt" kein Ergebnis, sondern ein Symptom.
 
 ## Bekannte Einschränkungen
 
