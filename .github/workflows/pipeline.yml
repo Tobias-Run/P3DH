@@ -245,6 +245,19 @@ jobs:
       - name: IRB-Risikogewichte (CR6)
         run: python scripts/build_irb_risk_weights.py
 
+      # Offenlegungsfrequenz je Template (#34). Muss NACH dem Parsen laufen,
+      # weil sie die Filing-Indicators aller Stichtage braucht — und sie
+      # aendert sich mit jeder neuen Welle, weil ein fuenfter Stichtag die
+      # Muster verlaengert.
+      - name: Offenlegungsfrequenz
+        run: python scripts/build_disclosure_frequency.py
+
+      # Die zwei Konzerngraphen gegeneinander (#32, #42). Braucht beide Dateien
+      # frisch; laeuft ohne Netz und bricht NICHT ab — ein Widerspruch waere ein
+      # Befund ueber die Quellen, kein Fehler dieser Kette.
+      - name: Konzerngraphen-Abgleich
+        run: python scripts/check_group_graphs.py
+
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
 

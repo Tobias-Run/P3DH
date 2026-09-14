@@ -138,6 +138,9 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/omission_profile.csv` | Report → was wird weggelassen, gemessen an den direkten Peers | `filing_indicators.csv` |
 | `processed/omission_templates.csv` | Klasse × Stichtag × Template → Offenlegungsquote der Peer-Gruppe | ebenda |
 | `processed/irb_risk_weights.csv` | Institut × Forderungsklasse × PD-Band → Risikogewicht, PD, LGD | CR6 `26.00.A` |
+| `processed/footprint.csv` | Institut → Länderstreuung des Exposures, Domestizitätsquote, HHI | CCyB1 `67.01.A` |
+| `processed/disclosure_frequency.csv` | Klasse × Template → gemessene Offenlegungsfrequenz | `filing_indicators.csv` |
+| `processed/group_graph_check.csv` | GLEIF-Konzernmutter gegen EZB-Gruppenkopf | beide Graphen |
 
 ### `country_gdp.csv` ist **deskriptiv**
 
@@ -695,6 +698,167 @@ echte Widersprüche zwischen zwei Spalten desselben Reports.
 Achsenauflösung. Der Code steht roh in `klasse_code`. Für den Vergleich reicht
 das — er läuft innerhalb einer Klasse —, aber ohne Klartextnamen ist die Zeile
 fachlich nicht einzuordnen (Lücke im Codebook, #3).
+
+### `footprint.csv` — Länderstreuung, und was `reliable` seit #83 bedeutet
+
+Je (Institut, Konsolidierungskreis, Stichtag) die geografische Verteilung des
+Exposures aus CCyB1 (`67.01.A`, Spalte `c0060`): Domestizitätsquote, Herfindahl
+über die Länderanteile, Zahl der benannten Länder.
+
+#### Zwei Spalten für zwei verschiedene Fragen
+
+| Spalte | sagt |
+|---|---|
+| `reliable` | ist die Zeile **im Ganzen** zu gebrauchen? |
+| `vorbehalt` | **welcher** Einwand greift — `kein_heimatland`, `residual`, `skala` (mehrere mit `\|` verbunden) |
+
+Der Unterschied ist nicht kosmetisch. Bis #83 stand `reliable` bei **28 Zeilen**
+auf `true`, deren Exposure um Größenordnungen zu klein ist. Der Beleg:
+
+| ING Bank Śląski | Gesamtexposure | `domestic_share` |
+|---|---:|---:|
+| 2025-06-30 | 39.863 EUR | 0,9820 |
+| 2025-12-31 | 41.827.858.555 EUR | 0,9858 |
+
+Faktor 10⁶ im Betrag, die Quote praktisch unverändert. Ein gleichmäßiger
+Skalenfehler **kürzt sich in jedem Verhältnis heraus**.
+
+⚠️ **Daraus folgt eine Leseregel.** Wer `total_exposure_eur` summiert, nimmt nur
+`reliable = true`. Wer Domestizität oder Konzentration auswertet, holt sich die
+Zeilen mit `vorbehalt = skala` ausdrücklich **zurück** — dort sind die Quoten
+gültig, und sie wegzulassen verkleinerte die Grundgesamtheit ohne Grund.
+
+#### Warum die Templateebene mitgelesen wird
+
+`scale_flags.csv` kennt Report- und Templateebene. Hier zählen beide — und die
+zweite ist kein Sonderfall: ING Bank Śląski ist **reportweit unauffällig**
+(Versatz −0,15), skaliert ist genau `67.01.*`, also die Quelle dieser Datei. Ein
+Filter nur auf die Reportebene hätte ihn durchgelassen.
+
+Ein `verdacht` genügt hier als Vorbehalt, anders als in `check_plausibility.py`:
+dort geht es um eine Grundgesamtheit, hier um einen einzelnen Betrag, der in
+keine Summe eingehen darf.
+
+Gemessen: 377 Zeilen, davon 335 ohne Vorbehalt, 31 mit `skala`, 14 mit
+`residual`.
+
+### `disclosure_frequency.csv` — die Frequenz, gemessen statt abgeschrieben
+
+Je (Größenklasse, Template) die Offenlegungsfrequenz, abgeleitet aus dem
+Verhalten der Melder. Sie steht in Art. 433a–c CRR; sie zu kodieren wäre
+möglich, aber schwächer — gemessen wird, was Institute **tun**, und Abweichungen
+davon sind selbst ein Befund.
+
+Ohne dieses Modell stolpert jede Auswertung über Stichtage hinweg: ein
+halbjährlich offengelegtes Template „verschwindet" zwischen den Quartalen und
+sieht dabei aus wie eine Auslassung (#43) oder wie ein Sprung (#36).
+
+#### Muster je Institut, nicht Quote je Population
+
+Die naheliegende Messung — der Anteil der Melder je (Template, Stichtag) — ist
+unbrauchbar: **ein Drittel der Quoten liegt zwischen 20 und 80 %**. Eine
+Schwelle darauf erfände eine Trennung, die die Zahlen nicht hergeben.
+
+Gemessen wird deshalb das **Muster eines einzelnen Instituts** über die vier
+Stichtage, als Vierer-Kette `06-30 · 09-30 · 12-31 · 03-31`. Das ist scharf:
+über 4.407 vollständige Paare fallen **96,5 % in genau vier Muster**.
+
+| Muster | Anteil | Bedeutung |
+|---|---:|---|
+| `1010` | 36,2 % | halbjährlich |
+| `0000` | 33,6 % | nie (Template trifft dieses Institut nicht) |
+| `0010` | 15,6 % | jährlich |
+| `1111` | 11,1 % | vierteljährlich |
+| Rest | 3,5 % | uneinheitlich |
+
+Eine Koordinate trägt nur dann eine Frequenz, wenn mindestens 5 Institute
+beitragen **und** das Modalmuster ≥ 60 % erreicht — sonst steht dort
+`uneinheitlich`. Von 184 Koordinaten sind 88 eindeutig.
+
+#### Die Gegenprobe
+
+Drei Frequenzen sind bei #43 unabhängig aus den Populationsquoten abgelesen
+worden und kommen hier wieder heraus:
+
+| Template | | gemessen | Modalanteil |
+|---|---|---|---:|
+| `61.00` | KM1 | vierteljährlich | 98 % von 58 |
+| `74.00` | LIQ2 | halbjährlich | 93 % von 58 |
+| `19.03` | OR3 | jährlich | 93 % von 58 |
+
+#### Der inhaltliche Befund: Proportionalität, sichtbar gemacht
+
+Dieselbe Angabe hat je nach Größenklasse eine andere Frequenz. `19.03` (OR3) ist
+für große EEA-Institute **jährlich**, für Tochtergesellschaften **nie** — Art.
+433a gegen 433b/c, an den Daten abgelesen.
+
+#### Drei Vorbehalte
+
+**1. Nur 82 der 476 Institute tragen ein Muster bei.** Ein Muster braucht alle
+vier Stichtage — und wer nur zum Jahresende meldet, hat keines. Das ist keine
+Stichprobe, sondern eine Auswahl nach genau der Eigenschaft, die gemessen wird.
+Für `Other highest EEA` bleiben **8 Paare**; für diese Klasse sagt die Datei
+nichts.
+
+**2. Vier Stichtage unterscheiden „jährlich" nicht von „einmalig".** Das
+entscheidet erst die nächste Welle.
+
+**3. `nie` heißt nicht „müsste nicht".** Die Trennung von Nichtanwendbarkeit und
+Ermessen bleibt offen (#43).
+
+⚠️ **Geprüft, nicht angenommen:** 2026-03-31 ist zugleich der einzige
+RF-4.2-Stichtag, und ein geänderter Meldebogen sähe aus wie eine geänderte
+Frequenz. Nachgemessen trägt der Filing-Indicator-Bogen an **allen** Stichtagen
+dieselben 114 Templates — keines fällt weg, keines kommt dazu.
+
+### `group_graph_check.csv` — die zwei Konzerngraphen gegeneinander
+
+Im Repo liegen **zwei** Konzerngraphen: GLEIF Level-2 (`lei_relations.csv`, 189
+oberste Mütter) und die EZB-Hierarchie (`coverage_gap.csv`, 797 Gruppenköpfe).
+`build_eba_reconciliation.py` schließt über den ersten 90 Institutszeilen aus,
+damit ein Länderaggregat Mutter und Tochter nicht doppelt zählt — wäre er
+falsch, wären es die Aggregate auch.
+
+97 Institute haben in beiden Quellen einen Kopf:
+
+| Urteil | n |
+|---|---:|
+| `identisch` | 67 |
+| `ssm_schnitt` | 30 |
+| `konflikt` | **0** |
+
+#### Die 30 Abweichungen sind kein Fehler, sondern die Perimetergrenze
+
+Die beiden Graphen beantworten verschiedene Fragen: die EZB nennt den Kopf der
+**beaufsichtigten Gruppe im SSM**, GLEIF den **Konzern**. In allen 30
+Abweichungen liegt der GLEIF-Kopf außerhalb der EZB-Liste, und bei 27 davon ist
+der EZB-Kopf das Institut selbst — es *ist* die Spitze seiner beaufsichtigten
+Gruppe.
+
+| Institut | EZB-Kopf | GLEIF-Kopf |
+|---|---|---|
+| BofA Securities Europe SA | sie selbst | Bank of America (US) |
+| HSBC Continental Europe | sie selbst | HSBC Holdings (UK) |
+| AB SEB bankas (LT) | sie selbst | SEB AB (SE, außerhalb SSM) |
+
+Die Gegenprobe stützt das: bei **allen 67** Übereinstimmungen liegt der Kopf
+innerhalb der EZB-Liste.
+
+⚠️ **Keiner der beiden ersetzt den anderen.** Für Aggregate ohne Doppelzählung
+ist der EZB-Kopf richtig — eine US-Mutter meldet nicht nach CRR Teil 8 und kann
+in einem EU-Aggregat gar nicht doppelt zählen. Für die Frage, wem ein Institut
+gehört, ist es GLEIF.
+
+#### Warum „0 Konflikte" hier eine Aussage ist
+
+`konflikt` heißt: der GLEIF-Kopf steht in der EZB-Liste, ist dort aber ein
+anderer. Diese Kategorie ist leer — und eine Prüfung, deren interessante
+Kategorie leer ist, sieht aus wie eine, die nichts tut.
+
+Der Unterschied ist die Gegenprobe: 97 Vergleichspaare, davon 30 mit
+abweichendem Kopf. Der Vergleich **greift**, er findet nur keinen Widerspruch.
+Ein Test hält genau das fest — fände er nirgends eine Abweichung, wäre „kein
+Konflikt" kein Ergebnis, sondern ein Symptom.
 
 ## Bekannte Einschränkungen
 
