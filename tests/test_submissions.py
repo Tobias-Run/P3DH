@@ -114,6 +114,30 @@ class KopplungTest(unittest.TestCase):
                           if "manifest_latest.csv" in z and not z.strip().startswith("#")]
                 self.assertEqual(zeilen, [], f"{name} greift noch darauf zurück")
 
+    def test_the_documentation_does_not_lead_back_into_the_trap(self):
+        """Der Defekt aus #88 hatte zwei Oberflächen, und die Defaults waren
+        die kleinere. Die grössere ist `docs/phase1_ingestion.md`: das Issue
+        nennt sie wörtlich — „Betroffen ist, wer die Skripte von Hand aufruft,
+        und genau das zeigt `docs/phase1_ingestion.md`."
+
+        Die Doku wies bis September 2026 an, `manifest_latest.csv` zu
+        konsumieren, und nannte den alten Gruppenschlüssel INKLUSIVE `country`.
+        Wer ihr folgte, bekam 1.746 statt 2.829 Einreichungen — lautlos.
+
+        Erlaubt bleibt die Datei nur als ausgewiesene Warnung (Zeilen, die mit
+        `>` beginnen). Als Anweisung darf sie nicht wieder auftauchen.
+        """
+        doc = (ROOT / "docs" / "phase1_ingestion.md").read_text(encoding="utf-8")
+        anweisung = [z for z in doc.splitlines()
+                     if "manifest_latest.csv" in z and not z.lstrip().startswith(">")]
+        self.assertEqual(anweisung, [],
+                         "die Doku schickt Leser wieder auf das verkürzte Manifest")
+        self.assertIn("manifest_parse.csv", doc,
+                      "die Doku nennt das richtige Manifest gar nicht")
+        # Und der Schlüssel, der dort steht, muss der produktive sein.
+        self.assertNotIn("(lei, consolidation, country, module, refdate)", doc,
+                         "der alte Schlüssel mit `country` steht wieder in der Doku")
+
     def test_a_missing_parse_manifest_is_an_error_not_a_fallback(self):
         """Fehlt das Parse-Manifest, ist die Kette unvollständig — und das
         gehört gesagt, nicht umgangen."""
