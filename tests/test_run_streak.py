@@ -183,6 +183,32 @@ class MeldungTest(unittest.TestCase):
         self.assertIn("zweimal hintereinander", text)
 
 
+def job_block(text, name):
+    """Die Zeilen EINES Jobs aus pipeline.yml — ohne PyYAML.
+
+    Das Projekt liest diese Datei auch sonst textuell
+    (`check_pipeline_order.py`) und verzichtet bewusst auf die Abhängigkeit;
+    PyYAML steht nicht in `requirements.txt`, und eine projektweite Dependency
+    für einen einzigen Test wäre unverhältnismässig. Genau daran ist der erste
+    Anlauf in CI gescheitert — lokal war PyYAML da, auf dem Runner nicht.
+
+    Abgegrenzt wird über die Einrückung: ein Job beginnt bei zwei Leerzeichen
+    und endet beim nächsten Geschwister auf derselben Ebene.
+    """
+    aus, drin = [], False
+    for z in text.splitlines():
+        if z.startswith(f"  {name}:"):
+            drin = True
+            continue
+        if drin:
+            if z.startswith("  ") and not z.startswith("   ") and z[2:3].strip():
+                break                      # naechster Job
+            if z and not z.startswith(" "):
+                break                      # naechster Abschnitt
+            aus.append(z)
+    return aus
+
+
 class WorkflowTest(unittest.TestCase):
     """Der Workflow muss halten, was das Skript voraussetzt."""
 
@@ -199,14 +225,12 @@ class WorkflowTest(unittest.TestCase):
         """Als Schritt mit `if: failure()` innerhalb des Pipeline-Jobs würde
         die Meldung übersprungen, wenn der Lauf früh abbricht — beim Checkout
         oder bei `pip install`. Gerade dann braucht es sie."""
-        import yaml
-        d = yaml.safe_load(self.wf)
-        self.assertIn("melden", d["jobs"])
-        m = d["jobs"]["melden"]
-        self.assertEqual(m.get("needs"), "pipeline",
-                         "ohne `needs: pipeline` haengt die Meldung an nichts")
-        self.assertIn("failure()", m.get("if", ""))
-        self.assertIn("schedule", m.get("if", ""))
+        text = "\n".join(job_block(self.wf, "melden"))
+        self.assertTrue(text, "Job `melden` fehlt in pipeline.yml")
+        self.assertIn("needs: pipeline", text,
+                      "ohne `needs: pipeline` haengt die Meldung an nichts")
+        self.assertIn("failure()", text)
+        self.assertIn("schedule", text)
 
     def test_the_job_uses_the_files_the_script_writes(self):
         self.assertIn("interim/meldung_titel.txt", self.wf)
@@ -216,6 +240,52 @@ class WorkflowTest(unittest.TestCase):
         """Eine Erwähnung im Text erzeugt keine verlässliche Benachrichtigung,
         eine Zuweisung schon."""
         self.assertIn("--assignee Tobias-Run", self.wf)
+
+    def test_the_extractor_finds_the_job_in_the_real_file(self):
+        block = "\n".join(job_block(self.wf, "melden"))
+        self.assertIn("Strecke pruefen", block)
+        self.assertEqual(job_block(self.wf, "gibtsnicht"), [])
+
+
+class BlockTest(unittest.TestCase):
+    """Der Extraktor selbst, an einem KÜNSTLICHEN Beispiel.
+
+    Gegen `pipeline.yml` geprüft wäre die Abgrenzung nicht prüfbar: `melden` ist
+    dort der letzte Job, es gibt also gar nichts, worüber der Extraktor hinaus
+    laufen könnte. Ein Test, der ihn dort misst, läuft über nichts und meldet
+    Erfolg — dieselbe Falle, gegen die diese ganze Datei geschrieben ist.
+    """
+
+    BEISPIEL = (
+        "jobs:\n"
+        "  erster:\n"
+        "    runs-on: ubuntu-latest\n"
+        "    steps:\n"
+        "      - name: A\n"
+        "  melden:\n"
+        "    needs: erster\n"
+        "    steps:\n"
+        "      - name: B\n"
+        "  dritter:\n"
+        "    steps:\n"
+        "      - name: C\n"
+        "\n"
+        "footer: x\n"
+    )
+
+    def test_it_stops_at_the_next_job(self):
+        block = "\n".join(job_block(self.BEISPIEL, "melden"))
+        self.assertIn("name: B", block)
+        self.assertNotIn("name: C", block, "läuft in den nächsten Job hinein")
+        self.assertNotIn("name: A", block, "greift den vorigen Job mit")
+
+    def test_it_stops_at_the_end_of_the_jobs_section(self):
+        block = "\n".join(job_block(self.BEISPIEL, "dritter"))
+        self.assertIn("name: C", block)
+        self.assertNotIn("footer", block)
+
+    def test_an_unknown_job_yields_nothing(self):
+        self.assertEqual(job_block(self.BEISPIEL, "gibtsnicht"), [])
 
 
 if __name__ == "__main__":
