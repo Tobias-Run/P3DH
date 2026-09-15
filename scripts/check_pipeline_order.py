@@ -116,6 +116,8 @@ ABHAENGIG = {
     # Repo, deshalb steht sie hier als Erzeugnis und nicht als Vorbedingung.
     "fetch_wikidata_entities.py": (["processed/long/p3dh_long.parquet"],
                                    ["codebook/wikidata_entities.csv"]),
+    "build_equity_link.py": (["codebook/wikidata_entities.csv"],
+                             ["processed/equity_link.csv"]),
     "check_event_study_feasibility.py": (
         ["interim/edap_recon/manifest_full.csv",
          "codebook/wikidata_entities.csv",

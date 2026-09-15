@@ -141,6 +141,29 @@
   td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:default}
   td.empty{background:var(--empty)}
   /* "Fehlt != Null": Coverage-Kasten + Sektions-Badge */
+  /* Gespeicherte Sichten (#50 Punkt 5) — Klappmenue in der Kopfleiste. */
+  .sichten{position:relative}
+  .sichten>summary{cursor:pointer;list-style:none;font-size:var(--f0);
+                   color:var(--ink2);padding:.15rem .4rem;border-radius:4px}
+  .sichten>summary::-webkit-details-marker{display:none}
+  .sichten>summary:hover{background:var(--soft)}
+  .sichtbox{position:absolute;z-index:30;top:100%;right:0;min-width:17rem;
+            max-height:20rem;overflow:auto;background:var(--card);
+            border:1px solid var(--line);border-radius:6px;padding:.45rem .55rem;
+            box-shadow:0 3px 14px rgba(0,0,0,.16);text-align:left}
+  .sichtneu{display:flex;gap:.3rem;margin-bottom:.35rem}
+  .sichtneu input{flex:1;min-width:0;font:inherit;font-size:var(--f0);
+                  padding:.2rem .35rem;border:1px solid var(--line);border-radius:4px}
+  .sichtzeile{display:flex;align-items:center;gap:.4rem;padding:.12rem 0}
+  .sichtzeile a{flex:1;color:var(--ink);text-decoration:none;font-size:var(--f0);
+                overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sichtzeile a:hover{text-decoration:underline}
+  .sichtzeile.aktiv a{font-weight:600}
+  .sichtweg{border:0;background:none;color:var(--muted);cursor:pointer;
+            font-size:var(--f1);line-height:1;padding:0 .2rem}
+  /* Bewusst KEIN Akzentrot: das markiert in diesem Viewer Fokus, nicht
+     Gefahr. Eine Sicht zu entfernen ist keine Warnung wert. */
+  .sichtweg:hover{color:var(--ink)}
   /* Spaltenauswahl (#50 Punkt 3) — ein Klappmenue in der Benchmark-Leiste. */
   .colsel{position:relative;padding:0}
   .colsel>summary{cursor:pointer;list-style:none;padding:.2rem .45rem}
@@ -368,6 +391,13 @@
     <button id="tabCompare">Vergleich <span id="cmpN"></span></button>
   </nav>
   <div class="hright">
+    <!-- Gespeicherte Sichten (#50 Punkt 5). Gespeichert wird der Hash, also
+         genau das, was auch ein geteilter Link traegt — eine Sicht ist damit
+         immer auch weitergebbar. -->
+    <details class="sichten" id="sichtMenu">
+      <summary title="Den aktuellen Zustand — Ansicht, Filter, Profil, Sortierung, Spalten, Auswahl — unter einem Namen merken. Gespeichert wird der teilbare Link, die Sicht laesst sich also auch kopieren.">Sichten <span id="sichtN" class="cl"></span></summary>
+      <div class="sichtbox" id="sichtBox"></div>
+    </details>
     <button class="iconbtn" id="themeBtn" title="Dark Mode umschalten">◐</button>
     <a class="hlink" href="../../index.html">About</a>
     <a class="hlink" href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md" title="Public data, research use — not affiliated with EBA/GLEIF">Disclaimer</a>
@@ -421,10 +451,39 @@ let CMPTPL = store.cmptpl || '61.00';
    den reinen Meldewert will, schaltet ihn ab; der Wert selbst ändert sich
    dadurch nie. */
 let CTX = store.ctx ?? true;
+/* Gespeicherte Sichten (#50 Punkt 5).
+
+   Gespeichert wird der HASH, nicht ein zweites Zustandsformat. Das ist der
+   Punkt: eine Sicht, die nur dieses Geraet kennt, waere das Gegenteil dessen,
+   was Punkt 1 erreichen wollte — so ist jede gespeicherte Sicht zugleich ein
+   teilbarer Link, den man kopieren kann. Und sie kann nicht veralten, weil sie
+   denselben Weg nimmt wie ein geteilter Link, inklusive der Verwerfung
+   unbekannter Werte.
+
+   [{n: Name, h: Hash}] — bewusst kurze Schluessel, localStorage ist knapp. */
+let SICHTEN = Array.isArray(store.sichten) ? store.sichten : [];
+const SICHT_MAX = 20;
 function persist(){ localStorage.setItem('p3dh', JSON.stringify({
   scale:SCALE, eur:EUR, pins:[...PINS], dark:DARK, cmptpl:CMPTPL,
+  sichten:SICHTEN,
   themes:(typeof OPENTHEMES!=='undefined'?[...OPENTHEMES]:undefined),
   bmp:(typeof BMP!=='undefined'?BMP:undefined)})); }
+/* Eine Sicht ablegen. Gibt die neue Liste zurueck.
+
+   Derselbe Name ueberschreibt, statt eine zweite Zeile mit gleichem Namen zu
+   erzeugen — zwei Eintraege "Schweden" sind nicht unterscheidbar und damit
+   beide wertlos. */
+function sichtSpeichern(name, hash, liste, max){
+  liste = liste || SICHTEN; max = max || SICHT_MAX;
+  name = (name||'').trim();
+  if(!name || !hash) return liste;
+  const ohne = liste.filter(s => s.n !== name);
+  ohne.unshift({n:name, h:hash});
+  return ohne.slice(0, max);
+}
+function sichtLoeschen(name, liste){
+  return (liste||SICHTEN).filter(s => s.n !== name);
+}
 function applyTheme(){ document.documentElement.dataset.theme = DARK?'dark':'light'; }
 applyTheme();
 
@@ -2735,6 +2794,49 @@ window.addEventListener('hashchange',route);
 
 /* theme + keyboard */
 document.getElementById('themeBtn').onclick=()=>{ DARK=!DARK; applyTheme(); persist(); };
+
+/* ===== Gespeicherte Sichten (#50 Punkt 5) ==================================
+   Der Kasten wird bei jedem Oeffnen neu gebaut: der aktuelle Hash aendert sich
+   staendig, und eine Liste, die den Stand von vorhin zeigt, speicherte beim
+   naechsten Klick etwas anderes als das, was der Nutzer sieht. */
+function sichtenZeichnen(){
+  const box=document.getElementById('sichtBox');
+  const zaehler=document.getElementById('sichtN');
+  if(!box) return;
+  if(zaehler) zaehler.textContent = SICHTEN.length ? `(${SICHTEN.length})` : '';
+  const jetzt=location.hash||'';
+  box.innerHTML =
+    `<div class="sichtneu"><input id="sichtName" placeholder="Diese Ansicht merken als…"
+        maxlength="40"><button id="sichtAdd" title="Speichert den aktuellen Link unter diesem Namen">＋</button></div>`
+    + (SICHTEN.length
+        ? SICHTEN.map(v=>`<div class="sichtzeile${v.h===jetzt?' aktiv':''}">
+            <a href="${esc(v.h)}" data-go="${esc(v.n)}">${esc(v.n)}</a>
+            <button class="sichtweg" data-weg="${esc(v.n)}" title="Diese Sicht entfernen">×</button></div>`).join('')
+        : `<div class="cl" style="padding:.3rem 0">Noch keine. Gespeichert wird der
+             aktuelle Link — er laesst sich also auch weitergeben.</div>`);
+  const feld=document.getElementById('sichtName');
+  const legeAn=()=>{
+    const neu=sichtSpeichern(feld.value, location.hash||'');
+    if(neu===SICHTEN) return;              // leerer Name -> nichts tun
+    SICHTEN=neu; persist(); feld.value=''; sichtenZeichnen();
+  };
+  document.getElementById('sichtAdd').onclick=legeAn;
+  feld.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); legeAn(); } });
+  box.querySelectorAll('[data-weg]').forEach(b=>{
+    b.onclick=e=>{ e.preventDefault(); e.stopPropagation();
+      SICHTEN=sichtLoeschen(b.dataset.weg); persist(); sichtenZeichnen(); };
+  });
+  // Der Link traegt den Hash selbst; ein Klick soll aber auch dann etwas tun,
+  // wenn der Hash derselbe ist wie der aktuelle (dann feuert `hashchange`
+  // nicht, und die Sicht saehe kaputt aus).
+  box.querySelectorAll('a[data-go]').forEach(a=>{
+    a.onclick=()=>{ document.getElementById('sichtMenu').open=false;
+                    setTimeout(route, 0); };
+  });
+}
+document.getElementById('sichtMenu').addEventListener('toggle',function(){
+  if(this.open) sichtenZeichnen();
+});
 document.addEventListener('keydown',e=>{
   if(e.key==='/' && document.activeElement.tagName!=='INPUT' && document.activeElement.tagName!=='SELECT'){
     e.preventDefault(); document.getElementById('reportFilter').focus();

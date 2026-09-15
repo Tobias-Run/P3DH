@@ -354,6 +354,75 @@ def pruefe():
                       covkopf: (document.querySelector('.covhead')||{}).textContent||''};
             }""")
 
+            # Gespeicherte Sichten (#50 Punkt 5). Der Punkt ist nicht, dass
+            # ein Name in einer Liste steht — sondern dass die Sicht den
+            # ZUSTAND zurueckbringt. Eine Sicht, die nur den Namen merkt,
+            # sieht genauso aus und tut nichts.
+            sichten = pg.evaluate("""async () => {
+              location.hash = '#benchmark?prof=npl&sort=npl_hh.asc';
+              await new Promise(s=>setTimeout(s,700));
+              const menu=document.getElementById('sichtMenu');
+              if(!menu) return {keine:1};
+              menu.open=true; menu.dispatchEvent(new Event('toggle'));
+              await new Promise(s=>setTimeout(s,200));
+              const feld=document.getElementById('sichtName');
+              if(!feld) return {keinFeld:1};
+              // Nach jedem Speichern wird der Kasten NEU gebaut. Das Feld
+              // von vorhin ist dann abgehaengt, und wer es weiterbenutzt,
+              // schreibt ins Leere — der zweite Klick taete gar nichts, und
+              // der Duplikat-Test prueefte nie Duplikate.
+              const tippe = (wert) => {
+                const f=document.getElementById('sichtName');
+                f.value=wert;
+                document.getElementById('sichtAdd').click();
+              };
+              tippe('Probe NPL');
+              await new Promise(s=>setTimeout(s,200));
+              // Zweimal derselbe Name darf keine zweite Zeile erzeugen: zwei
+              // Eintraege "Probe NPL" sind nicht unterscheidbar und damit
+              // beide wertlos.
+              tippe('Probe NPL');
+              await new Promise(s=>setTimeout(s,200));
+              // Und eine zweite, die gleich wieder geloescht wird.
+              tippe('Wegwerf');
+              await new Promise(s=>setTimeout(s,200));
+              const nachAnlegen = (JSON.parse(
+                localStorage.getItem('p3dh')||'{}').sichten||[]).length;
+              const weg=document.querySelector('[data-weg="Wegwerf"]');
+              if(weg){ weg.click(); await new Promise(s=>setTimeout(s,200)); }
+              const nachLoeschen = (JSON.parse(
+                localStorage.getItem('p3dh')||'{}').sichten||[]).length;
+              const gespeichert = JSON.parse(
+                localStorage.getItem('p3dh')||'{}').sichten||[];
+              const eintrag = gespeichert.find(v=>v.n==='Probe NPL') || {};
+              // NICHT navigieren, solange der Hash fehlt: location.hash=''
+              // laedt die Seite neu und reisst den Kontext mit. Ein Absturz
+              // ist kein Befund, er sieht nur aus wie einer.
+              if(!eintrag.h || eintrag.h[0] !== '#')
+                return {n:gespeichert.length, name:eintrag.n||'', hash:eintrag.h||'',
+                        nachAnlegen, nachLoeschen};
+              // Zwischenzustand, der sich in BEIDEN Feldern unterscheidet —
+              // sonst belegt die Rueckkehr nur eines davon.
+              location.hash = '#benchmark?prof=km1&sort=lev.desc';
+              await new Promise(s=>setTimeout(s,700));
+              const zwischen = {prof: BMP, sort: bmSort && bmSort.col};
+              menu.open=true; menu.dispatchEvent(new Event('toggle'));
+              await new Promise(s=>setTimeout(s,200));
+              const a=[...document.querySelectorAll('.sichtzeile a')]
+                        .find(x=>x.textContent.trim()==='Probe NPL');
+              if(!a) return {nichtGelistet:1, n:gespeichert.length};
+              location.hash=a.getAttribute('href');
+              await new Promise(s=>setTimeout(s,800));
+              // Die Obergrenze direkt: ueber die Oberflaeche braeuchte das
+              // 21 Speichervorgaenge, und eine Liste, die unbegrenzt waechst,
+              // sprengt irgendwann still den localStorage.
+              let lang=[]; for(let i=0;i<9;i++) lang=sichtSpeichern('S'+i,'#h'+i,lang,3);
+              return {n:gespeichert.length, name:eintrag.n, hash:eintrag.h,
+                      nachAnlegen, nachLoeschen, deckel:lang.length,
+                      juengste:(lang[0]||{}).n,
+                      zwischen, nachher:{prof: BMP, sort: bmSort && bmSort.col}};
+            }""")
+
             # Spaltenauswahl (#50 Punkt 3): kommt sie im DOM an, wirkt sie auf
             # die Tabelle, landet sie im Hash — und bleibt die Spalte stehen,
             # nach der sortiert wird? Eine Rangfolge ohne ihren Grund waere im
@@ -566,6 +635,52 @@ def pruefe():
         if leer["name"] and leer["name"] == leer["lei"]:
             fehler.append("der leere Report (#28) steht unter seiner nackten LEI — "
                           "sichtbar und anonym ist die halbe Reparatur")
+
+    if sichten.get("keine"):
+        fehler.append("kein Menü für gespeicherte Sichten (#50 Punkt 5) in der "
+                      "Kopfleiste")
+    elif sichten.get("keinFeld") or sichten.get("nichtGelistet"):
+        fehler.append("eine gespeicherte Sicht (#50 Punkt 5) lässt sich nicht "
+                      "anlegen oder erscheint nicht in der Liste")
+    else:
+        print(f"  Gespeicherte Sichten (#50 P5): {sichten['n']} Eintrag/Einträge · "
+              f"'{sichten.get('name')}' · {sichten.get('zwischen')} → "
+              f"{sichten.get('nachher')}")
+        if sichten.get("nachAnlegen") != 2:
+            fehler.append(
+                f"zweimal derselbe Name plus eine zweite Sicht ergibt "
+                f"{sichten.get('nachAnlegen')} Einträge statt 2 — gleichnamige "
+                "Sichten sind nicht unterscheidbar und damit beide wertlos")
+        if sichten.get("nachLoeschen") != sichten.get("nachAnlegen", 0) - 1:
+            fehler.append(
+                f"Löschen führt von {sichten.get('nachAnlegen')} auf "
+                f"{sichten.get('nachLoeschen')} — die Schaltfläche tut nichts")
+        if sichten.get("deckel") != 3:
+            fehler.append(f"die Obergrenze greift nicht ({sichten.get('deckel')} "
+                          "statt 3) — eine Liste, die unbegrenzt wächst, sprengt "
+                          "irgendwann still den localStorage")
+        if sichten.get("juengste") != "S8":
+            fehler.append("die neueste Sicht steht nicht vorn — beim Abschneiden "
+                          "fielen dann die neuen heraus statt der alten")
+        if sichten["n"] != 1:
+            fehler.append(f"zweimal derselbe Name ergibt {sichten['n']} Einträge — "
+                          "zwei gleichnamige Sichten sind nicht unterscheidbar "
+                          "und damit beide wertlos")
+        if not str(sichten.get("hash") or "").startswith("#"):
+            fehler.append("die gespeicherte Sicht enthält keinen Hash — dann "
+                          "merkt sie den Namen und nicht den Zustand")
+        elif sichten.get("nachher"):
+            vorher, nachher = sichten["zwischen"], sichten["nachher"]
+            if vorher == nachher:
+                fehler.append("der Zustand hat sich beim Zurückspringen nicht "
+                              "geändert — die Probe belegt nichts")
+            if nachher.get("prof") != "npl":
+                fehler.append("die gespeicherte Sicht bringt das Profil nicht "
+                              f"zurück (steht auf {nachher.get('prof')})")
+            if nachher.get("sort") != "npl_hh":
+                fehler.append("die gespeicherte Sicht bringt die Sortierung "
+                              f"nicht zurück (steht auf {nachher.get('sort')}) — "
+                              "dann zeigt sie eine andere Spitze")
 
     if spalten.get("keine"):
         fehler.append("keine Spaltenauswahl (#50) in der Benchmark-Leiste — "
