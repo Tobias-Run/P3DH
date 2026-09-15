@@ -76,3 +76,7 @@ interim/wikidata_cache/
 # geplante Laeufe hintereinander reissen; gehoeren nicht ins Repository.
 interim/meldung.md
 interim/meldung_titel.txt
+
+# DISDOCS-Messungen (#38): Stichproben, entstehen beim Messen neu.
+interim/disdocs_language.csv
+interim/disdocs_language_paare.csv

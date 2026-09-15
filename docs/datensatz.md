@@ -831,6 +831,60 @@ Der Ländereffekt ist trotzdem gross — die Mediane reichen von 0,061 (Irland) 
 will, braucht Instituts- und keine Ländermerkmale; das ist die Richtung von #13
 und #35.
 
+### `disdocs_language.csv` — in welcher Sprache berichten die Institute?
+
+Die Vorbedingung aus #38, und sie war der Grund, warum dort nichts gebaut wurde:
+
+> ⚠️ **31 Länder, entsprechend viele Sprachen.** Eine Schlagwortsuche auf
+> Deutsch oder Englisch erfasst einen verzerrten Ausschnitt.
+
+`probe_disdocs.py` hatte den Extraktionstest erledigt (97 % der PDFs tragen eine
+Textebene), die Sprache aber blieb offen: **kein einziges PDF gibt ein `/Lang`
+an.** Erkannt wird sie deshalb über Funktionswörter — Artikel, Präpositionen,
+Konjunktionen, die in jedem Sachtext vorkommen und nicht am Fachgebiet hängen.
+
+#### Die Antwort
+
+| | n=58 |
+|---|---:|
+| Englisch | 30 (52 %) |
+| Deutsch | 11 |
+| Italienisch | 6 |
+| übrige (cs, da, hr, pl, sk, sv, es, fr) | 11 |
+
+**Eine Schlagwortsuche nur auf Englisch erreichte 52 % des Korpus.** Die
+Verzerrung, vor der das Issue warnt, ist damit beziffert statt vermutet — und
+sie ist gross genug, dass jede einsprachige Auswertung die Hälfte der
+Institute systematisch auslässt.
+
+#### Warum man dem Erkenner glauben darf
+
+Ein Spracherkenner ohne Gütemaß ist eine Behauptung. Zwei Gegenproben, beide
+unabhängig von ihm:
+
+1. **Gegen das Sitzland.** Jede erkannte Sprache ist entweder die Amtssprache
+   des Sitzlands (32) oder Englisch (26). **Null** implausible Treffer — bei
+   einem verrauschten Erkenner stünden hier zufällige Sprachen.
+2. **Gegen sich selbst.** In einer gezielten Stichprobe von 15 Instituten mit
+   mehreren Berichten tragen **14 von 14** durchgehend dieselbe Sprache. Ein
+   Sprachwechsel zwischen Stichtagen wäre entweder ein Erkennungsfehler oder
+   eine echte Umstellung — beides käme in den Bericht.
+
+Die zufällige Stichprobe enthielt genau *ein* Institut mit zwei Berichten; für
+die zweite Gegenprobe wird deshalb **gezielt** gezogen (`--paare`). Zufällig zu
+ziehen und dann über das Ergebnis zu reden wäre eine Aussage über das Glück der
+Ziehung.
+
+#### Was der Erkenner nicht kann
+
+Bei eng verwandten Sprachen (Tschechisch/Slowakisch, Dänisch/Norwegisch/
+Schwedisch) trennen Funktionswörter nur knapp. Liegt der Abstand zum
+Zweitplatzierten unter der Schranke, lautet das Urteil `unsicher` statt der
+wahrscheinlicheren Sprache — in der Paarstichprobe traf das 1 von 30.
+
+**Korpusgrösse:** 1.073 Pakete, hochgerechnet rund 2 GB (Median 0,99 MB je
+Paket, max 11,3 MB). Der gesamte XBRL-Bestand liegt bei 13 MB.
+
 ### `event_study_feasibility.csv` — trägt der Bestand eine Ereignisstudie?
 
 Die Vorfrage aus #39, beantwortet statt geschätzt. Wir besitzen den
