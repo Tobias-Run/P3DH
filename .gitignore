@@ -70,3 +70,4 @@ processed/zweig_a/data/
 interim/placement_report.csv
 interim/unit_consistency_report.csv
 interim/osm_cache/
+interim/wikidata_cache/

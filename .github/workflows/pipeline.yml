@@ -289,6 +289,24 @@ jobs:
       - name: Laendereffekt (#11)
         run: python scripts/check_country_effect.py
 
+      # Wikidata ueber die LEI (#40). EINZIGER Schritt dieser Kette, der ein
+      # FREMDES Netz braucht (query.wikidata.org). Er bricht den Lauf deshalb
+      # nicht ab: die Zuordnung liegt in codebook/ im Repo, ein Ausfall laesst
+      # sie unveraendert und der naechste Schritt rechnet auf dem letzten Stand
+      # weiter. Der Skript-interne Schutz verhindert, dass eine halbe Antwort
+      # eine ganze ersetzt.
+      - name: Wikidata-Merkmale (#40)
+        continue-on-error: true
+        run: python scripts/fetch_wikidata_entities.py
+
+      # Anteil der Risikotraeger (#40). Braucht das Wikidata-Codebook UND die
+      # Plausibilitaetsbefunde: Reports mit `rem_per_head`-Befund (#17) liefern
+      # die eine Haelfte des Quotienten und fliegen raus. Laeuft es vor
+      # check_plausibility, ist der Filter leer und ein bekannter Ausreisser
+      # geht als Governance-Aussage durch.
+      - name: Risikotraeger-Anteil (#40)
+        run: python scripts/build_risk_taker_share.py
+
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
 

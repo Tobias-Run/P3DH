@@ -141,6 +141,8 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/irrbb_sensitivity.csv` | Report × Zinsschock → ΔEVE, ΔNII, Supervisory Outlier Test | IRRBB1 `68.00`, KM1 `61.00` |
 | `processed/peer_similarity.csv` | Report → die fünf ähnlichsten Institute nach Länderprofil | CCyB1 `67.01.A` |
 | `processed/country_effect.csv` | Bankattribut × Länderkennzahl → Varianzzerlegung und Korrelation | `footprint.csv`, `country_gdp.csv` |
+| `processed/risk_taker_share.csv` | Report → Anteil der „identified staff" an der Belegschaft, grössenbereinigt | REM1 `30.01` + `wikidata_entities.csv` |
+| `codebook/wikidata_entities.csv` | LEI → Wikidata-Item, Belegschaft mit Stichtag, Gründung, Rechtsform, Börsennotierung | Wikidata (`P1278`) |
 | `processed/irb_risk_weights.csv` | Institut × Forderungsklasse × PD-Band → Risikogewicht, PD, LGD | CR6 `26.00.A` |
 | `processed/footprint.csv` | Institut → Länderstreuung des Exposures, Domestizitätsquote, HHI | CCyB1 `67.01.A` |
 | `processed/disclosure_frequency.csv` | Klasse × Template → gemessene Offenlegungsfrequenz | `filing_indicators.csv` |
@@ -776,6 +778,74 @@ Der Ländereffekt ist trotzdem gross — die Mediane reichen von 0,061 (Irland) 
 0,993 (Norwegen). Er ist nur kein *Makro*effekt. Wer die Domestizität erklären
 will, braucht Instituts- und keine Ländermerkmale; das ist die Richtung von #13
 und #35.
+
+### `risk_taker_share.csv` — wie breit zieht ein Haus den Kreis der Risikoträger?
+
+Die Kennzahl aus #40, und sie entsteht **erst durch die Kombination**: REM1
+(`30.01` r0010) liefert die Zahl der „identified staff" nach CRD Art. 92,
+Wikidata über die LEI (`P1278` → `P1128`) die Gesamtbelegschaft. Der Quotient
+sagt, wie weit ein Institut den Kreis der Mitarbeiter zieht, deren Tätigkeit sich
+wesentlich auf das Risikoprofil auswirkt — ein Ermessensspielraum, für den es
+bisher keine vergleichenden Zahlen gibt. 83 Reports, 68 im Modell.
+
+#### Die Rohquote misst die Grösse, nicht das Ermessen
+
+Roh reicht der Anteil von 0,30 % bis 54,67 % — Faktor 180. Das sieht nach einem
+gewaltigen Ermessensunterschied aus und ist zum grössten Teil keiner:
+
+| Belegschaft | n | Median-Anteil |
+|---|---:|---:|
+| < 500 | 18 | 14,37 % |
+| 500–5.000 | 28 | 5,80 % |
+| 5.000–50.000 | 18 | 1,81 % |
+| > 50.000 | 4 | 1,14 % |
+
+`log10(Belegschaft)` gegen `log10(Anteil)`: **r = −0,869, r² = 0,755**. Drei
+Viertel der Streuung erklärt die Belegschaftsgrösse allein — und das ist
+Sachlogik, kein Artefakt: eine Grossbank mit 194.000 Beschäftigten hat
+Zehntausende im Filialvertrieb, deren Tätigkeit das Risikoprofil nicht
+wesentlich beeinflusst. Ein Spezialfinanzierer mit 101 Mitarbeitern hat sie
+nicht.
+
+> ⚠️ **Wer die Rohquote als Governance-Aussage veröffentlicht, veröffentlicht
+> eine Grössenmessung mit einem Governance-Etikett** — dieselbe Falle wie die
+> rohe Auslassungsquote in #43, die RWA-Dichte in #45 und die Ländermittel
+> in #11.
+
+#### Gemessen wird deshalb der Rest
+
+`faktor_gegen_erwartung` = tatsächlicher Anteil / dem Anteil, den die
+Belegschaftsgrösse vorhersagt (Modell: `Anteil ≈ 10^(−0,500·log10(Belegschaft)
++0,333)`, geschätzt je Institut und nur auf Zeilen ohne Vorbehalt). Ein Wert
+von 2,0 heisst: **doppelt so viele Risikoträger wie Häuser dieser Grösse** — und
+das ist eine Aussage über die Auslegung.
+
+Die Korrektur zieht die Spanne von Faktor 180 auf p10 0,48 / Median 1,03 /
+p90 1,87 zusammen. Am weitesten gezogen: Raiffeisen Bank International 3,31×,
+Sparebank 1 Østlandet 3,11×, Helaba 2,71×. Am engsten: VÚB 0,23×, MONETA Money
+Bank 0,34×, Bausparkasse Schwäbisch Hall 0,38×.
+
+Dass die Korrektur wirkt und nicht nur glättet, zeigt der **Perimetertest**:
+Wikidata führt eine Gruppenzahl, ein IND-Report aber die Risikoträger des
+Einzelinstituts. Roh liegen die IND-Quoten deshalb um Faktor 3,7 über den
+CON-Quoten (9,7 % gegen 2,6 %); nach Abzug der Grösse bleibt davon Faktor 1,04
+(1,042 gegen 1,006). Wo beide Perimeter vorliegen, gewinnt CON.
+
+#### Drei Vorbehalte, alle gemessen
+
+1. **Die Stichprobe ist nicht der Bestand.** Von 474 LEIs finden sich 232 in
+   Wikidata (49 %), aber nur **112 tragen eine Mitarbeiterzahl (24 %)** — und
+   diese sind nach TREA im Median **2,4-mal grösser** als die übrigen
+   (10,5 gegen 4,4 Mrd EUR). Die Verteilung hier ist grosslastig.
+2. **Wikidata ist crowdsourced.** Die Zahlen sind unterschiedlich aktuell und
+   verschieden abgegrenzt (Kopfzahl gegen Vollzeitäquivalente). `P1128` trägt
+   oft mehrere Aussagen mit verschiedenen Stichtagen — behalten wird die mit dem
+   **jüngsten** (`mitarbeiter_stand`, bei 100 von 112 vorhanden); undatierte
+   verlieren gegen datierte. `wikidata_id` macht jeden Wert nachprüfbar.
+3. **Beide Seiten der Division brauchen einen Filter.** REM1 ist genau das
+   Template, in dem #17 die stärksten Ausreisser findet. 15 Reports mit
+   `rem_per_head`-Befund tragen `vorbehalt=rem_befund`, gehen nicht ins Modell
+   und sind keine Governance-Aussage.
 
 ### `irb_risk_weights.csv` — Risikogewichte je PD-Band
 

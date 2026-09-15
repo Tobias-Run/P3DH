@@ -104,6 +104,18 @@ ABHAENGIG = {
     "check_country_effect.py": (["processed/footprint.csv",
                                  "codebook/country_gdp.csv"],
                                 ["processed/country_effect.csv"]),
+    # Der einzige Schritt mit einer FREMDEN Netzquelle. Seine Ausgabe liegt im
+    # Repo, deshalb steht sie hier als Erzeugnis und nicht als Vorbedingung.
+    "fetch_wikidata_entities.py": (["processed/long/p3dh_long.parquet"],
+                                   ["codebook/wikidata_entities.csv"]),
+    # Liest die Plausibilitaetsbefunde: ein Report mit `rem_per_head`-Befund
+    # (#17) liefert die eine Haelfte des Quotienten. Laeuft dieser Schritt
+    # zuerst, ist der Filter leer — und ein bekannter Ausreisser geht als
+    # Governance-Aussage durch.
+    "build_risk_taker_share.py": (["processed/long/p3dh_long.parquet",
+                                   "codebook/wikidata_entities.csv",
+                                   "interim/plausibility_findings.csv"],
+                                  ["processed/risk_taker_share.csv"]),
     "build_zweig_a_shards.py": (["processed/long/p3dh_long.parquet",
                                  "processed/quality_profile.csv",
                                  "interim/plausibility_findings.csv",
