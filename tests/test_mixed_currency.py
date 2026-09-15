@@ -174,11 +174,25 @@ class ShippedIndexTest(unittest.TestCase):
                 self.assertNotEqual(cur, r["baseCurrency"],
                                     f"{r['entityID']} {tid}: Ausnahme ohne Abweichung")
 
-    def test_every_report_still_names_a_currency(self):
+    def test_every_report_with_facts_still_names_a_currency(self):
         """Der Rückfallwert muss stehen: ohne ihn rechnet der Viewer für alle
-        Templates ohne Ausnahme gar nicht mehr um."""
-        without = [r["entityID"] for r in self.reports if not r.get("baseCurrency")]
-        self.assertEqual(without, [])
+        Templates ohne Ausnahme gar nicht mehr um.
+
+        Gilt für Reports, die Zellen TRAGEN. Ein Report ohne eine einzige
+        platzierbare Zelle (#28) hat nichts umzurechnen — dort ist die Prämisse
+        dieses Wächters nicht erfüllt, und eine Währung zu verlangen hiesse,
+        eine zu erfinden."""
+        ohne = [r["entityID"] for r in self.reports
+                if r.get("nt") and not r.get("baseCurrency")]
+        self.assertEqual(ohne, [])
+
+    def test_a_report_without_facts_names_none(self):
+        """Die Gegenrichtung, und sie ist die wichtigere: wir kennen die
+        Währung nicht. EUR einzusetzen wäre eine Behauptung — und jede
+        EUR-Rechnung stromabwärts nähme sie für bare Münze."""
+        erfunden = [r["entityID"] for r in self.reports
+                    if not r.get("nt") and r.get("baseCurrency")]
+        self.assertEqual(erfunden, [])
 
 
 if __name__ == "__main__":

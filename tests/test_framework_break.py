@@ -12,7 +12,8 @@ nicht ansieht:
    beobachtungsbasiert: Zellen, die nur in einer Version vorkommen, stehen
    bewusst nicht drin, denn Abwesenheit ist bei Offenlegungsdaten kein Beleg
    für eine Taxonomie-Änderung (Arbeitsprinzip 3). Der Viewer darf über sie
-   also nichts sagen — und markiert deshalb nur `rebound` und `ambiguous`.
+   also nichts sagen — und markiert deshalb nur `rebound`, `mehrfach` und
+   `ambiguous`.
 2. **Der Marker sitzt an den richtigen Zellen.** Wenn KM1 r0190 eines Tages
    nicht mehr umgebunden ist, verschwindet der Marker still — und niemand
    merkt, dass der Test seither nichts mehr prüft.
@@ -50,13 +51,16 @@ class BridgePayloadTest(unittest.TestCase):
         """Die 5.087 stabilen Zellen wären 40× so viel Nutzlast für eine
         Aussage, die der Viewer nicht braucht."""
         states = {s for cells in self.payload.values() for s in cells.values()}
-        self.assertEqual(states, {"rebound", "ambiguous"},
-                         f"unerwartete Zustände in der Brücke: {sorted(states)}")
+        self.assertTrue(states <= {"rebound", "mehrfach", "ambiguous"},
+                        f"unerwartete Zustände in der Brücke: {sorted(states)}")
+        self.assertNotIn("stable", states,
+                         "die stabilen Zellen wären 40× so viel Nutzlast für "
+                         "eine Aussage, die der Viewer nicht braucht")
 
     def test_payload_matches_the_source(self):
         want = {}
         for r in bridge_rows():
-            if r["status"] in ("rebound", "ambiguous"):
+            if r["status"] in ("rebound", "mehrfach", "ambiguous"):
                 want.setdefault(r["template_id"], {})[
                     r["cell_row"] + "|" + r["cell_col"]] = r["status"]
         self.assertEqual(self.payload, want,
@@ -93,7 +97,8 @@ class MarkedCellsTest(unittest.TestCase):
         """Die sieben Kennzahlen der KM1-Zeitreihe liegen auf stabilen Zellen.
         Ein Marker dort wäre eine Behauptung ohne Beleg."""
         marked = [row for row in ("0050", "0070", "0220", "0320", "0350", "0040", "0010")
-                  if self._status("61.00", row, "0010") in ("rebound", "ambiguous")]
+                  if self._status("61.00", row, "0010")
+                  in ("rebound", "mehrfach", "ambiguous")]
         self.assertEqual(marked, [],
                          f"KM1-Zeitreihenzellen gelten plötzlich als instabil: {marked} "
                          "— dann gehört der Marker auch dorthin")

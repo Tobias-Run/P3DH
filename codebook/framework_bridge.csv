@@ -5067,129 +5067,129 @@ template_id,cell_row,cell_col,row_label,col_label,dp_41,dp_42,status
 73.00.E,0300,0060,23. LIQUIDITY COVERAGE RATIO,b. T-1,dp475490,dp475490,stable
 73.00.E,0300,0070,23. LIQUIDITY COVERAGE RATIO,c. T-2,dp475491,dp475491,stable
 73.00.E,0300,0080,23. LIQUIDITY COVERAGE RATIO,d. T-3,dp475492,dp475492,stable
-74.00.A,0010,0010,1. Capital items and instruments,a. No maturity,dp3524782|dp3524783|dp3524903|dp3524966,dp3524782|dp3524783|dp3524903|dp3524966,ambiguous
-74.00.A,0010,0020,1. Capital items and instruments,b. < 6 months,dp3524784|dp3524785|dp3524967|dp455836,dp3524784|dp3524785|dp3524967|dp455836,ambiguous
-74.00.A,0010,0030,1. Capital items and instruments,c. 6 months to < 1yr,dp3524786|dp3524787|dp3524968|dp455835,dp3524786|dp3524787|dp3524968|dp455835,ambiguous
-74.00.A,0010,0040,1. Capital items and instruments,d. ≥ 1yr,dp3524788|dp3524789|dp3524969|dp455834,dp3524788|dp3524789|dp3524969|dp455834,ambiguous
-74.00.A,0010,0050,1. Capital items and instruments,e. Weighted value,dp3525376|dp3525414|dp3525415|dp458936,dp3525376|dp3525414|dp3525415|dp458936,ambiguous
-74.00.A,0020,0010,2. Own funds,a. No maturity,dp3524794|dp3524795|dp3524831|dp3524975,dp3524794|dp3524795|dp3524831|dp3524975,ambiguous
-74.00.A,0020,0020,2. Own funds,b. < 6 months,dp3524796|dp3524797|dp3524904|dp3524976,dp3524796|dp3524797|dp3524904|dp3524976,ambiguous
-74.00.A,0020,0030,2. Own funds,c. 6 months to < 1yr,dp3524798|dp3524799|dp3524832|dp3524977,dp3524798|dp3524799|dp3524832|dp3524977,ambiguous
-74.00.A,0020,0040,2. Own funds,d. ≥ 1yr,dp3524800|dp3524833|dp3524978|dp3524979,dp3524800|dp3524833|dp3524978|dp3524979,ambiguous
-74.00.A,0020,0050,2. Own funds,e. Weighted value,dp3525372|dp3525373|dp3525406|dp3525417,dp3525372|dp3525373|dp3525406|dp3525417,ambiguous
-74.00.A,0030,0020,3. Other capital instruments,b. < 6 months,dp3524970|dp3524971|dp3524972|dp455831,dp3524970|dp3524971|dp3524972|dp455831,ambiguous
-74.00.A,0030,0030,3. Other capital instruments,c. 6 months to < 1yr,dp3524790|dp3524973|dp3524974|dp455830,dp3524790|dp3524973|dp3524974|dp455830,ambiguous
-74.00.A,0030,0040,3. Other capital instruments,d. ≥ 1yr,dp3524791|dp3524792|dp3524793|dp455829,dp3524791|dp3524792|dp3524793|dp455829,ambiguous
-74.00.A,0030,0050,3. Other capital instruments,e. Weighted value,dp3525374|dp3525375|dp3525416|dp458934,dp3525374|dp3525375|dp3525416|dp458934,ambiguous
-74.00.A,0040,0020,4. Retail deposits,b. < 6 months,dp3524801|dp3524980|dp3524981|dp455743,dp3524801|dp3524980|dp3524981|dp455743,ambiguous
-74.00.A,0040,0030,4. Retail deposits,c. 6 months to < 1yr,dp3524802|dp3524982|dp3524983|dp455742,dp3524802|dp3524982|dp3524983|dp455742,ambiguous
-74.00.A,0040,0040,4. Retail deposits,d. ≥ 1yr,dp3524803|dp3524804|dp3524984|dp455741,dp3524803|dp3524804|dp3524984|dp455741,ambiguous
-74.00.A,0040,0050,4. Retail deposits,e. Weighted value,dp3525371|dp3525418|dp3525419|dp458905,dp3525371|dp3525418|dp3525419|dp458905,ambiguous
-74.00.A,0050,0020,5. Stable deposits,b. < 6 months,dp3524808|dp3524809|dp3524993|dp455730,dp3524808|dp3524809|dp3524993|dp455730,ambiguous
-74.00.A,0050,0030,5. Stable deposits,c. 6 months to < 1yr,dp3524810|dp3524994|dp3524995|dp455729,dp3524810|dp3524994|dp3524995|dp455729,ambiguous
-74.00.A,0050,0040,5. Stable deposits,d. ≥ 1yr,dp3524811|dp3524996|dp3524997|dp455727,dp3524811|dp3524996|dp3524997|dp455727,ambiguous
-74.00.A,0050,0050,5. Stable deposits,e. Weighted value,dp3525369|dp3525422|dp3525423|dp458900,dp3525369|dp3525422|dp3525423|dp458900,ambiguous
-74.00.A,0060,0020,6. Less stable deposits,b. < 6 months,dp3524985|dp3524986|dp3524987|dp455738,dp3524985|dp3524986|dp3524987|dp455738,ambiguous
-74.00.A,0060,0030,6. Less stable deposits,c. 6 months to < 1yr,dp3524805|dp3524990|dp3524991|dp455737,dp3524805|dp3524990|dp3524991|dp455737,ambiguous
-74.00.A,0060,0040,6. Less stable deposits,d. ≥ 1yr,dp3524806|dp3524807|dp3524992|dp455735,dp3524806|dp3524807|dp3524992|dp455735,ambiguous
-74.00.A,0060,0050,6. Less stable deposits,e. Weighted value,dp3525370|dp3525420|dp3525421|dp458903,dp3525370|dp3525420|dp3525421|dp458903,ambiguous
-74.00.A,0070,0020,7. Wholesale funding:,b. < 6 months,dp3524812|dp3524834|dp3524998|dp3524999,dp3524812|dp3524834|dp3524998|dp3524999,ambiguous
-74.00.A,0070,0030,7. Wholesale funding:,c. 6 months to < 1yr,dp3524813|dp3524905|dp3525000|dp3525001,dp3524813|dp3524905|dp3525000|dp3525001,ambiguous
-74.00.A,0070,0040,7. Wholesale funding:,d. ≥ 1yr,dp3524814|dp3524835|dp3525002|dp3525003,dp3524814|dp3524835|dp3525002|dp3525003,ambiguous
-74.00.A,0070,0050,7. Wholesale funding:,e. Weighted value,dp3525368|dp3525405|dp3525424|dp3525425,dp3525368|dp3525405|dp3525424|dp3525425,ambiguous
-74.00.A,0080,0020,8. Operational deposits,b. < 6 months,dp3524908|dp3524911|dp3524912|dp3524913,dp3524908|dp3524911|dp3524912|dp3524913,ambiguous
-74.00.A,0080,0030,8. Operational deposits,c. 6 months to < 1yr,dp3524837|dp3524914|dp3524915|dp3525056,dp3524837|dp3524914|dp3524915|dp3525056,ambiguous
-74.00.A,0080,0040,8. Operational deposits,d. ≥ 1yr,dp3524838|dp3524916|dp3525007|dp3525008,dp3524838|dp3524916|dp3525007|dp3525008,ambiguous
-74.00.A,0080,0050,8. Operational deposits,e. Weighted value,dp3525364|dp3525365|dp3525430|dp3525436,dp3525364|dp3525365|dp3525430|dp3525436,ambiguous
-74.00.A,0090,0020,9. Other wholesale funding,b. < 6 months,dp3524818|dp3524819|dp3524820|dp3524906,dp3524818|dp3524819|dp3524820|dp3524906,ambiguous
-74.00.A,0090,0030,9. Other wholesale funding,c. 6 months to < 1yr,dp3524821|dp3524836|dp3525057|dp3525058,dp3524821|dp3524836|dp3525057|dp3525058,ambiguous
-74.00.A,0090,0040,9. Other wholesale funding,d. ≥ 1yr,dp3524822|dp3524907|dp3524909|dp3524910,dp3524822|dp3524907|dp3524909|dp3524910,ambiguous
-74.00.A,0090,0050,9. Other wholesale funding,e. Weighted value,dp3525404|dp3525427|dp3525428|dp3525429,dp3525404|dp3525427|dp3525428|dp3525429,ambiguous
-74.00.A,0100,0020,10. Interdependent liabilities,b. < 6 months,dp3524815|dp3525004|dp3525005|dp455800,dp3524815|dp3525004|dp3525005|dp455800,ambiguous
-74.00.A,0100,0030,10. Interdependent liabilities,c. 6 months to < 1yr,dp3524816|dp3524954|dp3525006|dp455799,dp3524816|dp3524954|dp3525006|dp455799,ambiguous
-74.00.A,0100,0040,10. Interdependent liabilities,d. ≥ 1yr,dp3524817|dp3524952|dp3524953|dp455798,dp3524817|dp3524952|dp3524953|dp455798,ambiguous
-74.00.A,0100,0050,10. Interdependent liabilities,e. Weighted value,dp3525366|dp3525367|dp3525426|dp458923,dp3525366|dp3525367|dp3525426|dp458923,ambiguous
-74.00.A,0110,0020,11. Other liabilities:,b. < 6 months,dp3524829|dp3524858|dp3524958|dp3524959,dp3524829|dp3524858|dp3524958|dp3524959,ambiguous
-74.00.A,0110,0030,11. Other liabilities:,c. 6 months to < 1yr,dp3524902|dp3524960|dp3524961|dp3524962,dp3524902|dp3524960|dp3524961|dp3524962,ambiguous
-74.00.A,0110,0040,11. Other liabilities:,d. ≥ 1yr,dp3524830|dp3524859|dp3524860|dp3524963,dp3524830|dp3524859|dp3524860|dp3524963,ambiguous
-74.00.A,0110,0050,11. Other liabilities:,e. Weighted value,dp3525378|dp3525379|dp3525411|dp458940,dp3525378|dp3525379|dp3525411|dp458940,ambiguous
-74.00.A,0130,0020,13. All other liabilities and capital instruments not included in the above categories,b. < 6 months,dp3524861|dp3524862|dp3524964|dp455852,dp3524861|dp3524862|dp3524964|dp455852,ambiguous
-74.00.A,0130,0030,13. All other liabilities and capital instruments not included in the above categories,c. 6 months to < 1yr,dp3524863|dp3524864|dp3524965|dp455851,dp3524863|dp3524864|dp3524965|dp455851,ambiguous
-74.00.A,0130,0040,13. All other liabilities and capital instruments not included in the above categories,d. ≥ 1yr,dp3524780|dp3524781|dp3524865|dp455850,dp3524780|dp3524781|dp3524865|dp455850,ambiguous
-74.00.A,0130,0050,13. All other liabilities and capital instruments not included in the above categories,e. Weighted value,dp3525377|dp3525412|dp3525413|dp469246,dp3525377|dp3525412|dp3525413|dp469246,ambiguous
-74.00.A,0140,0050,14. Total available stable funding ASF,e. Weighted value,dp458851|dp475573|dp475574|dp475575,dp458851|dp475573|dp475574|dp475575,ambiguous
-74.00.B,0110,0010,11. Other liabilities:,a. No maturity,dp3525167|dp3525171|dp3525172|dp3525173,dp3525167|dp3525171|dp3525172|dp3525173,ambiguous
-74.00.B,0120,0010,12. NSFR derivative liabilities,a. No maturity,dp3525168|dp3525169|dp3525170|dp456456,dp3525168|dp3525169|dp3525170|dp456456,ambiguous
-74.00.C,0150,0050,15. Total high-quality liquid assets HQLA,e. Weighted value,dp3525361|dp3525362|dp3525403|dp3525433,dp3525361|dp3525362|dp3525403|dp3525433,ambiguous
-74.00.C,0160,0020,EU-15a. Assets encumbered for a residual maturity of one year or more in a cover pool,b. < 6 months,dp3524887|dp3524888|dp3524989|dp3525046,dp3524887|dp3524888|dp3524989|dp3525046,ambiguous
-74.00.C,0160,0030,EU-15a. Assets encumbered for a residual maturity of one year or more in a cover pool,c. 6 months to < 1yr,dp3524846|dp3525047|dp3525048|dp3525049,dp3524846|dp3525047|dp3525048|dp3525049,ambiguous
-74.00.C,0160,0040,EU-15a. Assets encumbered for a residual maturity of one year or more in a cover pool,d. ≥ 1yr,dp3524889|dp3524890|dp3524988|dp3525050,dp3524889|dp3524890|dp3524988|dp3525050,ambiguous
-74.00.C,0160,0050,EU-15a. Assets encumbered for a residual maturity of one year or more in a cover pool,e. Weighted value,dp3525396|dp3525397|dp3525407|dp3525442,dp3525396|dp3525397|dp3525407|dp3525442,ambiguous
-74.00.C,0170,0020,16. Deposits held at other financial institutions for operational purposes,b. < 6 months,dp3524871|dp3524872|dp3525035|dp455390,dp3524871|dp3524872|dp3525035|dp455390,ambiguous
-74.00.C,0170,0030,16. Deposits held at other financial institutions for operational purposes,c. 6 months to < 1yr,dp3524873|dp3525036|dp3525037|dp455389,dp3524873|dp3525036|dp3525037|dp455389,ambiguous
-74.00.C,0170,0040,16. Deposits held at other financial institutions for operational purposes,d. ≥ 1yr,dp3524874|dp3524875|dp3525038|dp455388,dp3524874|dp3524875|dp3525038|dp455388,ambiguous
-74.00.C,0170,0050,16. Deposits held at other financial institutions for operational purposes,e. Weighted value,dp3525390|dp3525391|dp3525445|dp458777,dp3525390|dp3525391|dp3525445|dp458777,ambiguous
-74.00.C,0180,0020,17. Performing loans and securities:,b. < 6 months,dp3524896|dp3524917|dp3525009|dp3525010,dp3524896|dp3524917|dp3525009|dp3525010,ambiguous
-74.00.C,0180,0030,17. Performing loans and securities:,c. 6 months to < 1yr,dp3524918|dp3525011|dp3525012|dp3525055,dp3524918|dp3525011|dp3525012|dp3525055,ambiguous
-74.00.C,0180,0040,17. Performing loans and securities:,d. ≥ 1yr,dp3524823|dp3524919|dp3525013|dp3525014,dp3524823|dp3524919|dp3525013|dp3525014,ambiguous
-74.00.C,0180,0050,17. Performing loans and securities:,e. Weighted value,dp3525363|dp3525401|dp3525431|dp3525432,dp3525363|dp3525401|dp3525431|dp3525432,ambiguous
-74.00.C,0190,0020,18. Performing securities financing transactions with financial customers collateralised by Level 1 HQLA subject to 0% haircut,b. < 6 months,dp3524932|dp3524933|dp3525015|dp455528,dp3524932|dp3524933|dp3525015|dp455528,ambiguous
-74.00.C,0190,0030,18. Performing securities financing transactions with financial customers collateralised by Level 1 HQLA subject to 0% haircut,c. 6 months to < 1yr,dp3524934|dp3525016|dp3525017|dp455527,dp3524934|dp3525016|dp3525017|dp455527,ambiguous
-74.00.C,0190,0040,18. Performing securities financing transactions with financial customers collateralised by Level 1 HQLA subject to 0% haircut,d. ≥ 1yr,dp3524935|dp3525018|dp3525019|dp455526,dp3524935|dp3525018|dp3525019|dp455526,ambiguous
-74.00.C,0190,0050,18. Performing securities financing transactions with financial customers collateralised by Level 1 HQLA subject to 0% haircut,e. Weighted value,dp3525384|dp3525453|dp3525454|dp458835,dp3525384|dp3525453|dp3525454|dp458835,ambiguous
-74.00.C,0200,0020,19. Performing securities financing transactions with financial customer collateralised by other assets and loans and advances to financial institutions,b. < 6 months,dp3524897|dp3524920|dp3524921|dp3524922,dp3524897|dp3524920|dp3524921|dp3524922,ambiguous
-74.00.C,0200,0030,19. Performing securities financing transactions with financial customer collateralised by other assets and loans and advances to financial institutions,c. 6 months to < 1yr,dp3524824|dp3524923|dp3524924|dp3524925,dp3524824|dp3524923|dp3524924|dp3524925,ambiguous
-74.00.C,0200,0040,19. Performing securities financing transactions with financial customer collateralised by other assets and loans and advances to financial institutions,d. ≥ 1yr,dp3524898|dp3524926|dp3524927|dp3524928,dp3524898|dp3524926|dp3524927|dp3524928,ambiguous
-74.00.C,0200,0050,19. Performing securities financing transactions with financial customer collateralised by other assets and loans and advances to financial institutions,e. Weighted value,dp3525359|dp3525360|dp3525402|dp3525434,dp3525359|dp3525360|dp3525402|dp3525434,ambiguous
-74.00.C,0210,0020,"20. Performing loans to non- financial corporate clients, loans to retail and small business customers, and loans to sovereigns, and PSEs, of which:",b. < 6 months,dp3524840|dp3524949|dp3525025|dp3525026,dp3524840|dp3524949|dp3525025|dp3525026,ambiguous
-74.00.C,0210,0030,"20. Performing loans to non- financial corporate clients, loans to retail and small business customers, and loans to sovereigns, and PSEs, of which:",c. 6 months to < 1yr,dp3524841|dp3524866|dp3524950|dp3524951,dp3524841|dp3524866|dp3524950|dp3524951,ambiguous
-74.00.C,0210,0040,"20. Performing loans to non- financial corporate clients, loans to retail and small business customers, and loans to sovereigns, and PSEs, of which:",d. ≥ 1yr,dp3524842|dp3524868|dp3525032|dp3525033,dp3524842|dp3524868|dp3525032|dp3525033,ambiguous
-74.00.C,0210,0050,"20. Performing loans to non- financial corporate clients, loans to retail and small business customers, and loans to sovereigns, and PSEs, of which:",e. Weighted value,dp3525387|dp3525388|dp3525438|dp3525448,dp3525387|dp3525388|dp3525438|dp3525448,ambiguous
-74.00.C,0220,0020,21. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,b. < 6 months,dp3524849|dp3525027|dp3525028|dp3525029,dp3524849|dp3525027|dp3525028|dp3525029,ambiguous
-74.00.C,0220,0030,21. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,c. 6 months to < 1yr,dp3524848|dp3524867|dp3525030|dp3525031,dp3524848|dp3524867|dp3525030|dp3525031,ambiguous
-74.00.C,0220,0040,21. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,d. ≥ 1yr,dp3524843|dp3524869|dp3524870|dp3525034,dp3524843|dp3524869|dp3524870|dp3525034,ambiguous
-74.00.C,0220,0050,21. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,e. Weighted value,dp3525389|dp3525437|dp3525446|dp3525447,dp3525389|dp3525437|dp3525446|dp3525447,ambiguous
-74.00.C,0230,0020,"22. Performing residential mortgages, of which:",b. < 6 months,dp3524839|dp3524936|dp3524937|dp3525020,dp3524839|dp3524936|dp3524937|dp3525020,ambiguous
-74.00.C,0230,0030,"22. Performing residential mortgages, of which:",c. 6 months to < 1yr,dp3524851|dp3524940|dp3524941|dp3525022,dp3524851|dp3524940|dp3524941|dp3525022,ambiguous
-74.00.C,0230,0040,"22. Performing residential mortgages, of which:",d. ≥ 1yr,dp3524850|dp3524944|dp3524945|dp3524946,dp3524850|dp3524944|dp3524945|dp3524946,ambiguous
-74.00.C,0230,0050,"22. Performing residential mortgages, of which:",e. Weighted value,dp3525385|dp3525435|dp3525451|dp3525452,dp3525385|dp3525435|dp3525451|dp3525452,ambiguous
-74.00.C,0240,0020,23. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,b. < 6 months,dp3524938|dp3524939|dp3525021|dp455567,dp3524938|dp3524939|dp3525021|dp455567,ambiguous
-74.00.C,0240,0030,23. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,c. 6 months to < 1yr,dp3524942|dp3524943|dp3525023|dp455564,dp3524942|dp3524943|dp3525023|dp455564,ambiguous
-74.00.C,0240,0040,23. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,d. ≥ 1yr,dp3524947|dp3524948|dp3525024|dp455561,dp3524947|dp3524948|dp3525024|dp455561,ambiguous
-74.00.C,0240,0050,23. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,e. Weighted value,dp3525386|dp3525449|dp3525450|dp458848,dp3525386|dp3525449|dp3525450|dp458848,ambiguous
-74.00.C,0250,0020,"24. Other loans and securities that are not in default and do not qualify as HQLA, including exchange-traded equities and trade finance on-balance sheet products",b. < 6 months,dp3524844|dp3524882|dp3524883|dp3525042,dp3524844|dp3524882|dp3524883|dp3525042,ambiguous
-74.00.C,0250,0030,"24. Other loans and securities that are not in default and do not qualify as HQLA, including exchange-traded equities and trade finance on-balance sheet products",c. 6 months to < 1yr,dp3524847|dp3524884|dp3525043|dp3525044,dp3524847|dp3524884|dp3525043|dp3525044,ambiguous
-74.00.C,0250,0040,"24. Other loans and securities that are not in default and do not qualify as HQLA, including exchange-traded equities and trade finance on-balance sheet products",d. ≥ 1yr,dp3524845|dp3524885|dp3524886|dp3525045,dp3524845|dp3524885|dp3524886|dp3525045,ambiguous
-74.00.C,0250,0050,"24. Other loans and securities that are not in default and do not qualify as HQLA, including exchange-traded equities and trade finance on-balance sheet products",e. Weighted value,dp3525395|dp3525408|dp3525443|dp3525444,dp3525395|dp3525408|dp3525443|dp3525444,ambiguous
-74.00.C,0260,0020,25. Interdependent assets,b. < 6 months,dp3524891|dp3524892|dp3525051|dp455450,dp3524891|dp3524892|dp3525051|dp455450,ambiguous
-74.00.C,0260,0030,25. Interdependent assets,c. 6 months to < 1yr,dp3524893|dp3525052|dp3525053|dp455449,dp3524893|dp3525052|dp3525053|dp455449,ambiguous
-74.00.C,0260,0040,25. Interdependent assets,d. ≥ 1yr,dp3524894|dp3524895|dp3525054|dp455448,dp3524894|dp3524895|dp3525054|dp455448,ambiguous
-74.00.C,0260,0050,25. Interdependent assets,e. Weighted value,dp3525398|dp3525399|dp3525400|dp458793,dp3525398|dp3525399|dp3525400|dp458793,ambiguous
-74.00.C,0280,0040,27. Physical traded commodities,d. ≥ 1yr,dp3524929|dp3524930|dp3524931|dp455476,dp3524929|dp3524930|dp3524931|dp455476,ambiguous
-74.00.C,0280,0050,27. Physical traded commodities,e. Weighted value,dp3525382|dp3525457|dp3525458|dp458803,dp3525382|dp3525457|dp3525458|dp458803,ambiguous
-74.00.C,0320,0020,31. All other assets not included in the above categories,b. < 6 months,dp3524828|dp3524852|dp3524853|dp3524955,dp3524828|dp3524852|dp3524853|dp3524955,ambiguous
-74.00.C,0320,0030,31. All other assets not included in the above categories,c. 6 months to < 1yr,dp3524854|dp3524855|dp3524900|dp3524956,dp3524854|dp3524855|dp3524900|dp3524956,ambiguous
-74.00.C,0320,0040,31. All other assets not included in the above categories,d. ≥ 1yr,dp3524856|dp3524857|dp3524901|dp3524957,dp3524856|dp3524857|dp3524901|dp3524957,ambiguous
-74.00.C,0320,0050,31. All other assets not included in the above categories,e. Weighted value,dp3525380|dp3525409|dp3525410|dp3525441,dp3525380|dp3525409|dp3525410|dp3525441,ambiguous
-74.00.C,0330,0020,32. Off-balance sheet items,b. < 6 months,dp3524876|dp3524877|dp3525039|dp455427,dp3524876|dp3524877|dp3525039|dp455427,ambiguous
-74.00.C,0330,0030,32. Off-balance sheet items,c. 6 months to < 1yr,dp3524878|dp3524879|dp3525040|dp455425,dp3524878|dp3524879|dp3525040|dp455425,ambiguous
-74.00.C,0330,0040,32. Off-balance sheet items,d. ≥ 1yr,dp3524880|dp3524881|dp3525041|dp455423,dp3524880|dp3524881|dp3525041|dp455423,ambiguous
-74.00.C,0330,0050,32. Off-balance sheet items,e. Weighted value,dp3525392|dp3525393|dp3525394|dp458786,dp3525392|dp3525393|dp3525394|dp458786,ambiguous
-74.00.C,0340,0050,33. Total RSF,e. Weighted value,dp458581|dp475569|dp475570|dp475571,dp458581|dp475569|dp475570|dp475571,ambiguous
-74.00.D,0300,0020,29. NSFR derivative assets,b. < 6 months,dp3525177|dp3525178|dp3525179|dp456453,dp3525177|dp3525178|dp3525179|dp456453,ambiguous
-74.00.D,0300,0050,29. NSFR derivative assets,e. Weighted value,dp3525355|dp3525356|dp3525460|dp458807,dp3525355|dp3525356|dp3525460|dp458807,ambiguous
-74.00.D,0310,0020,30. NSFR derivative liabilities before deduction of variation margin posted,b. < 6 months,dp3525174|dp3525175|dp3525176|dp456451,dp3525174|dp3525175|dp3525176|dp456451,ambiguous
-74.00.D,0310,0050,30. NSFR derivative liabilities before deduction of variation margin posted,e. Weighted value,dp3525354|dp3525381|dp3525459|dp458805,dp3525354|dp3525381|dp3525459|dp458805,ambiguous
-74.00.E,0270,0010,26. Other assets:,a. No maturity,dp3525210|dp3525211|dp3525216|dp3525223,dp3525210|dp3525211|dp3525216|dp3525223,ambiguous
-74.00.E,0270,0020,26. Other assets:,b. < 6 months,dp3525212|dp3525215|dp3525221|dp3525222,dp3525212|dp3525215|dp3525221|dp3525222,ambiguous
-74.00.E,0270,0030,26. Other assets:,c. 6 months to < 1yr,dp3525205|dp3525218|dp3525219|dp3525220,dp3525205|dp3525218|dp3525219|dp3525220,ambiguous
-74.00.E,0270,0040,26. Other assets:,d. ≥ 1yr,dp3525202|dp3525206|dp3525213|dp3525214,dp3525202|dp3525206|dp3525213|dp3525214,ambiguous
-74.00.E,0270,0050,26. Other assets:,e. Weighted value,dp3525383|dp3525440|dp3525455|dp3525456,dp3525383|dp3525440|dp3525455|dp3525456,ambiguous
-74.00.E,0290,0020,28. Assets posted as initial margin for derivative contracts and contributions to default funds of CCPs,b. < 6 months,dp3525203|dp3525207|dp3525208|dp3525229,dp3525203|dp3525207|dp3525208|dp3525229,ambiguous
-74.00.E,0290,0030,28. Assets posted as initial margin for derivative contracts and contributions to default funds of CCPs,c. 6 months to < 1yr,dp3525204|dp3525209|dp3525227|dp3525228,dp3525204|dp3525209|dp3525227|dp3525228,ambiguous
-74.00.E,0290,0040,28. Assets posted as initial margin for derivative contracts and contributions to default funds of CCPs,d. ≥ 1yr,dp3525217|dp3525224|dp3525225|dp3525226,dp3525217|dp3525224|dp3525225|dp3525226,ambiguous
-74.00.E,0290,0050,28. Assets posted as initial margin for derivative contracts and contributions to default funds of CCPs,e. Weighted value,dp3525357|dp3525358|dp3525439|dp3525461,dp3525357|dp3525358|dp3525439|dp3525461,ambiguous
-74.00.F,0350,0050,34. Net Stable Funding Ratio %,e. Weighted value,dp458571|dp475564|dp475565|dp475566,dp458571|dp475564|dp475565|dp475566,ambiguous
+74.00.A,0010,0010,1. Capital items and instruments,a. No maturity,dp3524782|dp3524783|dp3524903|dp3524966,dp3524782|dp3524783|dp3524903|dp3524966,mehrfach
+74.00.A,0010,0020,1. Capital items and instruments,b. < 6 months,dp3524784|dp3524785|dp3524967|dp455836,dp3524784|dp3524785|dp3524967|dp455836,mehrfach
+74.00.A,0010,0030,1. Capital items and instruments,c. 6 months to < 1yr,dp3524786|dp3524787|dp3524968|dp455835,dp3524786|dp3524787|dp3524968|dp455835,mehrfach
+74.00.A,0010,0040,1. Capital items and instruments,d. ≥ 1yr,dp3524788|dp3524789|dp3524969|dp455834,dp3524788|dp3524789|dp3524969|dp455834,mehrfach
+74.00.A,0010,0050,1. Capital items and instruments,e. Weighted value,dp3525376|dp3525414|dp3525415|dp458936,dp3525376|dp3525414|dp3525415|dp458936,mehrfach
+74.00.A,0020,0010,2. Own funds,a. No maturity,dp3524794|dp3524795|dp3524831|dp3524975,dp3524794|dp3524795|dp3524831|dp3524975,mehrfach
+74.00.A,0020,0020,2. Own funds,b. < 6 months,dp3524796|dp3524797|dp3524904|dp3524976,dp3524796|dp3524797|dp3524904|dp3524976,mehrfach
+74.00.A,0020,0030,2. Own funds,c. 6 months to < 1yr,dp3524798|dp3524799|dp3524832|dp3524977,dp3524798|dp3524799|dp3524832|dp3524977,mehrfach
+74.00.A,0020,0040,2. Own funds,d. ≥ 1yr,dp3524800|dp3524833|dp3524978|dp3524979,dp3524800|dp3524833|dp3524978|dp3524979,mehrfach
+74.00.A,0020,0050,2. Own funds,e. Weighted value,dp3525372|dp3525373|dp3525406|dp3525417,dp3525372|dp3525373|dp3525406|dp3525417,mehrfach
+74.00.A,0030,0020,3. Other capital instruments,b. < 6 months,dp3524970|dp3524971|dp3524972|dp455831,dp3524970|dp3524971|dp3524972|dp455831,mehrfach
+74.00.A,0030,0030,3. Other capital instruments,c. 6 months to < 1yr,dp3524790|dp3524973|dp3524974|dp455830,dp3524790|dp3524973|dp3524974|dp455830,mehrfach
+74.00.A,0030,0040,3. Other capital instruments,d. ≥ 1yr,dp3524791|dp3524792|dp3524793|dp455829,dp3524791|dp3524792|dp3524793|dp455829,mehrfach
+74.00.A,0030,0050,3. Other capital instruments,e. Weighted value,dp3525374|dp3525375|dp3525416|dp458934,dp3525374|dp3525375|dp3525416|dp458934,mehrfach
+74.00.A,0040,0020,4. Retail deposits,b. < 6 months,dp3524801|dp3524980|dp3524981|dp455743,dp3524801|dp3524980|dp3524981|dp455743,mehrfach
+74.00.A,0040,0030,4. Retail deposits,c. 6 months to < 1yr,dp3524802|dp3524982|dp3524983|dp455742,dp3524802|dp3524982|dp3524983|dp455742,mehrfach
+74.00.A,0040,0040,4. Retail deposits,d. ≥ 1yr,dp3524803|dp3524804|dp3524984|dp455741,dp3524803|dp3524804|dp3524984|dp455741,mehrfach
+74.00.A,0040,0050,4. Retail deposits,e. Weighted value,dp3525371|dp3525418|dp3525419|dp458905,dp3525371|dp3525418|dp3525419|dp458905,mehrfach
+74.00.A,0050,0020,5. Stable deposits,b. < 6 months,dp3524808|dp3524809|dp3524993|dp455730,dp3524808|dp3524809|dp3524993|dp455730,mehrfach
+74.00.A,0050,0030,5. Stable deposits,c. 6 months to < 1yr,dp3524810|dp3524994|dp3524995|dp455729,dp3524810|dp3524994|dp3524995|dp455729,mehrfach
+74.00.A,0050,0040,5. Stable deposits,d. ≥ 1yr,dp3524811|dp3524996|dp3524997|dp455727,dp3524811|dp3524996|dp3524997|dp455727,mehrfach
+74.00.A,0050,0050,5. Stable deposits,e. Weighted value,dp3525369|dp3525422|dp3525423|dp458900,dp3525369|dp3525422|dp3525423|dp458900,mehrfach
+74.00.A,0060,0020,6. Less stable deposits,b. < 6 months,dp3524985|dp3524986|dp3524987|dp455738,dp3524985|dp3524986|dp3524987|dp455738,mehrfach
+74.00.A,0060,0030,6. Less stable deposits,c. 6 months to < 1yr,dp3524805|dp3524990|dp3524991|dp455737,dp3524805|dp3524990|dp3524991|dp455737,mehrfach
+74.00.A,0060,0040,6. Less stable deposits,d. ≥ 1yr,dp3524806|dp3524807|dp3524992|dp455735,dp3524806|dp3524807|dp3524992|dp455735,mehrfach
+74.00.A,0060,0050,6. Less stable deposits,e. Weighted value,dp3525370|dp3525420|dp3525421|dp458903,dp3525370|dp3525420|dp3525421|dp458903,mehrfach
+74.00.A,0070,0020,7. Wholesale funding:,b. < 6 months,dp3524812|dp3524834|dp3524998|dp3524999,dp3524812|dp3524834|dp3524998|dp3524999,mehrfach
+74.00.A,0070,0030,7. Wholesale funding:,c. 6 months to < 1yr,dp3524813|dp3524905|dp3525000|dp3525001,dp3524813|dp3524905|dp3525000|dp3525001,mehrfach
+74.00.A,0070,0040,7. Wholesale funding:,d. ≥ 1yr,dp3524814|dp3524835|dp3525002|dp3525003,dp3524814|dp3524835|dp3525002|dp3525003,mehrfach
+74.00.A,0070,0050,7. Wholesale funding:,e. Weighted value,dp3525368|dp3525405|dp3525424|dp3525425,dp3525368|dp3525405|dp3525424|dp3525425,mehrfach
+74.00.A,0080,0020,8. Operational deposits,b. < 6 months,dp3524908|dp3524911|dp3524912|dp3524913,dp3524908|dp3524911|dp3524912|dp3524913,mehrfach
+74.00.A,0080,0030,8. Operational deposits,c. 6 months to < 1yr,dp3524837|dp3524914|dp3524915|dp3525056,dp3524837|dp3524914|dp3524915|dp3525056,mehrfach
+74.00.A,0080,0040,8. Operational deposits,d. ≥ 1yr,dp3524838|dp3524916|dp3525007|dp3525008,dp3524838|dp3524916|dp3525007|dp3525008,mehrfach
+74.00.A,0080,0050,8. Operational deposits,e. Weighted value,dp3525364|dp3525365|dp3525430|dp3525436,dp3525364|dp3525365|dp3525430|dp3525436,mehrfach
+74.00.A,0090,0020,9. Other wholesale funding,b. < 6 months,dp3524818|dp3524819|dp3524820|dp3524906,dp3524818|dp3524819|dp3524820|dp3524906,mehrfach
+74.00.A,0090,0030,9. Other wholesale funding,c. 6 months to < 1yr,dp3524821|dp3524836|dp3525057|dp3525058,dp3524821|dp3524836|dp3525057|dp3525058,mehrfach
+74.00.A,0090,0040,9. Other wholesale funding,d. ≥ 1yr,dp3524822|dp3524907|dp3524909|dp3524910,dp3524822|dp3524907|dp3524909|dp3524910,mehrfach
+74.00.A,0090,0050,9. Other wholesale funding,e. Weighted value,dp3525404|dp3525427|dp3525428|dp3525429,dp3525404|dp3525427|dp3525428|dp3525429,mehrfach
+74.00.A,0100,0020,10. Interdependent liabilities,b. < 6 months,dp3524815|dp3525004|dp3525005|dp455800,dp3524815|dp3525004|dp3525005|dp455800,mehrfach
+74.00.A,0100,0030,10. Interdependent liabilities,c. 6 months to < 1yr,dp3524816|dp3524954|dp3525006|dp455799,dp3524816|dp3524954|dp3525006|dp455799,mehrfach
+74.00.A,0100,0040,10. Interdependent liabilities,d. ≥ 1yr,dp3524817|dp3524952|dp3524953|dp455798,dp3524817|dp3524952|dp3524953|dp455798,mehrfach
+74.00.A,0100,0050,10. Interdependent liabilities,e. Weighted value,dp3525366|dp3525367|dp3525426|dp458923,dp3525366|dp3525367|dp3525426|dp458923,mehrfach
+74.00.A,0110,0020,11. Other liabilities:,b. < 6 months,dp3524829|dp3524858|dp3524958|dp3524959,dp3524829|dp3524858|dp3524958|dp3524959,mehrfach
+74.00.A,0110,0030,11. Other liabilities:,c. 6 months to < 1yr,dp3524902|dp3524960|dp3524961|dp3524962,dp3524902|dp3524960|dp3524961|dp3524962,mehrfach
+74.00.A,0110,0040,11. Other liabilities:,d. ≥ 1yr,dp3524830|dp3524859|dp3524860|dp3524963,dp3524830|dp3524859|dp3524860|dp3524963,mehrfach
+74.00.A,0110,0050,11. Other liabilities:,e. Weighted value,dp3525378|dp3525379|dp3525411|dp458940,dp3525378|dp3525379|dp3525411|dp458940,mehrfach
+74.00.A,0130,0020,13. All other liabilities and capital instruments not included in the above categories,b. < 6 months,dp3524861|dp3524862|dp3524964|dp455852,dp3524861|dp3524862|dp3524964|dp455852,mehrfach
+74.00.A,0130,0030,13. All other liabilities and capital instruments not included in the above categories,c. 6 months to < 1yr,dp3524863|dp3524864|dp3524965|dp455851,dp3524863|dp3524864|dp3524965|dp455851,mehrfach
+74.00.A,0130,0040,13. All other liabilities and capital instruments not included in the above categories,d. ≥ 1yr,dp3524780|dp3524781|dp3524865|dp455850,dp3524780|dp3524781|dp3524865|dp455850,mehrfach
+74.00.A,0130,0050,13. All other liabilities and capital instruments not included in the above categories,e. Weighted value,dp3525377|dp3525412|dp3525413|dp469246,dp3525377|dp3525412|dp3525413|dp469246,mehrfach
+74.00.A,0140,0050,14. Total available stable funding ASF,e. Weighted value,dp458851|dp475573|dp475574|dp475575,dp458851|dp475573|dp475574|dp475575,mehrfach
+74.00.B,0110,0010,11. Other liabilities:,a. No maturity,dp3525167|dp3525171|dp3525172|dp3525173,dp3525167|dp3525171|dp3525172|dp3525173,mehrfach
+74.00.B,0120,0010,12. NSFR derivative liabilities,a. No maturity,dp3525168|dp3525169|dp3525170|dp456456,dp3525168|dp3525169|dp3525170|dp456456,mehrfach
+74.00.C,0150,0050,15. Total high-quality liquid assets HQLA,e. Weighted value,dp3525361|dp3525362|dp3525403|dp3525433,dp3525361|dp3525362|dp3525403|dp3525433,mehrfach
+74.00.C,0160,0020,EU-15a. Assets encumbered for a residual maturity of one year or more in a cover pool,b. < 6 months,dp3524887|dp3524888|dp3524989|dp3525046,dp3524887|dp3524888|dp3524989|dp3525046,mehrfach
+74.00.C,0160,0030,EU-15a. Assets encumbered for a residual maturity of one year or more in a cover pool,c. 6 months to < 1yr,dp3524846|dp3525047|dp3525048|dp3525049,dp3524846|dp3525047|dp3525048|dp3525049,mehrfach
+74.00.C,0160,0040,EU-15a. Assets encumbered for a residual maturity of one year or more in a cover pool,d. ≥ 1yr,dp3524889|dp3524890|dp3524988|dp3525050,dp3524889|dp3524890|dp3524988|dp3525050,mehrfach
+74.00.C,0160,0050,EU-15a. Assets encumbered for a residual maturity of one year or more in a cover pool,e. Weighted value,dp3525396|dp3525397|dp3525407|dp3525442,dp3525396|dp3525397|dp3525407|dp3525442,mehrfach
+74.00.C,0170,0020,16. Deposits held at other financial institutions for operational purposes,b. < 6 months,dp3524871|dp3524872|dp3525035|dp455390,dp3524871|dp3524872|dp3525035|dp455390,mehrfach
+74.00.C,0170,0030,16. Deposits held at other financial institutions for operational purposes,c. 6 months to < 1yr,dp3524873|dp3525036|dp3525037|dp455389,dp3524873|dp3525036|dp3525037|dp455389,mehrfach
+74.00.C,0170,0040,16. Deposits held at other financial institutions for operational purposes,d. ≥ 1yr,dp3524874|dp3524875|dp3525038|dp455388,dp3524874|dp3524875|dp3525038|dp455388,mehrfach
+74.00.C,0170,0050,16. Deposits held at other financial institutions for operational purposes,e. Weighted value,dp3525390|dp3525391|dp3525445|dp458777,dp3525390|dp3525391|dp3525445|dp458777,mehrfach
+74.00.C,0180,0020,17. Performing loans and securities:,b. < 6 months,dp3524896|dp3524917|dp3525009|dp3525010,dp3524896|dp3524917|dp3525009|dp3525010,mehrfach
+74.00.C,0180,0030,17. Performing loans and securities:,c. 6 months to < 1yr,dp3524918|dp3525011|dp3525012|dp3525055,dp3524918|dp3525011|dp3525012|dp3525055,mehrfach
+74.00.C,0180,0040,17. Performing loans and securities:,d. ≥ 1yr,dp3524823|dp3524919|dp3525013|dp3525014,dp3524823|dp3524919|dp3525013|dp3525014,mehrfach
+74.00.C,0180,0050,17. Performing loans and securities:,e. Weighted value,dp3525363|dp3525401|dp3525431|dp3525432,dp3525363|dp3525401|dp3525431|dp3525432,mehrfach
+74.00.C,0190,0020,18. Performing securities financing transactions with financial customers collateralised by Level 1 HQLA subject to 0% haircut,b. < 6 months,dp3524932|dp3524933|dp3525015|dp455528,dp3524932|dp3524933|dp3525015|dp455528,mehrfach
+74.00.C,0190,0030,18. Performing securities financing transactions with financial customers collateralised by Level 1 HQLA subject to 0% haircut,c. 6 months to < 1yr,dp3524934|dp3525016|dp3525017|dp455527,dp3524934|dp3525016|dp3525017|dp455527,mehrfach
+74.00.C,0190,0040,18. Performing securities financing transactions with financial customers collateralised by Level 1 HQLA subject to 0% haircut,d. ≥ 1yr,dp3524935|dp3525018|dp3525019|dp455526,dp3524935|dp3525018|dp3525019|dp455526,mehrfach
+74.00.C,0190,0050,18. Performing securities financing transactions with financial customers collateralised by Level 1 HQLA subject to 0% haircut,e. Weighted value,dp3525384|dp3525453|dp3525454|dp458835,dp3525384|dp3525453|dp3525454|dp458835,mehrfach
+74.00.C,0200,0020,19. Performing securities financing transactions with financial customer collateralised by other assets and loans and advances to financial institutions,b. < 6 months,dp3524897|dp3524920|dp3524921|dp3524922,dp3524897|dp3524920|dp3524921|dp3524922,mehrfach
+74.00.C,0200,0030,19. Performing securities financing transactions with financial customer collateralised by other assets and loans and advances to financial institutions,c. 6 months to < 1yr,dp3524824|dp3524923|dp3524924|dp3524925,dp3524824|dp3524923|dp3524924|dp3524925,mehrfach
+74.00.C,0200,0040,19. Performing securities financing transactions with financial customer collateralised by other assets and loans and advances to financial institutions,d. ≥ 1yr,dp3524898|dp3524926|dp3524927|dp3524928,dp3524898|dp3524926|dp3524927|dp3524928,mehrfach
+74.00.C,0200,0050,19. Performing securities financing transactions with financial customer collateralised by other assets and loans and advances to financial institutions,e. Weighted value,dp3525359|dp3525360|dp3525402|dp3525434,dp3525359|dp3525360|dp3525402|dp3525434,mehrfach
+74.00.C,0210,0020,"20. Performing loans to non- financial corporate clients, loans to retail and small business customers, and loans to sovereigns, and PSEs, of which:",b. < 6 months,dp3524840|dp3524949|dp3525025|dp3525026,dp3524840|dp3524949|dp3525025|dp3525026,mehrfach
+74.00.C,0210,0030,"20. Performing loans to non- financial corporate clients, loans to retail and small business customers, and loans to sovereigns, and PSEs, of which:",c. 6 months to < 1yr,dp3524841|dp3524866|dp3524950|dp3524951,dp3524841|dp3524866|dp3524950|dp3524951,mehrfach
+74.00.C,0210,0040,"20. Performing loans to non- financial corporate clients, loans to retail and small business customers, and loans to sovereigns, and PSEs, of which:",d. ≥ 1yr,dp3524842|dp3524868|dp3525032|dp3525033,dp3524842|dp3524868|dp3525032|dp3525033,mehrfach
+74.00.C,0210,0050,"20. Performing loans to non- financial corporate clients, loans to retail and small business customers, and loans to sovereigns, and PSEs, of which:",e. Weighted value,dp3525387|dp3525388|dp3525438|dp3525448,dp3525387|dp3525388|dp3525438|dp3525448,mehrfach
+74.00.C,0220,0020,21. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,b. < 6 months,dp3524849|dp3525027|dp3525028|dp3525029,dp3524849|dp3525027|dp3525028|dp3525029,mehrfach
+74.00.C,0220,0030,21. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,c. 6 months to < 1yr,dp3524848|dp3524867|dp3525030|dp3525031,dp3524848|dp3524867|dp3525030|dp3525031,mehrfach
+74.00.C,0220,0040,21. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,d. ≥ 1yr,dp3524843|dp3524869|dp3524870|dp3525034,dp3524843|dp3524869|dp3524870|dp3525034,mehrfach
+74.00.C,0220,0050,21. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,e. Weighted value,dp3525389|dp3525437|dp3525446|dp3525447,dp3525389|dp3525437|dp3525446|dp3525447,mehrfach
+74.00.C,0230,0020,"22. Performing residential mortgages, of which:",b. < 6 months,dp3524839|dp3524936|dp3524937|dp3525020,dp3524839|dp3524936|dp3524937|dp3525020,mehrfach
+74.00.C,0230,0030,"22. Performing residential mortgages, of which:",c. 6 months to < 1yr,dp3524851|dp3524940|dp3524941|dp3525022,dp3524851|dp3524940|dp3524941|dp3525022,mehrfach
+74.00.C,0230,0040,"22. Performing residential mortgages, of which:",d. ≥ 1yr,dp3524850|dp3524944|dp3524945|dp3524946,dp3524850|dp3524944|dp3524945|dp3524946,mehrfach
+74.00.C,0230,0050,"22. Performing residential mortgages, of which:",e. Weighted value,dp3525385|dp3525435|dp3525451|dp3525452,dp3525385|dp3525435|dp3525451|dp3525452,mehrfach
+74.00.C,0240,0020,23. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,b. < 6 months,dp3524938|dp3524939|dp3525021|dp455567,dp3524938|dp3524939|dp3525021|dp455567,mehrfach
+74.00.C,0240,0030,23. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,c. 6 months to < 1yr,dp3524942|dp3524943|dp3525023|dp455564,dp3524942|dp3524943|dp3525023|dp455564,mehrfach
+74.00.C,0240,0040,23. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,d. ≥ 1yr,dp3524947|dp3524948|dp3525024|dp455561,dp3524947|dp3524948|dp3525024|dp455561,mehrfach
+74.00.C,0240,0050,23. With a risk weight of less than or equal to 35% under the Basel II Standardised Approach for credit risk,e. Weighted value,dp3525386|dp3525449|dp3525450|dp458848,dp3525386|dp3525449|dp3525450|dp458848,mehrfach
+74.00.C,0250,0020,"24. Other loans and securities that are not in default and do not qualify as HQLA, including exchange-traded equities and trade finance on-balance sheet products",b. < 6 months,dp3524844|dp3524882|dp3524883|dp3525042,dp3524844|dp3524882|dp3524883|dp3525042,mehrfach
+74.00.C,0250,0030,"24. Other loans and securities that are not in default and do not qualify as HQLA, including exchange-traded equities and trade finance on-balance sheet products",c. 6 months to < 1yr,dp3524847|dp3524884|dp3525043|dp3525044,dp3524847|dp3524884|dp3525043|dp3525044,mehrfach
+74.00.C,0250,0040,"24. Other loans and securities that are not in default and do not qualify as HQLA, including exchange-traded equities and trade finance on-balance sheet products",d. ≥ 1yr,dp3524845|dp3524885|dp3524886|dp3525045,dp3524845|dp3524885|dp3524886|dp3525045,mehrfach
+74.00.C,0250,0050,"24. Other loans and securities that are not in default and do not qualify as HQLA, including exchange-traded equities and trade finance on-balance sheet products",e. Weighted value,dp3525395|dp3525408|dp3525443|dp3525444,dp3525395|dp3525408|dp3525443|dp3525444,mehrfach
+74.00.C,0260,0020,25. Interdependent assets,b. < 6 months,dp3524891|dp3524892|dp3525051|dp455450,dp3524891|dp3524892|dp3525051|dp455450,mehrfach
+74.00.C,0260,0030,25. Interdependent assets,c. 6 months to < 1yr,dp3524893|dp3525052|dp3525053|dp455449,dp3524893|dp3525052|dp3525053|dp455449,mehrfach
+74.00.C,0260,0040,25. Interdependent assets,d. ≥ 1yr,dp3524894|dp3524895|dp3525054|dp455448,dp3524894|dp3524895|dp3525054|dp455448,mehrfach
+74.00.C,0260,0050,25. Interdependent assets,e. Weighted value,dp3525398|dp3525399|dp3525400|dp458793,dp3525398|dp3525399|dp3525400|dp458793,mehrfach
+74.00.C,0280,0040,27. Physical traded commodities,d. ≥ 1yr,dp3524929|dp3524930|dp3524931|dp455476,dp3524929|dp3524930|dp3524931|dp455476,mehrfach
+74.00.C,0280,0050,27. Physical traded commodities,e. Weighted value,dp3525382|dp3525457|dp3525458|dp458803,dp3525382|dp3525457|dp3525458|dp458803,mehrfach
+74.00.C,0320,0020,31. All other assets not included in the above categories,b. < 6 months,dp3524828|dp3524852|dp3524853|dp3524955,dp3524828|dp3524852|dp3524853|dp3524955,mehrfach
+74.00.C,0320,0030,31. All other assets not included in the above categories,c. 6 months to < 1yr,dp3524854|dp3524855|dp3524900|dp3524956,dp3524854|dp3524855|dp3524900|dp3524956,mehrfach
+74.00.C,0320,0040,31. All other assets not included in the above categories,d. ≥ 1yr,dp3524856|dp3524857|dp3524901|dp3524957,dp3524856|dp3524857|dp3524901|dp3524957,mehrfach
+74.00.C,0320,0050,31. All other assets not included in the above categories,e. Weighted value,dp3525380|dp3525409|dp3525410|dp3525441,dp3525380|dp3525409|dp3525410|dp3525441,mehrfach
+74.00.C,0330,0020,32. Off-balance sheet items,b. < 6 months,dp3524876|dp3524877|dp3525039|dp455427,dp3524876|dp3524877|dp3525039|dp455427,mehrfach
+74.00.C,0330,0030,32. Off-balance sheet items,c. 6 months to < 1yr,dp3524878|dp3524879|dp3525040|dp455425,dp3524878|dp3524879|dp3525040|dp455425,mehrfach
+74.00.C,0330,0040,32. Off-balance sheet items,d. ≥ 1yr,dp3524880|dp3524881|dp3525041|dp455423,dp3524880|dp3524881|dp3525041|dp455423,mehrfach
+74.00.C,0330,0050,32. Off-balance sheet items,e. Weighted value,dp3525392|dp3525393|dp3525394|dp458786,dp3525392|dp3525393|dp3525394|dp458786,mehrfach
+74.00.C,0340,0050,33. Total RSF,e. Weighted value,dp458581|dp475569|dp475570|dp475571,dp458581|dp475569|dp475570|dp475571,mehrfach
+74.00.D,0300,0020,29. NSFR derivative assets,b. < 6 months,dp3525177|dp3525178|dp3525179|dp456453,dp3525177|dp3525178|dp3525179|dp456453,mehrfach
+74.00.D,0300,0050,29. NSFR derivative assets,e. Weighted value,dp3525355|dp3525356|dp3525460|dp458807,dp3525355|dp3525356|dp3525460|dp458807,mehrfach
+74.00.D,0310,0020,30. NSFR derivative liabilities before deduction of variation margin posted,b. < 6 months,dp3525174|dp3525175|dp3525176|dp456451,dp3525174|dp3525175|dp3525176|dp456451,mehrfach
+74.00.D,0310,0050,30. NSFR derivative liabilities before deduction of variation margin posted,e. Weighted value,dp3525354|dp3525381|dp3525459|dp458805,dp3525354|dp3525381|dp3525459|dp458805,mehrfach
+74.00.E,0270,0010,26. Other assets:,a. No maturity,dp3525210|dp3525211|dp3525216|dp3525223,dp3525210|dp3525211|dp3525216|dp3525223,mehrfach
+74.00.E,0270,0020,26. Other assets:,b. < 6 months,dp3525212|dp3525215|dp3525221|dp3525222,dp3525212|dp3525215|dp3525221|dp3525222,mehrfach
+74.00.E,0270,0030,26. Other assets:,c. 6 months to < 1yr,dp3525205|dp3525218|dp3525219|dp3525220,dp3525205|dp3525218|dp3525219|dp3525220,mehrfach
+74.00.E,0270,0040,26. Other assets:,d. ≥ 1yr,dp3525202|dp3525206|dp3525213|dp3525214,dp3525202|dp3525206|dp3525213|dp3525214,mehrfach
+74.00.E,0270,0050,26. Other assets:,e. Weighted value,dp3525383|dp3525440|dp3525455|dp3525456,dp3525383|dp3525440|dp3525455|dp3525456,mehrfach
+74.00.E,0290,0020,28. Assets posted as initial margin for derivative contracts and contributions to default funds of CCPs,b. < 6 months,dp3525203|dp3525207|dp3525208|dp3525229,dp3525203|dp3525207|dp3525208|dp3525229,mehrfach
+74.00.E,0290,0030,28. Assets posted as initial margin for derivative contracts and contributions to default funds of CCPs,c. 6 months to < 1yr,dp3525204|dp3525209|dp3525227|dp3525228,dp3525204|dp3525209|dp3525227|dp3525228,mehrfach
+74.00.E,0290,0040,28. Assets posted as initial margin for derivative contracts and contributions to default funds of CCPs,d. ≥ 1yr,dp3525217|dp3525224|dp3525225|dp3525226,dp3525217|dp3525224|dp3525225|dp3525226,mehrfach
+74.00.E,0290,0050,28. Assets posted as initial margin for derivative contracts and contributions to default funds of CCPs,e. Weighted value,dp3525357|dp3525358|dp3525439|dp3525461,dp3525357|dp3525358|dp3525439|dp3525461,mehrfach
+74.00.F,0350,0050,34. Net Stable Funding Ratio %,e. Weighted value,dp458571|dp475564|dp475565|dp475566,dp458571|dp475564|dp475565|dp475566,mehrfach
 90.01,0010,0010,1. Own funds and eligible liabilities,a. T,dp459177,dp459177,stable
 90.01,0010,0020,1. Own funds and eligible liabilities,b. T,dp459222,dp459222,stable
 90.01,0010,0030,1. Own funds and eligible liabilities,c. T-1,dp3525673,dp3525673,stable

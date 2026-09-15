@@ -141,6 +141,10 @@
   td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:default}
   td.empty{background:var(--empty)}
   /* "Fehlt != Null": Coverage-Kasten + Sektions-Badge */
+  /* Ein Report ohne jede Zelle (#28) — die Leere IST die Aussage. */
+  .leer{border:1px solid var(--soft);border-left:3px solid var(--muted);
+        border-radius:6px;padding:.6rem .75rem;margin:.8rem 0;
+        font-size:var(--f1);line-height:1.5}
   .covwrap{border:1px solid var(--soft);border-radius:6px;padding:.55rem .7rem;margin:.8rem 0}
   .covhead{font-size:12px;color:var(--muted);margin-bottom:.3rem}
   .covblock{margin-top:.35rem;font-size:12px}
@@ -433,8 +437,9 @@ const bridgeAt=(tid,row,col)=>{ const m=BRIDGE.get(tid); return m?(m[row+'|'+col
    die hier zuerst stand. */
 const BRIDGE_TIP={
   rebound:'Diese Zelle wurde zwischen Framework 4.1 und 4.2 auf einen neuen Datenpunkt umgebunden. Die Bezeichnung ist in beiden Versionen dieselbe (gilt für alle 63 umgebundenen Zellen), die Kennung nicht — der Viewer verbindet über die Koordinate und findet den Wert deshalb weiter. Ein Vorbehalt bleibt: gleiche Bezeichnung ist keine Zusage gleicher Definition.',
-  ambiguous:'Für diese Zelle liegen in beiden Framework-Versionen mehrere Datenpunkte auf derselben Koordinate; die Brücke konnte sie nicht eindeutig zuordnen. Schwächer belegt als ein Rebound.'};
-const BRIDGE_MARK={rebound:'⇄', ambiguous:'≟'};
+  mehrfach:'Auf dieser Koordinate liegen mehrere Datenpunkte — in beiden Framework-Versionen dieselben. Die Zuordnung 4.1↔4.2 steht damit fest; die Koordinate trägt nur mehr als einen Wert. Bei LIQ2 (NSFR) sind das die vier Beobachtungsquartale, die das Template nebeneinander zeigt: gemessen teilen Reports desselben Instituts bei zwei Quartalen Abstand genau zwei der vier Werte. Beim Vergleich über die Zeit also darauf achten, welchen der Werte man nimmt.',
+  ambiguous:'Für diese Zelle liegen in beiden Framework-Versionen mehrere Datenpunkte auf derselben Koordinate, und die Sätze unterscheiden sich — die Brücke kann sie nicht zuordnen. Schwächer belegt als ein Rebound.'};
+const BRIDGE_MARK={rebound:'⇄', mehrfach:'⁞', ambiguous:'≟'};
 /* Nicht eindeutig platzierte Koordinaten (#54). Andere Ursache als die
    Bruecke oben: dort ist die VERSIONSzuordnung unklar, hier die PLATZIERUNG.
    Das DPM fuehrt je Template mehrere TableVersions, zwischen denen sich die
@@ -1174,6 +1179,27 @@ function renderTemplate(tid, cells, rep){
 /* Was NICHT im Report steht — der eigentliche "Fehlt != Null"-Block.
    Als ein kompakter Kasten, nicht als ~43 leere Sektionen je Report: eine
    Auslassung ist eine Zeile Information, kein Gitter aus Symbolen. */
+/* Ein Report, der NICHTS trägt (#28).
+
+   Das Institut hat für diesen Stichtag eingereicht und jedes Template als
+   nicht offengelegt deklariert. Ohne diesen Kasten stünde eine Seite da, die
+   nach einem Ladefehler aussieht — dabei ist die Leere hier die Aussage, und
+   genau der Fall, für den Arbeitsprinzip 3 existiert.
+
+   Bewusst KEIN Vorwurf: Art. 433a–c lässt Erleichterungen ausdrücklich zu. Der
+   Text sagt, was deklariert wurde, und nicht, was es bedeutet. */
+function leermeldung(rep){
+  if(rep.templates && rep.templates.size) return '';
+  const n=Object.keys(rep.coverage||{}).length;
+  if(!n) return `<div class="leer"><b>Keine Daten zu diesem Report.</b>
+    Es liegt uns weder eine Zahl noch eine Deklaration vor — das ist eine
+    Lücke auf unserer Seite, keine Aussage über das Institut.</div>`;
+  return `<div class="leer"><b>Dieses Institut legt für diesen Stichtag nichts offen.</b>
+    Es hat eingereicht und alle <b>${n}</b> Templates als nicht offengelegt
+    deklariert. Das ist zulässig: die CRR lässt nach Art. 433a–c Erleichterungen
+    zu, und Art. 432 erlaubt das Weglassen nicht wesentlicher Angaben.
+    <span class="cl">Die Deklaration steht unten vollständig.</span></div>`;
+}
 function coverageBlock(rep){
   const cov=rep.coverage||{};
   const keys=Object.keys(cov);
@@ -1499,9 +1525,11 @@ async function renderReport(rep){
   const nrec=NAMES.get(lei)||{};
   main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2>
     <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
-    <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(curLabel(rep))}</b>${
+    <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency ${
+      curLabel(rep) ? `<b>${esc(curLabel(rep))}</b>` : '<span class="cl">nicht gemeldet</span>'}${
       isMixedCur(rep)?` <span class="cl" title="Dieser Report meldet nicht durchgehend in einer Währung. Die zuerst genannte trägt die Mehrheit der Fakten; die abweichenden Templates rechnen mit ihrem eigenen Kurs (#55).">— je Template verschieden</span>`:''}
     · Framework <b>${esc(rep.framework)}</b></div></div>
+    ${leermeldung(rep)}
     <div id="ovSection"></div>
     <div id="tsSection"></div>
     ${coverageBlock(rep)}

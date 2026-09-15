@@ -288,6 +288,29 @@ def pruefe():
               }
               return {keine:1};
             }""")
+            # Nullmeldung (#28): ein Institut, das fuer seinen Stichtag NICHTS
+            # offenlegt, hatte bisher keinen Shard und war im Viewer nicht
+            # auffindbar. Jetzt ist es das — und dieser Lauf prueft, dass dort
+            # auch etwas STEHT. Eine Seite, die nur "Keine Templates" zeigt,
+            # saehe aus wie ein Ladefehler; die Leere ist hier die Aussage.
+            leer = pg.evaluate("""async () => {
+              const rep = REPORTS.find(r => r.nt === 0);
+              if(!rep) return {keine:1};
+              const p = leiParts(rep.entityID);
+              location.hash = '#r/'+p.lei+'/'+rep.refPeriod+'/'+p.scope;
+              for(let g=0; g<600 && !document.querySelector('.leer'); g++)
+                await new Promise(s=>setTimeout(s,10));
+              await new Promise(s=>setTimeout(s,300));
+              const k=document.querySelector('.leer');
+              const kopf=document.querySelector('.rhead h2');
+              return {n: REPORTS.filter(r=>r.nt===0).length,
+                      lei: p.lei,
+                      text: k ? k.textContent.replace(/\\s+/g,' ').trim() : '',
+                      name: kopf ? kopf.textContent.trim() : '',
+                      cov: document.querySelectorAll('.covitem').length,
+                      covkopf: (document.querySelector('.covhead')||{}).textContent||''};
+            }""")
+
             # Groessenbalken (#49): erscheinen sie — und bleiben sie dort WEG,
             # wo sie luegen wuerden? Ein Balken fuer einen um 10^6 zu kleinen
             # Betrag zeigt ein winziges Institut statt eines Meldefehlers.
@@ -429,6 +452,30 @@ def pruefe():
         if "keine Peer-Gruppe" not in text:
             fehler.append("die Liste weist sich nicht als explorativ aus und "
                           "liest sich damit wie eine anerkannte Vergleichsgruppe")
+
+    if leer.get("keine"):
+        print("  Nullmeldung (#28): kein Report mit nt=0 im Bestand — nichts zu prüfen")
+    else:
+        print(f"  Nullmeldung (#28): {leer['n']} Report(s) · {leer['name']} · "
+              f"{leer['cov']} deklarierte Templates gelistet")
+        if not leer["text"]:
+            fehler.append("ein Report ohne jede Zelle (#28) zeigt keinen Hinweis — "
+                          "die Seite sieht aus wie ein Ladefehler, dabei ist die "
+                          "Leere die Aussage")
+        elif "nichts offen" not in leer["text"]:
+            fehler.append("der Hinweis am leeren Report (#28) sagt nicht, dass das "
+                          f"Institut nichts offenlegt: {leer['text'][:90]}")
+        # Kein Vorwurf: die Zulaessigkeit muss danebenstehen, sonst liest sich
+        # die Leere wie ein Versaeumnis.
+        if leer["text"] and "433a" not in leer["text"]:
+            fehler.append("der Hinweis am leeren Report (#28) nennt die Rechtslage "
+                          "nicht — ohne sie liest er sich als Vorwurf")
+        if not leer["cov"]:
+            fehler.append("der leere Report (#28) listet seine Deklaration nicht — "
+                          "dann bleibt die einzige Aussage, die er trägt, unsichtbar")
+        if leer["name"] and leer["name"] == leer["lei"]:
+            fehler.append("der leere Report (#28) steht unter seiner nackten LEI — "
+                          "sichtbar und anonym ist die halbe Reparatur")
 
     print(f"  Benchmark: {balken['zeilen']} Zeilen · {balken['balken']} Größenbalken · "
           f"skaliert markiert {balken['mitMarke']}, davon mit Balken {balken['markeMitBalken']}")

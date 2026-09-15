@@ -177,5 +177,127 @@ class ResolveCoverageTest(unittest.TestCase):
         self.assertEqual(declared, before)
 
 
+class NullmeldungTest(unittest.TestCase):
+    """Ein Report ohne eine einzige platzierbare Zelle (#28).
+
+    Pass 1 baut Reports aus Zellen. Ein Institut, das für seinen Stichtag
+    NICHTS offenlegt, hat keine — und entstand deshalb gar nicht erst: kein
+    Shard, kein Index-Eintrag, im Viewer nicht auffindbar. Aus einer Meldung
+    „ich lege nichts offen" wurde bei uns ein Nichts statt einer Aussage, und
+    das ist genau der Fall, für den Arbeitsprinzip 3 existiert.
+    """
+
+    def test_a_declaration_only_report_is_created(self):
+        reports = {}
+        ergaenzt = z.nur_deklarierte(
+            reports, {"rs:X.CON|2025-12-31": {"61.00": False}},
+            {"rs:X.CON|2025-12-31": "4.1"})
+        self.assertEqual(ergaenzt, ["rs:X.CON|2025-12-31"])
+        rep = reports["rs:X.CON|2025-12-31"]
+        self.assertEqual(rep["entityID"], "rs:X.CON")
+        self.assertEqual(rep["refPeriod"], "2025-12-31")
+        self.assertEqual(rep["framework"], "4.1")
+        self.assertEqual(rep["tpl"], {})
+
+    def test_the_currency_stays_empty_rather_than_guessed(self):
+        """Wir kennen sie nicht. EUR einzusetzen hiesse, eine Währung zu
+        behaupten, wo keine gemeldet wurde — und alle EUR-Rechnungen
+        stromabwärts würden sie für bare Münze nehmen."""
+        reports = {}
+        z.nur_deklarierte(reports, {"rs:X.CON|2025-12-31": {"61.00": False}}, {})
+        self.assertEqual(reports["rs:X.CON|2025-12-31"]["baseCurrency"], "")
+
+    def test_an_existing_report_is_never_overwritten(self):
+        """Sonst verlöre ein Report mit Daten seine Zellen an die Ergänzung."""
+        reports = {"rs:X.CON|2025-12-31": {"entityID": "rs:X.CON",
+                                           "refPeriod": "2025-12-31",
+                                           "tpl": {"61.00": [("0010", "0010",
+                                                              "1", "")]}}}
+        ergaenzt = z.nur_deklarierte(
+            reports, {"rs:X.CON|2025-12-31": {"61.00": False}}, {})
+        self.assertEqual(ergaenzt, [])
+        self.assertEqual(len(reports["rs:X.CON|2025-12-31"]["tpl"]), 1)
+
+    def test_a_malformed_key_is_skipped(self):
+        reports = {}
+        z.nur_deklarierte(reports, {"ohnetrenner": {"61.00": False}}, {})
+        self.assertEqual(reports, {})
+
+    def test_such_a_report_resolves_every_declaration(self):
+        """Der Kasten im Viewer trägt die ganze Aussage des Reports — wenn die
+        Auflösung bei leeren Daten nichts liefert, bleibt er leer."""
+        cov = z.resolve_coverage({"61.00": False, "83.01": False}, set())
+        self.assertEqual(cov, {"61.00": "not-reported", "83.01": "not-reported"})
+
+
+class RegisterTest(unittest.TestCase):
+    """Sichtbar und anonym ist die halbe Reparatur (#28).
+
+    `meta` und `names` entstehen aus den Fakten. Ein Institut ohne einen
+    einzigen Fakt fehlt in beiden — der Report wäre auffindbar, stünde aber
+    nur als nackte LEI da.
+    """
+
+    def setUp(self):
+        import tempfile
+        self.dir = Path(tempfile.mkdtemp())
+        (self.dir / "processed").mkdir()
+        (self.dir / "processed" / "entity_meta.csv").write_text(
+            "lei,name,country,entity_type,institution_type,is_gsii,modules\n"
+            "LEI1,Milleis,France,Banking Group,Other highest EEA,false,x\n",
+            encoding="utf-8")
+
+    def test_a_missing_institution_gets_its_name_from_the_register(self):
+        meta, names = {}, {}
+        ergaenzt = z.ergaenze_aus_register(meta, names, {"LEI1"}, self.dir)
+        self.assertEqual(ergaenzt, ["LEI1"])
+        self.assertEqual(names["LEI1"]["name"], "Milleis")
+        self.assertEqual(names["LEI1"]["jur"], "France")
+        self.assertEqual(meta["LEI1"]["institution_type"], "Other highest EEA")
+
+    def test_an_institution_known_from_facts_is_not_touched_at_all(self):
+        """Steht der LEI in beiden Karten, greift schon der Vorfilter."""
+        meta = {"LEI1": {"country": "X", "institution_type": "Y",
+                         "is_gsii": "false"}}
+        names = {"LEI1": {"name": "aus den Fakten", "jur": "X"}}
+        self.assertEqual(z.ergaenze_aus_register(meta, names, {"LEI1"},
+                                                 self.dir), [])
+        self.assertEqual(names["LEI1"]["name"], "aus den Fakten")
+
+    def test_a_half_known_institution_keeps_the_name_it_already_has(self):
+        """Der Fall, der die Regel trägt: der LEI fehlt in `meta`, steht aber
+        in `names`. Er läuft damit durch die Ergänzung — und die darf den
+        Namen aus den Fakten nicht durch den Registernamen ersetzen. Die
+        Meldung ist die genauere Quelle; das Register füllt nur Lücken.
+
+        Ohne diesen asymmetrischen Fall prüft der Test nichts: bei einem LEI in
+        BEIDEN Karten greift der Vorfilter, und die Zuweisung wird nie
+        erreicht."""
+        meta = {}
+        names = {"LEI1": {"name": "aus den Fakten", "jur": "X"}}
+        z.ergaenze_aus_register(meta, names, {"LEI1"}, self.dir)
+        self.assertEqual(names["LEI1"]["name"], "aus den Fakten",
+                         "das Register hat den Meldenamen überschrieben")
+        self.assertEqual(meta["LEI1"]["country"], "France",
+                         "die fehlende Hälfte wurde nicht ergänzt")
+
+    def test_the_same_holds_for_the_metadata_half(self):
+        """Spiegelfall: `meta` steht, `names` fehlt. Auch hier füllt das
+        Register nur die Lücke."""
+        meta = {"LEI1": {"country": "aus den Fakten", "institution_type": "Y",
+                         "is_gsii": "false"}}
+        names = {}
+        z.ergaenze_aus_register(meta, names, {"LEI1"}, self.dir)
+        self.assertEqual(meta["LEI1"]["country"], "aus den Fakten",
+                         "das Register hat die Meldemetadaten überschrieben")
+        self.assertEqual(names["LEI1"]["name"], "Milleis")
+
+    def test_an_institution_in_neither_place_yields_nothing(self):
+        meta, names = {}, {}
+        self.assertEqual(z.ergaenze_aus_register(meta, names, {"UNBEKANNT"},
+                                                 self.dir), [])
+        self.assertEqual(names, {})
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
