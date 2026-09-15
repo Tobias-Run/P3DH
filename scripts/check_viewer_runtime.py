@@ -232,6 +232,35 @@ def pruefe():
                       z:rep.quality.z, alle:rep.quality.n, tid,
                       tip, ovq:ovq?ovq.getAttribute('title'):''};
             }""")
+            # Verteilungsstreifen (#49, R4): das Perzentil sagt, WO ein Institut
+            # steht — der Streifen, WORIN. "P47" heisst in einer eng gepackten
+            # Gruppe etwas anderes als in einer, die ueber zwei Groessenordnungen
+            # streut. Geprueft wird am DOM, ob Box, Median und Marke ankommen
+            # und ob die Marke innerhalb der Spur liegt.
+            streifen = pg.evaluate("""async () => {
+              const cont=document.getElementById('tcontainer');
+              const ds=[...document.querySelectorAll('details.theme')];
+              for(const d of ds){
+                const bd=d.querySelector('.tbody');
+                d.open=true;
+                let g=0; while(g++<400 && bd.dataset.done!=='1')
+                  await new Promise(s=>setTimeout(s,10));
+                await new Promise(s=>setTimeout(s,250));
+                const str=bd.querySelectorAll('.dstr');
+                if(str.length){
+                  const lagen=[...bd.querySelectorAll('.dstr .dmark')]
+                    .map(m=>parseFloat(m.style.left)).filter(x=>!isNaN(x));
+                  return {shapes: SHAPE?SHAPE.size:0, streifen:str.length,
+                          boxen: bd.querySelectorAll('.dstr .dbox').length,
+                          mediane: bd.querySelectorAll('.dstr .dmed').length,
+                          marken: lagen.length,
+                          min: Math.min(...lagen), max: Math.max(...lagen),
+                          verschieden: new Set(lagen.map(x=>Math.round(x))).size};
+                }
+              }
+              return {keine:1, shapes: SHAPE?SHAPE.size:0};
+            }""")
+
             # Aehnliche Institute (#13/#27): kommt die Liste im DOM an, und
             # traegt sie ihre BEGRUENDUNG? Eine unbegruendete
             # "aehnlich"-Behauptung ist genau die Black Box, die #27 ausschliesst
@@ -357,6 +386,28 @@ def pruefe():
             fehler.append("Report mit AUSSCHLIESSLICH Zeitbefunden begründet sie "
                           "im Viewer mit der Zellpopulation — die hat ihn nie "
                           "gesehen")
+
+    if streifen.get("keine"):
+        fehler.append(f"kein Verteilungsstreifen (#49) im DOM — "
+                      f"peer_shape.json trägt {streifen.get('shapes', 0)} Formen")
+    else:
+        print(f"  Verteilungsstreifen (#49): {streifen['streifen']} Streifen · "
+              f"{streifen['boxen']} Boxen · {streifen['marken']} Marken · "
+              f"Lage {streifen['min']:.0f}–{streifen['max']:.0f} % "
+              f"({streifen['verschieden']} verschiedene)")
+        if streifen["boxen"] != streifen["streifen"]:
+            fehler.append("nicht jeder Streifen trägt seine Quartilsbox — dann "
+                          "zeigt er eine Position ohne die Verteilung, also "
+                          "genau das, was das Perzentil schon sagt")
+        if streifen["mediane"] != streifen["streifen"]:
+            fehler.append("nicht jeder Streifen trägt den Median der Gruppe")
+        if not 0 <= streifen["min"] and streifen["max"] > 100:
+            fehler.append(f"Marke ausserhalb der Spur: {streifen['min']}–"
+                          f"{streifen['max']} % — Werte müssen geklemmt werden")
+        if streifen["verschieden"] < 3:
+            fehler.append(f"alle Marken stehen an derselben Stelle "
+                          f"({streifen['verschieden']} verschiedene) — der "
+                          f"Streifen zeigt nicht die eigene Lage")
 
     if aehnlich.get("keine"):
         fehler.append("kein Report mit ähnlichen Instituten (#27) — die Liste "

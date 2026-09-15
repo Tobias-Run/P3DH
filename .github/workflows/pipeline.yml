@@ -211,6 +211,19 @@ jobs:
       # Produkt: bricht bewusst NICHT ab, wenn Institute auffaellige Werte
       # melden — das sind Befunde ueber die Einreichungen, keine Fehler in
       # unserer Pipeline. Muss nach Zweig B laufen (braucht fact_value_eur).
+      # Offenlegungsfrequenz je Template (#34). Muss NACH dem Parsen laufen,
+      # weil sie die Filing-Indicators aller Stichtage braucht — und sie
+      # aendert sich mit jeder neuen Welle, weil ein fuenfter Stichtag die
+      # Muster verlaengert.
+      #
+      # Steht VOR check_plausibility (#36) und vor dem Auslassungsprofil (#43
+      # Punkt 4): beide lesen disclosure_frequency.csv. Fehlt sie, laufen beide
+      # trotzdem durch — der Zeitvergleich verliert nur den Frequenzhinweis am
+      # Befund, die Zeitdimension der Auslassung bleibt ganz leer. Zwei stille
+      # Ausfaelle, die scripts/check_pipeline_order.py jetzt findet.
+      - name: Offenlegungsfrequenz
+        run: python scripts/build_disclosure_frequency.py
+
       - name: Plausibility profile
         run: python scripts/check_plausibility.py
 
@@ -237,13 +250,6 @@ jobs:
       # gemeldet wird.
       - name: IRB-Risikogewichte (CR6)
         run: python scripts/build_irb_risk_weights.py
-
-      # Offenlegungsfrequenz je Template (#34). Muss NACH dem Parsen laufen,
-      # weil sie die Filing-Indicators aller Stichtage braucht — und sie
-      # aendert sich mit jeder neuen Welle, weil ein fuenfter Stichtag die
-      # Muster verlaengert.
-      - name: Offenlegungsfrequenz
-        run: python scripts/build_disclosure_frequency.py
 
       # Ermessensausuebung nach Art. 432 (#43). Braucht BEIDE Quellen frisch:
       # die Filing-Indicators fuer die Deklaration und das Parquet fuer die

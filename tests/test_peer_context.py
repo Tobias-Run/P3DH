@@ -188,3 +188,83 @@ class ViewerTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class VerteilungsformTest(unittest.TestCase):
+    """Die Form der Peer-Verteilung (#49, R4).
+
+    Das Perzentil sagt, WO ein Institut steht, nicht WORIN. „P47" heisst in
+    einer eng gepackten Gruppe etwas anderes als in einer, die über zwei
+    Größenordnungen streut — an der Zahl ist das nicht zu sehen.
+
+    Ausgeliefert wird die Form je GRUPPE, nicht je Zelle: 60.083 statt
+    1.407.650 Einträge, Faktor 23. Je Zelle wären es rund 39 MB für eine
+    Randnotiz, die man einzeln anschaut.
+    """
+
+    def setUp(self):
+        import build_zweig_a_shards as b
+        self.b = b
+
+    def test_the_quantile_interpolates_like_the_viewer(self):
+        """Dieselbe Formel wie `quart()` im Viewer. Zwei Quartilsdefinitionen
+        zeigten die Verteilungskarte über der Liste (#48) und den Streifen in
+        der Zeile (#49) nebeneinander verschieden — am selben Bildschirm."""
+        arr = [1, 2, 3, 4]
+        self.assertAlmostEqual(self.b.quantil(arr, 0.5), 2.5)
+        self.assertAlmostEqual(self.b.quantil(arr, 0.25), 1.75)
+        self.assertAlmostEqual(self.b.quantil(arr, 0.0), 1)
+        self.assertAlmostEqual(self.b.quantil(arr, 1.0), 4)
+
+    def test_an_empty_group_has_no_quantile(self):
+        self.assertEqual(self.b.quantil([], 0.5), 0)
+
+    def test_the_shape_file_exists_and_is_shaped_right(self):
+        """Am gebauten Artefakt: fünf Zahlen je Gruppe, aufsteigend."""
+        import json
+        pfad = ROOT / "processed" / "zweig_a" / "data" / "peer_shape.json"
+        if not pfad.exists():
+            self.skipTest("peer_shape.json nicht gebaut")
+        formen = json.loads(pfad.read_text(encoding="utf-8"))
+        self.assertGreater(len(formen), 10000)
+        for schluessel, werte in list(formen.items())[:500]:
+            with self.subTest(gruppe=schluessel):
+                self.assertEqual(len(werte), 5)
+                self.assertEqual(werte, sorted(werte),
+                                 "Quantile müssen aufsteigend sein")
+                self.assertEqual(len(schluessel.split("|")), 6)
+
+    def test_the_shape_is_per_group_not_per_cell(self):
+        """Die Entscheidung, die den Unterschied zwischen 1,7 MB und 39 MB
+        macht. Gäbe es so viele Formen wie Peer-Zellen, wäre sie
+        zurückgedreht."""
+        import json
+        pfad = ROOT / "processed" / "zweig_a" / "data" / "peer_shape.json"
+        if not pfad.exists():
+            self.skipTest("peer_shape.json nicht gebaut")
+        formen = json.loads(pfad.read_text(encoding="utf-8"))
+        zellen = 0
+        for f in sorted((ROOT / "processed" / "zweig_a" / "data" / "reports").glob("*.json"))[:60]:
+            peer = json.loads(f.read_text(encoding="utf-8")).get("peer", {})
+            zellen += sum(len(v) for v in peer.values())
+        self.assertGreater(zellen, 0, "keine Peer-Zellen — Test prüft nichts")
+        # 60 von 882 Shards tragen schon mehr Zellen als es Gruppen gibt.
+        self.assertLess(len(formen), zellen * 3,
+                        "die Formen skalieren mit den Zellen statt mit den Gruppen")
+
+    def test_a_degenerate_group_yields_no_strip(self):
+        """Wo p10 == p90 ist, gibt es keine Spur — und ein Streifen über eine
+        Gruppe ohne Streuung wäre eine Behauptung über Unterschiede, die es
+        nicht gibt. Der Viewer liefert dort einen leeren String."""
+        src = (ROOT / "processed" / "zweig_a" / "viewer_json.html").read_text(
+            encoding="utf-8")
+        self.assertIn("if(!(spanne>0)) return ''", src)
+
+    def test_the_strip_carries_no_colour_judgement(self):
+        """#49: „Nie Rot/Grün als Wertung." Die Position trägt das Signal."""
+        src = (ROOT / "processed" / "zweig_a" / "viewer_json.html").read_text(
+            encoding="utf-8")
+        block = src[src.index("function shapeStrip("):]
+        block = block[:block.index("\n}")]
+        for verboten in ("red", "green", "rot", "gruen", "#0f0", "#f00"):
+            self.assertNotIn(verboten, block.lower())

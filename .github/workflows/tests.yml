@@ -121,6 +121,14 @@ jobs:
           fi
           echo "Keine Auslassung — alle Tests sind gelaufen."
 
+      # Die Reihenfolge der Pipeline gegen die Abhaengigkeiten der Skripte (#8).
+      # Braucht weder Netz noch Artefakte — liest nur pipeline.yml und die
+      # Deklaration. Laeuft trotzdem hier und nicht im unittest-Job, weil eine
+      # Reihenfolgenverletzung ein Befund ueber die KETTE ist, nicht ueber den
+      # Code, und neben den anderen Kettenpruefungen stehen sollte.
+      - name: Pipeline-Reihenfolge
+        run: python scripts/check_pipeline_order.py
+
       # Der Test, den kein Quelltext-Test ersetzt: startet den Viewer gegen die
       # eben gebauten Artefakte und fragt, ob danach etwas dasteht.
       - name: Viewer-Laufzeitprüfung

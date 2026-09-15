@@ -560,7 +560,39 @@ def peer_stats(con, root: Path | None = None):
                                                        + arr[len(arr) // 2]) / 2
         out.setdefault(f"{eid}|{rp}", {}).setdefault(tid, {})[f"{r}|{c}"] = \
             [p, _sig(med), len(arr)]
-    return out
+
+    # Die FORM der Verteilung (#49, R4) — einmal je Peer-Gruppe, nicht je Zelle.
+    #
+    # Das Perzentil sagt, WO ein Institut steht, aber nicht, WORIN. „P47" heisst
+    # in einer eng gepackten Gruppe etwas anderes als in einer, die über zwei
+    # Grössenordnungen streut, und der Leser kann es an der Zahl nicht sehen.
+    #
+    # Je Zelle ausgeliefert wären das 1.407.650 Einträge und rund 39 MB — für
+    # eine Randnotiz, die man einzeln anschaut. Die Form ist aber gar keine
+    # Eigenschaft der Zelle, sondern der GRUPPE: 60.083 statt 1.407.650, Faktor
+    # 23, rund 1,7 MB. Deshalb eine eigene, lazy geladene Datei.
+    formen = {}
+    for schluessel, arr in sorted(gruppen.items()):
+        if len(arr) < PEER_MIN:
+            continue
+        tid, r, c, itype, scope, rp = schluessel
+        formen[f"{tid}|{r}|{c}|{itype}|{scope}|{rp}"] = [
+            _sig(quantil(arr, q)) for q in (0.10, 0.25, 0.50, 0.75, 0.90)]
+    return out, formen
+
+
+def quantil(sortiert, q):
+    """Lineare Interpolation wie `quart()` im Viewer.
+
+    Dieselbe Formel an beiden Orten, weil die Verteilungskarte über der Liste
+    (#48) und der Streifen in der Zeile (#49) sonst zwei verschiedene Quartile
+    zeigten — nebeneinander, am selben Bildschirm.
+    """
+    if not sortiert:
+        return 0
+    i = (len(sortiert) - 1) * q
+    lo, hi = math.floor(i), math.ceil(i)
+    return sortiert[lo] + (sortiert[hi] - sortiert[lo]) * (i - lo)
 
 
 def resolve_coverage(declared, data_tids):
@@ -619,7 +651,7 @@ def main():
     quality = load_quality_profile(ROOT)
     merge_scale_flags(quality, load_scale_flags(ROOT))
     befunde = load_cell_findings(ROOT)
-    peers = peer_stats(con)
+    peers, peer_formen = peer_stats(con)
     aehnlich = load_similar(ROOT)
 
     # --- pass 1: group placeable cells into reports (raw string values) ---
@@ -894,6 +926,10 @@ def main():
     write_if_changed(OUT / "benchmark.json", json.dumps(benchmark, ensure_ascii=False, separators=(",", ":")))
     write_if_changed(OUT / "codebook.json", json.dumps(codebook, ensure_ascii=False, separators=(",", ":")))
     write_if_changed(OUT / "labels.json", json.dumps(labels, ensure_ascii=False, separators=(",", ":")))
+    # Die Form der Peer-Verteilung (#49) — lazy wie labels.json, aus demselben
+    # Grund: der Streifen in der Zeile braucht sie, die Startseite nicht.
+    write_if_changed(OUT / "peer_shape.json",
+                     json.dumps(peer_formen, ensure_ascii=False, separators=(",", ":")))
 
     # --- sizes (raw + gzip, since Pages serves gzip) ---
     def sz(name):
@@ -907,12 +943,14 @@ def main():
     bm_r, bm_g = sz("benchmark.json")
     cb_r, cb_g = sz("codebook.json")
     lb_r, lb_g = sz("labels.json")
+    ps_r, ps_g = sz("peer_shape.json")
 
     print(f"✓ {OUT.relative_to(ROOT)}/  (Quelle: Zweig-B-Parquet)")
     print(f"  index.json     {idx_r:6.2f} MB raw · {idx_g:5.2f} MB gzip   ← UPFRONT (slim)")
     print(f"  benchmark.json {bm_r:6.2f} MB raw · {bm_g:5.2f} MB gzip   ← lazy (Benchmark/Zeitreihe)")
     print(f"  codebook.json  {cb_r:6.2f} MB raw · {cb_g:5.2f} MB gzip   ← UPFRONT (Titel/Themen/Kennzahlen)")
     print(f"  labels.json    {lb_r:6.2f} MB raw · {lb_g:5.2f} MB gzip   ← lazy (erst beim Aufklappen)")
+    print(f"  peer_shape.json{ps_r:6.2f} MB raw · {ps_g:5.2f} MB gzip   ← lazy (Verteilungsstreifen, #49)")
     print(f"  reports/       {len(shard_files)} shards · {shard_raw:.2f} MB raw · "
           f"geschrieben {written} / unverändert {skipped} / entfernt {removed}")
     if shard_files:
