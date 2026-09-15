@@ -117,6 +117,47 @@ class LogikTest(unittest.TestCase):
             self.assertNotIn(wort, felder.lower())
 
 
+class NamensnaeheTest(unittest.TestCase):
+    """Der Namensvergleich darf keine Abdeckung begründen — aber er entscheidet,
+    ob elf meldende Häuser als Lücke gezählt werden oder nicht. Beide Fehler
+    sind teuer, und beide sind hier festgehalten."""
+
+    def setUp(self):
+        import build_coverage_gap as b
+        self.n = b.namensnah
+
+    def test_the_same_house_under_another_legal_name_matches(self):
+        """Der Fall, der das erzwungen hat: die EZB führt Griechenlands Gruppe
+        als `Piraeus Bank S.A.`, offen legt sie als `Piraeus Financial
+        Holdings`. Rein über die LEI fehlte die viertgrösste Bank des Landes."""
+        self.assertTrue(self.n("Piraeus Bank S.A.",
+                               "Piraeus Financial Holdings"))
+
+    def test_a_shared_nationality_adjective_is_not_a_match(self):
+        """`Nederlandse Waterschapsbank` und `Nederlandse
+        Financierings-Maatschappij` sind zwei verschiedene Banken. Ein
+        falscher Treffer erklärte hier eine echte Lücke weg."""
+        self.assertFalse(self.n("Nederlandse Waterschapsbank N.V.",
+                                "Nederlandse Financierings-Maatschappij"))
+
+    def test_a_legal_form_split_into_letters_is_not_a_match(self):
+        """Die Trennung an Satzzeichen zerlegt `S.A.` in „s" und „a". Ohne die
+        Mindestlänge teilen `Piraeus Bank S.A.` und `Alpha Bank S.A.` zwei
+        Wörter und gelten als dasselbe Haus."""
+        self.assertFalse(self.n("Piraeus Bank S.A.", "Alpha Bank S.A."))
+
+    def test_two_shared_words_are_enough(self):
+        self.assertTrue(self.n("Volksbank Wien AG", "VOLKSBANK WIEN AG VB"))
+
+    def test_one_shared_word_is_not_enough_when_more_are_available(self):
+        """Sonst wären alle zwölf Volksbanken Europas dasselbe Haus."""
+        self.assertFalse(self.n("Volksbank Tirol AG", "Volksbank Kraichgau eG"))
+
+    def test_a_name_without_distinguishing_words_matches_nothing(self):
+        self.assertFalse(self.n("Bank S.A.", "Banca S.p.A."))
+        self.assertFalse(self.n("", "Piraeus Financial Holdings"))
+
+
 class TabelleTest(unittest.TestCase):
     def setUp(self):
         self.rows = zeilen()
@@ -161,10 +202,43 @@ class TabelleTest(unittest.TestCase):
 
     def test_every_row_has_a_verdict(self):
         erlaubt = {"meldet_selbst", "ueber_gruppe", "gruppe_meldet_teilweise",
-                   "keine_gruppe_bekannt", "nicht_abgedeckt"}
+                   "keine_gruppe_bekannt", "nicht_abgedeckt",
+                   "namensgleicher_melder"}
         for r in self.rows:
             with self.subTest(lei=r["lei"]):
                 self.assertIn(r["einordnung"], erlaubt)
+
+    def test_both_sheets_carry_country_and_name(self):
+        """Das LSI-Blatt hat keine Land- und keine Namensspalte; beides steht
+        dort als Zwischenüberschrift. Wer nur Spaltenköpfe sucht, bekommt für
+        alle 2.066 LSIs leere Felder — lautlos. Und #42 verlangt die Abdeckung
+        ausdrücklich JE LAND, bei 72 % LSI-Anteil."""
+        for sig in ("SI", "LSI"):
+            teil = [r for r in self.rows if r["signifikanz"] == sig]
+            self.assertGreater(len(teil), 100)
+            for feld in ("land", "name"):
+                leer = [r for r in teil if not r[feld]]
+                self.assertEqual(leer, [], f"{len(leer)} {sig}-Zeilen ohne "
+                                           f"{feld}")
+
+    def test_a_name_match_is_flagged_never_counted_as_covered(self):
+        """#42 ist eindeutig: die Zuordnung läuft über die LEI. Ein
+        Namenstreffer darf den Verdacht ausweisen, aber nie Abdeckung
+        behaupten — sonst rechnet sich die Negativmenge über Namensgleichheit
+        klein."""
+        for r in self.rows:
+            if r["einordnung"] == "namensgleicher_melder":
+                with self.subTest(lei=r["lei"]):
+                    self.assertEqual(r["im_bestand"], "false")
+                    self.assertEqual(r["gruppe_im_bestand"], "false")
+                    self.assertTrue(r["namenstreffer"],
+                                    "Verdacht ohne nachprüfbaren Treffer")
+
+    def test_only_a_name_matched_row_carries_a_name_hit(self):
+        for r in self.rows:
+            if r["einordnung"] != "namensgleicher_melder":
+                with self.subTest(lei=r["lei"]):
+                    self.assertFalse(r["namenstreffer"])
 
     def test_the_order_is_stable(self):
         k = [(r["signifikanz"], r["land"], r["lei"]) for r in self.rows]

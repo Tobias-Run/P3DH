@@ -104,6 +104,14 @@ ABHAENGIG = {
     "check_country_effect.py": (["processed/footprint.csv",
                                  "codebook/country_gdp.csv"],
                                 ["processed/country_effect.csv"]),
+    # Haelt den Katalog gegen BEIDES: das Parquet und die Coverage-Matrix. Nur
+    # aus dem Unterschied ist der #28-Fall (geparst, in der Matrix, ohne
+    # platzierbaren Fakt) von einer echten Luecke zu unterscheiden.
+    "check_catalogue_coverage.py": (["interim/edap_recon/manifest_full.csv",
+                                     "interim/edap_recon/manifest_parse.csv",
+                                     "processed/filing_indicators.csv",
+                                     "processed/long/p3dh_long.parquet"],
+                                    ["processed/catalogue_coverage.csv"]),
     # Der einzige Schritt mit einer FREMDEN Netzquelle. Seine Ausgabe liegt im
     # Repo, deshalb steht sie hier als Erzeugnis und nicht als Vorbedingung.
     "fetch_wikidata_entities.py": (["processed/long/p3dh_long.parquet"],

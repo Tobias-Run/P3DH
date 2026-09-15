@@ -141,6 +141,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/irrbb_sensitivity.csv` | Report × Zinsschock → ΔEVE, ΔNII, Supervisory Outlier Test | IRRBB1 `68.00`, KM1 `61.00` |
 | `processed/peer_similarity.csv` | Report → die fünf ähnlichsten Institute nach Länderprofil | CCyB1 `67.01.A` |
 | `processed/country_effect.csv` | Bankattribut × Länderkennzahl → Varianzzerlegung und Korrelation | `footprint.csv`, `country_gdp.csv` |
+| `processed/catalogue_coverage.csv` | Katalog-Report → geladen, oder warum nicht | `manifest_full.csv` gegen Parquet + Coverage-Matrix |
 | `processed/risk_taker_share.csv` | Report → Anteil der „identified staff" an der Belegschaft, grössenbereinigt | REM1 `30.01` + `wikidata_entities.csv` |
 | `codebook/wikidata_entities.csv` | LEI → Wikidata-Item, Belegschaft mit Stichtag, Gründung, Rechtsform, Börsennotierung | Wikidata (`P1278`) |
 | `processed/irb_risk_weights.csv` | Institut × Forderungsklasse × PD-Band → Risikogewicht, PD, LGD | CR6 `26.00.A` |
@@ -346,7 +347,8 @@ Schreibweisen, keine Lücke:
 | rohe Differenz | 2.479 |
 | nur signifikante Institute, Gruppenabdeckung über die EZB-Hierarchie | 126 |
 | Abgleich über den 18-stelligen LEI-Kern | 19 |
-| teilweise meldende Gruppen anerkannt | **12** |
+| teilweise meldende Gruppen anerkannt | 12 |
+| Melder unter abweichender LEI erkannt | **1** |
 
 Jeder Schritt entfernt Scheinbefunde, keinen echten.
 
@@ -355,13 +357,62 @@ Jeder Schritt entfernt Scheinbefunde, keinen echten.
 | `meldet_selbst` | 185 | 201 |
 | `ueber_gruppe` | 593 | — |
 | `gruppe_meldet_teilweise` | 7 | — |
+| `namensgleicher_melder` | 11 | — |
 | `keine_gruppe_bekannt` | — | 1.865 |
-| `nicht_abgedeckt` | **12** | — |
+| `nicht_abgedeckt` | **1** | — |
 
-Von den verbleibenden 12 sind 11 erklärbar: neun österreichische Volksbanken
-hängen an Volksbank Wien, die bei uns unter einem nationalen Code statt einem
-LEI steht, und zwei griechische an Piraeus, das bei uns als *Piraeus Financial
-Holdings* meldet.
+#### Die LEI der Aufsicht ist nicht die LEI der Offenlegung
+
+Rein über die LEI gerechnet fehlten **12** signifikante Institute. Elf davon
+melden nachweislich, nur unter einer anderen Kennung als der, die die EZB-Liste
+führt: neun österreichische Volksbanken hängen an **Volksbank Wien**, die bei
+uns unter einem nationalen Code statt einem LEI steht, und zwei griechische an
+**Piraeus**, das als *Piraeus Financial Holdings* meldet.
+
+Sie als fehlend zu zählen wäre eine Unterstellung; sie stillschweigend als
+abgedeckt zu zählen eine Behauptung. `namensgleicher_melder` sagt beides nicht
+und führt den gefundenen Melder in `namenstreffer` mit, damit der Verdacht
+nachprüfbar bleibt — die Zuordnung selbst läuft weiter ausschliesslich über die
+LEI.
+
+Der Namensvergleich verlangt **zwei** gemeinsame bedeutungstragende Wörter im
+**selben Land**; ein Wort genügt nur, wenn ein Name nach Abzug der Rechtsformen
+aus einem einzigen besteht. Beide Schranken sind gemessen nötig: mit einem Wort
+träfe *Nederlandse Waterschapsbank* auf *Nederlandse Financierings-Maatschappij*
+(zwei verschiedene Banken), und ohne die Mindestwortlänge zerfällt `S.A.` in
+„s" und „a" — dann gelten *Piraeus Bank S.A.* und *Alpha Bank S.A.* als
+dasselbe Haus.
+
+#### Übrig bleibt ein einziges Institut
+
+**Nederlandse Waterschapsbank N.V.** — weder selbst im Bestand, noch über die
+Gruppe, noch namensgleich. Das ist die Zahl, die #42 sucht, und auch sie ist
+kein Vorwurf: Art. 433a lässt für nicht börsennotierte Institute jährliche
+statt quartalsweiser Offenlegung zu, und eine Offenlegung ausserhalb des Hubs
+ist damit nicht ausgeschlossen.
+
+#### Abdeckung je Land — getrennt nach SI und LSI
+
+| Land | SI | LSI |
+|---|---:|---:|
+| Italien | 212/212 (100 %) | 30/138 (22 %) |
+| Frankreich | 207/207 (100 %) | 12/83 (14 %) |
+| Österreich | 66/75 (88 %) | 16/315 (5 %) |
+| Deutschland | 64/64 (100 %) | 41/1.109 (4 %) |
+| Finnland | 55/55 (100 %) | 5/46 (11 %) |
+| Spanien | 39/39 (100 %) | 16/72 (22 %) |
+
+Die Trennung ist keine Formalie. **Die LSI-Quote ist niedrig, weil sie niedrig
+sein soll:** nach CRR Art. 433a–c legen kleine, nicht börsennotierte Institute
+seltener und weniger offen, und Deutschlands 1.109 LSIs sind überwiegend
+Sparkassen und Genossenschaftsbanken. Eine gemeinsame Quote läse sich als
+Abdeckungslücke und wäre eine Unterstellung.
+
+> ⚠️ Das LSI-Blatt der EZB-Liste hat **weder eine Land- noch eine Namensspalte**
+> — es ist nach Ländern gegliedert, Name und Zwischenüberschrift stehen in
+> derselben Spalte. Wer nur Spaltenköpfe sucht, bekommt für alle 2.066 LSIs
+> leere Felder, und zwar lautlos. Genau deshalb wird das Land wie die
+> Gruppennummer als laufende Überschrift mitgeführt.
 
 **Drei Fallen, die gemessen zugeschlagen haben.** Die Proportionalität nach CRR
 Art. 433b/c (1.093 deutsche und 363 österreichische Kleininstitute legen gar
@@ -778,6 +829,34 @@ Der Ländereffekt ist trotzdem gross — die Mediane reichen von 0,061 (Irland) 
 0,993 (Norwegen). Er ist nur kein *Makro*effekt. Wer die Domestizität erklären
 will, braucht Instituts- und keine Ländermerkmale; das ist die Richtung von #13
 und #35.
+
+### `catalogue_coverage.csv` — ist die Stichtagswelle geladen?
+
+Die Frage aus #7, und sie war ohne dieses Blatt nur von Hand zu beantworten.
+925 Katalog-Reports, **882 geladen (95,4 %)**. Die naheliegende Rechnung
+„Katalog minus Bestand = 43 Rückstand" ist dabei falsch, weil die 43 vier
+verschiedene Dinge sind:
+
+| Einstufung | n | was es ist |
+|---|---:|---|
+| `nur_pdf` | 40 | veröffentlicht nur DISDOCS — PDF, kein XBRL-CSV |
+| `ohne_platzierbare_fakten` | 1 | geparst, in der Coverage-Matrix, kein platzierbarer Fakt (#28) |
+| `toter_link` | 2 | Katalogzeile ohne publizierte Datei (EDAP 404) |
+| **`offen`** | **0** | ladbar und noch nicht geladen |
+
+**Nur die letzte Zeile beschreibt eine Aufgabe.** Die 40 PDF-Institute als
+Rückstand zu führen hiesse, eine Eigenschaft der Quelle als eigenes Versäumnis
+zu buchen; die zwei toten Links stehen dauerhaft in `manifest_todo.csv` und
+verschwinden nie.
+
+Der `ohne_platzierbare_fakten`-Fall ist der heikelste: die Einreichung wurde
+geladen, geparst und deklariert Templates, trägt aber keinen einzigen
+platzierbaren Fakt. Sichtbar wird sie nur, wenn man die Coverage-Matrix gegen
+die Long-Form hält — sonst sieht sie aus wie eine geladene.
+
+Alle fünf Stichtage liegen vor (2025-06-30, 2025-09-30, 2025-10-31, 2025-12-31,
+2026-03-31); 209 Institute tragen mindestens zwei, womit Zeitreihen und die
+Zeitprüfung aus #36 real greifen.
 
 ### `risk_taker_share.csv` — wie breit zieht ein Haus den Kreis der Risikoträger?
 

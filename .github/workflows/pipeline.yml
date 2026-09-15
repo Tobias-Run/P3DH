@@ -289,6 +289,13 @@ jobs:
       - name: Laendereffekt (#11)
         run: python scripts/check_country_effect.py
 
+      # Ist die Stichtagswelle geladen (#7)? Muss NACH build_zweig_b laufen:
+      # die Einstufung haelt den Katalog gegen das Parquet UND die
+      # Coverage-Matrix. Nur so ist der #28-Fall — geparst, in der Matrix, ohne
+      # platzierbaren Fakt — von einer echten Luecke zu unterscheiden.
+      - name: Katalogabdeckung (#7)
+        run: python scripts/check_catalogue_coverage.py
+
       # Wikidata ueber die LEI (#40). EINZIGER Schritt dieser Kette, der ein
       # FREMDES Netz braucht (query.wikidata.org). Er bricht den Lauf deshalb
       # nicht ab: die Zuordnung liegt in codebook/ im Repo, ein Ausfall laesst
