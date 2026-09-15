@@ -71,3 +71,8 @@ interim/placement_report.csv
 interim/unit_consistency_report.csv
 interim/osm_cache/
 interim/wikidata_cache/
+
+# Meldungstexte der Ueberwachung (#8) — entstehen im Runner, wenn zwei
+# geplante Laeufe hintereinander reissen; gehoeren nicht ins Repository.
+interim/meldung.md
+interim/meldung_titel.txt

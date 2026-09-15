@@ -41,6 +41,7 @@ on:
 
 permissions:
   contents: write           # push the data branch + refreshed manifests
+  issues: write             # Meldung anlegen, wenn zwei geplante Laeufe reissen
 
 concurrency:
   group: p3dh-pipeline      # the data branch is force-pushed — never run two at once
@@ -400,4 +401,60 @@ jobs:
               echo "- Shards: **$(find processed/zweig_a/data/reports -name '*.json' | wc -l)**"
             fi
             echo "- Viewer: https://tobias-run.github.io/P3DH/"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # ---------------------------------------------------------------------------
+  # Seit der Zeitplan scharf ist (#8), sieht niemand mehr zu. Ein roter Lauf
+  # faellt damit niemandem auf -- genau der Zustand, den dieses Projekt sonst
+  # ueberall bekaempft: ein Ausfall, der sich als Stille meldet.
+  #
+  # EIGENER Job statt eines Schritts mit `if: failure()`, damit die Meldung auch
+  # dann greift, wenn die Pipeline frueh abbricht (Checkout, pip install) und
+  # ihre spaeteren Schritte nie erreicht.
+  #
+  # Die Entscheidungsregel steht in scripts/check_run_streak.py und ist dort
+  # geprueft: EIN roter Lauf ist kein Alarm (EDAP weg, Runner faellt aus,
+  # Wikidata drosselt -- das heilt sich meist bis zur naechsten Woche), ZWEI
+  # hintereinander schon. Titel und Text der Meldung erzeugt ebenfalls das
+  # Skript, damit Titel und Wiedererkennungsmarke nicht auseinanderlaufen
+  # koennen -- sonst entstuende jede Woche ein neues Issue statt einem.
+  melden:
+    needs: pipeline
+    if: failure() && github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Strecke pruefen
+        id: streak
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/check_run_streak.py \
+            --conclusion failure --event schedule | tee -a "$GITHUB_OUTPUT"
+
+      - name: Meldung anlegen
+        if: steps.streak.outputs.entscheidung == 'ja'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "$(cat interim/meldung_titel.txt)" \
+            --body-file interim/meldung.md \
+            --assignee Tobias-Run
+
+      - name: Entscheidung protokollieren
+        if: always()
+        run: |
+          {
+            echo "## Ueberwachung"
+            echo "- Entscheidung: **${{ steps.streak.outputs.entscheidung }}**"
+            echo "- Grund: ${{ steps.streak.outputs.grund }}"
           } >> "$GITHUB_STEP_SUMMARY"

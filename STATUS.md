@@ -86,6 +86,7 @@ Einreichungen, nicht unsere Pipeline.
 ## Betrieb
 
 - **Pipeline:** `.github/workflows/pipeline.yml`, wöchentlich per `schedule` und jederzeit manuell per `workflow_dispatch`, zustandslos — `raw/` startet leer, der Bestand kommt vom `data`-Branch. Die Reihenfolge der 34 Schritte ist seit [#8](https://github.com/Tobias-Run/P3DH/issues/8) als Graph geprüft (`check_pipeline_order.py`, in `tests.yml`). **Der wöchentliche Cron ist seit Lauf #13 scharf** (montags 04:00 UTC): dort liefen erstmals alle 41 Schritte grün durch, einschließlich der acht, die seit Lauf #12 dazugekommen waren. Laufzeit #13: 3:52 inkrementell.
+- **Überwachung:** Scheitern **zwei geplante Läufe hintereinander**, legt der Job `melden` ein Issue an und weist es dem Eigner zu (`scripts/check_run_streak.py`). Ein einzelner roter Lauf löst nichts aus — EDAP ist zeitweise weg, ein Runner fällt aus, Wikidata drosselt; das heilt sich meist bis zur nächsten Woche. Manuell gestartete Fehlläufe zählen nicht, weil jemand zusieht. Ist die Lauf-Historie nicht abrufbar, wird **gemeldet statt geschwiegen** — und die Meldung sagt dann selbst, dass die Strecke unbekannt war.
 - **Tests:** `.github/workflows/tests.yml`, automatisch bei jedem Push, ~15 s.
 - **Auslieferung:** Orphan-Branch `data` → jsDelivr. **Der Branch wird force-gepusht und trägt genau einen Commit** — er hat keine Historie, jeder Lauf ersetzt den vorigen Stand vollständig.
 - **Entwicklung:** Feature-Branch → PR → Merge nach `main`.
