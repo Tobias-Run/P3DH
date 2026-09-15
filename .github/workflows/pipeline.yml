@@ -325,6 +325,14 @@ jobs:
       - name: Ereignisstudie-Machbarkeit (#39)
         run: python scripts/check_event_study_feasibility.py
 
+      # Verknuepfung LEI -> Aktien-ISIN -> Primaernotierung (#39). Braucht
+      # dieselbe fremde Netzquelle wie fetch_wikidata_entities und laeuft
+      # deshalb ebenfalls mit continue-on-error: seine Ausgabe liegt im Repo,
+      # ein Ausfall laesst sie unveraendert.
+      - name: Aktien-Verknuepfung (#39)
+        continue-on-error: true
+        run: python scripts/build_equity_link.py
+
       # Anteil der Risikotraeger (#40). Braucht das Wikidata-Codebook UND die
       # Plausibilitaetsbefunde: Reports mit `rem_per_head`-Befund (#17) liefern
       # die eine Haelfte des Quotienten und fliegen raus. Laeuft es vor

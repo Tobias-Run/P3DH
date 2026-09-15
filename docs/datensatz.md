@@ -141,6 +141,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/irrbb_sensitivity.csv` | Report × Zinsschock → ΔEVE, ΔNII, Supervisory Outlier Test | IRRBB1 `68.00`, KM1 `61.00` |
 | `processed/peer_similarity.csv` | Report → die fünf ähnlichsten Institute nach Länderprofil | CCyB1 `67.01.A` |
 | `processed/country_effect.csv` | Bankattribut × Länderkennzahl → Varianzzerlegung und Korrelation | `footprint.csv`, `country_gdp.csv` |
+| `processed/equity_link.csv` | Institut → Aktien-ISIN, Primärnotierung, Tickersymbol | Wikidata (`P946`, `P414`/`P249`) |
 | `processed/event_study_feasibility.csv` | Ereignisfenster → verwertbare Ereignisse, Urteil zur Machbarkeit | `manifest_full.csv` + `wikidata_entities.csv` |
 | `processed/catalogue_coverage.csv` | Katalog-Report → geladen, oder warum nicht | `manifest_full.csv` gegen Parquet + Coverage-Matrix |
 | `processed/risk_taker_share.csv` | Report → Anteil der „identified staff" an der Belegschaft, grössenbereinigt | REM1 `30.01` + `wikidata_entities.csv` |
@@ -884,6 +885,50 @@ wahrscheinlicheren Sprache — in der Paarstichprobe traf das 1 von 30.
 
 **Korpusgrösse:** 1.073 Pakete, hochgerechnet rund 2 GB (Median 0,99 MB je
 Paket, max 11,3 MB). Der gesamte XBRL-Bestand liegt bei 13 MB.
+
+### `equity_link.csv` — vom Institut zum handelbaren Papier
+
+Die zweite Hälfte von #39, soweit sie **ohne fremde Daten** zu erledigen ist.
+69 belegt börsennotierte Institute, davon **56 mit Aktien-ISIN** und **42 mit
+dem Ticker ihrer Primärnotierung**.
+
+#### Warum nicht GLEIF
+
+Das Issue nennt GLEIF `/isins`, und der Weg funktioniert — an 12 Instituten
+geprüft, alle mit Treffern. Er liefert aber den **falschen Instrumententyp**:
+Intesa Sanpaolo trägt dort 1.676 ISINs, ganz überwiegend Anleihen. Eine
+Ereignisstudie auf Aktienkursen braucht *die eine* Aktien-ISIN, und GLEIF
+unterscheidet den Typ nicht. Wikidata führt sie als `P946`.
+
+#### Die Falle: Wikidata ordnet die Börsen nicht
+
+`P414` listet alle Notierungen ohne Rangfolge. Die erstbeste zu nehmen geht
+sichtbar schief:
+
+```
+UniCredit                 -> Frankfurt Stock Exchange, Ticker CRI
+Banca Monte dei Paschi    -> OTC Markets Group,        Ticker BMDPY
+```
+
+`BMDPY` ist ein **ADR**. Ein Ereignisfenster auf einem dünn gehandelten
+Zweitpapier misst Rauschen — und es sähe aus wie ein Ergebnis, weil am Ende
+Zahlen mit Nachkommastellen stehen.
+
+Entschieden wird über das **Länderpräfix der ISIN**: `IT0005218752` heisst
+Italien, also ist die Mailänder Notierung die primäre. Passt keine, bleibt das
+Feld leer und `sicherheit` sagt warum — geraten wird nicht.
+
+| `sicherheit` | n |
+|---|---:|
+| `eindeutig` | 39 |
+| `keine isin` | 13 |
+| `ohne ticker` | 9 |
+| `keine Notierung im ISIN-Land` | 5 |
+| `mehrere im ISIN-Land` | 3 |
+
+> ⚠️ **Kursdaten bleiben die offene Hälfte.** Dieses Blatt schliesst die Lücke
+> auf unserer Seite: 42 Institute sind an eine Kursreihe anschliessbar, sobald
+> es eine gibt.
 
 ### `event_study_feasibility.csv` — trägt der Bestand eine Ereignisstudie?
 
