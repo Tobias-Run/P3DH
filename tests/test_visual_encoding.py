@@ -93,8 +93,12 @@ class KodierungTest(unittest.TestCase):
 
     def test_the_reference_follows_the_visible_rows(self):
         """Die Filter sind Teil der Frage: wer auf Schweden filtert, will
-        schwedische Grössen vergleichen, nicht gegen BNP Paribas."""
-        self.assertIn("barBasis(rows, prof.cols)", self.src)
+        schwedische Grössen vergleichen, nicht gegen BNP Paribas.
+
+        Geprüft wird der ERSTE Parameter — die Zeilenmenge. Der zweite ist seit
+        der Spaltenwahl (#50) `spalten` statt `prof.cols`; daran hängt die
+        Aussage dieses Tests nicht."""
+        self.assertRegex(self.src, r"barBasis\(rows,")
         self.assertNotIn("barBasis(allRows", self.src)
 
     def test_the_runtime_check_covers_both_suppressions(self):
