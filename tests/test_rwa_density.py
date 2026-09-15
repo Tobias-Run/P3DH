@@ -208,5 +208,73 @@ class TabelleTest(unittest.TestCase):
         self.assertEqual(k, sorted(k))
 
 
+class AnsatzVergleichTest(unittest.TestCase):
+    """Punkt 3 des Issues: Standardansatz gegen IRB — der Teil, den die
+    EBA-Benchmarking-Übung strukturell nicht liefern kann, weil sie nur
+    IRB-Institute abdeckt."""
+
+    def setUp(self):
+        import build_rwa_density as m
+        self.m = m
+
+    def _z(self, klasse, ansatz, dichte, n=1):
+        return [{"institution_type": klasse, "ansatz": ansatz,
+                 "rwa_density": str(dichte), "plausibel": "true"} for _ in range(n)]
+
+    def test_the_comparison_happens_inside_a_size_class(self):
+        """Der Kern. Ungeschichtet misst der Vergleich die Grösse mit: SA-Häuser
+        sind kleiner, und kleinere Institute haben ohnehin eine höhere Dichte.
+        Zwei Klassen mit gegenläufigem Grössen- und Ansatzeffekt dürfen sich
+        nicht zu einer Zahl verrühren."""
+        z = (self._z("gross", "SA", 0.30, 5) + self._z("gross", "gemischt", 0.20, 5)
+             + self._z("klein", "SA", 0.60, 5) + self._z("klein", "gemischt", 0.50, 5))
+        v = self.m.ansatz_vergleich(z)
+        self.assertEqual([r["institution_type"] for r in v], ["gross", "klein"])
+        for r in v:
+            self.assertAlmostEqual(r["differenz"], 0.10)
+
+    def test_mixed_counts_as_irb(self):
+        """Nur 11 Reports melden reines IRB. Wer `gemischt` wegwirft, vergleicht
+        379 SA-Häuser gegen 11 und nennt das eine Population."""
+        z = self._z("k", "SA", 0.40, 5) + self._z("k", "gemischt", 0.30, 5)
+        self.assertEqual(len(self.m.ansatz_vergleich(z)), 1)
+
+    def test_an_unknown_approach_carries_no_statement(self):
+        """70 Zeilen tragen keinen Ansatz. Sie einer Seite zuzuschlagen wäre
+        eine Behauptung über Institute, die nichts dazu gemeldet haben."""
+        z = (self._z("k", "SA", 0.40, 5) + self._z("k", "gemischt", 0.30, 5)
+             + self._z("k", "unbekannt", 0.99, 50))
+        v = self.m.ansatz_vergleich(z)
+        self.assertEqual(v[0]["n_sa"] + v[0]["n_irb"], 10)
+
+    def test_a_thin_stratum_is_dropped_not_reported(self):
+        """Unter fünf Instituten je Seite trägt ein Median nicht — und ein
+        Abstand aus zwei Beobachtungen sähe genauso aus wie einer aus 200."""
+        z = self._z("k", "SA", 0.40, 5) + self._z("k", "gemischt", 0.30, 2)
+        self.assertEqual(self.m.ansatz_vergleich(z), [])
+
+    def test_implausible_rows_stay_out(self):
+        z = (self._z("k", "SA", 0.40, 5) + self._z("k", "gemischt", 0.30, 5)
+             + [{"institution_type": "k", "ansatz": "SA", "rwa_density": "99",
+                 "plausibel": "false"}])
+        self.assertEqual(self.m.ansatz_vergleich(z)[0]["n_sa"], 5)
+
+    def test_the_gap_survives_stratification_in_the_real_data(self):
+        """Das Ergebnis, und es ist der eigentliche Beitrag zu #45: der Abstand
+        zwischen Standardansatz und IRB ist in JEDER Grössenklasse positiv
+        (+0,074 bis +0,100) und damit kein Grösseneffekt. Bricht das, war der
+        Rohbefund von 0,425 gegen 0,339 eine Grössenmessung mit einem
+        Ansatzetikett."""
+        if not OUT.exists():
+            self.skipTest("rwa_density.csv nicht gebaut")
+        with OUT.open(encoding="utf-8") as fh:
+            v = self.m.ansatz_vergleich(list(csv.DictReader(fh)))
+        self.assertGreaterEqual(len(v), 3, "zu wenige tragfähige Klassen")
+        for r in v:
+            with self.subTest(klasse=r["institution_type"]):
+                self.assertGreater(r["differenz"], 0.0,
+                                   "in dieser Klasse liegt SA nicht mehr über IRB")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

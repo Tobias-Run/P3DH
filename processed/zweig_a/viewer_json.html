@@ -208,6 +208,8 @@
   .ovval{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.25;margin:1px 0 3px}
   .ovval .ovu{font-size:11px;font-weight:400;color:var(--muted);margin-left:2px}
   .ovmiss{font-size:11px;color:var(--muted);margin:.1rem 0 .35rem;max-width:82ch}
+  .simblock{margin:.4rem 0;font-size:12px}
+  .simblock>summary{cursor:pointer;color:var(--muted)}
   .ovq{font-size:11.5px;margin:.35rem 0;background:#f3efe3;color:#6b5300;border-radius:4px;
        padding:.3rem .6rem;max-width:82ch}
   [data-theme=dark] .ovq{background:#3a3320;color:#e0c96b}
@@ -742,6 +744,7 @@ async function ensureLoaded(rep){
   rep.coverage = j.coverage || {};   // Filing-Indicators ("Fehlt != Null"); {} = keine Aussage
   rep.flags = j.flags || {};         // Zellgenaue Plausibilitaets-Befunde (#24); {} = keine
   rep.peer  = j.peer  || {};         // Peer-Median/Perzentil je Zelle (#23); {} = keine
+  rep.similar = j.similar || [];     // Aehnliche Institute (#13/#27); [] = keine
   rep.loaded=true;
 }
 /* head templates (KM1 61.00 / OV1 60.00.A) for ALL reports — the cross-report data the
@@ -1345,9 +1348,52 @@ function renderOverview(rep){
   if(q && q.sc) h+=scaleNote(q.sc);
   if(q && q.n)
     h+=`<div class="ovq" title="Werte, ${befundHerkunft(q)}. Das kann eine korrekte Besonderheit sein.">△ Plausibilitätsprüfung: <b>${q.n}</b> Befund(e) in ${q.t?q.t.length:0} Template(s)${q.z?`, davon <b>${q.z}</b> aus dem Zeitvergleich gegen den Nachbarstichtag`:''}, größte Abweichung ${esc(q.d)} Größenordnungen${q.t&&q.t.length?` <span class="cl">· ${esc(q.t.slice(0,10).join(', '))}${q.t.length>10?' …':''}</span>`:''}</div>`;
+  h+=similarBlock(rep);
   if(!h){ host.innerHTML=''; return; }
   const note=pm?'Balken = Perzentil der Peer-Gruppe (gleiche Größenklasse, Konsolidierung, Stichtag; ab 5 Reports)':'Peer-Einordnung wird geladen…';
   host.innerHTML=`<section><h3>Überblick <span class="scalenote">${esc(note)}</span></h3>${h}</section>`;
+}
+
+/* ---- Aehnliche Institute (#13/#27) ---------------------------------------
+ *
+ * Die formale Peer-Gruppe (Groessenklasse x Konsolidierung x Stichtag) ist fuer
+ * Perzentile richtig und beantwortet trotzdem nicht, was ein Leser wissen will:
+ * mit wem ist dieses Institut vergleichbar? Zwei Haeuser gleicher Bilanzsumme
+ * koennen voellig verschiedene Geschaeftsmodelle haben.
+ *
+ * DREI Dinge, die hier nicht verrutschen duerfen:
+ *
+ * 1. Es ist KEINE Peer-Gruppe. Die Perzentile bleiben auf der formalen
+ *    Schichtung; diese Liste ist explorativ und sagt das auch. Sonst entstuende
+ *    der Eindruck, wir haetten eine aufsichtlich anerkannte Vergleichsgruppe
+ *    definiert — haben wir nicht.
+ * 2. Die BEGRUENDUNG reist mit. Eine unbegruendete "aehnlich"-Behauptung ist
+ *    genau die Art Black Box, die dieses Projekt vermeiden will — deshalb
+ *    stehen Ueberlappung und die groessten gemeinsamen Laender an jeder Zeile.
+ * 3. Konzerninterne Treffer werden BENANNT, nicht versteckt. Die staerksten
+ *    Aehnlichkeiten sind Mutter/Tochter-Paare (ING Groep und ING Bank bei
+ *    0,9999). Das ist der beste Beleg, dass das Mass greift — und als Vorschlag
+ *    trotzdem wertlos. Ohne die Marke laese ein Leser es als Entdeckung.
+ */
+const BEZ={konzern:'gleiche Gruppe', unabhaengig:'unabhängig', unbekannt:'Gruppe unbekannt'};
+function similarBlock(rep){
+  const s=rep.similar||[];
+  if(!s.length) return '';
+  const zeile=([eid,name,u,grund,bez])=>{
+    const p=leiParts(eid);
+    return `<li><a href="#r/${p.lei}/${rep.refPeriod}/${p.scope}">${esc(name||eid)}</a>
+      <span class="cl">${esc(nf(u*100,0))}${NBSP}% Länderüberlappung${
+        grund?' · '+esc(grund.split('|').join(', ')):''}${
+        bez&&BEZ[bez]?' · '+esc(BEZ[bez]):''}</span></li>`;
+  };
+  return `<details class="simblock"><summary>Ähnliche Institute nach Länderprofil
+      <span class="cl">(${s.length})</span></summary>
+    <div class="ovmiss">Gemessen an der Länderverteilung des Exposures (CCyB1
+      <code>67.01.A</code>): der Wert ist der Anteil, der bei beiden Häusern in
+      denselben Ländern liegt. <b>Das ist keine Peer-Gruppe</b> — die Perzentile
+      oben beruhen weiter auf Größenklasse, Konsolidierung und Stichtag. Diese
+      Liste ist explorativ.</div>
+    <ul class="gatelist">${s.map(zeile).join('')}</ul></details>`;
 }
 
 /* ---- Themenblöcke (Ebene 2) ---------------------------------------------

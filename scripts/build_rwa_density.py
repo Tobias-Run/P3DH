@@ -265,6 +265,49 @@ def ansatz_von(sa, irb):
     return "gemischt"
 
 
+MIN_SCHICHT = 5          # unter fünf Instituten trägt ein Median nicht
+
+
+def ansatz_vergleich(zeilen, min_schicht=MIN_SCHICHT):
+    """Punkt 3 des Issues: Standardansatz gegen IRB — und zwar geschichtet.
+
+    Roh verglichen liegt die RWA-Dichte im Standardansatz bei 0,425 und unter
+    IRB-Beteiligung bei 0,339. Das ist der bekannteste Befund der ganzen
+    Literatur, und man darf ihn so NICHT hinschreiben: SA-Häuser sind im
+    Schnitt kleiner, und kleinere Institute haben ohnehin eine höhere Dichte
+    (0,414 gegen 0,358 zwischen den Grössenklassen). Ungeschichtet misst der
+    Vergleich beides zugleich — genau der Fehler, der in #17 die Währung und in
+    #43 den Meldekalender gemessen hat.
+
+    Verglichen wird deshalb INNERHALB jeder Grössenklasse. `IRB` und
+    `gemischt` fallen zusammen: nur 11 Reports melden reines IRB, aber jede
+    IRB-Beteiligung ist der Unterschied, um den es geht.
+
+    Liefert je Klasse (n_sa, median_sa, n_irb, median_irb, differenz),
+    sortiert, und nur für Klassen, die auf beiden Seiten tragen.
+    """
+    gut = [z for z in zeilen if z["plausibel"] == "true" and z["rwa_density"]]
+    je = collections.defaultdict(lambda: {"SA": [], "IRB": []})
+    for z in gut:
+        if z["ansatz"] == "SA":
+            seite = "SA"
+        elif z["ansatz"] in ("IRB", "gemischt"):
+            seite = "IRB"
+        else:
+            continue                      # `unbekannt` trägt keine Aussage
+        je[z["institution_type"]][seite].append(float(z["rwa_density"]))
+
+    aus = []
+    for klasse in sorted(je):
+        sa, irb = je[klasse]["SA"], je[klasse]["IRB"]
+        if len(sa) < min_schicht or len(irb) < min_schicht:
+            continue
+        aus.append({"institution_type": klasse, "n_sa": len(sa), "n_irb": len(irb),
+                    "median_sa": st.median(sa), "median_irb": st.median(irb),
+                    "differenz": st.median(sa) - st.median(irb)})
+    return aus
+
+
 def bericht(zeilen):
     gut = [z for z in zeilen if z["plausibel"] == "true"]
     d = sorted(float(z["rwa_density"]) for z in gut)
@@ -283,6 +326,20 @@ def bericht(zeilen):
         teil = sorted(float(z["rwa_density"]) for z in gut if z["ansatz"] == a)
         if len(teil) >= 5:
             aus.append(f"  {a:9} n={len(teil):>4}  Median {st.median(teil):.3f}")
+
+    # Punkt 3: derselbe Vergleich, geschichtet — und damit erst belastbar.
+    v = ansatz_vergleich(zeilen)
+    if v:
+        aus.append("Standardansatz gegen IRB, INNERHALB der Grössenklasse (#45 Punkt 3):")
+        for r in v:
+            aus.append(f"  {r['institution_type'][:28]:30s} "
+                       f"SA n={r['n_sa']:>3} {r['median_sa']:.3f}   "
+                       f"IRB n={r['n_irb']:>3} {r['median_irb']:.3f}   "
+                       f"Δ {r['differenz']:+.3f}")
+        d = [r["differenz"] for r in v]
+        aus.append(f"  Der Abstand ist in allen {len(v)} Klassen positiv "
+                   f"({min(d):+.3f} bis {max(d):+.3f}) — er überlebt die "
+                   f"Schichtung, ist also kein Grösseneffekt.")
     abw = [float(z["ov1_abweichung"]) for z in zeilen if z["ov1_abweichung"] != ""]
     if abw:
         aus.append(f"OV1 gegen KM1: n={len(abw)}  Median {st.median(abw)*100:.4f} %  "

@@ -135,6 +135,12 @@ dieselbe Lage in demselben Template zeigen) und `frequenz_n_institute` (worauf
 die Erwartung beruht). Nach beiden Filtern bleiben **94 individuell
 zuschreibbare Fälle**. Das ist die Zahl, die etwas über einzelne Institute sagt.
 
+`richtung` beantwortet dabei die zweite Hälfte von **#34 Punkt 2**, das
+wörtlich nach beiden Vorgängen fragt — „ein Institut, das ein Template
+einstellt … oder eines neu aufnimmt". Unter den 94 sind es 27 Einstellungen
+und 67 Aufnahmen; die Abweichung vom Frequenzmuster geht also überwiegend in
+Richtung MEHR Offenlegung, nicht weniger.
+
 Auch sie ist eine OBERGRENZE, aus demselben Grund wie `n_gegen_erwartung`: der
 Filing-Indicator sagt nicht, warum etwas fehlt.
 
@@ -223,7 +229,8 @@ MIN_MODELL_INSTITUTE = 20
 FELDER_ZEIT = ["lei", "scope", "bank_name", "country", "institution_type",
                "template_id", "template_title", "frequenz", "frequenz_n_institute",
                "frequenz_eindeutig", "lage", "erwartung", "n_erwartet",
-               "n_offengelegt", "urteil", "n_signatur_geteilt", "einzelfall"]
+               "n_offengelegt", "urteil", "richtung", "n_signatur_geteilt",
+               "einzelfall"]
 
 
 def lade_gelieferte(con):
@@ -331,6 +338,29 @@ def lage_von(belegung, stichtage):
     """{Stichtag: bool} -> '1'/'0'/'-' je Stichtag, in fester Reihenfolge."""
     return "".join("1" if belegung.get(s) else ("0" if s in belegung else "-")
                    for s in stichtage)
+
+
+def richtung_von(lage, erwartung):
+    """`eingestellt` oder `aufgenommen` — die Unterscheidung aus #34 Punkt 2.
+
+    Dort lautet die Frage wörtlich: „ein Institut, das ein Template EINSTELLT,
+    das seine Frequenzklasse weiter meldet — oder eines NEU AUFNIMMT". Beides
+    ist eine Abweichung vom Muster, aber es sind entgegengesetzte Vorgänge, und
+    im Bestand halten sie sich fast die Waage (48 gegen 46).
+
+    Entschieden wird am ZULETZT beobachteten erwarteten Stichtag: endet die
+    Reihe mit einer Offenlegung, hat das Institut aufgenommen; endet sie mit
+    einer Auslassung, hat es eingestellt. Das ist bewusst die einfachste
+    Lesart — bei höchstens vier Stichtagen trüge eine feinere Verlaufsanalyse
+    („ausgesetzt und zurück") mehr Struktur, als die Daten hergeben.
+
+    Leer für alles ausser `wechselnd`: eine Richtung gibt es nur, wo sich etwas
+    geändert hat.
+    """
+    beobachtet = [l for l, e in zip(lage, erwartung) if e == "1" and l in "01"]
+    if not beobachtet:
+        return ""
+    return "aufgenommen" if beobachtet[-1] == "1" else "eingestellt"
 
 
 def lade(con):
@@ -589,7 +619,11 @@ def zeitreihe(zeilen, titel, modell=None):
             "frequenz": m["frequenz"], "frequenz_n_institute": m["n_institute"],
             "frequenz_eindeutig": m["eindeutig"], "lage": lage,
             "erwartung": erwartung, "n_erwartet": n_erw, "n_offengelegt": n_off,
-            "urteil": urteil, "n_signatur_geteilt": 0, "einzelfall": "",
+            "urteil": urteil,
+            # #34 Punkt 2 fragt nach beiden Richtungen: eingestellt ODER neu
+            # aufgenommen. Nur bei `wechselnd` hat sich etwas geändert.
+            "richtung": richtung_von(lage, erwartung) if urteil == "wechselnd" else "",
+            "n_signatur_geteilt": 0, "einzelfall": "",
         })
 
     # Die Signatur — und sie entscheidet, ob eine Zeile über ein Institut oder

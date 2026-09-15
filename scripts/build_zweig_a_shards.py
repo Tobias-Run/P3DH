@@ -433,6 +433,40 @@ def load_cell_findings(root: Path | None = None):
     return out
 
 
+def load_similar(root: Path | None = None):
+    """Ähnliche Institute je Report (#13/#27) -> {report_key: [[…], …]}.
+
+    Eintrag: [entityID, name, überlappung, begründung, beziehung].
+
+    In den SHARD, nicht in den Index: die Liste wird nur beim Öffnen genau
+    dieses Reports gebraucht, und der Index trägt alle 882 Reports auf einmal.
+
+    `beziehung` reist mit, weil sie die Lesart entscheidet. Die stärksten
+    Treffer sind konzernintern (ING Groep und ING Bank bei 0,9999) — als
+    Vorschlag „ähnliche Institute" wäre das wertlos, als Beleg dafür, dass das
+    Mass greift, ist es das beste Argument. Der Viewer muss beides unterscheiden
+    können, ohne den Konzerngraphen selbst zu laden.
+    """
+    root = root or ROOT
+    path = root / "processed" / "peer_similarity.csv"
+    if not path.exists():
+        return {}
+    out = {}
+    with path.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            lei, scope, rp = r.get("lei"), r.get("scope"), r.get("refPeriod")
+            if not (lei and scope and rp and r.get("nachbar_lei")):
+                continue
+            out.setdefault(f"rs:{lei}.{scope}|{rp}", []).append([
+                f"rs:{r['nachbar_lei']}.{r['nachbar_scope']}",
+                r.get("nachbar_name", ""),
+                round(float(r["ueberlappung"]), 3),
+                r.get("groesste_gemeinsamkeit", ""),
+                r.get("beziehung", ""),
+            ])
+    return out
+
+
 PEER_MIN = 5      # wie PCT_MIN_GROUP im Viewer: darunter ist ein Perzentil Rauschen
 
 
@@ -586,6 +620,7 @@ def main():
     merge_scale_flags(quality, load_scale_flags(ROOT))
     befunde = load_cell_findings(ROOT)
     peers = peer_stats(con)
+    aehnlich = load_similar(ROOT)
 
     # --- pass 1: group placeable cells into reports (raw string values) ---
     reports = {}
@@ -804,6 +839,9 @@ def main():
         pk = peers.get(key)
         if pk:                      # Kontextzahlen je Zelle (#23)
             inhalt["peer"] = pk
+        ae = aehnlich.get(key)
+        if ae:                      # Ähnliche Institute (#13/#27)
+            inhalt["similar"] = ae
         payload = json.dumps(inhalt, ensure_ascii=False,
                              separators=(",", ":"), sort_keys=True)
         if write_if_changed(SHARDS / fname, payload):
