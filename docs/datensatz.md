@@ -138,6 +138,9 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/omission_profile.csv` | Report → was wird weggelassen, gemessen an den direkten Peers | `filing_indicators.csv` |
 | `processed/omission_templates.csv` | Klasse × Stichtag × Template → Offenlegungsquote der Peer-Gruppe | ebenda |
 | `processed/omission_persistence.csv` | Institut × Template → ist die Auslassung dauerhaft oder wechselt sie? | ebenda + `disclosure_frequency.csv` |
+| `processed/irrbb_sensitivity.csv` | Report × Zinsschock → ΔEVE, ΔNII, Supervisory Outlier Test | IRRBB1 `68.00`, KM1 `61.00` |
+| `processed/peer_similarity.csv` | Report → die fünf ähnlichsten Institute nach Länderprofil | CCyB1 `67.01.A` |
+| `processed/country_effect.csv` | Bankattribut × Länderkennzahl → Varianzzerlegung und Korrelation | `footprint.csv`, `country_gdp.csv` |
 | `processed/irb_risk_weights.csv` | Institut × Forderungsklasse × PD-Band → Risikogewicht, PD, LGD | CR6 `26.00.A` |
 | `processed/footprint.csv` | Institut → Länderstreuung des Exposures, Domestizitätsquote, HHI | CCyB1 `67.01.A` |
 | `processed/disclosure_frequency.csv` | Klasse × Template → gemessene Offenlegungsfrequenz | `filing_indicators.csv` |
@@ -676,6 +679,103 @@ individuell zuschreibbare Fälle** — das ist die Zahl, die etwas über einzeln
 Institute sagt.
 
 Auch sie ist eine **Obergrenze**, aus demselben Grund wie `n_gegen_erwartung`.
+
+### `irrbb_sensitivity.csv` — Zinssensitivität, gemessen statt geschätzt
+
+Das IRRBB-Modul (`68.00`, EU IRRBB1) trägt die sechs aufsichtlichen
+Zinsschock-Szenarien mit der Barwertänderung des Eigenkapitals (ΔEVE) und der
+Zinsergebnisänderung (ΔNII). **235 Institute** melden es; bis September 2026 war
+es im ganzen Projekt ungenutzt.
+
+Der Massstab ist das Tier-1-Kapital aus KM1, und er ist nicht frei gewählt — die
+**Supervisory Outlier Tests** definieren genau diesen Quotienten: 15 % für ΔEVE
+(CRD Art. 98(5)), 5 % für ΔNII (EBA/GL/2022/14). Gezählt wird nur der *Verlust*.
+
+#### Die EVE-Kategorie ist leer, und genau das ist der Befund
+
+| | |
+|---|---:|
+| auswertbare Zeilen | 1.763 |
+| Median ΔEVE / Tier 1 | −0,000 |
+| p1 | −0,115 |
+| **grösster Verlust** | **−14,84 %** |
+| über der 15-%-Schwelle | **0** |
+
+Null Überschreitungen — bei einem Maximum von 14,84 %. Die fünf schwersten Fälle
+liegen bei −14,84 · −14,64 · −14,51 · −14,45 · −14,33 %, alle im letzten
+Prozentpunkt vor der Grenze. **Die Verteilung bricht unmittelbar vor der
+aufsichtlichen Schwelle ab**: das ist keine Eigenschaft der Zinsrisiken, sondern
+die Grenze als bindende Nebenbedingung. Ohne die Randverteilung wäre „0
+Überschreitungen" nicht von „nicht gemessen" zu unterscheiden.
+
+#### Bei ΔNII ist die Kategorie nicht leer, und die Treffer haben ein Muster
+
+22 Überschreitungen, fast alle unter *fallenden* Zinsen: flatexDEGIRO (−25,5 %),
+Nordnet (−25,0 %), Clearstream (−21,5 %), Avanza (−19,1 %), Revolut (−15,3 %).
+Broker, Neobanken und Verwahrstellen — Häuser, deren Ertrag am Zinsspread auf
+gehaltene Kundengelder hängt. Kein Meldefehler, sondern ein Geschäftsmodell, das
+der Test sichtbar macht.
+
+⚠️ Zwei Vorbehalte stehen in der Spalte `vorbehalt`: `skala` für Reports mit
+Skalenbefund aus #83 (die Deutsche Pfandbriefbank meldet 2.998 EUR Kernkapital —
+ungefiltert 126 Zeilen scheinbarer Überschreitungen aus *einem* Fehler) und
+`unplausibel`, wo der Verlust das gesamte Kernkapital übersteigt.
+
+### `peer_similarity.csv` — ähnliche Institute nach Länderprofil
+
+Die formale Peer-Gruppe (Grössenklasse × Konsolidierung × Stichtag) ist für
+Perzentile richtig, beantwortet aber nicht „mit wem ist dieses Institut
+vergleichbar". Gemessen wird die **Überlappung der Länderverteilung** des
+Exposures aus `67.01.A`:
+
+> überlappung(p, q) = Σ min(p_land, q_land)
+
+Direkt lesbar: 0,68 heisst, dass 68 % des Exposures beider Häuser in denselben
+Ländern liegt. Bewusst kein Kosinus — der wäre gegen unterschiedliche Breite
+blind und für einen Leser nicht interpretierbar.
+
+**Die Gegenprobe:** die stärksten Treffer sind Mutter/Tochter-Paare — ING Groep
+↔ ING Bank bei 0,9999, Argenta Holding ↔ Argenta Bank bei 1,0000. Das Verfahren
+findet Konzernzugehörigkeit aus der Exposure-Geografie wieder, *ohne je einen
+Konzerngraphen gesehen zu haben*; von 100 besten Treffern über 0,95 sind 22
+konzernintern, unterhalb von 0,80 nur noch 4. Die Spalte `beziehung` benennt das
+aus #32/#42, damit ein Leser den Beleg nicht für eine Entdeckung hält.
+
+⚠️ **Das ist keine Peer-Gruppe.** Die Perzentile im Viewer bleiben auf der
+formalen Schichtung; die Liste ist explorativ und im Viewer so beschriftet.
+
+⚠️ **Die Grenze der Kennzahl betrifft ein Drittel der Fälle.** Zwei rein national
+tätige Banken desselben Landes überlappen sich zwangsläufig fast vollständig: bei
+über 90 % Domestizität liegt die beste Überlappung im Median bei 0,976, bei
+breiter aufgestellten nur bei 0,812. Deshalb stehen `n_laender` und
+`groesste_gemeinsamkeit` in jeder Zeile.
+
+### `country_effect.csv` — hängt die Bank am Heimatland? Nein.
+
+Die These aus #11 — Bankattribute aus BIP- und Zinszeitreihen des Heimatlands
+erklären — ist geprüft und trägt nicht. Der Zins-Teil scheitert schon an der
+Konstruktion (EURIBOR hat zu einem Stichtag für alle Banken denselben Wert). Für
+den Rest gilt:
+
+Eine Kennzahl des Heimatlands ist für alle Institute desselben Landes identisch
+und kann nur erklären, was **zwischen** Ländern streut. Diese Zerlegung ist eine
+Identität, keine Schätzung:
+
+| | Anteil |
+|---|---:|
+| Varianz zwischen Ländern | 31,8 % |
+| Varianz **innerhalb** | **68,2 %** |
+
+Damit gilt **R² ≤ 0,318 für jede denkbare Länderkennzahl**, auch für noch nicht
+erhobene. Gemessen erreicht das BIP r² = 0,0013 — **0,4 % des Erreichbaren**.
+Auch der naheliegende Rettungsversuch („dann eben die Finanzplatzintensität")
+scheitert: Irland liegt bei Exposure/BIP am unteren Ende und bei der
+Domestizität trotzdem ganz unten.
+
+Der Ländereffekt ist trotzdem gross — die Mediane reichen von 0,061 (Irland) bis
+0,993 (Norwegen). Er ist nur kein *Makro*effekt. Wer die Domestizität erklären
+will, braucht Instituts- und keine Ländermerkmale; das ist die Richtung von #13
+und #35.
 
 ### `irb_risk_weights.csv` — Risikogewichte je PD-Band
 

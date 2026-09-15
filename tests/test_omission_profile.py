@@ -301,6 +301,28 @@ class PersistenzLogikTest(unittest.TestCase):
                          "zwei Frequenzen auf dasselbe Muster — die Umkehrung "
                          "verliert eine davon")
 
+    def test_the_direction_answers_the_second_question_of_issue_34(self):
+        """#34 Punkt 2 fragt nach BEIDEN Richtungen: „ein Institut, das ein
+        Template einstellt … oder eines neu aufnimmt". Entschieden wird am
+        zuletzt beobachteten ERWARTETEN Stichtag."""
+        self.assertEqual(self.o.richtung_von("1000", "1111"), "eingestellt")
+        self.assertEqual(self.o.richtung_von("0001", "1111"), "aufgenommen")
+
+    def test_the_direction_ignores_dates_outside_the_calendar(self):
+        """Der Stichtag, an dem die Frequenzklasse nichts erwartet, darf die
+        Richtung nicht entscheiden. Lage `1000` gegen Erwartung `1010` endet
+        am 31.12. mit einer Auslassung — die Null am 31.03. steht ausserhalb."""
+        self.assertEqual(self.o.richtung_von("1000", "1010"), "eingestellt")
+        self.assertEqual(self.o.richtung_von("0010", "1010"), "aufgenommen")
+
+    def test_an_unfiled_date_does_not_decide_the_direction(self):
+        """`-` ist kein `0`. Wer den nicht gemeldeten Stichtag als Auslassung
+        liest, dreht die Richtung um."""
+        self.assertEqual(self.o.richtung_von("001-", "1010"), "aufgenommen")
+
+    def test_without_an_observed_date_there_is_no_direction(self):
+        self.assertEqual(self.o.richtung_von("--0-", "0100"), "")
+
     def test_the_position_string_keeps_the_three_states(self):
         belegung = {"2025-06-30": True, "2025-12-31": False}
         self.assertEqual(
@@ -384,6 +406,27 @@ class PersistenzErgebnisTest(unittest.TestCase):
         self.assertLess(len(einzel), len(wech) * 0.3)
         self.assertGreater(len(einzel), 20,
                            "der Filter nimmt ALLES — dann misst er nicht mehr")
+
+    def test_the_direction_is_set_exactly_where_something_changed(self):
+        """Eine Richtung gibt es nur bei `wechselnd`. An einer kalendertreuen
+        oder dauerhaft ausgelassenen Zeile wäre sie eine Behauptung über eine
+        Änderung, die nicht stattgefunden hat."""
+        for r in self.rows:
+            with self.subTest(urteil=r["urteil"], bank=r["bank_name"]):
+                if r["urteil"] == "wechselnd":
+                    self.assertIn(r["richtung"], ("eingestellt", "aufgenommen"))
+                else:
+                    self.assertEqual(r["richtung"], "")
+
+    def test_both_directions_occur_among_the_individual_cases(self):
+        """Gegenprobe gegen eine Richtung, die immer dasselbe sagt: #34 Punkt 2
+        nennt beide Vorgänge, und beide kommen vor (27 eingestellt, 67
+        aufgenommen). Fiele eine Seite auf null, wäre die Spalte ein Etikett
+        und keine Unterscheidung."""
+        e = collections.Counter(r["richtung"] for r in self.rows
+                                if r["einzelfall"] == "ja")
+        self.assertGreater(e["eingestellt"], 5)
+        self.assertGreater(e["aufgenommen"], 5)
 
     def test_only_switching_rows_are_marked_at_all(self):
         """`einzelfall` ist eine Aussage über eine wechselnde Auslassung. An

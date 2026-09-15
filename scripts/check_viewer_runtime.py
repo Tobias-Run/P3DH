@@ -232,6 +232,33 @@ def pruefe():
                       z:rep.quality.z, alle:rep.quality.n, tid,
                       tip, ovq:ovq?ovq.getAttribute('title'):''};
             }""")
+            # Aehnliche Institute (#13/#27): kommt die Liste im DOM an, und
+            # traegt sie ihre BEGRUENDUNG? Eine unbegruendete
+            # "aehnlich"-Behauptung ist genau die Black Box, die #27 ausschliesst
+            # — und die Marke "keine Peer-Gruppe" verhindert, dass ein Leser sie
+            # fuer eine aufsichtlich anerkannte Vergleichsgruppe haelt.
+            aehnlich = pg.evaluate("""async () => {
+              const rep = REPORTS.find(r => r.entityID && r.refPeriod);
+              const kand = REPORTS.filter(r => r.nt > 20);
+              for(const r of kand.slice(0, 40)){
+                await ensureLoaded(r);
+                if((r.similar||[]).length){
+                  const p = leiParts(r.entityID);
+                  location.hash = '#r/'+p.lei+'/'+r.refPeriod+'/'+p.scope;
+                  for(let g=0; g<400 && !document.querySelector('.simblock'); g++)
+                    await new Promise(s=>setTimeout(s,10));
+                  const n = document.querySelector('.simblock');
+                  if(!n) return {bank:bankName(r.entityID)||r.entityID, n_similar:r.similar.length, text:''};
+                  n.open = true;
+                  await new Promise(s=>setTimeout(s,50));
+                  return {bank:bankName(r.entityID)||r.entityID, n_similar:r.similar.length,
+                          eintraege:n.querySelectorAll('li').length,
+                          links:n.querySelectorAll('li a[href^="#r/"]').length,
+                          text:n.textContent.replace(/\\s+/g,' ').trim()};
+                }
+              }
+              return {keine:1};
+            }""")
             # Groessenbalken (#49): erscheinen sie — und bleiben sie dort WEG,
             # wo sie luegen wuerden? Ein Balken fuer einen um 10^6 zu kleinen
             # Betrag zeigt ein winziges Institut statt eines Meldefehlers.
@@ -330,6 +357,27 @@ def pruefe():
             fehler.append("Report mit AUSSCHLIESSLICH Zeitbefunden begründet sie "
                           "im Viewer mit der Zellpopulation — die hat ihn nie "
                           "gesehen")
+
+    if aehnlich.get("keine"):
+        fehler.append("kein Report mit ähnlichen Instituten (#27) — die Liste "
+                      "kommt im Viewer nicht an")
+    else:
+        print(f"  Ähnliche Institute (#27): {aehnlich['bank'][:28]} · "
+              f"{aehnlich.get('eintraege', 0)} Einträge, "
+              f"{aehnlich.get('links', 0)} mit Sprunglink")
+        if not aehnlich.get("eintraege"):
+            fehler.append("Shard trägt ähnliche Institute, der Viewer rendert "
+                          "keinen Eintrag")
+        if aehnlich.get("links", 0) != aehnlich.get("eintraege", 0):
+            fehler.append("nicht jeder Vorschlag trägt einen Sprunglink — "
+                          "#27 verlangt ihn ausdrücklich")
+        text = aehnlich.get("text") or ""
+        if "Länderüberlappung" not in text:
+            fehler.append("die Vorschläge stehen ohne Begründung da — genau die "
+                          "Black Box, die #27 ausschliesst")
+        if "keine Peer-Gruppe" not in text:
+            fehler.append("die Liste weist sich nicht als explorativ aus und "
+                          "liest sich damit wie eine anerkannte Vergleichsgruppe")
 
     print(f"  Benchmark: {balken['zeilen']} Zeilen · {balken['balken']} Größenbalken · "
           f"skaliert markiert {balken['mitMarke']}, davon mit Balken {balken['markeMitBalken']}")

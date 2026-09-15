@@ -259,11 +259,29 @@ jobs:
       - name: Auslassungsprofil (Art. 432)
         run: python scripts/build_omission_profile.py
 
+      # Zinssensitivitaet aus dem IRRBB-Modul (#15). Braucht KM1 fuer das
+      # Kernkapital — beides steht im Parquet, kein Netz.
+      - name: Zinssensitivitaet (IRRBB1)
+        run: python scripts/build_irrbb_sensitivity.py
+
       # Die zwei Konzerngraphen gegeneinander (#32, #42). Braucht beide Dateien
       # frisch; laeuft ohne Netz und bricht NICHT ab — ein Widerspruch waere ein
       # Befund ueber die Quellen, kein Fehler dieser Kette.
       - name: Konzerngraphen-Abgleich
         run: python scripts/check_group_graphs.py
+
+      # Aehnliche Institute (#13, #27). Muss NACH check_group_graphs laufen:
+      # die Spalte `beziehung` liest lei_relations.csv und coverage_gap.csv, um
+      # konzerninterne Treffer zu benennen. Und VOR Zweig A, weil der Shard-Bau
+      # peer_similarity.csv in die Report-Shards legt — laeuft es danach, traegt
+      # der Viewer die Liste des VORIGEN Laufs.
+      - name: Aehnliche Institute
+        run: python scripts/build_peer_similarity.py
+
+      # Laendereffekt gegen Bankattribute (#11). Reine Auswertung ueber
+      # footprint.csv und country_gdp.csv; laeuft nach dem Footprint.
+      - name: Laendereffekt (#11)
+        run: python scripts/check_country_effect.py
 
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
@@ -311,7 +329,9 @@ jobs:
                   processed/entity_meta.csv processed/fx_rates.csv \
                   processed/quality_profile.csv processed/footprint.csv \
                   processed/disclosure_lag.csv processed/rwa_density.csv \
-                  interim/plausibility_cells.csv interim/plausibility_findings.csv
+                  interim/plausibility_cells.csv interim/plausibility_findings.csv \
+                  processed/irrbb_sensitivity.csv processed/peer_similarity.csv \
+                  processed/country_effect.csv processed/omission_persistence.csv
           # Harvest-Delta: entsteht nur bei inputs.harvest, deshalb einzeln und
           # bedingt. harvest_log.csv ist append-only — ohne diesen Commit stirbt
           # die Historie mit dem Runner, und der nächste Lauf beginnt wieder bei

@@ -14,8 +14,8 @@ niemand dieses Dokument kennen muss, um den Stand seines Issues zu sehen:
 
 ## Was seit der Erhebung geliefert wurde
 
-Der Review hat zu sechs Issues einen nächsten Schritt benannt. Alle sechs sind
-inzwischen gebaut — und drei Issues sind damit ganz erledigt.
+Der Review hat zu sechs Issues einen nächsten Schritt benannt; alle sechs sind
+gebaut. Dazu kamen fünf zufällig gezogene Issues in PR #94.
 
 | Issue | Was hier als nächster Schritt stand | Stand |
 |---|---|---|
@@ -27,9 +27,14 @@ inzwischen gebaut — und drei Issues sind damit ganz erledigt.
 | #41 | Machbarkeitsprüfung mit eigener Abbruchschwelle | ✅ PR #89 — **Issue geschlossen** |
 | #88 | vom Review selbst gefunden | ✅ PR #89 + #92 — **Issue geschlossen** |
 | #36 | hing an #34, siehe Abschnitt B | ✅ PR #91 — **Issue geschlossen** |
+| #15 | Zinssensitivität aus IRRBB statt EURIBOR | ✅ PR #94 |
+| #45 | Punkt 3 — Standardansatz gegen IRB, geschichtet | ✅ PR #94 |
+| #34 | Punkt 2 — Abweichung vom Frequenzmuster, mit Richtung | ✅ PR #94 |
+| #11 | These geprüft und widerlegt | ✅ PR #94 |
+| #27 | Ähnliche Institute, mit #13 als Unterbau | ✅ PR #94 |
 
 **Eine Lehre daraus, die den Review selbst betrifft.** Zwischen der Erhebung und
-heute sank die Zahl der offenen Issues von 29 auf 27, während sieben
+heute sank die Zahl der offenen Issues von 29 auf 26, während zwölf
 Arbeitspakete fertig wurden. Der Zähler misst diese Arbeit nicht, weil die
 meisten Issues mehrere Punkte tragen und teilgeliefert offen bleiben. Wer den
 Fortschritt am Zähler abliest, sieht Stillstand, wo keiner ist — und umgekehrt
@@ -257,11 +262,20 @@ und FINDIS als eigenständige Meldungen. Wer sie zusammenwirft, zählt
 verschiedene Module als Korrekturen voneinander. Eine Auswertung zu #31 muss
 diese Definition **nennen**, sonst ist ihre Kernzahl beliebig.
 
-### #19 — Länder-Aggregate · #16 — Kreditverschlechterungs-Kette · #15 — Zinssensitivität
+### ~~#15 — Zinssensitivität~~ → **erledigt** *(PR #94)*
+
+`processed/irrbb_sensitivity.csv`. Das IRRBB-Modul war im ganzen Projekt
+ungenutzt. Der Supervisory Outlier Test auf ΔEVE findet **null**
+Überschreitungen — bei einem grössten Verlust von −14,84 % gegen eine Schwelle
+von 15 %. Die Verteilung bricht unmittelbar vor der aufsichtlichen Grenze ab.
+Bei ΔNII sind es 22 Überschreitungen, konzentriert auf Broker und Neobanken
+unter fallenden Zinsen.
+
+### #19 — Länder-Aggregate · #16 — Kreditverschlechterungs-Kette
 
 Datengrundlage vollständig vorhanden (`open_axis_country` auf 264.555 Fakten
-über 250 Länder; `82.00.*`/`83.01.*`; `68.00`). Reine Auswertungen. #19
-überschneidet sich stark mit `footprint.csv`.
+über 250 Länder; `82.00.*`/`83.01.*`). Reine Auswertungen. #19 überschneidet
+sich stark mit `footprint.csv`.
 
 ### #59 — Ländercode-Verwechslungen
 
