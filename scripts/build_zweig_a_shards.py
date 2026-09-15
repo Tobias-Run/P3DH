@@ -282,6 +282,14 @@ def load_quality_profile(root: Path | None = None):
                 # KM1 r0050 `hoch` — und Kommuninvests nachprüfbar korrekte 355 %
                 # bleiben es nicht.
                 "th": [t for t in (r.get("templates_hoch") or "").split("|") if t],
+                # Wie viele der Befunde aus dem ZEITVERGLEICH kommen (#36).
+                # Der Viewer braucht die Zahl, weil die Aussage eine andere
+                # ist: „liegt ausserhalb der Verteilung seiner Zellpopulation"
+                # gilt für einen Zeitbefund nicht — der hat gar keine
+                # Population gesehen, sondern nur denselben Report ein halbes
+                # Jahr früher. Ohne diese Zahl stünde am Report eine Begründung,
+                # die auf seine Befunde nicht zutrifft.
+                "z": int(r.get("n_zeitbefunde") or 0),
             }
     return out
 
@@ -368,6 +376,21 @@ def load_cell_findings(root: Path | None = None):
 
     Eintrag: [sev, abweichung_groessenordnungen, referenzwert] — und ein
     viertes Feld mit der Befundzahl, wenn es mehr als einer war.
+
+    ## Der Zeitvergleich braucht ein fünftes Feld (#36)
+
+    Seit #36 gibt es zwei Arten von Befund auf einer Zelle, und der
+    Vergleichswert bedeutet bei beiden etwas anderes:
+
+        cell_outlier   Referenz ist der MEDIAN der Zellpopulation
+        time_jump      Referenz ist der EIGENE Wert des Instituts am
+                       Nachbarstichtag
+
+    Der Tooltip formuliert das verschieden („gegen die Population" gegen „gegen
+    den eigenen Wert vom …"), und ohne die Unterscheidung stünde am Zeitbefund
+    eine Aussage über eine Population, die ihn nie gesehen hat. Deshalb trägt
+    ein Zeitbefund im fünften Feld den Vergleichsstichtag — und dann ist auch
+    das vierte Feld immer besetzt, damit die Stelle eindeutig bleibt.
     """
     root = root or ROOT
     path = root / "interim" / "plausibility_findings.csv"
@@ -387,19 +410,25 @@ def load_cell_findings(root: Path | None = None):
             except ValueError:
                 continue
             k = f"rs:{lei}.{scope}|{rp}"
+            vgl = r.get("vergleich_refPeriod") or "" if r.get("rule") == "time_jump" else ""
             roh.setdefault(k, {}).setdefault(tid, {}).setdefault(f"{row}|{col}", []) \
-                .append((sev, dev, ref))
+                .append((sev, dev, ref, vgl))
     out = {}
     for k, tpl in roh.items():
         out[k] = {}
         for tid, zellen in tpl.items():
             out[k][tid] = {}
             for rc, treffer in zellen.items():
-                # Stärkster zuerst: Schweregrad, dann Abweichung.
-                sev, dev, ref = max(treffer, key=lambda t: (SEV_RANG[t[0]], t[1]))
+                # Stärkster zuerst: Schweregrad, dann Abweichung. Der
+                # Vergleichsstichtag ist KEIN Sortierkriterium — er steht nur
+                # mit, damit der Tooltip den Gewinner richtig benennen kann.
+                sev, dev, ref, vgl = max(treffer,
+                                         key=lambda t: (SEV_RANG[t[0]], t[1], t[3]))
                 eintrag = [sev, dev, ref]
-                if len(treffer) > 1:
+                if len(treffer) > 1 or vgl:
                     eintrag.append(len(treffer))
+                if vgl:
+                    eintrag.append(vgl)
                 out[k][tid][rc] = eintrag
     return out
 

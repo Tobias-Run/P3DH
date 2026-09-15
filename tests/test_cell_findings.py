@@ -109,12 +109,35 @@ class ShardTest(unittest.TestCase):
             for tid, zellen in o.get("flags", {}).items():
                 for rc, e in zellen.items():
                     with self.subTest(shard=p.name, tid=tid, rc=rc):
-                        self.assertIn(len(e), (3, 4))
+                        # [sev, abstand, referenz] · +Anzahl · +Vergleichsstichtag
+                        # Das fünfte Feld kam mit #36 dazu und markiert einen
+                        # ZEITBEFUND: dort ist die Referenz der eigene Wert des
+                        # Instituts am Nachbarstichtag, nicht der Zellmedian.
+                        # Damit die Stelle eindeutig bleibt, steht die Anzahl
+                        # dann IMMER — auch bei genau einem Befund.
+                        self.assertIn(len(e), (3, 4, 5))
                         self.assertIn(e[0], ("h", "m", "n"))
                         self.assertIsInstance(e[1], (int, float))
                         if len(e) == 4:
                             self.assertGreater(e[3], 1,
                                                "Anzahl nur bei MEHR als einem Befund")
+                        if len(e) == 5:
+                            self.assertGreaterEqual(e[3], 1)
+                            self.assertRegex(e[4], r"^\d{4}-\d{2}-\d{2}$")
+
+    def test_time_findings_reach_the_shards(self):
+        """Gegenprobe zur Formprüfung: die fünfstellige Form muss auch
+        VORKOMMEN. Prüfte nur die Form, wäre ein Shard-Bau, der den
+        Vergleichsstichtag gar nicht schreibt, grün — und im Viewer stünde an
+        jedem Zeitbefund wieder die Begründung der Zellpopulation."""
+        mit_datum = sum(
+            1 for p in self.shards
+            for zellen in json.loads(p.read_text(encoding="utf-8")).get("flags", {}).values()
+            for e in zellen.values() if len(e) == 5)
+        self.assertGreater(mit_datum, 50,
+                           "kein Zeitbefund (#36) in den Shards — entweder "
+                           "fehlt die Regelfamilie oder der Shard-Bau "
+                           "verschluckt den Vergleichsstichtag")
 
     def test_the_blocked_template_list_comes_from_the_single_source(self):
         """Eine zweite Liste im HTML waere die naechste, die auseinanderlaeuft."""

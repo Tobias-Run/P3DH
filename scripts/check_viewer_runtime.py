@@ -207,6 +207,31 @@ def pruefe():
               return {urteil:rep.quality.sc.u, n:REPORTS.filter(r=>r.quality&&r.quality.sc).length,
                       text:n?n.textContent.replace(/\\s+/g,' ').trim():''};
             }""")
+            # Zeitbefund (#36): traegt die Zellmarke die RICHTIGE Begruendung?
+            # Ein Zeitsprung ist gegen den eigenen Vorwert gemessen, nicht
+            # gegen eine Zellpopulation — und bis #36 sagte jeder Tooltip
+            # „gegen die Population". Eine Marke, die den falschen Massstab
+            # nennt, ist schlechter als keine: sie behauptet, der Wert falle
+            # aus der Reihe seiner Peers, obwohl niemand die Peers befragt hat.
+            zeit = pg.evaluate("""async () => {
+              const rep = REPORTS.find(r => r.quality && r.quality.z);
+              if(!rep) return {keine:1};
+              const p = leiParts(rep.entityID);
+              location.hash = '#r/'+p.lei+'/'+rep.refPeriod+'/'+p.scope;
+              for(let g=0; g<400 && !document.querySelector('.ovq'); g++)
+                await new Promise(s=>setTimeout(s,10));
+              // Den Zell-Tooltip aus den geladenen Flags bilden — ohne den
+              // Block aufzuklappen, in dem die Zelle zufaellig liegt.
+              await ensureLoaded(rep);
+              let tip='', tid='';
+              for(const [t,m] of Object.entries(rep.flags||{}))
+                for(const [rc,f] of Object.entries(m))
+                  if(f.length>=5 && !tip){ tid=t; tip=flagTip(t,f); }
+              const ovq=document.querySelector('.ovq');
+              return {n:REPORTS.filter(r=>r.quality&&r.quality.z).length,
+                      z:rep.quality.z, alle:rep.quality.n, tid,
+                      tip, ovq:ovq?ovq.getAttribute('title'):''};
+            }""")
             # Groessenbalken (#49): erscheinen sie — und bleiben sie dort WEG,
             # wo sie luegen wuerden? Ein Balken fuer einen um 10^6 zu kleinen
             # Betrag zeigt ein winziges Institut statt eines Meldefehlers.
@@ -287,6 +312,24 @@ def pruefe():
         if not skala["text"]:
             fehler.append("Report mit Skalenbefund (#83) zeigt keine Marke — "
                           "der Index trägt sie, der Viewer rendert sie nicht")
+
+    if zeit.get("keine"):
+        fehler.append("kein Report mit Zeitbefund (#36) im Index — die vierte "
+                      "Regelfamilie kommt im Viewer nicht an")
+    else:
+        print(f"  Zeitbefund (#36): {zeit['n']} Reports · Beispiel {zeit['z']} von "
+              f"{zeit['alle']} Befunden · Zelltooltip in {zeit['tid'] or '—'}: "
+              f"{(zeit['tip'] or '— NICHTS —')[:100]}")
+        if not zeit["tip"]:
+            fehler.append("Zeitbefund im Shard, aber kein Zell-Tooltip — der "
+                          "fünfte Eintrag (Vergleichsstichtag) kommt nicht an")
+        elif "Population" in zeit["tip"] or "eigenen Wert vom" not in zeit["tip"]:
+            fehler.append(f"Zell-Tooltip eines Zeitbefunds nennt den falschen "
+                          f"Maßstab: {zeit['tip'][:120]}")
+        if zeit["z"] >= zeit["alle"] and "Zellpopulation" in (zeit["ovq"] or ""):
+            fehler.append("Report mit AUSSCHLIESSLICH Zeitbefunden begründet sie "
+                          "im Viewer mit der Zellpopulation — die hat ihn nie "
+                          "gesehen")
 
     print(f"  Benchmark: {balken['zeilen']} Zeilen · {balken['balken']} Größenbalken · "
           f"skaliert markiert {balken['mitMarke']}, davon mit Balken {balken['markeMitBalken']}")
