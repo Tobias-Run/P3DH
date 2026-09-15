@@ -232,13 +232,6 @@ jobs:
           python scripts/build_disclosure_lag.py
           python scripts/build_rwa_density.py
 
-      # Ermessensausuebung nach Art. 432 (#43). Braucht BEIDE Quellen frisch:
-      # die Filing-Indicators fuer die Deklaration und das Parquet fuer die
-      # Gegenprobe, was wirklich geliefert wurde. Laeuft die Auswertung auf
-      # altem Parquet, meldet die Gegenprobe Widersprueche, die keine sind.
-      - name: Auslassungsprofil (Art. 432)
-        run: python scripts/build_omission_profile.py
-
       # IRB-Risikogewichte je PD-Band (#45). Reine Auswertung des Parquets,
       # kein Netz — und sie veraltet mit jeder Welle, weil CR6 quartalsweise
       # gemeldet wird.
@@ -251,6 +244,20 @@ jobs:
       # Muster verlaengert.
       - name: Offenlegungsfrequenz
         run: python scripts/build_disclosure_frequency.py
+
+      # Ermessensausuebung nach Art. 432 (#43). Braucht BEIDE Quellen frisch:
+      # die Filing-Indicators fuer die Deklaration und das Parquet fuer die
+      # Gegenprobe, was wirklich geliefert wurde. Laeuft die Auswertung auf
+      # altem Parquet, meldet die Gegenprobe Widersprueche, die keine sind.
+      #
+      # Und sie muss NACH der Offenlegungsfrequenz laufen (#43 Punkt 4): die
+      # Zeitdimension misst Auslassungen nur an Stichtagen, an denen die
+      # Frequenzklasse Offenlegung erwartet. Fehlt disclosure_frequency.csv,
+      # bleibt omission_persistence.csv leer — die Datei entstuende trotzdem,
+      # mit Kopfzeile und ohne Inhalt, und saehe aus wie ein Ergebnis.
+      # Dieselbe Reihenfolgenfalle wie build_report_scale -> check_plausibility.
+      - name: Auslassungsprofil (Art. 432)
+        run: python scripts/build_omission_profile.py
 
       # Die zwei Konzerngraphen gegeneinander (#32, #42). Braucht beide Dateien
       # frisch; laeuft ohne Netz und bricht NICHT ab — ein Widerspruch waere ein

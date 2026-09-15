@@ -19,6 +19,22 @@ Das ist ein Deklarationsfehler, kein Ermessen.
 
 Die Tests unten prüfen für jeden dieser vier Fälle, dass er NICHT als Verhalten
 gezählt wird.
+
+## Punkt 4 (Zeitdimension): eine fünfte Art, es zu verfehlen
+
+`omission_persistence.csv` beantwortet „dauerhaft oder wechselnd?". Die
+Unterscheidung trägt die ganze Aussage:
+
+    dauerhaft   Nichtanwendbarkeit bleibt möglich — wer kein Handelsbuch hat,
+                hat auch im nächsten Quartal keines
+    wechselnd   Nichtanwendbarkeit ist AUSGESCHLOSSEN — was einmal offengelegt
+                wurde, war anwendbar
+
+Und die fünfte Falle sitzt genau dort: die häufigste „wechselnde" Lage tritt
+bei **36 Instituten gleichzeitig** auf. Das ist kein Ermessen, das ist der
+Meldekalender, den das Frequenzmodell für dieses Template falsch trifft — weil
+es an Instituten mit allen vier Stichtagen geschätzt und auf Institute mit
+zweien angewandt wird.
 """
 
 from pathlib import Path
@@ -32,6 +48,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 OUT = ROOT / "processed" / "omission_profile.csv"
 OUT_TPL = ROOT / "processed" / "omission_templates.csv"
+OUT_ZEIT = ROOT / "processed" / "omission_persistence.csv"
 
 
 def lies(pfad):
@@ -226,6 +243,160 @@ class ErgebnisTest(unittest.TestCase):
         self.assertEqual(k, sorted(k))
         t = [(r["institution_type"], r["refPeriod"], r["template_id"]) for r in self.tpl]
         self.assertEqual(t, sorted(t))
+
+
+class PersistenzLogikTest(unittest.TestCase):
+    """Punkt 4, als reine Funktion."""
+
+    def setUp(self):
+        import build_omission_profile as o
+        self.o = o
+
+    def test_only_dates_the_calendar_expects_are_counted(self):
+        """Der Kern. Ein halbjährliches Template „fehlt" zwischen den Quartalen
+        aus reiner Meldelogik — wer das zählt, misst den Meldekalender und nennt
+        ihn Ermessen. Lage 1010 gegen Erwartung 1010 ist perfekte Erfüllung,
+        obwohl zwei der vier Stellen Nullen sind."""
+        self.assertEqual(self.o.persistenz("1010", "1010"),
+                         ("kalendertreu", 2, 2))
+
+    def test_a_date_the_institution_never_filed_carries_no_statement(self):
+        """`-` ist nicht `0`. „Fehlt ≠ Null", Arbeitsprinzip 3: ein nicht
+        gemeldeter Stichtag sagt nichts über ein Template."""
+        self.assertEqual(self.o.persistenz("1-1-", "1111"),
+                         ("kalendertreu", 2, 2))
+
+    def test_disclosed_once_and_omitted_once_is_the_finding(self):
+        """Die einzige Klasse, in der Nichtanwendbarkeit AUSGESCHLOSSEN ist:
+        was am 30.06. offengelegt wurde, war dem Institut anwendbar, also kann
+        die Auslassung am 30.09. keine Nichtanwendbarkeit sein."""
+        self.assertEqual(self.o.persistenz("1011", "1111"),
+                         ("wechselnd", 4, 3))
+
+    def test_never_disclosed_is_not_the_same_finding(self):
+        """`dauerhaft` sieht aus wie das stärkere Signal und ist das
+        schwächere: es ist genau die Lage, die ein Institut ohne Handelsbuch
+        erzeugt. Die beiden zu verschmelzen wäre der teuerste Fehler dieser
+        Auswertung."""
+        self.assertEqual(self.o.persistenz("0000", "1111"),
+                         ("dauerhaft", 4, 0))
+
+    def test_a_single_expected_date_yields_no_verdict(self):
+        """Ohne zwei Vergleichspunkte gibt es keine Zeitaussage — und ein
+        Urteil wäre eine Behauptung über eine Entwicklung, die nie beobachtet
+        wurde. Deshalb `unbeurteilbar` und nicht `dauerhaft`."""
+        self.assertEqual(self.o.persistenz("0---", "1111")[0], "unbeurteilbar")
+        self.assertEqual(self.o.persistenz("0010", "0010")[0], "unbeurteilbar")
+
+    def test_the_expectation_comes_from_the_frequency_model_not_a_copy(self):
+        """Eine zweite Mustertabelle neben der aus #34 wäre die nächste, die
+        auseinanderläuft — dieselbe Fehlerklasse wie #88. Deshalb wird
+        invertiert, nicht abgeschrieben."""
+        muster, stichtage = self.o._erwartungsmuster()
+        import build_disclosure_frequency as f
+        self.assertEqual(stichtage, f.STICHTAGE)
+        for m, frequenz in f.MUSTER.items():
+            self.assertEqual(muster[frequenz], m)
+        self.assertEqual(len(muster), len(f.MUSTER),
+                         "zwei Frequenzen auf dasselbe Muster — die Umkehrung "
+                         "verliert eine davon")
+
+    def test_the_position_string_keeps_the_three_states(self):
+        belegung = {"2025-06-30": True, "2025-12-31": False}
+        self.assertEqual(
+            self.o.lage_von(belegung, ("2025-06-30", "2025-09-30",
+                                       "2025-12-31", "2026-03-31")),
+            "1-0-")
+
+    def test_a_missing_frequency_model_yields_nothing_not_a_guess(self):
+        """Fehlt das Modell, bleibt die Auswertung leer. Mit einer
+        Standardfrequenz weiterzulaufen wäre schlimmer: dann stünde eine
+        Erwartung in der Ausgabe, die niemand gemessen hat."""
+        self.assertEqual(self.o.lade_frequenzmodell(ROOT / "gibt-es-nicht.csv"), {})
+        self.assertEqual(self.o.zeitreihe([], {}, modell={}), ([], collections.Counter()))
+
+
+class PersistenzErgebnisTest(unittest.TestCase):
+    """Am gebauten Artefakt."""
+
+    def setUp(self):
+        self.rows = lies(OUT_ZEIT)
+        if not self.rows:
+            self.skipTest("omission_persistence.csv nicht gebaut")
+
+    def test_all_three_verdicts_occur(self):
+        """Gegenprobe gegen eine Auswertung, die nur eine Klasse kennt: fände
+        sie nirgends `wechselnd`, wäre „keine Ermessensausübung" kein Ergebnis,
+        sondern ein Symptom."""
+        u = collections.Counter(r["urteil"] for r in self.rows)
+        for k in ("kalendertreu", "dauerhaft", "wechselnd"):
+            with self.subTest(urteil=k):
+                self.assertGreater(u[k], 50)
+
+    def test_no_row_is_unassessable(self):
+        """Zeilen ohne Zeitaussage gehören nicht in die Datei — sie hätten dort
+        ein Urteil, das die Daten nicht hergeben."""
+        self.assertNotIn("unbeurteilbar", {r["urteil"] for r in self.rows})
+
+    def test_every_row_has_at_least_two_expected_dates(self):
+        for r in self.rows:
+            with self.subTest(bank=r["bank_name"], tpl=r["template_id"]):
+                self.assertGreaterEqual(int(r["n_erwartet"]), 2)
+
+    def test_the_verdict_follows_from_the_two_counts(self):
+        """Das Urteil darf nicht neben den Zahlen stehen, aus denen es folgt."""
+        for r in self.rows:
+            n, off = int(r["n_erwartet"]), int(r["n_offengelegt"])
+            soll = ("kalendertreu" if off == n else
+                    "dauerhaft" if off == 0 else "wechselnd")
+            with self.subTest(bank=r["bank_name"], tpl=r["template_id"]):
+                self.assertEqual(r["urteil"], soll)
+
+    def test_a_shared_signature_is_not_an_individual_case(self):
+        """Die fünfte Falle. 36 Institute zeigen bei `91.00` dieselbe Lage
+        `0-1-`; als 36 Einzelfälle gezählt wäre das die Spitze jeder Rangliste
+        über Ermessensausübung — und wäre der Meldekalender."""
+        for r in self.rows:
+            if r["urteil"] != "wechselnd":
+                continue
+            with self.subTest(bank=r["bank_name"], tpl=r["template_id"]):
+                if int(r["n_signatur_geteilt"]) >= 2:
+                    self.assertEqual(r["einzelfall"], "nein")
+
+    def test_a_thin_frequency_estimate_is_not_an_individual_case(self):
+        """Die zweite Bedingung, und sie ist unabhängig von der ersten: eine
+        Erwartung aus 9 Instituten trägt kein Urteil über ein einzelnes."""
+        import build_omission_profile as o
+        for r in self.rows:
+            if r["urteil"] != "wechselnd" or r["einzelfall"] != "ja":
+                continue
+            with self.subTest(bank=r["bank_name"], tpl=r["template_id"]):
+                self.assertGreaterEqual(int(r["frequenz_n_institute"]),
+                                        o.MIN_MODELL_INSTITUTE)
+
+    def test_the_shared_signatures_really_dominate(self):
+        """Ohne diese Zahl wäre der Filter Dekoration. Er muss den Grossteil
+        der Fälle nehmen — sonst hätte es ihn nicht gebraucht, und die 523
+        wären die richtige Zahl gewesen."""
+        wech = [r for r in self.rows if r["urteil"] == "wechselnd"]
+        einzel = [r for r in wech if r["einzelfall"] == "ja"]
+        self.assertGreater(len(wech), 300)
+        self.assertLess(len(einzel), len(wech) * 0.3)
+        self.assertGreater(len(einzel), 20,
+                           "der Filter nimmt ALLES — dann misst er nicht mehr")
+
+    def test_only_switching_rows_are_marked_at_all(self):
+        """`einzelfall` ist eine Aussage über eine wechselnde Auslassung. An
+        einer kalendertreuen Zeile wäre sie sinnlos und würde beim Filtern
+        mitgezählt."""
+        for r in self.rows:
+            if r["urteil"] != "wechselnd":
+                with self.subTest(urteil=r["urteil"]):
+                    self.assertEqual(r["einzelfall"], "")
+
+    def test_the_order_is_stable(self):
+        k = [(r["lei"], r["scope"], r["template_id"]) for r in self.rows]
+        self.assertEqual(k, sorted(k))
 
 
 if __name__ == "__main__":
