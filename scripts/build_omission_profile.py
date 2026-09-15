@@ -1,7 +1,8 @@
 """Ermessensausübung nach CRR Art. 432 messen (#43).
 
-Ausgabe: processed/omission_profile.csv   (je Report)
-         processed/omission_templates.csv (je Template × Klasse × Stichtag)
+Ausgabe: processed/omission_profile.csv     (je Report)
+         processed/omission_templates.csv   (je Template × Klasse × Stichtag)
+         processed/omission_persistence.csv (je Institut × Template über die Zeit)
 
 ## Die Frage
 
@@ -83,6 +84,60 @@ Die Angaben nach Art. 437 (Eigenmittel: CC1 `66.01`, CC2 `66.02`) und Art. 450
 ausdrücklich AUSGENOMMEN. Eine Auslassung dort kann sich nicht auf
 Vertraulichkeit stützen und steht deshalb in einer eigenen Spalte.
 
+## Punkt 4: dauerhaft oder wechselnd? (`omission_persistence.csv`)
+
+Die Frage des Issues lautet „ist eine Auslassung dauerhaft oder wechselt sie?",
+und sie ist nicht kosmetisch — sie trennt die beiden Ursachen, die der
+Filing-Indicator nicht unterscheidet:
+
+    Nichtanwendbarkeit ist DAUERHAFT.  Wer kein Handelsbuch hat, hat auch im
+                                       nächsten Quartal keines.
+    Ermessen kann WECHSELN.            Wer ein Template einmal offenlegt, dem
+                                       ist es anwendbar — die spätere
+                                       Auslassung kann keine Nichtanwendbarkeit
+                                       sein.
+
+Das ist die schärfste Aussage, die diese Daten tragen, und sie braucht kein
+Modell: sie steht in der Historie des Instituts selbst.
+
+Der Kalender aus #34 kommt erst danach ins Spiel, und zwar als Filter. Ein
+Template, das halbjährlich gemeldet wird, „fehlt" zwischen den Quartalen aus
+reiner Meldelogik. Gemessen wird deshalb nur an Stichtagen, an denen die
+Frequenzklasse des Instituts Offenlegung ERWARTET — `_erwartungsmuster()`
+invertiert dafür die Mustertabelle aus `build_disclosure_frequency.py`, statt
+sie hier ein zweites Mal hinzuschreiben.
+
+    38.907  (Institut, Template)-Paare
+    28.727  ohne Kalendermodell        das Modell deckt 184 Koordinaten ab
+     6.841  < 2 erwartete Stichtage    kein Zeitvergleich möglich
+     2.381  kalendertreu
+       435  dauerhaft ausgelassen      Nichtanwendbarkeit nicht ausschliessbar
+       523  WECHSELND                  <- der Befund
+
+### Und warum 523 die falsche Zahl zum Zitieren ist
+
+Die häufigste Lage unter den 523 ist `0-1-` — am 30.06. ausgelassen, am 31.12.
+offengelegt, dazwischen gar nicht gemeldet. Sie tritt bei **36 Instituten
+gleichzeitig** auf (Template `91.00`), bei `66.02` und `67.01` je 23-mal. Eine
+Entscheidung, die 36 Häuser gleichzeitig treffen, ist keine individuelle
+Ermessensausübung.
+
+Die Ursache ist im Frequenzmodell selbst zu finden, und sie ist eine echte
+Grenze von #34: **das Modell schätzt an Instituten mit ALLEN VIER Stichtagen
+und wird hier auf Institute mit zweien angewandt.** Wer nur 30.06. und 31.12.
+meldet, war an der Schätzung nie beteiligt. Für `91.00` kommt hinzu, dass die
+Schätzung auf 9 Instituten ruht, während das Template über die Population ganz
+anders aussieht — 21 % Offenlegung am 30.06. gegen 72 % am 31.12., also eher
+jährlich als halbjährlich.
+
+Deshalb trägt jede Zeile `n_signatur_geteilt` (wie viele andere Institute
+dieselbe Lage in demselben Template zeigen) und `frequenz_n_institute` (worauf
+die Erwartung beruht). Nach beiden Filtern bleiben **94 individuell
+zuschreibbare Fälle**. Das ist die Zahl, die etwas über einzelne Institute sagt.
+
+Auch sie ist eine OBERGRENZE, aus demselben Grund wie `n_gegen_erwartung`: der
+Filing-Indicator sagt nicht, warum etwas fehlt.
+
 Aufruf: python3 scripts/build_omission_profile.py
 """
 
@@ -138,6 +193,37 @@ SIGNATUR_HAEUFIG = 3
 
 FELDER_TPL = ["institution_type", "refPeriod", "template_id", "template_title",
               "n_peer", "n_offengelegt", "quote_peer", "band", "art_432_2"]
+
+# --- Punkt 4: Zeitdimension ------------------------------------------------
+FREQUENZ = ROOT / "processed" / "disclosure_frequency.csv"
+OUT_ZEIT = ROOT / "processed" / "omission_persistence.csv"
+
+# Die Erwartung je Frequenzklasse ist die UMKEHRUNG der Mustertabelle aus #34.
+# Hergeleitet statt abgeschrieben: zwei Tabellen an zwei Orten, von denen eine
+# still abweicht, ist die Fehlerklasse aus #88 — und sie hat dieses Projekt
+# schon mehrfach getroffen.
+def _erwartungsmuster():
+    import build_disclosure_frequency as f
+    return {frequenz: muster for muster, frequenz in f.MUSTER.items()}, f.STICHTAGE
+
+
+# Ab wie vielen Instituten mit derselben Lage im selben Template die Aussage
+# nicht mehr über ein Institut geht. Dieselbe Schranke und dieselbe Begründung
+# wie SIGNATUR_HAEUFIG oben: 36 Häuser treffen keine gemeinsame Einzelfall-
+# entscheidung.
+SIGNATUR_GRENZE = 3
+
+# Worauf die Kalendererwartung mindestens beruhen muss. `build_disclosure_
+# frequency.py` lässt eine Koordinate ab 5 Instituten zu — für ein Modell, das
+# die Frequenz BESCHREIBT, ist das richtig; um damit ein einzelnes Institut zu
+# beurteilen, ist es zu dünn. `91.00` ruht auf 9 Instituten und liefert 36 der
+# 523 Fälle.
+MIN_MODELL_INSTITUTE = 20
+
+FELDER_ZEIT = ["lei", "scope", "bank_name", "country", "institution_type",
+               "template_id", "template_title", "frequenz", "frequenz_n_institute",
+               "frequenz_eindeutig", "lage", "erwartung", "n_erwartet",
+               "n_offengelegt", "urteil", "n_signatur_geteilt", "einzelfall"]
 
 
 def lade_gelieferte(con):
@@ -199,6 +285,52 @@ def band_von(quote):
     if quote < UNTYPISCH:
         return "untypisch"
     return "uneinheitlich"
+
+
+def persistenz(lage, erwartung):
+    """Wie verhält sich eine Auslassung über die Zeit? -> (urteil, n_erwartet, n_offen)
+
+    `lage` und `erwartung` sind gleich lange Zeichenketten über die Stichtage:
+
+        lage        '1' offengelegt · '0' ausgelassen · '-' Report nicht gemeldet
+        erwartung   '1' die Frequenzklasse legt hier offen · '0' nicht
+
+    Gezählt wird ausschliesslich an Stichtagen, die BEIDES sind: vom Institut
+    gemeldet UND von seiner Frequenzklasse erwartet. Alles andere trüge keine
+    Aussage — ein nicht gemeldeter Stichtag sagt nichts über ein Template, und
+    ein Stichtag ausserhalb der Frequenz ist Meldelogik, kein Verhalten.
+
+    Vier Urteile:
+
+        unbeurteilbar  weniger als zwei solche Stichtage — ohne Vergleich gibt
+                       es keine Zeitaussage. Das ist KEIN „unauffällig".
+        kalendertreu   an allen offengelegt
+        dauerhaft      an keinem offengelegt. Nichtanwendbarkeit bleibt
+                       möglich, das Urteil sagt darüber nichts.
+        wechselnd      an manchen ja, an manchen nein. **Nur hier ist
+                       Nichtanwendbarkeit ausgeschlossen** — was einmal
+                       offengelegt wurde, war anwendbar.
+
+    Die Reihenfolge ist wichtig: wer `unbeurteilbar` nicht zuerst prüft, zählt
+    ein Institut mit einem einzigen erwarteten Stichtag als `dauerhaft` oder
+    `kalendertreu` und behauptet damit eine Entwicklung, die nie beobachtet
+    wurde.
+    """
+    treffer = [l for l, e in zip(lage, erwartung) if e == "1" and l in "01"]
+    offen = sum(1 for l in treffer if l == "1")
+    if len(treffer) < 2:
+        return "unbeurteilbar", len(treffer), offen
+    if offen == len(treffer):
+        return "kalendertreu", len(treffer), offen
+    if offen == 0:
+        return "dauerhaft", len(treffer), offen
+    return "wechselnd", len(treffer), offen
+
+
+def lage_von(belegung, stichtage):
+    """{Stichtag: bool} -> '1'/'0'/'-' je Stichtag, in fester Reihenfolge."""
+    return "".join("1" if belegung.get(s) else ("0" if s in belegung else "-")
+                   for s in stichtage)
 
 
 def lade(con):
@@ -381,11 +513,129 @@ def build():
         w.writeheader()
         w.writerows(tpl)
 
+    zeit, verworfen = zeitreihe(zeilen, titel)
+    with OUT_ZEIT.open("w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, FELDER_ZEIT)
+        w.writeheader()
+        w.writerows(zeit)
+
     print(f"✓ {OUT}  ({len(aus)} Reports)")
     print(f"✓ {OUT_TPL}  ({len(tpl)} Koordinaten)")
+    print(f"✓ {OUT_ZEIT}  ({len(zeit)} beurteilbare Institut/Template-Paare)")
     for s in bericht(aus, tpl):
         print("  " + s)
-    return aus, tpl
+    for s in bericht_zeit(zeit, verworfen):
+        print("  " + s)
+    return aus, tpl, zeit
+
+
+def lade_frequenzmodell(pfad=None):
+    """{(institution_type, template_id): Zeile} aus #34.
+
+    Fehlt die Datei, bleibt die Zeitauswertung leer — und sagt das. Sie mit
+    einer Standardfrequenz weiterlaufen zu lassen wäre schlimmer als sie
+    wegzulassen: dann stünde eine Erwartung in der Ausgabe, die niemand
+    gemessen hat.
+    """
+    pfad = Path(pfad or FREQUENZ)
+    if not pfad.exists():
+        return {}
+    with pfad.open(encoding="utf-8") as fh:
+        return {(r["institution_type"], r["template_id"]): r
+                for r in csv.DictReader(fh)}
+
+
+def zeitreihe(zeilen, titel, modell=None):
+    """Punkt 4 des Issues: ist eine Auslassung dauerhaft oder wechselt sie?
+
+    Eine Zeile je (Institut, Konsolidierungskreis, Template) mit mindestens
+    zwei erwarteten Stichtagen. Paare ohne Kalendermodell oder mit weniger als
+    zwei erwarteten Stichtagen stehen NICHT in der Ausgabe — sie hätten dort
+    ein Urteil, das die Daten nicht hergeben; der Bericht zählt sie stattdessen.
+    """
+    modell = lade_frequenzmodell() if modell is None else modell
+    verworfen = collections.Counter()
+    if not modell:
+        return [], verworfen
+    erwartungsmuster, stichtage = _erwartungsmuster()
+
+    belegung = collections.defaultdict(dict)
+    kopf = {}
+    for z in zeilen:
+        if z["refPeriod"] not in stichtage:
+            continue
+        k = (z["lei"], z["scope"], z["template_id"])
+        belegung[k][z["refPeriod"]] = z["reported"]
+        kopf.setdefault(k, z)
+
+    aus = []
+    for k in sorted(belegung):
+        z = kopf[k]
+        m = modell.get((z["institution_type"], z["template_id"]))
+        erwartung = erwartungsmuster.get(m["frequenz"]) if m else None
+        if erwartung is None:
+            verworfen["ohne Kalendermodell"] += 1
+            continue
+        lage = lage_von(belegung[k], stichtage)
+        urteil, n_erw, n_off = persistenz(lage, erwartung)
+        if urteil == "unbeurteilbar":
+            verworfen["< 2 erwartete Stichtage"] += 1
+            continue
+        aus.append({
+            "lei": z["lei"], "scope": z["scope"], "bank_name": z["bank_name"],
+            "country": z["country"], "institution_type": z["institution_type"],
+            "template_id": z["template_id"],
+            "template_title": titel.get(z["template_id"], ""),
+            "frequenz": m["frequenz"], "frequenz_n_institute": m["n_institute"],
+            "frequenz_eindeutig": m["eindeutig"], "lage": lage,
+            "erwartung": erwartung, "n_erwartet": n_erw, "n_offengelegt": n_off,
+            "urteil": urteil, "n_signatur_geteilt": 0, "einzelfall": "",
+        })
+
+    # Die Signatur — und sie entscheidet, ob eine Zeile über ein Institut oder
+    # über eine Population spricht. 36 Institute zeigen bei `91.00` dieselbe
+    # Lage `0-1-`; das ist keine Ermessensausübung, das ist der Meldekalender,
+    # den das Modell für dieses Template falsch trifft.
+    haeufig = collections.Counter((a["template_id"], a["lage"]) for a in aus
+                                  if a["urteil"] == "wechselnd")
+    for a in aus:
+        if a["urteil"] != "wechselnd":
+            continue
+        n = haeufig[(a["template_id"], a["lage"])] - 1
+        a["n_signatur_geteilt"] = n
+        a["einzelfall"] = "ja" if (n < SIGNATUR_GRENZE - 1 and
+                                   int(a["frequenz_n_institute"]) >= MIN_MODELL_INSTITUTE) else "nein"
+    return aus, verworfen
+
+
+def bericht_zeit(zeit, verworfen=None):
+    if not zeit:
+        return ["Zeitdimension (#43 Punkt 4): kein Frequenzmodell — "
+                "erst scripts/build_disclosure_frequency.py"]
+    v = verworfen or collections.Counter()
+    u = collections.Counter(a["urteil"] for a in zeit)
+    aus = ["", "Zeitdimension (#43 Punkt 4) — dauerhaft oder wechselnd:"]
+    for k in ("ohne Kalendermodell", "< 2 erwartete Stichtage"):
+        aus.append(f"  nicht beurteilbar, {k:24s} {v[k]:6,d}")
+    for k in ("kalendertreu", "dauerhaft", "wechselnd"):
+        aus.append(f"  {k:41s} {u[k]:6,d}")
+    aus.append("  `dauerhaft` schliesst Nichtanwendbarkeit NICHT aus; "
+               "`wechselnd` schon — was einmal offengelegt wurde, war anwendbar.")
+
+    wech = [a for a in zeit if a["urteil"] == "wechselnd"]
+    einzel = [a for a in wech if a["einzelfall"] == "ja"]
+    aus.append(f"  davon individuell zuschreibbar (Signatur < {SIGNATUR_GRENZE} Institute "
+               f"und Frequenz aus >= {MIN_MODELL_INSTITUTE}): {len(einzel)}")
+    geteilt = collections.Counter((a["template_id"], a["lage"]) for a in wech)
+    aus.append("  häufigste geteilte Lage — Population, nicht Einzelfall:")
+    for (t, l), n in geteilt.most_common(3):
+        aus.append(f"    {t:8s} Lage {l}  bei {n} Instituten")
+    if einzel:
+        aus.append("  Beispiele für Einzelfälle:")
+        for a in sorted(einzel, key=lambda a: (-a["n_erwartet"], a["bank_name"]))[:5]:
+            aus.append(f"    {a['bank_name'][:30]:32s} {a['template_id']:8s} "
+                       f"{a['frequenz']:16s} ist={a['lage']} soll={a['erwartung']}")
+    return aus
 
 
 def bericht(aus, tpl):

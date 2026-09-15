@@ -21,6 +21,7 @@ inzwischen gebaut — und drei Issues sind damit ganz erledigt.
 |---|---|---|
 | #83 | „`build_footprint.py` liest `scale_flags.csv` nicht — der billigste nächste Schritt im ganzen Backlog" | ✅ PR #90 |
 | #34 | „Der Hebel mit der breitesten Wirkung … es fehlt die Ableitung als eigenes Artefakt" | ✅ PR #90, Punkt 1 von 2 |
+| #43 | Punkt 4 — Zeitdimension, hing an #34 | ✅ PR #93 |
 | #32 · #42 | „zwei Konzerngraphen, die nie gegeneinander geprüft wurden" | ✅ PR #90 |
 | #45 | Punkt 3 — IRB-Risikogewichte je PD-Band | ✅ PR #89 |
 | #41 | Machbarkeitsprüfung mit eigener Abbruchschwelle | ✅ PR #89 — **Issue geschlossen** |
@@ -100,9 +101,21 @@ hat** (207 von 474). Für die übrigen bleibt die allgemeine Erkennung offen.
 `processed/omission_profile.csv` und `omission_templates.csv`. Punkte 1–3 des
 Issues erledigt.
 
-**Offen: Punkt 4** (Zeitdimension) — aber **nicht mehr blockiert**: er hing an
-#34, und `processed/disclosure_frequency.csv` liegt seit PR #90 vor. Das ist
-damit der billigste offene Schritt im Backlog. Und der Ländervergleich aus
+**Punkt 4 (Zeitdimension) ist geliefert** *(PR #93)*:
+`processed/omission_persistence.csv`, 3.339 beurteilbare (Institut,
+Template)-Paare. Die Aussage, die erst der Zeitvergleich trägt:
+**Nichtanwendbarkeit ist dauerhaft, Ermessen kann wechseln** — wer ein Template
+einmal offenlegt, dem ist es anwendbar. 523 Paare wechseln, davon 94 individuell
+zuschreibbar; der Rest teilt seine Lage mit bis zu 36 anderen Instituten und ist
+damit Meldekalender, nicht Ermessen.
+
+Dabei ist eine Grenze von #34 sichtbar geworden, die dort nicht stand: **das
+Frequenzmodell schätzt an Instituten mit allen vier Stichtagen und wird auf
+Institute mit zweien angewandt.** Wer nur 30.06. und 31.12. meldet, war an der
+Schätzung nie beteiligt — und erzeugt dann die Lage `0-1-`, die 36-mal
+gleichzeitig auftritt.
+
+Und der Ländervergleich aus
 Punkt 3 trägt nicht: die Mediane liegen in fast allen 24 Ländern bei 0,000, die
 Spitze (Belgien, Rumänien) bei 0,042. Das ist Rauschen an der Nachkommastelle,
 kein Aufsichtsraum-Effekt.

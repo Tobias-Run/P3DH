@@ -137,6 +137,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/scale_flags.csv` | Report bzw. Template → Skalenurteil, Signale, geschätzter Faktor | abgeleitet aus dem Bestand |
 | `processed/omission_profile.csv` | Report → was wird weggelassen, gemessen an den direkten Peers | `filing_indicators.csv` |
 | `processed/omission_templates.csv` | Klasse × Stichtag × Template → Offenlegungsquote der Peer-Gruppe | ebenda |
+| `processed/omission_persistence.csv` | Institut × Template → ist die Auslassung dauerhaft oder wechselt sie? | ebenda + `disclosure_frequency.csv` |
 | `processed/irb_risk_weights.csv` | Institut × Forderungsklasse × PD-Band → Risikogewicht, PD, LGD | CR6 `26.00.A` |
 | `processed/footprint.csv` | Institut → Länderstreuung des Exposures, Domestizitätsquote, HHI | CCyB1 `67.01.A` |
 | `processed/disclosure_frequency.csv` | Klasse × Template → gemessene Offenlegungsfrequenz | `filing_indicators.csv` |
@@ -628,6 +629,53 @@ Auslassungen, `n_art432_2` führt sie getrennt.
 ⚠️ **Auslassung ist kein Fehlverhalten.** Art. 432 ist eine ausdrückliche
 Erlaubnis. Die Zahl sagt „hier weicht ein Institut von seinen Peers ab", nicht
 „hier wird etwas verschwiegen".
+
+### `omission_persistence.csv` — dauerhaft oder wechselnd?
+
+Die Zeitdimension derselben Frage, und sie trennt die beiden Ursachen, die der
+Filing-Indicator nicht unterscheidet:
+
+> **Nichtanwendbarkeit ist dauerhaft. Ermessen kann wechseln.**
+> Wer kein Handelsbuch hat, hat auch im nächsten Quartal keines. Wer ein
+> Template einmal offenlegt, dem *ist* es anwendbar — eine spätere Auslassung
+> kann dann keine Nichtanwendbarkeit mehr sein.
+
+Eine Zeile je (Institut, Konsolidierungskreis, Template). Gemessen wird
+ausschließlich an Stichtagen, die **beides** sind: vom Institut gemeldet und von
+seiner Frequenzklasse (`disclosure_frequency.csv`) erwartet. Ein halbjährliches
+Template „fehlt" zwischen den Quartalen aus reiner Meldelogik; wer das mitzählt,
+misst wieder den Meldekalender.
+
+| | Paare | |
+|---|---:|---|
+| ohne Kalendermodell | 28.727 | das Frequenzmodell deckt 184 Koordinaten ab |
+| < 2 erwartete Stichtage | 6.841 | kein Zeitvergleich möglich |
+| `kalendertreu` | 2.381 | an allen erwarteten Stichtagen offengelegt |
+| `dauerhaft` | 435 | an keinem — Nichtanwendbarkeit **nicht** ausschließbar |
+| `wechselnd` | 523 | an manchen — Nichtanwendbarkeit **ausgeschlossen** |
+
+#### Warum 523 die falsche Zahl zum Zitieren ist
+
+Die häufigste „wechselnde" Lage ist `0-1-` — am 30.06. ausgelassen, am 31.12.
+offengelegt, dazwischen gar nicht gemeldet. Sie tritt bei **36 Instituten
+gleichzeitig** auf (Template `91.00`), bei `66.02` und `67.01` je 23-mal. Eine
+Entscheidung, die 36 Häuser gleichzeitig treffen, ist kein Ermessen.
+
+Die Ursache ist eine echte Grenze des Frequenzmodells: **es schätzt an
+Instituten mit allen vier Stichtagen und wird hier auf Institute mit zweien
+angewandt.** Wer nur 30.06. und 31.12. meldet, war an der Schätzung nie
+beteiligt. Bei `91.00` kommt hinzu, dass sie auf 9 Instituten ruht, während das
+Template über die Population eher jährlich aussieht — 21 % Offenlegung am
+30.06. gegen 72 % am 31.12.
+
+Deshalb trägt jede Zeile `n_signatur_geteilt` (wie viele andere Institute
+dieselbe Lage im selben Template zeigen) und `frequenz_n_institute` (worauf die
+Erwartung beruht). `einzelfall = ja` verlangt beides: Signatur bei weniger als
+drei Instituten **und** eine Frequenz aus mindestens 20. Es bleiben **94
+individuell zuschreibbare Fälle** — das ist die Zahl, die etwas über einzelne
+Institute sagt.
+
+Auch sie ist eine **Obergrenze**, aus demselben Grund wie `n_gegen_erwartung`.
 
 ### `irb_risk_weights.csv` — Risikogewichte je PD-Band
 
