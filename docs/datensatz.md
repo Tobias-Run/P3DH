@@ -953,6 +953,48 @@ gar nicht finden — sie sieht nur nach oben, ein Skalenfehler zeigt nach unten
 (Abschnitt `scale_flags.csv`). Wer allein aus einem leeren Befundprofil auf einen
 sauberen Report schließt, liegt bei 50 von 100 markierten Reports falsch.
 
+#### Der Zeitvergleich als dritte Aussage (#36)
+
+`plausibility_findings.csv` führt seit #36 zwei weitere Regeln, erkennbar an
+der Spalte `rule`:
+
+| `rule` | Maßstab | Referenz in `reference` |
+|---|---|---|
+| `cell_outlier` | die Zellpopulation aller Institute | Median der Zelle |
+| `rem_per_head` | ein fachlicher Korridor | Mitte des Korridors |
+| `time_jump` | **das Institut selbst, ein Stichtag vorher** | der eigene Wert am Nachbarstichtag |
+| `time_break` | dasselbe, aber über den ganzen Report | Median aller Sprünge |
+
+Der Zeitvergleich braucht keine Peer-Gruppe, keine Größenklasse und keine
+Währungsannahme — das Institut ist sein eigener Maßstab. Er ist deshalb auch
+der einzige, der einen Skalenfehler **von unten** sehen kann.
+
+Drei Eigenschaften, ohne die die Spalten falsch gelesen werden:
+
+- **Ein Zeitbefund steht an BEIDEN Reports des Paares.** Welcher der zwei
+  falsch liegt, sagt die Prüfung nicht — und die naheliegende Wahl wäre die
+  falsche: bei der Deutschen Pfandbriefbank ist der *frühere* Report der
+  skalierte, der spätere sauber. `vergleich_refPeriod` nennt jeweils den
+  anderen Stichtag.
+- **`time_break` ist eine Aussage über den Report, nicht über eine Zelle** und
+  trägt deshalb kein Template. Er greift ab 5 % springender Zellen (p95 der
+  beobachteten Verteilung); 21 Report-Paare erreichen ihn und tragen zusammen
+  77 % aller Zellsprünge. `hinweis` führt Anteil und Median mit: liegt der
+  Median bei ~3 oder ~6 Größenordnungen, war es ein Faktorwechsel, sonst eher
+  ein echter Strukturbruch (Verkauf, Entkonsolidierung, Fusion).
+- **Ein Sprung ist nicht per se ein Meldefehler.** Der Befund lautet
+  „unerklärter Sprung".
+
+Die Gegenprobe: 8 der 21 Report-Paare mit Strukturbruch enthalten einen Report,
+den `scale_flags.csv` unabhängig als `skaliert` führt — darunter fünf der sechs
+am höchsten konzentrierten. Zwei Verfahren ohne gemeinsame Evidenz zeigen auf
+dieselben Reports.
+
+`findings_per_1000` rechnet seit #36 gegen **beide** Arten von Gelegenheit:
+prüfbare Fakten (`n_facts_checked`) plus vergleichbare Zeitpaare
+(`n_zeitpaare`). Ein Institut mit vier Stichtagen wurde häufiger geprüft als
+eines mit einem.
+
 ## Reproduktion
 
 ```bash

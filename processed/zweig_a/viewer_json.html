@@ -445,11 +445,22 @@ const flagAt=(rep,tid,row,col)=>{
   const m=(rep.flags||{})[tid]; return m?(m[row+'|'+col]||null):null; };
 const SEVW={h:'deutlich', m:'auffällig', n:'leicht erhöht'};
 function flagTip(tid,f){
-  const [sev,dev,ref,n]=f;
+  const [sev,dev,ref,n,vgl]=f;
   // Neutral formulieren: „liegt N Groessenordnungen ueber dem Vergleichswert",
   // nicht „falsch". Ein Meldefehler ist eine Hypothese, kein Befund.
-  let t='Gegen die Population '+(SEVW[sev]||'auffällig')+': rund '+nf(dev,1)
-    +' Größenordnungen vom Vergleichswert '+nf(ref,0,4)+' entfernt';
+  //
+  // Zwei Arten von Befund, zwei Begruendungen (#36). Der Vergleichswert
+  // bedeutet bei beiden etwas anderes: einmal der Median der Zellpopulation,
+  // einmal der EIGENE Wert desselben Instituts am Nachbarstichtag. Beide
+  // „gegen die Population" zu nennen waere eine Aussage ueber Daten, die den
+  // Zeitbefund nie gesehen haben.
+  let t = vgl
+    ? 'Gegen den eigenen Wert vom '+vgl+' '+(SEVW[sev]||'auffällig')+': rund '
+      +nf(dev,1)+' Größenordnungen von '+nf(ref,0,4)+' entfernt. Ein Sprung kann '
+      +'eine korrekte Änderung sein: Portfolioverkauf, Entkonsolidierung oder '
+      +'Fusion erklären ihn ebenso'
+    : 'Gegen die Population '+(SEVW[sev]||'auffällig')+': rund '+nf(dev,1)
+      +' Größenordnungen vom Vergleichswert '+nf(ref,0,4)+' entfernt';
   if(n>1) t+=' ('+n+' Befunde auf dieser Koordinate, stärkster gezeigt)';
   // In den Sperrlisten-Templates ist die EINHEIT strittig (#9). Dort kann eine
   // Abweichung um Groessenordnungen schlicht Tausend gegen Eins heissen — das
@@ -1333,7 +1344,7 @@ function renderOverview(rep){
      ein Skalenfehler nach UNTEN zeigt und der Ausreissertest nur nach oben sieht. */
   if(q && q.sc) h+=scaleNote(q.sc);
   if(q && q.n)
-    h+=`<div class="ovq" title="Werte, die ausserhalb der Verteilung ihrer Zellpopulation liegen. Das kann eine korrekte Besonderheit sein.">△ Plausibilitätsprüfung: <b>${q.n}</b> Befund(e) in ${q.t?q.t.length:0} Template(s), größte Abweichung ${esc(q.d)} Größenordnungen${q.t&&q.t.length?` <span class="cl">· ${esc(q.t.slice(0,10).join(', '))}${q.t.length>10?' …':''}</span>`:''}</div>`;
+    h+=`<div class="ovq" title="Werte, ${befundHerkunft(q)}. Das kann eine korrekte Besonderheit sein.">△ Plausibilitätsprüfung: <b>${q.n}</b> Befund(e) in ${q.t?q.t.length:0} Template(s)${q.z?`, davon <b>${q.z}</b> aus dem Zeitvergleich gegen den Nachbarstichtag`:''}, größte Abweichung ${esc(q.d)} Größenordnungen${q.t&&q.t.length?` <span class="cl">· ${esc(q.t.slice(0,10).join(', '))}${q.t.length>10?' …':''}</span>`:''}</div>`;
   if(!h){ host.innerHTML=''; return; }
   const note=pm?'Balken = Perzentil der Peer-Gruppe (gleiche Größenklasse, Konsolidierung, Stichtag; ab 5 Reports)':'Peer-Einordnung wird geladen…';
   host.innerHTML=`<section><h3>Überblick <span class="scalenote">${esc(note)}</span></h3>${h}</section>`;
@@ -1890,14 +1901,27 @@ function scaleBadge(q, tpl){
    hoch-Befund. Vorher war jeder Befund gleich stark markiert, weil der
    Schweregrad die Unterscheidung nicht trug. */
 const flaggedHigh=(q,tpl)=>!!(q && q.th && q.th.includes(tpl));
+/* Woher die Befunde eines Reports stammen (#36). Seit dem Zeitvergleich gibt
+   es zwei Quellen mit verschiedener Begruendung, und die Marke darf nicht die
+   eine nennen, wenn die andere zutrifft: ein Report, dessen Befunde
+   AUSSCHLIESSLICH Zeitspruenge sind, hat mit der Verteilung seiner
+   Zellpopulationen nichts zu tun. */
+function befundHerkunft(q){
+  const z=q&&q.z||0, n=q&&q.n||0;
+  if(!z) return 'die ausserhalb der Verteilung ihrer Zellpopulation liegen';
+  if(z>=n) return 'die gegenüber demselben Report am Nachbarstichtag um '
+                + 'Größenordnungen springen';
+  return 'die ausserhalb der Verteilung ihrer Zellpopulation liegen oder '
+       + 'gegenüber dem Nachbarstichtag springen';
+}
 function qualityBadge(q, tpl){
   if(!flaggedFor(q,tpl)) return '';
   const hi=flaggedHigh(q,tpl);
   return `<span class="qb" title="Die Plausibilitätsprüfung hat in Template ${tpl} dieses Reports `
-       + `Werte gefunden, die ausserhalb der Verteilung ihrer Zellpopulation liegen`
-       + (hi ? `, davon mindestens einen weit ausserhalb — mehr als fünf Rumpfbreiten `
-             + `der Zelle über deren Median` : '')
-       + ` (${q.n} Befund(e) im Report, größte Abweichung ${q.d} Größenordnungen). `
+       + `Werte gefunden, ${befundHerkunft(q)}`
+       + (hi ? `, davon mindestens einen weit ausserhalb` : '')
+       + ` (${q.n} Befund(e) im Report${q.z?`, davon ${q.z} aus dem Zeitvergleich`:''}, `
+       + `größte Abweichung ${q.d} Größenordnungen). `
        + `Das kann eine korrekte Besonderheit sein.">${hi?'△△ stark auffällig':'△ auffällig'}</span>`;
 }
 /* Ausschluss ausweisen, nicht still filtern (#18). Wer aus der Liste faellt,

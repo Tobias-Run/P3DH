@@ -68,7 +68,7 @@ Zweig-A-Artefakte brauchen — bekannt und erfasst als
 Diese Schritte brechen bewusst **nicht** ab: ihre Befunde betreffen die
 Einreichungen, nicht unsere Pipeline.
 
-- **Plausibilität** ([#17](https://github.com/Tobias-Run/P3DH/issues/17)): 5.957 Befunde in 326 von 882 Reports (2.868 hoch · 2.204 mittel · 885 niedrig)
+- **Plausibilität** ([#17](https://github.com/Tobias-Run/P3DH/issues/17), [#36](https://github.com/Tobias-Run/P3DH/issues/36)): 10.942 Befunde in 474 von 882 Reports (3.867 hoch · 6.235 mittel · 840 niedrig) aus vier Regelfamilien — 5.816 Zellausreißer, 214 Vergütungskorridor, 4.870 Zeitsprünge, 42 Strukturbrüche. Der Zeitvergleich misst das Institut an sich selbst und braucht dafür weder Peers noch Währungsannahme; 8 der 21 Report-Paare mit Strukturbruch treffen unabhängig einen `skaliert`-Befund aus [#83](https://github.com/Tobias-Run/P3DH/issues/83).
 - **Footprint** ([#12](https://github.com/Tobias-Run/P3DH/issues/12)): 377 Reports, 271 Institute; Median-Domestizität 82,3 %, 149 Institute über 90 % heimatzentriert
 
 ## Betrieb
