@@ -24,10 +24,20 @@ on:
         description: "DPM-Codebook neu bauen (lädt ~1 GB DPM-Quellen) — nötig, wenn neue Templates unbekannte dp-Codes bringen"
         type: boolean
         default: false
-  # Zeitplan bewusst noch nicht scharf: erst soll ein manueller Lauf sauber
-  # durchlaufen. Zum Aktivieren die beiden Zeilen einkommentieren.
-  # schedule:
-  #   - cron: "0 4 * * 1"   # montags 04:00 UTC
+  # Scharf seit Lauf #13 (2026-09-15, sha 9317f97): dort liefen erstmals alle
+  # 41 Schritte gruen durch, einschliesslich der acht, die seit dem letzten
+  # gruenen Lauf #12 dazugekommen waren. Das war die Vorbedingung aus #8 --
+  # ein Zeitplan auf ungetesteter Kette erzeugt rote Laeufe statt Daten.
+  #
+  # Montags, weil die EBA neue Einreichungen ueber die Woche verteilt
+  # veroeffentlicht; 04:00 UTC liegt ausserhalb der Stosszeiten der
+  # GitHub-Runner und des EDAP.
+  #
+  # Ein Lauf ohne neue Einreichungen ist kein Leerlauf: er erneuert den
+  # data-Branch, purged den jsDelivr-Cache und faehrt alle Pruefungen gegen
+  # den Bestand. Er erzeugt dann nur keinen Commit.
+  schedule:
+    - cron: "0 4 * * 1"   # montags 04:00 UTC
 
 permissions:
   contents: write           # push the data branch + refreshed manifests
