@@ -1,6 +1,6 @@
 # Projektstatus
 
-**Stand: 2026-09-15** · Bestand aus Pipeline-Lauf #12 (2026-09-14, sha `5333e3c`)
+**Stand: 2026-09-15** · Bestand aus Pipeline-Lauf #13 (2026-09-15, sha `9317f97`)
 
 Diese Datei beschreibt, *wo das Projekt steht*. Offene Arbeit wird als
 [GitHub-Issue](https://github.com/Tobias-Run/P3DH/issues) geführt, abgeschlossene
@@ -59,7 +59,7 @@ sie besteht aus zwei verschiedenen Dingen:
 Keine davon ist eine Behauptung im README — jede bricht die Pipeline ab oder
 erzeugt ein Produkt:
 
-| Prüfung | Wogegen | Stand Lauf #12 |
+| Prüfung | Wogegen | Stand Lauf #13 |
 |---|---|---|
 | `check_branch_parity.py` | Viewer-Zahlen ≠ Long-Form, auch in der **Einheit** | 2.295.189 Zellen · 41.902 Währungspaare · grün |
 | `check_fact_placement.py` | stiller Fact-Verlust durch unbekannte dp-Codes | unbekannte dp-Codes: **0** |
@@ -85,7 +85,7 @@ Einreichungen, nicht unsere Pipeline.
 
 ## Betrieb
 
-- **Pipeline:** `.github/workflows/pipeline.yml`, manuell (`workflow_dispatch`), zustandslos — `raw/` startet leer, der Bestand kommt vom `data`-Branch. Die Reihenfolge der 34 Schritte ist seit [#8](https://github.com/Tobias-Run/P3DH/issues/8) als Graph geprüft (`check_pipeline_order.py`, in `tests.yml`). Der wöchentliche Cron liegt weiter auskommentiert bereit: seit Lauf #12 sind acht Schritte dazugekommen, die noch nie in CI gelaufen sind — ein Zeitplan auf ungetesteter Kette erzeugt rote Läufe statt Daten.
+- **Pipeline:** `.github/workflows/pipeline.yml`, wöchentlich per `schedule` und jederzeit manuell per `workflow_dispatch`, zustandslos — `raw/` startet leer, der Bestand kommt vom `data`-Branch. Die Reihenfolge der 34 Schritte ist seit [#8](https://github.com/Tobias-Run/P3DH/issues/8) als Graph geprüft (`check_pipeline_order.py`, in `tests.yml`). **Der wöchentliche Cron ist seit Lauf #13 scharf** (montags 04:00 UTC): dort liefen erstmals alle 41 Schritte grün durch, einschließlich der acht, die seit Lauf #12 dazugekommen waren. Laufzeit #13: 3:52 inkrementell.
 - **Tests:** `.github/workflows/tests.yml`, automatisch bei jedem Push, ~15 s.
 - **Auslieferung:** Orphan-Branch `data` → jsDelivr. **Der Branch wird force-gepusht und trägt genau einen Commit** — er hat keine Historie, jeder Lauf ersetzt den vorigen Stand vollständig.
 - **Entwicklung:** Feature-Branch → PR → Merge nach `main`.
