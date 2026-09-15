@@ -398,6 +398,19 @@ class PersistenzErgebnisTest(unittest.TestCase):
         k = [(r["lei"], r["scope"], r["template_id"]) for r in self.rows]
         self.assertEqual(k, sorted(k))
 
+    def test_the_frequency_model_is_built_first(self):
+        """Läuft build_omission_profile.py vor build_disclosure_frequency.py,
+        findet es kein Modell und schreibt eine Datei mit Kopfzeile und ohne
+        Inhalt — ohne zu scheitern. Eine leere Auswertung, die aussieht wie ein
+        Ergebnis.
+
+        Genau diese Reihenfolge stand bis #43 Punkt 4 im Workflow, und es ist
+        dieselbe Falle wie build_report_scale -> check_plausibility bei #83."""
+        pl = (ROOT / ".github" / "workflows" / "pipeline.yml").read_text(
+            encoding="utf-8")
+        self.assertLess(pl.index("scripts/build_disclosure_frequency.py"),
+                        pl.index("scripts/build_omission_profile.py"))
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
