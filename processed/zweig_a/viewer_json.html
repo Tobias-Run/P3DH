@@ -141,6 +141,21 @@
   td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:default}
   td.empty{background:var(--empty)}
   /* "Fehlt != Null": Coverage-Kasten + Sektions-Badge */
+  /* Spaltenauswahl (#50 Punkt 3) — ein Klappmenue in der Benchmark-Leiste. */
+  .colsel{position:relative;padding:0}
+  .colsel>summary{cursor:pointer;list-style:none;padding:.2rem .45rem}
+  .colsel>summary::-webkit-details-marker{display:none}
+  .colbox{position:absolute;z-index:20;top:100%;left:0;min-width:15rem;
+          max-height:19rem;overflow:auto;background:var(--bg);
+          border:1px solid var(--soft);border-radius:6px;padding:.4rem .55rem;
+          box-shadow:0 2px 10px rgba(0,0,0,.14)}
+  .colbox label{display:block;padding:.15rem 0;white-space:nowrap;
+                font-size:var(--f0)}
+  .colbox label.fest{color:var(--muted)}
+  /* Ein Report ohne jede Zelle (#28) — die Leere IST die Aussage. */
+  .leer{border:1px solid var(--soft);border-left:3px solid var(--muted);
+        border-radius:6px;padding:.6rem .75rem;margin:.8rem 0;
+        font-size:var(--f1);line-height:1.5}
   .covwrap{border:1px solid var(--soft);border-radius:6px;padding:.55rem .7rem;margin:.8rem 0}
   .covhead{font-size:12px;color:var(--muted);margin-bottom:.3rem}
   .covblock{margin-top:.35rem;font-size:12px}
@@ -433,8 +448,9 @@ const bridgeAt=(tid,row,col)=>{ const m=BRIDGE.get(tid); return m?(m[row+'|'+col
    die hier zuerst stand. */
 const BRIDGE_TIP={
   rebound:'Diese Zelle wurde zwischen Framework 4.1 und 4.2 auf einen neuen Datenpunkt umgebunden. Die Bezeichnung ist in beiden Versionen dieselbe (gilt für alle 63 umgebundenen Zellen), die Kennung nicht — der Viewer verbindet über die Koordinate und findet den Wert deshalb weiter. Ein Vorbehalt bleibt: gleiche Bezeichnung ist keine Zusage gleicher Definition.',
-  ambiguous:'Für diese Zelle liegen in beiden Framework-Versionen mehrere Datenpunkte auf derselben Koordinate; die Brücke konnte sie nicht eindeutig zuordnen. Schwächer belegt als ein Rebound.'};
-const BRIDGE_MARK={rebound:'⇄', ambiguous:'≟'};
+  mehrfach:'Auf dieser Koordinate liegen mehrere Datenpunkte — in beiden Framework-Versionen dieselben. Die Zuordnung 4.1↔4.2 steht damit fest; die Koordinate trägt nur mehr als einen Wert. Bei LIQ2 (NSFR) sind das die vier Beobachtungsquartale, die das Template nebeneinander zeigt: gemessen teilen Reports desselben Instituts bei zwei Quartalen Abstand genau zwei der vier Werte. Beim Vergleich über die Zeit also darauf achten, welchen der Werte man nimmt.',
+  ambiguous:'Für diese Zelle liegen in beiden Framework-Versionen mehrere Datenpunkte auf derselben Koordinate, und die Sätze unterscheiden sich — die Brücke kann sie nicht zuordnen. Schwächer belegt als ein Rebound.'};
+const BRIDGE_MARK={rebound:'⇄', mehrfach:'⁞', ambiguous:'≟'};
 /* Nicht eindeutig platzierte Koordinaten (#54). Andere Ursache als die
    Bruecke oben: dort ist die VERSIONSzuordnung unklar, hier die PLATZIERUNG.
    Das DPM fuehrt je Template mehrere TableVersions, zwischen denen sich die
@@ -1174,6 +1190,27 @@ function renderTemplate(tid, cells, rep){
 /* Was NICHT im Report steht — der eigentliche "Fehlt != Null"-Block.
    Als ein kompakter Kasten, nicht als ~43 leere Sektionen je Report: eine
    Auslassung ist eine Zeile Information, kein Gitter aus Symbolen. */
+/* Ein Report, der NICHTS trägt (#28).
+
+   Das Institut hat für diesen Stichtag eingereicht und jedes Template als
+   nicht offengelegt deklariert. Ohne diesen Kasten stünde eine Seite da, die
+   nach einem Ladefehler aussieht — dabei ist die Leere hier die Aussage, und
+   genau der Fall, für den Arbeitsprinzip 3 existiert.
+
+   Bewusst KEIN Vorwurf: Art. 433a–c lässt Erleichterungen ausdrücklich zu. Der
+   Text sagt, was deklariert wurde, und nicht, was es bedeutet. */
+function leermeldung(rep){
+  if(rep.templates && rep.templates.size) return '';
+  const n=Object.keys(rep.coverage||{}).length;
+  if(!n) return `<div class="leer"><b>Keine Daten zu diesem Report.</b>
+    Es liegt uns weder eine Zahl noch eine Deklaration vor — das ist eine
+    Lücke auf unserer Seite, keine Aussage über das Institut.</div>`;
+  return `<div class="leer"><b>Dieses Institut legt für diesen Stichtag nichts offen.</b>
+    Es hat eingereicht und alle <b>${n}</b> Templates als nicht offengelegt
+    deklariert. Das ist zulässig: die CRR lässt nach Art. 433a–c Erleichterungen
+    zu, und Art. 432 erlaubt das Weglassen nicht wesentlicher Angaben.
+    <span class="cl">Die Deklaration steht unten vollständig.</span></div>`;
+}
 function coverageBlock(rep){
   const cov=rep.coverage||{};
   const keys=Object.keys(cov);
@@ -1499,9 +1536,11 @@ async function renderReport(rep){
   const nrec=NAMES.get(lei)||{};
   main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2>
     <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
-    <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency <b>${esc(curLabel(rep))}</b>${
+    <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency ${
+      curLabel(rep) ? `<b>${esc(curLabel(rep))}</b>` : '<span class="cl">nicht gemeldet</span>'}${
       isMixedCur(rep)?` <span class="cl" title="Dieser Report meldet nicht durchgehend in einer Währung. Die zuerst genannte trägt die Mehrheit der Fakten; die abweichenden Templates rechnen mit ihrem eigenen Kurs (#55).">— je Template verschieden</span>`:''}
     · Framework <b>${esc(rep.framework)}</b></div></div>
+    ${leermeldung(rep)}
     <div id="ovSection"></div>
     <div id="tsSection"></div>
     ${coverageBlock(rep)}
@@ -1800,6 +1839,24 @@ let BM_PCT = store.bmpct === true;   // Perzentil-Bänder (Peer-Gruppe), aus per
 let BM_HIDEFLAG = store.bmhide === true;
 let bmSort=null;
 const bmSortOr=prof=>bmSort||(bmSort={...prof.defaultSort});
+/* Spaltenauswahl (#50 Punkt 3). null heisst ALLE — so bleibt der Default
+   ungeschrieben und bestehende Links zeigen unveraendert das volle Profil. */
+let BM_COLS = null;
+/* Die sichtbaren Spalten eines Profils.
+
+   Regel: die Spalte, nach der SORTIERT wird, laesst sich nicht ausblenden.
+   Die Reihenfolge ist die halbe Aussage eines Benchmarks — wer einen Link
+   teilt, dessen Tabelle nach einer unsichtbaren Spalte sortiert ist, zeigt dem
+   Empfaenger eine Rangfolge ohne ihren Grund. Statt die Sortierung
+   zurueckzusetzen (das aenderte still die Reihenfolge) bleibt die Spalte
+   stehen: sichtbar ist billiger als unerklaerlich. */
+function sichtbareSpalten(prof){
+  if(!prof) return [];
+  if(!BM_COLS || !BM_COLS.size) return prof.cols;
+  const sortId=(bmSort||prof.defaultSort||{}).col;
+  const sicht=prof.cols.filter(c=>BM_COLS.has(c.id) || c.id===sortId);
+  return sicht.length ? sicht : prof.cols;   // alles abgewaehlt -> alles zeigen
+}
 function benchmarkRows(){
   const prof=bmProf();
   if(!prof) return [];
@@ -2238,20 +2295,28 @@ async function renderBenchmark(){
   const profSel=Object.entries(bmAll()).map(([k,p])=>
     `<option value="${k}"${k===BMP?' selected':''}>${esc(p.label)}</option>`).join('');
   const pmaps=new Map();
-  if(BM_PCT) for(const c of prof.cols) pmaps.set(c.id,percentileMap(allRows,c.id));
+  if(BM_PCT) for(const c of sichtbareSpalten(prof)) pmaps.set(c.id,percentileMap(allRows,c.id));
   // Bezug der Groessenbalken (#49): das Maximum der SICHTBAREN Zeilen. Berechnet
   // auf `rows`, nicht auf `allRows` — blendet jemand die auffaelligen Reports
   // aus, soll der Balken sich auf das beziehen, was er sieht.
-  const barMax=barBasis(rows, prof.cols);
+  const spalten=sichtbareSpalten(prof);
+  const barMax=barBasis(rows, spalten);
   // Randwert-Marker nur fuer die Spalte, nach der gerade sortiert wird: genau
   // die entscheidet, wer die Liste anfuehrt. Bei Sortierung nach Name/Stichtag
   // gibt es keine Metrik und damit keinen Marker.
-  const sortCol=prof.cols.find(c=>c.id===bmSort.col);
+  const sortCol=spalten.find(c=>c.id===bmSort.col);
   const fmarks=sortCol?fenceOutliers(allRows, sortCol.id):new Map();
   let h=`<div class="rhead"><h2>Benchmark</h2></div>
     <div class="bmbar"><label class="ctl">Profil: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
       <label class="ctl" title="Blendet Reports aus, in denen die Plausibilitätsprüfung Werte weit ausserhalb ihrer Zellpopulation gefunden hat. Perzentile bleiben auf der vollen Menge gerechnet."><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> auffällige einklappen${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
+      <details class="ctl colsel"><summary title="Welche Kennzahlen die Tabelle zeigt. Die Auswahl steht im Link und im CSV-Export — ein geteilter Link zeigt sonst andere Spalten als die Ansicht, aus der er stammt.">Spalten <span class="cl">(${spalten.length}/${prof.cols.length})</span></summary>
+        <div class="colbox">${prof.cols.map(c=>{
+          const an=spalten.some(x=>x.id===c.id);
+          const fest=c.id===bmSort.col;
+          return `<label${fest?' class="fest" title="Nach dieser Spalte wird sortiert — die Reihenfolge ist die halbe Aussage, und eine Rangfolge ohne ihren Grund wäre im geteilten Link nicht nachvollziehbar."':''}>
+            <input type="checkbox" data-col="${esc(c.id)}"${an?' checked':''}${fest?' disabled':''}> ${esc(c.label)}</label>`;
+        }).join('')}</div></details>
       <button class="ctl" id="bmCsv" title="Die Tabelle in ihrem aktuellen Zustand als CSV. Caveats, Filter und die Ansichts-URL stehen als Kopfkommentar darin, Skalen- und Plausibilitätsbefunde als eigene Spalten — eine nackte Tabelle verlöre genau die Warnungen, die hier danebenstehen.">⭳ CSV</button>
       <span class="meta" style="margin:0">Basis: Template ${esc(prof.tpl)}${bmUsesKm1(prof)?' + 61.00':''}${prof.cols.some(c=>c.kind==='eur')?' · Beträge in Mrd. EUR (EZB-Kurs)':''} · Sidebar-Filter aktiv · Klick auf Spalte sortiert</span></div>
     ${prof.note?`<div class="caveat">ⓘ ${esc(prof.note)}</div>`:''}
@@ -2268,7 +2333,7 @@ async function renderBenchmark(){
   // Spalten, deren Zelle zwischen den Frameworks umgebunden wurde (#26): der
   // Wert wird ueber die Koordinate weiter gefunden, aber die Rangliste mischt
   // dann Stichtage beiderseits eines Taxonomiewechsels.
-  for(const c of prof.cols){
+  for(const c of spalten){
     const bs=metricBridge(c);
     h+=`<th class="num" data-k="${c.id}">${esc(metricHead(c))}`
      + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:'')
@@ -2288,7 +2353,7 @@ async function renderBenchmark(){
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;
     const balken=barErlaubt(prof, r);
-    for(const c of prof.cols)
+    for(const c of spalten)
       h+=bmCell(c, r[c.id], BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null,
                 balken?barMax.get(c.id):null);
     if(prof.trendRow) h+=`<td>${r._trend?sparkline(r._trend,null,null,r._breaks):''}</td>`;
@@ -2306,6 +2371,19 @@ async function renderBenchmark(){
   });
   document.getElementById('bmHide').addEventListener('change',e=>{
     BM_HIDEFLAG=e.target.checked; store.bmhide=BM_HIDEFLAG; persist(); renderBenchmark(); shareState();
+  });
+  // Spaltenauswahl (#50 Punkt 3). Sie wird NICHT in `store` gelegt: eine
+  // Spaltenwahl, die nur dieses Geraet kennt, waere das Gegenteil dessen, was
+  // Punkt 1 erreichen wollte. Sie lebt im Hash und damit im geteilten Link.
+  main.querySelectorAll('.colbox input[data-col]').forEach(cb=>{
+    cb.addEventListener('change',()=>{
+      const an=[...main.querySelectorAll('.colbox input[data-col]')]
+                 .filter(x=>x.checked).map(x=>x.dataset.col);
+      // Alles abgewaehlt heisst ALLES zeigen, nicht eine leere Tabelle: eine
+      // Tabelle ohne Kennzahlen ist kein Zustand, den jemand teilen will.
+      BM_COLS = an.length ? new Set(an) : null;
+      renderBenchmark(); shareState();
+    });
   });
   // Exportiert wird, was der Nutzer SIEHT — `rows`, nicht `allRows`. Hat er die
   // auffaelligen eingeklappt, sind sie auch nicht in der Datei; die Zeilenzahl
@@ -2403,7 +2481,8 @@ function benchmarkCSV(rows, prof){
   // dass RF 4.1 und 4.2 nicht vergleichbar sind — ohne die Spalte kann niemand
   // danach handeln, und eine Warnung ohne Handhabe ist Dekoration.
   const kopf=['institut','lei','land','groessenklasse','konsolidierung','stichtag',
-              'framework', ...prof.cols.map(c=>c.id), 'skalenbefund','plausibilitaet'];
+              'framework', ...sichtbareSpalten(prof).map(c=>c.id),
+              'skalenbefund','plausibilitaet'];
   const zeilen=[kopf.map(csvFeld).join(',')];
   for(const r of rows){
     const sc=r.q&&r.q.sc;
@@ -2412,7 +2491,7 @@ function benchmarkCSV(rows, prof){
     const rep=byKey(r.key);
     zeilen.push([r.name, r.lei, r.country, r.itype, r.scope, r.date,
                  rep?rep.framework:'',
-                 ...prof.cols.map(c=>csvZahl(r[c.id])), skal, q]
+                 ...sichtbareSpalten(prof).map(c=>csvZahl(r[c.id])), skal, q]
                 .map(csvFeld).join(','));
   }
   return k.join('\n')+'\n'+zeilen.join('\n')+'\n';
@@ -2551,6 +2630,13 @@ function shareParams(){
     const prof=bmProf(), s=prof&&bmSort;
     if(s && prof && (s.col!==prof.defaultSort.col || s.dir!==prof.defaultSort.dir))
       p.set('sort', s.col + (s.dir<0 ? '.desc' : '.asc'));
+    // Die Spaltenwahl (#50 Punkt 3). Ohne sie zeigt ein geteilter Link
+    // andere Spalten als die Ansicht, aus der er stammt — und der Empfaenger
+    // sieht eine Tabelle, die der Absender nie gesehen hat. Der Default
+    // (alle Spalten) wird bewusst NICHT geschrieben.
+    if(BM_COLS && BM_COLS.size && prof &&
+       BM_COLS.size < prof.cols.length)
+      p.set('cols', [...BM_COLS].sort().join(','));
   }
   // Die Auswahl (#50). Ohne sie laesst sich ein Vergleich nicht weitergeben —
   // man kann nur AUFZAEHLEN, welche vier Reports der andere anpinnen soll.
@@ -2594,6 +2680,16 @@ function applyShared(){
     const prof=bmProf();
     if(prof && prof.cols.some(c=>c.id===col))
       bmSort={col, dir: dir==='desc' ? -1 : 1};
+  }
+  if(p.has('cols')){
+    // Dieselbe Sorgfalt wie bei `sort`: eine Spalte, die dieses Profil nicht
+    // kennt (veralteter Link, anderes Profil), wird verworfen. Uebernaehme man
+    // sie, zeigte die Tabelle weniger Spalten als angefordert, ohne dass
+    // jemand den Grund saehe.
+    const prof=bmProf();
+    const gibt=new Set((prof?prof.cols:[]).map(c=>c.id));
+    const wollte=p.get('cols').split(',').filter(x=>gibt.has(x));
+    BM_COLS = wollte.length ? new Set(wollte) : null;
   }
   if(p.has('pin')){
     // Nur Schluessel, die es im Bestand wirklich gibt: ein Link aus einer

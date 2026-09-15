@@ -124,6 +124,49 @@ def pruefe_export(res):
     for spalte in fehlend:
         fehler.append(f"CSV-Export ohne Spalte '{spalte}' — ein Caveat im Kopf "
                       "sagt nicht, WELCHE Zeile betroffen ist")
+    # Folgt der Export der Spaltenwahl (#50 Punkt 3)? Ein CSV mit allen
+    # Spalten, obwohl die Ansicht zwei zeigt, ist nicht die exportierte
+    # Ansicht, sondern eine andere Tabelle — und genau das Missverstaendnis,
+    # das der Export vermeiden soll.
+    schmal = res.get("csvSchmal") or ""
+    if schmal:
+        sd = [z for z in schmal.splitlines() if not z.startswith("#")]
+        gelesen = list(_csv.reader(io.StringIO("\n".join(sd))))
+        kopfzeile = gelesen[0] if gelesen else []
+        gewaehlt = res.get("csvSpalte")
+        weg = [s for s in (res.get("csvWeg") or []) if s in kopfzeile]
+        print(f"  CSV folgt der Spaltenwahl: {len(kopfzeile)} Spalten, "
+              f"gewählt '{gewaehlt}'")
+        if gewaehlt and gewaehlt not in kopfzeile:
+            fehler.append(f"die gewählte Spalte '{gewaehlt}' fehlt im Export")
+        if weg:
+            fehler.append("der Export enthält abgewählte Spalten "
+                          f"({', '.join(weg[:3])}) — er zeigt eine andere "
+                          "Tabelle als die Ansicht, aus der er stammt")
+        # Kopf und Werte müssen gleich breit sein. Folgt nur EINE der beiden
+        # Seiten der Spaltenwahl, entsteht eine Datei, die sich zwar öffnen
+        # lässt und in der die Werte um Spalten verschoben stehen — der
+        # gefährlichste Ausgang, weil er wie eine gültige Tabelle aussieht.
+        schief = [i for i, z in enumerate(gelesen[1:], 1)
+                  if len(z) != len(kopfzeile)]
+        if schief:
+            fehler.append(
+                f"im schmalen Export hat die Kopfzeile {len(kopfzeile)} Spalten, "
+                f"{len(schief)} Datenzeile(n) aber {len(gelesen[schief[0]])} — "
+                "die Werte stehen um Spalten verschoben")
+
+    # Die Regel, dass die Sortierspalte sichtbar bleibt — direkt geprüft.
+    regel = res.get("regel") or {}
+    if regel:
+        sichtbar = regel.get("sichtbar") or []
+        if regel.get("sortId") not in sichtbar:
+            fehler.append(
+                f"die Sortierspalte '{regel.get('sortId')}' lässt sich "
+                "ausblenden — dann zeigt ein geteilter Link eine Rangfolge "
+                "ohne ihren Grund")
+        if regel.get("gewaehlt") not in sichtbar:
+            fehler.append("die gewählte Spalte fehlt in der Auswahl")
+
     if None in zeilen[0]:
         # DictReader legt ueberzaehlige Felder unter None ab: die Kopfzeile hat
         # weniger Spalten als die Datenzeilen. Ohne diesen Zweig stuerzt die
@@ -288,6 +331,55 @@ def pruefe():
               }
               return {keine:1};
             }""")
+            # Nullmeldung (#28): ein Institut, das fuer seinen Stichtag NICHTS
+            # offenlegt, hatte bisher keinen Shard und war im Viewer nicht
+            # auffindbar. Jetzt ist es das — und dieser Lauf prueft, dass dort
+            # auch etwas STEHT. Eine Seite, die nur "Keine Templates" zeigt,
+            # saehe aus wie ein Ladefehler; die Leere ist hier die Aussage.
+            leer = pg.evaluate("""async () => {
+              const rep = REPORTS.find(r => r.nt === 0);
+              if(!rep) return {keine:1};
+              const p = leiParts(rep.entityID);
+              location.hash = '#r/'+p.lei+'/'+rep.refPeriod+'/'+p.scope;
+              for(let g=0; g<600 && !document.querySelector('.leer'); g++)
+                await new Promise(s=>setTimeout(s,10));
+              await new Promise(s=>setTimeout(s,300));
+              const k=document.querySelector('.leer');
+              const kopf=document.querySelector('.rhead h2');
+              return {n: REPORTS.filter(r=>r.nt===0).length,
+                      lei: p.lei,
+                      text: k ? k.textContent.replace(/\\s+/g,' ').trim() : '',
+                      name: kopf ? kopf.textContent.trim() : '',
+                      cov: document.querySelectorAll('.covitem').length,
+                      covkopf: (document.querySelector('.covhead')||{}).textContent||''};
+            }""")
+
+            # Spaltenauswahl (#50 Punkt 3): kommt sie im DOM an, wirkt sie auf
+            # die Tabelle, landet sie im Hash — und bleibt die Spalte stehen,
+            # nach der sortiert wird? Eine Rangfolge ohne ihren Grund waere im
+            # geteilten Link nicht nachvollziehbar.
+            spalten = pg.evaluate("""async () => {
+              location.hash = '#benchmark';
+              for(let g=0; g<600 && !document.querySelector('.colbox'); g++)
+                await new Promise(s=>setTimeout(s,10));
+              const boxen=[...document.querySelectorAll('.colbox input[data-col]')];
+              if(!boxen.length) return {keine:1};
+              const vorher=document.querySelectorAll('table.bmtable thead th').length;
+              const sortiert=boxen.filter(b=>b.disabled).map(b=>b.dataset.col);
+              // Die erste NICHT gesperrte Spalte abwaehlen.
+              const ziel=boxen.find(b=>!b.disabled);
+              ziel.checked=false;
+              ziel.dispatchEvent(new Event('change',{bubbles:true}));
+              await new Promise(s=>setTimeout(s,400));
+              const nachher=document.querySelectorAll('table.bmtable thead th').length;
+              const kopf=[...document.querySelectorAll('table.bmtable thead th')]
+                          .map(t=>t.dataset.k);
+              return {n:boxen.length, gesperrt:sortiert, abgewaehlt:ziel.dataset.col,
+                      vorher, nachher, hash:location.hash,
+                      nochDa: kopf.includes(ziel.dataset.col),
+                      sortNochDa: sortiert.every(c=>kopf.includes(c))};
+            }""")
+
             # Groessenbalken (#49): erscheinen sie — und bleiben sie dort WEG,
             # wo sie luegen wuerden? Ein Balken fuer einen um 10^6 zu kleinen
             # Betrag zeigt ein winziges Institut statt eines Meldefehlers.
@@ -340,8 +432,29 @@ def pruefe():
               await new Promise(s=>setTimeout(s,600));
               const p2=bmAll()['km1'];
               const zeilen2=benchmarkRows();
+              BM_COLS=null;
               res.csv=benchmarkCSV(zeilen2.slice(0,50), p2);
               res.knopf=!!document.getElementById('bmCsv');
+              // Folgt der Export der Spaltenwahl (#50 Punkt 3)? Ein CSV mit
+              // allen Spalten, obwohl die Ansicht zwei zeigt, ist nicht die
+              // exportierte Ansicht, sondern eine andere Tabelle.
+              const beh=p2.cols[0].id;
+              BM_COLS=new Set([beh]);
+              res.csvSchmal=benchmarkCSV(zeilen2.slice(0,3), p2);
+              res.csvSpalte=beh;
+              res.csvWeg=p2.cols.slice(1).map(c=>c.id)
+                           .filter(id=>id!==(bmSort||p2.defaultSort).col);
+              BM_COLS=null;
+              // Die REGEL direkt, nicht ueber die Oberflaeche: dort ist die
+              // Checkbox der Sortierspalte zwar gesperrt, aber angehakt — sie
+              // landet also ohnehin in BM_COLS, und die Regel wuerde nie
+              // geprueft. Hier wird sie ausdruecklich NICHT gewaehlt.
+              const sortId=(bmSort||p2.defaultSort).col;
+              const andere=p2.cols.find(c=>c.id!==sortId);
+              BM_COLS=new Set([andere.id]);
+              res.regel={sortId, gewaehlt:andere.id,
+                         sichtbar:sichtbareSpalten(p2).map(c=>c.id)};
+              BM_COLS=null;
               // Teilbarer Zustand (#50): Sortierung und Auswahl im Hash.
               const erste=REPORTS[0], zweite=REPORTS[1];
               PINS=new Set([repKey(erste), repKey(zweite)]);
@@ -429,6 +542,51 @@ def pruefe():
         if "keine Peer-Gruppe" not in text:
             fehler.append("die Liste weist sich nicht als explorativ aus und "
                           "liest sich damit wie eine anerkannte Vergleichsgruppe")
+
+    if leer.get("keine"):
+        print("  Nullmeldung (#28): kein Report mit nt=0 im Bestand — nichts zu prüfen")
+    else:
+        print(f"  Nullmeldung (#28): {leer['n']} Report(s) · {leer['name']} · "
+              f"{leer['cov']} deklarierte Templates gelistet")
+        if not leer["text"]:
+            fehler.append("ein Report ohne jede Zelle (#28) zeigt keinen Hinweis — "
+                          "die Seite sieht aus wie ein Ladefehler, dabei ist die "
+                          "Leere die Aussage")
+        elif "nichts offen" not in leer["text"]:
+            fehler.append("der Hinweis am leeren Report (#28) sagt nicht, dass das "
+                          f"Institut nichts offenlegt: {leer['text'][:90]}")
+        # Kein Vorwurf: die Zulaessigkeit muss danebenstehen, sonst liest sich
+        # die Leere wie ein Versaeumnis.
+        if leer["text"] and "433a" not in leer["text"]:
+            fehler.append("der Hinweis am leeren Report (#28) nennt die Rechtslage "
+                          "nicht — ohne sie liest er sich als Vorwurf")
+        if not leer["cov"]:
+            fehler.append("der leere Report (#28) listet seine Deklaration nicht — "
+                          "dann bleibt die einzige Aussage, die er trägt, unsichtbar")
+        if leer["name"] and leer["name"] == leer["lei"]:
+            fehler.append("der leere Report (#28) steht unter seiner nackten LEI — "
+                          "sichtbar und anonym ist die halbe Reparatur")
+
+    if spalten.get("keine"):
+        fehler.append("keine Spaltenauswahl (#50) in der Benchmark-Leiste — "
+                      "acht feste Spalten je Profil, wie vor dem Issue")
+    else:
+        print(f"  Spaltenauswahl (#50): {spalten['n']} Spalten · abgewählt "
+              f"'{spalten['abgewaehlt']}' · Kopf {spalten['vorher']}→"
+              f"{spalten['nachher']} · gesperrt {spalten['gesperrt']}")
+        if spalten["nachher"] >= spalten["vorher"]:
+            fehler.append("das Abwählen einer Spalte ändert die Tabelle nicht — "
+                          "die Auswahl ist Dekoration")
+        if spalten["nochDa"]:
+            fehler.append(f"die abgewählte Spalte '{spalten['abgewaehlt']}' steht "
+                          "weiter im Tabellenkopf")
+        if not spalten["sortNochDa"]:
+            fehler.append("die Spalte, nach der sortiert wird, ist verschwunden — "
+                          "dann zeigt der Link eine Rangfolge ohne ihren Grund")
+        if "cols=" not in spalten["hash"]:
+            fehler.append("die Spaltenwahl (#50) landet nicht im Hash — ein "
+                          "geteilter Link zeigt andere Spalten als die Ansicht, "
+                          "aus der er stammt")
 
     print(f"  Benchmark: {balken['zeilen']} Zeilen · {balken['balken']} Größenbalken · "
           f"skaliert markiert {balken['mitMarke']}, davon mit Balken {balken['markeMitBalken']}")

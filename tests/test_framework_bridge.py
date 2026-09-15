@@ -42,16 +42,47 @@ class BuildBridgeTest(unittest.TestCase):
         ])
         self.assertEqual(bridge, [])
 
-    def test_ambiguous_multiple_dps_per_version(self):
+    def test_the_same_multiple_dps_in_both_versions_are_not_ambiguous(self):
+        """Der Befund aus #70. Bis dahin kam die Mehrfach-Prüfung VOR dem
+        Gleichheitstest — und damit bekam eine Koordinate mit identischem
+        dp-Satz das Etikett `ambiguous`, obwohl die Zuordnung feststeht: sie
+        ist die Identität.
+
+        Gemessen betraf das ALLE 123 vermeintlich mehrdeutigen Zellen des
+        Bestands; nach der Korrektur bleiben null übrig. Der Unterschied ist
+        nicht kosmetisch — `ambiguous` sagt dem Leser „hier ist nichts zu
+        holen", und das war falsch."""
         bridge = build_bridge([
             obs("4.1", "60.00.A", "0120", "0020", "dpA"),
             obs("4.1", "60.00.A", "0120", "0020", "dpB"),
             obs("4.2", "60.00.A", "0120", "0020", "dpA"),
             obs("4.2", "60.00.A", "0120", "0020", "dpB"),
         ])
-        self.assertEqual(bridge[0]["status"], "ambiguous")
+        self.assertEqual(bridge[0]["status"], "mehrfach")
         # deterministisch sortiert serialisiert
         self.assertEqual(bridge[0]["dp_41"], "dpA|dpB")
+        self.assertEqual(bridge[0]["dp_41"], bridge[0]["dp_42"])
+
+    def test_differing_multiple_dps_stay_ambiguous(self):
+        """Erst wenn die Sätze AUSEINANDERGEHEN, kann die Brücke nichts
+        sagen. Fiele diese Einstufung weg, verschwände die einzige Klasse, für
+        die sie gedacht war."""
+        bridge = build_bridge([
+            obs("4.1", "60.00.A", "0120", "0020", "dpA"),
+            obs("4.1", "60.00.A", "0120", "0020", "dpB"),
+            obs("4.2", "60.00.A", "0120", "0020", "dpA"),
+            obs("4.2", "60.00.A", "0120", "0020", "dpC"),
+        ])
+        self.assertEqual(bridge[0]["status"], "ambiguous")
+
+    def test_a_single_dp_pair_never_becomes_mehrfach(self):
+        """`mehrfach` heisst „mehrere Werte auf einer Koordinate". Bei genau
+        einem dp-Code je Version wäre das eine Falschaussage."""
+        bridge = build_bridge([
+            obs("4.1", "61.00", "0010", "0010", "dp1"),
+            obs("4.2", "61.00", "0010", "0010", "dp1"),
+        ])
+        self.assertEqual(bridge[0]["status"], "stable")
 
     def test_output_sorted_deterministically(self):
         bridge = build_bridge([

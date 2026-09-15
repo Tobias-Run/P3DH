@@ -285,20 +285,37 @@ class FrameworkBridgeTest(unittest.TestCase):
                          "der Zeitvergleich lässt diese Koordinaten jetzt aus, "
                          "und das gehört in den Bericht")
 
-    def test_every_ambiguous_row_is_stable_on_the_datapoint(self):
-        """Die Begründung dafür, dass `ambiguous` hier nichts sperrt: alle 123
-        solchen Zeilen haben dp_41 == dp_42. Sie sind Mehrfachbelegungen einer
+    def test_every_multiply_occupied_row_is_stable_on_the_datapoint(self):
+        """Die Begründung dafür, dass `mehrfach` hier nichts sperrt: solche
+        Zeilen haben dp_41 == dp_42. Sie sind Mehrfachbelegungen einer
         Koordinate (74.00.A r0010 c0010 trägt vier Datenpunkte), keine
         Bedeutungsänderungen. Bricht das, ist die Begründung hinfällig — und
-        der vorige Test bricht mit."""
+        der vorige Test bricht mit.
+
+        Bis #70 trugen genau diese Zeilen das Etikett `ambiguous`, und die
+        Begründung stand nur hier im Test. Jetzt sagt die Einstufung selbst,
+        was der Fall ist."""
         if not BRIDGE.exists():
             self.skipTest("framework_bridge.csv nicht gebaut")
         with BRIDGE.open(encoding="utf-8") as fh:
-            amb = [r for r in csv.DictReader(fh) if r["status"] == "ambiguous"]
-        self.assertGreater(len(amb), 50)
-        for r in amb:
+            zeilen = list(csv.DictReader(fh))
+        mehrfach = [r for r in zeilen if r["status"] == "mehrfach"]
+        self.assertGreater(len(mehrfach), 50)
+        for r in mehrfach:
             with self.subTest(zelle=(r["template_id"], r["cell_row"], r["cell_col"])):
                 self.assertEqual(r["dp_41"], r["dp_42"])
+                self.assertIn("|", r["dp_41"], "`mehrfach` ohne Mehrfachbelegung")
+
+    def test_no_row_is_labelled_ambiguous_while_its_datapoints_match(self):
+        """Die Regel hinter #70, am echten Artefakt. `ambiguous` heisst „die
+        Brücke kann nichts sagen" — bei identischen dp-Mengen ist das falsch,
+        und der Viewer gäbe dem Leser eine Warnung, die nicht zutrifft."""
+        if not BRIDGE.exists():
+            self.skipTest("framework_bridge.csv nicht gebaut")
+        with BRIDGE.open(encoding="utf-8") as fh:
+            falsch = [r for r in csv.DictReader(fh)
+                      if r["status"] == "ambiguous" and r["dp_41"] == r["dp_42"]]
+        self.assertEqual(falsch, [])
 
 
 class FrequenzmodellTest(unittest.TestCase):

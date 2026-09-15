@@ -161,6 +161,92 @@ def load_coverage_map(root: Path | None = None):
     return mapping
 
 
+def load_declaration_framework(root: Path | None = None):
+    """{report key: framework_version} aus den Deklarationen.
+
+    Die einzige Quelle für `framework`, die NICHT an einem Fakt hängt — und
+    damit die einzige, die für einen Report ohne platzierbare Zelle überhaupt
+    etwas liefern kann (#28).
+    """
+    root = root or ROOT
+    pfad = root / "processed" / "filing_indicators.csv"
+    if not pfad.exists():
+        return {}
+    aus = {}
+    with pfad.open("r", newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            eid = (row.get("entityID") or "").strip()
+            rp = (row.get("refPeriod") or "").strip()
+            fw = (row.get("framework_version") or "").strip()
+            if eid and rp and fw:
+                aus.setdefault(f"{eid}|{rp}", fw)
+    return aus
+
+
+def ergaenze_aus_register(meta, names, leis, root: Path | None = None):
+    """Stammdaten für Institute, die im Parquet gar nicht vorkommen (#28).
+
+    `meta` und `names` entstehen aus den Fakten. Ein Institut, das für seinen
+    einzigen Stichtag nichts offenlegt, hat keine — und bliebe deshalb im
+    Viewer namenlos: der Report wäre zwar auffindbar, stünde aber nur als
+    nackte LEI da. Sichtbar und anonym ist die halbe Reparatur.
+
+    `entity_meta.csv` ist das Institutsregister und hängt an keiner Meldung.
+    Genau dafür ist es die richtige Quelle.
+    """
+    root = root or ROOT
+    pfad = root / "processed" / "entity_meta.csv"
+    if not pfad.exists():
+        return []
+    fehlend = {l for l in leis if l not in names or l not in meta}
+    if not fehlend:
+        return []
+    ergaenzt = []
+    with pfad.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            lei = (r.get("lei") or "").strip()
+            if lei not in fehlend:
+                continue
+            names.setdefault(lei, {"name": r.get("name") or lei,
+                                   "jur": r.get("country") or ""})
+            meta.setdefault(lei, {
+                "country": r.get("country") or "",
+                "institution_type": r.get("institution_type") or "",
+                "is_gsii": "true" if str(r.get("is_gsii", "")).strip().lower()
+                           == "true" else "false"})
+            ergaenzt.append(lei)
+    return sorted(ergaenzt)
+
+
+def nur_deklarierte(reports, coverage, framework):
+    """Reports ergänzen, die NUR aus Deklarationen bestehen (#28).
+
+    Pass 1 baut Reports aus platzierbaren Zellen. Ein Institut, das für einen
+    Stichtag **nichts** offenlegt, hat keine — und entsteht deshalb gar nicht
+    erst: kein Shard, kein Eintrag im Index, im Viewer nicht auffindbar.
+
+    Das trifft genau den Fall, für den Arbeitsprinzip 3 existiert. Milleis
+    deklariert 55 Templates, alle auf `False`, und verschwindet dadurch
+    vollständig — aus einer Meldung „ich lege nichts offen" wird bei uns ein
+    Nichts statt einer Aussage.
+
+    `baseCurrency` bleibt LEER, nicht EUR: wir wissen sie nicht. Sie zu raten
+    hiesse, eine Währung zu behaupten, wo keine gemeldet wurde.
+    """
+    ergaenzt = []
+    for key in coverage:
+        if key in reports:
+            continue
+        eid, _, rp = key.partition("|")
+        if not eid or not rp:
+            continue
+        reports[key] = {"entityID": eid, "refPeriod": rp,
+                        "framework": framework.get(key, ""),
+                        "tpl": {}, "cur": {}, "baseCurrency": ""}
+        ergaenzt.append(key)
+    return ergaenzt
+
+
 def cell_discriminator(country, dims, dp):
     """Was unterscheidet zwei Fakten auf DERSELBEN (template,row,col)?
 
@@ -699,6 +785,17 @@ def main():
         rep["baseCurrency"] = dominant
         rep["cur"] = override
 
+    # Reports, die NUR deklarieren und keine einzige platzierbare Zelle tragen
+    # (#28). Muss NACH der Währungszuweisung stehen, sonst überschriebe die
+    # Schleife oben ihr leeres `baseCurrency` nicht mit "" sondern liesse es
+    # ganz fehlen — und VOR der Coverage-Auflösung, damit sie ihre Deklaration
+    # bekommen.
+    ohne_zellen = nur_deklarierte(reports, coverage,
+                                  load_declaration_framework(ROOT))
+    if ohne_zellen:
+        print(f"  {len(ohne_zellen)} Report(s) ohne platzierbare Zelle ergänzt "
+              f"(#28): " + ", ".join(sorted(ohne_zellen)[:3]))
+
     # --- coverage ("Fehlt != Null"): resolve declarations against the templates
     # that actually carry cells. Done AFTER pass 1 so data_tids is complete, and
     # per report so nothing aliases the shared declaration dict.
@@ -762,7 +859,7 @@ def main():
     if bridge_path.exists():
         with bridge_path.open(encoding="utf-8") as fh:
             for row in csv.DictReader(fh):
-                if row.get("status") in ("rebound", "ambiguous"):
+                if row.get("status") in ("rebound", "mehrfach", "ambiguous"):
                     bridge.setdefault(row["template_id"], {})[
                         row["cell_row"] + "|" + row["cell_col"]] = row["status"]
 
@@ -830,6 +927,15 @@ def main():
     # "BayernLB" für die Bayerische Landesbank. GLEIF führt sie nicht — geprüft,
     # dort steht für Helaba gar kein weiterer Name und für BayernLB nur ein
     # früherer Registername. Deshalb eine gepflegte Liste.
+    # Institute ohne einen einzigen Fakt stehen in keiner der beiden Karten
+    # oben — sie entstehen aus dem Parquet (#28). Das Register kennt sie.
+    aus_register = ergaenze_aus_register(
+        meta, names,
+        {r["entityID"].split(":", 1)[-1].rsplit(".", 1)[0] for r in reports.values()},
+        ROOT)
+    if aus_register:
+        print(f"  Stammdaten aus dem Register ergänzt (#28): "
+              f"{', '.join(aus_register)}")
     for lei, aliase in load_bank_aliases().items():
         if lei in names:
             names[lei]["alias"] = aliase

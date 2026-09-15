@@ -481,21 +481,22 @@ def lade_framework_bruecke(pfad=None):
                  eindeutige Übersetzung hergibt. Paare über den Bruch werden
                  dort nicht geprüft, sondern gezählt und im Bericht genannt.
 
-    ## Warum `ambiguous` in der Brücke hier nichts sperrt
+    ## Warum `mehrfach` in der Brücke hier nichts sperrt
 
-    Die Brücke ist auf (template, row, col) gebaut, und `ambiguous` heisst
-    dort „mehrere dp-Codes je Version beobachtet". Nachgemessen gilt aber für
-    **alle 123** solchen Zellen dp_41 == dp_42: es sind Koordinaten, auf denen
-    mehrere Datenpunkte liegen (74.00.A r0010 c0010 trägt vier), und nicht
-    Zellen, deren Bedeutung sich geändert hätte. Auf dem dp-Code — dem
-    Schlüssel, den diese Prüfung benutzt — sind sie eindeutig.
+    Die Brücke ist auf (template, row, col) gebaut. Auf 123 Koordinaten liegen
+    MEHRERE Datenpunkte (74.00.A r0010 c0010 trägt vier) — in beiden Versionen
+    aber dieselben. Seit #70 heisst dieser Zustand `mehrfach` und nicht mehr
+    `ambiguous`: die Zuordnung 4.1↔4.2 steht, sie ist die Identität. Auf dem
+    dp-Code — dem Schlüssel, den diese Prüfung benutzt — sind sie eindeutig.
 
-    Das darf nicht zur Annahme werden. Die Brücke wächst mit jeder 4.2-Welle,
-    und eine `ambiguous`-Zeile, deren dp-Mengen sich UNTERSCHEIDEN, wäre eine
-    echte Mehrdeutigkeit. Genau die landet in `unsicher`. Die Menge ist heute
-    leer, und ein Test hält fest, dass sie sich füllt, sobald es so weit ist —
-    eine Prüfung, die auf Abwesenheit „bestanden" meldet, wäre hier besonders
-    verführerisch.
+    Entschieden wird hier trotzdem am dp-Code und NICHT am Etikett: `dp41 !=
+    dp42` ist die Frage, die zählt. Ein Etikett kann sich ändern, ohne dass
+    jemand diese Prüfung anfasst; der Vergleich der Mengen kann es nicht.
+
+    Eine Zeile, deren dp-Mengen sich UNTERSCHEIDEN, ist eine echte
+    Mehrdeutigkeit und landet in `unsicher`. Die Menge ist heute leer, und ein
+    Test hält fest, dass sie sich füllt, sobald es so weit ist — eine Prüfung,
+    die auf Abwesenheit „bestanden" meldet, wäre hier besonders verführerisch.
     """
     pfad = Path(pfad or BRIDGE)
     if not pfad.exists():

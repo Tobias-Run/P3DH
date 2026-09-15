@@ -10,7 +10,32 @@ Dieses Skript leitet aus dem Zweig-B-Parquet die Brücke ab: je Zelle
 der dp-Code je Version und der Status:
   stable   — gleicher dp-Code in 4.1 und 4.2 (direkter Join ok)
   rebound  — dp-Code geändert (Zeitreihe NUR über diese Brücke verknüpfbar)
-  ambiguous— mehrere dp-Codes je Version beobachtet (manuell prüfen)
+  mehrfach — mehrere dp-Codes, aber in BEIDEN Versionen dieselben. Die Brücke
+             ist eindeutig; die Koordinate trägt nur mehr als einen Wert.
+  ambiguous— mehrere dp-Codes UND sie unterscheiden sich zwischen den
+             Versionen. Erst hier kann die Brücke nichts sagen.
+
+## Warum `mehrfach` eine eigene Einstufung ist (#70)
+
+Bis #70 kam die Mehrfach-Prüfung VOR dem Gleichheitstest. Damit bekam jede
+Koordinate mit mehreren dp-Codes das Etikett `ambiguous` — auch dann, wenn in
+beiden Versionen exakt derselbe Satz stand und die Zuordnung folglich
+feststand.
+
+Gemessen betraf das **alle 123** vermeintlich mehrdeutigen Zellen; nach der
+Korrektur bleiben **null** übrig. Sie liegen sämtlich in LIQ2 (74.00.a–f), und
+die Ursache ist eine einzige: das Template zeigt die **vier
+Beobachtungsquartale** der NSFR nebeneinander, und der Brückenschlüssel
+(row, col) kennt das Quartal nicht.
+
+Belegt über die Daten statt vermutet: bei zwei Quartalen Abstand teilen 22 von
+27 Report-Paaren desselben Instituts genau **zwei** der vier Werte, bei einem
+Quartal Abstand **drei** — exakt die Vorhersage eines rollierenden
+Vier-Quartals-Fensters.
+
+Der Unterschied ist nicht kosmetisch: `ambiguous` sagt dem Leser „hier ist
+nichts zu holen", `mehrfach` sagt „die Zuordnung steht, aber sieh hin, welchen
+der Werte du vergleichst".
 
 Die Brücke ist beobachtungsbasiert: sie wächst mit jeder neuen 4.2-Welle
 (einfach neu laufen lassen). Zellen, die bisher nur in einer Version vorkommen,
@@ -51,10 +76,15 @@ def build_bridge(rows):
         dp41, dp42 = e["4.1"], e["4.2"]
         if not dp41 or not dp42:
             continue  # nur in einer Version beobachtet — keine Brücken-Aussage
-        if len(dp41) > 1 or len(dp42) > 1:
+        # Die Gleichheit MUSS zuerst geprüft werden. Andersherum — und so stand
+        # es bis #70 — bekommt eine Koordinate mit identischem dp-Satz in
+        # beiden Versionen das Etikett `ambiguous`, obwohl die Zuordnung
+        # feststeht: sie ist die Identität. Gemessen betraf das ALLE 123
+        # vermeintlich mehrdeutigen Zellen; keine einzige war es wirklich.
+        if dp41 == dp42:
+            status = "stable" if len(dp41) == 1 else "mehrfach"
+        elif len(dp41) > 1 or len(dp42) > 1:
             status = "ambiguous"
-        elif dp41 == dp42:
-            status = "stable"
         else:
             status = "rebound"
         bridge.append({
@@ -94,11 +124,19 @@ def main():
         writer.writeheader()
         writer.writerows(bridge)
 
-    n = {"stable": 0, "rebound": 0, "ambiguous": 0}
+    n = {"stable": 0, "rebound": 0, "mehrfach": 0, "ambiguous": 0}
     for b in bridge:
         n[b["status"]] += 1
     print(f"✓ {OUT.name}: {len(bridge)} Zellen in beiden RF-Versionen beobachtet")
-    print(f"  stable {n['stable']} / rebound {n['rebound']} / ambiguous {n['ambiguous']}")
+    print(f"  stable {n['stable']} / rebound {n['rebound']} / "
+          f"mehrfach {n['mehrfach']} / ambiguous {n['ambiguous']}")
+    if n["mehrfach"]:
+        # Ohne diese Zeile liest sich `mehrfach` wie eine abgeschwaechte
+        # Mehrdeutigkeit. Es ist das Gegenteil: die Zuordnung steht.
+        tmpl = sorted({b["template_id"] for b in bridge
+                       if b["status"] == "mehrfach"})
+        print(f"    `mehrfach` heisst: Zuordnung eindeutig, Koordinate traegt "
+              f"mehrere Werte — in {', '.join(tmpl[:6])}")
     if n["rebound"]:
         print("\n  Umgebundene Zellen (Zeitreihe nur über die Brücke!):")
         for b in bridge:
