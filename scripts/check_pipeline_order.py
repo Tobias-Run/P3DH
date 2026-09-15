@@ -116,6 +116,11 @@ ABHAENGIG = {
     # Repo, deshalb steht sie hier als Erzeugnis und nicht als Vorbedingung.
     "fetch_wikidata_entities.py": (["processed/long/p3dh_long.parquet"],
                                    ["codebook/wikidata_entities.csv"]),
+    "check_event_study_feasibility.py": (
+        ["interim/edap_recon/manifest_full.csv",
+         "codebook/wikidata_entities.csv",
+         "interim/plausibility_findings.csv"],
+        ["processed/event_study_feasibility.csv"]),
     # Liest die Plausibilitaetsbefunde: ein Report mit `rem_per_head`-Befund
     # (#17) liefert die eine Haelfte des Quotienten. Laeuft dieser Schritt
     # zuerst, ist der Filter leer — und ein bekannter Ausreisser geht als

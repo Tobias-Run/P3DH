@@ -141,6 +141,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/irrbb_sensitivity.csv` | Report × Zinsschock → ΔEVE, ΔNII, Supervisory Outlier Test | IRRBB1 `68.00`, KM1 `61.00` |
 | `processed/peer_similarity.csv` | Report → die fünf ähnlichsten Institute nach Länderprofil | CCyB1 `67.01.A` |
 | `processed/country_effect.csv` | Bankattribut × Länderkennzahl → Varianzzerlegung und Korrelation | `footprint.csv`, `country_gdp.csv` |
+| `processed/event_study_feasibility.csv` | Ereignisfenster → verwertbare Ereignisse, Urteil zur Machbarkeit | `manifest_full.csv` + `wikidata_entities.csv` |
 | `processed/catalogue_coverage.csv` | Katalog-Report → geladen, oder warum nicht | `manifest_full.csv` gegen Parquet + Coverage-Matrix |
 | `processed/risk_taker_share.csv` | Report → Anteil der „identified staff" an der Belegschaft, grössenbereinigt | REM1 `30.01` + `wikidata_entities.csv` |
 | `codebook/wikidata_entities.csv` | LEI → Wikidata-Item, Belegschaft mit Stichtag, Gründung, Rechtsform, Börsennotierung | Wikidata (`P1278`) |
@@ -829,6 +830,47 @@ Der Ländereffekt ist trotzdem gross — die Mediane reichen von 0,061 (Irland) 
 0,993 (Norwegen). Er ist nur kein *Makro*effekt. Wer die Domestizität erklären
 will, braucht Instituts- und keine Ländermerkmale; das ist die Richtung von #13
 und #35.
+
+### `event_study_feasibility.csv` — trägt der Bestand eine Ereignisstudie?
+
+Die Vorfrage aus #39, beantwortet statt geschätzt. Wir besitzen den
+**Einreichungszeitpunkt auf die Sekunde** (4.278 Zeilen mit `submission_ts`) —
+das ist ein Ereignisdatum, und Ereignisdaten sind die Währung der
+Kapitalmarktforschung. Ob daraus eine Studie werden kann, hängt an zwei Zahlen.
+
+#### Ein Ereignis ist nicht eine Einreichung
+
+Ein Institut reicht mehrere Module am selben Tag ein. **4.278 Einreichungen
+verdichten sich auf 1.964 (Institut, Tag).** Wer Einreichungen zählt, hält die
+Stichprobe für doppelt so gross.
+
+#### Isolation und Notierung halbieren sie zweimal
+
+| Fenster | isoliert | Anteil | davon börsennotiert | mit `hoch`-Befund | Urteil |
+|---|---:|---:|---:|---:|---|
+| ±3 d | 1.024 | 52 % | **243** | 154 | tragfähig |
+| ±5 d | 825 | 42 % | 192 | 127 | tragfähig |
+| ±10 d | 546 | 28 % | 122 | 89 | tragfähig |
+| ±21 d | 363 | 18 % | 75 | 52 | grenzwertig |
+
+Die Spalte **börsennotiert** ist die Stichprobe, die eine Aktien-Ereignisstudie
+wirklich hätte — nicht `isoliert`. Vier von fünf Instituten dieses Bestands
+haben keine handelbare Aktie (Sparkassen, Genossenschafts- und Förderbanken).
+Von 489 Instituten sind **69 belegt notiert**; 257 tragen keinen
+Wikidata-Eintrag, ihr Status ist damit **unbekannt und nicht „nicht notiert"**.
+
+Die letzte Spalte ist die Behandlungsgruppe der schärferen Frage aus #39:
+reagiert der Markt *stärker*, wenn die Offenlegung etwas Unangenehmes enthält?
+154 isolierte Ereignisse börsennotierter Institute tragen einen `hoch`-Befund
+aus #17.
+
+> ⚠️ **Obere Schranke, keine Schätzung.** Die zweite Konfundierung aus #39 ist
+> nicht aufgelöst: Pillar-3-Offenlegung fällt oft mit dem Geschäftsbericht
+> zusammen, und dessen Datum liegt uns nicht vor. Jedes solche Ereignis fällt
+> zusätzlich heraus.
+
+> ⚠️ **Kursdaten sind keine offene Quelle.** Dieses Blatt sagt, ob sich die
+> Beschaffung lohnen würde — es ersetzt sie nicht.
 
 ### `catalogue_coverage.csv` — ist die Stichtagswelle geladen?
 

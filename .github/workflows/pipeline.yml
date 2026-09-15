@@ -317,6 +317,14 @@ jobs:
         continue-on-error: true
         run: python scripts/fetch_wikidata_entities.py
 
+      # Machbarkeit der Ereignisstudie (#39). Reine Auswertung ueber den
+      # Katalog und das Wikidata-Codebook; braucht die Plausibilitaetsbefunde
+      # fuer die Behandlungsgruppe und laeuft deshalb nach check_plausibility.
+      # Beantwortet die eine Haelfte der Machbarkeit, die aus unseren Daten
+      # beantwortbar ist -- die andere sind Kursdaten, und die hat niemand.
+      - name: Ereignisstudie-Machbarkeit (#39)
+        run: python scripts/check_event_study_feasibility.py
+
       # Anteil der Risikotraeger (#40). Braucht das Wikidata-Codebook UND die
       # Plausibilitaetsbefunde: Reports mit `rem_per_head`-Befund (#17) liefern
       # die eine Haelfte des Quotienten und fliegen raus. Laeuft es vor
