@@ -121,7 +121,7 @@ echo "✓ pushed orphan branch 'data' (1 commit)"
 # (#23/#82) hiesse das neue Zellen ohne Beschriftung — kein Fehler, nur eine
 # Luecke, und damit unsichtbar. tests/test_publish_coupling.py haelt die Liste
 # gegen die tatsaechlichen getJSON-Aufrufe im Viewer.
-for f in index.json codebook.json labels.json benchmark.json; do
+for f in index.json codebook.json labels.json benchmark.json peer_shape.json; do
   curl -fsS "https://purge.jsdelivr.net/gh/Tobias-Run/P3DH@data/$f" >/dev/null \
     && echo "  purged $f" || echo "  purge $f failed (non-fatal)"
 done

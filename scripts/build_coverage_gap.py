@@ -35,14 +35,33 @@ Nummer sind dessen Töchter.
 
 Damit ist je Einheit entscheidbar, ob ihr Gruppenkopf bei uns meldet.
 
-## Die vier Einordnungen
+## Die sechs Einordnungen
 
-    meldet_selbst          die Einheit steht in unserem Bestand
-    ueber_gruppe           ihr Gruppenkopf steht bei uns — konsolidiert
-                           abgedeckt, keine Lücke
-    nicht_abgedeckt        weder sie noch ihr Gruppenkopf; bei einem
-                           SIGNIFIKANTEN Institut eine offene Frage
-    keine_gruppe_bekannt   Einheit ohne erkennbaren Kopf in der Liste
+    meldet_selbst            die Einheit steht in unserem Bestand
+    ueber_gruppe             ihr Gruppenkopf steht bei uns — konsolidiert
+                             abgedeckt, keine Lücke
+    gruppe_meldet_teilweise  der Kopf meldet nicht, ein anderes Mitglied
+                             derselben Gruppe aber schon
+    namensgleicher_melder    keine LEI trifft, aber ein Haus gleichen Namens
+                             im selben Land meldet — Verdacht, keine Aussage
+    nicht_abgedeckt          weder sie noch ihr Gruppenkopf noch ein
+                             gleichnamiges Haus; bei einem SIGNIFIKANTEN
+                             Institut eine offene Frage
+    keine_gruppe_bekannt     Einheit ohne erkennbaren Kopf in der Liste
+
+## Die LEI der Aufsicht ist nicht immer die LEI der Offenlegung
+
+Rein über die LEI gerechnet fehlten **12** signifikante Institute. Elf davon
+melden nachweislich — nur unter einer anderen LEI als der, die die EZB-Liste
+führt: Griechenlands Gruppe steht dort als `Piraeus Bank S.A.`, offen legt sie
+als `Piraeus Financial Holdings`; die neun österreichischen Volksbanken melden
+über den Verbund `Volksbank Wien`. Sie als fehlend zu zählen wäre eine
+Unterstellung, sie stillschweigend als abgedeckt zu zählen eine Behauptung.
+`namensgleicher_melder` sagt beides nicht und weist den Treffer in
+`namenstreffer` aus, damit er nachprüfbar ist.
+
+Übrig bleibt **ein** signifikantes Institut ohne jede Spur — und das ist die
+Zahl, die #42 sucht.
 
 ## Was das NICHT ist
 
@@ -88,7 +107,7 @@ KOPF = {"lei": "LEI", "typ": "Type", "name": "Name",
 
 FELDER = ["lei", "name", "typ", "land", "signifikanz",
           "gruppenkopf_lei", "gruppenkopf_name", "im_bestand",
-          "gruppe_im_bestand", "einordnung"]
+          "gruppe_im_bestand", "einordnung", "namenstreffer"]
 
 
 def xlsx_url():
@@ -129,7 +148,26 @@ def spalten_von(ws):
     raise RuntimeError("Kopfzeile mit LEI nicht gefunden")
 
 
-def lies_blatt(ws, signifikanz):
+def laendernamen(ws):
+    """Die Ländernamen, wie das SI-Blatt sie schreibt.
+
+    Nicht fest verdrahtet, sondern aus dem Blatt selbst: die Liste der
+    SSM-Länder ändert sich (Bulgarien und Kroatien kamen dazu), und eine
+    handgepflegte Kopie veraltete lautlos.
+    """
+    spalten = spalten_von(ws)
+    if "land" not in spalten:
+        return frozenset()
+    i = spalten["land"]
+    aus = set()
+    for row in ws.iter_rows(values_only=True):
+        vals = ["" if c is None else str(c).strip() for c in row]
+        if len(vals) > i and vals[i] and not vals[i].startswith(KOPF["land"]):
+            aus.add(vals[i])
+    return frozenset(aus)
+
+
+def lies_blatt(ws, signifikanz, laender=frozenset()):
     """Zeilen mit LEI, samt Gruppenkopf aus der laufenden Nummer links davor.
 
     Die Nummer steht NUR beim Kopf. Jede folgende Zeile ohne Nummer gehört zu
@@ -138,26 +176,59 @@ def lies_blatt(ws, signifikanz):
     Nur das SI-Blatt führt diese Nummerierung. Im LSI-Blatt gibt es keine
     Gruppenstruktur; dort bleibt der Kopf leer, und die Einordnung sagt das
     ausdrücklich statt eine Gruppe zu erfinden.
+
+    ## Das LSI-Blatt hat gar keine Land- und keine Namensspalte
+
+    Es ist nach Ländern GEGLIEDERT: eine Zeile „Belgium", darunter die
+    nationale Aufsicht, darunter die Institute — Name und Zwischenüberschrift
+    in derselben Spalte. Wer nur nach Spaltenköpfen sucht, bekommt für alle
+    2.066 LSIs ein leeres Land und einen leeren Namen, und zwar lautlos. Genau
+    die Falle, die weiter oben schon einmal zuschlug (feste Spaltenindizes) —
+    hier noch teurer, weil #42 die Abdeckung JE LAND ausweisen muss und 72 %
+    der Grundgesamtheit LSIs sind.
+
+    Das Land wird deshalb wie die Gruppennummer mitgeführt: als laufende
+    Überschrift. Erkannt wird sie daran, dass ihr Text einer der Ländernamen
+    ist, die das SI-Blatt führt (`laender`) — kein eingebauter Ländervorrat,
+    der veralten könnte.
     """
     SPALTEN = spalten_von(ws)
     lei_spalte = SPALTEN["lei"]
     aus, kopf = [], None
+    land_block, block_spalte = "", None
     for row in ws.iter_rows(values_only=True):
         vals = ["" if c is None else str(c).strip() for c in row]
-        breite = max(SPALTEN.values()) + 1
+        breite = max(list(SPALTEN.values()) + [block_spalte or 0]) + 1
         if len(vals) < breite:
             vals += [""] * (breite - len(vals))
         lei = vals[lei_spalte]
         if not LEI_RE.match(lei):
+            # Eine Zwischenüberschrift — aber nur auf einem Blatt, das das Land
+            # nicht als Spalte führt. Sonst überschriebe eine zufällige
+            # Textzelle das ordentlich gelesene Land.
+            if "land" not in SPALTEN:
+                for i, v in enumerate(vals):
+                    if v in laender:
+                        land_block, block_spalte = v, i
+                        break
             continue
         # Die laufende Nummer steht unmittelbar links vom LEI — und nur dort,
         # wo das Blatt sie führt.
         nummer = vals[lei_spalte - 1] if lei_spalte > 0 else ""
         nummer = nummer if nummer.isdigit() else ""
+        # Ohne Namensspalte steht der Name in derselben Spalte wie die
+        # Länderüberschrift.
+        if "name" in SPALTEN:
+            name = vals[SPALTEN["name"]]
+        elif block_spalte is not None and len(vals) > block_spalte:
+            name = vals[block_spalte]
+        else:
+            name = ""
         eintrag = {"lei": lei,
-                   "name": vals[SPALTEN["name"]] if "name" in SPALTEN else "",
+                   "name": name,
                    "typ": vals[SPALTEN["typ"]] if "typ" in SPALTEN else "",
-                   "land": vals[SPALTEN["land"]] if "land" in SPALTEN else "",
+                   "land": vals[SPALTEN["land"]] if "land" in SPALTEN
+                           else land_block,
                    "signifikanz": signifikanz}
         if nummer:                      # neue Gruppe beginnt
             kopf = eintrag
@@ -203,6 +274,83 @@ def _drin(lei, exakt, kern):
     return lei in exakt or lei[:18] in kern
 
 
+# Rechtsformen, die keinen Namen unterscheiden. Ohne sie zu entfernen trennt
+# „Piraeus Bank S.A." von „Piraeus Financial Holdings" nichts als Wortsalat.
+RECHTSFORMEN = {
+    "ag", "sa", "s.a.", "nv", "n.v.", "bv", "b.v.", "plc", "spa", "s.p.a.",
+    "eg", "e.g.", "egen", "e.gen.", "gen", "sarl", "s.a.r.l.", "srl", "as",
+    "a.s.", "ab", "oyj", "oy", "se", "kgaa", "gmbh", "aktiengesellschaft",
+    "aktiebolag", "group", "groupe", "holding", "holdings", "bank", "banca",
+    "banco", "banque", "bankas", "banka", "the", "of", "and", "financial",
+    "co", "company", "international",
+}
+
+
+def namensworte(name):
+    """Die bedeutungstragenden Wörter eines Namens.
+
+    Alles unter drei Zeichen fliegt raus. Der Grund ist konkret: die Trennung
+    an Satzzeichen zerlegt `S.A.` in „s" und „a" und `N.V.` in „n" und „v" —
+    und dann teilen `Piraeus Bank S.A.` und `Alpha Bank S.A.` zwei Wörter und
+    gelten als dasselbe Haus. Eine Rechtsform in der Sperrliste hilft nichts,
+    wenn sie als Einzelbuchstaben ankommt.
+    """
+    return {w for w in re.split(r"[^0-9A-Za-zÄÖÜäöüßÀ-ÿ]+", (name or "").lower())
+            if len(w) >= 3 and w not in RECHTSFORMEN}
+
+
+def namensnah(a, b):
+    """Zwei Namen, die dasselbe Haus meinen könnten.
+
+    Gefordert sind ZWEI gemeinsame Wörter, nicht eins. Ein Wort genügt nur,
+    wenn einer der Namen nach Abzug der Rechtsformen bloss aus einem besteht —
+    `Piraeus Bank S.A.` gegen `Piraeus Financial Holdings` ist dann ein Treffer.
+
+    Der Fall, der die Regel erzwungen hat: `Nederlandse Waterschapsbank N.V.`
+    traf über das erste Wort auf `Nederlandse Financierings-Maatschappij` —
+    zwei völlig verschiedene Banken, verbunden nur durch das Wort
+    „niederländisch". Ein Nationaladjektiv unterscheidet nichts, und ein
+    falscher Treffer wäre hier besonders teuer: er erklärte eine echte Lücke weg.
+    """
+    wa, wb = namensworte(a), namensworte(b)
+    if not wa or not wb:
+        return False
+    return len(wa & wb) >= min(2, len(wa), len(wb))
+
+
+def namensverdacht(zeilen, meta):
+    """Wo der LEI-Abgleich eine Lücke meldet, aber ein gleichnamiges Haus
+    im Bestand steht, wird der Verdacht ausgewiesen statt der Lücke.
+
+    Der Fall, der das erzwungen hat: Die EZB führt die griechische Gruppe unter
+    `Piraeus Bank S.A.`, offen legt sie aber als `Piraeus Financial Holdings` —
+    eine andere LEI. Rein über die LEI gerechnet fehlt Griechenlands
+    viertgrösste Bank vollständig, und das wäre eine Unterstellung statt eines
+    Befunds.
+
+    Gefordert wird das LAND und die Namensnähe nach `namensnah`. Das Land allein
+    wäre wertlos, die Namensnähe allein träfe alle zwölf Volksbanken quer durch
+    Europa.
+    """
+    je_land = collections.defaultdict(list)
+    for m in meta.values():
+        je_land[m.get("country", "")].append(m)
+    for z in zeilen:
+        if z["einordnung"] != "nicht_abgedeckt":
+            continue
+        # Auch über den Gruppenkopf: bei den österreichischen Volksbanken ist
+        # nicht die Einheit selbst namensgleich, sondern ihr Kopf.
+        for name in (z["name"], z["gruppenkopf_name"]):
+            treffer = [m for m in je_land.get(z["land"], [])
+                       if namensnah(name, m.get("name", ""))]
+            if treffer:
+                treffer.sort(key=lambda m: m["lei"])
+                z["einordnung"] = "namensgleicher_melder"
+                z["namenstreffer"] = f"{treffer[0]['lei']} {treffer[0]['name']}"
+                break
+    return zeilen
+
+
 def einordnen(zeilen, bestand):
     """Fünf Zustände — und der fünfte ist der ehrlichste.
 
@@ -246,7 +394,11 @@ def build(xlsx=None):
     import openpyxl
     pfad = lade(xlsx)
     wb = openpyxl.load_workbook(pfad, data_only=True)
-    zeilen = lies_blatt(wb["SIs"], "SI") + lies_blatt(wb["LSIs"], "LSI")
+    # Die Ländernamen kommen aus dem SI-Blatt und dienen dem LSI-Blatt als
+    # Schlüssel für seine Zwischenüberschriften.
+    laender = laendernamen(wb["SIs"])
+    zeilen = (lies_blatt(wb["SIs"], "SI", laender)
+              + lies_blatt(wb["LSIs"], "LSI", laender))
 
     # Dieselbe Einheit kann in beiden Blättern stehen; SI gewinnt.
     gesehen = {}
@@ -258,6 +410,7 @@ def build(xlsx=None):
     with META.open(encoding="utf-8") as fh:
         meta = {r["lei"]: r for r in csv.DictReader(fh)}
     einordnen(zeilen, bestand_index(meta))
+    namensverdacht(zeilen, meta)
 
     zeilen.sort(key=lambda z: (z["signifikanz"], z["land"], z["lei"]))
     with OUT.open("w", newline="", encoding="utf-8") as fh:
@@ -283,13 +436,63 @@ def bericht(zeilen, meta):
         c = collections.Counter(z["einordnung"] for z in teil)
         aus.append(f"{sig} (n={len(teil)}): " +
                    "  ".join(f"{k}={v}" for k, v in sorted(c.items())))
+    verdacht = [z for z in zeilen if z["signifikanz"] == "SI"
+                and z["einordnung"] == "namensgleicher_melder"]
+    if verdacht:
+        aus.append(f"Namensgleicher Melder unter anderer LEI: {len(verdacht)} "
+                   f"— nachweislich meldend, aber nicht über die LEI der "
+                   f"EZB-Liste zuzuordnen:")
+        for z in sorted(verdacht, key=lambda z: (z["land"], z["name"]))[:4]:
+            aus.append(f"    {z['land']:12s} {z['name'][:34]:36s} → "
+                       f"{z['namenstreffer'][:44]}")
+        if len(verdacht) > 4:
+            aus.append(f"    … und {len(verdacht) - 4} weitere")
+
     offen = [z for z in zeilen
              if z["signifikanz"] == "SI" and z["einordnung"] == "nicht_abgedeckt"]
-    aus.append(f"Signifikant und weder selbst noch über die Gruppe abgedeckt: {len(offen)}")
-    if offen:
-        nach_land = collections.Counter(z["land"] for z in offen)
-        aus.append("  nach Land: " +
-                   "  ".join(f"{k or '?'}={v}" for k, v in nach_land.most_common(6)))
+    # Die Zahl, um die es #42 geht. Sie steht bewusst NACH den Verdachtsfällen:
+    # wer nur über die LEI rechnet, liest hier 12 statt 1 und hält elf meldende
+    # Häuser für Lücken.
+    aus.append(f"► Signifikant und ohne jede Spur — weder selbst, noch über die "
+               f"Gruppe, noch namensgleich: {len(offen)}")
+    for z in sorted(offen, key=lambda z: (z["land"], z["name"])):
+        aus.append(f"    {z['land']:12s} {z['name'][:44]}")
+    aus.append("  Auch das ist kein Vorwurf: Art. 433a lässt für nicht "
+               "börsennotierte Institute jährliche statt quartalsweiser "
+               "Offenlegung zu, und eine Offenlegung ausserhalb des Hubs ist "
+               "damit nicht ausgeschlossen.")
+    # #42 verlangt die Abdeckung JE LAND ausdrücklich — und verbietet ebenso
+    # ausdrücklich, daraus eine EU-weite Vollständigkeit zu machen. Beides
+    # steht deshalb hier nebeneinander.
+    # Getrennt nach SI und LSI, und das ist keine Formalie: die LSI-Quote ist
+    # niedrig, WEIL sie niedrig sein soll. Nach CRR Art. 433a–c legen kleine,
+    # nicht börsennotierte Institute seltener und weniger offen; Deutschlands
+    # 1.109 LSIs sind überwiegend Sparkassen und Genossenschaftsbanken. Eine
+    # gemeinsame Quote läse sich als Abdeckungslücke und wäre eine
+    # Unterstellung — die aussagekräftige Zahl ist die der SIs.
+    aus.append("Abdeckung je Land (Anteil, der selbst oder über die Gruppe "
+               "offenlegt) — SI und LSI getrennt:")
+    je_land = collections.defaultdict(lambda: collections.defaultdict(lambda: [0, 0]))
+    for z in zeilen:
+        t = je_land[z["land"] or "?"][z["signifikanz"]]
+        t[0] += 1
+        t[1] += z["einordnung"] in ("meldet_selbst", "ueber_gruppe",
+                                    "gruppe_meldet_teilweise")
+    reihen = sorted(je_land.items(),
+                    key=lambda kv: (-kv[1]["SI"][0], kv[0]))[:8]
+    aus.append(f"    {'Land':14s} {'SI':>14s}   {'LSI':>14s}")
+    for land, teil in reihen:
+        def q(sig):
+            n, ab = teil[sig]
+            return f"{ab:4d}/{n:<4d} {100*ab/n:4.0f} %" if n else "        —   "
+        aus.append(f"    {land:14s} {q('SI')}   {q('LSI')}")
+    aus.append("  Die LSI-Quote ist niedrig, weil sie es sein soll: CRR "
+               "Art. 433a–c verlangt von kleinen, nicht börsennotierten "
+               "Instituten weniger. Sie ist kein Abdeckungsmangel.")
+    aus.append("  ⚠ Der SSM-Bereich umfasst den Euroraum. Unser Bestand reicht "
+               "darüber hinaus; für Länder ausserhalb gibt es hier keine "
+               "Grundgesamtheit und damit KEINE Abdeckungsaussage.")
+
     aus.append(f"Nur in unserem Bestand (ausserhalb des SSM-Bereichs): {len(nur_bei_uns)}")
     laender = collections.Counter(meta[l].get("country", "?") for l in nur_bei_uns)
     aus.append("  nach Land: " +

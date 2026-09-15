@@ -141,6 +141,9 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/irrbb_sensitivity.csv` | Report × Zinsschock → ΔEVE, ΔNII, Supervisory Outlier Test | IRRBB1 `68.00`, KM1 `61.00` |
 | `processed/peer_similarity.csv` | Report → die fünf ähnlichsten Institute nach Länderprofil | CCyB1 `67.01.A` |
 | `processed/country_effect.csv` | Bankattribut × Länderkennzahl → Varianzzerlegung und Korrelation | `footprint.csv`, `country_gdp.csv` |
+| `processed/catalogue_coverage.csv` | Katalog-Report → geladen, oder warum nicht | `manifest_full.csv` gegen Parquet + Coverage-Matrix |
+| `processed/risk_taker_share.csv` | Report → Anteil der „identified staff" an der Belegschaft, grössenbereinigt | REM1 `30.01` + `wikidata_entities.csv` |
+| `codebook/wikidata_entities.csv` | LEI → Wikidata-Item, Belegschaft mit Stichtag, Gründung, Rechtsform, Börsennotierung | Wikidata (`P1278`) |
 | `processed/irb_risk_weights.csv` | Institut × Forderungsklasse × PD-Band → Risikogewicht, PD, LGD | CR6 `26.00.A` |
 | `processed/footprint.csv` | Institut → Länderstreuung des Exposures, Domestizitätsquote, HHI | CCyB1 `67.01.A` |
 | `processed/disclosure_frequency.csv` | Klasse × Template → gemessene Offenlegungsfrequenz | `filing_indicators.csv` |
@@ -344,7 +347,8 @@ Schreibweisen, keine Lücke:
 | rohe Differenz | 2.479 |
 | nur signifikante Institute, Gruppenabdeckung über die EZB-Hierarchie | 126 |
 | Abgleich über den 18-stelligen LEI-Kern | 19 |
-| teilweise meldende Gruppen anerkannt | **12** |
+| teilweise meldende Gruppen anerkannt | 12 |
+| Melder unter abweichender LEI erkannt | **1** |
 
 Jeder Schritt entfernt Scheinbefunde, keinen echten.
 
@@ -353,13 +357,62 @@ Jeder Schritt entfernt Scheinbefunde, keinen echten.
 | `meldet_selbst` | 185 | 201 |
 | `ueber_gruppe` | 593 | — |
 | `gruppe_meldet_teilweise` | 7 | — |
+| `namensgleicher_melder` | 11 | — |
 | `keine_gruppe_bekannt` | — | 1.865 |
-| `nicht_abgedeckt` | **12** | — |
+| `nicht_abgedeckt` | **1** | — |
 
-Von den verbleibenden 12 sind 11 erklärbar: neun österreichische Volksbanken
-hängen an Volksbank Wien, die bei uns unter einem nationalen Code statt einem
-LEI steht, und zwei griechische an Piraeus, das bei uns als *Piraeus Financial
-Holdings* meldet.
+#### Die LEI der Aufsicht ist nicht die LEI der Offenlegung
+
+Rein über die LEI gerechnet fehlten **12** signifikante Institute. Elf davon
+melden nachweislich, nur unter einer anderen Kennung als der, die die EZB-Liste
+führt: neun österreichische Volksbanken hängen an **Volksbank Wien**, die bei
+uns unter einem nationalen Code statt einem LEI steht, und zwei griechische an
+**Piraeus**, das als *Piraeus Financial Holdings* meldet.
+
+Sie als fehlend zu zählen wäre eine Unterstellung; sie stillschweigend als
+abgedeckt zu zählen eine Behauptung. `namensgleicher_melder` sagt beides nicht
+und führt den gefundenen Melder in `namenstreffer` mit, damit der Verdacht
+nachprüfbar bleibt — die Zuordnung selbst läuft weiter ausschliesslich über die
+LEI.
+
+Der Namensvergleich verlangt **zwei** gemeinsame bedeutungstragende Wörter im
+**selben Land**; ein Wort genügt nur, wenn ein Name nach Abzug der Rechtsformen
+aus einem einzigen besteht. Beide Schranken sind gemessen nötig: mit einem Wort
+träfe *Nederlandse Waterschapsbank* auf *Nederlandse Financierings-Maatschappij*
+(zwei verschiedene Banken), und ohne die Mindestwortlänge zerfällt `S.A.` in
+„s" und „a" — dann gelten *Piraeus Bank S.A.* und *Alpha Bank S.A.* als
+dasselbe Haus.
+
+#### Übrig bleibt ein einziges Institut
+
+**Nederlandse Waterschapsbank N.V.** — weder selbst im Bestand, noch über die
+Gruppe, noch namensgleich. Das ist die Zahl, die #42 sucht, und auch sie ist
+kein Vorwurf: Art. 433a lässt für nicht börsennotierte Institute jährliche
+statt quartalsweiser Offenlegung zu, und eine Offenlegung ausserhalb des Hubs
+ist damit nicht ausgeschlossen.
+
+#### Abdeckung je Land — getrennt nach SI und LSI
+
+| Land | SI | LSI |
+|---|---:|---:|
+| Italien | 212/212 (100 %) | 30/138 (22 %) |
+| Frankreich | 207/207 (100 %) | 12/83 (14 %) |
+| Österreich | 66/75 (88 %) | 16/315 (5 %) |
+| Deutschland | 64/64 (100 %) | 41/1.109 (4 %) |
+| Finnland | 55/55 (100 %) | 5/46 (11 %) |
+| Spanien | 39/39 (100 %) | 16/72 (22 %) |
+
+Die Trennung ist keine Formalie. **Die LSI-Quote ist niedrig, weil sie niedrig
+sein soll:** nach CRR Art. 433a–c legen kleine, nicht börsennotierte Institute
+seltener und weniger offen, und Deutschlands 1.109 LSIs sind überwiegend
+Sparkassen und Genossenschaftsbanken. Eine gemeinsame Quote läse sich als
+Abdeckungslücke und wäre eine Unterstellung.
+
+> ⚠️ Das LSI-Blatt der EZB-Liste hat **weder eine Land- noch eine Namensspalte**
+> — es ist nach Ländern gegliedert, Name und Zwischenüberschrift stehen in
+> derselben Spalte. Wer nur Spaltenköpfe sucht, bekommt für alle 2.066 LSIs
+> leere Felder, und zwar lautlos. Genau deshalb wird das Land wie die
+> Gruppennummer als laufende Überschrift mitgeführt.
 
 **Drei Fallen, die gemessen zugeschlagen haben.** Die Proportionalität nach CRR
 Art. 433b/c (1.093 deutsche und 363 österreichische Kleininstitute legen gar
@@ -776,6 +829,102 @@ Der Ländereffekt ist trotzdem gross — die Mediane reichen von 0,061 (Irland) 
 0,993 (Norwegen). Er ist nur kein *Makro*effekt. Wer die Domestizität erklären
 will, braucht Instituts- und keine Ländermerkmale; das ist die Richtung von #13
 und #35.
+
+### `catalogue_coverage.csv` — ist die Stichtagswelle geladen?
+
+Die Frage aus #7, und sie war ohne dieses Blatt nur von Hand zu beantworten.
+925 Katalog-Reports, **882 geladen (95,4 %)**. Die naheliegende Rechnung
+„Katalog minus Bestand = 43 Rückstand" ist dabei falsch, weil die 43 vier
+verschiedene Dinge sind:
+
+| Einstufung | n | was es ist |
+|---|---:|---|
+| `nur_pdf` | 40 | veröffentlicht nur DISDOCS — PDF, kein XBRL-CSV |
+| `ohne_platzierbare_fakten` | 1 | geparst, in der Coverage-Matrix, kein platzierbarer Fakt (#28) |
+| `toter_link` | 2 | Katalogzeile ohne publizierte Datei (EDAP 404) |
+| **`offen`** | **0** | ladbar und noch nicht geladen |
+
+**Nur die letzte Zeile beschreibt eine Aufgabe.** Die 40 PDF-Institute als
+Rückstand zu führen hiesse, eine Eigenschaft der Quelle als eigenes Versäumnis
+zu buchen; die zwei toten Links stehen dauerhaft in `manifest_todo.csv` und
+verschwinden nie.
+
+Der `ohne_platzierbare_fakten`-Fall ist der heikelste: die Einreichung wurde
+geladen, geparst und deklariert Templates, trägt aber keinen einzigen
+platzierbaren Fakt. Sichtbar wird sie nur, wenn man die Coverage-Matrix gegen
+die Long-Form hält — sonst sieht sie aus wie eine geladene.
+
+Alle fünf Stichtage liegen vor (2025-06-30, 2025-09-30, 2025-10-31, 2025-12-31,
+2026-03-31); 209 Institute tragen mindestens zwei, womit Zeitreihen und die
+Zeitprüfung aus #36 real greifen.
+
+### `risk_taker_share.csv` — wie breit zieht ein Haus den Kreis der Risikoträger?
+
+Die Kennzahl aus #40, und sie entsteht **erst durch die Kombination**: REM1
+(`30.01` r0010) liefert die Zahl der „identified staff" nach CRD Art. 92,
+Wikidata über die LEI (`P1278` → `P1128`) die Gesamtbelegschaft. Der Quotient
+sagt, wie weit ein Institut den Kreis der Mitarbeiter zieht, deren Tätigkeit sich
+wesentlich auf das Risikoprofil auswirkt — ein Ermessensspielraum, für den es
+bisher keine vergleichenden Zahlen gibt. 83 Reports, 68 im Modell.
+
+#### Die Rohquote misst die Grösse, nicht das Ermessen
+
+Roh reicht der Anteil von 0,30 % bis 54,67 % — Faktor 180. Das sieht nach einem
+gewaltigen Ermessensunterschied aus und ist zum grössten Teil keiner:
+
+| Belegschaft | n | Median-Anteil |
+|---|---:|---:|
+| < 500 | 18 | 14,37 % |
+| 500–5.000 | 28 | 5,80 % |
+| 5.000–50.000 | 18 | 1,81 % |
+| > 50.000 | 4 | 1,14 % |
+
+`log10(Belegschaft)` gegen `log10(Anteil)`: **r = −0,869, r² = 0,755**. Drei
+Viertel der Streuung erklärt die Belegschaftsgrösse allein — und das ist
+Sachlogik, kein Artefakt: eine Grossbank mit 194.000 Beschäftigten hat
+Zehntausende im Filialvertrieb, deren Tätigkeit das Risikoprofil nicht
+wesentlich beeinflusst. Ein Spezialfinanzierer mit 101 Mitarbeitern hat sie
+nicht.
+
+> ⚠️ **Wer die Rohquote als Governance-Aussage veröffentlicht, veröffentlicht
+> eine Grössenmessung mit einem Governance-Etikett** — dieselbe Falle wie die
+> rohe Auslassungsquote in #43, die RWA-Dichte in #45 und die Ländermittel
+> in #11.
+
+#### Gemessen wird deshalb der Rest
+
+`faktor_gegen_erwartung` = tatsächlicher Anteil / dem Anteil, den die
+Belegschaftsgrösse vorhersagt (Modell: `Anteil ≈ 10^(−0,500·log10(Belegschaft)
++0,333)`, geschätzt je Institut und nur auf Zeilen ohne Vorbehalt). Ein Wert
+von 2,0 heisst: **doppelt so viele Risikoträger wie Häuser dieser Grösse** — und
+das ist eine Aussage über die Auslegung.
+
+Die Korrektur zieht die Spanne von Faktor 180 auf p10 0,48 / Median 1,03 /
+p90 1,87 zusammen. Am weitesten gezogen: Raiffeisen Bank International 3,31×,
+Sparebank 1 Østlandet 3,11×, Helaba 2,71×. Am engsten: VÚB 0,23×, MONETA Money
+Bank 0,34×, Bausparkasse Schwäbisch Hall 0,38×.
+
+Dass die Korrektur wirkt und nicht nur glättet, zeigt der **Perimetertest**:
+Wikidata führt eine Gruppenzahl, ein IND-Report aber die Risikoträger des
+Einzelinstituts. Roh liegen die IND-Quoten deshalb um Faktor 3,7 über den
+CON-Quoten (9,7 % gegen 2,6 %); nach Abzug der Grösse bleibt davon Faktor 1,04
+(1,042 gegen 1,006). Wo beide Perimeter vorliegen, gewinnt CON.
+
+#### Drei Vorbehalte, alle gemessen
+
+1. **Die Stichprobe ist nicht der Bestand.** Von 474 LEIs finden sich 232 in
+   Wikidata (49 %), aber nur **112 tragen eine Mitarbeiterzahl (24 %)** — und
+   diese sind nach TREA im Median **2,4-mal grösser** als die übrigen
+   (10,5 gegen 4,4 Mrd EUR). Die Verteilung hier ist grosslastig.
+2. **Wikidata ist crowdsourced.** Die Zahlen sind unterschiedlich aktuell und
+   verschieden abgegrenzt (Kopfzahl gegen Vollzeitäquivalente). `P1128` trägt
+   oft mehrere Aussagen mit verschiedenen Stichtagen — behalten wird die mit dem
+   **jüngsten** (`mitarbeiter_stand`, bei 100 von 112 vorhanden); undatierte
+   verlieren gegen datierte. `wikidata_id` macht jeden Wert nachprüfbar.
+3. **Beide Seiten der Division brauchen einen Filter.** REM1 ist genau das
+   Template, in dem #17 die stärksten Ausreisser findet. 15 Reports mit
+   `rem_per_head`-Befund tragen `vorbehalt=rem_befund`, gehen nicht ins Modell
+   und sind keine Governance-Aussage.
 
 ### `irb_risk_weights.csv` — Risikogewichte je PD-Band
 

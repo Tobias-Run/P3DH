@@ -279,6 +279,17 @@
   .pctb{display:block;position:relative;height:9px;margin-top:1px;background:var(--soft);
         border-radius:2px;overflow:hidden;min-width:52px}
   .pctf{display:block;height:100%;background:var(--blue);opacity:.35}
+  /* Verteilungsstreifen (#49). Spur = p10..p90 der Peer-Gruppe, Box = q1..q3,
+     Strich = Median, Marke = dieses Institut. Bewusst schmal: er steht UNTER
+     der Zahl und darf sie nicht ueberstimmen. */
+  .dstr{display:block;position:relative;height:7px;margin-top:2px;min-width:52px;
+        background:var(--soft);border-radius:2px}
+  .dbox{position:absolute;top:0;height:100%;background:var(--ink);opacity:.14;border-radius:2px}
+  .dmed{position:absolute;top:0;height:100%;width:1px;background:var(--ink);opacity:.45}
+  .dmark{position:absolute;top:-1px;height:9px;width:2px;background:var(--blue);
+         border-radius:1px;transform:translateX(-1px)}
+  .dout{position:absolute;top:-3px;font-style:normal;font-size:9px;color:var(--blue)}
+  .dstr .dout:first-of-type{left:0}
   /* Groessenbalken (#49). Optisch klar vom Perzentilband getrennt: dort eine
      Spur mit Marke und Beschriftung, hier ein schlichter Balken ohne Spur —
      „wie gross" und „wo in der Gruppe" duerfen nicht gleich aussehen. */
@@ -736,6 +747,67 @@ function ensureLabels(){
   return LABELS_PROMISE;
 }
 
+/* ---- Form der Peer-Verteilung (#49, R4) ----------------------------------
+ *
+ * Das Perzentil sagt, WO ein Institut steht — nicht, WORIN. "P47" heisst in
+ * einer eng gepackten Gruppe etwas anderes als in einer, die ueber zwei
+ * Groessenordnungen streut, und an der Zahl ist das nicht zu sehen.
+ *
+ * Je Zelle ausgeliefert waeren das 1.407.650 Eintraege und rund 39 MB. Die Form
+ * ist aber keine Eigenschaft der Zelle, sondern der GRUPPE — 60.083 Eintraege,
+ * Faktor 23. Deshalb eine eigene, lazy geladene Datei: die Startseite braucht
+ * sie nie, die Reportansicht erst beim Aufklappen.
+ *
+ * Eintrag: [p10, q1, median, q3, p90] in WERT-Einheiten. In Perzentilraum waere
+ * die Box per Definition 25..75 und damit informationslos. */
+let SHAPE=null, SHAPE_PROMISE=null;
+function ensureShapes(){
+  if(SHAPE) return Promise.resolve(SHAPE);
+  if(!SHAPE_PROMISE) SHAPE_PROMISE=getJSON('peer_shape.json').then(j=>{
+    SHAPE=new Map(Object.entries(j||{})); return SHAPE;
+  }).catch(e=>{ SHAPE_PROMISE=null; SHAPE=new Map(); return SHAPE; });
+  return SHAPE_PROMISE;
+}
+const shapeAt=(rep,tid,row,col)=>{
+  if(!SHAPE) return null;
+  const m=META.get(leiParts(rep.entityID).lei)||{};
+  const it=m.institution_type||m.itype||'?';
+  return SHAPE.get(`${tid}|${row}|${col}|${it}|${leiParts(rep.entityID).scope}|${rep.refPeriod}`)||null;
+};
+
+/* Der Streifen: Spur p10..p90, Box q1..q3, Marke beim eigenen Wert.
+ *
+ * KEIN Rot/Gruen (#49): es sind Offenlegungsdaten, keine Bewertung. Die
+ * Position traegt das Signal, nicht die Farbe — wer keine Farben unterscheidet,
+ * liest den Streifen trotzdem.
+ *
+ * Werte ausserhalb p10..p90 werden an den Rand GEKLEMMT und mit einem Pfeil
+ * markiert, statt die Spur zu dehnen: ein einzelner Extremwert wuerde sonst die
+ * ganze Box auf einen Strich zusammendruecken und die Verteilung unsichtbar
+ * machen — genau der Fehler, den #48 eine Ebene hoeher behoben hat. */
+function redrawBody(body, list, rep){
+  // Neu zeichnen, wenn die Form NACH dem ersten Rendern eintrifft. Nur dann —
+  // sonst flackert jede Tabelle einmal ohne Grund.
+  body.innerHTML=list.map(tid=>renderTemplate(tid, rep.templates.get(tid), rep)).join('');
+}
+
+function shapeStrip(form, wert){
+  if(!form || wert==null || !isFinite(wert)) return '';
+  const [p10,q1,med,q3,p90]=form;
+  const spanne=p90-p10;
+  if(!(spanne>0)) return '';                 // entartete Gruppe: kein Streifen
+  const pos=x=>Math.max(0,Math.min(100,(x-p10)/spanne*100));
+  const links=pos(q1), breite=Math.max(1,pos(q3)-pos(q1));
+  const roh=(wert-p10)/spanne*100;
+  const marke=Math.max(0,Math.min(100,roh));
+  const drausen=roh<0?'‹':roh>100?'›':'';
+  return `<span class="dstr" aria-hidden="true">`
+       + `<span class="dbox" style="left:${links}%;width:${breite}%"></span>`
+       + `<span class="dmed" style="left:${pos(med)}%"></span>`
+       + `<span class="dmark" style="left:${marke}%"></span>`
+       + (drausen?`<i class="dout">${drausen}</i>`:'') + `</span>`;
+}
+
 /* fetch a report's full grid on demand */
 async function ensureLoaded(rep){
   if(rep.loaded) return;
@@ -1091,7 +1163,8 @@ function renderTemplate(tid, cells, rep){
       // Sekundaerzeile nur, wenn eingeschaltet UND eine Peer-Gruppe da war.
       // Fehlt sie, steht dort NICHTS — kein Platzhalter, der nach Null aussieht.
       const ctx = (CTX&&pc) ? `<span class="ctxline">P${pc[0]} · ⌀${
-        esc(fmtTyped(pc[1],dt,unit,dt==='monetary'?rate:1))}</span>` : '';
+        esc(fmtTyped(pc[1],dt,unit,dt==='monetary'?rate:1))}</span>${
+        shapeStrip(shapeAt(rep,tid,r,c), v)}` : '';
       h+=`<td class="${cls}"${tip}>${fmtTyped(v,dt,unit,dt==='monetary'?rate:1)}${ctx}</td>`;
     }
     h+='</tr>';
@@ -1529,6 +1602,11 @@ async function renderReport(rep){
         +esc(e.message)+'</div>'; return; }
       if(body.dataset.done==='1') return;   // inzwischen anderweitig gefuellt
     }
+    // Die Form der Peer-Verteilung (#49) NACH den Labels und ohne zu blockieren:
+    // fehlt sie, steht der Streifen eben nicht da, die Tabelle steht trotzdem.
+    // Ein Streifen ist eine Zugabe, kein Wert — auf ihn zu warten hiesse, das
+    // Rendern einer 6-MB-Datei unterzuordnen.
+    if(!SHAPE) ensureShapes().then(()=>{ if(body.dataset.done==='1') redrawBody(body,list,rep); });
     body.innerHTML=list.map(tid=>renderTemplate(tid, rep.templates.get(tid), rep)).join('')
       || `<div class="status">${cont&&cont._filtered
             ? 'Kein Template dieses Blocks passt zum Filter.'

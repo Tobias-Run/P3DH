@@ -211,6 +211,19 @@ jobs:
       # Produkt: bricht bewusst NICHT ab, wenn Institute auffaellige Werte
       # melden — das sind Befunde ueber die Einreichungen, keine Fehler in
       # unserer Pipeline. Muss nach Zweig B laufen (braucht fact_value_eur).
+      # Offenlegungsfrequenz je Template (#34). Muss NACH dem Parsen laufen,
+      # weil sie die Filing-Indicators aller Stichtage braucht — und sie
+      # aendert sich mit jeder neuen Welle, weil ein fuenfter Stichtag die
+      # Muster verlaengert.
+      #
+      # Steht VOR check_plausibility (#36) und vor dem Auslassungsprofil (#43
+      # Punkt 4): beide lesen disclosure_frequency.csv. Fehlt sie, laufen beide
+      # trotzdem durch — der Zeitvergleich verliert nur den Frequenzhinweis am
+      # Befund, die Zeitdimension der Auslassung bleibt ganz leer. Zwei stille
+      # Ausfaelle, die scripts/check_pipeline_order.py jetzt findet.
+      - name: Offenlegungsfrequenz
+        run: python scripts/build_disclosure_frequency.py
+
       - name: Plausibility profile
         run: python scripts/check_plausibility.py
 
@@ -237,13 +250,6 @@ jobs:
       # gemeldet wird.
       - name: IRB-Risikogewichte (CR6)
         run: python scripts/build_irb_risk_weights.py
-
-      # Offenlegungsfrequenz je Template (#34). Muss NACH dem Parsen laufen,
-      # weil sie die Filing-Indicators aller Stichtage braucht — und sie
-      # aendert sich mit jeder neuen Welle, weil ein fuenfter Stichtag die
-      # Muster verlaengert.
-      - name: Offenlegungsfrequenz
-        run: python scripts/build_disclosure_frequency.py
 
       # Ermessensausuebung nach Art. 432 (#43). Braucht BEIDE Quellen frisch:
       # die Filing-Indicators fuer die Deklaration und das Parquet fuer die
@@ -282,6 +288,31 @@ jobs:
       # footprint.csv und country_gdp.csv; laeuft nach dem Footprint.
       - name: Laendereffekt (#11)
         run: python scripts/check_country_effect.py
+
+      # Ist die Stichtagswelle geladen (#7)? Muss NACH build_zweig_b laufen:
+      # die Einstufung haelt den Katalog gegen das Parquet UND die
+      # Coverage-Matrix. Nur so ist der #28-Fall — geparst, in der Matrix, ohne
+      # platzierbaren Fakt — von einer echten Luecke zu unterscheiden.
+      - name: Katalogabdeckung (#7)
+        run: python scripts/check_catalogue_coverage.py
+
+      # Wikidata ueber die LEI (#40). EINZIGER Schritt dieser Kette, der ein
+      # FREMDES Netz braucht (query.wikidata.org). Er bricht den Lauf deshalb
+      # nicht ab: die Zuordnung liegt in codebook/ im Repo, ein Ausfall laesst
+      # sie unveraendert und der naechste Schritt rechnet auf dem letzten Stand
+      # weiter. Der Skript-interne Schutz verhindert, dass eine halbe Antwort
+      # eine ganze ersetzt.
+      - name: Wikidata-Merkmale (#40)
+        continue-on-error: true
+        run: python scripts/fetch_wikidata_entities.py
+
+      # Anteil der Risikotraeger (#40). Braucht das Wikidata-Codebook UND die
+      # Plausibilitaetsbefunde: Reports mit `rem_per_head`-Befund (#17) liefern
+      # die eine Haelfte des Quotienten und fliegen raus. Laeuft es vor
+      # check_plausibility, ist der Filter leer und ein bekannter Ausreisser
+      # geht als Governance-Aussage durch.
+      - name: Risikotraeger-Anteil (#40)
+        run: python scripts/build_risk_taker_share.py
 
       - name: Build Zweig A (JSON shards)
         run: python scripts/build_zweig_a_shards.py
