@@ -1,23 +1,47 @@
 # Review der offenen Issues
 
-Stand **2026-09-13**, nach dem Merge von PR #87. 29 offene Issues.
+Erhoben **2026-09-13** nach PR #87, nachgezogen **2026-09-15** nach den PRs
+#89, #90 und #91. **27 offene Issues.**
 
 Dieser Review ist eine **Momentaufnahme** und veraltet mit jedem Merge. Er steht
 trotzdem im Repo, weil die Alternative — die Einschätzung nur im Issue-Verlauf —
-sie über 29 Threads verteilt und damit unlesbar macht. Jede Zahl darin ist am
+sie über 27 Threads verteilt und damit unlesbar macht. Jede Zahl darin ist am
 Bestand gemessen, nicht aus den Issue-Texten übernommen.
 
 Die Befunde stehen zusätzlich als Kommentar an den jeweiligen Issues, damit
 niemand dieses Dokument kennen muss, um den Stand seines Issues zu sehen:
-#14, #31, #32, #34, #44, #45, #59, #83.
+#14, #31, #32, #34, #36, #41, #44, #45, #59, #83, #88.
+
+## Was seit der Erhebung geliefert wurde
+
+Der Review hat zu sechs Issues einen nächsten Schritt benannt. Alle sechs sind
+inzwischen gebaut — und drei Issues sind damit ganz erledigt.
+
+| Issue | Was hier als nächster Schritt stand | Stand |
+|---|---|---|
+| #83 | „`build_footprint.py` liest `scale_flags.csv` nicht — der billigste nächste Schritt im ganzen Backlog" | ✅ PR #90 |
+| #34 | „Der Hebel mit der breitesten Wirkung … es fehlt die Ableitung als eigenes Artefakt" | ✅ PR #90, Punkt 1 von 2 |
+| #32 · #42 | „zwei Konzerngraphen, die nie gegeneinander geprüft wurden" | ✅ PR #90 |
+| #45 | Punkt 3 — IRB-Risikogewichte je PD-Band | ✅ PR #89 |
+| #41 | Machbarkeitsprüfung mit eigener Abbruchschwelle | ✅ PR #89 — **Issue geschlossen** |
+| #88 | vom Review selbst gefunden | ✅ PR #89 + #92 — **Issue geschlossen** |
+| #36 | hing an #34, siehe Abschnitt B | ✅ PR #91 — **Issue geschlossen** |
+
+**Eine Lehre daraus, die den Review selbst betrifft.** Zwischen der Erhebung und
+heute sank die Zahl der offenen Issues von 29 auf 27, während sieben
+Arbeitspakete fertig wurden. Der Zähler misst diese Arbeit nicht, weil die
+meisten Issues mehrere Punkte tragen und teilgeliefert offen bleiben. Wer den
+Fortschritt am Zähler abliest, sieht Stillstand, wo keiner ist — und umgekehrt
+wäre ein Issue, das nach dem ersten von vier Punkten geschlossen wird, eine
+verlorene Anforderung. Die Spalte „Stand" oben ist das ehrlichere Mass.
 
 ## Zusammenfassung
 
 | | Anzahl |
 |---|---:|
 | Teilergebnis geliefert, bewusst offen gelassen | 10 |
-| nicht angefasst, mit heutigem Bestand rechenbar | 9 |
-| nicht angefasst, braucht externe Quelle oder Netz | 5 |
+| nicht angefasst, mit heutigem Bestand rechenbar | 8 |
+| nicht angefasst, braucht externe Quelle oder Netz | 4 |
 | Betrieb / Wellen | 2 |
 | sehr niedrige Priorität | 3 |
 
@@ -49,17 +73,36 @@ Die beiden Detektoren sind also **komplementär, nicht redundant**. Offen bleibt
 eine *allgemeine* Erkennung einzelner skalierter Zellen — was existiert, ist
 eine Prüfung für eine bestimmte Zelle, geschrieben für einen anderen Zweck.
 
-**Und der ursprüngliche Aufhänger ist unverändert offen:** 22 Zeilen in
-`footprint.csv` mit `reliable = true`. `build_footprint.py` liest
-`scale_flags.csv` nicht. Die Ursache ist erkannt und in einer Datei, die
-Konsequenz fehlt — das ist der billigste nächste Schritt im ganzen Backlog.
+**Der ursprüngliche Aufhänger ist erledigt** *(PR #90)*. `build_footprint.py`
+liest `scale_flags.csv`; von 377 Zeilen tragen 31 den Vorbehalt `skala`, und
+keine davon ist noch `reliable = true`.
+
+**Dazu ein dritter Detektor, der keiner sein wollte** *(PR #91)*. Der
+Zeitvergleich aus #36 ist richtungsblind und sieht damit, was `robust_z` per
+Konstruktion nicht sieht. 8 der 21 Report-Paare mit Strukturbruch enthalten
+einen Report, den `scale_flags.csv` unabhängig als `skaliert` führt — und in
+der richtigen Richtung: bei der Deutschen Pfandbriefbank ist der frühere
+Report der skalierte. Die übrigen 13 kennt #83 nicht (Sparebanken Norge
+25,3 %, Groupe BPCE 18,2 %, DNB Bank 14,4 %).
+
+| Klasse | Detektor | Stand |
+|---|---|---|
+| A — ganzer Report | `scale_flags.csv` · `time_break` (#36) | ✅ zwei unabhängige |
+| B — einzelnes Template | `scale_flags.csv`, Templateebene | ✅ |
+| C — einzelne Zelle | `rwa_density.skalenverdacht` · `time_jump` (#36) | teilweise |
+
+Klasse C ist damit nicht mehr auf die LR-Zelle beschränkt — `time_jump` erkennt
+eine einzelne skalierte Zelle überall, **sofern das Institut zwei Stichtage
+hat** (207 von 474). Für die übrigen bleibt die allgemeine Erkennung offen.
 
 ### #43 — Ermessensausübung nach Art. 432
 
 `processed/omission_profile.csv` und `omission_templates.csv`. Punkte 1–3 des
 Issues erledigt.
 
-**Offen: Punkt 4** (Zeitdimension, hängt an #34). Und der Ländervergleich aus
+**Offen: Punkt 4** (Zeitdimension) — aber **nicht mehr blockiert**: er hing an
+#34, und `processed/disclosure_frequency.csv` liegt seit PR #90 vor. Das ist
+damit der billigste offene Schritt im Backlog. Und der Ländervergleich aus
 Punkt 3 trägt nicht: die Mediane liegen in fast allen 24 Ländern bei 0,000, die
 Spitze (Belgien, Rumänien) bei 0,042. Das ist Rauschen an der Nachkommastelle,
 kein Aufsichtsraum-Effekt.
@@ -82,11 +125,20 @@ Offen sind die Punkte 3–5 (Aggregate, die den Graphen *benutzen*). Heute hat e
 genau einen Konsumenten: `build_eba_reconciliation.py` schliesst über ihn 90
 Institutszeilen aus, deren Mutter selbst meldet.
 
-⚠️ **Im Repo liegen zwei Konzerngraphen, die nie gegeneinander geprüft wurden.**
-`coverage_gap.csv` (#42) erkennt Gruppenabdeckung über die **EZB-Hierarchie**,
-nicht über GLEIF — weil die EZB-Liste den Graphen selbst mitbringt. Das ist kein
-Mangel, aber ein Abgleich der beiden wäre eine billige externe Validierung nach
-dem Muster von #37.
+**Die beiden Konzerngraphen sind inzwischen gegeneinander geprüft** *(PR #90,
+`processed/group_graph_check.csv`)*. `coverage_gap.csv` (#42) erkennt
+Gruppenabdeckung über die **EZB-Hierarchie**, `lei_relations.csv` (#32) über
+GLEIF. 97 Institute haben in beiden einen Kopf:
+
+    67  identisch
+    30  ssm_schnitt   GLEIF-Kopf ausserhalb der EZB-Liste
+     0  konflikt
+
+**Kein Widerspruch** — und die 30 Abweichungen sind kein Fehler, sondern die
+Perimetergrenze: bei 27 davon ist der EZB-Kopf das Institut selbst, weil der
+Konzern über den SSM hinausreicht (BofA Securities Europe → Bank of America,
+HSBC Continental Europe → HSBC Holdings). Keiner der Graphen ersetzt den
+anderen; für die Länderaggregate in #37 ist der EZB-Kopf der richtige.
 
 ### #38 — DISDOCS-Korpus
 
@@ -122,27 +174,40 @@ anders als am deutschen, und genau diese Relativierung sieht heute niemand.
 
 Nach Aufwand-zu-Ertrag geordnet, mit dem Grund.
 
-### #34 — Frequenzmodell je Template ⭐
+### ~~#34 — Frequenzmodell je Template~~ → Punkt 1 geliefert *(PR #90)*
 
-**Der Hebel mit der breitesten Wirkung.** Bei #43 ist die Frequenz je
-(Klasse, Stichtag, Template) beiläufig mitgemessen worden, und sie ist scharf:
+`processed/disclosure_frequency.csv`, 184 Koordinaten. Gemessen statt aus der
+CRR abgeschrieben: über 4.407 (Institut, Template)-Paare mit allen vier
+Stichtagen fallen **96,5 % in genau vier Muster** (`1010` halbjährlich 36,2 % ·
+`0000` nie 33,6 % · `0010` jährlich 15,6 % · `1111` vierteljährlich 11,1 %).
 
-| Template | 06-30 | 09-30 | 12-31 | 03-31 | Lesart |
-|---|---:|---:|---:|---:|---|
-| `61.00` KM1 | 96,5 % | 94,9 % | 95,0 % | 95,3 % | vierteljährlich |
-| `74.00` LIQ2 | 62,8 % | 2,5 % | 62,9 % | 2,8 % | halbjährlich |
-| `19.03` OR3 | 3,0 % | 1,7 % | 53,9 % | 1,9 % | jährlich |
+Gemessen wird das Muster eines EINZELNEN Instituts über die vier Stichtage,
+nicht die Quote je Population — der naheliegende Weg hätte ein Drittel der
+Fälle im mehrdeutigen Mittelfeld gelassen (32 % zwischen 20 und 80 %).
 
-Damit ist das Modell fast fertig — es fehlt die Ableitung als eigenes Artefakt.
-Es entsperrt #43 Punkt 4 und macht #36 erst sauber interpretierbar.
+**Offen bleibt Punkt 2, und das ist laut Issue „das eigentliche Produkt":** die
+*Abweichung* vom Muster als Signal — ein Institut, das ein Template einstellt,
+das seine Frequenzklasse weiter meldet. Das Modell ist die Vorarbeit, nicht der
+Befund.
 
-### #36 — Intra-Instituts-Konsistenz über die Zeit
+### ~~#36 — Intra-Instituts-Konsistenz über die Zeit~~ → **erledigt** *(PR #91)*
 
-209 Institute mit ≥ 2 Stichtagen. Der stärkere Plausibilitätstest, weil er
-Institutsgröße und Geschäftsmodell konstant hält, statt sie herausrechnen zu
-müssen. **Braucht #34 vorher**: ohne Frequenzmodell ist jeder Sprung
-mehrdeutig — ein Template, das halbjährlich gemeldet wird, „springt" zwischen
-den Quartalen aus reiner Meldelogik.
+Vierte Regelfamilie in `check_plausibility.py`: 4.870 `time_jump` und 42
+`time_break` neben unverändert 5.816 Zellausreissern und 214
+Korridorverletzungen — in EINEM Profil, wie das Issue verlangt.
+
+Drei Annahmen des Issues trugen nicht, und alle drei sind im Issue-Kommentar
+belegt: der vorgeschlagene Schlüssel (Template, Zeile, Spalte) ist keine Zelle
+(268 Koordinaten tragen mehrere Datenpunkte, was 16.048 „Sprünge" über null
+Tage erzeugt); die Framework-Brücke sperrt nicht, sondern übersetzt (ein
+dp-Join verliert die umgebundenen Zeitreihen still, 1.055 Paare entstehen erst
+durch die Brücke); und die Frequenz trägt einen Vorbehalt, keinen Filter —
+Jahr gegen Quartal ist Faktor 4, also 0,6 Grössenordnungen, weit unter der
+Schwelle von 3.
+
+**#34 war also nicht die Voraussetzung, für die dieser Review sie hielt.** Die
+Einschätzung „braucht #34 vorher" war überzogen: sie stimmt für die
+*Interpretation* eines kleinen Sprungs, nicht für die Erkennung eines grossen.
 
 ### #44 — Wirkt die Proportionalität?
 
@@ -209,13 +274,34 @@ Viewer-Feature. Die Peer-Gruppen-Logik existiert (`peerKeyOf`,
 
 ## C. Nicht angefasst — braucht externe Quelle
 
-**#39** (Ereignisstudie, Kursdaten), **#40** (Wikidata), **#41** (OpenStreetMap),
-**#11** und **#13** (Clustering — rechenbar, aber inhaltlich an #35 gekoppelt),
-**#35** (bipartiter Graph).
+**#39** (Ereignisstudie, Kursdaten), **#40** (Wikidata), **#11** und **#13**
+(Clustering — rechenbar, aber inhaltlich an #35 gekoppelt), **#35** (bipartiter
+Graph).
 
 Zu #11/#13/#35: kein Skript im Repo. Sie hängen an derselben Matrix
 (Bank × Land aus `footprint.csv`) und wären als *ein* Arbeitsschritt billiger als
 als drei.
+
+### ~~#41 — OpenStreetMap~~ → **geschlossen, Abbruchempfehlung** *(PR #89)*
+
+Das Issue nennt seine eigene Abbruchbedingung: „Eine Trefferquote unter ~50 %
+ist ein legitimer Abbruchgrund." `scripts/probe_osm_branches.py` hat sie
+gemessen — **48,9 % über alle Institute (23 von 47)**. Die Schwelle ist
+erreicht, die Frage beantwortet, es ist nichts mehr zu bauen.
+
+Zwei Befunde aus der Messung, die den Wert der Vorabprüfung belegen:
+
+- Der naive Namensabgleich ordnete **36 Filialen der `Banco de Portugal`**
+  (Zentralbank) einem Investmenthaus namens `Banco de Investimento Global` zu.
+  Die Korrektur — generische Wörter streichen statt eine Längenschwelle — hat
+  die Trefferquote von 55,8 % auf 44,2 % **gesenkt**. Ohne sie hätte die
+  Analyse die Abbruchschwelle scheinbar überschritten.
+- Die Verbundstrukturen (Sparkassen, Raiffeisen, Crédit Agricole), die das
+  Issue als Risiko benennt, sind genau die Fälle, die nicht zuzuordnen sind —
+  eine Marke über rechtlich eigenständige Institute hinweg.
+
+Eine Wiederaufnahme bräuchte eine LEI-gestützte Verknüpfung, keine
+Namensheuristik. Die Idee ist damit nicht widerlegt, ihr Weg ist es.
 
 ---
 
@@ -272,7 +358,21 @@ und `build_parse_manifest.py` beschreibt die Falle in seinem Docstring sogar
 wörtlich. Es ist also **dieselbe Regel, zweimal implementiert, einmal richtig**.
 Genau diese Klasse hat das Projekt schon mehrfach getroffen.
 
-Details und Vorschlag in **#88**.
+**Erledigt und geschlossen** *(PR #89 und #92)*. Die Regel steht jetzt einmal, in
+`scripts/submissions.py`; beide Konsumenten defaulten auf `manifest_parse.csv`.
+
+Die zweite Oberfläche brauchte einen eigenen Schritt und war die grössere: das
+Issue nennt `docs/phase1_ingestion.md` wörtlich als die Stelle, an der Leser in
+die Falle geführt werden — und dort stand die Anweisung, `manifest_latest.csv` zu
+konsumieren, noch zwei PRs länger als der Code, den sie beschrieb. Die Doku
+nennt jetzt `build_parse_manifest.py`, führt die 38 % als ausgewiesene Warnung
+und nennt den produktiven Schlüssel. Ein Test in `tests/test_submissions.py`
+hält fest, dass die alte Anweisung nicht zurückkommt.
+
+Dass der Code repariert war und die Anleitung nicht, ist dieselbe Trennung wie
+beim Fund selbst: **eine Regel, zwei Orte, einer davon veraltet.** Eine
+Korrektur ist erst fertig, wenn auch die Stelle stimmt, die Leute tatsächlich
+lesen.
 
 ## Zwei Irrwege dieses Reviews, damit sie nicht wiederkommen
 
