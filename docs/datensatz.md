@@ -197,12 +197,42 @@ beim Lesen nötig:
   „Klumpenrisiko". Für die Fälle, um die es geht (5 Mrd in Malta gegen 5 Mrd in
   Deutschland), trägt sie.
 
-`country_concentration.csv` summiert dasselbe je Land. Die Summe ist
-**entdoppelt**: der CON-Report einer Gruppe enthält ihre Töchter bereits, und
-die IND-Reports derselben Töchter dazuzuzählen meldete eine Konzentration, die
-es nicht gibt — bei Österreich macht das 7,8 % aus. Reports mit Skalenvorbehalt
-(#83) bleiben ebenfalls draußen. Sie misst das Exposure **der Melder im
-Bestand**, nicht das eines Bankensystems.
+### `country_concentration.csv` — wie viel Exposure trägt Land X? (#19)
+
+Dieselben Daten je Land aggregiert. Die Summe ist **entdoppelt**: der CON-Report
+einer Gruppe enthält ihre Töchter bereits, und die IND-Reports derselben Töchter
+dazuzuzählen meldete eine Konzentration, die es nicht gibt — bei Österreich
+macht das 7,8 % aus. Reports mit Skalenvorbehalt (#83) bleiben ebenfalls
+draußen. Sie misst das Exposure **der Melder im Bestand** (222 zum 31.12.2025),
+nicht das eines Bankensystems.
+
+Vier Spalten tragen die Vorbehalte, die #19 als Vorbedingung nennt:
+
+| Spalte | wogegen |
+|---|---|
+| `melder_gesamt` · `breite` | Ohne Nenner ist `melder` nicht lesbar — 55 Melder sind viel oder wenig, je nachdem, ob 60 oder 600 in Frage kamen |
+| `melder_unvollstaendig` | Häuser mit über 25 % im Residualbucket `x28`. Deren Geografie ist unvollständig, die Summe also nach **unten** verzerrt — 45 von 250 Ländersummen betroffen |
+| `groesster_inlaendisch` | trennt die domestizierte Konzentration von der echten (siehe unten) |
+
+**Der Befund: Breite und Konzentration sind entkoppelt.** Brasilien hat 82
+Melder — und trotzdem liegen 80,1 % des Exposures (125,1 Mrd) bei Banco
+Santander. Viele Melder heißen nicht gestreut.
+
+Die Spalte `groesster_inlaendisch` ist nötig, damit das deutbar bleibt: Islands
+84,9 % liegen bei Íslandsbanki, einer isländischen Bank im eigenen Land — das
+ist der Normalfall, kein Befund. Von 101 Ländern mit über 0,5 Mrd Exposure
+tragen 85 ihre größte Position bei einem **ausländischen** Institut, und nur
+die sind Drittstaatenrisiken im Sinne des Issues:
+
+| Land | Anteil | bei | Melder |
+|---|---:|---|---:|
+| Algerien | 89,7 % | Natixis | 43 |
+| Neuseeland | 84,9 % | Rabobank | 60 |
+| Mosambik | 82,1 % | Banco Comercial Português | 22 |
+| Brasilien | 80,1 % | Banco Santander | 82 |
+
+Nicht länderzuordenbar bleiben zum 31.12.2025 **736,5 Mrd EUR** im
+Residualbucket — 3,4 % der zuordenbaren Masse.
 
 ### `lei_relations.csv` — wer gehört zu wem
 
