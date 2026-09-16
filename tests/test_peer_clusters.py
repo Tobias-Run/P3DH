@@ -301,6 +301,29 @@ class ErgebnisTest(unittest.TestCase):
         nummern = sorted({int(n) for n in self.gruppen})
         self.assertEqual(nummern, list(range(1, len(nummern) + 1)))
 
+    def test_an_incomplete_vector_is_marked(self):
+        """#13 verlangt das ausdrücklich: „Institute mit hohem `x28`-Anteil
+        ausschliessen oder markieren: deren Vektor ist unvollständig."
+
+        DekaBank trägt 53 % im Residualbucket — die Gruppenzuordnung stützt
+        sich dort auf 47 % des Buches. Ohne Markierung sähe die Zeile aus wie
+        jede andere.
+        """
+        import build_peer_clusters as c
+        for r in self.rows:
+            if not r["x28_anteil"]:
+                continue
+            with self.subTest(bank=r["bank_name"]):
+                erwartet = "ja" if float(r["x28_anteil"]) > c.X28_GRENZE else "nein"
+                self.assertEqual(r["vektor_unvollstaendig"], erwartet)
+
+    def test_the_residual_share_is_a_share(self):
+        for r in self.rows:
+            if r["x28_anteil"]:
+                with self.subTest(bank=r["bank_name"]):
+                    self.assertGreaterEqual(float(r["x28_anteil"]), 0.0)
+                    self.assertLessEqual(float(r["x28_anteil"]), 1.0)
+
     def test_the_order_is_stable(self):
         k = [(int(r["gruppe"]), r["lei"], r["scope"], r["refPeriod"])
              for r in self.rows]

@@ -105,10 +105,19 @@ MIN_INSTITUTE = 2
 # Beleg für Eigenständigkeit (Arbeitsprinzip 3).
 BELEGT_EIGEN = {"NO_KNOWN_PERSON", "NON_CONSOLIDATING", "NATURAL_PERSONS"}
 
+# Ab welchem Anteil im Residualbucket der Vektor als unvollstaendig gilt. #13
+# verlangt die Markierung ausdruecklich: „Institute mit hohem `x28`-Anteil
+# ausschliessen oder markieren: deren Vektor ist unvollständig." Markieren
+# statt ausschliessen, weil der Rest des Profils gueltig bleibt — nur eben
+# nicht das ganze Buch. Ein Viertel ist die Grenze, ab der die Zuordnung mehr
+# verschweigt als sie zeigt.
+X28_GRENZE = 0.25
+
 FELDER = ["gruppe", "groesse", "institute", "kohaesion", "traegerschaft",
           "traeger", "laender_gemeinsam", "laender", "heimatlaender",
           "grenzueberschreitend", "lei", "scope", "refPeriod", "bank_name",
-          "country", "institution_type", "n_laender"]
+          "country", "institution_type", "n_laender", "x28_anteil",
+          "vektor_unvollstaendig"]
 
 
 def komponenten(knoten, kanten):
@@ -217,6 +226,37 @@ def traegerschaft(leis, traeger):
     return "ungeklaert", len(belegt)
 
 
+def lade_x28(con, parquet=None):
+    """{(lei, scope, refPeriod): Anteil im Residualbucket}.
+
+    CCyB1 erlaubt, unwesentliche Länder in `x28` („übrige Länder")
+    zusammenzufassen. Für die Ähnlichkeit ist dieser Teil des Buches blind: er
+    fällt aus dem Vektor, und der Rest wird auf 1 normiert. Ein Haus mit 53 %
+    in `x28` wird also über 47 % seines Exposures zugeordnet — das ist keine
+    Fehlmessung, aber es muss danebenstehen.
+    """
+    import build_peer_similarity as ps
+
+    pfad = parquet or ps.PARQUET
+    aus = {}
+    for lei, sc, rp, x28, land in con.execute(f"""
+        SELECT lei, scope, refPeriod,
+               sum(CASE WHEN open_axis_country IS NULL AND cell_row = 'x28'
+                        THEN fact_value_eur ELSE 0 END),
+               sum(CASE WHEN open_axis_country IS NOT NULL AND fact_value_eur > 0
+                        THEN fact_value_eur ELSE 0 END)
+        FROM '{pfad}'
+        WHERE template_id = '{ps.TEMPLATE}' AND cell_col = '{ps.SPALTE}'
+          AND fact_value_eur IS NOT NULL
+        GROUP BY lei, scope, refPeriod
+        ORDER BY lei, scope, refPeriod
+    """).fetchall():
+        ganz = (x28 or 0) + (land or 0)
+        if ganz > 0:
+            aus[(lei, sc, rp)] = (x28 or 0) / ganz
+    return aus
+
+
 def build():
     import build_peer_similarity as ps
     import duckdb
@@ -225,6 +265,7 @@ def build():
     profile, meta = ps.lade(con)
     schluessel = sorted(profile)
     traeger = lade_traeger()
+    x28 = lade_x28(con)
     print(f"Profile mit mindestens {ps.MIN_LAENDER} Ländern: {len(schluessel)}")
 
     # Vollständige Ähnlichkeit. 343 Profile sind rund 58.000 Paare — der
@@ -269,7 +310,10 @@ def build():
                 "grenzueberschreitend": "ja" if len(heimat) > 1 else "nein",
                 "lei": lei, "scope": scope, "refPeriod": rp,
                 "bank_name": name, "country": land, "institution_type": itype,
-                "n_laender": len(profile[k])})
+                "n_laender": len(profile[k]),
+                "x28_anteil": f"{x28[k]:.4f}" if k in x28 else "",
+                "vektor_unvollstaendig":
+                    "ja" if x28.get(k, 0.0) > X28_GRENZE else "nein"})
 
     zeilen.sort(key=lambda z: (z["gruppe"], z["lei"], z["scope"], z["refPeriod"]))
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -305,6 +349,15 @@ def bericht(gruppen, zeilen):
                    f"zusammen, nicht direkt.")
     t = collections.Counter(zs[0]["traegerschaft"] for zs in je_gruppe.values())
     aus.append("Trägerschaft: " + "  ".join(f"{k}={v}" for k, v in t.most_common()))
+
+    # Der methodische Punkt, den #13 ausdrücklich nennt.
+    unvoll = [z for z in zeilen if z["vektor_unvollstaendig"] == "ja"]
+    if unvoll:
+        namen = sorted({z["bank_name"] for z in unvoll})
+        aus.append(f"⚠ {len(unvoll)} Zeile(n) mit über "
+                   f"{X28_GRENZE:.0%} im Residualbucket `x28` — die Zuordnung "
+                   f"stützt sich dort auf einen Teil des Buches: "
+                   f"{', '.join(n[:30] for n in namen[:3])}")
 
     grenz = [g for g, zs in je_gruppe.items()
              if zs[0]["grenzueberschreitend"] == "ja"]

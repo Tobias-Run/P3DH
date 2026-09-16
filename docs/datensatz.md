@@ -866,6 +866,7 @@ Drei Spalten tragen die Vorbehalte, ohne die die Ausgabe irreführend wäre:
 | `kohaesion` | die kleinste paarweise Überlappung IN der Gruppe. A~B und B~C machen A, B, C zu einer Komponente, auch wenn A und C sich fremd sind — eine **Kette**, die wie ein Block aussähe |
 | `institute` | die Einheit ist (LEI, scope, refPeriod). Beim ersten Lauf waren 37 von 69 „Gruppen" ein einziges Haus über mehrere Quartale; solche Selbstähnlichkeiten stehen nicht mehr drin |
 | `traegerschaft` | `konzern` heißt: das Verfahren hat eine bekannte Struktur wiedergefunden (OTP Luxembourg ↔ OTP banka d.d.). Das ist eine Gültigkeitsprobe, kein Befund |
+| `vektor_unvollstaendig` | CCyB1 erlaubt, unwesentliche Länder in `x28` zusammenzufassen. DekaBank trägt dort 53 % — die Zuordnung stützt sich auf 47 % des Buches. #13 verlangt die Markierung ausdrücklich |
 
 ⚠️ **„Keine Mutter gemeldet" heißt nicht „eigenständig".** GLEIF trennt
 `NO_KNOWN_PERSON` / `NON_CONSOLIDATING` / `NATURAL_PERSONS` („es gibt keine")
