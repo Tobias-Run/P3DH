@@ -1,7 +1,8 @@
 # Review der offenen Issues
 
 Erhoben **2026-09-13** nach PR #87, nachgezogen **2026-09-15** nach den PRs
-#89, #90 und #91. **27 offene Issues.**
+#89, #90 und #91, erneut **2026-09-16** nach den PRs #94 bis #101.
+**14 offene Issues.**
 
 Dieser Review ist eine **Momentaufnahme** und veraltet mit jedem Merge. Er steht
 trotzdem im Repo, weil die Alternative — die Einschätzung nur im Issue-Verlauf —
@@ -32,24 +33,115 @@ gebaut. Dazu kamen fünf zufällig gezogene Issues in PR #94.
 | #34 | Punkt 2 — Abweichung vom Frequenzmuster, mit Richtung | ✅ PR #94 |
 | #11 | These geprüft und widerlegt | ✅ PR #94 |
 | #27 | Ähnliche Institute, mit #13 als Unterbau | ✅ PR #94 |
+| #7 | Katalogabdeckung je Stichtagswelle | ✅ PR #97 |
+| #8 | Wochen-Cron scharf, plus Meldung bei zwei Fehlläufen | ✅ PR #97 — **erledigt** |
+| #28 · #70 · #50 | Nullmeldungen · Brücken-Mehrdeutigkeit · Spaltenauswahl | ✅ PR #98 |
+| #39 · #50 | Aktien-Verknüpfung (42 Ticker) · gespeicherte Sichten | ✅ PR #100 |
+| #83 | Skalenfehler auf **Templateebene** — der entkommene Fall | ✅ PR #101 |
+| #32 | Punkt 4 — Konsolidierungsabgleich Tochter-IND gegen Mutter-CON | ✅ PR #101 |
+| #13 · #11 | Fussabdruck-Gruppen, `peer_clusters.csv` | ✅ PR #101 |
+| #14 | BIP als Kontextspalte — jetzt **benutzt**, nicht nur vorhanden | ✅ PR #101 |
 
-**Eine Lehre daraus, die den Review selbst betrifft.** Zwischen der Erhebung und
-heute sank die Zahl der offenen Issues von 29 auf 26, während zwölf
-Arbeitspakete fertig wurden. Der Zähler misst diese Arbeit nicht, weil die
-meisten Issues mehrere Punkte tragen und teilgeliefert offen bleiben. Wer den
-Fortschritt am Zähler abliest, sieht Stillstand, wo keiner ist — und umgekehrt
-wäre ein Issue, das nach dem ersten von vier Punkten geschlossen wird, eine
-verlorene Anforderung. Die Spalte „Stand" oben ist das ehrlichere Mass.
+**Eine Lehre daraus, die den Review selbst betrifft.** In den ersten zwei Tagen
+sank die Zahl der offenen Issues von 29 auf 26, während zwölf Arbeitspakete
+fertig wurden. Der Zähler misst diese Arbeit nicht, weil die meisten Issues
+mehrere Punkte tragen und teilgeliefert offen bleiben. Wer den Fortschritt am
+Zähler abliest, sieht Stillstand, wo keiner ist — und umgekehrt wäre ein Issue,
+das nach dem ersten von vier Punkten geschlossen wird, eine verlorene
+Anforderung. Die Spalte „Stand" oben ist das ehrlichere Mass.
+
+Der Zähler steht heute bei 14, und **der Fehler läuft inzwischen andersherum**:
+vier davon sind vollständig geliefert und nur nicht geschlossen, eines ist durch
+ein Artefakt erfüllt, das für ein anderes Issue gebaut wurde. Ein Zähler, der zu
+hoch steht, ist genauso irreführend wie einer, der zu niedrig steht — deshalb
+beginnt der Plan unten mit dem Schliessen, nicht mit dem Bauen.
 
 ## Zusammenfassung
 
-| | Anzahl |
-|---|---:|
-| Teilergebnis geliefert, bewusst offen gelassen | 10 |
-| nicht angefasst, mit heutigem Bestand rechenbar | 8 |
-| nicht angefasst, braucht externe Quelle oder Netz | 4 |
-| Betrieb / Wellen | 2 |
-| sehr niedrige Priorität | 3 |
+Stand **2026-09-16**, gegen den Bestand geprüft — nicht aus den Issue-Texten
+übernommen.
+
+| | Anzahl | Issues |
+|---|---:|---|
+| **fertig, nur nicht geschlossen** | 4 | #11 · #13 · #14 · #83 |
+| fast fertig, Restspalten benannt | 2 | #19 · #32 |
+| Auswertung, Daten vollständig da | 4 | #31 · #35 · #44 · #59 |
+| Ausweitung eines bestehenden Artefakts | 1 | #37 |
+| grösseres Stück, neue Templates | 1 | #16 |
+| extern blockiert | 2 | #38 · #39 |
+
+**Der Tracker ist schlechter als die Realität.** Vier Issues sind vollständig
+geliefert und kommentiert, aber offen; #19 ist durch ein Artefakt erfüllt, das
+für ein anderes Issue gebaut wurde.
+
+### #19 ist zu vier Fünfteln nebenbei entstanden
+
+`processed/country_concentration.csv` (PR #101, gebaut für #14) liefert genau,
+was #19 verlangt: Exposure je Land über die Population, Zahl der Melder,
+BIP-Normierung, `open_axis_country`-Filter — **und zusätzlich die Entdopplung
+über den Konzerngraphen**, die #19 nicht einmal gefordert hat. Es fehlen zwei
+Spalten aus der Vorbedingungsliste des Issues: `abdeckungsgrad` und das
+`x28`-Qualitätsflag.
+
+### Nachtrag zum `x1`-Fehler aus PR #101
+
+Die Warnung stand seit dem 2026-09-01 wörtlich in #35: *„Immer
+`open_axis_country IS NOT NULL` filtern."* `build_peer_similarity` hat sie
+ignoriert, und niemand hat es bemerkt, weil der Median über alle Paare sich
+kaum bewegte.
+
+Alle sechs Konsumenten von `67.01.A` sind daraufhin geprüft:
+
+| Skript | Stand |
+|---|---|
+| `build_footprint.py` | filtert `cell_row <> 'x1'`, im Docstring begründet |
+| `check_consolidation.py` · `build_country_exposure.py` · `build_peer_similarity.py` | filtern korrekt |
+| `build_report_scale.py` · `check_plausibility.py` | nennen das Template nur im Docstring, aggregieren nicht über Länder |
+
+**Es war eine Einzelstelle, keine Fehlerklasse.**
+
+---
+
+## Plan bis Sonntag, 2026-09-20
+
+Der Wochen-Cron feuert montags 04:00 UTC — alles bis Sonntag Gemergte läuft
+Montag erstmals geschlossen durch. Das ist der Grund für den Stichtag.
+
+| Tag | Issues | Warum dort |
+|---|---|---|
+| **Mi 16.09.** | #83 · #13 · #14 · #11 schliessen | geliefert und kommentiert; der Tracker stimmt danach wieder |
+| **Do 17.09.** | #19 · #32 (P3+P5) · #44 | #19 braucht zwei Spalten; #32 P3 schaltet #35 frei |
+| **Fr 18.09.** | #35 · #37 | #35 war auf #32 blockiert, ab Donnerstag frei |
+| **Sa 19.09.** | #59 · #31 | eigenständig, keine Abhängigkeiten |
+| **So 20.09.** | #38 · #39 dokumentieren · Doku-Konsolidierung | siehe unten |
+
+**Abhängigkeit, die die Reihenfolge bestimmt:** #35 setzt #32 voraus — ohne
+Entdopplung zählen Mutter und Tochter als zwei Knoten und jede
+Konzentrationsaussage im Graphen ist verzerrt. Das Issue sagt das selbst, und
+bei 148 IND-Meldern von 474 ist der Effekt gross.
+
+**#16 fällt bewusst aus dem Fenster.** Es ist mit Abstand das grösste Stück und
+als einziges auf neue Templates angewiesen (`82.00`/`83.01`). Es blockiert
+nichts, also ist es das erste Element nach Sonntag — statt es hineinzuquetschen
+und dann zu reissen.
+
+**Vorab zu #44, damit es nicht in die bekannte Falle läuft:** die Frage lautet
+„folgt der Offenlegungsumfang der CRR-Klasse, oder folgen beide der Grösse?".
+Eine rohe Quote, die als Verhaltensmass etikettiert wird und Grösse misst, ist
+genau der Fehler aus #43, #45 und #11. #44 braucht Schichtung oder
+Residuum-nach-Grösse.
+
+### Die zwei extern blockierten
+
+Sie sind nicht durch Arbeit lösbar, sondern durch eine Entscheidung.
+
+- **#39** braucht lizenzierte Kursdaten. Die offene Quelle sitzt hinter einem
+  JS-Browser-Check; eine Bot-Schranke zu umgehen kommt nicht in Frage.
+  Geliefert ist die Verknüpfung bis zur Primärnotierung (42 Ticker) — die
+  Studie ist anschlussfähig, sobald jemand eine Quelle lizenziert. **Bleibt
+  dokumentiert offen.**
+- **#38** hängt an der Sprachbarriere: 30 von 58 Dokumenten sind englisch
+  (52 %). **Wird am Sonntag gebaut** — der LLM-Workflow über die übrigen 28.
 
 ---
 
@@ -58,7 +150,7 @@ verlorene Anforderung. Die Spalte „Stand" oben ist das ehrlichere Mass.
 Diese Issues haben ein Artefakt im Repo. Sie sind **nicht** erledigt, und der
 Rest ist jeweils benannt.
 
-### #83 — Skalenfehler *(bug)*
+### ~~#83 — Skalenfehler~~ *(bug)* → **erledigt** *(PR #90 + #101)*
 
 `processed/scale_flags.csv`: 54 Reports `skaliert`, 17 `verdacht`, 48 einzeln
 skalierte Templates. Der Viewer markiert 100 Reports, 50 davon ohne jeden
@@ -158,7 +250,7 @@ Konzern über den SSM hinausreicht (BofA Securities Europe → Bank of America,
 HSBC Continental Europe → HSBC Holdings). Keiner der Graphen ersetzt den
 anderen; für die Länderaggregate in #37 ist der EZB-Kopf der richtige.
 
-### #38 — DISDOCS-Korpus
+### #38 — DISDOCS-Korpus → Sprachverteilung gemessen *(PR #98)*, Workflow offen
 
 `interim/disdocs_manifest.csv` und `disdocs_probe.csv`. Schritt 3 blockiert an
 der Sprachbarriere; der LLM-Workflow ist im Issue beschrieben, nicht gebaut.
@@ -176,15 +268,19 @@ Teilbarkeit vollständig (Filter, Profil, Sortierung, Auswahl), Export gebaut.
 Umgehung: ein teilbarer Link *ist* eine gespeicherte Sicht, und zwar an einem
 Ort, den der Browser ohnehin verwaltet.
 
-### #14 — BIP als Kontextspalte
+### ~~#14 — BIP als Kontextspalte~~ → **erledigt** *(PR #101)*
 
 `codebook/country_gdp.csv`, 212 Länder, 99,68 % des Exposures, in
 `datensatz.md` mit der Regressor-Warnung dokumentiert.
 
-**Die Spalte wird nirgends benutzt** — ausser vom Abrufskript und der Doku liest
-sie niemand. Der Zweck aus dem Titel, „Kontextspalte", ist damit nicht
-eingelöst: ein Exposure von 5 Mrd EUR relativiert sich am maltesischen BIP
-anders als am deutschen, und genau diese Relativierung sieht heute niemand.
+~~**Die Spalte wird nirgends benutzt.**~~ Eingelöst in PR #101:
+`country_exposure.csv` (20.128 Zeilen je Report und Land) und
+`country_concentration.csv` (526 Zeilen je Land) führen `exposure_je_bip`.
+
+Der Ertrag in einer Zeile: nach absolutem Exposure führt Frankreich (4.038 Mrd,
+141 % des BIP), nach Quote die Marshallinseln (5.265 %). Zwei verschiedene
+Reihenfolgen — das war der Punkt des Issues. Wo die Kennzahl kippt, steht
+daneben: ganz oben misst sie einen Registerplatz, keine Volkswirtschaft.
 
 ---
 
@@ -301,13 +397,16 @@ Viewer-Feature. Die Peer-Gruppen-Logik existiert (`peerKeyOf`,
 
 ## C. Nicht angefasst — braucht externe Quelle
 
-**#39** (Ereignisstudie, Kursdaten), **#40** (Wikidata), **#11** und **#13**
-(Clustering — rechenbar, aber inhaltlich an #35 gekoppelt), **#35** (bipartiter
-Graph).
+**#39** (Ereignisstudie, Kursdaten) — als einziges hier noch extern blockiert.
 
-Zu #11/#13/#35: kein Skript im Repo. Sie hängen an derselben Matrix
-(Bank × Land aus `footprint.csv`) und wären als *ein* Arbeitsschritt billiger als
-als drei.
+~~**#11** und **#13** (Clustering), **#35** (bipartiter Graph)~~ → #11 und #13
+sind mit `peer_clusters.csv` erledigt *(PR #101)*; #35 sitzt auf derselben
+Matrix und ist damit vorbereitet, aber eigenständig. ~~**#40** (Wikidata)~~ →
+`wikidata_entities.csv` läuft in der Pipeline.
+
+Die damalige Einschätzung, die drei wären als *ein* Arbeitsschritt billiger,
+war richtig: #13 hat #11 mitbeantwortet, und beide haben den Unterbau für #35
+gleich mitgebaut.
 
 ### ~~#41 — OpenStreetMap~~ → **geschlossen, Abbruchempfehlung** *(PR #89)*
 
@@ -339,10 +438,12 @@ Namensheuristik. Die Idee ist damit nicht widerlegt, ihr Weg ist es.
 Im Bestand: 2025-06-30 · 09-30 · 10-31 · 12-31 · 2026-03-31. Die Frage ist
 nicht, ob es geht, sondern wann die nächste Welle vorliegt.
 
-### #8 — Wöchentlichen Cron scharf schalten
+### ~~#8 — Wöchentlichen Cron scharf schalten~~ → **erledigt** *(PR #97)*
 
-`pipeline.yml` Zeile 29/30, auskommentiert. Bewusst: ein Cron, der auf eine
-unfertige Kette losgeht, produziert Commits, die niemand liest.
+Scharf seit Lauf #13 (2026-09-15, sha `9317f97`): dort liefen erstmals alle 41
+Schritte grün durch. Montags 04:00 UTC. Dazu eine Meldung, wenn **zwei geplante
+Läufe hintereinander** reissen — ein einzelner roter Lauf heilt sich meist, zwei
+nicht, und seit der Zeitplan scharf ist, sieht sonst niemand mehr zu.
 
 ---
 
