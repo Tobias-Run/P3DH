@@ -312,6 +312,17 @@ jobs:
       - name: Fussabdruck-Gruppen (#11, #13)
         run: python scripts/build_peer_clusters.py
 
+      # Exposure am BIP des Gastlandes (#14). Muss NACH build_footprint laufen:
+      # er liest dessen Vorbehaltsspalte (#83), damit kein Report mit
+      # Skalenfehler in eine Laendersumme eingeht. Braucht ausserdem
+      # lei_relations.csv, um Toechter nicht doppelt zu zaehlen -- der
+      # CON-Report einer Gruppe enthaelt sie bereits.
+      #
+      # DESKRIPTIV, ausdruecklich: #14 schliesst die Regressorlesart aus. Was
+      # hier entsteht, ist eine Normierung, keine Aussage ueber Ursachen.
+      - name: Exposure je Host-BIP (#14)
+        run: python scripts/build_country_exposure.py
+
       # Laendereffekt gegen Bankattribute (#11). Reine Auswertung ueber
       # footprint.csv und country_gdp.csv; laeuft nach dem Footprint.
       - name: Laendereffekt (#11)
@@ -407,6 +418,8 @@ jobs:
                   interim/plausibility_cells.csv interim/plausibility_findings.csv \
                   processed/irrbb_sensitivity.csv processed/peer_similarity.csv \
                   processed/peer_clusters.csv \
+                  processed/country_exposure.csv \
+                  processed/country_concentration.csv \
                   processed/country_effect.csv processed/omission_persistence.csv
           # Harvest-Delta: entsteht nur bei inputs.harvest, deshalb einzeln und
           # bedingt. harvest_log.csv ist append-only — ohne diesen Commit stirbt
