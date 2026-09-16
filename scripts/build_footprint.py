@@ -60,6 +60,7 @@ Run:  python3 scripts/build_footprint.py
 """
 
 from pathlib import Path
+import math
 import csv
 import sys
 
@@ -133,6 +134,38 @@ def lade_skalenmarken(pfad=None):
     return aus
 
 
+# Wie viele Grössenordnungen die CCyB1-Summe unter dem TREA DESSELBEN Reports
+# liegen darf, bevor sie unbrauchbar ist (#83 Punkt 3).
+#
+# Vier, und die Zahl ist gemessen: der eine echte Fall liegt bei −6,39, der
+# nächste Wert der Verteilung bei −3,82 — und DER trägt bereits eine
+# Skalenmarke. Der erste unmarkierte liegt bei −2,97. Zwischen Schwelle und
+# legitimer Population liegt damit mehr als eine Grössenordnung.
+TREA_ORDNUNGEN = 4.0
+
+
+def unter_eigenem_trea(gesamt, trea, ordnungen=TREA_ORDNUNGEN):
+    """Liegt die CCyB1-Summe um Grössenordnungen unter dem TREA DESSELBEN Reports?
+
+    Das Issue schlägt den Peer-Median der Grössenklasse als Massstab vor. Der
+    Vergleich INNERHALB des Reports ist der schärfere: er braucht keine
+    Schichtung und ist gegen Institutsgrösse immun — ein kleines Institut hat
+    ein kleines TREA und eine kleine CCyB1-Summe, das Verhältnis bleibt normal.
+
+    Er fängt genau das, was `scale_flags.csv` NICHT fangen kann. Jene Marke
+    beurteilt den Report als GANZES; ist er durchgehend skaliert, sind Zähler
+    und Nenner gleichermassen zu klein und das Verhältnis unauffällig. Der eine
+    Fall, der dem Skalendetektor entkam (Bank GPB International: CCyB1 meldet
+    215,30 EUR, während KM1 im selben Report 1,52 Mrd trägt), ist ein
+    TEMPLATE-lokaler Fehler — und nur hier sichtbar.
+
+    Beide Prüfungen sind deshalb nötig und keine ersetzt die andere.
+    """
+    if not gesamt or not trea or gesamt <= 0 or trea <= 0:
+        return False           # ohne Vergleichswert wird nichts behauptet
+    return math.log10(gesamt / trea) < -ordnungen
+
+
 def hhi(values):
     """Herfindahl-Index über Exposure-Beträge -> 0..1.
 
@@ -148,12 +181,14 @@ def hhi(values):
     return sum((w / total) ** 2 for w in weights)
 
 
-def footprint(rows, home_country, skalenbefund=""):
+def footprint(rows, home_country, skalenbefund="", trea=None):
     """rows: [(country_name, exposure_eur)] EINES Reports, x1 bereits entfernt.
 
     `country_name` ist None für den Residualbucket x28.
     `skalenbefund` ist das Urteil aus `processed/scale_flags.csv` (#83) — leer,
     wenn der Report unauffällig ist.
+    `trea` ist der Gesamtrisikobetrag aus KM1 DESSELBEN Reports, falls
+    vorhanden — der Massstab für die vierte Prüfung (#83 Punkt 3).
 
     Liefert None, wenn kein verwertbares Exposure vorliegt — kein Wert ist
     besser als ein aus Null gerechneter (Arbeitsprinzip 3).
@@ -208,13 +243,20 @@ def footprint(rows, home_country, skalenbefund=""):
             "" if home else "kein_heimatland",
             "residual" if residual / grand_total > X28_UNRELIABLE else "",
             "skala" if skalenbefund else "",
+            # Vierter Vorbehalt (#83 Punkt 3). Eigener Name, weil er etwas
+            # ANDERES sagt als `skala`: dort ist der ganze Report verschoben
+            # und die Quoten bleiben gültig, hier ist NUR dieses Template
+            # verschoben — dann stimmen auch die Quoten nicht mehr gegen den
+            # Rest des Reports.
+            "unter_trea" if unter_eigenem_trea(grand_total, trea) else "",
         ])),
         # `reliable` sagt, was sein Name sagt: die Zeile ist im Ganzen zu
         # gebrauchen. Bis #83 blieb es bei skalierten Reports auf `true` — 28
         # Zeilen trugen ein um Grössenordnungen zu kleines Exposure und
         # meldeten sich als belastbar. Das war der Aufhänger des Issues.
         "reliable": (bool(home) and residual / grand_total <= X28_UNRELIABLE
-                     and not skalenbefund),
+                     and not skalenbefund
+                     and not unter_eigenem_trea(grand_total, trea)),
         "skalenbefund": skalenbefund,
     }
 
@@ -244,11 +286,28 @@ def main():
     if marken:
         print(f"  Skalenmarken aus #83 geladen: {len(marken)} Reports")
 
+    # Der Gesamtrisikobetrag aus KM1 DESSELBEN Reports — der Massstab für die
+    # vierte Prüfung. Eigene Abfrage statt eines Joins: CCyB1 und KM1 haben
+    # verschiedene Zeilenmengen, und ein Join würde Reports verlieren, die das
+    # eine melden und das andere nicht.
+    trea = {}
+    for lei, scope, rp, v in ordered_query(con, """
+        SELECT lei, scope, refPeriod, max(fact_value_eur)
+        FROM p
+        WHERE template_id = '61.00' AND cell_row = '0040' AND cell_col = '0010'
+          AND fact_value_eur IS NOT NULL
+        GROUP BY lei, scope, refPeriod
+        ORDER BY lei, scope, refPeriod
+    """, "KM1-TREA"):
+        trea[(lei, scope, rp)] = v
+    print(f"  KM1-TREA für den Grössenvergleich: {len(trea)} Reports")
+
     rows = []
     for key in sorted(reports):
         lei, scope, rp = key
         name, home = meta[key]
-        fp = footprint(reports[key], home, marken.get(key, ""))
+        fp = footprint(reports[key], home, marken.get(key, ""),
+                       trea.get(key))
         if fp is None:
             continue
         rows.append({

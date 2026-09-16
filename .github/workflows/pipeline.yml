@@ -287,6 +287,13 @@ jobs:
       - name: Konzerngraphen-Abgleich
         run: python scripts/check_group_graphs.py
 
+      # Konsolidierungsabgleich Tochter-IND gegen Mutter-CON (#32 Punkt 4).
+      # Muss NACH build_footprint UND check_group_graphs laufen: er liest die
+      # Vorbehaltsspalte aus #83, um Skalenfehler von Konsolidierungsfehlern
+      # zu trennen. Ohne sie staenden Scheinverstoesse in der Liste.
+      - name: Konsolidierungsabgleich (#32)
+        run: python scripts/check_consolidation.py
+
       # Aehnliche Institute (#13, #27). Muss NACH check_group_graphs laufen:
       # die Spalte `beziehung` liest lei_relations.csv und coverage_gap.csv, um
       # konzerninterne Treffer zu benennen. Und VOR Zweig A, weil der Shard-Bau
