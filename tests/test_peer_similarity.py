@@ -207,6 +207,38 @@ class ErgebnisTest(unittest.TestCase):
                 self.assertGreaterEqual(int(r["n_laender"]), p.MIN_LAENDER)
                 self.assertGreaterEqual(int(r["nachbar_n_laender"]), p.MIN_LAENDER)
 
+    def test_no_aggregate_row_counts_as_a_shared_country(self):
+        """Die Lücke, durch die das Mass eine Weile falsch war.
+
+        `67.01.A` trägt neben den Ländern `x1` (die GESAMTZEILE — die Summe der
+        übrigen noch einmal), `x28` („übrige Länder") und einen Ausreisser
+        `qx2014`. Solange die im Anteilsvektor standen, war `x1` bei den 127
+        betroffenen Profilen im Median **exakt die Hälfte** der Masse: zwei
+        beliebige Institute teilten sich schon darüber 50 % — eine
+        Gemeinsamkeit, die keine ist.
+
+        Der Median über alle Paare verschob sich dadurch kaum (0,034 statt
+        0,030), die SPITZE dagegen vollständig: 0,970 auf 0,345, 0,924 auf
+        0,262. Und die Spitze ist genau das, was hier im Artefakt steht. Eine
+        ausgewiesene Überlappung von 0,92, gelesen als „92 % des Exposures
+        liegt in denselben Ländern", war damit schlicht falsch.
+
+        Der Test greift die Begründungsspalten an, weil dort die geteilten
+        Länder namentlich stehen — ein `x1` als „grösste Gemeinsamkeit" ist die
+        sichtbare Form des Fehlers.
+        """
+        for r in self.rows:
+            for feld in ("groesste_gemeinsamkeit",):
+                for token in (r[feld] or "").split("|"):
+                    if not token:
+                        continue
+                    with self.subTest(bank=r["bank_name"], token=token):
+                        self.assertRegex(
+                            token, r"^[A-Z]{2}$",
+                            f"{token!r} ist kein Land, sondern eine "
+                            f"Aggregatzeile — sie darf nicht als geteiltes "
+                            f"Land gezählt werden")
+
     def test_the_method_rediscovers_corporate_groups(self):
         """Die tragende Gegenprobe. Das Verfahren sieht nur Exposure-Geografie
         und findet trotzdem Mutter/Tochter-Paare — konzerninterne Treffer

@@ -228,5 +228,67 @@ class SkalenmarkenTest(unittest.TestCase):
                         pl.index("scripts/build_footprint.py"))
 
 
+class UnterTreaTest(unittest.TestCase):
+    """Die vierte Pruefung (#83 Punkt 3) — und warum sie die dritte NICHT
+    ersetzt.
+
+    `scale_flags.csv` beurteilt den Report als GANZES. Ist er durchgehend
+    skaliert, sind Zaehler und Nenner gleichermassen zu klein, und das
+    Verhaeltnis CCyB1/TREA ist unauffaellig — gemessen liegen 20 der 22
+    verdaechtigen Zeilen bei rund 0,0.
+
+    Genau deshalb entkam dem Skalendetektor ein Fall: Bank GPB International
+    meldet in CCyB1 215,30 EUR, waehrend KM1 im selben Report 1,52 Mrd traegt.
+    Das ist ein TEMPLATE-lokaler Fehler, und nur der Vergleich innerhalb des
+    Reports sieht ihn.
+    """
+
+    def test_a_template_local_scale_error_is_caught(self):
+        """Der Fall, der die Pruefung erzwungen hat: −6,39 Groessenordnungen."""
+        self.assertTrue(fp.unter_eigenem_trea(215.30, 1_521_014_423.27))
+
+    def test_a_normal_report_passes(self):
+        """CCyB1 liegt ueblicherweise UEBER dem TREA (Median +0,21) — die
+        Pruefung darf dort nie anschlagen."""
+        self.assertFalse(fp.unter_eigenem_trea(1.6e9, 1.0e9))
+        self.assertFalse(fp.unter_eigenem_trea(5.0e7, 4.4e10))   # −2,9: knapp
+
+    def test_a_uniformly_scaled_report_is_NOT_caught_here(self):
+        """Der Beleg, dass die beiden Pruefungen komplementaer sind. Sind
+        BEIDE Seiten um 10^6 zu klein, ist das Verhaeltnis normal — dafuer ist
+        `skalenbefund` da, nicht diese Pruefung."""
+        self.assertFalse(fp.unter_eigenem_trea(215.30, 1521.01))
+
+    def test_a_missing_trea_claims_nothing(self):
+        """Ohne Vergleichswert wird nichts behauptet (Arbeitsprinzip 3). Ein
+        `True` hiesse, jeder Report ohne KM1 waere verdaechtig."""
+        self.assertFalse(fp.unter_eigenem_trea(215.30, None))
+        self.assertFalse(fp.unter_eigenem_trea(215.30, 0))
+        self.assertFalse(fp.unter_eigenem_trea(0, 1e9))
+
+    def test_the_threshold_is_actually_used(self):
+        # 10^-5 unter dem TREA: bei 4 Ordnungen ein Treffer, bei 6 nicht.
+        self.assertTrue(fp.unter_eigenem_trea(1e4, 1e9, ordnungen=4))
+        self.assertFalse(fp.unter_eigenem_trea(1e4, 1e9, ordnungen=6))
+
+    def test_the_reservation_is_its_own_name(self):
+        """Nicht `skala`: dort ist der ganze Report verschoben und die QUOTEN
+        bleiben gueltig. Hier ist nur dieses Template verschoben — dann stimmen
+        auch die Quoten nicht mehr gegen den Rest des Reports."""
+        f = fp.footprint([("Germany", 100.0), ("France", 115.3)], "Germany",
+                         trea=1.5e9)
+        self.assertIn("unter_trea", f["vorbehalt"])
+        self.assertNotIn("skala", f["vorbehalt"])
+        self.assertFalse(f["reliable"])
+
+    def test_without_the_check_the_row_would_pass(self):
+        """Die Gegenprobe: dieselben Zahlen ohne TREA sind unauffaellig. Ohne
+        die vierte Pruefung stuende hier `reliable=true` — der Zustand, den
+        #83 beanstandet."""
+        f = fp.footprint([("Germany", 100.0), ("France", 115.3)], "Germany")
+        self.assertTrue(f["reliable"])
+        self.assertEqual(f["vorbehalt"], "")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

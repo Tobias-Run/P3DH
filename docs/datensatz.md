@@ -141,6 +141,9 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/irrbb_sensitivity.csv` | Report × Zinsschock → ΔEVE, ΔNII, Supervisory Outlier Test | IRRBB1 `68.00`, KM1 `61.00` |
 | `processed/peer_similarity.csv` | Report → die fünf ähnlichsten Institute nach Länderprofil | CCyB1 `67.01.A` |
 | `processed/country_effect.csv` | Bankattribut × Länderkennzahl → Varianzzerlegung und Korrelation | `footprint.csv`, `country_gdp.csv` |
+| `processed/country_exposure.csv` | Report × Land → Exposure, Anteil am Report, **Exposure je Host-BIP** | CCyB1 `67.01.A` + `country_gdp.csv` |
+| `processed/country_concentration.csv` | Land → aggregiertes Exposure der Melder, am BIP relativiert | ebenda, entdoppelt über `lei_relations.csv` |
+| `processed/peer_clusters.csv` | Gruppe → Institute mit gemeinsamem Länder-Fussabdruck, Kohäsion, Trägerschaft | CCyB1 `67.01.A` + `lei_relations.csv` |
 | `processed/equity_link.csv` | Institut → Aktien-ISIN, Primärnotierung, Tickersymbol | Wikidata (`P946`, `P414`/`P249`) |
 | `processed/event_study_feasibility.csv` | Ereignisfenster → verwertbare Ereignisse, Urteil zur Machbarkeit | `manifest_full.csv` + `wikidata_entities.csv` |
 | `processed/catalogue_coverage.csv` | Katalog-Report → geladen, oder warum nicht | `manifest_full.csv` gegen Parquet + Coverage-Matrix |
@@ -172,6 +175,34 @@ höhere Kapitalquote" vermutlich ein Größenklassen-Effekt wäre.
 Der Join läuft über den **ISO-Code**, nicht über den Namen: von 216 gemeinsamen
 Codes tragen 32 bei der Weltbank einen anderen Namen als bei uns („Korea, Rep."
 gegen „Korea, Republic of"). Ein Namensabgleich hätte sie verloren.
+
+**Benutzt wird sie in `country_exposure.csv`** (#14). Bis dahin lag die Tabelle
+im Repo, ohne dass irgendetwas sie las — der Zweck aus dem Titel des Issues,
+„Kontextspalte", war damit nicht eingelöst.
+
+Dort steht je Report und Land der Quotient `exposure_je_bip`. Drei Dinge sind
+beim Lesen nötig:
+
+- **Die Umrechnung steht in der Zeile.** Das BIP kommt in Dollar, das Exposure
+  in Euro; ohne Umrechnung wäre der Quotient rund 17 % daneben. Welcher Kurs
+  benutzt wurde, sagt `bip_fx_refdate` — für 2025-06-30 liegt keiner vor, dort
+  wird der nächstgelegene genommen.
+- **Fehlt ≠ Null.** Für Jersey, Guernsey, die Britischen Jungferninseln und
+  Taiwan bleiben `bip_eur` und `exposure_je_bip` **leer**. Eine Null behauptete
+  eine Wirtschaft der Größe null, und der Quotient wäre unendlich.
+- **Oben kippt die Kennzahl.** Die Marshallinseln erreichen 5.265 % des BIP,
+  Luxemburg 780 %, die Kaimaninseln 640 %. Dahinter steht kein überschuldetes
+  Land, sondern ein Register — Schiffsfinanzierung beziehungsweise
+  Fondsdomizilierung. Eine Quote weit über 100 % heißt „Finanzplatz", nicht
+  „Klumpenrisiko". Für die Fälle, um die es geht (5 Mrd in Malta gegen 5 Mrd in
+  Deutschland), trägt sie.
+
+`country_concentration.csv` summiert dasselbe je Land. Die Summe ist
+**entdoppelt**: der CON-Report einer Gruppe enthält ihre Töchter bereits, und
+die IND-Reports derselben Töchter dazuzuzählen meldete eine Konzentration, die
+es nicht gibt — bei Österreich macht das 7,8 % aus. Reports mit Skalenvorbehalt
+(#83) bleiben ebenfalls draußen. Sie misst das Exposure **der Melder im
+Bestand**, nicht das eines Bankensystems.
 
 ### `lei_relations.csv` — wer gehört zu wem
 
@@ -792,18 +823,68 @@ blind und für einen Leser nicht interpretierbar.
 **Die Gegenprobe:** die stärksten Treffer sind Mutter/Tochter-Paare — ING Groep
 ↔ ING Bank bei 0,9999, Argenta Holding ↔ Argenta Bank bei 1,0000. Das Verfahren
 findet Konzernzugehörigkeit aus der Exposure-Geografie wieder, *ohne je einen
-Konzerngraphen gesehen zu haben*; von 100 besten Treffern über 0,95 sind 22
-konzernintern, unterhalb von 0,80 nur noch 4. Die Spalte `beziehung` benennt das
-aus #32/#42, damit ein Leser den Beleg nicht für eine Entdeckung hält.
+Konzerngraphen gesehen zu haben*; unter den 100 besten Treffern sind 22
+konzernintern, unter den 129 Treffern unterhalb von 0,80 noch genau einer. Die
+Spalte `beziehung` benennt das aus #32/#42, damit ein Leser den Beleg nicht für
+eine Entdeckung hält.
 
 ⚠️ **Das ist keine Peer-Gruppe.** Die Perzentile im Viewer bleiben auf der
 formalen Schichtung; die Liste ist explorativ und im Viewer so beschriftet.
 
 ⚠️ **Die Grenze der Kennzahl betrifft ein Drittel der Fälle.** Zwei rein national
 tätige Banken desselben Landes überlappen sich zwangsläufig fast vollständig: bei
-über 90 % Domestizität liegt die beste Überlappung im Median bei 0,976, bei
-breiter aufgestellten nur bei 0,812. Deshalb stehen `n_laender` und
+über 90 % Domestizität liegt die beste Überlappung im Median bei 0,975, bei
+breiter aufgestellten nur bei 0,760. Deshalb stehen `n_laender` und
 `groesste_gemeinsamkeit` in jeder Zeile.
+
+⚠️ **Die Zahlen oben sind seit dem Fix an `lade()` andere.** Bis dahin ging jede
+Zeile aus `67.01.A` als Land in den Anteilsvektor ein — auch `x1`, die
+**Gesamtzeile**, die die Summe der übrigen noch einmal trägt. Bei den 127
+betroffenen Profilen lag ihr Anteil im Median bei exakt 0,500: zwei beliebige
+Institute teilten sich schon darüber die halbe Masse.
+
+Der Median über alle Paare verschob sich dadurch kaum (0,034 statt 0,030) — wer
+nur den geprüft hätte, hätte nichts bemerkt. Die **Spitze** kippte vollständig:
+0,970 → 0,345, 0,924 → 0,262. Und die Spitze ist genau das, was in dieser Datei
+steht; eine ausgewiesene Überlappung von 0,92, gelesen als „92 % des Exposures
+liegt in denselben Ländern", war schlicht falsch. Gefiltert wird jetzt auf
+`open_axis_country IS NOT NULL` — keine Liste von Sonderfällen, sondern das
+Merkmal, das eine Landzeile ausmacht.
+
+### `peer_clusters.csv` — Gruppen mit gemeinsamem Fussabdruck
+
+`peer_similarity.csv` liefert je Report die fünf nächsten Nachbarn. Das
+beantwortet „wem ähnelt dieses Haus", nicht „welche Gruppen teilen einen
+Fussabdruck" — die Frage aus dem Titel von #11 und #13. Dafür wird die
+Ähnlichkeit **vollständig** gerechnet (56.825 Paare) und ab 0,90 zu
+Zusammenhangskomponenten verbunden.
+
+Drei Spalten tragen die Vorbehalte, ohne die die Ausgabe irreführend wäre:
+
+| Spalte | wogegen |
+|---|---|
+| `kohaesion` | die kleinste paarweise Überlappung IN der Gruppe. A~B und B~C machen A, B, C zu einer Komponente, auch wenn A und C sich fremd sind — eine **Kette**, die wie ein Block aussähe |
+| `institute` | die Einheit ist (LEI, scope, refPeriod). Beim ersten Lauf waren 37 von 69 „Gruppen" ein einziges Haus über mehrere Quartale; solche Selbstähnlichkeiten stehen nicht mehr drin |
+| `traegerschaft` | `konzern` heißt: das Verfahren hat eine bekannte Struktur wiedergefunden (OTP Luxembourg ↔ OTP banka d.d.). Das ist eine Gültigkeitsprobe, kein Befund |
+| `vektor_unvollstaendig` | CCyB1 erlaubt, unwesentliche Länder in `x28` zusammenzufassen. DekaBank trägt dort 53 % — die Zuordnung stützt sich auf 47 % des Buches. #13 verlangt die Markierung ausdrücklich |
+
+⚠️ **„Keine Mutter gemeldet" heißt nicht „eigenständig".** GLEIF trennt
+`NO_KNOWN_PERSON` / `NON_CONSOLIDATING` / `NATURAL_PERSONS` („es gibt keine")
+von `NO_LEI` / `NON_PUBLIC` („wir kennen sie nicht"). Nur das erste ist eine
+Auskunft; beim zweiten steht `ungeklaert`, nicht `unabhaengig`.
+
+**Der Befund — und er widerspricht der Erwartung.** #13 erwartet „Cluster, die
+nicht mit dem Heimatland zusammenfallen müssen … eine österreichische und eine
+italienische Bank können denselben CEE-Footprint haben". Gemessen: von **26
+Gruppen ist genau eine grenzüberschreitend**, und das ist OTP Luxembourg mit OTP
+banka d.d. — derselbe Konzern. **Null** Gruppen mit belegt verschiedenen Trägern
+über Ländergrenzen. Die Gruppen fallen mit dem Heimatland zusammen.
+
+Ein Zwischenstand sagte das Gegenteil: sechs Häuser aus Malta, Griechenland,
+Finnland und Italien schienen einen Fussabdruck zu teilen. Das war der
+`x1`-Fehler oben — ihre „gemeinsamen Länder" waren DE, FR, IE (die neun von zehn
+Profilen tragen) und `x28`, der Residualbucket. Mit der Korrektur löste die
+Gruppe sich auf.
 
 ### `country_effect.csv` — hängt die Bank am Heimatland? Nein.
 

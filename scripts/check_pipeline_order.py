@@ -97,10 +97,30 @@ ABHAENGIG = {
     "check_group_graphs.py": (["processed/lei_relations.csv",
                                "processed/coverage_gap.csv"],
                               ["processed/group_graph_check.csv"]),
+    "check_consolidation.py": (["processed/footprint.csv",
+                                "processed/lei_relations.csv",
+                                "processed/long/p3dh_long.parquet"],
+                               ["processed/consolidation_check.csv"]),
     "build_peer_similarity.py": (["processed/long/p3dh_long.parquet",
                                   "processed/lei_relations.csv",
                                   "processed/coverage_gap.csv"],
                                  ["processed/peer_similarity.csv"]),
+    # Liest peer_similarity.csv NICHT als Datei, sondern importiert dessen
+    # `lade`/`ueberlappung` — die Kante ist trotzdem echt: laeuft das Clustering
+    # vor dem Aehnlichkeitsschritt, stuenden im Bericht Gruppen, die zum
+    # veroeffentlichten Nachbarschaftsartefakt nicht passen.
+    "build_peer_clusters.py": (["processed/lei_relations.csv",
+                                "processed/peer_similarity.csv"],
+                               ["processed/peer_clusters.csv"]),
+    # Die deskriptive Schwester von check_country_effect.py: dieselben beiden
+    # Quellen, aber als Normierung statt als Regression (#14).
+    "build_country_exposure.py": (["processed/long/p3dh_long.parquet",
+                                   "processed/footprint.csv",
+                                   "processed/lei_relations.csv",
+                                   "processed/fx_rates.csv",
+                                   "codebook/country_gdp.csv"],
+                                  ["processed/country_exposure.csv",
+                                   "processed/country_concentration.csv"]),
     "check_country_effect.py": (["processed/footprint.csv",
                                  "codebook/country_gdp.csv"],
                                 ["processed/country_effect.csv"]),

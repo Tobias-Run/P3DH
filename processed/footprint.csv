@@ -92,7 +92,7 @@ lei,scope,refPeriod,bank_name,home_country,largest_country,n_countries,total_exp
 529900SXEWPJ1MRRX537,CON,2025-12-31,Raiffeisen-Holding Niederösterreich-Wien registrierte Genossenschaft mit beschränkter Haftung,Austria,Austria,60,21180.56,0.8393,0.7093,0.0000,false,skala,skaliert
 529900UIRB65OY6U4B21,IND,2025-12-31,Lombard Bank Malta plc,Malta,Malta,24,1080405285.97,0.9814,0.9633,0.0000,true,,
 529900UKZBMDBDZIXD62,CON,2025-12-31,Addiko Bank AG,Austria,Croatia,23,4296.63,0.0006,0.2324,0.0000,false,skala,skaliert
-529900VVDOKMRRAHZ894,IND,2025-12-31,Bank GPB International S.A.,Luxembourg,United Kingdom,10,215.30,0.1245,0.1397,0.0000,true,,
+529900VVDOKMRRAHZ894,IND,2025-12-31,Bank GPB International S.A.,Luxembourg,United Kingdom,10,215.30,0.1245,0.1397,0.0000,false,unter_trea,
 529900W3MOO00A18X956,CON,2025-12-31,OTP-csoport,Hungary,Hungary,22,70097407440.59,0.4172,0.2528,0.0000,true,,
 529900XSTAE561178282,CON,2025-06-30,Raiffeisenbankengruppe OÖ Verbund eGen,Austria,Austria,78,33540699359.11,0.6158,0.4231,0.0000,true,,
 529900XSTAE561178282,CON,2025-12-31,Raiffeisenbankengruppe OÖ Verbund eGen,Austria,Austria,79,34960720918.57,0.6225,0.4296,0.0000,true,,

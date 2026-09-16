@@ -287,6 +287,13 @@ jobs:
       - name: Konzerngraphen-Abgleich
         run: python scripts/check_group_graphs.py
 
+      # Konsolidierungsabgleich Tochter-IND gegen Mutter-CON (#32 Punkt 4).
+      # Muss NACH build_footprint UND check_group_graphs laufen: er liest die
+      # Vorbehaltsspalte aus #83, um Skalenfehler von Konsolidierungsfehlern
+      # zu trennen. Ohne sie staenden Scheinverstoesse in der Liste.
+      - name: Konsolidierungsabgleich (#32)
+        run: python scripts/check_consolidation.py
+
       # Aehnliche Institute (#13, #27). Muss NACH check_group_graphs laufen:
       # die Spalte `beziehung` liest lei_relations.csv und coverage_gap.csv, um
       # konzerninterne Treffer zu benennen. Und VOR Zweig A, weil der Shard-Bau
@@ -294,6 +301,27 @@ jobs:
       # der Viewer die Liste des VORIGEN Laufs.
       - name: Aehnliche Institute
         run: python scripts/build_peer_similarity.py
+
+      # Gruppen mit gemeinsamem Fussabdruck (#11, #13). Muss NACH
+      # build_peer_similarity laufen: er benutzt dessen `lade`, `anteilsvektor`
+      # und `ueberlappung`, rechnet die Aehnlichkeit aber VOLLSTAENDIG statt
+      # nur Top-5 — nur so ist die Kohaesion einer Gruppe berechenbar und eine
+      # Kette von einem Block zu unterscheiden. Braucht ausserdem
+      # lei_relations.csv aus check_group_graphs, um einen wiedergefundenen
+      # Konzern von einem echten Befund zu trennen.
+      - name: Fussabdruck-Gruppen (#11, #13)
+        run: python scripts/build_peer_clusters.py
+
+      # Exposure am BIP des Gastlandes (#14). Muss NACH build_footprint laufen:
+      # er liest dessen Vorbehaltsspalte (#83), damit kein Report mit
+      # Skalenfehler in eine Laendersumme eingeht. Braucht ausserdem
+      # lei_relations.csv, um Toechter nicht doppelt zu zaehlen -- der
+      # CON-Report einer Gruppe enthaelt sie bereits.
+      #
+      # DESKRIPTIV, ausdruecklich: #14 schliesst die Regressorlesart aus. Was
+      # hier entsteht, ist eine Normierung, keine Aussage ueber Ursachen.
+      - name: Exposure je Host-BIP (#14)
+        run: python scripts/build_country_exposure.py
 
       # Laendereffekt gegen Bankattribute (#11). Reine Auswertung ueber
       # footprint.csv und country_gdp.csv; laeuft nach dem Footprint.
@@ -389,6 +417,9 @@ jobs:
                   processed/disclosure_lag.csv processed/rwa_density.csv \
                   interim/plausibility_cells.csv interim/plausibility_findings.csv \
                   processed/irrbb_sensitivity.csv processed/peer_similarity.csv \
+                  processed/peer_clusters.csv \
+                  processed/country_exposure.csv \
+                  processed/country_concentration.csv \
                   processed/country_effect.csv processed/omission_persistence.csv
           # Harvest-Delta: entsteht nur bei inputs.harvest, deshalb einzeln und
           # bedingt. harvest_log.csv ist append-only — ohne diesen Commit stirbt
