@@ -1,0 +1,161 @@
+gruppe,groesse,institute,kohaesion,traegerschaft,traeger,laender_gemeinsam,laender,heimatlaender,grenzueberschreitend,lei,scope,refPeriod,bank_name,country,institution_type,n_laender
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,0W2PZJM8XOY22M4GG883,CON,2025-06-30,DekaBank Deutsche Girozentrale,Germany,Large highest EEA,30
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,0W2PZJM8XOY22M4GG883,CON,2025-12-31,DekaBank Deutsche Girozentrale,Germany,Large highest EEA,33
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,39120001JPAYYPDRNN92,IND,2025-12-31,Deutsche Bausparkasse Badenia Aktiengesellschaft,Germany,Other highest EEA,36
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,391200EEGLNXBBCVKC73,CON,2025-12-31,Erwerbsgesellschaft der S-Finanzgruppe mbH & Co. KG,Germany,Large highest EEA,157
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,5299007S3UH5RKUYDA52,IND,2025-06-30,DEUTSCHE APOTHEKER- UND ÄRZTEBANK EG,Germany,Large highest EEA,60
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,5299007S3UH5RKUYDA52,IND,2025-12-31,DEUTSCHE APOTHEKER- UND ÄRZTEBANK EG,Germany,Large highest EEA,61
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,529900HNOAA1KXQJUQ27,CON,2025-12-31,"DZ BANK AG Deutsche Zentral-Genossenschaftsbank, Frankfurt am Main",Germany,Large highest EEA,128
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,529900JZTYE3W7WQH904,CON,2025-06-30,HASPA Finanzholding,Germany,Large highest EEA,25
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,529900JZTYE3W7WQH904,CON,2025-12-31,HASPA Finanzholding,Germany,Large highest EEA,29
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,529900JZXXU699FCKK89,IND,2025-06-30,Bausparkasse Schwäbisch Hall Aktiengesellschaft - Bausparkasse der Volksbanken und Raiffeisenbanken,Germany,Large subsidiaries,61
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,529900JZXXU699FCKK89,IND,2025-12-31,Bausparkasse Schwäbisch Hall Aktiengesellschaft - Bausparkasse der Volksbanken und Raiffeisenbanken,Germany,Large subsidiaries,64
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,529900K16YGKC8BES892,IND,2025-06-30,Deutsche Kreditbank Aktiengesellschaft,Germany,Large subsidiaries,169
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,529900K16YGKC8BES892,IND,2025-12-31,Deutsche Kreditbank Aktiengesellschaft,Germany,Large subsidiaries,169
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,529900KRVTRP5RWP9K95,CON,2025-12-31,Santander Consumer Holding GmbH,Germany,Large subsidiaries,11
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,529900S1KHKOEQL5CK20,IND,2025-12-31,Wüstenrot Bausparkasse Aktiengesellschaft,Germany,Large highest EEA,49
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,5493007S4JE930SIUE86,CON,2025-06-30,ING Holding Deutschland GmbH,Germany,Large subsidiaries,110
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,5493007S4JE930SIUE86,CON,2025-12-31,ING Holding Deutschland GmbH,Germany,Large subsidiaries,112
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,GTQYZJON3I7SXRNJTT73,IND,2025-12-31,BSK 1818 AG,Germany,Large subsidiaries,157
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,VDYMYTQGZZ6DU0912C88,CON,2025-06-30,Bayerische Landesbank,Germany,Large highest EEA,27
+1,20,13,0.8270,unabhaengig,10,6,BE|DE|FR|IE|LU|SE,Germany,nein,VDYMYTQGZZ6DU0912C88,CON,2025-12-31,Bayerische Landesbank,Germany,Large highest EEA,30
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,96950001WI712W7PQG45,CON,2025-06-30,RCI Banque,France,Large highest EEA,28
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,9695000CG7B84NLR5984,CON,2025-12-31,Confédération Nationale du Crédit Mutuel,France,Large highest EEA,30
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,96950041VJ1QP0B69503,CON,2025-06-30,Crédit mutuel Arkéa,France,Large subsidiaries,26
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,96950041VJ1QP0B69503,CON,2025-12-31,Crédit mutuel Arkéa,France,Large subsidiaries,29
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500EVOBAGHKZEXA33,CON,2025-12-31,Banque populaire Alsace Lorraine Champagne,France,Large subsidiaries,29
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500EYG6U339D3TI84,CON,2025-06-30,Crédit Foncier de France,France,Large subsidiaries,18
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500EYG6U339D3TI84,CON,2025-12-31,Crédit Foncier de France,France,Large subsidiaries,22
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500JJWO4PQG0R1C58,CON,2025-12-31,CAISSE D'EPARGNE ET DE PREVOYANCE GRAND EST EUROPE,France,Large subsidiaries,27
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500JM7VIGQIPZOL49,CON,2025-12-31,BANQUE POPULAIRE AUVERGNE RHONE ALPES,France,Large subsidiaries,27
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500LFTDNMONT2EP08,CON,2025-06-30,Caisse fédérale de crédit mutuel,France,Large subsidiaries,21
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500LFTDNMONT2EP08,CON,2025-12-31,Caisse fédérale de crédit mutuel,France,Large subsidiaries,30
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500SJXM8MW32ZVG75,CON,2025-12-31,Caisse d'épargne et de prévoyance Bretagne-Pays de Loire,France,Large subsidiaries,12
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500STN7T9MRUMJ267,CON,2025-12-31,Bpifrance,France,Large highest EEA,47
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500TU5ZMYBIWP0R51,CON,2025-12-31,Caisse d'Epargne CEPAC,France,Large subsidiaries,25
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500VR2NA6ANMTXH21,CON,2025-12-31,Caisse d'épargne et de prévoyance de Rhône Alpes,France,Large subsidiaries,30
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500W34S6NCZWYBV47,CON,2025-12-31,Caisse d'épargne et de prévoyance Ile-de-France,France,Large subsidiaries,30
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,969500W8SBCXNX1DG443,CON,2025-12-31,Banque populaire Rives de Paris,France,Large subsidiaries,28
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,N4JDFKKH2FTD8RKFXO39,CON,2025-06-30,Crédit industriel et commercial - CIC,France,Large subsidiaries,21
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,N4JDFKKH2FTD8RKFXO39,CON,2025-12-31,Crédit industriel et commercial - CIC,France,Large subsidiaries,30
+2,20,16,0.8376,unabhaengig,4,6,DE|FR|GB|IE|LU|NL,France,nein,NICH5Q04ADUV9SN3Q390,CON,2025-12-31,BRED - Banque populaire,France,Large subsidiaries,30
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,529900SS7ZWCX82U3W60,IND,2025-12-31,DEUTSCHE BANK S.P.A.,Italy,Large subsidiaries,79
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,549300L7YCATGO57ZE10,CON,2025-06-30,FINECOBANK BANCA FINECO S.P.A. (IN BREVE FINECOBANK S.P.A. OVVERO BANCA FINECO S.P.A. OVVERO FINECO BANCA S.P.A.),Italy,Large highest EEA,138
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,549300L7YCATGO57ZE10,CON,2025-12-31,FINECOBANK BANCA FINECO S.P.A. (IN BREVE FINECOBANK S.P.A. OVVERO BANCA FINECO S.P.A. OVVERO FINECO BANCA S.P.A.),Italy,Large highest EEA,142
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,7LVZJ6XRIE7VNZ4UBX81,CON,2025-06-30,BANCA MEDIOLANUM S.P.A.,Italy,Large highest EEA,17
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,7LVZJ6XRIE7VNZ4UBX81,CON,2025-12-31,BANCA MEDIOLANUM S.P.A.,Italy,Large highest EEA,19
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,8156003D79D064FB5360,IND,2025-12-31,CASSA LOMBARDA - S.P.A.,Italy,,20
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,8156005420362AE59184,CON,2025-12-31,BANCA IFIS S.P.A. (OVVERO IFIS BANCA S.P.A. O IN FORMA ABBREVIATA IFIS S.P.A.),Italy,Other highest EEA,94
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,81560064085A02B2B297,CON,2025-12-31,MEDIOCREDITO CENTRALE - BANCA DEL MEZZOGIORNO SPA,Italy,Other highest EEA,35
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,815600AD83B2B6317788,CON,2025-06-30,CREDITO EMILIANO HOLDING SOCIETA' PER AZIONI,Italy,Large highest EEA,31
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,815600AD83B2B6317788,CON,2025-12-31,CREDITO EMILIANO HOLDING SOCIETA' PER AZIONI,Italy,Large highest EEA,27
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,815600B5C61A10BBB451,CON,2025-12-31,BANCA SISTEMA S.P.A.,Italy,Other highest EEA,20
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,J48C8PCSJVUBR8KCW529,CON,2025-06-30,BANCA POPOLARE DI SONDRIO SOCIETA' PER AZIONI,Italy,Large subsidiaries,27
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,J4CP7MHCXR8DAQMKIL78,CON,2025-06-30,Banca Monte dei Paschi di Siena S.p.A.,Italy,Large highest EEA,29
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,J4CP7MHCXR8DAQMKIL78,CON,2025-12-31,Banca Monte dei Paschi di Siena S.p.A.,Italy,Large highest EEA,36
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,N747OI7JINV7RUUH6190,CON,2025-06-30,BPER Banca S.p.A.,Italy,Large highest EEA,168
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,N747OI7JINV7RUUH6190,CON,2025-12-31,BPER Banca S.p.A.,Italy,Large highest EEA,38
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,NNVPP80YIZGEY2314M97,CON,2025-06-30,ICCREA BANCA S.P.A. - ISTITUTO CENTRALE DEL CREDITO COOPERATIVO (IN FORMA ABBREVIATA: ICCREA BANCA S.P.A.),Italy,Large highest EEA,22
+3,18,12,0.8330,unabhaengig,12,3,DE|FR|IT,Italy,nein,NNVPP80YIZGEY2314M97,CON,2025-12-31,ICCREA BANCA S.P.A. - ISTITUTO CENTRALE DEL CREDITO COOPERATIVO (IN FORMA ABBREVIATA: ICCREA BANCA S.P.A.),Italy,Large highest EEA,28
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,259400DZXF7UJKK2AY35,CON,2025-06-30,mBank S.A.,Poland,Large subsidiaries,36
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,259400DZXF7UJKK2AY35,CON,2025-12-31,mBank S.A.,Poland,Large subsidiaries,47
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,259400LGXW3K0GDAG361,CON,2025-06-30,Santander Bank Polska S.A.,Poland,Large subsidiaries,176
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,259400LGXW3K0GDAG361,CON,2025-12-31,Santander Bank Polska S.A.,Poland,Large subsidiaries,176
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,259400QHDOZWMJ103294,CON,2025-12-31,ALIOR BANK S.A.,Poland,Other highest EEA,24
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,259400YLRTOBISHBVX41,CON,2025-06-30,ING Bank Slaski S.A.,Poland,Large subsidiaries,17
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,259400YLRTOBISHBVX41,CON,2025-12-31,ING Bank Slaski S.A.,Poland,Large subsidiaries,26
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,5493000LKS7B3UTF7H35,CON,2025-06-30,Bank Polska Kasa Opieki S.A.,Poland,Large highest EEA,123
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,5493000LKS7B3UTF7H35,CON,2025-12-31,Bank Polska Kasa Opieki S.A.,Poland,Large highest EEA,123
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,NMH2KF074RKAGTH4CM63,CON,2025-06-30,BNP PARIBAS BANK POLSKA S.A,Poland,Large subsidiaries,67
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,NMH2KF074RKAGTH4CM63,CON,2025-12-31,BNP PARIBAS BANK POLSKA S.A,Poland,Large subsidiaries,87
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,P4GTT6GF1W40CVIMFR43,CON,2025-06-30,Powszechna Kasa Oszczednosci Bank Polski S.A.,Poland,Large highest EEA,35
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,P4GTT6GF1W40CVIMFR43,CON,2025-12-31,Powszechna Kasa Oszczednosci Bank Polski S.A.,Poland,Large highest EEA,162
+4,14,8,0.9371,unabhaengig,7,12,AU|BE|CY|CZ|DE|FR|GB|IE|LU|NL,Poland,nein,XLEZHWWOI4HFQDGL4793,CON,2025-12-31,BANK HANDLOWY W WARSZAWIE SA,Poland,Large subsidiaries,33
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,0W5QHUNYV4W7GJO62R27,CON,2025-12-31,HYPO TIROL BANK AG,Austria,Other highest EEA,34
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,52990045V2BWJN669Q34,CON,2025-12-31,Wüstenrot Wohnungswirtschaft registrierte Genossenschaft mit beschränkter Haftung,Austria,Other highest EEA,27
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,5299005OACOC1C1OFJ11,IND,2025-12-31,Raiffeisen-Landesbank Tirol AG,Austria,Other highest EEA,36
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,5299009EHB4RBGMI5828,IND,2025-12-31,Raiffeisen Landesbank Kärnten und Revisionsverband eGen,Austria,Other highest EEA,37
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,529900FEID5L4H2T2L70,IND,2025-12-31,Raiffeisen Landesbank Vorarlberg mit Revisionsverband eGen,Austria,Other highest EEA,21
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,529900QYEJ2GYSWK1F08,CON,2025-12-31,RLB-Stmk Verbund eGen,Austria,Other highest EEA,39
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,529900SXEWPJ1MRRX537,CON,2025-12-31,Raiffeisen-Holding Niederösterreich-Wien registrierte Genossenschaft mit beschränkter Haftung,Austria,Large highest EEA,60
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,549300HUKIA1IZQHFZ83,IND,2025-12-31,Erste Bank der oesterreichischen Sparkassen AG,Austria,Large subsidiaries,91
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,AT0000000000043000VB,CON,2025-12-31,VOLKSBANK WIEN AG VB,Austria,Large highest EEA,81
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,D1HEB8VEU6D9M8ZUXG17,CON,2025-06-30,UniCredit Bank Austria AG,Austria,Large subsidiaries,119
+5,11,10,0.8408,unabhaengig,9,14,AT|BE|CH|DE|ES|FR|GB|HU|IT|NL,Austria,nein,D1HEB8VEU6D9M8ZUXG17,CON,2025-12-31,UniCredit Bank Austria AG,Austria,Large subsidiaries,115
+6,7,4,0.9525,unabhaengig,3,5,CY|CZ|GB|SK|US,Slovakia,nein,3157002JBFAI478MD587,CON,2025-06-30,"Tatra banka, a.s.",Slovakia,Large subsidiaries,42
+6,7,4,0.9525,unabhaengig,3,5,CY|CZ|GB|SK|US,Slovakia,nein,3157002JBFAI478MD587,CON,2025-12-31,"Tatra banka, a.s.",Slovakia,Large subsidiaries,42
+6,7,4,0.9525,unabhaengig,3,5,CY|CZ|GB|SK|US,Slovakia,nein,315700K45LRKNGMUIW27,IND,2025-06-30,"Prima banka Slovensko, a.s.",Slovakia,Large highest EEA,5
+6,7,4,0.9525,unabhaengig,3,5,CY|CZ|GB|SK|US,Slovakia,nein,315700K45LRKNGMUIW27,IND,2025-12-31,"Prima banka Slovensko, a.s.",Slovakia,Large highest EEA,5
+6,7,4,0.9525,unabhaengig,3,5,CY|CZ|GB|SK|US,Slovakia,nein,52990096Q5LMCH1WU462,CON,2025-12-31,"Československá obchodná banka, a.s.",Slovakia,Large subsidiaries,16
+6,7,4,0.9525,unabhaengig,3,5,CY|CZ|GB|SK|US,Slovakia,nein,549300S2T3FWVVXWJI89,CON,2025-06-30,"Slovenská sporiteľňa, a.s.",Slovakia,Large subsidiaries,75
+6,7,4,0.9525,unabhaengig,3,5,CY|CZ|GB|SK|US,Slovakia,nein,549300S2T3FWVVXWJI89,CON,2025-12-31,"Slovenská sporiteľňa, a.s.",Slovakia,Large subsidiaries,81
+7,6,4,0.8919,unabhaengig,4,5,BE|DE|FR|GB|NL,Netherlands,nein,529900GGYMNGRQTDOO93,CON,2025-12-31,BNG Bank N.V.,Netherlands,Large highest EEA,10
+7,6,4,0.8919,unabhaengig,4,5,BE|DE|FR|GB|NL,Netherlands,nein,724500A1FNICHSDF2I11,CON,2025-06-30,ASN Bank N.V.,Netherlands,Large highest EEA,14
+7,6,4,0.8919,unabhaengig,4,5,BE|DE|FR|GB|NL,Netherlands,nein,724500A1FNICHSDF2I11,CON,2025-12-31,ASN Bank N.V.,Netherlands,Large highest EEA,14
+7,6,4,0.8919,unabhaengig,4,5,BE|DE|FR|GB|NL,Netherlands,nein,B64D6Y3LBJS4ANNPCU93,CON,2025-12-31,NIBC Bank N.V.,Netherlands,Other highest EEA,16
+7,6,4,0.8919,unabhaengig,4,5,BE|DE|FR|GB|NL,Netherlands,nein,BFXS5XCH7N0Y05NIXW11,CON,2025-06-30,ABN AMRO Bank N.V.,Netherlands,Large highest EEA,27
+7,6,4,0.8919,unabhaengig,4,5,BE|DE|FR|GB|NL,Netherlands,nein,BFXS5XCH7N0Y05NIXW11,CON,2025-12-31,ABN AMRO Bank N.V.,Netherlands,Large highest EEA,32
+8,5,4,0.9751,unabhaengig,4,8,CZ|DE|GB|HR|HU|PL|RO|SK,Hungary,nein,3H0Q3U74FVFED2SHZT16,CON,2025-06-30,MBH bankcsoport,Hungary,Large highest EEA,110
+8,5,4,0.9751,unabhaengig,4,8,CZ|DE|GB|HR|HU|PL|RO|SK,Hungary,nein,3H0Q3U74FVFED2SHZT16,CON,2025-12-31,MBH bankcsoport,Hungary,Large highest EEA,106
+8,5,4,0.9751,unabhaengig,4,8,CZ|DE|GB|HR|HU|PL|RO|SK,Hungary,nein,549300XWJHRKLHU2PS28,CON,2025-12-31,ERSTE csoport,Hungary,Large subsidiaries,8
+8,5,4,0.9751,unabhaengig,4,8,CZ|DE|GB|HR|HU|PL|RO|SK,Hungary,nein,KFUXYFTU2LHQFQZDQG45,CON,2025-12-31,Kereskedelmi és Hitelbank csoport,Hungary,Large subsidiaries,30
+8,5,4,0.9751,unabhaengig,4,8,CZ|DE|GB|HR|HU|PL|RO|SK,Hungary,nein,Y28RT6GGYJ696PMW8T44,CON,2025-12-31,UniCredit csoport,Hungary,Large subsidiaries,104
+9,5,3,0.9231,unabhaengig,3,16,AT|AU|BE|BG|CZ|DE|FR|GB|HR|HU,Croatia,nein,529900I1UZV70CZRAU55,CON,2025-06-30,Raiffeisenbank Austria d.d.,Croatia,Large subsidiaries,18
+9,5,3,0.9231,unabhaengig,3,16,AT|AU|BE|BG|CZ|DE|FR|GB|HR|HU,Croatia,nein,529900I1UZV70CZRAU55,CON,2025-12-31,Raiffeisenbank Austria d.d.,Croatia,Large subsidiaries,19
+9,5,3,0.9231,unabhaengig,3,16,AT|AU|BE|BG|CZ|DE|FR|GB|HR|HU,Croatia,nein,549300A2F46GR0UOM390,CON,2025-06-30,Erste&Steiermärkische Bank d.d.,Croatia,Large subsidiaries,106
+9,5,3,0.9231,unabhaengig,3,16,AT|AU|BE|BG|CZ|DE|FR|GB|HR|HU,Croatia,nein,549300A2F46GR0UOM390,CON,2025-12-31,Erste&Steiermärkische Bank d.d.,Croatia,Large subsidiaries,109
+9,5,3,0.9231,unabhaengig,3,16,AT|AU|BE|BG|CZ|DE|FR|GB|HR|HU,Croatia,nein,RG3IZJKPYQ4H6IQPIC08,IND,2025-12-31,Addiko Bank d.d.,Croatia,Large subsidiaries,69
+10,5,5,0.9784,unabhaengig,5,10,AU|DE|DK|ES|GB|IS|NO|PL|SE|US,Norway,nein,549300Q3OIWRHQUQM052,CON,2025-12-31,SpareBank 1 Sør-Norge,Norway,Large highest EEA,26
+10,5,5,0.9784,unabhaengig,5,10,AU|DE|DK|ES|GB|IS|NO|PL|SE|US,Norway,nein,549300SXM92LQ05OJQ76,CON,2025-12-31,Sparebank 1 Nord-Norge SPA,Norway,Other highest EEA,18
+10,5,5,0.9784,unabhaengig,5,10,AU|DE|DK|ES|GB|IS|NO|PL|SE|US,Norway,nein,5967007LIEEXZX5PU005,CON,2025-12-31,Sparebanken Møre SPA,Norway,Other highest EEA,17
+10,5,5,0.9784,unabhaengig,5,10,AU|DE|DK|ES|GB|IS|NO|PL|SE|US,Norway,nein,5967007LIEEXZX8UHK11,CON,2025-12-31,SPAREBANK 1 SOGN OG FJORDANE,Norway,Other highest EEA,29
+10,5,5,0.9784,unabhaengig,5,10,AU|DE|DK|ES|GB|IS|NO|PL|SE|US,Norway,nein,7V6Z97IO7R1SEAO84Q32,CON,2025-12-31,SpareBank 1 SMN,Norway,Other highest EEA,24
+11,5,5,0.9570,unabhaengig,5,10,BE|DE|ES|FR|GB|IE|LU|NL|RO|SE,Spain,nein,95980020140005220135,IND,2025-12-31,"Caja Rural de Granada, Sociedad Cooperativa de Crédito",Spain,Other highest EEA,19
+11,5,5,0.9570,unabhaengig,5,10,BE|DE|ES|FR|GB|IE|LU|NL|RO|SE,Spain,nein,95980020140005439549,IND,2025-12-31,"Caja Rural de Navarra, S. Coop. de Crédito",Spain,Other highest EEA,21
+11,5,5,0.9570,unabhaengig,5,10,BE|DE|ES|FR|GB|IE|LU|NL|RO|SE,Spain,nein,95980020140005484654,CON,2025-12-31,"Caja Rural de Albacete, Ciudad Real y Cuenca, Sociedad Cooperativa de Crédito",Spain,Other highest EEA,12
+11,5,5,0.9570,unabhaengig,5,10,BE|DE|ES|FR|GB|IE|LU|NL|RO|SE,Spain,nein,95980020140005552166,CON,2025-12-31,"Eurocaja Rural, Sociedad Cooperativa de Crédito",Spain,Other highest EEA,41
+11,5,5,0.9570,unabhaengig,5,10,BE|DE|ES|FR|GB|IE|LU|NL|RO|SE,Spain,nein,95980020140005881190,CON,2025-12-31,Banco de Crédito Social Cooperativo,Spain,Large highest EEA,28
+12,4,3,0.9502,unabhaengig,3,6,DE|FR|LU|MT|NL|NO,Malta,nein,529900UIRB65OY6U4B21,IND,2025-12-31,Lombard Bank Malta plc,Malta,Other highest EEA,24
+12,4,3,0.9502,unabhaengig,3,6,DE|FR|LU|MT|NL|NO,Malta,nein,549300TEJKOLFN65KR76,IND,2025-12-31,BNF Bank plc,Malta,Other highest EEA,19
+12,4,3,0.9502,unabhaengig,3,6,DE|FR|LU|MT|NL|NO,Malta,nein,549300X34UUBDEUL1Z91,CON,2025-06-30,HSBC Bank Malta p.l.c.,Malta,Large subsidiaries,18
+12,4,3,0.9502,unabhaengig,3,6,DE|FR|LU|MT|NL|NO,Malta,nein,549300X34UUBDEUL1Z91,CON,2025-12-31,HSBC Bank Malta p.l.c.,Malta,Large subsidiaries,20
+13,4,2,0.9602,konzern,1,72,AE|AL|AR|AT|AU|BA|BE|BG|BR|BS,Austria,nein,529900XSTAE561178282,CON,2025-06-30,Raiffeisenbankengruppe OÖ Verbund eGen,Austria,Large highest EEA,78
+13,4,2,0.9602,konzern,1,72,AE|AL|AR|AT|AU|BA|BE|BG|BR|BS,Austria,nein,529900XSTAE561178282,CON,2025-12-31,Raiffeisenbankengruppe OÖ Verbund eGen,Austria,Large highest EEA,79
+13,4,2,0.9602,konzern,1,72,AE|AL|AR|AT|AU|BA|BE|BG|BR|BS,Austria,nein,I6SS27Q1Q3385V753S50,IND,2025-06-30,Raiffeisenlandesbank Oberösterreich Aktiengesellschaft,Austria,Large subsidiaries,73
+13,4,2,0.9602,konzern,1,72,AE|AL|AR|AT|AU|BA|BE|BG|BR|BS,Austria,nein,I6SS27Q1Q3385V753S50,IND,2025-12-31,Raiffeisenlandesbank Oberösterreich Aktiengesellschaft,Austria,Large subsidiaries,76
+14,4,4,0.9013,unabhaengig,4,29,AT|AU|BE|BG|CA|CH|CY|CZ|DE|ES,Romania,nein,5493003BDYD5VPGUQS04,CON,2025-12-31,UniCredit Bank S.A.,Romania,Large subsidiaries,55
+14,4,4,0.9013,unabhaengig,4,29,AT|AU|BE|BG|CA|CH|CY|CZ|DE|ES,Romania,nein,5493008QRHH0XCLJ4238,CON,2025-12-31,BRD-Groupe Société Générale SA,Romania,Large subsidiaries,136
+14,4,4,0.9013,unabhaengig,4,29,AT|AU|BE|BG|CA|CH|CY|CZ|DE|ES,Romania,nein,549300RG3H390KEL8896,CON,2025-12-31,Banca Transilvania,Romania,Large highest EEA,84
+14,4,4,0.9013,unabhaengig,4,29,AT|AU|BE|BG|CA|CH|CY|CZ|DE|ES,Romania,nein,635400F6HLXKXNJJX605,IND,2025-12-31,EXIM BANCA ROMANEASCA S.A.,Romania,Large highest EEA,31
+15,4,3,0.9101,unabhaengig,3,9,BE|DE|DK|EE|FI|FR|NL|NO|SE,Finland,nein,7437003B5WFBOIEFY714,CON,2025-06-30,OP Osuuskunta,Finland,Large highest EEA,17
+15,4,3,0.9101,unabhaengig,3,9,BE|DE|DK|EE|FI|FR|NL|NO|SE,Finland,nein,7437003B5WFBOIEFY714,CON,2025-12-31,OP Osuuskunta,Finland,Large highest EEA,26
+15,4,3,0.9101,unabhaengig,3,9,BE|DE|DK|EE|FI|FR|NL|NO|SE,Finland,nein,743700FTBNXAUN57RH30,CON,2025-12-31,S-Pankki Oyj,Finland,Other highest EEA,18
+15,4,3,0.9101,unabhaengig,3,9,BE|DE|DK|EE|FI|FR|NL|NO|SE,Finland,nein,743700GC62JLHFBUND16,CON,2025-12-31,Aktia Bank Abp,Finland,Other highest EEA,28
+16,3,2,0.9791,konzern,1,200,AD|AE|AL|AM|AO|AR|AT|AU|AW|AZ,Netherlands,nein,3TK20IVIUJ8J3ZU0QE75,CON,2025-12-31,ING Bank N.V.,Netherlands,Large subsidiaries,203
+16,3,2,0.9791,konzern,1,200,AD|AE|AL|AM|AO|AR|AT|AU|AW|AZ,Netherlands,nein,549300NYKK9MWM7GGW15,CON,2025-06-30,ING Groep N.V.,Netherlands,Large highest EEA,207
+16,3,2,0.9791,konzern,1,200,AD|AE|AL|AM|AO|AR|AT|AU|AW|AZ,Netherlands,nein,549300NYKK9MWM7GGW15,CON,2025-12-31,ING Groep N.V.,Netherlands,Large highest EEA,203
+17,3,3,0.9146,unabhaengig,3,4,BG|GB|IT|US,Bulgaria,nein,529900EKPN8EYA3AX590,IND,2025-12-31,Texim Bank AD,Bulgaria,Other highest EEA,12
+17,3,3,0.9146,unabhaengig,3,4,BG|GB|IT|US,Bulgaria,nein,549300IRGNL8Q3O8Y413,IND,2025-12-31,Eurobank Bulgaria,Bulgaria,Large subsidiaries,17
+17,3,3,0.9146,unabhaengig,3,4,BG|GB|IT|US,Bulgaria,nein,549300UY81ESCZJ0GR95,CON,2025-06-30,First Investment Bank,Bulgaria,Large highest EEA,17
+18,3,2,0.9147,unabhaengig,2,20,AT|AU|BE|CH|DE|DK|ES|FI|FR|GB,Belgium,nein,54930060Q00W1SRIUI57,IND,2025-12-31,vdk bank,Belgium,Other highest EEA,32
+18,3,2,0.9147,unabhaengig,2,20,AT|AU|BE|CH|DE|DK|ES|FI|FR|GB,Belgium,nein,A5GWLFH3KM7YV2SFQL84,CON,2025-06-30,Belfius Bank,Belgium,Large highest EEA,38
+18,3,2,0.9147,unabhaengig,2,20,AT|AU|BE|CH|DE|DK|ES|FI|FR|GB,Belgium,nein,A5GWLFH3KM7YV2SFQL84,CON,2025-12-31,Belfius Bank,Belgium,Large highest EEA,39
+19,3,2,0.9921,konzern,1,87,AE|AF|AO|AT|AU|AW|BE|BF|BG|BR,Belgium,nein,5493008QOCP58OLEN998,CON,2025-06-30,Investeringsmaatschappij Argenta - Société d'investissements Argenta - Investierungsgesellschaft Arg,Belgium,Large highest EEA,87
+19,3,2,0.9921,konzern,1,87,AE|AF|AO|AT|AU|AW|BE|BF|BG|BR,Belgium,nein,5493009ML6YX83YHC820,CON,2025-06-30,Argenta Bank- en Verzekeringsgroep NV,Belgium,Large subsidiaries,87
+19,3,2,0.9921,konzern,1,87,AE|AF|AO|AT|AU|AW|BE|BF|BG|BR,Belgium,nein,5493009ML6YX83YHC820,CON,2025-12-31,Argenta Bank- en Verzekeringsgroep NV,Belgium,Large subsidiaries,100
+20,3,2,0.9094,unabhaengig,2,9,CN|DE|DK|GB|IE|NL|NO|PT|SE,Sweden,nein,549300TJREQ7GHIXWR36,IND,2025-06-30,Swedbank Hypotek AB,Sweden,Large subsidiaries,10
+20,3,2,0.9094,unabhaengig,2,9,CN|DE|DK|GB|IE|NL|NO|PT|SE,Sweden,nein,549300TJREQ7GHIXWR36,IND,2025-12-31,Swedbank Hypotek AB,Sweden,Large subsidiaries,10
+20,3,2,0.9094,unabhaengig,2,9,CN|DE|DK|GB|IE|NL|NO|PT|SE,Sweden,nein,549300UOX05QGUJJ5707,IND,2025-12-31,Stadshypotek AB,Sweden,Large subsidiaries,76
+21,3,2,0.9696,unabhaengig,2,9,BE|CZ|DE|ES|LU|NL|PT|RU|SK,Czech,nein,9KOGW2C2FCIOJQ7FF485,CON,2025-06-30,"Česká spořitelna, a.s.",Czech,Large subsidiaries,40
+21,3,2,0.9696,unabhaengig,2,9,BE|CZ|DE|ES|LU|NL|PT|RU|SK,Czech,nein,9KOGW2C2FCIOJQ7FF485,CON,2025-12-31,"Česká spořitelna, a.s.",Czech,Large subsidiaries,40
+21,3,2,0.9696,unabhaengig,2,9,BE|CZ|DE|ES|LU|NL|PT|RU|SK,Czech,nein,I6USJ58BDV2BO5KP3C31,CON,2025-12-31,"MONETA Money Bank, a.s.",Czech,Other highest EEA,14
+22,2,2,0.9775,unabhaengig,2,7,CY|FR|GB|GR|IE|NL|RO,Greece,nein,213800DBQIB6VBNU5C64,CON,2025-12-31,Alpha Bank S.A.,Greece,Large highest EEA,7
+22,2,2,0.9775,unabhaengig,2,7,CY|FR|GB|GR|IE|NL|RO,Greece,nein,M6AD1Y1KW32H8THQ6F76,CON,2025-06-30,Piraeus Financial Holdings,Greece,Large highest EEA,25
+23,2,2,0.9996,konzern,1,69,AE|AL|AT|AU|AZ|BA|BD|BE|BG|BR,Luxembourg|Slovenia,ja,22210058UCKT3BJTCN24,CON,2025-12-31,OTP Luxembourg S.à r.l.,Luxembourg,Large subsidiaries,69
+23,2,2,0.9996,konzern,1,69,AE|AL|AT|AU|AZ|BA|BD|BE|BG|BR,Luxembourg|Slovenia,ja,549300J0GSZ83GTKBZ89,CON,2025-12-31,OTP banka d.d.,Slovenia,Large subsidiaries,69
+24,2,2,0.9573,unabhaengig,2,12,AO|BR|CH|ES|FR|GB|LU|MZ|NL|PL,Portugal,nein,3DM5DPGI3W6OU6GJ4N92,CON,2025-12-31,BANCO BPI S.A.,Portugal,Large subsidiaries,15
+24,2,2,0.9573,unabhaengig,2,12,AO|BR|CH|ES|FR|GB|LU|MZ|NL|PL,Portugal,nein,549300URJH9VSI58CS32,CON,2025-12-31,"Banco Santander Totta, SA",Portugal,Large subsidiaries,16
+25,2,2,0.9854,unabhaengig,2,4,DK|IS|NO|SE,Iceland,nein,549300PZMFIQR79Q0T97,CON,2025-12-31,Íslandsbanki hf.,Iceland,Large highest EEA,6
+25,2,2,0.9854,unabhaengig,2,4,DK|IS|NO|SE,Iceland,nein,549300TLZPT6JELDWM92,CON,2025-12-31,Landsbankinn hf.,Iceland,Large highest EEA,17
+26,2,2,0.9730,unabhaengig,2,3,EE|GB|LT,Lithuania,nein,549300SBPFE9JX7N8J82,IND,2025-12-31,AB SEB bankas,Lithuania,Large subsidiaries,10
+26,2,2,0.9730,unabhaengig,2,3,EE|GB|LT,Lithuania,nein,549300TK038P6EV4YU51,CON,2025-12-31,AB Artea bankas,Lithuania,Large highest EEA,9

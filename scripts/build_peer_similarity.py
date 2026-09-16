@@ -33,21 +33,21 @@ von 0,91 sagt einem Leser nichts.
 Alle drei sind Mutter und Tochter derselben Gruppe — und das Verfahren setzt
 sie fast deckungsgleich, **ohne je einen Konzerngraphen gesehen zu haben.** Die
 Spalte `beziehung` benennt das im Nachhinein aus #32/#42, und die Häufung ist
-der eigentliche Beleg: von 100 besten Treffern über 0,95 sind 22 konzernintern,
-unterhalb von 0,80 nur noch 4.
+der eigentliche Beleg: unter den 100 besten Treffern sind 22 konzernintern,
+unter den 129 Treffern unterhalb von 0,80 noch genau einer.
 
 Der Ertrag steht daneben — starke Ähnlichkeit zwischen UNABHÄNGIGEN Häusern:
 
-    0,9933  Bausparkasse Schwäbisch Hall  ->  Deutsche Kreditbank
-    0,9929  Mediocredito Centrale         ->  ICCREA Banca
-    0,9905  Alior Bank                    ->  ING Bank Śląski
+    0,9977  Mediocredito Centrale  ->  ICCREA Banca
+    0,9914  Alior Bank             ->  BNP Paribas Bank Polska
+    0,9914  ING Bank Śląski        ->  BNP Paribas Bank Polska
 
 ## Was das Mass NICHT kann, und es betrifft ein Drittel der Fälle
 
 Zwei rein national tätige Banken desselben Landes überlappen sich zwangsläufig
 fast vollständig — sie haben beide fast alles im selben Land. Gemessen: bei
 Instituten mit über 90 % Domestizität liegt die beste Überlappung im Median bei
-**0,976**, bei breiter aufgestellten nur bei 0,812. Das sind 117 von 334
+**0,975**, bei breiter aufgestellten nur bei 0,760. Das sind 116 von 326
 Reports, und für sie heisst „ähnlich" im Wesentlichen „auch inländisch".
 
 Das ist keine Fehlmessung, sondern die Grenze der Kennzahl: Länder-Exposure
@@ -93,7 +93,7 @@ SPALTE = "0060"              # f Total exposure value
 # Unter so vielen Ländern trägt die Überlappung nicht: zwei Institute mit je
 # zwei Ländern erreichen trivial 1,0, und die Nachbarschaft wechselt mit jeder
 # Welle. Die verbleibenden Profile sind breit genug — Median 32 Länder, erstes
-# Dezil 11, Maximum 217.
+# Dezil 11, Maximum 216.
 MIN_LAENDER = 5
 
 # Unterhalb dieser Überlappung ist „ähnlich" keine Aussage mehr. 0,30 heisst:
@@ -235,7 +235,35 @@ def nachbarn(profile, top_k=TOP_K, min_ueberlappung=MIN_UEBERLAPPUNG):
 
 
 def lade(con):
-    """{(lei, scope, refPeriod): ({Land: Anteil}, Metadaten)}."""
+    """{(lei, scope, refPeriod): ({Land: Anteil}, Metadaten)}.
+
+    Nur ZEILEN MIT LAND. `67.01.A` trägt neben den Ländern drei Zeilen, die
+    keine sind, und alle drei haben `open_axis_country IS NULL`:
+
+        x1      die Gesamtzeile  — die Summe der übrigen noch einmal
+        x28     „übrige Länder"  — der Residualbucket
+        qx2014  ein einzelner Ausreisser bei einem Melder
+
+    Solange `x1` mitlief, war das Mass kaputt, und zwar oben, wo es benutzt
+    wird. `x1` ist definitionsgemäss halb so gross wie der ganze Report: bei
+    den 127 betroffenen Profilen lag sein Anteil im Median bei **exakt 0,500**.
+    Damit teilten sich zwei beliebige Institute schon über die Gesamtzeile die
+    halbe Masse — eine Gemeinsamkeit, die keine ist.
+
+    Der Median über alle Paare verschob sich dadurch kaum (0,034 auf 0,030);
+    wer nur den geprüft hätte, hätte nichts bemerkt. Die Spitze der Verteilung
+    kippte dagegen vollständig:
+
+        0,970 -> 0,345      0,924 -> 0,262      0,626 -> 0,005
+
+    Und die Spitze ist genau das, was in `peer_similarity.csv` steht. Eine
+    ausgewiesene Überlappung von 0,92 mit der Lesart „92 % des Exposures beider
+    Häuser liegt in denselben Ländern" war dann schlicht falsch.
+
+    `x28` fliegt aus demselben Grund mit: zwei Häuser mit je 5 % in „übrige
+    Länder" teilen kein Land, sondern eine Restgrösse. Elf Profile bestanden zu
+    über 90 % aus diesen beiden Zeilen.
+    """
     from determinism import ordered_query as ordered
 
     roh = collections.defaultdict(dict)
@@ -247,6 +275,7 @@ def lade(con):
         WHERE template_id = '{TEMPLATE}' AND cell_col = '{SPALTE}'
           AND fact_value_eur IS NOT NULL
           AND cell_row IS NOT NULL AND cell_row <> ''
+          AND open_axis_country IS NOT NULL
         GROUP BY lei, scope, refPeriod, cell_row
         ORDER BY lei, scope, refPeriod, cell_row
     """, "Länder-Exposure"):

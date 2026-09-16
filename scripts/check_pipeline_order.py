@@ -105,6 +105,13 @@ ABHAENGIG = {
                                   "processed/lei_relations.csv",
                                   "processed/coverage_gap.csv"],
                                  ["processed/peer_similarity.csv"]),
+    # Liest peer_similarity.csv NICHT als Datei, sondern importiert dessen
+    # `lade`/`ueberlappung` — die Kante ist trotzdem echt: laeuft das Clustering
+    # vor dem Aehnlichkeitsschritt, stuenden im Bericht Gruppen, die zum
+    # veroeffentlichten Nachbarschaftsartefakt nicht passen.
+    "build_peer_clusters.py": (["processed/lei_relations.csv",
+                                "processed/peer_similarity.csv"],
+                               ["processed/peer_clusters.csv"]),
     "check_country_effect.py": (["processed/footprint.csv",
                                  "codebook/country_gdp.csv"],
                                 ["processed/country_effect.csv"]),

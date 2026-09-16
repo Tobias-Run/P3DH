@@ -302,6 +302,16 @@ jobs:
       - name: Aehnliche Institute
         run: python scripts/build_peer_similarity.py
 
+      # Gruppen mit gemeinsamem Fussabdruck (#11, #13). Muss NACH
+      # build_peer_similarity laufen: er benutzt dessen `lade`, `anteilsvektor`
+      # und `ueberlappung`, rechnet die Aehnlichkeit aber VOLLSTAENDIG statt
+      # nur Top-5 — nur so ist die Kohaesion einer Gruppe berechenbar und eine
+      # Kette von einem Block zu unterscheiden. Braucht ausserdem
+      # lei_relations.csv aus check_group_graphs, um einen wiedergefundenen
+      # Konzern von einem echten Befund zu trennen.
+      - name: Fussabdruck-Gruppen (#11, #13)
+        run: python scripts/build_peer_clusters.py
+
       # Laendereffekt gegen Bankattribute (#11). Reine Auswertung ueber
       # footprint.csv und country_gdp.csv; laeuft nach dem Footprint.
       - name: Laendereffekt (#11)
@@ -396,6 +406,7 @@ jobs:
                   processed/disclosure_lag.csv processed/rwa_density.csv \
                   interim/plausibility_cells.csv interim/plausibility_findings.csv \
                   processed/irrbb_sensitivity.csv processed/peer_similarity.csv \
+                  processed/peer_clusters.csv \
                   processed/country_effect.csv processed/omission_persistence.csv
           # Harvest-Delta: entsteht nur bei inputs.harvest, deshalb einzeln und
           # bedingt. harvest_log.csv ist append-only — ohne diesen Commit stirbt
