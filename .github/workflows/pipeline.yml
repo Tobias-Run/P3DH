@@ -302,6 +302,12 @@ jobs:
       - name: Aehnliche Institute
         run: python scripts/build_peer_similarity.py
 
+      # Konzernzuordnung und Peer-Ueberschneidung (#32 P3+P5). Muss NACH
+      # check_group_graphs laufen (lei_relations.csv) und nach dem
+      # Abdeckungsabgleich (coverage_gap.csv) -- er verbindet beide Graphen.
+      - name: Konzernzuordnung (#32)
+        run: python scripts/build_entity_groups.py
+
       # Gruppen mit gemeinsamem Fussabdruck (#11, #13). Muss NACH
       # build_peer_similarity laufen: er benutzt dessen `lade`, `anteilsvektor`
       # und `ueberlappung`, rechnet die Aehnlichkeit aber VOLLSTAENDIG statt
@@ -417,7 +423,7 @@ jobs:
                   processed/disclosure_lag.csv processed/rwa_density.csv \
                   interim/plausibility_cells.csv interim/plausibility_findings.csv \
                   processed/irrbb_sensitivity.csv processed/peer_similarity.csv \
-                  processed/peer_clusters.csv \
+                  processed/peer_clusters.csv processed/entity_groups.csv \
                   processed/country_exposure.csv \
                   processed/country_concentration.csv \
                   processed/country_effect.csv processed/omission_persistence.csv
