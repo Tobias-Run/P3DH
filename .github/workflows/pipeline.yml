@@ -302,6 +302,13 @@ jobs:
       - name: Aehnliche Institute
         run: python scripts/build_peer_similarity.py
 
+      # Wirkt die Proportionalitaet (#44)? Muss NACH build_omission_profile
+      # laufen: die Auswertung lebt von dessen quote_gegen_erwartung, die um
+      # das Frequenzmodell aus #34 bereinigt ist. Ohne sie waere nur die rohe
+      # Quote messbar -- und die beantwortet Punkt 3 des Issues nicht.
+      - name: Proportionalitaet (#44)
+        run: python scripts/check_proportionality.py
+
       # Konzernzuordnung und Peer-Ueberschneidung (#32 P3+P5). Muss NACH
       # check_group_graphs laufen (lei_relations.csv) und nach dem
       # Abdeckungsabgleich (coverage_gap.csv) -- er verbindet beide Graphen.
@@ -424,6 +431,7 @@ jobs:
                   interim/plausibility_cells.csv interim/plausibility_findings.csv \
                   processed/irrbb_sensitivity.csv processed/peer_similarity.csv \
                   processed/peer_clusters.csv processed/entity_groups.csv \
+                  processed/proportionality.csv \
                   processed/country_exposure.csv \
                   processed/country_concentration.csv \
                   processed/country_effect.csv processed/omission_persistence.csv
