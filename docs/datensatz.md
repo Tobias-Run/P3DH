@@ -149,6 +149,8 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/country_swap.csv` | Stichtagspaar → Verdacht auf vertauschten Ländercode | CCyB1 `67.01.A`, auf Anteilen |
 | `processed/submission_profile.csv` | Institut → Einreichungen, Korrekturen, Korrekturrate | `manifest_full.csv` über `submissions.py` |
 | `processed/persistent_findings.csv` | Institut mit `hoch`-Befund, das **nie** korrigiert hat | ebenda + `quality_profile.csv` |
+| `processed/country_dependence.csv` | Land → wer trägt es von **aussen**, HHI über Konzerne | CCyB1 `67.01.A` + `entity_groups.csv` |
+| `processed/contagion_edges.csv` | Konzernpaar → geteilte **Auslandsmärkte**, spezifisch und roh | ebenda |
 | `processed/equity_link.csv` | Institut → Aktien-ISIN, Primärnotierung, Tickersymbol | Wikidata (`P946`, `P414`/`P249`) |
 | `processed/event_study_feasibility.csv` | Ereignisfenster → verwertbare Ereignisse, Urteil zur Machbarkeit | `manifest_full.csv` + `wikidata_entities.csv` |
 | `processed/catalogue_coverage.csv` | Katalog-Report → geladen, oder warum nicht | `manifest_full.csv` gegen Parquet + Coverage-Matrix |
@@ -1003,6 +1005,61 @@ sonst nirgends gibt.
 
 Kein Werturteil: eine Korrektur ist Sorgfalt, keine Schuld. Und der Katalog ist
 ein Schnappschuss — die Zahlen sind eine untere Schranke (#6).
+
+### `country_dependence.csv` · `contagion_edges.csv` — der Exposure-Graph (#35)
+
+Dieselben Daten wie #12, #13 und #19, aber als **Graph** gelesen. Zwei Dinge
+unterscheiden ihn, und beide sind gemessen, nicht gesetzt:
+
+**Ohne Heimatland.** Ein gemeinsamer Markt ist ein Übertragungskanal, das eigene
+Sitzland ist keiner. Der Unterschied ist gross: die Median-Überlappung steigt
+von 0,027 auf 0,186, und **44 von 50 Spitzenpaaren wechseln**. Der Graph ist
+damit ein anderes Objekt als die Ähnlichkeitssortierung aus #13.
+
+**Auf Konzernebene.** Knoten sind Konzerne aus `entity_groups.csv` (#32), nicht
+Reports — sonst zählen Mutter und Tochter als zwei unabhängige Knoten und jede
+Konzentrationsaussage ist verzerrt.
+
+#### Welche Länder hängen an wenigen ausländischen Trägern?
+
+| Land | Auslandsexposure | Träger | grösster |
+|---|---:|---:|---|
+| Belgien | 640,2 Mrd | 132 | **52,9 %** BNP Paribas |
+| Dänemark | 339,6 Mrd | 128 | 56,1 % BBVA ⚠️ |
+| Australien | 205,5 Mrd | 110 | 55,9 % ING |
+| Österreich | 163,6 Mrd | 95 | **71,1 %** UniCredit |
+| Brasilien | 125,1 Mrd | 64 | **80,2 %** Santander |
+
+⚠️ **Dänemark steht unter Vorbehalt.** Genau dieses Paar hat #59 als
+Ländercode-Tauschverdacht markiert (Dänemark +36,8 % gegen Spanien −35,1 %).
+Die Spalte `tauschverdacht` verweist darauf; die Abhängigkeit ist dort
+womöglich ein Meldeartefakt.
+
+#### Warum `ueberlappung_spezifisch` allein nicht reicht
+
+Fast jedes Profil enthält Grossbritannien (85,9 %), Frankreich (80,6 %) und
+zwei Dutzend weitere grosse Märkte. `ueberlappung_spezifisch` rechnet deshalb
+nur über die Länder, die **nicht** über die Hälfte der Profile ohnehin hält.
+
+Der erste Bericht daraus lautete „3.764 von 3.765 Kanten tragen spezifisch
+unter 0,10" — das klang nach einem Befund und war eine Eigenschaft der
+Kennzahl. Denn beim mittleren Profil liegt überhaupt nur **1,0 %** des
+Auslandsexposures in solchen Ländern (1. Quartil 0,1 %). Eine feste Schwelle
+misst dort die Obergrenze, nicht die Gemeinsamkeit.
+
+`spezifisch_moeglich` führt diese Obergrenze mit, `spezifisch_ausgeschoepft`
+setzt beides ins Verhältnis. Erst damit trägt die Aussage: **496 Kanten
+schöpfen über die Hälfte des möglichen Nischen-Überlapps aus**, und nur sie
+sind Übertragungskanäle im Sinne des Issues.
+
+Die strukturelle Nachricht steht dahinter und ist eigenständig: **das
+Auslandsexposure dieser Population ist selbst kaum gestreut.** Es läuft fast
+vollständig über dieselben zwei Dutzend Märkte.
+
+⚠️ **Exposure ist nicht Ansteckung.** Der Graph zeigt Kanäle, keine Wirkung und
+schon gar keine Verluste. Zwei Häuser mit demselben Auslandsprofil sind
+gleichzeitig betroffen, *wenn* dort etwas passiert — ob etwas passiert, steht
+hier nicht.
 
 ### `country_effect.csv` — hängt die Bank am Heimatland? Nein.
 

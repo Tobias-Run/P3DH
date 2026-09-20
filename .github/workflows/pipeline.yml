@@ -329,6 +329,14 @@ jobs:
       - name: Konzernzuordnung (#32)
         run: python scripts/build_entity_groups.py
 
+      # Bank<->Land als bipartiter Graph (#35). Muss NACH build_entity_groups
+      # laufen -- #35 macht #32 zur ausdruecklichen Vorbedingung: ohne
+      # Konzernaufloesung zaehlen Mutter und Tochter als zwei Knoten und jede
+      # Konzentrationsaussage ist verzerrt. Und NACH check_country_swap, weil
+      # die Laenderzeilen auf dessen Tauschverdacht verweisen.
+      - name: Exposure-Graph (#35)
+        run: python scripts/build_exposure_graph.py
+
       # Gruppen mit gemeinsamem Fussabdruck (#11, #13). Muss NACH
       # build_peer_similarity laufen: er benutzt dessen `lade`, `anteilsvektor`
       # und `ueberlappung`, rechnet die Aehnlichkeit aber VOLLSTAENDIG statt
@@ -447,6 +455,7 @@ jobs:
                   processed/peer_clusters.csv processed/entity_groups.csv \
                   processed/proportionality.csv processed/country_swap.csv \
                   processed/submission_profile.csv processed/persistent_findings.csv \
+                  processed/country_dependence.csv processed/contagion_edges.csv \
                   processed/country_exposure.csv \
                   processed/country_concentration.csv \
                   processed/country_effect.csv processed/omission_persistence.csv
