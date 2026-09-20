@@ -97,14 +97,21 @@ SPALTE = "0060"              # Total exposure value
 # nicht — dieselbe Trennung wie in check_consolidation.brauchbar.
 SKALENVORBEHALT = {"skala", "unter_trea"}
 
+# Ab welchem Anteil im Residualbucket die Ländergeografie eines Reports als
+# unvollständig gilt — dieselbe Grenze wie in `build_peer_clusters`. #19 nennt
+# das als Vorbedingung: „Institute, die fast alles in den Residual-Bucket legen
+# (Banco BPM: 101,4 Mrd), verzerren Länder-Aggregate nach unten."
+X28_GRENZE = 0.25
+
 FELDER_REPORT = ["refPeriod", "lei", "scope", "bank_name", "home_country",
                  "land", "land_name", "ist_heimatland", "rang",
                  "exposure_eur", "anteil_am_report", "bip_eur", "bip_jahr",
-                 "bip_fx_refdate", "exposure_je_bip", "vorbehalt"]
+                 "bip_fx_refdate", "exposure_je_bip", "vorbehalt", "x28_anteil"]
 
-FELDER_LAND = ["refPeriod", "land", "land_name", "melder", "exposure_eur",
+FELDER_LAND = ["refPeriod", "land", "land_name", "melder", "melder_gesamt",
+               "breite", "melder_unvollstaendig", "exposure_eur",
                "bip_eur", "bip_jahr", "exposure_je_bip", "groesster_melder",
-               "groesster_anteil"]
+               "groesster_heimat", "groesster_inlaendisch", "groesster_anteil"]
 
 
 def lade_bip(pfad=None):
@@ -216,11 +223,43 @@ def doppelt_gezaehlt(lei, scope, refperiod, muetter, con_melder):
     return any((m, refperiod) in con_melder for m in muetter.get(lei, ()))
 
 
-def je_report(rohzeilen, bip, kurs, kurs_datum, vorbehalte):
+def x28_anteile(con, parquet=None):
+    """{(lei, scope, refPeriod): Anteil im Residualbucket}.
+
+    CCyB1 erlaubt, unwesentliche Länder in `x28` („übrige Länder")
+    zusammenzufassen. Dieser Teil des Buches ist keinem Land zuzuordnen — er
+    fehlt also in JEDER Ländersumme, und zwar nach unten.
+
+    Gemessen liegen zum 31.12.2025 **736,5 Mrd EUR** in `x28`, das sind 3,4 %
+    der länderzuordenbaren Masse. Das ist klein genug, um die Aggregate
+    brauchbar zu machen, und gross genug, um es nicht zu verschweigen.
+    """
+    pfad = parquet or PARQUET
+    aus = {}
+    for lei, sc, rp, x28, land in con.execute(f"""
+        SELECT lei, scope, refPeriod,
+               sum(CASE WHEN open_axis_country IS NULL AND cell_row = 'x28'
+                        THEN fact_value_eur ELSE 0 END),
+               sum(CASE WHEN open_axis_country IS NOT NULL AND fact_value_eur > 0
+                        THEN fact_value_eur ELSE 0 END)
+        FROM '{pfad}'
+        WHERE template_id = '{TEMPLATE}' AND cell_col = '{SPALTE}'
+          AND fact_value_eur IS NOT NULL
+        GROUP BY lei, scope, refPeriod
+        ORDER BY lei, scope, refPeriod
+    """).fetchall():
+        ganz = (x28 or 0) + (land or 0)
+        if ganz > 0:
+            aus[(lei, sc, rp)] = (x28 or 0) / ganz
+    return aus
+
+
+def je_report(rohzeilen, bip, kurs, kurs_datum, vorbehalte, x28=None):
     """Die Zeilen je (Report, Land) — die Kontextspalte aus #14.
 
     `rohzeilen`: [(lei, scope, refPeriod, bank, heimat, iso2, name, betrag)]
     """
+    x28 = x28 or {}
     je = collections.defaultdict(list)
     for z in rohzeilen:
         je[(z[2], z[0], z[1])].append(z)
@@ -251,15 +290,33 @@ def je_report(rohzeilen, bip, kurs, kurs_datum, vorbehalte):
                 "bip_fx_refdate": kurs_datum if bip_eur else "",
                 "exposure_je_bip": (f"{betrag / bip_eur:.6f}"
                                     if bip_eur and bip_eur > 0 else ""),
-                "vorbehalt": vb})
+                "vorbehalt": vb,
+                "x28_anteil": (f"{x28[(lei, scope, rp)]:.4f}"
+                               if (lei, scope, rp) in x28 else "")})
     aus.sort(key=lambda z: (z["refPeriod"], z["lei"], z["scope"], int(z["rang"]),
                             z["land"]))
     return aus
 
 
 def je_land(zeilen, bip, kurs, kurs_datum, muetter, con_melder):
-    """Aggregation je Land — entdoppelt und ohne Skalenvorbehalte."""
+    """Aggregation je Land — entdoppelt und ohne Skalenvorbehalte.
+
+    Drei Spalten tragen die Vorbehalte, die #19 als Vorbedingung nennt:
+
+    `melder_gesamt` / `breite`
+        Wie viele Institute meldeten zu diesem Stichtag überhaupt Exposure,
+        und welcher Anteil davon ist in diesem Land engagiert. Ohne den Nenner
+        ist `melder` nicht lesbar: 55 Melder sind viel oder wenig, je nachdem,
+        ob 60 oder 600 in Frage kamen. #19 nennt das ausdrücklich als eigene
+        Anwendung — „Breite, nicht nur Volumen".
+
+    `melder_unvollstaendig`
+        Wie viele der beitragenden Häuser über `X28_GRENZE` im Residualbucket
+        führen. Deren Ländergeografie ist unvollständig, und die Summe ist
+        deshalb nach UNTEN verzerrt — nie nach oben.
+    """
     eimer = collections.defaultdict(list)
+    gesamt = collections.defaultdict(set)
     for z in zeilen:
         if skaliert(z["vorbehalt"]):
             continue
@@ -267,6 +324,7 @@ def je_land(zeilen, bip, kurs, kurs_datum, muetter, con_melder):
                             muetter, con_melder):
             continue
         eimer[(z["refPeriod"], z["land"])].append(z)
+        gesamt[z["refPeriod"]].add(z["lei"])
 
     aus = []
     for (rp, iso), zs in eimer.items():
@@ -274,15 +332,31 @@ def je_land(zeilen, bip, kurs, kurs_datum, muetter, con_melder):
         gross = max(zs, key=lambda z: (float(z["exposure_eur"]), z["lei"]))
         b = bip.get(iso)
         bip_eur = b[0] * kurs if (b and kurs) else None
+        melder = {z["lei"] for z in zs}
+        alle = len(gesamt[rp])
+        unvoll = {z["lei"] for z in zs
+                  if z["x28_anteil"] and float(z["x28_anteil"]) > X28_GRENZE}
         aus.append({
             "refPeriod": rp, "land": iso, "land_name": zs[0]["land_name"],
-            "melder": len({z["lei"] for z in zs}),
+            "melder": len(melder),
+            "melder_gesamt": alle,
+            "breite": f"{len(melder) / alle:.4f}" if alle else "",
+            "melder_unvollstaendig": len(unvoll),
             "exposure_eur": f"{summe:.2f}",
             "bip_eur": f"{bip_eur:.0f}" if bip_eur else "",
             "bip_jahr": b[1] if b else "",
             "exposure_je_bip": (f"{summe / bip_eur:.6f}"
                                 if bip_eur and bip_eur > 0 else ""),
             "groesster_melder": gross["bank_name"],
+            # Ohne diese beiden Spalten ist eine hohe Konzentration nicht zu
+            # deuten. Islands 84,9 % liegen bei Íslandsbanki -- einer
+            # islaendischen Bank im eigenen Land, also der Normalfall. Brasiliens
+            # 80,1 % liegen bei Santander, und DAS ist ein Klumpenrisiko
+            # gegenueber einem Drittstaat, wie #19 es meint.
+            "groesster_heimat": gross.get("home_country", ""),
+            "groesster_inlaendisch":
+                "ja" if gross.get("home_country") and
+                gross["home_country"] == gross["land_name"] else "nein",
             "groesster_anteil": (f"{float(gross['exposure_eur']) / summe:.4f}"
                                  if summe > 0 else "")})
     aus.sort(key=lambda z: (z["refPeriod"], z["land"]))
@@ -324,7 +398,8 @@ def build():
         print("WARNUNG: kein USD-Kurs — BIP bleibt unumgerechnet, die Spalten "
               "bleiben leer. Das ist kein Nullwert, sondern eine Lücke.")
 
-    zeilen = je_report(roh, bip, kurs, kurs_datum, vorbehalte)
+    zeilen = je_report(roh, bip, kurs, kurs_datum, vorbehalte,
+                       x28_anteile(con))
     con_melder = {(z["lei"], z["refPeriod"]) for z in zeilen
                   if z["scope"] == "CON"}
     laender = je_land(zeilen, bip, kurs, kurs_datum, muetter, con_melder)
@@ -397,6 +472,43 @@ def bericht(zeilen, laender, bip, kurs, kurs_datum):
                "vergleichbar werden — keine Aussage über Ursachen. Als "
                "Regressor taugt das BIP nicht, und check_country_effect.py "
                "misst genau das.")
+    aus.extend(bericht_aggregat(aktuell, jung))
+    return aus
+
+
+def bericht_aggregat(aktuell, stichtag):
+    """Die Fragen aus #19 — Breite, Konzentration, Abdeckung."""
+    if not aktuell:
+        return []
+    alle = max(int(z["melder_gesamt"]) for z in aktuell)
+    gross = [z for z in aktuell if float(z["exposure_eur"]) > 5e8
+             and z["groesster_anteil"]]
+    aus = ["", f"#19 — Länder-Aggregate, Stichtag {stichtag}:",
+           f"  Beitragende Melder: {alle} (entdoppelt, ohne Skalenvorbehalt). "
+           f"Das ist NICHT das EU-Bankensystem, sondern wer im P3DH "
+           f"veröffentlicht — die Summen sind entsprechend zu lesen."]
+    unvoll = [z for z in aktuell if int(z["melder_unvollstaendig"]) > 0]
+    aus.append(f"  {len(unvoll)} von {len(aktuell)} Ländersummen beruhen auf "
+               f"mindestens einem Profil mit über {X28_GRENZE:.0%} im "
+               f"Residualbucket — sie sind nach UNTEN verzerrt, nie nach oben.")
+    if not gross:
+        return aus
+
+    # Der eigentliche Befund: Breite und Konzentration sind entkoppelt.
+    fremd = [z for z in gross if z["groesster_inlaendisch"] == "nein"]
+    aus.append(f"  Klumpenrisiken: von {len(gross)} Ländern mit über 0,5 Mrd "
+               f"Exposure tragen {len(fremd)} ihre grösste Position bei einem "
+               f"AUSLÄNDISCHEN Institut. Nur die sind Drittstaatenrisiken im "
+               f"Sinne des Issues:")
+    for z in sorted(fremd, key=lambda z: -float(z["groesster_anteil"]))[:5]:
+        aus.append(f"    {z['land']} {z['land_name'][:20]:22s} "
+                   f"{float(z['groesster_anteil']):5.1%} bei "
+                   f"{z['groesster_melder'][:26]:28s} · {z['melder']:>3} Melder "
+                   f"· {float(z['exposure_eur']) / 1e9:7.1f} Mrd")
+    aus.append("  Viele Melder heissen NICHT gestreut: Brasilien hat 82 Melder "
+               "und trotzdem 80 % bei einem Haus. Die Breite (`breite`) und die "
+               "Konzentration (`groesster_anteil`) sind zwei verschiedene "
+               "Aussagen, und nur zusammen ergeben sie eine.")
     return aus
 
 

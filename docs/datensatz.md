@@ -144,6 +144,11 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/country_exposure.csv` | Report × Land → Exposure, Anteil am Report, **Exposure je Host-BIP** | CCyB1 `67.01.A` + `country_gdp.csv` |
 | `processed/country_concentration.csv` | Land → aggregiertes Exposure der Melder, am BIP relativiert | ebenda, entdoppelt über `lei_relations.csv` |
 | `processed/peer_clusters.csv` | Gruppe → Institute mit gemeinsamem Länder-Fussabdruck, Kohäsion, Trägerschaft | CCyB1 `67.01.A` + `lei_relations.csv` |
+| `processed/entity_groups.csv` | Report → Konzernkopf, Quelle, **effektive Grösse der Peer-Gruppe** | GLEIF + EZB-Hierarchie |
+| `processed/proportionality.csv` | CRR-Klasse × Stichtag → Offenlegungsumfang, Quartile, TREA-Median | `omission_profile.csv` + KM1 `61.00` |
+| `processed/country_swap.csv` | Stichtagspaar → Verdacht auf vertauschten Ländercode | CCyB1 `67.01.A`, auf Anteilen |
+| `processed/submission_profile.csv` | Institut → Einreichungen, Korrekturen, Korrekturrate | `manifest_full.csv` über `submissions.py` |
+| `processed/persistent_findings.csv` | Institut mit `hoch`-Befund, das **nie** korrigiert hat | ebenda + `quality_profile.csv` |
 | `processed/equity_link.csv` | Institut → Aktien-ISIN, Primärnotierung, Tickersymbol | Wikidata (`P946`, `P414`/`P249`) |
 | `processed/event_study_feasibility.csv` | Ereignisfenster → verwertbare Ereignisse, Urteil zur Machbarkeit | `manifest_full.csv` + `wikidata_entities.csv` |
 | `processed/catalogue_coverage.csv` | Katalog-Report → geladen, oder warum nicht | `manifest_full.csv` gegen Parquet + Coverage-Matrix |
@@ -197,12 +202,42 @@ beim Lesen nötig:
   „Klumpenrisiko". Für die Fälle, um die es geht (5 Mrd in Malta gegen 5 Mrd in
   Deutschland), trägt sie.
 
-`country_concentration.csv` summiert dasselbe je Land. Die Summe ist
-**entdoppelt**: der CON-Report einer Gruppe enthält ihre Töchter bereits, und
-die IND-Reports derselben Töchter dazuzuzählen meldete eine Konzentration, die
-es nicht gibt — bei Österreich macht das 7,8 % aus. Reports mit Skalenvorbehalt
-(#83) bleiben ebenfalls draußen. Sie misst das Exposure **der Melder im
-Bestand**, nicht das eines Bankensystems.
+### `country_concentration.csv` — wie viel Exposure trägt Land X? (#19)
+
+Dieselben Daten je Land aggregiert. Die Summe ist **entdoppelt**: der CON-Report
+einer Gruppe enthält ihre Töchter bereits, und die IND-Reports derselben Töchter
+dazuzuzählen meldete eine Konzentration, die es nicht gibt — bei Österreich
+macht das 7,8 % aus. Reports mit Skalenvorbehalt (#83) bleiben ebenfalls
+draußen. Sie misst das Exposure **der Melder im Bestand** (222 zum 31.12.2025),
+nicht das eines Bankensystems.
+
+Vier Spalten tragen die Vorbehalte, die #19 als Vorbedingung nennt:
+
+| Spalte | wogegen |
+|---|---|
+| `melder_gesamt` · `breite` | Ohne Nenner ist `melder` nicht lesbar — 55 Melder sind viel oder wenig, je nachdem, ob 60 oder 600 in Frage kamen |
+| `melder_unvollstaendig` | Häuser mit über 25 % im Residualbucket `x28`. Deren Geografie ist unvollständig, die Summe also nach **unten** verzerrt — 45 von 250 Ländersummen betroffen |
+| `groesster_inlaendisch` | trennt die domestizierte Konzentration von der echten (siehe unten) |
+
+**Der Befund: Breite und Konzentration sind entkoppelt.** Brasilien hat 82
+Melder — und trotzdem liegen 80,1 % des Exposures (125,1 Mrd) bei Banco
+Santander. Viele Melder heißen nicht gestreut.
+
+Die Spalte `groesster_inlaendisch` ist nötig, damit das deutbar bleibt: Islands
+84,9 % liegen bei Íslandsbanki, einer isländischen Bank im eigenen Land — das
+ist der Normalfall, kein Befund. Von 101 Ländern mit über 0,5 Mrd Exposure
+tragen 85 ihre größte Position bei einem **ausländischen** Institut, und nur
+die sind Drittstaatenrisiken im Sinne des Issues:
+
+| Land | Anteil | bei | Melder |
+|---|---:|---|---:|
+| Algerien | 89,7 % | Natixis | 43 |
+| Neuseeland | 84,9 % | Rabobank | 60 |
+| Mosambik | 82,1 % | Banco Comercial Português | 22 |
+| Brasilien | 80,1 % | Banco Santander | 82 |
+
+Nicht länderzuordenbar bleiben zum 31.12.2025 **736,5 Mrd EUR** im
+Residualbucket — 3,4 % der zuordenbaren Masse.
 
 ### `lei_relations.csv` — wer gehört zu wem
 
@@ -885,6 +920,89 @@ Finnland und Italien schienen einen Fussabdruck zu teilen. Das war der
 `x1`-Fehler oben — ihre „gemeinsamen Länder" waren DE, FR, IE (die neun von zehn
 Profilen tragen) und `x28`, der Residualbucket. Mit der Korrektur löste die
 Gruppe sich auf.
+
+### `entity_groups.csv` — die effektive Grösse einer Peer-Gruppe (#32)
+
+Verbindet beide Konzerngraphen: GLEIF (`lei_relations.csv`) sagt, wem ein
+Institut rechtlich gehört, die EZB-Hierarchie (`coverage_gap.csv`), wer die
+beaufsichtigte Gruppe führt. `kopf_quelle` hält fest, welcher geantwortet hat —
+858 von 882 Reports haben einen belegten Kopf.
+
+⚠️ **`unbekannt` ist nicht `eigen`.** GLEIF erklärt bei `NO_KNOWN_PERSON`
+positiv, dass es keine Mutter gibt; bei `NO_LEI` gibt es eine, wir kennen sie
+nur nicht. Die zu verschmelzen wäre der Fehler, vor dem #32 warnt.
+
+**Der Befund:** in der Klasse „Large subsidiaries" stehen zum 31.12.2025
+**71 Reports für 26 unabhängige Bankengruppen** — 63 % der effektiven
+Stichprobe gehen verloren, weil viele Mitglieder Geschwister unter demselben
+Kopf sind. Das ist die Definition der Klasse, keine Anomalie. Alle anderen
+Klassen: 0–3 %.
+
+Das ist **keine Doppelzählung** — der Benchmark bildet Perzentile, keine
+Summen. Es ist dasselbe Problem wie in #14 und #11: die effektive Stichprobe
+ist kleiner als die gezählte. `peer_effektiv` führt die Zahl mit; korrigiert
+wird nicht, weil sonst zu entscheiden wäre, welches von vierzehn ING-Häusern
+bleibt.
+
+### `proportionality.csv` — wirkt die Erleichterung? (#44)
+
+⚠️ **Die EBA-Klasse ist kein Rechtsbegriff.** Gemessen an der eigenen
+TREA-Meldung sind die Klassen fast vollständig grössengetrennt (Median 31,3 /
+14,6 / 1,8 Mrd, nur 0,4 % Überlappung) — als Schichtung brauchbar, als
+Art. 4(1)(145) CRR nicht.
+
+Der Umfang folgt der Klasse (Median 0,617 / 0,683 / 0,797), aber die
+Verteilungen überlappen fast vollständig: **46,2 %** der grossen Institute
+lassen mehr aus als das mittlere kleine. Nach Grössenbereinigung erklärt die
+Klasse 1,8 % der Streuung.
+
+**Der Kern:** `quote_gegen_erwartung` — um das Frequenzmodell (#34) bereinigt —
+ist in **allen drei Klassen null**. Der ganze rohe Abstand steckt im
+Meldekalender, nicht im Ermessen. Die Erleichterung wirkt über „seltener".
+
+### `country_swap.csv` — vertauschte Ländercodes (#59)
+
+Die Prüfklasse, die #17 nicht erreicht: dort wird ein Wert gegen die Population
+derselben Zelle geprüft, und 190 Mrd sind für BBVA plausibel. Falsch ist das
+**Land**, also die Koordinate.
+
+Gerechnet auf **Anteilen**, sonst schlüge jeder Skalenfehler an. Die Signatur
+ist die `paarung` — ein Koordinatentausch erhält die Summe, die beiden
+Bewegungen heben einander auf. Ohne sie fände der Test vor allem Fälle, in
+denen das *Heimatland* neu auftaucht (sieben Stück), und das ist eine Lücke im
+früheren Report, kein Tausch.
+
+Zwei Verdachtsfälle von 105 Stichtagspaaren: **First Investment Bank**
+(Schweiz +91,0 % ← Bulgarien −91,3 %, Paarung 100 %) und **BBVA**
+(Dänemark +36,8 % ← Spanien −35,1 %).
+
+Kein Werturteil: der Test sagt „passt nicht zum eigenen Vorquartal".
+
+### `submission_profile.csv` · `persistent_findings.csv` — Korrekturverhalten (#31)
+
+Der Katalog über die Einreichungen beschreibt nicht die Bank, sondern **ihr
+Verhalten**. 4.278 Einreichungen, 3.806 eigenständige Meldungen, **472
+Korrekturen**.
+
+⚠️ **Die Definition entscheidet über die Kernzahl.** Drei plausible Schlüssel
+für „dieselbe Meldung" geben 472, 2.539 und 3.353 — Faktor sieben. Richtig ist
+nur der mit dem **Modultyp** aus dem Dateinamen; er steht einmal in
+`submissions.py` (#88).
+
+⚠️ **Der Zusammenhang aus #31 trägt nicht.** Das Issue berichtet, Institute mit
+Plausibilitätsbefunden korrigierten 1,5–1,9-mal häufiger, und liest das als
+externe Validierung von #17. Gemessen liegen die Faktoren bei 1,00–1,11, mit
+strengeren Kriterien bei 0,66. Beide Zählschlüssel geprüft — daran liegt es
+nicht. Vermutlich hat sich die Befundpopulation geändert (238 → 273 Institute,
+seit #36 und #83), aber sicher ist nur das Ergebnis.
+
+**Was trägt:** `persistent_findings.csv` — **73 von 139 Instituten mit
+`hoch`-Befund haben nie korrigiert**, angeführt von ING Belgie mit 276
+Befunden aus vier Einreichungen. Eine Liste dauerhafter Auffälligkeiten, die es
+sonst nirgends gibt.
+
+Kein Werturteil: eine Korrektur ist Sorgfalt, keine Schuld. Und der Katalog ist
+ein Schnappschuss — die Zahlen sind eine untere Schranke (#6).
 
 ### `country_effect.csv` — hängt die Bank am Heimatland? Nein.
 

@@ -302,6 +302,33 @@ jobs:
       - name: Aehnliche Institute
         run: python scripts/build_peer_similarity.py
 
+      # Korrekturverhalten aus dem Einreichungskatalog (#31). Muss NACH
+      # check_plausibility laufen: die Kreuztabelle haelt den Katalog gegen
+      # quality_profile.csv. Der Zaehlschluessel kommt aus submissions.py (#88)
+      # -- ohne den Modultyp zaehlten CODIS und ESGDIS als Korrekturen
+      # voneinander, und die Kernzahl verschoebe sich um Faktor sieben.
+      - name: Korrekturverhalten (#31)
+        run: python scripts/build_submission_profile.py
+
+      # Laendercode-Verwechslungen (#59). Reine Zeitreihe ueber 67.01.A; muss
+      # nur NACH build_zweig_b laufen. Rechnet auf ANTEILEN, damit kein
+      # Skalenfehler (#83) und keine Bilanzausweitung anschlaegt.
+      - name: Laendercode-Tausch (#59)
+        run: python scripts/check_country_swap.py
+
+      # Wirkt die Proportionalitaet (#44)? Muss NACH build_omission_profile
+      # laufen: die Auswertung lebt von dessen quote_gegen_erwartung, die um
+      # das Frequenzmodell aus #34 bereinigt ist. Ohne sie waere nur die rohe
+      # Quote messbar -- und die beantwortet Punkt 3 des Issues nicht.
+      - name: Proportionalitaet (#44)
+        run: python scripts/check_proportionality.py
+
+      # Konzernzuordnung und Peer-Ueberschneidung (#32 P3+P5). Muss NACH
+      # check_group_graphs laufen (lei_relations.csv) und nach dem
+      # Abdeckungsabgleich (coverage_gap.csv) -- er verbindet beide Graphen.
+      - name: Konzernzuordnung (#32)
+        run: python scripts/build_entity_groups.py
+
       # Gruppen mit gemeinsamem Fussabdruck (#11, #13). Muss NACH
       # build_peer_similarity laufen: er benutzt dessen `lade`, `anteilsvektor`
       # und `ueberlappung`, rechnet die Aehnlichkeit aber VOLLSTAENDIG statt
@@ -417,7 +444,9 @@ jobs:
                   processed/disclosure_lag.csv processed/rwa_density.csv \
                   interim/plausibility_cells.csv interim/plausibility_findings.csv \
                   processed/irrbb_sensitivity.csv processed/peer_similarity.csv \
-                  processed/peer_clusters.csv \
+                  processed/peer_clusters.csv processed/entity_groups.csv \
+                  processed/proportionality.csv processed/country_swap.csv \
+                  processed/submission_profile.csv processed/persistent_findings.csv \
                   processed/country_exposure.csv \
                   processed/country_concentration.csv \
                   processed/country_effect.csv processed/omission_persistence.csv

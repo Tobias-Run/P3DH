@@ -235,6 +235,7 @@ class JeLandTest(unittest.TestCase):
     def _zeile(self, lei, scope, betrag, vorbehalt=""):
         return {"refPeriod": "2025-12-31", "lei": lei, "scope": scope,
                 "bank_name": lei, "land": "DE", "land_name": "Germany",
+                "home_country": "", "x28_anteil": "",
                 "exposure_eur": str(betrag), "vorbehalt": vorbehalt}
 
     def test_amounts_are_added_up(self):
@@ -263,6 +264,68 @@ class JeLandTest(unittest.TestCase):
                               self._zeile("B", "CON", 9e15, "skala")],
                              self.bip, 1.0, "2025-12-31", {}, set())
         self.assertAlmostEqual(float(aus[0]["exposure_eur"]), 2e9)
+
+    def test_the_breadth_has_a_denominator(self):
+        """#19 will „Breite, nicht nur Volumen". Ohne den Nenner ist `melder`
+        nicht lesbar: 55 Melder sind viel oder wenig, je nachdem, ob 60 oder
+        600 in Frage kamen."""
+        aus = self.b.je_land([self._zeile("A", "CON", 1e9),
+                              self._zeile("B", "CON", 2e9)],
+                             self.bip, 1.0, "2025-12-31", {}, set())
+        self.assertEqual(aus[0]["melder_gesamt"], 2)
+        self.assertAlmostEqual(float(aus[0]["breite"]), 1.0)
+
+    def test_the_denominator_counts_filers_not_present_in_this_country(self):
+        """Der Nenner ist die ganze meldende Population des Stichtags, nicht
+        die Teilmenge mit Exposure in diesem Land — sonst wäre die Breite
+        immer 100 %."""
+        zeilen = [self._zeile("A", "CON", 1e9), self._zeile("B", "CON", 2e9)]
+        zeilen[1]["land"] = "FR"
+        zeilen[1]["land_name"] = "France"
+        aus = {z["land"]: z for z in self.b.je_land(
+            zeilen, self.bip, 1.0, "2025-12-31", {}, set())}
+        self.assertEqual(aus["DE"]["melder_gesamt"], 2)
+        self.assertAlmostEqual(float(aus["DE"]["breite"]), 0.5)
+
+    def test_an_incomplete_geography_is_counted(self):
+        """#19: „Institute, die fast alles in den Residual-Bucket legen,
+        verzerren Länder-Aggregate nach unten." Die Zahl muss danebenstehen,
+        sonst liest niemand die Summe mit Vorbehalt."""
+        a = self._zeile("A", "CON", 1e9)
+        a["x28_anteil"] = "0.5300"
+        aus = self.b.je_land([a, self._zeile("B", "CON", 2e9)],
+                             self.bip, 1.0, "2025-12-31", {}, set())
+        self.assertEqual(aus[0]["melder_unvollstaendig"], 1)
+
+    def test_a_small_residual_share_is_not_counted(self):
+        a = self._zeile("A", "CON", 1e9)
+        a["x28_anteil"] = "0.0100"
+        aus = self.b.je_land([a], self.bip, 1.0, "2025-12-31", {}, set())
+        self.assertEqual(aus[0]["melder_unvollstaendig"], 0)
+
+    def test_a_domestic_concentration_is_told_apart_from_a_foreign_one(self):
+        """Der Unterschied, ohne den eine hohe Konzentration nicht zu deuten
+        ist. Islands 84,9 % liegen bei Íslandsbanki — einer isländischen Bank
+        im eigenen Land, also dem Normalfall. Brasiliens 80,1 % liegen bei
+        Santander, und DAS ist ein Drittstaatenrisiko im Sinne von #19."""
+        inland = self._zeile("IS", "CON", 9e9)
+        inland["home_country"] = "Germany"      # == land_name der Testzeile
+        aus = self.b.je_land([inland], self.bip, 1.0, "2025-12-31", {}, set())
+        self.assertEqual(aus[0]["groesster_inlaendisch"], "ja")
+
+        fremd = self._zeile("ES", "CON", 9e9)
+        fremd["home_country"] = "Spain"
+        aus = self.b.je_land([fremd], self.bip, 1.0, "2025-12-31", {}, set())
+        self.assertEqual(aus[0]["groesster_inlaendisch"], "nein")
+        self.assertEqual(aus[0]["groesster_heimat"], "Spain")
+
+    def test_an_unknown_home_country_is_not_claimed_as_domestic(self):
+        """„Fehlt ≠ Null": ohne Heimatland ist die Frage unbeantwortet, und
+        `ja` wäre eine Behauptung über Daten, die nicht vorliegen."""
+        z = self._zeile("X", "CON", 1e9)
+        z["home_country"] = ""
+        aus = self.b.je_land([z], self.bip, 1.0, "2025-12-31", {}, set())
+        self.assertEqual(aus[0]["groesster_inlaendisch"], "nein")
 
     def test_the_largest_filer_is_named_with_its_share(self):
         """Eine Ländersumme ohne Angabe, wie viel davon aus einem Haus kommt,

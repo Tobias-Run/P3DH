@@ -105,6 +105,22 @@ ABHAENGIG = {
                                   "processed/lei_relations.csv",
                                   "processed/coverage_gap.csv"],
                                  ["processed/peer_similarity.csv"]),
+    "build_submission_profile.py": (["interim/edap_recon/manifest_full.csv",
+                                     "processed/quality_profile.csv",
+                                     "processed/entity_meta.csv"],
+                                    ["processed/submission_profile.csv",
+                                     "processed/persistent_findings.csv"]),
+    "check_country_swap.py": (["processed/long/p3dh_long.parquet"],
+                              ["processed/country_swap.csv"]),
+    "check_proportionality.py": (["processed/omission_profile.csv",
+                                  "processed/long/p3dh_long.parquet"],
+                                 ["processed/proportionality.csv"]),
+    # Verbindet beide Konzerngraphen (#32/#42) zu einer Zuordnung je Report.
+    "build_entity_groups.py": (["processed/lei_relations.csv",
+                                "processed/coverage_gap.csv",
+                                "processed/entity_meta.csv",
+                                "processed/long/p3dh_long.parquet"],
+                               ["processed/entity_groups.csv"]),
     # Liest peer_similarity.csv NICHT als Datei, sondern importiert dessen
     # `lade`/`ueberlappung` — die Kante ist trotzdem echt: laeuft das Clustering
     # vor dem Aehnlichkeitsschritt, stuenden im Bericht Gruppen, die zum
