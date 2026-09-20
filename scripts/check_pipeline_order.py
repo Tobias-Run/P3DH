@@ -105,6 +105,8 @@ ABHAENGIG = {
                                   "processed/lei_relations.csv",
                                   "processed/coverage_gap.csv"],
                                  ["processed/peer_similarity.csv"]),
+    "check_country_swap.py": (["processed/long/p3dh_long.parquet"],
+                              ["processed/country_swap.csv"]),
     "check_proportionality.py": (["processed/omission_profile.csv",
                                   "processed/long/p3dh_long.parquet"],
                                  ["processed/proportionality.csv"]),

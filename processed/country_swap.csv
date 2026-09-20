@@ -1,0 +1,14 @@
+lei,bank_name,home_country,scope,von,bis,land_auf,delta_auf,anteil_vorher,land_ab,delta_ab,paarung,auf_ist_heimatland,urteil
+2138009Y59EAR7H1UO97,"Akciju sabiedrība ""Citadele banka""",Latvia,CON,2025-06-30,2025-12-31,Latvia,0.2639,0.4305,Lithuania,-0.3688,0.7156,ja,heimatland_ergaenzt
+213800DBQIB6VBNU5C64,Alpha Bank S.A.,Greece,CON,2025-06-30,2025-12-31,Greece,0.9475,0.0000,United Kingdom,-0.3076,0.3247,ja,heimatland_ergaenzt
+213800TC9PZRBHMJW403,MDB Group Limited,Malta,CON,2025-06-30,2025-12-31,Netherlands,0.4754,0.0910,Norway,-0.5486,0.8667,nein,verschiebung
+529900RWC8ZYB066JF16,Bank of Valletta Plc,Malta,CON,2025-06-30,2025-12-31,Spain,0.1465,0.0000,United Kingdom,-0.2032,0.7211,nein,verschiebung
+549300RFKNCOX56F8591,RAIFFEISEN BANK S.A.,Romania,CON,2025-06-30,2025-12-31,Germany,0.3059,0.0501,Austria,-0.2845,0.9301,nein,verschiebung
+549300UY81ESCZJ0GR95,First Investment Bank,Bulgaria,CON,2025-06-30,2025-12-31,Switzerland,0.9095,0.0039,Bulgaria,-0.9127,0.9965,nein,verdacht_tausch
+95980020140005881190,Banco de Crédito Social Cooperativo,Spain,CON,2025-06-30,2025-12-31,Spain,0.9483,0.0000,Germany,-0.3009,0.3173,ja,heimatland_ergaenzt
+96950001WI712W7PQG45,RCI Banque,France,CON,2025-06-30,2025-12-31,Germany,0.1285,0.0433,France,-0.5015,0.2562,nein,verschiebung
+K8MS7FD7N5Z2WQ51AZ71,"Banco Bilbao Vizcaya Argentaria, S.A.",Spain,CON,2025-06-30,2025-12-31,Denmark,0.3683,0.0001,Spain,-0.3511,0.9532,nein,verdacht_tausch
+KFUXYFTU2LHQFQZDQG45,Kereskedelmi és Hitelbank csoport,Hungary,CON,2025-06-30,2025-12-31,Hungary,0.9962,0.0000,Slovakia,-0.5204,0.5224,ja,heimatland_ergaenzt
+NICH5Q04ADUV9SN3Q390,BRED - Banque populaire,France,CON,2025-06-30,2025-12-31,France,0.1221,0.7754,Switzerland,-0.0265,0.2174,ja,heimatland_ergaenzt
+PRNXTNXHBI0TSY1V8P17,Zagrebačka banka d.d.,Croatia,CON,2025-06-30,2025-12-31,Croatia,0.7426,0.0673,Slovenia,-0.2897,0.3902,ja,heimatland_ergaenzt
+SI5RG2M0WQQLZCXKRM20,"Banco de Sabadell, S.A.",Spain,CON,2025-06-30,2025-12-31,Spain,0.6652,0.0000,United Kingdom,-0.6041,0.9081,ja,heimatland_ergaenzt
