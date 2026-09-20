@@ -302,6 +302,14 @@ jobs:
       - name: Aehnliche Institute
         run: python scripts/build_peer_similarity.py
 
+      # Korrekturverhalten aus dem Einreichungskatalog (#31). Muss NACH
+      # check_plausibility laufen: die Kreuztabelle haelt den Katalog gegen
+      # quality_profile.csv. Der Zaehlschluessel kommt aus submissions.py (#88)
+      # -- ohne den Modultyp zaehlten CODIS und ESGDIS als Korrekturen
+      # voneinander, und die Kernzahl verschoebe sich um Faktor sieben.
+      - name: Korrekturverhalten (#31)
+        run: python scripts/build_submission_profile.py
+
       # Laendercode-Verwechslungen (#59). Reine Zeitreihe ueber 67.01.A; muss
       # nur NACH build_zweig_b laufen. Rechnet auf ANTEILEN, damit kein
       # Skalenfehler (#83) und keine Bilanzausweitung anschlaegt.
@@ -438,6 +446,7 @@ jobs:
                   processed/irrbb_sensitivity.csv processed/peer_similarity.csv \
                   processed/peer_clusters.csv processed/entity_groups.csv \
                   processed/proportionality.csv processed/country_swap.csv \
+                  processed/submission_profile.csv processed/persistent_findings.csv \
                   processed/country_exposure.csv \
                   processed/country_concentration.csv \
                   processed/country_effect.csv processed/omission_persistence.csv
