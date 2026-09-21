@@ -310,6 +310,13 @@ jobs:
       - name: Korrekturverhalten (#31)
         run: python scripts/build_submission_profile.py
 
+      # Kreditverschlechterungs-Kette (#16). Verknuepft drei bis dahin
+      # ungenutzte Templates -- CQ3 (82.00.A), CQ1 (80.00.A) und CR1
+      # (21.01.D) -- ueber die Zeile "Loans and advances". Braucht nur
+      # build_zweig_b; die Auswertung mischt CON und IND nirgends.
+      - name: Kreditverschlechterungs-Kette (#16)
+        run: python scripts/build_credit_chain.py
+
       # Laendercode-Verwechslungen (#59). Reine Zeitreihe ueber 67.01.A; muss
       # nur NACH build_zweig_b laufen. Rechnet auf ANTEILEN, damit kein
       # Skalenfehler (#83) und keine Bilanzausweitung anschlaegt.
@@ -454,6 +461,7 @@ jobs:
                   processed/irrbb_sensitivity.csv processed/peer_similarity.csv \
                   processed/peer_clusters.csv processed/entity_groups.csv \
                   processed/proportionality.csv processed/country_swap.csv \
+                  processed/credit_chain.csv \
                   processed/submission_profile.csv processed/persistent_findings.csv \
                   processed/country_dependence.csv processed/contagion_edges.csv \
                   processed/country_exposure.csv \
