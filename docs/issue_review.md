@@ -2,8 +2,14 @@
 
 Erhoben **2026-09-13** nach PR #87, nachgezogen **2026-09-15** nach den PRs
 #89, #90 und #91, erneut **2026-09-16** nach den PRs #94 bis #101, zuletzt
-**2026-09-21** nach den PRs #102 bis #104 und dem Abbruch von #39.
-**3 offene Issues:** #16 (nur noch Punkt 3, hängt am Viewer), #31 und #38.
+**2026-09-21** nach den PRs #102 bis #104 und den Abbrüchen von #39 und #31.
+**2 offene Issues:** #16 (nur noch Punkt 3, hängt am Viewer) und #38.
+
+Zwei Issues sind am 2026-09-21 als `not planned` geschlossen worden, aus
+verschiedenen Gründen: **#39** an einer Lizenzentscheidung (Kursdaten),
+**#31** am eigenen Befund — die These des Issues hat sich nicht reproduzieren
+lassen. Beide haben ihre Artefakte behalten. Aus #31 ist zusätzlich
+[`korrekturspiel.md`](korrekturspiel.md) hervorgegangen.
 
 Dieser Review ist eine **Momentaufnahme** und veraltet mit jedem Merge. Er steht
 trotzdem im Repo, weil die Alternative — die Einschätzung nur im Issue-Verlauf —
