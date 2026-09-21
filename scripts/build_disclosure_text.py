@@ -18,8 +18,31 @@ desselben Instituts zum selben Stichtag.
 1.073 Pakete, rund 2 GB. Sie werden geladen, ausgewertet und verworfen; auf
 Platte bleiben nur die Kennzahlen. Das ist kein Sparzwang, sondern die saubere
 Form: ein 2-GB-Korpus im Repo wäre ein zweiter Zustand neben `raw/`, und die
-Kennzahlen sind alles, was die Auswertung braucht. Preis dafür ist, dass ein
-erneuter Lauf erneut lädt.
+Kennzahlen sind alles, was die Auswertung braucht.
+
+## Inkrementell, und was dabei NICHT zwischengespeichert wird
+
+Ein Vollabruf dauert über eine halbe Stunde und ist rechen-, nicht
+netzgebunden — das PDF-Parsen lässt sich mit Arbeitern kaum beschleunigen.
+Deshalb misst ein Lauf nur, was er noch nicht kennt.
+
+Der Schlüssel ist `(lei, scope, refPeriod, submission_ts)`, **einschliesslich
+des Zeitstempels**: eine neue Fassung desselben Berichts ist ein anderes
+Dokument und wird neu gemessen. Ohne den Zeitstempel bliebe eine Korrektur
+für immer unsichtbar, und zwar lautlos.
+
+Zwei Dinge sind bewusst **nicht** im Zwischenstand:
+
+- **Die Verknüpfungen.** `n_offengelegt`, `trea_eur` und die Grössenklasse
+  werden bei jedem Lauf neu gezogen. Sie hängen am Bestand, nicht am PDF, und
+  ändern sich mit jeder neuen Welle — eingefroren wären sie stillschweigend
+  veraltet, während die Zeile aktuell aussieht.
+- **Fehlschläge.** Eine Zeile mit `fehler` wird im nächsten Lauf erneut
+  versucht. Ein zwischengespeicherter Netzwerkfehler sähe aus wie ein
+  gemessenes Ergebnis und bliebe es für immer.
+
+Dokumente, die aus dem Katalog verschwinden, verschwinden auch hier: die
+Ausgabe folgt dem Manifest, nicht dem Zwischenstand.
 
 ## Vier Fallen, die das Ergebnis sonst erfänden
 
@@ -45,6 +68,15 @@ mitberichtet, statt sie zu unterschlagen.
 Stichprobe in `probe_disdocs_language.py`, wo es für die Sprachbestimmung
 genügt — unterschlüge bei einem in Teilen eingereichten Bericht den Rest.
 Hier werden alle summiert.
+
+## Wo das Skript läuft
+
+**Nicht in `pipeline.yml`, sondern monatlich in `disdocs.yml`.** Der Abruf
+dominierte sonst die Laufzeit der Hauptkette und wäre ihr wahrscheinlichster
+Abbruchgrund. Die Abhängigkeit zu `omission_profile.csv` und `scale_flags.csv`
+besteht trotzdem — nur über Workflow-Grenzen hinweg: gelesen wird, was die
+Hauptkette zuletzt committet hat. `check_pipeline_order.py` kann das nicht
+prüfen, und ein Eintrag dort wäre eine Zusage, die niemand einlöst.
 
 ## Grenzen
 
@@ -178,6 +210,49 @@ def hole_und_lies(zeile):
     }
 
 
+# Was aus einem früheren Lauf übernommen werden darf: die Messung am PDF.
+# Alles andere haengt am Bestand und wird neu gezogen.
+GEMESSEN = ["paket_mb", "n_pdf", "n_seiten", "n_zeichen", "zeichen_je_seite",
+            "textebene", "sprache", "sprach_abstand", "sprach_woerter",
+            "sprach_urteil"]
+
+FELDER = ["lei", "bank_name", "country", "scope", "refPeriod", "submission_ts",
+          "im_xbrl_bestand",
+          "paket_mb", "n_pdf", "n_seiten", "n_zeichen", "zeichen_je_seite",
+          "textebene", "sprache", "sprach_abstand", "sprach_woerter",
+          "sprach_urteil",
+          "n_offengelegt", "n_ausgelassen", "quote_gegen_erwartung",
+          "trea_eur", "groessenklasse", "zeichen_je_template", "fehler"]
+
+def schluessel_von(zeile):
+    """Ein Dokument ist (Institut, Umfang, Stichtag, **Einreichungszeitpunkt**).
+
+    Der Zeitstempel gehört dazu: eine Korrektur ist ein anderes Dokument mit
+    denselben ersten drei Feldern. Ohne ihn bliebe sie ungemessen, und zwar
+    ohne dass irgendetwas fehlschlüge.
+    """
+    return (zeile["lei"], zeile["scope"], zeile["refPeriod"],
+            zeile["submission_ts"])
+
+
+def lade_bestand(pfad=None, gemessen=GEMESSEN):
+    """Frühere Messungen -> {Schlüssel: Messwerte}.
+
+    Zeilen mit `fehler` kommen nicht zurück: ein zwischengespeicherter
+    Netzwerkfehler sähe aus wie ein Ergebnis und bliebe es für immer.
+    """
+    pfad = Path(pfad) if pfad else OUT
+    if not pfad.exists():
+        return {}
+    bestand = {}
+    with pfad.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            if r.get("fehler") or not r.get("submission_ts"):
+                continue
+            bestand[schluessel_von(r)] = {f: r.get(f, "") for f in gemessen}
+    return bestand
+
+
 def lade_offenlegung(pfad=OMISSION):
     """(lei, scope, refPeriod) -> Offenlegungsbreite aus #34/#44."""
     if not Path(pfad).exists():
@@ -230,12 +305,16 @@ def steigung(paare):
     return (a, b, 1 - ssr / sst)
 
 
-FELDER = ["lei", "bank_name", "country", "scope", "refPeriod", "im_xbrl_bestand",
-          "paket_mb", "n_pdf", "n_seiten", "n_zeichen", "zeichen_je_seite",
-          "textebene", "sprache", "sprach_abstand", "sprach_woerter",
-          "sprach_urteil",
-          "n_offengelegt", "n_ausgelassen", "quote_gegen_erwartung",
-          "trea_eur", "groessenklasse", "zeichen_je_template", "fehler"]
+
+
+def argumente(argv=None):
+    import argparse
+    p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    p.add_argument("--voll", action="store_true",
+                   help="alles neu messen, Zwischenstand ignorieren")
+    p.add_argument("--grenze", type=int, default=0,
+                   help="nur die ersten N Pakete (Rauchtest)")
+    return p.parse_args(argv)
 
 
 def main():
@@ -243,20 +322,34 @@ def main():
     if not MANIFEST.exists():
         print("DISDOCS-Manifest fehlt — erst build_disdocs_manifest.py laufen lassen.")
         return
+    args = argumente()
     with MANIFEST.open(encoding="utf-8") as fh:
         zeilen = [{"lei": r["lei"], "bank_name": r["bank_name"],
                    "country": r["country"], "scope": r["consolidation"],
                    "refPeriod": r["refdate"],
+                   "submission_ts": r["submission_ts"],
                    "im_xbrl_bestand": r["im_xbrl_bestand"], "url": r["url"]}
                   for r in csv.DictReader(fh)]
-    grenze = int(sys.argv[1]) if len(sys.argv) > 1 else 0
-    if grenze:
-        zeilen = zeilen[:grenze]
-        print(f"AUSSCHNITT: nur die ersten {grenze} Pakete")
-    print(f"{len(zeilen)} DISDOCS-Pakete, {ARBEITER} Arbeiter")
+    if args.grenze:
+        zeilen = zeilen[:args.grenze]
+        print(f"AUSSCHNITT: nur die ersten {args.grenze} Pakete")
 
-    with ThreadPoolExecutor(max_workers=ARBEITER) as ex:
-        ergebnisse = list(ex.map(hole_und_lies, zeilen))
+    bestand = {} if args.voll else lade_bestand()
+    neu = [z for z in zeilen if schluessel_von(z) not in bestand]
+    print(f"{len(zeilen)} DISDOCS-Pakete im Katalog · "
+          f"{len(zeilen) - len(neu)} aus früherem Lauf · "
+          f"{len(neu)} neu zu messen")
+    if args.voll:
+        print("VOLLABRUF: der Zwischenstand wird ignoriert")
+
+    ergebnisse = []
+    if neu:
+        with ThreadPoolExecutor(max_workers=ARBEITER) as ex:
+            ergebnisse = list(ex.map(hole_und_lies, neu))
+    for z in zeilen:
+        werte = bestand.get(schluessel_von(z))
+        if werte is not None:
+            ergebnisse.append({**z, **werte, "fehler": ""})
 
     offen = lade_offenlegung()
     trea = lade_trea()
@@ -276,13 +369,23 @@ def main():
             round(e.get("n_zeichen", 0) / int(n_off))
             if n_off and int(n_off) and e.get("n_zeichen") else "")
 
+    # Atomar schreiben: die Datei IST jetzt der Zwischenstand. Ein Lauf, der
+    # mitten im Schreiben stirbt, zerstörte ihn sonst und machte aus einem
+    # abgebrochenen Lauf einen halbstündigen Vollabruf beim nächsten Mal.
+    # Dieselbe Lehre wie in `fetch_gleif_relations.py`.
+    import os
+    import tempfile
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    with OUT.open("w", encoding="utf-8", newline="") as fh:
+    fd, temp = tempfile.mkstemp(dir=str(OUT.parent), suffix=".teil")
+    with os.fdopen(fd, "w", encoding="utf-8", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=FELDER)
         w.writeheader()
-        for z in sorted(ergebnisse,
-                        key=lambda r: (r["lei"], r["scope"], r["refPeriod"])):
+        for z in sorted(ergebnisse, key=lambda r: (r["lei"], r["scope"],
+                                                   r["refPeriod"],
+                                                   r["submission_ts"])):
             w.writerow({f: z.get(f, "") for f in FELDER})
+    os.replace(temp, OUT)
     print(f"  -> {OUT.relative_to(ROOT)} ({len(ergebnisse)} Zeilen)")
     bericht(ergebnisse)
 

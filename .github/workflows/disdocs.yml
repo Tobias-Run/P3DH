@@ -1,0 +1,102 @@
+name: DISDOCS-Berichtsumfang
+
+# Berichtsumfang gegen Offenlegungsumfang (#38), als eigener Zeitplan.
+#
+# Warum nicht in der Hauptkette: der Schritt laedt den kompletten
+# DISDOCS-Korpus -- 1.073 PDF-Pakete, rund 2 GB -- und braucht dafuer lokal
+# ueber eine halbe Stunde. In pipeline.yml haette er die Laufzeit der ganzen
+# Kette dominiert und waere zugleich ihr wahrscheinlichster Abbruchgrund
+# geworden, ausgerechnet in dem Lauf, der zehn andere neue Schritte zum ersten
+# Mal ueberhaupt ausfuehrt.
+#
+# Warum monatlich: der Korpus aendert sich nur mit neuen Einreichungen, und
+# die EBA veroeffentlicht quartalsweise Stichtage. Woechentlich zu laden hiesse,
+# dreimal im Monat dasselbe zu messen.
+#
+# Der Lauf ist INKREMENTELL: gemessen wird nur, was
+# processed/disclosure_text.csv noch nicht kennt, mit dem Schluessel
+# (lei, scope, refPeriod, submission_ts). Das committete Artefakt ist zugleich
+# der Zwischenstand -- es braucht keinen zweiten Zustand neben dem data-Branch.
+# Ein erster Lauf ohne Artefakt misst alles und dauert entsprechend lang.
+
+on:
+  workflow_dispatch:
+    inputs:
+      voll:
+        description: "Alles neu messen statt nur das Neue (nach Aenderungen an der Extraktion)"
+        type: boolean
+        default: false
+  schedule:
+    # Am 3. des Monats, 03:00 UTC. Nach dem Monatsersten, damit ein zum
+    # Monatswechsel eingereichter Bericht schon im Katalog steht.
+    - cron: "0 3 3 * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: p3dh-disdocs
+  cancel-in-progress: false
+
+jobs:
+  berichtsumfang:
+    runs-on: ubuntu-latest
+    # Der erste Lauf misst alle 1.073 Pakete; spaetere nur das Neue. Die
+    # Grenze ist fuer den ersten gesetzt, nicht fuer den Normalfall.
+    timeout-minutes: 180
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Das Manifest liegt committet auf main (build_disdocs_manifest.py laeuft
+      # in der Hauptkette). Fehlt es, ist das ein Fehler und kein leerer Lauf --
+      # sonst wuerde hier stillschweigend ueber nichts gemessen.
+      - name: Manifest vorhanden?
+        run: test -s interim/disdocs_manifest.csv
+
+      - name: Berichtsumfang messen
+        run: |
+          if [ "${{ inputs.voll }}" = "true" ]; then
+            python scripts/build_disclosure_text.py --voll
+          else
+            python scripts/build_disclosure_text.py
+          fi
+
+      - name: Tests gegen das Ergebnis
+        run: python -m unittest tests.test_disclosure_text -v
+
+      - name: Commit
+        run: |
+          git config user.name  "P3DH pipeline bot"
+          git config user.email "noreply@anthropic.com"
+          git add processed/disclosure_text.csv
+          if git diff --cached --quiet; then
+            echo "Berichtsumfang unveraendert -- kein neues Dokument im Katalog"
+          else
+            git commit -m "Berichtsumfang aktualisiert (DISDOCS-Lauf)"
+            # Zwischen Checkout und Push koennen Wochen liegen; ein Rebase
+            # verhindert, dass der Lauf an einem fremden Commit auf main
+            # scheitert und die gemessene Stunde verloren geht.
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### DISDOCS-Berichtsumfang"
+            if [ -f processed/disclosure_text.csv ]; then
+              echo "Zeilen: $(( $(wc -l < processed/disclosure_text.csv) - 1 ))"
+            else
+              echo "Kein Artefakt erzeugt."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

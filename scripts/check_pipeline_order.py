@@ -118,14 +118,17 @@ ABHAENGIG = {
     "build_credit_chain.py": (["processed/long/p3dh_long.parquet",
                                "processed/entity_meta.csv"],
                               ["processed/credit_chain.csv"]),
-    # Berichtsumfang gegen Offenlegungsumfang (#38). Laedt den DISDOCS-Korpus
-    # selbst und braucht aus der Pipeline nur die Offenlegungsbreite und die
-    # Groesse -- muss also NACH build_omission_profile und check_plausibility
-    # laufen, sonst stehen n_offengelegt und trea_eur noch nicht.
-    "build_disclosure_text.py": (["interim/disdocs_manifest.csv",
-                                  "processed/omission_profile.csv",
-                                  "processed/scale_flags.csv"],
-                                 ["processed/disclosure_text.csv"]),
+    # build_disclosure_text.py steht hier bewusst NICHT: es laeuft in
+    # disdocs.yml, nicht in dieser Kette. Dieses Verzeichnis beschreibt
+    # pipeline.yml, und ein Eintrag fuer ein Skript, das dort nie laeuft,
+    # waere eine Zusage, die niemand einloest -- `test_pipeline_order.py`
+    # prueft genau das und hat den Versuch abgefangen.
+    #
+    # Die Abhaengigkeit ist real, aber ueber Workflow-Grenzen hinweg: das
+    # Monatswerk liest omission_profile.csv und scale_flags.csv aus dem
+    # Checkout, also aus dem, was diese Kette dort zuletzt committet hat.
+    # Dokumentiert im Kopf von disdocs.yml und im Skript-Docstring.
+    #
     # Richtung der Korrekturen. Laedt die ueberholten Fassungen selbst von
     # EDAP nach und braucht daher aus der Pipeline nur den Katalog und die
     # Namen -- NICHT den geparsten Bestand, der nur die juengste Fassung

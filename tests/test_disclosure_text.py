@@ -155,8 +155,67 @@ class ErgebnisTest(unittest.TestCase):
         self.assertLess(c["en"] / gesamt, 0.75)
 
     def test_the_order_is_stable(self):
-        k = [(r["lei"], r["scope"], r["refPeriod"]) for r in self.rows]
+        k = [(r["lei"], r["scope"], r["refPeriod"], r["submission_ts"])
+             for r in self.rows]
         self.assertEqual(k, sorted(k))
+
+    def test_every_document_is_identified_by_its_submission(self):
+        """Ohne den Zeitstempel im Schlüssel bliebe eine korrigierte Fassung
+        für immer ungemessen — lautlos, weil nichts fehlschlüge."""
+        import build_disclosure_text as b
+        k = [b.schluessel_von(r) for r in self.rows]
+        self.assertEqual(len(k), len(set(k)))
+
+
+class BestandTest(unittest.TestCase):
+    """Der Zwischenstand (inkrementeller Lauf)."""
+
+    def setUp(self):
+        import build_disclosure_text as b
+        import tempfile
+        self.b = b
+        self.d = Path(tempfile.mkdtemp())
+        self.p = self.d / "stand.csv"
+
+    def _schreib(self, zeilen):
+        with self.p.open("w", encoding="utf-8", newline="") as fh:
+            w = csv.DictWriter(fh, fieldnames=self.b.FELDER)
+            w.writeheader()
+            for z in zeilen:
+                w.writerow({f: z.get(f, "") for f in self.b.FELDER})
+
+    def test_a_measured_document_is_reused(self):
+        self._schreib([{"lei": "A", "scope": "CON", "refPeriod": "2025-06-30",
+                        "submission_ts": "2026", "n_zeichen": "500",
+                        "textebene": "ja"}])
+        stand = self.b.lade_bestand(self.p)
+        self.assertEqual(stand[("A", "CON", "2025-06-30", "2026")]["n_zeichen"],
+                         "500")
+
+    def test_a_failed_row_is_retried_not_cached(self):
+        """Ein zwischengespeicherter Netzwerkfehler sähe aus wie ein
+        gemessenes Ergebnis — und bliebe es für immer."""
+        self._schreib([{"lei": "A", "scope": "CON", "refPeriod": "2025-06-30",
+                        "submission_ts": "2026", "fehler": "timeout"}])
+        self.assertEqual(self.b.lade_bestand(self.p), {})
+
+    def test_a_new_version_is_a_new_document(self):
+        """Dieselbe Meldung, andere Einreichung: muss neu gemessen werden."""
+        self._schreib([{"lei": "A", "scope": "CON", "refPeriod": "2025-06-30",
+                        "submission_ts": "2026010100", "n_zeichen": "500"}])
+        stand = self.b.lade_bestand(self.p)
+        self.assertNotIn(("A", "CON", "2025-06-30", "2026060100"), stand)
+
+    def test_only_the_measurement_is_cached_not_the_joins(self):
+        """`n_offengelegt` und `trea_eur` haengen am Bestand und wuerden
+        eingefroren stillschweigend veralten."""
+        for feld in ("n_offengelegt", "trea_eur", "groessenklasse",
+                     "quote_gegen_erwartung", "zeichen_je_template"):
+            with self.subTest(feld=feld):
+                self.assertNotIn(feld, self.b.GEMESSEN)
+
+    def test_a_missing_cache_is_not_an_error(self):
+        self.assertEqual(self.b.lade_bestand(self.d / "weg.csv"), {})
 
 
 if __name__ == "__main__":
