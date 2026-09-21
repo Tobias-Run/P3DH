@@ -1341,7 +1341,103 @@ Zweitplatzierten unter der Schranke, lautet das Urteil `unsicher` statt der
 wahrscheinlicheren Sprache — in der Paarstichprobe traf das 1 von 30.
 
 **Korpusgrösse:** 1.073 Pakete, hochgerechnet rund 2 GB (Median 0,99 MB je
-Paket, max 11,3 MB). Der gesamte XBRL-Bestand liegt bei 13 MB.
+Paket, max 11,3 MB). Der gesamte XBRL-Bestand liegt bei 13 MB. Der Vollabruf
+hat das bestätigt: **2,37 GB**, Median 0,97 MB, Maximum 84,7 MB.
+
+### `disclosure_text.csv` — Berichtsumfang gegen Offenlegungsumfang
+
+Die zweite Auswertung aus #38, die das Issue selbst als „billiger zu haben"
+bezeichnet, und die einzige Hälfte von Punkt 3, die **ohne Modell** auskommt.
+Sie verbindet zum ersten Mal die beiden Korpora, die EDAP nebeneinander statt
+gegeneinander stellt: den qualitativen Bericht und die Zahlenmeldung desselben
+Instituts zum selben Stichtag, über `omission_profile.csv`.
+
+**Alle 1.073 DISDOCS-Pakete**, geladen, im Arbeitsspeicher ausgewertet und
+verworfen — auf Platte bleiben nur die Kennzahlen. Läuft monatlich in
+`disdocs.yml`, nicht in der Hauptkette, und **inkrementell**: gemessen wird
+nur, was das Blatt noch nicht kennt.
+
+#### Drei Zahlen, und die dritte ist die überraschende
+
+| | |
+|---|---|
+| Textebene vorhanden | **1.032 von 1.070** (96,4 %) |
+| Zeichen je Bericht | Median **93.444**, min 265, max 3.061.574 |
+| Seiten je Bericht | Median 38, max 835 |
+
+**Textumfang und Institutsgrösse haben fast nichts miteinander zu tun.**
+Gegen `trea_eur` gerechnet, beide logarithmiert: Steigung 0,027, **r² = 0,005**
+über 923 Dokumente. Ein Säule-3-Bericht wird nicht länger, weil die Bank
+grösser ist.
+
+**Gegen die Offenlegungsbreite sehr wohl**: r² = 0,283 über 974 Dokumente.
+Text folgt dem, *was* offengelegt wird — nicht der Bilanzsumme. Damit ist
+`zeichen_je_template` überhaupt erst interpretierbar: die Kennzahl misst nicht
+verkappt die Grösse.
+
+#### Das vermutete Muster gibt es nicht
+
+> Viel Text bei wenigen tatsächlich offengelegten Templates ist ein eigenes
+> Muster.
+
+Geprüft je Grössenklasse gegen die jeweiligen Mediane:
+
+| Grösse | n | viel Text + wenige Templates | umgekehrt |
+|---|---:|---:|---:|
+| klein | 305 | 19,0 % | 17,0 % |
+| mittel | 316 | 14,6 % | 14,9 % |
+| gross | 294 | 12,9 % | 12,9 % |
+
+Bei Unabhängigkeit lägen beide Felder bei rund 25 %. Sie schrumpfen
+**gleichmässig** — das ist die Signatur eines positiven Zusammenhangs, nicht
+einer Asymmetrie. **Text ersetzt keine Tabellen.**
+
+#### Die Sprachverzerrung ist grösser als bisher beziffert
+
+Die Messung an n=58 ergab 52 % Englisch. Über den vollen Korpus:
+
+```
+Englisch          470 von 1.070   43,9 %
+Deutsch           177             16,5 %
+Italienisch       101              9,4 %
+Französisch        69              6,4 %
+unsicher           46              4,3 %
+... 21 Sprachen insgesamt
+```
+
+**Eine einsprachige Auswertung erreicht weniger als die Hälfte des Korpus.**
+Gegen das Sitzland gehalten: 598 Berichte in der Landessprache, 411 auf
+Englisch in einem Land, dessen Amtssprache eine andere ist, 46 unsicher — und
+**4 in einer dritten Sprache**, also weder Landessprache noch Englisch.
+
+#### Vier Entscheidungen, ohne die das Ergebnis eine Täuschung wäre
+
+**1. Kein Textlayer ist nicht null Zeichen.** 17 Scans und **21 Pakete ohne
+jedes PDF** liefern keinen Text, aber aus verschiedenen Gründen. Mit 0 Zeichen
+geführt wäre ein gescannter 200-Seiten-Bericht der knappste im Bestand.
+
+**2. Zeichen sind sprachabhängig** — ein roher Korpusvergleich misst zur
+Hälfte die Sprachverteilung. Die Auswertung ist nach Sprache geschichtet.
+
+**3. Beides könnte mit der Grösse wachsen.** Deshalb Schichtung nach
+TREA-Terzilen *und* r² gegen die Bilanzsumme im Bericht — statt es zu
+unterschlagen. Hier fiel es zugunsten der Kennzahl aus; das war vorher nicht
+bekannt.
+
+**4. Ein Paket kann mehrere PDFs tragen — und 158 tun es.** Nur das erste zu
+lesen, wie die Sprachstichprobe es tut (wo es genügt), hätte 15 % der
+Dokumente unterzählt.
+
+> ⚠️ **Zeichen sind kein Informationsgehalt.** Die textreichsten Berichte je
+> Template sind fast durchweg französische Genossenschaftsbanken mit 1 bis 2,7
+> Mio. Zeichen (Banque populaire, Caisse d'épargne, Natixis). Die
+> veröffentlichen ihr gesamtes *Document d'enregistrement universel* als
+> Säule-3-Dokument. Die Zeichenzahl misst dort den **Dokumentumfang**, nicht
+> den Umfang der Säule-3-Erläuterung. Das ist eine Grenze der Kennzahl, keine
+> Eigenschaft dieser Institute — und genau die Grenze, an der 38e mit einem
+> Modell weitermachen müsste.
+
+> ⚠️ **Keine Aussage über Absicht** (Randbedingung des Issues).
 
 ### `equity_link.csv` — vom Institut zum handelbaren Papier
 
