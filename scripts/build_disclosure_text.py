@@ -108,6 +108,12 @@ OUT = ROOT / "processed" / "disclosure_text.csv"
 UA = "P3DH-Pipeline/1.0 (+https://github.com/Tobias-Run/P3DH)"
 ARBEITER = 6
 
+# Alle N Pakete ein Lebenszeichen. Der erste Vollabruf brauchte ueber eine
+# Stunde; die Schaetzung aus einer Stichprobe von zwoelf lag bei 47 Minuten und
+# war zu optimistisch, weil die Stichprobe die grossen Pakete nicht traf
+# (Mittel 1,86 MB gegen 4,01 MB in der Groessenprobe, Maximum dort 75 MB).
+FORTSCHRITT = 50
+
 # Unter dieser Ausbeute trägt ein PDF keine Textebene, sondern ein Bild davon.
 # Die Schwelle stammt aus `probe_disdocs.py`, wo sie am Bestand belegt ist.
 MIN_ZEICHEN_JE_SEITE = 200
@@ -344,8 +350,18 @@ def main():
 
     ergebnisse = []
     if neu:
+        # Fortschritt ausgeben, nicht schweigen. Ein Vollabruf laeuft ueber
+        # eine Stunde; ohne Lebenszeichen ist in einem CI-Log nicht zu
+        # unterscheiden, ob der Schritt arbeitet oder haengt — und die
+        # naheliegende Reaktion waere, einen laufenden Abruf abzubrechen.
         with ThreadPoolExecutor(max_workers=ARBEITER) as ex:
-            ergebnisse = list(ex.map(hole_und_lies, neu))
+            for i, e in enumerate(ex.map(hole_und_lies, neu), start=1):
+                ergebnisse.append(e)
+                if i % FORTSCHRITT == 0 or i == len(neu):
+                    fehler = sum(1 for x in ergebnisse if x.get("fehler"))
+                    print(f"  {i}/{len(neu)} gemessen"
+                          f"{f', {fehler} Fehler' if fehler else ''}",
+                          flush=True)
     for z in zeilen:
         werte = bestand.get(schluessel_von(z))
         if werte is not None:
