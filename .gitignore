@@ -84,3 +84,8 @@ interim/disdocs_language_paare.csv
 # Ueberholte Fassungen korrigierter Meldungen (build_correction_direction.py).
 # Jederzeit neu ladbar, im Vollumfang hunderte MB.
 interim/korrekturen_raw/
+
+# Antwort-Cache des LLM-Clients (#38b). Entsteht erst bei einem Lauf gegen
+# ein Modell; gehoert dann als Artefakt auf den data-Branch wie
+# long_form_raw.csv, nicht auf main - er waechst mit jedem Dokument.
+interim/llm_cache.jsonl

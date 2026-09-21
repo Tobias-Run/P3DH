@@ -1,0 +1,78 @@
+name: Zeitplan-Wache
+
+# Feuert der wöchentliche Pipeline-Lauf überhaupt noch? (#8, blinder Fleck)
+#
+# Der Wächter in pipeline.yml (`melden`) zählt FEHLGESCHLAGENE geplante Läufe.
+# Sein Job hängt an `failure() && github.event_name == 'schedule'` -- es gibt
+# ihn also nur, wenn der Lauf stattgefunden hat. Stirbt der Zeitplan still,
+# gibt es keinen Fehlschlag, keinen Job und keine Meldung: die Ueberwachung
+# erklaert sich bei Abwesenheit fuer erfuellt.
+#
+# Deshalb ein EIGENER Workflow mit EIGENEM Zeitplan. Er darf ausdruecklich
+# nicht `needs: pipeline` tragen und nicht in pipeline.yml stehen -- sonst
+# teilte er das Schicksal, das er ueberwachen soll.
+#
+# Taeglich, weil er billig ist (ein API-Abruf) und weil eine Meldung erst
+# nuetzlich ist, wenn sie zeitnah kommt. Um 06:30 UTC, also versetzt zum
+# Pipeline-Cron (04:00) -- laeuft die Pipeline gerade verspaetet an, ist ihr
+# Lauf bis dahin in der Historie sichtbar.
+#
+# GRENZE, die dazugehoert: dieser Wächter laeuft selbst als geplanter Workflow
+# auf derselben Plattform. Faellt GitHubs Scheduler vollstaendig aus, faellt
+# er mit aus. Er meldet den realistischen Fall -- dass DIESER EINE Zeitplan
+# still stirbt, waehrend der Rest laeuft -- nicht den Totalausfall.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 6 * * *"
+
+permissions:
+  contents: read
+  issues: write
+  actions: read
+
+concurrency:
+  group: p3dh-cron-watch
+  cancel-in-progress: false
+
+jobs:
+  wache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Abwesenheit pruefen
+        id: wache
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/check_run_absence.py | tee -a "$GITHUB_OUTPUT"
+
+      - name: Meldung anlegen
+        if: steps.wache.outputs.entscheidung == 'ja'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "$(cat interim/meldung_titel.txt)" \
+            --body-file interim/meldung.md \
+            --assignee Tobias-Run
+
+      # Auch wenn nichts zu melden ist: die Entscheidung steht im Log. Ein
+      # Waechter, der im Normalfall gar nichts sagt, ist von einem kaputten
+      # Waechter nicht zu unterscheiden.
+      - name: Entscheidung protokollieren
+        if: always()
+        run: |
+          {
+            echo "## Zeitplan-Wache"
+            echo "- Entscheidung: **${{ steps.wache.outputs.entscheidung }}**"
+            echo "- Grund: ${{ steps.wache.outputs.grund }}"
+          } >> "$GITHUB_STEP_SUMMARY"

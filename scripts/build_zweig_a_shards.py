@@ -90,6 +90,11 @@ HEAD_TEMPLATES = {
     "61.00":   None,                      # KM1  — Kennzahlen + Zeitreihen-Basis
     "60.00.A": None,                      # OV1  — Risikoprofil (Anteile an TREA)
     "82.00.A": {"0010", "0040"},          # CQ3  — performing / non-performing
+    # Die Kette aus #16: die Vorstufe steht in CQ1, die Wertberichtigung in
+    # CR1. Beide nur mit den Zellen, die das Profil braucht — CQ1 hat sonst
+    # Dutzende Spalten, und benchmark.json wird nicht geshardet.
+    "80.00.A": {"0010", "0020"},          # CQ1  — gestundet, bedient/notleidend
+    "21.01.D": {"0040"},                  # CR1  — Wertberichtigung auf NPE
     # ESG: Bezugsgröße + die "davon"-Spalten. Nur Quotienten daraus sind
     # vergleichbar — die absoluten Beträge nicht, siehe Kommentar im Viewer.
     "41.00":   {"0010", "0020", "0030", "0040", "0050"},

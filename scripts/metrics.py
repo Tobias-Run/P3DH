@@ -22,6 +22,22 @@ Die Rechenvorschrift steht **deklarativ** in `op`, nicht als Code:
     diff          cells[0] − cells[1]      (Headroom TC−OCR)
     share         cells[0] / cells[1]      (ESG- und OV1-Anteile)
     npl           cells[0] / (cells[0] + cells[1])
+    shareOfSum    cells[0] / (cells[1] + cells[2])   (#16, Vorstufe)
+    deckung       |cells[0]| / cells[1]               (#16, Deckungsquote)
+
+Die letzten beiden kamen mit der Kreditverschlechterungs-Kette (#16) dazu, und
+beide mussten es sein, damit Viewer und `credit_chain.csv` **dieselbe** Zahl
+zeigen:
+
+- Die Forbearance-Quote bezieht sich auf den GESAMTBESTAND, also auf die Summe
+  aus bedient und notleidend. Mit `share` liesse sich nur ein einzelner Nenner
+  ansprechen; die Quote auf die bedienten Kredite allein zu beziehen wäre eine
+  zweite, abweichende Definition derselben Kennzahl — genau die Doppelung, vor
+  der #25 warnt.
+- Die Wertberichtigung wird **uneinheitlich vorzeichenbehaftet** gemeldet: 344
+  von 364 Reports negativ, 20 positiv. `deckung` rechnet deshalb mit dem
+  Betrag, wie `build_credit_chain.py` auch. Mit `share` wären 94 % der
+  Deckungsquoten negativ.
 
 Die Anteile am Gesamtrisikobetrag waren zuerst eine eigene Form, die den Nenner
 (KM1 r0040) im Code versteckte. Sichtbar wurde das an der Herleitung: sie zeigte
@@ -70,6 +86,8 @@ _OV1 = "60.00.A"
 _CQ3 = "82.00.A"
 _ESG = "41.00"
 _REM = "30.01"
+_CQ1 = "80.00.A"      # Gestundete Forderungen (forborne) — die Vorstufe
+_CR1 = "21.01.D"      # Wertberichtigungen — Nenner der Deckungsquote
 
 # Plausibilitätskorridor für "Vergütung pro identifiziertem Mitarbeiter", in EUR.
 # EINE Definition für zwei Verwender: `check_plausibility.RATIO_RULES` prüft
@@ -449,6 +467,69 @@ METRICS = [
     # melden aber ganz überwiegend in Währungseinheiten (10^2 bis 10^12).
     # Absolutbeträge sind hier institutsübergreifend NICHT vergleichbar;
     # Zähler und Nenner eines Quotienten stammen aus derselben Meldung.
+    # ---- Kreditverschlechterungs-Kette (#16 Punkt 3) --------------------
+    # performing -> forborne -> non-performing. Jede Stufe steht in einem
+    # ANDEREN Template; genau das ist der Grund, warum EDAP diese Kette nicht
+    # zeigen kann und wir schon.
+    {
+        "id": "forb_pe", "label": "Vorstufe (gestundet, bedient)",
+        "en": "Performing forborne ratio", "unit": "%",
+        "syn": ["forborne", "Stundung", "Forbearance", "Vorstufe"],
+        "op": "shareOfSum", "kind": "ratio",
+        "cells": [[_CQ1, "0020", "0010", "gestundet-bedient"],
+                  [_CQ3, "0020", "0010", "bedient"],
+                  [_CQ3, "0020", "0040", "notleidend"]],
+        "formula": "gestundet-bedient / (bedient + notleidend)",
+        "definition": "Anteil der Kredite, die gestundet wurden und (noch) "
+                      "bedient werden, am Gesamtbestand \u2014 aus CQ1 Zeile "
+                      "\u201eLoans and advances\u201c, bezogen auf denselben "
+                      "Nenner wie die NPL-Quote.",
+        "purpose": "Die Stufe **vor** dem Ausfall. Ein Institut mit niedriger "
+                   "NPL-Quote und hoher Vorstufe tr\u00e4gt ein Problem, das "
+                   "die etablierte Kennzahl noch nicht zeigt.",
+        "note": "**Keine Schwelle, und kein Werturteil.** Eine Stundung ist "
+                "ein Instrument, kein Fehler \u2014 sie kann einen Ausfall "
+                "verhindern statt ihn anzuk\u00fcndigen. Aussagekr\u00e4ftig "
+                "ist erst das Verh\u00e4ltnis zur NPL-Quote.",
+    },
+    {
+        "id": "forb_npe", "label": "Vorstufe (gestundet, notleidend)",
+        "en": "Non-performing forborne ratio", "unit": "%",
+        "syn": ["forborne non-performing"],
+        "op": "shareOfSum", "kind": "ratio",
+        "cells": [[_CQ1, "0020", "0020", "gestundet-notleidend"],
+                  [_CQ3, "0020", "0010", "bedient"],
+                  [_CQ3, "0020", "0040", "notleidend"]],
+        "formula": "gestundet-notleidend / (bedient + notleidend)",
+        "definition": "Anteil der gestundeten Kredite, die bereits notleidend "
+                      "sind, am Gesamtbestand.",
+        "purpose": "Die Gegenprobe zur bedienten Vorstufe: hier hat die "
+                   "Stundung den Ausfall nicht mehr verhindert.",
+        "note": "**Keine Schwelle.** Die Kennzahl misst, wie oft eine Stundung "
+                "den Ausfall nicht mehr verhindert hat \u2014 aufsichtlich "
+                "gefordert ist dazu kein Wert.",
+    },
+    {
+        "id": "npl_cov", "label": "NPL-Deckungsquote",
+        "en": "NPL coverage ratio", "unit": "%",
+        "syn": ["Deckung", "coverage", "Wertberichtigung", "Risikovorsorge"],
+        "op": "deckung", "kind": "ratio",
+        "cells": [[_CR1, "0020", "0040", "Wertberichtigung"],
+                  [_CQ3, "0020", "0040", "notleidend"]],
+        "formula": "|Wertberichtigung| / notleidend",
+        "definition": "Wertberichtigungen auf notleidende Kredite im "
+                      "Verh\u00e4ltnis zum notleidenden Bestand \u2014 die "
+                      "klassische Deckungsquote, aus CR1 und CQ3 "
+                      "zusammengesetzt.",
+        "purpose": "Wie viel des notleidenden Bestands bereits abgeschrieben "
+                   "ist. Eine niedrige Deckung bei hoher NPL-Quote heisst: "
+                   "der Verlust steht noch aus.",
+        "note": "Gerechnet wird mit dem **Betrag**. Die Wertberichtigung wird "
+                "uneinheitlich vorzeichenbehaftet gemeldet \u2014 344 von 364 "
+                "Reports negativ, 20 positiv. Eine Null ist dabei erlaubt und "
+                "kein Rechenfehler: ein Institut im Bestand meldet 0,8 Mio "
+                "EUR notleidende Kredite und **keine** Wertberichtigung.",
+    },
     {
         "id": "esg_green", "label": "Anteil nachhaltig",
         "en": "Share of environmentally sustainable exposures", "unit": "%",
@@ -642,6 +723,27 @@ PROFILES = [
     {"id": "npl", "label": "Kreditqualität (NPL, CQ3)", "tpl": _CQ3, "trend": None,
      "sort": ["npl", -1],
      "metrics": ["npl", "npe_amt", "pe_amt", "npl_hh", "npl_corp"]},
+    # Die Kette aus #16. Grundlage ist CQ3, weil dort die NPL-Quote steht und
+    # weil ein Report ohne CQ3 keinen Anker hätte — CQ1 und CR1 kommen als
+    # Quellzellen dazu. Sortiert nach der Vorstufe, nicht nach der NPL-Quote:
+    # die NPL-Rangliste gibt es schon im Profil daneben, und der Zweck dieses
+    # Profils ist die Stufe, die man dort NICHT sieht.
+    {"id": "kette", "label": "Kreditverschlechterungs-Kette", "tpl": _CQ3,
+     "trend": None, "sort": ["forb_pe", -1],
+     # Fremdtemplates ausdruecklich deklariert. Die Regel ist sonst: eine
+     # Spalte kommt aus dem eigenen Template, sonst bleibt sie fuer die
+     # meisten Zeilen leer. Hier gemessen: 90,3 % / 91,1 % (CQ1) und 98,2 %
+     # (CR1) der Reports mit CQ3-Kreditzeile tragen die Zelle auch. Die
+     # Deklaration ist die Bedingung, unter der die Ausnahme gilt -- und sie
+     # verpflichtet: was hier steht, muss in HEAD_TEMPLATES stehen, sonst
+     # erreicht die Zelle benchmark.json nie und die Spalte bleibt leer,
+     # ohne dass irgendetwas fehlschlaegt.
+     "cross": ["80.00.A", "21.01.D"],
+     "note": "performing → gestundet → notleidend. Jede Stufe steht in einem "
+             "anderen Template (CQ3, CQ1, CR1); EDAP liefert sie in "
+             "getrennten Dateien, die nie zusammengeführt werden. "
+             "Vollständige Auswertung: processed/credit_chain.csv.",
+     "metrics": ["npl", "forb_pe", "forb_npe", "npl_cov", "npe_amt", "pe_amt"]},
     {"id": "esg", "label": "ESG — Klima-Transitionsrisiko", "tpl": _ESG, "trend": None,
      "sort": ["esg_green", -1],
      "note": "Nur Verhältniszahlen: die Absolutbeträge in 41.00 haben "
