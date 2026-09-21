@@ -1006,6 +1006,57 @@ sonst nirgends gibt.
 Kein Werturteil: eine Korrektur ist Sorgfalt, keine Schuld. Und der Katalog ist
 ein Schnappschuss — die Zahlen sind eine untere Schranke (#6).
 
+### `eba_reconciliation.csv` — unsere Zahlen gegen die der EBA (#37)
+
+Die naheliegendste Validierung des ganzen Projekts: die EBA veröffentlicht
+aggregierte Kennzahlen, wir haben die Einzelmeldungen, aus denen sie entstehen.
+379 Vergleichspunkte über vier Kapital- und Verschuldungskennzahlen, 29 Länder,
+vier Stichtage. **60 % liegen innerhalb eines Prozentpunkts.**
+
+#### Die Abweichung ist nach Ursache getrennt
+
+| `ursache` | n | Bedeutung |
+|---|---:|---|
+| `stimmig` | 228 | innerhalb 1 pp |
+| `duenne_basis` | 83 | zu wenige Institute für ein vergleichbares Aggregat |
+| `konsolidierung` | 29 | die grossen Häuser melden über eine ausländische Mutter |
+| `unerklaert` | 39 | breite Basis, Selbstmelder — und trotzdem daneben |
+
+**Der Stichtagsversatz fehlt in dieser Liste, weil er geprüft und widerlegt
+ist:** über 287 Zellen passt unser Wert 111-mal besser zum aktuellen
+EBA-Quartal und nur 44-mal besser zum Vorquartal. Eine Ursache, die man nicht
+misst, gehört nicht in die Spalte.
+
+#### `quote_selbstmelder` erklärt die grössten Lücken
+
+Luxemburg lag 10 Prozentpunkte unter der EBA — bei scheinbar vollständiger
+Abdeckung. Tatsächlich melden dort **7 von 30** signifikanten Instituten
+selbst; die übrigen 21 sind Töchter ausländischer Gruppen, deren Kapital im
+Aggregat des **Mutterlands** steht.
+
+| Land | Selbstmelder | |
+|---|---|---|
+| Luxemburg | 7 von 30 | 23,3 % |
+| Belgien | 8 von 20 | 40,0 % |
+| Deutschland | 32 von 64 | 50,0 % |
+| Irland | 6 von 11 | 54,5 % |
+
+Die erste Fassung zählte `ueber_gruppe` als abgedeckt und gab Luxemburg
+dadurch eine Quote von 1,0 — die Spalte hätte genau dort weggesehen, wo sie
+gebraucht wird. Mit der Korrektur fielen die unerklärten Zellen von 68 auf 39.
+
+#### ⚠️ Die Abweichung ist **kein Gütemass**
+
+Die mit #32 korrigierte Entdopplung entfernt echte Doppelzählungen — und
+**vergrössert** die Abweichung dabei, in den 28 betroffenen Zellen von 0,88 auf
+1,08 pp. Das ist kein Argument gegen sie: die EBA aggregiert über eine eigene,
+anders abgegrenzte Stichprobe. Wer auf die EBA-Zahl hin optimiert, passt die
+eigene Methode an eine fremde Grundgesamtheit an.
+
+Eine Randbedingung des Abrufs: die EBA-Seite weist den Standard-User-Agent von
+`urllib` mit HTTP 403 ab. Das Skript sendet deshalb eine benennende Kennung mit
+Projektadresse — korrekte Client-Identifikation, kein vorgetäuschter Browser.
+
 ### `country_dependence.csv` · `contagion_edges.csv` — der Exposure-Graph (#35)
 
 Dieselben Daten wie #12, #13 und #19, aber als **Graph** gelesen. Zwei Dinge

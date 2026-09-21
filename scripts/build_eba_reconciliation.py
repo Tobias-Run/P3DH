@@ -68,6 +68,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 PARQUET = ROOT / "processed" / "long" / "p3dh_long.parquet"
 META = ROOT / "processed" / "entity_meta.csv"
 RELATIONS = ROOT / "processed" / "lei_relations.csv"
+GRUPPEN = ROOT / "processed" / "entity_groups.csv"
+COVERAGE = ROOT / "processed" / "coverage_gap.csv"
 DICHTE = ROOT / "processed" / "rwa_density.csv"
 GEO = ROOT / "codebook" / "geo_names.csv"
 OUT = ROOT / "processed" / "eba_reconciliation.csv"
@@ -84,14 +86,42 @@ KRI = {
     "SVC_13": ("0020", "0210"),   # Verschuldungsquote
 }
 
+# Bis hierher gilt eine Abweichung als stimmig. Ein Prozentpunkt auf einer
+# Kapitalquote ist bei verschiedenen Grundgesamtheiten kein Befund.
+NAH_PP = 1.0
+
+# Unter so vielen Instituten ist ein gewichtetes Landesaggregat nicht
+# vergleichbar: gemessen weichen Laender mit hoechstens zwei Instituten im
+# Median um 1,07 pp ab, solche mit acht und mehr nur um 0,23 pp.
+DUENN = 2
+
+# Ab welchem Anteil selbst meldender signifikanter Institute ein Landesaggregat
+# ueberhaupt vergleichbar ist. Darunter melden die grossen Haeuser ueber eine
+# auslaendische Mutter, und ihr Kapital steht im Aggregat des Mutterlands.
+SELBSTMELDER = 0.50
+
 FELDER = ["kri", "kri_name", "refPeriod", "country_iso", "country",
           "eba_wert", "unser_wert", "differenz_pp",
-          "n_institute", "n_ausgeschlossen_gruppe", "n_ausgeschlossen_skala"]
+          "n_institute", "n_ausgeschlossen_gruppe", "n_ausgeschlossen_skala",
+          "n_si_land", "n_si_selbstmelder", "quote_selbstmelder", "ursache"]
+
+
+# Die EBA-Seite weist den Standard-User-Agent von `urllib` (Python-urllib/3.x)
+# mit HTTP 403 ab. Hier steht deshalb eine ehrliche Kennung mit Projektadresse
+# — das ist korrekte Client-Identifikation, wie sie jeder Betreiber erwartet,
+# und ausdruecklich KEIN vorgetaeuschter Browser.
+UA = "P3DH-Pipeline/1.0 (+https://github.com/Tobias-Run/P3DH)"
+
+
+def hole(url, timeout=90):
+    """Eine GET-Anfrage mit benannter Kennung."""
+    return urllib.request.urlopen(
+        urllib.request.Request(url, headers={"User-Agent": UA}), timeout=timeout)
 
 
 def annex_urls():
     """Die Datenanhänge von der Übersichtsseite lesen, nicht raten."""
-    with urllib.request.urlopen(SEITE, timeout=90) as h:
+    with hole(SEITE) as h:
         html = h.read().decode("utf-8", "replace")
     treffer = re.findall(r'href="([^"]*Data%20Annex[^"]*\.xlsx)"', html)
     return [t if t.startswith("http") else BASIS + t for t in treffer]
@@ -121,17 +151,119 @@ def periode_von(refperiod):
     return refperiod[:4] + refperiod[5:7]
 
 
-def eigenstaendige(meta):
-    """LEIs, deren direkte Mutter NICHT selbst im Bestand meldet.
+def melder_menge(pfad=None):
+    """LEIs, die tatsächlich MELDEN — aus entity_groups.csv (#32).
 
-    Ohne das summiert ein Länderaggregat Mutter UND Tochter — gemessen liegt
-    bei 66 der 508 Institute die Mutter selbst im Bestand (#32).
+    Nicht dasselbe wie `entity_meta`: dort stehen auch Institute, von denen
+    kein Report vorliegt. Für die Frage „wird diese Tochter schon von ihrer
+    Mutter mitgemeldet?" zählt allein, wer meldet.
     """
-    if not RELATIONS.exists():
-        return set(meta)
-    with RELATIONS.open(encoding="utf-8") as fh:
-        rel = {r["lei"]: r["direct_parent_lei"] for r in csv.DictReader(fh)}
-    return {l for l in meta if rel.get(l, "") not in meta or not rel.get(l)}
+    pfad = Path(pfad or GRUPPEN)
+    if not pfad.exists():
+        return {}
+    with pfad.open(encoding="utf-8") as fh:
+        return {r["lei"]: r["konzern_kopf"] for r in csv.DictReader(fh)}
+
+
+def eigenstaendige(meta, koepfe=None):
+    """LEIs, deren Kapital nicht schon in einer anderen Meldung steckt.
+
+    Geprüft werden BEIDE Wege, und das ist seit #32 eine echte Korrektur:
+
+    * die **direkte Mutter** meldet — die bisherige Regel;
+    * der **aufgelöste Konzernkopf** meldet — neu aus `entity_groups.csv`.
+
+    Keiner der beiden genügt allein. Die alte Regel liess Enkelinnen durch,
+    deren direkte Mutter nicht meldet, deren Konzernkopf aber schon. Eine
+    Regel nur auf dem Konzernkopf macht den umgekehrten Fehler: **Bank
+    Handlowy w Warszawie** hat als GLEIF-Kopf die Citigroup, die im P3DH
+    nicht meldet — ihre direkte Mutter *Citibank Europe plc* aber sehr wohl.
+    Auf dem Kopf allein geprüft stünde ihr Kapital zweimal im polnischen
+    Aggregat.
+
+    Der Unterschied ist klein und real: 12 der 442 Institute fallen zusätzlich
+    heraus.
+    """
+    koepfe = koepfe if koepfe is not None else melder_menge()
+    rel = {}
+    if RELATIONS.exists():
+        with RELATIONS.open(encoding="utf-8") as fh:
+            rel = {r["lei"]: (r["direct_parent_lei"] or "")
+                   for r in csv.DictReader(fh)}
+    melder = set(koepfe)
+
+    def steckt_schon_drin(lei):
+        mutter = rel.get(lei, "")
+        if mutter and mutter != lei and mutter in melder:
+            return True
+        kopf = koepfe.get(lei, "")
+        return bool(kopf) and kopf != lei and kopf in melder
+
+    return {l for l in meta if not steckt_schon_drin(l)}
+
+
+def si_je_land(pfad=None):
+    """{Ländername: (signifikante Einheiten, davon SELBST meldend)} aus #42.
+
+    Die Grundgesamtheit UNSERER Seite, die das Issue verlangt. Sie ist
+    ausdrücklich **kein** Abbild der EBA-Stichprobe — die EBA aggregiert über
+    eine eigene, anders abgegrenzte Auswahl.
+
+    Gezählt wird nur `meldet_selbst`, und das war eine Korrektur. Der erste
+    Versuch zählte `ueber_gruppe` mit und gab Luxemburg damit eine Abdeckung
+    von 1,0 — bei einer Abweichung von 10 Prozentpunkten. Tatsächlich melden
+    dort **7 von 30** signifikanten Instituten selbst; die übrigen 21 sind
+    Töchter ausländischer Gruppen, deren Kapital im Land der MUTTER
+    aggregiert wird und im luxemburgischen Aggregat deshalb gar nicht
+    auftaucht.
+
+    Genau das ist der Konsolidierungsunterschied, den das Issue als Ursache
+    nennt — und er ist an dieser Quote ablesbar:
+
+        Luxemburg   7 von 30   23,3 %      grösste Abweichungen
+        Belgien     8 von 20   40,0 %
+        Irland      6 von 11   54,5 %
+        Deutschland 32 von 64  50,0 %
+    """
+    pfad = Path(pfad or COVERAGE)
+    if not pfad.exists():
+        return {}
+    aus = collections.defaultdict(lambda: [0, 0])
+    with pfad.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            if not (r.get("signifikanz") or "").upper().startswith("S"):
+                continue
+            e = aus[r["land"]]
+            e[0] += 1
+            if r.get("einordnung") == "meldet_selbst":
+                e[1] += 1
+    return {k: tuple(v) for k, v in aus.items()}
+
+
+def ursache_von(differenz_pp, n_institute, abdeckung,
+                schwelle=NAH_PP, duenn=DUENN):
+    """Woher kommt die Abweichung? — Punkt 3 des Issues.
+
+    `stimmig`        innerhalb der Toleranz, nichts zu erklären
+    `duenne_basis`   zu wenige Institute für ein vergleichbares Aggregat
+    `konsolidierung` die signifikanten Häuser des Landes melden überwiegend
+                     NICHT selbst, sondern über eine ausländische Mutter —
+                     ihr Kapital steht im Aggregat des Mutterlands
+    `unerklaert`     breite Basis, die Häuser melden selbst — und trotzdem
+                     weit daneben
+
+    Der **Stichtagsversatz** steht bewusst NICHT in dieser Liste. Er wurde
+    geprüft und ist widerlegt: über 287 Zellen passt unser Wert 111-mal besser
+    zum aktuellen EBA-Quartal und nur 44-mal besser zum Vorquartal. Eine
+    Ursache, die man nicht misst, gehört nicht in die Spalte.
+    """
+    if abs(differenz_pp) <= schwelle:
+        return "stimmig"
+    if n_institute <= duenn:
+        return "duenne_basis"
+    if abdeckung is not None and abdeckung < SELBSTMELDER:
+        return "konsolidierung"
+    return "unerklaert"
 
 
 def verdaechtige():
@@ -191,7 +323,7 @@ def build(xlsx=None):
         for u in annex_urls():
             name = ziel / re.sub(r"[^A-Za-z0-9._-]", "_", u.rsplit("/", 1)[-1])
             print(f"  hole {name.name}")
-            with urllib.request.urlopen(u, timeout=300) as h:
+            with hole(u, timeout=300) as h:
                 name.write_bytes(h.read())
             pfade.append(name)
 
@@ -209,7 +341,10 @@ def build(xlsx=None):
 
     con = duckdb.connect()
     con.execute(f"CREATE VIEW p AS SELECT * FROM '{PARQUET.as_posix()}'")
-    unser = unsere_aggregate(con, meta, eigenstaendige(set(meta)), verdaechtige())
+    koepfe = melder_menge()
+    unser = unsere_aggregate(con, meta, eigenstaendige(set(meta), koepfe),
+                             verdaechtige())
+    si = si_je_land()
 
     zeilen = []
     for (kri, rp, land), (wert, n, n_gruppe, n_skala) in sorted(unser.items()):
@@ -228,6 +363,12 @@ def build(xlsx=None):
             "n_institute": n, "n_ausgeschlossen_gruppe": n_gruppe,
             "n_ausgeschlossen_skala": n_skala,
         })
+        gesamt, abgedeckt = si.get(land, (0, 0))
+        quote = abgedeckt / gesamt if gesamt else None
+        zeilen[-1].update({
+            "n_si_land": gesamt, "n_si_selbstmelder": abgedeckt,
+            "quote_selbstmelder": "" if quote is None else round(quote, 4),
+            "ursache": ursache_von(zeilen[-1]["differenz_pp"], n, quote)})
     zeilen.sort(key=lambda z: (z["kri"], z["refPeriod"], z["country_iso"]))
     with OUT.open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, FELDER)
@@ -253,12 +394,35 @@ def bericht(zeilen):
     nah = [z for z in zeilen if abs(z["differenz_pp"]) <= 1.0]
     aus.append(f"innerhalb 1 Prozentpunkt: {len(nah)} von {len(zeilen)} "
                f"({100 * len(nah) / len(zeilen):.0f} %)")
+    import collections as co
+    u = co.Counter(z.get("ursache", "") for z in zeilen)
+    aus.append("Ursache der Abweichung (#37 Punkt 3): "
+               + "  ".join(f"{k}={v}" for k, v in u.most_common() if k))
+    aus.append("  Der Stichtagsversatz fehlt in dieser Liste, weil er GEPRÜFT "
+               "und widerlegt ist: über 287 Zellen passt unser Wert 111-mal "
+               "besser zum aktuellen EBA-Quartal und nur 44-mal besser zum "
+               "Vorquartal.")
+    unerklaert = [z for z in zeilen if z.get("ursache") == "unerklaert"]
+    aus.append(f"  {len(unerklaert)} Zellen bleiben unerklärt: breite Basis, "
+               f"gute Abdeckung — und trotzdem über {NAH_PP:.0f} pp daneben. "
+               f"Das ist die Teilmenge, die eine Erklärung verdient.")
+    for z in sorted(unerklaert, key=lambda z: -abs(z["differenz_pp"]))[:4]:
+        aus.append(f"    {z['kri']:7} {z['country_iso']} {z['refPeriod']}  "
+                   f"{z['differenz_pp']:+.2f} pp · n={z['n_institute']} · "
+                   f"Selbstmelder {z['quote_selbstmelder']}")
     weit = sorted(zeilen, key=lambda z: -abs(z["differenz_pp"]))[:5]
     aus.append("grösste Abweichungen:")
     for z in weit:
         aus.append(f"  {z['kri']:7} {z['country_iso']} {z['refPeriod']}  "
                    f"EBA {z['eba_wert']:.4f}  wir {z['unser_wert']:.4f}  "
-                   f"({z['differenz_pp']:+.2f} pp, n={z['n_institute']})")
+                   f"({z['differenz_pp']:+.2f} pp, n={z['n_institute']}, "
+                   f"{z.get('ursache', '')})")
+    aus.append("Die Abweichung ist KEIN Gütemass für unsere Methode. Die "
+               "korrigierte Entdopplung (#32) entfernt echte Doppelzählungen "
+               "und vergrössert die Abweichung dabei — in den 28 betroffenen "
+               "Zellen von 0,88 auf 1,08 pp. Wer auf die EBA-Zahl hin "
+               "optimiert, passt die eigene Methode an eine fremde "
+               "Grundgesamtheit an.")
     return aus
 
 
