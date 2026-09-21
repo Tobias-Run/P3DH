@@ -1,8 +1,9 @@
 # Review der offenen Issues
 
 Erhoben **2026-09-13** nach PR #87, nachgezogen **2026-09-15** nach den PRs
-#89, #90 und #91, erneut **2026-09-16** nach den PRs #94 bis #101.
-**14 offene Issues.**
+#89, #90 und #91, erneut **2026-09-16** nach den PRs #94 bis #101, zuletzt
+**2026-09-21** nach den PRs #102 bis #104 und dem Abbruch von #39.
+**3 offene Issues:** #16 (nur noch Punkt 3, hängt am Viewer), #31 und #38.
 
 Dieser Review ist eine **Momentaufnahme** und veraltet mit jedem Merge. Er steht
 trotzdem im Repo, weil die Alternative — die Einschätzung nur im Issue-Verlauf —
@@ -138,8 +139,10 @@ Sie sind nicht durch Arbeit lösbar, sondern durch eine Entscheidung.
 - **#39** braucht lizenzierte Kursdaten. Die offene Quelle sitzt hinter einem
   JS-Browser-Check; eine Bot-Schranke zu umgehen kommt nicht in Frage.
   Geliefert ist die Verknüpfung bis zur Primärnotierung (42 Ticker) — die
-  Studie ist anschlussfähig, sobald jemand eine Quelle lizenziert. **Bleibt
-  dokumentiert offen.**
+  Studie ist anschlussfähig, sobald jemand eine Quelle lizenziert.
+  **Entschieden am 2026-09-21: keine Lizenz, Issue als nicht durchführbar
+  geschlossen.** Die beiden Artefakte bleiben; der Wiedereinstieg kostet nur
+  den Join über den Ticker, falls sich die Lage ändert.
 - **#38** hängt an der Sprachbarriere: 30 von 58 Dokumenten sind englisch
   (52 %). **Wird am Sonntag gebaut** — der LLM-Workflow über die übrigen 28.
 
@@ -397,7 +400,11 @@ Viewer-Feature. Die Peer-Gruppen-Logik existiert (`peerKeyOf`,
 
 ## C. Nicht angefasst — braucht externe Quelle
 
-**#39** (Ereignisstudie, Kursdaten) — als einziges hier noch extern blockiert.
+~~**#39** (Ereignisstudie, Kursdaten)~~ → **am 2026-09-21 als nicht
+durchführbar geschlossen.** Die externe Quelle war nie zu beschaffen, ohne sie
+zu lizenzieren, und das Projekt hat sich dagegen entschieden. `equity_link.csv`
+(42 Ticker) und `event_study_feasibility.csv` bleiben als eigenständige
+Artefakte in der Pipeline.
 
 ~~**#11** und **#13** (Clustering), **#35** (bipartiter Graph)~~ → #11 und #13
 sind mit `peer_clusters.csv` erledigt *(PR #101)*; #35 sitzt auf derselben

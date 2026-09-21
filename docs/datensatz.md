@@ -1259,9 +1259,15 @@ Paket, max 11,3 MB). Der gesamte XBRL-Bestand liegt bei 13 MB.
 
 ### `equity_link.csv` — vom Institut zum handelbaren Papier
 
-Die zweite Hälfte von #39, soweit sie **ohne fremde Daten** zu erledigen ist.
 69 belegt börsennotierte Institute, davon **56 mit Aktien-ISIN** und **42 mit
 dem Ticker ihrer Primärnotierung**.
+
+> **#39 ist am 2026-09-21 als nicht durchführbar geschlossen** — Kursdaten sind
+> keine offene Quelle, und eine Lizenz dafür trägt dieses Projekt nicht. Dieses
+> Blatt ist deshalb **kein Rest einer abgebrochenen Studie, sondern ein
+> eigenständiges Artefakt**: es verbindet LEI, Aktien-ISIN und Primärnotierung
+> und ist damit der Anschlusspunkt an jede fremde Marktdatenquelle — auch an
+> eine, die nichts mit einer Ereignisstudie zu tun hat.
 
 #### Warum nicht GLEIF
 
@@ -1297,13 +1303,16 @@ Feld leer und `sicherheit` sagt warum — geraten wird nicht.
 | `keine Notierung im ISIN-Land` | 5 |
 | `mehrere im ISIN-Land` | 3 |
 
-> ⚠️ **Kursdaten bleiben die offene Hälfte.** Dieses Blatt schliesst die Lücke
-> auf unserer Seite: 42 Institute sind an eine Kursreihe anschliessbar, sobald
-> es eine gibt.
+> ⚠️ **Der Ticker ist belegt, nicht geraten — das ist sein ganzer Wert.** 27
+> der 69 Institute tragen bewusst *keinen*. Wer die Lücken mit dem erstbesten
+> Treffer füllte, bekäme eine vollständig aussehende Spalte, in der ADRs und
+> Zweitnotierungen stehen.
 
 ### `event_study_feasibility.csv` — trägt der Bestand eine Ereignisstudie?
 
-Die Vorfrage aus #39, beantwortet statt geschätzt. Wir besitzen den
+Die Vorfrage aus #39, beantwortet statt geschätzt — und die Antwort lautet
+**ja**, weshalb der Abbruch von #39 keiner wegen zu dünner Datenlage ist.
+Wir besitzen den
 **Einreichungszeitpunkt auf die Sekunde** (4.278 Zeilen mit `submission_ts`) —
 das ist ein Ereignisdatum, und Ereignisdaten sind die Währung der
 Kapitalmarktforschung. Ob daraus eine Studie werden kann, hängt an zwei Zahlen.
@@ -1340,7 +1349,17 @@ aus #17.
 > zusätzlich heraus.
 
 > ⚠️ **Kursdaten sind keine offene Quelle.** Dieses Blatt sagt, ob sich die
-> Beschaffung lohnen würde — es ersetzt sie nicht.
+> Beschaffung lohnen würde — es ersetzt sie nicht. Das Projekt hat sich am
+> 2026-09-21 gegen die Lizenz entschieden und #39 als nicht durchführbar
+> geschlossen; die Messung bleibt als Zahl stehen, damit eine spätere
+> Entscheidung nicht bei null anfängt.
+
+Unabhängig von der Ereignisstudie misst dieses Blatt etwas, das für sich steht:
+**wie gedrängt dieser Bestand eingereicht wird.** Knapp die Hälfte aller
+Einreichungen liegt keine drei Tage von der nächsten desselben Instituts
+entfernt, und bei ±21 Tagen sind es vier von fünf. Jede Auswertung, die eine
+einzelne Meldung als abgegrenztes Ereignis behandelt, muss sich an dieser Zahl
+messen lassen.
 
 ### `catalogue_coverage.csv` — ist die Stichtagswelle geladen?
 
