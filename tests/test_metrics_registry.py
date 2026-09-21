@@ -163,9 +163,74 @@ class ProfileTest(unittest.TestCase):
             for mid in p["metrics"]:
                 m = next(x for x in mx.METRICS if x["id"] == mid)
                 tpls = {c[0] for c in m["cells"]}
-                extra = tpls - {p["tpl"], "61.00"}
+                extra = tpls - {p["tpl"], "61.00"} - set(p.get("cross", []))
                 self.assertEqual(extra, set(),
-                                 f"{p['id']}/{mid}: Spalte aus {extra} statt {p['tpl']}")
+                                 f"{p['id']}/{mid}: Spalte aus {extra} statt "
+                                 f"{p['tpl']} — und nicht in `cross` erklärt")
+
+    def test_a_declared_cross_template_is_actually_shipped(self):
+        """Die Deklaration verpflichtet. Steht ein Fremdtemplate in `cross`,
+        aber nicht in `HEAD_TEMPLATES`, erreichen seine Zellen benchmark.json
+        nie — die Spalte bliebe leer, und **nichts schlüge fehl**. Genau
+        dieser stille Ausfall ist der Grund, warum die Ausnahme überhaupt
+        deklariert werden muss, statt einfach erlaubt zu sein."""
+        import build_zweig_a_shards as z
+        for p in mx.PROFILES:
+            for tpl in p.get("cross", []):
+                with self.subTest(profil=p["id"], template=tpl):
+                    self.assertIn(tpl, z.HEAD_TEMPLATES)
+
+    def test_a_cross_template_ships_the_columns_its_metrics_need(self):
+        """Eine Spalten-Allowlist, die die gebrauchte Spalte nicht enthält,
+        ist derselbe stille Ausfall eine Ebene tiefer."""
+        import build_zweig_a_shards as z
+        for p in mx.PROFILES:
+            for mid in p["metrics"]:
+                m = next(x for x in mx.METRICS if x["id"] == mid)
+                for c in m["cells"]:
+                    erlaubt = z.HEAD_TEMPLATES.get(c[0], "fehlt")
+                    if erlaubt in (None, "fehlt"):
+                        continue          # None = alle Spalten
+                    with self.subTest(kennzahl=mid, template=c[0], spalte=c[2]):
+                        self.assertIn(c[2], erlaubt)
+
+
+class OpTest(unittest.TestCase):
+    """Jede Rechenform der Registry muss der Viewer auch kennen."""
+
+    def setUp(self):
+        self.js = (ROOT / "processed" / "zweig_a" / "viewer_json.html").read_text(
+            encoding="utf-8")
+
+    def test_every_op_has_an_implementation(self):
+        """Der gefährlichste Fall in dieser Registry: eine Kennzahl erklärt
+        `op`, der `switch` in `metricValue` kennt ihn nicht, und die Funktion
+        fällt durch — sie gibt `undefined` zurück. Die Spalte bleibt leer, die
+        Tabelle sieht normal aus, **nichts schlägt fehl**. Genau so wären die
+        beiden Formen aus #16 fast eingezogen."""
+        for op in sorted({m["op"] for m in mx.METRICS}):
+            with self.subTest(op=op):
+                self.assertIn(f"case '{op}':", self.js)
+
+    def test_no_implementation_without_a_metric(self):
+        """Die Gegenrichtung: eine Rechenform in `metricValue`, die keine
+        Kennzahl mehr benutzt, ist toter Code — er sieht beim Lesen nach einer
+        Zusage aus, die niemand einlöst.
+
+        Geprüft wird nur der `switch` IN `metricValue`; der Viewer hat andere
+        `switch`-Blöcke, die hier nichts zu suchen haben.
+        """
+        import re
+        start = self.js.index("function metricValue(")
+        # Bis zur naechsten Funktion auf oberster Ebene.
+        ende = self.js.index("\nfunction ", start + 1)
+        koerper = self.js[start:ende]
+        im_code = set(re.findall(r"case '([A-Za-z]+)':", koerper))
+        genutzt = {m["op"] for m in mx.METRICS}
+        self.assertEqual(im_code - genutzt, set(),
+                         "Rechenform im Viewer, die keine Kennzahl benutzt")
+        self.assertEqual(genutzt - im_code, set(),
+                         "Kennzahl mit Rechenform, die der Viewer nicht kennt")
 
 
 class SearchTest(unittest.TestCase):

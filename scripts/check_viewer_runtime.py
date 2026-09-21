@@ -494,6 +494,21 @@ def pruefe():
                 tplTrifft: barErlaubt({tpl:'61.00'}, tplSkal),
                 tplDaneben: barErlaubt({tpl:'60.00.A'}, tplSkal),
                 strittig: ua ? barErlaubt({tpl:bmAll()[ua].tpl}, sauber) : null};
+              // Die Kette aus #16: ein Profil, dessen Spalten aus DREI
+              // Templates kommen. Eine Rechenform, die der Viewer nicht kennt,
+              // faellt in `metricValue` durch den switch und liefert
+              // `undefined` — die Spalte bliebe leer und die Tabelle saehe
+              // normal aus. Deshalb wird gezaehlt, wie viele Zeilen in den
+              // Fremdspalten tatsaechlich eine Zahl tragen.
+              sel.value='kette'; sel.dispatchEvent(new Event('change'));
+              await new Promise(s=>setTimeout(s,600));
+              {
+                const zs=benchmarkRows();
+                const gef=id=>zs.filter(r=>r[id]!=null).length;
+                res.kette={zeilen:zs.length, npl:gef('npl'),
+                           forb_pe:gef('forb_pe'), forb_npe:gef('forb_npe'),
+                           npl_cov:gef('npl_cov')};
+              }
               // CSV-Export (#50): den Text direkt erzeugen, nicht den Download
               // anstossen — geprueft wird der INHALT, und ein Klick lieferte im
               // Headless-Browser nur eine Datei, die niemand liest.
@@ -705,6 +720,26 @@ def pruefe():
 
     print(f"  Benchmark: {balken['zeilen']} Zeilen · {balken['balken']} Größenbalken · "
           f"skaliert markiert {balken['mitMarke']}, davon mit Balken {balken['markeMitBalken']}")
+
+    # Die Kette (#16 Punkt 3). Ein Profil, das rendert, aber leere Spalten
+    # zeigt, ist der Ausfall, gegen den dieser ganze Lauf existiert: bei #23
+    # und #24 waren zwei Funktionen gebaut, getestet und committet — und taten
+    # nichts, weil die Tests Shard-Inhalt und Quelltext prüfen, nie das
+    # Ergebnis im Browser.
+    kette = balken.get("kette") or {}
+    if not kette or not kette.get("zeilen"):
+        fehler.append("Profil 'kette' (#16) rendert keine Zeile")
+    else:
+        print(f"  Profil 'kette' (#16): {kette['zeilen']} Zeilen · "
+              f"NPL {kette['npl']} · Vorstufe {kette['forb_pe']} · "
+              f"Vorstufe-NPE {kette['forb_npe']} · Deckung {kette['npl_cov']}")
+        for feld in ("npl", "forb_pe", "forb_npe", "npl_cov"):
+            if kette[feld] < kette["zeilen"] * 0.5:
+                fehler.append(
+                    f"Profil 'kette': Spalte {feld} trägt nur {kette[feld]} "
+                    f"von {kette['zeilen']} Zeilen eine Zahl — gemessen sind "
+                    f"90 % und mehr, also fehlt die Zelle nicht, sondern die "
+                    f"Rechnung greift nicht")
     if balken["zeilen"] and not balken["balken"]:
         fehler.append("kein einziger Größenbalken (#49) in der Benchmark-Tabelle — "
                       "die Spalten tragen Beträge, die Zellen zeigen nur Zahlen")

@@ -201,5 +201,78 @@ class ErgebnisTest(unittest.TestCase):
         self.assertEqual(k, sorted(k))
 
 
+class ViewerParitaetTest(unittest.TestCase):
+    """Eine Definition, nicht zwei (#16 Punkt 3).
+
+    Das Benchmark-Profil im Viewer rechnet die Kette aus denselben Zellen wie
+    `credit_chain.csv` — aber in JavaScript, über eine Registry, mit eigenen
+    Rechenformen. Zwei Definitionen derselben Kennzahl wären genau die
+    Doppelung, vor der #25 warnt, und sie fällt nur auf, wenn jemand sie
+    gegeneinander rechnet. Dieser Test tut das.
+    """
+
+    BM = ROOT / "processed" / "zweig_a" / "data" / "benchmark.json"
+
+    def setUp(self):
+        if not (OUT.exists() and self.BM.exists()):
+            self.skipTest("credit_chain.csv oder benchmark.json nicht gebaut")
+        import json
+        import metrics as mx
+        self.mx = mx
+        with OUT.open(encoding="utf-8") as fh:
+            self.kette = {(r["lei"], r["scope"], r["refPeriod"]): r
+                          for r in csv.DictReader(fh)}
+        self.bm = json.loads(self.BM.read_text(encoding="utf-8"))
+
+    @staticmethod
+    def _zelle(rep, tpl, row, col):
+        for c in rep.get(tpl, []):
+            if c[0] == row and c[1] == col:
+                try:
+                    return float(c[2])
+                except (TypeError, ValueError):
+                    return None
+        return None
+
+    def _wert(self, rep, mid):
+        """Die Rechenformen aus `metricValue`, hier nachgebildet."""
+        d = next(x for x in self.mx.METRICS if x["id"] == mid)
+        at = lambda i: self._zelle(rep, *d["cells"][i][:3])  # noqa: E731
+        if d["op"] == "npl":
+            a, b = at(0), at(1)
+            return None if None in (a, b) or a + b <= 0 else a / (a + b)
+        if d["op"] == "shareOfSum":
+            n, a, b = at(0), at(1), at(2)
+            return None if None in (n, a, b) or a + b <= 0 else n / (a + b)
+        if d["op"] == "deckung":
+            n, dd = at(0), at(1)
+            return None if None in (n, dd) or dd <= 0 else abs(n) / dd
+        self.fail(f"unbekannte Rechenform {d['op']}")
+
+    def test_the_viewer_computes_what_the_artefact_computes(self):
+        gleich = 0
+        for key, rep in self.bm.items():
+            eid, _, rp = key.partition("|")
+            lei = eid.replace("rs:", "").split(".")[0]
+            scope = eid.split(".")[-1]
+            z = self.kette.get((lei, scope, rp))
+            if not z:
+                continue
+            for mid, spalte in (("npl", "npl_quote"),
+                                ("forb_pe", "vorstufe_quote"),
+                                ("npl_cov", "deckungsquote")):
+                v, soll = self._wert(rep, mid), z[spalte]
+                if v is None and not soll:
+                    continue
+                with self.subTest(bank=z["bank_name"], kennzahl=mid):
+                    self.assertIsNotNone(v, "Viewer rechnet nichts, das Blatt schon")
+                    self.assertTrue(soll, "das Blatt rechnet nichts, der Viewer schon")
+                    self.assertAlmostEqual(v, float(soll), places=6)
+                    gleich += 1
+        self.assertGreater(gleich, 500, "zu wenige Vergleichspunkte — "
+                                        "entweder ist der Join kaputt oder "
+                                        "die Profile sind leer")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -1348,6 +1348,27 @@ function metricValue(rep, m){
       if(a==null||b==null) return null;
       const t=a+b; return t>0?a/t*100:null;
     }
+    /* #16: die Vorstufe bezieht sich auf den GESAMTBESTAND, also auf die
+       Summe aus bedient und notleidend. Mit `share` liesse sich nur EIN
+       Nenner ansprechen; die Quote auf die bedienten Kredite allein zu
+       beziehen waere eine zweite, abweichende Definition derselben Kennzahl
+       neben credit_chain.csv. */
+    case 'shareOfSum': {
+      const n=at(0), a=at(1), b=at(2);
+      if(n==null||a==null||b==null) return null;
+      const d=a+b; return d>0?n/d*100:null;
+    }
+    /* #16: die Wertberichtigung wird uneinheitlich vorzeichenbehaftet
+       gemeldet — 344 von 364 Reports negativ, 20 positiv. Gerechnet wird
+       deshalb mit dem BETRAG, wie in build_credit_chain.py. Mit `share`
+       waeren 94 % der Deckungsquoten negativ.
+
+       Null ist erlaubt und kein Rechenfehler: ein Institut meldet 0,8 Mio
+       EUR notleidende Kredite und keine Wertberichtigung darauf. */
+    case 'deckung': {
+      const n=at(0), d=at(1);
+      return (n==null||d==null||d<=0)?null:Math.abs(n)/d*100;
+    }
     /* Betrag je Kopf (#18): Zaehler monetaer -> EUR, Nenner eine Kopfzahl.
        Beide aus DERSELBEN Spalte desselben Reports, der Kurs kuerzt sich also
        nicht heraus — deshalb die Umrechnung, sonst vergliche man Waehrungen. */
