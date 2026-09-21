@@ -25,9 +25,13 @@ on:
         type: boolean
         default: false
   # Scharf seit Lauf #13 (2026-09-15, sha 9317f97): dort liefen erstmals alle
-  # 41 Schritte gruen durch, einschliesslich der acht, die seit dem letzten
-  # gruenen Lauf #12 dazugekommen waren. Das war die Vorbedingung aus #8 --
-  # ein Zeitplan auf ungetesteter Kette erzeugt rote Laeufe statt Daten.
+  # damaligen 41 Schritte gruen durch, einschliesslich der acht, die seit dem
+  # letzten gruenen Lauf #12 dazugekommen waren. Das war die Vorbedingung aus
+  # #8 -- ein Zeitplan auf ungetesteter Kette erzeugt rote Laeufe statt Daten.
+  #
+  # ACHTUNG, Stand 2026-09-21: es sind inzwischen 46 Schritte, und die seit
+  # Lauf #13 dazugekommenen sind in der Pipeline noch NIE gelaufen -- nur
+  # lokal. Der erste geplante Lauf danach ist zugleich ihr erster Test.
   #
   # Montags, weil die EBA neue Einreichungen ueber die Woche verteilt
   # veroeffentlicht; 04:00 UTC liegt ausserhalb der Stosszeiten der
@@ -316,6 +320,14 @@ jobs:
       # build_zweig_b; die Auswertung mischt CON und IND nirgends.
       - name: Kreditverschlechterungs-Kette (#16)
         run: python scripts/build_credit_chain.py
+
+      # Stellen sich Institute durch ihre Korrekturen besser dar? Laedt die
+      # UEBERHOLTEN Fassungen direkt von EDAP -- der geparste Bestand kennt je
+      # Meldung nur die juengste, der Vergleich waere daraus nicht zu bauen.
+      # Braucht deshalb nur manifest_full.csv und entity_meta.csv und haengt
+      # an keinem Zweig-B-Schritt.
+      - name: Richtung der Korrekturen
+        run: python scripts/build_correction_direction.py
 
       # Laendercode-Verwechslungen (#59). Reine Zeitreihe ueber 67.01.A; muss
       # nur NACH build_zweig_b laufen. Rechnet auf ANTEILEN, damit kein

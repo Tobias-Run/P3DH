@@ -1058,6 +1058,92 @@ Eine Randbedingung des Abrufs: die EBA-Seite weist den Standard-User-Agent von
 `urllib` mit HTTP 403 ab. Das Skript sendet deshalb eine benennende Kennung mit
 Projektadresse — korrekte Client-Identifikation, kein vorgetäuschter Browser.
 
+### `correction_direction.csv` / `correction_summary.csv` — stellen sich Institute durch Korrekturen besser dar?
+
+Die Frage, die [`korrekturspiel.md`](korrekturspiel.md) §8 als die entscheidende
+benennt. Sie ist beantwortbar, weil `manifest_full.csv` die URL **jeder**
+Fassung führt, auch der überholten: beide Stände derselben Meldung sind von
+EDAP ladbar und gegeneinander zu rechnen. 146 CODIS-Meldungen mit mehreren
+Fassungen, **202 auswertbare Paare** (5 weitere scheitern an toten Links, der
+bekannten ~1-%-Eigenheit des Katalogs).
+
+#### Der erste Befund verschiebt die Frage
+
+Nicht jede Nachmeldung ist eine Korrektur. Der Katalog führt alle unter
+demselben Wort; gegeneinander gerechnet sind es fünf verschiedene Dinge:
+
+| Art | n | Anteil | was passiert ist |
+|---|---:|---:|---|
+| `wertkorrektur` | 91 | 45 % | mindestens ein gemeldeter Wert ändert sich |
+| **`inhaltsgleich`** | **60** | **30 %** | **kein einziges Faktum unterscheidet sich** |
+| `vervollstaendigung` | 25 | 12 % | es kommen Fakten hinzu, keines ändert sich |
+| `umbau` | 15 | 7 % | Zellen kommen und gehen, keine ändert ihren Wert |
+| `kuerzung` | 11 | 5 % | Fakten fallen weg |
+
+**Ein knappes Drittel der Nachmeldungen ändert kein einziges gemeldetes
+Faktum.** Die Datei ist neu, der Inhalt nicht. Und die `vervollstaendigung`
+ist keine Fehlerkorrektur, sondern das Nachreichen einer unvollständigen
+Erstmeldung — ein Institut im Bestand meldet zuerst **null** Fakten und
+liefert dann 1.284 nach.
+
+> Nur die 91 Wertkorrekturen stellen die Frage nach der Richtung überhaupt.
+> Über alle 202 gerechnet mischte die Antwort Uploads und Nachlieferungen
+> darunter.
+
+#### Die Antwort: keine Richtung
+
+Gemessen an den sieben Quoten aus KM1 (61.00), bei denen „höher" eindeutig
+„besser für das Institut" heisst — Kapital-, Verschuldungs- und
+Liquiditätsquoten:
+
+| Ebene | günstiger | ungünstiger |
+|---|---:|---:|
+| Paare (Gesamturteil) | 8 | 5 |
+| Zellen, Stichtag T | 18 | 17 |
+| Zellen, Vorperioden T-1…T-4 | 42 | 48 |
+
+Dazu 9 Paare, die **gemischt** korrigieren, 23 ohne Richtung und 46, die die
+Schlüsselkennzahlen gar nicht berühren.
+
+**Es gibt keine systematische Tendenz.** Die auffälligste Einzelkorrektur läuft
+sogar gegen die Vermutung: **Standard Chartered Bank AG korrigiert die
+CET1-Quote von 27,89 % auf 13,68 %** — mehr als 30 Tage nach der ersten
+Fassung, also lange nach jeder Endkontrolle. Das Institut halbiert seine
+veröffentlichte Kapitalquote; das ist das Gegenteil von Selbstschmeichelei.
+
+#### Vier Entscheidungen, ohne die das Ergebnis eine Täuschung wäre
+
+**1. Das Niveau wird vor der Richtung geprüft.** Eine CET1-Quote von 2.456 %,
+die auf 2.466 % korrigiert wird, ist eine Erhöhung — und ein Skalenfehler
+(#17). Der Skalenfilter fängt sie nicht, weil er die *Änderung* prüft und die
+hier Faktor 1,004 beträgt. 179 Zellen auf 8 Paaren fallen über das
+Plausibilitätsband heraus, darunter auch der umgekehrte Fall: eine CET1-Quote
+von **−0,24 %**, korrigiert auf 25,21 %. Als „günstiger" gezählt wäre sie die
+grösste positive Änderung des ganzen Bestands gewesen.
+
+**2. Die Wesentlichkeitsschwelle ist abgelesen, nicht gesetzt.** Die Beträge
+der Änderungen zerfallen in einen Haufen unter 0,005 pp — ein Drittel aller
+Zellen, Rundung in der fünften Nachkommastelle des Bruchs (26,702 % → 26,700 %)
+— und den Rest mit Median 0,5 pp. Ein Basispunkt trennt sie.
+
+**3. Fehlt ≠ Null.** Ein Wert, der erst in der zweiten Fassung auftaucht, ist
+Vollständigkeit, keine Richtung.
+
+**4. Gezählt wird das Paar, nicht die Zelle.** Eine Einheitenkorrektur schlägt
+auf 7 Kennzahlen × 5 Spalten durch und erzeugt 35 Zellen aus *einem* Ereignis.
+Der erste Entwurf zählte sie einzeln; die 292 `neu_gemeldet` verteilten sich in
+Wahrheit auf 19 Paare. **Die Zellenzahlen sind keine unabhängigen
+Beobachtungen** und stehen oben nur zur Transparenz.
+
+> ⚠️ **Nur wer korrigiert hat.** Die Stichprobe sind Korrekturen, nicht
+> Institute — über die 327 Institute ohne jede Korrektur sagt das Blatt nichts.
+> Und über Absicht sagt es erst recht nichts: eine Korrektur nach unten ist das
+> Zurücknehmen einer zu schönen Zahl und spricht **für** die interne Kontrolle.
+
+> ⚠️ **Nur CODIS.** Die Schlüsselkennzahlen stehen dort. Für FINDIS
+> (Kreditqualität) und die übrigen Rahmenwerke ist „günstig" ohne eigene
+> Richtungstabelle nicht definiert.
+
 ### `credit_chain.csv` — die Kreditverschlechterungs-Kette (#16)
 
 Kreditrisiko ist keine Zustandsgrösse, sondern eine Kette:
