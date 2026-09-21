@@ -53,8 +53,15 @@ jobs:
       # Nur was die Tests wirklich brauchen. requirements.txt zieht zusätzlich
       # playwright, access-parser und openpyxl — die gehören zum Harvest bzw.
       # zum Codebook-Bau und kosten hier nur Zeit.
+      #
+      # pypdf gehört seit #38 dazu: tests/test_disclosure_text.py prüft die
+      # Textausbeute eines Pakets, und `build_disclosure_text.lies_paket`
+      # importiert pypdf. Ohne es bricht der Test mit ModuleNotFoundError —
+      # wie am 2026-09-21 geschehen. Ein `skipUnless` wäre hier die falsche
+      # Antwort: eine Prüfung, die sich bei fehlender Abhängigkeit für erfüllt
+      # erklärt, ist genau der Fehlermodus aus dem Kopf dieser Datei.
       - name: Install test dependencies
-        run: pip install duckdb pyarrow
+        run: pip install duckdb pyarrow pypdf
 
       - name: Run test suite
         run: python -m unittest discover tests -v

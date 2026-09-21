@@ -29,9 +29,16 @@ on:
   # letzten gruenen Lauf #12 dazugekommen waren. Das war die Vorbedingung aus
   # #8 -- ein Zeitplan auf ungetesteter Kette erzeugt rote Laeufe statt Daten.
   #
-  # ACHTUNG, Stand 2026-09-21: es sind inzwischen 46 Schritte, und die seit
+  # ACHTUNG, Stand 2026-09-21: es sind inzwischen 47 Schritte -- die aktuelle
+  # Zahl druckt `python scripts/check_pipeline_order.py`, dort veraltet sie
+  # nicht --, und die seit
   # Lauf #13 dazugekommenen sind in der Pipeline noch NIE gelaufen -- nur
   # lokal. Der erste geplante Lauf danach ist zugleich ihr erster Test.
+  #
+  # Der DISDOCS-Berichtsumfang (#38) ist deshalb bewusst NICHT hier, sondern
+  # in disdocs.yml mit eigenem Monatsplan: er laedt rund 2 GB, haette die
+  # Laufzeit dominiert und waere der wahrscheinlichste Abbruchgrund genau des
+  # Laufs geworden, der zehn andere Schritte zum ersten Mal ausfuehrt.
   #
   # Montags, weil die EBA neue Einreichungen ueber die Woche verteilt
   # veroeffentlicht; 04:00 UTC liegt ausserhalb der Stosszeiten der
@@ -95,6 +102,18 @@ jobs:
       - name: Harvest-Delta
         if: inputs.harvest
         run: python scripts/harvest_delta.py >> "$GITHUB_STEP_SUMMARY"
+
+      # Das DISDOCS-Manifest fuer das Monatswerk (disdocs.yml). Es leitet sich
+      # aus manifest_full.csv ab und muss deshalb NACH dem Harvest stehen.
+      #
+      # Ohne diesen Schritt waere disdocs.yml eine Sackgasse, die sich als
+      # Erfolg meldet: das committete Manifest bliebe fuer immer auf 1.073
+      # Zeilen, der inkrementelle Lauf faende Monat fuer Monat "0 neu zu
+      # messen" und gruen durchlaufen, waehrend jeder neue Bericht unsichtbar
+      # bliebe. Gemerkt nur, weil jemand nachgesehen hat -- fehlgeschlagen
+      # waere nie etwas.
+      - name: DISDOCS-Manifest (#38)
+        run: python scripts/build_disdocs_manifest.py
 
       - name: Plan delta
         run: python scripts/plan_delta.py
@@ -329,6 +348,11 @@ jobs:
       - name: Richtung der Korrekturen
         run: python scripts/build_correction_direction.py
 
+      # Berichtsumfang gegen Offenlegungsumfang (#38) laeuft NICHT hier,
+      # sondern in .github/workflows/disdocs.yml mit eigenem Zeitplan: der
+      # Schritt laedt rund 2 GB und dominierte die Laufzeit dieser Kette.
+      # Sein Artefakt processed/disclosure_text.csv wird dort committet.
+
       # Laendercode-Verwechslungen (#59). Reine Zeitreihe ueber 67.01.A; muss
       # nur NACH build_zweig_b laufen. Rechnet auf ANTEILEN, damit kein
       # Skalenfehler (#83) und keine Bilanzausweitung anschlaegt.
@@ -464,6 +488,7 @@ jobs:
                   interim/edap_recon/manifest_sample.csv \
                   interim/edap_recon/manifest_urls.csv \
                   interim/edap_recon/manifest_wave.csv \
+                  interim/disdocs_manifest.csv \
                   codebook/framework_bridge.csv \
                   codebook/dpm_codebook.csv codebook/template_titles.csv \
                   processed/entity_meta.csv processed/fx_rates.csv \
@@ -473,7 +498,9 @@ jobs:
                   processed/irrbb_sensitivity.csv processed/peer_similarity.csv \
                   processed/peer_clusters.csv processed/entity_groups.csv \
                   processed/proportionality.csv processed/country_swap.csv \
-                  processed/credit_chain.csv \
+                  processed/credit_chain.csv processed/eba_reconciliation.csv \
+                  processed/correction_direction.csv \
+                  processed/correction_summary.csv \
                   processed/submission_profile.csv processed/persistent_findings.csv \
                   processed/country_dependence.csv processed/contagion_edges.csv \
                   processed/country_exposure.csv \

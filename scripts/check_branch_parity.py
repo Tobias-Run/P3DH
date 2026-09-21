@@ -62,8 +62,21 @@ dieselben Zahlen in derselben Einheit da", nicht „sind sie richtig beschriftet
 Zellen ohne `cell_row` landen nicht im Shard (so gebaut) und werden hier
 beidseitig ausgefiltert. Ein Report, dessen Fakten *alle* unplatzierbar sind,
 bekommt gar keinen Shard — das ist #28 und wird gemeldet, nicht als Fehler
-gewertet. Ein Shard OHNE Gegenstück in der Long-Form ist dagegen immer ein
-Fehler: er behauptet Daten, die es nicht gibt.
+gewertet.
+
+Ein Shard ohne Gegenstück in der Long-Form ist dagegen ein Fehler, **wenn er
+Zellen trägt**: dann behauptet er Daten, die es nicht gibt. Hier stand bis zum
+2026-09-21 „immer ein Fehler", und das war zu scharf — es widersprach dem
+zweiten Pass von `build_zweig_a_shards.py`, der für eine Meldung „ich lege
+nichts offen" bewusst einen **leeren** Shard anlegt (#28). Aufgefallen ist es
+am Lauf #14: Compagnie Financière Holding Mixte Milleis reicht ein Paket ohne
+eine einzige Datendatei ein, alle 54 Filing Indicators auf `false` — eine
+vollständige, zulässige Meldung. Der Wächter hielt sie für Drift und liess
+Publish und Commit ausfallen.
+
+Unterschieden wird jetzt am Inhalt des Shards, nicht an einer Ausnahmeliste:
+ist `tpl` leer, ist es eine Deklaration; trägt es Zellen, bleibt es ein
+Fehler.
 """
 
 from pathlib import Path
@@ -228,13 +241,29 @@ def main():
 
     problems, n_cells, n_reports = [], 0, 0
     only_long_form = sorted(set(lf) - set(by_key))
+    nur_deklariert = []
 
     for key in sorted(by_key):
         shard = shard_cells(by_key[key])
         truth = lf.get(key)
         if truth is None:
-            problems.append(f"{key}: Shard vorhanden, aber in der Long-Form kein einziger "
-                            f"platzierbarer Fakt — der Shard behauptet Daten, die es nicht gibt")
+            if not shard:
+                # Deklarationsshard (#28, Pass 2 in build_zweig_a_shards.py).
+                # Ein Institut, das für einen Stichtag ALLE Filing Indicators
+                # auf `false` setzt, meldet vollständig und zulässig: „ich lege
+                # nichts offen". Es hat damit keinen platzierbaren Fakt, und
+                # der Shard-Bauer legt ihm trotzdem einen an — sonst würde aus
+                # der Aussage ein Nichts und das Institut verschwände aus dem
+                # Viewer.
+                #
+                # Ein solcher Shard behauptet keine Daten: sein `tpl` ist leer.
+                # Genau das wird hier geprüft, statt ihn pauschal zu erlauben —
+                # ein Shard MIT Zellen ohne Gegenstück bleibt ein Fehler.
+                nur_deklariert.append(key)
+                continue
+            problems.append(f"{key}: Shard mit {sum(sum(c.values()) for c in shard.values())} "
+                            f"Zellen, aber in der Long-Form kein einziger platzierbarer "
+                            f"Fakt — der Shard behauptet Daten, die es nicht gibt")
             continue
         n_reports += 1
         for tid in sorted(set(shard) | set(truth)):
@@ -278,6 +307,13 @@ def main():
         print(f"  ohne Shard         : {len(only_long_form)} "
               f"(Reports ohne platzierbare Zelle, siehe #28)")
         for k in only_long_form[:5]:
+            print(f"      {k}")
+    if nur_deklariert:
+        # Gezählt und genannt, nicht stillschweigend übergangen: ein
+        # Deklarationsshard ist erlaubt, aber er soll sichtbar bleiben.
+        print(f"  nur Deklaration    : {len(nur_deklariert)} "
+              f"(alle Filing Indicators false, leerer Shard — #28)")
+        for k in nur_deklariert[:5]:
             print(f"      {k}")
 
     if problems:

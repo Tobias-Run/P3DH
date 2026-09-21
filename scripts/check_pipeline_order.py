@@ -54,6 +54,11 @@ ABHAENGIG = {
     "build_parse_manifest.py": (["interim/edap_recon/manifest_full.csv"],
                                 ["interim/edap_recon/manifest_parse.csv"]),
     "build_entity_meta.py": ([], ["processed/entity_meta.csv"]),
+    # Speist das Monatswerk disdocs.yml. Leitet sich aus dem Katalog ab und
+    # muss deshalb nach dem Harvest stehen.
+    "build_disdocs_manifest.py": (["interim/edap_recon/manifest_full.csv",
+                                   "processed/entity_meta.csv"],
+                                  ["interim/disdocs_manifest.csv"]),
     "fetch_fx_rates.py": ([], ["processed/fx_rates.csv"]),
     # Die Kante, vor der #7 ausdrücklich warnt: „Ohne aktualisierte EZB-Kurse
     # hat ein neuer Stichtag keinen fx_rate ⇒ fact_value_eur bleibt für alle
@@ -118,6 +123,17 @@ ABHAENGIG = {
     "build_credit_chain.py": (["processed/long/p3dh_long.parquet",
                                "processed/entity_meta.csv"],
                               ["processed/credit_chain.csv"]),
+    # build_disclosure_text.py steht hier bewusst NICHT: es laeuft in
+    # disdocs.yml, nicht in dieser Kette. Dieses Verzeichnis beschreibt
+    # pipeline.yml, und ein Eintrag fuer ein Skript, das dort nie laeuft,
+    # waere eine Zusage, die niemand einloest -- `test_pipeline_order.py`
+    # prueft genau das und hat den Versuch abgefangen.
+    #
+    # Die Abhaengigkeit ist real, aber ueber Workflow-Grenzen hinweg: das
+    # Monatswerk liest omission_profile.csv und scale_flags.csv aus dem
+    # Checkout, also aus dem, was diese Kette dort zuletzt committet hat.
+    # Dokumentiert im Kopf von disdocs.yml und im Skript-Docstring.
+    #
     # Richtung der Korrekturen. Laedt die ueberholten Fassungen selbst von
     # EDAP nach und braucht daher aus der Pipeline nur den Katalog und die
     # Namen -- NICHT den geparsten Bestand, der nur die juengste Fassung
