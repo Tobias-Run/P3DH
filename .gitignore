@@ -80,3 +80,7 @@ interim/meldung_titel.txt
 # DISDOCS-Messungen (#38): Stichproben, entstehen beim Messen neu.
 interim/disdocs_language.csv
 interim/disdocs_language_paare.csv
+
+# Ueberholte Fassungen korrigierter Meldungen (build_correction_direction.py).
+# Jederzeit neu ladbar, im Vollumfang hunderte MB.
+interim/korrekturen_raw/

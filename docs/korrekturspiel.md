@@ -283,24 +283,58 @@ Signalkanal zum Kapitalmarkt schlicht nicht.
 
 ---
 
-## 8. Die eine Messung, die es entscheiden würde
+## 8. Die Messung ist gemacht — und sie sagt: keine Richtung
 
-Die Vorhersage aus 5.3 ist prüfbar, und zwar **mit Daten, die wir bereits
-besitzen**: `manifest_full.csv` führt die URL **jeder** Fassung, auch der
-überholten. Beide Fassungen sind herunterladbar und gegeneinander zu
-rechnen.
+Dieser Abschnitt nannte bis zum 2026-09-21 die Messung, die das Modell prüfen
+würde. Sie ist inzwischen gebaut: `correction_direction.csv` und
+`correction_summary.csv` (Aufbau und Vorbehalte in
+[`datensatz.md`](datensatz.md)). `manifest_full.csv` führt die URL **jeder**
+Fassung, auch der überholten — beide Stände derselben Meldung sind von EDAP
+ladbar und gegeneinander zu rechnen. 202 auswertbare Fassungspaare aus CODIS.
 
-Damit wären zwei Dinge messbar, die das Modell braucht:
+### Die Vorhersage aus 5.3 bestätigt sich nicht
 
-1. **Die Richtung der Korrektur.** Bewegen Korrekturen die Kapitalquote nach
-   oben oder nach unten? Systematisch nach unten hiesse: korrigiert wird, was
-   geschmeichelt hat — ein Hinweis auf funktionierende interne Kontrolle.
-   Systematisch nach oben wäre das Gegenteil.
-2. **Freiwillig oder erzwungen.** Die 107 späten Korrekturen sind die
-   interessanten. Ob sie aus eigener Prüfung oder auf Nachfrage der Aufsicht
-   erfolgten, entscheidet über die ganze Auslegung — und **dafür fehlt uns das
-   Datum der Beanstandung.** Das ist nicht öffentlich. Ein Näherungsmass wäre
-   die zeitliche Häufung um Aufsichtstermine.
+Wäre Schweigen strategisch, müssten Korrekturen überwiegend zurücknehmen, was
+geschmeichelt hat. Gemessen an den sieben KM1-Quoten, bei denen „höher"
+eindeutig „besser für das Institut" heisst:
+
+| Ebene | günstiger | ungünstiger |
+|---|---:|---:|
+| Paare (Gesamturteil) | 8 | 5 |
+| Zellen, Stichtag T | 18 | 17 |
+| Zellen, Vorperioden T-1…T-4 | 42 | 48 |
+
+**Kein Übergewicht in irgendeine Richtung.** Die grösste Einzelkorrektur läuft
+gegen die Vermutung: Standard Chartered Bank AG korrigiert die CET1-Quote von
+**27,89 % auf 13,68 %**, mehr als 30 Tage nach der ersten Fassung. Ein Institut,
+das seine veröffentlichte Kapitalquote halbiert, betreibt keine
+Selbstschmeichelei.
+
+Das ist ein Ergebnis über die **Richtung**, nicht über die Häufigkeit: es sagt
+nicht, dass alle Fehler korrigiert werden, sondern dass die korrigierten sich
+nicht einseitig verteilen. Die 73 persistenten Befunde aus Abschnitt 6.4
+stehen unverändert daneben.
+
+### Der Nebenbefund ist der grössere
+
+Die Messung hat die Frage verschoben, bevor sie sie beantwortet hat: **nicht
+jede Nachmeldung ist eine Korrektur.** Von 202 Paaren ändern nur 91 überhaupt
+einen gemeldeten Wert. **60 — ein knappes Drittel — ändern kein einziges
+Faktum**, die Datei ist neu und der Inhalt nicht. 25 weitere reichen nur nach,
+was fehlte; ein Institut meldet zuerst **null** Fakten und liefert dann 1.284.
+
+Damit wird Abschnitt 6.2 noch schärfer: dort waren es 107 von 472 Korrekturen,
+die überhaupt strategisch interessant sein konnten. Jetzt kommt eine zweite
+Halbierung dazu. **Wer mit der Rohzahl „472 Korrekturen" über Meldeverhalten
+argumentiert, argumentiert überwiegend über Uploads und Nachlieferungen.**
+
+### Was weiterhin fehlt
+
+**Freiwillig oder erzwungen.** Die späten Korrekturen sind die interessanten.
+Ob sie aus eigener Prüfung oder auf Nachfrage der Aufsicht erfolgten,
+entscheidet über die ganze Auslegung — und **dafür fehlt das Datum der
+Beanstandung.** Das ist nicht öffentlich. Ein Näherungsmass wäre die zeitliche
+Häufung um Aufsichtstermine.
 
 **Was auch das nicht sähe:** die dritte Strategie, die dieses Dokument bisher
 übergangen hat — **den Fehler still in der nächsten regulären Meldung
@@ -326,6 +360,12 @@ nur die Institute, die den sichtbaren Weg gewählt haben.
 3. **c ist klein und einmalig.** Eine Nachmeldung kostet Arbeitszeit und etwas
    Gesicht. Bei c/D im unteren einstelligen Prozentbereich liegt die Schwelle
    p\* dort ebenfalls — und diese Schwelle ist heute erreicht.
+
+**Was die Messung dazu beiträgt** (Abschnitt 8): Die korrigierten Zahlen
+bewegen sich nicht einseitig nach oben. Das ist kein Beleg für Tugend — es ist
+der Befund, dass **Korrekturen im Bestand aussehen wie Qualitätsarbeit und
+nicht wie Selbstdarstellung.** Wer sie als Eingeständnis scheut, scheut etwas,
+das in den Daten keine erkennbare Richtung hat.
 
 **Wann das Modell etwas anderes sagt — der Vollständigkeit halber:** Bei einem
 unwesentlichen Fehler ohne aufsichtliche Folge ist D klein, und c ist nicht
@@ -363,6 +403,7 @@ merkt"**. Das ist ein Unterschied.
 | 73 Institute mit `hoch`-Befund ohne Korrektur | `processed/persistent_findings.csv` |
 | Plausibilitätsbefunde | `processed/quality_profile.csv` |
 | Abstände zwischen Fassungen, URLs überholter Fassungen | `interim/edap_recon/manifest_full.csv` |
+| Richtung der Korrekturen, Art der Nachmeldung | `processed/correction_direction.csv`, `processed/correction_summary.csv` |
 | Börsennotierung, 69 von 489 | `processed/equity_link.csv` |
 | Nachrechnen der EBA-Aggregate | `processed/eba_reconciliation.csv` |
 

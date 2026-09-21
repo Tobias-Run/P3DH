@@ -118,6 +118,14 @@ ABHAENGIG = {
     "build_credit_chain.py": (["processed/long/p3dh_long.parquet",
                                "processed/entity_meta.csv"],
                               ["processed/credit_chain.csv"]),
+    # Richtung der Korrekturen. Laedt die ueberholten Fassungen selbst von
+    # EDAP nach und braucht daher aus der Pipeline nur den Katalog und die
+    # Namen -- NICHT den geparsten Bestand, der nur die juengste Fassung
+    # kennt und den Vergleich gar nicht zuliesse.
+    "build_correction_direction.py": (["interim/edap_recon/manifest_full.csv",
+                                       "processed/entity_meta.csv"],
+                                      ["processed/correction_direction.csv",
+                                       "processed/correction_summary.csv"]),
     "check_country_swap.py": (["processed/long/p3dh_long.parquet"],
                               ["processed/country_swap.csv"]),
     "check_proportionality.py": (["processed/omission_profile.csv",
