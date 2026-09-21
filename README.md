@@ -28,6 +28,16 @@ korrigieren sie nicht — wir markieren sie und sagen, warum.
 > `docs/projektbriefing_2026-06.txt` ist das ursprüngliche Briefing zum Projektstart —
 > Zeitdokument, für den heutigen Stand nicht verlässlich.
 
+## 📄 Aus den Daten gelesen
+
+**[Das Korrekturspiel](docs/korrekturspiel.md)** — sollte ein Institut einen
+selbst entdeckten Fehler in einer veröffentlichten Säule-3-Meldung proaktiv
+korrigieren, oder schweigen und hoffen, dass es niemand merkt? Eine
+spieltheoretische Analyse, geprüft gegen die 472 Korrekturen in unserem
+Katalog. Ergebnis: korrigieren — aber nicht, weil der Markt Ehrlichkeit
+belohnt (das ist für vier von fünf Instituten gar nicht messbar), sondern
+weil der Data Hub selbst die Entdeckungswahrscheinlichkeit verändert hat.
+
 ## 🔗 Live-Viewer (im Browser, ohne Installation)
 
 **Öffentlich live:** **https://tobias-run.github.io/P3DH/** — kein Klonen/Server nötig.
@@ -175,8 +185,8 @@ fertige `codebook/dpm_codebook.csv` liegt im Repo.
 | `processed/zweig_a/` | **Zweig A**: `viewer_json.html` + Weiterleitung `index.html`; die JSON-Shards liegen auf dem `data`-Branch |
 | `codebook/` | DPM-Mapping Code → Label/Einheit/Titel |
 | `scripts/` | Harvester, Downloader, Parser, Zweig-B/A-Builder, Publish-Skript |
-| `tests/` | Testsuite (352 Tests), läuft bei jedem Push |
-| `docs/` | Decision-Memos, Format-Notizen, Query-Beispiele, Projektbriefing |
+| `tests/` | Testsuite (1.316 Tests), läuft bei jedem Push |
+| `docs/` | Decision-Memos, Format-Notizen, Query-Beispiele, Projektbriefing, Analysen (`korrekturspiel.md`) |
 
 ## Phasen
 
