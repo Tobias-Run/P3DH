@@ -29,7 +29,9 @@ on:
   # letzten gruenen Lauf #12 dazugekommen waren. Das war die Vorbedingung aus
   # #8 -- ein Zeitplan auf ungetesteter Kette erzeugt rote Laeufe statt Daten.
   #
-  # ACHTUNG, Stand 2026-09-21: es sind inzwischen 46 Schritte, und die seit
+  # ACHTUNG, Stand 2026-09-21: es sind inzwischen 47 Schritte -- die aktuelle
+  # Zahl druckt `python scripts/check_pipeline_order.py`, dort veraltet sie
+  # nicht --, und die seit
   # Lauf #13 dazugekommenen sind in der Pipeline noch NIE gelaufen -- nur
   # lokal. Der erste geplante Lauf danach ist zugleich ihr erster Test.
   #
@@ -100,6 +102,18 @@ jobs:
       - name: Harvest-Delta
         if: inputs.harvest
         run: python scripts/harvest_delta.py >> "$GITHUB_STEP_SUMMARY"
+
+      # Das DISDOCS-Manifest fuer das Monatswerk (disdocs.yml). Es leitet sich
+      # aus manifest_full.csv ab und muss deshalb NACH dem Harvest stehen.
+      #
+      # Ohne diesen Schritt waere disdocs.yml eine Sackgasse, die sich als
+      # Erfolg meldet: das committete Manifest bliebe fuer immer auf 1.073
+      # Zeilen, der inkrementelle Lauf faende Monat fuer Monat "0 neu zu
+      # messen" und gruen durchlaufen, waehrend jeder neue Bericht unsichtbar
+      # bliebe. Gemerkt nur, weil jemand nachgesehen hat -- fehlgeschlagen
+      # waere nie etwas.
+      - name: DISDOCS-Manifest (#38)
+        run: python scripts/build_disdocs_manifest.py
 
       - name: Plan delta
         run: python scripts/plan_delta.py
@@ -474,6 +488,7 @@ jobs:
                   interim/edap_recon/manifest_sample.csv \
                   interim/edap_recon/manifest_urls.csv \
                   interim/edap_recon/manifest_wave.csv \
+                  interim/disdocs_manifest.csv \
                   codebook/framework_bridge.csv \
                   codebook/dpm_codebook.csv codebook/template_titles.csv \
                   processed/entity_meta.csv processed/fx_rates.csv \
