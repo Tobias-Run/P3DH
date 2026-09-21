@@ -26,10 +26,15 @@ Ein Vollabruf dauert über eine halbe Stunde und ist rechen-, nicht
 netzgebunden — das PDF-Parsen lässt sich mit Arbeitern kaum beschleunigen.
 Deshalb misst ein Lauf nur, was er noch nicht kennt.
 
-Der Schlüssel ist `(lei, scope, refPeriod, submission_ts)`, **einschliesslich
-des Zeitstempels**: eine neue Fassung desselben Berichts ist ein anderes
-Dokument und wird neu gemessen. Ohne den Zeitstempel bliebe eine Korrektur
-für immer unsichtbar, und zwar lautlos.
+Der Schlüssel ist `(lei, scope, refPeriod, rahmenwerk, submission_ts)`. Beide
+hinteren Felder tragen, und beide sahen zunächst entbehrlich aus:
+
+- **Der Zeitstempel**, weil eine neue Fassung desselben Berichts ein anderes
+  Dokument ist. Ohne ihn bliebe jede Korrektur ungemessen, und zwar lautlos.
+- **Das Rahmenwerk**, weil `P3REMDISDOCS` (Vergütung) und `P3NONREMDISDOCS`
+  zwei verschiedene Berichte sind und **75 Institute beide in derselben
+  Sekunde einreichen**. Ohne es fallen 150 Zeilen auf 75 zusammen, und der
+  inkrementelle Lauf ordnet die Messung des einen dem anderen zu.
 
 Zwei Dinge sind bewusst **nicht** im Zwischenstand:
 
@@ -222,23 +227,42 @@ GEMESSEN = ["paket_mb", "n_pdf", "n_seiten", "n_zeichen", "zeichen_je_seite",
             "textebene", "sprache", "sprach_abstand", "sprach_woerter",
             "sprach_urteil"]
 
-FELDER = ["lei", "bank_name", "country", "scope", "refPeriod", "submission_ts",
-          "im_xbrl_bestand",
+FELDER = ["lei", "bank_name", "country", "scope", "refPeriod", "rahmenwerk",
+          "submission_ts", "im_xbrl_bestand",
           "paket_mb", "n_pdf", "n_seiten", "n_zeichen", "zeichen_je_seite",
           "textebene", "sprache", "sprach_abstand", "sprach_woerter",
           "sprach_urteil",
           "n_offengelegt", "n_ausgelassen", "quote_gegen_erwartung",
           "trea_eur", "groessenklasse", "zeichen_je_template", "fehler"]
 
-def schluessel_von(zeile):
-    """Ein Dokument ist (Institut, Umfang, Stichtag, **Einreichungszeitpunkt**).
+def rahmenwerk(url):
+    """Das Rahmenwerk steht nur im Pfad der URL, in keiner Spalte."""
+    teil = url.split("/public-documents/")
+    return teil[1].split("/")[0] if len(teil) > 1 else ""
 
-    Der Zeitstempel gehört dazu: eine Korrektur ist ein anderes Dokument mit
-    denselben ersten drei Feldern. Ohne ihn bliebe sie ungemessen, und zwar
+
+def schluessel_von(zeile):
+    """(Institut, Umfang, Stichtag, **Rahmenwerk**, **Einreichungszeitpunkt**).
+
+    Zwei Felder, die beide unscheinbar aussehen und beide tragen:
+
+    **Der Zeitstempel**, weil eine Korrektur ein anderes Dokument mit
+    denselben ersten Feldern ist. Ohne ihn bliebe sie ungemessen, und zwar
     ohne dass irgendetwas fehlschlüge.
+
+    **Das Rahmenwerk**, weil `P3REMDISDOCS` (Vergütung) und
+    `P3NONREMDISDOCS` (der übrige Bericht) zwei verschiedene Dokumente sind
+    — und **75 Institute reichen beide in derselben Sekunde ein**. Ohne es
+    kollidieren 150 Zeilen zu 75, und der inkrementelle Lauf ordnete die
+    Messung des einen Berichts dem anderen zu.
+
+    Das ist dieselbe Falle wie in `build_correction_direction.py`, wo sie #31
+    einmal auf 2.539 statt 472 Korrekturen brachte — und sie stand dort schon
+    als Warnung im Docstring, als dieses Skript sie ein zweites Mal baute.
+    Gefunden hat sie erst der Eindeutigkeitstest über das fertige Blatt.
     """
     return (zeile["lei"], zeile["scope"], zeile["refPeriod"],
-            zeile["submission_ts"])
+            zeile.get("rahmenwerk", ""), zeile["submission_ts"])
 
 
 def lade_bestand(pfad=None, gemessen=GEMESSEN):
@@ -253,7 +277,8 @@ def lade_bestand(pfad=None, gemessen=GEMESSEN):
     bestand = {}
     with pfad.open(encoding="utf-8") as fh:
         for r in csv.DictReader(fh):
-            if r.get("fehler") or not r.get("submission_ts"):
+            if r.get("fehler") or not r.get("submission_ts") \
+                    or not r.get("rahmenwerk"):
                 continue
             bestand[schluessel_von(r)] = {f: r.get(f, "") for f in gemessen}
     return bestand
@@ -333,6 +358,7 @@ def main():
         zeilen = [{"lei": r["lei"], "bank_name": r["bank_name"],
                    "country": r["country"], "scope": r["consolidation"],
                    "refPeriod": r["refdate"],
+                   "rahmenwerk": rahmenwerk(r["url"]),
                    "submission_ts": r["submission_ts"],
                    "im_xbrl_bestand": r["im_xbrl_bestand"], "url": r["url"]}
                   for r in csv.DictReader(fh)]
@@ -399,6 +425,7 @@ def main():
         w.writeheader()
         for z in sorted(ergebnisse, key=lambda r: (r["lei"], r["scope"],
                                                    r["refPeriod"],
+                                                   r["rahmenwerk"],
                                                    r["submission_ts"])):
             w.writerow({f: z.get(f, "") for f in FELDER})
     os.replace(temp, OUT)
