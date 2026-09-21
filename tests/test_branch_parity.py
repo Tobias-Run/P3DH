@@ -188,10 +188,31 @@ class ParityTest(unittest.TestCase):
 
     def test_a_shard_without_any_long_form_facts_is_an_error(self):
         """Ein Shard ohne Gegenstück behauptet Daten, die es nicht gibt — die
-        gefährlichere Richtung, weil sie im Viewer sichtbar wird."""
+        gefährlichere Richtung, weil sie im Viewer sichtbar wird.
+
+        Entscheidend ist, dass der Shard **Zellen trägt**: siehe den nächsten
+        Test für den Fall, in dem er keine hat.
+        """
         self._write_shard("rs:LEI00000000000000009.CON", self.rp,
                           {"61.00": [["0010", "0010", "1.0"]]})
         self.assertEqual(self._run(), 1)
+
+    def test_an_empty_declaration_shard_is_allowed(self):
+        """Der Fall, an dem Lauf #14 der Pipeline scheiterte.
+
+        Compagnie Financière Holding Mixte Milleis reicht ein Paket ohne eine
+        einzige Datendatei ein, alle 54 Filing Indicators auf `false` — eine
+        vollständige und zulässige Meldung „ich lege nichts offen".
+        `build_zweig_a_shards.py` legt dafür bewusst einen LEEREN Shard an
+        (#28), sonst verschwände das Institut aus dem Viewer.
+
+        Der Wächter hielt das für Drift und liess Publish und Commit
+        ausfallen. Unterschieden wird am Inhalt, nicht an einer
+        Ausnahmeliste — und der Test daneben zeigt, dass die scharfe Regel
+        für Shards mit Zellen unverändert gilt.
+        """
+        self._write_shard("rs:LEI00000000000000009.CON", self.rp, {})
+        self.assertEqual(self._run(), 0)
 
     # ---- die erlaubte Abweichung ------------------------------------------
 
