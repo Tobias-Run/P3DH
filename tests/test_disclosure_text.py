@@ -155,8 +155,8 @@ class ErgebnisTest(unittest.TestCase):
         self.assertLess(c["en"] / gesamt, 0.75)
 
     def test_the_order_is_stable(self):
-        k = [(r["lei"], r["scope"], r["refPeriod"], r["submission_ts"])
-             for r in self.rows]
+        k = [(r["lei"], r["scope"], r["refPeriod"], r["rahmenwerk"],
+              r["submission_ts"]) for r in self.rows]
         self.assertEqual(k, sorted(k))
 
     def test_every_document_is_identified_by_its_submission(self):
@@ -186,25 +186,48 @@ class BestandTest(unittest.TestCase):
 
     def test_a_measured_document_is_reused(self):
         self._schreib([{"lei": "A", "scope": "CON", "refPeriod": "2025-06-30",
+                        "rahmenwerk": "P3NONREMDISDOCS",
                         "submission_ts": "2026", "n_zeichen": "500",
                         "textebene": "ja"}])
         stand = self.b.lade_bestand(self.p)
-        self.assertEqual(stand[("A", "CON", "2025-06-30", "2026")]["n_zeichen"],
-                         "500")
+        self.assertEqual(
+            stand[("A", "CON", "2025-06-30", "P3NONREMDISDOCS", "2026")]["n_zeichen"],
+            "500")
 
     def test_a_failed_row_is_retried_not_cached(self):
         """Ein zwischengespeicherter Netzwerkfehler sähe aus wie ein
         gemessenes Ergebnis — und bliebe es für immer."""
         self._schreib([{"lei": "A", "scope": "CON", "refPeriod": "2025-06-30",
+                        "rahmenwerk": "P3NONREMDISDOCS",
                         "submission_ts": "2026", "fehler": "timeout"}])
         self.assertEqual(self.b.lade_bestand(self.p), {})
 
     def test_a_new_version_is_a_new_document(self):
         """Dieselbe Meldung, andere Einreichung: muss neu gemessen werden."""
         self._schreib([{"lei": "A", "scope": "CON", "refPeriod": "2025-06-30",
+                        "rahmenwerk": "P3NONREMDISDOCS",
                         "submission_ts": "2026010100", "n_zeichen": "500"}])
         stand = self.b.lade_bestand(self.p)
-        self.assertNotIn(("A", "CON", "2025-06-30", "2026060100"), stand)
+        self.assertNotIn(
+            ("A", "CON", "2025-06-30", "P3NONREMDISDOCS", "2026060100"), stand)
+
+    def test_the_two_report_kinds_do_not_collide(self):
+        """Der Fehler, den der Eindeutigkeitstest am fertigen Blatt gefunden
+        hat: 75 Institute reichen den Verguetungsbericht und den uebrigen
+        Bericht in DERSELBEN Sekunde ein. Ohne das Rahmenwerk im Schluessel
+        bekaeme der eine die Messung des anderen."""
+        self._schreib([
+            {"lei": "A", "scope": "CON", "refPeriod": "2025-06-30",
+             "rahmenwerk": "P3NONREMDISDOCS", "submission_ts": "2026",
+             "n_zeichen": "500"},
+            {"lei": "A", "scope": "CON", "refPeriod": "2025-06-30",
+             "rahmenwerk": "P3REMDISDOCS", "submission_ts": "2026",
+             "n_zeichen": "9"}])
+        stand = self.b.lade_bestand(self.p)
+        self.assertEqual(len(stand), 2)
+        self.assertEqual(
+            stand[("A", "CON", "2025-06-30", "P3REMDISDOCS", "2026")]["n_zeichen"],
+            "9")
 
     def test_only_the_measurement_is_cached_not_the_joins(self):
         """`n_offengelegt` und `trea_eur` haengen am Bestand und wuerden
