@@ -151,6 +151,7 @@ Neben dem Parquet liegen im Repo kleine, statische Referenztabellen:
 | `processed/persistent_findings.csv` | Institut mit `hoch`-Befund, das **nie** korrigiert hat | ebenda + `quality_profile.csv` |
 | `processed/country_dependence.csv` | Land → wer trägt es von **aussen**, HHI über Konzerne | CCyB1 `67.01.A` + `entity_groups.csv` |
 | `processed/contagion_edges.csv` | Konzernpaar → geteilte **Auslandsmärkte**, spezifisch und roh | ebenda |
+| `processed/credit_chain.csv` | Report → NPL-Quote, Forbearance, Deckungsquote, Frühwarnmuster | CQ3 `82.00.A` + CQ1 `80.00.A` + CR1 `21.01.D` |
 | `processed/equity_link.csv` | Institut → Aktien-ISIN, Primärnotierung, Tickersymbol | Wikidata (`P946`, `P414`/`P249`) |
 | `processed/event_study_feasibility.csv` | Ereignisfenster → verwertbare Ereignisse, Urteil zur Machbarkeit | `manifest_full.csv` + `wikidata_entities.csv` |
 | `processed/catalogue_coverage.csv` | Katalog-Report → geladen, oder warum nicht | `manifest_full.csv` gegen Parquet + Coverage-Matrix |
@@ -1005,6 +1006,120 @@ sonst nirgends gibt.
 
 Kein Werturteil: eine Korrektur ist Sorgfalt, keine Schuld. Und der Katalog ist
 ein Schnappschuss — die Zahlen sind eine untere Schranke (#6).
+
+### `eba_reconciliation.csv` — unsere Zahlen gegen die der EBA (#37)
+
+Die naheliegendste Validierung des ganzen Projekts: die EBA veröffentlicht
+aggregierte Kennzahlen, wir haben die Einzelmeldungen, aus denen sie entstehen.
+379 Vergleichspunkte über vier Kapital- und Verschuldungskennzahlen, 29 Länder,
+vier Stichtage. **60 % liegen innerhalb eines Prozentpunkts.**
+
+#### Die Abweichung ist nach Ursache getrennt
+
+| `ursache` | n | Bedeutung |
+|---|---:|---|
+| `stimmig` | 228 | innerhalb 1 pp |
+| `duenne_basis` | 83 | zu wenige Institute für ein vergleichbares Aggregat |
+| `konsolidierung` | 29 | die grossen Häuser melden über eine ausländische Mutter |
+| `unerklaert` | 39 | breite Basis, Selbstmelder — und trotzdem daneben |
+
+**Der Stichtagsversatz fehlt in dieser Liste, weil er geprüft und widerlegt
+ist:** über 287 Zellen passt unser Wert 111-mal besser zum aktuellen
+EBA-Quartal und nur 44-mal besser zum Vorquartal. Eine Ursache, die man nicht
+misst, gehört nicht in die Spalte.
+
+#### `quote_selbstmelder` erklärt die grössten Lücken
+
+Luxemburg lag 10 Prozentpunkte unter der EBA — bei scheinbar vollständiger
+Abdeckung. Tatsächlich melden dort **7 von 30** signifikanten Instituten
+selbst; die übrigen 21 sind Töchter ausländischer Gruppen, deren Kapital im
+Aggregat des **Mutterlands** steht.
+
+| Land | Selbstmelder | |
+|---|---|---|
+| Luxemburg | 7 von 30 | 23,3 % |
+| Belgien | 8 von 20 | 40,0 % |
+| Deutschland | 32 von 64 | 50,0 % |
+| Irland | 6 von 11 | 54,5 % |
+
+Die erste Fassung zählte `ueber_gruppe` als abgedeckt und gab Luxemburg
+dadurch eine Quote von 1,0 — die Spalte hätte genau dort weggesehen, wo sie
+gebraucht wird. Mit der Korrektur fielen die unerklärten Zellen von 68 auf 39.
+
+#### ⚠️ Die Abweichung ist **kein Gütemass**
+
+Die mit #32 korrigierte Entdopplung entfernt echte Doppelzählungen — und
+**vergrössert** die Abweichung dabei, in den 28 betroffenen Zellen von 0,88 auf
+1,08 pp. Das ist kein Argument gegen sie: die EBA aggregiert über eine eigene,
+anders abgegrenzte Stichprobe. Wer auf die EBA-Zahl hin optimiert, passt die
+eigene Methode an eine fremde Grundgesamtheit an.
+
+Eine Randbedingung des Abrufs: die EBA-Seite weist den Standard-User-Agent von
+`urllib` mit HTTP 403 ab. Das Skript sendet deshalb eine benennende Kennung mit
+Projektadresse — korrekte Client-Identifikation, kein vorgetäuschter Browser.
+
+### `credit_chain.csv` — die Kreditverschlechterungs-Kette (#16)
+
+Kreditrisiko ist keine Zustandsgrösse, sondern eine Kette:
+
+> performing → forborne (gestundet) → non-performing → ausgefallen
+
+Jede Stufe steht in einem **anderen Template**, und genau deshalb kann EDAP das
+strukturell nicht: es liefert ein ZIP je Institut, Zähler und Nenner liegen
+dort in verschiedenen Dateien. Drei bis dahin ungenutzte Templates, über die
+Zeile „Loans and advances" verknüpft:
+
+| Template | | |
+|---|---|---|
+| `82.00.A` | CQ3 | performing / non-performing |
+| `80.00.A` | CQ1 | performing / non-performing forborne |
+| `21.01.D` | CR1 | Wertberichtigung auf NPE |
+
+392 Reports. Zum 31.12.2025: **NPL-Quote** Median 2,28 %, **Vorstufe** 0,62 %,
+**NPL-Deckungsquote** 41,0 % (Q1 26,8 %, Q3 53,8 %).
+
+#### Der Frühwarn-Indikator braucht einen Boden
+
+Die Idee: wer wenig notleidende, aber viele **gestundete** Kredite hat, trägt
+ein Problem, das die NPL-Quote noch nicht zeigt. Roh gerechnet führt diese
+Liste allerdings **Agence France Locale mit dem 377-fachen** an — bei einer
+NPL-Quote von 0,00 %. Das ist eine Division durch fast nichts, dieselbe Falle
+wie der AIB-Fall in `check_plausibility`.
+
+`fruehwarnung` verlangt deshalb **drei** Bedingungen gleichzeitig:
+
+1. die Vorstufe ist absolut wesentlich (≥ 1 % des Kreditbuchs),
+2. das Verhältnis Vorstufe/NPL liegt über 1,5 (Median: 0,28),
+3. die NPL-Quote liegt **unter** dem Peer-Median.
+
+Die dritte trägt die Aussage — ohne sie stünden dort Häuser, deren
+Schwierigkeiten längst in der NPL-Quote sichtbar sind. Das wäre eine
+Spätmeldung, keine Frühwarnung.
+
+Es bleiben **8 von 375** Reports, darunter die beiden, die das Issue selbst
+nennt:
+
+| | NPL | Vorstufe | |
+|---|---:|---:|---|
+| Swedbank Hypotek | 0,36 % | 1,17 % | 3,25× |
+| Bank Handlowy | 1,12 % | 2,61 % | 2,34× |
+| IKB Deutsche Industriebank | 2,20 % | 4,66 % | 2,12× |
+
+#### ⚠️ Zwei Dinge, die die Daten selbst zeigen
+
+**Die Wertberichtigung hat kein einheitliches Vorzeichen.** 344 Reports melden
+sie negativ, **20 positiv**. Gerechnet wird mit dem Betrag; die Konvention
+steht als `wb_vorzeichen` daneben. Ob ein positiver Wert eine andere Konvention
+ist oder ein Vorzeichenfehler, entscheidet das Skript nicht.
+
+**Ein Haus meldet notleidende Kredite ohne jede Wertberichtigung darauf** —
+Merkanti Bank (Malta), 0,8 Mio EUR. Ein strengeres `deckungsquote > 0` hätte
+daraus einen Testfehler statt einer Beobachtung gemacht.
+
+⚠️ **CON und IND werden nirgends gemischt**, und das ist keine Formsache: ihre
+NPL-Mediane liegen bei 2,36 % gegen 1,91 %. Die Vergleichbarkeitsgrenze aus
+`DISCLAIMER.md` gilt unverändert — Rechnungslegung und nationale Optionen
+unterscheiden sich.
 
 ### `country_dependence.csv` · `contagion_edges.csv` — der Exposure-Graph (#35)
 
