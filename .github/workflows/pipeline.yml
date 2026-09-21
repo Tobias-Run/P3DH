@@ -29,9 +29,14 @@ on:
   # letzten gruenen Lauf #12 dazugekommen waren. Das war die Vorbedingung aus
   # #8 -- ein Zeitplan auf ungetesteter Kette erzeugt rote Laeufe statt Daten.
   #
-  # ACHTUNG, Stand 2026-09-21: es sind inzwischen 46 Schritte, und die seit
+  # ACHTUNG, Stand 2026-09-21: es sind inzwischen 47 Schritte, und die seit
   # Lauf #13 dazugekommenen sind in der Pipeline noch NIE gelaufen -- nur
   # lokal. Der erste geplante Lauf danach ist zugleich ihr erster Test.
+  #
+  # Der neue Schritt "Berichtsumfang (#38)" laedt dabei rund 2 GB und braucht
+  # lokal ueber eine halbe Stunde -- er dominiert die Laufzeit der ganzen
+  # Kette. Faellt der erste geplante Lauf deswegen um, ist er der erste
+  # Kandidat fuer einen eigenen Zeitplan statt fuer diese Kette.
   #
   # Montags, weil die EBA neue Einreichungen ueber die Woche verteilt
   # veroeffentlicht; 04:00 UTC liegt ausserhalb der Stosszeiten der
@@ -328,6 +333,17 @@ jobs:
       # an keinem Zweig-B-Schritt.
       - name: Richtung der Korrekturen
         run: python scripts/build_correction_direction.py
+
+      # Berichtsumfang gegen Offenlegungsumfang (#38). Laedt den kompletten
+      # DISDOCS-Korpus (1.073 PDF-Pakete, rund 2 GB) und wertet ihn im
+      # Arbeitsspeicher aus -- auf Platte bleiben nur die Kennzahlen. Braucht
+      # omission_profile (Offenlegungsbreite) und scale_flags (Groesse) und
+      # muss deshalb nach beiden laufen.
+      #
+      # Der teuerste Schritt der ganzen Kette: das PDF-Parsen ist rechen-,
+      # nicht netzgebunden, die Arbeiter helfen also nur beim Laden.
+      - name: Berichtsumfang (#38)
+        run: python scripts/build_disclosure_text.py
 
       # Laendercode-Verwechslungen (#59). Reine Zeitreihe ueber 67.01.A; muss
       # nur NACH build_zweig_b laufen. Rechnet auf ANTEILEN, damit kein

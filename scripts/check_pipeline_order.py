@@ -118,6 +118,14 @@ ABHAENGIG = {
     "build_credit_chain.py": (["processed/long/p3dh_long.parquet",
                                "processed/entity_meta.csv"],
                               ["processed/credit_chain.csv"]),
+    # Berichtsumfang gegen Offenlegungsumfang (#38). Laedt den DISDOCS-Korpus
+    # selbst und braucht aus der Pipeline nur die Offenlegungsbreite und die
+    # Groesse -- muss also NACH build_omission_profile und check_plausibility
+    # laufen, sonst stehen n_offengelegt und trea_eur noch nicht.
+    "build_disclosure_text.py": (["interim/disdocs_manifest.csv",
+                                  "processed/omission_profile.csv",
+                                  "processed/scale_flags.csv"],
+                                 ["processed/disclosure_text.csv"]),
     # Richtung der Korrekturen. Laedt die ueberholten Fassungen selbst von
     # EDAP nach und braucht daher aus der Pipeline nur den Katalog und die
     # Namen -- NICHT den geparsten Bestand, der nur die juengste Fassung
