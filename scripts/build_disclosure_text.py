@@ -265,7 +265,32 @@ def schluessel_von(zeile):
             zeile.get("rahmenwerk", ""), zeile["submission_ts"])
 
 
-def lade_bestand(pfad=None, gemessen=GEMESSEN):
+# Welche Messfelder Zahlen sind. Sie werden beim Lesen zurückverwandelt,
+# damit gelesene und frisch gemessene Zeilen in EINER Liste dieselben Typen
+# tragen. Die Vermischung hat in dieser Sitzung dreimal zugeschlagen — an
+# einem Formatstring, an einer Division und an einem `sorted()` — und jedes
+# Mal war die Reparatur an der Verbrauchsstelle. Die Ursache liegt hier, an
+# der Grenze zwischen CSV und Arbeitsspeicher.
+ZAHLFELDER = {"n_pdf": int, "n_seiten": int, "n_zeichen": int,
+              "sprach_woerter": int, "paket_mb": float,
+              "zeichen_je_seite": float, "sprach_abstand": float}
+
+
+def entspalte(wert, wandler):
+    """CSV-Text -> Zahl. Leer bleibt leer: „Fehlt ≠ Null".
+
+    `zeichen_je_seite` ist leer, wenn ein Paket keine Seite hat. Daraus eine
+    0,0 zu machen hiesse, eine gemessene Dichte von null zu behaupten.
+    """
+    if wert is None or wert == "":
+        return ""
+    try:
+        return wandler(wert)
+    except (TypeError, ValueError):
+        return ""
+
+
+def lade_bestand(pfad=None, gemessen=GEMESSEN, zahlfelder=ZAHLFELDER):
     """Frühere Messungen -> {Schlüssel: Messwerte}.
 
     Zeilen mit `fehler` kommen nicht zurück: ein zwischengespeicherter
@@ -280,7 +305,10 @@ def lade_bestand(pfad=None, gemessen=GEMESSEN):
             if r.get("fehler") or not r.get("submission_ts") \
                     or not r.get("rahmenwerk"):
                 continue
-            bestand[schluessel_von(r)] = {f: r.get(f, "") for f in gemessen}
+            bestand[schluessel_von(r)] = {
+                f: entspalte(r.get(f, ""), zahlfelder[f]) if f in zahlfelder
+                else r.get(f, "")
+                for f in gemessen}
     return bestand
 
 

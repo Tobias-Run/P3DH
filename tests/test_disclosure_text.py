@@ -217,7 +217,7 @@ class BestandTest(unittest.TestCase):
         stand = self.b.lade_bestand(self.p)
         self.assertEqual(
             stand[("A", "CON", "2025-06-30", "P3NONREMDISDOCS", "2026")]["n_zeichen"],
-            "500")
+            500, "Zahlen kommen als Zahlen zurueck, nicht als CSV-Text")
 
     def test_a_failed_row_is_retried_not_cached(self):
         """Ein zwischengespeicherter Netzwerkfehler sähe aus wie ein
@@ -252,7 +252,39 @@ class BestandTest(unittest.TestCase):
         self.assertEqual(len(stand), 2)
         self.assertEqual(
             stand[("A", "CON", "2025-06-30", "P3REMDISDOCS", "2026")]["n_zeichen"],
-            "9")
+            9)
+
+    def test_numbers_come_back_as_numbers(self):
+        """Die Ursache dreier Abstuerze in Folge: gelesene und frisch
+        gemessene Zeilen landen in EINER Liste. Trugen sie verschiedene
+        Typen, brach die naechste Auswertung darueber — an einem
+        Formatstring, an einer Division, an einem `sorted()`.
+
+        Geheilt wird das hier an der Grenze, nicht an jeder Verbrauchsstelle.
+        """
+        self._schreib([{"lei": "A", "scope": "CON", "refPeriod": "2025-06-30",
+                        "rahmenwerk": "P3NONREMDISDOCS",
+                        "submission_ts": "2026", "n_zeichen": "9000",
+                        "n_seiten": "40", "zeichen_je_seite": "225.0",
+                        "textebene": "ja"}])
+        w = self.b.lade_bestand(self.p)[
+            ("A", "CON", "2025-06-30", "P3NONREMDISDOCS", "2026")]
+        self.assertEqual(w["n_zeichen"], 9000)
+        self.assertEqual(w["n_seiten"], 40)
+        self.assertAlmostEqual(w["zeichen_je_seite"], 225.0)
+        self.assertEqual(w["textebene"], "ja", "Text bleibt Text")
+
+    def test_an_empty_number_stays_empty(self):
+        """`zeichen_je_seite` ist leer, wenn ein Paket keine Seite hat. Eine
+        0,0 daraus zu machen hiesse, eine gemessene Dichte zu behaupten."""
+        self._schreib([{"lei": "A", "scope": "CON", "refPeriod": "2025-06-30",
+                        "rahmenwerk": "P3NONREMDISDOCS",
+                        "submission_ts": "2026", "n_zeichen": "0",
+                        "zeichen_je_seite": "", "textebene": ""}])
+        w = self.b.lade_bestand(self.p)[
+            ("A", "CON", "2025-06-30", "P3NONREMDISDOCS", "2026")]
+        self.assertEqual(w["zeichen_je_seite"], "")
+        self.assertNotEqual(w["zeichen_je_seite"], 0.0)
 
     def test_only_the_measurement_is_cached_not_the_joins(self):
         """`n_offengelegt` und `trea_eur` haengen am Bestand und wuerden
