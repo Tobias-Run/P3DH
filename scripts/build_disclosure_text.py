@@ -284,6 +284,33 @@ def lade_bestand(pfad=None, gemessen=GEMESSEN):
     return bestand
 
 
+def ganzzahl(wert):
+    """Zahl aus einem Feld, das eine Zahl ODER eine Zeichenkette sein kann.
+
+    In einem inkrementellen Lauf stehen beide Sorten nebeneinander: frisch
+    gemessene Zeilen tragen `int`, aus dem Zwischenstand gelesene tragen den
+    CSV-Text. Diese Mischung hat in diesem Projekt schon dreimal zugeschlagen
+    — zweimal an einem Formatstring, einmal hier an einer Division, die nach
+    anderthalb Stunden Messzeit abbrach.
+    """
+    try:
+        return int(wert)
+    except (TypeError, ValueError):
+        return 0
+
+
+def je_template(n_zeichen, n_offengelegt):
+    """Zeichen je offengelegtem Template — oder leer, wenn eines fehlt.
+
+    Kein Nenner und keine Zeichen heisst **keine Kennzahl**, nicht null: eine
+    Null hier wäre die Aussage „dieser Bericht erläutert nichts".
+    """
+    zeichen, templates = ganzzahl(n_zeichen), ganzzahl(n_offengelegt)
+    if not zeichen or not templates:
+        return ""
+    return round(zeichen / templates)
+
+
 def lade_offenlegung(pfad=OMISSION):
     """(lei, scope, refPeriod) -> Offenlegungsbreite aus #34/#44."""
     if not Path(pfad).exists():
@@ -406,10 +433,8 @@ def main():
         t = trea.get(schluessel)
         e["trea_eur"] = t if t else ""
         e["groessenklasse"] = groessenklasse(t, grenzen)
-        n_off = o.get("n_offengelegt")
-        e["zeichen_je_template"] = (
-            round(e.get("n_zeichen", 0) / int(n_off))
-            if n_off and int(n_off) and e.get("n_zeichen") else "")
+        e["zeichen_je_template"] = je_template(e.get("n_zeichen"),
+                                               o.get("n_offengelegt"))
 
     # Atomar schreiben: die Datei IST jetzt der Zwischenstand. Ein Lauf, der
     # mitten im Schreiben stirbt, zerstörte ihn sonst und machte aus einem

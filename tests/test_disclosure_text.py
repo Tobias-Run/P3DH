@@ -97,6 +97,31 @@ class SteigungTest(unittest.TestCase):
                          (None, None, None))
 
 
+class JeTemplateTest(unittest.TestCase):
+    """Die Mischung aus Zahl und Zeichenkette im inkrementellen Lauf."""
+
+    def setUp(self):
+        import build_disclosure_text as b
+        self.b = b
+
+    def test_both_spellings_give_the_same_answer(self):
+        """Der Fehler, der den Nachmesslauf nach 153 Dokumenten abbrach:
+        frisch gemessene Zeilen tragen `int`, aus dem Zwischenstand gelesene
+        den CSV-Text — und beide liegen in derselben Liste."""
+        self.assertEqual(self.b.je_template(9000, 30), 300)
+        self.assertEqual(self.b.je_template("9000", "30"), 300)
+
+    def test_a_missing_part_yields_no_ratio(self):
+        """Eine Null hier wäre die Aussage „dieser Bericht erläutert nichts"."""
+        self.assertEqual(self.b.je_template(9000, 0), "")
+        self.assertEqual(self.b.je_template(9000, ""), "")
+        self.assertEqual(self.b.je_template(None, 30), "")
+        self.assertEqual(self.b.je_template("", "30"), "")
+
+    def test_nonsense_does_not_raise(self):
+        self.assertEqual(self.b.je_template("viele", "30"), "")
+
+
 class PaketTest(unittest.TestCase):
     def setUp(self):
         import build_disclosure_text as b
