@@ -178,7 +178,7 @@ class ProvenanceTest(unittest.TestCase):
         self.assertIsNotNone(m, "Verteilungskarte nicht gefunden")
         card = m.group(1)
         self.assertIn("dsrc", card, "Grafik ohne Quellzeile")
-        for part in ("Quelle:", "${esc(cell)}", "${esc(period)}"):
+        for part in ("tr('Source:')", "${esc(cell)}", "${esc(period)}"):
             self.assertIn(part, card, f"Quellzeile ohne {part}")
 
     def test_the_acknowledgement_names_the_inspiration_and_denies_affiliation(self):

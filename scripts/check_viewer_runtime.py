@@ -103,12 +103,19 @@ def pruefe_export(res):
     daten = [z for z in text.splitlines() if not z.startswith("#")]
     print(f"  CSV-Export: {len(kopf)} Kommentarzeilen · {len(daten)-1} Datenzeilen")
 
-    for pflicht, was in [("Aufsichtsmetrik", "der Vergleichbarkeits-Caveat"),
-                         ("nicht null", "der Hinweis „Fehlt ≠ Null\""),
-                         ("skalenbefund", "die Erklärung der Skalenspalte"),
-                         ("Ansicht: http", "die Rück-URL auf die eigene Ansicht"),
-                         ("Filter/Zustand", "der Filterzustand")]:
-        if pflicht not in text:
+    # Der Kopf folgt der Sprache, die Spaltenkoepfe nicht. Gesucht wird
+    # deshalb je Pflichtstueck in beiden Fassungen.
+    for pflicht, was in [(("Aufsichtsmetrik", "supervisory metric"),
+                          "der Vergleichbarkeits-Caveat"),
+                         (("nicht null", "not zero"),
+                          "der Hinweis „Fehlt ≠ Null\""),
+                         (("scale_finding",),
+                          "die Erklärung der Skalenspalte"),
+                         (("Ansicht: http", "view: http"),
+                          "die Rück-URL auf die eigene Ansicht"),
+                         (("Filter/Zustand", "filter/state"),
+                          "der Filterzustand")]:
+        if not any(s in text for s in pflicht):
             fehler.append(f"CSV-Export ohne {was}")
 
     try:
@@ -119,8 +126,8 @@ def pruefe_export(res):
     if not zeilen:
         fehler.append("CSV-Export ohne Datenzeilen")
         return fehler
-    fehlend = [s for s in ("institut", "lei", "stichtag", "framework",
-                           "skalenbefund", "plausibilitaet") if s not in zeilen[0]]
+    fehlend = [s for s in ("institution", "lei", "reference_date", "framework",
+                           "scale_finding", "plausibility") if s not in zeilen[0]]
     for spalte in fehlend:
         fehler.append(f"CSV-Export ohne Spalte '{spalte}' — ein Caveat im Kopf "
                       "sagt nicht, WELCHE Zeile betroffen ist")

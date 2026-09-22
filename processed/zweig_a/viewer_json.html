@@ -698,6 +698,90 @@ const DE = {
   "Labels could not be loaded:": "Beschriftungen nicht ladbar:",
 
   // --- Benchmark und Vergleich ---
+  "{0}th percentile of the peer group ({1} reports: same size class, consolidation, reference date)":
+    "{0}. Perzentil der Peer-Gruppe ({1} Reports: gleiche Größenklasse, Konsolidierung, Stichtag)",
+  "The value in the sorted column “{0}” lies outside the Tukey fences of its peer group (Q1−1.5·IQR to Q3+1.5·IQR, from 5 reports). That describes the position within the distribution — it says nothing about whether the filing is correct.":
+    "Der Wert in der sortierten Spalte „{0}“ liegt ausserhalb der Tukey-Zäune seiner Peer-Gruppe (Q1−1,5·IQR bis Q3+1,5·IQR, ab 5 Reports). Das beschreibt die Lage in der Verteilung — es sagt nichts darüber, ob die Meldung richtig ist.",
+  "◇ outlier {0}": "◇ Randwert {0}",
+  "Distribution across the {0} reports shown. The axis is clipped at the Tukey fences; whatever lies beyond appears as a bar in the margin strip — as a count, not a position. Click sorts the list by this column.":
+    "Verteilung über die {0} angezeigten Reports. Die Achse ist an den Tukey-Zäunen abgeschnitten; was darüber hinausgeht, steht als Balken im Randstreifen — als Anzahl, nicht als Position. Klick sortiert die Liste nach dieser Spalte.",
+  "outside": "außerhalb",
+  "Source:": "Quelle:",
+  "The list below <b>sorts</b>, the distribution above <b>places in context</b>. A top rank can be an outlier — 370 % CET1 stands at the very top of a ranking and at the very edge of a distribution. Both are the same value; only one of them looks like “the best”. Rows whose value in the sorted column lies outside the fences of its peer group are marked with ◇.":
+    "Die Liste unten <b>sortiert</b>, die Verteilung oben <b>ordnet ein</b>. Ein Spitzenplatz kann ein Randwert sein — 370 % CET1 stehen in einer Rangliste ganz oben und in einer Verteilung ganz außen. Beides ist derselbe Wert; nur das eine sieht aus wie „Bester“. Zeilen, deren Wert in der sortierten Spalte außerhalb der Zäune ihrer Peer-Gruppe liegt, sind mit ◇ markiert.",
+  "⇄ The filing taxonomy changes within this series: {0}. The dashed vertical marks the spot; the trend line is dashed there too — it says “across a version boundary”, not “incomparable”. The viewer joins cells over the coordinate, not over the data point: values are therefore still found, even where the taxonomy rebound them. <b>Which</b> cells are affected is stated by the ⇄ at the metric — about the rest no claim is made, because the bridge only knows observed cells.":
+    "⇄ Die Meldetaxonomie wechselt in dieser Reihe: {0}. Die gestrichelte Senkrechte markiert die Stelle; die Trendlinie ist dort ebenfalls gestrichelt — sie sagt „über eine Versionsgrenze hinweg“, nicht „unvergleichbar“. Der Viewer verbindet Zellen über die Koordinate, nicht über den Datenpunkt: Werte werden also weiter gefunden, auch wo die Taxonomie sie umgebunden hat. <b>Welche</b> Zellen das betrifft, sagt das ⇄ an der Kennzahl — über die übrigen wird keine Aussage getroffen, weil die Brücke nur beobachtete Zellen kennt.",
+  "⊘ Plausibility filter: <b>{0}</b> of {1} reports excluded ({2}{3}%). Excluded is whoever\u2019s remuneration per head in <i>one</i> function level lies outside {4}–{5}{3}EUR: that is no longer a question of pay but a question of units. The same corridor checks the holdings (<code>check_plausibility.py</code>) — here it filters the list.":
+    "⊘ Plausibilitätsfilter: <b>{0}</b> von {1} Reports ausgeschlossen ({2}{3}%). Ausgeschlossen wird, wessen Vergütung pro Kopf in <i>einer</i> Funktionsstufe ausserhalb von {4}–{5}{3}EUR liegt: das ist keine Gehaltsfrage mehr, sondern eine Einheitenfrage. Derselbe Korridor prüft den Bestand (<code>check_plausibility.py</code>) — hier filtert er die Liste.",
+  "view {0} institution(s)": "{0} Institut(e) ansehen",
+  "Hides reports in which the plausibility check found values far outside their cell population. Percentiles stay computed on the full set.":
+    "Blendet Reports aus, in denen die Plausibilitätsprüfung Werte weit ausserhalb ihrer Zellpopulation gefunden hat. Perzentile bleiben auf der vollen Menge gerechnet.",
+  "collapse conspicuous": "auffällige einklappen",
+  "Which metrics the table shows. The selection is part of the link and of the CSV export — otherwise a shared link shows different columns than the view it came from.":
+    "Welche Kennzahlen die Tabelle zeigt. Die Auswahl steht im Link und im CSV-Export — ein geteilter Link zeigt sonst andere Spalten als die Ansicht, aus der er stammt.",
+  "Columns": "Spalten",
+  "The table in its current state as CSV. Caveats, filters and the view URL are in the header comment, scale and plausibility findings as columns of their own — a bare table would lose exactly the warnings that stand next to it here.":
+    "Die Tabelle in ihrem aktuellen Zustand als CSV. Caveats, Filter und die Ansichts-URL stehen als Kopfkommentar darin, Skalen- und Plausibilitätsbefunde als eigene Spalten — eine nackte Tabelle verlöre genau die Warnungen, die hier danebenstehen.",
+  "Basis: template {0}": "Basis: Template {0}",
+  "sidebar filters active · click on a column sorts": "Sidebar-Filter aktiv · Klick auf Spalte sortiert",
+  "Bar = share of the largest value of the column in the current selection, linear. No value judgement — and none where the filed unit is disputed or a scale finding stands, where the length would be a claim about comparability that does not hold.":
+    "Balken = Anteil am grössten Wert der Spalte in der aktuellen Auswahl, linear. Kein Werturteil — und keiner bei strittiger Meldeeinheit oder Skalenbefund, dort wäre die Länge eine Behauptung über Vergleichbarkeit, die nicht gilt.",
+  "⚠ Comparability caveat: accounting framework, scope of consolidation (CON/IND), national options and framework version (4.1/4.2) differ — rankings are indicative, not a supervisory metric. Source: public Pillar 3 disclosures (© EBA).":
+    "⚠ Vergleichbarkeits-Caveat: Rechnungslegung, Konsolidierungskreis (CON/IND), nationale Optionen und Framework-Version (4.1/4.2) unterscheiden sich — Ranglisten sind indikativ, keine Aufsichtsmetrik. Quelle: öffentliche Pillar-3-Meldungen (© EBA).",
+  "Institution": "Institut",
+  "Reference date": "Stichtag",
+  "Trend": "Trend",
+  "Course over the available reference dates ({0})": "Verlauf über verfügbare Stichtage ({0})",
+  "Error:": "Fehler:",
+  "<b>{0}</b> contradictory (below)": "<b>{0}</b> widersprüchlich (unten)",
+  "⚠ different currencies — the EUR toggle is recommended":
+    "⚠ verschiedene Währungen — EUR-Toggle empfohlen",
+  "Remember this view as…": "Diese Ansicht merken als…",
+  "Saves the current link under this name": "Speichert den aktuellen Link unter diesem Namen",
+  "{0} institutions · {1} reports · {2} facts": "{0} Institute · {1} Reports · {2} Fakten",
+
+  // --- CSV-Export: Kopfkommentar (die Spaltenkoepfe bleiben englisch) ---
+  "benchmark export": "Benchmark-Export",
+  "created:": "erzeugt:",
+  "profile:": "Profil:",
+  "basis: template": "Basis: Template",
+  "filter/state:": "Filter/Zustand:",
+  "sorting:": "Sortierung:",
+  "ascending": "aufsteigend",
+  "descending": "absteigend",
+  "rows:": "Zeilen:",
+  "view:": "Ansicht:",
+  "none": "keine",
+  "report": "Report",
+  "{0} finding(s)": "{0} Befund(e)",
+  "CAUTION: template {0} is on the unit blocklist —":
+    "ACHTUNG: Template {0} steht auf der Einheiten-Sperrliste —",
+  "institutions demonstrably file there in different units.":
+    "Institute melden dort nachweislich in verschiedenen Einheiten.",
+  "Absolute amounts are NOT comparable across institutions.":
+    "Absolutbetraege sind institutsuebergreifend NICHT vergleichbar.",
+  "Source: public Pillar 3 disclosures from the EBA Pillar 3 Data Hub ((c) EBA).":
+    "Quelle: oeffentliche Pillar-3-Offenlegungen aus dem EBA Pillar 3 Data Hub ((c) EBA).",
+  "Accounting framework, scope of consolidation (CON/IND), national options and":
+    "Rechnungslegung, Konsolidierungskreis (CON/IND), nationale Optionen und",
+  "framework version (4.1 vs 4.2) differ between institutions —":
+    "Framework-Version (4.1 vs 4.2) unterscheiden sich zwischen Instituten —",
+  "this table is indicative and NOT a supervisory metric.":
+    "diese Tabelle ist indikativ und KEINE Aufsichtsmetrik.",
+  "RF 4.2 covers the reference date 2026-03-31 only: every comparison":
+    "RF 4.2 umfasst ausschliesslich den Stichtag 2026-03-31: jeder Vergleich",
+  "between framework versions is at the same time a comparison over time.":
+    "zwischen den Meldewerk-Versionen ist zugleich ein Zeitvergleich.",
+  "Column scale_finding: the absolute amounts of this report are off by a":
+    "Spalte scale_finding: die absoluten Betraege dieses Reports liegen um einen",
+  "factor (ratios remain valid). Column plausibility: values outside the":
+    "Faktor daneben (Verhaeltniszahlen bleiben gueltig). Spalte plausibility:",
+  "distribution of their cell population — can be a correct particularity.":
+    "Werte ausserhalb der Verteilung ihrer Zellpopulation — kann eine korrekte",
+  "Both are marked, not corrected.": "Besonderheit sein. Beides ist markiert, nicht korrigiert.",
+  "Missing values are EMPTY and mean \"not disclosed or not placeable\" —":
+    "Fehlende Werte sind LEER und bedeuten \"nicht offengelegt oder nicht",
+  "not zero.": "platzierbar\" — nicht null.",
   "Benchmark": "Benchmark",
   "Profile": "Profil",
   "No metric registry in the codebook — benchmark unavailable.":
@@ -719,8 +803,8 @@ const DE = {
     "<b>{0}</b> von <b>{1}</b> deklarierten Templates offengelegt",
   "Similar institutions by country profile": "Ähnliche Institute nach Länderprofil",
   "not reported": "nicht gemeldet",
-  "largest value of this column in the current selection":
-    "grössten Werts dieser Spalte in der aktuellen Auswahl",
+  "{0}{1}% of the largest value of this column in the current selection":
+    "{0}{1}% des grössten Werts dieser Spalte in der aktuellen Auswahl",
   "derived from {0}": "abgeleitet aus {0}",
   "The list is sorted by this column — the order is half the statement, and a ranking without its reason would be impossible to follow in a shared link.":
     "Nach dieser Spalte wird sortiert — die Reihenfolge ist die halbe Aussage, und eine Rangfolge ohne ihren Grund wäre im geteilten Link nicht nachvollziehbar.",
@@ -1587,7 +1671,7 @@ function coverageBlock(rep){
   if(!h) return '';
   return `<div class="covwrap"><div class="covhead">${tr('Disclosure scope per filing indicators:')}
     ${tr('<b>{0}</b> of <b>{1}</b> declared templates disclosed', reported, keys.length)}${
-    conflict?` · <b>${conflict}</b> widersprüchlich (unten)`:''}</div>${h}</div>`;
+    conflict?` · ${tr('<b>{0}</b> contradictory (below)', conflict)}`:''}</div>${h}</div>`;
 }
 /* ================= Überblick (#47, R2) ====================================
    Der Report begann bisher mit 136 gleichrangigen Tabellen in Codereihenfolge
@@ -2110,13 +2194,7 @@ function renderTimeseries(rep){
   ts+='</tbody></table>';
   if(anyBreak){
     const at=series.map((s,i)=>brk[i]?`${series[i-1].refPeriod} → ${s.refPeriod} (RF ${series[i-1].framework} → ${s.framework})`:null).filter(Boolean);
-    ts+=`<div class="caveat">⇄ Die Meldetaxonomie wechselt in dieser Reihe: ${esc(at.join(', '))}.
-      Die gestrichelte Senkrechte markiert die Stelle; die Trendlinie ist dort ebenfalls
-      gestrichelt — sie sagt „über eine Versionsgrenze hinweg", nicht „unvergleichbar".
-      Der Viewer verbindet Zellen über die Koordinate, nicht über den Datenpunkt: Werte werden
-      also weiter gefunden, auch wo die Taxonomie sie umgebunden hat. <b>Welche</b> Zellen das
-      betrifft, sagt das ⇄ an der Kennzahl — über die übrigen wird keine Aussage getroffen,
-      weil die Brücke nur beobachtete Zellen kennt.</div>`;
+    ts+=`<div class="caveat">${tr('⇄ The filing taxonomy changes within this series: {0}. The dashed vertical marks the spot; the trend line is dashed there too — it says “across a version boundary”, not “incomparable”. The viewer joins cells over the coordinate, not over the data point: values are therefore still found, even where the taxonomy rebound them. <b>Which</b> cells are affected is stated by the ⇄ at the metric — about the rest no claim is made, because the bridge only knows observed cells.', esc(at.join(', ')))}</div>`;
   }
   ts+='</section>';
   if(any) host.innerHTML=ts;
@@ -2309,7 +2387,7 @@ function percentileMap(rows,colId){
 function pctBadge(info){
   if(!info) return '';
   const p=Math.round(info.p);
-  return `<span class="pctb" title="${p}. Perzentil der Peer-Gruppe (${info.n} Reports: gleiche Größenklasse, Konsolidierung, Stichtag)">`
+  return `<span class="pctb" title="${esc(tr('{0}th percentile of the peer group ({1} reports: same size class, consolidation, reference date)', p, info.n))}">`
        + `<span class="pctf" style="width:${Math.max(2,Math.min(100,info.p))}%"></span><i>P${p}</i></span>`;
 }
 
@@ -2406,7 +2484,7 @@ function fenceOutliers(rows,colId){
 }
 function fenceBadge(dir,label){
   if(!dir) return '';
-  return `<span class="fb" title="Der Wert in der sortierten Spalte „${label}" liegt ausserhalb der Tukey-Zäune seiner Peer-Gruppe (Q1−1,5·IQR bis Q3+1,5·IQR, ab 5 Reports). Das beschreibt die Lage in der Verteilung — es sagt nichts darüber, ob die Meldung richtig ist.">◇ Randwert ${esc(dir)}</span>`;
+  return `<span class="fb" title="${esc(tr('The value in the sorted column “{0}” lies outside the Tukey fences of its peer group (Q1−1.5·IQR to Q3+1.5·IQR, from 5 reports). That describes the position within the distribution — it says nothing about whether the filing is correct.', label))}">${tr('◇ outlier {0}', esc(dir))}</span>`;
 }
 
 /* ---- Plausibilitaets-Marker (#48) ---------------------------------------
@@ -2485,17 +2563,12 @@ function gateNote(prof, out, total){
   if(!prof.gate.length) return '';
   const [lo,hi]=prof.gate[0].plausible;
   const q=total?(out.length/total*100):0;
-  let h=`<div class="caveat gate">⊘ Plausibilitätsfilter: <b>${out.length}</b> von
-    ${total} Reports ausgeschlossen (${esc(nf(q,1))}${NBSP}%). Ausgeschlossen wird,
-    wessen Vergütung pro Kopf in <i>einer</i> Funktionsstufe ausserhalb von
-    ${esc(nf(lo,0))}–${esc(nf(hi,0))}${NBSP}EUR liegt: das ist keine Gehaltsfrage
-    mehr, sondern eine Einheitenfrage. Derselbe Korridor prüft den Bestand
-    (<code>check_plausibility.py</code>) — hier filtert er die Liste.`;
+  let h=`<div class="caveat gate">${tr('⊘ Plausibility filter: <b>{0}</b> of {1} reports excluded ({2}{3}%). Excluded is whoever\u2019s remuneration per head in <i>one</i> function level lies outside {4}–{5}{3}EUR: that is no longer a question of pay but a question of units. The same corridor checks the holdings (<code>check_plausibility.py</code>) — here it filters the list.', out.length, total, esc(nf(q,1)), NBSP, esc(nf(lo,0)), esc(nf(hi,0)))}`;
   if(out.length){
     const seen=new Map();
     for(const r of out) if(!seen.has(r.lei)) seen.set(r.lei, r);
     const names=[...seen.values()].sort((a,b)=>a.name.localeCompare(b.name,LOCALE()));
-    h+=`<details class="gatelist"><summary>${names.length} Institut(e) ansehen</summary>
+    h+=`<details class="gatelist"><summary>${tr('view {0} institution(s)', names.length)}</summary>
       <ul>${names.map(r=>{
         // Genannt wird der WEITEST entfernte Wert, nicht der erste in der
         // Reihenfolge des Tors: sonst stuende bei fast jedem Institut die
@@ -2580,8 +2653,9 @@ function barErlaubt(prof, row){
 function sizeBar(v, max){
   if(!(max>0) || v==null || !isFinite(v) || v<=0) return '';
   const pct=Math.max(1, Math.min(100, v/max*100));
-  return `<span class="szb" aria-hidden="true" title="${esc(nf(pct,0,1))}${NBSP}% des`
-       + ` ${tr('largest value of this column in the current selection')}">`
+  return `<span class="szb" aria-hidden="true" title="${esc(tr(
+         '{0}{1}% of the largest value of this column in the current selection',
+         esc(nf(pct,0,1)), NBSP))}">`
        + `<span class="szf" style="width:${pct}%"></span></span>`;
 }
 
@@ -2627,27 +2701,24 @@ function distributionRow(rows, prof){
                : cs.length ? `${tr('derived from {0}', [...new Set(cs.map(x=>x[0]))].join(', '))}`
                : prof.tpl;
     cards+=`<div class="dcard${c.id===bmSort.col?' on':''}" data-k="${esc(c.id)}" tabindex="0"
-      title="Verteilung über die ${d.n} angezeigten Reports. Die Achse ist an den Tukey-Zäunen abgeschnitten; was darüber hinausgeht, steht als Balken im Randstreifen — als Anzahl, nicht als Position. Klick sortiert die Liste nach dieser Spalte.">
+      title="${esc(tr('Distribution across the {0} reports shown. The axis is clipped at the Tukey fences; whatever lies beyond appears as a bar in the margin strip — as a count, not a position. Click sorts the list by this column.', d.n))}">
       <div class="dlab">${esc(mlabel(c))}</div>
       <div class="dnote">${esc(NOTE[c.kind]||'')}</div>${d.svg}
       <div class="dax"><span>${esc(fmtv(d.lo))}</span><span>${esc(fmtv(d.hi))}</span></div>
       <div class="dsum">n=${d.n} · Median ${esc(fmtv(d.med))} · Q1–Q3 ${esc(fmtv(d.q1))}–${esc(fmtv(d.q3))}${
-        tail?` · <b>${esc(tail)}</b> außerhalb`:''}</div>
-      <div class="dsrc">Quelle: EBA Pillar 3 Data Hub · ${esc(cell)} · ${esc(period)}</div></div>`;
+        tail?` · <b>${esc(tail)}</b> ${tr('outside')}`:''}</div>
+      <div class="dsrc">${tr('Source:')} EBA Pillar 3 Data Hub · ${esc(cell)} · ${esc(period)}</div></div>`;
   }
   if(!cards) return '';
   return `<div class="dgrid">${cards}</div>
-    <div class="caveat" style="border-left-color:var(--muted)">Die Liste unten <b>sortiert</b>, die Verteilung oben <b>ordnet ein</b>.
-    Ein Spitzenplatz kann ein Randwert sein — 370 % CET1 stehen in einer Rangliste ganz oben und in einer
-    Verteilung ganz außen. Beides ist derselbe Wert; nur das eine sieht aus wie „Bester". Zeilen, deren Wert
-    in der sortierten Spalte außerhalb der Zäune ihrer Peer-Gruppe liegt, sind mit ◇ markiert.</div>`;
+    <div class="caveat" style="border-left-color:var(--muted)">${tr('The list below <b>sorts</b>, the distribution above <b>places in context</b>. A top rank can be an outlier — 370 % CET1 stands at the very top of a ranking and at the very edge of a distribution. Both are the same value; only one of them looks like “the best”. Rows whose value in the sorted column lies outside the fences of its peer group are marked with ◇.')}</div>`;
 }
 async function renderBenchmark(){
   VIEW='benchmark'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
   if(!BM_LOADED){
     main.innerHTML='<div class="rhead"><h2>Benchmark</h2></div><div class="status">Lade Benchmark-Daten…</div>';
-    try{ await ensureBenchmark(); }catch(e){ main.innerHTML='<div class="status">Fehler: '+esc(e.message)+'</div>'; return; }
+    try{ await ensureBenchmark(); }catch(e){ main.innerHTML=`<div class="status">${tr('Error:')} ${esc(e.message)}</div>`; return; }
     if(VIEW!=='benchmark') return;   // navigated away while loading
   }
   const prof=bmProf();
@@ -2682,27 +2753,22 @@ async function renderBenchmark(){
   let h=`<div class="rhead"><h2>${tr('Benchmark')}</h2></div>
     <div class="bmbar"><label class="ctl">${tr('Profile')}: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
-      <label class="ctl" title="Blendet Reports aus, in denen die Plausibilitätsprüfung Werte weit ausserhalb ihrer Zellpopulation gefunden hat. Perzentile bleiben auf der vollen Menge gerechnet."><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> auffällige einklappen${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
-      <details class="ctl colsel"><summary title="Welche Kennzahlen die Tabelle zeigt. Die Auswahl steht im Link und im CSV-Export — ein geteilter Link zeigt sonst andere Spalten als die Ansicht, aus der er stammt.">Spalten <span class="cl">(${spalten.length}/${prof.cols.length})</span></summary>
+      <label class="ctl" title="${esc(tr('Hides reports in which the plausibility check found values far outside their cell population. Percentiles stay computed on the full set.'))}"><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> ${tr('collapse conspicuous')}${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
+      <details class="ctl colsel"><summary title="${esc(tr('Which metrics the table shows. The selection is part of the link and of the CSV export — otherwise a shared link shows different columns than the view it came from.'))}">${tr('Columns')} <span class="cl">(${spalten.length}/${prof.cols.length})</span></summary>
         <div class="colbox">${prof.cols.map(c=>{
           const an=spalten.some(x=>x.id===c.id);
           const fest=c.id===bmSort.col;
           return `<label${fest?(' class="fest" title="'+esc(tr('The list is sorted by this column — the order is half the statement, and a ranking without its reason would be impossible to follow in a shared link.'))+'"'):''}>
-            <input type="checkbox" data-col="${esc(c.id)}"${an?' checked':''}${fest?' disabled':''}> ${esc(c.label)}</label>`;
+            <input type="checkbox" data-col="${esc(c.id)}"${an?' checked':''}${fest?' disabled':''}> ${esc(mlabel(c))}</label>`;
         }).join('')}</div></details>
-      <button class="ctl" id="bmCsv" title="Die Tabelle in ihrem aktuellen Zustand als CSV. Caveats, Filter und die Ansichts-URL stehen als Kopfkommentar darin, Skalen- und Plausibilitätsbefunde als eigene Spalten — eine nackte Tabelle verlöre genau die Warnungen, die hier danebenstehen.">⭳ CSV</button>
-      <span class="meta" style="margin:0">Basis: Template ${esc(prof.tpl)}${bmUsesKm1(prof)?' + 61.00':''}${prof.cols.some(c=>c.kind==='eur')?' · Beträge in Mrd. EUR (EZB-Kurs)':''} · Sidebar-Filter aktiv · Klick auf Spalte sortiert</span></div>
+      <button class="ctl" id="bmCsv" title="${esc(tr('The table in its current state as CSV. Caveats, filters and the view URL are in the header comment, scale and plausibility findings as columns of their own — a bare table would lose exactly the warnings that stand next to it here.'))}">⭳ CSV</button>
+      <span class="meta" style="margin:0">${tr('Basis: template {0}', esc(prof.tpl))}${bmUsesKm1(prof)?' + 61.00':''}${prof.cols.some(c=>c.kind==='eur')?' · '+tr('Amounts in bn EUR (ECB rate)'):''} · ${tr('sidebar filters active · click on a column sorts')}</span></div>
     ${prof.note?`<div class="caveat">ⓘ ${esc(prof.note)}</div>`:''}
-    ${barMax.size?`<div class="bmlegend"><span class="k"></span> Balken = Anteil am
-      grössten Wert der Spalte in der aktuellen Auswahl, linear. Kein Werturteil —
-      und keiner bei strittiger Meldeeinheit oder Skalenbefund, dort wäre die Länge
-      eine Behauptung über Vergleichbarkeit, die nicht gilt.</div>`:''}
-    <div class="caveat">⚠ Vergleichbarkeits-Caveat: Rechnungslegung, Konsolidierungskreis (CON/IND),
-    nationale Optionen und Framework-Version (4.1/4.2) unterscheiden sich — Ranglisten sind indikativ,
-    keine Aufsichtsmetrik. Quelle: öffentliche Pillar-3-Meldungen (© EBA).</div>
+    ${barMax.size?`<div class="bmlegend"><span class="k"></span> ${tr('Bar = share of the largest value of the column in the current selection, linear. No value judgement — and none where the filed unit is disputed or a scale finding stands, where the length would be a claim about comparability that does not hold.')}</div>`:''}
+    <div class="caveat">${tr('⚠ Comparability caveat: accounting framework, scope of consolidation (CON/IND), national options and framework version (4.1/4.2) differ — rankings are indicative, not a supervisory metric. Source: public Pillar 3 disclosures (© EBA).')}</div>
     ${distributionRow(allRows, prof)}
     <table class="bmtable"><thead><tr>
-      <th data-k="name">Institut <span class="dir"></span></th><th data-k="date">Stichtag <span class="dir"></span></th>`;
+      <th data-k="name">${tr('Institution')} <span class="dir"></span></th><th data-k="date">${tr('Reference date')} <span class="dir"></span></th>`;
   // Spalten, deren Zelle zwischen den Frameworks umgebunden wurde (#26): der
   // Wert wird ueber die Koordinate weiter gefunden, aber die Rangliste mischt
   // dann Stichtage beiderseits eines Taxonomiewechsels.
@@ -2712,7 +2778,7 @@ async function renderBenchmark(){
      + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:'')
      + ` <span class="dir"></span></th>`;
   }
-  if(prof.trendRow) h+=`<th title="Verlauf über verfügbare Stichtage (${esc((prof.cols.find(x=>x.row===prof.trendRow)||{}).label||'')})">Trend</th>`;
+  if(prof.trendRow) h+=`<th title="${esc(tr('Course over the available reference dates ({0})', mlabel(prof.cols.find(x=>x.row===prof.trendRow)||{})||''))}">${tr('Trend')}</th>`;
   h+='</tr></thead><tbody>';
   for(const r of rows){
     // Skalenbefund markiert die Zeile ebenfalls: in einer Rangliste ABSOLUTER
@@ -2807,19 +2873,25 @@ async function renderBenchmark(){
  * aufraeumen muss. Ein Export, den man erst reparieren muss, wird nicht
  * benutzt.
  */
-const CSV_CAVEATS = [
- 'Quelle: oeffentliche Pillar-3-Offenlegungen aus dem EBA Pillar 3 Data Hub ((c) EBA).',
- 'Rechnungslegung, Konsolidierungskreis (CON/IND), nationale Optionen und',
- 'Framework-Version (4.1 vs 4.2) unterscheiden sich zwischen Instituten —',
- 'diese Tabelle ist indikativ und KEINE Aufsichtsmetrik.',
- 'RF 4.2 umfasst ausschliesslich den Stichtag 2026-03-31: jeder Vergleich',
- 'zwischen den Meldewerk-Versionen ist zugleich ein Zeitvergleich.',
- 'Spalte skalenbefund: die absoluten Betraege dieses Reports liegen um einen',
- 'Faktor daneben (Verhaeltniszahlen bleiben gueltig). Spalte plausibilitaet:',
- 'Werte ausserhalb der Verteilung ihrer Zellpopulation — kann eine korrekte',
- 'Besonderheit sein. Beides ist markiert, nicht korrigiert.',
- 'Fehlende Werte sind LEER und bedeuten "nicht offengelegt oder nicht',
- 'platzierbar" — nicht null.',
+/* Die SPALTENKOEPFE der Datei folgen der Sprache NICHT — die Caveats schon.
+   Ein Kopf ist eine Kennung, die in fremdem Code steht: wer
+   `df['scale_finding']` schreibt, darf nicht davon abhaengen, in welcher
+   Sprache der Viewer gerade stand, als die Datei entstand. Ein Caveat ist
+   dagegen an einen Leser gerichtet, und der liest die Sprache, die er
+   eingestellt hat. */
+const CSV_CAVEATS = () => [
+ tr('Source: public Pillar 3 disclosures from the EBA Pillar 3 Data Hub ((c) EBA).'),
+ tr('Accounting framework, scope of consolidation (CON/IND), national options and'),
+ tr('framework version (4.1 vs 4.2) differ between institutions —'),
+ tr('this table is indicative and NOT a supervisory metric.'),
+ tr('RF 4.2 covers the reference date 2026-03-31 only: every comparison'),
+ tr('between framework versions is at the same time a comparison over time.'),
+ tr('Column scale_finding: the absolute amounts of this report are off by a'),
+ tr('factor (ratios remain valid). Column plausibility: values outside the'),
+ tr('distribution of their cell population — can be a correct particularity.'),
+ tr('Both are marked, not corrected.'),
+ tr('Missing values are EMPTY and mean "not disclosed or not placeable" —'),
+ tr('not zero.'),
 ];
 
 function csvFeld(v){
@@ -2834,33 +2906,33 @@ function csvFeld(v){
 const csvZahl=v=>(v==null||!isFinite(v)) ? '' : String(Number(v.toPrecision(12)));
 function benchmarkCSV(rows, prof){
   const jetzt=new Date().toISOString().slice(0,19)+'Z';
-  const filter=[...shareParams().entries()].map(([k,v])=>k+'='+v).join(' · ')||'keine';
-  const k=['# EBA Pillar 3 Data Hub — Benchmark-Export',
-           '# erzeugt: '+jetzt,
-           '# Profil: '+prof.label+'  (Basis: Template '+prof.tpl+')',
-           '# Filter/Zustand: '+filter,
-           '# Sortierung: '+bmSort.col+(bmSort.dir<0?' absteigend':' aufsteigend'),
-           '# Zeilen: '+rows.length,
-           '# Ansicht: '+location.href,
+  const filter=[...shareParams().entries()].map(([k,v])=>k+'='+v).join(' · ')||tr('none');
+  const k=['# EBA Pillar 3 Data Hub — '+tr('benchmark export'),
+           '# '+tr('created:')+' '+jetzt,
+           '# '+tr('profile:')+' '+mlabel(prof)+'  ('+tr('basis: template')+' '+prof.tpl+')',
+           '# '+tr('filter/state:')+' '+filter,
+           '# '+tr('sorting:')+' '+bmSort.col+' '+(bmSort.dir<0?tr('descending'):tr('ascending')),
+           '# '+tr('rows:')+' '+rows.length,
+           '# '+tr('view:')+' '+location.href,
            '#'];
-  for(const z of CSV_CAVEATS) k.push('# '+z);
+  for(const z of CSV_CAVEATS()) k.push('# '+z);
   k.push('#');
   if(UA.has(prof.tpl)) k.push(
-    '# ACHTUNG: Template '+prof.tpl+' steht auf der Einheiten-Sperrliste —',
-    '# Institute melden dort nachweislich in verschiedenen Einheiten.',
-    '# Absolutbetraege sind institutsuebergreifend NICHT vergleichbar.','#');
+    '# '+tr('CAUTION: template {0} is on the unit blocklist —', prof.tpl),
+    '# '+tr('institutions demonstrably file there in different units.'),
+    '# '+tr('Absolute amounts are NOT comparable across institutions.'),'#');
 
   // `framework` gehoert in die Tabelle, nicht nur in den Caveat. Der Kopf warnt,
   // dass RF 4.1 und 4.2 nicht vergleichbar sind — ohne die Spalte kann niemand
   // danach handeln, und eine Warnung ohne Handhabe ist Dekoration.
-  const kopf=['institut','lei','land','groessenklasse','konsolidierung','stichtag',
+  const kopf=['institution','lei','country','size_class','consolidation','reference_date',
               'framework', ...sichtbareSpalten(prof).map(c=>c.id),
-              'skalenbefund','plausibilitaet'];
+              'scale_finding','plausibility'];
   const zeilen=[kopf.map(csvFeld).join(',')];
   for(const r of rows){
     const sc=r.q&&r.q.sc;
-    const skal=!sc?'':(sc.u+(sc.f?' '+sc.f:'')+(sc.t.length?' ('+sc.t.join(' ')+')':' (Report)'));
-    const q=r.q&&r.q.n?`${r.q.n} Befund(e)${r.q.t&&r.q.t.length?' in '+r.q.t.join(' '):''}`:'';
+    const skal=!sc?'':(sc.u+(sc.f?' '+sc.f:'')+(sc.t.length?' ('+sc.t.join(' ')+')':' ('+tr('report')+')'));
+    const q=r.q&&r.q.n?`${tr('{0} finding(s)', r.q.n)}${r.q.t&&r.q.t.length?' in '+r.q.t.join(' '):''}`:'';
     const rep=byKey(r.key);
     zeilen.push([r.name, r.lei, r.country, r.itype, r.scope, r.date,
                  rep?rep.framework:'',
@@ -2931,8 +3003,8 @@ async function renderCompare(){
     const mixedCur=new Set(per.map(p=>EUR?p.cur:curOf(p.rep,CMPTPL))).size>1;
     const ttl=TITLES.get(tcode)||'';
     let t=`<section><h3>${esc(CMPTPL)} — ${esc(ttl)}
-      ${unit>1?`<span class="scalenote">Beträge in ${unitLabel(unit)} ${EUR?'EUR':esc(curOf(per[0].rep,CMPTPL))}${anyFx?' · EZB-Kurs':''}</span>`:''}
-      ${mixedCur?'<span class="scalenote" style="color:#b26b00">⚠ verschiedene Währungen — EUR-Toggle empfohlen</span>':''}
+      ${unit>1?`<span class="scalenote">${tr('Amounts in')} ${unitLabel(unit)} ${EUR?'EUR':esc(curOf(per[0].rep,CMPTPL))}${anyFx?' · '+tr('ECB rate'):''}</span>`:''}
+      ${mixedCur?`<span class="scalenote" style="color:#b26b00">${tr('⚠ different currencies — the EUR toggle is recommended')}</span>`:''}
       </h3><table><thead><tr><th class="rh">Zelle</th><th class="rl"></th>`;
     per.forEach(p=>{ t+=`<th>${esc(bankName(p.rep.entityID).slice(0,24))}<br><span class="cl">${esc(p.rep.refPeriod)} · ${esc(curOf(p.rep,CMPTPL))}</span></th>`; });
     t+='</tr></thead><tbody>';
@@ -3136,8 +3208,8 @@ function sichtenZeichnen(){
   if(zaehler) zaehler.textContent = SICHTEN.length ? `(${SICHTEN.length})` : '';
   const jetzt=location.hash||'';
   box.innerHTML =
-    `<div class="sichtneu"><input id="sichtName" placeholder="Diese Ansicht merken als…"
-        maxlength="40"><button id="sichtAdd" title="Speichert den aktuellen Link unter diesem Namen">＋</button></div>`
+    `<div class="sichtneu"><input id="sichtName" placeholder="${esc(tr('Remember this view as…'))}"
+        maxlength="40"><button id="sichtAdd" title="${esc(tr('Saves the current link under this name'))}">＋</button></div>`
     + (SICHTEN.length
         ? SICHTEN.map(v=>`<div class="sichtzeile${v.h===jetzt?' aktiv':''}">
             <a href="${esc(v.h)}" data-go="${esc(v.n)}">${esc(v.n)}</a>
@@ -3187,7 +3259,8 @@ async function init(){
     REPORTS.sort((a,b)=>(bankName(a.entityID)+a.refPeriod).localeCompare(bankName(b.entityID)+b.refPeriod));
     TOTAL_GROUPS=groupReports(REPORTS).length;
     document.getElementById('hsub').textContent=
-      `${nf(TOTAL_GROUPS,0,0)} Institute · ${nf(idx.stats.reports,0,0)} Reports · ${nf(idx.stats.facts,0,0)} Fakten`;
+      tr('{0} institutions · {1} reports · {2} facts',
+         nf(TOTAL_GROUPS,0,0), nf(idx.stats.reports,0,0), nf(idx.stats.facts,0,0));
     initFilters(); wireList(); updateCmpBadge(); renderReportList(); route();
     // Labels NACH dem ersten Rendern nachziehen. Das ist reine Beschleunigung:
     // wer sofort eine Tabelle aufklappt, wartet ueber ensureLabels() ohnehin
