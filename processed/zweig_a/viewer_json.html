@@ -456,12 +456,19 @@ let EUR   = store.eur ?? false;           // EUR normalization
 let PINS  = new Set(store.pins||[]);      // report keys for compare
 let DARK  = store.dark ?? window.matchMedia('(prefers-color-scheme: dark)').matches;
 let CMPTPL = store.cmptpl || '61.00';
-/* Peer-Kontext an der Zelle (#23). AN per Default — anders als der
-   Benchmark-Schalter, denn hier ist die Einordnung der Zweck: „12,4 %" allein
-   ist eine Zahl, „12,4 % bei einem Peer-Median von 15,1 %" eine Aussage. Wer
-   den reinen Meldewert will, schaltet ihn ab; der Wert selbst ändert sich
-   dadurch nie. */
-let CTX = store.ctx ?? true;
+/* Peer-Kontext an der Zelle (#23). AUS per Default.
+
+   Die Einordnung ist der Zweck dieses Werkzeugs — „12,4 %" allein ist eine
+   Zahl, „12,4 % bei einem Peer-Median von 15,1 %" eine Aussage. Trotzdem
+   steht sie nicht mehr von Anfang an da: wer eine Meldung aufschlägt, will
+   zuerst die MELDUNG sehen. Eine Zusatzzeile unter jedem Wert legt sich über
+   genau das, was gemeldet wurde, und ein Leser, der den Unterschied zwischen
+   beiden noch nicht kennt, liest den Peer-Median als Teil der Meldung.
+
+   Der Schalter steht unverändert über der Tabelle, und die Wahl wird
+   gespeichert — wer den Kontext will, schaltet ihn einmal ein. Der gemeldete
+   Wert ändert sich in keiner der beiden Stellungen. */
+let CTX = store.ctx ?? false;
 /* Gespeicherte Sichten (#50 Punkt 5).
 
    Gespeichert wird der HASH, nicht ein zweites Zustandsformat. Das ist der
@@ -1386,7 +1393,7 @@ function wireList(){
     if(pin){ ev.preventDefault(); ev.stopPropagation(); togglePin(pin.dataset.k); return; }
     if(ev.target.closest('.dchip')) return;      // echter Link — der Browser navigiert
     const row=ev.target.closest('.report');
-    if(row) location.hash=row.dataset.h;
+    if(row) springZu(row.dataset.h);
   });
 }
 function initFilters(){
@@ -3100,7 +3107,20 @@ function hashRoute(){
 }
 function shareState(){
   const p=shareParams().toString();
-  const neu=hashRoute()+(p?'?'+p:'');
+  /* Der Parameterblock gehoert HINTER das '#', immer. Auf der Startseite gibt
+     es aber noch gar keinen Hash, und `hashRoute()` liefert dort den leeren
+     String — `replaceState` bekam dann '?c=Austria' und haengte das an die
+     Adresse als QUERYSTRING an, nicht als Hash. Der Filter stand damit an
+     einer Stelle, die niemand liest: `location.hash` blieb leer, also fand
+     `applyShared()` nichts, und `hashQuery()` hatte nichts mitzunehmen. Wer
+     auf der Startseite filterte und dann ein Institut anklickte, verlor die
+     Filterung — nicht, weil der Sprung sie wegwarf, sondern weil sie nie im
+     Hash stand.
+
+     Ein nacktes '#' ist dieselbe Route wie gar kein Hash: `route()` faellt in
+     beiden Faellen auf den ersten Report zurueck. */
+  const basis=hashRoute() || (p ? '#' : '');
+  const neu=basis+(p?'?'+p:'');
   if(neu!==(location.hash||'')) history.replaceState(null,'',location.pathname+location.search+neu);
 }
 /* Zustand aus dem Hash uebernehmen. Fehlende Parameter bleiben auf ihrer
@@ -3180,8 +3200,46 @@ document.getElementById('tabReports').onclick=()=>{
 // Beim Tabwechsel die Parameter mitnehmen — ein Filter, der beim Umschalten
 // verfaellt, macht den Vergleich zwischen den Sichten unmoeglich.
 const hashQuery=()=>{ const i=(location.hash||'').indexOf('?'); return i<0?'':location.hash.slice(i); };
+/* Ein Sprung INNERHALB der Anwendung. Die eine Stelle dafuer — benutzt vom
+   Zeilenklick in der Berichtsliste und vom delegierten Link-Handler unten. */
+function springZu(route){ location.hash = route + hashQuery(); }
 document.getElementById('tabBenchmark').onclick=()=>{ location.hash='#benchmark'+hashQuery(); };
 document.getElementById('tabCompare').onclick=()=>{ location.hash='#compare'+hashQuery(); };
+
+/* Dasselbe fuer JEDEN internen Sprung, und zwar an einer Stelle.
+ *
+ * Die Links auf einen Report (`#r/LEI/Stichtag/Scope`) werden an sechs
+ * Stellen gebaut — Seitenliste, Stichtagschips, aehnliche Institute,
+ * Verteilungsliste, Benchmark-Tabelle, Kennzahl-Herleitung — und keiner von
+ * ihnen trug die Parameter. Ein Klick setzte den Hash also auf die nackte
+ * Route, `applyShared()` fand keinen Parameter und setzte jeden Filter auf
+ * seine Vorgabe zurueck: wer nach Land filterte und dann ein Institut
+ * anklickte, sah das Institut und verlor die Filterung.
+ *
+ * Das Zuruecksetzen ist an sich richtig und bleibt: ein GETEILTER Link ohne
+ * Parameter soll die Vorgaben zeigen, nicht den Filter des Empfaengers. Falsch
+ * war, dass ein Sprung innerhalb der Anwendung wie ein fremder Link aussah.
+ *
+ * Deshalb ein einziger delegierter Handler statt sechs angehaengter
+ * `hashQuery()`: ein siebter Link, den jemand spaeter hinzufuegt, ist damit
+ * von selbst richtig — und die Parameter werden im Moment des KLICKS gelesen,
+ * nicht im Moment des Renderns, koennen also nicht veralten.
+ *
+ * Zwei Ausnahmen, beide absichtlich:
+ *   - `a[data-go]` sind gespeicherte Sichten. Sie tragen ihren eigenen
+ *     Zustand, und eine ohne Parameter bedeutet AUSDRUECKLICH "ohne Filter".
+ *   - ein href, der bereits ein '?' traegt, bringt seinen Zustand selbst mit.
+ */
+document.addEventListener('click', e=>{
+  const ziel = e.target instanceof Element ? e.target.closest('a[href^="#"]') : null;
+  if(!ziel || ziel.dataset.go!=null) return;
+  const route_ = ziel.getAttribute('href')||'';
+  if(!/^#(r\/|benchmark|compare)/.test(route_) || route_.includes('?')) return;
+  const q = hashQuery();
+  if(!q) return;
+  e.preventDefault();
+  springZu(route_);
+});
 window.addEventListener('hashchange',route);
 
 /* theme + language + keyboard */
