@@ -205,6 +205,46 @@ def pruefe():
             pg.goto(f"http://localhost:{PORT}/viewer_json.html",
                     wait_until="networkidle", timeout=120000)
 
+            # --- Sprachumschalter -------------------------------------
+            # Englisch ist Standard; Deutsch ist umschaltbar. Geprueft wird
+            # nicht nur die Beschriftung, sondern das ZAHLFORMAT: in de-DE ist
+            # '.' der Tausendertrenner, in en-GB der Dezimaltrenner. Die
+            # Ersetzung durch das schmale Leerzeichen, die im Deutschen richtig
+            # ist, machte auf Englisch aus `1,234.5` ein `1,234 5` — eine
+            # Beschriftungspruefung allein waere dafuer blind.
+            sprach = pg.evaluate("""async () => {
+              const lies = () => ({lang:document.documentElement.lang,
+                btn:document.getElementById('langBtn').textContent,
+                land:document.getElementById('fCountry').options[0].textContent,
+                zahl:nf(1234567.89,2,2), einheit:unitLabel(1e9)});
+              const a = lies();
+              document.getElementById('langBtn').click();
+              await new Promise(s=>setTimeout(s,600));
+              const d = lies();
+              document.getElementById('langBtn').click();
+              await new Promise(s=>setTimeout(s,600));
+              return {en:a, de:d, zurueck:lies()};
+            }""")
+            en, de = sprach["en"], sprach["de"]
+            print(f"  Sprache: Standard {en['lang']} ({en['zahl']} · {en['einheit']}) "
+                  f"· umgeschaltet {de['lang']} ({de['zahl']} · {de['einheit']})")
+            if en["lang"] != "en":
+                fehler.append("Englisch ist nicht die Standardsprache des Viewers")
+            if de["lang"] != "de":
+                fehler.append("der Sprachumschalter wechselt nicht nach Deutsch")
+            if en["zahl"] == de["zahl"]:
+                fehler.append("das Zahlformat folgt der Sprache nicht — "
+                              f"beide Male {en['zahl']}")
+            if "." not in en["zahl"]:
+                fehler.append(f"englisches Zahlformat ohne Dezimalpunkt: "
+                              f"{en['zahl']} — die Trennzeichen-Ersetzung aus "
+                              f"dem Deutschen greift faelschlich mit")
+            if en["einheit"] == de["einheit"]:
+                fehler.append("die Groesseneinheit folgt der Sprache nicht")
+            if sprach["zurueck"] != en:
+                fehler.append("Zurueckschalten stellt den Ausgangszustand "
+                              "nicht wieder her")
+
             geladen = pg.evaluate(
                 "() => performance.getEntriesByType('resource')"
                 ".map(r => r.name.split('/').pop())")

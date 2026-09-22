@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -384,21 +384,22 @@
 <body>
 <header>
   <h1>Pillar 3 Viewer</h1>
-  <span class="pill" id="hsub">lädt…</span>
+  <span class="pill" id="hsub" data-i18n>loading…</span>
   <nav class="tabs">
     <button id="tabReports" class="on">Reports</button>
     <button id="tabBenchmark">Benchmark</button>
-    <button id="tabCompare">Vergleich <span id="cmpN"></span></button>
+    <button id="tabCompare"><span data-i18n>Compare</span> <span id="cmpN"></span></button>
   </nav>
   <div class="hright">
     <!-- Gespeicherte Sichten (#50 Punkt 5). Gespeichert wird der Hash, also
          genau das, was auch ein geteilter Link traegt — eine Sicht ist damit
          immer auch weitergebbar. -->
     <details class="sichten" id="sichtMenu">
-      <summary title="Den aktuellen Zustand — Ansicht, Filter, Profil, Sortierung, Spalten, Auswahl — unter einem Namen merken. Gespeichert wird der teilbare Link, die Sicht laesst sich also auch kopieren.">Sichten <span id="sichtN" class="cl"></span></summary>
+      <summary data-i18n-title title="Remember the current state — view, filters, profile, sorting, columns, selection — under a name. What is stored is the shareable link, so a view can be copied as well."><span data-i18n>Views</span> <span id="sichtN" class="cl"></span></summary>
       <div class="sichtbox" id="sichtBox"></div>
     </details>
-    <button class="iconbtn" id="themeBtn" title="Dark Mode umschalten">◐</button>
+    <button class="iconbtn" id="langBtn" data-i18n-title title="Switch language">EN</button>
+    <button class="iconbtn" id="themeBtn" data-i18n-title title="Toggle dark mode">◐</button>
     <a class="hlink" href="../../index.html">About</a>
     <a class="hlink" href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md" title="Public data, research use — not affiliated with EBA/GLEIF">Disclaimer</a>
   </div>
@@ -406,23 +407,23 @@
 <div class="layout">
   <aside>
     <div class="filter">
-      <input id="reportFilter" placeholder="Suchen: Name, Kürzel (BBVA), Land… ( / )">
+      <input id="reportFilter" data-i18n-ph placeholder="Search: name, ticker (BBVA), country… ( / )">
       <div class="selrow">
-        <select id="fCountry"><option value="">Land: alle</option></select>
-        <select id="fItype"><option value="">Größenklasse: alle</option></select>
+        <select id="fCountry"><option value="" data-i18n>Country: all</option></select>
+        <select id="fItype"><option value="" data-i18n>Size class: all</option></select>
       </div>
       <div class="selrow">
-        <select id="fScope"><option value="">Scope: alle</option>
+        <select id="fScope"><option value="" data-i18n>Scope: all</option>
           <option value="CON">Consolidated</option><option value="IND">Individual</option></select>
-        <select id="fDate"><option value="">Stichtag: alle</option></select>
+        <select id="fDate"><option value="" data-i18n>Reference date: all</option></select>
       </div>
-      <label class="gsii"><input type="checkbox" id="fGsii"> nur G-SII-Modul-Melder</label>
+      <label class="gsii"><input type="checkbox" id="fGsii"> <span data-i18n>G-SII module filers only</span></label>
       <div class="fcount" id="fCount"></div>
     </div>
     <div id="reportList"></div>
   </aside>
   <main id="main">
-    <div class="status" id="loadStatus">Lade Daten…<div class="prog"><i id="progBar"></i></div></div>
+    <div class="status" id="loadStatus"><span data-i18n>Loading data…</span><div class="prog"><i id="progBar"></i></div></div>
   </main>
 </div>
 <footer class="disc">
@@ -430,15 +431,25 @@
   Public Pillar&nbsp;3 data © European Banking Authority; entity names © GLEIF; FX = ECB reference rates.
   Re-presented “as is” for scientific/educational use (fair use) — verify figures against the official EBA
   source. Not investment or legal advice. <a href="https://github.com/Tobias-Run/P3DH/blob/main/DISCLAIMER.md">Full disclaimer</a>.
-  <div class="colophon">Gestaltung inspiriert von <i>The Economist</i> — dem wir die Einsicht verdanken, dass
-  eine Grafik eine Meinung haben darf, solange sie ihre Quelle nennt. Mit der Publikation in keiner Weise
-  verbunden; Schriften und Farbwerte sind eigene, und das rote Rechteck haben wir ihnen gelassen.</div>
+  <div class="colophon">Design inspired by <i>The Economist</i> — to whom we owe the insight that a chart
+  may hold an opinion as long as it names its source. In no way affiliated with the publication; typefaces
+  and colour values are our own, and we left them the red rectangle.</div>
 </footer>
 
 <script>
 'use strict';
 /* ================= state & persistence ================= */
 const store = JSON.parse(localStorage.getItem('p3dh')||'{}');
+/* ---- Sprache -------------------------------------------------------------
+   Englisch ist der Standard: die Daten sind europaeisch, die Templatelabels
+   der EBA sind englisch, und das Publikum ist es auch. Deutsch bleibt
+   umschaltbar, weil die Befunde in diesem Projekt auf Deutsch entstanden sind
+   und die Nuance dort genauer sitzt.
+
+   Die Wahl wird gespeichert wie Theme und Skalierung. Sie steckt NICHT im
+   teilbaren Link: ein Link soll dieselben ZAHLEN zeigen, nicht dieselbe
+   Sprache erzwingen. */
+let LANG  = (store.lang==='de'||store.lang==='en') ? store.lang : 'en';
 let VIEW  = 'reports';
 let SCALE = store.scale ?? 'auto';        // 'auto' | 1 | 1e3 | 1e6 | 1e9
 let EUR   = store.eur ?? false;           // EUR normalization
@@ -464,7 +475,7 @@ let CTX = store.ctx ?? true;
 let SICHTEN = Array.isArray(store.sichten) ? store.sichten : [];
 const SICHT_MAX = 20;
 function persist(){ localStorage.setItem('p3dh', JSON.stringify({
-  scale:SCALE, eur:EUR, pins:[...PINS], dark:DARK, cmptpl:CMPTPL,
+  scale:SCALE, eur:EUR, pins:[...PINS], dark:DARK, cmptpl:CMPTPL, lang:LANG,
   sichten:SICHTEN,
   themes:(typeof OPENTHEMES!=='undefined'?[...OPENTHEMES]:undefined),
   bmp:(typeof BMP!=='undefined'?BMP:undefined)})); }
@@ -485,7 +496,63 @@ function sichtLoeschen(name, liste){
   return (liste||SICHTEN).filter(s => s.n !== name);
 }
 function applyTheme(){ document.documentElement.dataset.theme = DARK?'dark':'light'; }
+
+/* ---- Sprachtabelle -------------------------------------------------------
+   Der Schluessel ist die englische Zeichenkette selbst, nicht eine ID: so
+   steht im Quelltext, was der Nutzer sieht, und eine fehlende Uebersetzung
+   faellt auf Englisch zurueck statt auf einen Platzhalter. Ein `t()`, das
+   `missing.key` anzeigt, waere im Zweifel schlimmer als die Ausgangssprache.
+
+   Geprueft wird das mechanisch: `check_viewer_runtime.py` rendert die
+   Oberflaeche auf Englisch und sucht im DOM nach deutschen Umlauten und
+   Funktionswoertern. Eine vergessene Zeichenkette ist damit ein Befund und
+   keine Geschmacksfrage. */
+const DE = {
+  "loading…": "lädt…",
+  "Compare": "Vergleich",
+  "Views": "Sichten",
+  "Toggle dark mode": "Dark Mode umschalten",
+  "Remember the current state — view, filters, profile, sorting, columns, selection — under a name. What is stored is the shareable link, so a view can be copied as well.":
+    "Den aktuellen Zustand — Ansicht, Filter, Profil, Sortierung, Spalten, Auswahl — unter einem Namen merken. Gespeichert wird der teilbare Link, die Sicht lässt sich also auch kopieren.",
+  "Search: name, ticker (BBVA), country… ( / )": "Suchen: Name, Kürzel (BBVA), Land… ( / )",
+  "Country: all": "Land: alle",
+  "Size class: all": "Größenklasse: alle",
+  "Scope: all": "Scope: alle",
+  "Reference date: all": "Stichtag: alle",
+  "G-SII module filers only": "nur G-SII-Modul-Melder",
+  "Loading data…": "Lade Daten…",
+  "Language": "Sprache",
+  "Switch language": "Sprache umschalten",
+  "Amounts in": "Beträge in",
+  "ECB rate": "EZB-Kurs"
+};
+const t = s => (LANG==='de' && DE[s]) ? DE[s] : s;
+
+/* Die statische Oberflaeche traegt `data-i18n`; ihr Textinhalt bzw. Attribut
+   wird beim Sprachwechsel neu gesetzt. Der englische Text steht im HTML —
+   ohne Javascript liest man also die Standardsprache, nicht einen
+   Platzhalter. */
+function applyLang(){
+  document.documentElement.lang = LANG;
+  for(const el of document.querySelectorAll('[data-i18n]')){
+    const k = el.getAttribute('data-i18n-src') || el.textContent.trim();
+    if(!el.getAttribute('data-i18n-src')) el.setAttribute('data-i18n-src', k);
+    el.textContent = t(k);
+  }
+  for(const el of document.querySelectorAll('[data-i18n-ph]')){
+    const k = el.getAttribute('data-i18n-src') || el.getAttribute('placeholder');
+    if(!el.getAttribute('data-i18n-src')) el.setAttribute('data-i18n-src', k);
+    el.setAttribute('placeholder', t(k));
+  }
+  for(const el of document.querySelectorAll('[data-i18n-title]')){
+    const k = el.getAttribute('data-i18n-src') || el.getAttribute('title');
+    if(!el.getAttribute('data-i18n-src')) el.setAttribute('data-i18n-src', k);
+    el.setAttribute('title', t(k));
+  }
+}
 applyTheme();
+applyLang();
+langBtnLabel();
 
 let REPORTS=[], CB=new Map(), TITLES=new Map(), AXIS=new Map(), NAMES=new Map(), META=new Map(), FX=new Map(), activeKey=null;
 /* Kuratierte Themen (#47) — aus codebook.json, nicht hier gefuehrt. */
@@ -617,14 +684,21 @@ const NBSP=' ';
    Ein spaeterer Export (#50) braucht die Gegenrichtung: maschinenlesbar mit
    Punkt und ohne Trennzeichen. Deshalb steht die Sprache hier als Konstante
    und nicht verstreut. */
-const LOCALE='de-DE';
+const LOCALES={en:'en-GB', de:'de-DE'};
+const LOCALE=()=>LOCALES[LANG]||LOCALES.en;
+/* Die Trennzeichen-Ersetzung ist SPRACHABHAENGIG, und das ist keine Feinheit:
+   in de-DE ist '.' der Tausendertrenner und wird durch das schmale Leerzeichen
+   ersetzt. In en-GB ist '.' der DEZIMALTRENNER — dieselbe Ersetzung machte aus
+   `1,234.5` ein `1,234 5` und damit aus jeder Nachkommastelle Unsinn.
+   Englisch bekommt deshalb die Standardform; die Verwechslungsgefahr, wegen
+   der im Deutschen ersetzt wird, gibt es dort nicht. */
 function nf(v, min, max){
   const n=Number(v);
   if(!Number.isFinite(n)) return '';
   const lo=min==null?0:min;
-  return n.toLocaleString(LOCALE, {minimumFractionDigits:lo,
-                                   maximumFractionDigits:max==null?lo:max})
-          .split('.').join(NBSP);   // in de-DE ist '.' der Tausendertrenner
+  const s=n.toLocaleString(LOCALE(), {minimumFractionDigits:lo,
+                                      maximumFractionDigits:max==null?lo:max});
+  return LANG==='de' ? s.split('.').join(NBSP) : s;
 }
 function fmt(v){
   const n=Number(v);
@@ -633,7 +707,9 @@ function fmt(v){
 }
 const ZERO_RE=/^-?0([.,]0+)?$/;
 const zdash=s=>ZERO_RE.test(String(s).replace(/[\s  ]|%/g,''))?'–':s;
-const UNIT_LABEL={1:'',1e3:'Tsd.',1e6:'Mio.',1e9:'Mrd.'};
+const UNIT_LABELS={de:{1:'',1e3:'Tsd.',1e6:'Mio.',1e9:'Mrd.'},
+                   en:{1:'',1e3:'k',1e6:'m',1e9:'bn'}};
+const unitLabel=u=>(UNIT_LABELS[LANG]||UNIT_LABELS.en)[u]||'';
 function pickUnit(maxAbs){
   if(SCALE!=='auto') return SCALE;
   for(const u of [1e9,1e6,1e3]) if(maxAbs/u>=1) return u;
@@ -1167,7 +1243,7 @@ function renderTemplate(tid, cells, rep){
     const n=Math.abs(Number(c.val))*rate; if(n>maxAbs) maxAbs=n; }
   const unit=maxAbs>0?pickUnit(maxAbs):1;
   const conv=EUR&&cur==='EUR'&&curOf(rep,tid)!=='EUR';
-  const note=unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${esc(cur)}${conv?' · EZB-Kurs':''}</span>`
+  const note=unit>1?`<span class="scalenote">Beträge in ${unitLabel(unit)} ${esc(cur)}${conv?' · EZB-Kurs':''}</span>`
              :(conv?`<span class="scalenote">EUR · EZB-Kurs</span>`:'');
   if(!cellList.length) return '';   // leere Templates stehen im Coverage-Block, nicht als Sektion
   // Dimensionswaehler: diese Templates sind kein 2D-Gitter, sondern EIN Gitter
@@ -1392,7 +1468,10 @@ const outsideCorridor=(m,v)=>
 const metricBridge=m=>(m.cells||[]).map(c=>bridgeAt(c[0],c[1],c[2])).find(Boolean)||'';
 /* Beschriftung im Tabellenkopf: Einheit nur dort, wo sie nicht schon im Wert
    steckt — bei % und Verhaeltniszahlen druckt die Zelle sie selbst. */
-const metricHead=m=>m.label+((m.unit==='%')?'':' ('+m.unit+')');
+/* Kennzahlname in der aktiven Sprache. Die Registry fuehrt beides; `en` ist
+   dort seit #25 gepflegt und lag bis jetzt ungenutzt herum. */
+const mlabel=m=>(LANG==='en' ? (m.en||m.label) : m.label);
+const metricHead=m=>mlabel(m)+((m.unit==='%')?'':' ('+m.unit+')');
 
 /* Einmal berechnet, dann gehalten: die Einordnung haengt nur an BM_LOADED. */
 let OV_PCT=null;
@@ -1457,7 +1536,7 @@ function metricDetail(rep, id){
   if(!doc) return '';
   const mt=doc, v=metricValue(rep,doc);
   let h=`<div class="mdet"><button class="mclose" data-close="1" title="schließen">✕</button>
-    <h4>${esc(mt.label)}</h4>
+    <h4>${esc(mlabel(mt))}</h4>
     <p>${esc(doc.definition||'')}</p>`;
   if(doc.purpose) h+=`<div class="mdl">Wozu</div><p>${esc(doc.purpose)}</p>`;
 
@@ -1505,7 +1584,7 @@ function renderOverview(rep){
   const have=[], miss=[];
   for(const mt of OV_METRICS()){
     const v=metricValue(rep,mt);
-    if(v==null) miss.push(mt.label); else have.push({mt,v});
+    if(v==null) miss.push(mlabel(mt)); else have.push({mt,v});
   }
   let h='';
   if(have.length){
@@ -1515,7 +1594,7 @@ function renderOverview(rep){
       const bs=metricBridge(mt);
       h+=`<div class="ovcard${mt.id===OPENMETRIC?' on':''}" data-m="${esc(mt.id)}" tabindex="0"
         title="Klick: Definition, Zweck, Schwelle und Herleitung aus dem Meldetemplate">
-        <div class="ovlab">${esc(mt.label)}${
+        <div class="ovlab">${esc(mlabel(mt))}${
         bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</div>
         <div class="ovval">${esc(nf(v,metricDec(mt)))}<span class="ovu">${esc(mt.unit)}</span></div>
         ${p?pctBadge(p):''}</div>`;
@@ -1699,7 +1778,7 @@ async function renderReport(rep){
     let head='';
     if(mh.length){
       head=`<div class="mhits"><span class="mhl">Kennzahlen</span>${mh.map(m=>
-        `<button class="mchip${m.id===OPENSEARCH?' on':''}" data-ms="${esc(m.id)}">${esc(m.label)}</button>`).join('')}</div>`;
+        `<button class="mchip${m.id===OPENSEARCH?' on':''}" data-ms="${esc(m.id)}">${esc(mlabel(m))}</button>`).join('')}</div>`;
       if(OPENSEARCH && mh.some(m=>m.id===OPENSEARCH)) head+=metricDetail(rep, OPENSEARCH);
     }
     c.innerHTML=head+(h||'<div class="status">Keine Templates in diesem Report.</div>');
@@ -1810,7 +1889,7 @@ function renderTimeseries(rep){
     // Liegt die Zelle dieser Kennzahl selbst auf einem Rebound? Dann ist der
     // Bruch nicht nur zeitlich, sondern trifft genau diese Zahl.
     const bs=bridgeAt('61.00', m.row, '0010');
-    ts+=`<tr><td class="rl">${esc(m.label)}${m.kind==='eur'?' <span class="cl">EUR</span>':''}`
+    ts+=`<tr><td class="rl">${esc(mlabel(m))}${m.kind==='eur'?' <span class="cl">EUR</span>':''}`
       + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:'')+`</td>`;
     vals.forEach((v,i)=>{ const cls=(v==null?'empty':'num')+(brk[i]?' fwbreak':'');
       ts+= v==null?`<td class="${cls}"></td>`:
@@ -2201,7 +2280,7 @@ function gateNote(prof, out, total){
   if(out.length){
     const seen=new Map();
     for(const r of out) if(!seen.has(r.lei)) seen.set(r.lei, r);
-    const names=[...seen.values()].sort((a,b)=>a.name.localeCompare(b.name,LOCALE));
+    const names=[...seen.values()].sort((a,b)=>a.name.localeCompare(b.name,LOCALE()));
     h+=`<details class="gatelist"><summary>${names.length} Institut(e) ansehen</summary>
       <ul>${names.map(r=>{
         // Genannt wird der WEITEST entfernte Wert, nicht der erste in der
@@ -2214,7 +2293,7 @@ function gateNote(prof, out, total){
         // eine gemeldete Null und damit wie ein anderer Fall.
         const w=worst?r[worst.id]:null;
         return `<li><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
-          <span class="cl">${worst?esc(worst.label)+': '
+          <span class="cl">${worst?esc(mlabel(worst))+': '
                                    +esc(nf(w, Math.abs(w)<1000?2:0))
                                    +NBSP+'EUR':''}</span></li>`;
       }).join('')}</ul></details>`;
@@ -2335,7 +2414,7 @@ function distributionRow(rows, prof){
                : prof.tpl;
     cards+=`<div class="dcard${c.id===bmSort.col?' on':''}" data-k="${esc(c.id)}" tabindex="0"
       title="Verteilung über die ${d.n} angezeigten Reports. Die Achse ist an den Tukey-Zäunen abgeschnitten; was darüber hinausgeht, steht als Balken im Randstreifen — als Anzahl, nicht als Position. Klick sortiert die Liste nach dieser Spalte.">
-      <div class="dlab">${esc(c.label)}</div>
+      <div class="dlab">${esc(mlabel(c))}</div>
       <div class="dnote">${esc(NOTE[c.kind]||'')}</div>${d.svg}
       <div class="dax"><span>${esc(fmtv(d.lo))}</span><span>${esc(fmtv(d.hi))}</span></div>
       <div class="dsum">n=${d.n} · Median ${esc(fmtv(d.med))} · Q1–Q3 ${esc(fmtv(d.q1))}–${esc(fmtv(d.q3))}${
@@ -2638,7 +2717,7 @@ async function renderCompare(){
     const mixedCur=new Set(per.map(p=>EUR?p.cur:curOf(p.rep,CMPTPL))).size>1;
     const ttl=TITLES.get(tcode)||'';
     let t=`<section><h3>${esc(CMPTPL)} — ${esc(ttl)}
-      ${unit>1?`<span class="scalenote">Beträge in ${UNIT_LABEL[unit]} ${EUR?'EUR':esc(curOf(per[0].rep,CMPTPL))}${anyFx?' · EZB-Kurs':''}</span>`:''}
+      ${unit>1?`<span class="scalenote">Beträge in ${unitLabel(unit)} ${EUR?'EUR':esc(curOf(per[0].rep,CMPTPL))}${anyFx?' · EZB-Kurs':''}</span>`:''}
       ${mixedCur?'<span class="scalenote" style="color:#b26b00">⚠ verschiedene Währungen — EUR-Toggle empfohlen</span>':''}
       </h3><table><thead><tr><th class="rh">Zelle</th><th class="rl"></th>`;
     per.forEach(p=>{ t+=`<th>${esc(bankName(p.rep.entityID).slice(0,24))}<br><span class="cl">${esc(p.rep.refPeriod)} · ${esc(curOf(p.rep,CMPTPL))}</span></th>`; });
@@ -2813,8 +2892,24 @@ document.getElementById('tabBenchmark').onclick=()=>{ location.hash='#benchmark'
 document.getElementById('tabCompare').onclick=()=>{ location.hash='#compare'+hashQuery(); };
 window.addEventListener('hashchange',route);
 
-/* theme + keyboard */
+/* theme + language + keyboard */
 document.getElementById('themeBtn').onclick=()=>{ DARK=!DARK; applyTheme(); persist(); };
+
+/* Der Umschalter zeigt die Sprache, in die er wechselt — nicht die aktuelle.
+   Ein Knopf, der "EN" zeigt, waehrend die Oberflaeche englisch ist, laesst
+   offen, ob er den Zustand meldet oder eine Handlung anbietet. */
+function langBtnLabel(){
+  const b=document.getElementById('langBtn');
+  if(b) b.textContent = LANG==='en' ? 'DE' : 'EN';
+}
+document.getElementById('langBtn').onclick=()=>{
+  LANG = LANG==='en' ? 'de' : 'en';
+  applyLang(); langBtnLabel(); persist();
+  /* Neu zeichnen, nicht nur Beschriftungen tauschen: Zahlen, Einheiten und
+     Kennzahlnamen haengen alle an der Sprache. Ein halber Wechsel waere
+     schlimmer als keiner — er saehe aus wie ein Darstellungsfehler. */
+  if(typeof route==='function') route();
+};
 
 /* ===== Gespeicherte Sichten (#50 Punkt 5) ==================================
    Der Kasten wird bei jedem Oeffnen neu gebaut: der aktuelle Hash aendert sich
