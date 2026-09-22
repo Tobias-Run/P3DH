@@ -2247,13 +2247,55 @@ function entityReports(rep){
    fuehrt. Die gestrichelte Linie sagt "ueber eine Versionsgrenze hinweg",
    nicht "unvergleichbar" — welche Zellen wirklich umgebunden sind, sagt das
    ⇄ an der Kennzahl. */
+/* Mindestweite des Wertefensters, relativ zum Niveau der Serie. 0,12 heisst:
+   schwankt eine Serie um weniger als rund +/-6 % ihres Niveaus, wird sie flach
+   gezeichnet. Kleiner = nervoeser, groesser = ruhiger. Bewusst eine einzelne
+   Konstante, damit sich der Ruhe-Grad ohne Eingriff in die Geometrie
+   justieren laesst. */
+const MIN_REL_SPAN = 0.12;
+
 function sparkline(vals,w,h,breaks){
   w=w||86; h=h||20;
   const present=vals.filter(x=>x!=null);
   if(present.length<2) return '';
-  const min=Math.min(...present), max=Math.max(...present), span=(max-min)||1;
+  /* Die y-Achse darf NICHT allein auf min/max der Serie gespannt werden.
+     Sonst fuellt jede noch so kleine Schwankung die volle Hoehe, und der Chart
+     transportiert ueberhaupt keine Groessenordnung mehr: zwei Serien mit
+     voellig verschiedener Bewegung sehen gleich heftig aus.
+
+     Gemessen an BBVA ueber vier Stichtage: LCR bewegt sich um 1,7 % ihres
+     Niveaus (140,0 -> 139,5 -> 140,1 -> 141,9), Leverage um 11,3 % — also
+     rund sechsmal so viel. Gezeichnet wurden beide mit exakt 13,0 px, der
+     vollen nutzbaren Hoehe. Eine Rundungsdifferenz sah aus wie ein Einbruch.
+
+     Das Fenster bekommt deshalb eine Mindestweite relativ zum NIVEAU. Damit
+     wird die Auslenkung proportional zur relativen Aenderung, und die Funktion
+     braucht dafuer kein Wissen ueber die Einheit — sie greift fuer
+     Prozentpunkte wie fuer Mrd. EUR. Nach dem Fix: LCR 1,8 px, Leverage
+     10,8 px.
+
+     Echte Einbrueche bleiben deutlich: LCR 140 -> 100 ergibt eine Spanne von
+     48 und damit 10,8 px, also nahezu volle Hoehe. Serien, die um null
+     schwanken (Headroom TC-OCR in pp), sind unkritisch: dort ist die relative
+     Aenderung per Definition gross, (max-min)*1,2 dominiert.
+
+     Bewusst KEIN Nullpunkt-Anker. Der drueckte alle Ratio-Serien platt —
+     LCR ~140 gegen CET1 ~13 — und waere das andere Extrem.
+
+     `lo = mid - span/2` zentriert die Daten im Fenster. Das behebt einen
+     zweiten, unabhaengigen Fehler: bei einer konstanten Serie war max-min == 0,
+     der Fallback `|| 1` griff, (x-min)/span wurde 0 und die Linie lag auf
+     y = h-3 = 17 von 20, also am UNTEREN Rand. Das liest sich als "am
+     Tiefpunkt" und bedeutet "unveraendert". Sie gehoert in die Mitte.
+
+     `|| 1` faengt weiterhin den Grenzfall ab, in dem Spanne UND Niveau ~0
+     sind (konstante Nullserie). */
+  const min=Math.min(...present), max=Math.max(...present);
+  const mid=(min+max)/2;
+  const span=Math.max((max-min)*1.2, Math.abs(mid)*MIN_REL_SPAN)||1;
+  const lo=mid-span/2;
   const pts=vals.map((x,i)=> x==null?null:
-    [ (vals.length>1 ? i/(vals.length-1) : 0)*(w-6)+3, h-3-((x-min)/span)*(h-7) ]);
+    [ (vals.length>1 ? i/(vals.length-1) : 0)*(w-6)+3, h-3-((x-lo)/span)*(h-7) ]);
   // Je Verbindungsstueck entscheiden: durchgezogen oder gestrichelt. Ein
   // Punkt, dessen beide Nachbarn fehlen, haengt an keinem Stueck und waere
   // sonst unsichtbar — er bekommt einen eigenen Marker.

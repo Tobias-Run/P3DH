@@ -298,6 +298,120 @@ def pruefe():
                 ".map(r => r.name.split('/').pop())")
             print(f"  beim Start geladen: {', '.join(geladen)}")
 
+            # --- Sparkline: die Auslenkung muss die Groessenordnung tragen
+            # `sparkline()` spannte die y-Achse allein auf min/max der eigenen
+            # Serie. Damit fuellte JEDE Schwankung die volle Hoehe, und der
+            # Chart trug ueberhaupt keine Groessenordnung mehr: BBVA bewegte
+            # sich bei der LCR um 1,7 % ihres Niveaus und beim Leverage um
+            # 11,9 % — gezeichnet wurden beide mit exakt 13,0 px.
+            #
+            # Geprueft wird deshalb nicht die Formel, sondern was sie leisten
+            # soll: wer sich relativ WENIGER bewegt, darf nicht staerker
+            # ausgelenkt werden. Das haelt auch dann, wenn jemand spaeter
+            # MIN_REL_SPAN verstellt — nur eine Achse, die wieder allein auf
+            # die Serie gespannt wird, verletzt es.
+            spark = pg.evaluate("""async () => {
+              const REIHEN=[{row:'0050',kind:'pct',label:'CET1-Ratio'},
+                            {row:'0070',kind:'pct',label:'TotalCap'},
+                            {row:'0220',kind:'pct',label:'Leverage'},
+                            {row:'0320',kind:'pct',label:'LCR'},
+                            {row:'0350',kind:'pct',label:'NSFR'},
+                            {row:'0040',kind:'eur',label:'TREA'},
+                            {row:'0010',kind:'eur',label:'CET1'}];
+              const auslenkung = svg => {
+                const ys=[];
+                for(const m of svg.matchAll(/[ML]([\d.]+) ([\d.]+)/g)) ys.push(parseFloat(m[2]));
+                for(const m of svg.matchAll(/cy="([\d.]+)"/g))          ys.push(parseFloat(m[1]));
+                return ys.length ? Math.max(...ys)-Math.min(...ys) : null;
+              };
+              const punkte=[];
+              for(const rep of REPORTS.slice(0,400)){
+                const series=entityReports(rep);
+                if(series.length<3 || series[0].entityID!==rep.entityID) continue;
+                for(const m of REIHEN){
+                  const vals=series.map(s=>{
+                    const v=km1Value(s,m.row);
+                    if(v==null) return null;
+                    if(m.kind==='pct') return Math.abs(v)>10?null:v*100;
+                    const cur=curOf(s,'61.00');
+                    const fxr=cur==='EUR'?1:(FX.get(cur+'|'+s.refPeriod)||null);
+                    return fxr==null?null:v*fxr/1e9;
+                  });
+                  const da=vals.filter(x=>x!=null);
+                  if(da.length<2) continue;
+                  const mn=Math.min(...da), mx=Math.max(...da), mid=Math.abs((mn+mx)/2);
+                  if(!mid) continue;
+                  const px=auslenkung(sparkline(vals,null,null,null));
+                  if(px==null) continue;
+                  punkte.push({rel:(mx-mn)/mid*100, px,
+                               was:bankName(rep.entityID).slice(0,18)+' '+m.label});
+                }
+              }
+              // Eine konstante Serie: sie gehoert in die MITTE. Vorher war
+              // max-min == 0, der Fallback griff, und die Linie lag auf
+              // y = h-3 = 17 von 20 — am unteren Rand. Das liest sich als
+              // "am Tiefpunkt" und bedeutet "unveraendert".
+              const konst=sparkline([140,140,140,140],null,null,null);
+              const kys=[...konst.matchAll(/cy="([\d.]+)"/g)].map(m=>parseFloat(m[1]));
+              return {punkte, n:punkte.length, konst:kys.length?kys[0]:null};
+            }""")
+            if spark["n"] < 20:
+                print(f"  (Sparkline nicht prüfbar: nur {spark['n']} Reihen)")
+            else:
+                pkt = sorted(spark["punkte"], key=lambda p: p["rel"])
+                # Verletzung: eine relativ kleinere Bewegung wird staerker
+                # gezeichnet als eine groessere. Toleranz 0.3 px gegen
+                # Rundung im SVG.
+                schlimmster, verstoesse = None, 0
+                hoch = pkt[0]
+                for p in pkt:
+                    if p["px"] > hoch["px"] + 0.3:
+                        verstoesse += 1
+                        if not schlimmster or p["px"] - hoch["px"] > \
+                           schlimmster[1]["px"] - schlimmster[0]["px"]:
+                            schlimmster = (hoch, p)
+                    if p["px"] > hoch["px"]:
+                        hoch = p
+                # Monotonie allein GENUEGT NICHT, und das ist der Kern des
+                # gemeldeten Fehlers: wenn jede Serie dieselbe Auslenkung
+                # bekommt, ist nichts invertiert — und trotzdem traegt das
+                # Bild keine Groessenordnung. Der erste Anlauf dieses Waechters
+                # liess genau das durchgehen. Gefordert wird deshalb auch, dass
+                # die Auslenkung TRENNT: das ruhigste Zehntel muss deutlich
+                # flacher gezeichnet werden als das bewegteste.
+                zehntel = max(1, len(pkt) // 10)
+                def med(xs):
+                    s = sorted(x["px"] for x in xs)
+                    return s[len(s) // 2]
+                ruhig, bewegt = med(pkt[:zehntel]), med(pkt[-zehntel:])
+                print(f"  Sparkline-Skalierung: {spark['n']} Reihen · "
+                      f"{pkt[0]['rel']:.2f} % → {pkt[0]['px']:.1f} px, "
+                      f"{pkt[-1]['rel']:.1f} % → {pkt[-1]['px']:.1f} px · "
+                      f"ruhigstes Zehntel {ruhig:.1f} px gegen "
+                      f"bewegtestes {bewegt:.1f} px · "
+                      f"konstante Serie y={spark['konst']}")
+                if bewegt - ruhig < 3.0:
+                    fehler.append(
+                        f"die Auslenkung trennt nicht: das ruhigste Zehntel "
+                        f"({pkt[zehntel-1]['rel']:.2f} % und weniger) wird mit "
+                        f"{ruhig:.1f} px gezeichnet, das bewegteste "
+                        f"({pkt[-zehntel]['rel']:.1f} % und mehr) mit "
+                        f"{bewegt:.1f} px — eine Rundungsdifferenz sieht damit "
+                        f"aus wie ein Einbruch")
+                if verstoesse:
+                    a_, b_ = schlimmster
+                    fehler.append(
+                        f"die Auslenkung folgt der Groessenordnung nicht: "
+                        f"{verstoesse} Reihen werden staerker gezeichnet als "
+                        f"eine groessere Bewegung, am deutlichsten "
+                        f"{b_['was']} ({b_['rel']:.2f} %, {b_['px']:.1f} px) "
+                        f"gegen {a_['was']} ({a_['rel']:.2f} %, {a_['px']:.1f} px)")
+                if spark["konst"] is None or abs(spark["konst"] - 10.5) > 0.6:
+                    fehler.append(
+                        f"eine konstante Serie liegt auf y={spark['konst']} "
+                        f"statt in der Mitte (10,5) — das liest sich als "
+                        f"„am Tiefpunkt\" und bedeutet „unverändert\"")
+
             # --- Gepflegte Kurznamen: SUCHEN, nicht nur verdrahten ------
             # Der Fehler, den das hier gefunden hat: der Shard-Builder schrieb
             # die Aliase in den Index, der Viewer suchte sie — und dazwischen
