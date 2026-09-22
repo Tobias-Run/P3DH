@@ -186,8 +186,16 @@ class ProvenanceTest(unittest.TestCase):
         self.assertIn("colophon", self.src)
         colophon = re.search(r'<div class="colophon">(.*?)</div>', self.src, re.S).group(1)
         self.assertIn("The Economist", colophon)
-        self.assertIn("in keiner Weise", colophon,
-                      "Danksagung ohne Verbindungs-Ausschluss")
+        # Die Formulierung darf sich ändern, die Aussage nicht. Geprüft wird
+        # deshalb der Ausschluss in beiden Sprachen — als die Oberfläche auf
+        # Englisch umgestellt wurde, schlug dieser Test zu Recht an, weil er
+        # an der deutschen Wendung hing.
+        ausschluss = ("in keiner Weise", "in no way affiliated",
+                      "not affiliated")
+        self.assertTrue(
+            any(s.lower() in colophon.lower() for s in ausschluss),
+            "Danksagung ohne Verbindungs-Ausschluss — die Namensnennung ist "
+            "zulässig, eine suggerierte Verbindung nicht")
 
 
 if __name__ == "__main__":
