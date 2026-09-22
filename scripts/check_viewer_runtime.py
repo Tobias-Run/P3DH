@@ -664,10 +664,12 @@ def pruefe():
             fehler.append("nicht jeder Vorschlag trägt einen Sprunglink — "
                           "#27 verlangt ihn ausdrücklich")
         text = aehnlich.get("text") or ""
-        if "Länderüberlappung" not in text:
+        # Sprachtolerant: der Viewer startet auf Englisch, die Begründung
+        # steht dann in der Quellsprache.
+        if not any(s in text for s in ("Länderüberlappung", "country overlap")):
             fehler.append("die Vorschläge stehen ohne Begründung da — genau die "
                           "Black Box, die #27 ausschliesst")
-        if "keine Peer-Gruppe" not in text:
+        if not any(s in text for s in ("keine Peer-Gruppe", "not a peer group")):
             fehler.append("die Liste weist sich nicht als explorativ aus und "
                           "liest sich damit wie eine anerkannte Vergleichsgruppe")
 

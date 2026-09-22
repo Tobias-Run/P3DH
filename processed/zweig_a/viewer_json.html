@@ -562,6 +562,15 @@ const DE = {
   "Scale": "Skala",
   "Auto": "Auto",
   "Full": "Voll",
+  "files the G-SII disclosure module": "reicht das G-SII-Offenlegungsmodul ein",
+  "pinned for comparison": "für Vergleich angepinnt",
+  "{0} reference date": "{0} Stichtag",
+  "{0} reference dates": "{0} Stichtage",
+  "in EUR (ECB rate)": "in EUR (EZB-Kurs)",
+  "ECB rate": "EZB-Kurs",
+  "Peer context at the cell": "Peer-Kontext an der Zelle",
+  "Shows, under every comparable value, the median of its peer group (same size class, consolidation, reference date) and the institution\u2019s percentile within it. From 5 reports per group; not where the unit is disputed (#9) and not on multiply occupied coordinates (#52).":
+    "Zeigt unter jedem vergleichbaren Wert den Median seiner Peer-Gruppe (gleiche Größenklasse, Konsolidierung, Stichtag) und das Perzentil des Instituts darin. Ab 5 Reports je Gruppe; nicht bei strittiger Einheit (#9) und nicht bei mehrfach belegten Koordinaten (#52).",
 
   // --- Offenlegungszustaende („Fehlt ≠ Null", Arbeitsprinzip 3) ---
   "not disclosed": "nicht offengelegt",
@@ -594,6 +603,47 @@ const DE = {
     "Dieser Report meldet nicht durchgehend in einer Währung. Die zuerst genannte trägt die Mehrheit der Fakten; die abweichenden Templates rechnen mit ihrem eigenen Kurs (#55).",
   "{0} hits of {1}": "{0} Treffer von {1}",
   "{0} of {1} templates with data": "{0} von {1} Templates mit Daten",
+  "Dimension": "Dimension",
+  "close": "schließen",
+  "no label": "ohne Label",
+  "What for": "Wozu",
+  "Classification": "Einordnung",
+  "Statutory floor:": "Gesetzlicher Boden:",
+  "Derivation from the filing": "Herleitung aus der Meldung",
+  "Origin in the filing": "Herkunft in der Meldung",
+  "Result": "Ergebnis",
+  "Look up in the report:": "Im Report nachschlagen:",
+  "Click: definition, purpose, threshold and derivation from the filing template":
+    "Klick: Definition, Zweck, Schwelle und Herleitung aus dem Meldetemplate",
+  "Overview": "Überblick",
+  "No templates in this report.": "Keine Templates in diesem Report.",
+  "{0} of {1} templates declared in this block carry data":
+    "{0} von {1} in diesem Block deklarierten Templates tragen Daten",
+  "Values {0}. That can be a correct particularity.":
+    "Werte, {0}. Das kann eine korrekte Besonderheit sein.",
+  "△ Plausibility check: <b>{0}</b> finding(s) in {1} template(s)":
+    "△ Plausibilitätsprüfung: <b>{0}</b> Befund(e) in {1} Template(s)",
+  ", <b>{0}</b> of them from the comparison against the neighbouring reference date":
+    ", davon <b>{0}</b> aus dem Zeitvergleich gegen den Nachbarstichtag",
+  ", largest deviation {0} orders of magnitude": ", größte Abweichung {0} Größenordnungen",
+  "same group": "gleiche Gruppe",
+  "independent": "unabhängig",
+  "group unknown": "Gruppe unbekannt",
+  "country overlap": "Länderüberlappung",
+  "Measured against the country distribution of the exposure (CCyB1 <code>67.01.A</code>): the figure is the share that lies in the same countries for both houses. <b>This is not a peer group</b> — the percentiles above still rest on size class, consolidation and reference date. This list is exploratory.":
+    "Gemessen an der Länderverteilung des Exposures (CCyB1 <code>67.01.A</code>): der Wert ist der Anteil, der bei beiden Häusern in denselben Ländern liegt. <b>Das ist keine Peer-Gruppe</b> — die Perzentile oben beruhen weiter auf Größenklasse, Konsolidierung und Stichtag. Diese Liste ist explorativ.",
+  "Row": "Zeile",
+  "{0} values — one grid per value": "{0} Werte — je Wert ein eigenes Gitter",
+  "≟ {0} coordinates in this template are not unambiguously placed: the DPM keeps two different rows for each of them, and our codebook does not yet tell the filing versions apart (#54). Affected rows are marked.":
+    "≟ {0} Koordinaten in diesem Template sind nicht eindeutig platziert: das DPM führt dort je zwei verschiedene Zeilen, und unser Codebook unterscheidet die Meldeversionen noch nicht (#54). Betroffene Zeilen sind markiert.",
+  "≟ {0} coordinate in this template is not unambiguously placed: the DPM keeps two different rows for it, and our codebook does not yet tell the filing versions apart (#54). Affected rows are marked.":
+    "≟ {0} Koordinate in diesem Template ist nicht eindeutig platziert: das DPM führt dort zwei verschiedene Zeilen, und unser Codebook unterscheidet die Meldeversionen noch nicht (#54). Betroffene Zeilen sind markiert.",
+  "▲ {0} values in this template deviate from the population so strongly that we class them as conspicuous (#24). The reported value stays unchanged — the mark is a pointer, not a verdict on correctness.":
+    "▲ {0} Werte in diesem Template weichen so stark von der Population ab, dass wir sie als auffällig einstufen (#24). Der gemeldete Wert bleibt unverändert stehen — die Markierung ist ein Hinweis, kein Urteil über Richtigkeit.",
+  "▲ {0} value in this template deviates from the population so strongly that we class it as conspicuous (#24). The reported value stays unchanged — the mark is a pointer, not a verdict on correctness.":
+    "▲ {0} Wert in diesem Template weicht so stark von der Population ab, dass wir ihn als auffällig einstufen (#24). Der gemeldete Wert bleibt unverändert stehen — die Markierung ist ein Hinweis, kein Urteil über Richtigkeit.",
+  "In this template the reported unit is inconsistent as well (#9), so the deviation may be a question of units.":
+    "In diesem Template ist zusätzlich die gemeldete Einheit uneinheitlich (#9), die Abweichung kann also eine Einheitenfrage sein.",
 
   // --- Plausibilitaetsmarken (#17, #24, #36) ---
   "that lie outside the distribution of their cell population":
@@ -1220,20 +1270,20 @@ function renderReportList(){
     // erwartet, der nur den Namen kennt.
     const cur=g.reps.find(r=>repKey(r)===activeKey) || g.reps[g.reps.length-1];
     const active=repKey(cur)===activeKey;
-    const badges=(m.is_gsii==='true'?'<span class="badge gs" title="reicht das G-SII-Offenlegungsmodul ein">G-SII</span>':'')+
+    const badges=(m.is_gsii==='true'?`<span class="badge gs" title="${esc(tr('files the G-SII disclosure module'))}">G-SII</span>`:'')+
                  (m.institution_type?`<span class="badge it">${esc(shortItype(m.institution_type))}</span>`:'');
     const chips=g.reps.map(r=>{
       const k=repKey(r);
       return `<a class="dchip${k===activeKey?' on':''}${PINS.has(k)?' pinned':''}"
         href="#r/${g.lei}/${r.refPeriod}/${g.scope}"
         title="${esc(r.refPeriod)} · ${r.nt} Templates · ${esc(curLabel(r))} · Framework ${esc(r.framework)}${
-          PINS.has(k)?' · für Vergleich angepinnt':''}">${esc(r.refPeriod)}</a>`;
+          PINS.has(k)?' · '+tr('pinned for comparison'):''}">${esc(r.refPeriod)}</a>`;
     }).join('');
     h+=`<div class="report${active?' active':''}" data-h="#r/${g.lei}/${cur.refPeriod}/${g.scope}">
       <button class="pinbtn${PINS.has(repKey(cur))?' on':''}" data-k="${esc(repKey(cur))}"
         title="${esc(tr('Pin reference date {0} for comparison', cur.refPeriod))}">⊞</button>
       <div class="lei">${esc(g.name)}${badges}</div>
-      <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(g.scope))} · ${g.reps.length} Stichtag${g.reps.length>1?'e':''}</div>
+      <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(g.scope))} · ${tr(g.reps.length>1?'{0} reference dates':'{0} reference date', g.reps.length)}</div>
       <div class="dates">${chips}</div>
       ${active?`<div class="rdet">${cur.nt} Templates · ${esc(curLabel(cur))} · Framework ${esc(cur.framework)}</div>`:''}
       <div class="leicode">${esc(g.lei)}</div></div>`;
@@ -1303,8 +1353,8 @@ function controlsHTML(){
         <option value="1000">${unitLabel(1e3)}</option><option value="1000000">${unitLabel(1e6)}</option>
         <option value="1000000000">${unitLabel(1e9)}</option>
       </select></label>
-    <label class="ctl"><input type="checkbox" id="eurChk"> in EUR (EZB-Kurs)</label>
-    <label class="ctl" title="Zeigt unter jedem vergleichbaren Wert den Median seiner Peer-Gruppe (gleiche Größenklasse, Konsolidierung, Stichtag) und das Perzentil des Instituts darin. Ab 5 Reports je Gruppe; nicht bei strittiger Einheit (#9) und nicht bei mehrfach belegten Koordinaten (#52)."><input type="checkbox" id="ctxChk"${CTX?' checked':''}> Peer-Kontext an der Zelle</label>`;
+    <label class="ctl"><input type="checkbox" id="eurChk"> ${tr('in EUR (ECB rate)')}</label>
+    <label class="ctl" title="${esc(tr('Shows, under every comparable value, the median of its peer group (same size class, consolidation, reference date) and the institution\u2019s percentile within it. From 5 reports per group; not where the unit is disputed (#9) and not on multiply occupied coordinates (#52).'))}"><input type="checkbox" id="ctxChk"${CTX?' checked':''}> ${tr('Peer context at the cell')}</label>`;
 }
 function wireControls(redraw){
   const sel=document.getElementById('scaleSel');
@@ -1410,16 +1460,16 @@ function renderTemplate(tid, cells, rep){
     const n=Math.abs(Number(c.val))*rate; if(n>maxAbs) maxAbs=n; }
   const unit=maxAbs>0?pickUnit(maxAbs):1;
   const conv=EUR&&cur==='EUR'&&curOf(rep,tid)!=='EUR';
-  const note=unit>1?`<span class="scalenote">Beträge in ${unitLabel(unit)} ${esc(cur)}${conv?' · EZB-Kurs':''}</span>`
-             :(conv?`<span class="scalenote">EUR · EZB-Kurs</span>`:'');
+  const note=unit>1?`<span class="scalenote">${tr('Amounts in')} ${unitLabel(unit)} ${esc(cur)}${conv?' · '+tr('ECB rate'):''}</span>`
+             :(conv?`<span class="scalenote">EUR · ${tr('ECB rate')}</span>`:'');
   if(!cellList.length) return '';   // leere Templates stehen im Coverage-Block, nicht als Sektion
   // Dimensionswaehler: diese Templates sind kein 2D-Gitter, sondern EIN Gitter
   // je Dimensionswert. Ohne Auswahl saehe der Nutzer einen von vielen Werten,
   // ohne zu erfahren, dass es mehrere gibt.
-  const dimBar = dims.length ? `<div class="dimbar">Dimension:
+  const dimBar = dims.length ? `<div class="dimbar">${tr('Dimension')}:
     <select class="dimsel" data-tid="${esc(tid)}">${dims.map(d=>
       `<option value="${esc(d)}"${d===dimSel?' selected':''}>${esc(d)}</option>`).join('')}</select>
-    <span class="cl">${dims.length} Werte — je Wert ein eigenes Gitter</span></div>` : '';
+    <span class="cl">${tr('{0} values — one grid per value', dims.length)}</span></div>` : '';
   // Bei offener Achse ist die Reihenfolge unsere Wahl, nicht die des Modells —
   // das gehoert dazugesagt, sonst wirkt sie wie die Meldereihenfolge.
   const axisNote = axisMap
@@ -1427,20 +1477,19 @@ function renderTemplate(tid, cells, rep){
   // Sagen, bevor gelesen wird: in diesem Template ist die Platzierung an N
   // Koordinaten nicht eindeutig (#54).
   const nAmbig=AMBIG.has(tid)?Object.keys(AMBIG.get(tid)).length:0;
-  const ambigNote = nAmbig ? `<div class="dimbar"><span class="cl">≟ ${nAmbig} Koordinate${
-    nAmbig>1?'n':''} in diesem Template sind nicht eindeutig platziert: das DPM führt dort je
-    zwei verschiedene Zeilen, und unser Codebook unterscheidet die Meldeversionen noch nicht
-    (#54). Betroffene Zeilen sind markiert.</span></div>` : '';
+  const ambigNote = nAmbig ? `<div class="dimbar"><span class="cl">${tr(nAmbig>1
+    ? '≟ {0} coordinates in this template are not unambiguously placed: the DPM keeps two different rows for each of them, and our codebook does not yet tell the filing versions apart (#54). Affected rows are marked.'
+    : '≟ {0} coordinate in this template is not unambiguously placed: the DPM keeps two different rows for it, and our codebook does not yet tell the filing versions apart (#54). Affected rows are marked.',
+    nAmbig)}</span></div>` : '';
   // Sagen, bevor gelesen wird — wie bei den mehrdeutigen Koordinaten: in
   // diesem Template halten WIR N Werte fuer unplausibel. Ohne diese Zeile
   // waere die Markierung an der Zelle ein Symbol ohne Herkunft.
   const nFlag=Object.keys((rep.flags||{})[tid]||{}).length;
-  const flagNote = nFlag ? `<div class="dimbar"><span class="cl">▲ ${nFlag} Wert${
-    nFlag>1?'e in diesem Template weichen':' in diesem Template weicht'} so stark von der
-    Population ab, dass wir ${nFlag>1?'sie':'ihn'} als auffällig einstufen (#24). Der gemeldete
-    Wert bleibt unverändert stehen — die Markierung ist ein Hinweis, kein Urteil über
-    Richtigkeit.${UA.has(tid)?' In diesem Template ist zusätzlich die gemeldete Einheit uneinheitlich (#9), die Abweichung kann also eine Einheitenfrage sein.':''}</span></div>` : '';
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}${flagNote}<table><thead><tr><th class="rh">${axisMap?'Code':'Row'}</th><th class="rl"></th>`;
+  const flagNote = nFlag ? `<div class="dimbar"><span class="cl">${tr(nFlag>1
+    ? '▲ {0} values in this template deviate from the population so strongly that we class them as conspicuous (#24). The reported value stays unchanged — the mark is a pointer, not a verdict on correctness.'
+    : '▲ {0} value in this template deviates from the population so strongly that we class it as conspicuous (#24). The reported value stays unchanged — the mark is a pointer, not a verdict on correctness.',
+    nFlag)}${UA.has(tid)?' '+tr('In this template the reported unit is inconsistent as well (#9), so the deviation may be a question of units.'):''}</span></div>` : '';
+  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}${flagNote}<table><thead><tr><th class="rh">${axisMap?'Code':tr('Row')}</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   // Am Zeilenlabel ist die Mehrdeutigkeit am wichtigsten: dort steht EINE
@@ -1686,7 +1735,7 @@ function metricCellRow(rep, tid, r, c, role){
   return `<tr><td class="role">${esc(role)}</td>
     <td class="coord">${esc(tid)} · r${esc(r)} c${esc(c)}${
       bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</td>
-    <td>${esc(label)||'<span class="cl">ohne Label</span>'}</td>
+    <td>${esc(label)||`<span class="cl">${tr('no label')}</span>`}</td>
     <td class="rv">${shown}</td></tr>`;
 }
 /* Nachkommastellen nach Art der Groesse: eine Quote braucht eine, ein Betrag
@@ -1698,17 +1747,17 @@ function metricDetail(rep, id){
   const doc=METRICDOC.get(id);
   if(!doc) return '';
   const mt=doc, v=metricValue(rep,doc);
-  let h=`<div class="mdet"><button class="mclose" data-close="1" title="schließen">✕</button>
+  let h=`<div class="mdet"><button class="mclose" data-close="1" title="${esc(tr('close'))}">✕</button>
     <h4>${esc(mlabel(mt))}</h4>
     <p>${esc(doc.definition||'')}</p>`;
-  if(doc.purpose) h+=`<div class="mdl">Wozu</div><p>${esc(doc.purpose)}</p>`;
+  if(doc.purpose) h+=`<div class="mdl">${tr('What for')}</div><p>${esc(doc.purpose)}</p>`;
 
   // --- Schwelle: gesetzlicher Boden UND die eigene Anforderung ---
   const own = doc.own_req ? tplValue(rep, doc.own_req[0], doc.own_req[1], doc.own_req[2]) : null;
   if(doc.floor!=null || own!=null || doc.note){
-    h+='<div class="mdl">Einordnung</div>';
+    h+=`<div class="mdl">${tr('Classification')}</div>`;
     if(doc.floor!=null)
-      h+=`<p>Gesetzlicher Boden: <b>${esc(nf(doc.floor,1))}${NBSP}${esc(mt.unit)}</b>
+      h+=`<p>${tr('Statutory floor:')} <b>${esc(nf(doc.floor,1))}${NBSP}${esc(mt.unit)}</b>
         <span class="cl">— ${esc(doc.floor_src||'')}</span></p>`;
     if(own!=null)
       h+=`<p>${tr('<b>Binding for this institution</b> is the reported overall requirement:')}
@@ -1718,11 +1767,11 @@ function metricDetail(rep, id){
   }
 
   // --- Herleitung aus dem eigenen Meldetemplate ---
-  h+=`<div class="mdl">${doc.formula?'Herleitung aus der Meldung':'Herkunft in der Meldung'}</div>`;
+  h+=`<div class="mdl">${doc.formula?tr('Derivation from the filing'):tr('Origin in the filing')}</div>`;
   h+='<table><tbody>';
   for(const [tid,r,c,role] of (doc.cells||[])) h+=metricCellRow(rep,tid,r,c,role);
   if(doc.formula){
-    h+=`<tr class="res"><td class="role">Ergebnis</td><td class="coord"></td>
+    h+=`<tr class="res"><td class="role">${tr('Result')}</td><td class="coord"></td>
       <td>${esc(doc.formula)}</td>
       <td class="rv">${v==null?'–':esc(nf(v,metricDec(mt)))+NBSP+esc(mt.unit)}</td></tr>`;
   }
@@ -1733,7 +1782,7 @@ function metricDetail(rep, id){
       mt.unit==='Mrd EUR'?tr(', converted at the ECB reference rate and in billions'):''}.</p>`;
   const tids=[...new Set((doc.cells||[]).map(c=>c[0]))].filter(t=>rep.templates.has(t));
   if(tids.length)
-    h+=`<p class="mnote">Im Report nachschlagen: ${tids.map(t=>
+    h+=`<p class="mnote">${tr('Look up in the report:')} ${tids.map(t=>
       `<a href="#" data-goto="${esc(t)}">${esc(t)} — ${esc(TITLES.get(dpmCode(t))||'')}</a>`).join(' · ')}</p>`;
   return h+'</div>';
 }
@@ -1754,7 +1803,7 @@ function renderOverview(rep){
       const p=pm?(pm.get(mt.id)||new Map()).get(key):null;
       const bs=metricBridge(mt);
       h+=`<div class="ovcard${mt.id===OPENMETRIC?' on':''}" data-m="${esc(mt.id)}" tabindex="0"
-        title="Klick: Definition, Zweck, Schwelle und Herleitung aus dem Meldetemplate">
+        title="${esc(tr('Click: definition, purpose, threshold and derivation from the filing template'))}">
         <div class="ovlab">${esc(mlabel(mt))}${
         bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</div>
         <div class="ovval">${esc(nf(v,metricDec(mt)))}<span class="ovu">${esc(mt.unit)}</span></div>
@@ -1777,12 +1826,16 @@ function renderOverview(rep){
      ein Skalenfehler nach UNTEN zeigt und der Ausreissertest nur nach oben sieht. */
   if(q && q.sc) h+=scaleNote(q.sc);
   if(q && q.n)
-    h+=`<div class="ovq" title="Werte, ${befundHerkunft(q)}. Das kann eine korrekte Besonderheit sein.">△ Plausibilitätsprüfung: <b>${q.n}</b> Befund(e) in ${q.t?q.t.length:0} Template(s)${q.z?`, davon <b>${q.z}</b> aus dem Zeitvergleich gegen den Nachbarstichtag`:''}, größte Abweichung ${esc(q.d)} Größenordnungen${q.t&&q.t.length?` <span class="cl">· ${esc(q.t.slice(0,10).join(', '))}${q.t.length>10?' …':''}</span>`:''}</div>`;
+    h+=`<div class="ovq" title="${esc(tr('Values {0}. That can be a correct particularity.', befundHerkunft(q)))}">${
+      tr('△ Plausibility check: <b>{0}</b> finding(s) in {1} template(s)', q.n, q.t?q.t.length:0)}${
+      q.z?tr(', <b>{0}</b> of them from the comparison against the neighbouring reference date', q.z):''}${
+      tr(', largest deviation {0} orders of magnitude', esc(q.d))}${
+      q.t&&q.t.length?` <span class="cl">· ${esc(q.t.slice(0,10).join(', '))}${q.t.length>10?' …':''}</span>`:''}</div>`;
   h+=similarBlock(rep);
   if(!h){ host.innerHTML=''; return; }
   const note=pm?tr('Bar = percentile within the peer group (same size class, consolidation, reference date; from 5 reports)')
                :tr('Loading peer context…');
-  host.innerHTML=`<section><h3>Überblick <span class="scalenote">${esc(note)}</span></h3>${h}</section>`;
+  host.innerHTML=`<section><h3>${tr('Overview')} <span class="scalenote">${esc(note)}</span></h3>${h}</section>`;
 }
 
 /* ---- Aehnliche Institute (#13/#27) ---------------------------------------
@@ -1806,24 +1859,20 @@ function renderOverview(rep){
  *    0,9999). Das ist der beste Beleg, dass das Mass greift — und als Vorschlag
  *    trotzdem wertlos. Ohne die Marke laese ein Leser es als Entdeckung.
  */
-const BEZ={konzern:'gleiche Gruppe', unabhaengig:'unabhängig', unbekannt:'Gruppe unbekannt'};
+const BEZ=()=>({konzern:tr('same group'), unabhaengig:tr('independent'), unbekannt:tr('group unknown')});
 function similarBlock(rep){
   const s=rep.similar||[];
   if(!s.length) return '';
   const zeile=([eid,name,u,grund,bez])=>{
     const p=leiParts(eid);
     return `<li><a href="#r/${p.lei}/${rep.refPeriod}/${p.scope}">${esc(name||eid)}</a>
-      <span class="cl">${esc(nf(u*100,0))}${NBSP}% Länderüberlappung${
+      <span class="cl">${esc(nf(u*100,0))}${NBSP}% ${tr('country overlap')}${
         grund?' · '+esc(grund.split('|').join(', ')):''}${
-        bez&&BEZ[bez]?' · '+esc(BEZ[bez]):''}</span></li>`;
+        bez&&BEZ()[bez]?' · '+esc(BEZ()[bez]):''}</span></li>`;
   };
   return `<details class="simblock"><summary>${tr('Similar institutions by country profile')}
       <span class="cl">(${s.length})</span></summary>
-    <div class="ovmiss">Gemessen an der Länderverteilung des Exposures (CCyB1
-      <code>67.01.A</code>): der Wert ist der Anteil, der bei beiden Häusern in
-      denselben Ländern liegt. <b>Das ist keine Peer-Gruppe</b> — die Perzentile
-      oben beruhen weiter auf Größenklasse, Konsolidierung und Stichtag. Diese
-      Liste ist explorativ.</div>
+    <div class="ovmiss">${tr('Measured against the country distribution of the exposure (CCyB1 <code>67.01.A</code>): the figure is the share that lies in the same countries for both houses. <b>This is not a peer group</b> — the percentiles above still rest on size class, consolidation and reference date. This list is exploratory.')}</div>
     <ul class="gatelist">${s.map(zeile).join('')}</ul></details>`;
 }
 
@@ -1837,7 +1886,7 @@ const THEME_REST={id:'__rest', label:'Nicht zugeordnet'};
 function themeBar(withData, declared){
   if(!declared) return '';
   const pct=Math.max(2,Math.min(100, withData/declared*100));
-  return `<span class="pctb thbar" title="${withData} von ${declared} in diesem Block deklarierten Templates tragen Daten"><span class="pctf" style="width:${pct}%"></span></span>`;
+  return `<span class="pctb thbar" title="${esc(tr('{0} of {1} templates declared in this block carry data', withData, declared))}"><span class="pctf" style="width:${pct}%"></span></span>`;
 }
 
 async function renderReport(rep){
@@ -1943,7 +1992,7 @@ async function renderReport(rep){
         `<button class="mchip${m.id===OPENSEARCH?' on':''}" data-ms="${esc(m.id)}">${esc(mlabel(m))}</button>`).join('')}</div>`;
       if(OPENSEARCH && mh.some(m=>m.id===OPENSEARCH)) head+=metricDetail(rep, OPENSEARCH);
     }
-    c.innerHTML=head+(h||'<div class="status">Keine Templates in diesem Report.</div>');
+    c.innerHTML=head+(h||`<div class="status">${tr('No templates in this report.')}</div>`);
     if(f && !nHit) c.insertAdjacentHTML('afterbegin','<div class="status">'+esc(tr('No template matches the filter.'))+'</div>');
     // offene Blöcke jetzt füllen; der Rest wartet auf sein toggle-Ereignis
     c.querySelectorAll('details.theme[open]').forEach(d=>fillTheme(rep,d,(f?hits:all).get(d.dataset.t)||[]));
