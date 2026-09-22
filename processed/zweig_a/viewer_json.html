@@ -1767,6 +1767,12 @@ const metricBridge=m=>(m.cells||[]).map(c=>bridgeAt(c[0],c[1],c[2])).find(Boolea
 /* Kennzahlname in der aktiven Sprache. Die Registry fuehrt beides; `en` ist
    dort seit #25 gepflegt und lag bis jetzt ungenutzt herum. */
 const mlabel=m=>(LANG==='en' ? (m.en||m.label) : m.label);
+/* Erklaerungstexte einer Kennzahl oder eines Profils in der eingestellten
+   Sprache. Fallback ist AUSDRUECKLICH die deutsche Fassung und nicht der leere
+   String: eine fehlende Uebersetzung soll den Text nicht verschwinden lassen —
+   eine Definition auf Deutsch ist einem Leser mehr wert als gar keine, und der
+   Codebook-Test findet die Luecke ohnehin. */
+const mtext=(m,feld)=>(LANG==='en' ? (m[feld+'_en']||m[feld]||'') : (m[feld]||''));
 const metricHead=m=>mlabel(m)+((m.unit==='%')?'':' ('+m.unit+')');
 
 /* Einmal berechnet, dann gehalten: die Einordnung haengt nur an BM_LOADED. */
@@ -1833,8 +1839,8 @@ function metricDetail(rep, id){
   const mt=doc, v=metricValue(rep,doc);
   let h=`<div class="mdet"><button class="mclose" data-close="1" title="${esc(tr('close'))}">✕</button>
     <h4>${esc(mlabel(mt))}</h4>
-    <p>${esc(doc.definition||'')}</p>`;
-  if(doc.purpose) h+=`<div class="mdl">${tr('What for')}</div><p>${esc(doc.purpose)}</p>`;
+    <p>${esc(mtext(doc,'definition'))}</p>`;
+  if(mtext(doc,'purpose')) h+=`<div class="mdl">${tr('What for')}</div><p>${esc(mtext(doc,'purpose'))}</p>`;
 
   // --- Schwelle: gesetzlicher Boden UND die eigene Anforderung ---
   const own = doc.own_req ? tplValue(rep, doc.own_req[0], doc.own_req[1], doc.own_req[2]) : null;
@@ -1842,12 +1848,12 @@ function metricDetail(rep, id){
     h+=`<div class="mdl">${tr('Classification')}</div>`;
     if(doc.floor!=null)
       h+=`<p>${tr('Statutory floor:')} <b>${esc(nf(doc.floor,1))}${NBSP}${esc(mt.unit)}</b>
-        <span class="cl">— ${esc(doc.floor_src||'')}</span></p>`;
+        <span class="cl">— ${esc(mtext(doc,'floor_src'))}</span></p>`;
     if(own!=null)
       h+=`<p>${tr('<b>Binding for this institution</b> is the reported overall requirement:')}
         <b>${esc(nf(own*100,2))}${NBSP}%</b>
         <span class="cl">${tr('(KM1 r{0} — Pillar 2 add-on and combined buffer requirement included). It refers to exactly this ratio. The floor above applies to everyone alike and is practically never the binding limit.', esc(doc.own_req[1]))}</span></p>`;
-    if(doc.note) h+=`<p class="mnote">${doc.note.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')}</p>`;
+    if(mtext(doc,'note')) h+=`<p class="mnote">${mtext(doc,'note').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')}</p>`;
   }
 
   // --- Herleitung aus dem eigenen Meldetemplate ---
@@ -2763,7 +2769,7 @@ async function renderBenchmark(){
         }).join('')}</div></details>
       <button class="ctl" id="bmCsv" title="${esc(tr('The table in its current state as CSV. Caveats, filters and the view URL are in the header comment, scale and plausibility findings as columns of their own — a bare table would lose exactly the warnings that stand next to it here.'))}">⭳ CSV</button>
       <span class="meta" style="margin:0">${tr('Basis: template {0}', esc(prof.tpl))}${bmUsesKm1(prof)?' + 61.00':''}${prof.cols.some(c=>c.kind==='eur')?' · '+tr('Amounts in bn EUR (ECB rate)'):''} · ${tr('sidebar filters active · click on a column sorts')}</span></div>
-    ${prof.note?`<div class="caveat">ⓘ ${esc(prof.note)}</div>`:''}
+    ${mtext(prof,'note')?`<div class="caveat">ⓘ ${esc(mtext(prof,'note'))}</div>`:''}
     ${barMax.size?`<div class="bmlegend"><span class="k"></span> ${tr('Bar = share of the largest value of the column in the current selection, linear. No value judgement — and none where the filed unit is disputed or a scale finding stands, where the length would be a claim about comparability that does not hold.')}</div>`:''}
     <div class="caveat">${tr('⚠ Comparability caveat: accounting framework, scope of consolidation (CON/IND), national options and framework version (4.1/4.2) differ — rankings are indicative, not a supervisory metric. Source: public Pillar 3 disclosures (© EBA).')}</div>
     ${distributionRow(allRows, prof)}

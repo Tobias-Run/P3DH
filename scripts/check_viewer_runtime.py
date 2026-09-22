@@ -252,6 +252,47 @@ def pruefe():
                 fehler.append("Zurueckschalten stellt den Ausgangszustand "
                               "nicht wieder her")
 
+            # --- Kennzahl-Registry: erreicht die englische Fassung das DOM? --
+            # Die Registry ist deutsch geschrieben, die englischen Texte
+            # liegen in `TEXTE_EN` und werden erst in `metric_payload()`
+            # angehaengt. Zwischen dort und der Oberflaeche liegen drei
+            # Stellen, an denen sie still verschwinden koennen: ein nicht neu
+            # gebautes codebook.json, ein `mtext`, das den Zusatz nicht kennt,
+            # und ein Aufrufer, der weiter `doc.definition` liest. Alle drei
+            # sehen gleich aus — der Text steht da, nur auf Deutsch.
+            kz = pg.evaluate("""async () => {
+              const doc = METRICDOC.get('cet1');
+              if(!doc) return {keine:'cet1 nicht in der Registry'};
+              const lies = () => ({def: mtext(doc,'definition'),
+                                   note: mtext(doc,'note')});
+              const a = lies();
+              document.getElementById('langBtn').click();
+              await new Promise(s=>setTimeout(s,400));
+              const d = lies();
+              document.getElementById('langBtn').click();
+              await new Promise(s=>setTimeout(s,400));
+              const ohne = [...METRICDOC.values()]
+                .filter(m => !m.definition_en).map(m => m.id);
+              return {en:a, de:d, ohne, gesamt: METRICDOC.size};
+            }""")
+            if kz.get("keine"):
+                fehler.append(f"Kennzahl-Registry: {kz['keine']}")
+            else:
+                print(f"  Kennzahltexte: {kz['gesamt']} Kennzahlen, "
+                      f"{len(kz['ohne'])} ohne englische Definition · "
+                      f"en: {kz['en']['def'][:58]}…")
+                if kz["ohne"]:
+                    fehler.append("Kennzahlen ohne englische Definition: "
+                                  + ", ".join(kz["ohne"][:8]))
+                if kz["en"]["def"] == kz["de"]["def"]:
+                    fehler.append("die Kennzahl-Definition folgt der Sprache "
+                                  "nicht — beide Male dieselbe Fassung")
+                umlaute = [c for c in kz["en"]["def"] + kz["en"]["note"]
+                           if c in "äöüßÄÖÜ"]
+                if umlaute:
+                    fehler.append("die englische Kennzahlerklaerung traegt "
+                                  f"deutsche Umlaute: {''.join(sorted(set(umlaute)))}")
+
             geladen = pg.evaluate(
                 "() => performance.getEntriesByType('resource')"
                 ".map(r => r.name.split('/').pop())")

@@ -771,11 +771,411 @@ PROFILES = [
                  "rem_varfix_mb", "rem_varfix_ot", "rem_staff_ot"]},
 ]
 
+# ---------------------------------------------------------------------------
+# Englische Fassung der Erklaerungstexte (#65).
+#
+# Die Registry bleibt deutsch — hier sind die Befunde entstanden, und die
+# Nuance sitzt dort genauer. Englisch ist trotzdem die Standardsprache der
+# Oberflaeche, und eine englische Oberflaeche mit deutschen Kennzahl-
+# erklaerungen waere halb uebersetzt.
+#
+# Warum ein eigener Block und nicht `definition_en` neben jedem `definition`:
+# die Registry ist die Stelle, an der man nachliest, WAS eine Kennzahl ist und
+# aus welcher Zelle sie kommt. Zwei Sprachen ineinander verschraenkt machen
+# genau das unlesbar. Getrennt ist ausserdem pruefbar, ob eine Uebersetzung
+# fehlt — verschraenkt faellt ein fehlendes Feld niemandem auf.
+#
+# Zusammengefuehrt wird erst in `metric_payload()`, dem einzigen Weg der
+# Registry nach codebook.json.
+# ---------------------------------------------------------------------------
+
+_REM_NOTE_EN = (
+    "**No threshold, and no salary statistic.** “Identified staff” is a "
+    "supervisory subset (CRD Art. 92 (3)) — not the workforce. Part-time work "
+    "and arrivals and departures during the year are not adjusted for, so one "
+    "head is not necessarily a full year. And the scope of consolidation "
+    "(CON/IND) is part of what decides whose remuneration is counted at all."
+)
+_SH_NOTE_EN = (
+    "Composition, not a requirement: there is no threshold. The denominator is "
+    "the total risk exposure amount from KM1 r0040 of **the same filing** — "
+    "numerator and denominator therefore come from one report. The five "
+    "categories shown here do **not** add up to 100 %: OV1 carries further rows "
+    "(among them settlement, securitisation and large-exposure risks in the "
+    "trading book) that this profile does not show."
+)
+_SIZE_EN = "A magnitude, not a requirement: there is no threshold."
+_NPL_NO_THRESHOLD_EN = ("As with the NPL ratio there is **no supervisory "
+                        "threshold** — see “NPL ratio (CQ3)”.")
+_ESG_RATIO_EN = "Analysable as a ratio only — see “Share environmentally sustainable”."
+_VARFIX_SRC_EN = ("CRD Art. 94 (1) (g) — variable at most 100 % of the fixed "
+                  "component; up to 200 % by resolution of the general meeting")
+
+TEXTE_EN = {
+ "cet1": {
+  "definition": "Common Equity Tier 1 capital (CET1) in relation to the total "
+                "risk exposure amount (TREA).",
+  "purpose": "The central solvency metric: how much loss-absorbing capital of "
+             "the highest quality stands behind the weighted risks?",
+  "floor_src": "CRR Art. 92 (1) (a) — Pillar 1 minimum ratio",
+  "note": "The CET1 requirement binding for this institution is **not** in KM1 "
+          "as a single figure: it is composed of the Pillar 1 floor, the CET1 "
+          "share of the Pillar 2 add-on and the combined buffer requirement. "
+          "The reported overall requirement (r0190) refers to the **total "
+          "capital ratio** and belongs there — see “Total capital ratio” and "
+          "“Headroom TC−OCR”.",
+ },
+ "t1": {
+  "definition": "Tier 1 capital (CET1 + additional Tier 1) in relation to the "
+                "total risk exposure amount.",
+  "purpose": "Its distance from the CET1 ratio shows how strongly an "
+             "institution relies on AT1 instruments — capital that is liable "
+             "in going concern, but only after Common Equity Tier 1.",
+  "floor_src": "CRR Art. 92 (1) (b) — Pillar 1 minimum ratio",
+ },
+ "tc": {
+  "definition": "Total own funds (CET1 + AT1 + Tier 2) in relation to the total "
+                "risk exposure amount.",
+  "purpose": "The broadest capital metric — it also counts subordinated "
+             "instruments that become liable later than CET1.",
+  "floor_src": "CRR Art. 92 (1) (c) — Pillar 1 minimum ratio",
+ },
+ "ocr": {
+  "definition": "The overall requirement for the total capital ratio that "
+                "applies to this institution — Pillar 1 floor, Pillar 2 add-on "
+                "and combined buffer requirement together.",
+  "purpose": "The figure the total capital ratio really has to be measured "
+             "against. It is institution-specific — which is why comparing two "
+             "institutions against the Pillar 1 floor alone says little.",
+  "note": "This is a **requirement**, not a threshold in its own right. Rebound "
+          "to a new data point in RF 4.2 (#26).",
+ },
+ "hr": {
+  "definition": "Distance of the total capital ratio from this institution’s "
+                "overall requirement (OCR), in percentage points.",
+  "purpose": "The only capital figure in the overview that takes the "
+             "institution-specific requirement into account instead of the "
+             "statutory floor. It says how much room there really is.",
+  "floor_src": "no legal value — at 0 pp the institution’s own overall "
+               "requirement is met exactly",
+  "note": "Both magnitudes come from the same template and the same filing, so "
+          "they cancel cleanly. The overall requirement is rebound to a new "
+          "data point in RF 4.2 — comparisons across the version change with a "
+          "caveat (#26).",
+ },
+ "cet1_srep": {
+  "definition": "Share of Common Equity Tier 1 capital that remains available "
+                "after meeting the SREP own funds requirement.",
+  "purpose": "The headroom reported by the institution itself — a second, "
+             "independent view of the same thing as “Headroom TC−OCR”, only at "
+             "CET1 level and without the buffer requirement.",
+  "note": "A magnitude without a threshold of its own: the requirement it was "
+          "computed against is already inside the value.",
+ },
+ "lev": {
+  "definition": "Tier 1 capital (T1) in relation to the leverage ratio total "
+                "exposure measure — an **unweighted** reference base.",
+  "purpose": "A backstop against model risk: it ignores risk weighting and "
+             "therefore catches exactly the cases in which the weighted ratios "
+             "look too favourable.",
+  "floor_src": "CRR Art. 92 (1) (d) — Pillar 1 minimum ratio",
+ },
+ "lcr": {
+  "definition": "Liquidity coverage ratio: highly liquid assets in relation to "
+                "the net outflows of a 30-day stress scenario.",
+  "purpose": "Does the institution survive a month of acute liquidity stress "
+             "under its own steam?",
+  "floor_src": "Delegated Regulation (EU) 2015/61 — minimum ratio 100 %",
+ },
+ "nsfr": {
+  "definition": "Structural liquidity ratio: available stable funding in "
+                "relation to required stable funding, over a one-year horizon.",
+  "purpose": "The long-run counterpart to the LCR — does the maturity of the "
+             "funding match the maturity of the business?",
+  "floor_src": "CRR Art. 428b — minimum ratio 100 %",
+ },
+ "hqla": {
+  "definition": "Stock of high quality liquid assets — the numerator of the LCR.",
+  "purpose": "Separates the two routes to a high LCR: a large buffer is "
+             "something other than small expected outflows.",
+  "note": _SIZE_EN,
+ },
+ "outflow": {
+  "definition": "Total net cash outflows in the 30-day scenario — the "
+                "denominator of the LCR.",
+  "purpose": "The stress scenario in one figure: how much liquidity the "
+             "institution assumes will flow out within 30 days.",
+  "note": _SIZE_EN,
+ },
+ "asf": {
+  "definition": "Available stable funding — the numerator of the NSFR.",
+  "purpose": "The part of the funding that holds up over the long run. Together "
+             "with the NSFR it shows whether a good ratio comes from a lot of "
+             "stable funding or from little long-term business.",
+  "note": _SIZE_EN,
+ },
+ "trea": {
+  "definition": "Total risk exposure amount: the sum of all risk-weighted "
+                "exposure amounts, converted at the ECB reference rate.",
+  "purpose": "The denominator of the capital ratios and at the same time the "
+             "most common measure of size — it is what makes the other ratios "
+             "placeable in the first place.",
+  "note": _SIZE_EN,
+ },
+ "cet1_amt": {
+  "definition": "Common Equity Tier 1 capital as an amount — the numerator of "
+                "the CET1 ratio.",
+  "purpose": "Breaks the CET1 ratio into its two causes: a high ratio can come "
+             "from a lot of capital or from little weighted risk. Only with the "
+             "TREA beside it does it become readable.",
+  "note": _SIZE_EN,
+ },
+ "sh_credit": {
+  "definition": "Share of credit risk (excluding counterparty credit risk) in "
+                "the total risk exposure amount.",
+  "purpose": "The core of the business model in one figure: a classic lender is "
+             "high, a trading or custody house markedly lower.",
+  "note": _SH_NOTE_EN,
+ },
+ "sh_ccr": {
+  "definition": "Share of counterparty credit risk in the total risk exposure "
+                "amount.",
+  "purpose": "Measures the weight of the derivatives and securities financing "
+             "business — risk from the default of the counterparty, not of the "
+             "borrower.",
+  "note": _SH_NOTE_EN,
+ },
+ "sh_cva": {
+  "definition": "Share of credit valuation adjustment risk in the total risk "
+                "exposure amount.",
+  "purpose": "The valuation risk of the derivatives book. Small at almost every "
+             "institution — conspicuously high only where OTC derivatives play "
+             "a load-bearing role.",
+  "note": _SH_NOTE_EN,
+ },
+ "sh_market": {
+  "definition": "Share of market risk (position, foreign exchange and commodity "
+                "risk) in the total risk exposure amount.",
+  "purpose": "Shows how large the trading book is relative to the business as a "
+             "whole — the type of risk that moves fastest.",
+  "note": _SH_NOTE_EN,
+ },
+ "sh_op": {
+  "definition": "Share of operational risk in the total risk exposure amount.",
+  "purpose": "The share that comes not from credit or market positions but from "
+             "processes, systems and legal risk. At fee-heavy houses regularly "
+             "the second largest block.",
+  "note": _SH_NOTE_EN + " All filings in the holdings fall after the date of "
+          "application of CRR3, so operational risk is determined throughout "
+          "via the business indicator — this share is methodologically uniform "
+          "across institutions.",
+ },
+ "npl": {
+  "definition": "Share of non-performing loans and advances in the total stock, "
+                "from CQ3 row “Loans and advances”.",
+  "purpose": "The most direct view of the quality of the loan book — and the "
+             "metric that shows credit cycles earliest.",
+  "note": "**No supervisory threshold.** The 5 % often quoted come from the EBA "
+          "Guidelines on management of non-performing exposures "
+          "(EBA/GL/2018/06), where they trigger the obligation to have an NPE "
+          "strategy. That is a trigger, not a limit.",
+ },
+ "npl_hh": {
+  "definition": "NPL ratio in the loan book towards households.",
+  "purpose": "Separates consumer and residential mortgage lending from the "
+             "corporate book. The two sub-ratios move in different cycles; the "
+             "overall ratio hides that.",
+  "note": _NPL_NO_THRESHOLD_EN,
+ },
+ "npl_corp": {
+  "definition": "NPL ratio in the loan book towards non-financial corporations.",
+  "purpose": "The corporate book reacts earlier and more sharply to the economic "
+             "cycle than the retail book — a deterioration shows up here first.",
+  "note": _NPL_NO_THRESHOLD_EN,
+ },
+ "npe_amt": {
+  "definition": "Stock of non-performing loans and advances as an amount.",
+  "purpose": "Puts the ratio in proportion to size: 3 % at a small institution "
+             "is something other than 3 % at a large bank.",
+  "note": _SIZE_EN,
+ },
+ "pe_amt": {
+  "definition": "Stock of performing loans and advances as an amount.",
+  "purpose": "The denominator of the NPL ratio — and at the same time the "
+             "measure of how large the loan book is at all.",
+  "note": _SIZE_EN,
+ },
+ "forb_pe": {
+  "definition": "Share of loans that have been forborne and are (still) being "
+                "serviced, in the total stock — from CQ1 row “Loans and "
+                "advances”, against the same denominator as the NPL ratio.",
+  "purpose": "The stage **before** default. An institution with a low NPL ratio "
+             "and a high preceding stage carries a problem the established "
+             "metric does not yet show.",
+  "note": "**No threshold, and no value judgement.** Forbearance is an "
+          "instrument, not a mistake — it can prevent a default rather than "
+          "announce one. Only the relation to the NPL ratio is meaningful.",
+ },
+ "forb_npe": {
+  "definition": "Share of forborne loans that are already non-performing, in "
+                "the total stock.",
+  "purpose": "The counter-check to the performing preceding stage: here "
+             "forbearance no longer prevented the default.",
+  "note": "**No threshold.** The metric measures how often forbearance no "
+          "longer prevented a default — supervision requires no value for it.",
+ },
+ "npl_cov": {
+  "definition": "Impairments on non-performing loans in relation to the "
+                "non-performing stock — the classic coverage ratio, assembled "
+                "from CR1 and CQ3.",
+  "purpose": "How much of the non-performing stock has already been written "
+             "down. Low coverage at a high NPL ratio means: the loss is still "
+             "to come.",
+  "note": "Computed on the **amount**. The impairment is filed with an "
+          "inconsistent sign — 344 of 364 reports negative, 20 positive. A zero "
+          "is permitted there and is not an arithmetic error: one institution "
+          "in the holdings reports 0.8 m EUR of non-performing loans and **no** "
+          "impairment.",
+ },
+ "esg_green": {
+  "definition": "Share of environmentally sustainable exposures (climate change "
+                "mitigation) in the gross carrying amount of the "
+                "climate-relevant sectors.",
+  "purpose": "The only indicator in the holdings that is robustly comparable "
+             "for how far an institution has already aligned its loan book with "
+             "the EU taxonomy.",
+  "note": "Analysable as a ratio only — the absolute amounts in 41.00 have "
+          "inconsistent filed units.",
+ },
+ "esg_paris": {
+  "definition": "Share of exposures towards companies excluded from "
+                "Paris-aligned benchmarks.",
+  "purpose": "The counterpart to the green share: the side of the book under "
+             "the strongest transition pressure.",
+  "note": _ESG_RATIO_EN,
+ },
+ "esg_stage2": {
+  "definition": "Share of exposures in impairment stage 2 (significantly "
+                "increased credit risk) in the climate-relevant sectors.",
+  "purpose": "An early indicator: stage 2 does not yet mean default, but "
+             "markedly deteriorated — transition pressure shows here before it "
+             "reaches the NPE ratio.",
+  "note": _ESG_RATIO_EN,
+ },
+ "esg_npe": {
+  "definition": "Share of non-performing exposures in the climate-relevant "
+                "sectors.",
+  "purpose": "The defaults that have already occurred in exactly those sectors "
+             "for which the transition is a business risk — comparable with the "
+             "same institution’s general NPL ratio.",
+  "note": _ESG_RATIO_EN,
+ },
+ "rem_head_mb": {
+  "definition": "Total fixed remuneration of the management body (MB management "
+                "function) divided by the number of identified staff reported "
+                "there, converted at the ECB reference rate.",
+  "purpose": "The most publicly watched figure in the whole dataset — and one "
+             "EDAP does not aggregate: it only comes into being from the "
+             "population.",
+  "note": _REM_NOTE_EN,
+ },
+ "rem_head_sb": {
+  "definition": "Total fixed remuneration of the supervisory body (MB "
+                "supervisory function) per reported head.",
+  "purpose": "Supervisory board mandates are secondary offices — the order of "
+             "magnitude therefore lies systematically below the management body "
+             "and says something about the governance structure, not about "
+             "salaries.",
+  "note": _REM_NOTE_EN,
+ },
+ "rem_head_sm": {
+  "definition": "Total fixed remuneration of other senior management per "
+                "reported head.",
+  "purpose": "The level below the executive board — its distance from it shows "
+             "how steep a house’s remuneration pyramid is.",
+  "note": _REM_NOTE_EN,
+ },
+ "rem_head_ot": {
+  "definition": "Total fixed remuneration of other identified staff per "
+                "reported head.",
+  "purpose": "By far the largest group — what stands here is the breadth of the "
+             "risk-taker population, not the top of it.",
+  "note": _REM_NOTE_EN,
+ },
+ "rem_varfix_mb": {
+  "definition": "Total variable remuneration of the management body in relation "
+                "to the fixed component, in per cent.",
+  "purpose": "The part of remuneration that is capped by supervision — and "
+             "therefore the metric on which incentive structure and bonus "
+             "culture differ between houses and countries.",
+  "floor_src": _VARFIX_SRC_EN,
+  "note": "The cap applies per **person**, not to the group average formed "
+          "here: a ratio below 100 % does not rule out an individual breach, "
+          "and one above it is not without more a breach. " + _REM_NOTE_EN,
+ },
+ "rem_varfix_ot": {
+  "definition": "Total variable remuneration of other identified staff in "
+                "relation to the fixed component, in per cent.",
+  "purpose": "Shows whether a house’s bonus orientation is confined to the top "
+             "or covers the whole risk-taker population.",
+  "floor_src": _VARFIX_SRC_EN,
+  "note": "Cap per person, not for the group average. " + _REM_NOTE_EN,
+ },
+ "rem_staff_ot": {
+  "definition": "Number of other identified staff, as reported.",
+  "purpose": "The reference measure for the remuneration columns — and a "
+             "statement in itself: how widely a house draws the circle of risk "
+             "takers is a matter of judgement.",
+  "note": _SIZE_EN + " " + _REM_NOTE_EN,
+ },
+}
+
+PROFIL_NOTIZEN_EN = {
+ "kette": "performing → forborne → non-performing. Each stage sits in a "
+          "different template (CQ3, CQ1, CR1); EDAP delivers them in separate "
+          "files that are never brought together. Full analysis: "
+          "processed/credit_chain.csv.",
+ "esg": "Ratios only: the absolute amounts in 41.00 have inconsistent filed "
+        "units.",
+ "verg": "Remuneration per head, not per person: “identified staff” is a "
+         "supervisory subset, part-time work and mid-year changes are not "
+         "adjusted for, and the scope of consolidation is part of what decides "
+         "who counts. A comparison of two houses is therefore a comparison of "
+         "two filings — not a salary statistic.",
+}
+
 METRIC_IDS = [m["id"] for m in METRICS]
 OVERVIEW_IDS = [m["id"] for m in METRICS if m.get("ov")]
 
 
+_TEXTFELDER = ("definition", "purpose", "note", "floor_src")
+
+
 def metric_payload():
     """Form für codebook.json: Kennzahlen + Profile. Ohne Rechen-Code — die
-    Rechenvorschrift steht deklarativ in `op`."""
-    return {"metrics": METRICS, "profiles": PROFILES}
+    Rechenvorschrift steht deklarativ in `op`.
+
+    Hier und nur hier werden die englischen Erklärungstexte angehängt, als
+    `definition_en`, `purpose_en`, `note_en`, `floor_src_en`. Der Viewer wählt
+    daraus nach eingestellter Sprache und fällt auf die deutsche Fassung
+    zurück, wenn eine fehlt — sichtbarer Text ist besser als eine Lücke.
+
+    Die Registry selbst bleibt unverändert: sie ist die Stelle, an der man
+    nachliest, was eine Kennzahl ist, und ein `dict`, das zwei Sprachen
+    ineinander verschränkt, liest sich nicht mehr.
+    """
+    metriken = []
+    for m in METRICS:
+        e = TEXTE_EN.get(m["id"], {})
+        kopie = dict(m)
+        for feld in _TEXTFELDER:
+            if e.get(feld):
+                kopie[feld + "_en"] = e[feld]
+        metriken.append(kopie)
+    profile = []
+    for pr in PROFILES:
+        kopie = dict(pr)
+        if PROFIL_NOTIZEN_EN.get(pr["id"]):
+            kopie["note_en"] = PROFIL_NOTIZEN_EN[pr["id"]]
+        profile.append(kopie)
+    return {"metrics": metriken, "profiles": profile}
