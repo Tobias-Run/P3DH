@@ -1870,6 +1870,144 @@ abweichendem Kopf. Der Vergleich **greift**, er findet nur keinen Widerspruch.
 Ein Test hält genau das fest — fände er nirgends eine Abweichung, wäre „kein
 Konflikt" kein Ergebnis, sondern ein Symptom.
 
+## Eingangs- und Zwischenartefakte
+
+Alles oben sind **Befunde**: eine Auswertung, die eine Frage beantwortet. Die
+sechs Dateien hier sind etwas anderes — Eingang, Zwischenstand oder Prüfung.
+Sie stehen bis hierher in keiner Dokumentation, und das war die gefährlichere
+Lücke: ein undokumentierter Befund fehlt, ein undokumentierter Eingang wird
+für einen Befund gehalten.
+
+Zwei von ihnen sind **nicht mehr in der Pipeline**. Das steht hier nicht im
+Kleingedruckten, sondern in der Überschrift: eine Datei, die im Repo liegt und
+nicht mehr gebaut wird, ist genau die Art Altbestand, die jemand später für
+aktuell hält.
+
+### `long_form_raw.csv` — der Bestand vor der Normalisierung
+
+2.295.224 Zeilen, 433 MB. Die geparsten XBRL-CSV-Fakten, **bevor** die
+Auflösung der offenen Achsen, die EUR-Normalisierung und die Skalenprüfung
+darauf gelaufen sind. Erzeugt von `scripts/xbrl_csv_parser.py`, verbraucht von
+`build_codebook.py`, `build_zweig_b.py`, `check_branch_parity.py` und
+`fetch_lei_names.py`.
+
+| Spalte | Inhalt |
+|---|---|
+| `entityID` | `rs:<LEI>.<CON\|IND>` — wie in der Meldung |
+| `refPeriod`, `framework_version` | Stichtag und Meldewerk (4.1 / 4.2) |
+| `template_id`, `template_reported` | Template und sein Filing-Indicator |
+| `datapoint_code`, `cell_row`, `cell_col` | Koordinate, wie geparst |
+| `open_axis_dims` | die offenen Achsen **roh**, noch nicht aufgelöst |
+| `fact_value` | der gemeldete Wert als Zeichenkette |
+| `baseCurrency`, `decimalsMonetary` | Meldewährung und -genauigkeit |
+| `source_file` | Quell-ZIP |
+
+**Wofür er da ist und wofür nicht.** Er ist die Stelle, an der man nachsieht,
+ob eine Abweichung im Parquet aus der Meldung kommt oder aus unserer
+Verarbeitung — die einzige Datei, in der beide Seiten dieser Frage stehen. Für
+eine Auswertung ist er der falsche Eingang: `fact_value` ist Text, die
+Beträge stehen in der Meldewährung, und die offenen Achsen sind nicht
+aufgelöst. Wer hier `SUM()` rechnet, summiert über Währungen hinweg und zählt
+Summenzeilen doppelt. Dafür gibt es `p3dh_long.parquet`.
+
+### `entity_meta.csv` — wer das Institut laut EDAP ist
+
+508 Institute, eine Zeile je LEI. Die Stammdaten aus dem **EDAP-Katalog**,
+nicht aus den Meldungen: `lei`, `name`, `country`, `entity_type` (CRD Credit
+Institution, Banking Group …), `institution_type` (die Grössenklasse: *Large
+highest EEA*, *Large subsidiaries*, *Other highest EEA* — bei einigen leer),
+`is_gsii` und `modules`, die eingereichten Offenlegungsmodule als
+`|`-getrennte Liste.
+
+Gebaut von `scripts/build_entity_meta.py`, in der Pipeline. Es ist die
+meistverbrauchte Referenztabelle des Projekts: Peer-Gruppen (Grössenklasse),
+der G-SII-Filter, die Institutsnamen im Viewer und in den Auswertungen hängen
+daran.
+
+**Die Spalte, die am leichtesten falsch gelesen wird**, ist
+`institution_type`. Sie ist keine Bilanzsumme und keine Aufsichtskategorie im
+Sinne der CRR, sondern die Einordnung des EDAP-Katalogs. Für die Schichtung der
+Peer-Gruppen ist sie genau richtig — sie ist für jedes Institut da, während
+eine Bilanzsumme es nicht ist. Als Aussage über die Grösse eines Hauses ist sie
+grob.
+
+### `fx_rates.csv` — EZB-Referenzkurse je Stichtag
+
+42 Zeilen: `currency`, `refdate`, `rate_to_eur`. **Eine Einheit der Währung =
+`rate_to_eur` Euro.** Gebaut von `scripts/fetch_fx_rates.py`, in der Pipeline,
+geprüft von `check_reference_data.py`.
+
+Klein, und trotzdem die Datei, an der die meisten absoluten Beträge im Projekt
+hängen: jede EUR-Normalisierung im Viewer und in den Auswertungen geht
+hierdurch. Drei Eigenschaften, die dazugehören:
+
+* **Inkrementell.** Es wird nur geholt, was fehlt. Ein bereits vorhandener Kurs
+  wird nie stillschweigend überschrieben — sonst änderte ein Neulauf
+  rückwirkend Zahlen in schon veröffentlichten Auswertungen.
+* **Zwei unabhängige Quellen.** frankfurter.app zuerst, das ECB Data Portal als
+  Rückfall. Ein Ausfall eines Anbieters hält die Pipeline nicht an.
+* **Eine Lücke bleibt eine Lücke.** Ein dauerhaft scheiternder Kurs wird *nicht*
+  als leere Zeile geschrieben, sondern weggelassen und gemeldet. Eine leere
+  Zeile sähe aus wie ein geholter Kurs und würde nie erneut versucht.
+
+### `consolidation_check.csv` — hält sich der Konsolidierungskreis? (#32 Punkt 4)
+
+16 Zeilen: für jedes Mutter-Tochter-Paar im Bestand, dessen beide Meldungen
+Länderexposure tragen, ein Vergleich. Gebaut von
+`scripts/check_consolidation.py`, in der Pipeline.
+
+Die Prüfung ist eine Aussage über **zwei verschiedene Meldungen**, und genau
+deshalb sieht sie sonst niemand: EDAP liefert je Institut ein Paket, und die
+Verbindung zwischen ihnen steht in keiner der beiden Dateien. Sie entsteht erst
+aus `lei_relations.csv` (GLEIF Level 2).
+
+| `urteil` | Zeilen | bedeutet |
+|---|---|---|
+| `stimmig` | 9 | Exposure der Tochter ≤ Gruppe, Länder der Tochter in der Gruppe enthalten |
+| `laender_fehlen` | 6 | die Gruppe weist Länder **nicht** aus, die die Tochter einzeln meldet |
+| `nicht_pruefbar` | 1 | eine der beiden Seiten trägt kein auswertbares Länderexposure |
+
+**`laender_fehlen` ist kein Meldefehler.** CCyB1 (`67.01.A`) verlangt die
+Aufgliederung nur dort, wo ein antizyklischer Puffer relevant ist; ein
+Konzernreport darf zusammenfassen, was eine Tochter einzeln aufschlüsselt. Bei
+der Bausparkasse Schwäbisch Hall gegen die DZ BANK sind es 60 von 61 Ländern,
+bei der DKB gegen die BayernLB 142 von 169. Die Spalte `mutter_x28` steht
+daneben, weil sie den Verdacht meistens erklärt: wo die Gruppe fast alles auf
+„sonstige Länder" bucht, fehlen die Einzelländer nicht, sie stecken dort.
+
+Die Zeile ist damit ein **Hinweis auf eine Grenze der Vergleichbarkeit**, nicht
+auf einen Fehler — und genau das ist der Grund, warum sie `laender_fehlen`
+heißt und nicht `fehler`.
+
+### `lei_names.csv` — GLEIF-Namen, ohne Abnehmer
+
+174 Zeilen: `lei`, `legal_name`, `jurisdiction`, geholt von
+`scripts/fetch_lei_names.py` aus dem öffentlichen GLEIF-Register.
+
+**Nicht in der Pipeline, und von keinem Code gelesen.** Das Skript sagt in
+seinem eigenen Docstring, die Datei sei „for the viewer to consume" — das
+stimmt seit `entity_meta.csv` nicht mehr: die Namen im Viewer kommen aus dem
+EDAP-Katalog, und der deckt alle 508 Institute ab statt 174.
+
+Sie bleibt trotzdem liegen, aus einem Grund: sie ist die **unabhängige Quelle**
+für den Namen eines Instituts. EDAP und GLEIF sind zwei Register, und wo sie
+sich widersprechen, ist das eine Beobachtung. `README.md` und `DISCLAIMER.md`
+führen sie deshalb weiter als Herkunftsnachweis. Wer sie als aktuelle
+Namensliste benutzt, benutzt die falsche Datei.
+
+### `manifest_with_metadata.csv` — eine Probe aus Phase 1
+
+20 Zeilen, letzter Stand Juli. **Nicht in der Pipeline.** Entstanden aus
+`scripts/extract_manifest_metadata.py`, als zu klären war, ob sich die
+Paketmetadaten (LEI, Konsolidierung, Land, Modul, Stichtag, Einreichungs-
+zeitstempel, Meldewährung, Meldegenauigkeit) aus der `parameters.csv` **im**
+ZIP lesen lassen, statt sie aus dem Dateinamen zu raten.
+
+Die Antwort war ja, und das Verfahren steckt seither im Parser. Die Datei ist
+der Beleg dieser Probe über 20 von inzwischen über tausend Paketen — kein
+Bestandsauszug. Wer eine vollständige Paketliste sucht, findet sie in
+`interim/edap_recon/manifest_full.csv`.
+
 ## Bekannte Einschränkungen
 
 Ein Datensatz ohne dokumentierte Fallen wird falsch verwendet. Die folgenden sind
