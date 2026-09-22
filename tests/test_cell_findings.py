@@ -172,7 +172,11 @@ class ViewerTest(unittest.TestCase):
         Tooltip ein Abstand zur Population, nicht das Wort falsch."""
         tip = self.src[self.src.index("function flagTip("):]
         tip = tip[:tip.index("\nlet OPENTHEMES")]
-        self.assertIn("Größenordnungen vom Vergleichswert", tip)
+        # Die Quellsprache ist Englisch, die deutsche Fassung steht in der
+        # Uebersetzungstabelle. Geprueft wird die AUSSAGE — ein Abstand mit
+        # Bezugsgroesse —, nicht die Sprache, in der sie zuerst geschrieben
+        # wurde.
+        self.assertIn("orders of magnitude away from the reference value", tip)
         # NUR die Zeichenketten pruefen, nicht den Quelltext drumherum: der
         # Kommentar erklaert ja gerade, warum „falsch" nicht vorkommen darf —
         # und liess den Test auf sich selbst hereinfallen.
