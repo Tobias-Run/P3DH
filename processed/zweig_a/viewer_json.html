@@ -552,7 +552,48 @@ const DE = {
   " — note: in this template the reported unit is inconsistent (#9), so the deviation may be a question of units":
     " — Achtung: in diesem Template ist die gemeldete Einheit uneinheitlich (#9), die Abweichung kann daher eine Einheitenfrage sein",
   "Peer median {0} · this institution in percentile {1} of {2} comparable reports (same size class, consolidation, reference date)":
-    "Peer-Median {0} · dieses Institut im {1}. Perzentil von {2} vergleichbaren Reports (gleiche Größenklasse, Konsolidierung, Stichtag)"
+    "Peer-Median {0} · dieses Institut im {1}. Perzentil von {2} vergleichbaren Reports (gleiche Größenklasse, Konsolidierung, Stichtag)",
+
+  // --- Berichtsliste und Steuerung ---
+  "Pin reference date {0} for comparison": "Stichtag {0} für Vergleich anpinnen",
+  "{0} of {1} institutions · {2} of {3} reports": "{0} von {1} Instituten · {2} von {3} Reports",
+  "Consolidated (CON) and individual (IND) count separately — they are not the same figures.":
+    "Konsolidiert (CON) und Einzelinstitut (IND) zählen getrennt — es sind nicht dieselben Zahlen.",
+  "Scale": "Skala",
+  "Auto": "Auto",
+  "Full": "Voll",
+
+  // --- Offenlegungszustaende („Fehlt ≠ Null", Arbeitsprinzip 3) ---
+  "not disclosed": "nicht offengelegt",
+  "Explicitly declared as NOT disclosed in the filing indicator — a deliberate omission by the institution (cf. CRR Art. 432), not a missing figure.":
+    "Im Filing-Indicator ausdrücklich als NICHT offengelegt deklariert — eine bewusste Auslassung des Instituts (vgl. CRR Art. 432), keine fehlende Zahl.",
+  "disclosed, but no analysable cells on our side": "gemeldet, bei uns ohne auswertbare Zellen",
+  "Declared as disclosed, but our holdings carry no placeable cells for it — a gap on OUR side (open axes / missing dp codes), not an omission by the institution.":
+    "Als offengelegt deklariert, aber unser Bestand hält dazu keine platzierbaren Zellen — eine Lücke auf UNSERER Seite (offene Achsen / fehlende dp-Codes), keine Auslassung des Instituts.",
+  "declared as not disclosed, yet data present": "als nicht offengelegt deklariert, aber Daten vorhanden",
+  "A contradiction within the institution’s own filing: the filing indicator says “not disclosed”, but the report contains facts for it. Both remain visible unchanged — we do not correct the filing.":
+    "Widerspruch in der Meldung des Instituts: der Filing-Indicator sagt „nicht offengelegt“, der Report enthält aber Fakten dazu. Beides bleibt unverändert sichtbar — wir korrigieren die Meldung nicht.",
+
+  // --- Reportansicht ---
+  "No data for this report.": "Keine Daten zu diesem Report.",
+  "We hold neither a figure nor a declaration for it — that is a gap on our side, not a statement about the institution.":
+    "Es liegt uns weder eine Zahl noch eine Deklaration vor — das ist eine Lücke auf unserer Seite, keine Aussage über das Institut.",
+  "Disclosure scope per filing indicators:": "Meldeumfang laut Filing-Indicators:",
+  "One reported cell — nothing is computed here.": "Eine gemeldete Zelle — hier wird nichts gerechnet.",
+  "The card shows the value": "Die Karte zeigt den Wert",
+  " as a percentage": " als Prozentwert",
+  ", converted at the ECB reference rate and in billions": ", umgerechnet zum EZB-Referenzkurs und in Milliarden",
+  "Without a value in this report:": "Ohne Wert in diesem Report:",
+  "— not disclosed, not placeable in our holdings, or without an ECB rate. Not “zero”.":
+    "— nicht offengelegt, nicht in unserem Bestand platzierbar oder ohne EZB-Kurs. Nicht „null“.",
+  "Bar = percentile within the peer group (same size class, consolidation, reference date; from 5 reports)":
+    "Balken = Perzentil der Peer-Gruppe (gleiche Größenklasse, Konsolidierung, Stichtag; ab 5 Reports)",
+  "Loading peer context…": "Peer-Einordnung wird geladen…",
+  "Error loading the report:": "Fehler beim Laden des Reports:",
+  "This report does not file consistently in one currency. The one named first carries the majority of facts; the deviating templates use their own rate (#55).":
+    "Dieser Report meldet nicht durchgehend in einer Währung. Die zuerst genannte trägt die Mehrheit der Fakten; die abweichenden Templates rechnen mit ihrem eigenen Kurs (#55).",
+  "{0} hits of {1}": "{0} Treffer von {1}",
+  "{0} of {1} templates with data": "{0} von {1} Templates mit Daten"
 };
 /* `t()` nimmt Platzhalter `{0}`, `{1}` … — und das ist kein Komfort, sondern
    Notwendigkeit: Deutsch und Englisch stellen die Satzteile anders. Ein aus
@@ -1100,7 +1141,7 @@ function renderReportList(){
     }).join('');
     h+=`<div class="report${active?' active':''}" data-h="#r/${g.lei}/${cur.refPeriod}/${g.scope}">
       <button class="pinbtn${PINS.has(repKey(cur))?' on':''}" data-k="${esc(repKey(cur))}"
-        title="Stichtag ${esc(cur.refPeriod)} für Vergleich anpinnen">⊞</button>
+        title="${esc(tr('Pin reference date {0} for comparison', cur.refPeriod))}">⊞</button>
       <div class="lei">${esc(g.name)}${badges}</div>
       <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(g.scope))} · ${g.reps.length} Stichtag${g.reps.length>1?'e':''}</div>
       <div class="dates">${chips}</div>
@@ -1109,9 +1150,9 @@ function renderReportList(){
   }
   host.innerHTML=h;
   document.getElementById('fCount').textContent=
-    `${groups.length} von ${TOTAL_GROUPS} Instituten · ${nRep} von ${REPORTS.length} Reports`;
+    tr('{0} of {1} institutions · {2} of {3} reports', groups.length, TOTAL_GROUPS, nRep, REPORTS.length);
   document.getElementById('fCount').title=
-    'Konsolidiert (CON) und Einzelinstitut (IND) zählen getrennt — es sind nicht dieselben Zahlen.';
+    tr('Consolidated (CON) and individual (IND) count separately — they are not the same figures.');
 }
 /* Ereignisse delegiert: die Liste wird bei jedem Filtertastendruck neu
    geschrieben, einzeln angehaengte Handler waeren 475-mal Arbeit je Anschlag. */
@@ -1166,11 +1207,11 @@ function updateCmpBadge(){
 
 /* ================= scale / EUR controls (shared) ================= */
 function controlsHTML(){
-  return `<label class="ctl">Skala:
+  return `<label class="ctl">${tr('Scale')}:
       <select id="scaleSel">
-        <option value="auto">Auto</option><option value="1">Voll</option>
-        <option value="1000">Tsd.</option><option value="1000000">Mio.</option>
-        <option value="1000000000">Mrd.</option>
+        <option value="auto">${tr('Auto')}</option><option value="1">${tr('Full')}</option>
+        <option value="1000">${unitLabel(1e3)}</option><option value="1000000">${unitLabel(1e6)}</option>
+        <option value="1000000000">${unitLabel(1e9)}</option>
       </select></label>
     <label class="ctl"><input type="checkbox" id="eurChk"> in EUR (EZB-Kurs)</label>
     <label class="ctl" title="Zeigt unter jedem vergleichbaren Wert den Median seiner Peer-Gruppe (gleiche Größenklasse, Konsolidierung, Stichtag) und das Perzentil des Instituts darin. Ab 5 Reports je Gruppe; nicht bei strittiger Einheit (#9) und nicht bei mehrfach belegten Koordinaten (#52)."><input type="checkbox" id="ctxChk"${CTX?' checked':''}> Peer-Kontext an der Zelle</label>`;
@@ -1193,23 +1234,23 @@ function wireControls(redraw){
    keine Filing-Indicator-Deklaration vor, treffen wir KEINE Aussage. Aus einer
    fehlenden Deklaration eine Aussage zu machen waere genau der Fehler, den das
    Arbeitsprinzip verbietet.                                                */
-const COV = {
+const COV = () => ({
   'not-reported':   {sym:'⊘', cls:'cov-false',
-                     label:'nicht offengelegt',
-                     tip:'Im Filing-Indicator ausdrücklich als NICHT offengelegt deklariert — eine bewusste Auslassung des Instituts (vgl. CRR Art. 432), keine fehlende Zahl.'},
+                     label:tr('not disclosed'),
+                     tip:tr('Explicitly declared as NOT disclosed in the filing indicator — a deliberate omission by the institution (cf. CRR Art. 432), not a missing figure.')},
   'reported-empty': {sym:'',   cls:'cov-gap',
-                     label:'gemeldet, bei uns ohne auswertbare Zellen',
-                     tip:'Als offengelegt deklariert, aber unser Bestand hält dazu keine platzierbaren Zellen — eine Lücke auf UNSERER Seite (offene Achsen / fehlende dp-Codes), keine Auslassung des Instituts.'},
+                     label:tr('disclosed, but no analysable cells on our side'),
+                     tip:tr('Declared as disclosed, but our holdings carry no placeable cells for it — a gap on OUR side (open axes / missing dp codes), not an omission by the institution.')},
   'conflict':       {sym:'⚠',  cls:'cov-conflict',
-                     label:'als nicht offengelegt deklariert, aber Daten vorhanden',
-                     tip:'Widerspruch in der Meldung des Instituts: der Filing-Indicator sagt „nicht offengelegt", der Report enthält aber Fakten dazu. Beides bleibt unverändert sichtbar — wir korrigieren die Meldung nicht.'},
+                     label:tr('declared as not disclosed, yet data present'),
+                     tip:tr('A contradiction within the institution’s own filing: the filing indicator says “not disclosed”, but the report contains facts for it. Both remain visible unchanged — we do not correct the filing.')},
   'reported':       {sym:'',   cls:'',  label:'', tip:''},
   'unknown':        {sym:'',   cls:'',  label:'', tip:''},
-};
+});
 function coverageState(rep, tid){
   const s = (rep.coverage || {})[tid];
   if (s === 'not-reported' && rep.templates.has(tid)) return 'conflict';
-  return COV[s] ? s : 'unknown';
+  return COV()[s] ? s : 'unknown';
 }
 
 function renderTemplate(tid, cells, rep){
@@ -1271,7 +1312,7 @@ function renderTemplate(tid, cells, rep){
   // existiert, traegt aber ein leeres Spaltenlabel, und der Kopf blieb leer,
   // obwohl weiter unten eines gestanden haette.
   const colLbl=c=>{ for(const r of rows){ const e=CB.get(tcode+'|'+r+'|'+c); if(e && e.cl) return e.cl; } return ''; };
-  const c=COV[state];
+  const c=COV()[state];
   const coverageNote = c.label
     ? `<span class="covbadge ${c.cls}" title="${esc(c.tip)}">${c.sym?c.sym+' ':''}${esc(c.label)}</span>` : '';
   let maxAbs=0;
@@ -1373,9 +1414,8 @@ function renderTemplate(tid, cells, rep){
 function leermeldung(rep){
   if(rep.templates && rep.templates.size) return '';
   const n=Object.keys(rep.coverage||{}).length;
-  if(!n) return `<div class="leer"><b>Keine Daten zu diesem Report.</b>
-    Es liegt uns weder eine Zahl noch eine Deklaration vor — das ist eine
-    Lücke auf unserer Seite, keine Aussage über das Institut.</div>`;
+  if(!n) return `<div class="leer"><b>${tr('No data for this report.')}</b>
+    ${tr('We hold neither a figure nor a declaration for it — that is a gap on our side, not a statement about the institution.')}</div>`;
   return `<div class="leer"><b>Dieses Institut legt für diesen Stichtag nichts offen.</b>
     Es hat eingereicht und alle <b>${n}</b> Templates als nicht offengelegt
     deklariert. Das ist zulässig: die CRR lässt nach Art. 433a–c Erleichterungen
@@ -1399,7 +1439,7 @@ function coverageBlock(rep){
   for(const st of ['not-reported','conflict','reported-empty']){
     const list=(byState[st]||[]).sort();
     if(!list.length) continue;
-    const c=COV[st];
+    const c=COV()[st];
     h+=`<details class="covblock ${c.cls}"><summary>${c.sym?c.sym+' ':''}<b>${list.length}</b> Templates — ${esc(c.label)}</summary>
       <p class="covtip">${esc(c.tip)}</p><div class="covlist">`;
     for(const tid of list){
@@ -1409,7 +1449,7 @@ function coverageBlock(rep){
     h+='</div></details>';
   }
   if(!h) return '';
-  return `<div class="covwrap"><div class="covhead">Meldeumfang laut Filing-Indicators:
+  return `<div class="covwrap"><div class="covhead">${tr('Disclosure scope per filing indicators:')}
     <b>${reported}</b> von <b>${keys.length}</b> deklarierten Templates offengelegt${
     conflict?` · <b>${conflict}</b> widersprüchlich (unten)`:''}</div>${h}</div>`;
 }
@@ -1603,9 +1643,9 @@ function metricDetail(rep, id){
   }
   h+='</tbody></table>';
   if(!doc.formula)
-    h+=`<p class="mnote">Eine gemeldete Zelle — hier wird nichts gerechnet.
-      Die Karte zeigt den Wert${mt.unit==='%'?' als Prozentwert':''}${
-      mt.unit==='Mrd EUR'?', umgerechnet zum EZB-Referenzkurs und in Milliarden':''}.</p>`;
+    h+=`<p class="mnote">${tr('One reported cell — nothing is computed here.')}
+      ${tr('The card shows the value')}${mt.unit==='%'?tr(' as a percentage'):''}${
+      mt.unit==='Mrd EUR'?tr(', converted at the ECB reference rate and in billions'):''}.</p>`;
   const tids=[...new Set((doc.cells||[]).map(c=>c[0]))].filter(t=>rep.templates.has(t));
   if(tids.length)
     h+=`<p class="mnote">Im Report nachschlagen: ${tids.map(t=>
@@ -1642,8 +1682,8 @@ function renderOverview(rep){
   // weggelassen — sonst sähe ein Report mit zwei Karten aus wie einer, für den
   // es nur zwei Kennzahlen gibt.
   if(miss.length)
-    h+=`<div class="ovmiss">Ohne Wert in diesem Report: ${esc(miss.join(' · '))}
-      <span class="cl">— nicht offengelegt, nicht in unserem Bestand platzierbar oder ohne EZB-Kurs. Nicht „null".</span></div>`;
+    h+=`<div class="ovmiss">${tr('Without a value in this report:')} ${esc(miss.join(' · '))}
+      <span class="cl">${tr('— not disclosed, not placeable in our holdings, or without an ECB rate. Not “zero”.')}</span></div>`;
   const q=rep.quality;
   /* Skalenbefund (#83) ZUERST, und getrennt von der Plausibilitätsprüfung.
      Er sagt etwas anderes: nicht „ein Wert passt nicht zur Verteilung", sondern
@@ -1655,7 +1695,8 @@ function renderOverview(rep){
     h+=`<div class="ovq" title="Werte, ${befundHerkunft(q)}. Das kann eine korrekte Besonderheit sein.">△ Plausibilitätsprüfung: <b>${q.n}</b> Befund(e) in ${q.t?q.t.length:0} Template(s)${q.z?`, davon <b>${q.z}</b> aus dem Zeitvergleich gegen den Nachbarstichtag`:''}, größte Abweichung ${esc(q.d)} Größenordnungen${q.t&&q.t.length?` <span class="cl">· ${esc(q.t.slice(0,10).join(', '))}${q.t.length>10?' …':''}</span>`:''}</div>`;
   h+=similarBlock(rep);
   if(!h){ host.innerHTML=''; return; }
-  const note=pm?'Balken = Perzentil der Peer-Gruppe (gleiche Größenklasse, Konsolidierung, Stichtag; ab 5 Reports)':'Peer-Einordnung wird geladen…';
+  const note=pm?tr('Bar = percentile within the peer group (same size class, consolidation, reference date; from 5 reports)')
+               :tr('Loading peer context…');
   host.innerHTML=`<section><h3>Überblick <span class="scalenote">${esc(note)}</span></h3>${h}</section>`;
 }
 
@@ -1723,7 +1764,7 @@ async function renderReport(rep){
       <div class="status">Lade Report…<div class="prog"><i style="width:45%"></i></div></div>`;
     renderReportList();
     try{ await ensureLoaded(rep); }
-    catch(e){ main.innerHTML='<div class="status">Fehler beim Laden des Reports: '+esc(e.message)+'</div>'; return; }
+    catch(e){ main.innerHTML='<div class="status">'+esc(tr('Error loading the report:'))+' '+esc(e.message)+'</div>'; return; }
     if(activeKey!==repKey(rep)) return;   // user navigated away while the shard loaded
   }
   const tids=[...rep.templates.keys()].sort();
@@ -1733,7 +1774,7 @@ async function renderReport(rep){
     <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
     <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency ${
       curLabel(rep) ? `<b>${esc(curLabel(rep))}</b>` : '<span class="cl">nicht gemeldet</span>'}${
-      isMixedCur(rep)?` <span class="cl" title="Dieser Report meldet nicht durchgehend in einer Währung. Die zuerst genannte trägt die Mehrheit der Fakten; die abweichenden Templates rechnen mit ihrem eigenen Kurs (#55).">— je Template verschieden</span>`:''}
+      isMixedCur(rep)?` <span class="cl" title="${tr('This report does not file consistently in one currency. The one named first carries the majority of facts; the deviating templates use their own rate (#55).')}">— je Template verschieden</span>`:''}
     · Framework <b>${esc(rep.framework)}</b></div></div>
     ${leermeldung(rep)}
     <div id="ovSection"></div>
@@ -1801,8 +1842,8 @@ async function renderReport(rep){
       // Templates, auch über eingeklappte.
       const open=f ? mh.length>0 : OPENTHEMES.has(th.id);
       const count=f
-        ? `${mh.length} Treffer von ${mine.length}`
-        : (dec?`${mine.length} von ${dec} Templates mit Daten`:`${mine.length} Templates`);
+        ? `${tr('{0} hits of {1}', mh.length, mine.length)}`
+        : (dec?`${tr('{0} of {1} templates with data', mine.length, dec)}`:`${mine.length} Templates`);
       h+=`<details class="theme" data-t="${esc(th.id)}"${open?' open':''}>
         <summary>${esc(th.label)}<span class="thcount">${esc(count)}</span>${f?'':themeBar(mine.length,dec)}</summary>
         <div class="tbody"></div></details>`;
