@@ -68,9 +68,49 @@ class TeilbarkeitTest(unittest.TestCase):
 
     def test_existing_links_keep_working(self):
         """`#r/<lei>/<refPeriod>/<scope>` und `#benchmark` sind vermutlich schon
-        geteilt worden. Alles Neue hängt hinter '?' und ist optional."""
+        geteilt worden. Alles Neue hängt hinter '?' und ist optional.
+
+        Geprüft wird die Zusage, nicht der Wortlaut: die Route kommt aus
+        `hashRoute()` und bleibt unangetastet, und der Zustand hängt als
+        `?…` dahinter. Vorher stand hier der Ausdruck selbst — und der
+        musste sich ändern, als sich zeigte, dass auf der Startseite gar
+        keine Route existiert und `replaceState` den Parameterblock
+        stattdessen als Querystring an die Adresse hängte.
+        """
         self.assertIn("(location.hash||'').split('?')[0]", self.src)
-        self.assertIn("hashRoute()+(p?'?'+p:'')", self.src)
+        rumpf = self.src[self.src.index("function shareState()"):]
+        rumpf = rumpf[:rumpf.index("\n}")]
+        self.assertIn("hashRoute()", rumpf,
+                      "die Route kommt nicht mehr aus hashRoute()")
+        self.assertIn("(p?'?'+p:'')", rumpf,
+                      "der Zustand hängt nicht mehr optional hinter '?'")
+
+    def test_the_state_never_lands_in_the_query_string(self):
+        """Der Fehler, den das gekostet hat: auf der Startseite gibt es keinen
+        Hash, `hashRoute()` lieferte den leeren String, und `replaceState`
+        bekam '?c=Austria' — das ist ein QUERYSTRING, kein Hash.
+
+        `location.hash` blieb damit leer. `applyShared()` fand beim nächsten
+        Sprung nichts und setzte jeden Filter zurück; wer auf der Startseite
+        nach Land filterte und dann ein Institut anklickte, verlor die
+        Filterung. Nicht weil der Sprung sie wegwarf, sondern weil sie nie im
+        Hash stand.
+        """
+        rumpf = self.src[self.src.index("function shareState()"):]
+        rumpf = rumpf[:rumpf.index("\n}")]
+        self.assertIn("hashRoute() || (p ? '#' : '')", rumpf,
+                      "ohne Route fällt der Parameterblock wieder in den "
+                      "Querystring")
+
+    def test_an_internal_jump_carries_the_state(self):
+        """Eine Stelle dafür, und zwei Wege hinein: der Klick auf die
+        Listenzeile (ein `<div>`) und der Klick auf einen echten Link. Sie
+        lagen in verschiedenen Handlern und sind auseinandergelaufen."""
+        self.assertIn("function springZu(route){ location.hash = route + hashQuery(); }",
+                      self.src)
+        self.assertIn("springZu(row.dataset.h)", self.src,
+                      "der Klick auf die Listenzeile setzt den Hash wieder "
+                      "an springZu() vorbei")
 
     def test_the_state_is_readable_not_encoded(self):
         """Ein Werkzeug für Nachvollziehbarkeit darf seinen Zustand nicht

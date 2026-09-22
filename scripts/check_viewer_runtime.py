@@ -298,6 +298,88 @@ def pruefe():
                 ".map(r => r.name.split('/').pop())")
             print(f"  beim Start geladen: {', '.join(geladen)}")
 
+            # --- Filter ueberlebt einen Sprung -------------------------
+            # Der Filterzustand haengt als Parameter hinter dem Hash. Ein
+            # interner Sprung, der nur die Route setzt, laesst `applyShared()`
+            # keinen Parameter finden — und die Funktion setzt dann JEDES
+            # Filterfeld auf seine Vorgabe zurueck. Das ist fuer einen
+            # geteilten Link richtig und fuer einen Klick in der eigenen Liste
+            # falsch: wer nach Land filtert und dann ein Institut anklickt,
+            # sah das Institut und verlor die Filterung.
+            #
+            # Geprueft werden BEIDE Wege in die Reportansicht, denn sie liegen
+            # in verschiedenen Handlern und sind schon einmal auseinander-
+            # gelaufen: der Klick auf die Listenzeile (ein <div>) und der Klick
+            # auf einen Stichtagschip (ein echter <a>).
+            sprung = pg.evaluate("""async () => {
+              const sel=document.getElementById('fCountry');
+              const land=[...sel.options].map(o=>o.value).filter(Boolean)
+                .find(v => { sel.value=v;
+                             return REPORTS.filter(r=>(META.get(leiParts(r.entityID).lei)||{})
+                                    .country===v).length >= 2; });
+              if(!land) return {keine:'kein Land mit zwei Reports'};
+              sel.value=land; sel.dispatchEvent(new Event('input'));
+              sel.dispatchEvent(new Event('change'));
+              await new Promise(s=>setTimeout(s,400));
+              const raus = () => ({land: document.getElementById('fCountry').value,
+                                   hash: location.hash||'',
+                                   zeilen: document.querySelectorAll('#reportList .report').length});
+              const vorher = raus();
+              // Weg 1: Klick auf die Zeile.
+              const zeile=document.querySelector('#reportList .report');
+              if(!zeile) return {keine:'keine gefilterte Zeile'};
+              zeile.click();
+              await new Promise(s=>setTimeout(s,900));
+              const nachZeile = {...raus(), offen: !!document.getElementById('ovSection')};
+              // Weg 2: Klick auf einen Stichtagschip (echter Link).
+              const chip=document.querySelector('#reportList .report .dchip');
+              if(chip){ chip.click(); await new Promise(s=>setTimeout(s,900)); }
+              const nachChip = {...raus(), chip: !!chip};
+              return {vorher, nachZeile, nachChip};
+            }""")
+            if sprung.get("keine"):
+                print(f"  (Filtersprung nicht prüfbar: {sprung['keine']})")
+            else:
+                v, z, c = sprung["vorher"], sprung["nachZeile"], sprung["nachChip"]
+                print(f"  Filter überlebt den Sprung: {v['land']} "
+                      f"({v['zeilen']} Zeilen, hash {v['hash'] or '—'}) → "
+                      f"Zeilenklick {z['land'] or '—'} ({z['zeilen']}, {z['hash'] or '—'}) → "
+                      f"Chipklick {c['land'] or '—'} ({c['zeilen']})")
+                if not z["offen"]:
+                    fehler.append("der Klick auf eine Listenzeile öffnet keinen "
+                                  "Report mehr")
+                for was, n in (("Klick auf die Listenzeile", z),
+                               ("Klick auf einen Stichtagschip", c)):
+                    if n["land"] != v["land"]:
+                        fehler.append(
+                            f"{was} wirft den Länderfilter weg "
+                            f"({v['land']!r} → {n['land']!r}) — der Zustand "
+                            f"hängt hinter dem Hash und der Sprung nimmt ihn "
+                            f"nicht mit")
+                    if n["zeilen"] != v["zeilen"]:
+                        fehler.append(
+                            f"{was} ändert die Länge der gefilterten Liste "
+                            f"({v['zeilen']} → {n['zeilen']})")
+                if c["chip"] and "?" not in c["hash"]:
+                    fehler.append("nach dem Sprung steht kein Zustand mehr im "
+                                  "Hash — der Link wäre nicht mehr teilbar")
+
+            # --- Peer-Kontext: Vorgabe AUS, Schalter an ------------------
+            # Die Vorgabe und die Faehigkeit sind zwei verschiedene Zusagen.
+            # Die Bloecke unten pruefen, dass die Kontextzeile ueberhaupt
+            # ankommt — dafuer muss der Schalter AN sein. Dass er es von
+            # selbst NICHT ist, wird genau hier einmal festgehalten.
+            ctxvor = pg.evaluate("""async () => {
+              const vorgabe = CTX;
+              CTX = true; store.ctx = true; persist();
+              return {vorgabe};
+            }""")
+            print(f"  Peer-Kontext (#23): Vorgabe "
+                  f"{'an' if ctxvor['vorgabe'] else 'aus'}, für die Prüfung eingeschaltet")
+            if ctxvor["vorgabe"]:
+                fehler.append("der Peer-Kontext steht per Vorgabe an — wer eine "
+                              "Meldung aufschlägt, soll zuerst die Meldung sehen")
+
             # Einen grossen Report oeffnen und einen Block aufklappen.
             pg.evaluate("""async () => {
               const rep = REPORTS.slice().sort((a,b)=>b.nt-a.nt)[0];
