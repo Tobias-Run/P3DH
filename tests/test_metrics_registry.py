@@ -321,5 +321,81 @@ class WiringTest(unittest.TestCase):
         self.assertEqual(missing, [], f"Koordinaten ohne Eintrag im Codebook: {missing}")
 
 
+
+class EnglishTextTest(unittest.TestCase):
+    """Die Registry ist deutsch geschrieben, die Oberfläche steht auf Englisch.
+
+    Beides ist so gewollt — aber die Brücke dazwischen ist unsichtbar: fehlt
+    eine Übersetzung, fällt der Viewer auf die deutsche Fassung zurück und
+    zeigt einen Text. Genau deshalb fällt es niemandem auf. Ein fehlender
+    Eintrag ist hier ein Testfehler und keine Geschmacksfrage.
+    """
+
+    FELDER = ("definition", "purpose", "note", "floor_src")
+    UMLAUTE = "äöüßÄÖÜ"
+
+    def test_every_metric_carries_an_english_text_for_every_german_one(self):
+        fehlend = []
+        for m in mx.METRICS:
+            e = mx.TEXTE_EN.get(m["id"], {})
+            for feld in self.FELDER:
+                if m.get(feld) and not e.get(feld):
+                    fehlend.append(f"{m['id']}.{feld}")
+        self.assertEqual(fehlend, [],
+                         f"deutsche Texte ohne englische Fassung: {fehlend}")
+
+    def test_no_english_text_is_left_over(self):
+        """Ein englischer Eintrag ohne deutsches Gegenstück zeigt auf eine
+        umbenannte Kennzahl oder einen Tippfehler in der ID — beides landet
+        still im Nichts, weil `mtext()` nur nachschlägt, was es findet."""
+        ids = {m["id"] for m in mx.METRICS}
+        self.assertEqual(set(mx.TEXTE_EN) - ids, set(),
+                         "TEXTE_EN nennt IDs, die es in METRICS nicht gibt")
+        ueberzaehlig = []
+        for m in mx.METRICS:
+            e = mx.TEXTE_EN.get(m["id"], {})
+            for feld in e:
+                if not m.get(feld):
+                    ueberzaehlig.append(f"{m['id']}.{feld}")
+        self.assertEqual(ueberzaehlig, [],
+                         f"englische Texte ohne deutsches Gegenstück: {ueberzaehlig}")
+
+    def test_the_english_texts_are_actually_english(self):
+        """Ein kopierter, nicht übersetzter Eintrag ist der wahrscheinlichste
+        Fehler — und der einzige, den die Vollständigkeitsprüfung oben
+        durchlässt."""
+        verdaechtig = []
+        for mid, e in mx.TEXTE_EN.items():
+            for feld, text in e.items():
+                if any(c in text for c in self.UMLAUTE):
+                    verdaechtig.append(f"{mid}.{feld}")
+        self.assertEqual(verdaechtig, [],
+                         f"englische Texte mit deutschen Umlauten: {verdaechtig}")
+
+    def test_the_payload_carries_both_languages(self):
+        """`metric_payload()` ist der einzige Weg der Registry nach
+        codebook.json. Was dort nicht angehängt wird, erreicht den Viewer
+        nie — und der zeigt dann stillschweigend Deutsch."""
+        payload = mx.metric_payload()
+        for m in payload["metrics"]:
+            self.assertIn("definition_en", m,
+                          f"{m['id']} ohne definition_en im Payload")
+        # Die Registry selbst darf der Payload-Bau nicht verändern: METRICS
+        # wird an mehreren Stellen gelesen, ein mutiertes dict wirkte dort mit.
+        self.assertTrue(all("definition_en" not in m for m in mx.METRICS),
+                        "metric_payload() schreibt in METRICS zurück")
+
+    def test_profile_notes_are_translated_too(self):
+        """Ein Profil-Caveat steht über einer ganzen Rangliste. Auf Deutsch
+        über einer englischen Tabelle ist er die auffälligste Lücke, die es
+        hier gibt — und trotzdem die, die am leichtesten vergessen wird."""
+        fehlend = [p["id"] for p in mx.PROFILES
+                   if p.get("note") and not mx.PROFIL_NOTIZEN_EN.get(p["id"])]
+        self.assertEqual(fehlend, [],
+                         f"Profile mit Notiz ohne englische Fassung: {fehlend}")
+        self.assertEqual(set(mx.PROFIL_NOTIZEN_EN) - {p["id"] for p in mx.PROFILES},
+                         set(), "PROFIL_NOTIZEN_EN nennt unbekannte Profile")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

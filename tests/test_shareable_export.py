@@ -90,8 +90,10 @@ class ExportTest(unittest.TestCase):
         Viewer daneben stehen, ist gefährlicher als gar keine."""
         block = self.src[self.src.index("const CSV_CAVEATS"):]
         block = block[:block.index("];")]
-        for pflicht in ("Aufsichtsmetrik", "Konsolidierungskreis", "4.2",
-                        "skalenbefund", "nicht null"):
+        # Quellsprache ist Englisch; die deutsche Fassung steht in der
+        # DE-Tabelle und wird von der Laufzeitpruefung abgenommen.
+        for pflicht in ("supervisory metric", "scope of consolidation", "4.2",
+                        "scale_finding", "not zero"):
             self.assertIn(pflicht, block, f"Caveat zu '{pflicht}' fehlt im Export")
 
     def test_the_marks_are_columns_not_only_prose(self):
@@ -100,7 +102,7 @@ class ExportTest(unittest.TestCase):
         zuerst."""
         rumpf = self.src[self.src.index("function benchmarkCSV("):]
         rumpf = rumpf[:rumpf.index("\nfunction ladeHerunter")]
-        self.assertIn("'skalenbefund','plausibilitaet'", rumpf)
+        self.assertIn("'scale_finding','plausibility'", rumpf)
         self.assertIn("'framework'", rumpf,
                       "der Kopf warnt vor dem Meldewerkswechsel, ohne dass eine "
                       "Spalte sagt, welche Zeile betroffen ist")
@@ -111,8 +113,8 @@ class ExportTest(unittest.TestCase):
         rumpf = self.src[self.src.index("function benchmarkCSV("):]
         rumpf = rumpf[:rumpf.index("\nfunction ladeHerunter")]
         self.assertIn("location.href", rumpf)
-        self.assertIn("Filter/Zustand", rumpf)
-        self.assertIn("Sortierung: ", rumpf)
+        self.assertIn("tr('filter/state:')", rumpf)
+        self.assertIn("tr('sorting:')", rumpf)
 
     def test_the_unit_blocklist_gets_its_own_warning(self):
         """Bei `41.00` und `45.00.A` ist der Vergleich absoluter Beträge
@@ -121,7 +123,7 @@ class ExportTest(unittest.TestCase):
         rumpf = self.src[self.src.index("function benchmarkCSV("):]
         rumpf = rumpf[:rumpf.index("\nfunction ladeHerunter")]
         self.assertIn("UA.has(prof.tpl)", rumpf)
-        self.assertIn("NICHT vergleichbar", rumpf)
+        self.assertIn("NOT comparable across institutions", rumpf)
 
     def test_comments_use_a_character_the_usual_readers_know(self):
         """Ein Export, den man erst von Hand aufräumen muss, wird nicht

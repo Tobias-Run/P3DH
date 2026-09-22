@@ -103,12 +103,19 @@ def pruefe_export(res):
     daten = [z for z in text.splitlines() if not z.startswith("#")]
     print(f"  CSV-Export: {len(kopf)} Kommentarzeilen · {len(daten)-1} Datenzeilen")
 
-    for pflicht, was in [("Aufsichtsmetrik", "der Vergleichbarkeits-Caveat"),
-                         ("nicht null", "der Hinweis „Fehlt ≠ Null\""),
-                         ("skalenbefund", "die Erklärung der Skalenspalte"),
-                         ("Ansicht: http", "die Rück-URL auf die eigene Ansicht"),
-                         ("Filter/Zustand", "der Filterzustand")]:
-        if pflicht not in text:
+    # Der Kopf folgt der Sprache, die Spaltenkoepfe nicht. Gesucht wird
+    # deshalb je Pflichtstueck in beiden Fassungen.
+    for pflicht, was in [(("Aufsichtsmetrik", "supervisory metric"),
+                          "der Vergleichbarkeits-Caveat"),
+                         (("nicht null", "not zero"),
+                          "der Hinweis „Fehlt ≠ Null\""),
+                         (("scale_finding",),
+                          "die Erklärung der Skalenspalte"),
+                         (("Ansicht: http", "view: http"),
+                          "die Rück-URL auf die eigene Ansicht"),
+                         (("Filter/Zustand", "filter/state"),
+                          "der Filterzustand")]:
+        if not any(s in text for s in pflicht):
             fehler.append(f"CSV-Export ohne {was}")
 
     try:
@@ -119,8 +126,8 @@ def pruefe_export(res):
     if not zeilen:
         fehler.append("CSV-Export ohne Datenzeilen")
         return fehler
-    fehlend = [s for s in ("institut", "lei", "stichtag", "framework",
-                           "skalenbefund", "plausibilitaet") if s not in zeilen[0]]
+    fehlend = [s for s in ("institution", "lei", "reference_date", "framework",
+                           "scale_finding", "plausibility") if s not in zeilen[0]]
     for spalte in fehlend:
         fehler.append(f"CSV-Export ohne Spalte '{spalte}' — ein Caveat im Kopf "
                       "sagt nicht, WELCHE Zeile betroffen ist")
@@ -204,6 +211,87 @@ def pruefe():
             pg.on("pageerror", lambda e: seitenfehler.append(str(e)[:200]))
             pg.goto(f"http://localhost:{PORT}/viewer_json.html",
                     wait_until="networkidle", timeout=120000)
+
+            # --- Sprachumschalter -------------------------------------
+            # Englisch ist Standard; Deutsch ist umschaltbar. Geprueft wird
+            # nicht nur die Beschriftung, sondern das ZAHLFORMAT: in de-DE ist
+            # '.' der Tausendertrenner, in en-GB der Dezimaltrenner. Die
+            # Ersetzung durch das schmale Leerzeichen, die im Deutschen richtig
+            # ist, machte auf Englisch aus `1,234.5` ein `1,234 5` — eine
+            # Beschriftungspruefung allein waere dafuer blind.
+            sprach = pg.evaluate("""async () => {
+              const lies = () => ({lang:document.documentElement.lang,
+                btn:document.getElementById('langBtn').textContent,
+                land:document.getElementById('fCountry').options[0].textContent,
+                zahl:nf(1234567.89,2,2), einheit:unitLabel(1e9)});
+              const a = lies();
+              document.getElementById('langBtn').click();
+              await new Promise(s=>setTimeout(s,600));
+              const d = lies();
+              document.getElementById('langBtn').click();
+              await new Promise(s=>setTimeout(s,600));
+              return {en:a, de:d, zurueck:lies()};
+            }""")
+            en, de = sprach["en"], sprach["de"]
+            print(f"  Sprache: Standard {en['lang']} ({en['zahl']} · {en['einheit']}) "
+                  f"· umgeschaltet {de['lang']} ({de['zahl']} · {de['einheit']})")
+            if en["lang"] != "en":
+                fehler.append("Englisch ist nicht die Standardsprache des Viewers")
+            if de["lang"] != "de":
+                fehler.append("der Sprachumschalter wechselt nicht nach Deutsch")
+            if en["zahl"] == de["zahl"]:
+                fehler.append("das Zahlformat folgt der Sprache nicht — "
+                              f"beide Male {en['zahl']}")
+            if "." not in en["zahl"]:
+                fehler.append(f"englisches Zahlformat ohne Dezimalpunkt: "
+                              f"{en['zahl']} — die Trennzeichen-Ersetzung aus "
+                              f"dem Deutschen greift faelschlich mit")
+            if en["einheit"] == de["einheit"]:
+                fehler.append("die Groesseneinheit folgt der Sprache nicht")
+            if sprach["zurueck"] != en:
+                fehler.append("Zurueckschalten stellt den Ausgangszustand "
+                              "nicht wieder her")
+
+            # --- Kennzahl-Registry: erreicht die englische Fassung das DOM? --
+            # Die Registry ist deutsch geschrieben, die englischen Texte
+            # liegen in `TEXTE_EN` und werden erst in `metric_payload()`
+            # angehaengt. Zwischen dort und der Oberflaeche liegen drei
+            # Stellen, an denen sie still verschwinden koennen: ein nicht neu
+            # gebautes codebook.json, ein `mtext`, das den Zusatz nicht kennt,
+            # und ein Aufrufer, der weiter `doc.definition` liest. Alle drei
+            # sehen gleich aus — der Text steht da, nur auf Deutsch.
+            kz = pg.evaluate("""async () => {
+              const doc = METRICDOC.get('cet1');
+              if(!doc) return {keine:'cet1 nicht in der Registry'};
+              const lies = () => ({def: mtext(doc,'definition'),
+                                   note: mtext(doc,'note')});
+              const a = lies();
+              document.getElementById('langBtn').click();
+              await new Promise(s=>setTimeout(s,400));
+              const d = lies();
+              document.getElementById('langBtn').click();
+              await new Promise(s=>setTimeout(s,400));
+              const ohne = [...METRICDOC.values()]
+                .filter(m => !m.definition_en).map(m => m.id);
+              return {en:a, de:d, ohne, gesamt: METRICDOC.size};
+            }""")
+            if kz.get("keine"):
+                fehler.append(f"Kennzahl-Registry: {kz['keine']}")
+            else:
+                print(f"  Kennzahltexte: {kz['gesamt']} Kennzahlen, "
+                      f"{len(kz['ohne'])} ohne englische Definition · "
+                      f"en: {kz['en']['def'][:58]}…")
+                if kz["ohne"]:
+                    fehler.append("Kennzahlen ohne englische Definition: "
+                                  + ", ".join(kz["ohne"][:8]))
+                if kz["en"]["def"] == kz["de"]["def"]:
+                    fehler.append("die Kennzahl-Definition folgt der Sprache "
+                                  "nicht — beide Male dieselbe Fassung")
+                umlaute = [c for c in kz["en"]["def"] + kz["en"]["note"]
+                           if c in "äöüßÄÖÜ"]
+                if umlaute:
+                    fehler.append("die englische Kennzahlerklaerung traegt "
+                                  f"deutsche Umlaute: {''.join(sorted(set(umlaute)))}")
 
             geladen = pg.evaluate(
                 "() => performance.getEntriesByType('resource')"
@@ -576,10 +664,14 @@ def pruefe():
         if not zeit["tip"]:
             fehler.append("Zeitbefund im Shard, aber kein Zell-Tooltip — der "
                           "fünfte Eintrag (Vergleichsstichtag) kommt nicht an")
-        elif "Population" in zeit["tip"] or "eigenen Wert vom" not in zeit["tip"]:
+        # Geprueft wird die AUSSAGE, nicht die Formulierung: der Viewer laeuft
+        # auf Englisch, laesst sich aber auf Deutsch schalten. Beide Wendungen
+        # zaehlen, und der falsche Massstab faellt in beiden Sprachen auf.
+        elif (any(s in zeit["tip"].lower() for s in ("population", "populati"))
+              or not any(s in zeit["tip"] for s in ("own value", "eigenen Wert vom"))):
             fehler.append(f"Zell-Tooltip eines Zeitbefunds nennt den falschen "
                           f"Maßstab: {zeit['tip'][:120]}")
-        if zeit["z"] >= zeit["alle"] and "Zellpopulation" in (zeit["ovq"] or ""):
+        if zeit["z"] >= zeit["alle"] and any(s in (zeit["ovq"] or "") for s in ("Zellpopulation", "cell population")):
             fehler.append("Report mit AUSSCHLIESSLICH Zeitbefunden begründet sie "
                           "im Viewer mit der Zellpopulation — die hat ihn nie "
                           "gesehen")
@@ -620,10 +712,12 @@ def pruefe():
             fehler.append("nicht jeder Vorschlag trägt einen Sprunglink — "
                           "#27 verlangt ihn ausdrücklich")
         text = aehnlich.get("text") or ""
-        if "Länderüberlappung" not in text:
+        # Sprachtolerant: der Viewer startet auf Englisch, die Begründung
+        # steht dann in der Quellsprache.
+        if not any(s in text for s in ("Länderüberlappung", "country overlap")):
             fehler.append("die Vorschläge stehen ohne Begründung da — genau die "
                           "Black Box, die #27 ausschliesst")
-        if "keine Peer-Gruppe" not in text:
+        if not any(s in text for s in ("keine Peer-Gruppe", "not a peer group")):
             fehler.append("die Liste weist sich nicht als explorativ aus und "
                           "liest sich damit wie eine anerkannte Vergleichsgruppe")
 
@@ -636,7 +730,9 @@ def pruefe():
             fehler.append("ein Report ohne jede Zelle (#28) zeigt keinen Hinweis — "
                           "die Seite sieht aus wie ein Ladefehler, dabei ist die "
                           "Leere die Aussage")
-        elif "nichts offen" not in leer["text"]:
+        # Beide Sprachen zaehlen: die Zusage ist, dass die Leere als AUSSAGE
+        # dasteht, nicht in welcher Sprache sie das tut.
+        elif not any(s in leer["text"] for s in ("nichts offen", "discloses nothing")):
             fehler.append("der Hinweis am leeren Report (#28) sagt nicht, dass das "
                           f"Institut nichts offenlegt: {leer['text'][:90]}")
         # Kein Vorwurf: die Zulaessigkeit muss danebenstehen, sonst liest sich

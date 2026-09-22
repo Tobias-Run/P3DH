@@ -178,7 +178,7 @@ class ProvenanceTest(unittest.TestCase):
         self.assertIsNotNone(m, "Verteilungskarte nicht gefunden")
         card = m.group(1)
         self.assertIn("dsrc", card, "Grafik ohne Quellzeile")
-        for part in ("Quelle:", "${esc(cell)}", "${esc(period)}"):
+        for part in ("tr('Source:')", "${esc(cell)}", "${esc(period)}"):
             self.assertIn(part, card, f"Quellzeile ohne {part}")
 
     def test_the_acknowledgement_names_the_inspiration_and_denies_affiliation(self):
@@ -186,8 +186,16 @@ class ProvenanceTest(unittest.TestCase):
         self.assertIn("colophon", self.src)
         colophon = re.search(r'<div class="colophon">(.*?)</div>', self.src, re.S).group(1)
         self.assertIn("The Economist", colophon)
-        self.assertIn("in keiner Weise", colophon,
-                      "Danksagung ohne Verbindungs-Ausschluss")
+        # Die Formulierung darf sich ändern, die Aussage nicht. Geprüft wird
+        # deshalb der Ausschluss in beiden Sprachen — als die Oberfläche auf
+        # Englisch umgestellt wurde, schlug dieser Test zu Recht an, weil er
+        # an der deutschen Wendung hing.
+        ausschluss = ("in keiner Weise", "in no way affiliated",
+                      "not affiliated")
+        self.assertTrue(
+            any(s.lower() in colophon.lower() for s in ausschluss),
+            "Danksagung ohne Verbindungs-Ausschluss — die Namensnennung ist "
+            "zulässig, eine suggerierte Verbindung nicht")
 
 
 if __name__ == "__main__":

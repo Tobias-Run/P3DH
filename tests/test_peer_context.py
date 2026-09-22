@@ -162,8 +162,9 @@ class ViewerTest(unittest.TestCase):
         wird — ein Perzentil aus 5 Reports ist etwas anderes als eines aus 80."""
         tip = self.src[self.src.index("function peerTip("):]
         tip = tip[:tip.index("\nlet OPENTHEMES")]
-        self.assertIn("vergleichbaren Reports", tip)
-        self.assertIn("Perzentil", tip)
+        # Quellsprache Englisch, deutsche Fassung in der Uebersetzungstabelle.
+        self.assertIn("comparable reports", tip)
+        self.assertIn("percentile", tip)
 
     def test_the_context_can_be_switched_off(self):
         """Wer den reinen Meldewert sehen will, muss das koennen."""
