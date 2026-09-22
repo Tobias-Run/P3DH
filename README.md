@@ -1,264 +1,304 @@
-# EBA Pillar 3 Data Hub (P3DH) — Datenanalyse-Pipeline
+# EBA Pillar 3 Data Hub (P3DH) — data analysis pipeline
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22666716.svg)](https://doi.org/10.5281/zenodo.22666716)
+[![Tests](https://github.com/Tobias-Run/P3DH/actions/workflows/tests.yml/badge.svg)](https://github.com/Tobias-Run/P3DH/actions/workflows/tests.yml)
+[![Pipeline](https://github.com/Tobias-Run/P3DH/actions/workflows/pipeline.yml/badge.svg)](https://github.com/Tobias-Run/P3DH/actions/workflows/pipeline.yml)
 
-**Europas Banken legen alles offen. Lesen kann es fast niemand.**
+**Europe's banks disclose everything. Almost nobody can read it.**
 
-Die EBA veröffentlicht die aufsichtlichen Offenlegungen der großen EU- und
-EEA-Institute an einer Stelle, maschinenlesbar als XBRL-CSV. Das war ein
-echter Fortschritt — und es löste die falsche Hälfte des Problems. Das Portal
-gibt ein Bankarchiv nach dem anderen heraus. Ob eine Kapitalquote hoch ist, ob
-ein Länderexposure ungewöhnlich aussieht oder ob eine gemeldete Zahl überhaupt
-plausibel ist, sagt es nicht.
+The EBA publishes the supervisory disclosures of the large EU and EEA
+institutions in one place, machine-readable as XBRL-CSV. That was real
+progress — and it solved the wrong half of the problem. The portal hands out
+one bank's archive after another. Whether a capital ratio is high, whether a
+country exposure looks unusual, or whether a reported figure is plausible at
+all, it does not say.
 
-Diese Fragen brauchen die Population als Maßstab. Also haben wir sie gebaut:
-jede Einreichung geparst, jeden Datenpunkt gegen das DPM aufgelöst, jedes
-Template mit echten Zeilen- und Spaltenlabels rekonstruiert — und dann über die
-Institute hinweg verglichen.
+Those questions need the population as a yardstick. So we built it: every
+submission parsed, every data point resolved against the DPM, every template
+reconstructed with real row and column labels — and then compared across
+institutions.
 
-Der Unterschied zeigt sich schnell. Eine Meldung im Bestand weist **11,7 Bio.
-EUR fixe Vorstandsvergütung für neun Personen** aus, rund das Dreifache des
-deutschen BIP. Für sich gelesen ist das eine Zahl. Gegen 330 vergleichbare
-Meldungen gelesen, deren Median bei 1,6 Mio. EUR liegt, ist es ein Befund. Wir
-korrigieren sie nicht — wir markieren sie und sagen, warum.
+The difference shows up quickly. One report in the holdings states **EUR 11.7
+trillion in fixed management-body remuneration for nine people**, roughly three
+times German GDP. Read on its own, that is a number. Read against 330
+comparable reports whose median is EUR 1.6 million, it is a finding. We do not
+correct it — we flag it and say why.
 
-> **Aktueller Projektstatus:** siehe `STATUS.md`. Offene Arbeit läuft über
-> [GitHub-Issues](https://github.com/Tobias-Run/P3DH/issues), abgeschlossene Befunde
-> stehen als Entscheidungshistorie in `BACKLOG.md`.
-> `docs/projektbriefing_2026-06.txt` ist das ursprüngliche Briefing zum Projektstart —
-> Zeitdokument, für den heutigen Stand nicht verlässlich.
+> **Current project status:** see `STATUS.md`, which carries the dated
+> inventory. Open work is tracked as
+> [GitHub issues](https://github.com/Tobias-Run/P3DH/issues); closed findings
+> live in `BACKLOG.md` as a decision history.
+> `docs/projektbriefing_2026-06.txt` is the original project brief — a
+> historical document, not a reliable description of the current state.
 
-## 📄 Aus den Daten gelesen
+### A note on language
 
-**[Das Korrekturspiel](docs/korrekturspiel.md)** — sollte ein Institut einen
-selbst entdeckten Fehler in einer veröffentlichten Säule-3-Meldung proaktiv
-korrigieren, oder schweigen und hoffen, dass es niemand merkt? Eine
-spieltheoretische Analyse, geprüft gegen die 472 Korrekturen in unserem
-Katalog. Ergebnis: korrigieren — aber nicht, weil der Markt Ehrlichkeit
-belohnt (das ist für vier von fünf Instituten gar nicht messbar), sondern
-weil der Data Hub selbst die Entdeckungswahrscheinlichkeit verändert hat.
+Project documentation is **English**. The viewer offers a **German/English
+switch**; English is the default. Working notes and analysis write-ups under
+`docs/` are partly German — they are marked as such, and translating them is
+tracked separately.
 
-## 🔗 Live-Viewer (im Browser, ohne Installation)
+## 📄 Read out of the data
 
-**Öffentlich live:** **https://tobias-run.github.io/P3DH/** — kein Klonen/Server nötig.
+**[The Correction Game](docs/korrekturspiel.md)** *(German)* — should an
+institution proactively correct an error it found in a published Pillar 3
+report, or stay silent and hope nobody notices? A game-theoretic analysis,
+checked against the corrections in our own catalogue. Result: correct — but not
+because the market rewards honesty (for four out of five institutions that is
+not even measurable), but because the Data Hub itself changed the probability
+of detection.
 
-Der **Zweig-A-Viewer** rekonstruiert die Bank-Templates (KM1, OV1, CCR1 …) mit vollen
-Zeilen-/Spalten-Labels und bietet **Peer-Benchmark, Zeitreihen und Vergleich** über die
-Institute. Geladen: **882 Reports · 2,295 Mio. Fakten · 474 Institute · 30 Länder** über
-fünf Stichtage.
+## 🔗 Live viewer (in the browser, no installation)
 
-Das ist **keine Stichprobe**. Von den 489 Instituten im Katalog reichen 476 XBRL-CSV ein,
-und alle 476 sind verarbeitet; die übrigen 13 veröffentlichen nur qualitative PDF-Pakete
-(`*DISDOCS`, außerhalb des Scopes). Dass der Katalog 4.278 Einreichungen zählt und wir
-882 Reports zeigen, liegt an Resubmissions: 2.539 Einträge sind Korrekturfassungen
-derselben Meldung, von denen nur die neueste zählt.
+**Public:** **https://tobias-run.github.io/P3DH/** — no clone, no server.
 
-Drei Dinge, die das offizielle Portal nicht leistet:
+The **branch-A viewer** reconstructs the bank templates (KM1, OV1, CCR1 …) with
+full row and column labels and offers **peer benchmarks, time series and
+comparison** across institutions.
 
-- **Verteilung statt Rangliste.** Peer-Gruppen nach Größenklasse, Konsolidierungskreis
-  und Stichtag; Perzentilbänder statt nackter Tabellenführung. Ein Randwert liegt am Rand
-  einer Verteilung, nicht an der Spitze einer Liste. Gemessen sind rund **6 %** der
-  Reports in einer gegebenen Kennzahl Randwerte.
-- **Plausibilität gegen die Population** — markiert, nie versteckt, nie verändert.
-- **Länderexposure über Institute hinweg**: Heimatanteil, Länder-HHI und ein ehrliches
-  Qualitätsflag für den Residualbucket. Der Median liegt bei **82,3 %** Heimatanteil
-  (363 belastbare Reports).
+This is **not a sample**. Of the 489 institutions in the catalogue, 476 file
+XBRL-CSV, and all of them are processed; the remaining 13 publish only
+qualitative PDF packages (`*DISDOCS`, out of scope for branch B, analysed
+separately in [#38](https://github.com/Tobias-Run/P3DH/issues/38)). The
+catalogue counts far more submissions than we show reports, because most
+entries are corrections of the same report and only the newest one counts. The
+exact figures for the current holdings are in `STATUS.md` — they change with
+every pipeline run, which is why they are not repeated here.
 
-- **Landing:** `index.html` · **Viewer (Standard):** `processed/zweig_a/viewer_json.html`
-- **Wie es lädt:** Der JSON-Viewer holt einen schlanken `index.json` vorab und jeden Report
-  **erst beim Öffnen** als per-Report-JSON-Shard (nativ `JSON.parse`, kein CSV-Parser im
-  Browser). So skaliert er Richtung Voll-Load. Die Shards werden **aus dem Zweig-B-Parquet
-  abgeleitet** (eine Transformationsstelle) und über den Orphan-`data`-Branch via **jsDelivr**
-  ausgeliefert (Fallback: `raw.githubusercontent.com`).
-- **Einstieg** `processed/zweig_a/index.html`: leitet auf den Viewer weiter (früher die
-  Gabelseite JSON vs. CSV — der CSV-Viewer ist zurückgezogen, siehe unten).
-- **Lokal:** `python3 -m http.server 8766` im Repo-Root → `http://localhost:8766/`
-- **Gestaltung:** ein redaktionelles System (#61) — ruhiger Kopf, Serif für Überschriften,
-  ein einziger Akzent, und **Rot bedeutet Fokus, nie Wertung**. Zwei Tests halten das fest:
-  die Akzentfarbe darf nur auf Fokus-Selektoren stehen, und jede Text-auf-Fläche-Paarung
-  muss in beiden Themes WCAG AA erfüllen.
+Three things the official portal does not do:
 
-## Was es nicht ist
+- **Distribution instead of ranking.** Peer groups by size class, scope of
+  consolidation and reference date; percentile bands instead of a naked
+  leaderboard. An outlier sits at the edge of a distribution, not at the top of
+  a list.
+- **Plausibility against the population** — flagged, never hidden, never
+  altered.
+- **Country exposure across institutions**: home share, country HHI and an
+  honest quality flag for the residual bucket.
 
-Keine Aufsicht und keine Bestenliste. Die Vergleichbarkeit über Institute hinweg ist
-tatsächlich begrenzt: Rechnungslegung, Konsolidierungskreise und nationale Optionen
-unterscheiden sich, und die Meldetaxonomie hat sich mitten im Bestand geändert. Jede
-Rangliste trägt diesen Vorbehalt sichtbar mit. Uns ist ein „das können wir nicht sagen"
-lieber als eine Genauigkeit, die die Daten nicht hergeben.
+Details:
 
-Und: **Fehlt ist nicht Null.** Institute dürfen nach CRR Art. 432 rechtmäßig auslassen,
-und ein Template, das *wir* nicht platzieren können, ist unsere Lücke, nicht ihre. Der
-Viewer unterscheidet beides überall — die zwei zu vermengen hieße, Schweigen still in
-einen Befund zu verwandeln.
+- **Landing page:** `index.html` · **viewer:** `processed/zweig_a/viewer_json.html`
+- **How it loads:** the viewer fetches a slim `index.json` upfront and each
+  report **only when opened**, as a per-report JSON shard (native `JSON.parse`,
+  no CSV parser in the browser). The shards are **derived from the branch-B
+  parquet** (a single transformation point) and served from the orphan `data`
+  branch via **jsDelivr** (fallback: `raw.githubusercontent.com`).
+- **Locally:** `python3 -m http.server 8766` in the repository root →
+  `http://localhost:8766/`
+- **Design:** an editorial system (#61) — quiet header, serif headings, a single
+  accent, and **red means focus, never judgement**. Two tests hold that: the
+  accent colour may appear only on focus selectors, and every text-on-surface
+  pairing must meet WCAG AA in both themes.
 
-## ⚠ Disclaimer / Datenquellen
+## What this is not
 
-Unabhängiges, **nicht-kommerzielles Forschungs-/Bildungsprojekt**, **nicht** mit EBA oder
-GLEIF verbunden. Alle externen Daten sind **öffentlich** und werden ausschließlich zu
-**wissenschaftlichen/Bildungszwecken** genutzt (Fair Use / Forschung). Quellen: EBA Pillar 3
-Data Hub (© EBA), EBA DPM 2.0, GLEIF (LEI-Namen). Bereitstellung „as is", ohne Gewähr —
-Zahlen stets gegen die offizielle EBA-Quelle prüfen; keine Anlage-/Rechtsberatung.
-Volltext: **`DISCLAIMER.md`**.
+Not supervision and not a league table. Comparability across institutions is
+genuinely limited: accounting frameworks, scopes of consolidation and national
+options differ, and the reporting taxonomy changed in the middle of the
+holdings. Every ranking carries that caveat visibly. We prefer a "we cannot say
+that" to a precision the data does not support.
 
-## Lizenz & Zitation
+And: **missing is not zero.** Institutions may lawfully omit under CRR Art. 432,
+and a template *we* cannot place is our gap, not theirs. The viewer distinguishes
+the two everywhere — conflating them would quietly turn silence into a finding.
 
-Der **Code** steht unter der **MIT-Lizenz** (`LICENSE`) — `scripts/`, `tests/`,
-`.github/`, der Viewer, die Landing-Pages und die Projekttexte.
+## ⚠ Disclaimer / data sources
 
-Die MIT-Lizenz gilt **nicht** für das Material, das aus fremden Quellen stammt und hier
-nur weitergereicht wird: `codebook/dpm_codebook.csv` und `codebook/template_titles.csv`
-(EBA DPM 2.0), `interim/edap_recon/manifest_*.csv` (EDAP-Katalog), `processed/lei_names.csv`
-und `processed/entity_meta.csv` (GLEIF) sowie der veröffentlichte Datensatz selbst. Daran
-halten wir keine Rechte und vergeben keine. Die Abgrenzung steht vollständig in
-`DISCLAIMER.md`.
+An independent, **non-commercial research and education project**, **not**
+affiliated with the EBA or GLEIF. All external data are **public** and used
+exclusively for **scientific and educational purposes**. Sources: EBA Pillar 3
+Data Hub (© EBA), EBA DPM 2.0, GLEIF (LEI names). Provided "as is", without
+warranty — always check figures against the official EBA source; no investment
+or legal advice. Full text: **`DISCLAIMER.md`**.
 
-Zum Zitieren der Software: `CITATION.cff` (GitHub zeigt daraus „Cite this repository").
-**Die ausgewerteten Offenlegungsdaten sind gesondert zu zitieren** — sie stammen von der
-EBA, nicht von uns.
+## Licence & citation
 
-Die Software ist über Zenodo archiviert. Der **Concept-DOI**
-[10.5281/zenodo.22666716](https://doi.org/10.5281/zenodo.22666716) zeigt immer auf die
-neueste Fassung; wer einen bestimmten Stand zitiert, nimmt den Versions-DOI aus dem
-jeweiligen Zenodo-Eintrag. Der DOI deckt die **Software** ab — nicht den Datensatz.
+The **code** is under the **MIT licence** (`LICENSE`) — `scripts/`, `tests/`,
+`.github/`, the viewer, the landing pages and the project texts.
 
-Der Datensatz selbst ist in `docs/datensatz.md` beschrieben: alle 29 Spalten mit Herkunft
-und Semantik, dazu die dokumentierten Fallen an einer Stelle. Wie ein Release entsteht,
-steht in `docs/release.md`.
+The MIT licence does **not** cover material that originates elsewhere and is
+only passed through here: `codebook/dpm_codebook.csv` and
+`codebook/template_titles.csv` (EBA DPM 2.0), `interim/edap_recon/manifest_*.csv`
+(EDAP catalogue), `processed/lei_names.csv` and `processed/entity_meta.csv`
+(GLEIF), and the published dataset itself. We hold no rights to those and grant
+none. The full delineation is in `DISCLAIMER.md`.
 
-## Zwei Ausgabe-Zweige, ein gemeinsamer Kern
+To cite the software: `CITATION.cff` (GitHub renders "Cite this repository"
+from it). **The disclosure data analysed here must be cited separately** — it
+comes from the EBA, not from us.
 
-Der teure, fehleranfällige Teil (DPM-Join, Einheiten-Semantik, `filing-indicators`,
-„fehlt ≠ Null") existiert **nur einmal**. Er erzeugt eine Long-Form-Wahrheit, die zu
-**Zweig B (Parquet)** verdichtet wird — und aus diesem Parquet leiten sich **beide** Ausgaben
-ab. Viewer und Analytik teilen so **eine Transformationsstelle** und können nicht auseinanderlaufen:
+The software is archived on Zenodo. The **concept DOI**
+[10.5281/zenodo.22666716](https://doi.org/10.5281/zenodo.22666716) always points
+at the latest version; to cite a specific state, take the version DOI from the
+corresponding Zenodo record. The DOI covers the **software**, not the dataset.
+
+The dataset itself is described in `docs/datensatz.md` *(German)*: every column
+with provenance and semantics, plus the documented traps in one place. How a
+release is produced is in `docs/release.md` *(German)*.
+
+## Two output branches, one shared core
+
+The expensive, error-prone part (DPM join, unit semantics, `filing-indicators`,
+"missing ≠ zero") exists **only once**. It produces a long-form truth that is
+condensed into **branch B (parquet)** — and **both** outputs derive from that
+parquet. Viewer and analytics therefore share **one transformation point** and
+cannot drift apart:
 
 ```
-/raw  ─►  Parser + DPM-Join (Codebook)  ─►  long_form_raw.csv  ─►  ZWEIG B: /processed/long/p3dh_long.parquet
-                                                                    (self-contained, DuckDB; EUR-normalisiert +
-                                                                     Original, LEI/Entity-Keys, Flags, FX)
+/raw  ─►  parser + DPM join (codebook)  ─►  long_form_raw.csv  ─►  BRANCH B: /processed/long/p3dh_long.parquet
+                                                                    (self-contained, DuckDB; EUR-normalised +
+                                                                     original, LEI/entity keys, flags, FX)
                                                                           │  build_zweig_a_shards.py
                                                                           ▼
-                                                          ZWEIG A: JSON-Shards (data-Branch → jsDelivr)
-                                                          - index.json (Report-Meta) + codebook.json
-                                                          - benchmark.json (KM1/OV1-Head, lazy)
-                                                          - reports/<key>.json (per Report, lazy)
-                                                          → viewer_json.html rekonstruiert die Templates,
-                                                            Benchmark / Zeitreihen / Vergleich im Browser
+                                                          BRANCH A: JSON shards (data branch → jsDelivr)
+                                                          - index.json (report metadata) + codebook.json
+                                                          - benchmark.json (cross-report head templates, lazy)
+                                                          - reports/<key>.json (per report, lazy)
+                                                          → viewer_json.html reconstructs the templates;
+                                                            benchmark / time series / comparison in the browser
 ```
 
-Zweig A wird **immer aus** Zweig B abgeleitet, nie parallel geparst. Dass dabei nichts
-driftet, ist keine Behauptung mehr: `scripts/check_branch_parity.py` vergleicht je (Report,
-Template) die **Multimenge** aller `(Zeile, Spalte, Wert)` zwischen den Shards und
-`long_form_raw.csv` — als Zeichenkette, nicht über `float()`, damit auch eine
-Formatierungsänderung auffällt. Dazu je (Report, Template) die **Währung**: gleiche Zahl in
-anderer Einheit ist derselbe Fehler, und die Wertprüfung allein war dafür blind (#55 —
-9.086 Fakten mit dem falschen Kurs, Parität grün). Läuft in der Pipeline **vor** dem
-Publish (33 s über 882 Reports / 2,3 Mio. Zellen / 41.902 Währungspaare) und bricht ab,
-bevor abweichende Zahlen veröffentlicht werden.
+Branch A is **always derived from** branch B, never parsed in parallel. That
+nothing drifts is no longer a claim: `scripts/check_branch_parity.py` compares,
+per (report, template), the **multiset** of all `(row, column, value)` triples
+between the shards and `long_form_raw.csv` — as strings, not via `float()`, so
+that even a formatting change is caught. Plus, per (report, template), the
+**currency**: the same number in a different unit is the same error, and the
+value check alone was blind to it (#55 — 9,086 facts with the wrong rate, parity
+green). It runs in the pipeline **before** publishing and aborts before
+diverging figures go out.
 
-> **Zurückgezogen:** der Legacy-CSV-Viewer (`viewer.html`) las die Long-Form direkt im
-> Browser und war als unabhängige Gegenprobe gedacht. Bei 413 MB und 2,3 Mio. Fakten
-> stirbt der Tab am Speicher — auch lokal —, und er war 13 Commits hinterher (ohne offene
-> Zeilenachse, Zell-Diskriminator, Coverage-Zustände). Eine Gegenprobe, die planmäßig
-> abweicht, ist keine. Die Prüfung oben leistet dasselbe ohne Browser und schärfer.
+One deliberate exception, added after pipeline run #14 failed on it: a report
+whose filing indicators are **all false** is a complete and lawful statement —
+"I disclose nothing". The shard builder creates an **empty** shard for it (#28)
+so the institution does not vanish from the viewer, and the parity check allows
+a shard without a long-form counterpart **exactly when it carries no cells**.
+A shard with cells and no counterpart remains an error.
 
-## Lokal arbeiten
+> **Withdrawn:** the legacy CSV viewer (`viewer.html`) read the long form
+> directly in the browser and was meant as an independent cross-check. At
+> 413 MB and 2.3 million facts the tab dies of memory — locally too — and it was
+> 13 commits behind (no open row axis, no cell discriminator, no coverage
+> states). A cross-check that diverges by design is not one. The check above
+> does the same thing without a browser, and more sharply.
 
-Der Zustand der Pipeline (Long-Form, Coverage-Matrix, Zweig-B-Parquet) liegt **nicht** im
-Repo, sondern auf dem `data`-Branch unter `state/`. Ein frischer Clone holt ihn sich:
+## Working locally
+
+The pipeline state (long form, coverage matrix, branch-B parquet) does **not**
+live in the repository but on the `data` branch under `state/`. A fresh clone
+fetches it:
 
 ```bash
-bash scripts/fetch_state.sh     # ~300 MB, danach ist alles lokal auswertbar
+bash scripts/fetch_state.sh     # ~300 MB, after that everything is analysable locally
 ```
 
-Danach genügt `python3 scripts/build_zweig_b.py` bzw. DuckDB direkt auf dem Parquet.
-Die DPM-Access-DB (720 MB) wird nur zum *Neubauen* des Codebooks gebraucht — das
-fertige `codebook/dpm_codebook.csv` liegt im Repo.
+Then `python3 scripts/build_zweig_b.py`, or DuckDB directly on the parquet. The
+DPM Access database (720 MB) is needed only to *rebuild* the codebook — the
+finished `codebook/dpm_codebook.csv` is in the repository.
 
-## Projektstruktur
+## Repository layout
 
-| Ordner | Inhalt |
+| Directory | Contents |
 |---|---|
-| `raw/` | Roh-XBRL-CSV-Pakete, **immutable**, nie überschreiben (gitignored) |
-| `interim/edap_recon/` | Kataloge/Manifeste (Voll-Harvest, Wellen, latest-wins) |
-| `processed/long/` | **Zweig B**: `p3dh_long.parquet` — die gejointe Wahrheit, speist die Shards (gitignored, regenerierbar) |
-| `processed/zweig_a/` | **Zweig A**: `viewer_json.html` + Weiterleitung `index.html`; die JSON-Shards liegen auf dem `data`-Branch |
-| `codebook/` | DPM-Mapping Code → Label/Einheit/Titel |
-| `scripts/` | Harvester, Downloader, Parser, Zweig-B/A-Builder, Publish-Skript |
-| `tests/` | Testsuite (1.316 Tests), läuft bei jedem Push |
-| `docs/` | Decision-Memos, Format-Notizen, Query-Beispiele, Projektbriefing, Analysen (`korrekturspiel.md`) |
+| `raw/` | raw XBRL-CSV packages, **immutable**, never overwritten (gitignored) |
+| `interim/edap_recon/` | catalogues and manifests (full harvest, waves, latest-wins) |
+| `processed/long/` | **branch B**: `p3dh_long.parquet` — the joined truth that feeds the shards (gitignored, regenerable) |
+| `processed/zweig_a/` | **branch A**: `viewer_json.html` + redirect `index.html`; the JSON shards live on the `data` branch |
+| `codebook/` | DPM mapping: code → label / unit / title |
+| `scripts/` | harvester, downloader, parser, branch-B/A builders, publish script |
+| `tests/` | the test suite; runs on every push (count: see the Tests badge above) |
+| `docs/` | decision memos, format notes, query examples, project brief, analyses |
 
-## Phasen
+## Phases
 
-- **Phase 0** — Scoping & Zugangsklärung ✅ → `docs/phase0_decision_memo.md`
-- **Phase 1** — Ingestion: Voll-Katalog-Harvester (`harvest_catalog_query.py`) + wellenweiser Download ✅
-- **Phase 2** — Parsing & DPM-Join → Codebook + Long-Form ✅
-- **Phase 3** — Zweig B (Parquet/DuckDB) + Zweig A (JSON-Viewer, aus Zweig B gespeist) ✅ ·
-  RF-4.1↔4.2-Brücke gebaut (5.277 beobachtete Zellen: 5.091 stabil, 63 umgebunden,
-  123 mehrdeutig) und im Viewer markiert (#26) ✅ — die 123 liegen sämtlich in LIQ2
-  (`74.00.a`–`f`), festgehalten als #70
-- **Phase 4** — Explorationen: sieben Benchmark-Profile (KM1, Headroom, Risiko, Liquidität,
-  NPL/CQ3, ESG/41.00, Vergütung/REM1) ✅ · Perzentilbänder je Peer-Gruppe ✅ ·
-  Plausibilitätsprofil (#17) ✅ · Footprint-Kennzahlen (#12) ✅ · Clustering und
-  Transparenz-Matrix offen
+- **Phase 0** — scoping and access clarification ✅ → `docs/phase0_decision_memo.md`
+- **Phase 1** — ingestion: full catalogue harvester (`harvest_catalog_query.py`) + wave-wise download ✅
+- **Phase 2** — parsing and DPM join → codebook + long form ✅
+- **Phase 3** — branch B (parquet/DuckDB) + branch A (JSON viewer, fed from branch B) ✅ ·
+  RF 4.1↔4.2 bridge built (5,277 observed cells: 5,091 stable, 63 rebound,
+  123 ambiguous) and flagged in the viewer (#26) ✅ — the 123 all sit in LIQ2
+  (`74.00.a`–`f`), tracked as #70
+- **Phase 4** — explorations: eight benchmark profiles (KM1, headroom, risk,
+  liquidity, NPL/CQ3, **credit-deterioration chain**, ESG/41.00,
+  remuneration/REM1) ✅ · percentile bands per peer group ✅ · plausibility
+  profile (#17) ✅ · footprint metrics (#12) ✅ · peer clustering (#11/#13) ✅ ·
+  cross-corpus analyses: correction direction, country exposure, report volume
+  against disclosure breadth ✅
 
-## Automatisierte Pipeline (GitHub Actions)
+## Automated pipeline (GitHub Actions)
 
-`.github/workflows/pipeline.yml` fährt die ganze Kette ohne den Laptop. Ausgelöst wird
-manuell (`workflow_dispatch`). Ein wöchentlicher Cron liegt auskommentiert bereit; die
-Vorbedingung „ein manueller Lauf muss sauber durchlaufen" ist erfüllt (Lauf #6, 10:45
-inklusive vollem Reparse), offen ist nur noch die Entscheidung über den Harvest (#8):
+`.github/workflows/pipeline.yml` runs the whole chain without the laptop. It
+fires **weekly by cron (Mondays 04:00 UTC)** and can be started manually via
+`workflow_dispatch`:
 
 ```
-fetch_state.sh → plan_delta.py → download (nur Neues) → parse (inkrementell)
+fetch_state.sh → plan_delta.py → download (new only) → parse (incremental)
    → build_zweig_b.py → build_zweig_a_shards.py → publish_data_branch.sh
 ```
 
-Der Lauf ist **zustandslos**: `raw/` startet leer, der Bestand kommt aus `state/` auf dem
-`data`-Branch, und die Coverage-Matrix sagt, was schon verarbeitet ist — geladen wird nur
-die Differenz. Drei Schalter: `harvest` (Katalog neu ernten, opt-in, weil der
-Playwright-/Power-BI-Teil der fragilste ist), `full_reparse` und `refresh_codebook`.
+The run is **stateless**: `raw/` starts empty, the holdings come from `state/` on
+the `data` branch, and the coverage matrix says what has already been processed —
+only the difference is downloaded. Three switches: `harvest` (re-harvest the
+catalogue, opt-in because the Playwright/Power-BI part is the most fragile),
+`full_reparse` and `refresh_codebook`.
 
-Ob voll oder inkrementell gearbeitet wird, entscheidet der Lauf allerdings **nicht** allein
-an diesen Schaltern, sondern einmal vor dem Download — und Download, Parse und Gate lesen
-dieselbe Antwort. Ein per Commit geändertes Codebook erzwingt den vollen Reparse von sich
-aus, weil neben dem Bestand der Fingerabdruck des Codebooks liegt, mit dem er entstanden
-ist (#57). Ein **Sanity-Gate** vergleicht in jedem Modus den Bestand vorher/nachher und
-bricht vor dem Publish ab, wenn er inkrementell schrumpft.
+Whether the run works fully or incrementally is decided **once, before the
+download** — and download, parse and gate all read that same answer. A codebook
+changed by commit forces a full reparse on its own, because the holdings carry
+the fingerprint of the codebook they were built with (#57). A **sanity gate**
+compares the holdings before and after in either mode and aborts before
+publishing if they shrink incrementally. The step order is verified as a graph
+(`check_pipeline_order.py`, run in `tests.yml`).
 
-> Der `data`-Branch wird **force-gepusht und trägt genau einen Commit**. Er hat keine
-> Historie: jeder Lauf ersetzt den vorigen Stand vollständig. Wer einen bestimmten Stand
-> zitieren will, braucht das Release-Asset, nicht den Branch.
+Two further workflows run on their own schedules:
 
-## Arbeitsprinzipien
+- `.github/workflows/disdocs.yml` — monthly, measures the qualitative PDF corpus
+  (#38). It downloads roughly 2 GB and would otherwise dominate the main chain's
+  runtime; it works **incrementally** and only measures what it does not
+  already know.
+- `.github/workflows/cron_watch.yml` — daily, asks **whether the weekly run
+  happened at all**. The monitor inside `pipeline.yml` counts *failed* scheduled
+  runs and therefore depends on a run having taken place; a schedule that dies
+  silently is invisible to it. GitHub disables scheduled workflows in
+  repositories that see no activity for 60 days, without notice — this watcher
+  exists for exactly that class of failure.
 
-1. Reproduzierbarkeit: Roh-Layer immutable, jede Transformation skriptiert —
-   und **byte-genau**: gleiche Eingaben, gleiche Ausgaben. Die Regel, die das
-   trägt: *jedes Feld, das in die Ausgabe fließt, gehört in den `ORDER BY`.*
-   Durchgesetzt von `scripts/determinism.py` im Ausführungspfad, nicht bloß im
-   Test. Warum das ein eigenes Prinzip verdient hat und dreimal verletzt wurde:
-   `docs/reproduzierbarkeit.md`.
-2. Annahmen offenlegen (im Code/README), nicht bei Kleinigkeiten nachfragen.
-3. „Fehlt" ≠ „Null" durchgängig erhalten (`filing-indicators`) — **auch in der
-   Oberfläche**: der JSON-Viewer zeigt je Report, welche Templates bewusst nicht
-   offengelegt wurden, wo unser Bestand lückt und wo die Meldung sich selbst
-   widerspricht. Ohne Deklaration wird **keine** Aussage getroffen.
-4. Vergleichbarkeitsfallen (Rechnungslegung, Konsolidierung, nationale Optionen) als
-   Caveat in jeder Analyse benennen. **Neu seit der offenen Zeilenachse (#56):**
-   Templates mit offener Achse zerfallen in zwei Klassen. Bei CCyB1 (`67.01.A`)
-   ist die Zeile ein ISO-Ländercode und damit institutsübergreifend vergleichbar;
-   bei CC2 (`66.02`) und LI2/LI3 (`64.01`, `64.02`) ist sie der **Bilanzposten
-   des Instituts**, also Freitext in Landessprache — 5.324 verschiedene Zeilen
-   allein in `64.02`. Diese sind innerhalb eines Reports auswertbar, aber ohne
-   vorherige Zuordnung **nicht** für Peer-Vergleiche.
-5. Resubmissions: pro (Institut, Modul, Stichtag) zählt nur die neueste Einreichung
-   („latest wins"). Der **vollständige Katalog** inkl. älterer Fassungen bleibt als
-   Audit-Trail in `interim/edap_recon/manifest_full.csv` (4.278 Einreichungen, Voll-Harvest
-   via `harvest_catalog_query.py`).
+> The `data` branch is **force-pushed and carries exactly one commit**. It has no
+> history: every run replaces the previous state entirely. To cite a specific
+> state, use the release asset, not the branch.
+
+## Working principles
+
+1. Reproducibility: the raw layer is immutable, every transformation is
+   scripted — and **byte-exact**: same inputs, same outputs. The rule that
+   carries it: *every field that flows into the output belongs in the
+   `ORDER BY`.* Enforced by `scripts/determinism.py` in the execution path, not
+   merely in a test. Why this earned its own principle, and how it was violated
+   three times: `docs/reproduzierbarkeit.md` *(German)*.
+2. Disclose assumptions (in code and README); do not ask about trivia.
+3. Preserve "missing" ≠ "zero" throughout (`filing-indicators`) — **including in
+   the interface**: the viewer shows, per report, which templates were
+   deliberately not disclosed, where our holdings have gaps, and where the
+   report contradicts itself. Without a declaration, **no** statement is made.
+4. Name comparability traps (accounting, consolidation, national options) as a
+   caveat in every analysis. **Since the open row axis (#56):** templates with an
+   open axis fall into two classes. In CCyB1 (`67.01.A`) the row is an ISO country
+   code and therefore comparable across institutions; in CC2 (`66.02`) and
+   LI2/LI3 (`64.01`, `64.02`) it is the institution's **own balance-sheet line**,
+   i.e. free text in the local language — 5,324 distinct rows in `64.02` alone.
+   Those are analysable within one report, but **not** for peer comparison
+   without prior mapping.
+5. Resubmissions: per (institution, module, reference date) only the newest
+   submission counts ("latest wins"). The **full catalogue**, including older
+   versions, remains as an audit trail in
+   `interim/edap_recon/manifest_full.csv` — and it is what makes the correction
+   analysis possible in the first place, because superseded versions are still
+   retrievable.
 
 ---
 
-*Gestaltung inspiriert von The Economist — dem wir die Einsicht verdanken, dass eine
-Grafik eine Meinung haben darf, solange sie ihre Quelle nennt. Mit der Publikation in
-keiner Weise verbunden; Schriften und Farbwerte sind eigene, und das rote Rechteck haben
-wir ihnen gelassen.*
+*Design inspired by The Economist — to whom we owe the insight that a chart may
+hold an opinion as long as it names its source. In no way affiliated with the
+publication; typefaces and colour values are our own, and we left them the red
+rectangle.*
