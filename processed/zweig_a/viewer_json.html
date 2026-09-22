@@ -645,7 +645,22 @@ const DE = {
   "⚠ Scale": "⚠ Skala",
   "⚠ Scale?": "⚠ Skala?",
   "Loading labels …": "Beschriftungen werden geladen …",
-  "Labels could not be loaded:": "Beschriftungen nicht ladbar:"
+  "Labels could not be loaded:": "Beschriftungen nicht ladbar:",
+
+  // --- Benchmark und Vergleich ---
+  "Benchmark": "Benchmark",
+  "Profile": "Profil",
+  "No metric registry in the codebook — benchmark unavailable.":
+    "Keine Kennzahlen-Registry im Codebook — Benchmark nicht verfügbar.",
+  "No reports pinned. Click the <b>⊞</b> symbol on up to 4 reports in the list on the left.":
+    "Keine Reports angepinnt. In der Liste links das <b>⊞</b>-Symbol an bis zu 4 Reports klicken.",
+  "Ratio from KM1, in per cent": "Quote aus KM1, in Prozent",
+  "Ratio, in per cent": "Verhältniszahl, in Prozent",
+  "Share of the total risk exposure amount (TREA)": "Anteil an der Gesamtrisikoposition (TREA)",
+  "Amounts in bn EUR (ECB rate)": "Beträge in Mrd. EUR (EZB-Kurs)",
+  "{0} reports with template {1}": "{0} Reports mit Template {1}",
+  "None yet. What is stored is the current link — so it can be passed on as well.":
+    "Noch keine. Gespeichert wird der aktuelle Link — er lässt sich also auch weitergeben."
 };
 /* `t()` nimmt Platzhalter `{0}`, `{1}` … — und das ist kein Komfort, sondern
    Notwendigkeit: Deutsch und Englisch stellen die Satzteile anders. Ein aus
@@ -2102,7 +2117,7 @@ function bmProfiles(){
   for(const p of PROFILES){
     const cols=p.metrics.map(id=>METRICDOC.get(id)).filter(Boolean);
     if(!cols.length) continue;
-    out[p.id]={label:p.label, tpl:p.tpl, trendRow:p.trend||null, note:p.note||'',
+    out[p.id]={label:(LANG==='en'&&p.en)?p.en:p.label, tpl:p.tpl, trendRow:p.trend||null, note:p.note||'',
                defaultSort:{col:p.sort[0], dir:p.sort[1]}, cols,
                // Plausibilitaets-Tor (#18): Kennzahlen, deren `plausible`-
                // Korridor ueber die Aufnahme in die Liste entscheidet.
@@ -2523,9 +2538,9 @@ function distributionRow(rows, prof){
     return nf(v,d);
   };
   // Anmerkung unter dem Titel: klärt die Größe, bevor die Zahl gelesen wird.
-  const NOTE={pct:'Quote aus KM1, in Prozent', ratio:'Verhältniszahl, in Prozent',
-              shareOfTrea:'Anteil an der Gesamtrisikoposition (TREA)',
-              pp:'Differenz in Prozentpunkten', eur:'Beträge in Mrd. EUR (EZB-Kurs)',
+  const NOTE={pct:tr('Ratio from KM1, in per cent'), ratio:tr('Ratio, in per cent'),
+              shareOfTrea:tr('Share of the total risk exposure amount (TREA)'),
+              pp:'Differenz in Prozentpunkten', eur:tr('Amounts in bn EUR (ECB rate)'),
               eurPlain:'Betrag je Kopf, in EUR (EZB-Kurs)', num:'Absolutzahl'};
   // Quellzeile je Grafik — die exakte Herkunft, nicht nur die Institution:
   // Template, Zelle, Stichtage, Zahl der Reports. Das ist die
@@ -2569,7 +2584,7 @@ async function renderBenchmark(){
     if(VIEW!=='benchmark') return;   // navigated away while loading
   }
   const prof=bmProf();
-  if(!prof){ main.innerHTML='<div class="status">Keine Kennzahlen-Registry im Codebook — Benchmark nicht verfügbar.</div>'; return; }
+  if(!prof){ main.innerHTML='<div class="status">'+esc(tr('No metric registry in the codebook — benchmark unavailable.'))+'</div>'; return; }
   bmSortOr(prof);
   const gross=benchmarkRows();
   // Das Plausibilitaets-Tor greift VOR allem anderen: eine Meldung in falscher
@@ -2597,8 +2612,8 @@ async function renderBenchmark(){
   // gibt es keine Metrik und damit keinen Marker.
   const sortCol=spalten.find(c=>c.id===bmSort.col);
   const fmarks=sortCol?fenceOutliers(allRows, sortCol.id):new Map();
-  let h=`<div class="rhead"><h2>Benchmark</h2></div>
-    <div class="bmbar"><label class="ctl">Profil: <select id="bmProfile">${profSel}</select></label>
+  let h=`<div class="rhead"><h2>${tr('Benchmark')}</h2></div>
+    <div class="bmbar"><label class="ctl">${tr('Profile')}: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
       <label class="ctl" title="Blendet Reports aus, in denen die Plausibilitätsprüfung Werte weit ausserhalb ihrer Zellpopulation gefunden hat. Perzentile bleiben auf der vollen Menge gerechnet."><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> auffällige einklappen${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
       <details class="ctl colsel"><summary title="Welche Kennzahlen die Tabelle zeigt. Die Auswahl steht im Link und im CSV-Export — ein geteilter Link zeigt sonst andere Spalten als die Ansicht, aus der er stammt.">Spalten <span class="cl">(${spalten.length}/${prof.cols.length})</span></summary>
@@ -2650,7 +2665,7 @@ async function renderBenchmark(){
     if(prof.trendRow) h+=`<td>${r._trend?sparkline(r._trend,null,null,r._breaks):''}</td>`;
     h+='</tr>';
   }
-  h+=`</tbody></table><div class="meta" style="margin-top:.5rem">${rows.length} Reports mit Template ${esc(prof.tpl)}</div>`;
+  h+=`</tbody></table><div class="meta" style="margin-top:.5rem">${tr('{0} reports with template {1}', rows.length, esc(prof.tpl))}</div>`;
   h+=gateNote(prof, gatedOut, gross.length);
   main.innerHTML=h;
   document.getElementById('bmProfile').addEventListener('change',e=>{
@@ -2803,8 +2818,8 @@ async function renderCompare(){
   const main=document.getElementById('main');
   const reps=[...PINS].map(byKey).filter(Boolean);
   if(!reps.length){
-    main.innerHTML=`<div class="rhead"><h2>Vergleich</h2></div>
-      <div class="status">Keine Reports angepinnt. In der Liste links das <b>⊞</b>-Symbol an bis zu 4 Reports klicken.</div>`;
+    main.innerHTML=`<div class="rhead"><h2>${tr('Compare')}</h2></div>
+      <div class="status">${tr('No reports pinned. Click the <b>⊞</b> symbol on up to 4 reports in the list on the left.')}</div>`;
     return;
   }
   const need=reps.filter(r=>!r.loaded);
@@ -3060,8 +3075,7 @@ function sichtenZeichnen(){
         ? SICHTEN.map(v=>`<div class="sichtzeile${v.h===jetzt?' aktiv':''}">
             <a href="${esc(v.h)}" data-go="${esc(v.n)}">${esc(v.n)}</a>
             <button class="sichtweg" data-weg="${esc(v.n)}" title="Diese Sicht entfernen">×</button></div>`).join('')
-        : `<div class="cl" style="padding:.3rem 0">Noch keine. Gespeichert wird der
-             aktuelle Link — er laesst sich also auch weitergeben.</div>`);
+        : `<div class="cl" style="padding:.3rem 0">${tr('None yet. What is stored is the current link — so it can be passed on as well.')}</div>`);
   const feld=document.getElementById('sichtName');
   const legeAn=()=>{
     const neu=sichtSpeichern(feld.value, location.hash||'');

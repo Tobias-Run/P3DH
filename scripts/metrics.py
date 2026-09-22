@@ -711,16 +711,16 @@ METRICS = [
 # Benchmark-Profile: nur noch eine Reihenfolge von Kennzahl-IDs. Vorher
 # definierte `BM_PROFILES` im Viewer dieselben Kennzahlen ein zweites Mal.
 PROFILES = [
-    {"id": "km1", "label": "KM1-Kennzahlen", "tpl": _KM1, "trend": "0050",
+    {"id": "km1", "label": "KM1-Kennzahlen", "en": "KM1 key metrics", "tpl": _KM1, "trend": "0050",
      "sort": ["cet1", -1],
      "metrics": ["cet1", "t1", "tc", "lev", "lcr", "nsfr", "trea", "cet1_amt"]},
-    {"id": "headroom", "label": "Kapital-Headroom", "tpl": _KM1, "trend": "0070",
+    {"id": "headroom", "label": "Kapital-Headroom", "en": "Capital headroom", "tpl": _KM1, "trend": "0070",
      "sort": ["hr", 1],
      "metrics": ["cet1", "tc", "ocr", "hr", "cet1_srep", "trea"]},
-    {"id": "risk", "label": "Risikoprofil (OV1)", "tpl": _OV1, "trend": None,
+    {"id": "risk", "label": "Risikoprofil (OV1)", "en": "Risk profile (OV1)", "tpl": _OV1, "trend": None,
      "sort": ["sh_credit", -1],
      "metrics": ["sh_credit", "sh_ccr", "sh_cva", "sh_market", "sh_op", "trea"]},
-    {"id": "npl", "label": "Kreditqualität (NPL, CQ3)", "tpl": _CQ3, "trend": None,
+    {"id": "npl", "label": "Kreditqualität (NPL, CQ3)", "en": "Credit quality (NPL, CQ3)", "tpl": _CQ3, "trend": None,
      "sort": ["npl", -1],
      "metrics": ["npl", "npe_amt", "pe_amt", "npl_hh", "npl_corp"]},
     # Die Kette aus #16. Grundlage ist CQ3, weil dort die NPL-Quote steht und
@@ -728,7 +728,7 @@ PROFILES = [
     # Quellzellen dazu. Sortiert nach der Vorstufe, nicht nach der NPL-Quote:
     # die NPL-Rangliste gibt es schon im Profil daneben, und der Zweck dieses
     # Profils ist die Stufe, die man dort NICHT sieht.
-    {"id": "kette", "label": "Kreditverschlechterungs-Kette", "tpl": _CQ3,
+    {"id": "kette", "label": "Kreditverschlechterungs-Kette", "en": "Credit-deterioration chain", "tpl": _CQ3,
      "trend": None, "sort": ["forb_pe", -1],
      # Fremdtemplates ausdruecklich deklariert. Die Regel ist sonst: eine
      # Spalte kommt aus dem eigenen Template, sonst bleibt sie fuer die
@@ -744,12 +744,12 @@ PROFILES = [
              "getrennten Dateien, die nie zusammengeführt werden. "
              "Vollständige Auswertung: processed/credit_chain.csv.",
      "metrics": ["npl", "forb_pe", "forb_npe", "npl_cov", "npe_amt", "pe_amt"]},
-    {"id": "esg", "label": "ESG — Klima-Transitionsrisiko", "tpl": _ESG, "trend": None,
+    {"id": "esg", "label": "ESG — Klima-Transitionsrisiko", "en": "ESG — climate transition risk", "tpl": _ESG, "trend": None,
      "sort": ["esg_green", -1],
      "note": "Nur Verhältniszahlen: die Absolutbeträge in 41.00 haben "
              "uneinheitliche Meldeeinheiten.",
      "metrics": ["esg_green", "esg_paris", "esg_stage2", "esg_npe"]},
-    {"id": "liq", "label": "Liquidität", "tpl": _KM1, "trend": "0320",
+    {"id": "liq", "label": "Liquidität", "en": "Liquidity", "tpl": _KM1, "trend": "0320",
      "sort": ["lcr", -1],
      "metrics": ["lcr", "nsfr", "hqla", "outflow", "asf"]},
     # Vergütung (#18). `gate` ist hier keine Kür: eine Vergütungs-Rangliste mit
@@ -759,7 +759,7 @@ PROFILES = [
     # alle vier Stufen zugleich (35 von 59), was die Diagnose stützt: das ist
     # eine falsche Meldeeinheit für das ganze Template, kein einzelner Wert.
     # Der Viewer weist die Ausschlussquote aus und nennt die Ausgeschlossenen.
-    {"id": "verg", "label": "Vergütung (REM1)", "tpl": _REM, "trend": None,
+    {"id": "verg", "label": "Vergütung (REM1)", "en": "Remuneration (REM1)", "tpl": _REM, "trend": None,
      "sort": ["rem_head_mb", -1],
      "gate": ["rem_head_sb", "rem_head_mb", "rem_head_sm", "rem_head_ot"],
      "note": "Vergütung pro Kopf, nicht pro Person: „identified staff“ ist eine "
