@@ -593,7 +593,27 @@ const DE = {
   "This report does not file consistently in one currency. The one named first carries the majority of facts; the deviating templates use their own rate (#55).":
     "Dieser Report meldet nicht durchgehend in einer Währung. Die zuerst genannte trägt die Mehrheit der Fakten; die abweichenden Templates rechnen mit ihrem eigenen Kurs (#55).",
   "{0} hits of {1}": "{0} Treffer von {1}",
-  "{0} of {1} templates with data": "{0} von {1} Templates mit Daten"
+  "{0} of {1} templates with data": "{0} von {1} Templates mit Daten",
+
+  // --- Plausibilitaetsmarken (#17, #24, #36) ---
+  "that lie outside the distribution of their cell population":
+    "die ausserhalb der Verteilung ihrer Zellpopulation liegen",
+  "that jump by orders of magnitude against the same report at the neighbouring reference date":
+    "die gegenüber demselben Report am Nachbarstichtag um Größenordnungen springen",
+  "that lie outside the distribution of their cell population, or jump against the neighbouring reference date":
+    "die ausserhalb der Verteilung ihrer Zellpopulation liegen oder gegenüber dem Nachbarstichtag springen",
+  "In template {0} of this report the plausibility check found values {1}":
+    "Die Plausibilitätsprüfung hat in Template {0} dieses Reports Werte gefunden, {1}",
+  ", at least one of them far outside": ", davon mindestens einen weit ausserhalb",
+  " ({0} finding(s) in the report{1}, largest deviation {2} orders of magnitude). This may well be a correct peculiarity.":
+    " ({0} Befund(e) im Report{1}, größte Abweichung {2} Größenordnungen). Das kann eine korrekte Besonderheit sein.",
+  ", {0} of them from the time comparison": ", davon {0} aus dem Zeitvergleich",
+  "△△ strongly conspicuous": "△△ stark auffällig",
+  "△ conspicuous": "△ auffällig",
+  "No template matches the filter.": "Kein Template passt zum Filter.",
+  "No template in this block matches the filter.": "Kein Template dieses Blocks passt zum Filter.",
+  "No analysable cells for this block — it is declared, but without data in our holdings.":
+    "Für diesen Block liegen keine auswertbaren Zellen vor — er ist deklariert, aber ohne Daten in unserem Bestand."
 };
 /* `t()` nimmt Platzhalter `{0}`, `{1}` … — und das ist kein Komfort, sondern
    Notwendigkeit: Deutsch und Englisch stellen die Satzteile anders. Ein aus
@@ -1859,7 +1879,7 @@ async function renderReport(rep){
       if(OPENSEARCH && mh.some(m=>m.id===OPENSEARCH)) head+=metricDetail(rep, OPENSEARCH);
     }
     c.innerHTML=head+(h||'<div class="status">Keine Templates in diesem Report.</div>');
-    if(f && !nHit) c.insertAdjacentHTML('afterbegin','<div class="status">Kein Template passt zum Filter.</div>');
+    if(f && !nHit) c.insertAdjacentHTML('afterbegin','<div class="status">'+esc(tr('No template matches the filter.'))+'</div>');
     // offene Blöcke jetzt füllen; der Rest wartet auf sein toggle-Ereignis
     c.querySelectorAll('details.theme[open]').forEach(d=>fillTheme(rep,d,(f?hits:all).get(d.dataset.t)||[]));
     c._lists=(f?hits:all); c._filtered=!!f;
@@ -1884,8 +1904,8 @@ async function renderReport(rep){
     if(!SHAPE) ensureShapes().then(()=>{ if(body.dataset.done==='1') redrawBody(body,list,rep); });
     body.innerHTML=list.map(tid=>renderTemplate(tid, rep.templates.get(tid), rep)).join('')
       || `<div class="status">${cont&&cont._filtered
-            ? 'Kein Template dieses Blocks passt zum Filter.'
-            : 'Für diesen Block liegen keine auswertbaren Zellen vor — er ist deklariert, aber ohne Daten in unserem Bestand.'}</div>`;
+            ? tr('No template in this block matches the filter.')
+            : tr('No analysable cells for this block — it is declared, but without data in our holdings.')}</div>`;
     body.dataset.done='1';
   };
   draw();
@@ -2325,21 +2345,20 @@ const flaggedHigh=(q,tpl)=>!!(q && q.th && q.th.includes(tpl));
    Zellpopulationen nichts zu tun. */
 function befundHerkunft(q){
   const z=q&&q.z||0, n=q&&q.n||0;
-  if(!z) return 'die ausserhalb der Verteilung ihrer Zellpopulation liegen';
-  if(z>=n) return 'die gegenüber demselben Report am Nachbarstichtag um '
-                + 'Größenordnungen springen';
-  return 'die ausserhalb der Verteilung ihrer Zellpopulation liegen oder '
-       + 'gegenüber dem Nachbarstichtag springen';
+  if(!z) return tr('that lie outside the distribution of their cell population');
+  if(z>=n) return tr('that jump by orders of magnitude against the same report at the neighbouring reference date');
+  return tr('that lie outside the distribution of their cell population, or jump against the neighbouring reference date');
 }
 function qualityBadge(q, tpl){
   if(!flaggedFor(q,tpl)) return '';
   const hi=flaggedHigh(q,tpl);
-  return `<span class="qb" title="Die Plausibilitätsprüfung hat in Template ${tpl} dieses Reports `
-       + `Werte gefunden, ${befundHerkunft(q)}`
-       + (hi ? `, davon mindestens einen weit ausserhalb` : '')
-       + ` (${q.n} Befund(e) im Report${q.z?`, davon ${q.z} aus dem Zeitvergleich`:''}, `
-       + `größte Abweichung ${q.d} Größenordnungen). `
-       + `Das kann eine korrekte Besonderheit sein.">${hi?'△△ stark auffällig':'△ auffällig'}</span>`;
+  return `<span class="qb" title="`
+       + esc(tr('In template {0} of this report the plausibility check found values {1}',
+                tpl, befundHerkunft(q)))
+       + (hi ? esc(tr(', at least one of them far outside')) : '')
+       + esc(tr(' ({0} finding(s) in the report{1}, largest deviation {2} orders of magnitude). This may well be a correct peculiarity.',
+                q.n, q.z?tr(', {0} of them from the time comparison', q.z):'', q.d))
+       + `">${hi?tr('△△ strongly conspicuous'):tr('△ conspicuous')}</span>`;
 }
 /* Ausschluss ausweisen, nicht still filtern (#18). Wer aus der Liste faellt,
    steht namentlich darunter — mit dem Wert, der ihn herausgeworfen hat. Sonst
