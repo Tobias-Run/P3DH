@@ -660,7 +660,30 @@ const DE = {
   "Amounts in bn EUR (ECB rate)": "Beträge in Mrd. EUR (EZB-Kurs)",
   "{0} reports with template {1}": "{0} Reports mit Template {1}",
   "None yet. What is stored is the current link — so it can be passed on as well.":
-    "Noch keine. Gespeichert wird der aktuelle Link — er lässt sich also auch weitergeben."
+    "Noch keine. Gespeichert wird der aktuelle Link — er lässt sich also auch weitergeben.",
+
+  // --- Reportansicht, Fortsetzung ---
+  "Rows = axis values, ordered by amount (the filing prescribes no order here) · {0} values":
+    "Zeilen = Achsenwerte, nach Betrag geordnet (die Meldung gibt hier keine Reihenfolge vor) · {0} Werte",
+  "<b>{0}</b> of <b>{1}</b> declared templates disclosed":
+    "<b>{0}</b> von <b>{1}</b> deklarierten Templates offengelegt",
+  "Similar institutions by country profile": "Ähnliche Institute nach Länderprofil",
+  "not reported": "nicht gemeldet",
+  "largest value of this column in the current selection":
+    "grössten Werts dieser Spalte in der aktuellen Auswahl",
+  "derived from {0}": "abgeleitet aus {0}",
+  "The list is sorted by this column — the order is half the statement, and a ranking without its reason would be impossible to follow in a shared link.":
+    "Nach dieser Spalte wird sortiert — die Reihenfolge ist die halbe Aussage, und eine Rangfolge ohne ihren Grund wäre im geteilten Link nicht nachvollziehbar.",
+  "Error while loading:": "Fehler beim Laden:",
+  "This institution discloses nothing for this reference date.":
+    "Dieses Institut legt für diesen Stichtag nichts offen.",
+  "It filed and declared all <b>{0}</b> templates as not disclosed. That is lawful: the CRR grants relief under Art. 433a–c, and Art. 432 permits omitting non-material information.":
+    "Es hat eingereicht und alle <b>{0}</b> Templates als nicht offengelegt deklariert. Das ist zulässig: die CRR lässt nach Art. 433a–c Erleichterungen zu, und Art. 432 erlaubt das Weglassen nicht wesentlicher Angaben.",
+  "The full declaration is listed below.": "Die Deklaration steht unten vollständig.",
+  "<b>Binding for this institution</b> is the reported overall requirement:":
+    "<b>Für dieses Institut bindend</b> ist die gemeldete Gesamtanforderung:",
+  "(KM1 r{0} — Pillar 2 add-on and combined buffer requirement included). It refers to exactly this ratio. The floor above applies to everyone alike and is practically never the binding limit.":
+    "(KM1 r{0} — Säule-2-Aufschlag und kombinierte Pufferanforderung eingeschlossen). Sie bezieht sich auf genau diese Quote. Der Boden oben gilt für alle gleich und wird praktisch nie zur wirksamen Grenze."
 };
 /* `t()` nimmt Platzhalter `{0}`, `{1}` … — und das ist kein Komfort, sondern
    Notwendigkeit: Deutsch und Englisch stellen die Satzteile anders. Ein aus
@@ -1400,8 +1423,7 @@ function renderTemplate(tid, cells, rep){
   // Bei offener Achse ist die Reihenfolge unsere Wahl, nicht die des Modells —
   // das gehoert dazugesagt, sonst wirkt sie wie die Meldereihenfolge.
   const axisNote = axisMap
-    ? `<div class="dimbar"><span class="cl">Zeilen = Achsenwerte, nach Betrag geordnet
-       (die Meldung gibt hier keine Reihenfolge vor) · ${rows.length} Werte</span></div>` : '';
+    ? `<div class="dimbar"><span class="cl">${tr('Rows = axis values, ordered by amount (the filing prescribes no order here) · {0} values', rows.length)}</span></div>` : '';
   // Sagen, bevor gelesen wird: in diesem Template ist die Platzierung an N
   // Koordinaten nicht eindeutig (#54).
   const nAmbig=AMBIG.has(tid)?Object.keys(AMBIG.get(tid)).length:0;
@@ -1483,11 +1505,9 @@ function leermeldung(rep){
   const n=Object.keys(rep.coverage||{}).length;
   if(!n) return `<div class="leer"><b>${tr('No data for this report.')}</b>
     ${tr('We hold neither a figure nor a declaration for it — that is a gap on our side, not a statement about the institution.')}</div>`;
-  return `<div class="leer"><b>Dieses Institut legt für diesen Stichtag nichts offen.</b>
-    Es hat eingereicht und alle <b>${n}</b> Templates als nicht offengelegt
-    deklariert. Das ist zulässig: die CRR lässt nach Art. 433a–c Erleichterungen
-    zu, und Art. 432 erlaubt das Weglassen nicht wesentlicher Angaben.
-    <span class="cl">Die Deklaration steht unten vollständig.</span></div>`;
+  return `<div class="leer"><b>${tr('This institution discloses nothing for this reference date.')}</b>
+    ${tr('It filed and declared all <b>{0}</b> templates as not disclosed. That is lawful: the CRR grants relief under Art. 433a–c, and Art. 432 permits omitting non-material information.', n)}
+    <span class="cl">${tr('The full declaration is listed below.')}</span></div>`;
 }
 function coverageBlock(rep){
   const cov=rep.coverage||{};
@@ -1517,7 +1537,7 @@ function coverageBlock(rep){
   }
   if(!h) return '';
   return `<div class="covwrap"><div class="covhead">${tr('Disclosure scope per filing indicators:')}
-    <b>${reported}</b> von <b>${keys.length}</b> deklarierten Templates offengelegt${
+    ${tr('<b>{0}</b> of <b>{1}</b> declared templates disclosed', reported, keys.length)}${
     conflict?` · <b>${conflict}</b> widersprüchlich (unten)`:''}</div>${h}</div>`;
 }
 /* ================= Überblick (#47, R2) ====================================
@@ -1691,11 +1711,9 @@ function metricDetail(rep, id){
       h+=`<p>Gesetzlicher Boden: <b>${esc(nf(doc.floor,1))}${NBSP}${esc(mt.unit)}</b>
         <span class="cl">— ${esc(doc.floor_src||'')}</span></p>`;
     if(own!=null)
-      h+=`<p><b>Für dieses Institut bindend</b> ist die gemeldete Gesamtanforderung:
+      h+=`<p>${tr('<b>Binding for this institution</b> is the reported overall requirement:')}
         <b>${esc(nf(own*100,2))}${NBSP}%</b>
-        <span class="cl">(KM1 r${esc(doc.own_req[1])} — Säule-2-Aufschlag und kombinierte
-        Pufferanforderung eingeschlossen). Sie bezieht sich auf genau diese Quote. Der
-        Boden oben gilt für alle gleich und wird praktisch nie zur wirksamen Grenze.</span></p>`;
+        <span class="cl">${tr('(KM1 r{0} — Pillar 2 add-on and combined buffer requirement included). It refers to exactly this ratio. The floor above applies to everyone alike and is practically never the binding limit.', esc(doc.own_req[1]))}</span></p>`;
     if(doc.note) h+=`<p class="mnote">${doc.note.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')}</p>`;
   }
 
@@ -1799,7 +1817,7 @@ function similarBlock(rep){
         grund?' · '+esc(grund.split('|').join(', ')):''}${
         bez&&BEZ[bez]?' · '+esc(BEZ[bez]):''}</span></li>`;
   };
-  return `<details class="simblock"><summary>Ähnliche Institute nach Länderprofil
+  return `<details class="simblock"><summary>${tr('Similar institutions by country profile')}
       <span class="cl">(${s.length})</span></summary>
     <div class="ovmiss">Gemessen an der Länderverteilung des Exposures (CCyB1
       <code>67.01.A</code>): der Wert ist der Anteil, der bei beiden Häusern in
@@ -1840,7 +1858,7 @@ async function renderReport(rep){
   main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2>
     <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
     <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency ${
-      curLabel(rep) ? `<b>${esc(curLabel(rep))}</b>` : '<span class="cl">nicht gemeldet</span>'}${
+      curLabel(rep) ? `<b>${esc(curLabel(rep))}</b>` : `<span class="cl">${tr('not reported')}</span>`}${
       isMixedCur(rep)?` <span class="cl" title="${tr('This report does not file consistently in one currency. The one named first carries the majority of facts; the deviating templates use their own rate (#55).')}">— je Template verschieden</span>`:''}
     · Framework <b>${esc(rep.framework)}</b></div></div>
     ${leermeldung(rep)}
@@ -2514,7 +2532,7 @@ function sizeBar(v, max){
   if(!(max>0) || v==null || !isFinite(v) || v<=0) return '';
   const pct=Math.max(1, Math.min(100, v/max*100));
   return `<span class="szb" aria-hidden="true" title="${esc(nf(pct,0,1))}${NBSP}% des`
-       + ` groessten Werts dieser Spalte in der aktuellen Auswahl">`
+       + ` ${tr('largest value of this column in the current selection')}">`
        + `<span class="szf" style="width:${pct}%"></span></span>`;
 }
 
@@ -2557,7 +2575,7 @@ function distributionRow(rows, prof){
     // bei einer abgeleiteten Kennzahl die beteiligten.
     const cs=c.cells||[];
     const cell = cs.length===1 ? `${cs[0][0]} · r${cs[0][1]} c${cs[0][2]}`
-               : cs.length ? `abgeleitet aus ${[...new Set(cs.map(x=>x[0]))].join(', ')}`
+               : cs.length ? `${tr('derived from {0}', [...new Set(cs.map(x=>x[0]))].join(', '))}`
                : prof.tpl;
     cards+=`<div class="dcard${c.id===bmSort.col?' on':''}" data-k="${esc(c.id)}" tabindex="0"
       title="Verteilung über die ${d.n} angezeigten Reports. Die Achse ist an den Tukey-Zäunen abgeschnitten; was darüber hinausgeht, steht als Balken im Randstreifen — als Anzahl, nicht als Position. Klick sortiert die Liste nach dieser Spalte.">
@@ -2620,7 +2638,7 @@ async function renderBenchmark(){
         <div class="colbox">${prof.cols.map(c=>{
           const an=spalten.some(x=>x.id===c.id);
           const fest=c.id===bmSort.col;
-          return `<label${fest?' class="fest" title="Nach dieser Spalte wird sortiert — die Reihenfolge ist die halbe Aussage, und eine Rangfolge ohne ihren Grund wäre im geteilten Link nicht nachvollziehbar."':''}>
+          return `<label${fest?(' class="fest" title="'+esc(tr('The list is sorted by this column — the order is half the statement, and a ranking without its reason would be impossible to follow in a shared link.'))+'"'):''}>
             <input type="checkbox" data-col="${esc(c.id)}"${an?' checked':''}${fest?' disabled':''}> ${esc(c.label)}</label>`;
         }).join('')}</div></details>
       <button class="ctl" id="bmCsv" title="Die Tabelle in ihrem aktuellen Zustand als CSV. Caveats, Filter und die Ansichts-URL stehen als Kopfkommentar darin, Skalen- und Plausibilitätsbefunde als eigene Spalten — eine nackte Tabelle verlöre genau die Warnungen, die hier danebenstehen.">⭳ CSV</button>
@@ -3129,7 +3147,7 @@ async function init(){
     requestIdleCallback ? requestIdleCallback(()=>ensureLabels().catch(()=>{}))
                         : setTimeout(()=>ensureLabels().catch(()=>{}), 0);
   }catch(err){
-    document.getElementById('main').innerHTML='<div class="status">Fehler beim Laden: '+esc(err.message)+
+    document.getElementById('main').innerHTML='<div class="status">'+esc(tr('Error while loading:'))+' '+esc(err.message)+
       '<br><br>Vom Repo-Root ausliefern: <code>python3 -m http.server 8766</code> → <code>/processed/zweig_a/viewer_json.html</code></div>';
   }
 }

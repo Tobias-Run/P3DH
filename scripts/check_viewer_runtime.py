@@ -680,7 +680,9 @@ def pruefe():
             fehler.append("ein Report ohne jede Zelle (#28) zeigt keinen Hinweis — "
                           "die Seite sieht aus wie ein Ladefehler, dabei ist die "
                           "Leere die Aussage")
-        elif "nichts offen" not in leer["text"]:
+        # Beide Sprachen zaehlen: die Zusage ist, dass die Leere als AUSSAGE
+        # dasteht, nicht in welcher Sprache sie das tut.
+        elif not any(s in leer["text"] for s in ("nichts offen", "discloses nothing")):
             fehler.append("der Hinweis am leeren Report (#28) sagt nicht, dass das "
                           f"Institut nichts offenlegt: {leer['text'][:90]}")
         # Kein Vorwurf: die Zulaessigkeit muss danebenstehen, sonst liest sich
