@@ -142,6 +142,52 @@ class DocumentationTest(unittest.TestCase):
         self.assertIn("gesondert zu zitieren", self.doc)
         self.assertIn("MIT-Lizenz", self.doc)
 
+    def test_every_artefact_in_processed_is_described(self):
+        """Der Anlass: sechs Dateien lagen in `processed/` und kamen in
+        `datensatz.md` nicht vor — darunter die 433 MB grosse Rohform und die
+        Stammdatentabelle, an der die Peer-Gruppen hängen.
+
+        Eine fehlende Auswertung fällt auf, weil niemand sie findet. Ein
+        fehlender EINGANG fällt nicht auf: die Datei liegt da, sieht aus wie
+        ein Ergebnis und wird als eines gelesen. Deshalb ist die Lücke hier
+        ein Testfehler und keine Fleissaufgabe — und deshalb prüft der Test
+        das VERZEICHNIS gegen das Dokument und nicht eine gepflegte Liste
+        gegen eine zweite gepflegte Liste.
+        """
+        verzeichnis = ROOT / "processed"
+        if not verzeichnis.is_dir():
+            self.skipTest("processed/ nicht vorhanden")
+        artefakte = sorted(f.name for f in verzeichnis.iterdir()
+                           if f.suffix in (".csv", ".parquet"))
+        if not artefakte:
+            self.skipTest("keine Artefakte gebaut")
+        fehlt = [n for n in artefakte if n not in self.doc]
+        self.assertEqual(
+            fehlt, [],
+            "Artefakte in processed/ ohne Erwähnung in docs/datensatz.md: "
+            f"{fehlt}")
+
+    def test_an_artefact_out_of_the_pipeline_says_so(self):
+        """Zwei der sechs werden nicht mehr gebaut. Eine Datei, die im Repo
+        liegt und nicht mehr entsteht, ist genau die Art Altbestand, die
+        jemand später für aktuell hält — also muss es dastehen, und zwar
+        neben der Datei und nicht in einer Fussnote am Ende.
+        """
+        workflow = WORKFLOW.read_text(encoding="utf-8")
+        for name, datei in (("lei_names.csv", "fetch_lei_names.py"),
+                            ("manifest_with_metadata.csv",
+                             "extract_manifest_metadata.py")):
+            self.assertNotIn(datei, workflow,
+                             f"{datei} läuft wieder in der Pipeline — dann "
+                             f"ist der Hinweis zu {name} in datensatz.md falsch")
+            abschnitt = self.doc.split(f"### `{name}`")
+            self.assertEqual(len(abschnitt), 2,
+                             f"{name} hat keinen eigenen Abschnitt")
+            # Bis zur naechsten Ueberschrift derselben Ebene.
+            text = abschnitt[1].split("\n### ")[0]
+            self.assertIn("Nicht in der Pipeline", text,
+                          f"{name} wird nicht mehr gebaut, sagt es aber nicht")
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

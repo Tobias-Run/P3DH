@@ -1,9 +1,19 @@
 """Resolve the LEIs seen in the data to legal entity names via the public GLEIF API.
 
 Reads the distinct LEIs from processed/long_form_raw.csv and writes
-processed/lei_names.csv (lei, legal_name, jurisdiction) for the viewer to consume.
-GLEIF is the authoritative LEI register; the API is public (no auth, no rate key needed
-for this volume).
+processed/lei_names.csv (lei, legal_name, jurisdiction). GLEIF is the authoritative
+LEI register; the API is public (no auth, no rate key needed for this volume).
+
+NOT in the pipeline, and no longer the viewer's source of names. That was the
+original purpose, and this docstring claimed it long after it stopped being true:
+since processed/entity_meta.csv the names come from the EDAP catalogue, which
+covers all 508 institutions instead of the 174 resolved here.
+
+What the file is still for is the thing entity_meta cannot be — an INDEPENDENT
+register. Where EDAP and GLEIF disagree about an institution's name, that is an
+observation, and it needs two sources to exist. README.md and DISCLAIMER.md carry
+it as a provenance record for exactly that reason. Run it to refresh that
+cross-check, not to feed the viewer.
 """
 
 from pathlib import Path
