@@ -613,7 +613,39 @@ const DE = {
   "No template matches the filter.": "Kein Template passt zum Filter.",
   "No template in this block matches the filter.": "Kein Template dieses Blocks passt zum Filter.",
   "No analysable cells for this block — it is declared, but without data in our holdings.":
-    "Für diesen Block liegen keine auswertbaren Zellen vor — er ist deklariert, aber ohne Daten in unserem Bestand."
+    "Für diesen Block liegen keine auswertbaren Zellen vor — er ist deklariert, aber ohne Daten in unserem Bestand.",
+
+  // --- Skalenbefund (#83) ---
+  "the total risk exposure amount lies below any professionally possible floor":
+    "der Gesamtrisikobetrag liegt unter jeder fachlich möglichen Grenze",
+  "the values lie consistently below the median of their cell population":
+    "die Werte liegen durchgängig unter dem Median ihrer Zellpopulation",
+  "a jump against the institution’s own other reference dates":
+    "ein Sprung gegen die eigenen anderen Stichtage",
+  "almost every value contradicts the declared reporting precision":
+    "der erklärten Meldegenauigkeit widerspricht fast jeder Wert",
+  "a jump against the same templates at the institution’s own other reference dates":
+    "ein Sprung gegen dieselben Templates an den eigenen anderen Stichtagen",
+  "in {0}": "in {0}",
+  "across the whole report": "im gesamten Report",
+  "Estimated factor {0}.": "Geschätzter Faktor {0}.",
+  "Ratios are unaffected: a uniform factor cancels out in a quotient.":
+    "Verhältniszahlen bleiben davon unberührt: ein gleichmässiger Faktor kürzt sich im Quotienten heraus.",
+  "⚠ Scale finding: the <b>absolute amounts</b> {0} are {1} too small by a factor.":
+    "⚠ Skalenbefund: die <b>absoluten Beträge</b> {0} sind {1} um einen Faktor zu klein.",
+  "with high confidence": "mit hoher Sicherheit",
+  "presumably": "mutmasslich",
+  "Reason: {0}.": "Grund: {0}.",
+  "Ratios and relative figures of this report remain valid; nothing is corrected.":
+    "Quoten und Verhältnisse dieses Reports bleiben gültig; korrigiert wird nichts.",
+  "The absolute amounts of this template are too small by a factor":
+    "Die absoluten Beträge dieses Templates sind um einen Faktor zu klein",
+  " (estimated {0})": " (geschätzt {0})",
+  ". Ratios are not affected.": ". Verhältniszahlen sind davon nicht betroffen.",
+  "⚠ Scale": "⚠ Skala",
+  "⚠ Scale?": "⚠ Skala?",
+  "Loading labels …": "Beschriftungen werden geladen …",
+  "Labels could not be loaded:": "Beschriftungen nicht ladbar:"
 };
 /* `t()` nimmt Platzhalter `{0}`, `{1}` … — und das ist kein Komfort, sondern
    Notwendigkeit: Deutsch und Englisch stellen die Satzteile anders. Ein aus
@@ -1891,9 +1923,9 @@ async function renderReport(rep){
     // Ohne Labels waere das eine Tabelle aus nackten Codes — sichtbar falsch,
     // aber nicht als Fehler erkennbar. Also warten statt raten.
     if(!LABELS_LOADED){
-      body.innerHTML='<div class="status">Beschriftungen werden geladen …</div>';
+      body.innerHTML='<div class="status">'+esc(tr('Loading labels …'))+'</div>';
       try{ await ensureLabels(); }
-      catch(e){ body.innerHTML='<div class="status">Beschriftungen nicht ladbar: '
+      catch(e){ body.innerHTML='<div class="status">'+esc(tr('Labels could not be loaded:'))+' '
         +esc(e.message)+'</div>'; return; }
       if(body.dataset.done==='1') return;   // inzwischen anderweitig gefuellt
     }
@@ -2310,29 +2342,33 @@ function flaggedFor(q, tpl){ return !!(q && q.t && q.t.includes(tpl)); }
    andere. `sc.t` leer heisst „gilt für den ganzen Report", nicht „für kein
    Template" — wer das verwechselt, markiert ausgerechnet die schwersten Fälle
    gar nicht. */
-const SIG_TEXT={untergrenze:'der Gesamtrisikobetrag liegt unter jeder fachlich möglichen Grenze',
-  versatz:'die Werte liegen durchgängig unter dem Median ihrer Zellpopulation',
-  zeitreihe:'ein Sprung gegen die eigenen anderen Stichtage',
-  decimals:'der erklärten Meldegenauigkeit widerspricht fast jeder Wert',
-  template_sprung:'ein Sprung gegen dieselben Templates an den eigenen anderen Stichtagen'};
+const SIG_TEXT=()=>({untergrenze:tr('the total risk exposure amount lies below any professionally possible floor'),
+  versatz:tr('the values lie consistently below the median of their cell population'),
+  zeitreihe:tr('a jump against the institution’s own other reference dates'),
+  decimals:tr('almost every value contradicts the declared reporting precision'),
+  template_sprung:tr('a jump against the same templates at the institution’s own other reference dates')});
 const scaleFor=(q,tpl)=>!!(q && q.sc && (!q.sc.t.length || q.sc.t.includes(tpl)));
 function scaleNote(sc){
-  const wo=sc.t.length?`in ${esc(sc.t.join(', '))}`:'im gesamten Report';
-  const gruende=sc.s.split('|').filter(Boolean).map(x=>SIG_TEXT[x]||x);
-  const f=sc.f?` Geschätzter Faktor <b>${esc(sc.f)}</b>.`:'';
-  return `<div class="ovq ovsc" title="Verhältniszahlen bleiben davon unberührt: ein gleichmässiger Faktor kürzt sich im Quotienten heraus.">`
-    +`⚠ Skalenbefund: die <b>absoluten Beträge</b> ${wo} sind `
-    +(sc.u==='skaliert'?'mit hoher Sicherheit':'mutmasslich')
-    +` um einen Faktor zu klein.${f}`
-    +(gruende.length?` <span class="cl">Grund: ${esc(gruende.join('; '))}.</span>`:'')
-    +` <span class="cl">Quoten und Verhältnisse dieses Reports bleiben gültig; korrigiert wird nichts.</span></div>`;
+  const wo=sc.t.length?tr('in {0}', esc(sc.t.join(', '))):tr('across the whole report');
+  const tab=SIG_TEXT();
+  const gruende=sc.s.split('|').filter(Boolean).map(x=>tab[x]||x);
+  const f=sc.f?' '+tr('Estimated factor {0}.', `<b>${esc(sc.f)}</b>`):'';
+  return `<div class="ovq ovsc" title="`
+    + esc(tr('Ratios are unaffected: a uniform factor cancels out in a quotient.')) + `">`
+    + tr('⚠ Scale finding: the <b>absolute amounts</b> {0} are {1} too small by a factor.',
+         wo, sc.u==='skaliert'?tr('with high confidence'):tr('presumably'))
+    + f
+    + (gruende.length?` <span class="cl">${esc(tr('Reason: {0}.', gruende.join('; ')))}</span>`:'')
+    + ` <span class="cl">${esc(tr('Ratios and relative figures of this report remain valid; nothing is corrected.'))}</span></div>`;
 }
 function scaleBadge(q, tpl){
   if(!scaleFor(q,tpl)) return '';
   const sc=q.sc;
-  return `<span class="qb sb" title="Die absoluten Beträge dieses Templates sind um einen Faktor zu klein`
-       + (sc.f?` (geschätzt ${sc.f})`:'') + `. Verhältniszahlen sind davon nicht betroffen.`
-       + `">${sc.u==='skaliert'?'⚠ Skala':'⚠ Skala?'}</span>`;
+  return `<span class="qb sb" title="`
+       + esc(tr('The absolute amounts of this template are too small by a factor'))
+       + (sc.f?esc(tr(' (estimated {0})', sc.f)):'')
+       + esc(tr('. Ratios are not affected.'))
+       + `">${sc.u==='skaliert'?tr('⚠ Scale'):tr('⚠ Scale?')}</span>`;
 }
 /* Abstufung seit #53: `th` fuehrt die Templates mit mindestens einem
    hoch-Befund. Vorher war jeder Befund gleich stark markiert, weil der
