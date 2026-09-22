@@ -105,6 +105,7 @@
          padding:0 4px;margin-left:5px;vertical-align:1px;color:var(--muted)}
   .badge.gs{border-color:var(--ink2);color:var(--ink2)}
   .badge.it{border-color:var(--line);color:var(--muted)}
+  .badge.al{border-color:var(--blue2);color:var(--blue);text-transform:none;letter-spacing:0}
   .pinbtn{position:absolute;top:.45rem;right:.4rem;border:1px solid var(--line);background:var(--card);color:var(--muted);
     border-radius:5px;width:22px;height:22px;font-size:12px;line-height:1;cursor:pointer;padding:0}
   .pinbtn:hover{color:var(--blue);border-color:var(--blue)}
@@ -571,6 +572,8 @@ const DE = {
   "Full": "Voll",
   "files the G-SII disclosure module": "reicht das G-SII-Offenlegungsmodul ein",
   "pinned for comparison": "für Vergleich angepinnt",
+  "maintained short name — the filing runs under the registered name":
+    "gepflegter Kurzname — die Meldung läuft unter dem Registernamen",
   "{0} reference date": "{0} Stichtag",
   "{0} reference dates": "{0} Stichtage",
   "in EUR (ECB rate)": "in EUR (EZB-Kurs)",
@@ -1066,6 +1069,15 @@ function bankAliases(entityID){
  * "BayernLB", "Bayern LB" und "NORD/LB" gleichermaessen, und keine dieser
  * Schreibweisen ist falsch. Normalisiert fallen sie zusammen. */
 const alnum=s=>s.toLowerCase().replace(/[^0-9a-zà-ÿ&]/g,'');
+/* Der Kurzname gehoert auch SICHTBAR an die Zeile, nicht nur in den Index.
+   Wer „Helaba" sucht, bekommt sonst eine Zeile mit „Landesbank Hessen-
+   Thueringen Girozentrale" und muss GLAUBEN, dass das dieselbe Bank ist. Der
+   Registername bleibt die Ueberschrift — er ist das, was in der Meldung
+   steht; der Kurzname steht daneben und belegt den Treffer. */
+function aliasMarke(entityID){
+  const a=bankAliases(entityID);
+  return a.length ? `<span class="badge al" title="${esc(tr('maintained short name — the filing runs under the registered name'))}">${esc(a.join(' · '))}</span>` : '';
+}
 function aliasTrifft(entityID,q){
   const k=alnum(q);
   return k.length>=2 && bankAliases(entityID).some(a=>alnum(a).includes(k));
@@ -1170,7 +1182,15 @@ function buildFromIndex(idx, codebook){
   for(const m of (reg.metrics||[])) METRICDOC.set(m.id, m);
   PROFILES=reg.profiles||[];
   for(const [tid,cells] of Object.entries(codebook.ambig||{})) AMBIG.set(tid,cells);
-  for(const [lei,m] of Object.entries(idx.names)) NAMES.set(lei,{name:m.name, jur:m.jur});
+  /* `alias` MUSS hier mit. Der Shard-Builder schreibt die gepflegten
+     Kurznamen in den Index, und dieses Neuaufbauen des Datensatzes hat sie
+     wieder weggeworfen — die Suche lief dann gegen ein Feld, das es im
+     Speicher nicht mehr gab, und fand nichts. Feldweise kopieren ist hier
+     Absicht (der Index traegt mehr, als der Viewer braucht); der Preis ist,
+     dass ein neues Feld genau so vergessen werden kann. Deshalb steht die
+     Suche nach einem gepflegten Alias in der Laufzeitpruefung. */
+  for(const [lei,m] of Object.entries(idx.names))
+    NAMES.set(lei,{name:m.name, jur:m.jur, alias:m.alias});
   for(const [lei,m] of Object.entries(idx.meta))  META.set(lei, m);
   for(const [k,rate] of Object.entries(idx.fx))   FX.set(k, rate);
   UA=new Set(idx.ua||[]);   // Sperrliste aus check_unit_consistency.py (#9)
@@ -1373,7 +1393,7 @@ function renderReportList(){
     h+=`<div class="report${active?' active':''}" data-h="#r/${g.lei}/${cur.refPeriod}/${g.scope}">
       <button class="pinbtn${PINS.has(repKey(cur))?' on':''}" data-k="${esc(repKey(cur))}"
         title="${esc(tr('Pin reference date {0} for comparison', cur.refPeriod))}">⊞</button>
-      <div class="lei">${esc(g.name)}${badges}</div>
+      <div class="lei">${esc(g.name)}${aliasMarke(cur.entityID)}${badges}</div>
       <div class="rmeta">${esc(m.country||'')}${m.country?' · ':''}${esc(refScope(g.scope))} · ${tr(g.reps.length>1?'{0} reference dates':'{0} reference date', g.reps.length)}</div>
       <div class="dates">${chips}</div>
       ${active?`<div class="rdet">${cur.nt} Templates · ${esc(curLabel(cur))} · Framework ${esc(cur.framework)}</div>`:''}

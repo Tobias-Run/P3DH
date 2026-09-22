@@ -244,6 +244,35 @@ class AliasVerdrahtungTest(unittest.TestCase):
                       "Die Kurznamen stehen im Index, werden aber nicht "
                       "durchsucht — gepflegt und wirkungslos")
 
+    def test_the_index_entry_survives_the_load(self):
+        """Die Naht, an der es gebrochen ist.
+
+        Jedes GLIED war geprüft: die gepflegte Datei, der Lader, dass der
+        Shard-Builder `alias` in den Index schreibt, dass der Viewer danach
+        sucht. Dazwischen baut `buildFromIndex()` den Datensatz feldweise neu
+        auf — und liess `alias` weg. Die Suche lief gegen ein Feld, das es im
+        Speicher nicht mehr gab, und fand nichts. Alle Tests grün.
+
+        Feldweise kopieren bleibt richtig (der Index trägt mehr, als der
+        Viewer braucht). Der Preis ist, dass ein Feld genau so vergessen
+        werden kann — deshalb steht es hier, und deshalb TIPPT die
+        Laufzeitprüfung einen gepflegten Kurznamen ein, statt eine
+        Verdrahtung nachzuweisen.
+        """
+        zeile = next((z for z in self.src.splitlines()
+                      if "NAMES.set(lei," in z), "")
+        self.assertIn("alias", zeile,
+                      "buildFromIndex() übernimmt `alias` nicht aus dem Index "
+                      f"— gebaut wird: {zeile.strip()!r}")
+
+    def test_the_short_name_is_visible_not_only_searchable(self):
+        """Wer „Helaba" sucht, bekommt eine Zeile mit „Landesbank Hessen-
+        Thüringen Girozentrale". Ohne den Kurznamen daneben muss er GLAUBEN,
+        dass das dieselbe Bank ist."""
+        self.assertIn("function aliasMarke(entityID)", self.src)
+        self.assertIn("aliasMarke(cur.entityID)", self.src,
+                      "die Marke ist gebaut, steht aber an keiner Zeile")
+
     def test_spelling_of_the_query_does_not_matter(self):
         """„Bayern LB", „BayernLB" und „NORD/LB" sind alle richtig geschrieben.
         Verglichen wird deshalb ohne Leer- und Sonderzeichen."""

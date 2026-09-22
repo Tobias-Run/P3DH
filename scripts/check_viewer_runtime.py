@@ -298,6 +298,82 @@ def pruefe():
                 ".map(r => r.name.split('/').pop())")
             print(f"  beim Start geladen: {', '.join(geladen)}")
 
+            # --- Gepflegte Kurznamen: SUCHEN, nicht nur verdrahten ------
+            # Der Fehler, den das hier gefunden hat: der Shard-Builder schrieb
+            # die Aliase in den Index, der Viewer suchte sie — und dazwischen
+            # baute `buildFromIndex()` den Datensatz feldweise neu auf und liess
+            # `alias` weg. Die Suche lief gegen ein Feld, das es im Speicher
+            # nicht mehr gab, und fand nichts.
+            #
+            # Jedes GLIED der Kette war geprueft: die Datei, der Lader, die
+            # Verdrahtung im Builder, die Verdrahtung im Viewer. Die NAHT
+            # dazwischen war es nicht, und genau dort lag der Bruch.
+            #
+            # Die Erwartung kommt deshalb aus `codebook/bank_aliases.csv` und
+            # NICHT aus dem Viewer. Der erste Anlauf las die Liste aus `NAMES`
+            # — also aus genau dem, was kaputt war — und meldete bei der
+            # Mutation "nicht pruefbar" statt eines Fehlers. Ein Waechter, den
+            # der Schaden selbst stummschaltet, ist keiner.
+            import csv as _csv_alias
+            erwartet = []
+            alias_csv = ROOT / "codebook" / "bank_aliases.csv"
+            if alias_csv.exists():
+                with alias_csv.open(encoding="utf-8") as fh:
+                    for r in _csv_alias.DictReader(fh):
+                        lei, a = (r.get("lei") or "").strip(), (r.get("alias") or "").strip()
+                        if lei and a:
+                            erwartet.append({"lei": lei, "alias": a})
+            if not erwartet:
+                print("  (Kurznamen nicht prüfbar: bank_aliases.csv fehlt oder ist leer)")
+            else:
+                alias = pg.evaluate("""async (erwartet) => {
+                  const f = document.getElementById('reportFilter');
+                  const treffer = {};
+                  for(const e of erwartet){
+                    f.value = e.alias; f.dispatchEvent(new Event('input'));
+                    await new Promise(s=>setTimeout(s,250));
+                    const zeilen = [...document.querySelectorAll('#reportList .report')];
+                    treffer[e.alias] = {
+                      n: zeilen.length,
+                      richtig: zeilen.some(z => (z.textContent||'').includes(e.lei))};
+                  }
+                  f.value=''; f.dispatchEvent(new Event('input'));
+                  await new Promise(s=>setTimeout(s,400));
+                  return {treffer,
+                          marken: document.querySelectorAll('#reportList .badge.al').length};
+                }""", erwartet)
+                n_leis = len({e["lei"] for e in erwartet})
+                tr_ = alias["treffer"]
+                leer = sorted(q for q, r in tr_.items() if not r["n"])
+                falsch = sorted(q for q, r in tr_.items()
+                                if r["n"] and not r["richtig"])
+                # Ein gepflegter Kurzname bezeichnet EIN Haus — das ist sein
+                # Zweck, und ein Test haelt schon fest, dass keiner von der
+                # allgemeinen Regel ohnehin gefunden wird. Mehrere Treffer
+                # heissen deshalb: der Alias haengt nicht dort, wo er soll.
+                breit = sorted(f"{q} ({r['n']})" for q, r in tr_.items() if r["n"] > 1)
+                print(f"  Gepflegte Kurznamen: {len(erwartet)} gesucht, "
+                      f"{len(erwartet)-len(leer)} gefunden, {n_leis} Institute · "
+                      f"{alias['marken']} an der Zeile sichtbar")
+                if leer:
+                    fehler.append(
+                        "gepflegte Kurznamen ohne Treffer in der Suche: "
+                        f"{', '.join(leer)} — gepflegt und wirkungslos")
+                if falsch:
+                    fehler.append(
+                        "Kurzname trifft, aber nicht das Institut, an dem er "
+                        f"hängt: {', '.join(falsch)}")
+                if breit:
+                    fehler.append(
+                        "ein gepflegter Kurzname bezeichnet mehr als ein "
+                        f"Institut: {', '.join(breit)}")
+                if alias["marken"] != n_leis:
+                    fehler.append(
+                        f"{n_leis} Institute tragen einen Kurznamen, "
+                        f"an der Zeile stehen {alias['marken']} — wer „Helaba\" "
+                        "sucht, muss sonst glauben, dass die gefundene Zeile "
+                        "dieselbe Bank ist")
+
             # --- Filter ueberlebt einen Sprung -------------------------
             # Der Filterzustand haengt als Parameter hinter dem Hash. Ein
             # interner Sprung, der nur die Route setzt, laesst `applyShared()`
