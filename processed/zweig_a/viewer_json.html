@@ -524,9 +524,48 @@ const DE = {
   "Language": "Sprache",
   "Switch language": "Sprache umschalten",
   "Amounts in": "Beträge in",
-  "ECB rate": "EZB-Kurs"
+  "ECB rate": "EZB-Kurs",
+
+  // --- Framework-Bruecke (#26) ---
+  "This cell was rebound to a new datapoint between framework 4.1 and 4.2. The label is the same in both versions (true for all 63 rebound cells), the identifier is not — the viewer connects through the coordinate and therefore still finds the value. One caveat remains: the same label is no promise of the same definition.":
+    "Diese Zelle wurde zwischen Framework 4.1 und 4.2 auf einen neuen Datenpunkt umgebunden. Die Bezeichnung ist in beiden Versionen dieselbe (gilt für alle 63 umgebundenen Zellen), die Kennung nicht — der Viewer verbindet über die Koordinate und findet den Wert deshalb weiter. Ein Vorbehalt bleibt: gleiche Bezeichnung ist keine Zusage gleicher Definition.",
+  "Several datapoints sit on this coordinate — the same ones in both framework versions. The 4.1↔4.2 mapping is therefore settled; the coordinate simply carries more than one value. In LIQ2 (NSFR) these are the four observation quarters the template shows side by side: measured, reports of the same institution two quarters apart share exactly two of the four values. When comparing over time, mind which value you take.":
+    "Auf dieser Koordinate liegen mehrere Datenpunkte — in beiden Framework-Versionen dieselben. Die Zuordnung 4.1↔4.2 steht damit fest; die Koordinate trägt nur mehr als einen Wert. Bei LIQ2 (NSFR) sind das die vier Beobachtungsquartale, die das Template nebeneinander zeigt: gemessen teilen Reports desselben Instituts bei zwei Quartalen Abstand genau zwei der vier Werte. Beim Vergleich über die Zeit also darauf achten, welchen der Werte man nimmt.",
+  "For this cell, both framework versions hold several datapoints on the same coordinate, and their sets differ — the bridge cannot map them. Weaker evidence than a rebound.":
+    "Für diese Zelle liegen in beiden Framework-Versionen mehrere Datenpunkte auf derselben Koordinate, und die Sätze unterscheiden sich — die Brücke kann sie nicht zuordnen. Schwächer belegt als ein Rebound.",
+
+  // --- nicht eindeutig platzierte Koordinate (#54) ---
+  "This coordinate is not placed unambiguously: the DPM holds two different rows here — “{0}”. Which of them carries the value depends on the reporting version, and our codebook does not yet distinguish them (#54). The value itself is unchanged, as reported; what is uncertain is which row it should sit in.":
+    "Diese Koordinate ist nicht eindeutig platziert: das DPM führt hier zwei verschiedene Zeilen — „{0}“. Welche der Wert trägt, hängt an der Meldeversion, und unser Codebook unterscheidet sie noch nicht (#54). Der Wert ist unverändert der gemeldete; unsicher ist, in welcher Zeile er stehen müsste.",
+  "” and “": "“ und „",
+
+  // --- Plausibilitaet (#17, #24, #36) ---
+  "markedly": "deutlich",
+  "noticeably": "auffällig",
+  "slightly": "leicht erhöht",
+  "Departs {0} from this institution’s own value of {1}: about {2} orders of magnitude away from {3}. A jump can be a correct change — a portfolio sale, a deconsolidation or a merger explain it just as well":
+    "Gegen den eigenen Wert vom {1} {0}: rund {2} Größenordnungen von {3} entfernt. Ein Sprung kann eine korrekte Änderung sein: Portfolioverkauf, Entkonsolidierung oder Fusion erklären ihn ebenso",
+  "Departs {0} from the population: about {1} orders of magnitude away from the reference value {2}":
+    "Gegen die Population {0}: rund {1} Größenordnungen vom Vergleichswert {2} entfernt",
+  " ({0} findings on this coordinate, the strongest one shown)":
+    " ({0} Befunde auf dieser Koordinate, stärkster gezeigt)",
+  " — note: in this template the reported unit is inconsistent (#9), so the deviation may be a question of units":
+    " — Achtung: in diesem Template ist die gemeldete Einheit uneinheitlich (#9), die Abweichung kann daher eine Einheitenfrage sein",
+  "Peer median {0} · this institution in percentile {1} of {2} comparable reports (same size class, consolidation, reference date)":
+    "Peer-Median {0} · dieses Institut im {1}. Perzentil von {2} vergleichbaren Reports (gleiche Größenklasse, Konsolidierung, Stichtag)"
 };
-const t = s => (LANG==='de' && DE[s]) ? DE[s] : s;
+/* `t()` nimmt Platzhalter `{0}`, `{1}` … — und das ist kein Komfort, sondern
+   Notwendigkeit: Deutsch und Englisch stellen die Satzteile anders. Ein aus
+   Fragmenten zusammengeklebter Satz laesst sich nur uebersetzen, wenn die
+   Reihenfolge der Sprache gehorcht, nicht dem Quelltext. */
+/* Heisst `tr` und nicht `t`: im Viewer gibt es fuenf lokale Variablen namens
+   `t` (Titel, Zwischensummen, Zeitreihen). Eine davon haette die Funktion in
+   ihrem Block verdeckt — und zwar lautlos, mit einem "t is not a function"
+   erst zur Laufzeit an genau der Stelle, die uebersetzt werden soll. */
+const tr = (s, ...a) => {
+  const roh = (LANG==='de' && DE[s]) ? DE[s] : s;
+  return a.length ? roh.replace(/\{(\d+)\}/g, (_,i)=> a[i]==null?'':a[i]) : roh;
+};
 
 /* Die statische Oberflaeche traegt `data-i18n`; ihr Textinhalt bzw. Attribut
    wird beim Sprachwechsel neu gesetzt. Der englische Text steht im HTML —
@@ -537,17 +576,17 @@ function applyLang(){
   for(const el of document.querySelectorAll('[data-i18n]')){
     const k = el.getAttribute('data-i18n-src') || el.textContent.trim();
     if(!el.getAttribute('data-i18n-src')) el.setAttribute('data-i18n-src', k);
-    el.textContent = t(k);
+    el.textContent = tr(k);
   }
   for(const el of document.querySelectorAll('[data-i18n-ph]')){
     const k = el.getAttribute('data-i18n-src') || el.getAttribute('placeholder');
     if(!el.getAttribute('data-i18n-src')) el.setAttribute('data-i18n-src', k);
-    el.setAttribute('placeholder', t(k));
+    el.setAttribute('placeholder', tr(k));
   }
   for(const el of document.querySelectorAll('[data-i18n-title]')){
     const k = el.getAttribute('data-i18n-src') || el.getAttribute('title');
     if(!el.getAttribute('data-i18n-src')) el.setAttribute('data-i18n-src', k);
-    el.setAttribute('title', t(k));
+    el.setAttribute('title', tr(k));
   }
 }
 applyTheme();
@@ -572,10 +611,10 @@ const bridgeAt=(tid,row,col)=>{ const m=BRIDGE.get(tid); return m?(m[row+'|'+col
    hat gewechselt, die Bezeichnung nicht. Das ist ein Grund fuer einen
    Vorbehalt, aber keiner fuer die Warnung "misst womoeglich etwas anderes",
    die hier zuerst stand. */
-const BRIDGE_TIP={
-  rebound:'Diese Zelle wurde zwischen Framework 4.1 und 4.2 auf einen neuen Datenpunkt umgebunden. Die Bezeichnung ist in beiden Versionen dieselbe (gilt für alle 63 umgebundenen Zellen), die Kennung nicht — der Viewer verbindet über die Koordinate und findet den Wert deshalb weiter. Ein Vorbehalt bleibt: gleiche Bezeichnung ist keine Zusage gleicher Definition.',
-  mehrfach:'Auf dieser Koordinate liegen mehrere Datenpunkte — in beiden Framework-Versionen dieselben. Die Zuordnung 4.1↔4.2 steht damit fest; die Koordinate trägt nur mehr als einen Wert. Bei LIQ2 (NSFR) sind das die vier Beobachtungsquartale, die das Template nebeneinander zeigt: gemessen teilen Reports desselben Instituts bei zwei Quartalen Abstand genau zwei der vier Werte. Beim Vergleich über die Zeit also darauf achten, welchen der Werte man nimmt.',
-  ambiguous:'Für diese Zelle liegen in beiden Framework-Versionen mehrere Datenpunkte auf derselben Koordinate, und die Sätze unterscheiden sich — die Brücke kann sie nicht zuordnen. Schwächer belegt als ein Rebound.'};
+const BRIDGE_TIP=()=>({
+  rebound:tr('This cell was rebound to a new datapoint between framework 4.1 and 4.2. The label is the same in both versions (true for all 63 rebound cells), the identifier is not — the viewer connects through the coordinate and therefore still finds the value. One caveat remains: the same label is no promise of the same definition.'),
+  mehrfach:tr('Several datapoints sit on this coordinate — the same ones in both framework versions. The 4.1↔4.2 mapping is therefore settled; the coordinate simply carries more than one value. In LIQ2 (NSFR) these are the four observation quarters the template shows side by side: measured, reports of the same institution two quarters apart share exactly two of the four values. When comparing over time, mind which value you take.'),
+  ambiguous:tr('For this cell, both framework versions hold several datapoints on the same coordinate, and their sets differ — the bridge cannot map them. Weaker evidence than a rebound.')});
 const BRIDGE_MARK={rebound:'⇄', mehrfach:'⁞', ambiguous:'≟'};
 /* Nicht eindeutig platzierte Koordinaten (#54). Andere Ursache als die
    Bruecke oben: dort ist die VERSIONSzuordnung unklar, hier die PLATZIERUNG.
@@ -586,10 +625,10 @@ const BRIDGE_MARK={rebound:'⇄', mehrfach:'⁞', ambiguous:'≟'};
    commodities risks" mit "15. Settlement risk" zusammen. */
 let AMBIG=new Map();
 const ambigAt=(tid,row,col)=>{ const m=AMBIG.get(tid); return m?(m[row+'|'+col]||null):null; };
-const ambigTip=lbl=>'Diese Koordinate ist nicht eindeutig platziert: das DPM führt hier zwei '
-  +'verschiedene Zeilen — „'+lbl.join('“ und „')+'“. Welche der Wert trägt, hängt an der '
-  +'Meldeversion, und unser Codebook unterscheidet sie noch nicht (#54). Der Wert ist '
-  +'unverändert der gemeldete; unsicher ist, in welcher Zeile er stehen müsste.';
+/* Ein Satz, kein Baukasten: die Reihenfolge der Teile unterscheidet sich
+   zwischen den Sprachen, und zusammengeklebt liesse er sich nicht uebersetzen. */
+const ambigTip=lbl=>tr('This coordinate is not placed unambiguously: the DPM holds two different rows here — “{0}”. Which of them carries the value depends on the reporting version, and our codebook does not yet distinguish them (#54). The value itself is unchanged, as reported; what is uncertain is which row it should sit in.',
+  lbl.join(tr('” and “')));
 /* Zellgenaue Plausibilitaets-Befunde (#24).
    Eintrag: [schweregrad, abweichung_in_groessenordnungen, referenzwert, (anzahl)].
    EDAP MUSS einen gemeldeten Wert originalgetreu rendern — wir nicht. Genau
@@ -598,7 +637,7 @@ const ambigTip=lbl=>'Diese Koordinate ist nicht eindeutig platziert: das DPM fü
 let UA=new Set();                            // Templates mit strittiger Einheit
 const flagAt=(rep,tid,row,col)=>{
   const m=(rep.flags||{})[tid]; return m?(m[row+'|'+col]||null):null; };
-const SEVW={h:'deutlich', m:'auffällig', n:'leicht erhöht'};
+const SEVW=()=>({h:tr('markedly'), m:tr('noticeably'), n:tr('slightly')});
 function flagTip(tid,f){
   const [sev,dev,ref,n,vgl]=f;
   // Neutral formulieren: „liegt N Groessenordnungen ueber dem Vergleichswert",
@@ -609,19 +648,17 @@ function flagTip(tid,f){
   // einmal der EIGENE Wert desselben Instituts am Nachbarstichtag. Beide
   // „gegen die Population" zu nennen waere eine Aussage ueber Daten, die den
   // Zeitbefund nie gesehen haben.
+  const wie = SEVW()[sev] || tr('noticeably');
   let t = vgl
-    ? 'Gegen den eigenen Wert vom '+vgl+' '+(SEVW[sev]||'auffällig')+': rund '
-      +nf(dev,1)+' Größenordnungen von '+nf(ref,0,4)+' entfernt. Ein Sprung kann '
-      +'eine korrekte Änderung sein: Portfolioverkauf, Entkonsolidierung oder '
-      +'Fusion erklären ihn ebenso'
-    : 'Gegen die Population '+(SEVW[sev]||'auffällig')+': rund '+nf(dev,1)
-      +' Größenordnungen vom Vergleichswert '+nf(ref,0,4)+' entfernt';
-  if(n>1) t+=' ('+n+' Befunde auf dieser Koordinate, stärkster gezeigt)';
+    ? tr('Departs {0} from this institution’s own value of {1}: about {2} orders of magnitude away from {3}. A jump can be a correct change — a portfolio sale, a deconsolidation or a merger explain it just as well',
+         wie, vgl, nf(dev,1), nf(ref,0,4))
+    : tr('Departs {0} from the population: about {1} orders of magnitude away from the reference value {2}',
+         wie, nf(dev,1), nf(ref,0,4));
+  if(n>1) t+=tr(' ({0} findings on this coordinate, the strongest one shown)', n);
   // In den Sperrlisten-Templates ist die EINHEIT strittig (#9). Dort kann eine
   // Abweichung um Groessenordnungen schlicht Tausend gegen Eins heissen — das
   // gehoert dazugesagt, sonst liest sich der Hinweis als Meldefehler.
-  if(UA.has(tid)) t+=' — Achtung: in diesem Template ist die gemeldete Einheit '
-    +'uneinheitlich (#9), die Abweichung kann daher eine Einheitenfrage sein';
+  if(UA.has(tid)) t+=tr(' — note: in this template the reported unit is inconsistent (#9), so the deviation may be a question of units');
   return t+'.';
 }
 /* Peer-Kontext je Zelle (#23). Eintrag: [perzentil, peer_median, n_peers].
@@ -635,9 +672,8 @@ function peerTip(pc,dt,cur){
   // nf(v, MINIMUM, MAXIMUM) — nicht (v, Stellen, Mindeststellen). Vertauscht
   // wirft toLocaleString 'maximumFractionDigits value is out of range' und
   // reisst das ganze Tabellen-Rendering mit.
-  return 'Peer-Median '+nf(med,0,dt==='percentage'?2:0)+(dt==='percentage'?' %':' '+(cur||''))
-    +' · dieses Institut im '+p+'. Perzentil von '+n+' vergleichbaren Reports '
-    +'(gleiche Größenklasse, Konsolidierung, Stichtag)';
+  return tr('Peer median {0} · this institution in percentile {1} of {2} comparable reports (same size class, consolidation, reference date)',
+            nf(med,0,dt==='percentage'?2:0)+(dt==='percentage'?' %':' '+(cur||'')), p, n);
 }
 let OPENTHEMES=new Set(store.themes||[]);   // aufgeklappte Bloecke, ueber Reports hinweg
 const repKey=r=>r.entityID+'|'+r.refPeriod;
@@ -1306,7 +1342,7 @@ function renderTemplate(tid, cells, rep){
         dt==='monetary'?`${fmt(v)} ${curOf(rep,tid)} (Originalwert)`:
         dt==='percentage'?`Rohwert ${v}`:'',
         pc?peerTip(pc,dt,curOf(rep,tid)):'',
-        bs?BRIDGE_TIP[bs]:'',
+        bs?BRIDGE_TIP()[bs]:'',
         am?ambigTip(am):'',
         fg?flagTip(tid,fg):''].filter(Boolean);
       const tip=parts.length?` title="${esc(parts.join(' · '))}"`:'';
@@ -1522,7 +1558,7 @@ function metricCellRow(rep, tid, r, c, role){
   const bs=bridgeAt(tid,r,c);
   return `<tr><td class="role">${esc(role)}</td>
     <td class="coord">${esc(tid)} · r${esc(r)} c${esc(c)}${
-      bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</td>
+      bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</td>
     <td>${esc(label)||'<span class="cl">ohne Label</span>'}</td>
     <td class="rv">${shown}</td></tr>`;
 }
@@ -1595,7 +1631,7 @@ function renderOverview(rep){
       h+=`<div class="ovcard${mt.id===OPENMETRIC?' on':''}" data-m="${esc(mt.id)}" tabindex="0"
         title="Klick: Definition, Zweck, Schwelle und Herleitung aus dem Meldetemplate">
         <div class="ovlab">${esc(mlabel(mt))}${
-        bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</div>
+        bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</div>
         <div class="ovval">${esc(nf(v,metricDec(mt)))}<span class="ovu">${esc(mt.unit)}</span></div>
         ${p?pctBadge(p):''}</div>`;
     }
@@ -1890,7 +1926,7 @@ function renderTimeseries(rep){
     // Bruch nicht nur zeitlich, sondern trifft genau diese Zahl.
     const bs=bridgeAt('61.00', m.row, '0010');
     ts+=`<tr><td class="rl">${esc(mlabel(m))}${m.kind==='eur'?' <span class="cl">EUR</span>':''}`
-      + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:'')+`</td>`;
+      + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:'')+`</td>`;
     vals.forEach((v,i)=>{ const cls=(v==null?'empty':'num')+(brk[i]?' fwbreak':'');
       ts+= v==null?`<td class="${cls}"></td>`:
         `<td class="${cls}">${m.kind==='pct'?zdash(nf(v,1)+NBSP+'%'):zdash(nf(v,0,1))}</td>`; });
@@ -2495,7 +2531,7 @@ async function renderBenchmark(){
   for(const c of spalten){
     const bs=metricBridge(c);
     h+=`<th class="num" data-k="${c.id}">${esc(metricHead(c))}`
-     + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP[bs])}">${BRIDGE_MARK[bs]}</span>`:'')
+     + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:'')
      + ` <span class="dir"></span></th>`;
   }
   if(prof.trendRow) h+=`<th title="Verlauf über verfügbare Stichtage (${esc((prof.cols.find(x=>x.row===prof.trendRow)||{}).label||'')})">Trend</th>`;

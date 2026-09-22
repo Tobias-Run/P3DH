@@ -616,10 +616,14 @@ def pruefe():
         if not zeit["tip"]:
             fehler.append("Zeitbefund im Shard, aber kein Zell-Tooltip — der "
                           "fünfte Eintrag (Vergleichsstichtag) kommt nicht an")
-        elif "Population" in zeit["tip"] or "eigenen Wert vom" not in zeit["tip"]:
+        # Geprueft wird die AUSSAGE, nicht die Formulierung: der Viewer laeuft
+        # auf Englisch, laesst sich aber auf Deutsch schalten. Beide Wendungen
+        # zaehlen, und der falsche Massstab faellt in beiden Sprachen auf.
+        elif (any(s in zeit["tip"].lower() for s in ("population", "populati"))
+              or not any(s in zeit["tip"] for s in ("own value", "eigenen Wert vom"))):
             fehler.append(f"Zell-Tooltip eines Zeitbefunds nennt den falschen "
                           f"Maßstab: {zeit['tip'][:120]}")
-        if zeit["z"] >= zeit["alle"] and "Zellpopulation" in (zeit["ovq"] or ""):
+        if zeit["z"] >= zeit["alle"] and any(s in (zeit["ovq"] or "") for s in ("Zellpopulation", "cell population")):
             fehler.append("Report mit AUSSCHLIESSLICH Zeitbefunden begründet sie "
                           "im Viewer mit der Zellpopulation — die hat ihn nie "
                           "gesehen")
