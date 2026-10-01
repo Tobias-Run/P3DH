@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Performance: getestete CPU-Optimierungen für Zahlenformate, Zeitreihen und Perzentile übernehmen",
+    "url": "https://github.com/Tobias-Run/P3DH/issues/115",
+    "number": 115,
+    "body_file": "performance/issues/1.md"
+  },
+  {
+    "title": "UX: Beschriftungen auf Berichtsseiten früh laden, ohne den Benchmark-Start zu belasten",
+    "url": "https://github.com/Tobias-Run/P3DH/issues/116",
+    "number": 116,
+    "body_file": "performance/issues/2.md"
+  },
+  {
+    "title": "Performance: Sortieren und Filtern ohne vollständigen Neuaufbau der Benchmark-Tabelle",
+    "url": "https://github.com/Tobias-Run/P3DH/issues/117",
+    "number": 117,
+    "body_file": "performance/issues/3.md"
+  },
+  {
+    "title": "Performance: Benchmark-Daten nach Template laden und Profilwechsel zwischenspeichern",
+    "url": "https://github.com/Tobias-Run/P3DH/issues/118",
+    "number": 118,
+    "body_file": "performance/issues/4.md"
+  },
+  {
+    "title": "UX: Layoutsprünge reduzieren und Ladezustände mit erhaltenem Arbeitskontext anzeigen",
+    "url": "https://github.com/Tobias-Run/P3DH/issues/119",
+    "number": 119,
+    "body_file": "performance/issues/5.md"
+  }
+]

@@ -1,0 +1,14 @@
+WARNING: The directory '/home/agent/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Collecting duckdb
+  Downloading duckdb-1.5.6-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (4.2 kB)
+Collecting pyarrow
+  Downloading pyarrow-25.0.1-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (3.0 kB)
+Downloading duckdb-1.5.6-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (21.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 21.6/21.6 MB 59.1 MB/s eta 0:00:00
+Downloading pyarrow-25.0.1-cp312-cp312-manylinux_2_28_x86_64.whl (50.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.1/50.1 MB 68.3 MB/s eta 0:00:00
+Installing collected packages: pyarrow, duckdb
+Successfully installed duckdb-1.5.6 pyarrow-25.0.1
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python -m pip install --upgrade pip

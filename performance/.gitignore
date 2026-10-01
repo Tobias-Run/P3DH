@@ -1,0 +1,6 @@
+baseline/
+formatters/
+network/
+results/excluded_*
+results/baseline_pilot.json
+results/*_equivalence.json

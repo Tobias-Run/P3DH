@@ -57,6 +57,10 @@
   header h1{font:700 var(--f3)/1.15 var(--serif);margin:0;white-space:nowrap;letter-spacing:-.01em}
   .pill{font-size:var(--f0);color:var(--muted);letter-spacing:.02em;
         font-variant-numeric:tabular-nums;white-space:nowrap}
+  #hsub{min-inline-size:38ch}
+  main{min-width:0}
+  .ts-slot{min-block-size:30rem}
+  .ovpct{min-block-size:10px}
   /* Tabs als Rubrikleiste: Unterstrich statt Kasten. */
   nav.tabs{display:flex;gap:1rem;margin-left:.4rem;align-self:flex-end}
   nav.tabs button{background:transparent;color:var(--ink2);border:0;border-bottom:2px solid transparent;
@@ -376,8 +380,9 @@
             font-style:normal;color:var(--muted)}
   a{color:var(--blue)}
   @media (max-width:860px){
+    #hsub{flex-basis:100%;min-inline-size:0}
     .layout{flex-direction:column}
-    aside{width:100%;flex:none;position:static;max-height:38vh}
+    aside{width:100%;flex:none;position:static;height:38vh;max-height:38vh}
     main{max-height:none}
   }
 </style>
@@ -622,6 +627,9 @@ const DE = {
   "Derivation from the filing": "Herleitung aus der Meldung",
   "Origin in the filing": "Herkunft in der Meldung",
   "Result": "Ergebnis",
+  "Time series": "Zeitreihe",
+  "Metric": "Kennzahl",
+  "Taxonomy change: Framework {0} → {1}": "Taxonomiewechsel: Framework {0} → {1}",
   "Look up in the report:": "Im Report nachschlagen:",
   "Click: definition, purpose, threshold and derivation from the filing template":
     "Klick: Definition, Zweck, Schwelle und Herleitung aus dem Meldetemplate",
@@ -964,16 +972,41 @@ const LOCAL = /^(localhost|127\.|0\.0\.0\.0|\[?::1)/.test(location.hostname) || 
 const DATA_BASES = LOCAL ? ['data/']
   : ['https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@data/',
      'https://raw.githubusercontent.com/Tobias-Run/P3DH/data/'];
-async function getJSON(path){
-  let err;
-  for(const base of DATA_BASES){
+let DATA_REV=null;
+async function getJSON(path,integrity=null){
+  let err, missing=true;
+  let bases=DATA_REV&&!LOCAL ? DATA_BASES.map(base=>
+    base.replace('@data/','@'+DATA_REV+'/').replace('/data/','/'+DATA_REV+'/')) : DATA_BASES;
+  // The raw branch is authoritative for the optional rollout pointer.
+  // A CDN error must not veto a confirmed legacy publication.
+  if(path==='data_version.json' && !LOCAL) bases=[...bases].reverse();
+  for(const base of bases){
     try{
-      const r=await fetch(base+path,{cache:'no-store'});
+      const r=await fetch(base+path,{cache:DATA_REV||path.startsWith('benchmark/')?'default':'no-store',
+        ...(integrity?{integrity}:{})});
       if(r.ok) return await r.json();   // native parse — no hand-rolled CSV parser
+      if(r.status===404 && path==='data_version.json' && base.startsWith('https://raw.githubusercontent.com/')){
+        return null; // authoritative absence: older publication, no pointer yet
+      }
+      if(r.status!==404) missing=false;
       err=new Error(path.split('/').pop()+' '+r.status);
-    }catch(e){ err=e; }
+    }catch(e){ err=e; missing=false; }
   }
+  err.missing=missing;
   throw err;
+}
+async function selectDataVersion(){
+  try{
+    const version=await getJSON('data_version.json');
+    if(version===null) return;
+    if(version.schema!==1 || !/^[a-f0-9]{40}$/.test(version.revision))
+      throw new Error('Invalid dataset version');
+    DATA_REV=version.revision;
+  }catch(e){
+    // Local backwards compatibility when all origins report a missing pointer.
+    // A failed/invalid pointer must never silently select mutable mixed data.
+    if(!e.missing) throw e;
+  }
 }
 
 /* ================= formatting ================= */
@@ -1003,12 +1036,21 @@ const LOCALE=()=>LOCALES[LANG]||LOCALES.en;
    `1,234.5` ein `1,234 5` und damit aus jeder Nachkommastelle Unsinn.
    Englisch bekommt deshalb die Standardform; die Verwechslungsgefahr, wegen
    der im Deutschen ersetzt wird, gibt es dort nicht. */
+// Reuse locale formatters: table rendering calls nf thousands of times.
+// Locale is part of the key, so switching language keeps its exact semantics.
+const NUMBER_FORMATS=new Map();
 function nf(v, min, max){
   const n=Number(v);
   if(!Number.isFinite(n)) return '';
   const lo=min==null?0:min;
-  const s=n.toLocaleString(LOCALE(), {minimumFractionDigits:lo,
-                                      maximumFractionDigits:max==null?lo:max});
+  const hi=max==null?lo:max;
+  const key=LOCALE()+'|'+lo+'|'+hi;
+  let formatter=NUMBER_FORMATS.get(key);
+  if(!formatter){
+    formatter=new Intl.NumberFormat(LOCALE(), {minimumFractionDigits:lo, maximumFractionDigits:hi});
+    NUMBER_FORMATS.set(key,formatter);
+  }
+  const s=formatter.format(n);
   return LANG==='de' ? s.split('.').join(NBSP) : s;
 }
 function fmt(v){
@@ -1181,6 +1223,8 @@ function buildFromIndex(idx, codebook){
   const reg=codebook.metrics||{};
   for(const m of (reg.metrics||[])) METRICDOC.set(m.id, m);
   PROFILES=reg.profiles||[];
+  BM_MANIFEST=codebook.benchmark_parts||null;
+  if(BM_MANIFEST && BM_MANIFEST.schema!==1) throw new Error('Unsupported benchmark manifest');
   for(const [tid,cells] of Object.entries(codebook.ambig||{})) AMBIG.set(tid,cells);
   /* `alias` MUSS hier mit. Der Shard-Builder schreibt die gepflegten
      Kurznamen in den Index, und dieses Neuaufbauen des Datensatzes hat sie
@@ -1224,6 +1268,21 @@ function ensureLabels(){
     setLabels(j.cb||{}); LABELS_LOADED=true;
   }).catch(e=>{ LABELS_PROMISE=null; throw e; });
   return LABELS_PROMISE;
+}
+function showRetry(host,message,retry){
+  host.innerHTML='<div class="status" role="alert">'+esc(message)+' <button type="button">'+
+    (LANG==='de'?'Erneut versuchen':'Retry')+'</button></div>';
+  host.querySelector('button').onclick=retry;
+}
+function labelView(host,draw,current){
+  const previous=host.querySelector('.label-status');
+  if(previous) previous.remove();
+  const status=document.createElement('div');
+  status.className='status label-status'; status.setAttribute('role','status');
+  status.textContent=tr('Loading labels …'); host.append(status);
+  ensureLabels().then(()=>{if(current() && host.isConnected) draw();})
+    .catch(e=>{if(current() && status.isConnected)
+      showRetry(status,tr('Labels could not be loaded:')+' '+e.message,()=>labelView(host,draw,current));});
 }
 
 /* ---- Form der Peer-Verteilung (#49, R4) ----------------------------------
@@ -1300,8 +1359,32 @@ async function ensureLoaded(rep){
 }
 /* head templates (KM1 61.00 / OV1 60.00.A) for ALL reports — the cross-report data the
    benchmark and time-series need. Loaded once, lazily; merged into each report's templates. */
-let BM_LOADED=false, BM_PROMISE=null;
-function ensureBenchmark(){
+let BM_LOADED=false, BM_PROMISE=null, BM_MANIFEST=null;
+const BM_TEMPLATES=new Set(), BM_REQUESTS=new Map();
+const overviewTemplates=()=>BM_MANIFEST?.overview||null;
+const haveBenchmark=tids=>BM_MANIFEST ? (tids||Object.keys(BM_MANIFEST.templates)).every(t=>BM_TEMPLATES.has(t)) : BM_LOADED;
+function ensureBenchmark(tids=null){
+  if(BM_MANIFEST){
+    const wanted=[...new Set(tids||Object.keys(BM_MANIFEST.templates))];
+    return Promise.all(wanted.map(tid=>{
+      if(BM_TEMPLATES.has(tid)) return;
+      if(!BM_REQUESTS.has(tid)){
+        const part=BM_MANIFEST.templates[tid];
+        if(!part || !/^benchmark\/[A-Za-z0-9._-]+\.json$/.test(part.path) || !/^[a-f0-9]{64}$/.test(part.sha256))
+          return Promise.reject(new Error('Missing or invalid benchmark template '+tid));
+        const integrity='sha256-'+btoa(part.sha256.match(/../g).map(x=>String.fromCharCode(parseInt(x,16))).join(''));
+        const promise=getJSON(part.path,integrity).then(data=>{
+          for(const rep of REPORTS){
+            const cells=data[repKey(rep)];
+            if(cells && !rep.templates.has(tid)) rep.templates.set(tid,cellsFrom(cells));
+          }
+          BM_TEMPLATES.add(tid);BM_LOADED=true;OV_PCT=null;
+        }).finally(()=>BM_REQUESTS.delete(tid));
+        BM_REQUESTS.set(tid,promise);
+      }
+      return BM_REQUESTS.get(tid);
+    }));
+  }
   if(BM_LOADED) return Promise.resolve();
   if(!BM_PROMISE) BM_PROMISE=getJSON('benchmark.json').then(bm=>{
     for(const rep of REPORTS){
@@ -1310,7 +1393,7 @@ function ensureBenchmark(){
         if(!rep.templates.has(tid)) rep.templates.set(tid, cellsFrom(cells));
     }
     BM_LOADED=true;
-  });
+  }).catch(e=>{BM_PROMISE=null;throw e;});
   return BM_PROMISE;
 }
 
@@ -1805,7 +1888,7 @@ const metricHead=m=>mlabel(m)+((m.unit==='%')?'':' ('+m.unit+')');
 /* Einmal berechnet, dann gehalten: die Einordnung haengt nur an BM_LOADED. */
 let OV_PCT=null;
 function overviewPercentiles(){
-  if(!BM_LOADED) return null;          // ohne die anderen Reports keine Einordnung
+  if(!haveBenchmark(overviewTemplates())) return null;
   if(OV_PCT) return OV_PCT;
   const rows=REPORTS.map(rep=>{
     const {lei,scope}=leiParts(rep.entityID);
@@ -1838,6 +1921,31 @@ function jumpToTemplate(tid){
    nichts gerechnet; dort ist der Wert eine gemeldete Zahl, und so zu tun, als
    gaebe es eine Formel, waere eine Erfindung. Nur abgeleitete Kennzahlen
    zeigen einen Rechenweg. */
+const DERIVATION_EN={
+  "gesamtkapitalquote": "total capital ratio",
+  "gesamtanforderung": "overall capital requirement",
+  "wert": "value",
+  "Risikobetrag der Kategorie": "risk exposure amount of the category",
+  "Gesamtrisikobetrag": "total risk exposure amount",
+  "notleidend": "non-performing",
+  "bedient": "performing",
+  "gestundet-bedient": "forborne performing",
+  "gestundet-notleidend": "forborne non-performing",
+  "Wertberichtigung": "impairment",
+  "davon nachhaltig": "of which sustainable",
+  "Bruttobuchwert": "gross carrying amount",
+  "davon ausgeschlossen": "of which excluded",
+  "davon Stage 2": "of which Stage 2",
+  "davon notleidend": "of which non-performing",
+  "fixe Vergütung": "fixed remuneration",
+  "variable Vergütung": "variable remuneration",
+  "Köpfe": "headcount"
+};
+function derivationText(text){
+  if(LANG!=='en') return text;
+  return Object.keys(DERIVATION_EN).sort((a,b)=>b.length-a.length)
+    .reduce((value,role)=>value.split(role).join(DERIVATION_EN[role]),text);
+}
 function metricCellRow(rep, tid, r, c, role){
   const e=CB.get(dpmCode(tid)+'|'+r+'|'+c)||{};
   const raw=tplValue(rep, tid, r, c);
@@ -1849,7 +1957,7 @@ function metricCellRow(rep, tid, r, c, role){
           : nf(raw,0,2);
   }
   const bs=bridgeAt(tid,r,c);
-  return `<tr><td class="role">${esc(role)}</td>
+  return `<tr><td class="role">${esc(derivationText(role))}</td>
     <td class="coord">${esc(tid)} · r${esc(r)} c${esc(c)}${
       bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</td>
     <td>${esc(label)||`<span class="cl">${tr('no label')}</span>`}</td>
@@ -1889,7 +1997,7 @@ function metricDetail(rep, id){
   for(const [tid,r,c,role] of (doc.cells||[])) h+=metricCellRow(rep,tid,r,c,role);
   if(doc.formula){
     h+=`<tr class="res"><td class="role">${tr('Result')}</td><td class="coord"></td>
-      <td>${esc(doc.formula)}</td>
+      <td>${esc(derivationText(doc.formula))}</td>
       <td class="rv">${v==null?'–':esc(nf(v,metricDec(mt)))+NBSP+esc(mt.unit)}</td></tr>`;
   }
   h+='</tbody></table>';
@@ -1924,7 +2032,7 @@ function renderOverview(rep){
         <div class="ovlab">${esc(mlabel(mt))}${
         bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</div>
         <div class="ovval">${esc(nf(v,metricDec(mt)))}<span class="ovu">${esc(mt.unit)}</span></div>
-        ${p?pctBadge(p):''}</div>`;
+        <div class="ovpct">${p?pctBadge(p):''}</div></div>`;
     }
     h+='</div>';
     if(OPENMETRIC) h+=metricDetail(rep, OPENMETRIC);
@@ -2006,17 +2114,31 @@ function themeBar(withData, declared){
   return `<span class="pctb thbar" title="${esc(tr('{0} of {1} templates declared in this block carry data', withData, declared))}"><span class="pctf" style="width:${pct}%"></span></span>`;
 }
 
+const VIEW_CONTEXT=new Map();
+let DISPLAY_CONTEXT=null;
+function rememberView(next){
+  const main=document.getElementById('main');
+  if(DISPLAY_CONTEXT && DISPLAY_CONTEXT!==next){
+    VIEW_CONTEXT.set(DISPLAY_CONTEXT,{scroll:main.scrollTop,windowY:window.scrollY,
+      filter:document.getElementById('tfilter')?.value||''});
+    if(VIEW_CONTEXT.size>10) VIEW_CONTEXT.delete(VIEW_CONTEXT.keys().next().value);
+  }
+  DISPLAY_CONTEXT=next;
+  return VIEW_CONTEXT.get(next);
+}
 async function renderReport(rep){
+  const remembered=rememberView('report:'+repKey(rep));
   VIEW='reports'; setTabs();
   activeKey=repKey(rep);
   const main=document.getElementById('main');
+  const current=()=>VIEW==='reports' && activeKey===repKey(rep);
   if(!rep.loaded){
     main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2></div>
       <div class="status">Lade Report…<div class="prog"><i style="width:45%"></i></div></div>`;
     renderReportList();
     try{ await ensureLoaded(rep); }
-    catch(e){ main.innerHTML='<div class="status">'+esc(tr('Error loading the report:'))+' '+esc(e.message)+'</div>'; return; }
-    if(activeKey!==repKey(rep)) return;   // user navigated away while the shard loaded
+    catch(e){ if(!current()) return; main.innerHTML='<div class="status">'+esc(tr('Error loading the report:'))+' '+esc(e.message)+'</div>'; return; }
+    if(!current()) return;   // ignore stale navigation completions
   }
   const tids=[...rep.templates.keys()].sort();
   const {lei,scope}=leiParts(rep.entityID);
@@ -2029,7 +2151,7 @@ async function renderReport(rep){
     · Framework <b>${esc(rep.framework)}</b></div></div>
     ${leermeldung(rep)}
     <div id="ovSection"></div>
-    <div id="tsSection"></div>
+    <div id="tsSection"${entityReports(rep).length>=2?' class="ts-slot" aria-busy="true"><div class="status" role="status">'+esc(LANG==='de'?'Zeitreihe wird geladen…':'Loading time series…')+'</div>':'>'}</div>
     ${coverageBlock(rep)}
     <div class="tfilter"><input id="tfilter" placeholder="Suchen: Kennzahl, Template, Titel…">${controlsHTML()}</div>
     <div id="tcontainer"></div>`;
@@ -2048,7 +2170,7 @@ async function renderReport(rep){
     OPENMETRIC = OPENMETRIC===card.dataset.m ? null : card.dataset.m;
     // Der Beleg zeigt Zeilen-/Spaltenlabels der Herleitung — ohne sie stuenden
     // dort nackte Koordinaten.
-    if(OPENMETRIC && !LABELS_LOADED){ ensureLabels().then(()=>renderOverview(rep)); return; }
+    if(OPENMETRIC && !LABELS_LOADED){ labelView(document.getElementById('ovSection'),()=>renderOverview(rep),current); return; }
     renderOverview(rep);
   });
   document.getElementById('ovSection').addEventListener('keydown',e=>{
@@ -2059,13 +2181,24 @@ async function renderReport(rep){
     OPENMETRIC = OPENMETRIC===card.dataset.m ? null : card.dataset.m;
     // Der Beleg zeigt Zeilen-/Spaltenlabels der Herleitung — ohne sie stuenden
     // dort nackte Koordinaten.
-    if(OPENMETRIC && !LABELS_LOADED){ ensureLabels().then(()=>renderOverview(rep)); return; }
+    if(OPENMETRIC && !LABELS_LOADED){ labelView(document.getElementById('ovSection'),()=>renderOverview(rep),current); return; }
     renderOverview(rep);
   });
-  ensureBenchmark().then(()=>{
-    if(activeKey!==repKey(rep)) return;
+  // Prepare labels after the useful report is visible, before optional peer data.
+  // Catch prefetch errors here; the actual reader provides a retry control.
+  ensureLabels().catch(()=>{}).then(()=>{
+    if(current()) return ensureBenchmark(overviewTemplates());
+  }).then(()=>{
+    if(!current()) return;
     renderOverview(rep);
     if(entityReports(rep).length>=2) renderTimeseries(rep);
+  }).catch(e=>{
+    if(!current()) return;
+    const host=document.getElementById('tsSection');
+    if(entityReports(rep).length>=2) showRetry(host,tr('Error:')+' '+e.message,async()=>{
+      try{await ensureBenchmark(overviewTemplates());if(current()){renderOverview(rep);renderTimeseries(rep);}}
+      catch(err){if(current()) showRetry(host,tr('Error:')+' '+err.message,()=>renderReport(rep));}
+    });
   });
   // Ebene 2+3: Themenblöcke, Rohtabellen erst beim Aufklappen gerendert. Das
   // ist nicht nur Ordnung, sondern auch Tempo — 136 Gitter auf einmal zu bauen
@@ -2117,15 +2250,27 @@ async function renderReport(rep){
   };
   const fillTheme=async (rep,det,list)=>{
     const body=det.querySelector('.tbody');
-    if(body.dataset.done==='1') return;
+    if(body.dataset.done==='1' || body.dataset.loading==='1') return;
+    body.dataset.loading='1';
+    body.setAttribute('aria-busy','true');
+    body.innerHTML='<div class="status" role="status">'+esc(LANG==='de'?'Tabelle wird vorbereitet…':'Preparing table…')+'</div>';
+    await new Promise(resolve=>requestAnimationFrame(()=>setTimeout(resolve,0)));
+    if(!current() || !body.isConnected){delete body.dataset.loading;return;}
     const cont=document.getElementById('tcontainer');
     // Ohne Labels waere das eine Tabelle aus nackten Codes — sichtbar falsch,
     // aber nicht als Fehler erkennbar. Also warten statt raten.
     if(!LABELS_LOADED){
-      body.innerHTML='<div class="status">'+esc(tr('Loading labels …'))+'</div>';
+      body.setAttribute('aria-busy','true');
+      body.innerHTML='<div class="status" role="status">'+esc(tr('Loading labels …'))+'</div>';
       try{ await ensureLabels(); }
-      catch(e){ body.innerHTML='<div class="status">'+esc(tr('Labels could not be loaded:'))+' '
-        +esc(e.message)+'</div>'; return; }
+      catch(e){
+        delete body.dataset.loading;
+        body.removeAttribute('aria-busy');
+        showRetry(body,tr('Labels could not be loaded:')+' '+e.message,()=>fillTheme(rep,det,list));
+        return;
+      }
+      body.removeAttribute('aria-busy');
+      if(!current() || !body.isConnected) return;
       if(body.dataset.done==='1') return;   // inzwischen anderweitig gefuellt
     }
     // Die Form der Peer-Verteilung (#49) NACH den Labels und ohne zu blockieren:
@@ -2138,7 +2283,9 @@ async function renderReport(rep){
             ? tr('No template in this block matches the filter.')
             : tr('No analysable cells for this block — it is declared, but without data in our holdings.')}</div>`;
     body.dataset.done='1';
+    delete body.dataset.loading;body.removeAttribute('aria-busy');
   };
+  if(remembered) document.getElementById('tfilter').value=remembered.filter;
   draw();
   document.getElementById('tfilter').addEventListener('input',draw);
   const cont=document.getElementById('tcontainer');
@@ -2158,7 +2305,7 @@ async function renderReport(rep){
     const chip=e.target.closest('[data-ms]');
     if(!chip) return;
     OPENSEARCH = OPENSEARCH===chip.dataset.ms ? null : chip.dataset.ms;
-    if(OPENSEARCH && !LABELS_LOADED){ ensureLabels().then(draw); return; }
+    if(OPENSEARCH && !LABELS_LOADED){ labelView(cont,draw,current); return; }
     draw();
   });
   // Dimensionswechsel (#52): Auswahl merken und nur neu zeichnen.
@@ -2170,7 +2317,8 @@ async function renderReport(rep){
   });
   wireControls(draw);
   renderReportList();
-  main.scrollTop=0;
+  main.scrollTop=remembered?.scroll||0;
+  if(remembered) window.scrollTo(0,remembered.windowY);
 }
 
 /* ================= time series helpers ================= */
@@ -2194,11 +2342,11 @@ function renderTimeseries(rep){
   // dieser Stelle sah aus wie Geschaeftsentwicklung.
   const brk=series.map((s,i)=> i>0 && series[i-1].framework!==s.framework);
   const anyBreak=brk.some(Boolean);
-  let ts=`<section class="ts"><h3>Zeitreihe — EU KM1 <span class="scalenote">${series.length} Stichtage</span></h3>
-    <table><thead><tr><th class="rl">Kennzahl</th>`;
+  let ts=`<section class="ts"><h3>${tr('Time series')} — EU KM1 <span class="scalenote">${tr('{0} reference dates',series.length)}</span></h3>
+    <table><thead><tr><th class="rl">${tr('Metric')}</th>`;
   series.forEach((s,i)=>{
     const on=s.refPeriod===rep.refPeriod;
-    ts+=`<th class="datecol${brk[i]?' fwbreak':''}"${brk[i]?` title="Taxonomiewechsel: Framework ${esc(series[i-1].framework)} → ${esc(s.framework)}"`:''}>`
+    ts+=`<th class="datecol${brk[i]?' fwbreak':''}"${brk[i]?` title="${esc(tr('Taxonomy change: Framework {0} → {1}',series[i-1].framework,s.framework))}"`:''}>`
       + `<a href="#r/${lei}/${s.refPeriod}/${scope}">${esc(s.refPeriod)}</a>${on?' •':''}`
       + `<br><span class="cl">RF ${esc(s.framework)}</span></th>`;
   });
@@ -2230,12 +2378,23 @@ function renderTimeseries(rep){
     ts+=`<div class="caveat">${tr('⇄ The filing taxonomy changes within this series: {0}. The dashed vertical marks the spot; the trend line is dashed there too — it says “across a version boundary”, not “incomparable”. The viewer joins cells over the coordinate, not over the data point: values are therefore still found, even where the taxonomy rebound them. <b>Which</b> cells are affected is stated by the ⇄ at the metric — about the rest no claim is made, because the bridge only knows observed cells.', esc(at.join(', ')))}</div>`;
   }
   ts+='</section>';
-  if(any) host.innerHTML=ts;
+  host.removeAttribute('aria-busy');
+  host.innerHTML=any?ts:'<div class="status">'+esc(LANG==='de'?'Keine vergleichbaren Zeitreihenwerte verfügbar.':'No comparable time-series values available.')+'</div>';
+}
+let ENTITY_REPORTS=new Map();
+function indexEntityReports(){
+  ENTITY_REPORTS=new Map();
+  for(const rep of REPORTS){
+    const {lei,scope}=leiParts(rep.entityID), key=lei+'|'+scope;
+    if(!ENTITY_REPORTS.has(key)) ENTITY_REPORTS.set(key,[]);
+    ENTITY_REPORTS.get(key).push(rep);
+  }
+  for(const reps of ENTITY_REPORTS.values())
+    reps.sort((a,b)=>a.refPeriod.localeCompare(b.refPeriod));
 }
 function entityReports(rep){
   const {lei,scope}=leiParts(rep.entityID);
-  return REPORTS.filter(r=>{ const p=leiParts(r.entityID); return p.lei===lei&&p.scope===scope; })
-    .sort((a,b)=>a.refPeriod.localeCompare(b.refPeriod));
+  return ENTITY_REPORTS.get(lei+'|'+scope)||[];
 }
 /* `breaks[i] === true` heisst: VOR diesem Punkt wechselt die Taxonomie. Das
    verbindende Stueck wird dort GESTRICHELT statt durchgezogen (#26) — ein
@@ -2444,17 +2603,25 @@ function percentileMap(rows,colId){
     const k=peerKeyOf(r);
     (groups.get(k)||groups.set(k,[]).get(k)).push(v);
   }
-  for(const arr of groups.values()) arr.sort((a,b)=>a-b);
+  const ranks=new Map();
+  for(const [key,arr] of groups){
+    arr.sort((a,b)=>a-b);
+    if(arr.length<PCT_MIN_GROUP) continue;
+    const values=new Map();
+    for(let lo=0;lo<arr.length;){
+      let hi=lo+1;
+      while(hi<arr.length && arr[hi]===arr[lo]) hi++;
+      values.set(arr[lo],{p:(lo+(hi-lo)/2)/arr.length*100,n:arr.length});
+      lo=hi;
+    }
+    ranks.set(key,values);
+  }
   const out=new Map();
   for(const r of rows){
     const v=r[colId];
     if(v==null||!isFinite(v)) continue;
-    const arr=groups.get(peerKeyOf(r));
-    if(!arr||arr.length<PCT_MIN_GROUP) continue;
-    // Mid-Rank: Anteil echt kleinerer Werte + halbe Bindungen -> stabil bei Ties
-    let below=0,equal=0;
-    for(const x of arr){ if(x<v) below++; else if(x===v) equal++; }
-    out.set(r.key,{p:(below+equal/2)/arr.length*100, n:arr.length});
+    const rank=ranks.get(peerKeyOf(r))?.get(v);
+    if(rank) out.set(r.key,rank);
   }
   return out;
 }
@@ -2788,16 +2955,88 @@ function distributionRow(rows, prof){
   return `<div class="dgrid">${cards}</div>
     <div class="caveat" style="border-left-color:var(--muted)">${tr('The list below <b>sorts</b>, the distribution above <b>places in context</b>. A top rank can be an outlier — 370 % CET1 stands at the very top of a ranking and at the very edge of a distribution. Both are the same value; only one of them looks like “the best”. Rows whose value in the sorted column lies outside the fences of its peer group are marked with ◇.')}</div>`;
 }
+// Keep the controls and keyed rows alive during sorting. The cache is bounded
+// to one profile/filter/column context; it never retains every visited profile.
+let BM_DOM={context:null,rows:new Map()};
+const BM_PAGE_SIZE=100;
+let BM_PAGE=0, BM_PAGE_CONTEXT=null;
+let BM_RENDER_SERIAL=0;
+function syncBenchmarkNode(old,node){
+  if(old.nodeType!==node.nodeType || old.nodeName!==node.nodeName){
+    old.replaceWith(node.cloneNode(true)); return;
+  }
+  if(old.nodeType!==1){ if(old.nodeValue!==node.nodeValue) old.nodeValue=node.nodeValue; return; }
+  if(old.tagName==='TBODY' && old.closest('.bmtable')) return;
+  for(const a of [...old.attributes]) if(!node.hasAttribute(a.name)) old.removeAttribute(a.name);
+  for(const a of node.attributes) if(old.getAttribute(a.name)!==a.value) old.setAttribute(a.name,a.value);
+  const children=[...node.childNodes];
+  children.forEach((child,i)=>{
+    if(old.childNodes[i]) syncBenchmarkNode(old.childNodes[i],child);
+    else old.append(child.cloneNode(true));
+  });
+  while(old.childNodes.length>children.length) old.lastChild.remove();
+}
+function mountBenchmark(main,html,newRows,rows,sortCol,fmarks){
+  const fresh=document.createElement('template'); fresh.innerHTML=html;
+  if(main.querySelector('.bmtable')){
+    const shell=document.createElement('main'); shell.append(fresh.content);
+    // Sync children only: main's own attributes belong to the application shell.
+    const nodes=[...shell.childNodes];
+    nodes.forEach((node,i)=>{
+      if(main.childNodes[i]) syncBenchmarkNode(main.childNodes[i],node);
+      else main.append(node.cloneNode(true));
+    });
+    while(main.childNodes.length>nodes.length) main.lastChild.remove();
+  }else main.replaceChildren(fresh.content);
+  if(newRows){
+    const parsed=document.createElement('template');
+    parsed.innerHTML='<table><tbody>'+newRows+'</tbody></table>';
+    for(const row of parsed.content.querySelectorAll('tr')) BM_DOM.rows.set(row.dataset.key,row);
+  }
+  const body=main.querySelector('.bmtable tbody'), fragment=document.createDocumentFragment();
+  for(const row of rows){
+    const node=BM_DOM.rows.get(row.key);
+    const badge=node.querySelector('.bm-fence');
+    const html=sortCol?fenceBadge(fmarks.get(row.key),sortCol.label):'';
+    if(badge.innerHTML!==html) badge.innerHTML=html;
+    fragment.append(node);
+  }
+  body.replaceChildren(fragment);
+  const visible=new Set(rows.map(r=>r.key));
+  for(const key of BM_DOM.rows.keys()) if(!visible.has(key)) BM_DOM.rows.delete(key);
+}
 async function renderBenchmark(){
+  const remembered=rememberView('benchmark');
+  const serial=++BM_RENDER_SERIAL;
+  const wasBenchmark=VIEW==='benchmark';
   VIEW='benchmark'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
-  if(!BM_LOADED){
-    main.innerHTML='<div class="rhead"><h2>Benchmark</h2></div><div class="status">Lade Benchmark-Daten…</div>';
-    try{ await ensureBenchmark(); }catch(e){ main.innerHTML=`<div class="status">${tr('Error:')} ${esc(e.message)}</div>`; return; }
-    if(VIEW!=='benchmark') return;   // navigated away while loading
-  }
+  const scroll=wasBenchmark?main.scrollTop:(remembered?.scroll||0);
   const prof=bmProf();
   if(!prof){ main.innerHTML='<div class="status">'+esc(tr('No metric registry in the codebook — benchmark unavailable.'))+'</div>'; return; }
+  const needed=BM_MANIFEST ? BM_MANIFEST.profiles[BMP] : null;
+  if(BM_MANIFEST && !needed){showRetry(main,'Missing profile dependencies',renderBenchmark);return;}
+  if(!haveBenchmark(needed)){
+    let status=document.getElementById('bmLoadStatus');
+    if(!main.querySelector('.bmtable')) main.innerHTML='<div class="rhead"><h2>Benchmark</h2></div>';
+    if(!status || !status.isConnected){status=document.createElement('div');status.id='bmLoadStatus';main.prepend(status);}
+    status.className='status';status.setAttribute('role','status');
+    status.textContent=LANG==='de'?'Benchmark wird geladen…':'Loading benchmark…';
+    main.setAttribute('aria-busy','true');
+    const table=main.querySelector('.bmtable');if(table)table.inert=true;
+    for(const id of ['bmCsv','bmPrev','bmNext']){const b=document.getElementById(id);if(b)b.disabled=true;}
+    try{ await ensureBenchmark(needed); }
+    catch(e){
+      if(serial===BM_RENDER_SERIAL && VIEW==='benchmark'){
+        main.removeAttribute('aria-busy');showRetry(status,tr('Error:')+' '+e.message,renderBenchmark);
+      }
+      return;
+    }
+    if(serial!==BM_RENDER_SERIAL || VIEW!=='benchmark') return;
+    status.remove();main.removeAttribute('aria-busy');
+    if(table)table.inert=false;
+  }
+  main.removeAttribute('aria-busy');
   bmSortOr(prof);
   const gross=benchmarkRows();
   // Das Plausibilitaets-Tor greift VOR allem anderen: eine Meldung in falscher
@@ -2825,6 +3064,14 @@ async function renderBenchmark(){
   // gibt es keine Metrik und damit keinen Marker.
   const sortCol=spalten.find(c=>c.id===bmSort.col);
   const fmarks=sortCol?fenceOutliers(allRows, sortCol.id):new Map();
+  const context=JSON.stringify([LANG,BMP,activeFilters(),BM_HIDEFLAG,BM_PCT,spalten.map(c=>c.id)]);
+  const pageContext=context+JSON.stringify(bmSort);
+  if(BM_PAGE_CONTEXT!==pageContext){BM_PAGE=0;BM_PAGE_CONTEXT=pageContext;}
+  BM_PAGE=Math.min(BM_PAGE,Math.max(0,Math.ceil(rows.length/BM_PAGE_SIZE)-1));
+  const offset=BM_PAGE*BM_PAGE_SIZE, visibleRows=rows.slice(offset,offset+BM_PAGE_SIZE);
+  if(!main.querySelector('.bmtable') || BM_DOM.context!==context)
+    BM_DOM={context,rows:new Map()};
+  let newRows='';
   let h=`<div class="rhead"><h2>${tr('Benchmark')}</h2></div>
     <div class="bmbar"><label class="ctl">${tr('Profile')}: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
@@ -2842,62 +3089,74 @@ async function renderBenchmark(){
     ${barMax.size?`<div class="bmlegend"><span class="k"></span> ${tr('Bar = share of the largest value of the column in the current selection, linear. No value judgement — and none where the filed unit is disputed or a scale finding stands, where the length would be a claim about comparability that does not hold.')}</div>`:''}
     <div class="caveat">${tr('⚠ Comparability caveat: accounting framework, scope of consolidation (CON/IND), national options and framework version (4.1/4.2) differ — rankings are indicative, not a supervisory metric. Source: public Pillar 3 disclosures (© EBA).')}</div>
     ${distributionRow(allRows, prof)}
+    <div class="bmpages" role="group" aria-label="${LANG==='de'?'Ergebnisseiten':'Result pages'}">
+      <button id="bmPrev"${BM_PAGE===0?' disabled':''}>${LANG==='de'?'Zurück':'Previous'}</button>
+      <span role="status">${rows.length?offset+1:0}–${offset+visibleRows.length} / ${rows.length}</span>
+      <button id="bmNext"${offset+visibleRows.length>=rows.length?' disabled':''}>${LANG==='de'?'Weiter':'Next'}</button>
+      <span class="meta">${LANG==='de'?'Suche und CSV umfassen alle Treffer. Die Browsersuche findet die aktuelle Seite.':'Search and CSV include all results. Browser find searches the current page.'}</span>
+    </div>
     <table class="bmtable"><thead><tr>
-      <th data-k="name">${tr('Institution')} <span class="dir"></span></th><th data-k="date">${tr('Reference date')} <span class="dir"></span></th>`;
+      <th tabindex="0" data-k="name">${tr('Institution')} <span class="dir"></span></th><th tabindex="0" data-k="date">${tr('Reference date')} <span class="dir"></span></th>`;
   // Spalten, deren Zelle zwischen den Frameworks umgebunden wurde (#26): der
   // Wert wird ueber die Koordinate weiter gefunden, aber die Rangliste mischt
   // dann Stichtage beiderseits eines Taxonomiewechsels.
   for(const c of spalten){
     const bs=metricBridge(c);
-    h+=`<th class="num" data-k="${c.id}">${esc(metricHead(c))}`
+    h+=`<th tabindex="0" class="num" data-k="${c.id}">${esc(metricHead(c))}`
      + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:'')
      + ` <span class="dir"></span></th>`;
   }
   if(prof.trendRow) h+=`<th title="${esc(tr('Course over the available reference dates ({0})', mlabel(prof.cols.find(x=>x.row===prof.trendRow)||{})||''))}">${tr('Trend')}</th>`;
   h+='</tr></thead><tbody>';
-  for(const r of rows){
+  for(const r of visibleRows){
+    if(BM_DOM.rows.has(r.key)) continue;
     // Skalenbefund markiert die Zeile ebenfalls: in einer Rangliste ABSOLUTER
     // Beträge ist ein um 10^6 zu kleiner Report der irreführendste Eintrag, den
     // es gibt — er steht ganz unten und sieht nach einem winzigen Institut aus.
     const cls=[flaggedFor(r.q,prof.tpl)?'flagged':'', scaleFor(r.q,prof.tpl)?'scaled':'']
                 .filter(Boolean).join(' ');
-    h+=`<tr${cls?` class="${cls}"`:''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
+    newRows+=`<tr data-key="${esc(r.key)}"${cls?` class="${cls}"`:''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
         ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}${scaleBadge(r.q,prof.tpl)}${
-          sortCol?fenceBadge(fmarks.get(r.key), sortCol.label):''}
+          '<span class="bm-fence"></span>'}
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;
     const balken=barErlaubt(prof, r);
     for(const c of spalten)
-      h+=bmCell(c, r[c.id], BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null,
+      newRows+=bmCell(c, r[c.id], BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null,
                 balken?barMax.get(c.id):null);
-    if(prof.trendRow) h+=`<td>${r._trend?sparkline(r._trend,null,null,r._breaks):''}</td>`;
-    h+='</tr>';
+    if(prof.trendRow) newRows+=`<td>${r._trend?sparkline(r._trend,null,null,r._breaks):''}</td>`;
+    newRows+='</tr>';
   }
   h+=`</tbody></table><div class="meta" style="margin-top:.5rem">${tr('{0} reports with template {1}', rows.length, esc(prof.tpl))}</div>`;
   h+=gateNote(prof, gatedOut, gross.length);
-  main.innerHTML=h;
-  document.getElementById('bmProfile').addEventListener('change',e=>{
+  mountBenchmark(main,h,newRows,visibleRows,sortCol,fmarks);
+  document.getElementById('bmPrev').onclick=()=>{BM_PAGE--;renderBenchmark();};
+  document.getElementById('bmNext').onclick=()=>{BM_PAGE++;renderBenchmark();};
+  document.getElementById('bmProfile').value=BMP;
+  document.getElementById('bmProfile').onchange=e=>{
     BMP=e.target.value; bmSort={...bmAll()[BMP].defaultSort};
     store.bmp=BMP; persist(); renderBenchmark(); shareState();
-  });
-  document.getElementById('bmPct').addEventListener('change',e=>{
+  };
+  document.getElementById('bmPct').checked=BM_PCT;
+  document.getElementById('bmPct').onchange=e=>{
     BM_PCT=e.target.checked; store.bmpct=BM_PCT; persist(); renderBenchmark(); shareState();
-  });
-  document.getElementById('bmHide').addEventListener('change',e=>{
+  };
+  document.getElementById('bmHide').checked=BM_HIDEFLAG;
+  document.getElementById('bmHide').onchange=e=>{
     BM_HIDEFLAG=e.target.checked; store.bmhide=BM_HIDEFLAG; persist(); renderBenchmark(); shareState();
-  });
+  };
   // Spaltenauswahl (#50 Punkt 3). Sie wird NICHT in `store` gelegt: eine
   // Spaltenwahl, die nur dieses Geraet kennt, waere das Gegenteil dessen, was
   // Punkt 1 erreichen wollte. Sie lebt im Hash und damit im geteilten Link.
   main.querySelectorAll('.colbox input[data-col]').forEach(cb=>{
-    cb.addEventListener('change',()=>{
+    cb.onchange=()=>{
       const an=[...main.querySelectorAll('.colbox input[data-col]')]
                  .filter(x=>x.checked).map(x=>x.dataset.col);
       // Alles abgewaehlt heisst ALLES zeigen, nicht eine leere Tabelle: eine
       // Tabelle ohne Kennzahlen ist kein Zustand, den jemand teilen will.
       BM_COLS = an.length ? new Set(an) : null;
       renderBenchmark(); shareState();
-    });
+    };
   });
   // Exportiert wird, was der Nutzer SIEHT — `rows`, nicht `allRows`. Hat er die
   // auffaelligen eingeklappt, sind sie auch nicht in der Datei; die Zeilenzahl
@@ -2913,16 +3172,21 @@ async function renderBenchmark(){
       if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:-1};
       renderBenchmark(); shareState();
     };
+    card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();card.click();}};
   });
   main.querySelectorAll('th[data-k]').forEach(th=>{
     const k=th.dataset.k;
+    th.tabIndex=0;
+    th.setAttribute('aria-sort',k===bmSort.col?(bmSort.dir<0?'descending':'ascending'):'none');
     if(k===bmSort.col) th.querySelector('.dir').textContent=bmSort.dir<0?'▼':'▲';
     th.onclick=()=>{
       if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:(k==='name'||k==='date')?1:-1};
       renderBenchmark(); shareState();
     };
+    th.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();th.click();}};
   });
-  main.scrollTop=0;
+  main.scrollTop=scroll;
+  if(!wasBenchmark && remembered) window.scrollTo(0,remembered.windowY);
 }
 
 /* ---- CSV-Export (#50) -----------------------------------------------------
@@ -3028,6 +3292,7 @@ async function renderCompare(){
   // Die Vergleichstabelle beschriftet jede Zelle — ohne Labels waere sie eine
   // Matrix aus Koordinaten.
   try{ await ensureLabels(); }catch(e){}
+  rememberView('compare');
   VIEW='compare'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
   const reps=[...PINS].map(byKey).filter(Boolean);
@@ -3296,11 +3561,11 @@ document.addEventListener('click', e=>{
   const ziel = e.target instanceof Element ? e.target.closest('a[href^="#"]') : null;
   if(!ziel || ziel.dataset.go!=null) return;
   const route_ = ziel.getAttribute('href')||'';
-  if(!/^#(r\/|benchmark|compare)/.test(route_) || route_.includes('?')) return;
-  const q = hashQuery();
-  if(!q) return;
+  if(!/^#(r\/|benchmark|compare)/.test(route_)) return;
+  // Always route within this document: HTML previews may set an external <base>.
   e.preventDefault();
-  springZu(route_);
+  if(route_.includes('?')) location.hash=route_;
+  else springZu(route_);
 });
 window.addEventListener('hashchange',route);
 
@@ -3377,23 +3642,30 @@ document.addEventListener('keydown',e=>{
 async function init(){
   try{
     const bar=document.getElementById('progBar');
+    await selectDataVersion();
     const [idx, codebook]=await Promise.all([
       getJSON('index.json'), getJSON('codebook.json')
     ]);
     if(bar) bar.style.width='100%';
     buildFromIndex(idx, codebook);
     REPORTS.sort((a,b)=>(bankName(a.entityID)+a.refPeriod).localeCompare(bankName(b.entityID)+b.refPeriod));
+    indexEntityReports();
     TOTAL_GROUPS=groupReports(REPORTS).length;
     document.getElementById('hsub').textContent=
       tr('{0} institutions · {1} reports · {2} facts',
          nf(TOTAL_GROUPS,0,0), nf(idx.stats.reports,0,0), nf(idx.stats.facts,0,0));
     initFilters(); wireList(); updateCmpBadge(); renderReportList(); route();
-    // Labels NACH dem ersten Rendern nachziehen. Das ist reine Beschleunigung:
-    // wer sofort eine Tabelle aufklappt, wartet ueber ensureLabels() ohnehin
-    // korrekt. Fehlschlaege bleiben hier still — sie werden an der Stelle
-    // gemeldet, an der die Labels wirklich gebraucht werden.
-    requestIdleCallback ? requestIdleCallback(()=>ensureLabels().catch(()=>{}))
-                        : setTimeout(()=>ensureLabels().catch(()=>{}), 0);
+    // Fetch labels on intent, not on every idle callback: the benchmark and
+    // collapsed overview never use the 9.4 MB decoded dictionary. Readers still
+    // wait for ensureLabels(), so a direct click or touch is safe without prefetch.
+    const prefetchLabels=event=>{
+      if(event.target.closest('details.theme summary, .ovcard, .mchip')){
+        ensureLabels().catch(()=>{});
+      }
+    };
+    const main=document.getElementById('main');
+    main.addEventListener('pointerover',prefetchLabels);
+    main.addEventListener('focusin',prefetchLabels);
   }catch(err){
     document.getElementById('main').innerHTML='<div class="status">'+esc(tr('Error while loading:'))+' '+esc(err.message)+
       '<br><br>Vom Repo-Root ausliefern: <code>python3 -m http.server 8766</code> → <code>/processed/zweig_a/viewer_json.html</code></div>';

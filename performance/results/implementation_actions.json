@@ -1,0 +1,142 @@
+[
+  {
+    "profile": "desktop",
+    "run": 0,
+    "sort": {
+      "script_ms": 54.3999999910593,
+      "paint_ms": 69.29999999701977,
+      "nodes": 6980
+    },
+    "filter": {
+      "script_ms": 73.90000000596046,
+      "paint_ms": 96.70000000298023,
+      "nodes": 4797
+    }
+  },
+  {
+    "profile": "desktop",
+    "run": 1,
+    "sort": {
+      "script_ms": 61.5,
+      "paint_ms": 77.3999999910593,
+      "nodes": 6896
+    },
+    "filter": {
+      "script_ms": 63.5,
+      "paint_ms": 83.29999999701977,
+      "nodes": 4751
+    }
+  },
+  {
+    "profile": "desktop",
+    "run": 2,
+    "sort": {
+      "script_ms": 41.1000000089407,
+      "paint_ms": 51.70000000298023,
+      "nodes": 6980
+    },
+    "filter": {
+      "script_ms": 66.29999999701977,
+      "paint_ms": 84.8999999910593,
+      "nodes": 4797
+    }
+  },
+  {
+    "profile": "desktop",
+    "run": 3,
+    "sort": {
+      "script_ms": 42.6000000089407,
+      "paint_ms": 51.900000005960464,
+      "nodes": 6896
+    },
+    "filter": {
+      "script_ms": 61.599999994039536,
+      "paint_ms": 79.59999999403954,
+      "nodes": 4751
+    }
+  },
+  {
+    "profile": "desktop",
+    "run": 4,
+    "sort": {
+      "script_ms": 39.5,
+      "paint_ms": 49.400000005960464,
+      "nodes": 6980
+    },
+    "filter": {
+      "script_ms": 71.40000000596046,
+      "paint_ms": 93,
+      "nodes": 4797
+    }
+  },
+  {
+    "profile": "mobile4g",
+    "run": 0,
+    "sort": {
+      "script_ms": 262.70000000298023,
+      "paint_ms": 350.59999999403954,
+      "nodes": 6980
+    },
+    "filter": {
+      "script_ms": 407.79999999701977,
+      "paint_ms": 547.7000000029802,
+      "nodes": 4797
+    }
+  },
+  {
+    "profile": "mobile4g",
+    "run": 1,
+    "sort": {
+      "script_ms": 202.30000001192093,
+      "paint_ms": 295.1000000089407,
+      "nodes": 6896
+    },
+    "filter": {
+      "script_ms": 330.29999999701977,
+      "paint_ms": 474.09999999403954,
+      "nodes": 4751
+    }
+  },
+  {
+    "profile": "mobile4g",
+    "run": 2,
+    "sort": {
+      "script_ms": 242.59999999403954,
+      "paint_ms": 316.40000000596046,
+      "nodes": 6980
+    },
+    "filter": {
+      "script_ms": 353.20000000298023,
+      "paint_ms": 462.90000000596046,
+      "nodes": 4797
+    }
+  },
+  {
+    "profile": "mobile4g",
+    "run": 3,
+    "sort": {
+      "script_ms": 217.20000000298023,
+      "paint_ms": 305,
+      "nodes": 6896
+    },
+    "filter": {
+      "script_ms": 345.8999999910593,
+      "paint_ms": 486,
+      "nodes": 4751
+    }
+  },
+  {
+    "profile": "mobile4g",
+    "run": 4,
+    "sort": {
+      "script_ms": 237.69999998807907,
+      "paint_ms": 328.8999999910593,
+      "nodes": 6980
+    },
+    "filter": {
+      "script_ms": 319.79999999701977,
+      "paint_ms": 458.29999999701977,
+      "nodes": 4797
+    }
+  }
+]

@@ -1,0 +1,100 @@
+{
+  "lossless": true,
+  "sizes": {
+    "21.01.D": {
+      "raw": 238753,
+      "gzip": 42120
+    },
+    "30.01": {
+      "raw": 399910,
+      "gzip": 63000
+    },
+    "41.00": {
+      "raw": 1312727,
+      "gzip": 299308
+    },
+    "60.00.A": {
+      "raw": 1246045,
+      "gzip": 241551
+    },
+    "61.00": {
+      "raw": 3428954,
+      "gzip": 593325
+    },
+    "80.00.A": {
+      "raw": 176223,
+      "gzip": 32099
+    },
+    "82.00.A": {
+      "raw": 278824,
+      "gzip": 65246
+    }
+  },
+  "manifest": {
+    "schema": 1,
+    "version": "c3bf537afd5187aacdb75553bba7c537fd380d5ce43ff7738b09c48853db13b3",
+    "templates": {
+      "21.01.D": {
+        "path": "benchmark/21.01.D.62687e8490dc31cb6ccaabd62743299b17038335d3d8df9f5e2312250e99ca13.json",
+        "sha256": "62687e8490dc31cb6ccaabd62743299b17038335d3d8df9f5e2312250e99ca13"
+      },
+      "30.01": {
+        "path": "benchmark/30.01.2d32dc860b9fc45101cfbb7c202dd123b8c763b77f06cf7367a458ef8e70975c.json",
+        "sha256": "2d32dc860b9fc45101cfbb7c202dd123b8c763b77f06cf7367a458ef8e70975c"
+      },
+      "41.00": {
+        "path": "benchmark/41.00.39436ef4270b0af8e2c36c123cbd6575e0bddc7fa4dee2b5cc35186cfa129cb4.json",
+        "sha256": "39436ef4270b0af8e2c36c123cbd6575e0bddc7fa4dee2b5cc35186cfa129cb4"
+      },
+      "60.00.A": {
+        "path": "benchmark/60.00.A.48009a2922faf455f5c6ff14d691aa27727f0ecd8aa989907a0e9a3e94e29104.json",
+        "sha256": "48009a2922faf455f5c6ff14d691aa27727f0ecd8aa989907a0e9a3e94e29104"
+      },
+      "61.00": {
+        "path": "benchmark/61.00.c6d14338bb7cc07cbeba9c87c417072674b7b7d6bf6ee1bc6195724eb30b9d45.json",
+        "sha256": "c6d14338bb7cc07cbeba9c87c417072674b7b7d6bf6ee1bc6195724eb30b9d45"
+      },
+      "80.00.A": {
+        "path": "benchmark/80.00.A.40c12586e6cfcb6abdfdf705e24d135fe9f15c280b0cb53cec222be4b52bbf9e.json",
+        "sha256": "40c12586e6cfcb6abdfdf705e24d135fe9f15c280b0cb53cec222be4b52bbf9e"
+      },
+      "82.00.A": {
+        "path": "benchmark/82.00.A.cc4494c6fa849f95d8d2e03f0c236b81d28814db19dc0a4b977a1ed6c727de8f.json",
+        "sha256": "cc4494c6fa849f95d8d2e03f0c236b81d28814db19dc0a4b977a1ed6c727de8f"
+      }
+    },
+    "profiles": {
+      "km1": [
+        "61.00"
+      ],
+      "headroom": [
+        "61.00"
+      ],
+      "risk": [
+        "60.00.A",
+        "61.00"
+      ],
+      "npl": [
+        "82.00.A"
+      ],
+      "kette": [
+        "21.01.D",
+        "80.00.A",
+        "82.00.A"
+      ],
+      "esg": [
+        "41.00"
+      ],
+      "liq": [
+        "61.00"
+      ],
+      "verg": [
+        "30.01"
+      ]
+    },
+    "overview": [
+      "61.00",
+      "82.00.A"
+    ]
+  }
+}

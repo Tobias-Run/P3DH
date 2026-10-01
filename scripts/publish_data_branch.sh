@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Publish the generated JSON data (processed/zweig_a/data/) to the orphan `data`
 # branch, from which jsDelivr serves it to the viewer. The branch is force-pushed
-# as a SINGLE fresh commit every time, so neither main nor the data branch
+# as a fresh snapshot plus a version-pointer commit every time, so neither main nor the data branch
 # accumulate history/bloat — the big shard tree never enters main's history.
 #
 # The branch also carries the pipeline STATE under state/ (long form + coverage
@@ -29,6 +29,7 @@ SRC="$ROOT/processed/zweig_a/data"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 cp -R "$SRC"/. "$TMP"/
+rm -f "$TMP/data_version.json"   # never carry a pointer from a restored snapshot
 touch "$TMP/.nojekyll"          # so GitHub/jsDelivr serve dotfiles/json verbatim
 
 # --- pipeline state (optional: only what exists locally is published) ----------
@@ -58,7 +59,8 @@ Dieser Branch trägt die **erzeugten Daten** des Projekts
 [Tobias-Run/P3DH](https://github.com/Tobias-Run/P3DH), nicht den Code.
 
 ⚠️ **Kein Verlass auf Dauer:** Der Branch wird bei jedem Pipeline-Lauf
-force-gepusht und trägt genau einen Commit. Er hat **keine Historie** — der vorige
+force-gepusht und trägt einen Snapshot-Commit plus einen Versionszeiger-Commit.
+Er hat **keine fortlaufende Historie** — der vorige
 Stand ist danach weg. Wer einen bestimmten Stand zitieren oder reproduzieren muss,
 nimmt ein **Release-Asset**, nicht diesen Branch.
 
@@ -71,6 +73,7 @@ nimmt ein **Release-Asset**, nicht diesen Branch.
 | `state/long_form_raw.csv.gz` | Dieselbe Wahrheit als CSV, vor der Verdichtung |
 | `state/filing_indicators.csv.gz` | Coverage-Matrix — welches Template ein Institut als gemeldet deklariert hat |
 | `index.json`, `codebook.json`, `benchmark.json`, `reports/` | Zweig A: was der Viewer lädt |
+| `data_version.json`, `benchmark/` | Atomarer Versionszeiger und unveränderliche Template-Teilpayloads |
 
 ## Bevor Sie damit rechnen
 
@@ -107,12 +110,21 @@ git add -A
 git -c user.email="noreply@anthropic.com" -c user.name="P3DH data bot" \
   commit -q -m "data snapshot $(date -u +%FT%TZ)"
 
+# Pin every viewer resource to the same immutable snapshot. The pointer is a
+# second commit whose parent keeps that snapshot reachable. An old CDN pointer
+# can serve an older coherent dataset, but can never mix new index + old cells.
+snapshot_revision=$(git rev-parse HEAD)
+printf '{"schema":1,"revision":"%s"}\n' "$snapshot_revision" > data_version.json
+git add data_version.json
+git -c user.email="noreply@anthropic.com" -c user.name="P3DH data bot" \
+  commit -q -m "Point viewer to data snapshot $snapshot_revision"
+
 if [ -n "${P3DH_PUSH_URL:-}" ]; then
   git push -f -q "$P3DH_PUSH_URL" data
 else
   GIT_SSH_COMMAND="ssh -i $KEY" git push -f -q "$REPO_SSH" data
 fi
-echo "✓ pushed orphan branch 'data' (1 commit)"
+echo "✓ pushed data snapshot and version pointer (2 commits)"
 
 # Purge jsDelivr's branch cache for the files that change every publish.
 # Jede Datei, die der Viewer per getJSON() aus dem Wurzelverzeichnis holt,
@@ -121,7 +133,7 @@ echo "✓ pushed orphan branch 'data' (1 commit)"
 # (#23/#82) hiesse das neue Zellen ohne Beschriftung — kein Fehler, nur eine
 # Luecke, und damit unsichtbar. tests/test_publish_coupling.py haelt die Liste
 # gegen die tatsaechlichen getJSON-Aufrufe im Viewer.
-for f in index.json codebook.json labels.json benchmark.json peer_shape.json; do
+for f in data_version.json index.json codebook.json labels.json benchmark.json peer_shape.json; do
   curl -fsS "https://purge.jsdelivr.net/gh/Tobias-Run/P3DH@data/$f" >/dev/null \
     && echo "  purged $f" || echo "  purge $f failed (non-fatal)"
 done

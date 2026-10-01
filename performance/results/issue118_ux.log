@@ -1,0 +1,41 @@
+{
+  "benchmark_without_labels": true,
+  "report_prefetch": true,
+  "touch_expansion": true,
+  "deduplicated_labels": true,
+  "failure_retry": true,
+  "stale_report_navigation": true,
+  "benchmark": {
+    "reused_rows": true,
+    "preserved_controls_and_focus": true,
+    "cached_vs_fresh": [
+      "km1/name",
+      "km1/cet1",
+      "headroom/name",
+      "headroom/cet1",
+      "risk/name",
+      "risk/sh_credit",
+      "npl/name",
+      "npl/npl",
+      "kette/name",
+      "kette/npl",
+      "esg/name",
+      "esg/esg_green",
+      "liq/name",
+      "liq/lcr",
+      "verg/name",
+      "verg/rem_head_mb"
+    ],
+    "filtered_rows": 429,
+    "pagination_complete": true,
+    "export": true
+  },
+  "partition": {
+    "km1_only": true,
+    "cached_profile_switch": true,
+    "latest_profile_wins": true,
+    "partial_failure_retry": true,
+    "all_data_pinned": true,
+    "integrity_failure_same_revision_fallback": true
+  }
+}

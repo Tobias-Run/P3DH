@@ -1,0 +1,18 @@
+landing 0 200 0.1957
+landing 1 200 0.136859
+landing 2 200 0.128153
+pages 0 200 0.176554
+pages 1 200 0.109675
+pages 2 200 0.120871
+cdn_index 0 200 0.103949
+cdn_index 1 200 0.079609
+cdn_index 2 200 0.071394
+raw_index 0 200 0.246604
+raw_index 1 200 0.10411
+raw_index 2 200 0.104139
+{'url': 'https://tobias-run.github.io/P3DH/processed/zweig_a/viewer_json.html', 'browser': '151.0.7922.173', 'sample': 0, 'visit': 'cold', 'ready_ms': 1243.1000000014901, 'rows': 814, 'errors': [], 'elapsed_ms': 1314.7260999976425}
+{'url': 'https://tobias-run.github.io/P3DH/processed/zweig_a/viewer_json.html', 'browser': '151.0.7922.173', 'sample': 0, 'visit': 'warm', 'ready_ms': 1237.3999999985099, 'rows': 814, 'errors': [], 'elapsed_ms': 1291.5898400024162}
+{'url': 'https://tobias-run.github.io/P3DH/processed/zweig_a/viewer_json.html', 'browser': '151.0.7922.173', 'sample': 1, 'visit': 'cold', 'ready_ms': 1228.2999999970198, 'rows': 814, 'errors': [], 'elapsed_ms': 1877.3259200024768}
+{'url': 'https://tobias-run.github.io/P3DH/processed/zweig_a/viewer_json.html', 'browser': '151.0.7922.173', 'sample': 1, 'visit': 'warm', 'ready_ms': 885.3999999985099, 'rows': 814, 'errors': [], 'elapsed_ms': 1508.807391001028}
+{'url': 'https://tobias-run.github.io/P3DH/processed/zweig_a/viewer_json.html', 'browser': '151.0.7922.173', 'sample': 2, 'visit': 'cold', 'ready_ms': 1639.7000000029802, 'rows': 814, 'errors': [], 'elapsed_ms': 1817.3743549996288}
+{'url': 'https://tobias-run.github.io/P3DH/processed/zweig_a/viewer_json.html', 'browser': '151.0.7922.173', 'sample': 2, 'visit': 'warm', 'ready_ms': 908.3000000044703, 'rows': 814, 'errors': [], 'elapsed_ms': 1534.7892839999986}

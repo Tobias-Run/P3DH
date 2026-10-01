@@ -1,0 +1,9 @@
+{
+  "baseline_ref": "902d0add0d117473791d129bc2d9180e9761e7f4",
+  "sha256": {
+    "baseline": "cf6658fc46df205138612a63343b0e4d1e20dd3a49a0feea3faa5c14a42c3ed5",
+    "formatters": "355aaee5974454023ede958dc3bfdd255cfc5f2ae8c83e0bda882f68b87e0d19",
+    "network": "426d0cd117936fdb1af933a0887741659402646b63fef9df7dd4881dcd9e797f",
+    "candidate": "27e227e64e009ddbfd29d9152e9f75d7e73badf80432979c7fcede3e9b215b77"
+  }
+}

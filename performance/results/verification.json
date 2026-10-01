@@ -1,0 +1,66 @@
+{
+  "profiles": {
+    "equal": true,
+    "baseline_sha256": "945a90fc72cb62184034c1b3c13b78f1eca94dbd952e9cd5461aed16957b2ec8",
+    "candidate_sha256": "945a90fc72cb62184034c1b3c13b78f1eca94dbd952e9cd5461aed16957b2ec8"
+  },
+  "membership": {
+    "equal": true,
+    "baseline_sha256": "e6b98e662067878ce02f7ebe6be41d9652bac27ce6258adb201c0ebc9b177000",
+    "candidate_sha256": "e6b98e662067878ce02f7ebe6be41d9652bac27ce6258adb201c0ebc9b177000"
+  },
+  "formats": {
+    "equal": true,
+    "baseline_sha256": "d8a2307a587489bc6d993315c290e0da44c557a76ef7dbfab3da26ce9bf06ef1",
+    "candidate_sha256": "d8a2307a587489bc6d993315c290e0da44c557a76ef7dbfab3da26ce9bf06ef1"
+  },
+  "syntheticCases": {
+    "equal": true,
+    "baseline_sha256": "fe675fe7aaee830b6fed09b64e034f84dcbdaeb429d9cccd4ebb90e15af8dd71",
+    "candidate_sha256": "fe675fe7aaee830b6fed09b64e034f84dcbdaeb429d9cccd4ebb90e15af8dd71"
+  },
+  "tables": {
+    "equal": true,
+    "baseline_sha256": "0d84ed5b650e17274c02ca9938618d434543e285f8dcd54a55ee2aa47e4b2cb8",
+    "candidate_sha256": "0d84ed5b650e17274c02ca9938618d434543e285f8dcd54a55ee2aa47e4b2cb8"
+  },
+  "errors": {
+    "equal": true,
+    "baseline_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "candidate_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "cache_revalidation": {
+    "equal": true,
+    "versions": [
+      1,
+      1,
+      2
+    ],
+    "http": [
+      {
+        "path": "/candidate/data/cache_probe.json",
+        "status": 200,
+        "if_none_match": null,
+        "cache_control": "no-cache"
+      },
+      {
+        "path": "/candidate/data/cache_probe.json",
+        "status": 200,
+        "if_none_match": null,
+        "cache_control": "no-cache"
+      },
+      {
+        "path": "/candidate/data/cache_probe.json",
+        "status": 200,
+        "if_none_match": null,
+        "cache_control": "no-cache"
+      }
+    ]
+  },
+  "lazy_labels": {
+    "equal": true,
+    "benchmark_initial": false,
+    "report_prefetch": true,
+    "direct_expansion": true
+  }
+}

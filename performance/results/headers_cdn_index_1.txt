@@ -1,0 +1,28 @@
+HTTP/1.1 200 OK
+date: Wed, 30 Sep 2026 21:50:01 GMT
+server: envoy
+
+HTTP/2 200 
+access-control-allow-origin: *
+access-control-expose-headers: *
+timing-allow-origin: *
+cache-control: public, max-age=604800, s-maxage=43200
+cross-origin-resource-policy: cross-origin
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+content-type: application/json; charset=utf-8
+x-jsd-version: data
+x-jsd-version-type: branch
+etag: W/"502b4-NgVXQdIWbqoVDidJi8hrogoF4mI"
+content-encoding: br
+accept-ranges: bytes
+age: 4055
+date: Wed, 30 Sep 2026 21:50:02 GMT
+x-served-by: cache-fra-etou8220146-FRA, cache-chi-klot8100099-CHI
+x-cache: HIT, HIT
+vary: Accept-Encoding
+alt-svc: h3=":443";ma=86400,h3-29=":443";ma=86400,h3-27=":443";ma=86400
+content-length: 42363
+x-envoy-upstream-service-time: 48
+server: envoy
+

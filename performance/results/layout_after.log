@@ -1,0 +1,22 @@
+[
+  {
+    "profile": "desktop",
+    "scenario": "benchmark",
+    "shifts": []
+  },
+  {
+    "profile": "desktop",
+    "scenario": "report",
+    "shifts": []
+  },
+  {
+    "profile": "mobile4g",
+    "scenario": "benchmark",
+    "shifts": []
+  },
+  {
+    "profile": "mobile4g",
+    "scenario": "report",
+    "shifts": []
+  }
+]
