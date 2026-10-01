@@ -3561,11 +3561,11 @@ document.addEventListener('click', e=>{
   const ziel = e.target instanceof Element ? e.target.closest('a[href^="#"]') : null;
   if(!ziel || ziel.dataset.go!=null) return;
   const route_ = ziel.getAttribute('href')||'';
-  if(!/^#(r\/|benchmark|compare)/.test(route_) || route_.includes('?')) return;
-  const q = hashQuery();
-  if(!q) return;
+  if(!/^#(r\/|benchmark|compare)/.test(route_)) return;
+  // Always route within this document: HTML previews may set an external <base>.
   e.preventDefault();
-  springZu(route_);
+  if(route_.includes('?')) location.hash=route_;
+  else springZu(route_);
 });
 window.addEventListener('hashchange',route);
 

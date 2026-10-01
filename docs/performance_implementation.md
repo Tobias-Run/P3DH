@@ -216,3 +216,14 @@ Taxonomiewechsel-Hinweis berücksichtigen ebenfalls die Sprache.
 identische numerische Ergebnisse sowie die Zeitreihenüberschriften. Der Test und
 die Browser-Runtime-Regression bestehen (`language_regression.log`,
 `language_runtime.log`).
+
+### Interne Navigation in der externen Vorschau
+
+HTMLPreview setzt eine `<base>`-Adresse auf die Raw-GitHub-Datei. Ohne Filter-
+Query ließ der bisherige Linkhandler den Browser navigieren; ein Banklink konnte
+so die HTML-Rohdatei statt des Berichts im Viewer öffnen. Interne Berichts-,
+Benchmark- und Vergleichslinks werden nun stets im aktuellen Dokument behandelt.
+Eigene Query-Parameter eines Links bleiben erhalten; sonst wird der aktuelle
+Filterzustand übernommen. `performance/test_preview_navigation.py` prüft eine
+absichtlich externe Basisadresse, Banklink, Rückweg und Query-Erhaltung.
+Dieser Test und die Browser-Runtime-Regression bestehen.
