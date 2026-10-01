@@ -1,0 +1,62 @@
+{
+  "pipeline_run": 36933243825,
+  "merge_sha": "b22b1b79c1dbe2397c47c5555cc5238a0af071f8",
+  "data_head": "38dd73e537d54c800f841d5826e494303a8c37b7",
+  "data_revision": "f47ef2d32968e59188b4139ede3ccac1d9737f21",
+  "pages_sha256": "733c3a3353b39912367320d15f329293491054dfbbd47c898a1b58bca0de0db6",
+  "pages_headers": {
+    "etag": "\"6abed8f1-35ae3\"",
+    "cache-control": "max-age=600"
+  },
+  "parts": {
+    "21.01.D": {
+      "path": "benchmark/21.01.D.62687e8490dc31cb6ccaabd62743299b17038335d3d8df9f5e2312250e99ca13.json",
+      "sha256": "62687e8490dc31cb6ccaabd62743299b17038335d3d8df9f5e2312250e99ca13",
+      "raw_bytes": 238753
+    },
+    "30.01": {
+      "path": "benchmark/30.01.2d32dc860b9fc45101cfbb7c202dd123b8c763b77f06cf7367a458ef8e70975c.json",
+      "sha256": "2d32dc860b9fc45101cfbb7c202dd123b8c763b77f06cf7367a458ef8e70975c",
+      "raw_bytes": 399910
+    },
+    "41.00": {
+      "path": "benchmark/41.00.39436ef4270b0af8e2c36c123cbd6575e0bddc7fa4dee2b5cc35186cfa129cb4.json",
+      "sha256": "39436ef4270b0af8e2c36c123cbd6575e0bddc7fa4dee2b5cc35186cfa129cb4",
+      "raw_bytes": 1312727
+    },
+    "60.00.A": {
+      "path": "benchmark/60.00.A.48009a2922faf455f5c6ff14d691aa27727f0ecd8aa989907a0e9a3e94e29104.json",
+      "sha256": "48009a2922faf455f5c6ff14d691aa27727f0ecd8aa989907a0e9a3e94e29104",
+      "raw_bytes": 1246045
+    },
+    "61.00": {
+      "path": "benchmark/61.00.c6d14338bb7cc07cbeba9c87c417072674b7b7d6bf6ee1bc6195724eb30b9d45.json",
+      "sha256": "c6d14338bb7cc07cbeba9c87c417072674b7b7d6bf6ee1bc6195724eb30b9d45",
+      "raw_bytes": 3428954
+    },
+    "80.00.A": {
+      "path": "benchmark/80.00.A.40c12586e6cfcb6abdfdf705e24d135fe9f15c280b0cb53cec222be4b52bbf9e.json",
+      "sha256": "40c12586e6cfcb6abdfdf705e24d135fe9f15c280b0cb53cec222be4b52bbf9e",
+      "raw_bytes": 176223
+    },
+    "82.00.A": {
+      "path": "benchmark/82.00.A.cc4494c6fa849f95d8d2e03f0c236b81d28814db19dc0a4b977a1ed6c727de8f.json",
+      "sha256": "cc4494c6fa849f95d8d2e03f0c236b81d28814db19dc0a4b977a1ed6c727de8f",
+      "raw_bytes": 278824
+    }
+  },
+  "cdn_km1_headers": {
+    "timing-allow-origin": "*",
+    "cache-control": "public, max-age=31536000, s-maxage=31536000, immutable",
+    "etag": "W/\"34525a-xvVcujhNZbIAVAYuuwEx7LKCCt4\""
+  },
+  "stats": {
+    "reports": 883,
+    "facts": 2295189
+  },
+  "pointer_parent_matches": true,
+  "pages_matches_merged_viewer": true,
+  "all_part_hashes_verified": true,
+  "lossless_reconstruction": true,
+  "cdn_part_matches": true
+}
