@@ -972,13 +972,19 @@ const DATA_BASES = LOCAL ? ['data/']
 let DATA_REV=null;
 async function getJSON(path,integrity=null){
   let err, missing=true;
-  const bases=DATA_REV&&!LOCAL ? DATA_BASES.map(base=>
+  let bases=DATA_REV&&!LOCAL ? DATA_BASES.map(base=>
     base.replace('@data/','@'+DATA_REV+'/').replace('/data/','/'+DATA_REV+'/')) : DATA_BASES;
+  // The raw branch is authoritative for the optional rollout pointer.
+  // A CDN error must not veto a confirmed legacy publication.
+  if(path==='data_version.json' && !LOCAL) bases=[...bases].reverse();
   for(const base of bases){
     try{
       const r=await fetch(base+path,{cache:DATA_REV||path.startsWith('benchmark/')?'default':'no-store',
         ...(integrity?{integrity}:{})});
       if(r.ok) return await r.json();   // native parse — no hand-rolled CSV parser
+      if(r.status===404 && path==='data_version.json' && base.startsWith('https://raw.githubusercontent.com/')){
+        return null; // authoritative absence: older publication, no pointer yet
+      }
       if(r.status!==404) missing=false;
       err=new Error(path.split('/').pop()+' '+r.status);
     }catch(e){ err=e; missing=false; }
@@ -989,11 +995,12 @@ async function getJSON(path,integrity=null){
 async function selectDataVersion(){
   try{
     const version=await getJSON('data_version.json');
+    if(version===null) return;
     if(version.schema!==1 || !/^[a-f0-9]{40}$/.test(version.revision))
       throw new Error('Invalid dataset version');
     DATA_REV=version.revision;
   }catch(e){
-    // Backwards compatibility only when every origin reports a missing pointer.
+    // Local backwards compatibility when all origins report a missing pointer.
     // A failed/invalid pointer must never silently select mutable mixed data.
     if(!e.missing) throw e;
   }

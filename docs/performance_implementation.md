@@ -187,3 +187,20 @@ Draft-PR: [#120](https://github.com/Tobias-Run/P3DH/pull/120).
 Die Issues bleiben bis zur Abnahme offen. Das Ideal einer sofortigen Tabellenöffnung
 unter einer Sekunde, ein eigener Nachweis für die 100-ms-Rückmeldung aller langen
 Aktionen sowie physische Geräte-/Screenreader-Prüfung sind weiter offen.
+
+### Korrektur nach Smartphone-Vorschau
+
+Der Smartphone-Test meldete `data_version.json 404`. Die bisher veröffentlichte
+Datenversion enthält noch keinen Versionszeiger. Die bisherige Prüfung verlangte
+404 von beiden Abrufquellen; ein zusätzlicher CDN-/Netzwerkfehler konnte den
+zulässigen Legacy-Fallback verhindern. Für den optionalen Zeiger wird jetzt
+zuerst die maßgebliche Raw-GitHub-Datenquelle geprüft. Deren bestätigte 404 wählt
+den Legacy-Modus. Ein ungültiger Zeiger oder Ausfall ohne bestätigte Abwesenheit
+bleibt ein Fehler und startet keine Datenabrufe.
+
+`performance/test_data_pointer.py` prüft bestätigte Abwesenheit trotz gestörtem
+CDN, ungültige Versionsangaben und vollständigen Ausfall. Das betrifft den
+Produktions-Abrufpfad; die oben dokumentierte lokale A/B-Messung wurde vor dieser
+Korrektur durchgeführt. Die externe HTML-Vorschau verwendet weiterhin den
+publizierten Legacy-Datenstand und eignet sich zur Bedienungsprüfung, nicht zur
+vollständigen Abnahme der neuen Datenaufteilung.
