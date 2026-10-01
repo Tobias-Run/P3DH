@@ -1,0 +1,30 @@
+HTTP/1.1 200 OK
+date: Wed, 30 Sep 2026 21:50:01 GMT
+server: envoy
+
+HTTP/2 200 
+server: envoy
+content-type: text/html; charset=utf-8
+last-modified: Tue, 22 Sep 2026 23:46:24 GMT
+access-control-allow-origin: *
+strict-transport-security: max-age=31556952
+etag: W/"6ab31350-32447"
+expires: Wed, 30 Sep 2026 22:00:01 GMT
+cache-control: max-age=600
+content-encoding: gzip
+x-proxy-cache: MISS
+x-github-request-id: F284:1049DE:5F0379:63403A:6ABD8409
+x-github-edge-region: iad
+accept-ranges: bytes
+date: Wed, 30 Sep 2026 21:50:01 GMT
+via: 1.1 varnish
+age: 0
+x-served-by: cache-chi-klot8100173-CHI
+x-cache: HIT
+x-cache-hits: 1
+x-timer: S1790805002.927004,VS0,VE3
+vary: Accept-Encoding
+x-fastly-request-id: 436e7b75ec52d0bce3655cb88c7b01d9df3c0fe0
+content-length: 74369
+x-envoy-upstream-service-time: 14
+

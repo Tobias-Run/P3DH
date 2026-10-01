@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Performance: getestete CPU-Optimierungen für Zahlenformate, Zeitreihen und Perzentile übernehmen",
+    "body_file": "performance/issues/1.md"
+  },
+  {
+    "title": "UX: Beschriftungen auf Berichtsseiten früh laden, ohne den Benchmark-Start zu belasten",
+    "body_file": "performance/issues/2.md"
+  },
+  {
+    "title": "Performance: Sortieren und Filtern ohne vollständigen Neuaufbau der Benchmark-Tabelle",
+    "body_file": "performance/issues/3.md"
+  },
+  {
+    "title": "Performance: Benchmark-Daten nach Template laden und Profilwechsel zwischenspeichern",
+    "body_file": "performance/issues/4.md"
+  },
+  {
+    "title": "UX: Layoutsprünge reduzieren und Ladezustände mit erhaltenem Arbeitskontext anzeigen",
+    "body_file": "performance/issues/5.md"
+  }
+]

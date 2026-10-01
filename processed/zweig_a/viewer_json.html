@@ -1003,12 +1003,21 @@ const LOCALE=()=>LOCALES[LANG]||LOCALES.en;
    `1,234.5` ein `1,234 5` und damit aus jeder Nachkommastelle Unsinn.
    Englisch bekommt deshalb die Standardform; die Verwechslungsgefahr, wegen
    der im Deutschen ersetzt wird, gibt es dort nicht. */
+// Reuse locale formatters: table rendering calls nf thousands of times.
+// Locale is part of the key, so switching language keeps its exact semantics.
+const NUMBER_FORMATS=new Map();
 function nf(v, min, max){
   const n=Number(v);
   if(!Number.isFinite(n)) return '';
   const lo=min==null?0:min;
-  const s=n.toLocaleString(LOCALE(), {minimumFractionDigits:lo,
-                                      maximumFractionDigits:max==null?lo:max});
+  const hi=max==null?lo:max;
+  const key=LOCALE()+'|'+lo+'|'+hi;
+  let formatter=NUMBER_FORMATS.get(key);
+  if(!formatter){
+    formatter=new Intl.NumberFormat(LOCALE(), {minimumFractionDigits:lo, maximumFractionDigits:hi});
+    NUMBER_FORMATS.set(key,formatter);
+  }
+  const s=formatter.format(n);
   return LANG==='de' ? s.split('.').join(NBSP) : s;
 }
 function fmt(v){
@@ -2232,10 +2241,20 @@ function renderTimeseries(rep){
   ts+='</section>';
   if(any) host.innerHTML=ts;
 }
+let ENTITY_REPORTS=new Map();
+function indexEntityReports(){
+  ENTITY_REPORTS=new Map();
+  for(const rep of REPORTS){
+    const {lei,scope}=leiParts(rep.entityID), key=lei+'|'+scope;
+    if(!ENTITY_REPORTS.has(key)) ENTITY_REPORTS.set(key,[]);
+    ENTITY_REPORTS.get(key).push(rep);
+  }
+  for(const reps of ENTITY_REPORTS.values())
+    reps.sort((a,b)=>a.refPeriod.localeCompare(b.refPeriod));
+}
 function entityReports(rep){
   const {lei,scope}=leiParts(rep.entityID);
-  return REPORTS.filter(r=>{ const p=leiParts(r.entityID); return p.lei===lei&&p.scope===scope; })
-    .sort((a,b)=>a.refPeriod.localeCompare(b.refPeriod));
+  return ENTITY_REPORTS.get(lei+'|'+scope)||[];
 }
 /* `breaks[i] === true` heisst: VOR diesem Punkt wechselt die Taxonomie. Das
    verbindende Stueck wird dort GESTRICHELT statt durchgezogen (#26) — ein
@@ -2444,17 +2463,25 @@ function percentileMap(rows,colId){
     const k=peerKeyOf(r);
     (groups.get(k)||groups.set(k,[]).get(k)).push(v);
   }
-  for(const arr of groups.values()) arr.sort((a,b)=>a-b);
+  const ranks=new Map();
+  for(const [key,arr] of groups){
+    arr.sort((a,b)=>a-b);
+    if(arr.length<PCT_MIN_GROUP) continue;
+    const values=new Map();
+    for(let lo=0;lo<arr.length;){
+      let hi=lo+1;
+      while(hi<arr.length && arr[hi]===arr[lo]) hi++;
+      values.set(arr[lo],{p:(lo+(hi-lo)/2)/arr.length*100,n:arr.length});
+      lo=hi;
+    }
+    ranks.set(key,values);
+  }
   const out=new Map();
   for(const r of rows){
     const v=r[colId];
     if(v==null||!isFinite(v)) continue;
-    const arr=groups.get(peerKeyOf(r));
-    if(!arr||arr.length<PCT_MIN_GROUP) continue;
-    // Mid-Rank: Anteil echt kleinerer Werte + halbe Bindungen -> stabil bei Ties
-    let below=0,equal=0;
-    for(const x of arr){ if(x<v) below++; else if(x===v) equal++; }
-    out.set(r.key,{p:(below+equal/2)/arr.length*100, n:arr.length});
+    const rank=ranks.get(peerKeyOf(r))?.get(v);
+    if(rank) out.set(r.key,rank);
   }
   return out;
 }
@@ -3383,6 +3410,7 @@ async function init(){
     if(bar) bar.style.width='100%';
     buildFromIndex(idx, codebook);
     REPORTS.sort((a,b)=>(bankName(a.entityID)+a.refPeriod).localeCompare(bankName(b.entityID)+b.refPeriod));
+    indexEntityReports();
     TOTAL_GROUPS=groupReports(REPORTS).length;
     document.getElementById('hsub').textContent=
       tr('{0} institutions · {1} reports · {2} facts',

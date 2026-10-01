@@ -1,0 +1,106 @@
+{
+  "full": {
+    "raw_bytes": 7003824,
+    "gzip_bytes": 1388301
+  },
+  "lossless_reconstruction": true,
+  "profiles": {
+    "km1": {
+      "raw_bytes": 3437094,
+      "gzip_bytes": 593698,
+      "templates": [
+        "61.00"
+      ],
+      "reports": 814
+    },
+    "headroom": {
+      "raw_bytes": 3437094,
+      "gzip_bytes": 593698,
+      "templates": [
+        "61.00"
+      ],
+      "reports": 814
+    },
+    "risk": {
+      "raw_bytes": 4660422,
+      "gzip_bytes": 846950,
+      "templates": [
+        "60.00.A",
+        "61.00"
+      ],
+      "reports": 843
+    },
+    "npl": {
+      "raw_bytes": 283828,
+      "gzip_bytes": 65405,
+      "templates": [
+        "82.00.A"
+      ],
+      "reports": 417
+    },
+    "kette": {
+      "raw_bytes": 672459,
+      "gzip_bytes": 134415,
+      "templates": [
+        "21.01.D",
+        "80.00.A",
+        "82.00.A"
+      ],
+      "reports": 539
+    },
+    "esg": {
+      "raw_bytes": 1315047,
+      "gzip_bytes": 299366,
+      "templates": [
+        "41.00"
+      ],
+      "reports": 232
+    },
+    "liq": {
+      "raw_bytes": 3437094,
+      "gzip_bytes": 593698,
+      "templates": [
+        "61.00"
+      ],
+      "reports": 814
+    },
+    "verg": {
+      "raw_bytes": 403500,
+      "gzip_bytes": 63164,
+      "templates": [
+        "30.01"
+      ],
+      "reports": 359
+    }
+  },
+  "per_template": {
+    "21.01.D": {
+      "raw_bytes": 238753,
+      "gzip_bytes": 42120
+    },
+    "30.01": {
+      "raw_bytes": 399910,
+      "gzip_bytes": 63000
+    },
+    "41.00": {
+      "raw_bytes": 1312727,
+      "gzip_bytes": 299308
+    },
+    "60.00.A": {
+      "raw_bytes": 1246045,
+      "gzip_bytes": 241551
+    },
+    "61.00": {
+      "raw_bytes": 3428954,
+      "gzip_bytes": 593325
+    },
+    "80.00.A": {
+      "raw_bytes": 176223,
+      "gzip_bytes": 32099
+    },
+    "82.00.A": {
+      "raw_bytes": 278824,
+      "gzip_bytes": 65246
+    }
+  }
+}

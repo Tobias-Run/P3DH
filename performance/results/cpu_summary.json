@@ -1,0 +1,52 @@
+{
+  "baseline": {
+    "duration_ms": 1772.774,
+    "self_ms": {
+      "renderBenchmark": 616.6099999999994,
+      "nf": 438.2110000000002,
+      "(program)": 226.97100000000003,
+      "(anonymous)": 195.47699999999995,
+      "leiParts": 167.423,
+      "(garbage collector)": 41.473,
+      "metricValue": 13.268,
+      "benchmarkRows": 13.113000000000001,
+      "entityReports": 9.235,
+      "tr": 5.5,
+      "sparkline": 5.3,
+      "esc": 4.704,
+      "sizeBar": 4.666,
+      "passFilters": 4.616,
+      "zdash": 4.145,
+      "distChart": 3.765,
+      "bmCell": 3.333,
+      "distributionRow": 2.161,
+      "tplValue": 2.157,
+      "km1Value": 1.152
+    }
+  },
+  "candidate": {
+    "duration_ms": 831.133,
+    "self_ms": {
+      "renderBenchmark": 625.1169999999998,
+      "(program)": 106.82899999999995,
+      "metricValue": 18.682000000000002,
+      "nf": 18.024,
+      "(anonymous)": 12.548,
+      "(garbage collector)": 9.89,
+      "distChart": 5.373999999999999,
+      "sparkline": 4.709,
+      "benchmarkRows": 4.119,
+      "sizeBar": 3.9819999999999993,
+      "distributionRow": 3.266,
+      "passFilters": 2.301,
+      "peerKeyOf": 2.151,
+      "km1Value": 2.149,
+      "(idle)": 1.276,
+      "bmCell": 1.12,
+      "flaggedFor": 1.102,
+      "tr": 1.101,
+      "fenceOutliers": 1.092,
+      "bankName": 1.077
+    }
+  }
+}

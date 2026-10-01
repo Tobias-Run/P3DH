@@ -1,0 +1,32 @@
+HTTP/1.1 200 OK
+date: Wed, 30 Sep 2026 21:50:02 GMT
+server: envoy
+
+HTTP/2 200 
+date: Wed, 30 Sep 2026 21:50:02 GMT
+content-type: application/json; charset=utf-8
+content-length: 42363
+access-control-allow-origin: *
+access-control-expose-headers: *
+timing-allow-origin: *
+cache-control: public, max-age=604800, s-maxage=43200
+cross-origin-resource-policy: cross-origin
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+x-jsd-version: data
+x-jsd-version-type: branch
+etag: W/"502b4-NgVXQdIWbqoVDidJi8hrogoF4mI"
+content-encoding: br
+accept-ranges: bytes
+x-served-by: cache-fra-etou8220146-FRA, cache-lga-kjfk8660026-LGA
+x-cache: HIT, MISS
+vary: Accept-Encoding
+alt-svc: h3=":443"; ma=86400
+nel: {"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}
+age: 4055
+cf-cache-status: HIT
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=O3tO3Bc8C3eBjkRkuOuIYIvxmpxlQOAWvXuS%2F8NQSxrr5HSrf8O8AFUU213ZVE3JnkXSc%2FUL3q5KoSJ6mNez9Ic9v5QEAsRgDTy3fmqGUtP9M3yC6Gj5pp%2FYiiK6CmKsJVM%3D"}]}
+server: envoy
+cf-ray: a43670dfe9e8dad8-ORD
+x-envoy-upstream-service-time: 41
+

@@ -1,0 +1,6 @@
+{
+  "final_sha256": "c692ddffe171d2014880980c1e70169ca36b92af869c0048510592ef09117a4f",
+  "measured_sha256": "27e227e64e009ddbfd29d9152e9f75d7e73badf80432979c7fcede3e9b215b77",
+  "only_change_after_measurements": "comment: await ensureLabels() -> wait for ensureLabels()",
+  "reconstruction_matches_measured_hash": true
+}
