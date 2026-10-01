@@ -57,6 +57,10 @@
   header h1{font:700 var(--f3)/1.15 var(--serif);margin:0;white-space:nowrap;letter-spacing:-.01em}
   .pill{font-size:var(--f0);color:var(--muted);letter-spacing:.02em;
         font-variant-numeric:tabular-nums;white-space:nowrap}
+  #hsub{min-inline-size:38ch}
+  main{min-width:0}
+  .ts-slot{min-block-size:30rem}
+  .ovpct{min-block-size:10px}
   /* Tabs als Rubrikleiste: Unterstrich statt Kasten. */
   nav.tabs{display:flex;gap:1rem;margin-left:.4rem;align-self:flex-end}
   nav.tabs button{background:transparent;color:var(--ink2);border:0;border-bottom:2px solid transparent;
@@ -376,8 +380,9 @@
             font-style:normal;color:var(--muted)}
   a{color:var(--blue)}
   @media (max-width:860px){
+    #hsub{flex-basis:100%;min-inline-size:0}
     .layout{flex-direction:column}
-    aside{width:100%;flex:none;position:static;max-height:38vh}
+    aside{width:100%;flex:none;position:static;height:38vh;max-height:38vh}
     main{max-height:none}
   }
 </style>
@@ -1992,7 +1997,7 @@ function renderOverview(rep){
         <div class="ovlab">${esc(mlabel(mt))}${
         bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</div>
         <div class="ovval">${esc(nf(v,metricDec(mt)))}<span class="ovu">${esc(mt.unit)}</span></div>
-        ${p?pctBadge(p):''}</div>`;
+        <div class="ovpct">${p?pctBadge(p):''}</div></div>`;
     }
     h+='</div>';
     if(OPENMETRIC) h+=metricDetail(rep, OPENMETRIC);
@@ -2074,7 +2079,20 @@ function themeBar(withData, declared){
   return `<span class="pctb thbar" title="${esc(tr('{0} of {1} templates declared in this block carry data', withData, declared))}"><span class="pctf" style="width:${pct}%"></span></span>`;
 }
 
+const VIEW_CONTEXT=new Map();
+let DISPLAY_CONTEXT=null;
+function rememberView(next){
+  const main=document.getElementById('main');
+  if(DISPLAY_CONTEXT && DISPLAY_CONTEXT!==next){
+    VIEW_CONTEXT.set(DISPLAY_CONTEXT,{scroll:main.scrollTop,windowY:window.scrollY,
+      filter:document.getElementById('tfilter')?.value||''});
+    if(VIEW_CONTEXT.size>10) VIEW_CONTEXT.delete(VIEW_CONTEXT.keys().next().value);
+  }
+  DISPLAY_CONTEXT=next;
+  return VIEW_CONTEXT.get(next);
+}
 async function renderReport(rep){
+  const remembered=rememberView('report:'+repKey(rep));
   VIEW='reports'; setTabs();
   activeKey=repKey(rep);
   const main=document.getElementById('main');
@@ -2098,7 +2116,7 @@ async function renderReport(rep){
     · Framework <b>${esc(rep.framework)}</b></div></div>
     ${leermeldung(rep)}
     <div id="ovSection"></div>
-    <div id="tsSection"></div>
+    <div id="tsSection"${entityReports(rep).length>=2?' class="ts-slot" aria-busy="true"><div class="status" role="status">'+esc(LANG==='de'?'Zeitreihe wird geladen…':'Loading time series…')+'</div>':'>'}</div>
     ${coverageBlock(rep)}
     <div class="tfilter"><input id="tfilter" placeholder="Suchen: Kennzahl, Template, Titel…">${controlsHTML()}</div>
     <div id="tcontainer"></div>`;
@@ -2139,7 +2157,14 @@ async function renderReport(rep){
     if(!current()) return;
     renderOverview(rep);
     if(entityReports(rep).length>=2) renderTimeseries(rep);
-  }).catch(()=>{});
+  }).catch(e=>{
+    if(!current()) return;
+    const host=document.getElementById('tsSection');
+    if(entityReports(rep).length>=2) showRetry(host,tr('Error:')+' '+e.message,async()=>{
+      try{await ensureBenchmark(overviewTemplates());if(current()){renderOverview(rep);renderTimeseries(rep);}}
+      catch(err){if(current()) showRetry(host,tr('Error:')+' '+err.message,()=>renderReport(rep));}
+    });
+  });
   // Ebene 2+3: Themenblöcke, Rohtabellen erst beim Aufklappen gerendert. Das
   // ist nicht nur Ordnung, sondern auch Tempo — 136 Gitter auf einmal zu bauen
   // war der teuerste Schritt am Report.
@@ -2190,7 +2215,12 @@ async function renderReport(rep){
   };
   const fillTheme=async (rep,det,list)=>{
     const body=det.querySelector('.tbody');
-    if(body.dataset.done==='1') return;
+    if(body.dataset.done==='1' || body.dataset.loading==='1') return;
+    body.dataset.loading='1';
+    body.setAttribute('aria-busy','true');
+    body.innerHTML='<div class="status" role="status">'+esc(LANG==='de'?'Tabelle wird vorbereitet…':'Preparing table…')+'</div>';
+    await new Promise(resolve=>requestAnimationFrame(()=>setTimeout(resolve,0)));
+    if(!current() || !body.isConnected){delete body.dataset.loading;return;}
     const cont=document.getElementById('tcontainer');
     // Ohne Labels waere das eine Tabelle aus nackten Codes — sichtbar falsch,
     // aber nicht als Fehler erkennbar. Also warten statt raten.
@@ -2199,6 +2229,7 @@ async function renderReport(rep){
       body.innerHTML='<div class="status" role="status">'+esc(tr('Loading labels …'))+'</div>';
       try{ await ensureLabels(); }
       catch(e){
+        delete body.dataset.loading;
         body.removeAttribute('aria-busy');
         showRetry(body,tr('Labels could not be loaded:')+' '+e.message,()=>fillTheme(rep,det,list));
         return;
@@ -2217,7 +2248,9 @@ async function renderReport(rep){
             ? tr('No template in this block matches the filter.')
             : tr('No analysable cells for this block — it is declared, but without data in our holdings.')}</div>`;
     body.dataset.done='1';
+    delete body.dataset.loading;body.removeAttribute('aria-busy');
   };
+  if(remembered) document.getElementById('tfilter').value=remembered.filter;
   draw();
   document.getElementById('tfilter').addEventListener('input',draw);
   const cont=document.getElementById('tcontainer');
@@ -2249,7 +2282,8 @@ async function renderReport(rep){
   });
   wireControls(draw);
   renderReportList();
-  main.scrollTop=0;
+  main.scrollTop=remembered?.scroll||0;
+  if(remembered) window.scrollTo(0,remembered.windowY);
 }
 
 /* ================= time series helpers ================= */
@@ -2309,7 +2343,8 @@ function renderTimeseries(rep){
     ts+=`<div class="caveat">${tr('⇄ The filing taxonomy changes within this series: {0}. The dashed vertical marks the spot; the trend line is dashed there too — it says “across a version boundary”, not “incomparable”. The viewer joins cells over the coordinate, not over the data point: values are therefore still found, even where the taxonomy rebound them. <b>Which</b> cells are affected is stated by the ⇄ at the metric — about the rest no claim is made, because the bridge only knows observed cells.', esc(at.join(', ')))}</div>`;
   }
   ts+='</section>';
-  if(any) host.innerHTML=ts;
+  host.removeAttribute('aria-busy');
+  host.innerHTML=any?ts:'<div class="status">'+esc(LANG==='de'?'Keine vergleichbaren Zeitreihenwerte verfügbar.':'No comparable time-series values available.')+'</div>';
 }
 let ENTITY_REPORTS=new Map();
 function indexEntityReports(){
@@ -2936,11 +2971,12 @@ function mountBenchmark(main,html,newRows,rows,sortCol,fmarks){
   for(const key of BM_DOM.rows.keys()) if(!visible.has(key)) BM_DOM.rows.delete(key);
 }
 async function renderBenchmark(){
+  const remembered=rememberView('benchmark');
   const serial=++BM_RENDER_SERIAL;
   const wasBenchmark=VIEW==='benchmark';
   VIEW='benchmark'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
-  const scroll=wasBenchmark?main.scrollTop:0;
+  const scroll=wasBenchmark?main.scrollTop:(remembered?.scroll||0);
   const prof=bmProf();
   if(!prof){ main.innerHTML='<div class="status">'+esc(tr('No metric registry in the codebook — benchmark unavailable.'))+'</div>'; return; }
   const needed=BM_MANIFEST ? BM_MANIFEST.profiles[BMP] : null;
@@ -3115,6 +3151,7 @@ async function renderBenchmark(){
     th.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();th.click();}};
   });
   main.scrollTop=scroll;
+  if(!wasBenchmark && remembered) window.scrollTo(0,remembered.windowY);
 }
 
 /* ---- CSV-Export (#50) -----------------------------------------------------
@@ -3220,6 +3257,7 @@ async function renderCompare(){
   // Die Vergleichstabelle beschriftet jede Zelle — ohne Labels waere sie eine
   // Matrix aus Koordinaten.
   try{ await ensureLabels(); }catch(e){}
+  rememberView('compare');
   VIEW='compare'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
   const reps=[...PINS].map(byKey).filter(Boolean);

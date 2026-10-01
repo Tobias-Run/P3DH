@@ -71,6 +71,7 @@ def main():
         result=labels(browser,base)
         if int(args.issue)>=117: result['benchmark']=benchmark(browser,base)
         if int(args.issue)>=118: result['partition']=partition(browser,base)
+        if int(args.issue)>=119: result['context']=context_restore(browser,base)
         browser.close()
     server.shutdown()
     (OUT/f'issue{args.issue}_ux.json').write_text(json.dumps(result,indent=2))
@@ -184,5 +185,29 @@ def partition(browser,base):
     ctx.close()
     return {'km1_only':True,'cached_profile_switch':True,'latest_profile_wins':True,
             'partial_failure_retry':True,'all_data_pinned':True,'integrity_failure_same_revision_fallback':True}
+
+def context_restore(browser,base):
+    ctx=browser.new_context(viewport={'width':1440,'height':900});page=ctx.new_page();errors=[]
+    page.on('pageerror',lambda e:errors.append(str(e)))
+    page.goto(report_url(base),wait_until='networkidle')
+    page.wait_for_selector('#tfilter')
+    page.fill('#tfilter','61.00')
+    page.wait_for_function("Array.from(document.querySelectorAll('details.theme .tbody')).some(x=>x.dataset.done==='1')")
+    page.evaluate("document.getElementById('main').scrollTop=160")
+    scroll=page.evaluate("document.getElementById('main').scrollTop")
+    assert scroll>0
+    page.locator('#tabBenchmark').click();page.wait_for_selector('.bmtable tbody tr')
+    page.goto(report_url(base),wait_until='networkidle')
+    page.wait_for_selector('#tfilter')
+    assert page.input_value('#tfilter')=='61.00'
+    assert abs(page.evaluate("document.getElementById('main').scrollTop")-scroll)<2
+    page.fill('#tfilter','')
+    # Keyboard opening announces busy immediately and restores a labelled table.
+    page.evaluate("OPENTHEMES.clear();renderReport(byKey(activeKey))")
+    summary=page.locator('details.theme summary').first;summary.focus();page.keyboard.press('Enter')
+    page.wait_for_function("document.querySelector('details.theme .tbody').dataset.done==='1'")
+    assert page.locator('details.theme .tbody').first.get_attribute('aria-busy') is None
+    assert not errors,errors;ctx.close()
+    return {'report_filter_restored':True,'report_scroll_restored':True,'keyboard_expansion':True,'busy_cleared':True}
 
 if __name__=='__main__':main()

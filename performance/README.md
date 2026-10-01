@@ -140,3 +140,28 @@ not claim end-to-end speedups for this unimplemented strategy.
 
 No performance script uploads data, changes GitHub Issues, merges a PR or deploys
 the site. The only remote requests are reads of the public repository and Pages/CDN.
+
+## Sequential issue implementation (#115–#119)
+
+The earlier review and its `final_comparison.json` / `variant_hashes.json` describe
+an earlier candidate. Follow-up implementation and measurements are documented in
+[`../docs/performance_implementation.md`](../docs/performance_implementation.md).
+Reproduce the final implementation after downloading all report shards:
+
+```bash
+python scripts/build_benchmark_parts.py
+python performance/test_ux.py --issue 119
+python performance/verify.py
+python performance/run_runtime_check.py
+python -m pytest tests/ -q
+python performance/trace_layout.py --output layout_after.json
+python performance/measure.py --variants baseline candidate --profiles desktop mobile4g --runs 5 --output implementation_comparison.json
+python performance/measure_actions.py
+```
+
+Generating parts adds manifest metadata to the pinned codebook and retains the
+legacy benchmark. Both variants use this same derived dataset. The final viewer
+pages 100 rows; calculations and export still use all results. Source hashes for
+each measurement are stored beside its raw output. Follow-up warm-cache behavior
+uses normal caching for content-addressed parts and commit-pinned production data;
+the earlier review's cache observations do not describe this final loader.
