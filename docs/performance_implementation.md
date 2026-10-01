@@ -204,3 +204,15 @@ Produktions-Abrufpfad; die oben dokumentierte lokale A/B-Messung wurde vor diese
 Korrektur durchgeführt. Die externe HTML-Vorschau verwendet weiterhin den
 publizierten Legacy-Datenstand und eignet sich zur Bedienungsprüfung, nicht zur
 vollständigen Abnahme der neuen Datenaufteilung.
+
+### Sprachkorrektur nach Browser-Kommentar
+
+Die Herleitungsrollen und Formeltexte kamen unverändert aus der deutschen
+Kennzahlenregistry. Der Viewer übersetzt nun sämtliche 18 Rollen in der englischen
+Darstellung und verwendet dieselben Begriffe in Formeln. Deutsche Rollen und
+Formeln bleiben erhalten. Zeitreihenüberschrift, Stichtagszahl, Kennzahlspalte und
+Taxonomiewechsel-Hinweis berücksichtigen ebenfalls die Sprache.
+`performance/test_language.py` prüft alle 38 Kennzahlen in beiden Sprachen,
+identische numerische Ergebnisse sowie die Zeitreihenüberschriften. Der Test und
+die Browser-Runtime-Regression bestehen (`language_regression.log`,
+`language_runtime.log`).

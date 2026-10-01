@@ -627,6 +627,9 @@ const DE = {
   "Derivation from the filing": "Herleitung aus der Meldung",
   "Origin in the filing": "Herkunft in der Meldung",
   "Result": "Ergebnis",
+  "Time series": "Zeitreihe",
+  "Metric": "Kennzahl",
+  "Taxonomy change: Framework {0} → {1}": "Taxonomiewechsel: Framework {0} → {1}",
   "Look up in the report:": "Im Report nachschlagen:",
   "Click: definition, purpose, threshold and derivation from the filing template":
     "Klick: Definition, Zweck, Schwelle und Herleitung aus dem Meldetemplate",
@@ -1918,6 +1921,31 @@ function jumpToTemplate(tid){
    nichts gerechnet; dort ist der Wert eine gemeldete Zahl, und so zu tun, als
    gaebe es eine Formel, waere eine Erfindung. Nur abgeleitete Kennzahlen
    zeigen einen Rechenweg. */
+const DERIVATION_EN={
+  "gesamtkapitalquote": "total capital ratio",
+  "gesamtanforderung": "overall capital requirement",
+  "wert": "value",
+  "Risikobetrag der Kategorie": "risk exposure amount of the category",
+  "Gesamtrisikobetrag": "total risk exposure amount",
+  "notleidend": "non-performing",
+  "bedient": "performing",
+  "gestundet-bedient": "forborne performing",
+  "gestundet-notleidend": "forborne non-performing",
+  "Wertberichtigung": "impairment",
+  "davon nachhaltig": "of which sustainable",
+  "Bruttobuchwert": "gross carrying amount",
+  "davon ausgeschlossen": "of which excluded",
+  "davon Stage 2": "of which Stage 2",
+  "davon notleidend": "of which non-performing",
+  "fixe Vergütung": "fixed remuneration",
+  "variable Vergütung": "variable remuneration",
+  "Köpfe": "headcount"
+};
+function derivationText(text){
+  if(LANG!=='en') return text;
+  return Object.keys(DERIVATION_EN).sort((a,b)=>b.length-a.length)
+    .reduce((value,role)=>value.split(role).join(DERIVATION_EN[role]),text);
+}
 function metricCellRow(rep, tid, r, c, role){
   const e=CB.get(dpmCode(tid)+'|'+r+'|'+c)||{};
   const raw=tplValue(rep, tid, r, c);
@@ -1929,7 +1957,7 @@ function metricCellRow(rep, tid, r, c, role){
           : nf(raw,0,2);
   }
   const bs=bridgeAt(tid,r,c);
-  return `<tr><td class="role">${esc(role)}</td>
+  return `<tr><td class="role">${esc(derivationText(role))}</td>
     <td class="coord">${esc(tid)} · r${esc(r)} c${esc(c)}${
       bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</td>
     <td>${esc(label)||`<span class="cl">${tr('no label')}</span>`}</td>
@@ -1969,7 +1997,7 @@ function metricDetail(rep, id){
   for(const [tid,r,c,role] of (doc.cells||[])) h+=metricCellRow(rep,tid,r,c,role);
   if(doc.formula){
     h+=`<tr class="res"><td class="role">${tr('Result')}</td><td class="coord"></td>
-      <td>${esc(doc.formula)}</td>
+      <td>${esc(derivationText(doc.formula))}</td>
       <td class="rv">${v==null?'–':esc(nf(v,metricDec(mt)))+NBSP+esc(mt.unit)}</td></tr>`;
   }
   h+='</tbody></table>';
@@ -2314,11 +2342,11 @@ function renderTimeseries(rep){
   // dieser Stelle sah aus wie Geschaeftsentwicklung.
   const brk=series.map((s,i)=> i>0 && series[i-1].framework!==s.framework);
   const anyBreak=brk.some(Boolean);
-  let ts=`<section class="ts"><h3>Zeitreihe — EU KM1 <span class="scalenote">${series.length} Stichtage</span></h3>
-    <table><thead><tr><th class="rl">Kennzahl</th>`;
+  let ts=`<section class="ts"><h3>${tr('Time series')} — EU KM1 <span class="scalenote">${tr('{0} reference dates',series.length)}</span></h3>
+    <table><thead><tr><th class="rl">${tr('Metric')}</th>`;
   series.forEach((s,i)=>{
     const on=s.refPeriod===rep.refPeriod;
-    ts+=`<th class="datecol${brk[i]?' fwbreak':''}"${brk[i]?` title="Taxonomiewechsel: Framework ${esc(series[i-1].framework)} → ${esc(s.framework)}"`:''}>`
+    ts+=`<th class="datecol${brk[i]?' fwbreak':''}"${brk[i]?` title="${esc(tr('Taxonomy change: Framework {0} → {1}',series[i-1].framework,s.framework))}"`:''}>`
       + `<a href="#r/${lei}/${s.refPeriod}/${scope}">${esc(s.refPeriod)}</a>${on?' •':''}`
       + `<br><span class="cl">RF ${esc(s.framework)}</span></th>`;
   });
