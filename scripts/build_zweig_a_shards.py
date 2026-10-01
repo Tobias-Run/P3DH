@@ -1041,6 +1041,8 @@ def main():
     # Grund: der Streifen in der Zeile braucht sie, die Startseite nicht.
     write_if_changed(OUT / "peer_shape.json",
                      json.dumps(peer_formen, ensure_ascii=False, separators=(",", ":")))
+    from build_benchmark_parts import build as build_benchmark_parts
+    build_benchmark_parts(OUT)
 
     # --- sizes (raw + gzip, since Pages serves gzip) ---
     def sz(name):

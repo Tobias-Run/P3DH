@@ -964,16 +964,34 @@ const LOCAL = /^(localhost|127\.|0\.0\.0\.0|\[?::1)/.test(location.hostname) || 
 const DATA_BASES = LOCAL ? ['data/']
   : ['https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@data/',
      'https://raw.githubusercontent.com/Tobias-Run/P3DH/data/'];
-async function getJSON(path){
-  let err;
-  for(const base of DATA_BASES){
+let DATA_REV=null;
+async function getJSON(path,integrity=null){
+  let err, missing=true;
+  const bases=DATA_REV&&!LOCAL ? DATA_BASES.map(base=>
+    base.replace('@data/','@'+DATA_REV+'/').replace('/data/','/'+DATA_REV+'/')) : DATA_BASES;
+  for(const base of bases){
     try{
-      const r=await fetch(base+path,{cache:'no-store'});
+      const r=await fetch(base+path,{cache:DATA_REV||path.startsWith('benchmark/')?'default':'no-store',
+        ...(integrity?{integrity}:{})});
       if(r.ok) return await r.json();   // native parse — no hand-rolled CSV parser
+      if(r.status!==404) missing=false;
       err=new Error(path.split('/').pop()+' '+r.status);
-    }catch(e){ err=e; }
+    }catch(e){ err=e; missing=false; }
   }
+  err.missing=missing;
   throw err;
+}
+async function selectDataVersion(){
+  try{
+    const version=await getJSON('data_version.json');
+    if(version.schema!==1 || !/^[a-f0-9]{40}$/.test(version.revision))
+      throw new Error('Invalid dataset version');
+    DATA_REV=version.revision;
+  }catch(e){
+    // Backwards compatibility only when every origin reports a missing pointer.
+    // A failed/invalid pointer must never silently select mutable mixed data.
+    if(!e.missing) throw e;
+  }
 }
 
 /* ================= formatting ================= */
@@ -1190,6 +1208,8 @@ function buildFromIndex(idx, codebook){
   const reg=codebook.metrics||{};
   for(const m of (reg.metrics||[])) METRICDOC.set(m.id, m);
   PROFILES=reg.profiles||[];
+  BM_MANIFEST=codebook.benchmark_parts||null;
+  if(BM_MANIFEST && BM_MANIFEST.schema!==1) throw new Error('Unsupported benchmark manifest');
   for(const [tid,cells] of Object.entries(codebook.ambig||{})) AMBIG.set(tid,cells);
   /* `alias` MUSS hier mit. Der Shard-Builder schreibt die gepflegten
      Kurznamen in den Index, und dieses Neuaufbauen des Datensatzes hat sie
@@ -1324,8 +1344,32 @@ async function ensureLoaded(rep){
 }
 /* head templates (KM1 61.00 / OV1 60.00.A) for ALL reports — the cross-report data the
    benchmark and time-series need. Loaded once, lazily; merged into each report's templates. */
-let BM_LOADED=false, BM_PROMISE=null;
-function ensureBenchmark(){
+let BM_LOADED=false, BM_PROMISE=null, BM_MANIFEST=null;
+const BM_TEMPLATES=new Set(), BM_REQUESTS=new Map();
+const overviewTemplates=()=>BM_MANIFEST?.overview||null;
+const haveBenchmark=tids=>BM_MANIFEST ? (tids||Object.keys(BM_MANIFEST.templates)).every(t=>BM_TEMPLATES.has(t)) : BM_LOADED;
+function ensureBenchmark(tids=null){
+  if(BM_MANIFEST){
+    const wanted=[...new Set(tids||Object.keys(BM_MANIFEST.templates))];
+    return Promise.all(wanted.map(tid=>{
+      if(BM_TEMPLATES.has(tid)) return;
+      if(!BM_REQUESTS.has(tid)){
+        const part=BM_MANIFEST.templates[tid];
+        if(!part || !/^benchmark\/[A-Za-z0-9._-]+\.json$/.test(part.path) || !/^[a-f0-9]{64}$/.test(part.sha256))
+          return Promise.reject(new Error('Missing or invalid benchmark template '+tid));
+        const integrity='sha256-'+btoa(part.sha256.match(/../g).map(x=>String.fromCharCode(parseInt(x,16))).join(''));
+        const promise=getJSON(part.path,integrity).then(data=>{
+          for(const rep of REPORTS){
+            const cells=data[repKey(rep)];
+            if(cells && !rep.templates.has(tid)) rep.templates.set(tid,cellsFrom(cells));
+          }
+          BM_TEMPLATES.add(tid);BM_LOADED=true;OV_PCT=null;
+        }).finally(()=>BM_REQUESTS.delete(tid));
+        BM_REQUESTS.set(tid,promise);
+      }
+      return BM_REQUESTS.get(tid);
+    }));
+  }
   if(BM_LOADED) return Promise.resolve();
   if(!BM_PROMISE) BM_PROMISE=getJSON('benchmark.json').then(bm=>{
     for(const rep of REPORTS){
@@ -1334,7 +1378,7 @@ function ensureBenchmark(){
         if(!rep.templates.has(tid)) rep.templates.set(tid, cellsFrom(cells));
     }
     BM_LOADED=true;
-  });
+  }).catch(e=>{BM_PROMISE=null;throw e;});
   return BM_PROMISE;
 }
 
@@ -1829,7 +1873,7 @@ const metricHead=m=>mlabel(m)+((m.unit==='%')?'':' ('+m.unit+')');
 /* Einmal berechnet, dann gehalten: die Einordnung haengt nur an BM_LOADED. */
 let OV_PCT=null;
 function overviewPercentiles(){
-  if(!BM_LOADED) return null;          // ohne die anderen Reports keine Einordnung
+  if(!haveBenchmark(overviewTemplates())) return null;
   if(OV_PCT) return OV_PCT;
   const rows=REPORTS.map(rep=>{
     const {lei,scope}=leiParts(rep.entityID);
@@ -2090,7 +2134,7 @@ async function renderReport(rep){
   // Prepare labels after the useful report is visible, before optional peer data.
   // Catch prefetch errors here; the actual reader provides a retry control.
   ensureLabels().catch(()=>{}).then(()=>{
-    if(current()) return ensureBenchmark();
+    if(current()) return ensureBenchmark(overviewTemplates());
   }).then(()=>{
     if(!current()) return;
     renderOverview(rep);
@@ -2846,6 +2890,7 @@ function distributionRow(rows, prof){
 let BM_DOM={context:null,rows:new Map()};
 const BM_PAGE_SIZE=100;
 let BM_PAGE=0, BM_PAGE_CONTEXT=null;
+let BM_RENDER_SERIAL=0;
 function syncBenchmarkNode(old,node){
   if(old.nodeType!==node.nodeType || old.nodeName!==node.nodeName){
     old.replaceWith(node.cloneNode(true)); return;
@@ -2891,17 +2936,36 @@ function mountBenchmark(main,html,newRows,rows,sortCol,fmarks){
   for(const key of BM_DOM.rows.keys()) if(!visible.has(key)) BM_DOM.rows.delete(key);
 }
 async function renderBenchmark(){
+  const serial=++BM_RENDER_SERIAL;
   const wasBenchmark=VIEW==='benchmark';
   VIEW='benchmark'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
   const scroll=wasBenchmark?main.scrollTop:0;
-  if(!BM_LOADED){
-    main.innerHTML='<div class="rhead"><h2>Benchmark</h2></div><div class="status">Lade Benchmark-Daten…</div>';
-    try{ await ensureBenchmark(); }catch(e){ main.innerHTML=`<div class="status">${tr('Error:')} ${esc(e.message)}</div>`; return; }
-    if(VIEW!=='benchmark') return;   // navigated away while loading
-  }
   const prof=bmProf();
   if(!prof){ main.innerHTML='<div class="status">'+esc(tr('No metric registry in the codebook — benchmark unavailable.'))+'</div>'; return; }
+  const needed=BM_MANIFEST ? BM_MANIFEST.profiles[BMP] : null;
+  if(BM_MANIFEST && !needed){showRetry(main,'Missing profile dependencies',renderBenchmark);return;}
+  if(!haveBenchmark(needed)){
+    let status=document.getElementById('bmLoadStatus');
+    if(!main.querySelector('.bmtable')) main.innerHTML='<div class="rhead"><h2>Benchmark</h2></div>';
+    if(!status || !status.isConnected){status=document.createElement('div');status.id='bmLoadStatus';main.prepend(status);}
+    status.className='status';status.setAttribute('role','status');
+    status.textContent=LANG==='de'?'Benchmark wird geladen…':'Loading benchmark…';
+    main.setAttribute('aria-busy','true');
+    const table=main.querySelector('.bmtable');if(table)table.inert=true;
+    for(const id of ['bmCsv','bmPrev','bmNext']){const b=document.getElementById(id);if(b)b.disabled=true;}
+    try{ await ensureBenchmark(needed); }
+    catch(e){
+      if(serial===BM_RENDER_SERIAL && VIEW==='benchmark'){
+        main.removeAttribute('aria-busy');showRetry(status,tr('Error:')+' '+e.message,renderBenchmark);
+      }
+      return;
+    }
+    if(serial!==BM_RENDER_SERIAL || VIEW!=='benchmark') return;
+    status.remove();main.removeAttribute('aria-busy');
+    if(table)table.inert=false;
+  }
+  main.removeAttribute('aria-busy');
   bmSortOr(prof);
   const gross=benchmarkRows();
   // Das Plausibilitaets-Tor greift VOR allem anderen: eine Meldung in falscher
@@ -3505,6 +3569,7 @@ document.addEventListener('keydown',e=>{
 async function init(){
   try{
     const bar=document.getElementById('progBar');
+    await selectDataVersion();
     const [idx, codebook]=await Promise.all([
       getJSON('index.json'), getJSON('codebook.json')
     ]);

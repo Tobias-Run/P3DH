@@ -70,6 +70,7 @@ def main():
         browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
         result=labels(browser,base)
         if int(args.issue)>=117: result['benchmark']=benchmark(browser,base)
+        if int(args.issue)>=118: result['partition']=partition(browser,base)
         browser.close()
     server.shutdown()
     (OUT/f'issue{args.issue}_ux.json').write_text(json.dumps(result,indent=2))
@@ -128,5 +129,60 @@ def benchmark(browser,base):
     }""")
     assert not errors,errors
     ctx.close();return result
+
+def partition(browser,base):
+    from measure import DATA,ROOT
+    from urllib.parse import urlsplit
+    ctx=browser.new_context();page=ctx.new_page();requests=[];errors=[]
+    page.on('request',lambda r:requests.append(r.url))
+    page.on('pageerror',lambda e:errors.append(str(e)))
+    page.goto(base+'/candidate/viewer.html#benchmark',wait_until='networkidle')
+    page.wait_for_selector('.bmtable tbody tr')
+    parts=lambda:[x for x in requests if '/benchmark/' in x]
+    assert len(parts())==1 and '/61.00.' in parts()[0],parts()
+    assert not any(x.endswith('/benchmark.json') for x in requests)
+    page.select_option('#bmProfile','npl')
+    page.wait_for_function("haveBenchmark(BM_MANIFEST.profiles.npl) && document.querySelector('th[data-k=npl]')")
+    before=len(parts());page.select_option('#bmProfile','km1')
+    page.wait_for_function("document.querySelector('th[data-k=cet1]')")
+    assert len(parts())==before,'Cached profile fetched again'
+    # A delayed response for a former profile must not replace the latest one.
+    page.evaluate("""()=>{const original=window.fetch;window.fetch=async(...args)=>{
+      const r=await original(...args);if(String(args[0]).includes('/41.00.'))await new Promise(r=>setTimeout(r,500));return r;};
+      BMP='esg';bmSort={...bmProf().defaultSort};renderBenchmark();
+      BMP='km1';bmSort={...bmProf().defaultSort};renderBenchmark();}""")
+    page.wait_for_function("BM_TEMPLATES.has('41.00')")
+    assert page.evaluate("BMP==='km1' && !!document.querySelector('th[data-k=cet1]')")
+    # Failed partial requests remain retryable; no permanent rejected promise.
+    page.route('**/benchmark/30.01.*',lambda r:r.abort())
+    page.select_option('#bmProfile','verg');page.locator('#bmLoadStatus button').wait_for()
+    page.unroute('**/benchmark/30.01.*');page.locator('#bmLoadStatus button').click()
+    page.wait_for_function("haveBenchmark(BM_MANIFEST.profiles.verg) && !document.getElementById('bmLoadStatus')")
+    assert not errors,errors;ctx.close()
+
+    # Fulfil all requests locally but use a non-local page origin so the real
+    # CDN/raw URL construction, CORS, integrity and version pinning execute.
+    ctx=browser.new_context();page=ctx.new_page();seen=[];revision='a'*40
+    def fulfil(route):
+        url=route.request.url;seen.append(url)
+        if url.endswith('/favicon.ico'):route.fulfill(status=204);return
+        if url=='https://viewer.test/viewer.html':
+            route.fulfill(status=200,content_type='text/html',body=(ROOT/'processed/zweig_a/viewer_json.html').read_bytes());return
+        if url.endswith('/data_version.json'):
+            body=json.dumps({'schema':1,'revision':revision}).encode()
+        else:
+            marker='@'+revision+'/' if 'cdn.jsdelivr.net' in url else '/'+revision+'/'
+            assert marker in url, 'Unpinned data URL '+url
+            relative=url.split(marker,1)[1];body=(DATA/relative).read_bytes()
+            if 'cdn.jsdelivr.net' in url and '/benchmark/' in url:body=b'{}' # force integrity fallback
+        route.fulfill(status=200,body=body,headers={'Content-Type':'application/json','Access-Control-Allow-Origin':'*'})
+    page.route('**/*',fulfil)
+    page.goto('https://viewer.test/viewer.html#benchmark',wait_until='networkidle')
+    page.wait_for_selector('.bmtable tbody tr')
+    assert page.evaluate('DATA_REV')==revision
+    assert any('raw.githubusercontent.com' in u and '/benchmark/' in u for u in seen)
+    ctx.close()
+    return {'km1_only':True,'cached_profile_switch':True,'latest_profile_wins':True,
+            'partial_failure_retry':True,'all_data_pinned':True,'integrity_failure_same_revision_fallback':True}
 
 if __name__=='__main__':main()

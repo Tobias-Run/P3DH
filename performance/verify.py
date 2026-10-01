@@ -20,6 +20,7 @@ def capture(browser,base,variant,check_lazy=True):
     pg.wait_for_selector('.bmtable tbody tr')
     start_resources=pg.evaluate("performance.getEntriesByType('resource').map(x=>x.name)")
     result=pg.evaluate("""async()=>{
+      await ensureBenchmark();
       const profiles={};
       for(const p of PROFILES){
         BMP=p.id; const prof=bmProf();

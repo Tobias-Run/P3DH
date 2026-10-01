@@ -21,7 +21,7 @@ downloads=[]
 
 def serve(self):
     path=Path(self.translate_path(self.path)).resolve()
-    if path.is_relative_to(DATA) and path.suffix=='.json' and not path.exists():
+    if path.is_relative_to(DATA/'reports') and path.suffix=='.json' and not path.exists():
         rel=path.relative_to(DATA).as_posix()
         path.parent.mkdir(parents=True,exist_ok=True)
         subprocess.run(['curl','-fsSL','--compressed','--connect-timeout','10',
