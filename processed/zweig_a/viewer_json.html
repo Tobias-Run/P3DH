@@ -1234,6 +1234,21 @@ function ensureLabels(){
   }).catch(e=>{ LABELS_PROMISE=null; throw e; });
   return LABELS_PROMISE;
 }
+function showRetry(host,message,retry){
+  host.innerHTML='<div class="status" role="alert">'+esc(message)+' <button type="button">'+
+    (LANG==='de'?'Erneut versuchen':'Retry')+'</button></div>';
+  host.querySelector('button').onclick=retry;
+}
+function labelView(host,draw,current){
+  const previous=host.querySelector('.label-status');
+  if(previous) previous.remove();
+  const status=document.createElement('div');
+  status.className='status label-status'; status.setAttribute('role','status');
+  status.textContent=tr('Loading labels …'); host.append(status);
+  ensureLabels().then(()=>{if(current() && host.isConnected) draw();})
+    .catch(e=>{if(current() && status.isConnected)
+      showRetry(status,tr('Labels could not be loaded:')+' '+e.message,()=>labelView(host,draw,current));});
+}
 
 /* ---- Form der Peer-Verteilung (#49, R4) ----------------------------------
  *
@@ -2019,13 +2034,14 @@ async function renderReport(rep){
   VIEW='reports'; setTabs();
   activeKey=repKey(rep);
   const main=document.getElementById('main');
+  const current=()=>VIEW==='reports' && activeKey===repKey(rep);
   if(!rep.loaded){
     main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2></div>
       <div class="status">Lade Report…<div class="prog"><i style="width:45%"></i></div></div>`;
     renderReportList();
     try{ await ensureLoaded(rep); }
-    catch(e){ main.innerHTML='<div class="status">'+esc(tr('Error loading the report:'))+' '+esc(e.message)+'</div>'; return; }
-    if(activeKey!==repKey(rep)) return;   // user navigated away while the shard loaded
+    catch(e){ if(!current()) return; main.innerHTML='<div class="status">'+esc(tr('Error loading the report:'))+' '+esc(e.message)+'</div>'; return; }
+    if(!current()) return;   // ignore stale navigation completions
   }
   const tids=[...rep.templates.keys()].sort();
   const {lei,scope}=leiParts(rep.entityID);
@@ -2057,7 +2073,7 @@ async function renderReport(rep){
     OPENMETRIC = OPENMETRIC===card.dataset.m ? null : card.dataset.m;
     // Der Beleg zeigt Zeilen-/Spaltenlabels der Herleitung — ohne sie stuenden
     // dort nackte Koordinaten.
-    if(OPENMETRIC && !LABELS_LOADED){ ensureLabels().then(()=>renderOverview(rep)); return; }
+    if(OPENMETRIC && !LABELS_LOADED){ labelView(document.getElementById('ovSection'),()=>renderOverview(rep),current); return; }
     renderOverview(rep);
   });
   document.getElementById('ovSection').addEventListener('keydown',e=>{
@@ -2068,14 +2084,18 @@ async function renderReport(rep){
     OPENMETRIC = OPENMETRIC===card.dataset.m ? null : card.dataset.m;
     // Der Beleg zeigt Zeilen-/Spaltenlabels der Herleitung — ohne sie stuenden
     // dort nackte Koordinaten.
-    if(OPENMETRIC && !LABELS_LOADED){ ensureLabels().then(()=>renderOverview(rep)); return; }
+    if(OPENMETRIC && !LABELS_LOADED){ labelView(document.getElementById('ovSection'),()=>renderOverview(rep),current); return; }
     renderOverview(rep);
   });
-  ensureBenchmark().then(()=>{
-    if(activeKey!==repKey(rep)) return;
+  // Prepare labels after the useful report is visible, before optional peer data.
+  // Catch prefetch errors here; the actual reader provides a retry control.
+  ensureLabels().catch(()=>{}).then(()=>{
+    if(current()) return ensureBenchmark();
+  }).then(()=>{
+    if(!current()) return;
     renderOverview(rep);
     if(entityReports(rep).length>=2) renderTimeseries(rep);
-  });
+  }).catch(()=>{});
   // Ebene 2+3: Themenblöcke, Rohtabellen erst beim Aufklappen gerendert. Das
   // ist nicht nur Ordnung, sondern auch Tempo — 136 Gitter auf einmal zu bauen
   // war der teuerste Schritt am Report.
@@ -2131,10 +2151,16 @@ async function renderReport(rep){
     // Ohne Labels waere das eine Tabelle aus nackten Codes — sichtbar falsch,
     // aber nicht als Fehler erkennbar. Also warten statt raten.
     if(!LABELS_LOADED){
-      body.innerHTML='<div class="status">'+esc(tr('Loading labels …'))+'</div>';
+      body.setAttribute('aria-busy','true');
+      body.innerHTML='<div class="status" role="status">'+esc(tr('Loading labels …'))+'</div>';
       try{ await ensureLabels(); }
-      catch(e){ body.innerHTML='<div class="status">'+esc(tr('Labels could not be loaded:'))+' '
-        +esc(e.message)+'</div>'; return; }
+      catch(e){
+        body.removeAttribute('aria-busy');
+        showRetry(body,tr('Labels could not be loaded:')+' '+e.message,()=>fillTheme(rep,det,list));
+        return;
+      }
+      body.removeAttribute('aria-busy');
+      if(!current() || !body.isConnected) return;
       if(body.dataset.done==='1') return;   // inzwischen anderweitig gefuellt
     }
     // Die Form der Peer-Verteilung (#49) NACH den Labels und ohne zu blockieren:
@@ -2167,7 +2193,7 @@ async function renderReport(rep){
     const chip=e.target.closest('[data-ms]');
     if(!chip) return;
     OPENSEARCH = OPENSEARCH===chip.dataset.ms ? null : chip.dataset.ms;
-    if(OPENSEARCH && !LABELS_LOADED){ ensureLabels().then(draw); return; }
+    if(OPENSEARCH && !LABELS_LOADED){ labelView(cont,draw,current); return; }
     draw();
   });
   // Dimensionswechsel (#52): Auswahl merken und nur neu zeichnen.
@@ -3416,12 +3442,17 @@ async function init(){
       tr('{0} institutions · {1} reports · {2} facts',
          nf(TOTAL_GROUPS,0,0), nf(idx.stats.reports,0,0), nf(idx.stats.facts,0,0));
     initFilters(); wireList(); updateCmpBadge(); renderReportList(); route();
-    // Labels NACH dem ersten Rendern nachziehen. Das ist reine Beschleunigung:
-    // wer sofort eine Tabelle aufklappt, wartet ueber ensureLabels() ohnehin
-    // korrekt. Fehlschlaege bleiben hier still — sie werden an der Stelle
-    // gemeldet, an der die Labels wirklich gebraucht werden.
-    requestIdleCallback ? requestIdleCallback(()=>ensureLabels().catch(()=>{}))
-                        : setTimeout(()=>ensureLabels().catch(()=>{}), 0);
+    // Fetch labels on intent, not on every idle callback: the benchmark and
+    // collapsed overview never use the 9.4 MB decoded dictionary. Readers still
+    // wait for ensureLabels(), so a direct click or touch is safe without prefetch.
+    const prefetchLabels=event=>{
+      if(event.target.closest('details.theme summary, .ovcard, .mchip')){
+        ensureLabels().catch(()=>{});
+      }
+    };
+    const main=document.getElementById('main');
+    main.addEventListener('pointerover',prefetchLabels);
+    main.addEventListener('focusin',prefetchLabels);
   }catch(err){
     document.getElementById('main').innerHTML='<div class="status">'+esc(tr('Error while loading:'))+' '+esc(err.message)+
       '<br><br>Vom Repo-Root ausliefern: <code>python3 -m http.server 8766</code> → <code>/processed/zweig_a/viewer_json.html</code></div>';

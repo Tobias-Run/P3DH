@@ -56,5 +56,11 @@
         "cache_control": "no-cache"
       }
     ]
+  },
+  "lazy_labels": {
+    "equal": true,
+    "benchmark_initial": false,
+    "report_prefetch": true,
+    "direct_expansion": true
   }
 }

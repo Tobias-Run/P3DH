@@ -26,3 +26,18 @@ Der Äquivalenztest vergleicht acht Profile samt CSV, 883 Berichtszuordnungen,
 Zahlenformate beider Sprachen, 1.001 synthetische Perzentilfälle und die vollständigen
 Template-HTML-Ausgaben dreier großer Berichte. CSV-Zeitstempel und lokale URL
 werden normalisiert. Ergebnisse: `performance/results/issue115_verification.json`.
+
+
+## #116 – Berichtsprefetch und Fehlerbehandlung
+
+Die erste Berichtsdarstellung startet die Labels, bevor sie optionale Peer-Daten
+anfordert. Die Benchmark-Ansicht fordert weiterhin keine Labels an. Alle
+Lesestellen warten auf erfolgreiche Beschriftungen. Ein sichtbarer Retry-Knopf
+ermöglicht einen neuen Abruf nach Fehlern; gleichzeitige Leser teilen den Request.
+Späte Report- und Label-Antworten dürfen eine andere Ansicht nicht überschreiben.
+
+`performance/test_ux.py` prüft Touch-Öffnung, Request-Zusammenfassung,
+Abruffehler/Wiederholen und Navigation während eines verzögerten Report-Abrufs.
+`performance/measure_labels.py` misst die erste Tabellenöffnung sofort nach der
+Übersicht sowie nach 1,5 Sekunden Lesezeit, jeweils fünfmal auf Desktop/Mobil.
+Diese Definition ist strenger als die frühere Öffnung nach Netzwerkberuhigung.

@@ -1,0 +1,8 @@
+{
+  "benchmark_without_labels": true,
+  "report_prefetch": true,
+  "touch_expansion": true,
+  "deduplicated_labels": true,
+  "failure_retry": true,
+  "stale_report_navigation": true
+}

@@ -180,6 +180,11 @@ def main():
     ap.add_argument('--profiles',nargs='+',default=list(PROFILES)); ap.add_argument('--runs',type=int,default=3)
     ap.add_argument('--scenarios',nargs='+',default=['benchmark','report']); ap.add_argument('--output',default='measurements.json')
     args=ap.parse_args(); server=serve(); results=[]
+    sources={}
+    for variant in args.variants:
+        path=ROOT/'processed/zweig_a/viewer_json.html' if variant=='candidate' else ROOT/f'performance/{variant}/viewer_json.html'
+        sources[variant]=hashlib.sha256(server.payloads[str(path)][0]).hexdigest()
+    (OUT/(Path(args.output).stem+'_sources.json')).write_text(json.dumps(sources,indent=2))
     with sync_playwright() as p:
         browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
         for n in range(args.runs):

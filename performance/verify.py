@@ -81,7 +81,7 @@ def capture(browser,base,variant,check_lazy=True):
         r=chosen[0]; lei=r['entityID'][3:23]; scope=r['entityID'].split('.')[-1]
         fresh.goto(f'{base}/{variant}/viewer.html#r/{lei}/{r["refPeriod"]}/{scope}',wait_until='networkidle')
         fresh.wait_for_selector('#ovSection .ovcard')
-        assert fresh.evaluate('!LABELS_LOADED'), 'Report loaded unused labels'
+        assert fresh.evaluate('LABELS_LOADED'), 'Report did not prepare labels'
         fresh.evaluate("document.querySelector('details.theme').open=true")
         fresh.wait_for_function("document.querySelector('details.theme .tbody').dataset.done==='1'")
         assert fresh.locator('details.theme td.num').count()>0
@@ -120,7 +120,7 @@ def main():
         probes=[r for r in server.requests if 'cache_probe' in r['path']]
         checks['cache_revalidation']={'equal':True,'versions':[1,1,2],'http':probes}
         if not args.cpu_only:
-            checks['lazy_labels']={'equal':True,'benchmark_initial':False,'report_initial':False,'direct_expansion':True}
+            checks['lazy_labels']={'equal':True,'benchmark_initial':False,'report_prefetch':True,'direct_expansion':True}
         (OUT/'verification.json').write_text(json.dumps(checks,indent=2))
         browser.close()
     server.shutdown()
