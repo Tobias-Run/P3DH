@@ -139,3 +139,51 @@ keinen beobachteten Shift (`layout_after.json`). Vorher waren es mobil 0,222 und
 im Desktop-Bericht 0,117 als Summe der aufgezeichneten Shifts. Dies ist eine
 Laborbeobachtung mit Nachladefenster, keine Aussage über alle Geräte oder Feld-CLS.
 Die finale wiederholte A/B-Messung aggregiert CLS separat über Session-Fenster.
+
+### Finaler A/B-Vergleich
+
+80 Beobachtungen, fünf Wiederholungen je Kombination, keine Browserfehler.
+Mediane bis zur ersten nutzbaren Ansicht, in Sekunden:
+
+| Ansicht | Gerät / Besuch | Ausgangscode | Umsetzung |
+|---|---|---:|---:|
+| Benchmark | Desktop kalt | 1,335 | 0,666 |
+| Benchmark | Desktop warm | 0,914 | 0,294 |
+| Benchmark | Mobil kalt | 8,390 | 2,831 |
+| Benchmark | Mobil warm | 8,063 | 1,542 |
+| Bericht | Desktop kalt | 0,538 | 0,558 |
+| Bericht | Desktop warm | 0,262 | 0,283 |
+| Bericht | Mobil kalt | 1,808 | 1,921 |
+| Bericht | Mobil warm | 1,364 | 1,468 |
+
+Die mobile Benchmark-Ansicht ist damit kalt 66 % und warm 81 % schneller.
+Der Bericht erscheint dagegen in dieser Messreihe etwas später: mobil rund
+0,11 s. Für ihn liegt der Gewinn bei schnellerer Tabellenöffnung nach kurzer
+Lesezeit und stabilerem Layout, nicht bei einer schnelleren ersten Übersicht.
+Fünf Wiederholungen erlauben keine belastbare Aussage über Gerätepopulationen.
+
+CLS ist für den Kandidaten in sämtlichen 40 Kalt-/Warm-Beobachtungen null; auch
+das deskriptive p90 ist null. Der Ausgangsstand liegt mobil im Median bei 0,222
+und im Desktop-Bericht bei 0,117. Das Beobachtungsfenster erfasst nachgeladene
+Inhalte; zusätzlich wurden deren Quellen separat bis zwei Sekunden nach
+Netzwerkberuhigung aufgezeichnet.
+
+Benchmark-Übertragung einschließlich Viewer und Metadaten: mobil kalt
+2.072 → 725 KiB, warm 2.000 → 69 KiB. Die warmen Einsparungen entstehen mit den
+normal cachebaren, inhaltsadressierten Template-Dateien; die alten Datenabrufe
+verwendeten `no-store`. Dies sind gzip-Laborbytes, keine Produktions-Brotliwerte.
+Die finalen fünf Sortier-/Filteraktionen ergeben mobil 316 / 474 ms und am
+Desktop 52 / 85 ms. Diese Aktionslatenzen sind kein Feld-INP.
+
+![Finaler Vergleich](../performance/results/implementation_comparison.png)
+
+Rohdaten: `implementation_comparison.json`, vollständige Median/p90/Min/Max-
+Auswertung: `implementation_comparison_summary.json`, Quellhashes:
+`implementation_comparison_sources.json`, Aktionen: `implementation_actions.json`.
+`python performance/plot_implementation.py` erzeugt Auswertung und Grafik.
+
+Die GitHub-CI des Umsetzungscommits besteht ebenfalls: `unittest` und `artifacts`.
+Draft-PR: [#120](https://github.com/Tobias-Run/P3DH/pull/120).
+Die Issues bleiben bis zur Abnahme offen. Das Ideal einer sofortigen Tabellenöffnung
+unter einer Sekunde, ein eigener Nachweis für die 100-ms-Rückmeldung aller langen
+Aktionen sowie physische Geräte-/Screenreader-Prüfung sind weiter offen.
