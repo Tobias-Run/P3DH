@@ -2841,9 +2841,60 @@ function distributionRow(rows, prof){
   return `<div class="dgrid">${cards}</div>
     <div class="caveat" style="border-left-color:var(--muted)">${tr('The list below <b>sorts</b>, the distribution above <b>places in context</b>. A top rank can be an outlier — 370 % CET1 stands at the very top of a ranking and at the very edge of a distribution. Both are the same value; only one of them looks like “the best”. Rows whose value in the sorted column lies outside the fences of its peer group are marked with ◇.')}</div>`;
 }
+// Keep the controls and keyed rows alive during sorting. The cache is bounded
+// to one profile/filter/column context; it never retains every visited profile.
+let BM_DOM={context:null,rows:new Map()};
+const BM_PAGE_SIZE=100;
+let BM_PAGE=0, BM_PAGE_CONTEXT=null;
+function syncBenchmarkNode(old,node){
+  if(old.nodeType!==node.nodeType || old.nodeName!==node.nodeName){
+    old.replaceWith(node.cloneNode(true)); return;
+  }
+  if(old.nodeType!==1){ if(old.nodeValue!==node.nodeValue) old.nodeValue=node.nodeValue; return; }
+  if(old.tagName==='TBODY' && old.closest('.bmtable')) return;
+  for(const a of [...old.attributes]) if(!node.hasAttribute(a.name)) old.removeAttribute(a.name);
+  for(const a of node.attributes) if(old.getAttribute(a.name)!==a.value) old.setAttribute(a.name,a.value);
+  const children=[...node.childNodes];
+  children.forEach((child,i)=>{
+    if(old.childNodes[i]) syncBenchmarkNode(old.childNodes[i],child);
+    else old.append(child.cloneNode(true));
+  });
+  while(old.childNodes.length>children.length) old.lastChild.remove();
+}
+function mountBenchmark(main,html,newRows,rows,sortCol,fmarks){
+  const fresh=document.createElement('template'); fresh.innerHTML=html;
+  if(main.querySelector('.bmtable')){
+    const shell=document.createElement('main'); shell.append(fresh.content);
+    // Sync children only: main's own attributes belong to the application shell.
+    const nodes=[...shell.childNodes];
+    nodes.forEach((node,i)=>{
+      if(main.childNodes[i]) syncBenchmarkNode(main.childNodes[i],node);
+      else main.append(node.cloneNode(true));
+    });
+    while(main.childNodes.length>nodes.length) main.lastChild.remove();
+  }else main.replaceChildren(fresh.content);
+  if(newRows){
+    const parsed=document.createElement('template');
+    parsed.innerHTML='<table><tbody>'+newRows+'</tbody></table>';
+    for(const row of parsed.content.querySelectorAll('tr')) BM_DOM.rows.set(row.dataset.key,row);
+  }
+  const body=main.querySelector('.bmtable tbody'), fragment=document.createDocumentFragment();
+  for(const row of rows){
+    const node=BM_DOM.rows.get(row.key);
+    const badge=node.querySelector('.bm-fence');
+    const html=sortCol?fenceBadge(fmarks.get(row.key),sortCol.label):'';
+    if(badge.innerHTML!==html) badge.innerHTML=html;
+    fragment.append(node);
+  }
+  body.replaceChildren(fragment);
+  const visible=new Set(rows.map(r=>r.key));
+  for(const key of BM_DOM.rows.keys()) if(!visible.has(key)) BM_DOM.rows.delete(key);
+}
 async function renderBenchmark(){
+  const wasBenchmark=VIEW==='benchmark';
   VIEW='benchmark'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
+  const scroll=wasBenchmark?main.scrollTop:0;
   if(!BM_LOADED){
     main.innerHTML='<div class="rhead"><h2>Benchmark</h2></div><div class="status">Lade Benchmark-Daten…</div>';
     try{ await ensureBenchmark(); }catch(e){ main.innerHTML=`<div class="status">${tr('Error:')} ${esc(e.message)}</div>`; return; }
@@ -2878,6 +2929,14 @@ async function renderBenchmark(){
   // gibt es keine Metrik und damit keinen Marker.
   const sortCol=spalten.find(c=>c.id===bmSort.col);
   const fmarks=sortCol?fenceOutliers(allRows, sortCol.id):new Map();
+  const context=JSON.stringify([LANG,BMP,activeFilters(),BM_HIDEFLAG,BM_PCT,spalten.map(c=>c.id)]);
+  const pageContext=context+JSON.stringify(bmSort);
+  if(BM_PAGE_CONTEXT!==pageContext){BM_PAGE=0;BM_PAGE_CONTEXT=pageContext;}
+  BM_PAGE=Math.min(BM_PAGE,Math.max(0,Math.ceil(rows.length/BM_PAGE_SIZE)-1));
+  const offset=BM_PAGE*BM_PAGE_SIZE, visibleRows=rows.slice(offset,offset+BM_PAGE_SIZE);
+  if(!main.querySelector('.bmtable') || BM_DOM.context!==context)
+    BM_DOM={context,rows:new Map()};
+  let newRows='';
   let h=`<div class="rhead"><h2>${tr('Benchmark')}</h2></div>
     <div class="bmbar"><label class="ctl">${tr('Profile')}: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
@@ -2895,62 +2954,74 @@ async function renderBenchmark(){
     ${barMax.size?`<div class="bmlegend"><span class="k"></span> ${tr('Bar = share of the largest value of the column in the current selection, linear. No value judgement — and none where the filed unit is disputed or a scale finding stands, where the length would be a claim about comparability that does not hold.')}</div>`:''}
     <div class="caveat">${tr('⚠ Comparability caveat: accounting framework, scope of consolidation (CON/IND), national options and framework version (4.1/4.2) differ — rankings are indicative, not a supervisory metric. Source: public Pillar 3 disclosures (© EBA).')}</div>
     ${distributionRow(allRows, prof)}
+    <div class="bmpages" role="group" aria-label="${LANG==='de'?'Ergebnisseiten':'Result pages'}">
+      <button id="bmPrev"${BM_PAGE===0?' disabled':''}>${LANG==='de'?'Zurück':'Previous'}</button>
+      <span role="status">${rows.length?offset+1:0}–${offset+visibleRows.length} / ${rows.length}</span>
+      <button id="bmNext"${offset+visibleRows.length>=rows.length?' disabled':''}>${LANG==='de'?'Weiter':'Next'}</button>
+      <span class="meta">${LANG==='de'?'Suche und CSV umfassen alle Treffer. Die Browsersuche findet die aktuelle Seite.':'Search and CSV include all results. Browser find searches the current page.'}</span>
+    </div>
     <table class="bmtable"><thead><tr>
-      <th data-k="name">${tr('Institution')} <span class="dir"></span></th><th data-k="date">${tr('Reference date')} <span class="dir"></span></th>`;
+      <th tabindex="0" data-k="name">${tr('Institution')} <span class="dir"></span></th><th tabindex="0" data-k="date">${tr('Reference date')} <span class="dir"></span></th>`;
   // Spalten, deren Zelle zwischen den Frameworks umgebunden wurde (#26): der
   // Wert wird ueber die Koordinate weiter gefunden, aber die Rangliste mischt
   // dann Stichtage beiderseits eines Taxonomiewechsels.
   for(const c of spalten){
     const bs=metricBridge(c);
-    h+=`<th class="num" data-k="${c.id}">${esc(metricHead(c))}`
+    h+=`<th tabindex="0" class="num" data-k="${c.id}">${esc(metricHead(c))}`
      + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:'')
      + ` <span class="dir"></span></th>`;
   }
   if(prof.trendRow) h+=`<th title="${esc(tr('Course over the available reference dates ({0})', mlabel(prof.cols.find(x=>x.row===prof.trendRow)||{})||''))}">${tr('Trend')}</th>`;
   h+='</tr></thead><tbody>';
-  for(const r of rows){
+  for(const r of visibleRows){
+    if(BM_DOM.rows.has(r.key)) continue;
     // Skalenbefund markiert die Zeile ebenfalls: in einer Rangliste ABSOLUTER
     // Beträge ist ein um 10^6 zu kleiner Report der irreführendste Eintrag, den
     // es gibt — er steht ganz unten und sieht nach einem winzigen Institut aus.
     const cls=[flaggedFor(r.q,prof.tpl)?'flagged':'', scaleFor(r.q,prof.tpl)?'scaled':'']
                 .filter(Boolean).join(' ');
-    h+=`<tr${cls?` class="${cls}"`:''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
+    newRows+=`<tr data-key="${esc(r.key)}"${cls?` class="${cls}"`:''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
         ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}${scaleBadge(r.q,prof.tpl)}${
-          sortCol?fenceBadge(fmarks.get(r.key), sortCol.label):''}
+          '<span class="bm-fence"></span>'}
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;
     const balken=barErlaubt(prof, r);
     for(const c of spalten)
-      h+=bmCell(c, r[c.id], BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null,
+      newRows+=bmCell(c, r[c.id], BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null,
                 balken?barMax.get(c.id):null);
-    if(prof.trendRow) h+=`<td>${r._trend?sparkline(r._trend,null,null,r._breaks):''}</td>`;
-    h+='</tr>';
+    if(prof.trendRow) newRows+=`<td>${r._trend?sparkline(r._trend,null,null,r._breaks):''}</td>`;
+    newRows+='</tr>';
   }
   h+=`</tbody></table><div class="meta" style="margin-top:.5rem">${tr('{0} reports with template {1}', rows.length, esc(prof.tpl))}</div>`;
   h+=gateNote(prof, gatedOut, gross.length);
-  main.innerHTML=h;
-  document.getElementById('bmProfile').addEventListener('change',e=>{
+  mountBenchmark(main,h,newRows,visibleRows,sortCol,fmarks);
+  document.getElementById('bmPrev').onclick=()=>{BM_PAGE--;renderBenchmark();};
+  document.getElementById('bmNext').onclick=()=>{BM_PAGE++;renderBenchmark();};
+  document.getElementById('bmProfile').value=BMP;
+  document.getElementById('bmProfile').onchange=e=>{
     BMP=e.target.value; bmSort={...bmAll()[BMP].defaultSort};
     store.bmp=BMP; persist(); renderBenchmark(); shareState();
-  });
-  document.getElementById('bmPct').addEventListener('change',e=>{
+  };
+  document.getElementById('bmPct').checked=BM_PCT;
+  document.getElementById('bmPct').onchange=e=>{
     BM_PCT=e.target.checked; store.bmpct=BM_PCT; persist(); renderBenchmark(); shareState();
-  });
-  document.getElementById('bmHide').addEventListener('change',e=>{
+  };
+  document.getElementById('bmHide').checked=BM_HIDEFLAG;
+  document.getElementById('bmHide').onchange=e=>{
     BM_HIDEFLAG=e.target.checked; store.bmhide=BM_HIDEFLAG; persist(); renderBenchmark(); shareState();
-  });
+  };
   // Spaltenauswahl (#50 Punkt 3). Sie wird NICHT in `store` gelegt: eine
   // Spaltenwahl, die nur dieses Geraet kennt, waere das Gegenteil dessen, was
   // Punkt 1 erreichen wollte. Sie lebt im Hash und damit im geteilten Link.
   main.querySelectorAll('.colbox input[data-col]').forEach(cb=>{
-    cb.addEventListener('change',()=>{
+    cb.onchange=()=>{
       const an=[...main.querySelectorAll('.colbox input[data-col]')]
                  .filter(x=>x.checked).map(x=>x.dataset.col);
       // Alles abgewaehlt heisst ALLES zeigen, nicht eine leere Tabelle: eine
       // Tabelle ohne Kennzahlen ist kein Zustand, den jemand teilen will.
       BM_COLS = an.length ? new Set(an) : null;
       renderBenchmark(); shareState();
-    });
+    };
   });
   // Exportiert wird, was der Nutzer SIEHT — `rows`, nicht `allRows`. Hat er die
   // auffaelligen eingeklappt, sind sie auch nicht in der Datei; die Zeilenzahl
@@ -2966,16 +3037,20 @@ async function renderBenchmark(){
       if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:-1};
       renderBenchmark(); shareState();
     };
+    card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();card.click();}};
   });
   main.querySelectorAll('th[data-k]').forEach(th=>{
     const k=th.dataset.k;
+    th.tabIndex=0;
+    th.setAttribute('aria-sort',k===bmSort.col?(bmSort.dir<0?'descending':'ascending'):'none');
     if(k===bmSort.col) th.querySelector('.dir').textContent=bmSort.dir<0?'▼':'▲';
     th.onclick=()=>{
       if(bmSort.col===k) bmSort.dir*=-1; else bmSort={col:k,dir:(k==='name'||k==='date')?1:-1};
       renderBenchmark(); shareState();
     };
+    th.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();th.click();}};
   });
-  main.scrollTop=0;
+  main.scrollTop=scroll;
 }
 
 /* ---- CSV-Export (#50) -----------------------------------------------------

@@ -69,9 +69,64 @@ def main():
     with sync_playwright() as p:
         browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
         result=labels(browser,base)
+        if int(args.issue)>=117: result['benchmark']=benchmark(browser,base)
         browser.close()
     server.shutdown()
     (OUT/f'issue{args.issue}_ux.json').write_text(json.dumps(result,indent=2))
     print(json.dumps(result,indent=2))
+
+def benchmark(browser,base):
+    ctx=browser.new_context();page=ctx.new_page();errors=[]
+    page.on('pageerror',lambda e:errors.append(str(e)))
+    page.goto(base+'/candidate/viewer.html#benchmark',wait_until='networkidle')
+    page.wait_for_selector('.bmtable tbody tr')
+    result=page.evaluate("""async()=>{
+      const first=document.querySelector('.bmtable tbody tr');
+      const key=first.dataset.key, control=document.getElementById('bmProfile');
+      await renderBenchmark();
+      if(document.querySelector('.bmtable tbody tr')!==first) throw new Error('Redraw discarded stable row');
+      const th=document.querySelector('th[data-k="name"]');th.focus();th.click();
+      await renderBenchmark();
+      const retained=[...document.querySelectorAll('.bmtable tbody tr')].find(r=>r.dataset.key===key);
+      if(retained && retained!==first)
+        throw new Error('Sort discarded existing row');
+      if(document.getElementById('bmProfile')!==control || document.activeElement!==th)
+        throw new Error('Sort discarded controls/focus');
+      const snapshot=()=>[...document.querySelectorAll('.bmtable tbody tr')].map(r=>[r.dataset.key,r.innerHTML]);
+      const checks=[];
+      for(const p of PROFILES){
+        BMP=p.id;bmSort={...p.defaultSort};
+        // Registry profiles carry sort as a tuple; use the resolved profile.
+        bmSort={...bmProf().defaultSort};
+        BM_PCT=true;await renderBenchmark();
+        for(const col of ['name',bmProf().cols[0].id]){
+          bmSort={col,dir:-1};await renderBenchmark();const cached=snapshot();
+          BM_DOM={context:null,rows:new Map()};await renderBenchmark();
+          if(JSON.stringify(cached)!==JSON.stringify(snapshot())) throw new Error('Stale cells '+p.id+' '+col);
+          checks.push(p.id+'/'+col);
+        }
+      }
+      BMP='km1';BM_PCT=false;BM_HIDEFLAG=false;BM_COLS=null;
+      document.getElementById('reportFilter').value='bank';
+      bmSort={...bmProf().defaultSort};await renderBenchmark();
+      const expected=benchmarkRows().map(r=>r.key);
+      const actual=[...document.querySelectorAll('.bmtable tbody tr')].map(r=>r.dataset.key);
+      if(JSON.stringify(expected.slice(0,BM_PAGE_SIZE))!==JSON.stringify(actual))throw new Error('Filter order/rows changed');
+      const paged=[];
+      for(let i=0;i<Math.ceil(expected.length/BM_PAGE_SIZE);i++){
+        BM_PAGE=i;await renderBenchmark();
+        paged.push(...[...document.querySelectorAll('.bmtable tbody tr')].map(r=>r.dataset.key));
+        if(BM_DOM.rows.size>BM_PAGE_SIZE)throw new Error('Unbounded row cache');
+      }
+      if(JSON.stringify(paged)!==JSON.stringify(expected))throw new Error('Pagination lost/duplicated rows');
+      let exported='';ladeHerunter=(name,csv)=>{exported=csv;};document.getElementById('bmCsv').click();
+      if(!exported.includes('# '+tr('rows:')+' '+expected.length))throw new Error('Export lost rows');
+      const d=bmSort.dir;const header=document.querySelector('th[data-k="'+bmSort.col+'"]');
+      header.click();header.click();header.click();
+      if(bmSort.dir!==-d)throw new Error('Duplicate event handlers');
+      return {reused_rows:true,preserved_controls_and_focus:true,cached_vs_fresh:checks,filtered_rows:expected.length,pagination_complete:true,export:true};
+    }""")
+    assert not errors,errors
+    ctx.close();return result
 
 if __name__=='__main__':main()
