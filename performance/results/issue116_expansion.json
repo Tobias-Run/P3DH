@@ -1,0 +1,162 @@
+[
+  {
+    "run": 0,
+    "profile": "desktop",
+    "reading_ms": 0,
+    "expand_ms": 101.5,
+    "report_ready_ms": 784.0999999940395,
+    "cells": 1536
+  },
+  {
+    "run": 0,
+    "profile": "desktop",
+    "reading_ms": 1500,
+    "expand_ms": 100.59999999403954,
+    "report_ready_ms": 821.1000000089407,
+    "cells": 1536
+  },
+  {
+    "run": 0,
+    "profile": "mobile4g",
+    "reading_ms": 0,
+    "expand_ms": 2452.5999999940395,
+    "report_ready_ms": 2189,
+    "cells": 1536
+  },
+  {
+    "run": 0,
+    "profile": "mobile4g",
+    "reading_ms": 1500,
+    "expand_ms": 564.0999999940395,
+    "report_ready_ms": 2184.7000000029802,
+    "cells": 1536
+  },
+  {
+    "run": 1,
+    "profile": "desktop",
+    "reading_ms": 0,
+    "expand_ms": 281.8999999910593,
+    "report_ready_ms": 879.7999999970198,
+    "cells": 1536
+  },
+  {
+    "run": 1,
+    "profile": "desktop",
+    "reading_ms": 1500,
+    "expand_ms": 144.5,
+    "report_ready_ms": 855.3999999910593,
+    "cells": 1536
+  },
+  {
+    "run": 1,
+    "profile": "mobile4g",
+    "reading_ms": 0,
+    "expand_ms": 2120.1000000089407,
+    "report_ready_ms": 2228.2999999970198,
+    "cells": 1536
+  },
+  {
+    "run": 1,
+    "profile": "mobile4g",
+    "reading_ms": 1500,
+    "expand_ms": 706.3999999910593,
+    "report_ready_ms": 2192.1000000089407,
+    "cells": 1536
+  },
+  {
+    "run": 2,
+    "profile": "desktop",
+    "reading_ms": 0,
+    "expand_ms": 402.09999999403954,
+    "report_ready_ms": 876.3999999910593,
+    "cells": 1536
+  },
+  {
+    "run": 2,
+    "profile": "desktop",
+    "reading_ms": 1500,
+    "expand_ms": 150.29999999701977,
+    "report_ready_ms": 900.5999999940395,
+    "cells": 1536
+  },
+  {
+    "run": 2,
+    "profile": "mobile4g",
+    "reading_ms": 0,
+    "expand_ms": 2288.0,
+    "report_ready_ms": 2151.2000000029802,
+    "cells": 1536
+  },
+  {
+    "run": 2,
+    "profile": "mobile4g",
+    "reading_ms": 1500,
+    "expand_ms": 641.5999999940395,
+    "report_ready_ms": 2154.7999999970198,
+    "cells": 1536
+  },
+  {
+    "run": 3,
+    "profile": "desktop",
+    "reading_ms": 0,
+    "expand_ms": 190.8999999910593,
+    "report_ready_ms": 755,
+    "cells": 1536
+  },
+  {
+    "run": 3,
+    "profile": "desktop",
+    "reading_ms": 1500,
+    "expand_ms": 146.30000001192093,
+    "report_ready_ms": 864.2999999970198,
+    "cells": 1536
+  },
+  {
+    "run": 3,
+    "profile": "mobile4g",
+    "reading_ms": 0,
+    "expand_ms": 2098.5,
+    "report_ready_ms": 2155.2999999970198,
+    "cells": 1536
+  },
+  {
+    "run": 3,
+    "profile": "mobile4g",
+    "reading_ms": 1500,
+    "expand_ms": 536.0,
+    "report_ready_ms": 2102.5,
+    "cells": 1536
+  },
+  {
+    "run": 4,
+    "profile": "desktop",
+    "reading_ms": 0,
+    "expand_ms": 135.5,
+    "report_ready_ms": 877.7000000029802,
+    "cells": 1536
+  },
+  {
+    "run": 4,
+    "profile": "desktop",
+    "reading_ms": 1500,
+    "expand_ms": 273.3999999910593,
+    "report_ready_ms": 864.1000000089407,
+    "cells": 1536
+  },
+  {
+    "run": 4,
+    "profile": "mobile4g",
+    "reading_ms": 0,
+    "expand_ms": 2218.9000000059605,
+    "report_ready_ms": 2177.4000000059605,
+    "cells": 1536
+  },
+  {
+    "run": 4,
+    "profile": "mobile4g",
+    "reading_ms": 1500,
+    "expand_ms": 532.5999999940395,
+    "report_ready_ms": 1960.5999999940395,
+    "cells": 1536
+  }
+]

@@ -964,11 +964,11 @@ const LOCAL = /^(localhost|127\.|0\.0\.0\.0|\[?::1)/.test(location.hostname) || 
 const DATA_BASES = LOCAL ? ['data/']
   : ['https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@data/',
      'https://raw.githubusercontent.com/Tobias-Run/P3DH/data/'];
-async function getJSON(path){
+async function getJSON(path,options={}){
   let err;
   for(const base of DATA_BASES){
     try{
-      const r=await fetch(base+path,{cache:'no-store'});
+      const r=await fetch(base+path,{cache:'no-store',...options});
       if(r.ok) return await r.json();   // native parse — no hand-rolled CSV parser
       err=new Error(path.split('/').pop()+' '+r.status);
     }catch(e){ err=e; }
@@ -1229,7 +1229,7 @@ function setLabels(cb){
 }
 function ensureLabels(){
   if(LABELS_LOADED) return Promise.resolve();
-  if(!LABELS_PROMISE) LABELS_PROMISE=getJSON('labels.json').then(j=>{
+  if(!LABELS_PROMISE) LABELS_PROMISE=getJSON('labels.json',{priority:'low'}).then(j=>{
     setLabels(j.cb||{}); LABELS_LOADED=true;
   }).catch(e=>{ LABELS_PROMISE=null; throw e; });
   return LABELS_PROMISE;
@@ -2039,7 +2039,11 @@ async function renderReport(rep){
     main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2></div>
       <div class="status">Lade Report…<div class="prog"><i style="width:45%"></i></div></div>`;
     renderReportList();
-    try{ await ensureLoaded(rep); }
+    const loading=ensureLoaded(rep);
+    // Start after the critical shard request, at low network priority.
+    // Waiting until the overview is painted penalises immediate touch expansion.
+    ensureLabels().catch(()=>{});
+    try{ await loading; }
     catch(e){ if(!current()) return; main.innerHTML='<div class="status">'+esc(tr('Error loading the report:'))+' '+esc(e.message)+'</div>'; return; }
     if(!current()) return;   // ignore stale navigation completions
   }
