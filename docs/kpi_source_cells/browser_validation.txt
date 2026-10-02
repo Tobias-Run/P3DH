@@ -1,0 +1,12 @@
+  Exakte KPI-Quelle: 1280px · en · dark=False · CET1/TREA/Headroom: OK
+  Exakte KPI-Quelle: 390px · de · dark=False · CET1/TREA/Headroom: OK
+  Exakte KPI-Quelle: 1280px · de · dark=True · CET1/TREA/Headroom: OK
+  Exakte KPI-Quelle: 390px · en · dark=True · CET1/TREA/Headroom: OK
+  KPI-Quelle: SEK/EUR · umgerechneter Wert, unveränderte exakte Quellzelle: OK
+  KPI-Quelle: 1280px · missing · keine falsche Zelle markiert: OK
+  KPI-Quelle: 1280px · conflicting · keine falsche Zelle markiert: OK
+  KPI-Quelle: 1280px · dimension · keine falsche Zelle markiert: OK
+  KPI-Quelle: 390px · missing · keine falsche Zelle markiert: OK
+  KPI-Quelle: 390px · conflicting · keine falsche Zelle markiert: OK
+  KPI-Quelle: 390px · dimension · keine falsche Zelle markiert: OK
+{'cases': 11, 'source_activations': 19, 'javascript_errors': []}

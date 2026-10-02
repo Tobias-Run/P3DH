@@ -931,6 +931,9 @@ def pruefe():
             kpi = pruefe_kpi_navigation(b, f"http://localhost:{PORT}/viewer_json.html")
             print(f"  KPI-Quellnavigation: {kpi['cases']} Fälle · "
                   f"{kpi['source_activations']} erfolgreiche Quellsprünge")
+            from check_kpi_source_cells import pruefe as pruefe_kpi_source_cells
+            source_cells = pruefe_kpi_source_cells(b, f"http://localhost:{PORT}/viewer_json.html")
+            print(f"  Exakte KPI-Quellzellen: {source_cells['cases']} Fälle")
             from check_metric_units import pruefe as pruefe_metric_units
             units = pruefe_metric_units(b, f"http://localhost:{PORT}/viewer_json.html")
             print(f"  KPI-Einheiten: {units['cases']} Sprach-/Viewportfälle")
