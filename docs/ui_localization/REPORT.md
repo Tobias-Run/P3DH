@@ -16,3 +16,9 @@ Report-Status, Suchfeld und Hinweis auf unterschiedliche Template-Währungen ver
 - `scripts/check_ui_localization.py` läuft automatisch im vorhandenen Runtimecheck und damit in der PR-CI. Der vollständige Viewercheck umfasst außerdem KPI-Quellnavigation, alle Einheitenprofile, Peer-Kontext, Filter und CSV.
 
 [Browserprotokoll](browser_validation.txt). Mobile Prüfung in Chromium, kein physischer iPhone-/Safari-Test. Originale Institutionsnamen und Offenlegungstexte werden beibehalten. Die Korrektur führt keine neuen Produktions-Requests ein.
+
+## Ergänzung: Templategruppen – Issue #131
+
+[Issue #131](https://github.com/Tobias-Run/P3DH/issues/131): Die zwölf deutschen Gruppenlabels aus dem vorhandenen Codebook werden beim Laden einmal auf englische Übersetzungsschlüssel normalisiert. Die Darstellung verwendet anschließend die aktuelle Sprache. Auch der Auffangblock „Nicht zugeordnet“/„Unassigned“ und die Suchüberschrift „Kennzahlen“/„Metrics“ folgen dem Sprachwechsel. Templatezuordnung, Reihenfolge, Daten und KPI-Auswertung bleiben unverändert. Die Korrektur funktioniert mit veröffentlichten Codebooks ohne Datenneubau oder zusätzliche Requests.
+
+Browserprüfung mit einem echten Jahresbericht, der alle zwölf Gruppen enthält (`213800CBW4NPFP73ZK64`, 2025-12-31, CON): EN → DE → EN bei 1280×844 und 390×844. Alle Gruppenlabels, Suchüberschrift und Filterzählungen geprüft; Sprache und aufgeklappte Gruppen bleiben nach Neuladen erhalten. Ein isolierter unbekannter Zuordnungsschlüssel bestätigt den übersetzten Auffangblock. KPI-Werte bleiben identisch, keine JavaScript-Fehler. Zusätzlich bestehen die zehn bisherigen UI-Browserfälle und alle neun Tests der Templategruppen-Registry. Mobilprüfung in Chromium.
