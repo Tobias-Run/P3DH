@@ -54,7 +54,7 @@ def register(root=ROOT):
         for field in ("supporting_source_url", "control_source_url"):
             if row.get(field) and (urlparse(row[field]).scheme != "https" or not urlparse(row[field]).netloc):
                 raise ValueError(f"Invalid supporting evidence for {lei}")
-        if row.get("ownership_basis") == "reviewed_control_chain":
+        if row.get("ownership_basis") in {"reviewed_control_chain", "reviewed_document_chain"}:
             if not re.fullmatch(r"[A-Z0-9]{20}", row.get("controller_lei", "")) or not row.get("control_source_url") or not re.fullmatch(r"[a-f0-9]{64}", row.get("control_source_sha256", "")):
                 raise ValueError(f"Missing reviewed control chain for {lei}")
         result[lei] = {k: row.get(k, "") for k in ["ownership", "source_url", "evidence_quote",
@@ -79,9 +79,10 @@ def traits(root, leis):
         result[lei].update(classifications.get(lei, {}))
         # Only explicit reviewed chains override the older group snapshot.
         # A parent name or an unreviewed classification never propagates.
-        if result[lei].get("ownership_basis") == "reviewed_control_chain":
+        if result[lei].get("ownership_basis") in {"reviewed_control_chain", "reviewed_document_chain"}:
             result[lei].update(group_head=result[lei]["controller_lei"],
-                               group_source="reviewed_gleif", role="subsidiary")
+                               group_source=("reviewed_gleif" if result[lei]["ownership_basis"] == "reviewed_control_chain"
+                                             else "reviewed_document"), role="subsidiary")
     return result
 
 

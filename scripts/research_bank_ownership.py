@@ -62,7 +62,12 @@ def fetch(url,directory,refresh=False):
             body=response.read(16*1024*1024+1);actual=response.url;mime=response.headers.get('Content-Type','')
             if len(body)>16*1024*1024:raise ValueError('Response exceeds 16 MiB evidence limit')
         result.update({'http_status':200,'url':actual,'sha256':hashlib.sha256(body).hexdigest()})
-        if 'pdf' in mime or urllib.parse.urlparse(actual).path.lower().endswith('.pdf'):
+        if 'json' in mime:
+            # Public CMS responses contain HTML inside JSON strings. Running
+            # them through HTMLParser would remove tags and insert invalid
+            # literal newlines, destroying both the data and its evidence.
+            text=body.decode('utf-8-sig');json.loads(text);links=[]
+        elif 'pdf' in mime or urllib.parse.urlparse(actual).path.lower().endswith('.pdf'):
             import io
             from pypdf import PdfReader
             text='\n'.join(p.extract_text() or '' for p in PdfReader(io.BytesIO(body)).pages);links=[]

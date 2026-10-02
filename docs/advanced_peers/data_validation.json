@@ -5,24 +5,51 @@
     "website_no_ownership_passage": 128,
     "website_unavailable": 208
   },
-  "clusters": 52,
-  "clusters_with_at_least_five_members": 35,
+  "browser_checks": {
+    "cases": [
+      {
+        "clusters": 38,
+        "language": "en",
+        "public_reports": 54,
+        "width": 1280
+      },
+      {
+        "clusters": 38,
+        "language": "de",
+        "public_reports": 54,
+        "width": 390
+      }
+    ],
+    "javascript_errors": 0
+  },
+  "clusters": 58,
+  "clusters_with_at_least_five_members": 38,
   "coverage": {
-    "classified": 154,
+    "classified": 184,
     "eligible_reports": 529,
     "entities": 475,
     "excluded_reports": 353,
     "group_duplicates": 84
   },
-  "maximum_cluster_size_ratio": 9.075139042518463,
-  "median_cluster_silhouette": 0.28726450000000003,
+  "maximum_cluster_size_ratio": 8.676437195438183,
+  "median_cluster_silhouette": 0.35421100000000005,
   "ownership_counts": {
-    "cooperative": 85,
+    "cooperative": 86,
+    "mixed": 7,
     "mutual": 4,
-    "public": 24,
-    "shareholder": 41,
-    "unknown": 321
+    "public": 25,
+    "shareholder": 62,
+    "unknown": 291
   },
-  "registry_rows": 175,
-  "reviewed_control_relationships": 50
+  "registry_rows": 212,
+  "reviewed_control_relationships": 55,
+  "reviewed_document_chains": 4,
+  "top30_selection": {
+    "baseline_unknown": 321,
+    "new_viewer_classifications": 30,
+    "rankable": 192,
+    "remaining_unknown": 291,
+    "unrankable": 129
+  },
+  "unit_tests": 1503
 }

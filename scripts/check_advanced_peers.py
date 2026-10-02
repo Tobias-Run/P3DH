@@ -32,6 +32,19 @@ def check():
                 assert page.evaluate("AP_DATA.metadata['9ZHRYM6F437SQJ6OUG95'].ownership")=='cooperative'
                 assert page.evaluate("AP_DATA.metadata['0W5QHUNYV4W7GJO62R27'].ownership")=='public'
                 assert page.evaluate("AP_DATA.metadata['5493009EIBTCB1X12G89'].ownership")=='shareholder'
+                checked=page.evaluate("""()=>({
+                  coverage:AP_DATA.coverage.classified,
+                  aib:AP_DATA.metadata['635400AKJBGNS5WNQL34'].ownership,
+                  belfius:AP_DATA.metadata['A5GWLFH3KM7YV2SFQL84'].ownership,
+                  dnb:AP_DATA.metadata['549300GKFG0RYRRQ1414'].ownership,
+                  iccrea:AP_DATA.metadata['NNVPP80YIZGEY2314M97'].ownership,
+                  ing:AP_DATA.metadata['3TK20IVIUJ8J3ZU0QE75'],
+                  label:document.querySelector('#bmOwnership option[value=shareholder]').textContent})""")
+                assert checked['coverage']>=184
+                assert (checked['aib'],checked['belfius'],checked['dnb'],checked['iccrea'])==('shareholder','public','mixed','cooperative')
+                assert checked['ing']['ownership_basis']=='reviewed_document_chain'
+                assert checked['ing']['group_head']=='549300NYKK9MWM7GGW15'
+                assert checked['label']==('Shareholder-owned' if lang=='en' else 'Aktionärsgetragen')
                 page.select_option('#bmOwnership','public')
                 page.wait_for_function("BM_OWN==='public' && document.querySelector('.peer-note')")
                 out=page.evaluate('''()=>{const selected=advancedSelection(benchmarkRows());return {

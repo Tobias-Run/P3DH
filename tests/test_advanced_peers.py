@@ -179,5 +179,70 @@ class InputsTest(unittest.TestCase):
         for lei in ['549300UARE5MHTBUPJ19','724500AG21Z9GIJE4735']:
             self.assertNotEqual(registry.get(lei,{}).get('ownership'),'cooperative')
 
+    def test_document_control_chain_requires_separate_control_evidence(self):
+        (self.root/'codebook/bank_classification.csv').write_text(
+            'lei,ownership,source_url,evidence_quote,reviewed_at,source_sha256,ownership_basis\n'
+            '549300TRUWO2CD2G5692,shareholder,https://example.com,reviewed owners,2026-10-02,'+
+            '0'*64+',reviewed_document_chain\n')
+        with self.assertRaisesRegex(ValueError,'control chain'):ap.register(self.root)
+
+    def test_reviewed_document_parent_overrides_stale_group_snapshot(self):
+        child='3TK20IVIUJ8J3ZU0QE75';parent='549300NYKK9MWM7GGW15'
+        (self.root/'codebook/bank_classification.csv').write_text(
+            'lei,ownership,source_url,evidence_quote,reviewed_at,source_sha256,ownership_basis,controller_lei,control_source_url,control_source_sha256\n'+
+            child+',shareholder,https://example.com/owners,reviewed owners,2026-10-02,'+
+            '0'*64+',reviewed_document_chain,'+parent+',https://example.com/annual,'+'1'*64+'\n')
+        m=ap.traits(self.root,[child])[child]
+        self.assertEqual((m['group_head'],m['role'],m['group_source']),
+                         (parent,'subsidiary','reviewed_document'))
+
+
+class OwnershipResearchSnapshotTest(unittest.TestCase):
+    def setUp(self):
+        doc=ROOT/'docs/advanced_peers'
+        self.selection=json.loads((doc/'top30_selection.json').read_text())
+        self.evidence=json.loads((doc/'top30_ownership_evidence.json').read_text())
+        self.registry=ap.register(ROOT)
+
+    def test_only_selected_thirty_are_added_to_frozen_unknown_population(self):
+        baseline=set(self.selection['baseline_unknown_leis'])
+        selected={r['lei'] for r in self.selection['selected']}
+        self.assertEqual(len(selected),30)
+        self.assertEqual(baseline.intersection(self.registry),selected)
+        self.assertEqual(len(baseline-set(self.registry)),291)
+        self.assertEqual(baseline,set(self.selection['unrankable_leis']) |
+                         {r['lei'] for r in self.selection['ranking_candidates']})
+
+    def test_accounting_assets_order_and_currency_overlay(self):
+        values=self.selection['selected']
+        self.assertEqual([r['rank'] for r in values],list(range(1,31)))
+        self.assertEqual([r['assets_eur'] for r in values],
+                         sorted((r['assets_eur'] for r in values),reverse=True))
+        self.assertEqual(values[0]['lei'],'3TK20IVIUJ8J3ZU0QE75')
+        millennium=next(r for r in self.selection['source_overlays']
+                        if r['lei']=='259400OFDZ9KPZEO8K78')
+        self.assertEqual(millennium['currency'],'PLN')
+        self.assertAlmostEqual(millennium['assets_eur'],
+                               millennium['reported_assets']*millennium['eur_per_currency'])
+        self.assertNotIn(millennium['lei'],{r['lei'] for r in values})
+
+    def test_selected_evidence_agrees_with_live_registry_and_control_sources(self):
+        for selected in self.selection['selected']:
+            lei=selected['lei'];record=self.registry[lei];audit=self.evidence[lei]
+            with self.subTest(lei=lei):
+                proof=audit['ownership_evidence']
+                self.assertEqual(record['ownership'],audit['ownership'])
+                self.assertEqual(record['source_url'],proof['url'])
+                self.assertEqual(record['source_sha256'],proof['sha256'])
+                self.assertEqual(record['evidence_quote'],proof['quote'])
+                self.assertTrue(audit['interpretation'])
+                if 'control_evidence' in audit:
+                    control=audit['control_evidence']
+                    self.assertEqual(record['controller_lei'],audit['controller_lei'])
+                    self.assertEqual(record['control_source_sha256'],control['sha256'])
+                    self.assertNotEqual(proof['url'],control['url'])
+                    self.assertEqual(record['ownership'],
+                                     self.registry[record['controller_lei']]['ownership'])
+
 
 if __name__=='__main__':unittest.main()

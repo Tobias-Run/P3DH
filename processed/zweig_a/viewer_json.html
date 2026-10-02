@@ -535,14 +535,14 @@ const DE = {
   "No consolidating parent (GLEIF)": "Keine konsolidierende Mutter (GLEIF)",
   "Unknown group role": "Unbekannte Gruppenrolle",
   "Size, scope and date": "Größe, Konsolidierung und Stichtag",
-  "Private shareholders / owners": "Private Aktionäre / Eigentümer",
+  "Shareholder-owned": "Aktionärsgetragen",
   "Supporting ownership source": "Ergänzende Quelle zur Trägerschaft",
   "Maximum TREA size ratio within a cluster: {0}×.": "Maximales TREA-Größenverhältnis innerhalb eines Clusters: {0}×.",
   "Ownership not yet verified": "Trägerschaft noch nicht verifiziert",
   "Missing or ambiguous framework": "Fehlendes oder mehrdeutiges Melderahmenwerk",
   "Foundation-controlled": "Stiftungsgetragen",
   "Self-owned savings bank": "Selbstständige Sparkasse",
-  "Verified consolidation relationship": "Geprüfte Konsolidierungsbeziehung",
+  "Verified group relationship": "Geprüfte Konzernbeziehung",
   "Controller LEI": "LEI der kontrollierenden Einheit",
   "Ownership and group role": "Trägerschaft und Gruppenrolle",
   "Statistical clusters": "Statistische Cluster",
@@ -2676,7 +2676,7 @@ const km1Value=(rep,row)=>tplValue(rep,'61.00',row);
 /* Optional peer formation: separate from report/cell context. */
 let AP_MANIFEST=null, AP_DATA=null, AP_PROMISE=null, AP_CLUSTERS=new Map();
 let BM_PEER='standard', BM_OWN='', BM_ROLE='', BM_CLUSTER='';
-const OWN_LABEL={cooperative:'Cooperative',public:'Publicly owned',shareholder:'Private shareholders / owners',
+const OWN_LABEL={cooperative:'Cooperative',public:'Publicly owned',shareholder:'Shareholder-owned',
   mixed:'Mixed ownership',mutual:'Mutual',foundation:'Foundation-controlled',savings:'Self-owned savings bank',unknown:'Ownership not yet verified'};
 const ROLE_LABEL={group_head:'Group head',subsidiary:'Subsidiary',
   no_consolidating_parent:'No consolidating parent (GLEIF)',unknown:'Unknown group role'};
@@ -2793,7 +2793,7 @@ function peerEvidence(r){
   if(BM_PEER==='standard')return '';
   const m=peerMeta(r),p=AP_DATA?.reports[r.key],reason=AP_DATA?.excluded[r.key];
   const source=m.source_url?`<a href="${esc(m.source_url)}" target="_blank" rel="noopener">${tr('Ownership source')}</a> · ${esc(m.reviewed_at)}${m.supporting_source_url?' · <a href="'+esc(m.supporting_source_url)+'" target="_blank" rel="noopener">'+tr('Supporting ownership source')+'</a>':''}<br>${esc(m.evidence_quote)}`:tr('No reviewed ownership source.');
-  const chain=m.control_source_url?'<br><a href="'+esc(m.control_source_url)+'" target="_blank" rel="noopener">'+tr('Verified consolidation relationship')+'</a> · '+tr('Controller LEI')+': '+esc(m.controller_lei):'';
+  const chain=m.control_source_url?'<br><a href="'+esc(m.control_source_url)+'" target="_blank" rel="noopener">'+tr('Verified group relationship')+'</a> · '+tr('Controller LEI')+': '+esc(m.controller_lei):'';
   const head=m.group_head?`${tr('Group head LEI')}: ${esc(m.group_head)} (${esc(m.group_source)})`:tr('Unknown group head');
   const cluster=p?.cluster?`${tr('Cluster')}: ${esc(p.cluster.slice(0,6))}`:tr('No cluster assignment');
   const why=reason?tr({scale_finding:'Scale finding in fitting inputs',missing_or_ambiguous_size:'Missing or ambiguous size',missing_or_ambiguous_framework:'Missing or ambiguous framework',missing_or_invalid_risk:'Missing, ambiguous or invalid risk mix'}[reason]||'Missing fitting inputs'):

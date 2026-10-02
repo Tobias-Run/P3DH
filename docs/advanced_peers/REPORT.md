@@ -4,7 +4,9 @@ Stand: 2. Oktober 2026. Arbeitsstand zu [Issue #134](https://github.com/Tobias-R
 
 ## Rechercheergebnis
 
-Von **475 unterschiedlichen Institutskennungen im Viewer** sind **154** mit Quellen eingeordnet: 85 genossenschaftlich, 41 privatwirtschaftlich, 24 öffentlich und 4 als Gegenseitigkeitsorganisation. **321 benötigen weitere manuelle Prüfung**. Der Viewer hat 476 Institut/Scope-Karten; ein Institut kommt mit mehreren Konsolidierungskreisen vor. Der Registerbestand enthält 175 Einträge, einschließlich zusätzlicher Konzernträger und Katalogeinträge außerhalb des aktuellen Viewers.
+Von **475 unterschiedlichen Institutskennungen im Viewer** sind **184** mit Quellen eingeordnet: 86 genossenschaftlich, 62 aktionärsgetragen, 25 öffentlich, 7 mit gemischter Trägerschaft und 4 als Gegenseitigkeitsorganisation. **291 benötigen weitere manuelle Prüfung**. Der Viewer hat 476 Institut/Scope-Karten; ein Institut kommt mit mehreren Konsolidierungskreisen vor. Der Registerbestand enthält 212 Einträge, einschließlich zusätzlicher Konzernträger und Katalogeinträge außerhalb des aktuellen Viewers.
+
+Die [Recherche der 30 großen zuvor ungeprüften Institute](TOP30_OWNERSHIP.md) dokumentiert Bilanzsummen, Eigentümeranker, Quellen und Konzernketten. Die Auswahl umfasst die größten 30 unter 192 Fällen mit eindeutiger verfügbarer Bilanzsumme; 129 der ursprünglich 321 offenen Kennungen sind noch nicht priorisierbar. Diese Grenze wird ausdrücklich ausgewiesen.
 
 Für den gesamten Katalog mit 508 Kennungen wurden GLEIF-Daten gesucht; 505 Datensätze wurden gefunden. Drei Kennungen sind synthetische EBA-Gruppenkennungen. Für 436 der 475 Viewer-Institute wurden Websitekandidaten gefunden. Diese Kandidaten sind Recherchehinweise und kein Identitäts- oder Eigentumsnachweis. Zusätzlich wurden Konzernträger, aktuelle GLEIF-Konsolidierungsbeziehungen, Governance-Seiten und verlinkte Geschäftsberichte geprüft.
 
@@ -30,12 +32,12 @@ Die [Rechercheliste](ownership_research.csv) enthält jeden der 475 Fälle, die 
 - AG, SA oder Börsennotierung allein belegen keine private Kontrolle. Namen und fehlende GLEIF-Mutterangaben begründen ebenfalls keine Trägerschaft.
 - Eine registrierte banktypische genossenschaftliche oder öffentlich-rechtliche Form ist ein verwendeter Nachweis; der Kontext der juristischen Person muss passen. Die niederländischen Coöperatie-Holdings Promontoria 19 und WP XII Financial Holdings bleiben ungeprüft: ihre Rechtsform belegt kein genossenschaftliches Bankgeschäft.
 - Angaben zu Aktionärsanteilen und Stimmrechten werden zusammen gelesen. Öffentliches Minderheitseigentum allein führt nicht zur Kategorie „öffentlich“.
-- Eine Einordnung entlang eines Konzerns wird nur als explizit kuratierter Datensatz gespeichert. 50 Übernahmen beruhen auf aktuellen, aktiven, veröffentlichten und vollständig corroborierten GLEIF-Konsolidierungsbeziehungen plus einer belegten Einordnung des Konzernträgers. Die Laufzeitsoftware vererbt keine Klassifikation automatisch.
+- Eine Einordnung entlang eines Konzerns wird nur als explizit kuratierter Datensatz gespeichert. 55 Übernahmen beruhen auf aktuellen, aktiven, veröffentlichten und vollständig corroborierten GLEIF-Konsolidierungsbeziehungen plus einer belegten Einordnung des Konzernträgers. Vier weitere Einordnungen verwenden explizit geprüfte Bankgeschäftsberichte/SEC-Tochterverzeichnisse (`reviewed_document_chain`) plus Eigentümerquellen des Konzernträgers. Die Laufzeitsoftware vererbt keine Klassifikation automatisch.
 - Konsolidierungsbeziehungen sind Belege für Rechnungslegungskontrolle. Sie beschreiben nicht notwendigerweise die vollständige wirtschaftliche Eigentümerkette oder sämtliche gemeinsamen natürlichen Eigentümer. Bekannte Konzernbeziehungen ermöglichen eine konservative Dublettenbereinigung; unbekannte Gruppen bleiben eine Einschränkung.
 - Das Prüfdatum beschreibt den **aktuellen Recherchestand**, nicht die historische Trägerschaft an jedem Berichtsstichtag. Eigentümerwechsel wie bei Saxo oder Santander Bank Polska erfordern datierte Nachprüfung; historische Zuordnung ist noch nicht umgesetzt.
 - HTML-Tabellen und Fußnoten werden getrennt extrahiert: Bei BNP Paribas darf beispielsweise Fußnote 1 vor 7,1 % nicht zu 17,1 % verschmelzen. Dafür besteht ein Regressionstest.
 
-85 akzeptierte GLEIF-Quelldatensätze sind in [accepted_gleif_records.json](accepted_gleif_records.json), 50 Konsolidierungsbeziehungen in [accepted_control_relationships.json](accepted_control_relationships.json) archiviert. `canonical_gleif_record` bezeichnet SHA-256 des kanonisch serialisierten einzelnen JSON-Datensatzes; `http_response` bezeichnet SHA-256 der damals gelesenen HTTP-Antwort. Websites können sich ändern. Die vollständigen Websiteantworten werden nicht mitgeliefert; deren Hash ist eine Abrufkennung, kein unabhängig reproduzierbarer Archivnachweis. Die zitierte Passage und öffentliche URL bleiben einsehbar.
+85 akzeptierte GLEIF-Quelldatensätze sind in [accepted_gleif_records.json](accepted_gleif_records.json), 55 Konsolidierungsbeziehungen in [accepted_control_relationships.json](accepted_control_relationships.json) archiviert. Neue Website-Belegpassagen, Quellenhashes, Kontrollnachweise und Einordnungsbegründungen stehen in [top30_ownership_evidence.json](top30_ownership_evidence.json). `canonical_gleif_record` bezeichnet SHA-256 des kanonisch serialisierten einzelnen JSON-Datensatzes; `http_response` bezeichnet SHA-256 der damals gelesenen HTTP-Antwort. Websites können sich ändern. Die vollständigen Websiteantworten werden nicht mitgeliefert; deren Hash ist eine Abrufkennung, kein unabhängig reproduzierbarer Archivnachweis. Die zitierte Passage und öffentliche URL bleiben einsehbar.
 
 ## Umsetzung im Benchmark
 
@@ -69,9 +71,9 @@ Die Schwellenwerte 0,20/0,30 liefern eine Nachbarschafts-Jaccard-Sensitivität. 
 
 ## Messung und Tests
 
-[Messwerte](data_validation.json): 529 Berichte haben vollständige Fitdaten, 353 sind ausgeschlossen; 84 Konzernrepräsentationsdubletten werden nicht gefittet. Es entstehen 52 Cluster, davon 35 mit mindestens fünf Mitgliedern. Größte tatsächliche TREA-Spanne: **9,08-fach**. Median der definierten Cluster-Silhouetten: **0,2873**; die Trennung ist mäßig und rechtfertigt noch keine pauschale Aussage „bessere Peers“.
+[Messwerte](data_validation.json): 529 Berichte haben vollständige Fitdaten, 353 sind ausgeschlossen; 84 Konzernrepräsentationsdubletten werden nicht gefittet. Es entstehen 58 Cluster, davon 38 mit mindestens fünf Mitgliedern. Größte tatsächliche TREA-Spanne: **8,68-fach**. Median der definierten Cluster-Silhouetten: **0,3542**; die Trennung ist mäßig und rechtfertigt noch keine pauschale Aussage „bessere Peers“. Der vorherige Stand lag bei 0,2873; der Anstieg durch zusätzliche Einordnungen ist eine Modelldiagnose, kein unabhängiger Nachweis einer besseren Nutzerentscheidung.
 
-- 1.497 Unit-/Datentests bestanden, einschließlich fehlender Werte, Dimensionenkonflikte, Scale-Ausschlüsse, Frameworkgrenzen, Größe, Konzernbereinigung, Quellpflicht und Collectorfehlern.
+- 1.503 Unit-/Datentests bestanden, einschließlich fehlender Werte, Dimensionenkonflikte, Scale-Ausschlüsse, Frameworkgrenzen, Größe, Konzernbereinigung, Quellpflicht und Collectorfehlern.
 - Echte Chromium-Prüfung bei 1280 px/Englisch und 390 px/Deutsch: Filter, Perzentile, CSV, Quellen, Sprachwechsel, geteilte Links, Neuladen, Risikoansicht, veraltetes Cluster, fehlende Datei und ältere Veröffentlichung ohne Manifest; keine JavaScript-Fehler.
 - Standardstart lädt die Zusatzdatei nicht; die bisherige Standard-Perzentilberechnung bleibt gleich.
 - Reale Artefakte geprüft auf disjunkte Mitgliedschaften, Datums-/Scopegrenzen, Konzernbereinigung, maximale Distanz, Größenrahmen sowie Quell- und Manifesthashes.
@@ -79,6 +81,6 @@ Die Schwellenwerte 0,20/0,30 liefern eine Nachbarschafts-Jaccard-Sensitivität. 
 
 ## Offene Arbeit vor einer vollständigen Trägerschaftsabdeckung
 
-Die 321 offenen Institutsfälle einzeln anhand verifizierter Bankidentität und offizieller Eigentümer-/Stimmrechtsquellen abarbeiten. Dynamische Aktionärstabellen und blockierte Websites erfordern alternative offizielle Berichte oder Register. Weitere Trägerketten müssen bis zur tatsächlichen Kontrolle geprüft werden. Insbesondere sind genossenschaftliche Holding-Rechtsformen, Stiftungen, selbstständige Sparkassen und historische Eigentümerwechsel keine pauschalen Kategorien.
+Die 291 offenen Institutsfälle einzeln anhand verifizierter Bankidentität und offizieller Eigentümer-/Stimmrechtsquellen abarbeiten. Dynamische Aktionärstabellen und blockierte Websites erfordern alternative offizielle Berichte oder Register. Weitere Trägerketten müssen bis zur tatsächlichen Kontrolle geprüft werden. Insbesondere sind genossenschaftliche Holding-Rechtsformen, Stiftungen, selbstständige Sparkassen und historische Eigentümerwechsel keine pauschalen Kategorien.
 
 Issue #134 bleibt offen. Dieser Stand ist ein überprüfbarer Entwurf mit belastbaren Teilbelegen und getesteter Funktion; vollständige Recherche und fachliche Modellvalidierung stehen aus.

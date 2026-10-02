@@ -13,6 +13,20 @@ import research_bank_ownership as research
 
 
 class EvidenceCollectionTest(unittest.TestCase):
+    def test_public_cms_json_preserves_embedded_markup_and_share_percentages(self):
+        from unittest.mock import MagicMock
+        body=json.dumps({'content':{'rendered':'<p>State share: 34.4%</p>'}}).encode()
+        response=MagicMock();response.read.return_value=body
+        response.url='https://example.com/wp-json/pages'
+        response.headers.get.return_value='application/json; charset=UTF-8'
+        response.__enter__.return_value=response
+        with tempfile.TemporaryDirectory() as d:
+            with patch.object(research.urllib.request,'urlopen',return_value=response):
+                result=research.fetch(response.url,Path(d))
+        self.assertEqual(result['status'],200)
+        self.assertEqual(json.loads(result['text'])['content']['rendered'],'<p>State share: 34.4%</p>')
+        self.assertEqual(result['sha256'],hashlib.sha256(body).hexdigest())
+
     def test_table_cells_and_footnotes_cannot_change_a_share_percentage(self):
         p=research.PageText();p.feed('<table><tr><td>BlackRock<sup>1</sup></td><td>7.1%</td><td>SFPI<sup>2</sup></td><td>5.7%</td></tr></table>')
         text=' '.join(''.join(p.parts).split())
