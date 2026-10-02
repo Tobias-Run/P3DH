@@ -523,6 +523,20 @@ function applyTheme(){ document.documentElement.dataset.theme = DARK?'dark':'lig
    Funktionswoertern. Eine vergessene Zeichenkette ist damit ein Befund und
    keine Geschmacksfrage. */
 const DE = {
+  "Capital, own funds & leverage": "Kapital, Eigenmittel & Verschuldung",
+  "Credit risk": "Kreditrisiko",
+  "Credit quality & non-performing loans": "Kreditqualität & notleidende Kredite",
+  "Market, counterparty & interest rate risk": "Markt-, Gegenpartei- & Zinsrisiko",
+  "Securitisations": "Verbriefungen",
+  "Operational risk": "Operationelles Risiko",
+  "Liquidity & asset encumbrance": "Liquidität & Belastung von Vermögenswerten",
+  "Resolution: MREL & TLAC": "Abwicklung: MREL & TLAC",
+  "ESG & climate risk": "ESG & Klimarisiko",
+  "Remuneration": "Vergütung",
+  "G-SII indicators": "G-SII-Indikatoren",
+  "Other disclosures": "Weitere Angaben",
+  "Unassigned": "Nicht zugeordnet",
+  "Metrics": "Kennzahlen",
   "loading…": "lädt…",
   "Compare": "Vergleich",
   "Views": "Sichten",
@@ -1253,7 +1267,10 @@ function buildFromIndex(idx, codebook){
   // gelesen. Fehlt sie (aelteres codebook.json), faellt alles in den
   // Auffangblock — sichtbar bleibt jede Tabelle in jedem Fall.
   const th=codebook.themes||{};
-  THEME_ORDER=(th.order||[]).map(([id,label])=>({id,label}));
+  // Existing codebooks carry German group labels. Normalize once to the
+  // English translation key; render with tr() on every language change.
+  const themeKeys=new Map(Object.entries(DE).map(([en,de])=>[de,en]));
+  THEME_ORDER=(th.order||[]).map(([id,label])=>({id,label:themeKeys.get(label)||label}));
   for(const [tid,id] of Object.entries(th.map||{})) THEME_OF.set(tid,id);
   for(const [tid,cells] of Object.entries(codebook.bridge||{})) BRIDGE.set(tid,cells);
   // Kennzahlen-Dokumentation (#63) — kuratiert in scripts/metrics.py. Die
@@ -2207,7 +2224,7 @@ function similarBlock(rep){
    nichts verschwindet. */
 const baseTid=t=>t.replace(/\.[A-Z]$/,'');
 const themeOf=t=>THEME_OF.get(baseTid(t))||'__rest';
-const THEME_REST={id:'__rest', label:'Nicht zugeordnet'};
+const THEME_REST={id:'__rest', label:'Unassigned'};
 function themeBar(withData, declared){
   if(!declared) return '';
   const pct=Math.max(2,Math.min(100, withData/declared*100));
@@ -2330,7 +2347,7 @@ async function renderReport(rep){
         ? `${tr('{0} hits of {1}', mh.length, mine.length)}`
         : (dec?`${tr('{0} of {1} templates with data', mine.length, dec)}`:`${mine.length} Templates`);
       h+=`<details class="theme" data-t="${esc(th.id)}"${open?' open':''}>
-        <summary>${esc(th.label)}<span class="thcount">${esc(count)}</span>${f?'':themeBar(mine.length,dec)}</summary>
+        <summary>${esc(tr(th.label))}<span class="thcount">${esc(count)}</span>${f?'':themeBar(mine.length,dec)}</summary>
         <div class="tbody"></div></details>`;
     }
     // Kennzahlensuche (#25): dasselbe Feld findet Templates UND Kennzahlen.
@@ -2339,7 +2356,7 @@ async function renderReport(rep){
     const mh = f ? [...METRICDOC.values()].filter(m=>metricMatches(m,f)) : [];
     let head='';
     if(mh.length){
-      head=`<div class="mhits"><span class="mhl">Kennzahlen</span>${mh.map(m=>
+      head=`<div class="mhits"><span class="mhl">${tr('Metrics')}</span>${mh.map(m=>
         `<button class="mchip${m.id===OPENSEARCH?' on':''}" data-ms="${esc(m.id)}">${esc(mlabel(m))}</button>`).join('')}</div>`;
       if(OPENSEARCH && mh.some(m=>m.id===OPENSEARCH)) head+=metricDetail(rep, OPENSEARCH);
     }
