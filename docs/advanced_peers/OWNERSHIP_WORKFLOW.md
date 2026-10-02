@@ -1,0 +1,59 @@
+# Eigentümerrecherche mit begrenztem Kontext
+
+Stand: 2. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach einem ersten Pilotpaket sind 185/475 Institute belegt, 290 bleiben offen. 234 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 56 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
+
+## Feste Standardgrenzen
+
+| Grenze | Standard | Zweck |
+|---|---:|---|
+| Institute je Lauf | 5 | Kleine, abschließbare Recherchepakete |
+| Seitenversuche je Institut | 4 | Höchstens 20 Quellabrufversuche im automatisierten Paket; Cachetreffer zählen mit. Redirects können zusätzliche HTTP-Anfragen auslösen |
+| Gleichzeitige Collector-Worker | 2 | Begrenzte Quellenlast; das sind keine zusätzlichen KI-Agenten |
+| Belegauszüge je Institut | 2 | Konzentrierte manuelle Prüfung |
+| Zeichen je Belegauszug | 650 | Ganze Berichte bleiben außerhalb des Gesprächskontexts |
+| Zeichen im gesamten Review-JSON | 12.000 | Technisch geprüfte Obergrenze für dieses Kontextpaket |
+
+Das Zeichenlimit ist **kein exaktes Token- oder Kostenlimit**. Tokenisierung, sonstiger Gesprächskontext, Werkzeugaufrufe und Antworten zählen zusätzlich. Der Collector ruft kein Sprachmodell auf. PDF-/HTML-Auswertung, URLsuche im Cache und Ranking laufen lokal; nur ausgewählte Auszüge werden für die manuelle Prüfung gelesen. Für eine belastbare Kostenobergrenze eines späteren API-Recherchejobs wären zusätzlich ein gewähltes Modell, dessen Tokenizer sowie gemessene Ein-/Ausgabetokens mit einem Abbruchbudget erforderlich. Im aktuellen Chat kann dieses Skript den gesamten Sitzungsverbrauch nicht kontrollieren.
+
+## Ablauf
+
+1. **Warteschlange neu bauen.** Bereits klassifizierte Institute werden entfernt. TREA wird aus KM1, Zeile 0040, Spalte 0010 gelesen, je Kennung vom jüngsten technisch nutzbaren Stichtag; bei gleichem Datum CON bevorzugt. Keine TREA-Schätzung aus Namen oder Größenklasse. Mehrdeutige Beträge/Dimensionen/Einheiten, relevante Scale-Befunde und explizite Währungsprüffälle werden ausgeschlossen. Bank Millennium H1 2025 steht in der separaten Recherche-Sperrliste; die ursprünglichen Facts bleiben unverändert.
+2. **Vorhandene Quellen zuerst durchsuchen.** Bereits akzeptierte Konzernträger, Belegpassagen, Websiteantworten und Geschäftsberichte wiederverwenden. Die Queue nennt mögliche Konzernträger und bereits geprüfte Eigentümerquellen als kurze Wiederverwendungshinweise. Die ältere Konzernbeziehung ist dabei noch kein aktuell geprüfter Bank-Kontrollnachweis. Ein Bank-spezifischer Kontrollnachweis bleibt erforderlich; die Trägerschaft wird nicht automatisch aus einem Parent-Namen abgeleitet.
+3. **Bei Bedarf begrenzt abrufen.** Die ersten fünf offenen Fälle der Warteschlange verwenden höchstens vier Seitenversuche je Institut. Bekannte HTTP-403-Antworten werden nicht erneut abgerufen; temporäre Fehler respektieren den vorhandenen Cooldown/Retry-After. Websitekandidaten sind Recherchehinweise, keine verifizierten Eigentümerquellen.
+4. **Kurze Belege manuell prüfen.** `review_bundle.json` enthält maximal zwei Auszüge je Fall samt URL/Hash. Ein Treffer, ein Prozentwert oder Börsennotierung ist keine automatische Klassifikation. Bankidentität, Stimmrechte, tatsächliche Kontrolle, Minderheitsanteile und Quellenstichtag müssen passen. Gespeicherte Volltexte/weitere Passagen können gezielt lokal durchsucht werden; nicht ganze Dokumente in den Chat ausgeben.
+5. **Schwierige Fälle begrenzen.** Wenn das Paket keinen genügenden Nachweis liefert, Fall mit konkretem Folgeauftrag markieren. Im selben Paket nicht unbegrenzt zusätzliche Suchläufe starten. „Noch zu prüfen“ bedeutet nicht „öffentlich nicht vorhanden“. Eine gesonderte Tiefenrecherche ist ein eigener, sichtbar begrenzter Folgeauftrag.
+6. **Ergebnisse dauerhaft speichern.** Akzeptierte Einordnungen kommen mit Quellen/Hash/Datum in `codebook/bank_classification.csv`, Paketentscheidungen in `ownership_batches/`, offene Fälle bleiben im vollständigen Rechercheledger. Nach Quellenprüfung Shards/Validierung und Warteschlange neu erzeugen. Atomare Einzelcheckpoint-Dateien verhindern, dass ein abgebrochener Schreibvorgang als fertiger Fall gilt.
+
+## Befehle
+
+Aus dem Repository, mit installierten Projektabhängigkeiten:
+
+```bash
+python scripts/build_ownership_research_queue.py
+python scripts/research_bank_ownership.py \
+  --discovery docs/advanced_peers/ownership_priority.json \
+  --output interim/ownership_research \
+  --max-banks 5 --max-pages 4 --max-context-chars 12000
+```
+
+Für einen ersten Lauf ganz ohne neue Abrufe ergänzen:
+
+```bash
+--cache-only --cache-dir /pfad/zum/vorhandenen/pages-cache
+```
+
+Cache-only liest auch bei alten temporären Fehlern ausschließlich vorhandene Dateien. Dieser Probe-Durchlauf blockiert den ersten späteren begrenzten Live-Durchlauf nicht. Schon abgeschlossene Live-Collector-Fälle werden beim nächsten Lauf übersprungen; die Einzelcheckpoint-Dateien bleiben erhalten. Bereits klassifizierte Kennungen werden zusätzlich beim Collectorstart aus dem aktuellen Register entfernt, auch wenn eine ältere Queue-Datei übergeben wird.
+
+`--repeat` besucht gespeicherte Fälle ausdrücklich erneut; Cache- und 403-Schutz bleiben aktiv. Reguläre weitere Pakete brauchen dieses Flag nicht. `research.json` und `review_bundle.json` zeigen das zuletzt gesammelte Paket; die einzelnen `<LEI>.json`-Dateien enthalten weiterhin die früheren Fälle. Wenn das Zeichenbudget für einen Fall nicht reicht, wird er als `deferred_leis` ausgewiesen; der vollständige Checkpoint wird nicht gelöscht.
+
+Die Warteschlange besitzt CSV, Collector-JSON und ein Manifest mit Quellhashes. Sie ist ein neu erzeugbarer Recherchestand, keine automatische Produktionspipeline. Nach neuen Facts oder akzeptierten Einordnungen muss sie neu gebaut werden. Eine Recherchepriorität ist noch kein Quellenbeleg.
+
+## Erster Pilot
+
+[Batch 001](ownership_batches/batch_001.json): fünf TREA-priorisierte Fälle, **null neue Netzwerkabrufe**. Bank of America Europe DAC wurde anhand ihres Eintrags im bereits archivierten SEC-Tochterverzeichnis und der bereits geprüften Aktionärsquelle des Konzernträgers explizit eingeordnet. Das belegt Konzernzugehörigkeit; ein 100-%-Anteilsbesitz wird daraus nicht behauptet. Die anderen vier Fälle (Bpifrance, Eurobank, RCI Banque und Caixa Geral de Depósitos) bleiben zur gezielten Quellenprüfung offen.
+
+Das erste automatisierte Cache-Reviewpaket umfasste 947 Zeichen. Das ist ein tatsächlicher Zeichenmesswert dieses Pakets, kein gemessener Gesamttokenverbrauch. Die manuelle Wiederverwendung der archivierten SEC-/Aktionärsquellen wird separat dokumentiert; akzeptierte Quellenarchive unterliegen nicht dem Auszugslimit des Collector-Reviewpakets.
+
+## Kontrolle
+
+Tests prüfen TREA-Reihenfolge, Scope-/Datumswahl, Mengen-/Dimensionskonflikte, Sperrfälle, Skip bereits geprüfter Institute, Wiederaufnahme, reine Cache-Läufe ohne Netzwerkzugriff, harte Kontextgrenze ohne Verlust vollständiger Belege und atomare Checkpoints. Eigentümerbelege und bankbezogene Konzernquellen werden separat geprüft. Auszüge können durch das Zeichenlimit unvollständig sein: vor einer Klassifikation muss die entscheidende Passage im archivierten/öffentlichen Original vollständig gelesen werden.

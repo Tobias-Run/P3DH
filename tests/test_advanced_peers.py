@@ -204,14 +204,27 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
         self.evidence=json.loads((doc/'top30_ownership_evidence.json').read_text())
         self.registry=ap.register(ROOT)
 
-    def test_only_selected_thirty_are_added_to_frozen_unknown_population(self):
+    def test_additions_are_selected_thirty_or_explicitly_reviewed_followup_cases(self):
         baseline=set(self.selection['baseline_unknown_leis'])
         selected={r['lei'] for r in self.selection['selected']}
         self.assertEqual(len(selected),30)
-        self.assertEqual(baseline.intersection(self.registry),selected)
-        self.assertEqual(len(baseline-set(self.registry)),291)
+        followup={case['lei'] for path in (ROOT/'docs/advanced_peers/ownership_batches').glob('*.json')
+                  for case in json.loads(path.read_text())['accepted']}
+        self.assertEqual(baseline.intersection(self.registry),selected|followup)
+        self.assertEqual(len(baseline-set(self.registry)),len(baseline-selected-followup))
         self.assertEqual(baseline,set(self.selection['unrankable_leis']) |
                          {r['lei'] for r in self.selection['ranking_candidates']})
+
+    def test_followup_document_evidence_has_bank_specific_control_and_reviewed_parent(self):
+        for path in (ROOT/'docs/advanced_peers/ownership_batches').glob('*.json'):
+            for case in json.loads(path.read_text())['accepted']:
+                record=self.registry[case['lei']]
+                self.assertEqual(record['ownership_basis'],'reviewed_document_chain')
+                self.assertEqual(record['controller_lei'],case['controller_lei'])
+                self.assertEqual(record['source_sha256'],case['ownership_evidence']['sha256'])
+                self.assertEqual(record['control_source_sha256'],case['control_evidence']['sha256'])
+                self.assertIn(case['name'],case['control_evidence']['quote'])
+                self.assertEqual(record['ownership'],self.registry[case['controller_lei']]['ownership'])
 
     def test_accounting_assets_order_and_currency_overlay(self):
         values=self.selection['selected']

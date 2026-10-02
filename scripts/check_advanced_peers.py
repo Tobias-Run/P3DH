@@ -34,13 +34,17 @@ def check():
                 assert page.evaluate("AP_DATA.metadata['5493009EIBTCB1X12G89'].ownership")=='shareholder'
                 checked=page.evaluate("""()=>({
                   coverage:AP_DATA.coverage.classified,
+                  boaeurope:AP_DATA.metadata['EQYXK86SF381Q21S3020'],
                   aib:AP_DATA.metadata['635400AKJBGNS5WNQL34'].ownership,
                   belfius:AP_DATA.metadata['A5GWLFH3KM7YV2SFQL84'].ownership,
                   dnb:AP_DATA.metadata['549300GKFG0RYRRQ1414'].ownership,
                   iccrea:AP_DATA.metadata['NNVPP80YIZGEY2314M97'].ownership,
                   ing:AP_DATA.metadata['3TK20IVIUJ8J3ZU0QE75'],
                   label:document.querySelector('#bmOwnership option[value=shareholder]').textContent})""")
-                assert checked['coverage']>=184
+                assert checked['coverage']>=185
+                assert checked['boaeurope']['ownership']=='shareholder'
+                assert checked['boaeurope']['ownership_basis']=='reviewed_document_chain'
+                assert checked['boaeurope']['controller_lei']=='9DJT3UXIJIZJI4WXO774'
                 assert (checked['aib'],checked['belfius'],checked['dnb'],checked['iccrea'])==('shareholder','public','mixed','cooperative')
                 assert checked['ing']['ownership_basis']=='reviewed_document_chain'
                 assert checked['ing']['group_head']=='549300NYKK9MWM7GGW15'

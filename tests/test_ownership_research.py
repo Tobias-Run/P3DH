@@ -13,6 +13,68 @@ import research_bank_ownership as research
 
 
 class EvidenceCollectionTest(unittest.TestCase):
+    def test_batch_priority_and_resume_do_not_repeat_attempted_cases(self):
+        banks=[{'lei':'a'},{'lei':'a'},{'lei':'b'},{'lei':'c'}]
+        with tempfile.TemporaryDirectory() as d:
+            directory=Path(d);(directory/'a.json').write_text('{}')
+            self.assertEqual(research.select_batch(banks,directory,1),[{'lei':'b'}])
+            self.assertEqual(research.select_batch(banks,directory,2,repeat=True),
+                             [{'lei':'a'},{'lei':'b'}])
+            self.assertEqual(research.select_batch(banks,directory,2,repeat=True,known={'a','b'}),
+                             [{'lei':'c'}])
+
+    def test_review_bundle_has_hard_character_cap_without_losing_checkpoints(self):
+        banks=[{'lei':str(i).zfill(20),'name':'Bank '+str(i),'rank':i,
+                'status':'evidence_collected','pages':[{'url':'https://example.com/owners',
+                'status':200,'sha256':'0'*64,'hits':[{'quote':'State owns 34.4%. '+'x'*2000}]*50}]}
+               for i in range(5)]
+        bundle=research.compact_bundle(banks,max_chars=1600)
+        encoded=json.dumps(bundle,ensure_ascii=False,separators=(',',':'))
+        self.assertLessEqual(len(encoded),1600)
+        self.assertEqual({b['lei'] for b in banks},
+                         {b['lei'] for b in bundle['cases']}|set(bundle['deferred_leis']))
+        self.assertEqual(len(banks[0]['pages'][0]['hits']),50)
+        for case in bundle['cases']:
+            self.assertLessEqual(len(case['excerpts']),2)
+            for proof in case['excerpts']:self.assertLessEqual(len(proof['quote']),650)
+
+    def test_cache_probe_does_not_block_first_live_pass(self):
+        banks=[{'lei':'a'}]
+        with tempfile.TemporaryDirectory() as d:
+            directory=Path(d)
+            (directory/'a.json').write_text('{"collection_mode":"cache_only"}')
+            self.assertEqual(research.select_batch(banks,directory),banks)
+            self.assertEqual(research.select_batch(banks,directory,cache_only=True),[])
+
+    def test_failed_checkpoint_replace_preserves_previous_complete_case(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'a.json';path.write_text('{"status":"old"}')
+            with patch.object(Path,'replace',side_effect=OSError('interrupted')):
+                with self.assertRaises(OSError):research.checkpoint(path,{'status':'new'})
+            self.assertEqual(json.loads(path.read_text()),{'status':'old'})
+
+    def test_cache_only_pass_cannot_make_network_requests_even_for_transient_errors(self):
+        with tempfile.TemporaryDirectory() as d:
+            directory=Path(d);url,_=self.cached(directory,503)
+            with patch.object(research.urllib.request,'urlopen') as request:
+                result=research.collect({'lei':'a','websites':[url]},directory,
+                                        cache_dir=directory,cache_only=True)
+                request.assert_not_called()
+            self.assertEqual(result['status'],'website_unavailable')
+
+    def test_collect_never_exceeds_page_attempt_budget(self):
+        root='https://example.com'
+        links=[root+'/ownership/'+str(i) for i in range(20)]
+        def source(url,directory):
+            return {'requested_url':url,'url':url,'status':200,'sha256':'0'*64,
+                    'hits':[],'links':links}
+        with tempfile.TemporaryDirectory() as d:
+            with patch.object(research,'fetch',side_effect=source) as fetcher:
+                with patch.object(research.time,'sleep'):
+                    result=research.collect({'lei':'a','websites':[root]},Path(d),max_pages=4)
+            self.assertEqual(fetcher.call_count,4)
+            self.assertEqual(len(result['pages']),4)
+
     def test_public_cms_json_preserves_embedded_markup_and_share_percentages(self):
         from unittest.mock import MagicMock
         body=json.dumps({'content':{'rendered':'<p>State share: 34.4%</p>'}}).encode()

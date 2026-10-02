@@ -1,0 +1,2924 @@
+[
+  {
+    "lei": "969500STN7T9MRUMJ267",
+    "name": "Bpifrance",
+    "entityID": "rs:969500STN7T9MRUMJ267.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 91445333689.57,
+    "rank": 1,
+    "websites": [
+      "http://www.bpifrance.fr/"
+    ]
+  },
+  {
+    "lei": "213800KGF4EFNUQKAT69",
+    "name": "EUROBANK S.A.",
+    "entityID": "rs:213800KGF4EFNUQKAT69.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 53646935316.43,
+    "rank": 2,
+    "websites": [
+      "https://www.eurobank.gr"
+    ]
+  },
+  {
+    "lei": "96950001WI712W7PQG45",
+    "name": "RCI Banque",
+    "entityID": "rs:96950001WI712W7PQG45.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 48934538140.6,
+    "rank": 3,
+    "websites": [
+      "https://www.rcibs.com/"
+    ],
+    "controller_candidate_lei": "969500F7JLTX36OUI695"
+  },
+  {
+    "lei": "TO822O0VT80V06K0FH57",
+    "name": "Caixa Geral de Depósitos, S.A.",
+    "entityID": "rs:TO822O0VT80V06K0FH57.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 47952630705.92,
+    "rank": 4,
+    "websites": [
+      "https://www.cgd.pt"
+    ]
+  },
+  {
+    "lei": "8156007D348794DB1690",
+    "name": "CRÉDIT AGRICOLE ITALIA S.P.A.",
+    "entityID": "rs:8156007D348794DB1690.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 43759890367.0,
+    "rank": 5,
+    "websites": [
+      "https://www.credit-agricole.it"
+    ],
+    "controller_candidate_lei": "969500TJ5KRTCJQWXH05"
+  },
+  {
+    "lei": "JU1U6S0DG9YLT7N8ZV32",
+    "name": "Banco Comercial Português, SA",
+    "entityID": "rs:JU1U6S0DG9YLT7N8ZV32.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 42901543108.17,
+    "rank": 6,
+    "websites": [
+      "http://www.millenniumbcp.pt"
+    ]
+  },
+  {
+    "lei": "5493000LKS7B3UTF7H35",
+    "name": "Bank Polska Kasa Opieki S.A.",
+    "entityID": "rs:5493000LKS7B3UTF7H35.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 42246411125.69105,
+    "rank": 7,
+    "websites": [
+      "https://pekao.com.pl"
+    ],
+    "controller_candidate_lei": "QLPCKOOKVX32FUELX240"
+  },
+  {
+    "lei": "5UMCZOEYKCVFAW8ZLO05",
+    "name": "National Bank of Greece, S.A.",
+    "entityID": "rs:5UMCZOEYKCVFAW8ZLO05.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 41100000000.0,
+    "rank": 8,
+    "websites": [
+      "https://www.nbg.gr/",
+      "http://www.nbg.gr"
+    ]
+  },
+  {
+    "lei": "54930056IRBXK0Q1FP96",
+    "name": "Abanca Corporacion Bancaria, S.A.",
+    "entityID": "rs:54930056IRBXK0Q1FP96.CON",
+    "scope": "CON",
+    "date": "2025-09-30",
+    "trea_eur": 39116279545.0,
+    "rank": 9,
+    "websites": [
+      "https://www.abanca.com/",
+      "http://www.abancacorporacionbancaria.com/es/"
+    ]
+  },
+  {
+    "lei": "M6AD1Y1KW32H8THQ6F76",
+    "name": "Piraeus Financial Holdings",
+    "entityID": "rs:M6AD1Y1KW32H8THQ6F76.CON",
+    "scope": "CON",
+    "date": "2025-09-30",
+    "trea_eur": 36604471638.4367,
+    "rank": 10,
+    "websites": [
+      "https://www.piraeusholdings.gr"
+    ]
+  },
+  {
+    "lei": "PSNL19R2RXX5U3QWHI44",
+    "name": "MEDIOBANCA - BANCA DI CREDITO FINANZIARIO S.P.A.",
+    "entityID": "rs:PSNL19R2RXX5U3QWHI44.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 34040244233.0,
+    "rank": 11,
+    "websites": [
+      "https://www.mediobanca.com/"
+    ],
+    "controller_candidate_lei": "J4CP7MHCXR8DAQMKIL78",
+    "reviewed_controller_source_url": "https://www.gruppomps.it/en/corporate-governance/shareholding-structure.html"
+  },
+  {
+    "lei": "3M5E1GQGKL17HI6CPN30",
+    "name": "Jyske Bank A/S",
+    "entityID": "rs:3M5E1GQGKL17HI6CPN30.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 33932753783.73917,
+    "rank": 12,
+    "websites": [
+      "http://www.jyskebank.dk/"
+    ]
+  },
+  {
+    "lei": "LOO0AWXR8GF142JCO404",
+    "name": "CASSA CENTRALE BANCA - CREDITO COOPERATIVO ITALIANOSOCIETA' PER AZIONI (IN SIGLA CASSA CENTRALE BANCA)",
+    "entityID": "rs:LOO0AWXR8GF142JCO404.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 33611309414.0,
+    "rank": 13,
+    "websites": [
+      "https://www.cassacentrale.it"
+    ]
+  },
+  {
+    "lei": "259400LGXW3K0GDAG361",
+    "name": "Santander Bank Polska S.A.",
+    "entityID": "rs:259400LGXW3K0GDAG361.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 32533929542.30645,
+    "rank": 14,
+    "websites": [
+      "https://www.erste.pl/"
+    ],
+    "controller_candidate_lei": "PQOH26KWDF7CG10L6792"
+  },
+  {
+    "lei": "213800DBQIB6VBNU5C64",
+    "name": "Alpha Bank S.A.",
+    "entityID": "rs:213800DBQIB6VBNU5C64.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 32482147955.744,
+    "rank": 15,
+    "websites": [
+      "https://www.alpha.gr/"
+    ]
+  },
+  {
+    "lei": "259400DZXF7UJKK2AY35",
+    "name": "mBank S.A.",
+    "entityID": "rs:259400DZXF7UJKK2AY35.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 31685655124.25965,
+    "rank": 16,
+    "websites": [
+      "https://mbank.pl"
+    ],
+    "controller_candidate_lei": "851WYGNLUQLFZBSYGB56",
+    "reviewed_controller_source_url": "https://www.deutsche-finanzagentur.de/stabilisierungsmassnahmen/finanzmarktstabilisierungsfonds/massnahmen"
+  },
+  {
+    "lei": "549300U4LIZV0REEQQ46",
+    "name": "Kutxabank, S.A.",
+    "entityID": "rs:549300U4LIZV0REEQQ46.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 30879944000.0,
+    "rank": 17,
+    "websites": [
+      "https://www.kutxabank.es"
+    ],
+    "controller_candidate_lei": "95980020140006031928"
+  },
+  {
+    "lei": "95980020140005881190",
+    "name": "Banco de Crédito Social Cooperativo",
+    "entityID": "rs:95980020140005881190.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 30190657477.0,
+    "rank": 18,
+    "websites": [
+      "https://www.bcc.es"
+    ]
+  },
+  {
+    "lei": "5493007SJLLCTM6J6M37",
+    "name": "Unicaja Banco, S.A.",
+    "entityID": "rs:5493007SJLLCTM6J6M37.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 30097390082.0,
+    "rank": 19,
+    "websites": [
+      "https://www.unicajabanco.es"
+    ]
+  },
+  {
+    "lei": "529900JZTYE3W7WQH904",
+    "name": "HASPA Finanzholding",
+    "entityID": "rs:529900JZTYE3W7WQH904.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 29971856760.0,
+    "rank": 20,
+    "websites": [
+      "https://www.haspa-finanzholding.de"
+    ]
+  },
+  {
+    "lei": "9KOGW2C2FCIOJQ7FF485",
+    "name": "Česká spořitelna, a.s.",
+    "entityID": "rs:9KOGW2C2FCIOJQ7FF485.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 28130725899.55916,
+    "rank": 21,
+    "websites": [
+      "https://www.csas.cz/"
+    ],
+    "controller_candidate_lei": "PQOH26KWDF7CG10L6792"
+  },
+  {
+    "lei": "549300TJREQ7GHIXWR36",
+    "name": "Swedbank Hypotek AB",
+    "entityID": "rs:549300TJREQ7GHIXWR36.IND",
+    "scope": "IND",
+    "date": "2026-03-31",
+    "trea_eur": 26470958400.0,
+    "rank": 22,
+    "websites": [
+      "https://www.swedbank.com"
+    ],
+    "controller_candidate_lei": "M312WZV08Y7LYUC71685",
+    "reviewed_controller_source_url": "https://widget.datablocks.se/api/rose/widgets/owner-list?token=4c2cebc0-49fb-42f2-80a6-e6ed9b182026&stylesheet=swedbank-colors.css"
+  },
+  {
+    "lei": "J48C8PCSJVUBR8KCW529",
+    "name": "BANCA POPOLARE DI SONDRIO SOCIETA' PER AZIONI",
+    "entityID": "rs:J48C8PCSJVUBR8KCW529.CON",
+    "scope": "CON",
+    "date": "2025-09-30",
+    "trea_eur": 24332992114.0,
+    "rank": 23,
+    "websites": [
+      "https://www.popso.it"
+    ]
+  },
+  {
+    "lei": "549300V1VN70Q7PQ7234",
+    "name": "CRÉDIT AGRICOLE AUTO BANK S.P.A.",
+    "entityID": "rs:549300V1VN70Q7PQ7234.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 23980553298.0,
+    "rank": 24,
+    "websites": [
+      "https://www.ca-autobank.com"
+    ],
+    "controller_candidate_lei": "969500TJ5KRTCJQWXH05"
+  },
+  {
+    "lei": "815600AD83B2B6317788",
+    "name": "CREDITO EMILIANO HOLDING SOCIETA' PER AZIONI",
+    "entityID": "rs:815600AD83B2B6317788.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 23192588795.0,
+    "rank": 25,
+    "websites": [
+      "https://www.credem.it"
+    ]
+  },
+  {
+    "lei": "Q5BP2UEQ48R75BOTCB92",
+    "name": "Československá obchodní banka, a.s.",
+    "entityID": "rs:Q5BP2UEQ48R75BOTCB92.CON",
+    "scope": "CON",
+    "date": "2025-06-30",
+    "trea_eur": 21639203358.50925,
+    "rank": 26,
+    "websites": [
+      "https://www.csob.cz/"
+    ],
+    "controller_candidate_lei": "213800X3Q9LSAKRUWY91",
+    "reviewed_controller_source_url": "https://www.kbc.com/en/investor-relations/shareholder-information/shareholder-structure.html"
+  },
+  {
+    "lei": "3DM5DPGI3W6OU6GJ4N92",
+    "name": "BANCO BPI S.A.",
+    "entityID": "rs:3DM5DPGI3W6OU6GJ4N92.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 20594299636.566303,
+    "rank": 27,
+    "websites": [
+      "https://www.bancobpi.pt",
+      "https://www.bancobpi.pt/"
+    ]
+  },
+  {
+    "lei": "5967007LIEEXZX659K67",
+    "name": "DNB BOLIGKREDITT AS",
+    "entityID": "rs:5967007LIEEXZX659K67.IND",
+    "scope": "IND",
+    "date": "2026-03-31",
+    "trea_eur": 20393668498.73067,
+    "rank": 28,
+    "websites": [
+      "https://www.dnb.no"
+    ],
+    "controller_candidate_lei": "549300GKFG0RYRRQ1414",
+    "reviewed_controller_source_url": "https://www.ir.dnb.no/share/largest-shareholders"
+  },
+  {
+    "lei": "5493001BABFV7P27OW30",
+    "name": "Nova Ljubljanska Banka d.d., Ljubljana",
+    "entityID": "rs:5493001BABFV7P27OW30.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 20163888000.0,
+    "rank": 29,
+    "websites": [
+      "https://www.nlb.si"
+    ]
+  },
+  {
+    "lei": "549300RG3H390KEL8896",
+    "name": "Banca Transilvania",
+    "entityID": "rs:549300RG3H390KEL8896.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 19431893129.05371,
+    "rank": 30,
+    "websites": [
+      "https://www.bancatransilvania.ro/"
+    ]
+  },
+  {
+    "lei": "549300OLBL49CW8CT155",
+    "name": "Ibercaja Banco, S.A.",
+    "entityID": "rs:549300OLBL49CW8CT155.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 19220983000.0,
+    "rank": 31,
+    "websites": [
+      "https://www.ibercaja.es"
+    ]
+  },
+  {
+    "lei": "549300Q3OIWRHQUQM052",
+    "name": "SpareBank 1 Sør-Norge",
+    "entityID": "rs:549300Q3OIWRHQUQM052.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 19191082662.5874,
+    "rank": 32,
+    "websites": [
+      "http://www.sr-bank.no"
+    ]
+  },
+  {
+    "lei": "213800M7T3CYVZ3ZRT12",
+    "name": "Sparebanken Norge",
+    "entityID": "rs:213800M7T3CYVZ3ZRT12.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 19124142307.065193,
+    "rank": 33,
+    "websites": [
+      "https://www.spv.no/"
+    ]
+  },
+  {
+    "lei": "724500A1FNICHSDF2I11",
+    "name": "ASN Bank N.V.",
+    "entityID": "rs:724500A1FNICHSDF2I11.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 18258565112.0,
+    "rank": 34,
+    "websites": [
+      "https://www.asnbank.nl"
+    ]
+  },
+  {
+    "lei": "DZZ47B9A52ZJ6LT6VV95",
+    "name": "Deutsche Pfandbriefbank AG",
+    "entityID": "rs:DZZ47B9A52ZJ6LT6VV95.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 17997000000.0,
+    "rank": 35,
+    "websites": [
+      "https://www.pfandbriefbank.com"
+    ]
+  },
+  {
+    "lei": "9845006C7B5CC707X660",
+    "name": "Swedbank Baltics AS",
+    "entityID": "rs:9845006C7B5CC707X660.CON",
+    "scope": "CON",
+    "date": "2025-06-30",
+    "trea_eur": 17996692000.0,
+    "rank": 36,
+    "websites": [
+      "https://www.swedbank.com"
+    ],
+    "controller_candidate_lei": "M312WZV08Y7LYUC71685",
+    "reviewed_controller_source_url": "https://widget.datablocks.se/api/rose/widgets/owner-list?token=4c2cebc0-49fb-42f2-80a6-e6ed9b182026&stylesheet=swedbank-colors.css"
+  },
+  {
+    "lei": "7LVZJ6XRIE7VNZ4UBX81",
+    "name": "BANCA MEDIOLANUM S.P.A.",
+    "entityID": "rs:7LVZJ6XRIE7VNZ4UBX81.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 16681605098.0,
+    "rank": 37,
+    "websites": [
+      "http://www.bancamediolanum.it"
+    ]
+  },
+  {
+    "lei": "AT0000000000043000VB",
+    "name": "VOLKSBANK WIEN AG VB",
+    "entityID": "rs:AT0000000000043000VB.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 16191680000.0,
+    "rank": 38,
+    "websites": [
+      "https://www.volksbankwien.at"
+    ]
+  },
+  {
+    "lei": "391200EEGLNXBBCVKC73",
+    "name": "Erwerbsgesellschaft der S-Finanzgruppe mbH & Co. KG",
+    "entityID": "rs:391200EEGLNXBBCVKC73.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 15508102262.51,
+    "rank": 39,
+    "websites": [
+      "https://www.s-finanzgruppe.de"
+    ]
+  },
+  {
+    "lei": "6TJCK1B7E7UTXP528Y04",
+    "name": "Citigroup Global Markets Europe AG",
+    "entityID": "rs:6TJCK1B7E7UTXP528Y04.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 14848243517.0955,
+    "rank": 40,
+    "websites": [
+      "http://www.citigroup.de/"
+    ],
+    "controller_candidate_lei": "6SHGI4ZSSLCXXQSBB395",
+    "reviewed_controller_source_url": "https://www.citigroup.com/rcs/citigpa/storage/public/Annual_Report/2025/2026-citi-proxy-statement.pdf"
+  },
+  {
+    "lei": "3H0Q3U74FVFED2SHZT16",
+    "name": "MBH bankcsoport",
+    "entityID": "rs:3H0Q3U74FVFED2SHZT16.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 14777621471.5064,
+    "rank": 41,
+    "websites": [
+      "https://www.mbhbank.hu"
+    ]
+  },
+  {
+    "lei": "259400QHDOZWMJ103294",
+    "name": "ALIOR BANK S.A.",
+    "entityID": "rs:259400QHDOZWMJ103294.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 14130023130.0,
+    "rank": 42,
+    "websites": [
+      "https://www.aliorbank.pl",
+      "https://www.aliorbank.pl/en/",
+      "https://www.aliorbank.pl/oferta-dla-ukrainy/nasza-propozicia-ukr/nasza-propozicia.html"
+    ],
+    "controller_candidate_lei": "QLPCKOOKVX32FUELX240"
+  },
+  {
+    "lei": "XTC5E2QFTEF0435JWL77",
+    "name": "Nederlandse Financierings-Maatschappij voor Ontwikkelingslanden N.V.",
+    "entityID": "rs:XTC5E2QFTEF0435JWL77.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 14034324445.52,
+    "rank": 43,
+    "websites": [
+      "https://www.fmo.nl"
+    ]
+  },
+  {
+    "lei": "529900DEAYRUPP22B339",
+    "name": "Mercedes-Benz Bank AG",
+    "entityID": "rs:529900DEAYRUPP22B339.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 13172000000.0,
+    "rank": 44,
+    "websites": [
+      "https://www.mercedes-benz-bank.de"
+    ],
+    "controller_candidate_lei": "529900R27DL06UVNT076"
+  },
+  {
+    "lei": "TUKDD90GPC79G1KOE162",
+    "name": "Hamburg Commercial Bank AG",
+    "entityID": "rs:TUKDD90GPC79G1KOE162.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 13054215444.93,
+    "rank": 45,
+    "websites": [
+      "https://www.hcob-bank.de/"
+    ]
+  },
+  {
+    "lei": "549300C6TUMDXNOVXS82",
+    "name": "Länsförsäkringar Bank AB - gruppen",
+    "entityID": "rs:549300C6TUMDXNOVXS82.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 13013114013.82776,
+    "rank": 46,
+    "websites": [
+      "https://www.lansforsakringar.se/"
+    ],
+    "controller_candidate_lei": "549300FOASW7JFUQV048"
+  },
+  {
+    "lei": "5299008I0TO44SUINZ71",
+    "name": "Oldenburgische Landesbank Aktiengesellschaft",
+    "entityID": "rs:5299008I0TO44SUINZ71.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 12870000000.0,
+    "rank": 47,
+    "websites": [
+      "https://www.olb.de/"
+    ]
+  },
+  {
+    "lei": "254900RNFMDM0P11YR84",
+    "name": "Atlantic Lux HoldCo S.à r.l.",
+    "entityID": "rs:254900RNFMDM0P11YR84.CON",
+    "scope": "CON",
+    "date": "2025-09-30",
+    "trea_eur": 12833792486.59,
+    "rank": 48,
+    "websites": [
+      "https://www.ablv.com"
+    ]
+  },
+  {
+    "lei": "529900V3O1M5IHMOSF46",
+    "name": "State Street Europe Holdings Germany S.a.r.l. & Co. KG",
+    "entityID": "rs:529900V3O1M5IHMOSF46.CON",
+    "scope": "CON",
+    "date": "2025-06-30",
+    "trea_eur": 12754828698.09,
+    "rank": 49,
+    "websites": [
+      "https://www.statestreet.com"
+    ],
+    "controller_candidate_lei": "549300ZFEEJ2IP5VME73"
+  },
+  {
+    "lei": "549300DYPOFMXOR7XM56",
+    "name": "Crelan",
+    "entityID": "rs:549300DYPOFMXOR7XM56.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 12156315342.3447,
+    "rank": 50,
+    "websites": [
+      "https://www.crelan.be"
+    ]
+  },
+  {
+    "lei": "549300DVPJYGNF2P7B03",
+    "name": "Steiermärkische Bank und Sparkassen Aktiengesellschaft",
+    "entityID": "rs:549300DVPJYGNF2P7B03.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 12095231486.55,
+    "rank": 51,
+    "websites": [
+      "https://www.sparkasse.at/steiermaerkische"
+    ],
+    "controller_candidate_lei": "PQOH26KWDF7CG10L6792"
+  },
+  {
+    "lei": "549300ZHFZ4CSK7VS460",
+    "name": "Privredna Banka Zagreb d.d.",
+    "entityID": "rs:549300ZHFZ4CSK7VS460.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 12041794115.2,
+    "rank": 52,
+    "websites": [
+      "https://www.pbz.hr/"
+    ],
+    "controller_candidate_lei": "2W8N8UU78PMDQKZENC08",
+    "reviewed_controller_source_url": "https://group.intesasanpaolo.com/en/governance/shareholder-base"
+  },
+  {
+    "lei": "9CZ7TVMR36CYD5TZBS50",
+    "name": "Banque Internationale à Luxembourg",
+    "entityID": "rs:9CZ7TVMR36CYD5TZBS50.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 11695376623.09,
+    "rank": 53,
+    "websites": [
+      "https://www.bil.com"
+    ],
+    "controller_candidate_lei": "5299003ONUYCE70HZ185"
+  },
+  {
+    "lei": "5493009ML6YX83YHC820",
+    "name": "Argenta Bank- en Verzekeringsgroep NV",
+    "entityID": "rs:5493009ML6YX83YHC820.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 11121396978.8924,
+    "rank": 54,
+    "websites": [
+      "https://www.argenta.be"
+    ],
+    "controller_candidate_lei": "5493008QOCP58OLEN998"
+  },
+  {
+    "lei": "635400L14KNHZXPUZM19",
+    "name": "Bank of Cyprus Holdings Public Limited Company",
+    "entityID": "rs:635400L14KNHZXPUZM19.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 10563647403.0,
+    "rank": 55,
+    "websites": [
+      "https://www.bankofcyprus.com"
+    ]
+  },
+  {
+    "lei": "5493008QOCP58OLEN998",
+    "name": "Investeringsmaatschappij Argenta - Société d'investissements Argenta - Investierungsgesellschaft Arg",
+    "entityID": "rs:5493008QOCP58OLEN998.CON",
+    "scope": "CON",
+    "date": "2025-09-30",
+    "trea_eur": 10385176140.0381,
+    "rank": 56,
+    "websites": [
+      "https://www.argenta.be"
+    ]
+  },
+  {
+    "lei": "529900GGYMNGRQTDOO93",
+    "name": "BNG Bank N.V.",
+    "entityID": "rs:529900GGYMNGRQTDOO93.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 10324084076.37,
+    "rank": 57,
+    "websites": [
+      "http://www.bng.nl"
+    ]
+  },
+  {
+    "lei": "815600F24AE25C9D1B94",
+    "name": "MAURIZIO SELLA - SOCIETA' IN ACCOMANDITA PER AZIONI",
+    "entityID": "rs:815600F24AE25C9D1B94.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 10112185226.0,
+    "rank": 58,
+    "websites": [
+      "https://www.sellagroup.eu"
+    ]
+  },
+  {
+    "lei": "635400DTNHVYGZODKQ93",
+    "name": "Permanent TSB Group Holdings Plc",
+    "entityID": "rs:635400DTNHVYGZODKQ93.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 10056839312.5,
+    "rank": 59,
+    "websites": [
+      "https://www.ptsb.ie"
+    ]
+  },
+  {
+    "lei": "5299003ATVTQVPTW4735",
+    "name": "BTV Vier Länder Bank AG",
+    "entityID": "rs:5299003ATVTQVPTW4735.CON",
+    "scope": "CON",
+    "date": "2025-06-30",
+    "trea_eur": 10049905530.58305,
+    "rank": 60,
+    "websites": [
+      "https://www.btv.at"
+    ]
+  },
+  {
+    "lei": "549300UARE5MHTBUPJ19",
+    "name": "Promontoria 19 Coöperatie U.A.",
+    "entityID": "rs:549300UARE5MHTBUPJ19.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 9983705657.92,
+    "rank": 61,
+    "websites": [
+      "https://www.hcob-bank.com/"
+    ]
+  },
+  {
+    "lei": "31570014BNQ1Q99CNQ35",
+    "name": "PPF Financial Holdings AS",
+    "entityID": "rs:31570014BNQ1Q99CNQ35.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 9767346023.740927,
+    "rank": 62,
+    "websites": [
+      "https://www.ppf.eu"
+    ],
+    "controller_candidate_lei": "984500CE58365CB10V25"
+  },
+  {
+    "lei": "21380057HUGFEAF25W84",
+    "name": "NOBA Group",
+    "entityID": "rs:21380057HUGFEAF25W84.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 9632510836.587534,
+    "rank": 63,
+    "websites": [
+      "https://www.nordax.se/"
+    ]
+  },
+  {
+    "lei": "315700E9POA724IWFP59",
+    "name": "J&amp;T FINANCE GROUP SE",
+    "entityID": "rs:315700E9POA724IWFP59.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 9595265175.55597,
+    "rank": 64,
+    "websites": [
+      "http://www.jtfg.com/"
+    ]
+  },
+  {
+    "lei": "549300VRM6G42M8OWN49",
+    "name": "Sparebank 1 Østlandet",
+    "entityID": "rs:549300VRM6G42M8OWN49.CON",
+    "scope": "CON",
+    "date": "2025-06-30",
+    "trea_eur": 9511431427.51453,
+    "rank": 65,
+    "websites": [
+      "https://www.sb1ostlandet.no/"
+    ]
+  },
+  {
+    "lei": "CXUHEGU3MADZ2CEV7C11",
+    "name": "Eurobank Limited",
+    "entityID": "rs:CXUHEGU3MADZ2CEV7C11.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 8616771126.9,
+    "rank": 66,
+    "websites": [
+      "https://www.eurobank.com.cy"
+    ],
+    "controller_candidate_lei": "213800KGF4EFNUQKAT69"
+  },
+  {
+    "lei": "2138004FIUXU3B2MR537",
+    "name": "Caixa Económica Montepio Geral, Caixa Económica Bancária, S.A.",
+    "entityID": "rs:2138004FIUXU3B2MR537.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 8590754083.510406,
+    "rank": 67,
+    "websites": [
+      "https://www.bancomontepio.pt"
+    ],
+    "controller_candidate_lei": "213800SK4KN8HTCNPB38"
+  },
+  {
+    "lei": "549300O3HXYXXUHR0897",
+    "name": "Klarna - Grupp",
+    "entityID": "rs:549300O3HXYXXUHR0897.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 8562166425.325411,
+    "rank": 68,
+    "websites": [
+      "https://www.klarna.com/"
+    ],
+    "controller_candidate_lei": "636700HER4JIK7GZUN17"
+  },
+  {
+    "lei": "KFUXYFTU2LHQFQZDQG45",
+    "name": "Kereskedelmi és Hitelbank csoport",
+    "entityID": "rs:KFUXYFTU2LHQFQZDQG45.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 8331820583.099,
+    "rank": 69,
+    "websites": [
+      "https://www.kh.hu"
+    ]
+  },
+  {
+    "lei": "529900L89TGSPV9OU151",
+    "name": "Porsche Bank Aktiengesellschaft",
+    "entityID": "rs:529900L89TGSPV9OU151.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 8132888352.5,
+    "rank": 70,
+    "websites": [
+      "https://www.porschebank.at"
+    ],
+    "controller_candidate_lei": "529900NNUPAGGOMPXZ31",
+    "reviewed_controller_source_url": "https://www.porsche-se.com/en/investor-relations/shareholder-structure"
+  },
+  {
+    "lei": "549300A2F46GR0UOM390",
+    "name": "Erste&Steiermärkische Bank d.d.",
+    "entityID": "rs:549300A2F46GR0UOM390.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 8067578529.89,
+    "rank": 71,
+    "websites": [
+      "https://www.erstebank.hr"
+    ],
+    "controller_candidate_lei": "PQOH26KWDF7CG10L6792"
+  },
+  {
+    "lei": "XLEZHWWOI4HFQDGL4793",
+    "name": "BANK HANDLOWY W WARSZAWIE SA",
+    "entityID": "rs:XLEZHWWOI4HFQDGL4793.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 8021350540.1065,
+    "rank": 72,
+    "websites": [
+      "https://www.citibank.pl/"
+    ],
+    "controller_candidate_lei": "6SHGI4ZSSLCXXQSBB395",
+    "reviewed_controller_source_url": "https://www.citigroup.com/rcs/citigpa/storage/public/Annual_Report/2025/2026-citi-proxy-statement.pdf"
+  },
+  {
+    "lei": "213800RZWHE5EUX9R444",
+    "name": "Luminor Holding AS",
+    "entityID": "rs:213800RZWHE5EUX9R444.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 7899514109.64487,
+    "rank": 73,
+    "websites": [
+      "https://www.luminor.ee"
+    ]
+  },
+  {
+    "lei": "724500JIWG886A9RRT57",
+    "name": "RBS Holdings N.V.",
+    "entityID": "rs:724500JIWG886A9RRT57.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 7897854103.86611,
+    "rank": 74,
+    "websites": [
+      "https://www.natwestgroup.com"
+    ]
+  },
+  {
+    "lei": "22210058UCKT3BJTCN24",
+    "name": "OTP Luxembourg S.à r.l.",
+    "entityID": "rs:22210058UCKT3BJTCN24.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 7880667000.0,
+    "rank": 75,
+    "websites": [
+      "https://www.otpbank.lu"
+    ],
+    "controller_candidate_lei": "529900W3MOO00A18X956",
+    "reviewed_controller_source_url": "https://www.otpgroup.info/investor-relations/shares/ownership-structure"
+  },
+  {
+    "lei": "959800LQ598A5RQASA61",
+    "name": "Banca March, S.A.",
+    "entityID": "rs:959800LQ598A5RQASA61.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 7572525858.07,
+    "rank": 76,
+    "websites": [
+      "https://www.bancamarch.es/es/",
+      "http://www.bancamarch.com"
+    ]
+  },
+  {
+    "lei": "529900S1KHKOEQL5CK20",
+    "name": "Wüstenrot Bausparkasse Aktiengesellschaft",
+    "entityID": "rs:529900S1KHKOEQL5CK20.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 7571866501.84,
+    "rank": 77,
+    "websites": [
+      "http://www.wuestenrot.de/"
+    ],
+    "controller_candidate_lei": "5299003H07ZT0Z5ZNN35"
+  },
+  {
+    "lei": "549300PZMFIQR79Q0T97",
+    "name": "Íslandsbanki hf.",
+    "entityID": "rs:549300PZMFIQR79Q0T97.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 7304067600.0,
+    "rank": 78,
+    "websites": [
+      "https://www.islandsbanki.is"
+    ]
+  },
+  {
+    "lei": "529900BHRYZ464GFD289",
+    "name": "GRENKE AG",
+    "entityID": "rs:529900BHRYZ464GFD289.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 7182742350.27,
+    "rank": 79,
+    "websites": [
+      "http://www.grenke.de"
+    ]
+  },
+  {
+    "lei": "213800HDJ876ACJXXD05",
+    "name": "AIKGROUP (CY) LIMITED",
+    "entityID": "rs:213800HDJ876ACJXXD05.CON",
+    "scope": "CON",
+    "date": "2025-09-30",
+    "trea_eur": 7147631124.89822,
+    "rank": 80,
+    "websites": [
+      "https://www.aikbanka.rs"
+    ]
+  },
+  {
+    "lei": "549300L1IEXJYJ2NUV45",
+    "name": "Sparekassen Danmark",
+    "entityID": "rs:549300L1IEXJYJ2NUV45.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 7092659521.758513,
+    "rank": 81,
+    "websites": [
+      "https://www.sparv.dk"
+    ]
+  },
+  {
+    "lei": "724500973ODKK3IFQ447",
+    "name": "Adyen N.V.",
+    "entityID": "rs:724500973ODKK3IFQ447.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 7032215319.54,
+    "rank": 82,
+    "websites": [
+      "https://www.adyen.com/"
+    ]
+  },
+  {
+    "lei": "529900LKIMB57HKF3545",
+    "name": "Bank of China (Europe) S.A",
+    "entityID": "rs:529900LKIMB57HKF3545.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 6988455159.05,
+    "rank": 83,
+    "websites": [
+      "https://www.bankofchina.com/lu"
+    ],
+    "controller_candidate_lei": "54930053HGCFWVHYZX42"
+  },
+  {
+    "lei": "SX0CI4F7GVW5530ZMN03",
+    "name": "Wells Fargo Bank International Unlimited Company",
+    "entityID": "rs:SX0CI4F7GVW5530ZMN03.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 6840264486.56,
+    "rank": 84,
+    "websites": [
+      "https://www.wellsfargo.com"
+    ],
+    "controller_candidate_lei": "PBLD0EJDB5FWOLXP3B76"
+  },
+  {
+    "lei": "I6USJ58BDV2BO5KP3C31",
+    "name": "MONETA Money Bank, a.s.",
+    "entityID": "rs:I6USJ58BDV2BO5KP3C31.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 6799675012.7317915,
+    "rank": 85,
+    "websites": [
+      "https://www.moneta.cz/"
+    ]
+  },
+  {
+    "lei": "B64D6Y3LBJS4ANNPCU93",
+    "name": "NIBC Bank N.V.",
+    "entityID": "rs:B64D6Y3LBJS4ANNPCU93.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 6783360962.06,
+    "rank": 86,
+    "websites": [
+      "http://www.nibc.com/"
+    ]
+  },
+  {
+    "lei": "549300IRGNL8Q3O8Y413",
+    "name": "Eurobank Bulgaria",
+    "entityID": "rs:549300IRGNL8Q3O8Y413.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 6783331201.599999,
+    "rank": 87,
+    "websites": [
+      "https://www.postbank.bg"
+    ]
+  },
+  {
+    "lei": "8156003A4FB445454553",
+    "name": "CASSA DI RISPARMIO DI BOLZANO S.P.A. - SUDTIROLER SPARKASSE AG",
+    "entityID": "rs:8156003A4FB445454553.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 6741162974.0,
+    "rank": 88,
+    "websites": [
+      "https://www.sparkasse.it"
+    ]
+  },
+  {
+    "lei": "G8ZTNESVNKW4NN761W05",
+    "name": "ABN AMRO Clearing Bank N.V.",
+    "entityID": "rs:G8ZTNESVNKW4NN761W05.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 6694127208.0,
+    "rank": 89,
+    "websites": [
+      "http://www.abnamroclearing.com"
+    ],
+    "controller_candidate_lei": "BFXS5XCH7N0Y05NIXW11",
+    "reviewed_controller_source_url": "https://downloads.ctfassets.net/1u811bvgvthc/688tP3vcLbHAgEsUavbdMR/22bd74bf45996df3f6e76b0893ecc950/ABN_AMRO_Bank_-_Annual_Report_2025.pdf#page=15"
+  },
+  {
+    "lei": "724500PMK2A2M1SQQ228",
+    "name": "Triodos Bank N.V.",
+    "entityID": "rs:724500PMK2A2M1SQQ228.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 6600423668.64,
+    "rank": 90,
+    "websites": [
+      "https://www.triodos.com/"
+    ]
+  },
+  {
+    "lei": "549300XWJHRKLHU2PS28",
+    "name": "ERSTE csoport",
+    "entityID": "rs:549300XWJHRKLHU2PS28.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 6356443600.0,
+    "rank": 91,
+    "websites": [
+      "https://www.erstebank.hu"
+    ],
+    "controller_candidate_lei": "PQOH26KWDF7CG10L6792"
+  },
+  {
+    "lei": "549300L7YCATGO57ZE10",
+    "name": "FINECOBANK BANCA FINECO S.P.A. (IN BREVE FINECOBANK S.P.A. OVVERO BANCA FINECO S.P.A. OVVERO FINECO BANCA S.P.A.)",
+    "entityID": "rs:549300L7YCATGO57ZE10.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 6299478641.0,
+    "rank": 92,
+    "websites": [
+      "https://www.finecobank.com/"
+    ]
+  },
+  {
+    "lei": "549300TDPXT0OW2AY198",
+    "name": "FinAx",
+    "entityID": "rs:549300TDPXT0OW2AY198.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 6231075771.66531,
+    "rank": 93,
+    "websites": [
+      "https://www.axabank.be"
+    ],
+    "controller_candidate_lei": "5493005E2GHATS0Z6J59"
+  },
+  {
+    "lei": "549300WDT1HWUMTUW770",
+    "name": "Standard Chartered Bank AG",
+    "entityID": "rs:549300WDT1HWUMTUW770.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 6213381032.45,
+    "rank": 94,
+    "websites": [
+      "https://www.sc.com"
+    ],
+    "controller_candidate_lei": "U4LOSYZ7YG4W3S5F2G91"
+  },
+  {
+    "lei": "MMYX0N4ZEZ13Z4XCG897",
+    "name": "THE BANK OF NEW YORK MELLON",
+    "entityID": "rs:MMYX0N4ZEZ13Z4XCG897.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 6091849319.005838,
+    "rank": 95,
+    "websites": [
+      "https://www.bny.com"
+    ],
+    "controller_candidate_lei": "WFLLPEPC7FZXENRZV188"
+  },
+  {
+    "lei": "485100FX5Y9YLAQLNP12",
+    "name": "Revolut Holdings Europe UAB",
+    "entityID": "rs:485100FX5Y9YLAQLNP12.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 6069509814.0,
+    "rank": 96,
+    "websites": [
+      "https://www.revolut.com"
+    ],
+    "controller_candidate_lei": "213800UIKMYZWWQS5E02"
+  },
+  {
+    "lei": "PWEFG14QWWESISQ84C69",
+    "name": "IKB Deutsche Industriebank Aktiengesellschaft",
+    "entityID": "rs:PWEFG14QWWESISQ84C69.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 5614000000.0,
+    "rank": 97,
+    "websites": [
+      "http://www.ikb.de/"
+    ]
+  },
+  {
+    "lei": "52990033C5FUEN4LMC06",
+    "name": "BANCA POPOLARE DELL'ALTO ADIGE SOCIETA' PER AZIONI (IN TEDESCO SUDTIROLER VOLKSBANK A.G.)",
+    "entityID": "rs:52990033C5FUEN4LMC06.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 5551076095.0,
+    "rank": 98,
+    "websites": [
+      "https://www.volksbank.it"
+    ]
+  },
+  {
+    "lei": "815600903231FA2E7698",
+    "name": "BANCA GENERALI - SOCIETA' PER AZIONI (IN FORMA ABBREVIATA GENERBANCA)",
+    "entityID": "rs:815600903231FA2E7698.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 5464859043.0,
+    "rank": 99,
+    "websites": [
+      "http://www.bancagenerali.com"
+    ],
+    "controller_candidate_lei": "549300X5UKJVE386ZB61"
+  },
+  {
+    "lei": "747DLM6L5TO7LXZY5T60",
+    "name": "Scotiabank (Ireland) Designated Activity Company",
+    "entityID": "rs:747DLM6L5TO7LXZY5T60.IND",
+    "scope": "IND",
+    "date": "2025-10-31",
+    "trea_eur": 5324357289.192755,
+    "rank": 100,
+    "websites": [
+      "https://www.scotiabank.com"
+    ],
+    "controller_candidate_lei": "L3I9ZG2KFGXZ61BMYR72"
+  },
+  {
+    "lei": "5299000R7WZOVIFHLN21",
+    "name": "BFS SozialFinanz AG",
+    "entityID": "rs:5299000R7WZOVIFHLN21.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 5267617158.01,
+    "rank": 101,
+    "websites": [
+      "https://www.sozialfinanz.de/"
+    ]
+  },
+  {
+    "lei": "724500BICUQ0LF1AH770",
+    "name": "Nationale-Nederlanden Bank N.V.",
+    "entityID": "rs:724500BICUQ0LF1AH770.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 5263541156.0,
+    "rank": 102,
+    "websites": [
+      "https://www.nn.nl"
+    ],
+    "controller_candidate_lei": "724500OHYNDT9OY6Q215"
+  },
+  {
+    "lei": "81560027D07F9BDB8436",
+    "name": "CASSA DI RISPARMIO DI ASTI S.P.A. (IN FORMA ABBREVIATA BANCA C.R. ASTI S.P.A.)",
+    "entityID": "rs:81560027D07F9BDB8436.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 5213053604.0,
+    "rank": 103,
+    "websites": [
+      "https://www.bancadiasti.it"
+    ]
+  },
+  {
+    "lei": "549300BZZFFS0SOWR325",
+    "name": "Ford Bank GmbH",
+    "entityID": "rs:549300BZZFFS0SOWR325.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 5181057649.23,
+    "rank": 104,
+    "websites": [
+      "https://www.fordbank.de"
+    ],
+    "controller_candidate_lei": "20S05OYHG0MQM4VUIC57"
+  },
+  {
+    "lei": "549300SBPFE9JX7N8J82",
+    "name": "AB SEB bankas",
+    "entityID": "rs:549300SBPFE9JX7N8J82.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 5070736504.95,
+    "rank": 105,
+    "websites": [
+      "http://www.seb.lt"
+    ],
+    "controller_candidate_lei": "F3JS33DEI6XQ4ZBPTN86",
+    "reviewed_controller_source_url": "https://tools.euroland.com/majorshareholder/s-seb_new/?lang=english"
+  },
+  {
+    "lei": "549300UY81ESCZJ0GR95",
+    "name": "First Investment Bank",
+    "entityID": "rs:549300UY81ESCZJ0GR95.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 5046160867.0,
+    "rank": 106,
+    "websites": [
+      "http://www.pinbank.ua/"
+    ]
+  },
+  {
+    "lei": "529900NNQW9IAE32GQ07",
+    "name": "GRAWE-Vermögensverwaltung",
+    "entityID": "rs:529900NNQW9IAE32GQ07.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 4875126336.03,
+    "rank": 107,
+    "websites": [
+      "https://www.grawe.at"
+    ]
+  },
+  {
+    "lei": "5493007BWYDPQZLZ0Y27",
+    "name": "HYPO NOE Landesbank für Niederösterreich und Wien AG",
+    "entityID": "rs:5493007BWYDPQZLZ0Y27.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 4734931000.0,
+    "rank": 108,
+    "websites": [
+      "http://www.hyponoe.at/"
+    ]
+  },
+  {
+    "lei": "815600A029117B20DD63",
+    "name": "ILLIMITY BANK S.P.A.",
+    "entityID": "rs:815600A029117B20DD63.CON",
+    "scope": "CON",
+    "date": "2025-06-30",
+    "trea_eur": 4546529000.0,
+    "rank": 109,
+    "websites": [
+      "https://www.illimity.com"
+    ],
+    "controller_candidate_lei": "8156005420362AE59184",
+    "reviewed_controller_source_url": "https://www.bancaifis.it/chi-siamo/corporate-governance/azionariato/"
+  },
+  {
+    "lei": "529900J35NSHS856UA68",
+    "name": "Sparekassen Kronjylland",
+    "entityID": "rs:529900J35NSHS856UA68.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 4216972097.648924,
+    "rank": 110,
+    "websites": [
+      "https://www.sparkron.dk/"
+    ]
+  },
+  {
+    "lei": "743700FTBNXAUN57RH30",
+    "name": "S-Pankki Oyj",
+    "entityID": "rs:743700FTBNXAUN57RH30.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 4129000000.0,
+    "rank": 111,
+    "websites": [
+      "https://www.s-pankki.fi"
+    ]
+  },
+  {
+    "lei": "2594000ZNGGQZXZKXH36",
+    "name": "VELOBANK SA",
+    "entityID": "rs:2594000ZNGGQZXZKXH36.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 3584045786.83017,
+    "rank": 112,
+    "websites": [
+      "https://www.velobank.pl"
+    ]
+  },
+  {
+    "lei": "815600DDCE9083CAC598",
+    "name": "MEDIOBANCA PREMIER S.P.A.",
+    "entityID": "rs:815600DDCE9083CAC598.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 3542523372.0,
+    "rank": 113,
+    "websites": [
+      "https://www.mediobancapremier.com"
+    ],
+    "controller_candidate_lei": "J4CP7MHCXR8DAQMKIL78",
+    "reviewed_controller_source_url": "https://www.gruppomps.it/en/corporate-governance/shareholding-structure.html"
+  },
+  {
+    "lei": "5967007LIEEXZX5PU005",
+    "name": "Sparebanken Møre SPA",
+    "entityID": "rs:5967007LIEEXZX5PU005.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 3508988640.0,
+    "rank": 114,
+    "websites": [
+      "https://sbm.no"
+    ]
+  },
+  {
+    "lei": "5299005OACOC1C1OFJ11",
+    "name": "Raiffeisen-Landesbank Tirol AG",
+    "entityID": "rs:5299005OACOC1C1OFJ11.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 3492084703.9900002,
+    "rank": 115,
+    "websites": [
+      "https://www.rlbt.at"
+    ]
+  },
+  {
+    "lei": "MKP1B7E76TN04CD85Z79",
+    "name": "BANK OCHRONY ŚRODOWISKA SA",
+    "entityID": "rs:MKP1B7E76TN04CD85Z79.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 3381061426.05084,
+    "rank": 116,
+    "websites": [
+      "https://www.bosbank.pl"
+    ]
+  },
+  {
+    "lei": "743700GC62JLHFBUND16",
+    "name": "Aktia Bank Abp",
+    "entityID": "rs:743700GC62JLHFBUND16.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 3378855772.0,
+    "rank": 117,
+    "websites": [
+      "https://www.aktia.fi/sv/",
+      "http://www.aktia.fi"
+    ]
+  },
+  {
+    "lei": "549300ND1MQ8SNNYMJ22",
+    "name": "AS SEB Pank",
+    "entityID": "rs:549300ND1MQ8SNNYMJ22.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 3330476309.5,
+    "rank": 118,
+    "websites": [
+      "http://www.seb.ee/"
+    ],
+    "controller_candidate_lei": "F3JS33DEI6XQ4ZBPTN86",
+    "reviewed_controller_source_url": "https://tools.euroland.com/majorshareholder/s-seb_new/?lang=english"
+  },
+  {
+    "lei": "529900ZVK4VTIS0TOT43",
+    "name": "DenizBank AG",
+    "entityID": "rs:529900ZVK4VTIS0TOT43.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 3254643188.24,
+    "rank": 119,
+    "websites": [
+      "https://www.denizbank.at"
+    ],
+    "controller_candidate_lei": "54930029BCN8HF3B1286"
+  },
+  {
+    "lei": "5493007QRSX9DS2CM858",
+    "name": "China Construction Bank (Europe) S.A.",
+    "entityID": "rs:5493007QRSX9DS2CM858.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 3175819122.47,
+    "rank": 120,
+    "websites": [
+      "https://www.ccb.com"
+    ],
+    "controller_candidate_lei": "5493001KQW6DM7KEDR62"
+  },
+  {
+    "lei": "815600848DEFE160E913",
+    "name": "IBL ISTITUTO BANCARIO DEL LAVORO S.P.A. (IN FORMA ABBREVIATA IBL BANCA)",
+    "entityID": "rs:815600848DEFE160E913.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 3167176127.0,
+    "rank": 121,
+    "websites": [
+      "https://www.iblbanca.it"
+    ]
+  },
+  {
+    "lei": "549300OL514RA0SXJJ44",
+    "name": "Clearstream Banking S.A.",
+    "entityID": "rs:549300OL514RA0SXJJ44.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 3134286406.08,
+    "rank": 122,
+    "websites": [
+      "https://www.clearstream.com"
+    ],
+    "controller_candidate_lei": "529900G3SW56SHYNPR95"
+  },
+  {
+    "lei": "5493004D82XDFVPWQJ91",
+    "name": "Ikano Bank AB (publ)",
+    "entityID": "rs:5493004D82XDFVPWQJ91.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 3078571598.9661818,
+    "rank": 123,
+    "websites": [
+      "https://ikano.co.uk/",
+      "https://ikanobank.se/",
+      "https://ikanobank.pl/",
+      "https://ikanobank.de/",
+      "https://ikanobank.dk/",
+      "https://ikanobank.no/",
+      "https://ikanobank.fi/"
+    ],
+    "controller_candidate_lei": "5493008E81TB1MN1VT78"
+  },
+  {
+    "lei": "529900C3SHT3Q94H3W82",
+    "name": "Bank11 Holding GmbH",
+    "entityID": "rs:529900C3SHT3Q94H3W82.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 3028832863.24,
+    "rank": 124,
+    "websites": [
+      "https://www.bank11.de"
+    ],
+    "controller_candidate_lei": "5299004RMSA334L0LD60"
+  },
+  {
+    "lei": "529900OKPZTTS50FXP26",
+    "name": "Advanzia Bank S.A.",
+    "entityID": "rs:529900OKPZTTS50FXP26.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 2960946485.5386596,
+    "rank": 125,
+    "websites": [
+      "https://www.advanzia.com/"
+    ]
+  },
+  {
+    "lei": "52990045V2BWJN669Q34",
+    "name": "Wüstenrot Wohnungswirtschaft registrierte Genossenschaft mit beschränkter Haftung",
+    "entityID": "rs:52990045V2BWJN669Q34.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 2958293686.31,
+    "rank": 126,
+    "websites": [
+      "https://www.wuestenrot.at"
+    ]
+  },
+  {
+    "lei": "549300TK038P6EV4YU51",
+    "name": "AB Artea bankas",
+    "entityID": "rs:549300TK038P6EV4YU51.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 2855601000.0,
+    "rank": 127,
+    "websites": [
+      "https://www.artea.lt/"
+    ]
+  },
+  {
+    "lei": "529900D5G4V6THXC5P79",
+    "name": "Hrvatska poštanska banka d.d.",
+    "entityID": "rs:529900D5G4V6THXC5P79.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 2813546304.61,
+    "rank": 128,
+    "websites": [
+      "https://www.hpb.hr"
+    ]
+  },
+  {
+    "lei": "549300LYFYVPUCG6SY25",
+    "name": "Banco Cooperativo Español, S.A.",
+    "entityID": "rs:549300LYFYVPUCG6SY25.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 2791109477.0,
+    "rank": 129,
+    "websites": [
+      "https://www.bancocooperativo.es"
+    ]
+  },
+  {
+    "lei": "815600A32DA05F693F24",
+    "name": "LA CASSA DI RAVENNA S.P.A.",
+    "entityID": "rs:815600A32DA05F693F24.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 2761011309.0,
+    "rank": 130,
+    "websites": [
+      "https://www.lacassa.com"
+    ]
+  },
+  {
+    "lei": "2138009Y59EAR7H1UO97",
+    "name": "Akciju sabiedrība \"Citadele banka\"",
+    "entityID": "rs:2138009Y59EAR7H1UO97.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 2743289145.96,
+    "rank": 131,
+    "websites": [
+      "https://www.citadele.lv/"
+    ]
+  },
+  {
+    "lei": "549300ZEF3QWM810M319",
+    "name": "Ziklo Bank AB",
+    "entityID": "rs:549300ZEF3QWM810M319.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 2654339722.7787266,
+    "rank": 132,
+    "websites": [
+      "https://www.ziklo.com"
+    ]
+  },
+  {
+    "lei": "5493002DPKDEC2JN1Y86",
+    "name": "Sparekassen Sjælland-Fyn A/S",
+    "entityID": "rs:5493002DPKDEC2JN1Y86.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 2628084043.1869087,
+    "rank": 133,
+    "websites": [
+      "https://www.sjfbank.dk/"
+    ]
+  },
+  {
+    "lei": "549300YW95G1VBBGGV07",
+    "name": "AS \"SEB banka\"",
+    "entityID": "rs:549300YW95G1VBBGGV07.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 2611820516.9574,
+    "rank": 134,
+    "websites": [
+      "https://www.seb.lv/"
+    ],
+    "controller_candidate_lei": "F3JS33DEI6XQ4ZBPTN86",
+    "reviewed_controller_source_url": "https://tools.euroland.com/majorshareholder/s-seb_new/?lang=english"
+  },
+  {
+    "lei": "9598002AYDQER7DXLR16",
+    "name": "GRUCAJRURAL INVERSIONES SL",
+    "entityID": "rs:9598002AYDQER7DXLR16.CON",
+    "scope": "CON",
+    "date": "2025-06-30",
+    "trea_eur": 2590690874.0,
+    "rank": 135,
+    "websites": [
+      "https://www.grupocajarural.es"
+    ]
+  },
+  {
+    "lei": "549300CQ9NLEHMRCU505",
+    "name": "Cecabank, S.A.",
+    "entityID": "rs:549300CQ9NLEHMRCU505.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 2431932004.0,
+    "rank": 136,
+    "websites": [
+      "https://www.cecabank.es"
+    ]
+  },
+  {
+    "lei": "549300X34UUBDEUL1Z91",
+    "name": "HSBC Bank Malta p.l.c.",
+    "entityID": "rs:549300X34UUBDEUL1Z91.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 2173519754.79,
+    "rank": 137,
+    "websites": [
+      "https://www.hsbc.com.mt"
+    ],
+    "controller_candidate_lei": "MLU0ZO3ML4LN2LL2TL39",
+    "reviewed_controller_source_url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf"
+  },
+  {
+    "lei": "GDI8P8WHFH4PS5YTU851",
+    "name": "HAITONG BANK, S.A.",
+    "entityID": "rs:GDI8P8WHFH4PS5YTU851.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 2111653138.3797245,
+    "rank": 138,
+    "websites": [
+      "https://www.haitongib.com"
+    ]
+  },
+  {
+    "lei": "815600722FAEE18D6013",
+    "name": "BANCA DEL FUCINO S.P.A.",
+    "entityID": "rs:815600722FAEE18D6013.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 2059667583.1,
+    "rank": 139,
+    "websites": [
+      "https://www.bancafucino.it"
+    ]
+  },
+  {
+    "lei": "213800UYAHIRLZ4NSN67",
+    "name": "Lån & Spar Bank A/S",
+    "entityID": "rs:213800UYAHIRLZ4NSN67.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 2038235760.6227705,
+    "rank": 140,
+    "websites": [
+      "https://www.lsb.dk"
+    ]
+  },
+  {
+    "lei": "5493007SWCCN9S3J2748",
+    "name": "Bigbank AS",
+    "entityID": "rs:5493007SWCCN9S3J2748.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 2017858077.22,
+    "rank": 141,
+    "websites": [
+      "https://www.bigbank.ee"
+    ]
+  },
+  {
+    "lei": "635400F6HLXKXNJJX605",
+    "name": "EXIM BANCA ROMANEASCA S.A.",
+    "entityID": "rs:635400F6HLXKXNJJX605.IND",
+    "scope": "IND",
+    "date": "2025-06-30",
+    "trea_eur": 1951609091.97044,
+    "rank": 142,
+    "websites": [
+      "https://www.eximbank.ro"
+    ]
+  },
+  {
+    "lei": "213800A1O379I6DMCU10",
+    "name": "APS BANK P.L.C.",
+    "entityID": "rs:213800A1O379I6DMCU10.IND",
+    "scope": "IND",
+    "date": "2026-03-31",
+    "trea_eur": 1921119393.99,
+    "rank": 143,
+    "websites": [
+      "https://www.apsbank.com.mt"
+    ]
+  },
+  {
+    "lei": "549300JSC82O1L4XV837",
+    "name": "Nordnet - Grupp",
+    "entityID": "rs:549300JSC82O1L4XV837.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1892697479.25458,
+    "rank": 144,
+    "websites": [
+      "https://www.nordnetab.com"
+    ],
+    "controller_candidate_lei": "549300D6WW5ZTWLZ4C08"
+  },
+  {
+    "lei": "7437006WYM821IJ3MN73",
+    "name": "Ålandsbanken Abp",
+    "entityID": "rs:7437006WYM821IJ3MN73.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1887785853.91,
+    "rank": 145,
+    "websites": [
+      "https://www.alandsbanken.fi"
+    ]
+  },
+  {
+    "lei": "5493002K643MZPQEK497",
+    "name": "Banco Bradesco Europa S.A.",
+    "entityID": "rs:5493002K643MZPQEK497.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 1853544772.2792652,
+    "rank": 146,
+    "websites": [
+      "https://www.bradescobbi.com.br"
+    ],
+    "controller_candidate_lei": "549300CTUU1RFXHQJE44"
+  },
+  {
+    "lei": "9695002JOWSRCLLLNY11",
+    "name": "Edmond de Rothschild (France)",
+    "entityID": "rs:9695002JOWSRCLLLNY11.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1831316040.626,
+    "rank": 147,
+    "websites": [
+      "https://www.edmond-de-rothschild.com"
+    ],
+    "controller_candidate_lei": "52990049YMGDGTAMFX97"
+  },
+  {
+    "lei": "5493009VJC01E4H6HH77",
+    "name": "Avanza - Grupp",
+    "entityID": "rs:5493009VJC01E4H6HH77.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1755290036.9493,
+    "rank": 148,
+    "websites": [
+      "https://www.avanza.se"
+    ],
+    "controller_candidate_lei": "549300MBWR5H8SIJLE03"
+  },
+  {
+    "lei": "959800R86KE31EAVRC30",
+    "name": "LIBERTY PARTNERS S.L.U.",
+    "entityID": "rs:959800R86KE31EAVRC30.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1720864000.0,
+    "rank": 149,
+    "websites": [
+      "https://www.bancopichincha.es"
+    ],
+    "controller_candidate_lei": "9598005U8TZQ8Q64SC71"
+  },
+  {
+    "lei": "BB3BGO3LCED63R8R9R41",
+    "name": "BANK POLSKIEJ SPOLDZIELCZOSCI S.A.",
+    "entityID": "rs:BB3BGO3LCED63R8R9R41.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1685850721.10169,
+    "rank": 150,
+    "websites": [
+      "https://www.bankbps.pl"
+    ]
+  },
+  {
+    "lei": "815600B5C61A10BBB451",
+    "name": "BANCA SISTEMA S.P.A.",
+    "entityID": "rs:815600B5C61A10BBB451.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1681277239.31,
+    "rank": 151,
+    "websites": [
+      "https://www.bancasistema.it"
+    ]
+  },
+  {
+    "lei": "969500GVS02SJYG9S632",
+    "name": "Carrefour banque",
+    "entityID": "rs:969500GVS02SJYG9S632.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1654455174.41,
+    "rank": 152,
+    "websites": [
+      "https://www.carrefour-banque.fr"
+    ],
+    "controller_candidate_lei": "549300B8P6MUJ1YWTS08"
+  },
+  {
+    "lei": "724500M4G9AVEMHMV291",
+    "name": "bunq Holding B.V.",
+    "entityID": "rs:724500M4G9AVEMHMV291.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1648837829.5974877,
+    "rank": 153,
+    "websites": [
+      "https://www.bunq.com"
+    ]
+  },
+  {
+    "lei": "54930060Q00W1SRIUI57",
+    "name": "vdk bank",
+    "entityID": "rs:54930060Q00W1SRIUI57.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 1621452423.172,
+    "rank": 154,
+    "websites": [
+      "https://www.vdk.be/"
+    ]
+  },
+  {
+    "lei": "222100PG81CES7H3HZ28",
+    "name": "Aneto S.à r.l.",
+    "entityID": "rs:222100PG81CES7H3HZ28.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1616964000.0,
+    "rank": 155,
+    "websites": [
+      "https://www.banquehavilland.com"
+    ],
+    "controller_candidate_lei": "549300BNKM71X644N307"
+  },
+  {
+    "lei": "213800GO21RWIB6O9Q29",
+    "name": "Middelfart Sparekasse",
+    "entityID": "rs:213800GO21RWIB6O9Q29.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1602035125.1384563,
+    "rank": 156,
+    "websites": [
+      "http://www.midspar.dk"
+    ]
+  },
+  {
+    "lei": "635400LCCIYHUL6ELA34",
+    "name": "USB European (Holdings) Limited",
+    "entityID": "rs:635400LCCIYHUL6ELA34.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1564219756.64,
+    "rank": 157,
+    "websites": [
+      "https://www.usbank.com"
+    ],
+    "controller_candidate_lei": "N1GZ7BBF3NP8GI976H15"
+  },
+  {
+    "lei": "5967007LIEEXZX76AW36",
+    "name": "OBOS-BANKEN AS",
+    "entityID": "rs:5967007LIEEXZX76AW36.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1544427136.9265401,
+    "rank": 158,
+    "websites": [
+      "https://www.obos.no/bank"
+    ],
+    "controller_candidate_lei": "5967007LIEEXZXJ4UW55"
+  },
+  {
+    "lei": "529900DSIVJWCUQUMP41",
+    "name": "AKA Ausfuhrkredit-Gesellschaft mit beschränkter Haftung",
+    "entityID": "rs:529900DSIVJWCUQUMP41.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 1511791361.73,
+    "rank": 159,
+    "websites": [
+      "https://www.akabank.de/"
+    ]
+  },
+  {
+    "lei": "529900IRBZTADXJB6757",
+    "name": "flatexDEGIRO AG",
+    "entityID": "rs:529900IRBZTADXJB6757.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1480008114.81,
+    "rank": 160,
+    "websites": [
+      "https://flatexdegiro.com/"
+    ]
+  },
+  {
+    "lei": "549300EHNXQVOI120S55",
+    "name": "Coop Pank AS",
+    "entityID": "rs:549300EHNXQVOI120S55.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 1477830900.0178,
+    "rank": 161,
+    "websites": [
+      "https://www.cooppank.ee"
+    ],
+    "controller_candidate_lei": "98450087SBF395595011"
+  },
+  {
+    "lei": "HWIPDOTRM1EKRPKYKH81",
+    "name": "Northern Trust Global Services SE",
+    "entityID": "rs:HWIPDOTRM1EKRPKYKH81.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 1418878060.727343,
+    "rank": 162,
+    "websites": [
+      "https://www.northerntrust.com"
+    ],
+    "controller_candidate_lei": "549300GLF98S992BC502"
+  },
+  {
+    "lei": "5967007LIEEXZX51WW28",
+    "name": "SPAREBANKEN ØST",
+    "entityID": "rs:5967007LIEEXZX51WW28.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1414740109.582945,
+    "rank": 163,
+    "websites": [
+      "http://www.oest.no/"
+    ]
+  },
+  {
+    "lei": "2138002PVBMEHILJ1340",
+    "name": "Mitsubishi UFJ Investor Services and Banking (Luxembourg) S.A.",
+    "entityID": "rs:2138002PVBMEHILJ1340.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 1413538489.0992386,
+    "rank": 164,
+    "websites": [
+      "https://www.mufg-investorservices.com"
+    ],
+    "controller_candidate_lei": "353800V2V8PUY9TK3E06"
+  },
+  {
+    "lei": "724500SF1CI8OD5AHI07",
+    "name": "HCBG Holding B.V.",
+    "entityID": "rs:724500SF1CI8OD5AHI07.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1397966394.2984216,
+    "rank": 165,
+    "websites": [
+      "https://www.hcbinternational.nl"
+    ]
+  },
+  {
+    "lei": "549300SGF4BS54YG8M65",
+    "name": "Citco Bank Nederland N.V.",
+    "entityID": "rs:549300SGF4BS54YG8M65.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1388794700.0,
+    "rank": 166,
+    "websites": [
+      "https://www.citco.com"
+    ]
+  },
+  {
+    "lei": "549300JECLPX13NZLU57",
+    "name": "Danske Andelskassers Bank A/S",
+    "entityID": "rs:549300JECLPX13NZLU57.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1299173721.9105241,
+    "rank": 167,
+    "websites": [
+      "https://www.andelskassen.dk"
+    ]
+  },
+  {
+    "lei": "254900WR3I1Z9NPC7D84",
+    "name": "Kvika banki hf.",
+    "entityID": "rs:254900WR3I1Z9NPC7D84.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1268144806.6,
+    "rank": 168,
+    "websites": [
+      "https://www.kvika.is"
+    ]
+  },
+  {
+    "lei": "39120001JPAYYPDRNN92",
+    "name": "Deutsche Bausparkasse Badenia Aktiengesellschaft",
+    "entityID": "rs:39120001JPAYYPDRNN92.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 1265173198.38,
+    "rank": 169,
+    "websites": [
+      "http://www.badenia.de"
+    ],
+    "controller_candidate_lei": "549300X5UKJVE386ZB61"
+  },
+  {
+    "lei": "2138007F5HA5FFJROB80",
+    "name": "Akciju sabiedrība \"Rietumu Banka\"",
+    "entityID": "rs:2138007F5HA5FFJROB80.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1235059000.0,
+    "rank": 170,
+    "websites": [
+      "http://www.rietumu.lv"
+    ]
+  },
+  {
+    "lei": "RG3IZJKPYQ4H6IQPIC08",
+    "name": "Addiko Bank d.d.",
+    "entityID": "rs:RG3IZJKPYQ4H6IQPIC08.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 1155691796.77,
+    "rank": 171,
+    "websites": [
+      "https://www.addiko.hr"
+    ],
+    "controller_candidate_lei": "529900UKZBMDBDZIXD62"
+  },
+  {
+    "lei": "529900TDG1TFZM39SF37",
+    "name": "Baader Beteiligungs GmbH",
+    "entityID": "rs:529900TDG1TFZM39SF37.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1154054798.32,
+    "rank": 172,
+    "websites": [
+      "https://www.baaderbank.de"
+    ]
+  },
+  {
+    "lei": "529900FZWXWNKF3O8394",
+    "name": "Sparekassen Thy",
+    "entityID": "rs:529900FZWXWNKF3O8394.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1100532444.140127,
+    "rank": 173,
+    "websites": [
+      "https://www.sparthy.dk"
+    ]
+  },
+  {
+    "lei": "529900Q2C3I7VCILLG45",
+    "name": "FIMBank plc",
+    "entityID": "rs:529900Q2C3I7VCILLG45.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1085936453.0,
+    "rank": 174,
+    "websites": [
+      "https://www.fimbank.com"
+    ],
+    "controller_candidate_lei": "254900NKYL22Y1SJAI75"
+  },
+  {
+    "lei": "2138005M92IEIQVEL297",
+    "name": "AS Inbank",
+    "entityID": "rs:2138005M92IEIQVEL297.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1045267228.6076869,
+    "rank": 175,
+    "websites": [
+      "https://www.inbank.ee"
+    ]
+  },
+  {
+    "lei": "9695007EQZDL89LUW373",
+    "name": "Banque Banorient France",
+    "entityID": "rs:9695007EQZDL89LUW373.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 1044113535.0,
+    "rank": 176,
+    "websites": [
+      "https://www.banorientfrance.com/"
+    ],
+    "controller_candidate_lei": "549300ERAZEQ2KEJ8L86"
+  },
+  {
+    "lei": "529900UIRB65OY6U4B21",
+    "name": "Lombard Bank Malta plc",
+    "entityID": "rs:529900UIRB65OY6U4B21.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 1027828499.7727244,
+    "rank": 177,
+    "websites": [
+      "https://www.lombardmalta.com"
+    ]
+  },
+  {
+    "lei": "724500ZNT2I60RYZQI38",
+    "name": "Anadolubank Nederland N.V.",
+    "entityID": "rs:724500ZNT2I60RYZQI38.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 1025473885.1095,
+    "rank": 178,
+    "websites": [
+      "https://www.anadolubank.nl"
+    ],
+    "controller_candidate_lei": "789000T2LRFLVASOPJ63"
+  },
+  {
+    "lei": "R1IO4YJ0O79SMWVCHB58",
+    "name": "Banque centrale de compensation",
+    "entityID": "rs:R1IO4YJ0O79SMWVCHB58.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 995639124.84,
+    "rank": 179,
+    "websites": [
+      "https://www.lch.com"
+    ],
+    "controller_candidate_lei": "213800QAUUUP6I445N30"
+  },
+  {
+    "lei": "5493006Z4NTMNDDBGL49",
+    "name": "ECCM Bank plc",
+    "entityID": "rs:5493006Z4NTMNDDBGL49.IND",
+    "scope": "IND",
+    "date": "2025-09-30",
+    "trea_eur": 947763385.38,
+    "rank": 180,
+    "websites": [
+      "https://www.eccmbank.com"
+    ],
+    "controller_candidate_lei": "894500RAHVAOLBIL5A27"
+  },
+  {
+    "lei": "81560017C4A61A529235",
+    "name": "CASSA DI RISPARMIO DI FERMO S.P.A. (IN FORMA ABBREVIATA CARIFERMO S.P.A.)",
+    "entityID": "rs:81560017C4A61A529235.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 902083284.0,
+    "rank": 181,
+    "websites": [
+      "https://www.carifermo.it"
+    ]
+  },
+  {
+    "lei": "2138007JGI1M5YF7FJ53",
+    "name": "Frøs Sparekasse",
+    "entityID": "rs:2138007JGI1M5YF7FJ53.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 827487505.0564877,
+    "rank": 182,
+    "websites": [
+      "https://www.sydjysksparekasse.dk/"
+    ]
+  },
+  {
+    "lei": "529900RQOBT3ZJMDRK43",
+    "name": "Bank Frick AG",
+    "entityID": "rs:529900RQOBT3ZJMDRK43.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 817519287.22461,
+    "rank": 183,
+    "websites": [
+      "https://www.bankfrick.li/en"
+    ]
+  },
+  {
+    "lei": "815600B6B356EC776E54",
+    "name": "CASSA DI RISPARMIO DI VOLTERRA S.P.A.",
+    "entityID": "rs:815600B6B356EC776E54.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 815411934.44,
+    "rank": 184,
+    "websites": [
+      "https://www.crvolterra.it"
+    ]
+  },
+  {
+    "lei": "95980020140005658381",
+    "name": "Aresbank, S.A.",
+    "entityID": "rs:95980020140005658381.IND",
+    "scope": "IND",
+    "date": "2025-06-30",
+    "trea_eur": 810861000.0,
+    "rank": 185,
+    "websites": [
+      "http://www.aresbank.es"
+    ]
+  },
+  {
+    "lei": "549300ZOE0EU2VKF6M35",
+    "name": "Lombard Odier (Europe) S.A.",
+    "entityID": "rs:549300ZOE0EU2VKF6M35.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 801697101.0,
+    "rank": 186,
+    "websites": [
+      "https://www.lombardodier.com"
+    ],
+    "controller_candidate_lei": "4BY1ZWG5DYMF1HP5KL86"
+  },
+  {
+    "lei": "529900UHDH7QLRMEJQ86",
+    "name": "Sigma Bank AG",
+    "entityID": "rs:529900UHDH7QLRMEJQ86.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 790415131.6883701,
+    "rank": 187,
+    "websites": [
+      "https://www.sigmabank.com"
+    ]
+  },
+  {
+    "lei": "259400DAAAR5M4A6SI23",
+    "name": "Bank Pocztowy S.A.",
+    "entityID": "rs:259400DAAAR5M4A6SI23.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 789086408.46996,
+    "rank": 188,
+    "websites": [
+      "https://www.pocztowy.pl"
+    ],
+    "controller_candidate_lei": "259400F669WGVYGLHT55"
+  },
+  {
+    "lei": "213800JF3JFF6MMR2P36",
+    "name": "Fynske Bank A/S",
+    "entityID": "rs:213800JF3JFF6MMR2P36.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 732072131.0592,
+    "rank": 189,
+    "websites": [
+      "https://www.fynskebank.dk/"
+    ]
+  },
+  {
+    "lei": "81560035485BD7DB3590",
+    "name": "BANCO DI CREDITO P.AZZOAGLIO - S.P.A.",
+    "entityID": "rs:81560035485BD7DB3590.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 726948866.0,
+    "rank": 190,
+    "websites": [
+      "https://www.bancapb.it"
+    ]
+  },
+  {
+    "lei": "5299001PEMDU9N24CH60",
+    "name": "DELAVSKA HRANILNICA d.d. LJUBLJANA",
+    "entityID": "rs:5299001PEMDU9N24CH60.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 725366000.0,
+    "rank": 191,
+    "websites": [
+      "https://www.delavska-hranilnica.si"
+    ]
+  },
+  {
+    "lei": "529900SEFOTJH1MLGZ92",
+    "name": "Lægernes Bank A/S",
+    "entityID": "rs:529900SEFOTJH1MLGZ92.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 712948852.6500001,
+    "rank": 192,
+    "websites": [
+      "https://www.lpb.dk"
+    ],
+    "controller_candidate_lei": "529900ADCRMS97AZYR34"
+  },
+  {
+    "lei": "529900U5XAEYOT68AC40",
+    "name": "EFG Bank (Luxembourg) S.A.",
+    "entityID": "rs:529900U5XAEYOT68AC40.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 707704904.97,
+    "rank": 193,
+    "websites": [
+      "https://www.efginternational.com"
+    ],
+    "controller_candidate_lei": "506700PR1R98BSF81139"
+  },
+  {
+    "lei": "QS3ZEAHRBZY9228Z0111",
+    "name": "Bank Julius Baer Europe S.A.",
+    "entityID": "rs:QS3ZEAHRBZY9228Z0111.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 673755353.69,
+    "rank": 194,
+    "websites": [
+      "https://www.juliusbaer.com"
+    ],
+    "controller_candidate_lei": "5299007MF0604ZGJER92"
+  },
+  {
+    "lei": "549300TEJKOLFN65KR76",
+    "name": "BNF Bank plc",
+    "entityID": "rs:549300TEJKOLFN65KR76.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 646645007.32,
+    "rank": 195,
+    "websites": [
+      "https://www.bnf.bank"
+    ]
+  },
+  {
+    "lei": "213800UIIZ6YSEQB5S26",
+    "name": "Clearstream Fund Centre Holding S.A.",
+    "entityID": "rs:213800UIIZ6YSEQB5S26.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 605032324.25,
+    "rank": 196,
+    "websites": [
+      "https://www.clearstream.com"
+    ],
+    "controller_candidate_lei": "529900G3SW56SHYNPR95"
+  },
+  {
+    "lei": "549300FRBP5L0O1HY885",
+    "name": "Sparbanken Syd",
+    "entityID": "rs:549300FRBP5L0O1HY885.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 592343547.8372985,
+    "rank": 197,
+    "websites": [
+      "https://www.sparbankensyd.se"
+    ]
+  },
+  {
+    "lei": "529900OLW8QPFMTBDC23",
+    "name": "Neue Bank AG",
+    "entityID": "rs:529900OLW8QPFMTBDC23.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 539260336.13823,
+    "rank": 198,
+    "websites": [
+      "https://www.neuebankag.li"
+    ]
+  },
+  {
+    "lei": "529900VVDOKMRRAHZ894",
+    "name": "Bank GPB International S.A.",
+    "entityID": "rs:529900VVDOKMRRAHZ894.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 526450699.201722,
+    "rank": 199,
+    "websites": [
+      "https://www.gazprombank.lu"
+    ]
+  },
+  {
+    "lei": "549300RMML7KXP6M1Y98",
+    "name": "BANCO BAI EUROPA S.A.",
+    "entityID": "rs:549300RMML7KXP6M1Y98.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 523693400.88,
+    "rank": 200,
+    "websites": [
+      "https://www.bancobaieuropa.pt"
+    ]
+  },
+  {
+    "lei": "9845009BE414FBF82130",
+    "name": "FESTA HOLDING",
+    "entityID": "rs:9845009BE414FBF82130.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 522615194.7798,
+    "rank": 201,
+    "websites": [
+      "https://www.fibank.bg"
+    ]
+  },
+  {
+    "lei": "549300M2IHOB9P5WE714",
+    "name": "Swissquote Bank Europe S.A",
+    "entityID": "rs:549300M2IHOB9P5WE714.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 494350585.92,
+    "rank": 202,
+    "websites": [
+      "https://www.swissquote.lu"
+    ],
+    "controller_candidate_lei": "549300O3WME82RDPEN66"
+  },
+  {
+    "lei": "969500F3KYDJBFS4XM73",
+    "name": "Bank Audi France",
+    "entityID": "rs:969500F3KYDJBFS4XM73.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 491055472.67,
+    "rank": 203,
+    "websites": [
+      "https://www.banqueaudi.fr"
+    ],
+    "controller_candidate_lei": "549300EC11JZQNA37K65"
+  },
+  {
+    "lei": "81560062CEAE87A85C80",
+    "name": "AREPO BP S.P.A.",
+    "entityID": "rs:81560062CEAE87A85C80.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 472335118.0,
+    "rank": 204,
+    "websites": [
+      "https://www.bancaprofilo.it"
+    ]
+  },
+  {
+    "lei": "529900XB6RQ3XCELQO62",
+    "name": "BENDURA BANK AG",
+    "entityID": "rs:529900XB6RQ3XCELQO62.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 464210066.1940201,
+    "rank": 205,
+    "websites": [
+      "https://www.bendura.li"
+    ]
+  },
+  {
+    "lei": "213800ZOI1EW481WPV90",
+    "name": "FCM Bank Ltd",
+    "entityID": "rs:213800ZOI1EW481WPV90.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 462944114.0,
+    "rank": 206,
+    "websites": [
+      "https://www.fcmbank.com.mt"
+    ]
+  },
+  {
+    "lei": "9695002K2HDLD20JU790",
+    "name": "AGENCE FRANCE LOCALE - SOCIETE TERRITORIALE",
+    "entityID": "rs:9695002K2HDLD20JU790.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 455524556.52,
+    "rank": 207,
+    "websites": [
+      "https://www.agence-france-locale.fr"
+    ]
+  },
+  {
+    "lei": "213800TKOS7J5UA3ZI07",
+    "name": "EUROPE ARAB BANK SA",
+    "entityID": "rs:213800TKOS7J5UA3ZI07.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 440917666.22,
+    "rank": 208,
+    "websites": [
+      "https://www.eabplc.com"
+    ],
+    "controller_candidate_lei": "5493001JH4LYPQTBQP79"
+  },
+  {
+    "lei": "8156003D79D064FB5360",
+    "name": "CASSA LOMBARDA - S.P.A.",
+    "entityID": "rs:8156003D79D064FB5360.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 438049293.0,
+    "rank": 209,
+    "websites": [
+      "https://www.cassalombarda.it"
+    ]
+  },
+  {
+    "lei": "529900BIK4WRWS06MR52",
+    "name": "Varengold Bank AG",
+    "entityID": "rs:529900BIK4WRWS06MR52.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 402271102.51,
+    "rank": 210,
+    "websites": [
+      "https://www.varengold.de/"
+    ]
+  },
+  {
+    "lei": "2534005A84927EKSR789",
+    "name": "Signet Bank AS",
+    "entityID": "rs:2534005A84927EKSR789.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 378333168.92,
+    "rank": 211,
+    "websites": [
+      "https://signetbank.com/"
+    ]
+  },
+  {
+    "lei": "213800RENLNKMWZV8767",
+    "name": "Lollands Bank A/S",
+    "entityID": "rs:213800RENLNKMWZV8767.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 363219901.72914004,
+    "rank": 212,
+    "websites": [
+      "https://www.lollandsbank.dk/"
+    ]
+  },
+  {
+    "lei": "549300YV6LXRPJO3U576",
+    "name": "Merkur Andelskasse",
+    "entityID": "rs:549300YV6LXRPJO3U576.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 338502788.75995106,
+    "rank": 213,
+    "websites": [
+      "https://merkur.dk/"
+    ]
+  },
+  {
+    "lei": "959800VHSP2QBPNRF210",
+    "name": "Bank of Africa Europe, S.A.",
+    "entityID": "rs:959800VHSP2QBPNRF210.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 326990845.0,
+    "rank": 214,
+    "websites": [
+      "https://www.bmce-intl.co.uk"
+    ]
+  },
+  {
+    "lei": "724500AG21Z9GIJE4735",
+    "name": "WP XII Financial Holdings Coöperatief U.A.",
+    "entityID": "rs:724500AG21Z9GIJE4735.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 323246476.19,
+    "rank": 215,
+    "websites": [
+      "https://www.warburgpincus.com/",
+      "https://www.cerberus.com/"
+    ]
+  },
+  {
+    "lei": "529900DPOQPLDSF3R482",
+    "name": "Kaiser Partner Privatbank AG",
+    "entityID": "rs:529900DPOQPLDSF3R482.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 298562384.77137005,
+    "rank": 216,
+    "websites": [
+      "https://www.kaiserpartner.bank"
+    ]
+  },
+  {
+    "lei": "EV2XZWMLLXF2QRX0CD47",
+    "name": "Kommuninvest - Grupp",
+    "entityID": "rs:EV2XZWMLLXF2QRX0CD47.CON",
+    "scope": "CON",
+    "date": "2026-03-31",
+    "trea_eur": 288943560.0,
+    "rank": 217,
+    "websites": [
+      "https://www.kommuninvest.se"
+    ]
+  },
+  {
+    "lei": "213800CQ92347ZCS9V73",
+    "name": "ATLÂNTICO EUROPA, SGPS, SA",
+    "entityID": "rs:213800CQ92347ZCS9V73.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 273193711.328287,
+    "rank": 218,
+    "websites": [
+      "https://www.atlantico.eu"
+    ]
+  },
+  {
+    "lei": "9845006BAF66DZ35C849",
+    "name": "Lunar Group A/S",
+    "entityID": "rs:9845006BAF66DZ35C849.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 260514781.41921332,
+    "rank": 219,
+    "websites": [
+      "https://www.lunar.app"
+    ]
+  },
+  {
+    "lei": "529900EKPN8EYA3AX590",
+    "name": "Texim Bank AD",
+    "entityID": "rs:529900EKPN8EYA3AX590.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 249733236.39999998,
+    "rank": 220,
+    "websites": [
+      "https://www.teximbank.bg"
+    ]
+  },
+  {
+    "lei": "RY3KI4Q2655O2GIL8D68",
+    "name": "BANCA INVESTIS S.P.A.",
+    "entityID": "rs:RY3KI4Q2655O2GIL8D68.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 245128279.0,
+    "rank": 221,
+    "websites": [
+      "https://www.bancainvestis.com"
+    ]
+  },
+  {
+    "lei": "549300OMTXWX1144LP69",
+    "name": "Akciju sabiedrība \"Reģionālā investīciju banka\"",
+    "entityID": "rs:549300OMTXWX1144LP69.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 229480397.0,
+    "rank": 222,
+    "websites": [
+      "https://www.ribbank.com"
+    ]
+  },
+  {
+    "lei": "213800CBW4NPFP73ZK64",
+    "name": "ANCORIA INVESTMENTS PLC",
+    "entityID": "rs:213800CBW4NPFP73ZK64.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 199412464.55,
+    "rank": 223,
+    "websites": [
+      "https://www.ancoriabank.com"
+    ]
+  },
+  {
+    "lei": "21380033CFFM2V1ZCK65",
+    "name": "SPARKASSE (HOLDINGS) MALTA LIMITED",
+    "entityID": "rs:21380033CFFM2V1ZCK65.CON",
+    "scope": "CON",
+    "date": "2025-12-31",
+    "trea_eur": 185105768.9,
+    "rank": 224,
+    "websites": [
+      "https://www.sparkasse-bank-malta.com"
+    ]
+  },
+  {
+    "lei": "213800C78WI8VFJCYR09",
+    "name": "Sparekassen Bredebro",
+    "entityID": "rs:213800C78WI8VFJCYR09.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 166879379.79782715,
+    "rank": 225,
+    "websites": [
+      "https://www.sparekassenbredebro.dk"
+    ]
+  },
+  {
+    "lei": "213800984CWACNBY8F31",
+    "name": "Sparekassen for Nr. Nebel og Omegn",
+    "entityID": "rs:213800984CWACNBY8F31.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 160309549.35904104,
+    "rank": 226,
+    "websites": [
+      "https://www.sparnebel.dk"
+    ]
+  },
+  {
+    "lei": "8156007C053DC07AC307",
+    "name": "CREDITO LOMBARDO VENETO S.P.A.",
+    "entityID": "rs:8156007C053DC07AC307.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 126516417.0,
+    "rank": 227,
+    "websites": [
+      "https://www.crelov.it"
+    ]
+  },
+  {
+    "lei": "5299005743YY767PR386",
+    "name": "Dragsholm Sparekasse",
+    "entityID": "rs:5299005743YY767PR386.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 125159940.8664036,
+    "rank": 228,
+    "websites": [
+      "https://www.dragsholmsparekasse.dk"
+    ]
+  },
+  {
+    "lei": "984500ADEE3DE4F14F51",
+    "name": "Kompasbank A/S",
+    "entityID": "rs:984500ADEE3DE4F14F51.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 108991854.16032001,
+    "rank": 229,
+    "websites": [
+      "https://www.kompasbank.dk"
+    ]
+  },
+  {
+    "lei": "213800MLL4APN9UP1J53",
+    "name": "Rise Sparekasse",
+    "entityID": "rs:213800MLL4APN9UP1J53.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 99176924.30206601,
+    "rank": 230,
+    "websites": [
+      "https://www.risesparekasse.dk"
+    ]
+  },
+  {
+    "lei": "213800KOJ5JSZ6ID2R91",
+    "name": "Sparekassen Balling",
+    "entityID": "rs:213800KOJ5JSZ6ID2R91.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 97963800.1567854,
+    "rank": 231,
+    "websites": [
+      "https://www.balling-sparekasse.dk"
+    ]
+  },
+  {
+    "lei": "549300KOORG6SN9LMO68",
+    "name": "IIG Bank (Malta) Ltd",
+    "entityID": "rs:549300KOORG6SN9LMO68.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 77711969.94,
+    "rank": 232,
+    "websites": [
+      "https://www.iigbank.com"
+    ]
+  },
+  {
+    "lei": "213800UK7516IBWZO445",
+    "name": "Borbjerg Sparekasse",
+    "entityID": "rs:213800UK7516IBWZO445.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 66036351.21246762,
+    "rank": 233,
+    "websites": [
+      "https://www.borbjerg-sparekasse.dk"
+    ]
+  },
+  {
+    "lei": "2138005MGIT3X9ZTMP37",
+    "name": "Rønde Sparekasse",
+    "entityID": "rs:2138005MGIT3X9ZTMP37.IND",
+    "scope": "IND",
+    "date": "2025-12-31",
+    "trea_eur": 53335645.54147042,
+    "rank": 234,
+    "websites": [
+      "https://www.rondespard.dk"
+    ]
+  }
+]
