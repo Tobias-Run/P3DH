@@ -917,6 +917,9 @@ def pruefe():
             kpi = pruefe_kpi_navigation(b, f"http://localhost:{PORT}/viewer_json.html")
             print(f"  KPI-Quellnavigation: {kpi['cases']} Fälle · "
                   f"{kpi['source_activations']} erfolgreiche Quellsprünge")
+            from check_metric_units import pruefe as pruefe_metric_units
+            units = pruefe_metric_units(b, f"http://localhost:{PORT}/viewer_json.html")
+            print(f"  KPI-Einheiten: {units['cases']} Sprach-/Viewportfälle")
             b.close()
     finally:
         srv.shutdown()

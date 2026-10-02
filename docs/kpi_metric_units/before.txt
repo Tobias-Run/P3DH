@@ -1,0 +1,2 @@
+{'language': 'en', 'trea_unit': 'Mrd EUR', 'timeseries': ['CET1-Ratio', 'TotalCap-Ratio', 'Leverage', 'LCR', 'NSFR', 'TREA (Mrd) EUR', 'CET1 (Mrd) EUR']}
+{'trea_header': 'Total risk exposure amount (Mrd EUR)'}
