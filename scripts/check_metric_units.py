@@ -48,7 +48,64 @@ def pruefe(browser, url):
         finally:
             context.close()
     assert not errors, errors
-    return {'cases': len(cases), 'results': cases}
+    audit = pruefe_audit(browser, url)
+    return {'cases': len(cases), 'results': cases, 'audit': audit}
+
+
+def pruefe_audit(browser, url):
+    """Every benchmark profile, plus report/compare scale controls and CSV."""
+    context = browser.new_context(viewport={'width': 1280, 'height': 844})
+    page = context.new_page()
+    errors, seen, profiles = [], set(), 0
+    page.on('pageerror', lambda e: errors.append(str(e)))
+    try:
+        for lang in ('en', 'de'):
+            page.goto(url + REPORT, wait_until='networkidle')
+            if page.evaluate('LANG') != lang:
+                page.locator('#langBtn').click()
+            page.wait_for_function('LANG === document.documentElement.lang')
+            registry = page.evaluate('PROFILES.map(p=>({id:p.id,metrics:p.metrics}))')
+            for profile in registry:
+                page.evaluate('id=>location.hash="#benchmark?prof="+id', profile['id'])
+                page.wait_for_function('id=>document.querySelector("#bmProfile")?.value===id && !document.querySelector("#main").hasAttribute("aria-busy")', arg=profile['id'])
+                metadata = page.evaluate('ids=>ids.map(id=>({id,unit:METRICDOC.get(id).unit}))', profile['metrics'])
+                for metric in metadata:
+                    if metric['unit'] not in ('Mrd EUR', 'Personen'):
+                        continue
+                    expected = ('bn EUR' if lang == 'en' else 'Mrd. EUR') if metric['unit'] == 'Mrd EUR' else ('people' if lang == 'en' else 'Personen')
+                    assert f'({expected})' in page.locator(f'.bmtable th[data-k="{metric["id"]}"]').inner_text()
+                    seen.add(metric['id'])
+                notes = page.locator('.dcard .dnote').all_text_contents()
+                if profile['id'] == 'headroom':
+                    assert ('Difference in percentage points' if lang == 'en' else 'Differenz in Prozentpunkten') in notes
+                if profile['id'] == 'verg':
+                    assert ('Amount per head in EUR (ECB rate)' if lang == 'en' else 'Betrag je Kopf, in EUR (EZB-Kurs)') in notes
+                    assert ('Absolute count' if lang == 'en' else 'Absolutzahl') in notes
+                csv = page.evaluate('benchmarkCSV(benchmarkRows().slice(0,2),bmProf())')
+                if lang == 'en':
+                    assert all(word not in csv for word in ('Mrd', 'Tsd.', 'Mio.', 'Personen'))
+                profiles += 1
+            page.evaluate('''() => {
+                const rep=REPORTS.find(r=>r.entityID.includes('549300TRUWO2CD2G5692') && r.refPeriod==='2026-03-31');
+                PINS=new Set([repKey(rep)]); persist();
+            }''')
+            for route, target in ((REPORT, '#tcontainer .scalenote'), ('#compare', '#cmpBody .scalenote')):
+                page.evaluate('hash=>location.hash=hash', route)
+                page.wait_for_selector('#ovSection' if route == REPORT else '#cmpBody table')
+                page.wait_for_selector('#scaleSel')
+                if route == REPORT:
+                    page.locator('.ovcard[data-m="trea"]').click()
+                    page.locator('.mdet a[data-goto]').first.click()
+                    page.wait_for_selector('#tcontainer section[data-template="61.00"] td.num')
+                for scale, expected in (('1000', 'k' if lang == 'en' else 'Tsd.'), ('1000000', 'm' if lang == 'en' else 'Mio.'), ('1000000000', 'bn' if lang == 'en' else 'Mrd.')):
+                    page.locator('#scaleSel').select_option(scale)
+                    page.wait_for_function('([target,unit])=>document.querySelector(target)?.textContent.includes(unit+" EUR")', arg=[target, expected])
+            print(f'  Einheiten-Audit: {lang} · {len(registry)} Profile · Report/Compare k/m/bn · CSV: OK', flush=True)
+        assert len(seen) == 8, seen  # Seven billion-EUR metrics and one headcount.
+        assert not errors, errors
+        return {'profiles': profiles, 'metrics': sorted(seen), 'javascript_errors': errors}
+    finally:
+        context.close()
 
 
 if __name__ == '__main__':

@@ -810,6 +810,10 @@ const DE = {
   "Ratio, in per cent": "Verhältniszahl, in Prozent",
   "Share of the total risk exposure amount (TREA)": "Anteil an der Gesamtrisikoposition (TREA)",
   "Amounts in bn EUR (ECB rate)": "Beträge in Mrd. EUR (EZB-Kurs)",
+  "Difference in percentage points": "Differenz in Prozentpunkten",
+  "Amount per head in EUR (ECB rate)": "Betrag je Kopf, in EUR (EZB-Kurs)",
+  "Absolute count": "Absolutzahl",
+  "people": "Personen",
   "{0} reports with template {1}": "{0} Reports mit Template {1}",
   "None yet. What is stored is the current link — so it can be passed on as well.":
     "Noch keine. Gespeichert wird der aktuelle Link — er lässt sich also auch weitergeben.",
@@ -1881,7 +1885,8 @@ const metricBridge=m=>(m.cells||[]).map(c=>bridgeAt(c[0],c[1],c[2])).find(Boolea
    dort seit #25 gepflegt und lag bis jetzt ungenutzt herum. */
 const mlabel=m=>(LANG==='en' ? (m.en||m.label) : m.label);
 // Registry units remain canonical; only their visible labels follow the language.
-const metricUnit=m=>m.unit==='Mrd EUR' ? unitLabel(1e9)+' EUR' : m.unit;
+const metricUnit=m=>m.unit==='Mrd EUR' ? unitLabel(1e9)+' EUR'
+  : m.unit==='Personen' ? tr('people') : m.unit;
 /* Erklaerungstexte einer Kennzahl oder eines Profils in der eingestellten
    Sprache. Fallback ist AUSDRUECKLICH die deutsche Fassung und nicht der leere
    String: eine fehlende Uebersetzung soll den Text nicht verschwinden lassen —
@@ -2952,8 +2957,8 @@ function distributionRow(rows, prof){
   // Anmerkung unter dem Titel: klärt die Größe, bevor die Zahl gelesen wird.
   const NOTE={pct:tr('Ratio from KM1, in per cent'), ratio:tr('Ratio, in per cent'),
               shareOfTrea:tr('Share of the total risk exposure amount (TREA)'),
-              pp:'Differenz in Prozentpunkten', eur:tr('Amounts in bn EUR (ECB rate)'),
-              eurPlain:'Betrag je Kopf, in EUR (EZB-Kurs)', num:'Absolutzahl'};
+              pp:tr('Difference in percentage points'), eur:tr('Amounts in bn EUR (ECB rate)'),
+              eurPlain:tr('Amount per head in EUR (ECB rate)'), num:tr('Absolute count')};
   // Quellzeile je Grafik — die exakte Herkunft, nicht nur die Institution:
   // Template, Zelle, Stichtage, Zahl der Reports. Das ist die
   // Reproduzierbarkeitslinie des Projekts als Gestaltungselement.

@@ -15,3 +15,11 @@ Die Registry verwendet `Mrd EUR` als kanonische Einheit. Ein gemeinsamer Darstel
 - **1.455 vorhandene Tests bestanden, keine übersprungen.** [Testabschluss](test_suite.txt).
 
 Die neue Prüfung `scripts/check_metric_units.py` ist in `scripts/check_viewer_runtime.py` eingebunden und damit Teil der vorhandenen PR-CI. Mobilprüfung in Chromium; kein physischer Safari-Test. Produktiv nach Merge und Pages-Deployment.
+
+## Erweiterter Audit auf weitere Vorkommen
+
+Die Folgeprüfung gegen Commit `f2306bd2ce85c56b8ccb2f0f5f9d21039d26cf2a` findet zusätzlich die Einheit `Personen` im Vergütungs-Benchmark und drei deutsche Diagramm-Erklärungen: `Differenz in Prozentpunkten`, `Betrag je Kopf, in EUR (EZB-Kurs)` und `Absolutzahl`. [Browserreproduktion](audit_before.txt). Diese vier Darstellungsfälle werden jetzt ebenfalls lokalisiert: `people`, `Difference in percentage points`, `Amount per head in EUR (ECB rate)`, `Absolute count`. Deutsch behält die bisherige Beschriftung.
+
+[Erweiterter Browsercheck](audit_validation.txt): alle **8 Benchmark-Profile in EN/DE (16 Profilfälle)**, alle 7 Milliarden-Kennzahlen (TREA, CET1-Kapital, HQLA, Netto-Abflüsse, ASF, NPE/Performing-Kredite) und die Kopfzahl. Die neuen Einheitenerklärungen werden im gerenderten Diagramm geprüft. Report-Rohtabelle und Compare werden jeweils in beiden Sprachen bei Tausender-, Millionen- und Milliardenskalierung geprüft (12 Skalierungsfälle). Englische CSV-Exporte aller Profile enthalten keines der deutschen Einheitenkürzel. Dazu bleiben die sechs Desktop-/Mobil-Sprachwechselprüfungen bestehen. Keine JavaScript-Fehler. Die erweiterte Prüfung läuft automatisch über den bestehenden Runtimecheck in der CI.
+
+Weitere Übersetzungslücken betreffen eigene UI-Texte, etwa Report-Suchfeld, Compare-Überschrift/Spaltenkopf und Profil-Erklärungen. Sie sind in [Issue #127](https://github.com/Tobias-Run/P3DH/issues/127) separat dokumentiert und noch nicht behoben. Die Einheitenprüfung bedeutet keine vollständige Übersetzung aller UI-Texte oder Original-Offenlegungen.
