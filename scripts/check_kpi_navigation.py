@@ -21,10 +21,13 @@ SOURCE_VISIBLE = """tid => {
   const sec=[...document.querySelectorAll('#tcontainer section[data-template]')]
     .find(s=>s.dataset.template===tid);
   if(!sec || !sec.querySelector('td.num')) return false;
-  const heading=sec.querySelector('h3'), box=heading.getBoundingClientRect();
+  const target=document.activeElement;
+  if(!sec.contains(target)) return false;
+  if(sec.querySelector('.kpi-source') ? !target.matches('.kpi-source') : target!==sec.querySelector('h3')) return false;
+  const box=target.getBoundingClientRect();
   const header=document.querySelector('header').getBoundingClientRect();
-  return document.activeElement===heading && box.top>=header.bottom-2
-    && box.bottom<=innerHeight && sec.closest('details').open;
+  return box.top>=header.bottom-2 && box.bottom<=innerHeight
+    && box.left>=0 && box.right<=innerWidth && sec.closest('details').open;
 }"""
 
 
