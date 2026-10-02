@@ -1,0 +1,4 @@
+{"width": 1280, "activation": "click", "url": "http://localhost:8799/viewer_json.html#r/549300TRUWO2CD2G5692/2026-03-31/CON", "result": {"filter": "61.00", "scroll": 0, "source": 1507.328125, "detail": 345.109375, "focused": "A", "hash": "#r/549300TRUWO2CD2G5692/2026-03-31/CON"}, "errors": []}
+{"width": 1280, "activation": "Enter", "result": {"filter": "61.00", "detail": true, "hash": "#r/549300TRUWO2CD2G5692/2026-03-31/CON"}, "errors": []}
+{"width": 390, "activation": "click", "url": "http://localhost:8799/viewer_json.html#r/549300TRUWO2CD2G5692/2026-03-31/CON", "result": {"filter": "61.00", "scroll": 0, "source": 1509.046875, "detail": -123.796875, "focused": "A", "hash": "#r/549300TRUWO2CD2G5692/2026-03-31/CON"}, "errors": []}
+{"width": 390, "activation": "Enter", "result": {"filter": "61.00", "detail": true, "hash": "#r/549300TRUWO2CD2G5692/2026-03-31/CON"}, "errors": []}

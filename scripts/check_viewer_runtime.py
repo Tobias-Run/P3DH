@@ -68,7 +68,10 @@ class _H(http.server.SimpleHTTPRequestHandler):
         self.send_header("Content-Type", typ)
         self.send_header("Content-Length", str(len(daten)))
         self.end_headers()
-        self.wfile.write(daten)
+        try:
+            self.wfile.write(daten)
+        except (BrokenPipeError, ConnectionResetError):
+            pass  # The navigation tests deliberately cancel obsolete requests.
 
 
 def _serve():
@@ -908,6 +911,12 @@ def pruefe():
               PINS=new Set();
               return res;
             }""")
+            # Follow the real source links after lazy grid rendering (#124),
+            # including touch/keyboard input and obsolete navigation requests.
+            from check_kpi_navigation import pruefe as pruefe_kpi_navigation
+            kpi = pruefe_kpi_navigation(b, f"http://localhost:{PORT}/viewer_json.html")
+            print(f"  KPI-Quellnavigation: {kpi['cases']} Fälle · "
+                  f"{kpi['source_activations']} erfolgreiche Quellsprünge")
             b.close()
     finally:
         srv.shutdown()

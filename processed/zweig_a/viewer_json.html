@@ -1326,7 +1326,10 @@ const shapeAt=(rep,tid,row,col)=>{
 function redrawBody(body, list, rep){
   // Neu zeichnen, wenn die Form NACH dem ersten Rendern eintrifft. Nur dann —
   // sonst flackert jede Tabelle einmal ohne Grund.
+  const focused=body.contains(document.activeElement)
+    ? document.activeElement.closest('section[data-template]')?.dataset.template : null;
   body.innerHTML=list.map(tid=>renderTemplate(tid, rep.templates.get(tid), rep)).join('');
+  if(focused) focusTemplateHeading(body,focused);
 }
 
 function shapeStrip(form, wert){
@@ -1683,7 +1686,7 @@ function renderTemplate(tid, cells, rep){
     ? '▲ {0} values in this template deviate from the population so strongly that we class them as conspicuous (#24). The reported value stays unchanged — the mark is a pointer, not a verdict on correctness.'
     : '▲ {0} value in this template deviates from the population so strongly that we class it as conspicuous (#24). The reported value stays unchanged — the mark is a pointer, not a verdict on correctness.',
     nFlag)}${UA.has(tid)?' '+tr('In this template the reported unit is inconsistent as well (#9), so the deviation may be a question of units.'):''}</span></div>` : '';
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}${flagNote}<table><thead><tr><th class="rh">${axisMap?'Code':tr('Row')}</th><th class="rl"></th>`;
+  let h=`<section data-template="${esc(tid)}"><h3 tabindex="-1">${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}${flagNote}<table><thead><tr><th class="rh">${axisMap?'Code':tr('Row')}</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   // Am Zeilenlabel ist die Mehrdeutigkeit am wichtigsten: dort steht EINE
@@ -1909,8 +1912,31 @@ function jumpToTemplate(tid){
   if(!f) return;
   f.value=tid;
   f.dispatchEvent(new Event('input'));
-  const sec=document.querySelector('#tcontainer section');
-  if(sec) sec.scrollIntoView({block:'start', behavior:'smooth'});
+  const theme=[...document.querySelectorAll('#tcontainer details.theme')]
+    .find(d=>d.dataset.t===themeOf(tid));
+  const body=theme?.querySelector('.tbody');
+  if(!body) return;
+  // Rendering is asynchronous. An obsolete filter/report discards this
+  // request along with its disconnected body, without scrolling a new view.
+  body.dataset.jumpTemplate=tid;
+  finishTemplateJump(body);
+}
+function focusTemplateHeading(body,tid){
+  const sec=[...body.querySelectorAll('section[data-template]')]
+    .find(s=>s.dataset.template===tid);
+  const heading=sec?.querySelector('h3');
+  if(heading) heading.focus({preventScroll:true});
+  return sec;
+}
+function finishTemplateJump(body){
+  const tid=body.dataset.jumpTemplate;
+  if(!tid || !body.isConnected) return;
+  const sec=focusTemplateHeading(body,tid);
+  if(!sec) return;
+  delete body.dataset.jumpTemplate;
+  // The sticky header wraps on phones; keep the actual heading below it.
+  sec.style.scrollMarginTop=(document.querySelector('header').getBoundingClientRect().height+8)+'px';
+  sec.scrollIntoView({block:'start', behavior:'smooth'});
 }
 
 /* ---- Kennzahl-Detail (#63) ------------------------------------------------
@@ -2284,6 +2310,7 @@ async function renderReport(rep){
             : tr('No analysable cells for this block — it is declared, but without data in our holdings.')}</div>`;
     body.dataset.done='1';
     delete body.dataset.loading;body.removeAttribute('aria-busy');
+    finishTemplateJump(body);
   };
   if(remembered) document.getElementById('tfilter').value=remembered.filter;
   draw();
