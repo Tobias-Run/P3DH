@@ -1,0 +1,985 @@
+{
+  "source": "measurements.json",
+  "failures": [],
+  "groups": {
+    "pages / desktop / benchmark / cold": {
+      "ready_ms": {
+        "n": 5,
+        "median": 608.5,
+        "p90": 747.2600000143051,
+        "min": 585.4000000059605,
+        "max": 783.3000000119209
+      },
+      "ttfb_ms": {
+        "n": 5,
+        "median": 61.79999998211861,
+        "p90": 82.75999999046326,
+        "min": 36.400000005960464,
+        "max": 87.39999997615814
+      },
+      "wire_bytes": {
+        "n": 5,
+        "median": 671248,
+        "p90": 674513.2,
+        "min": 671248,
+        "max": 676690
+      },
+      "decoded_bytes": {
+        "n": 5,
+        "median": 4068855,
+        "p90": 4074324.0,
+        "min": 4068855,
+        "max": 4077970
+      },
+      "requests": {
+        "n": 5,
+        "median": 5,
+        "p90": 5.6,
+        "min": 5,
+        "max": 6
+      },
+      "nodes": {
+        "n": 5,
+        "median": 6896,
+        "p90": 6896.0,
+        "min": 6896,
+        "max": 6896
+      },
+      "heap_bytes": {
+        "n": 5,
+        "median": 15885071,
+        "p90": 20546128.2,
+        "min": 14928135,
+        "max": 22337401
+      },
+      "longtask_count": {
+        "n": 5,
+        "median": 3,
+        "p90": 3.6,
+        "min": 3,
+        "max": 4
+      },
+      "blocking_ms": {
+        "n": 5,
+        "median": 89,
+        "p90": 124.2,
+        "min": 77,
+        "max": 125
+      },
+      "lcp_ms": {
+        "n": 5,
+        "median": 620,
+        "p90": 756.8,
+        "min": 596,
+        "max": 792
+      },
+      "cls": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "sort_script_ms": {
+        "n": 5,
+        "median": 58.599999994039536,
+        "p90": 62.54000000357628,
+        "min": 51.80000001192093,
+        "max": 64.90000000596046
+      },
+      "sort_paint_ms": {
+        "n": 5,
+        "median": 72,
+        "p90": 75.68000000715256,
+        "min": 63.5,
+        "max": 78
+      },
+      "filter_script_ms": {
+        "n": 5,
+        "median": 75.69999998807907,
+        "p90": 78.49999999403954,
+        "min": 67.19999998807907,
+        "max": 79.09999999403954
+      },
+      "filter_paint_ms": {
+        "n": 5,
+        "median": 95.90000000596046,
+        "p90": 98.99999999403954,
+        "min": 85.19999998807907,
+        "max": 99.59999999403954
+      },
+      "cdp_wire_bytes": {
+        "n": 5,
+        "median": 673390,
+        "p90": 676495.0,
+        "min": 673203,
+        "max": 678559
+      },
+      "http_response_count": {
+        "n": 5,
+        "median": 5,
+        "p90": 5.6,
+        "min": 5,
+        "max": 6
+      },
+      "cached_response_count": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "sort_blocking_ms": {
+        "n": 5,
+        "median": 8,
+        "p90": 12.600000000000001,
+        "min": 2,
+        "max": 15
+      },
+      "sort_longtask_count": {
+        "n": 5,
+        "median": 1,
+        "p90": 1.0,
+        "min": 1,
+        "max": 1
+      },
+      "sort_nodes": {
+        "n": 5,
+        "median": 6980,
+        "p90": 6980.0,
+        "min": 6980,
+        "max": 6980
+      },
+      "filter_blocking_ms": {
+        "n": 5,
+        "median": 25,
+        "p90": 28.6,
+        "min": 17,
+        "max": 29
+      },
+      "filter_longtask_count": {
+        "n": 5,
+        "median": 1,
+        "p90": 1.0,
+        "min": 1,
+        "max": 1
+      },
+      "filter_nodes": {
+        "n": 5,
+        "median": 4797,
+        "p90": 4797.0,
+        "min": 4797,
+        "max": 4797
+      }
+    },
+    "pages / desktop / benchmark / warm": {
+      "ready_ms": {
+        "n": 5,
+        "median": 287.90000000596046,
+        "p90": 304.34000000953677,
+        "min": 262,
+        "max": 308.30000001192093
+      },
+      "ttfb_ms": {
+        "n": 5,
+        "median": 0.0,
+        "p90": 0.05999999642372132,
+        "min": 0.0,
+        "max": 0.09999999403953552
+      },
+      "wire_bytes": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "decoded_bytes": {
+        "n": 5,
+        "median": 4068855,
+        "p90": 4068855.0,
+        "min": 4068855,
+        "max": 4068855
+      },
+      "requests": {
+        "n": 5,
+        "median": 5,
+        "p90": 5.0,
+        "min": 5,
+        "max": 5
+      },
+      "nodes": {
+        "n": 5,
+        "median": 6896,
+        "p90": 6896.0,
+        "min": 6896,
+        "max": 6896
+      },
+      "heap_bytes": {
+        "n": 5,
+        "median": 11180446,
+        "p90": 15619467.600000001,
+        "min": 11176746,
+        "max": 18546850
+      },
+      "longtask_count": {
+        "n": 5,
+        "median": 2,
+        "p90": 2.6,
+        "min": 2,
+        "max": 3
+      },
+      "blocking_ms": {
+        "n": 5,
+        "median": 29,
+        "p90": 39.2,
+        "min": 15,
+        "max": 44
+      },
+      "lcp_ms": {
+        "n": 5,
+        "median": 300,
+        "p90": 317.6,
+        "min": 276,
+        "max": 324
+      },
+      "cls": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "cdp_wire_bytes": {
+        "n": 5,
+        "median": 242,
+        "p90": 258.8,
+        "min": 240,
+        "max": 260
+      },
+      "http_response_count": {
+        "n": 5,
+        "median": 5,
+        "p90": 5.0,
+        "min": 5,
+        "max": 5
+      },
+      "cached_response_count": {
+        "n": 5,
+        "median": 4,
+        "p90": 4.0,
+        "min": 4,
+        "max": 4
+      }
+    },
+    "pages / desktop / report / cold": {
+      "ready_ms": {
+        "n": 5,
+        "median": 628,
+        "p90": 683.6600000083447,
+        "min": 597.9000000059605,
+        "max": 708.7000000178814
+      },
+      "ttfb_ms": {
+        "n": 5,
+        "median": 70.10000002384186,
+        "p90": 81.35999999046325,
+        "min": 53.69999998807907,
+        "max": 83.0
+      },
+      "wire_bytes": {
+        "n": 5,
+        "median": 1357476,
+        "p90": 1357476.0,
+        "min": 1357476,
+        "max": 1357476
+      },
+      "decoded_bytes": {
+        "n": 5,
+        "median": 14393481,
+        "p90": 14393481.0,
+        "min": 14393481,
+        "max": 14393481
+      },
+      "requests": {
+        "n": 5,
+        "median": 8,
+        "p90": 8.0,
+        "min": 8,
+        "max": 8
+      },
+      "nodes": {
+        "n": 5,
+        "median": 4672,
+        "p90": 4672.0,
+        "min": 4672,
+        "max": 4672
+      },
+      "heap_bytes": {
+        "n": 5,
+        "median": 57531166,
+        "p90": 57944262.0,
+        "min": 50510293,
+        "max": 57966294
+      },
+      "longtask_count": {
+        "n": 5,
+        "median": 5,
+        "p90": 6.2,
+        "min": 4,
+        "max": 7
+      },
+      "blocking_ms": {
+        "n": 5,
+        "median": 164,
+        "p90": 214.4,
+        "min": 114,
+        "max": 244
+      },
+      "lcp_ms": {
+        "n": 5,
+        "median": 988,
+        "p90": 1065.6,
+        "min": 952,
+        "max": 1096
+      },
+      "cls": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "cdp_wire_bytes": {
+        "n": 5,
+        "median": 1360954,
+        "p90": 1360958.2,
+        "min": 1360759,
+        "max": 1360959
+      },
+      "http_response_count": {
+        "n": 5,
+        "median": 8,
+        "p90": 8.0,
+        "min": 8,
+        "max": 8
+      },
+      "cached_response_count": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "expand_paint_ms": {
+        "n": 5,
+        "median": 126.40000000596046,
+        "p90": 137.2,
+        "min": 86.5,
+        "max": 140
+      }
+    },
+    "pages / desktop / report / warm": {
+      "ready_ms": {
+        "n": 5,
+        "median": 261.40000000596046,
+        "p90": 270.0799999833107,
+        "min": 233.90000000596046,
+        "max": 274.39999997615814
+      },
+      "ttfb_ms": {
+        "n": 5,
+        "median": 0.0,
+        "p90": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "wire_bytes": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "decoded_bytes": {
+        "n": 5,
+        "median": 14393481,
+        "p90": 14393481.0,
+        "min": 14393481,
+        "max": 14393481
+      },
+      "requests": {
+        "n": 5,
+        "median": 8,
+        "p90": 8.0,
+        "min": 8,
+        "max": 8
+      },
+      "nodes": {
+        "n": 5,
+        "median": 4672,
+        "p90": 4672.0,
+        "min": 4672,
+        "max": 4672
+      },
+      "heap_bytes": {
+        "n": 5,
+        "median": 109603452,
+        "p90": 113795662.4,
+        "min": 27609247,
+        "max": 114793408
+      },
+      "longtask_count": {
+        "n": 5,
+        "median": 4,
+        "p90": 4.0,
+        "min": 3,
+        "max": 4
+      },
+      "blocking_ms": {
+        "n": 5,
+        "median": 68,
+        "p90": 85.0,
+        "min": 65,
+        "max": 93
+      },
+      "lcp_ms": {
+        "n": 5,
+        "median": 528,
+        "p90": 565.6,
+        "min": 520,
+        "max": 572
+      },
+      "cls": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "cdp_wire_bytes": {
+        "n": 5,
+        "median": 259,
+        "p90": 261.6,
+        "min": 240,
+        "max": 262
+      },
+      "http_response_count": {
+        "n": 5,
+        "median": 8,
+        "p90": 8.0,
+        "min": 8,
+        "max": 8
+      },
+      "cached_response_count": {
+        "n": 5,
+        "median": 7,
+        "p90": 7.0,
+        "min": 7,
+        "max": 7
+      }
+    },
+    "pages / mobile4g / benchmark / cold": {
+      "ready_ms": {
+        "n": 5,
+        "median": 2653,
+        "p90": 2767.7200000166895,
+        "min": 2619.4000000059605,
+        "max": 2800.600000023842
+      },
+      "ttfb_ms": {
+        "n": 5,
+        "median": 60.29999998211861,
+        "p90": 69.92000000476837,
+        "min": 44.099999994039536,
+        "max": 76.0
+      },
+      "wire_bytes": {
+        "n": 5,
+        "median": 671248,
+        "p90": 671248.0,
+        "min": 671248,
+        "max": 671248
+      },
+      "decoded_bytes": {
+        "n": 5,
+        "median": 4068855,
+        "p90": 4068855.0,
+        "min": 4068855,
+        "max": 4068855
+      },
+      "requests": {
+        "n": 5,
+        "median": 5,
+        "p90": 5.0,
+        "min": 5,
+        "max": 5
+      },
+      "nodes": {
+        "n": 5,
+        "median": 6896,
+        "p90": 6896.0,
+        "min": 6896,
+        "max": 6896
+      },
+      "heap_bytes": {
+        "n": 5,
+        "median": 10224527,
+        "p90": 10226524.6,
+        "min": 10223351,
+        "max": 10227771
+      },
+      "longtask_count": {
+        "n": 5,
+        "median": 5,
+        "p90": 6.0,
+        "min": 5,
+        "max": 6
+      },
+      "blocking_ms": {
+        "n": 5,
+        "median": 903,
+        "p90": 972.8,
+        "min": 798,
+        "max": 1002
+      },
+      "lcp_ms": {
+        "n": 5,
+        "median": 2644,
+        "p90": 2762.4,
+        "min": 2612,
+        "max": 2796
+      },
+      "cls": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "sort_script_ms": {
+        "n": 5,
+        "median": 226.89999997615814,
+        "p90": 242.9,
+        "min": 212.59999999403954,
+        "max": 244.5
+      },
+      "sort_paint_ms": {
+        "n": 5,
+        "median": 317,
+        "p90": 326.81999999284744,
+        "min": 300.59999999403954,
+        "max": 331.5
+      },
+      "filter_script_ms": {
+        "n": 5,
+        "median": 376.69999998807907,
+        "p90": 411.81999999880793,
+        "min": 364.2999999821186,
+        "max": 431.90000000596046
+      },
+      "filter_paint_ms": {
+        "n": 5,
+        "median": 507.39999997615814,
+        "p90": 542.3400000035763,
+        "min": 488.09999999403954,
+        "max": 557.9000000059605
+      },
+      "cdp_wire_bytes": {
+        "n": 5,
+        "median": 672979,
+        "p90": 673338.8,
+        "min": 672670,
+        "max": 673402
+      },
+      "http_response_count": {
+        "n": 5,
+        "median": 5,
+        "p90": 5.0,
+        "min": 5,
+        "max": 5
+      },
+      "cached_response_count": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "sort_blocking_ms": {
+        "n": 5,
+        "median": 213,
+        "p90": 222.6,
+        "min": 194,
+        "max": 227
+      },
+      "sort_longtask_count": {
+        "n": 5,
+        "median": 2,
+        "p90": 2.0,
+        "min": 2,
+        "max": 2
+      },
+      "sort_nodes": {
+        "n": 5,
+        "median": 6980,
+        "p90": 6980.0,
+        "min": 6980,
+        "max": 6980
+      },
+      "filter_blocking_ms": {
+        "n": 5,
+        "median": 401,
+        "p90": 436.6,
+        "min": 382,
+        "max": 453
+      },
+      "filter_longtask_count": {
+        "n": 5,
+        "median": 2,
+        "p90": 2.0,
+        "min": 2,
+        "max": 2
+      },
+      "filter_nodes": {
+        "n": 5,
+        "median": 4797,
+        "p90": 4797.0,
+        "min": 4797,
+        "max": 4797
+      }
+    },
+    "pages / mobile4g / benchmark / warm": {
+      "ready_ms": {
+        "n": 5,
+        "median": 1256.7000000178814,
+        "p90": 1335.2799999892711,
+        "min": 1132.7999999821186,
+        "max": 1370.5999999940395
+      },
+      "ttfb_ms": {
+        "n": 5,
+        "median": 0.0,
+        "p90": 0.05999999642372132,
+        "min": 0.0,
+        "max": 0.09999999403953552
+      },
+      "wire_bytes": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "decoded_bytes": {
+        "n": 5,
+        "median": 4068855,
+        "p90": 4068855.0,
+        "min": 4068855,
+        "max": 4068855
+      },
+      "requests": {
+        "n": 5,
+        "median": 5,
+        "p90": 5.0,
+        "min": 5,
+        "max": 5
+      },
+      "nodes": {
+        "n": 5,
+        "median": 6896,
+        "p90": 6896.0,
+        "min": 6896,
+        "max": 6896
+      },
+      "heap_bytes": {
+        "n": 5,
+        "median": 11172062,
+        "p90": 18447575.6,
+        "min": 11145958,
+        "max": 18514534
+      },
+      "longtask_count": {
+        "n": 5,
+        "median": 5,
+        "p90": 5.0,
+        "min": 5,
+        "max": 5
+      },
+      "blocking_ms": {
+        "n": 5,
+        "median": 784,
+        "p90": 861.0,
+        "min": 669,
+        "max": 891
+      },
+      "lcp_ms": {
+        "n": 5,
+        "median": 1244,
+        "p90": 1327.2,
+        "min": 1124,
+        "max": 1364
+      },
+      "cls": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "cdp_wire_bytes": {
+        "n": 5,
+        "median": 259,
+        "p90": 260.2,
+        "min": 258,
+        "max": 261
+      },
+      "http_response_count": {
+        "n": 5,
+        "median": 5,
+        "p90": 5.0,
+        "min": 5,
+        "max": 5
+      },
+      "cached_response_count": {
+        "n": 5,
+        "median": 4,
+        "p90": 4.0,
+        "min": 4,
+        "max": 4
+      }
+    },
+    "pages / mobile4g / report / cold": {
+      "ready_ms": {
+        "n": 5,
+        "median": 1829,
+        "p90": 1948.8399999916553,
+        "min": 1742.699999988079,
+        "max": 2008.5999999940395
+      },
+      "ttfb_ms": {
+        "n": 5,
+        "median": 63.19999998807907,
+        "p90": 82.33999999165536,
+        "min": 46.30000001192093,
+        "max": 95.09999999403954
+      },
+      "wire_bytes": {
+        "n": 5,
+        "median": 1357476,
+        "p90": 1357476.0,
+        "min": 1357476,
+        "max": 1357476
+      },
+      "decoded_bytes": {
+        "n": 5,
+        "median": 14393481,
+        "p90": 14393481.0,
+        "min": 14393481,
+        "max": 14393481
+      },
+      "requests": {
+        "n": 5,
+        "median": 8,
+        "p90": 8.0,
+        "min": 8,
+        "max": 8
+      },
+      "nodes": {
+        "n": 5,
+        "median": 4672,
+        "p90": 4672.0,
+        "min": 4672,
+        "max": 4672
+      },
+      "heap_bytes": {
+        "n": 5,
+        "median": 57513846,
+        "p90": 57533177.2,
+        "min": 52141585,
+        "max": 57533302
+      },
+      "longtask_count": {
+        "n": 5,
+        "median": 9,
+        "p90": 10.8,
+        "min": 8,
+        "max": 12
+      },
+      "blocking_ms": {
+        "n": 5,
+        "median": 1773,
+        "p90": 2012.2,
+        "min": 1601,
+        "max": 2073
+      },
+      "lcp_ms": {
+        "n": 5,
+        "median": 5120,
+        "p90": 5295.2,
+        "min": 4912,
+        "max": 5396
+      },
+      "cls": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0015408652293839727,
+        "min": 0,
+        "max": 0.0025681087156399544
+      },
+      "cdp_wire_bytes": {
+        "n": 5,
+        "median": 1360383,
+        "p90": 1360759.2,
+        "min": 1359406,
+        "max": 1360786
+      },
+      "http_response_count": {
+        "n": 5,
+        "median": 8,
+        "p90": 8.0,
+        "min": 8,
+        "max": 8
+      },
+      "cached_response_count": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "expand_paint_ms": {
+        "n": 5,
+        "median": 484.59999999403954,
+        "p90": 514.2600000083446,
+        "min": 425.7999999821186,
+        "max": 515.7000000178814
+      }
+    },
+    "pages / mobile4g / report / warm": {
+      "ready_ms": {
+        "n": 5,
+        "median": 1096.699999988079,
+        "p90": 1187.7800000071525,
+        "min": 949.1000000238419,
+        "max": 1197.5
+      },
+      "ttfb_ms": {
+        "n": 5,
+        "median": 0.0,
+        "p90": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "wire_bytes": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "decoded_bytes": {
+        "n": 5,
+        "median": 14393481,
+        "p90": 14393481.0,
+        "min": 14393481,
+        "max": 14393481
+      },
+      "requests": {
+        "n": 5,
+        "median": 8,
+        "p90": 8.0,
+        "min": 8,
+        "max": 8
+      },
+      "nodes": {
+        "n": 5,
+        "median": 4672,
+        "p90": 4672.0,
+        "min": 4672,
+        "max": 4672
+      },
+      "heap_bytes": {
+        "n": 5,
+        "median": 27623211,
+        "p90": 38309321.6,
+        "min": 27601063,
+        "max": 45348286
+      },
+      "longtask_count": {
+        "n": 5,
+        "median": 9,
+        "p90": 9.6,
+        "min": 9,
+        "max": 10
+      },
+      "blocking_ms": {
+        "n": 5,
+        "median": 1585,
+        "p90": 1741.6,
+        "min": 1442,
+        "max": 1774
+      },
+      "lcp_ms": {
+        "n": 5,
+        "median": 2356,
+        "p90": 2569.6,
+        "min": 2220,
+        "max": 2600
+      },
+      "cls": {
+        "n": 5,
+        "median": 0,
+        "p90": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "cdp_wire_bytes": {
+        "n": 5,
+        "median": 259,
+        "p90": 261.2,
+        "min": 258,
+        "max": 262
+      },
+      "http_response_count": {
+        "n": 5,
+        "median": 8,
+        "p90": 8.0,
+        "min": 8,
+        "max": 8
+      },
+      "cached_response_count": {
+        "n": 5,
+        "median": 7,
+        "p90": 7.0,
+        "min": 7,
+        "max": 7
+      }
+    }
+  },
+  "expected_samples": 40,
+  "data_revision": "f47ef2d32968e59188b4139ede3ccac1d9737f21",
+  "request_failures": [],
+  "http_errors": [
+    {
+      "profile": "desktop",
+      "scenario": "benchmark",
+      "visit": "cold",
+      "run": 0,
+      "responses": [
+        {
+          "url": "https://tobias-run.github.io/favicon.ico",
+          "status": 404,
+          "protocol": "h2",
+          "fromDiskCache": false,
+          "fromServiceWorker": false,
+          "headers": {
+            "content-encoding": "gzip",
+            "etag": "W/\"6abcf5c5-239b\""
+          },
+          "encodedDataLength": 5366
+        }
+      ]
+    }
+  ]
+}
