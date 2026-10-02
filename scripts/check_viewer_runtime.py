@@ -920,6 +920,9 @@ def pruefe():
             from check_metric_units import pruefe as pruefe_metric_units
             units = pruefe_metric_units(b, f"http://localhost:{PORT}/viewer_json.html")
             print(f"  KPI-Einheiten: {units['cases']} Sprach-/Viewportfälle")
+            from check_ui_localization import pruefe as pruefe_ui_localization
+            localization = pruefe_ui_localization(b, f"http://localhost:{PORT}/viewer_json.html")
+            print(f"  UI-Lokalisierung: {localization['cases']} Fälle")
             b.close()
     finally:
         srv.shutdown()

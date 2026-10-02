@@ -534,6 +534,19 @@ const DE = {
   "Reference date: all": "Stichtag: alle",
   "G-SII module filers only": "nur G-SII-Modul-Melder",
   "Loading data…": "Lade Daten…",
+  "Loading report…": "Lade Report…",
+  "Loading {0} report(s)…": "Lade {0} Report(s)…",
+  "Search: metric, template, title…": "Suchen: Kennzahl, Template, Titel…",
+  "varies by template": "je Template verschieden",
+  "Reference date": "Stichtag",
+  "Currency": "Währung",
+  "Framework": "Framework",
+  "Cell": "Zelle",
+  "remove": "entfernen",
+  "Compare at most {0} reports.": "Maximal {0} Reports vergleichen.",
+  "Percentile within peer group": "Perzentil je Peer-Gruppe",
+  "{0} left": "{0} links",
+  "{0} right": "{0} rechts",
   "Language": "Sprache",
   "Switch language": "Sprache umschalten",
   "Amounts in": "Beträge in",
@@ -1536,7 +1549,7 @@ const PIN_MAX=4;
 function togglePin(key){
   if(PINS.has(key)) PINS.delete(key);
   else{
-    if(PINS.size>=PIN_MAX){ alert('Maximal '+PIN_MAX+' Reports vergleichen.'); return; }
+    if(PINS.size>=PIN_MAX){ alert(tr('Compare at most {0} reports.',PIN_MAX)); return; }
     PINS.add(key);
   }
   persist(); updateCmpBadge(); renderReportList(); shareState();
@@ -2167,7 +2180,7 @@ async function renderReport(rep){
   const current=()=>VIEW==='reports' && activeKey===repKey(rep);
   if(!rep.loaded){
     main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2></div>
-      <div class="status">Lade Report…<div class="prog"><i style="width:45%"></i></div></div>`;
+      <div class="status">${tr('Loading report…')}<div class="prog"><i style="width:45%"></i></div></div>`;
     renderReportList();
     try{ await ensureLoaded(rep); }
     catch(e){ if(!current()) return; main.innerHTML='<div class="status">'+esc(tr('Error loading the report:'))+' '+esc(e.message)+'</div>'; return; }
@@ -2178,15 +2191,15 @@ async function renderReport(rep){
   const nrec=NAMES.get(lei)||{};
   main.innerHTML=`<div class="rhead"><h2>${esc(bankName(rep.entityID))}</h2>
     <div class="meta"><span class="leicode">${esc(lei)}</span>${nrec.jur?' · '+esc(nrec.jur):''} · ${esc(refScope(scope))}</div>
-    <div class="meta">Reference date <b>${esc(rep.refPeriod)}</b> · Currency ${
+    <div class="meta">${tr('Reference date')} <b>${esc(rep.refPeriod)}</b> · ${tr('Currency')} ${
       curLabel(rep) ? `<b>${esc(curLabel(rep))}</b>` : `<span class="cl">${tr('not reported')}</span>`}${
-      isMixedCur(rep)?` <span class="cl" title="${tr('This report does not file consistently in one currency. The one named first carries the majority of facts; the deviating templates use their own rate (#55).')}">— je Template verschieden</span>`:''}
-    · Framework <b>${esc(rep.framework)}</b></div></div>
+      isMixedCur(rep)?` <span class="cl" title="${tr('This report does not file consistently in one currency. The one named first carries the majority of facts; the deviating templates use their own rate (#55).')}">— ${tr('varies by template')}</span>`:''}
+    · ${tr('Framework')} <b>${esc(rep.framework)}</b></div></div>
     ${leermeldung(rep)}
     <div id="ovSection"></div>
     <div id="tsSection"${entityReports(rep).length>=2?' class="ts-slot" aria-busy="true"><div class="status" role="status">'+esc(LANG==='de'?'Zeitreihe wird geladen…':'Loading time series…')+'</div>':'>'}</div>
     ${coverageBlock(rep)}
-    <div class="tfilter"><input id="tfilter" placeholder="Suchen: Kennzahl, Template, Titel…">${controlsHTML()}</div>
+    <div class="tfilter"><input id="tfilter" placeholder="${esc(tr('Search: metric, template, title…'))}">${controlsHTML()}</div>
     <div id="tcontainer"></div>`;
   // Werte sofort aus dem eigenen Shard; die Peer-Einordnung braucht die anderen
   // Reports und kommt nach, sobald benchmark.json da ist.
@@ -2530,7 +2543,8 @@ function bmProfiles(){
   for(const p of PROFILES){
     const cols=p.metrics.map(id=>METRICDOC.get(id)).filter(Boolean);
     if(!cols.length) continue;
-    out[p.id]={label:(LANG==='en'&&p.en)?p.en:p.label, tpl:p.tpl, trendRow:p.trend||null, note:p.note||'',
+    out[p.id]={label:p.label, en:p.en, tpl:p.tpl, trendRow:p.trend||null,
+               note:p.note||'', note_en:p.note_en||'',
                defaultSort:{col:p.sort[0], dir:p.sort[1]}, cols,
                // Plausibilitaets-Tor (#18): Kennzahlen, deren `plausible`-
                // Korridor ueber die Aufnahme in die Liste entscheidet.
@@ -2964,12 +2978,12 @@ function distributionRow(rows, prof){
   // Reproduzierbarkeitslinie des Projekts als Gestaltungselement.
   const dates=[...new Set(rows.map(r=>r.date))].sort();
   const period=dates.length===1?dates[0]
-    :`${dates[0]}–${dates[dates.length-1]} (${dates.length} Stichtage)`;
+    :`${dates[0]}–${dates[dates.length-1]} (${tr('{0} reference dates',dates.length)})`;
   let cards='';
   for(const c of prof.cols){
     const d=distChart(rows.map(r=>r[c.id]));
     if(!d) continue;
-    const tail=[d.nLo?`${d.nLo} links`:'', d.nHi?`${d.nHi} rechts`:''].filter(Boolean).join(' · ');
+    const tail=[d.nLo?tr('{0} left',d.nLo):'', d.nHi?tr('{0} right',d.nHi):''].filter(Boolean).join(' · ');
     // Quellzeile aus den Registry-Zellen: bei einer Zelle die Koordinate,
     // bei einer abgeleiteten Kennzahl die beteiligten.
     const cs=c.cells||[];
@@ -3031,7 +3045,7 @@ function mountBenchmark(main,html,newRows,rows,sortCol,fmarks){
   for(const row of rows){
     const node=BM_DOM.rows.get(row.key);
     const badge=node.querySelector('.bm-fence');
-    const html=sortCol?fenceBadge(fmarks.get(row.key),sortCol.label):'';
+    const html=sortCol?fenceBadge(fmarks.get(row.key),mlabel(sortCol)):'';
     if(badge.innerHTML!==html) badge.innerHTML=html;
     fragment.append(node);
   }
@@ -3085,7 +3099,7 @@ async function renderBenchmark(){
   const nFlag=allRows.filter(r=>flaggedFor(r.q,prof.tpl)).length;
   const rows=BM_HIDEFLAG?allRows.filter(r=>!flaggedFor(r.q,prof.tpl)):allRows;
   const profSel=Object.entries(bmAll()).map(([k,p])=>
-    `<option value="${k}"${k===BMP?' selected':''}>${esc(p.label)}</option>`).join('');
+    `<option value="${k}"${k===BMP?' selected':''}>${esc(mlabel(p))}</option>`).join('');
   const pmaps=new Map();
   if(BM_PCT) for(const c of sichtbareSpalten(prof)) pmaps.set(c.id,percentileMap(allRows,c.id));
   // Bezug der Groessenbalken (#49): das Maximum der SICHTBAREN Zeilen. Berechnet
@@ -3108,7 +3122,7 @@ async function renderBenchmark(){
   let newRows='';
   let h=`<div class="rhead"><h2>${tr('Benchmark')}</h2></div>
     <div class="bmbar"><label class="ctl">${tr('Profile')}: <select id="bmProfile">${profSel}</select></label>
-      <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> Perzentil je Peer-Gruppe</label>
+      <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> ${tr('Percentile within peer group')}</label>
       <label class="ctl" title="${esc(tr('Hides reports in which the plausibility check found values far outside their cell population. Percentiles stay computed on the full set.'))}"><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> ${tr('collapse conspicuous')}${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
       <details class="ctl colsel"><summary title="${esc(tr('Which metrics the table shows. The selection is part of the link and of the CSV export — otherwise a shared link shows different columns than the view it came from.'))}">${tr('Columns')} <span class="cl">(${spalten.length}/${prof.cols.length})</span></summary>
         <div class="colbox">${prof.cols.map(c=>{
@@ -3337,7 +3351,7 @@ async function renderCompare(){
   }
   const need=reps.filter(r=>!r.loaded);
   if(need.length){
-    main.innerHTML=`<div class="rhead"><h2>Vergleich</h2></div><div class="status">Lade ${need.length} Report(s)…</div>`;
+    main.innerHTML=`<div class="rhead"><h2>${tr('Compare')}</h2></div><div class="status">${tr('Loading {0} report(s)…',need.length)}</div>`;
     try{ await Promise.all(need.map(ensureLoaded)); }catch(e){}
     if(VIEW!=='compare') return;   // navigated away while loading
   }
@@ -3345,7 +3359,7 @@ async function renderCompare(){
   reps.forEach(r=>[...r.templates.keys()].forEach(t=>tplSet.add(t)));
   const tpls=[...tplSet].sort();
   if(!tpls.includes(CMPTPL)) CMPTPL=tpls.includes('61.00')?'61.00':tpls[0];
-  main.innerHTML=`<div class="rhead"><h2>Vergleich</h2></div><div class="cmp-pick">
+  main.innerHTML=`<div class="rhead"><h2>${tr('Compare')}</h2></div><div class="cmp-pick">
     <label class="ctl">Template:
       <select id="cmpTpl">${tpls.map(t=>{
         const ttl=TITLES.get(dpmCode(t))||'';
@@ -3353,7 +3367,7 @@ async function renderCompare(){
       }).join('')}</select></label>
     ${controlsHTML()}
     ${reps.map(r=>`<span class="chip">${esc(bankName(r.entityID).slice(0,28))} · ${esc(r.refPeriod)}
-      <button title="entfernen" data-k="${esc(repKey(r))}">✕</button></span>`).join('')}
+      <button title="${esc(tr('remove'))}" data-k="${esc(repKey(r))}">✕</button></span>`).join('')}
   </div><div id="cmpBody"></div>`;
 
   const draw=()=>{
@@ -3379,7 +3393,7 @@ async function renderCompare(){
     let t=`<section><h3>${esc(CMPTPL)} — ${esc(ttl)}
       ${unit>1?`<span class="scalenote">${tr('Amounts in')} ${unitLabel(unit)} ${EUR?'EUR':esc(curOf(per[0].rep,CMPTPL))}${anyFx?' · '+tr('ECB rate'):''}</span>`:''}
       ${mixedCur?`<span class="scalenote" style="color:#b26b00">${tr('⚠ different currencies — the EUR toggle is recommended')}</span>`:''}
-      </h3><table><thead><tr><th class="rh">Zelle</th><th class="rl"></th>`;
+      </h3><table><thead><tr><th class="rh">${tr('Cell')}</th><th class="rl"></th>`;
     per.forEach(p=>{ t+=`<th>${esc(bankName(p.rep.entityID).slice(0,24))}<br><span class="cl">${esc(p.rep.refPeriod)} · ${esc(curOf(p.rep,CMPTPL))}</span></th>`; });
     t+='</tr></thead><tbody>';
     for(const k of sorted){
