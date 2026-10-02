@@ -1,3 +1,5 @@
+**[Open the live Pillar 3 Viewer →](https://tobias-run.github.io/P3DH/processed/zweig_a/viewer_json.html)**
+
 # EBA Pillar 3 Data Hub (P3DH) — data analysis pipeline
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22666716.svg)](https://doi.org/10.5281/zenodo.22666716)
@@ -24,6 +26,9 @@ times German GDP. Read on its own, that is a number. Read against 330
 comparable reports whose median is EUR 1.6 million, it is a finding. We do not
 correct it — we flag it and say why.
 
+> **Documentation:** start with the [documentation index](docs/README.md).
+> The [issue review dated 2 October 2026](docs/issue_review_2026-10-02.md)
+> records the latest ticket review and remaining work.
 > **Current project status:** see `STATUS.md`, which carries the dated
 > inventory. Open work is tracked as
 > [GitHub issues](https://github.com/Tobias-Run/P3DH/issues); closed findings
@@ -50,7 +55,8 @@ of detection.
 
 ## 🔗 Live viewer (in the browser, no installation)
 
-**Public:** **https://tobias-run.github.io/P3DH/** — no clone, no server.
+**[Open the viewer directly](https://tobias-run.github.io/P3DH/processed/zweig_a/viewer_json.html)** — no clone, no server.
+The [project landing page](https://tobias-run.github.io/P3DH/) provides background and links.
 
 The **branch-A viewer** reconstructs the bank templates (KM1, OV1, CCR1 …) with
 full row and column labels and offers **peer benchmarks, time series and
@@ -208,7 +214,14 @@ finished `codebook/dpm_codebook.csv` is in the repository.
 | `codebook/` | DPM mapping: code → label / unit / title |
 | `scripts/` | harvester, downloader, parser, branch-B/A builders, publish script |
 | `tests/` | the test suite; runs on every push (count: see the Tests badge above) |
-| `docs/` | decision memos, format notes, query examples, project brief, analyses |
+| `docs/` | [documentation index](docs/README.md), decision memos, format notes, analyses and dated reviews |
+| `performance/` | [reproducible measurement tools](performance/README.md) and retained measurement evidence in `results/` |
+| `.github/workflows/` | automated tests, data pipeline and publication workflows |
+
+Generated data and downloaded snapshots are intentionally ignored by Git; the
+`data` branch holds the published data. Local Python and pytest caches are also
+ignored. Measurement evidence under `performance/results/` and dated review
+folders under `docs/` are retained so published findings remain traceable.
 
 ## Phases
 
