@@ -1,0 +1,7 @@
+{'profile': 'headroom', 'lang': 'en', 'unit_notes': ['Ratio from KM1, in per cent', 'Ratio from KM1, in per cent', 'Ratio from KM1, in per cent', 'Differenz in Prozentpunkten', 'Ratio from KM1, in per cent', 'Amounts in bn EUR (ECB rate)']}
+{'profile': 'verg', 'lang': 'en', 'unit_notes': ['Betrag je Kopf, in EUR (EZB-Kurs)', 'Betrag je Kopf, in EUR (EZB-Kurs)', 'Betrag je Kopf, in EUR (EZB-Kurs)', 'Betrag je Kopf, in EUR (EZB-Kurs)', 'Ratio, in per cent', 'Ratio, in per cent', 'Absolutzahl']}
+{'staff_header': 'Number of other identified staff (Personen)'}
+{'profile': 'esg', 'lang': 'en', 'unit_notes': ['Ratio, in per cent', 'Ratio, in per cent', 'Ratio, in per cent', 'Ratio, in per cent']}
+{'profile_note': 'ⓘ Nur Verhältniszahlen: die Absolutbeträge in 41.00 haben uneinheitliche Meldeeinheiten.'}
+{'report_search': 'Suchen: Kennzahl, Template, Titel…'}
+{'compare_heading': 'Vergleich', 'cell_header': 'Zelle'}

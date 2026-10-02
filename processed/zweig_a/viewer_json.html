@@ -810,6 +810,10 @@ const DE = {
   "Ratio, in per cent": "Verhältniszahl, in Prozent",
   "Share of the total risk exposure amount (TREA)": "Anteil an der Gesamtrisikoposition (TREA)",
   "Amounts in bn EUR (ECB rate)": "Beträge in Mrd. EUR (EZB-Kurs)",
+  "Difference in percentage points": "Differenz in Prozentpunkten",
+  "Amount per head in EUR (ECB rate)": "Betrag je Kopf, in EUR (EZB-Kurs)",
+  "Absolute count": "Absolutzahl",
+  "people": "Personen",
   "{0} reports with template {1}": "{0} Reports mit Template {1}",
   "None yet. What is stored is the current link — so it can be passed on as well.":
     "Noch keine. Gespeichert wird der aktuelle Link — er lässt sich also auch weitergeben.",
@@ -1326,7 +1330,10 @@ const shapeAt=(rep,tid,row,col)=>{
 function redrawBody(body, list, rep){
   // Neu zeichnen, wenn die Form NACH dem ersten Rendern eintrifft. Nur dann —
   // sonst flackert jede Tabelle einmal ohne Grund.
+  const focused=body.contains(document.activeElement)
+    ? document.activeElement.closest('section[data-template]')?.dataset.template : null;
   body.innerHTML=list.map(tid=>renderTemplate(tid, rep.templates.get(tid), rep)).join('');
+  if(focused) focusTemplateHeading(body,focused);
 }
 
 function shapeStrip(form, wert){
@@ -1683,7 +1690,7 @@ function renderTemplate(tid, cells, rep){
     ? '▲ {0} values in this template deviate from the population so strongly that we class them as conspicuous (#24). The reported value stays unchanged — the mark is a pointer, not a verdict on correctness.'
     : '▲ {0} value in this template deviates from the population so strongly that we class it as conspicuous (#24). The reported value stays unchanged — the mark is a pointer, not a verdict on correctness.',
     nFlag)}${UA.has(tid)?' '+tr('In this template the reported unit is inconsistent as well (#9), so the deviation may be a question of units.'):''}</span></div>` : '';
-  let h=`<section><h3>${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}${flagNote}<table><thead><tr><th class="rh">${axisMap?'Code':tr('Row')}</th><th class="rl"></th>`;
+  let h=`<section data-template="${esc(tid)}"><h3 tabindex="-1">${esc(tid)} — ${esc(title)||'?'} ${coverageNote}${note}</h3>${dimBar}${axisNote}${ambigNote}${flagNote}<table><thead><tr><th class="rh">${axisMap?'Code':tr('Row')}</th><th class="rl"></th>`;
   for(const c of cols) h+=`<th>${esc(c)}<br><span class="cl">${esc(colLbl(c))}</span></th>`;
   h+='</tr></thead><tbody>';
   // Am Zeilenlabel ist die Mehrdeutigkeit am wichtigsten: dort steht EINE
@@ -1877,13 +1884,16 @@ const metricBridge=m=>(m.cells||[]).map(c=>bridgeAt(c[0],c[1],c[2])).find(Boolea
 /* Kennzahlname in der aktiven Sprache. Die Registry fuehrt beides; `en` ist
    dort seit #25 gepflegt und lag bis jetzt ungenutzt herum. */
 const mlabel=m=>(LANG==='en' ? (m.en||m.label) : m.label);
+// Registry units remain canonical; only their visible labels follow the language.
+const metricUnit=m=>m.unit==='Mrd EUR' ? unitLabel(1e9)+' EUR'
+  : m.unit==='Personen' ? tr('people') : m.unit;
 /* Erklaerungstexte einer Kennzahl oder eines Profils in der eingestellten
    Sprache. Fallback ist AUSDRUECKLICH die deutsche Fassung und nicht der leere
    String: eine fehlende Uebersetzung soll den Text nicht verschwinden lassen —
    eine Definition auf Deutsch ist einem Leser mehr wert als gar keine, und der
    Codebook-Test findet die Luecke ohnehin. */
 const mtext=(m,feld)=>(LANG==='en' ? (m[feld+'_en']||m[feld]||'') : (m[feld]||''));
-const metricHead=m=>mlabel(m)+((m.unit==='%')?'':' ('+m.unit+')');
+const metricHead=m=>mlabel(m)+((m.unit==='%')?'':' ('+metricUnit(m)+')');
 
 /* Einmal berechnet, dann gehalten: die Einordnung haengt nur an BM_LOADED. */
 let OV_PCT=null;
@@ -1909,8 +1919,31 @@ function jumpToTemplate(tid){
   if(!f) return;
   f.value=tid;
   f.dispatchEvent(new Event('input'));
-  const sec=document.querySelector('#tcontainer section');
-  if(sec) sec.scrollIntoView({block:'start', behavior:'smooth'});
+  const theme=[...document.querySelectorAll('#tcontainer details.theme')]
+    .find(d=>d.dataset.t===themeOf(tid));
+  const body=theme?.querySelector('.tbody');
+  if(!body) return;
+  // Rendering is asynchronous. An obsolete filter/report discards this
+  // request along with its disconnected body, without scrolling a new view.
+  body.dataset.jumpTemplate=tid;
+  finishTemplateJump(body);
+}
+function focusTemplateHeading(body,tid){
+  const sec=[...body.querySelectorAll('section[data-template]')]
+    .find(s=>s.dataset.template===tid);
+  const heading=sec?.querySelector('h3');
+  if(heading) heading.focus({preventScroll:true});
+  return sec;
+}
+function finishTemplateJump(body){
+  const tid=body.dataset.jumpTemplate;
+  if(!tid || !body.isConnected) return;
+  const sec=focusTemplateHeading(body,tid);
+  if(!sec) return;
+  delete body.dataset.jumpTemplate;
+  // The sticky header wraps on phones; keep the actual heading below it.
+  sec.style.scrollMarginTop=(document.querySelector('header').getBoundingClientRect().height+8)+'px';
+  sec.scrollIntoView({block:'start', behavior:'smooth'});
 }
 
 /* ---- Kennzahl-Detail (#63) ------------------------------------------------
@@ -1982,7 +2015,7 @@ function metricDetail(rep, id){
   if(doc.floor!=null || own!=null || doc.note){
     h+=`<div class="mdl">${tr('Classification')}</div>`;
     if(doc.floor!=null)
-      h+=`<p>${tr('Statutory floor:')} <b>${esc(nf(doc.floor,1))}${NBSP}${esc(mt.unit)}</b>
+      h+=`<p>${tr('Statutory floor:')} <b>${esc(nf(doc.floor,1))}${NBSP}${esc(metricUnit(mt))}</b>
         <span class="cl">— ${esc(mtext(doc,'floor_src'))}</span></p>`;
     if(own!=null)
       h+=`<p>${tr('<b>Binding for this institution</b> is the reported overall requirement:')}
@@ -1998,7 +2031,7 @@ function metricDetail(rep, id){
   if(doc.formula){
     h+=`<tr class="res"><td class="role">${tr('Result')}</td><td class="coord"></td>
       <td>${esc(derivationText(doc.formula))}</td>
-      <td class="rv">${v==null?'–':esc(nf(v,metricDec(mt)))+NBSP+esc(mt.unit)}</td></tr>`;
+      <td class="rv">${v==null?'–':esc(nf(v,metricDec(mt)))+NBSP+esc(metricUnit(mt))}</td></tr>`;
   }
   h+='</tbody></table>';
   if(!doc.formula)
@@ -2031,7 +2064,7 @@ function renderOverview(rep){
         title="${esc(tr('Click: definition, purpose, threshold and derivation from the filing template'))}">
         <div class="ovlab">${esc(mlabel(mt))}${
         bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:''}</div>
-        <div class="ovval">${esc(nf(v,metricDec(mt)))}<span class="ovu">${esc(mt.unit)}</span></div>
+        <div class="ovval">${esc(nf(v,metricDec(mt)))}<span class="ovu">${esc(metricUnit(mt))}</span></div>
         <div class="ovpct">${p?pctBadge(p):''}</div></div>`;
     }
     h+='</div>';
@@ -2284,6 +2317,7 @@ async function renderReport(rep){
             : tr('No analysable cells for this block — it is declared, but without data in our holdings.')}</div>`;
     body.dataset.done='1';
     delete body.dataset.loading;body.removeAttribute('aria-busy');
+    finishTemplateJump(body);
   };
   if(remembered) document.getElementById('tfilter').value=remembered.filter;
   draw();
@@ -2334,8 +2368,8 @@ function renderTimeseries(rep){
     {row:'0220',label:'Leverage',kind:'pct'},
     {row:'0320',label:'LCR',kind:'pct'},
     {row:'0350',label:'NSFR',kind:'pct'},
-    {row:'0040',label:'TREA (Mrd)',kind:'eur'},
-    {row:'0010',label:'CET1 (Mrd)',kind:'eur'},
+    {row:'0040',label:'TREA',kind:'eur'},
+    {row:'0010',label:'CET1',kind:'eur'},
   ];
   // Framework-Bruch (#26): wo wechselt zwischen zwei benachbarten Stichtagen
   // die Taxonomie? Der Viewer zeichnete bisher darueber hinweg — ein Sprung an
@@ -2365,7 +2399,7 @@ function renderTimeseries(rep){
     // Liegt die Zelle dieser Kennzahl selbst auf einem Rebound? Dann ist der
     // Bruch nicht nur zeitlich, sondern trifft genau diese Zahl.
     const bs=bridgeAt('61.00', m.row, '0010');
-    ts+=`<tr><td class="rl">${esc(mlabel(m))}${m.kind==='eur'?' <span class="cl">EUR</span>':''}`
+    ts+=`<tr><td class="rl">${esc(mlabel(m))}${m.kind==='eur'?' ('+esc(unitLabel(1e9))+') <span class="cl">EUR</span>':''}`
       + (bs?` <span class="fwb" title="${esc(BRIDGE_TIP()[bs])}">${BRIDGE_MARK[bs]}</span>`:'')+`</td>`;
     vals.forEach((v,i)=>{ const cls=(v==null?'empty':'num')+(brk[i]?' fwbreak':'');
       ts+= v==null?`<td class="${cls}"></td>`:
@@ -2923,8 +2957,8 @@ function distributionRow(rows, prof){
   // Anmerkung unter dem Titel: klärt die Größe, bevor die Zahl gelesen wird.
   const NOTE={pct:tr('Ratio from KM1, in per cent'), ratio:tr('Ratio, in per cent'),
               shareOfTrea:tr('Share of the total risk exposure amount (TREA)'),
-              pp:'Differenz in Prozentpunkten', eur:tr('Amounts in bn EUR (ECB rate)'),
-              eurPlain:'Betrag je Kopf, in EUR (EZB-Kurs)', num:'Absolutzahl'};
+              pp:tr('Difference in percentage points'), eur:tr('Amounts in bn EUR (ECB rate)'),
+              eurPlain:tr('Amount per head in EUR (ECB rate)'), num:tr('Absolute count')};
   // Quellzeile je Grafik — die exakte Herkunft, nicht nur die Institution:
   // Template, Zelle, Stichtage, Zahl der Reports. Das ist die
   // Reproduzierbarkeitslinie des Projekts als Gestaltungselement.

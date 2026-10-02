@@ -1,0 +1,9 @@
+  KPI-Einheiten: 1280px · en · bn EUR · Overview/Zeitreihe/Benchmark: OK
+  KPI-Einheiten: 1280px · de · Mrd. EUR · Overview/Zeitreihe/Benchmark: OK
+  KPI-Einheiten: 1280px · en · bn EUR · Overview/Zeitreihe/Benchmark: OK
+  KPI-Einheiten: 390px · en · bn EUR · Overview/Zeitreihe/Benchmark: OK
+  KPI-Einheiten: 390px · de · Mrd. EUR · Overview/Zeitreihe/Benchmark: OK
+  KPI-Einheiten: 390px · en · bn EUR · Overview/Zeitreihe/Benchmark: OK
+  Einheiten-Audit: en · 8 Profile · Report/Compare k/m/bn · CSV: OK
+  Einheiten-Audit: de · 8 Profile · Report/Compare k/m/bn · CSV: OK
+{'cases': 6, 'results': [{'width': 1280, 'lang': 'en', 'unit': 'bn EUR'}, {'width': 1280, 'lang': 'de', 'unit': 'Mrd. EUR'}, {'width': 1280, 'lang': 'en', 'unit': 'bn EUR'}, {'width': 390, 'lang': 'en', 'unit': 'bn EUR'}, {'width': 390, 'lang': 'de', 'unit': 'Mrd. EUR'}, {'width': 390, 'lang': 'en', 'unit': 'bn EUR'}], 'audit': {'profiles': 16, 'metrics': ['asf', 'cet1_amt', 'hqla', 'npe_amt', 'outflow', 'pe_amt', 'rem_staff_ot', 'trea'], 'javascript_errors': []}}
