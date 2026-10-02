@@ -1,0 +1,11 @@
+  UI-Lokalisierung: 1280px · en · Report/Compare/Profilcache/Diagramme: OK
+  UI-Lokalisierung: 1280px · de · Report/Compare/Profilcache/Diagramme: OK
+  UI-Lokalisierung: 1280px · en · Report/Compare/Profilcache/Diagramme: OK
+  UI-Lokalisierung: 390px · en · Report/Compare/Profilcache/Diagramme: OK
+  UI-Lokalisierung: 390px · de · Report/Compare/Profilcache/Diagramme: OK
+  UI-Lokalisierung: 390px · en · Report/Compare/Profilcache/Diagramme: OK
+  UI-Ladezustand: en · report · verzögertes Shard: OK
+  UI-Ladezustand: en · compare · verzögertes Shard: OK
+  UI-Ladezustand: de · report · verzögertes Shard: OK
+  UI-Ladezustand: de · compare · verzögertes Shard: OK
+{'cases': 10, 'javascript_errors': []}
