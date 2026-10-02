@@ -109,7 +109,7 @@ class KodierungTest(unittest.TestCase):
         rt = (ROOT / "scripts" / "check_viewer_runtime.py").read_text(encoding="utf-8")
         self.assertIn("barErlaubt({tpl:", rt)
         self.assertIn("tplDaneben", rt)
-        self.assertIn("skalierte Reports (#83) tragen einen", rt)
+        self.assertIn("betroffene Betragszellen (#122) tragen einen", rt)
 
 
 if __name__ == "__main__":

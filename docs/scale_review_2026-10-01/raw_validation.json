@@ -1,0 +1,4569 @@
+{
+  "summary": {
+    "findings": 119,
+    "checked_facts_with_overlap": 158553,
+    "errors": 0,
+    "source_zips": 280
+  },
+  "sources": [
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800A1O379I6DMCU10.IND_MT_PILLAR3020000_CODIS_2025-06-30_20260121132249259.zip",
+      "filename": "213800A1O379I6DMCU10.IND_MT_PILLAR3020000_CODIS_2025-06-30_20260121132249259.zip",
+      "bytes": 22452,
+      "sha256": "a90a7fcaf670c036666e7cfd64c5f61f6cbd908f8a1a9fd73f33bf0f894280bb",
+      "parameters": {
+        "entityID": "rs:213800A1O379I6DMCU10.IND",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800A1O379I6DMCU10.IND_MT_PILLAR3020000_CODIS_2025-09-30_20260127124452313.zip",
+      "filename": "213800A1O379I6DMCU10.IND_MT_PILLAR3020000_CODIS_2025-09-30_20260127124452313.zip",
+      "bytes": 9308,
+      "sha256": "e4721d712c27c521821ef42fba36ac858e9310fca59e137e240aa152cb019726",
+      "parameters": {
+        "entityID": "rs:213800A1O379I6DMCU10.IND",
+        "refPeriod": "2025-09-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800A1O379I6DMCU10.IND_MT_PILLAR3020000_CODIS_2025-12-31_20260402091037110.zip",
+      "filename": "213800A1O379I6DMCU10.IND_MT_PILLAR3020000_CODIS_2025-12-31_20260402091037110.zip",
+      "bytes": 24337,
+      "sha256": "1d4feac4c269a993b2bb4675c07c7138830592f420422d5cba8d58088b167244",
+      "parameters": {
+        "entityID": "rs:213800A1O379I6DMCU10.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800A1O379I6DMCU10.IND_MT_PILLAR3020100_CODIS_2026-03-31_20260525084819161.zip",
+      "filename": "213800A1O379I6DMCU10.IND_MT_PILLAR3020100_CODIS_2026-03-31_20260525084819161.zip",
+      "bytes": 7669,
+      "sha256": "5eabf495f78c3eb01292786f5580a870f3a1f3c415e788c6e040e8b8eebf7cab",
+      "parameters": {
+        "entityID": "rs:213800A1O379I6DMCU10.IND",
+        "refPeriod": "2026-03-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800DBQIB6VBNU5C64.CON_GR_PILLAR3020000_CODIS_2025-06-30_20260306044215000.zip",
+      "filename": "213800DBQIB6VBNU5C64.CON_GR_PILLAR3020000_CODIS_2025-06-30_20260306044215000.zip",
+      "bytes": 35881,
+      "sha256": "5a1fd7d36257014e89df5fbac3419534b56402b9fdd7cf8dca338f56ef5021d4",
+      "parameters": {
+        "baseCurrency": "iso4217:EUR",
+        "entityID": "rs:213800DBQIB6VBNU5C64.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800DBQIB6VBNU5C64.CON_GR_PILLAR3020000_CODIS_2025-12-31_20260625160303000.zip",
+      "filename": "213800DBQIB6VBNU5C64.CON_GR_PILLAR3020000_CODIS_2025-12-31_20260625160303000.zip",
+      "bytes": 46006,
+      "sha256": "d0edf83b102aa63cd37e76544ccf56ccad983c581d6b3540556282a17afc4f15",
+      "parameters": {
+        "baseCurrency": "iso4217:EUR",
+        "entityID": "rs:213800DBQIB6VBNU5C64.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800KYUPNOQPAQL758.CON_PT_PILLAR3020000_CODIS_2025-12-31_20260518101049765.zip",
+      "filename": "213800KYUPNOQPAQL758.CON_PT_PILLAR3020000_CODIS_2025-12-31_20260518101049765.zip",
+      "bytes": 8189,
+      "sha256": "86028388bf69e06f1ffde78d16278803e8108d428e426d84ebc78bd34b7ade20",
+      "parameters": {
+        "entityID": "rs:213800KYUPNOQPAQL758.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800P1P13ABO5R9V78.IND_CY_PILLAR3020000_CODIS_2025-12-31_20260625112038640.zip",
+      "filename": "213800P1P13ABO5R9V78.IND_CY_PILLAR3020000_CODIS_2025-12-31_20260625112038640.zip",
+      "bytes": 39956,
+      "sha256": "338d536caad701f379cad774c36fe63a9a37e990383fe5772d9738c45f927cb9",
+      "parameters": {
+        "entityID": "rs:213800P1P13ABO5R9V78.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_CODIS_2025-06-30_20251202105932080.zip",
+      "filename": "213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_CODIS_2025-06-30_20251202105932080.zip",
+      "bytes": 24117,
+      "sha256": "117d9bb59900487ab15c8c1aea268e1d9d41d186b7a53299a083a822e2df0421",
+      "parameters": {
+        "entityID": "rs:213800TC9PZRBHMJW403.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_CODIS_2025-09-30_20251202105804725.zip",
+      "filename": "213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_CODIS_2025-09-30_20251202105804725.zip",
+      "bytes": 6880,
+      "sha256": "57513f253d8fcfeef23fdaf9f5151e13e367b5fdcaec571f844a921366b4c500",
+      "parameters": {
+        "entityID": "rs:213800TC9PZRBHMJW403.CON",
+        "refPeriod": "2025-09-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_CODIS_2025-12-31_20260619170503464.zip",
+      "filename": "213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_CODIS_2025-12-31_20260619170503464.zip",
+      "bytes": 24027,
+      "sha256": "741969a986f49c5f9d408ad6afec350c5d3c1454dfcabe7064dde0993f70f650",
+      "parameters": {
+        "entityID": "rs:213800TC9PZRBHMJW403.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/259400P9KF07OP2K5P83.IND_PL_PILLAR3020000_CODIS_2025-06-30_20260416143633339.zip",
+      "filename": "259400P9KF07OP2K5P83.IND_PL_PILLAR3020000_CODIS_2025-06-30_20260416143633339.zip",
+      "bytes": 2602,
+      "sha256": "7c09cedb7774625c4b5348d27e48d73124e8f8086fef28b506c300ac7692c215",
+      "parameters": {
+        "baseCurrency": "iso4217:PLN",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "entityID": "rs:259400P9KF07OP2K5P83.IND",
+        "refPeriod": "2025-06-30"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/259400WNAOMT2E4OIS38.CON_PL_PILLAR3020000_CODIS_2025-12-31_20260331163011246.zip",
+      "filename": "259400WNAOMT2E4OIS38.CON_PL_PILLAR3020000_CODIS_2025-12-31_20260331163011246.zip",
+      "bytes": 32374,
+      "sha256": "c320904d47c7f282b19c57499aa42416f2d404ff100b00a5a372a7e90e3159b1",
+      "parameters": {
+        "entityID": "rs:259400WNAOMT2E4OIS38.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:PLN",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/259400YLRTOBISHBVX41.CON_PL_PILLAR3020000_CODIS_2025-06-30_20260123182722889.zip",
+      "filename": "259400YLRTOBISHBVX41.CON_PL_PILLAR3020000_CODIS_2025-06-30_20260123182722889.zip",
+      "bytes": 63033,
+      "sha256": "6873b45f1923c12aa7282772ea9e612a1b472418dee82bb444d6bd03d863586d",
+      "parameters": {
+        "entityID": "rs:259400YLRTOBISHBVX41.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:PLN",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/259400YLRTOBISHBVX41.CON_PL_PILLAR3020000_CODIS_2025-12-31_20260305182504539.zip",
+      "filename": "259400YLRTOBISHBVX41.CON_PL_PILLAR3020000_CODIS_2025-12-31_20260305182504539.zip",
+      "bytes": 68697,
+      "sha256": "4c035caa2e1be0bede8252fab25286699cf373f23fba3aab187ec5cc68f40614",
+      "parameters": {
+        "entityID": "rs:259400YLRTOBISHBVX41.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:PLN",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_CODIS_2025-06-30_20260513110119344.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_CODIS_2025-06-30_20260513110119344.zip",
+      "bytes": 18781,
+      "sha256": "82df49bf053e407baf5b885a09de519de51f33dec441a60bfdb4eebaa14e970f",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_CODIS_2025-09-30_20260427113426643.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_CODIS_2025-09-30_20260427113426643.zip",
+      "bytes": 6164,
+      "sha256": "891c109e771555d549cfccc7e2c30378275e519cc4857476b4d8f13efeeef789",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2025-09-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_CODIS_2025-12-31_20260519144524121.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_CODIS_2025-12-31_20260519144524121.zip",
+      "bytes": 20630,
+      "sha256": "72232deef654d12a76ad4fe99d3c30a20f9eb59f0b0f5075d9f0f541ac7ce91b",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3020100_CODIS_2026-03-31_20260515093634472.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3020100_CODIS_2026-03-31_20260515093634472.zip",
+      "bytes": 7028,
+      "sha256": "30df58f5f1d949c1a9109d706ef5e75a6e42fc91fcf79e72d2174390a8b6ea1e",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2026-03-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/5299000F1CGJQ8NAXQ58.IND_MT_PILLAR3020000_CODIS_2025-12-31_20260512163621768.zip",
+      "filename": "5299000F1CGJQ8NAXQ58.IND_MT_PILLAR3020000_CODIS_2025-12-31_20260512163621768.zip",
+      "bytes": 13717,
+      "sha256": "7315508be076616ab4256227ce8a09f1a6c99d48fd3a456a8d59ee9dec14c4db",
+      "parameters": {
+        "entityID": "rs:5299000F1CGJQ8NAXQ58.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/5299008FEH4GQXGZNP50.CON_PT_PILLAR3020000_CODIS_2025-12-31_20260505032238702.zip",
+      "filename": "5299008FEH4GQXGZNP50.CON_PT_PILLAR3020000_CODIS_2025-12-31_20260505032238702.zip",
+      "bytes": 9261,
+      "sha256": "242ccad64d841cb349b04a6392634e12b1d5ab5962507e9a6fb2102d9f338f0a",
+      "parameters": {
+        "entityID": "rs:5299008FEH4GQXGZNP50.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-4",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/52990096Q5LMCH1WU462.CON_SK_PILLAR3020000_CODIS_2025-12-31_20260610020616000.zip",
+      "filename": "52990096Q5LMCH1WU462.CON_SK_PILLAR3020000_CODIS_2025-12-31_20260610020616000.zip",
+      "bytes": 27355,
+      "sha256": "beceb2301e18408b015954d1f1371ae237f003ea9ab6835f632344aa1c98629d",
+      "parameters": {
+        "entityID": "rs:52990096Q5LMCH1WU462.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/5299009EHB4RBGMI5828.IND_AT_PILLAR3020000_CODIS_2025-06-30_20260420030453473.zip",
+      "filename": "5299009EHB4RBGMI5828.IND_AT_PILLAR3020000_CODIS_2025-06-30_20260420030453473.zip",
+      "bytes": 4024,
+      "sha256": "b00cb82607802bf47d3dedfa7b4530440dbcc51ef45a30ee8ca63543a276a90c",
+      "parameters": {
+        "entityID": "rs:5299009EHB4RBGMI5828.IND",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/5299009EHB4RBGMI5828.IND_AT_PILLAR3020000_CODIS_2025-12-31_20260624120650166.zip",
+      "filename": "5299009EHB4RBGMI5828.IND_AT_PILLAR3020000_CODIS_2025-12-31_20260624120650166.zip",
+      "bytes": 30696,
+      "sha256": "d5081ead82e7da7a7335ca067f760172e27deed0da5c4f61da942b3491d4dec2",
+      "parameters": {
+        "entityID": "rs:5299009EHB4RBGMI5828.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900AVGYYBVL1VNQ03.IND_DK_PILLAR3020000_CODIS_2025-12-31_20260608094506464.zip",
+      "filename": "529900AVGYYBVL1VNQ03.IND_DK_PILLAR3020000_CODIS_2025-12-31_20260608094506464.zip",
+      "bytes": 24608,
+      "sha256": "40450a1f813e91607e17c9b74a61ce7a862bd19d716265aa0a024d6b3963427f",
+      "parameters": {
+        "entityID": "rs:529900AVGYYBVL1VNQ03.IND",
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:DKK",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900BI5KIGX6YLX375.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260625020602298.zip",
+      "filename": "529900BI5KIGX6YLX375.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260625020602298.zip",
+      "bytes": 13048,
+      "sha256": "7690116149e9305313c1dc25629a6434b5dfffb3af5f03e8a4eb10e32bc7f6d5",
+      "parameters": {
+        "entityID": "rs:529900BI5KIGX6YLX375.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900FEID5L4H2T2L70.IND_AT_PILLAR3020000_CODIS_2025-06-30_20260330120343254.zip",
+      "filename": "529900FEID5L4H2T2L70.IND_AT_PILLAR3020000_CODIS_2025-06-30_20260330120343254.zip",
+      "bytes": 4063,
+      "sha256": "f6074bac1ca086e000b6f565bc1db73f4fe4086bc7b8a01e66dd3bd969a4f175",
+      "parameters": {
+        "entityID": "rs:529900FEID5L4H2T2L70.IND",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900FEID5L4H2T2L70.IND_AT_PILLAR3020000_CODIS_2025-12-31_20260626110629274.zip",
+      "filename": "529900FEID5L4H2T2L70.IND_AT_PILLAR3020000_CODIS_2025-12-31_20260626110629274.zip",
+      "bytes": 38447,
+      "sha256": "098320e3dc355babc2cac82fcbe275026135b5e4604542ab36f7363ab4f9ff2e",
+      "parameters": {
+        "entityID": "rs:529900FEID5L4H2T2L70.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900LU7D396TOO3B50.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260609100651240.zip",
+      "filename": "529900LU7D396TOO3B50.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260609100651240.zip",
+      "bytes": 13957,
+      "sha256": "adf86bce13a4bf4c4b88b92c1a3b56740e3016a345d6faf98f61b40648968de2",
+      "parameters": {
+        "entityID": "rs:529900LU7D396TOO3B50.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900NJYUGRO908KV84.CON_BG_PILLAR3020000_CODIS_2025-12-31_20260522175929712.zip",
+      "filename": "529900NJYUGRO908KV84.CON_BG_PILLAR3020000_CODIS_2025-12-31_20260522175929712.zip",
+      "bytes": 9057,
+      "sha256": "ce205d2abe3aa69d13566b48e95cb1e21760146f521255abfeba593d83bd9a3e",
+      "parameters": {
+        "entityID": "rs:529900NJYUGRO908KV84.CON",
+        "decimalsPercentage": "4",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "en-US",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900RCLERIIXF4QM23.IND_AT_PILLAR3020000_CODIS_2025-12-31_20260618060600205.zip",
+      "filename": "529900RCLERIIXF4QM23.IND_AT_PILLAR3020000_CODIS_2025-12-31_20260618060600205.zip",
+      "bytes": 10051,
+      "sha256": "ba40a85bffbe883a9fc488fb16742f96d5a4f89b5c8c35bcd372699a9469f90f",
+      "parameters": {
+        "entityID": "rs:529900RCLERIIXF4QM23.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsDecimal": "6",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900RPGHC6DQEQL615.IND_BG_PILLAR3020000_CODIS_2025-12-31_20260623165651300.zip",
+      "filename": "529900RPGHC6DQEQL615.IND_BG_PILLAR3020000_CODIS_2025-12-31_20260623165651300.zip",
+      "bytes": 23646,
+      "sha256": "1325d625397b8dbbe27cdc855de59a7fd07db7405c161679d4e92294c31afce7",
+      "parameters": {
+        "entityID": "rs:529900RPGHC6DQEQL615.IND",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_CODIS_2025-06-30_20260619145856344.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_CODIS_2025-06-30_20260619145856344.zip",
+      "bytes": 30136,
+      "sha256": "1b59e023f04279a3941be8ab89f680c4ec7c9cd1f776bb6478f2b961d18279e1",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_CODIS_2025-09-30_20260622141841887.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_CODIS_2025-09-30_20260622141841887.zip",
+      "bytes": 8758,
+      "sha256": "dc65e38c9f906b2a99d3cade5541d7dab3234b4c3604c657d21b677e07cf045c",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-09-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_CODIS_2025-12-31_20260623161258728.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_CODIS_2025-12-31_20260623161258728.zip",
+      "bytes": 37737,
+      "sha256": "ff04d1e7bfcd7d07b4bc1cc536842d3d0af51fe7788af18b2608f74d6e1a4065",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900SXEWPJ1MRRX537.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260508120557213.zip",
+      "filename": "529900SXEWPJ1MRRX537.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260508120557213.zip",
+      "bytes": 35480,
+      "sha256": "fc97d3dbd9b238ab588f3e6941a2a5a440edda591c6f21da708d6a04031fbf6e",
+      "parameters": {
+        "entityID": "rs:529900SXEWPJ1MRRX537.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900T32UL0CP1FZA06.CON_IT_PILLAR3020000_CODIS_2025-12-31_20260617165429429.zip",
+      "filename": "529900T32UL0CP1FZA06.CON_IT_PILLAR3020000_CODIS_2025-12-31_20260617165429429.zip",
+      "bytes": 30765,
+      "sha256": "ebad5ee10f99bd710e868ded8584064ac2975dcea682ed9e87e18ecb05476bd7",
+      "parameters": {
+        "entityID": "rs:529900T32UL0CP1FZA06.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-6",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900UKZBMDBDZIXD62.CON_AT_PILLAR3020000_CODIS_2025-06-30_20260105040158328.zip",
+      "filename": "529900UKZBMDBDZIXD62.CON_AT_PILLAR3020000_CODIS_2025-06-30_20260105040158328.zip",
+      "bytes": 4004,
+      "sha256": "bc88088a766dce7d00a341f9bb92b224d3a4688ab7d338469b861efa4d289396",
+      "parameters": {
+        "entityID": "rs:529900UKZBMDBDZIXD62.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/529900UKZBMDBDZIXD62.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260326110350543.zip",
+      "filename": "529900UKZBMDBDZIXD62.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260326110350543.zip",
+      "bytes": 35618,
+      "sha256": "1c602719b680e9b77f8956dd7512a55f49522c88dd2e0f55a63a41d861d5a8ce",
+      "parameters": {
+        "entityID": "rs:529900UKZBMDBDZIXD62.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/5493000UPYR7EEHN2R94.CON_SI_PILLAR3020000_CODIS_2025-12-31_20260602093351229.zip",
+      "filename": "5493000UPYR7EEHN2R94.CON_SI_PILLAR3020000_CODIS_2025-12-31_20260602093351229.zip",
+      "bytes": 18718,
+      "sha256": "1d3c88d06ee30bc9100bc77f7217a27fe822ca63455f39a509bbc0b9f8d20f03",
+      "parameters": {
+        "entityID": "rs:5493000UPYR7EEHN2R94.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/5493008QRHH0XCLJ4238.CON_RO_PILLAR3020000_CODIS_2025-06-30_20260130132448894.zip",
+      "filename": "5493008QRHH0XCLJ4238.CON_RO_PILLAR3020000_CODIS_2025-06-30_20260130132448894.zip",
+      "bytes": 24566,
+      "sha256": "adf17cbb3923804169cba9ba91c6cf182dfc4147aeca5fa00ce2ab86926bc8f5",
+      "parameters": {
+        "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:RON",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/5493008QRHH0XCLJ4238.CON_RO_PILLAR3020000_CODIS_2025-09-30_20260130110659652.zip",
+      "filename": "5493008QRHH0XCLJ4238.CON_RO_PILLAR3020000_CODIS_2025-09-30_20260130110659652.zip",
+      "bytes": 9461,
+      "sha256": "a8644765c8c16a2a348ccc63265c974abd48b96a3f2c5c23a296e2f6db7eb246",
+      "parameters": {
+        "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+        "refPeriod": "2025-09-30",
+        "baseCurrency": "iso4217:RON",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/5493008QRHH0XCLJ4238.CON_RO_PILLAR3020000_CODIS_2025-12-31_20260526103251680.zip",
+      "filename": "5493008QRHH0XCLJ4238.CON_RO_PILLAR3020000_CODIS_2025-12-31_20260526103251680.zip",
+      "bytes": 30097,
+      "sha256": "d838c2a18824a4a7d4904a4eed8f9308699f4f59b2b40bd86ddfd7b04ba69b6b",
+      "parameters": {
+        "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:RON",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300HUKIA1IZQHFZ83.IND_AT_PILLAR3020000_CODIS_2025-06-30_20260303080323413.zip",
+      "filename": "549300HUKIA1IZQHFZ83.IND_AT_PILLAR3020000_CODIS_2025-06-30_20260303080323413.zip",
+      "bytes": 4100,
+      "sha256": "5702452b67cd99437b1ed651a1bfb814bf949052a36239363ab0948cab48b3e2",
+      "parameters": {
+        "entityID": "rs:549300HUKIA1IZQHFZ83.IND",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300HUKIA1IZQHFZ83.IND_AT_PILLAR3020000_CODIS_2025-12-31_20260626020650777.zip",
+      "filename": "549300HUKIA1IZQHFZ83.IND_AT_PILLAR3020000_CODIS_2025-12-31_20260626020650777.zip",
+      "bytes": 38956,
+      "sha256": "e1ae7fb8dad745f605a095b9b1996b536b7d021eade1fdf0af7e72dbf752453c",
+      "parameters": {
+        "entityID": "rs:549300HUKIA1IZQHFZ83.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3020000_CODIS_2025-06-30_20260626104310000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3020000_CODIS_2025-06-30_20260626104310000.zip",
+      "bytes": 43978,
+      "sha256": "63ae06bc374aa4d755cf42b38df7db8dbacbe339ab6a4a4837fc58d15a02386f",
+      "parameters": {
+        "refPeriod": "2025-06-30",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3020000_CODIS_2025-09-30_20260625161137000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3020000_CODIS_2025-09-30_20260625161137000.zip",
+      "bytes": 12708,
+      "sha256": "7f59c38871528157cc19076763acd8e8ce049873cbe202ef82385b8976262fdb",
+      "parameters": {
+        "refPeriod": "2025-09-30",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3020000_CODIS_2025-12-31_20260615184556000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3020000_CODIS_2025-12-31_20260615184556000.zip",
+      "bytes": 49700,
+      "sha256": "4d5b5536e00510f1235f34e4ca15d48172d7ee2cee3ad1d874650ac9e3191ab0",
+      "parameters": {
+        "refPeriod": "2025-12-31",
+        "decimalsDecimal": "2",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300RG3H390KEL8896.CON_RO_PILLAR3020000_CODIS_2025-06-30_20251113173014000.zip",
+      "filename": "549300RG3H390KEL8896.CON_RO_PILLAR3020000_CODIS_2025-06-30_20251113173014000.zip",
+      "bytes": 37676,
+      "sha256": "5303be91ab22404aa751d533285f453f6f0cc1b47b358ecbf7d26154f32f5eb4",
+      "parameters": {
+        "entityID": "rs:549300RG3H390KEL8896.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:RON",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300RG3H390KEL8896.CON_RO_PILLAR3020000_CODIS_2025-09-30_20260213144912000.zip",
+      "filename": "549300RG3H390KEL8896.CON_RO_PILLAR3020000_CODIS_2025-09-30_20260213144912000.zip",
+      "bytes": 11827,
+      "sha256": "50881290da123b229d2cdcd9e3875d15c981b906021cd298966e8fb34449af4e",
+      "parameters": {
+        "entityID": "rs:549300RG3H390KEL8896.CON",
+        "refPeriod": "2025-09-30",
+        "baseCurrency": "iso4217:RON",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300RG3H390KEL8896.CON_RO_PILLAR3020000_CODIS_2025-12-31_20260626092234000.zip",
+      "filename": "549300RG3H390KEL8896.CON_RO_PILLAR3020000_CODIS_2025-12-31_20260626092234000.zip",
+      "bytes": 46213,
+      "sha256": "7feab308cd8d253772e5d2d1fa21bcfc40c8790b6d5f2e0d9d5f064d97c894bf",
+      "parameters": {
+        "entityID": "rs:549300RG3H390KEL8896.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:RON",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300S2T3FWVVXWJI89.CON_SK_PILLAR3020000_CODIS_2025-06-30_20260330105509793.zip",
+      "filename": "549300S2T3FWVVXWJI89.CON_SK_PILLAR3020000_CODIS_2025-06-30_20260330105509793.zip",
+      "bytes": 29221,
+      "sha256": "bad0f7e8c08c4ab1ba4695f100c9c22abd3319cc0ef12399be45aed117f5b84a",
+      "parameters": {
+        "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "sk-SK",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300S2T3FWVVXWJI89.CON_SK_PILLAR3020000_CODIS_2025-09-30_20260330123203216.zip",
+      "filename": "549300S2T3FWVVXWJI89.CON_SK_PILLAR3020000_CODIS_2025-09-30_20260330123203216.zip",
+      "bytes": 11073,
+      "sha256": "7cb73f60aacc6a2c90e17724e24ac4240778e97ff9c6b4f2f62b272a6d513d23",
+      "parameters": {
+        "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+        "refPeriod": "2025-09-30",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "sk-SK",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300S2T3FWVVXWJI89.CON_SK_PILLAR3020000_CODIS_2025-12-31_20260330170559647.zip",
+      "filename": "549300S2T3FWVVXWJI89.CON_SK_PILLAR3020000_CODIS_2025-12-31_20260330170559647.zip",
+      "bytes": 30675,
+      "sha256": "4a8551bb3a90016168b481713a0c56b2e177f7b1b6eea0ab2d04ce1b6be6a780",
+      "parameters": {
+        "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "sk-SK",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300S2T3FWVVXWJI89.CON_SK_PILLAR3020100_CODIS_2026-03-31_20260430135814565.zip",
+      "filename": "549300S2T3FWVVXWJI89.CON_SK_PILLAR3020100_CODIS_2026-03-31_20260430135814565.zip",
+      "bytes": 11138,
+      "sha256": "183bd56c164144b4105798265faaaaff9efa14268288eb2fef3f0062a43260a5",
+      "parameters": {
+        "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+        "refPeriod": "2026-03-31",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "sk-SK",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300TL5406IC1XKD09.CON_DK_PILLAR3020000_CODIS_2025-12-31_20260504092754000.zip",
+      "filename": "549300TL5406IC1XKD09.CON_DK_PILLAR3020000_CODIS_2025-12-31_20260504092754000.zip",
+      "bytes": 54357,
+      "sha256": "39dc6e00fda22bc553b5f99608d84ecaa94ee1358b2e0a92249e68db4d4cf57a",
+      "parameters": {
+        "entityID": "rs:549300TL5406IC1XKD09.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300TLZPT6JELDWM92.CON_IS_PILLAR3020000_CODIS_2025-12-31_20260320103342839.zip",
+      "filename": "549300TLZPT6JELDWM92.CON_IS_PILLAR3020000_CODIS_2025-12-31_20260320103342839.zip",
+      "bytes": 29659,
+      "sha256": "67871b7d5b561f90d2c85f3bf78e9748fec5674be924d6b03d17a143a0da3ff8",
+      "parameters": {
+        "entityID": "rs:549300TLZPT6JELDWM92.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsDecimal": "4",
+        "baseCurrency": "iso4217:ISK",
+        "decimalsMonetary": "-4",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300TLZPT6JELDWM92.CON_IS_PILLAR3020100_CODIS_2026-03-31_20260430122215358.zip",
+      "filename": "549300TLZPT6JELDWM92.CON_IS_PILLAR3020100_CODIS_2026-03-31_20260430122215358.zip",
+      "bytes": 6885,
+      "sha256": "5faa8fa0e914b565cdc0d6825c2f88b444cad1c4fabc082896149d5b96858eaa",
+      "parameters": {
+        "entityID": "rs:549300TLZPT6JELDWM92.CON",
+        "refPeriod": "2026-03-31",
+        "baseCurrency": "iso4217:ISK",
+        "decimalsMonetary": "-4",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300TTZTKBUFKWH890.CON_CY_PILLAR3020000_CODIS_2025-12-31_20260623133704877.zip",
+      "filename": "549300TTZTKBUFKWH890.CON_CY_PILLAR3020000_CODIS_2025-12-31_20260623133704877.zip",
+      "bytes": 44352,
+      "sha256": "4371db9f7173e9d949695149328ac4c5eebc3ba41e73e44b05349448af75e177",
+      "parameters": {
+        "entityID": "rs:549300TTZTKBUFKWH890.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300UY81ESCZJ0GR95.CON_BG_PILLAR3020000_CODIS_2025-06-30_20260408133212470.zip",
+      "filename": "549300UY81ESCZJ0GR95.CON_BG_PILLAR3020000_CODIS_2025-06-30_20260408133212470.zip",
+      "bytes": 29972,
+      "sha256": "5e8744e4550bef53051742d5d508a396048dfc8a2db7e75fed3cab152a850dda",
+      "parameters": {
+        "entityID": "rs:549300UY81ESCZJ0GR95.CON",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300UY81ESCZJ0GR95.CON_BG_PILLAR3020000_CODIS_2025-09-30_20260331132431347.zip",
+      "filename": "549300UY81ESCZJ0GR95.CON_BG_PILLAR3020000_CODIS_2025-09-30_20260331132431347.zip",
+      "bytes": 6233,
+      "sha256": "fca8b93d6c25ab1f9fb67ac6d12bdb12eb3b5ef277e93ac197a11255f709f6a4",
+      "parameters": {
+        "entityID": "rs:549300UY81ESCZJ0GR95.CON",
+        "refPeriod": "2025-09-30",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/549300V4H4USWZUCE073.IND_PT_PILLAR3020000_CODIS_2025-12-31_20260624151824180.zip",
+      "filename": "549300V4H4USWZUCE073.IND_PT_PILLAR3020000_CODIS_2025-12-31_20260624151824180.zip",
+      "bytes": 8065,
+      "sha256": "27f24c3a8467627ef4368a21b3977e560166bde216e855300f09dd9cd3d0f16b",
+      "parameters": {
+        "entityID": "rs:549300V4H4USWZUCE073.IND",
+        "decimalsPercentage": "4",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "en-GB",
+        "decimalsMonetary": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/635400F6HLXKXNJJX605.IND_RO_PILLAR3020000_CODIS_2025-12-31_20260629152331678.zip",
+      "filename": "635400F6HLXKXNJJX605.IND_RO_PILLAR3020000_CODIS_2025-12-31_20260629152331678.zip",
+      "bytes": 35056,
+      "sha256": "ac1616dcd9f272939e053bbd553ab7c510f7e50bda835c0e282e501b437239f4",
+      "parameters": {
+        "entityID": "rs:635400F6HLXKXNJJX605.IND",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:RON",
+        "baseLanguage": "ro",
+        "decimalsDecimal": "#none",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/724500D8WOYCL1BUCB80.CON_NL_PILLAR3020000_CODIS_2025-12-31_20260323093314080.zip",
+      "filename": "724500D8WOYCL1BUCB80.CON_NL_PILLAR3020000_CODIS_2025-12-31_20260323093314080.zip",
+      "bytes": 36884,
+      "sha256": "15d6a7a02cc7d60e08b3be5d8626afd5ca9cb153f1efbc16f510949d8999d724",
+      "parameters": {
+        "entityID": "rs:724500D8WOYCL1BUCB80.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "6",
+        "decimalsInteger": "0",
+        "decimalsDecimal": "-6",
+        "baseLanguage": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/8156005C22D0BF134C40.IND_IT_PILLAR3020000_CODIS_2025-12-31_20260623121022199.zip",
+      "filename": "8156005C22D0BF134C40.IND_IT_PILLAR3020000_CODIS_2025-12-31_20260623121022199.zip",
+      "bytes": 31988,
+      "sha256": "f8fda392658cbae10032bc5f5546bfb81a93b5bdf53d1dc41439986bfae5e92e",
+      "parameters": {
+        "entityID": "rs:8156005C22D0BF134C40.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/8156009F9B6BB7745A32.CON_IT_PILLAR3020000_CODIS_2025-12-31_20260626160124867.zip",
+      "filename": "8156009F9B6BB7745A32.CON_IT_PILLAR3020000_CODIS_2025-12-31_20260626160124867.zip",
+      "bytes": 32661,
+      "sha256": "cf7f470b83b613b803677e456584b68b24dec9077b8d11e8fa1d665b70caee24",
+      "parameters": {
+        "entityID": "rs:8156009F9B6BB7745A32.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/815600B43BECA3919584.IND_IT_PILLAR3020000_CODIS_2025-12-31_20260529143454884.zip",
+      "filename": "815600B43BECA3919584.IND_IT_PILLAR3020000_CODIS_2025-12-31_20260529143454884.zip",
+      "bytes": 11583,
+      "sha256": "91a31e8b008a08731d7fee13b12a3e9f7c8a1fba5a887d8e063344c425acffea",
+      "parameters": {
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "entityID": "rs:815600B43BECA3919584.IND"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/894500N55FUZ70ZQ1784.CON_SE_PILLAR3020000_CODIS_2025-12-31_20260526140609812.zip",
+      "filename": "894500N55FUZ70ZQ1784.CON_SE_PILLAR3020000_CODIS_2025-12-31_20260526140609812.zip",
+      "bytes": 34356,
+      "sha256": "a775813dffd31db770e8142af3bb0be30e8546bf65e19d63c7b6d2bf928ba655",
+      "parameters": {
+        "entityID": "rs:894500N55FUZ70ZQ1784.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsInteger": "0",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/969500A4IPKVUBH3CA90.CON_FR_PILLAR3020000_CODIS_2025-12-31_20260630104747588.zip",
+      "filename": "969500A4IPKVUBH3CA90.CON_FR_PILLAR3020000_CODIS_2025-12-31_20260630104747588.zip",
+      "bytes": 4128,
+      "sha256": "3d4746e47ea2b67da642ae000ed64c943d7316c6e8f70ca8c696bafa0ba020a5",
+      "parameters": {
+        "entityID": "rs:969500A4IPKVUBH3CA90.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/969500CJCTMI93QJKK89.CON_FR_PILLAR3020000_CODIS_2025-12-31_20260601142748428.zip",
+      "filename": "969500CJCTMI93QJKK89.CON_FR_PILLAR3020000_CODIS_2025-12-31_20260601142748428.zip",
+      "bytes": 7945,
+      "sha256": "45696d995d74fb6e3a1f331329e10b171c95a0a99acd629951a66dae362444e5",
+      "parameters": {
+        "entityID": "rs:969500CJCTMI93QJKK89.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "baseLanguage": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/984500E4D07499C10435.CON_BG_PILLAR3020000_CODIS_2025-12-31_20260603112250122.zip",
+      "filename": "984500E4D07499C10435.CON_BG_PILLAR3020000_CODIS_2025-12-31_20260603112250122.zip",
+      "bytes": 29412,
+      "sha256": "ee170c2813c7e1a1ac09624287b532b2d5f806cf3fbcddd278eebcbdf0156529",
+      "parameters": {
+        "entityID": "rs:984500E4D07499C10435.CON",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/D1HEB8VEU6D9M8ZUXG17.CON_AT_PILLAR3020000_CODIS_2025-06-30_20260316174722322.zip",
+      "filename": "D1HEB8VEU6D9M8ZUXG17.CON_AT_PILLAR3020000_CODIS_2025-06-30_20260316174722322.zip",
+      "bytes": 31057,
+      "sha256": "ebafdc66dc8c366e70a6ad819cf64df6403d112e18563750475419de2bc9b2f7",
+      "parameters": {
+        "entityID": "rs:D1HEB8VEU6D9M8ZUXG17.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/D1HEB8VEU6D9M8ZUXG17.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260318074843260.zip",
+      "filename": "D1HEB8VEU6D9M8ZUXG17.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260318074843260.zip",
+      "bytes": 33948,
+      "sha256": "8b8154599d5c5dde9455295c37e607b361599db9dec023aad65774e7ffef3dc8",
+      "parameters": {
+        "entityID": "rs:D1HEB8VEU6D9M8ZUXG17.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/DG3RU1DBUFHT4ZF9WN62.CON_NL_PILLAR3020000_CODIS_2025-12-31_20260522121612487.zip",
+      "filename": "DG3RU1DBUFHT4ZF9WN62.CON_NL_PILLAR3020000_CODIS_2025-12-31_20260522121612487.zip",
+      "bytes": 50280,
+      "sha256": "1cc89ccc8c2160222d0a6d9dbce3ce647c3cd99d79441d0be592ce3b80bd4190",
+      "parameters": {
+        "entityID": "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/DG3RU1DBUFHT4ZF9WN62.CON_NL_PILLAR3020100_CODIS_2026-03-31_20260526114640725.zip",
+      "filename": "DG3RU1DBUFHT4ZF9WN62.CON_NL_PILLAR3020100_CODIS_2026-03-31_20260526114640725.zip",
+      "bytes": 12229,
+      "sha256": "77ae05d4cbc1ada675abff5c2128f553d33573d831542f5ce3c243aa2ff922f0",
+      "parameters": {
+        "entityID": "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+        "refPeriod": "2026-03-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3020000_CODIS_2025-06-30_20260528162343397.zip",
+      "filename": "DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3020000_CODIS_2025-06-30_20260528162343397.zip",
+      "bytes": 33890,
+      "sha256": "d9dc57cd16f83f8e36127ec77f403a8f618614a9f1a262404e41d23eabe9fe64",
+      "parameters": {
+        "entityID": "rs:DZZ47B9A52ZJ6LT6VV95.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "-6",
+        "baseLanguage": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3020000_CODIS_2025-09-30_20260602151606426.zip",
+      "filename": "DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3020000_CODIS_2025-09-30_20260602151606426.zip",
+      "bytes": 10399,
+      "sha256": "872839237b4b7d948e1b33d737fa450aed918a2bd5c22870a43ace6b05922aba",
+      "parameters": {
+        "entityID": "rs:DZZ47B9A52ZJ6LT6VV95.CON",
+        "refPeriod": "2025-09-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/FR9695005MSX1OYEMGDF.CON_FR_PILLAR3020000_CODIS_2025-06-30_20260123173722776.zip",
+      "filename": "FR9695005MSX1OYEMGDF.CON_FR_PILLAR3020000_CODIS_2025-06-30_20260123173722776.zip",
+      "bytes": 71638,
+      "sha256": "506310cb7c8ea1ebcc7b43d39dde9d709005e69db12737707d58f24feb09fddb",
+      "parameters": {
+        "entityID": "rs:FR9695005MSX1OYEMGDF.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "4",
+        "baseLanguage": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/FR9695005MSX1OYEMGDF.CON_FR_PILLAR3020000_CODIS_2025-12-31_20260513164139728.zip",
+      "filename": "FR9695005MSX1OYEMGDF.CON_FR_PILLAR3020000_CODIS_2025-12-31_20260513164139728.zip",
+      "bytes": 99659,
+      "sha256": "b8a409f1f825f6aa4c0c8be7640b548620c727fa396b1cda20db62a6824ca9f4",
+      "parameters": {
+        "entityID": "rs:FR9695005MSX1OYEMGDF.CON",
+        "refPeriod": "2025-12-31",
+        "baseLanguage": "#none",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "decimalsDecimal": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/GP5DT10VX1QRQUKVBK64.CON_DK_PILLAR3020100_CODIS_2026-03-31_20261105085030302.zip",
+      "filename": "GP5DT10VX1QRQUKVBK64.CON_DK_PILLAR3020100_CODIS_2026-03-31_20261105085030302.zip",
+      "bytes": 13219,
+      "sha256": "34e42fba9772bfe2d0631d1356528688901ca6a203ee7ceefaad3a8426e60030",
+      "parameters": {
+        "entityID": "rs:GP5DT10VX1QRQUKVBK64.CON",
+        "refPeriod": "2026-03-31",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:DKK",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/H8MIG1MMPR6JXUQVBM04.IND_PL_PILLAR3020000_CODIS_2025-12-31_20260603165836396.zip",
+      "filename": "H8MIG1MMPR6JXUQVBM04.IND_PL_PILLAR3020000_CODIS_2025-12-31_20260603165836396.zip",
+      "bytes": 9449,
+      "sha256": "1e195be937f0658a7aa89075d803d8f700ca8f5e22d867557d3799dba1635370",
+      "parameters": {
+        "entityID": "rs:H8MIG1MMPR6JXUQVBM04.IND",
+        "decimalsPercentage": "4",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:PLN",
+        "baseLanguage": "pl-PL",
+        "decimalsMonetary": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/K8MS7FD7N5Z2WQ51AZ71.CON_ES_PILLAR3020000_CODIS_2025-06-30_20251202124425234.zip",
+      "filename": "K8MS7FD7N5Z2WQ51AZ71.CON_ES_PILLAR3020000_CODIS_2025-06-30_20251202124425234.zip",
+      "bytes": 63442,
+      "sha256": "02a2946d44b7ed3d1775589d46b3c8767c0c4552202904a74dbbd8b914c2dcfa",
+      "parameters": {
+        "baseCurrency": "iso4217:EUR",
+        "decimalsDecimal": "4",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "entityID": "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+        "refPeriod": "2025-06-30"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/K8MS7FD7N5Z2WQ51AZ71.CON_ES_PILLAR3020000_CODIS_2025-12-31_20260423111525236.zip",
+      "filename": "K8MS7FD7N5Z2WQ51AZ71.CON_ES_PILLAR3020000_CODIS_2025-12-31_20260423111525236.zip",
+      "bytes": 93239,
+      "sha256": "4c39c757780d1d603c01065f3af20395992d311d1ed45a6c94c6d4753614f3b0",
+      "parameters": {
+        "baseCurrency": "iso4217:EUR",
+        "decimalsDecimal": "4",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "entityID": "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+        "refPeriod": "2025-12-31"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/KR6LSKV3BTSJRD41IF75.CON_CZ_PILLAR3020000_CODIS_2025-06-30_20260610092715000.zip",
+      "filename": "KR6LSKV3BTSJRD41IF75.CON_CZ_PILLAR3020000_CODIS_2025-06-30_20260610092715000.zip",
+      "bytes": 31159,
+      "sha256": "392fde158bd9e712575c268e261b6c1b369b8a114395facb7eb6614bf9aa95e8",
+      "parameters": {
+        "entityID": "rs:KR6LSKV3BTSJRD41IF75.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:CZK",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/KR6LSKV3BTSJRD41IF75.CON_CZ_PILLAR3020000_CODIS_2025-12-31_20260630064728167.zip",
+      "filename": "KR6LSKV3BTSJRD41IF75.CON_CZ_PILLAR3020000_CODIS_2025-12-31_20260630064728167.zip",
+      "bytes": 31361,
+      "sha256": "d35623eedd3ca7f724a681633eff9e97ebf177f1d82f5ccf2548392e5595c414",
+      "parameters": {
+        "entityID": "rs:KR6LSKV3BTSJRD41IF75.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:CZK",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/O2RNE8IBXP4R0TD8PU41.CON_FR_PILLAR3020000_CODIS_2025-06-30_20260422120549933.zip",
+      "filename": "O2RNE8IBXP4R0TD8PU41.CON_FR_PILLAR3020000_CODIS_2025-06-30_20260422120549933.zip",
+      "bytes": 63461,
+      "sha256": "c72b783678172748680c8e4e4c8a098d2a559bde8f54e9edf12ce7ec3bab7fab",
+      "parameters": {
+        "entityID": "rs:O2RNE8IBXP4R0TD8PU41.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "decimalsDecimal": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/O2RNE8IBXP4R0TD8PU41.CON_FR_PILLAR3020000_CODIS_2025-12-31_20260624154255436.zip",
+      "filename": "O2RNE8IBXP4R0TD8PU41.CON_FR_PILLAR3020000_CODIS_2025-12-31_20260624154255436.zip",
+      "bytes": 108019,
+      "sha256": "3322b4b547d6302edda175ffbf4c07b3c6da8b64ecc75986dc44885e3378afbf",
+      "parameters": {
+        "entityID": "rs:O2RNE8IBXP4R0TD8PU41.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "decimalsDecimal": "4",
+        "baseLanguage": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/PQOH26KWDF7CG10L6792.CON_AT_PILLAR3020000_CODIS_2025-06-30_20260618040609068.zip",
+      "filename": "PQOH26KWDF7CG10L6792.CON_AT_PILLAR3020000_CODIS_2025-06-30_20260618040609068.zip",
+      "bytes": 64729,
+      "sha256": "9e9a9126fae404b20d02d69d07e746b7e0e714f9b6c8031a5f340da5c50b8546",
+      "parameters": {
+        "entityID": "rs:PQOH26KWDF7CG10L6792.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsDecimal": "6",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/PQOH26KWDF7CG10L6792.CON_AT_PILLAR3020000_CODIS_2025-09-30_20260623090600616.zip",
+      "filename": "PQOH26KWDF7CG10L6792.CON_AT_PILLAR3020000_CODIS_2025-09-30_20260623090600616.zip",
+      "bytes": 14698,
+      "sha256": "979d767fbf103a1a8b4f5da1e1db032d3605b39a897bdb344fabb31c78d28d1d",
+      "parameters": {
+        "entityID": "rs:PQOH26KWDF7CG10L6792.CON",
+        "refPeriod": "2025-09-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_CODIS_2025-06-30_20260325033311648.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_CODIS_2025-06-30_20260325033311648.zip",
+      "bytes": 26366,
+      "sha256": "18c98899cecc57da12a099ac7e1f4f07ce67eddb6c81133b94539861922c01eb",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_CODIS_2025-09-30_20260324112242298.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_CODIS_2025-09-30_20260324112242298.zip",
+      "bytes": 5841,
+      "sha256": "5aaafe21860d49a0fb5acf8eae920328cf1a1553f83e3a8e7d30bd4ee54df371",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2025-09-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_CODIS_2025-12-31_20260427025307132.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_CODIS_2025-12-31_20260427025307132.zip",
+      "bytes": 19364,
+      "sha256": "afa86594a92359a3a62ac8b15f1d8aaf31780c75379821b77a03fca1527fb84d",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020100_CODIS_2026-03-31_20260623095501361.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020100_CODIS_2026-03-31_20260623095501361.zip",
+      "bytes": 7934,
+      "sha256": "8731d53170a54fd0713ef6b0c5fe0ca5b50a4dd9d2e302decaad265a374bebea",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2026-03-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/R0MUWSFPU8MPRO8K5P83.CON_FR_PILLAR3020000_CODIS_2025-06-30_20260402014710606.zip",
+      "filename": "R0MUWSFPU8MPRO8K5P83.CON_FR_PILLAR3020000_CODIS_2025-06-30_20260402014710606.zip",
+      "bytes": 72877,
+      "sha256": "213387450ff5e2cf0f80da807461dbbc431eeca3fa0f89f5a3228bf64f9dc771",
+      "parameters": {
+        "entityID": "rs:R0MUWSFPU8MPRO8K5P83.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/R0MUWSFPU8MPRO8K5P83.CON_FR_PILLAR3020000_CODIS_2025-12-31_20260402113626037.zip",
+      "filename": "R0MUWSFPU8MPRO8K5P83.CON_FR_PILLAR3020000_CODIS_2025-12-31_20260402113626037.zip",
+      "bytes": 90397,
+      "sha256": "d947bcfbfb7efb20e7ff6885c6bdc4f74f57ae73bfb2eb18711b1a2d907c6d44",
+      "parameters": {
+        "entityID": "rs:R0MUWSFPU8MPRO8K5P83.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3020000_CODIS_2025-06-30_20260123030154973.zip",
+      "filename": "RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3020000_CODIS_2025-06-30_20260123030154973.zip",
+      "bytes": 4088,
+      "sha256": "cd2b1fa5772c158f61abe140635382b25e53fef9df31b00f8726ebabe91b7a47",
+      "parameters": {
+        "entityID": "rs:RRUN0TCQ1K2JDV7MXO75.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260626020601976.zip",
+      "filename": "RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3020000_CODIS_2025-12-31_20260626020601976.zip",
+      "bytes": 41493,
+      "sha256": "312e8ce2969e77bd0e0433304d53620af5a015ad7f5a80f77488fd640e7c65e4",
+      "parameters": {
+        "entityID": "rs:RRUN0TCQ1K2JDV7MXO75.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/TPS0Q8GFSZF45ZZFL873.CON_LU_PILLAR3020000_CODIS_2025-12-31_20260415095339772.zip",
+      "filename": "TPS0Q8GFSZF45ZZFL873.CON_LU_PILLAR3020000_CODIS_2025-12-31_20260415095339772.zip",
+      "bytes": 29591,
+      "sha256": "3f420ba4eee8b452add905a15bd6a111c1bbd013337393e16ffc5beb004b0e74",
+      "parameters": {
+        "entityID": "rs:TPS0Q8GFSZF45ZZFL873.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "baseLanguage": "#none",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/VWMYAEQSTOPNV0SUGU82.CON_ES_PILLAR3020000_CODIS_2025-06-30_20260123014527488.zip",
+      "filename": "VWMYAEQSTOPNV0SUGU82.CON_ES_PILLAR3020000_CODIS_2025-06-30_20260123014527488.zip",
+      "bytes": 38275,
+      "sha256": "d3ba641f43de3e6abadca0e1b1248f05cd656ffffd88d8acc92f755eb235aec1",
+      "parameters": {
+        "entityID": "rs:VWMYAEQSTOPNV0SUGU82.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "decimalsDecimal": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/CODIS/input/VWMYAEQSTOPNV0SUGU82.CON_ES_PILLAR3020000_CODIS_2025-12-31_20260518115719284.zip",
+      "filename": "VWMYAEQSTOPNV0SUGU82.CON_ES_PILLAR3020000_CODIS_2025-12-31_20260518115719284.zip",
+      "bytes": 51664,
+      "sha256": "97f79a6963fbaa146dece94a5374b81abafb4d5240ec327e1a8478d4b36af9f9",
+      "parameters": {
+        "entityID": "rs:VWMYAEQSTOPNV0SUGU82.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "decimalsDecimal": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/213800M7T3CYVZ3ZRT12.CON_NO_PILLAR3020000_ESGDIS_2025-06-30_20260302014331731.zip",
+      "filename": "213800M7T3CYVZ3ZRT12.CON_NO_PILLAR3020000_ESGDIS_2025-06-30_20260302014331731.zip",
+      "bytes": 10334,
+      "sha256": "8b3a7e102349c8937aa3a7b5af648660be6d6866d6ac2df33c4922a02e6c4e32",
+      "parameters": {
+        "entityID": "rs:213800M7T3CYVZ3ZRT12.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsInteger": "0",
+        "baseCurrency": "iso4217:NOK",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/213800M7T3CYVZ3ZRT12.CON_NO_PILLAR3020000_ESGDIS_2025-12-31_20260507095423019.zip",
+      "filename": "213800M7T3CYVZ3ZRT12.CON_NO_PILLAR3020000_ESGDIS_2025-12-31_20260507095423019.zip",
+      "bytes": 12535,
+      "sha256": "290274a8b1b3db0e05d0c700349393ddad28e0e9bc55a1857f5efc1beabcfcbf",
+      "parameters": {
+        "entityID": "rs:213800M7T3CYVZ3ZRT12.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsInteger": "0",
+        "baseCurrency": "iso4217:NOK",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_ESGDIS_2025-06-30_20251202105735922.zip",
+      "filename": "213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_ESGDIS_2025-06-30_20251202105735922.zip",
+      "bytes": 12376,
+      "sha256": "49ad158e9e22455cb9a604b762750d1145749e89315fdca5b6f2debda7aeba75",
+      "parameters": {
+        "entityID": "rs:213800TC9PZRBHMJW403.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_ESGDIS_2025-12-31_20260626135154835.zip",
+      "filename": "213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_ESGDIS_2025-12-31_20260626135154835.zip",
+      "bytes": 7022,
+      "sha256": "5dffbbf450291a7c9bc0275bbd08d7800971e743f314921a832e36fa6b327600",
+      "parameters": {
+        "entityID": "rs:213800TC9PZRBHMJW403.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/3157002JBFAI478MD587.CON_SK_PILLAR3020000_ESGDIS_2025-06-30_20260127094417200.zip",
+      "filename": "3157002JBFAI478MD587.CON_SK_PILLAR3020000_ESGDIS_2025-06-30_20260127094417200.zip",
+      "bytes": 25641,
+      "sha256": "b8faa4c516c05869a176e2529591a69e04d37390b67175851fd106ef9df8951d",
+      "parameters": {
+        "entityID": "rs:3157002JBFAI478MD587.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "sk-SK",
+        "decimalsMonetary": "2",
+        "decimalsDecimal": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/3157002JBFAI478MD587.CON_SK_PILLAR3020000_ESGDIS_2025-12-31_20260327132824058.zip",
+      "filename": "3157002JBFAI478MD587.CON_SK_PILLAR3020000_ESGDIS_2025-12-31_20260327132824058.zip",
+      "bytes": 15171,
+      "sha256": "bec87bf24b0b5a7e6a5c709f2e3217ed78b50d5515b2663d7332253569af3575",
+      "parameters": {
+        "entityID": "rs:3157002JBFAI478MD587.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "sk-SK",
+        "decimalsMonetary": "-6",
+        "decimalsDecimal": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_ESGDIS_2025-06-30_20260427113239914.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_ESGDIS_2025-06-30_20260427113239914.zip",
+      "bytes": 12886,
+      "sha256": "70ab85b202e1aaf02715809d6b99bcf7375d3feac442f0af3a5eae2ff062bb8e",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_ESGDIS_2025-12-31_20260427113325999.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_ESGDIS_2025-12-31_20260427113325999.zip",
+      "bytes": 12437,
+      "sha256": "b2c3eafabd89d29362fde48fe9e1e3abca763d8137b2599d6d76bdc83d6b6655",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/529900PR2ELW8QI1B775.IND_DK_PILLAR3020000_ESGDIS_2025-12-31_20260623091943985.zip",
+      "filename": "529900PR2ELW8QI1B775.IND_DK_PILLAR3020000_ESGDIS_2025-12-31_20260623091943985.zip",
+      "bytes": 5676,
+      "sha256": "a667e9c4ba14f0e9c7c31a46441d0c6f2013653222cd83fc94dedc60869361a0",
+      "parameters": {
+        "entityID": "rs:529900PR2ELW8QI1B775.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:DKK",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_ESGDIS_2025-06-30_20260619152643995.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_ESGDIS_2025-06-30_20260619152643995.zip",
+      "bytes": 11396,
+      "sha256": "164d115ab8da39f20856627c778ed26c0c2e8ae26ddd4514fa1dbf26294ea466",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_ESGDIS_2025-12-31_20260623162744568.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_ESGDIS_2025-12-31_20260623162744568.zip",
+      "bytes": 11653,
+      "sha256": "9cd03aa5f6aca3ea6e6d4d8f11d3ffaaeac14ed9db3459fbb4912baa59847b96",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/529900SXEWPJ1MRRX537.CON_AT_PILLAR3020000_ESGDIS_2025-12-31_20260508120538043.zip",
+      "filename": "529900SXEWPJ1MRRX537.CON_AT_PILLAR3020000_ESGDIS_2025-12-31_20260508120538043.zip",
+      "bytes": 15264,
+      "sha256": "a5193527b7eae6d809c57df562ff5bbed9c7654afa17112b323ca5dcd8160dad",
+      "parameters": {
+        "entityID": "rs:529900SXEWPJ1MRRX537.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsDecimal": "2",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/549300OLBL49CW8CT155.CON_ES_PILLAR3020000_ESGDIS_2025-06-30_20260220111708992.zip",
+      "filename": "549300OLBL49CW8CT155.CON_ES_PILLAR3020000_ESGDIS_2025-06-30_20260220111708992.zip",
+      "bytes": 19657,
+      "sha256": "8f7d6841dbe69a9330fa87fd44fb137830f4c84c31cc07eeb03089f77e110b7c",
+      "parameters": {
+        "entityID": "rs:549300OLBL49CW8CT155.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "4",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/549300OLBL49CW8CT155.CON_ES_PILLAR3020000_ESGDIS_2025-12-31_20260420123018003.zip",
+      "filename": "549300OLBL49CW8CT155.CON_ES_PILLAR3020000_ESGDIS_2025-12-31_20260420123018003.zip",
+      "bytes": 13256,
+      "sha256": "85c8db8bf325d7bf03dbffcd0f27ea1800f3f627ca5090c3ac12a78a250bf5d4",
+      "parameters": {
+        "entityID": "rs:549300OLBL49CW8CT155.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "4",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3020000_ESGDIS_2025-06-30_20260626143732000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3020000_ESGDIS_2025-06-30_20260626143732000.zip",
+      "bytes": 17772,
+      "sha256": "d4caa2410f1faa87d178836b3da56be580c1b789c0262695318c73f5c763ca4c",
+      "parameters": {
+        "refPeriod": "2025-06-30",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3020000_ESGDIS_2025-12-31_20260615182609000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3020000_ESGDIS_2025-12-31_20260615182609000.zip",
+      "bytes": 17569,
+      "sha256": "ae0ee703d4b398716e65e480aa232e06a3ede8157e5e2fbb1b8c7c2b3cad2dc5",
+      "parameters": {
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/549300URJH9VSI58CS32.CON_PT_PILLAR3020000_ESGDIS_2025-06-30_20250417160229257.zip",
+      "filename": "549300URJH9VSI58CS32.CON_PT_PILLAR3020000_ESGDIS_2025-06-30_20250417160229257.zip",
+      "bytes": 13096,
+      "sha256": "5b07d7ef424747b7390fedb2358ac73693dfdb3cef2fb8751db9d8be8a5b2bdf",
+      "parameters": {
+        "entityID": "rs:549300URJH9VSI58CS32.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/549300UY81ESCZJ0GR95.CON_BG_PILLAR3020000_ESGDIS_2025-06-30_20260408133326788.zip",
+      "filename": "549300UY81ESCZJ0GR95.CON_BG_PILLAR3020000_ESGDIS_2025-06-30_20260408133326788.zip",
+      "bytes": 16204,
+      "sha256": "89f50dfe71eddd42aa344a4c1b36e5fa9c0b26c39dd8cb67424b4b9c853f1fab",
+      "parameters": {
+        "entityID": "rs:549300UY81ESCZJ0GR95.CON",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/635400F6HLXKXNJJX605.IND_RO_PILLAR3020000_ESGDIS_2025-12-31_20260624140335907.zip",
+      "filename": "635400F6HLXKXNJJX605.IND_RO_PILLAR3020000_ESGDIS_2025-12-31_20260624140335907.zip",
+      "bytes": 14312,
+      "sha256": "f916d0d2aba37d33176c8be821daf0103b1ca3dfc9a8e7e33cf90754995d4a15",
+      "parameters": {
+        "entityID": "rs:635400F6HLXKXNJJX605.IND",
+        "decimalsPercentage": "4",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:RON",
+        "baseLanguage": "ro-RO",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3020000_ESGDIS_2025-06-30_20260528144815898.zip",
+      "filename": "DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3020000_ESGDIS_2025-06-30_20260528144815898.zip",
+      "bytes": 8810,
+      "sha256": "bad4ef3d7ca652b46a7dfefd441fb19791a57510a657ba6cc78285ecd4ec54f0",
+      "parameters": {
+        "entityID": "rs:DZZ47B9A52ZJ6LT6VV95.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/KFUXYFTU2LHQFQZDQG45.CON_HU_PILLAR3020000_ESGDIS_2025-06-30_20260512102557005.zip",
+      "filename": "KFUXYFTU2LHQFQZDQG45.CON_HU_PILLAR3020000_ESGDIS_2025-06-30_20260512102557005.zip",
+      "bytes": 11578,
+      "sha256": "f83a60d48edf208ac36fdd4255587fa28a447e7f5415fdf3bed20afde2016084",
+      "parameters": {
+        "entityID": "rs:KFUXYFTU2LHQFQZDQG45.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:HUF",
+        "decimalsMonetary": "-3",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/KFUXYFTU2LHQFQZDQG45.CON_HU_PILLAR3020000_ESGDIS_2025-12-31_20260602081305000.zip",
+      "filename": "KFUXYFTU2LHQFQZDQG45.CON_HU_PILLAR3020000_ESGDIS_2025-12-31_20260602081305000.zip",
+      "bytes": 12813,
+      "sha256": "4674fc51e2a30028f700db808a18963fb8992bb0a3d79f86e97efb4ce3dd40ae",
+      "parameters": {
+        "entityID": "rs:KFUXYFTU2LHQFQZDQG45.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:HUF",
+        "decimalsMonetary": "-3",
+        "decimalsInteger": "0",
+        "decimalsPercentage": "4",
+        "decimalsDecimal": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/PQOH26KWDF7CG10L6792.CON_AT_PILLAR3020000_ESGDIS_2025-06-30_20260622030606960.zip",
+      "filename": "PQOH26KWDF7CG10L6792.CON_AT_PILLAR3020000_ESGDIS_2025-06-30_20260622030606960.zip",
+      "bytes": 41002,
+      "sha256": "9ed006b60c0d38255fc2d88b17b1f9a46e6855a96413cf67cc29921eb3c7d0db",
+      "parameters": {
+        "entityID": "rs:PQOH26KWDF7CG10L6792.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsDecimal": "6",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/ESGDIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_ESGDIS_2025-12-31_20260427025310184.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_ESGDIS_2025-12-31_20260427025310184.zip",
+      "bytes": 6428,
+      "sha256": "11db569cf24f5902ae5c9003c41caa8b5f83a96e7875b99145d803aa84951823",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/213800KYUPNOQPAQL758.CON_PT_PILLAR3020000_FINDIS_2025-12-31_20260518101136882.zip",
+      "filename": "213800KYUPNOQPAQL758.CON_PT_PILLAR3020000_FINDIS_2025-12-31_20260518101136882.zip",
+      "bytes": 9007,
+      "sha256": "9d4db58dfa8f022acf38050d15256125eb3b61b1526672dbf77b71f06716ef13",
+      "parameters": {
+        "entityID": "rs:213800KYUPNOQPAQL758.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/213800P1P13ABO5R9V78.IND_CY_PILLAR3020000_FINDIS_2025-12-31_20260625111419580.zip",
+      "filename": "213800P1P13ABO5R9V78.IND_CY_PILLAR3020000_FINDIS_2025-12-31_20260625111419580.zip",
+      "bytes": 17648,
+      "sha256": "ecfa448673c1f86d39f682ff92071ef01912b6c967e72636238f3b3cef05ba15",
+      "parameters": {
+        "entityID": "rs:213800P1P13ABO5R9V78.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_FINDIS_2025-06-30_20251202105903187.zip",
+      "filename": "213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_FINDIS_2025-06-30_20251202105903187.zip",
+      "bytes": 11637,
+      "sha256": "23deba81a3a49252c3c1aeb2aefc44dc5bfef937d4cec002f09933b97fd11819",
+      "parameters": {
+        "entityID": "rs:213800TC9PZRBHMJW403.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_FINDIS_2025-12-31_20260619171025901.zip",
+      "filename": "213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_FINDIS_2025-12-31_20260619171025901.zip",
+      "bytes": 12875,
+      "sha256": "289d7bd8f60795c46b5c3f202ec993f3079da42fabe38226655fc2da21f34f65",
+      "parameters": {
+        "entityID": "rs:213800TC9PZRBHMJW403.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/259400WNAOMT2E4OIS38.CON_PL_PILLAR3020000_FINDIS_2025-12-31_20260401155045294.zip",
+      "filename": "259400WNAOMT2E4OIS38.CON_PL_PILLAR3020000_FINDIS_2025-12-31_20260401155045294.zip",
+      "bytes": 13606,
+      "sha256": "afc41e1462a2bfe0f813e8db39c052e7c12533ad803fc1388d741b194d57f8d2",
+      "parameters": {
+        "entityID": "rs:259400WNAOMT2E4OIS38.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:PLN",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_FINDIS_2025-06-30_20260427142518726.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_FINDIS_2025-06-30_20260427142518726.zip",
+      "bytes": 11630,
+      "sha256": "d4f95ebae8582634f5188c03cecfc78fe7b42fc05e1b95fdc19ee262fd0ee72c",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_FINDIS_2025-12-31_20260427150321830.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_FINDIS_2025-12-31_20260427150321830.zip",
+      "bytes": 14170,
+      "sha256": "fcaa7c2e04c09581cf74875fb38e428777087996d5b6bfbcf1e774b662c523e4",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/5299000F1CGJQ8NAXQ58.IND_MT_PILLAR3020000_FINDIS_2025-12-31_20260513093054058.zip",
+      "filename": "5299000F1CGJQ8NAXQ58.IND_MT_PILLAR3020000_FINDIS_2025-12-31_20260513093054058.zip",
+      "bytes": 8091,
+      "sha256": "2aca9e764639014b553a99735e8edf9f84356e744cf85a1d27286829ae51b8de",
+      "parameters": {
+        "entityID": "rs:5299000F1CGJQ8NAXQ58.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/5299008FEH4GQXGZNP50.CON_PT_PILLAR3020000_FINDIS_2025-12-31_20260505032238702.zip",
+      "filename": "5299008FEH4GQXGZNP50.CON_PT_PILLAR3020000_FINDIS_2025-12-31_20260505032238702.zip",
+      "bytes": 9757,
+      "sha256": "90f6869a8b54f12a5308f9ee30095684abb56359da2a3b8fee8b6fcd3b7ea37b",
+      "parameters": {
+        "entityID": "rs:5299008FEH4GQXGZNP50.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/52990096Q5LMCH1WU462.CON_SK_PILLAR3020000_FINDIS_2025-12-31_20260518093509000.zip",
+      "filename": "52990096Q5LMCH1WU462.CON_SK_PILLAR3020000_FINDIS_2025-12-31_20260518093509000.zip",
+      "bytes": 8790,
+      "sha256": "1cbd094e4fc57f0cdc59691a83f4f56727b266b7732b6e3d40db208cfe7e0f09",
+      "parameters": {
+        "entityID": "rs:52990096Q5LMCH1WU462.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/5299009EHB4RBGMI5828.IND_AT_PILLAR3020000_FINDIS_2025-12-31_20260624120626527.zip",
+      "filename": "5299009EHB4RBGMI5828.IND_AT_PILLAR3020000_FINDIS_2025-12-31_20260624120626527.zip",
+      "bytes": 16927,
+      "sha256": "809be8d76d43a0b99cf170cfefe83a3f491af07be27a4d73468481947d9097a4",
+      "parameters": {
+        "entityID": "rs:5299009EHB4RBGMI5828.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900AVGYYBVL1VNQ03.IND_DK_PILLAR3020000_FINDIS_2025-12-31_20260609100552137.zip",
+      "filename": "529900AVGYYBVL1VNQ03.IND_DK_PILLAR3020000_FINDIS_2025-12-31_20260609100552137.zip",
+      "bytes": 4246,
+      "sha256": "ee37f82037bc06419196402aebdfdf1a9e9ead0585e7bc7bccda07f93150032e",
+      "parameters": {
+        "entityID": "rs:529900AVGYYBVL1VNQ03.IND",
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:DKK"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900BI5KIGX6YLX375.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260625020600383.zip",
+      "filename": "529900BI5KIGX6YLX375.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260625020600383.zip",
+      "bytes": 16421,
+      "sha256": "0040cf6ba3aa125055c552b3afc83d708d880e7e61f97a290c215efa7c5983e7",
+      "parameters": {
+        "entityID": "rs:529900BI5KIGX6YLX375.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900FEID5L4H2T2L70.IND_AT_PILLAR3020000_FINDIS_2025-12-31_20260626110645430.zip",
+      "filename": "529900FEID5L4H2T2L70.IND_AT_PILLAR3020000_FINDIS_2025-12-31_20260626110645430.zip",
+      "bytes": 20208,
+      "sha256": "bdc0c1244e0ee66d66660b60361e89eb318d7dfc17510de70587c6ff365e1bd0",
+      "parameters": {
+        "entityID": "rs:529900FEID5L4H2T2L70.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900LU7D396TOO3B50.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260609100625114.zip",
+      "filename": "529900LU7D396TOO3B50.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260609100625114.zip",
+      "bytes": 10321,
+      "sha256": "11276b2784ae66d1dd71bd6b5229c881c912339a6f2a3949efca3012e949165a",
+      "parameters": {
+        "entityID": "rs:529900LU7D396TOO3B50.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900NJYUGRO908KV84.CON_BG_PILLAR3020000_FINDIS_2025-12-31_20260522171048654.zip",
+      "filename": "529900NJYUGRO908KV84.CON_BG_PILLAR3020000_FINDIS_2025-12-31_20260522171048654.zip",
+      "bytes": 8323,
+      "sha256": "56030422c5391b6f4a1f4d116faf5d94dcd783ca846e0a3bcf3d5fc16f8b8ec2",
+      "parameters": {
+        "entityID": "rs:529900NJYUGRO908KV84.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "en-US",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900PR2ELW8QI1B775.IND_DK_PILLAR3020000_FINDIS_2025-12-31_20260630114800372.zip",
+      "filename": "529900PR2ELW8QI1B775.IND_DK_PILLAR3020000_FINDIS_2025-12-31_20260630114800372.zip",
+      "bytes": 16203,
+      "sha256": "9802a6cea16f5e03066c8090c029a740904267cf31f4bd44eb629028e0cbeb74",
+      "parameters": {
+        "entityID": "rs:529900PR2ELW8QI1B775.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:DKK",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900RCLERIIXF4QM23.IND_AT_PILLAR3020000_FINDIS_2025-12-31_20260618060656587.zip",
+      "filename": "529900RCLERIIXF4QM23.IND_AT_PILLAR3020000_FINDIS_2025-12-31_20260618060656587.zip",
+      "bytes": 11047,
+      "sha256": "9d0986f8ed49d2ccb2a1a50a3ca29d695008408fb7b2a46db5c1c07a717779b3",
+      "parameters": {
+        "entityID": "rs:529900RCLERIIXF4QM23.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900RPGHC6DQEQL615.IND_BG_PILLAR3020000_FINDIS_2025-12-31_20260623104736406.zip",
+      "filename": "529900RPGHC6DQEQL615.IND_BG_PILLAR3020000_FINDIS_2025-12-31_20260623104736406.zip",
+      "bytes": 14872,
+      "sha256": "cd9a86d165f7fb65f5115e03cf7b22362ee2ecb492ef1f9dc3512e5ffc3b3434",
+      "parameters": {
+        "entityID": "rs:529900RPGHC6DQEQL615.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_FINDIS_2025-06-30_20260619153442140.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_FINDIS_2025-06-30_20260619153442140.zip",
+      "bytes": 12152,
+      "sha256": "6171ea8c18c7d3d3cb87b1321b6de20fe2635929b23812e1433185a89112a43b",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_FINDIS_2025-12-31_20260623163839838.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3020000_FINDIS_2025-12-31_20260623163839838.zip",
+      "bytes": 16771,
+      "sha256": "70e3476a87b08546f149117e9e899bcec229cee3654800fa87ffe8cf41ad2c59",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900SXEWPJ1MRRX537.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260508120547985.zip",
+      "filename": "529900SXEWPJ1MRRX537.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260508120547985.zip",
+      "bytes": 12673,
+      "sha256": "879a83d134d931dde4551a79e953d342bdb2f44b7e2ef981075949b88ed81007",
+      "parameters": {
+        "entityID": "rs:529900SXEWPJ1MRRX537.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900T32UL0CP1FZA06.CON_IT_PILLAR3020000_FINDIS_2025-12-31_20260617163507173.zip",
+      "filename": "529900T32UL0CP1FZA06.CON_IT_PILLAR3020000_FINDIS_2025-12-31_20260617163507173.zip",
+      "bytes": 13215,
+      "sha256": "781477fc3b52c9f7e0e5e8c651d99bc362687a2bbb85576fd2a653969e175d84",
+      "parameters": {
+        "entityID": "rs:529900T32UL0CP1FZA06.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-6",
+        "baseCurrency": "iso4217:EUR"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/529900UKZBMDBDZIXD62.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260317110354824.zip",
+      "filename": "529900UKZBMDBDZIXD62.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260317110354824.zip",
+      "bytes": 17577,
+      "sha256": "f7a6eee59fbeca7bf643432bf718e8ebb51e2e8ad26f31787a320b63c2b9dbb0",
+      "parameters": {
+        "entityID": "rs:529900UKZBMDBDZIXD62.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/5493000UPYR7EEHN2R94.CON_SI_PILLAR3020000_FINDIS_2025-12-31_20260608130224384.zip",
+      "filename": "5493000UPYR7EEHN2R94.CON_SI_PILLAR3020000_FINDIS_2025-12-31_20260608130224384.zip",
+      "bytes": 8833,
+      "sha256": "9bf998e9a8737fede84d492dfe1de1c39eae8eeb89ec96261e19e4661f3bbc27",
+      "parameters": {
+        "entityID": "rs:5493000UPYR7EEHN2R94.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/5493006QMFDDMYWIAM13.CON_ES_PILLAR3020000_FINDIS_2025-06-30_20260130111255722.zip",
+      "filename": "5493006QMFDDMYWIAM13.CON_ES_PILLAR3020000_FINDIS_2025-06-30_20260130111255722.zip",
+      "bytes": 11976,
+      "sha256": "5a770bc1da4ef170200627febeb7802a869b8ab786e5eb1cd3e6d7a5e44f81db",
+      "parameters": {
+        "entityID": "rs:5493006QMFDDMYWIAM13.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/5493006QMFDDMYWIAM13.CON_ES_PILLAR3020000_FINDIS_2025-12-31_20260225062517249.zip",
+      "filename": "5493006QMFDDMYWIAM13.CON_ES_PILLAR3020000_FINDIS_2025-12-31_20260225062517249.zip",
+      "bytes": 14893,
+      "sha256": "2717d4f8ae0d7b72926e865a04e9c113be0be262f6df76d5940537cc11b9acaf",
+      "parameters": {
+        "entityID": "rs:5493006QMFDDMYWIAM13.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300DVPJYGNF2P7B03.CON_AT_PILLAR3020000_FINDIS_2025-06-30_20260127080158617.zip",
+      "filename": "549300DVPJYGNF2P7B03.CON_AT_PILLAR3020000_FINDIS_2025-06-30_20260127080158617.zip",
+      "bytes": 18656,
+      "sha256": "3a8a28f6e1af1d3a836b715e8e7dc875aa66dc2538099ab9ea15687c6eaedadf",
+      "parameters": {
+        "entityID": "rs:549300DVPJYGNF2P7B03.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300DVPJYGNF2P7B03.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260420030401803.zip",
+      "filename": "549300DVPJYGNF2P7B03.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260420030401803.zip",
+      "bytes": 20936,
+      "sha256": "97c33016008071ca7fe6e69a21fe5abd8cec3bb1a8983f107601695c5975cabf",
+      "parameters": {
+        "entityID": "rs:549300DVPJYGNF2P7B03.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300HUKIA1IZQHFZ83.IND_AT_PILLAR3020000_FINDIS_2025-12-31_20260626020636765.zip",
+      "filename": "549300HUKIA1IZQHFZ83.IND_AT_PILLAR3020000_FINDIS_2025-12-31_20260626020636765.zip",
+      "bytes": 25168,
+      "sha256": "da96f1795e9dc2ba33d69ff817378d90ad99bc07d56e51b22921050f2793670f",
+      "parameters": {
+        "entityID": "rs:549300HUKIA1IZQHFZ83.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300L7YCATGO57ZE10.CON_IT_PILLAR3020000_FINDIS_2025-06-30_20260415131401393.zip",
+      "filename": "549300L7YCATGO57ZE10.CON_IT_PILLAR3020000_FINDIS_2025-06-30_20260415131401393.zip",
+      "bytes": 11807,
+      "sha256": "3ac36fe212600a2ed6c3e92b000ecc2f72f8e1c959c5a30812c09b3777e1b799",
+      "parameters": {
+        "entityID": "rs:549300L7YCATGO57ZE10.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300L7YCATGO57ZE10.CON_IT_PILLAR3020000_FINDIS_2025-12-31_20260518175358538.zip",
+      "filename": "549300L7YCATGO57ZE10.CON_IT_PILLAR3020000_FINDIS_2025-12-31_20260518175358538.zip",
+      "bytes": 15699,
+      "sha256": "87dd38ef537105c6365e622fed31eaac8927f01d901e65f2b562989707896d91",
+      "parameters": {
+        "entityID": "rs:549300L7YCATGO57ZE10.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3020000_FINDIS_2025-06-30_20260626095415000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3020000_FINDIS_2025-06-30_20260626095415000.zip",
+      "bytes": 9180,
+      "sha256": "0f2190147ad97edb74f2c3329fe997ebbcb2531af3b960cdf716494344571c69",
+      "parameters": {
+        "refPeriod": "2025-06-30",
+        "decimalsMonetary": "-3",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3020000_FINDIS_2025-12-31_20260615182940000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3020000_FINDIS_2025-12-31_20260615182940000.zip",
+      "bytes": 12473,
+      "sha256": "00b6e2f58cf025b00146550b182970993b00bd70eb3a937c0550792975d37954",
+      "parameters": {
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-3",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300S2T3FWVVXWJI89.CON_SK_PILLAR3020000_FINDIS_2025-06-30_20260330100438562.zip",
+      "filename": "549300S2T3FWVVXWJI89.CON_SK_PILLAR3020000_FINDIS_2025-06-30_20260330100438562.zip",
+      "bytes": 12644,
+      "sha256": "e494e4435056e875b828b375b8d691ac8787e6b16423e79fcffb2988fffe2b07",
+      "parameters": {
+        "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "sk-SK",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300S2T3FWVVXWJI89.CON_SK_PILLAR3020000_FINDIS_2025-12-31_20260330170100850.zip",
+      "filename": "549300S2T3FWVVXWJI89.CON_SK_PILLAR3020000_FINDIS_2025-12-31_20260330170100850.zip",
+      "bytes": 12694,
+      "sha256": "815d4d82c47f3ab3e6041e50ddb22e6b9a0c445a2ae9ba3737798c6b3b1e3298",
+      "parameters": {
+        "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "sk-SK",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300TL5406IC1XKD09.CON_DK_PILLAR3020000_FINDIS_2025-12-31_20260505112325000.zip",
+      "filename": "549300TL5406IC1XKD09.CON_DK_PILLAR3020000_FINDIS_2025-12-31_20260505112325000.zip",
+      "bytes": 19091,
+      "sha256": "4e1098251bd47c9e6132e48474fbfa383c91f3a0aacd9d4442a13b6ae32c4839",
+      "parameters": {
+        "entityID": "rs:549300TL5406IC1XKD09.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300TTZTKBUFKWH890.CON_CY_PILLAR3020000_FINDIS_2025-12-31_20260623125047703.zip",
+      "filename": "549300TTZTKBUFKWH890.CON_CY_PILLAR3020000_FINDIS_2025-12-31_20260623125047703.zip",
+      "bytes": 18485,
+      "sha256": "bb1c43dfcc23a9b0d24fbe56606e3c34608749a07da0c3d5a4c6651e20888a9a",
+      "parameters": {
+        "entityID": "rs:549300TTZTKBUFKWH890.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300URJH9VSI58CS32.CON_PT_PILLAR3020000_FINDIS_2025-06-30_20250416122729257.zip",
+      "filename": "549300URJH9VSI58CS32.CON_PT_PILLAR3020000_FINDIS_2025-06-30_20250416122729257.zip",
+      "bytes": 23689,
+      "sha256": "b948e3a49bcec031aa6dfb2846b8a301e1a652f9a3a7b7376601568e1acc10d1",
+      "parameters": {
+        "entityID": "rs:549300URJH9VSI58CS32.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:EUR"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300UY81ESCZJ0GR95.CON_BG_PILLAR3020000_FINDIS_2025-06-30_20260408133446436.zip",
+      "filename": "549300UY81ESCZJ0GR95.CON_BG_PILLAR3020000_FINDIS_2025-06-30_20260408133446436.zip",
+      "bytes": 13747,
+      "sha256": "e625c462b62aac80db940590453825c876d2f04a1f9e336c4882a46392e9a985",
+      "parameters": {
+        "entityID": "rs:549300UY81ESCZJ0GR95.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/549300V4H4USWZUCE073.IND_PT_PILLAR3020000_FINDIS_2025-12-31_20260624153333614.zip",
+      "filename": "549300V4H4USWZUCE073.IND_PT_PILLAR3020000_FINDIS_2025-12-31_20260624153333614.zip",
+      "bytes": 8238,
+      "sha256": "989b05bc229569f5550cd1fecddb5487861bd5cf683cbb705c6e037805c1c10e",
+      "parameters": {
+        "entityID": "rs:549300V4H4USWZUCE073.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/635400F6HLXKXNJJX605.IND_RO_PILLAR3020000_FINDIS_2025-12-31_20260624133207307.zip",
+      "filename": "635400F6HLXKXNJJX605.IND_RO_PILLAR3020000_FINDIS_2025-12-31_20260624133207307.zip",
+      "bytes": 15208,
+      "sha256": "0791f25b1e9268ecdec0c6e113edddbddb70b5f0cd5d2db15c5d9d46aeded370",
+      "parameters": {
+        "entityID": "rs:635400F6HLXKXNJJX605.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:RON",
+        "baseLanguage": "ro-RO",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/724500D8WOYCL1BUCB80.CON_NL_PILLAR3020000_FINDIS_2025-12-31_20260323112112616.zip",
+      "filename": "724500D8WOYCL1BUCB80.CON_NL_PILLAR3020000_FINDIS_2025-12-31_20260323112112616.zip",
+      "bytes": 12969,
+      "sha256": "81e05fa756dd4d71a126d326ff1c95de87905cb75c9a6bd50918da8994bd909c",
+      "parameters": {
+        "entityID": "rs:724500D8WOYCL1BUCB80.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/8156005C22D0BF134C40.IND_IT_PILLAR3020000_FINDIS_2025-12-31_20260623121045282.zip",
+      "filename": "8156005C22D0BF134C40.IND_IT_PILLAR3020000_FINDIS_2025-12-31_20260623121045282.zip",
+      "bytes": 13857,
+      "sha256": "9782502c035bb66938591c0396b5aa4b874783e04d1d8b81891e86fef1366912",
+      "parameters": {
+        "entityID": "rs:8156005C22D0BF134C40.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/8156009F9B6BB7745A32.CON_IT_PILLAR3020000_FINDIS_2025-12-31_20260626155948018.zip",
+      "filename": "8156009F9B6BB7745A32.CON_IT_PILLAR3020000_FINDIS_2025-12-31_20260626155948018.zip",
+      "bytes": 13983,
+      "sha256": "e4670451c5676fb5aca23d73dd14bc43b0b53fa360a380b4a3ca3e1f66a3ed90",
+      "parameters": {
+        "entityID": "rs:8156009F9B6BB7745A32.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/815600B43BECA3919584.IND_IT_PILLAR3020000_FINDIS_2025-12-31_20260529142804705.zip",
+      "filename": "815600B43BECA3919584.IND_IT_PILLAR3020000_FINDIS_2025-12-31_20260529142804705.zip",
+      "bytes": 9098,
+      "sha256": "034034a3fa8c16d73132a4976267cdf9c74e09233fe392565d7f0158092dae04",
+      "parameters": {
+        "decimalsMonetary": "-3",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "entityID": "rs:815600B43BECA3919584.IND"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/894500N55FUZ70ZQ1784.CON_SE_PILLAR3020000_FINDIS_2025-12-31_20260526095137671.zip",
+      "filename": "894500N55FUZ70ZQ1784.CON_SE_PILLAR3020000_FINDIS_2025-12-31_20260526095137671.zip",
+      "bytes": 16774,
+      "sha256": "38b9d8f62d0f55b44565fc45e391bf30659d9ce94d02e82127881d969d683a6c",
+      "parameters": {
+        "entityID": "rs:894500N55FUZ70ZQ1784.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/984500E4D07499C10435.CON_BG_PILLAR3020000_FINDIS_2025-12-31_20260529093343468.zip",
+      "filename": "984500E4D07499C10435.CON_BG_PILLAR3020000_FINDIS_2025-12-31_20260529093343468.zip",
+      "bytes": 18226,
+      "sha256": "7163277a8f422aed4449a6a34ab4042cc8e7f57f9a70881865c5b5e730eaedf3",
+      "parameters": {
+        "entityID": "rs:984500E4D07499C10435.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3020000_FINDIS_2025-06-30_20260529170637653.zip",
+      "filename": "DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3020000_FINDIS_2025-06-30_20260529170637653.zip",
+      "bytes": 10535,
+      "sha256": "c6be6871faf8e384aab46e53bfec6de98b9215d6539d2afb1cdaffe646570aa7",
+      "parameters": {
+        "entityID": "rs:DZZ47B9A52ZJ6LT6VV95.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/H8MIG1MMPR6JXUQVBM04.IND_PL_PILLAR3020000_FINDIS_2025-12-31_20260603175110674.zip",
+      "filename": "H8MIG1MMPR6JXUQVBM04.IND_PL_PILLAR3020000_FINDIS_2025-12-31_20260603175110674.zip",
+      "bytes": 7377,
+      "sha256": "9f9a16d822d05e0662dd29b28df6491c5b8029e79c6df42232597b963d808137",
+      "parameters": {
+        "entityID": "rs:H8MIG1MMPR6JXUQVBM04.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:PLN",
+        "baseLanguage": "pl-PL",
+        "decimalsMonetary": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/K8MS7FD7N5Z2WQ51AZ71.CON_ES_PILLAR3020000_FINDIS_2025-06-30_20260225124425234.zip",
+      "filename": "K8MS7FD7N5Z2WQ51AZ71.CON_ES_PILLAR3020000_FINDIS_2025-06-30_20260225124425234.zip",
+      "bytes": 11360,
+      "sha256": "e2f36b6f5c4883c2ebdd2f64950cf233f5737592c0c79f0f01d96cf487dcfba9",
+      "parameters": {
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "entityID": "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+        "refPeriod": "2025-06-30"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/K8MS7FD7N5Z2WQ51AZ71.CON_ES_PILLAR3020000_FINDIS_2025-12-31_20260421155725234.zip",
+      "filename": "K8MS7FD7N5Z2WQ51AZ71.CON_ES_PILLAR3020000_FINDIS_2025-12-31_20260421155725234.zip",
+      "bytes": 15585,
+      "sha256": "cfc2cbec76c9af9a50fa377fe57c9b4f97a4f7d99df74e3411a2ba96b82f552f",
+      "parameters": {
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "entityID": "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+        "refPeriod": "2025-12-31"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/NICH5Q04ADUV9SN3Q390.CON_FR_PILLAR3020000_FINDIS_2025-06-30_20260107161423296.zip",
+      "filename": "NICH5Q04ADUV9SN3Q390.CON_FR_PILLAR3020000_FINDIS_2025-06-30_20260107161423296.zip",
+      "bytes": 11395,
+      "sha256": "67dd417bd98cec6b82467558334d65978667d31cc5d276fff361e7407ae70a44",
+      "parameters": {
+        "entityID": "rs:NICH5Q04ADUV9SN3Q390.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/NICH5Q04ADUV9SN3Q390.CON_FR_PILLAR3020000_FINDIS_2025-12-31_20260506121911053.zip",
+      "filename": "NICH5Q04ADUV9SN3Q390.CON_FR_PILLAR3020000_FINDIS_2025-12-31_20260506121911053.zip",
+      "bytes": 14167,
+      "sha256": "0ec84486d724b13072b2974b21183229d98eedb905c67f6db507a6707afb6d74",
+      "parameters": {
+        "entityID": "rs:NICH5Q04ADUV9SN3Q390.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/PQOH26KWDF7CG10L6792.CON_AT_PILLAR3020000_FINDIS_2025-06-30_20260618040641051.zip",
+      "filename": "PQOH26KWDF7CG10L6792.CON_AT_PILLAR3020000_FINDIS_2025-06-30_20260618040641051.zip",
+      "bytes": 13908,
+      "sha256": "0c074fd36bed8d2dd67687377249a3372fec1a633acacdc1af410e08fed697a9",
+      "parameters": {
+        "entityID": "rs:PQOH26KWDF7CG10L6792.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_FINDIS_2025-06-30_20260325033314650.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_FINDIS_2025-06-30_20260325033314650.zip",
+      "bytes": 10452,
+      "sha256": "2b5673e00fabd08aad7a6e5db1af45dffc1949e8188847544ae8e375904dba0c",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_FINDIS_2025-12-31_20260427025310950.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_FINDIS_2025-12-31_20260427025310950.zip",
+      "bytes": 12693,
+      "sha256": "93e6a973e85b16aa7899f386e79be7237a9c84e8f2ca5e1b71f3985e2c4a8d49",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260626020653455.zip",
+      "filename": "RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3020000_FINDIS_2025-12-31_20260626020653455.zip",
+      "bytes": 19822,
+      "sha256": "c2d4b6b83cd279e8f81dab81a5250cc9d104ed449614686eae8f6ce24ef8cdc9",
+      "parameters": {
+        "entityID": "rs:RRUN0TCQ1K2JDV7MXO75.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/FINDIS/input/TPS0Q8GFSZF45ZZFL873.CON_LU_PILLAR3020000_FINDIS_2025-12-31_20260331085505487.zip",
+      "filename": "TPS0Q8GFSZF45ZZFL873.CON_LU_PILLAR3020000_FINDIS_2025-12-31_20260331085505487.zip",
+      "bytes": 12989,
+      "sha256": "b8413f9ca4fd3cbdfeed8b144a3bb6560f9b46d4264b52bc4df24ee5d54fba1c",
+      "parameters": {
+        "entityID": "rs:TPS0Q8GFSZF45ZZFL873.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/213800TC9PZRBHMJW403.CON_MT_PILLAR3010000_IRRBBDIS_2025-06-30_20251202105834025.zip",
+      "filename": "213800TC9PZRBHMJW403.CON_MT_PILLAR3010000_IRRBBDIS_2025-06-30_20251202105834025.zip",
+      "bytes": 2959,
+      "sha256": "02fc3b35500848962aa97ffd88872f8d73bb97568793040707ad17680ed967f8",
+      "parameters": {
+        "entityID": "rs:213800TC9PZRBHMJW403.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/213800TC9PZRBHMJW403.CON_MT_PILLAR3010000_IRRBBDIS_2025-12-31_20260619170815186.zip",
+      "filename": "213800TC9PZRBHMJW403.CON_MT_PILLAR3010000_IRRBBDIS_2025-12-31_20260619170815186.zip",
+      "bytes": 2973,
+      "sha256": "643667ccbe16ec93179e86d143b8861135352ed0131911d4c73bf89ff9fee9b1",
+      "parameters": {
+        "entityID": "rs:213800TC9PZRBHMJW403.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3010000_IRRBBDIS_2025-06-30_20260427113005003.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3010000_IRRBBDIS_2025-06-30_20260427113005003.zip",
+      "bytes": 2275,
+      "sha256": "35abda1b752cd27a8c839999c02613a81871cdd5b97df6ceb2fa2058c43c57aa",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3010000_IRRBBDIS_2025-12-31_20260427112944974.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3010000_IRRBBDIS_2025-12-31_20260427112944974.zip",
+      "bytes": 2275,
+      "sha256": "5bc116dc136c7d8e5439b93be1dab9528f228648d5d2ec5b5ea18a001db34237",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/52990096Q5LMCH1WU462.CON_SK_PILLAR3010000_IRRBBDIS_2025-12-31_20260518091155000.zip",
+      "filename": "52990096Q5LMCH1WU462.CON_SK_PILLAR3010000_IRRBBDIS_2025-12-31_20260518091155000.zip",
+      "bytes": 1950,
+      "sha256": "5e9264f2c2f2cd0d3757775799cadba4a7df06604b396734ef4c4d631e09a611",
+      "parameters": {
+        "entityID": "rs:52990096Q5LMCH1WU462.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/5299009EHB4RBGMI5828.IND_AT_PILLAR3010000_IRRBBDIS_2025-12-31_20260624120639320.zip",
+      "filename": "5299009EHB4RBGMI5828.IND_AT_PILLAR3010000_IRRBBDIS_2025-12-31_20260624120639320.zip",
+      "bytes": 3403,
+      "sha256": "09c992155c15202d07e77d0971284000351f1886fb09720f55b2bea1bf5fb8e5",
+      "parameters": {
+        "entityID": "rs:5299009EHB4RBGMI5828.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/529900HEKOENJHPNN480.CON_FI_PILLAR3010000_IRRBBDIS_2025-06-30_20260119162809756.zip",
+      "filename": "529900HEKOENJHPNN480.CON_FI_PILLAR3010000_IRRBBDIS_2025-06-30_20260119162809756.zip",
+      "bytes": 3542,
+      "sha256": "ba7daccfea3a9b343a1f1e28285a5951bd2386931017a235fd8f53ad8eb19100",
+      "parameters": {
+        "entityID": "rs:529900HEKOENJHPNN480.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/529900HEKOENJHPNN480.CON_FI_PILLAR3010000_IRRBBDIS_2025-12-31_20260604171020063.zip",
+      "filename": "529900HEKOENJHPNN480.CON_FI_PILLAR3010000_IRRBBDIS_2025-12-31_20260604171020063.zip",
+      "bytes": 3488,
+      "sha256": "30d438208e099c947722953b9451bf714de2eb233b9dbc5144b4881ce8a2804c",
+      "parameters": {
+        "entityID": "rs:529900HEKOENJHPNN480.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/529900PR2ELW8QI1B775.IND_DK_PILLAR3010000_IRRBBDIS_2025-12-31_20260626110050477.zip",
+      "filename": "529900PR2ELW8QI1B775.IND_DK_PILLAR3010000_IRRBBDIS_2025-12-31_20260626110050477.zip",
+      "bytes": 3276,
+      "sha256": "efa549ac027506d86b3dedc4d8b87ced618b39017932b6f58b35968fab04c616",
+      "parameters": {
+        "entityID": "rs:529900PR2ELW8QI1B775.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:DKK",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/529900RPGHC6DQEQL615.IND_BG_PILLAR3010000_IRRBBDIS_2025-12-31_20260623104351870.zip",
+      "filename": "529900RPGHC6DQEQL615.IND_BG_PILLAR3010000_IRRBBDIS_2025-12-31_20260623104351870.zip",
+      "bytes": 2432,
+      "sha256": "8271e6ef37f0b1b637b61214bc1c2db693a8a47a0cafee53689727abc7191cba",
+      "parameters": {
+        "entityID": "rs:529900RPGHC6DQEQL615.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3010000_IRRBBDIS_2025-06-30_20260619155100300.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3010000_IRRBBDIS_2025-06-30_20260619155100300.zip",
+      "bytes": 3301,
+      "sha256": "64c28acf1c52acc6a469b5f2c6a5b3e831b0c7fa991bb2dee70ad8c0afc77e54",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3010000_IRRBBDIS_2025-12-31_20260623164152356.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3010000_IRRBBDIS_2025-12-31_20260623164152356.zip",
+      "bytes": 3297,
+      "sha256": "e984dd090e503bf24bc28915af18ddedab45e710f0a33ceb4a20a6172ddd95d3",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/529900SXEWPJ1MRRX537.CON_AT_PILLAR3010000_IRRBBDIS_2025-12-31_20260508120500279.zip",
+      "filename": "529900SXEWPJ1MRRX537.CON_AT_PILLAR3010000_IRRBBDIS_2025-12-31_20260508120500279.zip",
+      "bytes": 3436,
+      "sha256": "ed5b43e7192c3c7f285264a0b37495f3694f38781f089b491b3f0e42483cf1d1",
+      "parameters": {
+        "entityID": "rs:529900SXEWPJ1MRRX537.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/529900UKZBMDBDZIXD62.CON_AT_PILLAR3010000_IRRBBDIS_2025-12-31_20260317110310134.zip",
+      "filename": "529900UKZBMDBDZIXD62.CON_AT_PILLAR3010000_IRRBBDIS_2025-12-31_20260317110310134.zip",
+      "bytes": 3406,
+      "sha256": "1ab8acb5c3785533cfa6bc4d183ea8e964859d6b9defdc9576e3b1d7625f8426",
+      "parameters": {
+        "entityID": "rs:529900UKZBMDBDZIXD62.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/549300IQZVZ949N37S44.CON_BE_PILLAR3010000_IRRBBDIS_2025-06-30_20251205115112347.zip",
+      "filename": "549300IQZVZ949N37S44.CON_BE_PILLAR3010000_IRRBBDIS_2025-06-30_20251205115112347.zip",
+      "bytes": 3272,
+      "sha256": "0598a0f69a047762aa4f230baba00d0335a7be4e119bf70f23dee77f97b60f20",
+      "parameters": {
+        "entityID": "rs:549300IQZVZ949N37S44.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/549300IQZVZ949N37S44.CON_BE_PILLAR3010000_IRRBBDIS_2025-12-31_20260605112550120.zip",
+      "filename": "549300IQZVZ949N37S44.CON_BE_PILLAR3010000_IRRBBDIS_2025-12-31_20260605112550120.zip",
+      "bytes": 3608,
+      "sha256": "c806df110ee92e77ba4c5397848b514718b6045b70c23f61746dcc87d0282553",
+      "parameters": {
+        "entityID": "rs:549300IQZVZ949N37S44.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3010000_IRRBBDIS_2025-06-30_20260625165705000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3010000_IRRBBDIS_2025-06-30_20260625165705000.zip",
+      "bytes": 2131,
+      "sha256": "d1285f0176da033284d99d988b5e81ae5051edc05da45dd83a9a99974728cf99",
+      "parameters": {
+        "refPeriod": "2025-06-30",
+        "decimalsMonetary": "-3",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3010000_IRRBBDIS_2025-12-31_20260615183034000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3010000_IRRBBDIS_2025-12-31_20260615183034000.zip",
+      "bytes": 2134,
+      "sha256": "68d9aa1dbd6698a02d5084a4de4a6624d14e46c6e44dcde7a7a4c45cc1b5e375",
+      "parameters": {
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-3",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/549300TL5406IC1XKD09.CON_DK_PILLAR3010000_IRRBBDIS_2025-12-31_20260430065101000.zip",
+      "filename": "549300TL5406IC1XKD09.CON_DK_PILLAR3010000_IRRBBDIS_2025-12-31_20260430065101000.zip",
+      "bytes": 4047,
+      "sha256": "f2aae0ce3c31f852ac5bd0a9a7833d3965cc04e61285f89b4183f4e145b45aca",
+      "parameters": {
+        "entityID": "rs:549300TL5406IC1XKD09.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/549300TTZTKBUFKWH890.CON_CY_PILLAR3010000_IRRBBDIS_2025-12-31_20260623124306243.zip",
+      "filename": "549300TTZTKBUFKWH890.CON_CY_PILLAR3010000_IRRBBDIS_2025-12-31_20260623124306243.zip",
+      "bytes": 3792,
+      "sha256": "59cf4665a69455d03a6b8df3ed8f6d17d5a6a64aa36975eab47b3a6c904f2a64",
+      "parameters": {
+        "entityID": "rs:549300TTZTKBUFKWH890.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/549300URJH9VSI58CS32.CON_PT_PILLAR3010000_IRRBBDIS_2025-06-30_20250416112829257.zip",
+      "filename": "549300URJH9VSI58CS32.CON_PT_PILLAR3010000_IRRBBDIS_2025-06-30_20250416112829257.zip",
+      "bytes": 3817,
+      "sha256": "e4f26b040f3a97840497c5dcb8e0adfd7cb07f4f904700e6b013322bd426dba1",
+      "parameters": {
+        "entityID": "rs:549300URJH9VSI58CS32.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:EUR"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/549300UY81ESCZJ0GR95.CON_BG_PILLAR3010000_IRRBBDIS_2025-06-30_20260408132032101.zip",
+      "filename": "549300UY81ESCZJ0GR95.CON_BG_PILLAR3010000_IRRBBDIS_2025-06-30_20260408132032101.zip",
+      "bytes": 2089,
+      "sha256": "35cd9b796ee556f7966b658135a0a569ac08d41a66ca02a77ea8541287fb8cc4",
+      "parameters": {
+        "entityID": "rs:549300UY81ESCZJ0GR95.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/635400F6HLXKXNJJX605.IND_RO_PILLAR3010000_IRRBBDIS_2025-12-31_20260624140951073.zip",
+      "filename": "635400F6HLXKXNJJX605.IND_RO_PILLAR3010000_IRRBBDIS_2025-12-31_20260624140951073.zip",
+      "bytes": 2495,
+      "sha256": "1c91d63c36ab21363e2371662ba0efe4d857b561abb61edcf474afd4f2a25105",
+      "parameters": {
+        "entityID": "rs:635400F6HLXKXNJJX605.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:RON",
+        "baseLanguage": "ro-RO",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/724500D8WOYCL1BUCB80.CON_NL_PILLAR3010000_IRRBBDIS_2025-12-31_20260323112839789.zip",
+      "filename": "724500D8WOYCL1BUCB80.CON_NL_PILLAR3010000_IRRBBDIS_2025-12-31_20260323112839789.zip",
+      "bytes": 2102,
+      "sha256": "0b913795d4736be7aa972e7df8fba28ade6435a884978f4c3c449e2109bc6ce6",
+      "parameters": {
+        "entityID": "rs:724500D8WOYCL1BUCB80.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/894500N55FUZ70ZQ1784.CON_SE_PILLAR3010000_IRRBBDIS_2025-12-31_20260522134522187.zip",
+      "filename": "894500N55FUZ70ZQ1784.CON_SE_PILLAR3010000_IRRBBDIS_2025-12-31_20260522134522187.zip",
+      "bytes": 3275,
+      "sha256": "fff60ff329a4480a89be3b95c0350a0f128cbe9a16f00b99ab2cb45176000fdd",
+      "parameters": {
+        "entityID": "rs:894500N55FUZ70ZQ1784.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/984500E4D07499C10435.CON_BG_PILLAR3010000_IRRBBDIS_2025-12-31_20260526164551740.zip",
+      "filename": "984500E4D07499C10435.CON_BG_PILLAR3010000_IRRBBDIS_2025-12-31_20260526164551740.zip",
+      "bytes": 4892,
+      "sha256": "fe5b43626171c4e412d1d4fbabf5d42e64504bffce1e0da77021c770e6a2b382",
+      "parameters": {
+        "entityID": "rs:984500E4D07499C10435.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "en",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/9ZHRYM6F437SQJ6OUG95.CON_AT_PILLAR3010000_IRRBBDIS_2025-06-30_20260401040424578.zip",
+      "filename": "9ZHRYM6F437SQJ6OUG95.CON_AT_PILLAR3010000_IRRBBDIS_2025-06-30_20260401040424578.zip",
+      "bytes": 3574,
+      "sha256": "357659858314e0390e6fc1beb0d77b4465f8507a7e90d6aa236bfbf6250e5e5d",
+      "parameters": {
+        "entityID": "rs:9ZHRYM6F437SQJ6OUG95.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/9ZHRYM6F437SQJ6OUG95.CON_AT_PILLAR3010000_IRRBBDIS_2025-12-31_20260414090428636.zip",
+      "filename": "9ZHRYM6F437SQJ6OUG95.CON_AT_PILLAR3010000_IRRBBDIS_2025-12-31_20260414090428636.zip",
+      "bytes": 3456,
+      "sha256": "8ae033f47598d245734ce0d6d3ced31d4c8acbbd38ba00fc81bb40a41feb9e06",
+      "parameters": {
+        "entityID": "rs:9ZHRYM6F437SQJ6OUG95.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3010000_IRRBBDIS_2025-06-30_20260528162420184.zip",
+      "filename": "DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3010000_IRRBBDIS_2025-06-30_20260528162420184.zip",
+      "bytes": 2076,
+      "sha256": "f60dd0f579ec9453f50710d3c9a23fa7846c198c0933e5233b21ba782c4dd60e",
+      "parameters": {
+        "entityID": "rs:DZZ47B9A52ZJ6LT6VV95.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/N1FBEDJ5J41VKZLO2475.CON_IE_PILLAR3010000_IRRBBDIS_2025-06-30_20260611000000001.zip",
+      "filename": "N1FBEDJ5J41VKZLO2475.CON_IE_PILLAR3010000_IRRBBDIS_2025-06-30_20260611000000001.zip",
+      "bytes": 2069,
+      "sha256": "5f71390c58e855c5f5b4a316762be2c7c10f03ae70799e542fc036e23f405a83",
+      "parameters": {
+        "entityID": "rs:N1FBEDJ5J41VKZLO2475.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:EUR"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/N1FBEDJ5J41VKZLO2475.CON_IE_PILLAR3010000_IRRBBDIS_2025-12-31_20260616000000004.zip",
+      "filename": "N1FBEDJ5J41VKZLO2475.CON_IE_PILLAR3010000_IRRBBDIS_2025-12-31_20260616000000004.zip",
+      "bytes": 2054,
+      "sha256": "fae5818bcf8f285c4ad1b4b7114e2234e87e0a7132fa477b22e35b1ec7cd1c26",
+      "parameters": {
+        "entityID": "rs:N1FBEDJ5J41VKZLO2475.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:EUR"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/O2RNE8IBXP4R0TD8PU41.CON_FR_PILLAR3010000_IRRBBDIS_2025-06-30_20260422120602266.zip",
+      "filename": "O2RNE8IBXP4R0TD8PU41.CON_FR_PILLAR3010000_IRRBBDIS_2025-06-30_20260422120602266.zip",
+      "bytes": 2711,
+      "sha256": "ff8be787d74501cfc5db7b96d6890dccc89ef3b434f1df93745f8febd119f951",
+      "parameters": {
+        "entityID": "rs:O2RNE8IBXP4R0TD8PU41.CON",
+        "refPeriod": "2025-06-30",
+        "baseLanguage": "#none",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/O2RNE8IBXP4R0TD8PU41.CON_FR_PILLAR3010000_IRRBBDIS_2025-12-31_20260422121006203.zip",
+      "filename": "O2RNE8IBXP4R0TD8PU41.CON_FR_PILLAR3010000_IRRBBDIS_2025-12-31_20260422121006203.zip",
+      "bytes": 2724,
+      "sha256": "2c683fdc1e9f80537f92b3c0453bd4114c71a383c313e0815dcf91ff92402185",
+      "parameters": {
+        "entityID": "rs:O2RNE8IBXP4R0TD8PU41.CON",
+        "refPeriod": "2025-12-31",
+        "baseLanguage": "#none",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/PQOH26KWDF7CG10L6792.CON_AT_PILLAR3010000_IRRBBDIS_2025-06-30_20260618040652207.zip",
+      "filename": "PQOH26KWDF7CG10L6792.CON_AT_PILLAR3010000_IRRBBDIS_2025-06-30_20260618040652207.zip",
+      "bytes": 3411,
+      "sha256": "ad075a5f3a12725d9459a09fd11bd220bc60ff0b1e30bc1df37c4f04302fd4cf",
+      "parameters": {
+        "entityID": "rs:PQOH26KWDF7CG10L6792.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3010000_IRRBBDIS_2025-06-30_20260325033315488.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3010000_IRRBBDIS_2025-06-30_20260325033315488.zip",
+      "bytes": 2025,
+      "sha256": "3c4f203fbe73b14e8df62e9bac21e53022bd58577075aeb94bdf92e56d728672",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3010000_IRRBBDIS_2025-12-31_20260427025312196.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3010000_IRRBBDIS_2025-12-31_20260427025312196.zip",
+      "bytes": 2023,
+      "sha256": "be76703282d6021ef06620fad4a95306bfe723a4090cb1ecfd5745a028a6f59e",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/IRRBBDIS/input/RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3010000_IRRBBDIS_2025-12-31_20260626020606777.zip",
+      "filename": "RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3010000_IRRBBDIS_2025-12-31_20260626020606777.zip",
+      "bytes": 3513,
+      "sha256": "d5fb13b157fa019df6846fff7fb0f6683132178e4d5cb5776b25e01b47e3fa0e",
+      "parameters": {
+        "entityID": "rs:RRUN0TCQ1K2JDV7MXO75.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/52990096Q5LMCH1WU462.CON_SK_PILLAR3010000_MRELTLACDIS_2025-12-31_20260518105420000.zip",
+      "filename": "52990096Q5LMCH1WU462.CON_SK_PILLAR3010000_MRELTLACDIS_2025-12-31_20260518105420000.zip",
+      "bytes": 4328,
+      "sha256": "48ee906fc0c9637f256bb0cce30855c0bd0b81c6a525a51cec5f97b199010c23",
+      "parameters": {
+        "entityID": "rs:52990096Q5LMCH1WU462.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/5299009EHB4RBGMI5828.IND_AT_PILLAR3010000_MRELTLACDIS_2025-06-30_20260420030432949.zip",
+      "filename": "5299009EHB4RBGMI5828.IND_AT_PILLAR3010000_MRELTLACDIS_2025-06-30_20260420030432949.zip",
+      "bytes": 3501,
+      "sha256": "4deeaddeef7882128767f3c875aa3e5389299d6f677e370acd96aa973a4b1de7",
+      "parameters": {
+        "entityID": "rs:5299009EHB4RBGMI5828.IND",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/5299009EHB4RBGMI5828.IND_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260624125619618.zip",
+      "filename": "5299009EHB4RBGMI5828.IND_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260624125619618.zip",
+      "bytes": 5858,
+      "sha256": "205b4bcf4d7ce0119ca47914a5d7398ea5b51c804523215db2d08d628675532b",
+      "parameters": {
+        "entityID": "rs:5299009EHB4RBGMI5828.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/529900AVGYYBVL1VNQ03.IND_DK_PILLAR3010000_MRELTLACDIS_2025-12-31_20260608120832957.zip",
+      "filename": "529900AVGYYBVL1VNQ03.IND_DK_PILLAR3010000_MRELTLACDIS_2025-12-31_20260608120832957.zip",
+      "bytes": 4734,
+      "sha256": "a62ab13fae398dedf7ba5e42f525a653eff6fee6785e4aaba668e20dd4109b97",
+      "parameters": {
+        "entityID": "rs:529900AVGYYBVL1VNQ03.IND",
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/529900BI5KIGX6YLX375.CON_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260625020645440.zip",
+      "filename": "529900BI5KIGX6YLX375.CON_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260625020645440.zip",
+      "bytes": 5532,
+      "sha256": "4c8974812404df0ec97638400a20dfbfe498b11a0381a8b6d3d74865e6535bf1",
+      "parameters": {
+        "entityID": "rs:529900BI5KIGX6YLX375.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/529900FEID5L4H2T2L70.IND_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260626110622386.zip",
+      "filename": "529900FEID5L4H2T2L70.IND_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260626110622386.zip",
+      "bytes": 4880,
+      "sha256": "af732c26c1c000f413014377067c65562360590343b109e89594e813b4e58b50",
+      "parameters": {
+        "entityID": "rs:529900FEID5L4H2T2L70.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/529900LU7D396TOO3B50.CON_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260609100606888.zip",
+      "filename": "529900LU7D396TOO3B50.CON_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260609100606888.zip",
+      "bytes": 6696,
+      "sha256": "bdda9193f19905026a12ca4c5c8f7d3a2972d44b6f0a180a2dff791db5aede66",
+      "parameters": {
+        "entityID": "rs:529900LU7D396TOO3B50.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/529900RCLERIIXF4QM23.IND_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260618060634521.zip",
+      "filename": "529900RCLERIIXF4QM23.IND_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260618060634521.zip",
+      "bytes": 5900,
+      "sha256": "7830d5047308affb4efccb75531dcea0a9e1f7b1921911a750d5e84ee67729ac",
+      "parameters": {
+        "entityID": "rs:529900RCLERIIXF4QM23.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3010000_MRELTLACDIS_2025-06-30_20260619154436758.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3010000_MRELTLACDIS_2025-06-30_20260619154436758.zip",
+      "bytes": 3534,
+      "sha256": "180bc59fead5fdc78d6ffae8bd28d84835e91919e497c1e1e17c839faacce45a",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/529900RWC8ZYB066JF16.CON_MT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260623164825262.zip",
+      "filename": "529900RWC8ZYB066JF16.CON_MT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260623164825262.zip",
+      "bytes": 5557,
+      "sha256": "3c052319776c1563b2854793acf6c9cdf5522a4b3d9a636eba39e68106186454",
+      "parameters": {
+        "entityID": "rs:529900RWC8ZYB066JF16.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/549300HUKIA1IZQHFZ83.IND_AT_PILLAR3010000_MRELTLACDIS_2025-06-30_20260303070344701.zip",
+      "filename": "549300HUKIA1IZQHFZ83.IND_AT_PILLAR3010000_MRELTLACDIS_2025-06-30_20260303070344701.zip",
+      "bytes": 3568,
+      "sha256": "dfb77e4cd2350a1a8963cb0954472d7fdb66a2aeb78ace2f12f418e5efaafcda",
+      "parameters": {
+        "entityID": "rs:549300HUKIA1IZQHFZ83.IND",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/549300HUKIA1IZQHFZ83.IND_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260626020620015.zip",
+      "filename": "549300HUKIA1IZQHFZ83.IND_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260626020620015.zip",
+      "bytes": 4508,
+      "sha256": "82a8dd9811d4c0ae2983a0382cbe3d99b15744e510d0c1e01ce5100f0010649f",
+      "parameters": {
+        "entityID": "rs:549300HUKIA1IZQHFZ83.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3010000_MRELTLACDIS_2025-06-30_20260625165740000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3010000_MRELTLACDIS_2025-06-30_20260625165740000.zip",
+      "bytes": 2080,
+      "sha256": "69fc7d44aa186e866928a986e013b98d4cff032690b96636ea5f1db017d0c196",
+      "parameters": {
+        "refPeriod": "2025-06-30",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3010000_MRELTLACDIS_2025-12-31_20260615183432000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3010000_MRELTLACDIS_2025-12-31_20260615183432000.zip",
+      "bytes": 2081,
+      "sha256": "86aa26e749c9edc35bfc4daf80df0ba2650f4f66274e29bdf9ad463e23761a86",
+      "parameters": {
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/549300S2T3FWVVXWJI89.CON_SK_PILLAR3010000_MRELTLACDIS_2025-06-30_20260330100946178.zip",
+      "filename": "549300S2T3FWVVXWJI89.CON_SK_PILLAR3010000_MRELTLACDIS_2025-06-30_20260330100946178.zip",
+      "bytes": 2121,
+      "sha256": "7aada2cdab8926eaa6016024dc53841d8644ae5e53342e8d91b4cd284c0da1fd",
+      "parameters": {
+        "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsPercentage": "4",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "sk-SK",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/549300S2T3FWVVXWJI89.CON_SK_PILLAR3010000_MRELTLACDIS_2025-12-31_20260330165154450.zip",
+      "filename": "549300S2T3FWVVXWJI89.CON_SK_PILLAR3010000_MRELTLACDIS_2025-12-31_20260330165154450.zip",
+      "bytes": 3598,
+      "sha256": "c97c2d687bd66965bef9ca7ec063a206432859951234662c18491f7b561469f1",
+      "parameters": {
+        "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsPercentage": "4",
+        "baseCurrency": "iso4217:EUR",
+        "baseLanguage": "sk-SK",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/549300TL5406IC1XKD09.CON_DK_PILLAR3010000_MRELTLACDIS_2025-12-31_20260514091950000.zip",
+      "filename": "549300TL5406IC1XKD09.CON_DK_PILLAR3010000_MRELTLACDIS_2025-12-31_20260514091950000.zip",
+      "bytes": 7295,
+      "sha256": "d0f0a5c68778b81e8a3ef79e70f51ca8cd47e10792255900d0f4af14a7c6482d",
+      "parameters": {
+        "entityID": "rs:549300TL5406IC1XKD09.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/549300URJH9VSI58CS32.CON_PT_PILLAR3010000_MRELTLACDIS_2025-06-30_20250416115629257.zip",
+      "filename": "549300URJH9VSI58CS32.CON_PT_PILLAR3010000_MRELTLACDIS_2025-06-30_20250416115629257.zip",
+      "bytes": 5709,
+      "sha256": "74faf836495443cddf730ed72cc016b25a1ffe8e869acb066086ae137f9277ca",
+      "parameters": {
+        "entityID": "rs:549300URJH9VSI58CS32.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/635400F6HLXKXNJJX605.IND_RO_PILLAR3010000_MRELTLACDIS_2025-12-31_20260624141508038.zip",
+      "filename": "635400F6HLXKXNJJX605.IND_RO_PILLAR3010000_MRELTLACDIS_2025-12-31_20260624141508038.zip",
+      "bytes": 4611,
+      "sha256": "cbc53b76d308da40a5fa54bb42220e08de7e49ecfffe254d9ff2e9b315cddb8a",
+      "parameters": {
+        "entityID": "rs:635400F6HLXKXNJJX605.IND",
+        "decimalsPercentage": "4",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:RON",
+        "baseLanguage": "ro",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/984500E4D07499C10435.CON_BG_PILLAR3010000_MRELTLACDIS_2025-12-31_20260529115238451.zip",
+      "filename": "984500E4D07499C10435.CON_BG_PILLAR3010000_MRELTLACDIS_2025-12-31_20260529115238451.zip",
+      "bytes": 3277,
+      "sha256": "a1f6606baafe2ca85850f9ba1a242f1f33040f4f7ae72771605298e953485716",
+      "parameters": {
+        "entityID": "rs:984500E4D07499C10435.CON",
+        "decimalsPercentage": "4",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3010000_MRELTLACDIS_2025-06-30_20260529170933616.zip",
+      "filename": "DZZ47B9A52ZJ6LT6VV95.CON_DE_PILLAR3010000_MRELTLACDIS_2025-06-30_20260529170933616.zip",
+      "bytes": 2137,
+      "sha256": "b55f009c7b18226f700b942135421687547f37913f77c717824a0fa6182bf060",
+      "parameters": {
+        "entityID": "rs:DZZ47B9A52ZJ6LT6VV95.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/FR9695005MSX1OYEMGDF.CON_FR_PILLAR3010000_MRELTLACDIS_2025-06-30_20251211103805838.zip",
+      "filename": "FR9695005MSX1OYEMGDF.CON_FR_PILLAR3010000_MRELTLACDIS_2025-06-30_20251211103805838.zip",
+      "bytes": 3757,
+      "sha256": "995c3a83c148f526932b3720124f987983a9561af680279b8d20541ce05aab58",
+      "parameters": {
+        "entityID": "rs:FR9695005MSX1OYEMGDF.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsPercentage": "4",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "baseLanguage": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/FR9695005MSX1OYEMGDF.CON_FR_PILLAR3010000_MRELTLACDIS_2025-12-31_20260507195353619.zip",
+      "filename": "FR9695005MSX1OYEMGDF.CON_FR_PILLAR3010000_MRELTLACDIS_2025-12-31_20260507195353619.zip",
+      "bytes": 4115,
+      "sha256": "16d3e411a6121d2d7971d9cf310f0cd9d21d72455b00923a75fba5a3eb0a6593",
+      "parameters": {
+        "entityID": "rs:FR9695005MSX1OYEMGDF.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsPercentage": "4",
+        "baseLanguage": "#none"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/PQOH26KWDF7CG10L6792.CON_AT_PILLAR3010000_MRELTLACDIS_2025-06-30_20260618040622384.zip",
+      "filename": "PQOH26KWDF7CG10L6792.CON_AT_PILLAR3010000_MRELTLACDIS_2025-06-30_20260618040622384.zip",
+      "bytes": 3520,
+      "sha256": "da7dfbee2bc54d8a5b85ae1c8f440fbf1e5ddb9084384467fc108db75df550fd",
+      "parameters": {
+        "entityID": "rs:PQOH26KWDF7CG10L6792.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3010000_MRELTLACDIS_2025-12-31_20260427025312313.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3010000_MRELTLACDIS_2025-12-31_20260427025312313.zip",
+      "bytes": 3085,
+      "sha256": "6afb5e20dcad98c8531c29637cc23e151c9c69a6ae0966b6c284d98a48207f14",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3",
+        "decimalsPercentage": "4"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3010000_MRELTLACDIS_2025-06-30_20260123030130217.zip",
+      "filename": "RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3010000_MRELTLACDIS_2025-06-30_20260123030130217.zip",
+      "bytes": 3434,
+      "sha256": "142135c8eb85b1d269e6b7ed7243a552820ca7fabd9337d9fe0844a571028e3a",
+      "parameters": {
+        "entityID": "rs:RRUN0TCQ1K2JDV7MXO75.CON",
+        "refPeriod": "2025-06-30",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/MRELTLACDIS/input/RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260626020646586.zip",
+      "filename": "RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3010000_MRELTLACDIS_2025-12-31_20260626020646586.zip",
+      "bytes": 5333,
+      "sha256": "1a95accf9cb85cdd113c91e1fbb7ef7bdc916ef9e430bfeac23d8d8ddec173db",
+      "parameters": {
+        "entityID": "rs:RRUN0TCQ1K2JDV7MXO75.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "6",
+        "decimalsPercentage": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/213800KYUPNOQPAQL758.CON_PT_PILLAR3020000_REMDIS_2025-12-31_20260518101248853.zip",
+      "filename": "213800KYUPNOQPAQL758.CON_PT_PILLAR3020000_REMDIS_2025-12-31_20260518101248853.zip",
+      "bytes": 5418,
+      "sha256": "77eb451f11efc4161093b0a9de44e46deafa4ccd461e43771023d1d92b744845",
+      "parameters": {
+        "entityID": "rs:213800KYUPNOQPAQL758.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsInteger": "0",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/213800P1P13ABO5R9V78.IND_CY_PILLAR3020000_REMDIS_2025-12-31_20260625112454070.zip",
+      "filename": "213800P1P13ABO5R9V78.IND_CY_PILLAR3020000_REMDIS_2025-12-31_20260625112454070.zip",
+      "bytes": 5370,
+      "sha256": "9533c610efd8f96261bef1553c69f451258e05d49df7f63599e434088ebf2815",
+      "parameters": {
+        "entityID": "rs:213800P1P13ABO5R9V78.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_REMDIS_2025-12-31_20260619170921105.zip",
+      "filename": "213800TC9PZRBHMJW403.CON_MT_PILLAR3020000_REMDIS_2025-12-31_20260619170921105.zip",
+      "bytes": 5318,
+      "sha256": "dd83b864001a7f65ab70418c5771bd161224140a5c7713e6d3753034c1948881",
+      "parameters": {
+        "entityID": "rs:213800TC9PZRBHMJW403.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/259400WNAOMT2E4OIS38.CON_PL_PILLAR3020000_REMDIS_2025-12-31_20260401155525526.zip",
+      "filename": "259400WNAOMT2E4OIS38.CON_PL_PILLAR3020000_REMDIS_2025-12-31_20260401155525526.zip",
+      "bytes": 4259,
+      "sha256": "0e6c63714aca281cec9e346ca4a96e685f7cfd9a175621a038e5dc6dd7bd6e7c",
+      "parameters": {
+        "entityID": "rs:259400WNAOMT2E4OIS38.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:PLN",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_REMDIS_2025-12-31_20260427112903963.zip",
+      "filename": "315700K45LRKNGMUIW27.IND_SK_PILLAR3020000_REMDIS_2025-12-31_20260427112903963.zip",
+      "bytes": 4359,
+      "sha256": "ebec5259a2fbdc8acbff72da52d975930d6536dfffe55ac8b574231bcbcddee1",
+      "parameters": {
+        "entityID": "rs:315700K45LRKNGMUIW27.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/5299000F1CGJQ8NAXQ58.IND_MT_PILLAR3020000_REMDIS_2025-12-31_20260513102023584.zip",
+      "filename": "5299000F1CGJQ8NAXQ58.IND_MT_PILLAR3020000_REMDIS_2025-12-31_20260513102023584.zip",
+      "bytes": 2969,
+      "sha256": "3f8716d0177e0531f2918594d971f9e8103422df54d8d05be4a103e951a66df5",
+      "parameters": {
+        "entityID": "rs:5299000F1CGJQ8NAXQ58.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/5299008FEH4GQXGZNP50.CON_PT_PILLAR3020000_REMDIS_2025-12-31_20260505032238702.zip",
+      "filename": "5299008FEH4GQXGZNP50.CON_PT_PILLAR3020000_REMDIS_2025-12-31_20260505032238702.zip",
+      "bytes": 4185,
+      "sha256": "b0f7d8350ff8edc8407abf62d31d2c603f5361f4e8415cb956db43da75ac66e3",
+      "parameters": {
+        "entityID": "rs:5299008FEH4GQXGZNP50.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/52990096Q5LMCH1WU462.CON_SK_PILLAR3020000_REMDIS_2025-12-31_20260518094941000.zip",
+      "filename": "52990096Q5LMCH1WU462.CON_SK_PILLAR3020000_REMDIS_2025-12-31_20260518094941000.zip",
+      "bytes": 3703,
+      "sha256": "46a306b007197691e8289fc6033edf66aea719e6be310df76396450561c3e615",
+      "parameters": {
+        "entityID": "rs:52990096Q5LMCH1WU462.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/5299009EHB4RBGMI5828.IND_AT_PILLAR3020000_REMDIS_2025-12-31_20260624120638165.zip",
+      "filename": "5299009EHB4RBGMI5828.IND_AT_PILLAR3020000_REMDIS_2025-12-31_20260624120638165.zip",
+      "bytes": 4313,
+      "sha256": "eb7936f1433aa08109f541221a66a0cbf153a35459e3f5b93ed4d1ee75b4c9c6",
+      "parameters": {
+        "entityID": "rs:5299009EHB4RBGMI5828.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/529900AVGYYBVL1VNQ03.IND_DK_PILLAR3020000_REMDIS_2025-12-31_20260608120226398.zip",
+      "filename": "529900AVGYYBVL1VNQ03.IND_DK_PILLAR3020000_REMDIS_2025-12-31_20260608120226398.zip",
+      "bytes": 4219,
+      "sha256": "7841d864488c8ab623cb1ff97dd3176e0167190acad729627c88ac07070bd1a6",
+      "parameters": {
+        "entityID": "rs:529900AVGYYBVL1VNQ03.IND",
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:DKK",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/529900BI5KIGX6YLX375.CON_AT_PILLAR3020000_REMDIS_2025-12-31_20260625020603818.zip",
+      "filename": "529900BI5KIGX6YLX375.CON_AT_PILLAR3020000_REMDIS_2025-12-31_20260625020603818.zip",
+      "bytes": 3916,
+      "sha256": "f362e6bb91387efadb5fb1d5d8cf8533b0712bbddc37a8d1db775c10bfd6c316",
+      "parameters": {
+        "entityID": "rs:529900BI5KIGX6YLX375.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/529900LU7D396TOO3B50.CON_AT_PILLAR3020000_REMDIS_2025-12-31_20260609100626611.zip",
+      "filename": "529900LU7D396TOO3B50.CON_AT_PILLAR3020000_REMDIS_2025-12-31_20260609100626611.zip",
+      "bytes": 5139,
+      "sha256": "4bfaca9cb5028bac08198ebf5a0c1f3e9d4235ad5559149e5833d48113d497a1",
+      "parameters": {
+        "entityID": "rs:529900LU7D396TOO3B50.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/529900NJYUGRO908KV84.CON_BG_PILLAR3020000_REMDIS_2025-12-31_20260522170552319.zip",
+      "filename": "529900NJYUGRO908KV84.CON_BG_PILLAR3020000_REMDIS_2025-12-31_20260522170552319.zip",
+      "bytes": 3684,
+      "sha256": "1dbbcdeac14bcd4eef2ddf178e7e3be3519ed4fd80bcbb0069658a80a44c602d",
+      "parameters": {
+        "entityID": "rs:529900NJYUGRO908KV84.CON",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "en-US",
+        "decimalsMonetary": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/529900PR2ELW8QI1B775.IND_DK_PILLAR3020000_REMDIS_2025-12-31_20260623123206824.zip",
+      "filename": "529900PR2ELW8QI1B775.IND_DK_PILLAR3020000_REMDIS_2025-12-31_20260623123206824.zip",
+      "bytes": 4494,
+      "sha256": "98d53387209993b3d57ca824451d8079fb6a4d20977dfef67f1fc81005ef441a",
+      "parameters": {
+        "entityID": "rs:529900PR2ELW8QI1B775.IND",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:DKK",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/529900RPGHC6DQEQL615.IND_BG_PILLAR3020000_REMDIS_2025-12-31_20260623104653206.zip",
+      "filename": "529900RPGHC6DQEQL615.IND_BG_PILLAR3020000_REMDIS_2025-12-31_20260623104653206.zip",
+      "bytes": 3339,
+      "sha256": "fe3ac5a6df03eb8fc0c1c607a3acbda2fd41cfee7facb9039b48a4245def934d",
+      "parameters": {
+        "entityID": "rs:529900RPGHC6DQEQL615.IND",
+        "refPeriod": "2025-12-31",
+        "decimalsInteger": "0",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/529900SXEWPJ1MRRX537.CON_AT_PILLAR3020000_REMDIS_2025-12-31_20260618090641627.zip",
+      "filename": "529900SXEWPJ1MRRX537.CON_AT_PILLAR3020000_REMDIS_2025-12-31_20260618090641627.zip",
+      "bytes": 4822,
+      "sha256": "a25b5c3b79d9e78783f9136dc25f966336aa6d941fb5a63c231d9855f4a5fc6a",
+      "parameters": {
+        "entityID": "rs:529900SXEWPJ1MRRX537.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/529900T32UL0CP1FZA06.CON_IT_PILLAR3020000_REMDIS_2025-12-31_20260617122724554.zip",
+      "filename": "529900T32UL0CP1FZA06.CON_IT_PILLAR3020000_REMDIS_2025-12-31_20260617122724554.zip",
+      "bytes": 4450,
+      "sha256": "a8746e25752dfd5321c9e6e5b9691ff46b7a7f5dd597886f0af9880d3673e805",
+      "parameters": {
+        "entityID": "rs:529900T32UL0CP1FZA06.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6",
+        "baseCurrency": "iso4217:EUR"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/529900UKZBMDBDZIXD62.CON_AT_PILLAR3020000_REMDIS_2025-12-31_20260417050413724.zip",
+      "filename": "529900UKZBMDBDZIXD62.CON_AT_PILLAR3020000_REMDIS_2025-12-31_20260417050413724.zip",
+      "bytes": 6835,
+      "sha256": "e38ab104d77ff1969211cb8736b8764d19b939372c33d344614b2be655f7b094",
+      "parameters": {
+        "entityID": "rs:529900UKZBMDBDZIXD62.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/549300RFKNCOX56F8591.CON_RO_PILLAR3020000_REMDIS_2025-12-31_20260615183532000.zip",
+      "filename": "549300RFKNCOX56F8591.CON_RO_PILLAR3020000_REMDIS_2025-12-31_20260615183532000.zip",
+      "bytes": 4313,
+      "sha256": "2bdfdf3916d617d7b42e4ad669cf9120f1fb8a613c52203e24205e33b27bd771",
+      "parameters": {
+        "refPeriod": "2025-12-31",
+        "decimalsMonetary": "-3",
+        "decimalsInteger": "0",
+        "entityID": "rs:549300RFKNCOX56F8591.CON",
+        "baseCurrency": "iso4217:RON"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/549300TL5406IC1XKD09.CON_DK_PILLAR3020000_REMDIS_2025-12-31_20260518112934001.zip",
+      "filename": "549300TL5406IC1XKD09.CON_DK_PILLAR3020000_REMDIS_2025-12-31_20260518112934001.zip",
+      "bytes": 5747,
+      "sha256": "71964690c240e855ef6cc9030292c99be35e95925dd28bb4629442242f804903",
+      "parameters": {
+        "entityID": "rs:549300TL5406IC1XKD09.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/549300TTZTKBUFKWH890.CON_CY_PILLAR3020000_REMDIS_2025-12-31_20260623113627200.zip",
+      "filename": "549300TTZTKBUFKWH890.CON_CY_PILLAR3020000_REMDIS_2025-12-31_20260623113627200.zip",
+      "bytes": 5478,
+      "sha256": "73f0e529c35ae14a408b8e2c7f50e53fea7a9403c07718353a27ea2b045ab98e",
+      "parameters": {
+        "entityID": "rs:549300TTZTKBUFKWH890.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/549300URJH9VSI58CS32.CON_PT_PILLAR3020000_REMDIS_2025-06-30_20250417160029257.zip",
+      "filename": "549300URJH9VSI58CS32.CON_PT_PILLAR3020000_REMDIS_2025-06-30_20250417160029257.zip",
+      "bytes": 5987,
+      "sha256": "91f4e589e4f370dd3f4adaa85b5d062c680f6497555c4c6336894386980c799b",
+      "parameters": {
+        "entityID": "rs:549300URJH9VSI58CS32.CON",
+        "refPeriod": "2025-06-30",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3",
+        "baseCurrency": "iso4217:EUR"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/549300V4H4USWZUCE073.IND_PT_PILLAR3020000_REMDIS_2025-12-31_20260624153217921.zip",
+      "filename": "549300V4H4USWZUCE073.IND_PT_PILLAR3020000_REMDIS_2025-12-31_20260624153217921.zip",
+      "bytes": 3762,
+      "sha256": "1b375fa6072609703adeb1cacffc7325a343710b50b1e3f2b47fa8abff4a8904",
+      "parameters": {
+        "entityID": "rs:549300V4H4USWZUCE073.IND",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/635400F6HLXKXNJJX605.IND_RO_PILLAR3020000_REMDIS_2025-12-31_20260624152100767.zip",
+      "filename": "635400F6HLXKXNJJX605.IND_RO_PILLAR3020000_REMDIS_2025-12-31_20260624152100767.zip",
+      "bytes": 4583,
+      "sha256": "784b68de5fa2bb10f775abba08a2d6339da14e953946a30ebd6cd7f3d9dec3c2",
+      "parameters": {
+        "entityID": "rs:635400F6HLXKXNJJX605.IND",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:RON",
+        "baseLanguage": "ro",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/724500D8WOYCL1BUCB80.CON_NL_PILLAR3020000_REMDIS_2025-12-31_20260323113234848.zip",
+      "filename": "724500D8WOYCL1BUCB80.CON_NL_PILLAR3020000_REMDIS_2025-12-31_20260323113234848.zip",
+      "bytes": 4688,
+      "sha256": "d3b0b4588355b26ebd1c6002d588ee2a93991a240fff1ea4f18eea94149107d8",
+      "parameters": {
+        "entityID": "rs:724500D8WOYCL1BUCB80.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/8156005C22D0BF134C40.IND_IT_PILLAR3020000_REMDIS_2025-12-31_20260623155644884.zip",
+      "filename": "8156005C22D0BF134C40.IND_IT_PILLAR3020000_REMDIS_2025-12-31_20260623155644884.zip",
+      "bytes": 3893,
+      "sha256": "3c400448227bb7f8ca83291ef01d5ed523106638b3b28705096f74625d86cbd9",
+      "parameters": {
+        "entityID": "rs:8156005C22D0BF134C40.IND",
+        "refPeriod": "2025-12-31",
+        "decimalsInteger": "0",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/815600B43BECA3919584.IND_IT_PILLAR3020000_REMDIS_2025-12-31_20260529142944744.zip",
+      "filename": "815600B43BECA3919584.IND_IT_PILLAR3020000_REMDIS_2025-12-31_20260529142944744.zip",
+      "bytes": 4567,
+      "sha256": "fb0c6d7d1f4f7f90346feba668880ecdf7a1522f690f5f493ee516603079cf7c",
+      "parameters": {
+        "decimalsMonetary": "-3",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "entityID": "rs:815600B43BECA3919584.IND"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/894500N55FUZ70ZQ1784.CON_SE_PILLAR3020000_REMDIS_2025-12-31_20260526134528609.zip",
+      "filename": "894500N55FUZ70ZQ1784.CON_SE_PILLAR3020000_REMDIS_2025-12-31_20260526134528609.zip",
+      "bytes": 6292,
+      "sha256": "65e46c3da1f55ae837c6ad8b746a52b55c2c12cc75a8f21c9f7134c71ec6d5f6",
+      "parameters": {
+        "entityID": "rs:894500N55FUZ70ZQ1784.CON",
+        "refPeriod": "2025-12-31",
+        "decimalsInteger": "0",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/984500E4D07499C10435.CON_BG_PILLAR3020000_REMDIS_2025-12-31_20260526171644108.zip",
+      "filename": "984500E4D07499C10435.CON_BG_PILLAR3020000_REMDIS_2025-12-31_20260526171644108.zip",
+      "bytes": 3122,
+      "sha256": "008ab02dfab0f4a72ac0305fcd1e09507969f9c3007e0bbf30170d4b2d04c83a",
+      "parameters": {
+        "entityID": "rs:984500E4D07499C10435.CON",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:BGN",
+        "baseLanguage": "bg-BG",
+        "decimalsMonetary": "-6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/H8MIG1MMPR6JXUQVBM04.IND_PL_PILLAR3020000_REMDIS_2025-12-31_20260603180617540.zip",
+      "filename": "H8MIG1MMPR6JXUQVBM04.IND_PL_PILLAR3020000_REMDIS_2025-12-31_20260603180617540.zip",
+      "bytes": 3760,
+      "sha256": "f5fa93fe4580b361bde8c5e6345e5e9db3321bd42ea962cf28616b1f71598457",
+      "parameters": {
+        "entityID": "rs:H8MIG1MMPR6JXUQVBM04.IND",
+        "decimalsInteger": "0",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:PLN",
+        "baseLanguage": "pl-PL",
+        "decimalsMonetary": "2"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_REMDIS_2025-12-31_20260427025312696.zip",
+      "filename": "PRNXTNXHBI0TSY1V8P17.CON_HR_PILLAR3020000_REMDIS_2025-12-31_20260427025312696.zip",
+      "bytes": 3393,
+      "sha256": "1304243e6a5c4ea1175d1fb82d0aef73dd3cc8cc1175f39edabe46406507ae5c",
+      "parameters": {
+        "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "-3"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3020000_REMDIS_2025-12-31_20260626020609882.zip",
+      "filename": "RRUN0TCQ1K2JDV7MXO75.CON_AT_PILLAR3020000_REMDIS_2025-12-31_20260626020609882.zip",
+      "bytes": 5805,
+      "sha256": "a3aeb207c8e749433c1f8e13025afcfd13736ed7fa8cd28b31923819afa288c6",
+      "parameters": {
+        "entityID": "rs:RRUN0TCQ1K2JDV7MXO75.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsInteger": "0",
+        "decimalsMonetary": "6"
+      }
+    },
+    {
+      "url": "https://errp.eba.europa.eu/public-documents/REMDIS/input/TPS0Q8GFSZF45ZZFL873.CON_LU_PILLAR3020000_REMDIS_2025-12-31_20260604000000000.zip",
+      "filename": "TPS0Q8GFSZF45ZZFL873.CON_LU_PILLAR3020000_REMDIS_2025-12-31_20260604000000000.zip",
+      "bytes": 4934,
+      "sha256": "1c7f966a82289273133539d129ad986816ba9472874cc2f0571a501b1aaf6b31",
+      "parameters": {
+        "entityID": "rs:TPS0Q8GFSZF45ZZFL873.CON",
+        "refPeriod": "2025-12-31",
+        "baseCurrency": "iso4217:EUR",
+        "decimalsMonetary": "-6",
+        "decimalsInteger": "0"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "entityID": "rs:213800KYUPNOQPAQL758.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 1130,
+      "errors": []
+    },
+    {
+      "entityID": "rs:213800P1P13ABO5R9V78.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 862,
+      "errors": []
+    },
+    {
+      "entityID": "rs:213800TC9PZRBHMJW403.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 3196,
+      "errors": []
+    },
+    {
+      "entityID": "rs:213800TC9PZRBHMJW403.CON",
+      "date": "2025-09-30",
+      "template": "",
+      "checked_facts": 291,
+      "errors": []
+    },
+    {
+      "entityID": "rs:213800TC9PZRBHMJW403.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 3585,
+      "errors": []
+    },
+    {
+      "entityID": "rs:259400P9KF07OP2K5P83.IND",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 36,
+      "errors": []
+    },
+    {
+      "entityID": "rs:259400WNAOMT2E4OIS38.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 396,
+      "errors": []
+    },
+    {
+      "entityID": "rs:315700K45LRKNGMUIW27.IND",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 3857,
+      "errors": []
+    },
+    {
+      "entityID": "rs:315700K45LRKNGMUIW27.IND",
+      "date": "2025-09-30",
+      "template": "",
+      "checked_facts": 196,
+      "errors": []
+    },
+    {
+      "entityID": "rs:315700K45LRKNGMUIW27.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 4249,
+      "errors": []
+    },
+    {
+      "entityID": "rs:315700K45LRKNGMUIW27.IND",
+      "date": "2026-03-31",
+      "template": "",
+      "checked_facts": 273,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5299000F1CGJQ8NAXQ58.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 1391,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5299008FEH4GQXGZNP50.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 425,
+      "errors": []
+    },
+    {
+      "entityID": "rs:52990096Q5LMCH1WU462.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 1399,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5299009EHB4RBGMI5828.IND",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 43,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5299009EHB4RBGMI5828.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 3695,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900AVGYYBVL1VNQ03.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 2140,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900BI5KIGX6YLX375.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 1591,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900FEID5L4H2T2L70.IND",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 48,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900FEID5L4H2T2L70.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 4377,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900LU7D396TOO3B50.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 907,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900NJYUGRO908KV84.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 1207,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900PR2ELW8QI1B775.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 705,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900RCLERIIXF4QM23.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 940,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900RPGHC6DQEQL615.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 1337,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900RWC8ZYB066JF16.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 4775,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900RWC8ZYB066JF16.CON",
+      "date": "2025-09-30",
+      "template": "",
+      "checked_facts": 347,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900RWC8ZYB066JF16.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 5778,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900SXEWPJ1MRRX537.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 5022,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900T32UL0CP1FZA06.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 717,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900UKZBMDBDZIXD62.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 39,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900UKZBMDBDZIXD62.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 4391,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493000UPYR7EEHN2R94.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 1013,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300HUKIA1IZQHFZ83.IND",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 49,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300HUKIA1IZQHFZ83.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 4675,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300RFKNCOX56F8591.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 7208,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300RFKNCOX56F8591.CON",
+      "date": "2025-09-30",
+      "template": "",
+      "checked_facts": 513,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300RFKNCOX56F8591.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 8749,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 3266,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+      "date": "2025-09-30",
+      "template": "",
+      "checked_facts": 523,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 3677,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300S2T3FWVVXWJI89.CON",
+      "date": "2026-03-31",
+      "template": "",
+      "checked_facts": 526,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300TL5406IC1XKD09.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 2187,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300TLZPT6JELDWM92.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 1319,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300TLZPT6JELDWM92.CON",
+      "date": "2026-03-31",
+      "template": "",
+      "checked_facts": 243,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300TTZTKBUFKWH890.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 1556,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300URJH9VSI58CS32.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 3570,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300UY81ESCZJ0GR95.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 4479,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300UY81ESCZJ0GR95.CON",
+      "date": "2025-09-30",
+      "template": "",
+      "checked_facts": 269,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300V4H4USWZUCE073.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 1223,
+      "errors": []
+    },
+    {
+      "entityID": "rs:635400F6HLXKXNJJX605.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 5920,
+      "errors": []
+    },
+    {
+      "entityID": "rs:724500D8WOYCL1BUCB80.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 2236,
+      "errors": []
+    },
+    {
+      "entityID": "rs:8156005C22D0BF134C40.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 509,
+      "errors": []
+    },
+    {
+      "entityID": "rs:8156009F9B6BB7745A32.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 394,
+      "errors": []
+    },
+    {
+      "entityID": "rs:815600B43BECA3919584.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 414,
+      "errors": []
+    },
+    {
+      "entityID": "rs:894500N55FUZ70ZQ1784.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 3746,
+      "errors": []
+    },
+    {
+      "entityID": "rs:969500A4IPKVUBH3CA90.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 60,
+      "errors": []
+    },
+    {
+      "entityID": "rs:984500E4D07499C10435.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 3862,
+      "errors": []
+    },
+    {
+      "entityID": "rs:DZZ47B9A52ZJ6LT6VV95.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 4965,
+      "errors": []
+    },
+    {
+      "entityID": "rs:DZZ47B9A52ZJ6LT6VV95.CON",
+      "date": "2025-09-30",
+      "template": "",
+      "checked_facts": 526,
+      "errors": []
+    },
+    {
+      "entityID": "rs:GP5DT10VX1QRQUKVBK64.CON",
+      "date": "2026-03-31",
+      "template": "",
+      "checked_facts": 496,
+      "errors": []
+    },
+    {
+      "entityID": "rs:H8MIG1MMPR6JXUQVBM04.IND",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 790,
+      "errors": []
+    },
+    {
+      "entityID": "rs:PQOH26KWDF7CG10L6792.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 8083,
+      "errors": []
+    },
+    {
+      "entityID": "rs:PQOH26KWDF7CG10L6792.CON",
+      "date": "2025-09-30",
+      "template": "",
+      "checked_facts": 549,
+      "errors": []
+    },
+    {
+      "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 3619,
+      "errors": []
+    },
+    {
+      "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+      "date": "2025-09-30",
+      "template": "",
+      "checked_facts": 261,
+      "errors": []
+    },
+    {
+      "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 2124,
+      "errors": []
+    },
+    {
+      "entityID": "rs:PRNXTNXHBI0TSY1V8P17.CON",
+      "date": "2026-03-31",
+      "template": "",
+      "checked_facts": 265,
+      "errors": []
+    },
+    {
+      "entityID": "rs:RRUN0TCQ1K2JDV7MXO75.CON",
+      "date": "2025-06-30",
+      "template": "",
+      "checked_facts": 43,
+      "errors": []
+    },
+    {
+      "entityID": "rs:RRUN0TCQ1K2JDV7MXO75.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 5573,
+      "errors": []
+    },
+    {
+      "entityID": "rs:TPS0Q8GFSZF45ZZFL873.CON",
+      "date": "2025-12-31",
+      "template": "",
+      "checked_facts": 2715,
+      "errors": []
+    },
+    {
+      "entityID": "rs:213800A1O379I6DMCU10.IND",
+      "date": "2025-06-30",
+      "template": "60.00.A",
+      "checked_facts": 87,
+      "errors": []
+    },
+    {
+      "entityID": "rs:213800A1O379I6DMCU10.IND",
+      "date": "2025-12-31",
+      "template": "25.00",
+      "checked_facts": 93,
+      "errors": []
+    },
+    {
+      "entityID": "rs:213800DBQIB6VBNU5C64.CON",
+      "date": "2025-06-30",
+      "template": "23.00",
+      "checked_facts": 21,
+      "errors": []
+    },
+    {
+      "entityID": "rs:213800M7T3CYVZ3ZRT12.CON",
+      "date": "2025-06-30",
+      "template": "41.00",
+      "checked_facts": 411,
+      "errors": []
+    },
+    {
+      "entityID": "rs:213800M7T3CYVZ3ZRT12.CON",
+      "date": "2025-06-30",
+      "template": "42.00.A",
+      "checked_facts": 45,
+      "errors": []
+    },
+    {
+      "entityID": "rs:213800M7T3CYVZ3ZRT12.CON",
+      "date": "2025-06-30",
+      "template": "45.00.A",
+      "checked_facts": 125,
+      "errors": []
+    },
+    {
+      "entityID": "rs:259400YLRTOBISHBVX41.CON",
+      "date": "2025-06-30",
+      "template": "67.01.A",
+      "checked_facts": 308,
+      "errors": []
+    },
+    {
+      "entityID": "rs:3157002JBFAI478MD587.CON",
+      "date": "2025-12-31",
+      "template": "42.00.A",
+      "checked_facts": 136,
+      "errors": []
+    },
+    {
+      "entityID": "rs:3157002JBFAI478MD587.CON",
+      "date": "2025-12-31",
+      "template": "45.00.A",
+      "checked_facts": 1248,
+      "errors": []
+    },
+    {
+      "entityID": "rs:529900HEKOENJHPNN480.CON",
+      "date": "2025-06-30",
+      "template": "68.00",
+      "checked_facts": 16,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493006QMFDDMYWIAM13.CON",
+      "date": "2025-06-30",
+      "template": "83.01.C",
+      "checked_facts": 52,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493006QMFDDMYWIAM13.CON",
+      "date": "2025-06-30",
+      "template": "83.01.D",
+      "checked_facts": 40,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+      "date": "2025-06-30",
+      "template": "61.00",
+      "checked_facts": 65,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+      "date": "2025-06-30",
+      "template": "73.00.C",
+      "checked_facts": 112,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+      "date": "2025-06-30",
+      "template": "73.00.D",
+      "checked_facts": 64,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+      "date": "2025-06-30",
+      "template": "74.00.A",
+      "checked_facts": 204,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+      "date": "2025-06-30",
+      "template": "74.00.C",
+      "checked_facts": 224,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+      "date": "2025-06-30",
+      "template": "74.00.E",
+      "checked_facts": 36,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+      "date": "2025-09-30",
+      "template": "73.00.C",
+      "checked_facts": 112,
+      "errors": []
+    },
+    {
+      "entityID": "rs:5493008QRHH0XCLJ4238.CON",
+      "date": "2025-09-30",
+      "template": "73.00.D",
+      "checked_facts": 64,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300DVPJYGNF2P7B03.CON",
+      "date": "2025-12-31",
+      "template": "21.02",
+      "checked_facts": 18,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300IQZVZ949N37S44.CON",
+      "date": "2025-06-30",
+      "template": "68.00",
+      "checked_facts": 16,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300L7YCATGO57ZE10.CON",
+      "date": "2025-06-30",
+      "template": "83.01.C",
+      "checked_facts": 20,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300OLBL49CW8CT155.CON",
+      "date": "2025-06-30",
+      "template": "42.00.A",
+      "checked_facts": 136,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300RG3H390KEL8896.CON",
+      "date": "2025-06-30",
+      "template": "73.00.C",
+      "checked_facts": 112,
+      "errors": []
+    },
+    {
+      "entityID": "rs:549300RG3H390KEL8896.CON",
+      "date": "2025-06-30",
+      "template": "73.00.D",
+      "checked_facts": 64,
+      "errors": []
+    },
+    {
+      "entityID": "rs:969500CJCTMI93QJKK89.CON",
+      "date": "2025-12-31",
+      "template": "61.00",
+      "checked_facts": 65,
+      "errors": []
+    },
+    {
+      "entityID": "rs:9ZHRYM6F437SQJ6OUG95.CON",
+      "date": "2025-12-31",
+      "template": "68.00",
+      "checked_facts": 16,
+      "errors": []
+    },
+    {
+      "entityID": "rs:D1HEB8VEU6D9M8ZUXG17.CON",
+      "date": "2025-12-31",
+      "template": "71.00",
+      "checked_facts": 47,
+      "errors": []
+    },
+    {
+      "entityID": "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+      "date": "2026-03-31",
+      "template": "61.00",
+      "checked_facts": 60,
+      "errors": []
+    },
+    {
+      "entityID": "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+      "date": "2026-03-31",
+      "template": "73.00.C",
+      "checked_facts": 104,
+      "errors": []
+    },
+    {
+      "entityID": "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+      "date": "2026-03-31",
+      "template": "73.00.D",
+      "checked_facts": 44,
+      "errors": []
+    },
+    {
+      "entityID": "rs:FR9695005MSX1OYEMGDF.CON",
+      "date": "2025-06-30",
+      "template": "97.00.A",
+      "checked_facts": 17,
+      "errors": []
+    },
+    {
+      "entityID": "rs:FR9695005MSX1OYEMGDF.CON",
+      "date": "2025-12-31",
+      "template": "26.00.A",
+      "checked_facts": 1836,
+      "errors": []
+    },
+    {
+      "entityID": "rs:FR9695005MSX1OYEMGDF.CON",
+      "date": "2025-12-31",
+      "template": "26.00.B",
+      "checked_facts": 12,
+      "errors": []
+    },
+    {
+      "entityID": "rs:FR9695005MSX1OYEMGDF.CON",
+      "date": "2025-12-31",
+      "template": "27.02.A",
+      "checked_facts": 39,
+      "errors": []
+    },
+    {
+      "entityID": "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+      "date": "2025-06-30",
+      "template": "74.00.A",
+      "checked_facts": 102,
+      "errors": []
+    },
+    {
+      "entityID": "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+      "date": "2025-06-30",
+      "template": "83.01.C",
+      "checked_facts": 60,
+      "errors": []
+    },
+    {
+      "entityID": "rs:KFUXYFTU2LHQFQZDQG45.CON",
+      "date": "2025-12-31",
+      "template": "41.00",
+      "checked_facts": 441,
+      "errors": []
+    },
+    {
+      "entityID": "rs:KR6LSKV3BTSJRD41IF75.CON",
+      "date": "2025-12-31",
+      "template": "29.02.A",
+      "checked_facts": 72,
+      "errors": []
+    },
+    {
+      "entityID": "rs:N1FBEDJ5J41VKZLO2475.CON",
+      "date": "2025-12-31",
+      "template": "68.00",
+      "checked_facts": 16,
+      "errors": []
+    },
+    {
+      "entityID": "rs:NICH5Q04ADUV9SN3Q390.CON",
+      "date": "2025-06-30",
+      "template": "21.02",
+      "checked_facts": 17,
+      "errors": []
+    },
+    {
+      "entityID": "rs:O2RNE8IBXP4R0TD8PU41.CON",
+      "date": "2025-06-30",
+      "template": "27.01",
+      "checked_facts": 46,
+      "errors": []
+    },
+    {
+      "entityID": "rs:O2RNE8IBXP4R0TD8PU41.CON",
+      "date": "2025-06-30",
+      "template": "27.02.A",
+      "checked_facts": 39,
+      "errors": []
+    },
+    {
+      "entityID": "rs:O2RNE8IBXP4R0TD8PU41.CON",
+      "date": "2025-06-30",
+      "template": "27.02.B",
+      "checked_facts": 27,
+      "errors": []
+    },
+    {
+      "entityID": "rs:O2RNE8IBXP4R0TD8PU41.CON",
+      "date": "2025-06-30",
+      "template": "68.00",
+      "checked_facts": 16,
+      "errors": []
+    },
+    {
+      "entityID": "rs:R0MUWSFPU8MPRO8K5P83.CON",
+      "date": "2025-06-30",
+      "template": "04.00.A",
+      "checked_facts": 96,
+      "errors": []
+    },
+    {
+      "entityID": "rs:VWMYAEQSTOPNV0SUGU82.CON",
+      "date": "2025-06-30",
+      "template": "26.00.B",
+      "checked_facts": 12,
+      "errors": []
+    }
+  ]
+}

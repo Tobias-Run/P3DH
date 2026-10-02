@@ -1,0 +1,23 @@
+  Sprache: Standard en (1,234,567.89 · bn) · umgeschaltet de (1 234 567,89 · Mrd.)
+  Kennzahltexte: 38 Kennzahlen, 0 ohne englische Definition · en: Common Equity Tier 1 capital (CET1) in relation to the tot…
+  beim Start geladen: data_version.json, index.json, codebook.json, favicon.ico, rs_549300TK038P6EV4YU51.CON__2025-12-31.json, labels.json, 61.00.c6d14338bb7cc07cbeba9c87c417072674b7b7d6bf6ee1bc6195724eb30b9d45.json, 82.00.A.cc4494c6fa849f95d8d2e03f0c236b81d28814db19dc0a4b977a1ed6c727de8f.json
+  Sparkline-Skalierung: 1419 Reihen · 0.09 % → 0.0 px, 200.0 % → 10.8 px · ruhigstes Zehntel 1.4 px gegen bewegtestes 10.8 px · konstante Serie y=10.499999999999996
+  Gepflegte Kurznamen: 7 gesucht, 7 gefunden, 7 Institute · 7 an der Zeile sichtbar
+  Filter überlebt den Sprung: Austria (25 Zeilen, hash #?c=Austria) → Zeilenklick Austria (25, #r/529900UKZBMDBDZIXD62/2025-12-31/CON?c=Austria) → Chipklick Austria (25)
+  Peer-Kontext (#23): Vorgabe aus, für die Prüfung eingeschaltet
+  Block 'kapital': 36 Templates · 2306 Zellen · 1110 Kontextzeilen · 2 markiert
+  Skalenmarke: 100 Reports · gerendert: ⚠ Scale warningabsolute amounts across the report: too small · unconfirmed hypothesis. Ratios remain comparabl
+  Zeitbefund (#36): 307 Reports · Beispiel 6 von 18 Befunden · Zelltooltip in 61.00: Departs noticeably from this institution’s own value of 2026-03-31: about 3.0 orders of magnitude aw
+  Verteilungsstreifen (#49): 966 Streifen · 966 Boxen · 966 Marken · Lage 0–100 % (63 verschiedene)
+  Ähnliche Institute (#27): AB Artea bankas · 3 Einträge, 3 mit Sprunglink
+  Nullmeldung (#28): 1 Report(s) · Compagnie Financière Holding Mixte Milleis · 55 deklarierte Templates gelistet
+  Gespeicherte Sichten (#50 P5): 1 Eintrag/Einträge · 'Probe NPL' · {'prof': 'km1', 'sort': 'lev'} → {'prof': 'npl', 'sort': 'npl_hh'}
+  Spaltenauswahl (#50): 5 Spalten · abgewählt 'npl' · Kopf 7→6 · gesperrt ['npl_hh']
+  Benchmark: 100 Zeilen · 182 Größenbalken · skaliert markiert 9, unzulässige Balken in betroffenen Zellen 0
+  Profil 'kette' (#16): 417 Zeilen · NPL 392 · Vorstufe 354 · Vorstufe-NPE 357 · Deckung 382
+  Balkenregel: normal=ja  skala=nein  tplTrifft=nein  tplDaneben=ja  strittig=nein  partialTrea=ja  partialLiquidity=nein  unknown=nein  referenceMax=ja
+  Profil 'esg' (strittige Einheit, #9): 100 Zeilen · 0 Größenbalken
+  CSV-Export: 22 Kommentarzeilen · 50 Datenzeilen
+  CSV folgt der Spaltenwahl: 10 Spalten, gewählt 'cet1'
+  Teilbarer Zustand: pin='rs:549300TK038P6EV4YU51.CON|2025-12-31,rs:549300TK038P6EV4YU51.CON|2026-03-31' sort='cet1.asc'
+Runtime errors: 0

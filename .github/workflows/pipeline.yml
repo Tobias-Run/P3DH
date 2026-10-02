@@ -493,6 +493,7 @@ jobs:
                   codebook/dpm_codebook.csv codebook/template_titles.csv \
                   processed/entity_meta.csv processed/fx_rates.csv \
                   processed/quality_profile.csv processed/footprint.csv \
+                  processed/scale_flags.csv processed/scale_review_status.json \
                   processed/disclosure_lag.csv processed/rwa_density.csv \
                   interim/plausibility_cells.csv interim/plausibility_findings.csv \
                   processed/irrbb_sensitivity.csv processed/peer_similarity.csv \

@@ -1,0 +1,17 @@
+test_alpha_original_and_parameters (__main__.ReviewChecks.test_alpha_original_and_parameters) ... ok
+test_alpha_same_cells (__main__.ReviewChecks.test_alpha_same_cells) ... ok
+test_austria_current_vs_historical_columns (__main__.ReviewChecks.test_austria_current_vs_historical_columns) ... ok
+test_bbva_no_scale_in_matching_cells (__main__.ReviewChecks.test_bbva_no_scale_in_matching_cells) ... ok
+test_citi_historical_anchor (__main__.ReviewChecks.test_citi_historical_anchor) ... ok
+test_complete_ledger (__main__.ReviewChecks.test_complete_ledger) ... ok
+test_cr10_semantic_type_conflict (__main__.ReviewChecks.test_cr10_semantic_type_conflict) ... ok
+test_kh_direction (__main__.ReviewChecks.test_kh_direction) ... ok
+test_original_list_reproduced (__main__.ReviewChecks.test_original_list_reproduced) ... ok
+test_pinned_dataset (__main__.ReviewChecks.test_pinned_dataset) ... ok
+test_rabobank_scope (__main__.ReviewChecks.test_rabobank_scope) ... ok
+test_raw_sources (__main__.ReviewChecks.test_raw_sources) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.358s
+
+OK

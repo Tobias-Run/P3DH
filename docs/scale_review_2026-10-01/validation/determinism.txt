@@ -1,0 +1,5 @@
+Full scale_flags.csv rebuild: byte-identical
+SHA-256: 07dc556e9608d6e80fc2c2845b7024a5247d9e6153e6e3a76f3717caf7ffc1f8
+Source hashes verified: 281 (Parquet + 280 EBA ZIPs)
+Numeric report shards changed: 0/883
+Detailed-warning gzip overhead: 4383 bytes

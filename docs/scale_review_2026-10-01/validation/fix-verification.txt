@@ -1,0 +1,295 @@
+{
+  "snapshot": "f47ef2d32968e59188b4139ede3ccac1d9737f21",
+  "all_checks_passed": true,
+  "old_rows": 930,
+  "new_rows": 929,
+  "old_active_findings": 119,
+  "new_active_findings": 118,
+  "report_status_changes": 0,
+  "counts": {
+    "report/unauffaellig": 811,
+    "report/verdacht": 17,
+    "report/skaliert": 54,
+    "template/skaliert": 46,
+    "template/verdacht": 1
+  },
+  "added_keys": [
+    [
+      "template",
+      "rs:KFUXYFTU2LHQFQZDQG45.CON",
+      "2025-06-30",
+      "41.00"
+    ],
+    [
+      "template",
+      "rs:N1FBEDJ5J41VKZLO2475.CON",
+      "2025-06-30",
+      "68.00"
+    ]
+  ],
+  "removed_keys": [
+    [
+      "template",
+      "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+      "2025-06-30",
+      "83.01.C"
+    ],
+    [
+      "template",
+      "rs:KFUXYFTU2LHQFQZDQG45.CON",
+      "2025-12-31",
+      "41.00"
+    ],
+    [
+      "template",
+      "rs:N1FBEDJ5J41VKZLO2475.CON",
+      "2025-12-31",
+      "68.00"
+    ]
+  ],
+  "applied_source_bound_reviews": 48,
+  "partial_findings": 9,
+  "affected_cell_masks": 261,
+  "irrbb_changed_rows": [
+    {
+      "bank": "Kuntarahoitus Oyj",
+      "lei": "529900HEKOENJHPNN480",
+      "date": "2025-06-30",
+      "scenario": "0010",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Kuntarahoitus Oyj",
+      "lei": "529900HEKOENJHPNN480",
+      "date": "2025-06-30",
+      "scenario": "0020",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Kuntarahoitus Oyj",
+      "lei": "529900HEKOENJHPNN480",
+      "date": "2025-06-30",
+      "scenario": "0030",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Kuntarahoitus Oyj",
+      "lei": "529900HEKOENJHPNN480",
+      "date": "2025-06-30",
+      "scenario": "0040",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Kuntarahoitus Oyj",
+      "lei": "529900HEKOENJHPNN480",
+      "date": "2025-06-30",
+      "scenario": "0050",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Kuntarahoitus Oyj",
+      "lei": "529900HEKOENJHPNN480",
+      "date": "2025-06-30",
+      "scenario": "0060",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Euroclear Holding",
+      "lei": "549300IQZVZ949N37S44",
+      "date": "2025-06-30",
+      "scenario": "0010",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Euroclear Holding",
+      "lei": "549300IQZVZ949N37S44",
+      "date": "2025-06-30",
+      "scenario": "0020",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Euroclear Holding",
+      "lei": "549300IQZVZ949N37S44",
+      "date": "2025-06-30",
+      "scenario": "0030",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Euroclear Holding",
+      "lei": "549300IQZVZ949N37S44",
+      "date": "2025-06-30",
+      "scenario": "0040",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Euroclear Holding",
+      "lei": "549300IQZVZ949N37S44",
+      "date": "2025-06-30",
+      "scenario": "0050",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Euroclear Holding",
+      "lei": "549300IQZVZ949N37S44",
+      "date": "2025-06-30",
+      "scenario": "0060",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Raiffeisen Bank International AG",
+      "lei": "9ZHRYM6F437SQJ6OUG95",
+      "date": "2025-12-31",
+      "scenario": "0010",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Raiffeisen Bank International AG",
+      "lei": "9ZHRYM6F437SQJ6OUG95",
+      "date": "2025-12-31",
+      "scenario": "0020",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Raiffeisen Bank International AG",
+      "lei": "9ZHRYM6F437SQJ6OUG95",
+      "date": "2025-12-31",
+      "scenario": "0030",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Raiffeisen Bank International AG",
+      "lei": "9ZHRYM6F437SQJ6OUG95",
+      "date": "2025-12-31",
+      "scenario": "0040",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Raiffeisen Bank International AG",
+      "lei": "9ZHRYM6F437SQJ6OUG95",
+      "date": "2025-12-31",
+      "scenario": "0050",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Raiffeisen Bank International AG",
+      "lei": "9ZHRYM6F437SQJ6OUG95",
+      "date": "2025-12-31",
+      "scenario": "0060",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Citibank Europe plc",
+      "lei": "N1FBEDJ5J41VKZLO2475",
+      "date": "2025-06-30",
+      "scenario": "0010",
+      "before": "unplausibel",
+      "after": "skala"
+    },
+    {
+      "bank": "Citibank Europe plc",
+      "lei": "N1FBEDJ5J41VKZLO2475",
+      "date": "2025-06-30",
+      "scenario": "0020",
+      "before": "unplausibel",
+      "after": "skala"
+    },
+    {
+      "bank": "Citibank Europe plc",
+      "lei": "N1FBEDJ5J41VKZLO2475",
+      "date": "2025-06-30",
+      "scenario": "0030",
+      "before": "unplausibel",
+      "after": "skala"
+    },
+    {
+      "bank": "Citibank Europe plc",
+      "lei": "N1FBEDJ5J41VKZLO2475",
+      "date": "2025-06-30",
+      "scenario": "0040",
+      "before": "unplausibel",
+      "after": "skala"
+    },
+    {
+      "bank": "Citibank Europe plc",
+      "lei": "N1FBEDJ5J41VKZLO2475",
+      "date": "2025-06-30",
+      "scenario": "0050",
+      "before": "unplausibel",
+      "after": "skala"
+    },
+    {
+      "bank": "Citibank Europe plc",
+      "lei": "N1FBEDJ5J41VKZLO2475",
+      "date": "2025-06-30",
+      "scenario": "0060",
+      "before": "unplausibel",
+      "after": "skala"
+    },
+    {
+      "bank": "Société générale S.A.",
+      "lei": "O2RNE8IBXP4R0TD8PU41",
+      "date": "2025-06-30",
+      "scenario": "0010",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Société générale S.A.",
+      "lei": "O2RNE8IBXP4R0TD8PU41",
+      "date": "2025-06-30",
+      "scenario": "0020",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Société générale S.A.",
+      "lei": "O2RNE8IBXP4R0TD8PU41",
+      "date": "2025-06-30",
+      "scenario": "0030",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Société générale S.A.",
+      "lei": "O2RNE8IBXP4R0TD8PU41",
+      "date": "2025-06-30",
+      "scenario": "0040",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Société générale S.A.",
+      "lei": "O2RNE8IBXP4R0TD8PU41",
+      "date": "2025-06-30",
+      "scenario": "0050",
+      "before": "",
+      "after": "skala"
+    },
+    {
+      "bank": "Société générale S.A.",
+      "lei": "O2RNE8IBXP4R0TD8PU41",
+      "date": "2025-06-30",
+      "scenario": "0060",
+      "before": "",
+      "after": "skala"
+    }
+  ]
+}
