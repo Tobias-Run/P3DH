@@ -23,7 +23,7 @@
   KPI-Quelle: ausstehender Sprung nach report-Wechsel verworfen: OK
   KPI-Quellnavigation: 14 Fälle · 24 erfolgreiche Quellsprünge
   Block 'kapital': 36 Templates · 2306 Zellen · 1110 Kontextzeilen · 2 markiert
-  Skalenmarke: 100 Reports · gerendert: ⚠ Scale finding: the absolute amounts across the whole report are with high confidence too small by a factor. 
+  Skalenmarke: 100 Reports · gerendert: ⚠ Scale finding: the absolute amounts across the whole report are with high confidence too small by a factor.
   Zeitbefund (#36): 307 Reports · Beispiel 6 von 18 Befunden · Zelltooltip in 61.00: Departs noticeably from this institution’s own value of 2026-03-31: about 3.0 orders of magnitude aw
   Verteilungsstreifen (#49): 966 Streifen · 966 Boxen · 966 Marken · Lage 0–100 % (63 verschiedene)
   Ähnliche Institute (#27): AB Artea bankas · 3 Einträge, 3 mit Sprunglink
