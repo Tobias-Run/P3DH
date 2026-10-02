@@ -387,6 +387,7 @@
     aside{width:100%;flex:none;position:static;height:38vh;max-height:38vh}
     main{max-height:none}
   }
+.peer-controls{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}.peer-controls select{max-width:100%}.peer-note{padding:.75rem;border:1px solid var(--line);margin:.5rem 0;font-size:.875rem}.peer-note p{margin:.4rem 0}.peer-evidence{font-size:.75rem;margin-top:.3rem;max-width:28rem}.peer-evidence div{white-space:normal;overflow-wrap:anywhere}.peer-controls label{min-width:0}.peer-controls select{min-width:0}@media(max-width:600px){.peer-controls .ctl{width:100%;display:flex;justify-content:space-between;gap:.4rem}.peer-controls select{max-width:70%}}
 </style>
 </head>
 <body>
@@ -523,6 +524,74 @@ function applyTheme(){ document.documentElement.dataset.theme = DARK?'dark':'lig
    Funktionswoertern. Eine vergessene Zeichenkette ist damit ein Befund und
    keine Geschmacksfrage. */
 const DE = {
+  "Cooperative": "Genossenschaftlich",
+  "Publicly owned": "Öffentlich getragen",
+  "Shareholder-owned": "Aktionärsgetragen",
+  "Mixed ownership": "Gemischte Trägerschaft",
+  "Mutual": "Gegenseitigkeitsorganisation",
+  "Unknown ownership": "Unbekannte Trägerschaft",
+  "Group head": "Gruppenobergesellschaft",
+  "Subsidiary": "Tochtergesellschaft",
+  "No consolidating parent (GLEIF)": "Keine konsolidierende Mutter (GLEIF)",
+  "Unknown group role": "Unbekannte Gruppenrolle",
+  "Size, scope and date": "Größe, Konsolidierung und Stichtag",
+  "Private shareholders / owners": "Private Aktionäre / Eigentümer",
+  "Supporting ownership source": "Ergänzende Quelle zur Trägerschaft",
+  "Maximum TREA size ratio within a cluster: {0}×.": "Maximales TREA-Größenverhältnis innerhalb eines Clusters: {0}×.",
+  "Ownership not yet verified": "Trägerschaft noch nicht verifiziert",
+  "Missing or ambiguous framework": "Fehlendes oder mehrdeutiges Melderahmenwerk",
+  "Foundation-controlled": "Stiftungsgetragen",
+  "Self-owned savings bank": "Selbstständige Sparkasse",
+  "Verified consolidation relationship": "Geprüfte Konsolidierungsbeziehung",
+  "Controller LEI": "LEI der kontrollierenden Einheit",
+  "Ownership and group role": "Trägerschaft und Gruppenrolle",
+  "Statistical clusters": "Statistische Cluster",
+  "Peer basis": "Vergleichsbasis",
+  "Peer method, coverage and exclusions": "Peer-Methode, Abdeckung und Ausschlüsse",
+  "Ownership": "Trägerschaft",
+  "Group role": "Gruppenrolle",
+  "All ownership types": "Alle Trägerschaften",
+  "All group roles": "Alle Gruppenrollen",
+  "Cluster": "Cluster",
+  "Unavailable cluster": "Nicht verfügbares Cluster",
+  "The requested cluster does not exist in this data revision. Choose another cluster or all reports.": "Das gewünschte Cluster gibt es in diesem Datenstand nicht. Wähle ein anderes Cluster oder alle Meldungen.",
+  "Cluster diagnostics describe the fitted population; filters may reduce the members used for this benchmark.": "Die Cluster-Diagnostik beschreibt den berechneten Bestand; Filter können die für diesen Benchmark verwendeten Mitglieder reduzieren.",
+  "All clusters and unassigned reports": "Alle Cluster und nicht zugeordnete Meldungen",
+  "Advanced peer data is unavailable for this data revision.": "Erweiterte Peer-Daten sind für diesen Datenstand nicht verfügbar.",
+  "Unsupported advanced peer data.": "Nicht unterstützte erweiterte Peer-Daten.",
+  "Loading advanced peers…": "Erweiterte Peer-Gruppen werden geladen…",
+  "Use standard peers": "Standard-Peers verwenden",
+  "{0} of {1} reports have reviewed ownership.": "Für {0} von {1} Meldungen ist die Trägerschaft geprüft.",
+  "{0} reports have an unknown group head.": "Bei {0} Meldungen ist die Gruppenobergesellschaft unbekannt.",
+  "{0} reports have no peer assignment; {1} are in groups smaller than five.": "{0} Meldungen haben keine Peer-Zuordnung; {1} liegen in Gruppen mit weniger als fünf Meldungen.",
+  "Percentiles require five valid values per metric. No automatic widening of the peer group.": "Perzentile benötigen fünf gültige Werte je Kennzahl. Die Peer-Gruppe wird nicht automatisch erweitert.",
+  "Ownership describes the current reviewed classification, not historical ownership at the report date. Sources and review dates are shown per bank. Subsidiaries do not inherit ownership automatically.": "Die Trägerschaft beschreibt die aktuell geprüfte Einordnung, nicht historische Eigentumsverhältnisse zum Meldestichtag. Quellen und Prüfdatum stehen bei jeder Bank. Töchter übernehmen die Einordnung nicht automatisch.",
+  "At most one report per known group, date, scope and framework is retained. Unknown group heads remain separate; independence is not established.": "Je bekannter Gruppe, Stichtag, Konsolidierung und Framework bleibt höchstens eine Meldung. Unbekannte Gruppenobergesellschaften bleiben getrennt; Eigenständigkeit ist nicht belegt.",
+  "{0} related reports excluded.": "{0} konzernverwandte Meldungen ausgeschlossen.",
+  "Show related reports excluded": "Ausgeschlossene konzernverwandte Meldungen anzeigen",
+  "Groups share size class, scope, date, framework, ownership and group role. Unknown ownership or role receives no percentile.": "Die Gruppen teilen Größenklasse, Konsolidierung, Stichtag, Framework, Trägerschaft und Gruppenrolle. Bei unbekannter Trägerschaft oder Rolle gibt es kein Perzentil.",
+  "Exploratory complete-linkage clusters: size 25%, risk mix 50%, ownership 15%, group role 10%. Same date, scope and framework; maximum distance 0.25. Unknown categories contribute a neutral distance of 0.5. Capital and liquidity ratios are not fitting inputs.": "Explorative Complete-Linkage-Cluster: Größe 25 %, Risikomix 50 %, Trägerschaft 15 %, Gruppenrolle 10 %. Gleicher Stichtag, Konsolidierung und Framework; maximale Distanz 0,25. Unbekannte Kategorien tragen eine neutrale Distanz von 0,5 bei. Kapital- und Liquiditätsquoten sind keine Eingangsgrößen.",
+  "TREA and risk-profile percentiles use fitting inputs and are suppressed in cluster mode. Report overview and cell peer context keep their standard basis.": "TREA- und Risikoprofil-Perzentile nutzen Cluster-Eingangsgrößen und werden im Cluster-Modus unterdrückt. Report-Overview und Zellkontext behalten ihre Standardbasis.",
+  "Cluster diagnostics and members": "Cluster-Diagnostik und Mitglieder",
+  "Maximum distance": "Maximale Distanz",
+  "Threshold sensitivity (0.20 / 0.30 neighbourhood overlap)": "Schwellensensitivität (Nachbarschaftsüberlappung bei 0,20 / 0,30)",
+  "Silhouette": "Silhouette",
+  "These diagnostics are not confidence probabilities or a credit rating.": "Diese Diagnostik ist keine Konfidenzwahrscheinlichkeit und kein Kreditrating.",
+  "Median risk shares": "Mediane Risikoanteile",
+  "Ownership source": "Quelle der Trägerschaft",
+  "Supporting legal-form source": "Ergänzende Rechtsformquelle",
+  "No reviewed ownership source.": "Keine geprüfte Quelle zur Trägerschaft.",
+  "Group head LEI": "LEI der Gruppenobergesellschaft",
+  "Unknown group head": "Unbekannte Gruppenobergesellschaft",
+  "No cluster assignment": "Keine Cluster-Zuordnung",
+  "Scale finding in fitting inputs": "Scale-Befund bei Eingangsgrößen",
+  "Missing or ambiguous size": "Fehlende oder mehrdeutige Größe",
+  "Missing, ambiguous or invalid risk mix": "Fehlender, mehrdeutiger oder ungültiger Risikomix",
+  "Missing fitting inputs": "Fehlende Eingangsgrößen",
+  "Another report represents this group in the fitted clusters.": "Eine andere Meldung vertritt diese Gruppe in den berechneten Clustern.",
+  "Isolated at the selected distance threshold.": "Bei der gewählten Distanzschwelle isoliert.",
+  "{0}th percentile within the selected peer basis ({1} valid reports)": "{0}. Perzentil innerhalb der gewählten Vergleichsbasis ({1} gültige Meldungen)",
+
   "Capital, own funds & leverage": "Kapital, Eigenmittel & Verschuldung",
   "Credit risk": "Kreditrisiko",
   "Credit quality & non-performing loans": "Kreditqualität & notleidende Kredite",
@@ -1279,6 +1348,7 @@ function buildFromIndex(idx, codebook){
   const reg=codebook.metrics||{};
   for(const m of (reg.metrics||[])) METRICDOC.set(m.id, m);
   PROFILES=reg.profiles||[];
+  AP_MANIFEST=codebook.advanced_peers||null;
   BM_MANIFEST=codebook.benchmark_parts||null;
   if(BM_MANIFEST && BM_MANIFEST.schema!==1) throw new Error('Unsupported benchmark manifest');
   for(const [tid,cells] of Object.entries(codebook.ambig||{})) AMBIG.set(tid,cells);
@@ -2603,6 +2673,145 @@ function tplValue(rep,tid,row,col){
 }
 const km1Value=(rep,row)=>tplValue(rep,'61.00',row);
 
+/* Optional peer formation: separate from report/cell context. */
+let AP_MANIFEST=null, AP_DATA=null, AP_PROMISE=null, AP_CLUSTERS=new Map();
+let BM_PEER='standard', BM_OWN='', BM_ROLE='', BM_CLUSTER='';
+const OWN_LABEL={cooperative:'Cooperative',public:'Publicly owned',shareholder:'Private shareholders / owners',
+  mixed:'Mixed ownership',mutual:'Mutual',foundation:'Foundation-controlled',savings:'Self-owned savings bank',unknown:'Ownership not yet verified'};
+const ROLE_LABEL={group_head:'Group head',subsidiary:'Subsidiary',
+  no_consolidating_parent:'No consolidating parent (GLEIF)',unknown:'Unknown group role'};
+const PEER_LABEL={standard:'Size, scope and date',bank_type:'Ownership and group role',cluster:'Statistical clusters'};
+function ensureAdvancedPeers(){
+  if(AP_DATA) return Promise.resolve();
+  if(!AP_MANIFEST || AP_MANIFEST.schema!==1 || AP_MANIFEST.path!=='advanced_peers.json' ||
+     !/^[a-f0-9]{64}$/.test(AP_MANIFEST.sha256))
+    return Promise.reject(new Error(tr('Advanced peer data is unavailable for this data revision.')));
+  if(!AP_PROMISE){
+    const integrity='sha256-'+btoa(AP_MANIFEST.sha256.match(/../g).map(x=>String.fromCharCode(parseInt(x,16))).join(''));
+    AP_PROMISE=getJSON('advanced_peers.json',integrity).then(data=>{
+      if(data.schema!==1 || data.method!=='complete-linkage-gower-caliper-v1' || !data.metadata || !data.reports || !Array.isArray(data.clusters))
+        throw new Error(tr('Unsupported advanced peer data.'));
+      AP_DATA=data;AP_CLUSTERS=new Map(data.clusters.map(c=>[c.id,c]));
+    }).catch(e=>{AP_PROMISE=null;throw e;});
+  }
+  return AP_PROMISE;
+}
+function peerMeta(row){
+  return AP_DATA?.metadata[row.lei]||{ownership:'unknown',role:'unknown',group_head:''};
+}
+function advancedSelection(rows){
+  if(BM_PEER==='standard' || !AP_DATA) return {rows,duplicates:[],filtered:0};
+  const filtered=rows.filter(r=>{
+    const m=peerMeta(r), cluster=AP_DATA.reports[r.key]?.cluster;
+    return (!BM_OWN || m.ownership===BM_OWN) && (!BM_ROLE || m.role===BM_ROLE) &&
+      (!BM_CLUSTER || cluster===BM_CLUSTER);
+  });
+  // Representatives are selected within the actual visible date/scope/framework
+  // population, before size/type partitioning. Unknown parents stay separate.
+  const families=new Map(),duplicates=[];
+  for(const r of filtered){
+    const m=peerMeta(r),rep=byKey(r.key);
+    const family=[r.date,r.scope,rep?.framework||'?',m.group_head||'unknown:'+r.lei].join('|');
+    (families.get(family)||families.set(family,[]).get(family)).push(r);
+  }
+  const selected=[];
+  for(const family of families.values()){
+    family.sort((a,b)=>{
+      const ma=peerMeta(a),mb=peerMeta(b);
+      return Number(ma.role!=='group_head')-Number(mb.role!=='group_head') ||
+        Number(a.itype.includes('sub'))-Number(b.itype.includes('sub')) || a.key.localeCompare(b.key);
+    });
+    selected.push(family[0]);
+    duplicates.push(...family.slice(1).map(r=>({row:r,representative:family[0]})));
+  }
+  const keep=new Set(selected.map(r=>r.key));
+  return {rows:filtered.filter(r=>keep.has(r.key)),duplicates,filtered:rows.length-filtered.length};
+}
+function advancedPeerKey(r,basis){
+  if(!AP_DATA) return null;
+  const rep=byKey(r.key),m=peerMeta(r);
+  if(basis==='cluster'){
+    const id=AP_DATA.reports[r.key]?.cluster;
+    return id && AP_CLUSTERS.has(id)?'cluster:'+id:null;
+  }
+  if(m.ownership==='unknown' || m.role==='unknown') return null;
+  return [r.itype||'?',r.scope,r.date,rep?.framework||'?',m.ownership,m.role].join('|');
+}
+const clusterFittingMetric=id=>BM_PEER==='cluster' && (AP_DATA?.fitting_metrics||[]).includes(id);
+function peerControls(){
+  const opts=(items,value)=>Object.entries(items).map(([id,label])=>
+    `<option value="${id}"${id===value?' selected':''}>${esc(tr(label))}</option>`).join('');
+  let h=`<div class="peer-controls"><label class="ctl">${tr('Peer basis')}: <select id="bmPeer">${opts(PEER_LABEL,BM_PEER)}</select></label>`;
+  if(BM_PEER!=='standard'){
+    const availableOwners=new Set(Object.values(AP_DATA?.metadata||{}).map(m=>m.ownership));
+    const owners=Object.fromEntries(Object.entries(OWN_LABEL).filter(([id])=>availableOwners.has(id)||id===BM_OWN));
+    h+=`<label class="ctl">${tr('Ownership')}: <select id="bmOwnership"><option value="">${tr('All ownership types')}</option>${opts(owners,BM_OWN)}</select></label>
+      <label class="ctl">${tr('Group role')}: <select id="bmRole"><option value="">${tr('All group roles')}</option>${opts(ROLE_LABEL,BM_ROLE)}</select></label>`;
+    if(BM_PEER==='cluster'){
+      h+=`<label class="ctl">${tr('Cluster')}: <select id="bmCluster"><option value="">${tr('All clusters and unassigned reports')}</option>${BM_CLUSTER && !AP_CLUSTERS.has(BM_CLUSTER)?'<option value="'+esc(BM_CLUSTER)+'" selected>'+tr('Unavailable cluster')+' '+esc(BM_CLUSTER)+'</option>':''}${[...AP_CLUSTERS.values()].map(c=>
+        `<option value="${c.id}"${BM_CLUSTER===c.id?' selected':''}>${esc(c.date+' · '+c.scope+' · RF '+c.framework+' · '+c.id.slice(0,6)+' · n='+c.members.length)}</option>`).join('')}</select></label>`;
+    }
+  }
+  return h+'</div>';
+}
+function peerExplanation(rows,selection){
+  if(BM_PEER==='standard') return '';
+  const unavailable=BM_CLUSTER && !AP_CLUSTERS.has(BM_CLUSTER);
+  const ownershipKnown=rows.filter(r=>peerMeta(r).ownership!=='unknown').length;
+  const groupUnknown=rows.filter(r=>!peerMeta(r).group_head).length;
+  const eligible=rows.filter(r=>advancedPeerKey(r,BM_PEER)).length;
+  const memberships=new Map();
+  for(const r of rows){const k=advancedPeerKey(r,BM_PEER);if(k)(memberships.get(k)||memberships.set(k,[]).get(k)).push(r);}
+  const small=[...memberships.values()].filter(g=>g.length<5).reduce((n,g)=>n+g.length,0);
+  let h=`<div class="peer-note" role="status">${unavailable?'<p>'+tr('The requested cluster does not exist in this data revision. Choose another cluster or all reports.')+'</p>':''}<b>${esc(tr(PEER_LABEL[BM_PEER]))}</b> · ${tr('{0} of {1} reports have reviewed ownership.',ownershipKnown,rows.length)}
+    ${tr('{0} reports have an unknown group head.',groupUnknown)}
+    ${tr('{0} reports have no peer assignment; {1} are in groups smaller than five.',rows.length-eligible,small)}
+    ${tr('Percentiles require five valid values per metric. No automatic widening of the peer group.')}
+    <details><summary>${tr('Peer method, coverage and exclusions')}</summary><p>${tr('Ownership describes the current reviewed classification, not historical ownership at the report date. Sources and review dates are shown per bank. Subsidiaries do not inherit ownership automatically.')}</p>
+    <p>${tr('At most one report per known group, date, scope and framework is retained. Unknown group heads remain separate; independence is not established.')}
+    ${tr('{0} related reports excluded.',selection.duplicates.length)}</p>`;
+  if(selection.duplicates.length)h+=`<details><summary>${tr('Show related reports excluded')}</summary><ul>${selection.duplicates.map(x=>
+    `<li>${esc(x.row.name+' · '+x.row.date)} → ${esc(x.representative.name)}</li>`).join('')}</ul></details>`;
+  if(BM_PEER==='bank_type')h+=`<p>${tr('Groups share size class, scope, date, framework, ownership and group role. Unknown ownership or role receives no percentile.')}</p>`;
+  else{
+    h+=`<p>${tr('Maximum TREA size ratio within a cluster: {0}×.',AP_DATA.max_size_ratio)}</p><p>${tr('Exploratory complete-linkage clusters: size 25%, risk mix 50%, ownership 15%, group role 10%. Same date, scope and framework; maximum distance 0.25. Unknown categories contribute a neutral distance of 0.5. Capital and liquidity ratios are not fitting inputs.')}</p>
+      <p>${tr('Cluster diagnostics describe the fitted population; filters may reduce the members used for this benchmark.')}</p>
+    <p>${tr('TREA and risk-profile percentiles use fitting inputs and are suppressed in cluster mode. Report overview and cell peer context keep their standard basis.')}</p>`;
+    const used=[...new Set(rows.map(r=>AP_DATA.reports[r.key]?.cluster).filter(Boolean))];
+    if(used.length)h+=`<details class="peer-diagnostics"><summary>${tr('Cluster diagnostics and members')} (${used.length})</summary>${used.map(id=>{
+      const c=AP_CLUSTERS.get(id);
+      return `<details><summary>${esc(c.date+' · '+c.scope+' · RF '+c.framework+' · '+id.slice(0,6))} · n=${c.members.length} · ${tr('Maximum distance')}: ${nf(c.max_distance,3,3)}</summary>
+        <p>${tr('Threshold sensitivity (0.20 / 0.30 neighbourhood overlap)')}: ${nf(c.sensitivity*100,1,1)}% · ${tr('Silhouette')}: ${c.silhouette==null?'—':nf(c.silhouette,3,3)}.
+        ${tr('These diagnostics are not confidence probabilities or a credit rating.')}</p>
+        <p>${tr('Median risk shares')}: ${Object.entries(c.median_risk).map(([k,v])=>esc(tr({credit:'Credit risk',counterparty:'Counterparty credit risk',cva:'CVA',market:'Market risk',operational:'Operational risk'}[k]))+' '+nf(v*100,1,1)+'%').join(' · ')}</p>
+        <ul>${c.members.map(key=>{const rep=byKey(key);return rep?`<li><a href="#r/${leiParts(rep.entityID).lei}/${rep.refPeriod}/${leiParts(rep.entityID).scope}">${esc(bankName(rep.entityID))}</a></li>`:'';}).join('')}</ul></details>`;
+    }).join('')}</details>`;
+  }
+  return h+'</details></div>';
+}
+function peerEvidence(r){
+  if(BM_PEER==='standard')return '';
+  const m=peerMeta(r),p=AP_DATA?.reports[r.key],reason=AP_DATA?.excluded[r.key];
+  const source=m.source_url?`<a href="${esc(m.source_url)}" target="_blank" rel="noopener">${tr('Ownership source')}</a> · ${esc(m.reviewed_at)}${m.supporting_source_url?' · <a href="'+esc(m.supporting_source_url)+'" target="_blank" rel="noopener">'+tr('Supporting ownership source')+'</a>':''}<br>${esc(m.evidence_quote)}`:tr('No reviewed ownership source.');
+  const chain=m.control_source_url?'<br><a href="'+esc(m.control_source_url)+'" target="_blank" rel="noopener">'+tr('Verified consolidation relationship')+'</a> · '+tr('Controller LEI')+': '+esc(m.controller_lei):'';
+  const head=m.group_head?`${tr('Group head LEI')}: ${esc(m.group_head)} (${esc(m.group_source)})`:tr('Unknown group head');
+  const cluster=p?.cluster?`${tr('Cluster')}: ${esc(p.cluster.slice(0,6))}`:tr('No cluster assignment');
+  const why=reason?tr({scale_finding:'Scale finding in fitting inputs',missing_or_ambiguous_size:'Missing or ambiguous size',missing_or_ambiguous_framework:'Missing or ambiguous framework',missing_or_invalid_risk:'Missing, ambiguous or invalid risk mix'}[reason]||'Missing fitting inputs'):
+    p?.representative?tr('Another report represents this group in the fitted clusters.'):
+    !p?tr('Missing fitting inputs'):tr('Isolated at the selected distance threshold.');
+  return `<details class="peer-evidence"><summary>${esc(tr(OWN_LABEL[m.ownership]||OWN_LABEL.unknown))} · ${esc(tr(ROLE_LABEL[m.role]||ROLE_LABEL.unknown))}</summary>
+    <div>${source}${chain}<br>${head}${BM_PEER==='cluster'?'<br>'+cluster+(p?.cluster?'':' · '+esc(why)):''}</div></details>`;
+}
+function bindPeerControls(){
+  document.getElementById('bmPeer').onchange=e=>{
+    BM_PEER=e.target.value;BM_OWN='';BM_ROLE='';BM_CLUSTER='';
+    renderBenchmark();shareState();
+  };
+  for(const [id,set] of [['bmOwnership',v=>BM_OWN=v],['bmRole',v=>BM_ROLE=v],['bmCluster',v=>BM_CLUSTER=v]]){
+    const el=document.getElementById(id);if(el)el.onchange=e=>{set(e.target.value);renderBenchmark();shareState();};
+  }
+}
+
 /* ================= benchmark view (profiles) ================= */
 /* col kinds: pct = KM1 raw ratio *100 · eur = monetary -> Mrd EUR (ECB rate)
    shareOfTrea = OV1 component / KM1 TREA *100 · pp = difference already in % points */
@@ -2713,14 +2922,14 @@ function benchmarkRows(){
    institution_type) + Konsolidierungskreis + Stichtag; ein Stichtagsmix
    würde sonst Werte unterschiedlicher Zeitpunkte vermischen. */
 const PCT_MIN_GROUP=5;   // darunter ist ein Perzentil Rauschen, nicht Signal
-const peerKeyOf=r=>(r.itype||'?')+'|'+(r.scope||'?')+'|'+(r.date||'?');
+const peerKeyOf=(r,basis='standard')=>basis==='standard'?(r.itype||'?')+'|'+(r.scope||'?')+'|'+(r.date||'?'):advancedPeerKey(r,basis);
 
-function percentileMap(rows,colId){
+function percentileMap(rows,colId,basis='standard'){
   const groups=new Map();
   for(const r of rows){
     const v=r[colId];
     if(v==null||!isFinite(v)) continue;
-    const k=peerKeyOf(r);
+    const k=peerKeyOf(r,basis); if(!k) continue;
     (groups.get(k)||groups.set(k,[]).get(k)).push(v);
   }
   const ranks=new Map();
@@ -2740,8 +2949,8 @@ function percentileMap(rows,colId){
   for(const r of rows){
     const v=r[colId];
     if(v==null||!isFinite(v)) continue;
-    const rank=ranks.get(peerKeyOf(r))?.get(v);
-    if(rank) out.set(r.key,rank);
+    const rank=ranks.get(peerKeyOf(r,basis))?.get(v);
+    if(rank) out.set(r.key,basis==='standard'?rank:{...rank,basis});
   }
   return out;
 }
@@ -2749,7 +2958,7 @@ function percentileMap(rows,colId){
 function pctBadge(info){
   if(!info) return '';
   const p=Math.round(info.p);
-  return `<span class="pctb" title="${esc(tr('{0}th percentile of the peer group ({1} reports: same size class, consolidation, reference date)', p, info.n))}">`
+  return `<span class="pctb" title="${esc(info.basis?tr('{0}th percentile within the selected peer basis ({1} valid reports)',p,info.n):tr('{0}th percentile of the peer group ({1} reports: same size class, consolidation, reference date)', p, info.n))}">`
        + `<span class="pctf" style="width:${Math.max(2,Math.min(100,info.p))}%"></span><i>P${p}</i></span>`;
 }
 
@@ -2826,11 +3035,11 @@ function distChart(vals){
    messen — dieselbe Ueberlegung wie bei den Perzentilbaendern. Das Histogramm
    oben BESCHREIBT dagegen die angezeigte Menge; nur die Aussage ueber eine
    einzelne Zeile ist peer-relativ. */
-function fenceOutliers(rows,colId){
+function fenceOutliers(rows,colId,basis='standard'){
   const groups=new Map();
   for(const r of rows){ const v=r[colId];
     if(v==null||!isFinite(v)) continue;
-    const k=peerKeyOf(r); (groups.get(k)||groups.set(k,[]).get(k)).push(v); }
+    const k=peerKeyOf(r,basis); if(!k) continue; (groups.get(k)||groups.set(k,[]).get(k)).push(v); }
   const fen=new Map();
   for(const [k,arr] of groups){
     if(arr.length<PCT_MIN_GROUP) continue;      // darunter ist ein Zaun Rauschen
@@ -2839,7 +3048,7 @@ function fenceOutliers(rows,colId){
   const out=new Map();
   for(const r of rows){
     const v=r[colId]; if(v==null||!isFinite(v)) continue;
-    const f=fen.get(peerKeyOf(r)); if(!f) continue;
+    const f=fen.get(peerKeyOf(r,basis)); if(!f) continue;
     if(v>f.hi) out.set(r.key,'hoch'); else if(v<f.lo) out.set(r.key,'niedrig');
   }
   return out;
@@ -3192,6 +3401,22 @@ async function renderBenchmark(){
     status.remove();main.removeAttribute('aria-busy');
     if(table)table.inert=false;
   }
+  if(BM_PEER!=='standard' && !AP_DATA){
+    const status=document.createElement('div');status.className='status';status.setAttribute('role','status');
+    status.textContent=tr('Loading advanced peers…');main.prepend(status);main.setAttribute('aria-busy','true');
+    const table=main.querySelector('.bmtable');if(table){table.inert=true;table.hidden=true;}
+    for(const id of ['bmCsv','bmPrev','bmNext']){const button=document.getElementById(id);if(button)button.disabled=true;}
+    try{await ensureAdvancedPeers();}
+    catch(e){if(serial===BM_RENDER_SERIAL && VIEW==='benchmark'){
+      main.removeAttribute('aria-busy');showRetry(status,e.message,renderBenchmark);
+      status.querySelector('button').id='bmPeerRetry';
+      const reset=document.createElement('button');reset.textContent=tr('Use standard peers');
+      reset.id='bmPeerStandard';
+      reset.onclick=()=>{BM_PEER='standard';BM_OWN='';BM_ROLE='';BM_CLUSTER='';renderBenchmark();shareState();};status.append(reset);
+    }return;}
+    if(serial!==BM_RENDER_SERIAL || VIEW!=='benchmark')return;
+    status.remove();if(table){table.inert=false;table.hidden=false;}
+  }
   main.removeAttribute('aria-busy');
   bmSortOr(prof);
   const gross=benchmarkRows();
@@ -3200,7 +3425,9 @@ async function renderBenchmark(){
   // oder die Zaunwerte verschieben. Ausgeschlossen wird nicht still — die Zahl
   // und die Namen stehen unter der Tabelle (#18).
   const gatedOut=prof.gate.length?gross.filter(r=>r._out):[];
-  const allRows=prof.gate.length?gross.filter(r=>!r._out):gross;
+  const gatedRows=prof.gate.length?gross.filter(r=>!r._out):gross;
+  const peerSelection=advancedSelection(gatedRows);
+  const allRows=peerSelection.rows;
   // Perzentile IMMER auf der vollen (zugelassenen) Menge: ein ausgeblendeter
   // Ausreisser darf die Verteilung nicht verschieben, sonst aendert das
   // Einklappen die Zahlen.
@@ -3209,8 +3436,8 @@ async function renderBenchmark(){
   const profSel=Object.entries(bmAll()).map(([k,p])=>
     `<option value="${k}"${k===BMP?' selected':''}>${esc(mlabel(p))}</option>`).join('');
   const pmaps=new Map();
-  if(BM_PCT) for(const c of sichtbareSpalten(prof))
-    pmaps.set(c.id,percentileMap(BAR_KINDS.has(c.kind)?allRows.filter(r=>barErlaubt(prof,r,c)):allRows,c.id));
+  if(BM_PCT) for(const c of sichtbareSpalten(prof).filter(c=>!clusterFittingMetric(c.id)))
+    pmaps.set(c.id,percentileMap(BAR_KINDS.has(c.kind)?allRows.filter(r=>barErlaubt(prof,r,c)):allRows,c.id,BM_PEER));
   // Bezug der Groessenbalken (#49): das Maximum der SICHTBAREN Zeilen. Berechnet
   // auf `rows`, nicht auf `allRows` — blendet jemand die auffaelligen Reports
   // aus, soll der Balken sich auf das beziehen, was er sieht.
@@ -3221,8 +3448,8 @@ async function renderBenchmark(){
   // gibt es keine Metrik und damit keinen Marker.
   const sortCol=spalten.find(c=>c.id===bmSort.col);
   const fenceRows=sortCol && BAR_KINDS.has(sortCol.kind)?allRows.filter(r=>barErlaubt(prof,r,sortCol)):allRows;
-  const fmarks=sortCol?fenceOutliers(fenceRows, sortCol.id):new Map();
-  const context=JSON.stringify([LANG,BMP,activeFilters(),BM_HIDEFLAG,BM_PCT,spalten.map(c=>c.id)]);
+  const fmarks=sortCol && !clusterFittingMetric(sortCol.id)?fenceOutliers(fenceRows, sortCol.id,BM_PEER):new Map();
+  const context=JSON.stringify([LANG,BMP,activeFilters(),BM_HIDEFLAG,BM_PCT,BM_PEER,BM_OWN,BM_ROLE,BM_CLUSTER,spalten.map(c=>c.id)]);
   const pageContext=context+JSON.stringify(bmSort);
   if(BM_PAGE_CONTEXT!==pageContext){BM_PAGE=0;BM_PAGE_CONTEXT=pageContext;}
   BM_PAGE=Math.min(BM_PAGE,Math.max(0,Math.ceil(rows.length/BM_PAGE_SIZE)-1));
@@ -3231,6 +3458,8 @@ async function renderBenchmark(){
     BM_DOM={context,rows:new Map()};
   let newRows='';
   let h=`<div class="rhead"><h2>${tr('Benchmark')}</h2></div>
+    ${peerControls()}
+    ${peerExplanation(allRows,peerSelection)}
     <div class="bmbar"><label class="ctl">${tr('Profile')}: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> ${tr('Percentile within peer group')}</label>
       <label class="ctl" title="${esc(tr('Hides reports in which the plausibility check found values far outside their cell population. Percentiles stay computed on the full set.'))}"><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> ${tr('collapse conspicuous')}${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
@@ -3276,7 +3505,7 @@ async function renderBenchmark(){
     newRows+=`<tr data-key="${esc(r.key)}"${cls?` class="${cls}"`:''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
         ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}${scaleBadge(r.q,prof.tpl)}${
           '<span class="bm-fence"></span>'}
-        <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
+        <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span>${peerEvidence(r)}</td>
         <td>${esc(r.date)}</td>`;
     for(const c of spalten)
       newRows+=bmCell(c, r[c.id], BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null,
@@ -3287,6 +3516,7 @@ async function renderBenchmark(){
   h+=`</tbody></table><div class="meta" style="margin-top:.5rem">${tr('{0} reports with template {1}', rows.length, esc(prof.tpl))}</div>`;
   h+=gateNote(prof, gatedOut, gross.length);
   mountBenchmark(main,h,newRows,visibleRows,sortCol,fmarks);
+  bindPeerControls();
   document.getElementById('bmPrev').onclick=()=>{BM_PAGE--;renderBenchmark();};
   document.getElementById('bmNext').onclick=()=>{BM_PAGE++;renderBenchmark();};
   document.getElementById('bmProfile').value=BMP;
@@ -3412,6 +3642,13 @@ function benchmarkCSV(rows, prof){
            '# '+tr('rows:')+' '+rows.length,
            '# '+tr('view:')+' '+location.href,
            '#'];
+  if(BM_PEER!=='standard')k.push('# Peer basis: '+BM_PEER,
+    '# Current reviewed ownership; not historical ownership at report date.',
+    '# One representative per known group/date/scope/framework; unknown parents are not proven independent.',
+    '# Advanced peer data SHA-256: '+AP_MANIFEST.sha256);
+  if(BM_PEER==='cluster')k.push('# Fitting method: '+AP_DATA.method+'; threshold '+AP_DATA.threshold+'; weights '+JSON.stringify(AP_DATA.weights)+'; maximum TREA size ratio '+AP_DATA.max_size_ratio,
+    '# TREA/risk-profile cluster percentiles are suppressed because size/risk mix are fitting inputs.');
+  else if(BM_PEER==='bank_type')k.push('# Groups share size class, scope, date, framework, ownership and group role; at least five valid values per metric.');
   for(const z of CSV_CAVEATS()) k.push('# '+z);
   k.push('#');
   if(UA.has(prof.tpl)) k.push(
@@ -3424,7 +3661,7 @@ function benchmarkCSV(rows, prof){
   // danach handeln, und eine Warnung ohne Handhabe ist Dekoration.
   const kopf=['institution','lei','country','size_class','consolidation','reference_date',
               'framework', ...sichtbareSpalten(prof).map(c=>c.id),
-              'scale_finding','plausibility'];
+              'scale_finding','plausibility',...(BM_PEER==='standard'?[]:['ownership','ownership_reviewed_at','ownership_source','ownership_basis','ownership_controller_lei','ownership_control_source','group_role','group_head_lei','cluster_id'])];
   const zeilen=[kopf.map(csvFeld).join(',')];
   for(const r of rows){
     const sc=r.q&&r.q.sc;
@@ -3434,7 +3671,8 @@ function benchmarkCSV(rows, prof){
     const rep=byKey(r.key);
     zeilen.push([r.name, r.lei, r.country, r.itype, r.scope, r.date,
                  rep?rep.framework:'',
-                 ...sichtbareSpalten(prof).map(c=>csvZahl(r[c.id])), skal, q]
+                 ...sichtbareSpalten(prof).map(c=>csvZahl(r[c.id])), skal, q,
+                 ...(BM_PEER==='standard'?[]:[peerMeta(r).ownership,peerMeta(r).reviewed_at||'',peerMeta(r).source_url||'',peerMeta(r).ownership_basis||'',peerMeta(r).controller_lei||'',peerMeta(r).control_source_url||'',peerMeta(r).role,peerMeta(r).group_head||'',AP_DATA.reports[r.key]?.cluster||''])]
                 .map(csvFeld).join(','));
   }
   return k.join('\n')+'\n'+zeilen.join('\n')+'\n';
@@ -3565,6 +3803,10 @@ function shareParams(){
   const g=document.getElementById('fGsii');
   if(g && g.checked) p.set('g','1');
   if(VIEW==='benchmark'){
+    if(BM_PEER!=='standard')p.set('peer',BM_PEER);
+    if(BM_OWN)p.set('ownership',BM_OWN);
+    if(BM_ROLE)p.set('role',BM_ROLE);
+    if(BM_CLUSTER)p.set('cluster',BM_CLUSTER);
     if(BMP!=='km1')  p.set('prof', BMP);
     if(BM_PCT)       p.set('pct','1');
     if(BM_HIDEFLAG)  p.set('hide','1');
@@ -3626,6 +3868,10 @@ function applyShared(){
   }
   const g=document.getElementById('fGsii');
   if(g) g.checked = p.get('g')==='1';
+  BM_PEER=['bank_type','cluster'].includes(p.get('peer'))?p.get('peer'):'standard';
+  BM_OWN=BM_PEER!=='standard' && p.get('ownership') in OWN_LABEL?p.get('ownership'):'';
+  BM_ROLE=BM_PEER!=='standard' && p.get('role') in ROLE_LABEL?p.get('role'):'';
+  BM_CLUSTER=BM_PEER==='cluster' && /^[a-f0-9]{12}$/.test(p.get('cluster')||'')?p.get('cluster'):'';
   if(p.has('prof')) BMP=p.get('prof');
   if(p.has('pct'))  BM_PCT  = p.get('pct')==='1';
   if(p.has('hide')) BM_HIDEFLAG = p.get('hide')==='1';

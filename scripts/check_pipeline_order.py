@@ -203,7 +203,9 @@ ABHAENGIG = {
                                  "processed/quality_profile.csv",
                                  "interim/plausibility_findings.csv",
                                  "processed/scale_flags.csv",
-                                 "processed/peer_similarity.csv"],
+                                 "processed/peer_similarity.csv",
+                                 "processed/lei_relations.csv",
+                                 "processed/coverage_gap.csv"],
                                 ["processed/zweig_a/data/index.json"]),
 }
 
