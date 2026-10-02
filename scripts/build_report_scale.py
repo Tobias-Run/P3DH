@@ -1,4 +1,4 @@
-"""Skalenfehler auf REPORT-Ebene erkennen (#83).
+"""Skalenfehler auf Report-, Template- und Teilbereichsebene erkennen (#83, #122).
 
 Ausgabe: processed/scale_flags.csv
 
@@ -13,8 +13,9 @@ nach der ganzen Geschichte aus.
 den Abstand ÜBER dem Zellmedian; die untere Flanke einer Exposure-Verteilung ist
 natürlich (sehr viele Institute haben nahe null Exposure zu einer gegebenen
 Kategorie), und symmetrisch geprüft lagen 9.750 von 12.744 Befunden unter dem
-Median. Diese Entscheidung ist richtig — aber ein Skalenfehler macht Werte
-IMMER zu klein. Er landet damit genau dort, wo nicht hingesehen wird. Gemessen
+Median. Diese Entscheidung ist richtig — aber zu klein gemeldete Werte
+landen genau dort, wo nicht hingesehen wird. Skalenfehler können auch zu große
+Beträge erzeugen (K&H und Citibank, #122). Gemessen
 liegen 1.524 der 1.966 prüfbaren Fakten der pbb mindestens drei Grössenordnungen
 UNTER ihrem Zellmedian, und kein einziger löst etwas aus.
 
@@ -121,6 +122,7 @@ from pathlib import Path
 import collections
 import csv
 import math
+import json
 import sys
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -197,7 +199,9 @@ FELDER = ["ebene", "entityID", "lei", "scope", "refPeriod", "template_id",
           "bank_name", "country",
           "trea_eur", "versatz_log10", "zeitreihe_faktor", "decimals_deklariert",
           "anteil_erreicht_genauigkeit", "n_zellen", "signale", "urteil",
-          "faktor_geschaetzt"]
+          "faktor_geschaetzt", "richtung", "umfang", "referenz_stichtag",
+          "beleg_status", "betroffene_zellen", "faktoren", "begruendung",
+          "vergleich_n", "review_id"]
 
 
 def _sig(x, n=4):
@@ -315,13 +319,11 @@ def zeitreihen_faktor(trea_je_report):
 def template_spruenge(je_template):
     """{(entityID, refPeriod, template): (versatz, sprung, n)} — Klasse B.
 
-    Dasselbe Institut, dasselbe Template, ein Sprung von `TEMPLATE_SPRUNG`
-    Grössenordnungen gegen den besten eigenen Stichtag. Das Signal ist
-    unabhängig von der Institutsgrösse: ein kleines Haus ist an allen
-    Stichtagen klein, ein skaliertes nur an einem.
-
-    Braucht mindestens zwei Stichtage für dieses Template. Mit nur einem gibt
-    es keine Vergleichsgrundlage — dann steht hier nichts, nicht „sauber".
+    Populationsversätze wählen Kandidaten aus, bestätigen aber keinen Fehler:
+    Zusammensetzungen können sich ändern und der größte Stichtag kann selbst
+    falsch sein. `scale_evidence.evaluate` vergleicht anschließend identische
+    Datenpunkte, Dimensionen und Vorzeichen. Quellengebundene Sichtprüfungen
+    bestimmen Richtung und Teilbereich; fehlende Belege bleiben Verdacht.
     """
     je = collections.defaultdict(dict)
     for eid, rp, tid, v, n in je_template:
@@ -473,30 +475,68 @@ def build():
                 "signale": "untergrenze", "urteil": "skaliert",
                 "faktor_geschaetzt": "",
             })
-    zeilen.extend(km1)
-
-    # Klasse B: skalierte EINZELNE Templates in einem sonst sauberen Report.
-    # Wo der Report schon markiert ist, waere die Template-Zeile nur Rauschen —
-    # sie sagte dasselbe noch einmal, nur kleinteiliger.
+    # A report suspicion does not hide an independently reviewed subproblem.
+    # Confirmed report-wide warnings remain as before (#83).
     schon = {(z["entityID"], z["refPeriod"]) for z in zeilen
-             if z["urteil"] in ("skaliert", "verdacht")}
+             if z["urteil"] == "skaliert"}
     kopfdaten = {(z["entityID"], z["refPeriod"]): z for z in zeilen}
     sprung = template_spruenge(je_template)
-    for (eid, rp, tid), (v, hoch, n) in sorted(sprung.items()):
+    from scale_evidence import load_reviews, collect, evaluate, apply_reviews
+    reviews = load_reviews()
+    keys = {(e, t) for e, d, t in sprung}
+    keys.update((g["key"][0], g["key"][2]) for r in reviews for g in r["guards"])
+    facts = collect(con, keys)
+    offsets = {(e, d, t): v for e, d, t, v, n in je_template}
+    template_stats = {(e, d, t): (v, n) for e, d, t, v, n in je_template}
+    findings = {}
+    for z in km1:
+        findings[z["entityID"], z["refPeriod"], z["template_id"]] = {
+            "urteil": "skaliert", "richtung": "zu_klein", "umfang": "template",
+            "referenz_stichtag": "", "beleg_status": "fachliche_untergrenze",
+            "faktor_geschaetzt": "", "faktoren": [], "betroffene_zellen": [],
+            "begruendung": "KM1-Untergrenze auffällig, anderer Report-Rumpf plausibel.",
+            "vergleich_n": 0, "zeitreihe_faktor": ""}
+    for key in sorted(sprung):
+        eid, rp, tid = key
         if (eid, rp) in schon:
             continue
+        evidence = evaluate(key, facts, offsets)
+        if evidence is not None:
+            findings[key] = evidence
+    review_status = apply_reviews(findings, facts, reviews)
+    OUT.with_name("scale_review_status.json").write_text(
+        json.dumps(review_status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    for (eid, rp, tid), evidence in sorted(findings.items()):
         k = kopfdaten.get((eid, rp), {})
+        v, n = template_stats.get((eid, rp, tid), (None, 0))
+        signals = "direkter_vergleich"
+        if evidence.get("review_id"):
+            signals += "|sichtpruefung"
+        if evidence["beleg_status"] == "offen":
+            signals = "datentyp_offen"
         zeilen.append({
             "ebene": "template", "template_id": tid,
             "entityID": eid, "lei": k.get("lei", ""), "scope": k.get("scope", ""),
             "refPeriod": rp, "bank_name": k.get("bank_name", ""),
             "country": k.get("country", ""),
-            "trea_eur": "", "versatz_log10": round(v, 3),
-            "zeitreihe_faktor": round(10 ** hoch), "decimals_deklariert": "",
+            "trea_eur": "", "versatz_log10": round(v, 3) if v is not None else "",
+            "decimals_deklariert": "",
             "anteil_erreicht_genauigkeit": "", "n_zellen": n,
-            "signale": "template_sprung", "urteil": "skaliert",
-            "faktor_geschaetzt": faktor_von(None, 10 ** hoch),
+            "signale": signals, **evidence,
         })
+
+    for z in zeilen:
+        if z["ebene"] == "report":
+            z.update(richtung="zu_klein" if z["urteil"] == "skaliert" else "unklar",
+                     umfang="report", beleg_status="heuristik",
+                     betroffene_zellen=[], faktoren=[z["faktor_geschaetzt"]]
+                     if z["faktor_geschaetzt"] else [])
+            # A weak population-only suspicion does not identify a safe factor.
+            if z["urteil"] == "verdacht":
+                z.update(faktor_geschaetzt="", faktoren=[])
+        for field in ("betroffene_zellen", "faktoren"):
+            z[field] = json.dumps(z.get(field, []), ensure_ascii=False,
+                                  separators=(",", ":"))
 
     zeilen.sort(key=lambda z: (z["ebene"], z["entityID"], z["refPeriod"],
                                z["template_id"]))
@@ -508,6 +548,7 @@ def build():
     print(f"✓ {OUT}  ({len(zeilen)} Zeilen)")
     for s in bericht(zeilen):
         print("  " + s)
+    con.close()
     return zeilen
 
 
@@ -519,7 +560,7 @@ def bericht(zeilen):
     tpl = [z for z in zeilen if z["ebene"] == "template"]
     if tpl:
         wo = collections.Counter(z["template_id"] for z in tpl)
-        aus.append(f"einzeln skalierte Templates in sonst sauberen Reports: {len(tpl)}"
+        aus.append(f"Templatebefunde (inklusive offener Verdachtsfälle): {len(tpl)}"
                    f"  (haeufigste: " +
                    "  ".join(f"{k}={v}" for k, v in wo.most_common(5)) + ")")
     s = collections.Counter()

@@ -564,8 +564,39 @@ die Grundgesamtheit, nicht unsere Rechnung.
 
 Je (Institut, Konsolidierungskreis, Stichtag) ein Urteil: `skaliert`,
 `verdacht` oder `unauffaellig`. 54 von 882 Reports sind als skaliert
-eingestuft, 17 als Verdacht; dazu 48 einzelne Templates in sonst sauberen
-Reports.
+eingestuft, 17 als Verdacht; nach dem kritischen Review (#122) kommen
+46 bestätigte Templatewarnungen und ein offener Templateverdacht hinzu
+(929 Zeilen insgesamt, 118 aktive Befunde im geprüften Snapshot).
+
+#### Präzisierung durch den vollständigen Review (#122)
+
+[Audit und 119 Einzelfallurteile](scale_review_2026-10-01/REPORT.md),
+[Umsetzung, Grenzfälle und Validierung](scale_review_2026-10-01/IMPLEMENTATION.md).
+Alpha Bank 23.00 im Juni bleibt gewarnt. K&H 41.00 und Citibank 68.00
+werden im Juni als `zu_gross` markiert; die Dezemberwarnungen entfallen.
+BBVA 83.01.C im Juni wird nicht länger gewarnt. Neun gemischte Befunde
+bekommen Zellmasken; UniCredit Czech/Slovakia CR10 bleibt ohne Faktor offen.
+
+Populationssprünge wählen Kandidaten aus. Verglichen werden gleiche
+Datenpunkte, offene Dimensionen und Vorzeichen. Die 48 fachlichen
+Templateprüfungen in `codebook/scale_reviews.json` gelten nur bei passenden
+SHA-256-Fingerabdrücken sämtlicher geprüfter monetärer Fakten und Quellen.
+Änderungen an Rohwert, Währung, FX oder Taxonomie machen die Sichtprüfung
+ungültig; `processed/scale_review_status.json` weist das aus.
+
+Zusätzliche CSV-Felder: `richtung`, `umfang`, `referenz_stichtag`,
+`beleg_status`, `betroffene_zellen` (JSON mit Zeile, Spalte, Dimensionen,
+Datapoint und Faktorhypothese), `faktoren` (JSON), `begruendung`,
+`vergleich_n`, `review_id`. Ein Verdacht oder gemischte Faktoren bekommen
+keinen scheinbar gesicherten Einzelmultiplikator. Keine Zahl wird korrigiert.
+
+Im Viewer gelten Größenbalken, Betragsverteilungen und Betragsperzentile
+nur für vergleichbare Quellzellen. Saubere Kapital-/TREA-Zellen eines
+isolierten Liquiditätsfehlers bleiben nutzbar. IRRBB prüft Zähler und
+Tier-1-Nenner anhand der betroffenen Zellen. Quoten sind nur bei gleicher
+Skala im Zähler und Nenner vergleichbar; sie werden nicht pauschal für
+gültig erklärt. Die ursprüngliche Reportheuristik (#83) bleibt bestehen;
+die nachstehenden historischen Reportmessungen beziehen sich auf sie.
 
 #### Warum das eine eigene Ebene braucht
 
@@ -575,8 +606,9 @@ Flanke einer Exposure-Verteilung ist natürlich — sehr viele Institute haben n
 null Exposure zu einer gegebenen Kategorie, und ein Betrag von 100 EUR in einer
 Zelle mit Median 10⁸ ist eine kleine Position, kein Meldefehler.
 
-Ein Skalenfehler macht Werte aber **immer zu klein**. Er landet damit genau
-dort, wo nicht hingesehen wird. Für die Deutsche Pfandbriefbank am 2025-06-30
+Zu klein gemeldete Werte landen genau dort, wo nicht hingesehen wird.
+Skalenfehler können auch **zu große** Beträge erzeugen; K&H und Citibank
+sind im Review #122 Beispiele dafür. Für die Deutsche Pfandbriefbank am 2025-06-30
 liegen 1.524 der 1.966 prüfbaren Fakten mindestens drei Größenordnungen unter
 ihrem Zellmedian — und die Prüfung meldet **null** Befunde, bei 67 von 69
 danebenliegenden Templates.

@@ -104,7 +104,9 @@ jobs:
           ls -lh processed/long/p3dh_long.parquet processed/filing_indicators.csv
 
       - name: Zweig A bauen
-        run: python scripts/build_zweig_a_shards.py
+        run: |
+          python scripts/build_report_scale.py
+          python scripts/build_zweig_a_shards.py
 
       - name: Datensatz-Manifest bauen
         run: python scripts/build_dataset_manifest.py
@@ -140,3 +142,6 @@ jobs:
       # eben gebauten Artefakte und fragt, ob danach etwas dasteht.
       - name: Viewer-Laufzeitprüfung
         run: python scripts/check_viewer_runtime.py
+
+      - name: Scale-Befunde auf Desktop und Mobilgerät (DE/EN)
+        run: python scripts/check_scale_runtime.py

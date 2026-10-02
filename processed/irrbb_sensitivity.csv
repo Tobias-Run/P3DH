@@ -365,12 +365,12 @@ lei,scope,refPeriod,bank_name,country,institution_type,szenario,szenario_label,d
 529900GM944JT8YIRL63,IND,2025-12-31,Münchener Hypothekenbank eG,Germany,Large highest EEA,0040,Flattener,-7144010,,2113190585,-0.0034,,nein,,
 529900GM944JT8YIRL63,IND,2025-12-31,Münchener Hypothekenbank eG,Germany,Large highest EEA,0050,kurze Zinsen hoch,-49666101,,2113190585,-0.0235,,nein,,
 529900GM944JT8YIRL63,IND,2025-12-31,Münchener Hypothekenbank eG,Germany,Large highest EEA,0060,kurze Zinsen runter,26043382,,2113190585,0.0123,,nein,,
-529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0010,Parallelverschiebung hoch,-117886,-31430,1653973000,-0.0001,-0.0000,nein,nein,
-529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0020,Parallelverschiebung runter,70210,16047,1653973000,0.0000,0.0000,nein,nein,
-529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0030,Steepener,24045,,1653973000,0.0000,,nein,,
-529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0040,Flattener,-65256,,1653973000,-0.0000,,nein,,
-529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0050,kurze Zinsen hoch,-98972,,1653973000,-0.0001,,nein,,
-529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0060,kurze Zinsen runter,52820,,1653973000,0.0000,,nein,,
+529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0010,Parallelverschiebung hoch,-117886,-31430,1653973000,-0.0001,-0.0000,,,skala
+529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0020,Parallelverschiebung runter,70210,16047,1653973000,0.0000,0.0000,,,skala
+529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0030,Steepener,24045,,1653973000,0.0000,,,,skala
+529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0040,Flattener,-65256,,1653973000,-0.0000,,,,skala
+529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0050,kurze Zinsen hoch,-98972,,1653973000,-0.0001,,,,skala
+529900HEKOENJHPNN480,CON,2025-06-30,Kuntarahoitus Oyj,Finland,Large highest EEA,0060,kurze Zinsen runter,52820,,1653973000,0.0000,,,,skala
 529900HEKOENJHPNN480,CON,2025-12-31,Kuntarahoitus Oyj,Finland,Large highest EEA,0010,Parallelverschiebung hoch,-133600000,-33194000,1705929000,-0.0783,-0.0195,nein,nein,
 529900HEKOENJHPNN480,CON,2025-12-31,Kuntarahoitus Oyj,Finland,Large highest EEA,0020,Parallelverschiebung runter,78332000,15720000,1705929000,0.0459,0.0092,nein,nein,
 529900HEKOENJHPNN480,CON,2025-12-31,Kuntarahoitus Oyj,Finland,Large highest EEA,0030,Steepener,20234000,,1705929000,0.0119,,nein,,
@@ -731,12 +731,12 @@ lei,scope,refPeriod,bank_name,country,institution_type,szenario,szenario_label,d
 549300HFEHJOXGE4ZE63,CON,2025-12-31,SFIL S.A.,France,Large highest EEA,0040,Flattener,45087736,,1490193408,0.0303,,nein,,
 549300HFEHJOXGE4ZE63,CON,2025-12-31,SFIL S.A.,France,Large highest EEA,0050,kurze Zinsen hoch,6970794,,1490193408,0.0047,,nein,,
 549300HFEHJOXGE4ZE63,CON,2025-12-31,SFIL S.A.,France,Large highest EEA,0060,kurze Zinsen runter,42008721,,1490193408,0.0282,,nein,,
-549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0010,Parallelverschiebung hoch,-302673,37032,8714453351,-0.0000,0.0000,nein,nein,
-549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0020,Parallelverschiebung runter,159461,-141245,8714453351,0.0000,-0.0000,nein,nein,
-549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0030,Steepener,28056,,8714453351,0.0000,,nein,,
-549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0040,Flattener,-112815,,8714453351,-0.0000,,nein,,
-549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0050,kurze Zinsen hoch,-202532,,8714453351,-0.0000,,nein,,
-549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0060,kurze Zinsen runter,103271,,8714453351,0.0000,,nein,,
+549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0010,Parallelverschiebung hoch,-302673,37032,8714453351,-0.0000,0.0000,,,skala
+549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0020,Parallelverschiebung runter,159461,-141245,8714453351,0.0000,-0.0000,,,skala
+549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0030,Steepener,28056,,8714453351,0.0000,,,,skala
+549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0040,Flattener,-112815,,8714453351,-0.0000,,,,skala
+549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0050,kurze Zinsen hoch,-202532,,8714453351,-0.0000,,,,skala
+549300IQZVZ949N37S44,CON,2025-06-30,Euroclear Holding,Belgium,Large highest EEA,0060,kurze Zinsen runter,103271,,8714453351,0.0000,,,,skala
 549300IQZVZ949N37S44,CON,2025-12-31,Euroclear Holding,Belgium,Large highest EEA,0010,Parallelverschiebung hoch,-407140787,-2542526,9210858000,-0.0442,-0.0003,nein,nein,
 549300IQZVZ949N37S44,CON,2025-12-31,Euroclear Holding,Belgium,Large highest EEA,0020,Parallelverschiebung runter,214464349,-133569550,9210858000,0.0233,-0.0145,nein,nein,
 549300IQZVZ949N37S44,CON,2025-12-31,Euroclear Holding,Belgium,Large highest EEA,0030,Steepener,42314055,,9210858000,0.0046,,nein,,
@@ -1463,12 +1463,12 @@ lei,scope,refPeriod,bank_name,country,institution_type,szenario,szenario_label,d
 9ZHRYM6F437SQJ6OUG95,CON,2025-06-30,Raiffeisen Bank International AG,Austria,Large highest EEA,0040,Flattener,-175282000,,19147615758,-0.0092,,nein,,
 9ZHRYM6F437SQJ6OUG95,CON,2025-06-30,Raiffeisen Bank International AG,Austria,Large highest EEA,0050,kurze Zinsen hoch,-503496000,,19147615758,-0.0263,,nein,,
 9ZHRYM6F437SQJ6OUG95,CON,2025-06-30,Raiffeisen Bank International AG,Austria,Large highest EEA,0060,kurze Zinsen runter,253128000,,19147615758,0.0132,,nein,,
-9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0010,Parallelverschiebung hoch,-905036,68236,19776425479,-0.0000,0.0000,nein,nein,
-9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0020,Parallelverschiebung runter,456473,-655497,19776425479,0.0000,-0.0000,nein,nein,
-9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0030,Steepener,-42131,,19776425479,-0.0000,,nein,,
-9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0040,Flattener,-173668,,19776425479,-0.0000,,nein,,
-9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0050,kurze Zinsen hoch,-453464,,19776425479,-0.0000,,nein,,
-9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0060,kurze Zinsen runter,243205,,19776425479,0.0000,,nein,,
+9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0010,Parallelverschiebung hoch,-905036,68236,19776425479,-0.0000,0.0000,,,skala
+9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0020,Parallelverschiebung runter,456473,-655497,19776425479,0.0000,-0.0000,,,skala
+9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0030,Steepener,-42131,,19776425479,-0.0000,,,,skala
+9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0040,Flattener,-173668,,19776425479,-0.0000,,,,skala
+9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0050,kurze Zinsen hoch,-453464,,19776425479,-0.0000,,,,skala
+9ZHRYM6F437SQJ6OUG95,CON,2025-12-31,Raiffeisen Bank International AG,Austria,Large highest EEA,0060,kurze Zinsen runter,243205,,19776425479,0.0000,,,,skala
 A5GWLFH3KM7YV2SFQL84,CON,2025-06-30,Belfius Bank,Belgium,Large highest EEA,0010,Parallelverschiebung hoch,-1332000000,13000000,11881820681,-0.1121,0.0011,nein,nein,
 A5GWLFH3KM7YV2SFQL84,CON,2025-06-30,Belfius Bank,Belgium,Large highest EEA,0020,Parallelverschiebung runter,174000000,15000000,11881820681,0.0146,0.0013,nein,nein,
 A5GWLFH3KM7YV2SFQL84,CON,2025-06-30,Belfius Bank,Belgium,Large highest EEA,0030,Steepener,-131000000,,11881820681,-0.0110,,nein,,
@@ -1763,12 +1763,12 @@ MMYX0N4ZEZ13Z4XCG897,IND,2025-12-31,THE BANK OF NEW YORK MELLON,Belgium,Large hi
 MMYX0N4ZEZ13Z4XCG897,IND,2025-12-31,THE BANK OF NEW YORK MELLON,Belgium,Large highest EEA,0040,Flattener,-145969605,,5164322150,-0.0283,,nein,,
 MMYX0N4ZEZ13Z4XCG897,IND,2025-12-31,THE BANK OF NEW YORK MELLON,Belgium,Large highest EEA,0050,kurze Zinsen hoch,-146629673,,5164322150,-0.0284,,nein,,
 MMYX0N4ZEZ13Z4XCG897,IND,2025-12-31,THE BANK OF NEW YORK MELLON,Belgium,Large highest EEA,0060,kurze Zinsen runter,86956890,,5164322150,0.0168,,nein,,
-N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0010,Parallelverschiebung hoch,-121994457500,446059541000,14449645113,-8.4427,30.8699,,,unplausibel
-N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0020,Parallelverschiebung runter,-298143554000,-539815550000,14449645113,-20.6333,-37.3584,,,unplausibel
-N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0030,Steepener,81849340000,,14449645113,5.6645,,,,unplausibel
-N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0040,Flattener,-246864977000,,14449645113,-17.0845,,,,unplausibel
-N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0050,kurze Zinsen hoch,-267165895000,,14449645113,-18.4894,,,,unplausibel
-N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0060,kurze Zinsen runter,29090437500,,14449645113,2.0132,,,,unplausibel
+N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0010,Parallelverschiebung hoch,-121994457500,446059541000,14449645113,-8.4427,30.8699,,,skala
+N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0020,Parallelverschiebung runter,-298143554000,-539815550000,14449645113,-20.6333,-37.3584,,,skala
+N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0030,Steepener,81849340000,,14449645113,5.6645,,,,skala
+N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0040,Flattener,-246864977000,,14449645113,-17.0845,,,,skala
+N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0050,kurze Zinsen hoch,-267165895000,,14449645113,-18.4894,,,,skala
+N1FBEDJ5J41VKZLO2475,CON,2025-06-30,Citibank Europe plc,Ireland,Large highest EEA,0060,kurze Zinsen runter,29090437500,,14449645113,2.0132,,,,skala
 N1FBEDJ5J41VKZLO2475,CON,2025-12-31,Citibank Europe plc,Ireland,Large highest EEA,0010,Parallelverschiebung hoch,-113081622,120878322,,,,,,
 N1FBEDJ5J41VKZLO2475,CON,2025-12-31,Citibank Europe plc,Ireland,Large highest EEA,0020,Parallelverschiebung runter,-297143901,-430682474,,,,,,
 N1FBEDJ5J41VKZLO2475,CON,2025-12-31,Citibank Europe plc,Ireland,Large highest EEA,0030,Steepener,85275413,,,,,,,
@@ -1835,12 +1835,12 @@ NNVPP80YIZGEY2314M97,CON,2025-12-31,ICCREA BANCA S.P.A. - ISTITUTO CENTRALE DEL 
 NNVPP80YIZGEY2314M97,CON,2025-12-31,ICCREA BANCA S.P.A. - ISTITUTO CENTRALE DEL CREDITO COOPERATIVO (IN FORMA ABBREVIATA: ICCREA BANCA S.P.A.),Italy,Large highest EEA,0040,Flattener,56247111,,17271833335,0.0033,,nein,,
 NNVPP80YIZGEY2314M97,CON,2025-12-31,ICCREA BANCA S.P.A. - ISTITUTO CENTRALE DEL CREDITO COOPERATIVO (IN FORMA ABBREVIATA: ICCREA BANCA S.P.A.),Italy,Large highest EEA,0050,kurze Zinsen hoch,-28558770,,17271833335,-0.0017,,nein,,
 NNVPP80YIZGEY2314M97,CON,2025-12-31,ICCREA BANCA S.P.A. - ISTITUTO CENTRALE DEL CREDITO COOPERATIVO (IN FORMA ABBREVIATA: ICCREA BANCA S.P.A.),Italy,Large highest EEA,0060,kurze Zinsen runter,245580349,,17271833335,0.0142,,nein,,
-O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0010,Parallelverschiebung hoch,-2817000,279000,61421000000,-0.0000,0.0000,nein,nein,
-O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0020,Parallelverschiebung runter,-1873000,-743000,61421000000,-0.0000,-0.0000,nein,nein,
-O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0030,Steepener,390000,,61421000000,0.0000,,nein,,
-O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0040,Flattener,-1602000,,61421000000,-0.0000,,nein,,
-O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0050,kurze Zinsen hoch,-1749000,,61421000000,-0.0000,,nein,,
-O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0060,kurze Zinsen runter,780000,,61421000000,0.0000,,nein,,
+O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0010,Parallelverschiebung hoch,-2817000,279000,61421000000,-0.0000,0.0000,,,skala
+O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0020,Parallelverschiebung runter,-1873000,-743000,61421000000,-0.0000,-0.0000,,,skala
+O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0030,Steepener,390000,,61421000000,0.0000,,,,skala
+O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0040,Flattener,-1602000,,61421000000,-0.0000,,,,skala
+O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0050,kurze Zinsen hoch,-1749000,,61421000000,-0.0000,,,,skala
+O2RNE8IBXP4R0TD8PU41,CON,2025-06-30,Société générale S.A.,France,Large highest EEA,0060,kurze Zinsen runter,780000,,61421000000,0.0000,,,,skala
 O2RNE8IBXP4R0TD8PU41,CON,2025-12-31,Société générale S.A.,France,Large highest EEA,0010,Parallelverschiebung hoch,-3422590000,275060000,62953119370,-0.0544,0.0044,nein,nein,
 O2RNE8IBXP4R0TD8PU41,CON,2025-12-31,Société générale S.A.,France,Large highest EEA,0020,Parallelverschiebung runter,-766830000,-652570000,62953119370,-0.0122,-0.0104,nein,nein,
 O2RNE8IBXP4R0TD8PU41,CON,2025-12-31,Société générale S.A.,France,Large highest EEA,0030,Steepener,336710000,,62953119370,0.0053,,nein,,

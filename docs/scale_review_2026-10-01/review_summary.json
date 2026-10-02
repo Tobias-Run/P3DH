@@ -1,0 +1,13 @@
+{
+  "rows": 119,
+  "statuses": {
+    "verdacht_bleibt": 15,
+    "warnung_plausibel": 54,
+    "kleine_bank_kein_nachweis": 2,
+    "gut_gestuetzt": 35,
+    "teilfehler": 9,
+    "nicht_gestuetzt": 1,
+    "falsche_richtung": 2,
+    "offen": 1
+  }
+}

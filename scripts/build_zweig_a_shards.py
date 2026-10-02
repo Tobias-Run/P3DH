@@ -415,16 +415,30 @@ def load_scale_flags(root: Path | None = None):
                 continue
             key = f"{eid}|{rp}"
             e = out.setdefault(key, {"u": urteil, "f": r.get("faktor_geschaetzt") or "",
-                                     "s": r.get("signale") or "", "t": []})
-            # Ein `skaliert` auf Reportebene schlägt eine Template-Zeile: die
-            # build_report_scale.py schreibt beides nie für denselben Report,
-            # aber der Viewer darf sich darauf nicht verlassen.
+                                     "s": r.get("signale") or "", "t": [], "d": {}})
+            # Ein Reportverdacht kann neben einem unabhängig belegten
+            # Templatebefund stehen (#122). Der Gesamtstatus bewahrt beide.
             if urteil == "skaliert":
                 e["u"] = "skaliert"
             if r.get("ebene") == "template" and r.get("template_id"):
                 e["t"].append(r["template_id"])
+            # Keep template-specific status/factor; the first CSV row cannot
+            # stand for several unrelated templates or a mixed-scale defect.
+            tid = r.get("template_id") if r.get("ebene") == "template" else "*"
+            cells = json.loads(r.get("betroffene_zellen") or "[]")
+            e["d"][tid] = {
+                "u": urteil, "f": r.get("faktor_geschaetzt") or "",
+                "r": r.get("richtung") or "zu_klein",
+                "a": r.get("umfang") or ("report" if tid == "*" else "template"),
+                "ref": r.get("referenz_stichtag") or "",
+                "b": r.get("beleg_status") or "heuristik",
+                "why": r.get("begruendung") or "",
+                "fs": json.loads(r.get("faktoren") or "[]"),
+                "cells": sorted({(x["r"], x["c"]) for x in cells})}
     for e in out.values():
-        e["t"].sort()
+        e["t"] = [] if "*" in e["d"] else sorted(set(e["t"]))
+        factors = {d["f"] for d in e["d"].values()}
+        e["f"] = factors.pop() if len(factors) == 1 else ""
     return out
 
 

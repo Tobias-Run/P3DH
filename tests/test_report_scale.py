@@ -258,11 +258,11 @@ class ErgebnisTest(unittest.TestCase):
                 if r["versatz_log10"]:
                     self.assertGreater(float(r["versatz_log10"]), b.VERSATZ_ALLEIN)
 
-    def test_the_template_level_never_repeats_a_flagged_report(self):
+    def test_the_template_level_never_repeats_a_confirmed_report(self):
         """Eine Template-Zeile in einem schon markierten Report sagte dasselbe
         noch einmal, nur kleinteiliger — und bliese die Datei auf."""
         markiert = {(r["entityID"], r["refPeriod"]) for r in self.reports
-                    if r["urteil"] in ("skaliert", "verdacht")}
+                    if r["urteil"] == "skaliert"}
         for r in self.rows:
             if r["ebene"] == "template":
                 self.assertNotIn((r["entityID"], r["refPeriod"]), markiert)
@@ -399,12 +399,12 @@ class ViewerTest(unittest.TestCase):
         self.assertIn(".qb.sb{", self.viewer)
         self.assertIn(".ovq.ovsc{", self.viewer)
 
-    def test_the_viewer_says_that_ratios_survive(self):
+    def test_the_viewer_conditions_ratio_comparability_on_matching_scale(self):
         """Ein Verhältnis überlebt einen gleichmässigen Skalenfehler — die
         RWA-Dichte der pbb ist mit 0,43 richtig, obwohl Zähler und Nenner beide
         zu klein sind. Ohne diesen Satz liest die Marke sich als „Report
         unbrauchbar", und dann gehen Quoten verloren, die stimmen."""
-        self.assertIn("Quoten und Verhältnisse dieses Reports bleiben gültig",
+        self.assertIn("Ratios remain comparable only when numerator and denominator have the same scale.",
                       self.viewer)
 
     def test_the_runtime_check_actually_looks_for_the_mark(self):
