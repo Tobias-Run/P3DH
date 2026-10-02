@@ -1,0 +1,205 @@
+PASS 1280 Alpha
+PASS 1280 K&H June
+PASS 1280 K&H December
+PASS 1280 Citibank June
+PASS 1280 Citibank December
+PASS 1280 BBVA
+PASS 1280 Rabobank
+PASS 1280 Bank Austria
+PASS 1280 CR10 open
+PASS 390 Alpha
+PASS 390 K&H June
+PASS 390 K&H December
+PASS 390 Citibank June
+PASS 390 Citibank December
+PASS 390 BBVA
+PASS 390 Rabobank
+PASS 390 Bank Austria
+PASS 390 CR10 open
+{
+  "cases": 18,
+  "language_checks": 36,
+  "javascript_errors": [],
+  "results": [
+    {
+      "case": "Alpha",
+      "viewport": 1280,
+      "template_warning": true,
+      "direction": "zu_klein",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "K&H June",
+      "viewport": 1280,
+      "template_warning": true,
+      "direction": "zu_gross",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "K&H December",
+      "viewport": 1280,
+      "template_warning": false,
+      "direction": "",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "Citibank June",
+      "viewport": 1280,
+      "template_warning": true,
+      "direction": "zu_gross",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "Citibank December",
+      "viewport": 1280,
+      "template_warning": false,
+      "direction": "",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "BBVA",
+      "viewport": 1280,
+      "template_warning": false,
+      "direction": "",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "Rabobank",
+      "viewport": 1280,
+      "template_warning": true,
+      "direction": "zu_klein",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "Bank Austria",
+      "viewport": 1280,
+      "template_warning": true,
+      "direction": "zu_klein",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "CR10 open",
+      "viewport": 1280,
+      "template_warning": true,
+      "direction": "unklar",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "Alpha",
+      "viewport": 390,
+      "template_warning": true,
+      "direction": "zu_klein",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "K&H June",
+      "viewport": 390,
+      "template_warning": true,
+      "direction": "zu_gross",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "K&H December",
+      "viewport": 390,
+      "template_warning": false,
+      "direction": "",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "Citibank June",
+      "viewport": 390,
+      "template_warning": true,
+      "direction": "zu_gross",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "Citibank December",
+      "viewport": 390,
+      "template_warning": false,
+      "direction": "",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "BBVA",
+      "viewport": 390,
+      "template_warning": false,
+      "direction": "",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "Rabobank",
+      "viewport": 390,
+      "template_warning": true,
+      "direction": "zu_klein",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "Bank Austria",
+      "viewport": 390,
+      "template_warning": true,
+      "direction": "zu_klein",
+      "languages": [
+        "en",
+        "de"
+      ]
+    },
+    {
+      "case": "CR10 open",
+      "viewport": 390,
+      "template_warning": true,
+      "direction": "unklar",
+      "languages": [
+        "en",
+        "de"
+      ]
+    }
+  ]
+}

@@ -819,11 +819,17 @@ def pruefe():
               await new Promise(s=>setTimeout(s,300));
               const zeilen=[...document.querySelectorAll('table tbody tr')];
               let mitMarke=0, markeMitBalken=0;
+              const lookup=new Map(benchmarkRows().map(r=>[r.key,r]));
+              const prof=bmAll()[document.getElementById('bmProfile').value], cols=sichtbareSpalten(prof);
               for(const tr of zeilen){
                 const skaliert = tr.classList.contains('scaled');
                 if(!skaliert) continue;
                 mitMarke++;
-                if(tr.querySelector('.szf')) markeMitBalken++;
+                const row=lookup.get(tr.dataset.key);
+                cols.forEach((c,i)=>{
+                  if(row && tr.children[i+2]?.querySelector('.szf') && !barErlaubt(prof,row,c))
+                    markeMitBalken++;
+                });
               }
               const res = {zeilen:zeilen.length,
                       balken:document.querySelectorAll('.szf').length,
@@ -848,7 +854,15 @@ def pruefe():
               // ohne irgendetwas zu pruefen.
               const sauber={q:null}, skal={q:{sc:{u:'skaliert',t:[]}}};
               const tplSkal={q:{sc:{u:'skaliert',t:['61.00']}}};
-              res.regel={
+              const scalePartial={q:{sc:{t:['61.00'],d:{'61.00':{a:'teilbereich',cells:[['0280','0010']]}}}}};
+              const unknown={q:{sc:{t:['61.00'],d:{'61.00':{a:'unklar'}}}}};
+              const trea={id:'trea',kind:'eur',cells:[['61.00','0040','0010']]};
+              const liquidity={id:'liq',kind:'eur',cells:[['61.00','0280','0010']]};
+              res.balkenregel={
+                partialTrea:barErlaubt({tpl:'61.00'},scalePartial,trea),
+                partialLiquidity:barErlaubt({tpl:'61.00'},scalePartial,liquidity),
+                unknown:barErlaubt({tpl:'61.00'},unknown,trea),
+                referenceMax:barBasis([{...scalePartial,trea:20},{...unknown,trea:20000}], [trea], {tpl:'61.00'}).get('trea')===20,
                 normal:  barErlaubt({tpl:'61.00'}, sauber),
                 skala:   barErlaubt({tpl:'61.00'}, skal),
                 tplTrifft: barErlaubt({tpl:'61.00'}, tplSkal),
@@ -1087,7 +1101,7 @@ def pruefe():
                           "aus der er stammt")
 
     print(f"  Benchmark: {balken['zeilen']} Zeilen · {balken['balken']} Größenbalken · "
-          f"skaliert markiert {balken['mitMarke']}, davon mit Balken {balken['markeMitBalken']}")
+          f"skaliert markiert {balken['mitMarke']}, unzulässige Balken in betroffenen Zellen {balken['markeMitBalken']}")
 
     # Die Kette (#16 Punkt 3). Ein Profil, das rendert, aber leere Spalten
     # zeigt, ist der Ausfall, gegen den dieser ganze Lauf existiert: bei #23
@@ -1115,15 +1129,14 @@ def pruefe():
         fehler.append("Größenbalken ohne Legende — eine Länge ohne Bezug ist "
                       "eine Behauptung, die niemand prüfen kann")
     if balken["markeMitBalken"]:
-        fehler.append(f"{balken['markeMitBalken']} skalierte Reports (#83) tragen einen "
-                      "Größenbalken — er zeigt dort ein winziges Institut statt "
-                      "eines Meldefehlers")
+        fehler.append(f"{balken['markeMitBalken']} betroffene Betragszellen (#122) tragen einen Größenbalken")
     # Die Regel selbst, unabhaengig davon, ob ein heutiges Profil sie ausloest.
-    regel = balken.get("regel") or {}
+    regel = balken.get("balkenregel") or {}
     erwartet = {"normal": True, "skala": False, "tplTrifft": False,
-                "tplDaneben": True, "strittig": False}
+                "tplDaneben": True, "strittig": False, "partialTrea": True,
+                "partialLiquidity": False, "unknown": False, "referenceMax": True}
     falsch = [k for k, v in erwartet.items()
-              if regel.get(k) is not None and regel[k] is not v]
+              if not (k == "strittig" and regel.get(k) is None) and regel.get(k) is not v]
     print("  Balkenregel: " + "  ".join(
         f"{k}={'ja' if regel.get(k) else 'nein'}" for k in erwartet))
     if falsch:

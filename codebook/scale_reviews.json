@@ -1,0 +1,4498 @@
+{
+  "version": 1,
+  "snapshot": "f47ef2d32968e59188b4139ede3ccac1d9737f21",
+  "reviews": [
+    {
+      "id": "scale-2026-10-01-213800A1O379I6DMCU10-2025-06-30-60.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:213800A1O379I6DMCU10.IND",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "0ae43cccda5f5b0c35d34a97a322aa77bf173e183ebe1aade095f668648ffa46"
+        },
+        {
+          "key": [
+            "rs:213800A1O379I6DMCU10.IND",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "be983a0b8055fdb1baa0f48ea0372733e4ede62d312f86b52a7d6d5ee468d411"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:213800A1O379I6DMCU10.IND",
+          "2025-06-30",
+          "60.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:213800A1O379I6DMCU10.IND",
+            "2025-06-30",
+            "60.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 18,
+            "zeitreihe_faktor": 1020.918
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-213800A1O379I6DMCU10-2025-12-31-25.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Risikogewichts-/Portfolio-Aufteilung verändert sich stark; einzelne Zellen sind schlechte Zeitreihenanker. Gesamtsumme 4.755.060 gegenüber KM1-Leverage 4.755.060.268,29 EUR stützt Tausenderhypothese. Faktor nicht auf jede Zelle blind anwenden.",
+      "guards": [
+        {
+          "key": [
+            "rs:213800A1O379I6DMCU10.IND",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "0ae43cccda5f5b0c35d34a97a322aa77bf173e183ebe1aade095f668648ffa46"
+        },
+        {
+          "key": [
+            "rs:213800A1O379I6DMCU10.IND",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "be983a0b8055fdb1baa0f48ea0372733e4ede62d312f86b52a7d6d5ee468d411"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:213800A1O379I6DMCU10.IND",
+          "2025-12-31",
+          "25.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:213800A1O379I6DMCU10.IND",
+            "2025-12-31",
+            "25.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-06-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Risikogewichts-/Portfolio-Aufteilung verändert sich stark; einzelne Zellen sind schlechte Zeitreihenanker. Gesamtsumme 4.755.060 gegenüber KM1-Leverage 4.755.060.268,29 EUR stützt Tausenderhypothese. Faktor nicht auf jede Zelle blind anwenden.",
+            "vergleich_n": 38,
+            "zeitreihe_faktor": 861.228
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-213800DBQIB6VBNU5C64-2025-06-30-23.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Original EBA-CSV unverändert übernommen: 15/15 positiven Vergleichszellen nahe Faktor 10^6, Juni-KM1-TREA 30,604 Mrd EUR plausibel. Sehr starke Evidenz für in Millionen gemeinte Juni-CR3-Beträge.",
+      "guards": [
+        {
+          "key": [
+            "rs:213800DBQIB6VBNU5C64.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "b7d92d15847d0f24493a554fe445baf630854e5f126eec29ccfe51b315c9b91f"
+        },
+        {
+          "key": [
+            "rs:213800DBQIB6VBNU5C64.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "bd9e6f844e53ad05c1397633aea6611219968059e228763da5ff12aa3b960e80"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:213800DBQIB6VBNU5C64.CON",
+          "2025-06-30",
+          "23.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:213800DBQIB6VBNU5C64.CON",
+            "2025-06-30",
+            "23.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Original EBA-CSV unverändert übernommen: 15/15 positiven Vergleichszellen nahe Faktor 10^6, Juni-KM1-TREA 30,604 Mrd EUR plausibel. Sehr starke Evidenz für in Millionen gemeinte Juni-CR3-Beträge.",
+            "vergleich_n": 15,
+            "zeitreihe_faktor": 1033594.049
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-213800M7T3CYVZ3ZRT12-2025-06-30-41.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:213800M7T3CYVZ3ZRT12.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "2723785a5423662bd92a6e4aaf66d2e6d996bd984c916e2697e7e9c5ef18990b"
+        },
+        {
+          "key": [
+            "rs:213800M7T3CYVZ3ZRT12.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "6c2ce21d20d9f1087e612d2961e7dc264060ed91859c9c49b77fefce0bed5ca4"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:213800M7T3CYVZ3ZRT12.CON",
+          "2025-06-30",
+          "41.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:213800M7T3CYVZ3ZRT12.CON",
+            "2025-06-30",
+            "41.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 379,
+            "zeitreihe_faktor": 948674.004
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-213800M7T3CYVZ3ZRT12-2025-06-30-42.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:213800M7T3CYVZ3ZRT12.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "2723785a5423662bd92a6e4aaf66d2e6d996bd984c916e2697e7e9c5ef18990b"
+        },
+        {
+          "key": [
+            "rs:213800M7T3CYVZ3ZRT12.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "6c2ce21d20d9f1087e612d2961e7dc264060ed91859c9c49b77fefce0bed5ca4"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:213800M7T3CYVZ3ZRT12.CON",
+          "2025-06-30",
+          "42.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:213800M7T3CYVZ3ZRT12.CON",
+            "2025-06-30",
+            "42.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 45,
+            "zeitreihe_faktor": 804648.118
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-213800M7T3CYVZ3ZRT12-2025-06-30-45.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:213800M7T3CYVZ3ZRT12.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "2723785a5423662bd92a6e4aaf66d2e6d996bd984c916e2697e7e9c5ef18990b"
+        },
+        {
+          "key": [
+            "rs:213800M7T3CYVZ3ZRT12.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "6c2ce21d20d9f1087e612d2961e7dc264060ed91859c9c49b77fefce0bed5ca4"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:213800M7T3CYVZ3ZRT12.CON",
+          "2025-06-30",
+          "45.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:213800M7T3CYVZ3ZRT12.CON",
+            "2025-06-30",
+            "45.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 118,
+            "zeitreihe_faktor": 837691.29
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-259400YLRTOBISHBVX41-2025-06-30-67.01.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:259400YLRTOBISHBVX41.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "a97b87422b0540e219402b17c4d03213f77cb8902bc8244d671c8afd1d3976b0"
+        },
+        {
+          "key": [
+            "rs:259400YLRTOBISHBVX41.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "45b1f4153e4bed6be60f8da23c736a5c2ce3cab2054c2b665df0ff83b1d18446"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:259400YLRTOBISHBVX41.CON",
+          "2025-06-30",
+          "67.01.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:259400YLRTOBISHBVX41.CON",
+            "2025-06-30",
+            "67.01.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 78,
+            "zeitreihe_faktor": 901938.655
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-3157002JBFAI478MD587-2025-12-31-42.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:3157002JBFAI478MD587.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "30384a8a421185a3d2d9a442feec9349899161b036494e407c22f65dbfc38267"
+        },
+        {
+          "key": [
+            "rs:3157002JBFAI478MD587.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "1562f1993f02e3415442f3950ab8c828347624a9dd30fadb337b997a91c78dee"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:3157002JBFAI478MD587.CON",
+          "2025-12-31",
+          "42.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:3157002JBFAI478MD587.CON",
+            "2025-12-31",
+            "42.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-06-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 52,
+            "zeitreihe_faktor": 919392.592
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-3157002JBFAI478MD587-2025-12-31-45.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:3157002JBFAI478MD587.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "30384a8a421185a3d2d9a442feec9349899161b036494e407c22f65dbfc38267"
+        },
+        {
+          "key": [
+            "rs:3157002JBFAI478MD587.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "1562f1993f02e3415442f3950ab8c828347624a9dd30fadb337b997a91c78dee"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:3157002JBFAI478MD587.CON",
+          "2025-12-31",
+          "45.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:3157002JBFAI478MD587.CON",
+            "2025-12-31",
+            "45.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-06-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 126,
+            "zeitreihe_faktor": 975858.839
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-529900HEKOENJHPNN480-2025-06-30-68.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:529900HEKOENJHPNN480.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "f4d29dab571ff5ded09c67ad16913bb8c5573a0f42b89bea0be2adf3c7c7f21a"
+        },
+        {
+          "key": [
+            "rs:529900HEKOENJHPNN480.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "7e2e0265f9784ef73368795a58b637959db1cb7638acbfdd0c3aa0868ac690ad"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:529900HEKOENJHPNN480.CON",
+          "2025-06-30",
+          "68.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:529900HEKOENJHPNN480.CON",
+            "2025-06-30",
+            "68.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 16,
+            "zeitreihe_faktor": 999.998
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-5493006QMFDDMYWIAM13-2025-06-30-83.01.C",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:5493006QMFDDMYWIAM13.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "6a1b8b53aa8283a61db6a0fc6b2785631325693efb723797be15fd013157c39e"
+        },
+        {
+          "key": [
+            "rs:5493006QMFDDMYWIAM13.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "c15060284406c09b39867a6411888a46c97894a6bf605dbb6bae93a606de484d"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:5493006QMFDDMYWIAM13.CON",
+          "2025-06-30",
+          "83.01.C"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:5493006QMFDDMYWIAM13.CON",
+            "2025-06-30",
+            "83.01.C"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 52,
+            "zeitreihe_faktor": 1027162.132
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-5493006QMFDDMYWIAM13-2025-06-30-83.01.D",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:5493006QMFDDMYWIAM13.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "6a1b8b53aa8283a61db6a0fc6b2785631325693efb723797be15fd013157c39e"
+        },
+        {
+          "key": [
+            "rs:5493006QMFDDMYWIAM13.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "c15060284406c09b39867a6411888a46c97894a6bf605dbb6bae93a606de484d"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:5493006QMFDDMYWIAM13.CON",
+          "2025-06-30",
+          "83.01.D"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:5493006QMFDDMYWIAM13.CON",
+            "2025-06-30",
+            "83.01.D"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 39,
+            "zeitreihe_faktor": 1062500.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-5493008QRHH0XCLJ4238-2025-06-30-61.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "teilfehler",
+      "explanation": "Kapital und TREA sind plausibel; Liquiditäts-/Funding-Zeilen liegen etwa Faktor 1.000 unter Dezember. Warnung auf betroffene Zeilen begrenzen.",
+      "guards": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "c4c52e760403fa44a25fd1fa7f755990afe7c9087f78cd5ed46c8fcea5c4b0b9"
+        },
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "4255f334bbe072369766ba26329addcb4b1e63aa36ce0ae803d495e4475e855a"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:5493008QRHH0XCLJ4238.CON",
+          "2025-06-30",
+          "61.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "61.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "teilbereich",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [
+              {
+                "r": "0280",
+                "c": "0010",
+                "d": "",
+                "dp": "dp145637",
+                "f": "10^3"
+              },
+              {
+                "r": "0280",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475499",
+                "f": "10^3"
+              },
+              {
+                "r": "0280",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475500",
+                "f": "10^3"
+              },
+              {
+                "r": "0280",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475501",
+                "f": "10^3"
+              },
+              {
+                "r": "0280",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475502",
+                "f": "10^3"
+              },
+              {
+                "r": "0290",
+                "c": "0010",
+                "d": "",
+                "dp": "dp146049",
+                "f": "10^3"
+              },
+              {
+                "r": "0290",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475503",
+                "f": "10^3"
+              },
+              {
+                "r": "0290",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475504",
+                "f": "10^3"
+              },
+              {
+                "r": "0290",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475505",
+                "f": "10^3"
+              },
+              {
+                "r": "0290",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475506",
+                "f": "10^3"
+              },
+              {
+                "r": "0300",
+                "c": "0010",
+                "d": "",
+                "dp": "dp475494",
+                "f": "10^3"
+              },
+              {
+                "r": "0300",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475495",
+                "f": "10^3"
+              },
+              {
+                "r": "0300",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475496",
+                "f": "10^3"
+              },
+              {
+                "r": "0300",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475497",
+                "f": "10^3"
+              },
+              {
+                "r": "0300",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475498",
+                "f": "10^3"
+              },
+              {
+                "r": "0310",
+                "c": "0010",
+                "d": "",
+                "dp": "dp134665",
+                "f": "10^3"
+              },
+              {
+                "r": "0310",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475219",
+                "f": "10^3"
+              },
+              {
+                "r": "0310",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475220",
+                "f": "10^3"
+              },
+              {
+                "r": "0310",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475221",
+                "f": "10^3"
+              },
+              {
+                "r": "0310",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475222",
+                "f": "10^3"
+              },
+              {
+                "r": "0330",
+                "c": "0010",
+                "d": "",
+                "dp": "dp458851",
+                "f": "10^3"
+              },
+              {
+                "r": "0330",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475573",
+                "f": "10^3"
+              },
+              {
+                "r": "0330",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475574",
+                "f": "10^3"
+              },
+              {
+                "r": "0330",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475575",
+                "f": "10^3"
+              },
+              {
+                "r": "0330",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475576",
+                "f": "10^3"
+              },
+              {
+                "r": "0340",
+                "c": "0010",
+                "d": "",
+                "dp": "dp458581",
+                "f": "10^3"
+              },
+              {
+                "r": "0340",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475569",
+                "f": "10^3"
+              },
+              {
+                "r": "0340",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475570",
+                "f": "10^3"
+              },
+              {
+                "r": "0340",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475571",
+                "f": "10^3"
+              },
+              {
+                "r": "0340",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475572",
+                "f": "10^3"
+              }
+            ],
+            "begruendung": "Kapital und TREA sind plausibel; Liquiditäts-/Funding-Zeilen liegen etwa Faktor 1.000 unter Dezember. Warnung auf betroffene Zeilen begrenzen.",
+            "vergleich_n": 55,
+            "zeitreihe_faktor": 920.002
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-5493008QRHH0XCLJ4238-2025-06-30-73.00.C",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "c4c52e760403fa44a25fd1fa7f755990afe7c9087f78cd5ed46c8fcea5c4b0b9"
+        },
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "4255f334bbe072369766ba26329addcb4b1e63aa36ce0ae803d495e4475e855a"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:5493008QRHH0XCLJ4238.CON",
+          "2025-06-30",
+          "73.00.C"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "73.00.C"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 76,
+            "zeitreihe_faktor": 1034.866
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-5493008QRHH0XCLJ4238-2025-06-30-73.00.D",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "c4c52e760403fa44a25fd1fa7f755990afe7c9087f78cd5ed46c8fcea5c4b0b9"
+        },
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "4255f334bbe072369766ba26329addcb4b1e63aa36ce0ae803d495e4475e855a"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:5493008QRHH0XCLJ4238.CON",
+          "2025-06-30",
+          "73.00.D"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "73.00.D"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 36,
+            "zeitreihe_faktor": 1046.034
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-5493008QRHH0XCLJ4238-2025-06-30-74.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "c4c52e760403fa44a25fd1fa7f755990afe7c9087f78cd5ed46c8fcea5c4b0b9"
+        },
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "4255f334bbe072369766ba26329addcb4b1e63aa36ce0ae803d495e4475e855a"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:5493008QRHH0XCLJ4238.CON",
+          "2025-06-30",
+          "74.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "74.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 140,
+            "zeitreihe_faktor": 999.038
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-5493008QRHH0XCLJ4238-2025-06-30-74.00.C",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "c4c52e760403fa44a25fd1fa7f755990afe7c9087f78cd5ed46c8fcea5c4b0b9"
+        },
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "4255f334bbe072369766ba26329addcb4b1e63aa36ce0ae803d495e4475e855a"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:5493008QRHH0XCLJ4238.CON",
+          "2025-06-30",
+          "74.00.C"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "74.00.C"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 132,
+            "zeitreihe_faktor": 1061.972
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-5493008QRHH0XCLJ4238-2025-06-30-74.00.E",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "c4c52e760403fa44a25fd1fa7f755990afe7c9087f78cd5ed46c8fcea5c4b0b9"
+        },
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "4255f334bbe072369766ba26329addcb4b1e63aa36ce0ae803d495e4475e855a"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:5493008QRHH0XCLJ4238.CON",
+          "2025-06-30",
+          "74.00.E"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-06-30",
+            "74.00.E"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 16,
+            "zeitreihe_faktor": 1037.118
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-5493008QRHH0XCLJ4238-2025-09-30-73.00.C",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-09-30",
+            "*"
+          ],
+          "sha256": "43aea2a5a8f0047c83d8e9f9599475a9321b4b99b9fe6ac38434184a5945c387"
+        },
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "4255f334bbe072369766ba26329addcb4b1e63aa36ce0ae803d495e4475e855a"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:5493008QRHH0XCLJ4238.CON",
+          "2025-09-30",
+          "73.00.C"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-09-30",
+            "73.00.C"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 76,
+            "zeitreihe_faktor": 1015.982
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-5493008QRHH0XCLJ4238-2025-09-30-73.00.D",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-09-30",
+            "*"
+          ],
+          "sha256": "43aea2a5a8f0047c83d8e9f9599475a9321b4b99b9fe6ac38434184a5945c387"
+        },
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "4255f334bbe072369766ba26329addcb4b1e63aa36ce0ae803d495e4475e855a"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:5493008QRHH0XCLJ4238.CON",
+          "2025-09-30",
+          "73.00.D"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:5493008QRHH0XCLJ4238.CON",
+            "2025-09-30",
+            "73.00.D"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 36,
+            "zeitreihe_faktor": 1037.861
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-549300DVPJYGNF2P7B03-2025-12-31-21.02",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:549300DVPJYGNF2P7B03.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "e648049d932c41ef59e6269009a6b4aade99b2d33f6222ce523db7d9c6b5814b"
+        },
+        {
+          "key": [
+            "rs:549300DVPJYGNF2P7B03.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "5ce214ef4cd0d3ffcf3fe8140cee0b29b432061e4f94e6d6efc4b78c4aaede22"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:549300DVPJYGNF2P7B03.CON",
+          "2025-12-31",
+          "21.02"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:549300DVPJYGNF2P7B03.CON",
+            "2025-12-31",
+            "21.02"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-06-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 17,
+            "zeitreihe_faktor": 986.888
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-549300IQZVZ949N37S44-2025-06-30-68.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:549300IQZVZ949N37S44.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "dce570c678253b367dbd9fd654f65a4ec298a1dbc504e1728bf29f5b6aa7395d"
+        },
+        {
+          "key": [
+            "rs:549300IQZVZ949N37S44.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "0d5c66b8b637494dd44eaf6d0d112a26b7fc752d3eec7683c99842a53cbd96ff"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:549300IQZVZ949N37S44.CON",
+          "2025-06-30",
+          "68.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:549300IQZVZ949N37S44.CON",
+            "2025-06-30",
+            "68.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 15,
+            "zeitreihe_faktor": 1125.688
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-549300L7YCATGO57ZE10-2025-06-30-83.01.C",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:549300L7YCATGO57ZE10.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "cce0fb7ad3cb33e4264f773dd9513e3ebc29482e853973330a94209538706292"
+        },
+        {
+          "key": [
+            "rs:549300L7YCATGO57ZE10.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "d6508dd3b6b06922c1c85f77acc942f1a087035ba927194f89b789b9fff768e6"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:549300L7YCATGO57ZE10.CON",
+          "2025-06-30",
+          "83.01.C"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:549300L7YCATGO57ZE10.CON",
+            "2025-06-30",
+            "83.01.C"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 18,
+            "zeitreihe_faktor": 996.669
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-549300OLBL49CW8CT155-2025-06-30-42.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:549300OLBL49CW8CT155.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "6760dffd8d3aadc71cee16af461cfb2ceec3ce43a43ea6c8744e5a209e7caf3c"
+        },
+        {
+          "key": [
+            "rs:549300OLBL49CW8CT155.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "02e7d386267ecf02805ee9a09cbd2560b1a9619c38076f31b5bb7a3b2e3e9235"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:549300OLBL49CW8CT155.CON",
+          "2025-06-30",
+          "42.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:549300OLBL49CW8CT155.CON",
+            "2025-06-30",
+            "42.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 64,
+            "zeitreihe_faktor": 1036723.636
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-549300RG3H390KEL8896-2025-06-30-73.00.C",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten. September ist der bessere Referenzstichtag; Dezember enthält möglicherweise weitere Teilfehler.",
+      "guards": [
+        {
+          "key": [
+            "rs:549300RG3H390KEL8896.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "cde63c56ab592407a33007ca60213b1da4fd8df48ad3b80d2ca4dd2aee75b142"
+        },
+        {
+          "key": [
+            "rs:549300RG3H390KEL8896.CON",
+            "2025-09-30",
+            "*"
+          ],
+          "sha256": "944de407b9ac8b730572231546590d784d463a94e88dfe15a7ed90fe140d439d"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:549300RG3H390KEL8896.CON",
+          "2025-06-30",
+          "73.00.C"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:549300RG3H390KEL8896.CON",
+            "2025-06-30",
+            "73.00.C"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-09-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten. September ist der bessere Referenzstichtag; Dezember enthält möglicherweise weitere Teilfehler.",
+            "vergleich_n": 80,
+            "zeitreihe_faktor": 1010.267
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-549300RG3H390KEL8896-2025-06-30-73.00.D",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten. September ist der bessere Referenzstichtag; Dezember enthält möglicherweise weitere Teilfehler.",
+      "guards": [
+        {
+          "key": [
+            "rs:549300RG3H390KEL8896.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "cde63c56ab592407a33007ca60213b1da4fd8df48ad3b80d2ca4dd2aee75b142"
+        },
+        {
+          "key": [
+            "rs:549300RG3H390KEL8896.CON",
+            "2025-09-30",
+            "*"
+          ],
+          "sha256": "944de407b9ac8b730572231546590d784d463a94e88dfe15a7ed90fe140d439d"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:549300RG3H390KEL8896.CON",
+          "2025-06-30",
+          "73.00.D"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:549300RG3H390KEL8896.CON",
+            "2025-06-30",
+            "73.00.D"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-09-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten. September ist der bessere Referenzstichtag; Dezember enthält möglicherweise weitere Teilfehler.",
+            "vergleich_n": 32,
+            "zeitreihe_faktor": 1129.637
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-969500CJCTMI93QJKK89-2025-12-31-61.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "KM1-CET1 540,72 und TREA 2.998,88 EUR, sonstiger monetärer Report-Rumpf in normaler EUR-Größenordnung. Isolierte KM1-Warnung plausibel; kein zweiter eigener KM1-Stichtag.",
+      "guards": [
+        {
+          "key": [
+            "rs:969500CJCTMI93QJKK89.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "bfd0c190e94d8fa36ad32e61d494eb77a6c6371144fd78b5360a49435d4de84f"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:969500CJCTMI93QJKK89.CON",
+          "2025-12-31",
+          "61.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:969500CJCTMI93QJKK89.CON",
+            "2025-12-31",
+            "61.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "KM1-CET1 540,72 und TREA 2.998,88 EUR, sonstiger monetärer Report-Rumpf in normaler EUR-Größenordnung. Isolierte KM1-Warnung plausibel; kein zweiter eigener KM1-Stichtag.",
+            "vergleich_n": 0,
+            "zeitreihe_faktor": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-9ZHRYM6F437SQJ6OUG95-2025-12-31-68.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:9ZHRYM6F437SQJ6OUG95.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "8522935f9a91b562b1672d28d145787baf85b1226e6f1788457122cd4c0a0853"
+        },
+        {
+          "key": [
+            "rs:9ZHRYM6F437SQJ6OUG95.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "7b0b2e47b99fc25d940a117d5aeaed5dbd242814e1d86da8e6e1c22a1da977c1"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:9ZHRYM6F437SQJ6OUG95.CON",
+          "2025-12-31",
+          "68.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:9ZHRYM6F437SQJ6OUG95.CON",
+            "2025-12-31",
+            "68.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-06-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 16,
+            "zeitreihe_faktor": 1000.002
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-D1HEB8VEU6D9M8ZUXG17-2025-12-31-71.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "teilfehler",
+      "explanation": "Spalte 0010 ist plausibel; Dezember-Spalte 0020 enthält Millionenwerte. Beispiel r0560: 116.540 statt des Juni-Werts 116.540.317.600 EUR. Kein einheitlicher Template-Faktor.",
+      "guards": [
+        {
+          "key": [
+            "rs:D1HEB8VEU6D9M8ZUXG17.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "2bf860dbc03c5c8058e96e85f3ac785036ebc40dc9ae00fb251cb2439ee80654"
+        },
+        {
+          "key": [
+            "rs:D1HEB8VEU6D9M8ZUXG17.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "462367a06bfbb88b87cfa3f1322aa26e879f7fcf5e8481d2786f4b4b9424412e"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:D1HEB8VEU6D9M8ZUXG17.CON",
+          "2025-12-31",
+          "71.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:D1HEB8VEU6D9M8ZUXG17.CON",
+            "2025-12-31",
+            "71.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "teilbereich",
+            "referenz_stichtag": "2025-06-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [
+              {
+                "r": "0010",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3531004",
+                "f": "10^6"
+              },
+              {
+                "r": "0030",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3526450",
+                "f": "10^6"
+              },
+              {
+                "r": "0060",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529878",
+                "f": "10^6"
+              },
+              {
+                "r": "0070",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3528329",
+                "f": "10^6"
+              },
+              {
+                "r": "0080",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529451",
+                "f": "10^6"
+              },
+              {
+                "r": "0100",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3526552",
+                "f": "10^6"
+              },
+              {
+                "r": "0110",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529443",
+                "f": "10^6"
+              },
+              {
+                "r": "0160",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3526624",
+                "f": "10^6"
+              },
+              {
+                "r": "0180",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3528328",
+                "f": "10^6"
+              },
+              {
+                "r": "0190",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3525534",
+                "f": "10^6"
+              },
+              {
+                "r": "0210",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3526553",
+                "f": "10^6"
+              },
+              {
+                "r": "0250",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3527917",
+                "f": "10^6"
+              },
+              {
+                "r": "0260",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3528964",
+                "f": "10^6"
+              },
+              {
+                "r": "0270",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529835",
+                "f": "10^6"
+              },
+              {
+                "r": "0290",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3528971",
+                "f": "10^6"
+              },
+              {
+                "r": "0350",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529875",
+                "f": "10^6"
+              },
+              {
+                "r": "0420",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529857",
+                "f": "10^6"
+              },
+              {
+                "r": "0430",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529882",
+                "f": "10^6"
+              },
+              {
+                "r": "0440",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3527643",
+                "f": "10^6"
+              },
+              {
+                "r": "0540",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3528378",
+                "f": "10^6"
+              },
+              {
+                "r": "0550",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3525503",
+                "f": "10^6"
+              },
+              {
+                "r": "0560",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3527851",
+                "f": "10^6"
+              },
+              {
+                "r": "0570",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3528377",
+                "f": "10^6"
+              }
+            ],
+            "begruendung": "Spalte 0010 ist plausibel; Dezember-Spalte 0020 enthält Millionenwerte. Beispiel r0560: 116.540 statt des Juni-Werts 116.540.317.600 EUR. Kein einheitlicher Template-Faktor.",
+            "vergleich_n": 45,
+            "zeitreihe_faktor": 16.348
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-DG3RU1DBUFHT4ZF9WN62-2026-03-31-61.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "teilfehler",
+      "explanation": "Kapital/TREA/Leverage sind in EUR plausibel. Liquiditäts-/Funding-Zeilen 0280–0340 enthalten Größen wie 103.493 HQLA und 469.754 ASF; Millionenhypothese. Der geschätzte Faktor 10^3 ist unpassend.",
+      "guards": [
+        {
+          "key": [
+            "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "844e534bfd94cb2aa87f2e6bb8b49d9db9f4fbe6b9a357616ecac0e1444bde2e"
+        },
+        {
+          "key": [
+            "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+            "2026-03-31",
+            "*"
+          ],
+          "sha256": "5bd2d34d4113d45a0268bb9a2404ab059ccb7e61e925a5f654563420b2a8ec32"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+          "2026-03-31",
+          "61.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+            "2026-03-31",
+            "61.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "teilbereich",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [
+              {
+                "r": "0280",
+                "c": "0010",
+                "d": "",
+                "dp": "dp145637",
+                "f": "10^6"
+              },
+              {
+                "r": "0280",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475499",
+                "f": "10^6"
+              },
+              {
+                "r": "0280",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475500",
+                "f": "10^6"
+              },
+              {
+                "r": "0280",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475501",
+                "f": "10^6"
+              },
+              {
+                "r": "0280",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475502",
+                "f": "10^6"
+              },
+              {
+                "r": "0290",
+                "c": "0010",
+                "d": "",
+                "dp": "dp146049",
+                "f": "10^6"
+              },
+              {
+                "r": "0290",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475503",
+                "f": "10^6"
+              },
+              {
+                "r": "0290",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475504",
+                "f": "10^6"
+              },
+              {
+                "r": "0290",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475505",
+                "f": "10^6"
+              },
+              {
+                "r": "0290",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475506",
+                "f": "10^6"
+              },
+              {
+                "r": "0300",
+                "c": "0010",
+                "d": "",
+                "dp": "dp475494",
+                "f": "10^6"
+              },
+              {
+                "r": "0300",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475495",
+                "f": "10^6"
+              },
+              {
+                "r": "0300",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475496",
+                "f": "10^6"
+              },
+              {
+                "r": "0300",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475497",
+                "f": "10^6"
+              },
+              {
+                "r": "0300",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475498",
+                "f": "10^6"
+              },
+              {
+                "r": "0310",
+                "c": "0010",
+                "d": "",
+                "dp": "dp134665",
+                "f": "10^6"
+              },
+              {
+                "r": "0310",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475219",
+                "f": "10^6"
+              },
+              {
+                "r": "0310",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475220",
+                "f": "10^6"
+              },
+              {
+                "r": "0310",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475221",
+                "f": "10^6"
+              },
+              {
+                "r": "0310",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475222",
+                "f": "10^6"
+              },
+              {
+                "r": "0330",
+                "c": "0010",
+                "d": "",
+                "dp": "dp458851",
+                "f": "10^6"
+              },
+              {
+                "r": "0330",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475573",
+                "f": "10^6"
+              },
+              {
+                "r": "0330",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475574",
+                "f": "10^6"
+              },
+              {
+                "r": "0330",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475575",
+                "f": "10^6"
+              },
+              {
+                "r": "0330",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475576",
+                "f": "10^6"
+              },
+              {
+                "r": "0340",
+                "c": "0010",
+                "d": "",
+                "dp": "dp458581",
+                "f": "10^6"
+              },
+              {
+                "r": "0340",
+                "c": "0020",
+                "d": "",
+                "dp": "dp475569",
+                "f": "10^6"
+              },
+              {
+                "r": "0340",
+                "c": "0030",
+                "d": "",
+                "dp": "dp475570",
+                "f": "10^6"
+              },
+              {
+                "r": "0340",
+                "c": "0040",
+                "d": "",
+                "dp": "dp475571",
+                "f": "10^6"
+              },
+              {
+                "r": "0340",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475572",
+                "f": "10^6"
+              }
+            ],
+            "begruendung": "Kapital/TREA/Leverage sind in EUR plausibel. Liquiditäts-/Funding-Zeilen 0280–0340 enthalten Größen wie 103.493 HQLA und 469.754 ASF; Millionenhypothese. Der geschätzte Faktor 10^3 ist unpassend.",
+            "vergleich_n": 28,
+            "zeitreihe_faktor": 1.022
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-DG3RU1DBUFHT4ZF9WN62-2026-03-31-73.00.C",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "844e534bfd94cb2aa87f2e6bb8b49d9db9f4fbe6b9a357616ecac0e1444bde2e"
+        },
+        {
+          "key": [
+            "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+            "2026-03-31",
+            "*"
+          ],
+          "sha256": "5bd2d34d4113d45a0268bb9a2404ab059ccb7e61e925a5f654563420b2a8ec32"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+          "2026-03-31",
+          "73.00.C"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+            "2026-03-31",
+            "73.00.C"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 104,
+            "zeitreihe_faktor": 1003208.031
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-DG3RU1DBUFHT4ZF9WN62-2026-03-31-73.00.D",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "844e534bfd94cb2aa87f2e6bb8b49d9db9f4fbe6b9a357616ecac0e1444bde2e"
+        },
+        {
+          "key": [
+            "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+            "2026-03-31",
+            "*"
+          ],
+          "sha256": "5bd2d34d4113d45a0268bb9a2404ab059ccb7e61e925a5f654563420b2a8ec32"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+          "2026-03-31",
+          "73.00.D"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:DG3RU1DBUFHT4ZF9WN62.CON",
+            "2026-03-31",
+            "73.00.D"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 44,
+            "zeitreihe_faktor": 1016534.213
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-FR9695005MSX1OYEMGDF-2025-06-30-97.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "a820ced3ecc5f80b32f30a6d5a305bc9af3dc1a1096cc13abf31406b63b36344"
+        },
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "fe57250497fa986f20b29691fc420f2d5569e7b57d72c51a0e176b1a4a6af8f9"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:FR9695005MSX1OYEMGDF.CON",
+          "2025-06-30",
+          "97.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-06-30",
+            "97.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 17,
+            "zeitreihe_faktor": 1006996.59
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-FR9695005MSX1OYEMGDF-2025-12-31-26.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "a820ced3ecc5f80b32f30a6d5a305bc9af3dc1a1096cc13abf31406b63b36344"
+        },
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "fe57250497fa986f20b29691fc420f2d5569e7b57d72c51a0e176b1a4a6af8f9"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:FR9695005MSX1OYEMGDF.CON",
+          "2025-12-31",
+          "26.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-12-31",
+            "26.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-06-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 750,
+            "zeitreihe_faktor": 1048696.938
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-FR9695005MSX1OYEMGDF-2025-12-31-26.00.B",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "a820ced3ecc5f80b32f30a6d5a305bc9af3dc1a1096cc13abf31406b63b36344"
+        },
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "fe57250497fa986f20b29691fc420f2d5569e7b57d72c51a0e176b1a4a6af8f9"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:FR9695005MSX1OYEMGDF.CON",
+          "2025-12-31",
+          "26.00.B"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-12-31",
+            "26.00.B"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-06-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 12,
+            "zeitreihe_faktor": 984344.23
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-FR9695005MSX1OYEMGDF-2025-12-31-27.02.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "teilfehler",
+      "explanation": "Dezember enthält normale EUR-Werte und Millionenwerte nebeneinander: r0130 c0010 Gesamt-Exposure 634.778,85, während c0020 RWA 133.910.346.543,27 EUR. Keine uniforme Skalierung.",
+      "guards": [
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "a820ced3ecc5f80b32f30a6d5a305bc9af3dc1a1096cc13abf31406b63b36344"
+        },
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "fe57250497fa986f20b29691fc420f2d5569e7b57d72c51a0e176b1a4a6af8f9"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:FR9695005MSX1OYEMGDF.CON",
+          "2025-12-31",
+          "27.02.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:FR9695005MSX1OYEMGDF.CON",
+            "2025-12-31",
+            "27.02.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "teilbereich",
+            "referenz_stichtag": "2025-06-30",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [
+              {
+                "r": "0040",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3528243",
+                "f": "10^6"
+              },
+              {
+                "r": "0050",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3528371",
+                "f": "10^6"
+              },
+              {
+                "r": "0060",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3528370",
+                "f": "10^6"
+              },
+              {
+                "r": "0080",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527862",
+                "f": "10^6"
+              },
+              {
+                "r": "0090",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527863",
+                "f": "10^6"
+              },
+              {
+                "r": "0100",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527864",
+                "f": "10^6"
+              },
+              {
+                "r": "0120",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527866",
+                "f": "10^6"
+              },
+              {
+                "r": "0130",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3528368",
+                "f": "10^6"
+              }
+            ],
+            "begruendung": "Dezember enthält normale EUR-Werte und Millionenwerte nebeneinander: r0130 c0010 Gesamt-Exposure 634.778,85, während c0020 RWA 133.910.346.543,27 EUR. Keine uniforme Skalierung.",
+            "vergleich_n": 17,
+            "zeitreihe_faktor": 1.075
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-K8MS7FD7N5Z2WQ51AZ71-2025-06-30-74.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "teilfehler",
+      "explanation": "Ein Teil der Perioden/Datenpunkte enthält Beträge rund Faktor 1.000 kleiner; andere sind plausibel. Dieselbe sichtbare Koordinate enthält mehrere Datapoints mit unterschiedlicher Frequenz. Juni-Wert 61 Mio erscheint im Dezember als historischer Wert erneut. Zeit-/Periodenachsen müssen getrennt werden.",
+      "guards": [
+        {
+          "key": [
+            "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "ae0e5df2d70a29a48e98fde702a96cf30002cef249bfa5b0649d679db1b11dc3"
+        },
+        {
+          "key": [
+            "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "8e22882dbf620a587920e838339d8f9d4e8fbe673155b13442e5b87a932d0a07"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+          "2025-06-30",
+          "74.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+            "2025-06-30",
+            "74.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "teilbereich",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [
+              {
+                "r": "0010",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3524783",
+                "f": "10^3"
+              },
+              {
+                "r": "0010",
+                "c": "0040",
+                "d": "",
+                "dp": "dp3524789",
+                "f": "10^3"
+              },
+              {
+                "r": "0010",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525376",
+                "f": "10^3"
+              },
+              {
+                "r": "0020",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3524795",
+                "f": "10^3"
+              },
+              {
+                "r": "0020",
+                "c": "0040",
+                "d": "",
+                "dp": "dp3524800",
+                "f": "10^3"
+              },
+              {
+                "r": "0020",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525372",
+                "f": "10^3"
+              },
+              {
+                "r": "0030",
+                "c": "0040",
+                "d": "",
+                "dp": "dp3524793",
+                "f": "10^3"
+              },
+              {
+                "r": "0030",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525374",
+                "f": "10^3"
+              },
+              {
+                "r": "0040",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3524801",
+                "f": "10^3"
+              },
+              {
+                "r": "0040",
+                "c": "0030",
+                "d": "",
+                "dp": "dp3524802",
+                "f": "10^3"
+              },
+              {
+                "r": "0040",
+                "c": "0040",
+                "d": "",
+                "dp": "dp3524804",
+                "f": "10^3"
+              },
+              {
+                "r": "0040",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525371",
+                "f": "10^3"
+              },
+              {
+                "r": "0050",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3524809",
+                "f": "10^3"
+              },
+              {
+                "r": "0050",
+                "c": "0030",
+                "d": "",
+                "dp": "dp3524995",
+                "f": "10^3"
+              },
+              {
+                "r": "0050",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525423",
+                "f": "10^3"
+              },
+              {
+                "r": "0060",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3524987",
+                "f": "10^3"
+              },
+              {
+                "r": "0060",
+                "c": "0030",
+                "d": "",
+                "dp": "dp3524991",
+                "f": "10^3"
+              },
+              {
+                "r": "0060",
+                "c": "0040",
+                "d": "",
+                "dp": "dp3524992",
+                "f": "10^3"
+              },
+              {
+                "r": "0060",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525421",
+                "f": "10^3"
+              },
+              {
+                "r": "0070",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3524999",
+                "f": "10^3"
+              },
+              {
+                "r": "0070",
+                "c": "0030",
+                "d": "",
+                "dp": "dp3524813",
+                "f": "10^3"
+              },
+              {
+                "r": "0070",
+                "c": "0040",
+                "d": "",
+                "dp": "dp3525003",
+                "f": "10^3"
+              },
+              {
+                "r": "0070",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525425",
+                "f": "10^3"
+              },
+              {
+                "r": "0080",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3524913",
+                "f": "10^3"
+              },
+              {
+                "r": "0080",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525364",
+                "f": "10^3"
+              },
+              {
+                "r": "0090",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3524820",
+                "f": "10^3"
+              },
+              {
+                "r": "0090",
+                "c": "0030",
+                "d": "",
+                "dp": "dp3525057",
+                "f": "10^3"
+              },
+              {
+                "r": "0090",
+                "c": "0040",
+                "d": "",
+                "dp": "dp3524910",
+                "f": "10^3"
+              },
+              {
+                "r": "0090",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525429",
+                "f": "10^3"
+              },
+              {
+                "r": "0110",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3524959",
+                "f": "10^3"
+              },
+              {
+                "r": "0110",
+                "c": "0040",
+                "d": "",
+                "dp": "dp3524963",
+                "f": "10^3"
+              },
+              {
+                "r": "0110",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525378",
+                "f": "10^3"
+              },
+              {
+                "r": "0130",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3524862",
+                "f": "10^3"
+              },
+              {
+                "r": "0130",
+                "c": "0040",
+                "d": "",
+                "dp": "dp3524781",
+                "f": "10^3"
+              },
+              {
+                "r": "0130",
+                "c": "0050",
+                "d": "",
+                "dp": "dp3525377",
+                "f": "10^3"
+              },
+              {
+                "r": "0140",
+                "c": "0050",
+                "d": "",
+                "dp": "dp475573",
+                "f": "10^3"
+              }
+            ],
+            "begruendung": "Ein Teil der Perioden/Datenpunkte enthält Beträge rund Faktor 1.000 kleiner; andere sind plausibel. Dieselbe sichtbare Koordinate enthält mehrere Datapoints mit unterschiedlicher Frequenz. Juni-Wert 61 Mio erscheint im Dezember als historischer Wert erneut. Zeit-/Periodenachsen müssen getrennt werden.",
+            "vergleich_n": 71,
+            "zeitreihe_faktor": 708.667
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-K8MS7FD7N5Z2WQ51AZ71-2025-06-30-83.01.C",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "nicht_gestuetzt",
+      "explanation": "Kein Skalensprung in 15 direkt vergleichbaren Datenpunkten: Median 0,048 log10, alle innerhalb Faktor 2 um unveränderte Skala. Der Populationsversatz springt wegen veränderter Zellzusammensetzung; Juni ist nicht als skaliert belegt.",
+      "guards": [
+        {
+          "key": [
+            "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "ae0e5df2d70a29a48e98fde702a96cf30002cef249bfa5b0649d679db1b11dc3"
+        },
+        {
+          "key": [
+            "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "8e22882dbf620a587920e838339d8f9d4e8fbe673155b13442e5b87a932d0a07"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:K8MS7FD7N5Z2WQ51AZ71.CON",
+          "2025-06-30",
+          "83.01.C"
+        ]
+      ],
+      "decisions": []
+    },
+    {
+      "id": "scale-2026-10-01-KFUXYFTU2LHQFQZDQG45-2025-12-31-41.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "falsche_richtung",
+      "explanation": "Dezember-Exposure r0010 c0010 ist 3,273 Mrd EUR; Juni enthält 3,117 Billiarden EUR, bei Juni-TREA 7,592 Mrd EUR. Juni ist etwa 10^6 zu groß; Dezember nicht pauschal hochskalieren. Template ist zusätzlich unit_ambiguous.",
+      "guards": [
+        {
+          "key": [
+            "rs:KFUXYFTU2LHQFQZDQG45.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "ccb2d18b4b384550c7034ca0ff7fad3f38a59938ce4e061d157eba5860af19a4"
+        },
+        {
+          "key": [
+            "rs:KFUXYFTU2LHQFQZDQG45.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "c0b07b033890a98caad6120c66f03ab22b49a06db2d5a1b8640ee5f4a0c46dc9"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:KFUXYFTU2LHQFQZDQG45.CON",
+          "2025-12-31",
+          "41.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:KFUXYFTU2LHQFQZDQG45.CON",
+            "2025-06-30",
+            "41.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_gross",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Dezember-Exposure r0010 c0010 ist 3,273 Mrd EUR; Juni enthält 3,117 Billiarden EUR, bei Juni-TREA 7,592 Mrd EUR. Juni ist etwa 10^6 zu groß; Dezember nicht pauschal hochskalieren. Template ist zusätzlich unit_ambiguous.",
+            "vergleich_n": 406,
+            "zeitreihe_faktor": 1020984.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-KR6LSKV3BTSJRD41IF75-2025-12-31-29.02.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "offen",
+      "explanation": "Acht direkt vergleichbare positive Werte sind feste Risikogewichte (z.B. 0,5), im Datensatz als monetary geführt und mit CZK/EUR umgerechnet. Die monetären Exposures wechseln Datapoints/Zellbelegung. Ein Skalenproblem ist möglich, aber der pauschale Faktor 10^3 ist damit nicht belegt. Datentyp und Perioden-/Versionszuordnung zuerst klären.",
+      "guards": [
+        {
+          "key": [
+            "rs:KR6LSKV3BTSJRD41IF75.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "e91e171b892e6a343c745ea1ae58e14c14996844d9d6a92efc167d8b5a5e9686"
+        },
+        {
+          "key": [
+            "rs:KR6LSKV3BTSJRD41IF75.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "b508285bb6a9ece5c8b624a0c868d3eed8723e2995fa6b7a4e642cf57f81ea92"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:KR6LSKV3BTSJRD41IF75.CON",
+          "2025-12-31",
+          "29.02.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:KR6LSKV3BTSJRD41IF75.CON",
+            "2025-12-31",
+            "29.02.A"
+          ],
+          "finding": {
+            "urteil": "verdacht",
+            "richtung": "unklar",
+            "umfang": "unklar",
+            "referenz_stichtag": "2025-06-30",
+            "beleg_status": "offen",
+            "faktor_geschaetzt": "",
+            "faktoren": [],
+            "betroffene_zellen": [],
+            "begruendung": "Acht direkt vergleichbare positive Werte sind feste Risikogewichte (z.B. 0,5), im Datensatz als monetary geführt und mit CZK/EUR umgerechnet. Die monetären Exposures wechseln Datapoints/Zellbelegung. Ein Skalenproblem ist möglich, aber der pauschale Faktor 10^3 ist damit nicht belegt. Datentyp und Perioden-/Versionszuordnung zuerst klären.",
+            "vergleich_n": 8,
+            "zeitreihe_faktor": 1.021
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-N1FBEDJ5J41VKZLO2475-2025-12-31-68.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "falsche_richtung",
+      "explanation": "Juni meldet EVE-Verlust Parallel-up von -121,994 Mrd EUR, Dezember -113,082 Mio EUR und als Vorperiode -121,994 Mio EUR. Gleicher historischer Wert zeigt Juni-Faktor 1.000 zu groß. Dezember ist plausibel; Warnung gehört zu Juni.",
+      "guards": [
+        {
+          "key": [
+            "rs:N1FBEDJ5J41VKZLO2475.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "3f918b33398f5d84b2b75b5a8c8719df3f9af93aaed2bcdba6acd75031b6ae05"
+        },
+        {
+          "key": [
+            "rs:N1FBEDJ5J41VKZLO2475.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "13ddfbf15d3ebb7973a8cae7385ad7a7d22cb932c2e4bd2e0bf90a211b584946"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:N1FBEDJ5J41VKZLO2475.CON",
+          "2025-12-31",
+          "68.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:N1FBEDJ5J41VKZLO2475.CON",
+            "2025-06-30",
+            "68.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_gross",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Juni meldet EVE-Verlust Parallel-up von -121,994 Mrd EUR, Dezember -113,082 Mio EUR und als Vorperiode -121,994 Mio EUR. Gleicher historischer Wert zeigt Juni-Faktor 1.000 zu groß. Dezember ist plausibel; Warnung gehört zu Juni.",
+            "vergleich_n": 15,
+            "zeitreihe_faktor": 1003.365
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-NICH5Q04ADUV9SN3Q390-2025-06-30-21.02",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:NICH5Q04ADUV9SN3Q390.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "9a07f80e4cd0a574da8403a61cf5819a777dae15eedbdb5dc85a6a80283cdf39"
+        },
+        {
+          "key": [
+            "rs:NICH5Q04ADUV9SN3Q390.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "6e9b20101ff932db3bfd50006ab8fc7787f7d6ef16b0413d5c03922f09c177cf"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:NICH5Q04ADUV9SN3Q390.CON",
+          "2025-06-30",
+          "21.02"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:NICH5Q04ADUV9SN3Q390.CON",
+            "2025-06-30",
+            "21.02"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 17,
+            "zeitreihe_faktor": 1006929.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-O2RNE8IBXP4R0TD8PU41-2025-06-30-27.01",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "teilfehler",
+      "explanation": "Vergleichszellen zeigen ein Gemisch normaler EUR-Werte und etwa Faktor 1.000 kleinerer Beträge. Warnung berechtigt für Teile, nicht als pauschaler Faktor.",
+      "guards": [
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "4f131b00dd13e6113e9ed8e10b47fa60189d1710471dcff46e54ad711660bc71"
+        },
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "7fe57d0e5716195d3f8efb8a378fcd1e771de2d0d3b8465ebe2b9c7b59cc3994"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:O2RNE8IBXP4R0TD8PU41.CON",
+          "2025-06-30",
+          "27.01"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-06-30",
+            "27.01"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "teilbereich",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [
+              {
+                "r": "0040",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529809",
+                "f": "10^3"
+              },
+              {
+                "r": "0040",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529810",
+                "f": "10^3"
+              },
+              {
+                "r": "0070",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529742",
+                "f": "10^3"
+              },
+              {
+                "r": "0070",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529741",
+                "f": "10^3"
+              },
+              {
+                "r": "0090",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529729",
+                "f": "10^3"
+              },
+              {
+                "r": "0090",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529570",
+                "f": "10^3"
+              },
+              {
+                "r": "0100",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529806",
+                "f": "10^3"
+              },
+              {
+                "r": "0100",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529807",
+                "f": "10^3"
+              },
+              {
+                "r": "0110",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529745",
+                "f": "10^3"
+              },
+              {
+                "r": "0110",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529744",
+                "f": "10^3"
+              },
+              {
+                "r": "0130",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529571",
+                "f": "10^3"
+              },
+              {
+                "r": "0130",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529728",
+                "f": "10^3"
+              },
+              {
+                "r": "0140",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529747",
+                "f": "10^3"
+              },
+              {
+                "r": "0140",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529746",
+                "f": "10^3"
+              },
+              {
+                "r": "0150",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529808",
+                "f": "10^3"
+              },
+              {
+                "r": "0150",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529743",
+                "f": "10^3"
+              },
+              {
+                "r": "0190",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529803",
+                "f": "10^3"
+              },
+              {
+                "r": "0190",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529749",
+                "f": "10^3"
+              },
+              {
+                "r": "0200",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529804",
+                "f": "10^3"
+              },
+              {
+                "r": "0200",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529748",
+                "f": "10^3"
+              },
+              {
+                "r": "0210",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529733",
+                "f": "10^3"
+              },
+              {
+                "r": "0210",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529549",
+                "f": "10^3"
+              },
+              {
+                "r": "0230",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529569",
+                "f": "10^3"
+              },
+              {
+                "r": "0230",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529731",
+                "f": "10^3"
+              },
+              {
+                "r": "0300",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529811",
+                "f": "10^3"
+              },
+              {
+                "r": "0300",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529738",
+                "f": "10^3"
+              },
+              {
+                "r": "0310",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529737",
+                "f": "10^3"
+              },
+              {
+                "r": "0310",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529736",
+                "f": "10^3"
+              },
+              {
+                "r": "0320",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3529767",
+                "f": "10^3"
+              },
+              {
+                "r": "0320",
+                "c": "0020",
+                "d": "",
+                "dp": "dp3529766",
+                "f": "10^3"
+              }
+            ],
+            "begruendung": "Vergleichszellen zeigen ein Gemisch normaler EUR-Werte und etwa Faktor 1.000 kleinerer Beträge. Warnung berechtigt für Teile, nicht als pauschaler Faktor.",
+            "vergleich_n": 46,
+            "zeitreihe_faktor": 953.885
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-O2RNE8IBXP4R0TD8PU41-2025-06-30-27.02.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "teilfehler",
+      "explanation": "Vergleichszellen zeigen normale EUR-Werte und ungefähr Faktor 1.000 kleinere Beträge. Zeilen/Spalten getrennt prüfen.",
+      "guards": [
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "4f131b00dd13e6113e9ed8e10b47fa60189d1710471dcff46e54ad711660bc71"
+        },
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "7fe57d0e5716195d3f8efb8a378fcd1e771de2d0d3b8465ebe2b9c7b59cc3994"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:O2RNE8IBXP4R0TD8PU41.CON",
+          "2025-06-30",
+          "27.02.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-06-30",
+            "27.02.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "teilbereich",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [
+              {
+                "r": "0010",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3528369",
+                "f": "10^3"
+              },
+              {
+                "r": "0010",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529544",
+                "f": "10^3"
+              },
+              {
+                "r": "0010",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529602",
+                "f": "10^3"
+              },
+              {
+                "r": "0020",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527861",
+                "f": "10^3"
+              },
+              {
+                "r": "0030",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527860",
+                "f": "10^3"
+              },
+              {
+                "r": "0040",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3528243",
+                "f": "10^3"
+              },
+              {
+                "r": "0040",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529610",
+                "f": "10^3"
+              },
+              {
+                "r": "0040",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529551",
+                "f": "10^3"
+              },
+              {
+                "r": "0050",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3528371",
+                "f": "10^3"
+              },
+              {
+                "r": "0050",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529504",
+                "f": "10^3"
+              },
+              {
+                "r": "0050",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529505",
+                "f": "10^3"
+              },
+              {
+                "r": "0060",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3528370",
+                "f": "10^3"
+              },
+              {
+                "r": "0060",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529601",
+                "f": "10^3"
+              },
+              {
+                "r": "0060",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529543",
+                "f": "10^3"
+              },
+              {
+                "r": "0070",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527865",
+                "f": "10^3"
+              },
+              {
+                "r": "0080",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527862",
+                "f": "10^3"
+              },
+              {
+                "r": "0080",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529600",
+                "f": "10^3"
+              },
+              {
+                "r": "0080",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529508",
+                "f": "10^3"
+              },
+              {
+                "r": "0090",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527863",
+                "f": "10^3"
+              },
+              {
+                "r": "0090",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529506",
+                "f": "10^3"
+              },
+              {
+                "r": "0090",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529507",
+                "f": "10^3"
+              },
+              {
+                "r": "0100",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527864",
+                "f": "10^3"
+              },
+              {
+                "r": "0100",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529607",
+                "f": "10^3"
+              },
+              {
+                "r": "0100",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529606",
+                "f": "10^3"
+              },
+              {
+                "r": "0120",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527866",
+                "f": "10^3"
+              },
+              {
+                "r": "0120",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529547",
+                "f": "10^3"
+              },
+              {
+                "r": "0120",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529546",
+                "f": "10^3"
+              },
+              {
+                "r": "0130",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3528368",
+                "f": "10^3"
+              },
+              {
+                "r": "0130",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529545",
+                "f": "10^3"
+              },
+              {
+                "r": "0130",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529603",
+                "f": "10^3"
+              }
+            ],
+            "begruendung": "Vergleichszellen zeigen normale EUR-Werte und ungefähr Faktor 1.000 kleinere Beträge. Zeilen/Spalten getrennt prüfen.",
+            "vergleich_n": 39,
+            "zeitreihe_faktor": 1015.449
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-O2RNE8IBXP4R0TD8PU41-2025-06-30-27.02.B",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "teilfehler",
+      "explanation": "Vergleich enthält Cluster bei Faktoren 10^6 und 10^9. Der geschätzte Faktor 10^9 ist keine Korrekturvorgabe für das gesamte Template.",
+      "guards": [
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "4f131b00dd13e6113e9ed8e10b47fa60189d1710471dcff46e54ad711660bc71"
+        },
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "7fe57d0e5716195d3f8efb8a378fcd1e771de2d0d3b8465ebe2b9c7b59cc3994"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:O2RNE8IBXP4R0TD8PU41.CON",
+          "2025-06-30",
+          "27.02.B"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-06-30",
+            "27.02.B"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "teilbereich",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "",
+            "faktoren": [
+              "10^6",
+              "10^9"
+            ],
+            "betroffene_zellen": [
+              {
+                "r": "0010",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527871",
+                "f": "10^9"
+              },
+              {
+                "r": "0010",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529617",
+                "f": "10^6"
+              },
+              {
+                "r": "0010",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529616",
+                "f": "10^6"
+              },
+              {
+                "r": "0020",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527868",
+                "f": "10^6"
+              },
+              {
+                "r": "0020",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529554",
+                "f": "10^6"
+              },
+              {
+                "r": "0020",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529553",
+                "f": "10^6"
+              },
+              {
+                "r": "0030",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527867",
+                "f": "10^6"
+              },
+              {
+                "r": "0030",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529552",
+                "f": "10^6"
+              },
+              {
+                "r": "0030",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529611",
+                "f": "10^6"
+              },
+              {
+                "r": "0040",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527870",
+                "f": "10^9"
+              },
+              {
+                "r": "0040",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529615",
+                "f": "10^9"
+              },
+              {
+                "r": "0040",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529556",
+                "f": "10^9"
+              },
+              {
+                "r": "0050",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527873",
+                "f": "10^9"
+              },
+              {
+                "r": "0050",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529558",
+                "f": "10^9"
+              },
+              {
+                "r": "0050",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529557",
+                "f": "10^9"
+              },
+              {
+                "r": "0060",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3528244",
+                "f": "10^9"
+              },
+              {
+                "r": "0060",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529612",
+                "f": "10^9"
+              },
+              {
+                "r": "0070",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527869",
+                "f": "10^9"
+              },
+              {
+                "r": "0070",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529555",
+                "f": "10^9"
+              },
+              {
+                "r": "0070",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529614",
+                "f": "10^9"
+              },
+              {
+                "r": "0080",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527872",
+                "f": "10^9"
+              },
+              {
+                "r": "0080",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529619",
+                "f": "10^6"
+              },
+              {
+                "r": "0080",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529618",
+                "f": "10^6"
+              },
+              {
+                "r": "0090",
+                "c": "0010",
+                "d": "",
+                "dp": "dp3527874",
+                "f": "10^9"
+              },
+              {
+                "r": "0090",
+                "c": "0130",
+                "d": "",
+                "dp": "dp3529620",
+                "f": "10^9"
+              },
+              {
+                "r": "0090",
+                "c": "0140",
+                "d": "",
+                "dp": "dp3529559",
+                "f": "10^9"
+              }
+            ],
+            "begruendung": "Vergleich enthält Cluster bei Faktoren 10^6 und 10^9. Der geschätzte Faktor 10^9 ist keine Korrekturvorgabe für das gesamte Template.",
+            "vergleich_n": 27,
+            "zeitreihe_faktor": 1012838030.349
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-O2RNE8IBXP4R0TD8PU41-2025-06-30-68.00",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "4f131b00dd13e6113e9ed8e10b47fa60189d1710471dcff46e54ad711660bc71"
+        },
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "7fe57d0e5716195d3f8efb8a378fcd1e771de2d0d3b8465ebe2b9c7b59cc3994"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:O2RNE8IBXP4R0TD8PU41.CON",
+          "2025-06-30",
+          "68.00"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:O2RNE8IBXP4R0TD8PU41.CON",
+            "2025-06-30",
+            "68.00"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 16,
+            "zeitreihe_faktor": 1000.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-R0MUWSFPU8MPRO8K5P83-2025-06-30-04.00.A",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "teilfehler",
+      "explanation": "Unterschiedliche Teile liegen etwa Faktor 10^6 auseinander; zahlreiche andere Zellen bewegen sich normal. Kein einheitlicher Template-Faktor.",
+      "guards": [
+        {
+          "key": [
+            "rs:R0MUWSFPU8MPRO8K5P83.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "1990b746e1bb15a2c6fa9ef200328dcf3fe294b59cbf846b88b67bc0a7fac6d5"
+        },
+        {
+          "key": [
+            "rs:R0MUWSFPU8MPRO8K5P83.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "ab8cd22719000c0f1f0baa375c2a0be4b55a551353f74a6cee86db532de1e633"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:R0MUWSFPU8MPRO8K5P83.CON",
+          "2025-06-30",
+          "04.00.A"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:R0MUWSFPU8MPRO8K5P83.CON",
+            "2025-06-30",
+            "04.00.A"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "teilbereich",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^6",
+            "faktoren": [
+              "10^6"
+            ],
+            "betroffene_zellen": [
+              {
+                "r": "0010",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3293114",
+                "f": "10^6"
+              },
+              {
+                "r": "0010",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3293114",
+                "f": "10^6"
+              },
+              {
+                "r": "0010",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2071",
+                "dp": "dp3293114",
+                "f": "10^6"
+              },
+              {
+                "r": "0010",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2073",
+                "dp": "dp3293114",
+                "f": "10^6"
+              },
+              {
+                "r": "0010",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3294345",
+                "f": "10^6"
+              },
+              {
+                "r": "0010",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3294345",
+                "f": "10^6"
+              },
+              {
+                "r": "0010",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2071",
+                "dp": "dp3294345",
+                "f": "10^6"
+              },
+              {
+                "r": "0010",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2073",
+                "dp": "dp3294345",
+                "f": "10^6"
+              },
+              {
+                "r": "0020",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3292897",
+                "f": "10^6"
+              },
+              {
+                "r": "0020",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3292897",
+                "f": "10^6"
+              },
+              {
+                "r": "0020",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2073",
+                "dp": "dp3292897",
+                "f": "10^6"
+              },
+              {
+                "r": "0020",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3294659",
+                "f": "10^6"
+              },
+              {
+                "r": "0020",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3294659",
+                "f": "10^6"
+              },
+              {
+                "r": "0020",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2073",
+                "dp": "dp3294659",
+                "f": "10^6"
+              },
+              {
+                "r": "0030",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3292896",
+                "f": "10^6"
+              },
+              {
+                "r": "0030",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3292896",
+                "f": "10^6"
+              },
+              {
+                "r": "0030",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3294660",
+                "f": "10^6"
+              },
+              {
+                "r": "0030",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3294660",
+                "f": "10^6"
+              },
+              {
+                "r": "0040",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3293113",
+                "f": "10^6"
+              },
+              {
+                "r": "0040",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3293113",
+                "f": "10^6"
+              },
+              {
+                "r": "0040",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3294344",
+                "f": "10^6"
+              },
+              {
+                "r": "0040",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3294344",
+                "f": "10^6"
+              },
+              {
+                "r": "0050",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3293106",
+                "f": "10^6"
+              },
+              {
+                "r": "0050",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3293106",
+                "f": "10^6"
+              },
+              {
+                "r": "0050",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2073",
+                "dp": "dp3293106",
+                "f": "10^6"
+              },
+              {
+                "r": "0050",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3294340",
+                "f": "10^6"
+              },
+              {
+                "r": "0050",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3294340",
+                "f": "10^6"
+              },
+              {
+                "r": "0050",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2073",
+                "dp": "dp3294340",
+                "f": "10^6"
+              },
+              {
+                "r": "0060",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3292894",
+                "f": "10^6"
+              },
+              {
+                "r": "0060",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3292894",
+                "f": "10^6"
+              },
+              {
+                "r": "0060",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3294591",
+                "f": "10^6"
+              },
+              {
+                "r": "0060",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3294591",
+                "f": "10^6"
+              },
+              {
+                "r": "0060",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2071",
+                "dp": "dp3294591",
+                "f": "10^6"
+              },
+              {
+                "r": "0070",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3293109",
+                "f": "10^6"
+              },
+              {
+                "r": "0070",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3293109",
+                "f": "10^6"
+              },
+              {
+                "r": "0070",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3294593",
+                "f": "10^6"
+              },
+              {
+                "r": "0070",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3294593",
+                "f": "10^6"
+              },
+              {
+                "r": "0080",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3292899",
+                "f": "10^6"
+              },
+              {
+                "r": "0080",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3292899",
+                "f": "10^6"
+              },
+              {
+                "r": "0080",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3294346",
+                "f": "10^6"
+              },
+              {
+                "r": "0090",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3293151",
+                "f": "10^6"
+              },
+              {
+                "r": "0090",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3293151",
+                "f": "10^6"
+              },
+              {
+                "r": "0090",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2071",
+                "dp": "dp3293151",
+                "f": "10^6"
+              },
+              {
+                "r": "0090",
+                "c": "0010",
+                "d": "qEEA=eba_qAE:qx2073",
+                "dp": "dp3293151",
+                "f": "10^6"
+              },
+              {
+                "r": "0090",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2012",
+                "dp": "dp3294608",
+                "f": "10^6"
+              },
+              {
+                "r": "0090",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2013",
+                "dp": "dp3294608",
+                "f": "10^6"
+              },
+              {
+                "r": "0090",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2071",
+                "dp": "dp3294608",
+                "f": "10^6"
+              },
+              {
+                "r": "0090",
+                "c": "0060",
+                "d": "qEEA=eba_qAE:qx2073",
+                "dp": "dp3294608",
+                "f": "10^6"
+              }
+            ],
+            "begruendung": "Unterschiedliche Teile liegen etwa Faktor 10^6 auseinander; zahlreiche andere Zellen bewegen sich normal. Kein einheitlicher Template-Faktor.",
+            "vergleich_n": 85,
+            "zeitreihe_faktor": 442762.672
+          }
+        }
+      ]
+    },
+    {
+      "id": "scale-2026-10-01-VWMYAEQSTOPNV0SUGU82-2025-06-30-26.00.B",
+      "review_date": "2026-10-01",
+      "audit": "docs/scale_review_2026-10-01/REPORT.md",
+      "assessment": "gut_gestuetzt",
+      "explanation": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+      "guards": [
+        {
+          "key": [
+            "rs:VWMYAEQSTOPNV0SUGU82.CON",
+            "2025-06-30",
+            "*"
+          ],
+          "sha256": "7f33478ef44ee1fa9e391cc6716f38c4cf2c92fbe617ea4687dd5e54d7f8f3d1"
+        },
+        {
+          "key": [
+            "rs:VWMYAEQSTOPNV0SUGU82.CON",
+            "2025-12-31",
+            "*"
+          ],
+          "sha256": "181f261460808b697c11986f297afd5b7f73700548aabf1b5019c27b4be40a3e"
+        }
+      ],
+      "replaces": [
+        [
+          "rs:VWMYAEQSTOPNV0SUGU82.CON",
+          "2025-06-30",
+          "26.00.B"
+        ]
+      ],
+      "decisions": [
+        {
+          "key": [
+            "rs:VWMYAEQSTOPNV0SUGU82.CON",
+            "2025-06-30",
+            "26.00.B"
+          ],
+          "finding": {
+            "urteil": "skaliert",
+            "richtung": "zu_klein",
+            "umfang": "template",
+            "referenz_stichtag": "2025-12-31",
+            "beleg_status": "geprueft",
+            "faktor_geschaetzt": "10^3",
+            "faktoren": [
+              "10^3"
+            ],
+            "betroffene_zellen": [],
+            "begruendung": "Direkter Vergleich gleicher Datapoints stützt den starken Einheitenbruch. Faktor bleibt Hypothese; fachlich zugehörige Referenzbeträge und Teilzellen beachten.",
+            "vergleich_n": 12,
+            "zeitreihe_faktor": 1010.888
+          }
+        }
+      ]
+    }
+  ]
+}

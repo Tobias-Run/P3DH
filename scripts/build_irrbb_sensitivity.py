@@ -191,7 +191,7 @@ def vorbehalt_von(skaliert, q_eve, q_nii):
 
 
 def lade_skalenmarken(pfad=None):
-    """{(lei, scope, refPeriod)} der Reports mit belegtem Skalenfehler (#83).
+    """Reports mit einem Skalenfehler im Zähler oder Tier-1-Nenner (#122).
 
     Nur `skaliert`, nicht `verdacht`: ein Verdacht reicht nicht, um eine Zeile
     aus der Auswertung zu nehmen. Fehlt die Datei, wird nichts markiert — dann
@@ -202,9 +202,12 @@ def lade_skalenmarken(pfad=None):
     if not pfad.exists():
         return set()
     with pfad.open(encoding="utf-8") as fh:
+        from scale_evidence import finding_affects
         return {(r["lei"], r["scope"], r["refPeriod"]) for r in csv.DictReader(fh)
-                if r.get("ebene") == "report" and r.get("urteil") == "skaliert"
-                and r.get("lei")}
+                if r.get("urteil") == "skaliert" and r.get("lei") and
+                (finding_affects(r, TEMPLATE, col=SPALTE_EVE)
+                 or finding_affects(r, TEMPLATE, col=SPALTE_NII)
+                 or finding_affects(r, KM1, TIER1_ROW, '0010'))}
 
 
 def lade(con):

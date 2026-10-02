@@ -712,6 +712,23 @@ const DE = {
   ". Ratios are not affected.": ". Verhältniszahlen sind davon nicht betroffen.",
   "⚠ Scale": "⚠ Skala",
   "⚠ Scale?": "⚠ Skala?",
+  "Scale warning": "Skalenwarnung",
+  "too small": "zu klein",
+  "too large": "zu groß",
+  "direction uncertain": "Richtung unklar",
+  "affected cells only": "nur betroffene Zellen",
+  "extent uncertain": "Umfang unklar",
+  "checked against the original filing": "an der Originalmeldung geprüft",
+  "unconfirmed hypothesis": "unbestätigte Hypothese",
+  "reference {0}": "Referenz {0}",
+  "Factor hypothesis {0}.": "Faktorhypothese {0}.",
+  "Ratios remain comparable only when numerator and denominator have the same scale.":
+    "Quoten bleiben nur vergleichbar, wenn Zähler und Nenner dieselbe Skala haben.",
+  "Scope: rows {0}; columns {1}.": "Umfang: Zeilen {0}; Spalten {1}.",
+  "absolute amounts across the report": "absolute Beträge im gesamten Report",
+  "Original values are retained.": "Die Originalwerte bleiben erhalten.",
+  "Column scale_finding includes direction, extent, factor hypotheses and reference dates.":
+    "Die Spalte scale_finding enthält Richtung, Umfang, Faktorhypothesen und Referenzstichtage.",
   "Loading labels …": "Beschriftungen werden geladen …",
   "Labels could not be loaded:": "Beschriftungen nicht ladbar:",
 
@@ -1893,12 +1910,16 @@ function overviewPercentiles(){
   const rows=REPORTS.map(rep=>{
     const {lei,scope}=leiParts(rep.entityID);
     const m=META.get(lei)||{};
-    const r={key:repKey(rep), itype:shortItype(m.institution_type||''), scope, date:rep.refPeriod};
+    const r={key:repKey(rep), itype:shortItype(m.institution_type||''), scope, date:rep.refPeriod, q:rep.quality};
     for(const mt of OV_METRICS()) r[mt.id]=metricValue(rep,mt);
     return r;
   });
   OV_PCT=new Map();
-  for(const mt of OV_METRICS()) OV_PCT.set(mt.id, percentileMap(rows, mt.id));
+  for(const mt of OV_METRICS()){
+    const prof={tpl:(mt.cells||[])[0]?.[0]||'61.00'};
+    const comparable=BAR_KINDS.has(mt.kind)?rows.filter(r=>barErlaubt(prof,r,mt)):rows;
+    OV_PCT.set(mt.id, percentileMap(comparable, mt.id));
+  }
   return OV_PCT;
 }
 /* Aus der Erklaerung in die Rohtabelle springen: der Templatefilter oeffnet
@@ -2751,25 +2772,49 @@ const SIG_TEXT=()=>({untergrenze:tr('the total risk exposure amount lies below a
   template_sprung:tr('a jump against the same templates at the institution’s own other reference dates')});
 const scaleFor=(q,tpl)=>!!(q && q.sc && (!q.sc.t.length || q.sc.t.includes(tpl)));
 function scaleNote(sc){
+  if(sc.d){
+    const notes=Object.entries(sc.d).map(([tpl,d])=>{
+      const where=tpl==='*'?tr('absolute amounts across the report'):esc(tpl);
+      const direction=tr(d.r==='zu_gross'?'too large':d.r==='zu_klein'?'too small':'direction uncertain');
+      const scope=d.a==='teilbereich'?tr('affected cells only'):d.a==='unklar'?tr('extent uncertain'):'';
+      const status=tr(d.b==='geprueft'?'checked against the original filing':'unconfirmed hypothesis');
+      const factor=(d.fs||[]).length?tr('Factor hypothesis {0}.',esc(d.fs.join(' / '))):'';
+      const ref=d.ref?tr('reference {0}',esc(d.ref)):'';
+      const cells=d.cells||[];
+      const positions=cells.length?tr('Scope: rows {0}; columns {1}.',
+        esc([...new Set(cells.map(x=>x[0]))].join(', ')),
+        esc([...new Set(cells.map(x=>x[1]))].join(', '))):'';
+      const why=LANG==='de' && d.why?esc(d.why):positions;
+      return `<div><b>${where}</b>: ${[direction,scope,status,ref].filter(Boolean).join(' · ')}. ${factor}`
+        +(why?` <span class="cl">${why}</span>`:'')+'</div>';
+    }).join('');
+    return `<div class="ovq ovsc"><b>⚠ ${tr('Scale warning')}</b>${notes}`
+      +`<span class="cl">${tr('Ratios remain comparable only when numerator and denominator have the same scale.')} ${tr('Original values are retained.')}</span></div>`;
+  }
   const wo=sc.t.length?tr('in {0}', esc(sc.t.join(', '))):tr('across the whole report');
   const tab=SIG_TEXT();
   const gruende=sc.s.split('|').filter(Boolean).map(x=>tab[x]||x);
   const f=sc.f?' '+tr('Estimated factor {0}.', `<b>${esc(sc.f)}</b>`):'';
-  return `<div class="ovq ovsc" title="`
-    + esc(tr('Ratios are unaffected: a uniform factor cancels out in a quotient.')) + `">`
-    + tr('⚠ Scale finding: the <b>absolute amounts</b> {0} are {1} too small by a factor.',
-         wo, sc.u==='skaliert'?tr('with high confidence'):tr('presumably'))
-    + f
-    + (gruende.length?` <span class="cl">${esc(tr('Reason: {0}.', gruende.join('; ')))}</span>`:'')
-    + ` <span class="cl">${esc(tr('Ratios and relative figures of this report remain valid; nothing is corrected.'))}</span></div>`;
+  return `<div class="ovq ovsc"><b>⚠ ${tr('Scale warning')}</b> ${wo}: `
+    +tr(sc.u==='skaliert'?'too small':'direction uncertain')+f
+    +(gruende.length?` <span class="cl">${esc(tr('Reason: {0}.', gruende.join('; ')))}</span>`:'')
+    +` <span class="cl">${tr('Ratios remain comparable only when numerator and denominator have the same scale.')} ${tr('Original values are retained.')}</span></div>`;
 }
 function scaleBadge(q, tpl){
   if(!scaleFor(q,tpl)) return '';
   const sc=q.sc;
+  if(sc.d){
+    const ds=[sc.d['*'],sc.d[tpl]].filter(Boolean);
+    const text=ds.map(d=>[tr(d.r==='zu_gross'?'too large':d.r==='zu_klein'?'too small':'direction uncertain'),
+      d.a==='teilbereich'?tr('affected cells only'):'',d.f?tr('Factor hypothesis {0}.',d.f):'',
+      d.ref?tr('reference {0}',d.ref):''].filter(Boolean).join(' · ')).join('; ');
+    const confirmed=ds.some(d=>d.u==='skaliert');
+    return `<span class="qb sb" title="${esc(text)}">${tr(confirmed?'⚠ Scale':'⚠ Scale?')}</span>`;
+  }
   return `<span class="qb sb" title="`
-       + esc(tr('The absolute amounts of this template are too small by a factor'))
+       + esc(tr(sc.u==='skaliert'?'too small':'direction uncertain'))
        + (sc.f?esc(tr(' (estimated {0})', sc.f)):'')
-       + esc(tr('. Ratios are not affected.'))
+       + esc(tr('Ratios remain comparable only when numerator and denominator have the same scale.'))
        + `">${sc.u==='skaliert'?tr('⚠ Scale'):tr('⚠ Scale?')}</span>`;
 }
 /* Abstufung seit #53: `th` fuehrt die Templates mit mindestens einem
@@ -2865,7 +2910,7 @@ function gateNote(prof, out, total){
  */
 const BAR_KINDS = new Set(['eur','eurPlain','num']);
 
-function barBasis(rows, cols){
+function barBasis(rows, cols, prof=null){
   /* Maximum je Groessenspalte ueber die SICHTBAREN Zeilen. Die Filter sind Teil
      der Frage: wer auf Schweden filtert, will schwedische Groessen vergleichen,
      nicht gegen BNP Paribas. */
@@ -2873,7 +2918,10 @@ function barBasis(rows, cols){
   for(const c of cols){
     if(!BAR_KINDS.has(c.kind)) continue;
     let mx=0;
-    for(const r of rows){ const v=r[c.id]; if(v!=null&&isFinite(v)&&v>mx) mx=v; }
+    for(const r of rows){
+      if(prof && !barErlaubt(prof,r,c)) continue;
+      const v=r[c.id]; if(v!=null&&isFinite(v)&&v>mx) mx=v;
+    }
     if(mx>0) out.set(c.id, mx);
   }
   return out;
@@ -2887,9 +2935,17 @@ function barBasis(rows, cols){
  * saehe es. Geprueft wird sie deshalb als FUNKTION (check_viewer_runtime.py)
  * und nicht an der gerenderten Tabelle; ein Test an der Seite waere gruen,
  * ohne irgendetwas zu belegen. */
-function barErlaubt(prof, row){
+function barErlaubt(prof, row, metric=null){
   if(UA.has(prof.tpl)) return false;                    // strittige Einheit (#9)
   const sc=row.q && row.q.sc;                           // Skalenbefund (#83)
+  if(sc && sc.d && metric && (metric.cells||[]).length){
+    return metric.cells.every(([tpl,r,c])=>{
+      if(UA.has(tpl)) return false;
+      const ds=[sc.d['*'],sc.d[tpl]].filter(Boolean);
+      return ds.every(d=>d.a==='teilbereich' && d.cells && d.cells.length
+        && !d.cells.some(x=>x[0]===r && x[1]===(c||'0010')));
+    });
+  }
   return !(sc && (!sc.t.length || sc.t.includes(prof.tpl)));
 }
 function sizeBar(v, max){
@@ -2933,7 +2989,8 @@ function distributionRow(rows, prof){
     :`${dates[0]}–${dates[dates.length-1]} (${dates.length} Stichtage)`;
   let cards='';
   for(const c of prof.cols){
-    const d=distChart(rows.map(r=>r[c.id]));
+    const comparable=BAR_KINDS.has(c.kind)?rows.filter(r=>barErlaubt(prof,r,c)):rows;
+    const d=distChart(comparable.map(r=>r[c.id]));
     if(!d) continue;
     const tail=[d.nLo?`${d.nLo} links`:'', d.nHi?`${d.nHi} rechts`:''].filter(Boolean).join(' · ');
     // Quellzeile aus den Registry-Zellen: bei einer Zelle die Koordinate,
@@ -3053,17 +3110,19 @@ async function renderBenchmark(){
   const profSel=Object.entries(bmAll()).map(([k,p])=>
     `<option value="${k}"${k===BMP?' selected':''}>${esc(p.label)}</option>`).join('');
   const pmaps=new Map();
-  if(BM_PCT) for(const c of sichtbareSpalten(prof)) pmaps.set(c.id,percentileMap(allRows,c.id));
+  if(BM_PCT) for(const c of sichtbareSpalten(prof))
+    pmaps.set(c.id,percentileMap(BAR_KINDS.has(c.kind)?allRows.filter(r=>barErlaubt(prof,r,c)):allRows,c.id));
   // Bezug der Groessenbalken (#49): das Maximum der SICHTBAREN Zeilen. Berechnet
   // auf `rows`, nicht auf `allRows` — blendet jemand die auffaelligen Reports
   // aus, soll der Balken sich auf das beziehen, was er sieht.
   const spalten=sichtbareSpalten(prof);
-  const barMax=barBasis(rows, spalten);
+  const barMax=barBasis(rows, spalten, prof);
   // Randwert-Marker nur fuer die Spalte, nach der gerade sortiert wird: genau
   // die entscheidet, wer die Liste anfuehrt. Bei Sortierung nach Name/Stichtag
   // gibt es keine Metrik und damit keinen Marker.
   const sortCol=spalten.find(c=>c.id===bmSort.col);
-  const fmarks=sortCol?fenceOutliers(allRows, sortCol.id):new Map();
+  const fenceRows=sortCol && BAR_KINDS.has(sortCol.kind)?allRows.filter(r=>barErlaubt(prof,r,sortCol)):allRows;
+  const fmarks=sortCol?fenceOutliers(fenceRows, sortCol.id):new Map();
   const context=JSON.stringify([LANG,BMP,activeFilters(),BM_HIDEFLAG,BM_PCT,spalten.map(c=>c.id)]);
   const pageContext=context+JSON.stringify(bmSort);
   if(BM_PAGE_CONTEXT!==pageContext){BM_PAGE=0;BM_PAGE_CONTEXT=pageContext;}
@@ -3120,10 +3179,9 @@ async function renderBenchmark(){
           '<span class="bm-fence"></span>'}
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span></td>
         <td>${esc(r.date)}</td>`;
-    const balken=barErlaubt(prof, r);
     for(const c of spalten)
       newRows+=bmCell(c, r[c.id], BM_PCT?(pmaps.get(c.id)||new Map()).get(r.key):null,
-                balken?barMax.get(c.id):null);
+                barErlaubt(prof,r,c)?barMax.get(c.id):null);
     if(prof.trendRow) newRows+=`<td>${r._trend?sparkline(r._trend,null,null,r._breaks):''}</td>`;
     newRows+='</tr>';
   }
@@ -3225,8 +3283,9 @@ const CSV_CAVEATS = () => [
  tr('this table is indicative and NOT a supervisory metric.'),
  tr('RF 4.2 covers the reference date 2026-03-31 only: every comparison'),
  tr('between framework versions is at the same time a comparison over time.'),
- tr('Column scale_finding: the absolute amounts of this report are off by a'),
- tr('factor (ratios remain valid). Column plausibility: values outside the'),
+ tr('Column scale_finding includes direction, extent, factor hypotheses and reference dates.'),
+ tr('Ratios remain comparable only when numerator and denominator have the same scale.'),
+ tr('Column plausibility: values outside the'),
  tr('distribution of their cell population — can be a correct particularity.'),
  tr('Both are marked, not corrected.'),
  tr('Missing values are EMPTY and mean "not disclosed or not placeable" —'),
@@ -3270,7 +3329,8 @@ function benchmarkCSV(rows, prof){
   const zeilen=[kopf.map(csvFeld).join(',')];
   for(const r of rows){
     const sc=r.q&&r.q.sc;
-    const skal=!sc?'':(sc.u+(sc.f?' '+sc.f:'')+(sc.t.length?' ('+sc.t.join(' ')+')':' ('+tr('report')+')'));
+    const skal=!sc?'':sc.d?JSON.stringify(sc.d):
+      (sc.u+(sc.f?' '+sc.f:'')+(sc.t.length?' ('+sc.t.join(' ')+')':' ('+tr('report')+')'));
     const q=r.q&&r.q.n?`${tr('{0} finding(s)', r.q.n)}${r.q.t&&r.q.t.length?' in '+r.q.t.join(' '):''}`:'';
     const rep=byKey(r.key);
     zeilen.push([r.name, r.lei, r.country, r.itype, r.scope, r.date,

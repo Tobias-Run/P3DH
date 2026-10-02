@@ -1,0 +1,3 @@
+Pipeline-Schritte: 48 · davon mit deklarierter Abhängigkeit: 36
+  ✓ Die Kette ist eine gültige Topologie: jedes gelesene Artefakt entsteht vorher.
+    geprüfte Abhängigkeiten: 62

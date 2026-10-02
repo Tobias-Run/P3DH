@@ -1,0 +1,6 @@
+Command: python -m unittest discover tests -v
+Ran 1471 tests in 24.636s
+
+OK
+Skipped tests: 0
+New evidence tests: 16
