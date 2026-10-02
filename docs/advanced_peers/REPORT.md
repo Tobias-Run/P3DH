@@ -4,11 +4,11 @@ Stand: 2. Oktober 2026. Arbeitsstand zu [Issue #134](https://github.com/Tobias-R
 
 ## Rechercheergebnis
 
-Von **475 unterschiedlichen Institutskennungen im Viewer** sind **185** mit Quellen eingeordnet: 86 genossenschaftlich, 63 aktionärsgetragen, 25 öffentlich, 7 mit gemischter Trägerschaft und 4 als Gegenseitigkeitsorganisation. **290 benötigen weitere manuelle Prüfung**. Der Viewer hat 476 Institut/Scope-Karten; ein Institut kommt mit mehreren Konsolidierungskreisen vor. Der Registerbestand enthält 213 Einträge, einschließlich zusätzlicher Konzernträger und Katalogeinträge außerhalb des aktuellen Viewers.
+Von **475 unterschiedlichen Institutskennungen im Viewer** sind **187** mit Quellen eingeordnet: 86 genossenschaftlich, 64 aktionärsgetragen, 26 öffentlich, 7 mit gemischter Trägerschaft und 4 als Gegenseitigkeitsorganisation. **288 benötigen weitere manuelle Prüfung**. Der Viewer hat 476 Institut/Scope-Karten; ein Institut kommt mit mehreren Konsolidierungskreisen vor. Der Registerbestand enthält 215 Einträge, einschließlich zusätzlicher Konzernträger und Katalogeinträge außerhalb des aktuellen Viewers.
 
 Die [Recherche der 30 großen zuvor ungeprüften Institute](TOP30_OWNERSHIP.md) dokumentiert Bilanzsummen, Eigentümeranker, Quellen und Konzernketten. Die Auswahl umfasst die größten 30 unter 192 Fällen mit eindeutiger verfügbarer Bilanzsumme; 129 der ursprünglich 321 offenen Kennungen sind noch nicht priorisierbar. Diese Grenze wird ausdrücklich ausgewiesen.
 
-Die weitere Recherche wird jetzt nach TREA priorisiert: [begrenzter Rechercheablauf](OWNERSHIP_WORKFLOW.md), [aktuelle Warteschlange](ownership_priority.csv) und [Vergleich TREA/Bilanzsumme](TREA_VS_ASSETS.md). Ein erster Cache-Pilot ergänzt Bank of America Europe DAC anhand schon archivierter Primärquellen ohne neue Netzwerkabrufe. Vier weitere Pilotfälle bleiben gezielt nachzuprüfen.
+Die weitere Recherche wird jetzt nach TREA priorisiert: [begrenzter Rechercheablauf](OWNERSHIP_WORKFLOW.md), [aktuelle Warteschlange](ownership_priority.csv) und [Vergleich TREA/Bilanzsumme](TREA_VS_ASSETS.md). Ein erster Cache-Pilot ergänzt Bank of America Europe DAC anhand schon archivierter Primärquellen ohne neue Netzwerkabrufe. [Batch 002](ownership_batches/batch_002.json) ergänzt Eurobank als aktionärsgetragen und Caixa Geral de Depósitos als öffentlich: 18 Quellenversuche, davon 17 neue Abrufe, bei höchstens vier Versuchen pro Bank. Bpifrance, RCI Banque und Crédit Agricole Italia bleiben mit konkreten nächsten Prüfschritten offen. Die Eurobank-Quelle beschreibt eine gestreute Aktionärsstruktur; dynamische Prozentwerte wurden nicht ausgelesen und eine Fairfax-Mehrheitskontrolle wird nicht behauptet. Die CGD-Satzung schreibt ausschließlich staatlichen Aktienbesitz vor.
 
 Für den gesamten Katalog mit 508 Kennungen wurden GLEIF-Daten gesucht; 505 Datensätze wurden gefunden. Drei Kennungen sind synthetische EBA-Gruppenkennungen. Für 436 der 475 Viewer-Institute wurden Websitekandidaten gefunden. Diese Kandidaten sind Recherchehinweise und kein Identitäts- oder Eigentumsnachweis. Zusätzlich wurden Konzernträger, aktuelle GLEIF-Konsolidierungsbeziehungen, Governance-Seiten und verlinkte Geschäftsberichte geprüft.
 
@@ -75,7 +75,7 @@ Die Schwellenwerte 0,20/0,30 liefern eine Nachbarschafts-Jaccard-Sensitivität. 
 
 [Messwerte](data_validation.json): 529 Berichte haben vollständige Fitdaten, 353 sind ausgeschlossen; 84 Konzernrepräsentationsdubletten werden nicht gefittet. Es entstehen 58 Cluster, davon 38 mit mindestens fünf Mitgliedern. Größte tatsächliche TREA-Spanne: **8,68-fach**. Median der definierten Cluster-Silhouetten: **0,3542**; die Trennung ist mäßig und rechtfertigt noch keine pauschale Aussage „bessere Peers“. Der vorherige Stand lag bei 0,2873; der Anstieg durch zusätzliche Einordnungen ist eine Modelldiagnose, kein unabhängiger Nachweis einer besseren Nutzerentscheidung.
 
-- 1.513 Unit-/Datentests bestanden, einschließlich fehlender Werte, Dimensionenkonflikte, Scale-Ausschlüsse, Frameworkgrenzen, Größe, Konzernbereinigung, Quellpflicht und Collectorfehlern.
+- 1.514 Unit-/Datentests bestanden, einschließlich fehlender Werte, Dimensionenkonflikte, Scale-Ausschlüsse, Frameworkgrenzen, Größe, Konzernbereinigung, Quellpflicht und Collectorfehlern.
 - Echte Chromium-Prüfung bei 1280 px/Englisch und 390 px/Deutsch: Filter, Perzentile, CSV, Quellen, Sprachwechsel, geteilte Links, Neuladen, Risikoansicht, veraltetes Cluster, fehlende Datei und ältere Veröffentlichung ohne Manifest; keine JavaScript-Fehler.
 - Standardstart lädt die Zusatzdatei nicht; die bisherige Standard-Perzentilberechnung bleibt gleich.
 - Reale Artefakte geprüft auf disjunkte Mitgliedschaften, Datums-/Scopegrenzen, Konzernbereinigung, maximale Distanz, Größenrahmen sowie Quell- und Manifesthashes.
@@ -83,6 +83,6 @@ Die Schwellenwerte 0,20/0,30 liefern eine Nachbarschafts-Jaccard-Sensitivität. 
 
 ## Offene Arbeit vor einer vollständigen Trägerschaftsabdeckung
 
-Die 290 offenen Institutsfälle einzeln anhand verifizierter Bankidentität und offizieller Eigentümer-/Stimmrechtsquellen abarbeiten. Dynamische Aktionärstabellen und blockierte Websites erfordern alternative offizielle Berichte oder Register. Weitere Trägerketten müssen bis zur tatsächlichen Kontrolle geprüft werden. Insbesondere sind genossenschaftliche Holding-Rechtsformen, Stiftungen, selbstständige Sparkassen und historische Eigentümerwechsel keine pauschalen Kategorien.
+Die 288 offenen Institutsfälle einzeln anhand verifizierter Bankidentität und offizieller Eigentümer-/Stimmrechtsquellen abarbeiten. Dynamische Aktionärstabellen und blockierte Websites erfordern alternative offizielle Berichte oder Register. Weitere Trägerketten müssen bis zur tatsächlichen Kontrolle geprüft werden. Insbesondere sind genossenschaftliche Holding-Rechtsformen, Stiftungen, selbstständige Sparkassen und historische Eigentümerwechsel keine pauschalen Kategorien.
 
 Issue #134 bleibt offen. Dieser Stand ist ein überprüfbarer Entwurf mit belastbaren Teilbelegen und getesteter Funktion; vollständige Recherche und fachliche Modellvalidierung stehen aus.

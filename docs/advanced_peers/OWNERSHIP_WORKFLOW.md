@@ -1,6 +1,6 @@
 # Eigentümerrecherche mit begrenztem Kontext
 
-Stand: 2. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach einem ersten Pilotpaket sind 185/475 Institute belegt, 290 bleiben offen. 234 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 56 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
+Stand: 2. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach zwei Recherchepaketen sind 187/475 Institute belegt, 288 bleiben offen. 232 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 56 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
 
 ## Feste Standardgrenzen
 
@@ -57,3 +57,11 @@ Das erste automatisierte Cache-Reviewpaket umfasste 947 Zeichen. Das ist ein tat
 ## Kontrolle
 
 Tests prüfen TREA-Reihenfolge, Scope-/Datumswahl, Mengen-/Dimensionskonflikte, Sperrfälle, Skip bereits geprüfter Institute, Wiederaufnahme, reine Cache-Läufe ohne Netzwerkzugriff, harte Kontextgrenze ohne Verlust vollständiger Belege und atomare Checkpoints. Eigentümerbelege und bankbezogene Konzernquellen werden separat geprüft. Auszüge können durch das Zeichenlimit unvollständig sein: vor einer Klassifikation muss die entscheidende Passage im archivierten/öffentlichen Original vollständig gelesen werden.
+
+## Zweites Paket: gezielte Quellenprüfung
+
+[Batch 002](ownership_batches/batch_002.json) prüft die nächsten fünf nach TREA: Bpifrance, Eurobank, RCI Banque, Caixa Geral de Depósitos und Crédit Agricole Italia. **18 Quellenversuche / 17 neue Abrufe**, höchstens vier je Institut. Gezielt ausgewählte URLs und Cachequellen ersetzen einen breiten erneuten Crawl. Eurobank und CGD wurden mit direkten offiziellen Eigentümerbelegen ergänzt; drei Fälle bleiben offen. Ein temporärer 502, ein falscher 404-Link und 403-Sperren sind technische Ergebnisse, keine Aussagen zur öffentlichen Verfügbarkeit der Eigentümerdaten.
+
+Das komprimierte Entscheidungs-JSON umfasst **4.423 Zeichen**; zusätzliche kurze Quellenprüfungen und Werkzeugausgaben sind darin nicht enthalten. Auch dieser Wert misst keine Gesamttokens. Das komplette versionierte Paket enthält außerdem Abrufprotokoll, Quellhashes und konkrete Nachprüfungen. Einzelcheckpoint-Dateien wurden im üblichen lokalen Ausgabeordner `interim/ownership_research/` gespeichert. Der nächste Lauf mit demselben Ausgabeordner überspringt diese bereits geprüften Fälle; die drei ungeklärten Banken bleiben in der Warteschlange und im Ledger und können gezielt wiederaufgenommen werden.
+
+Bei Crédit Agricole Italia wurde eine nur `ENTITY_SUPPLIED_ONLY` belegte GLEIF-Beziehung ausdrücklich nicht als vollständig corroboriert akzeptiert. Bei RCI fehlt noch die geprüfte Eigentümerstruktur des exakten Renault-Konzernträgers. Für Bpifrance ist der nächste Schritt ein amtlicher Beteiligungsbericht des Staates bzw. der Caisse des Dépôts mit genauer Rechtsträgerzuordnung. Aktuelle Trägerschaftslabels bilden keine historische Eigentümer-Zeitreihe; Eurobanks verwendete Aktionärsseite nennt den 4. September 2026.

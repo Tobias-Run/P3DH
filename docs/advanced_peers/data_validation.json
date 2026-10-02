@@ -5,6 +5,14 @@
     "website_no_ownership_passage": 128,
     "website_unavailable": 208
   },
+  "bounded_research_batch_002": {
+    "decision_bundle_chars": 4423,
+    "deferred": 3,
+    "institutions": 5,
+    "new_network_fetches": 17,
+    "newly_accepted": 2,
+    "page_attempts": 18
+  },
   "bounded_research_pilot": {
     "collector_review_bundle_chars": 947,
     "deferred": 4,
@@ -17,13 +25,13 @@
       {
         "clusters": 38,
         "language": "en",
-        "public_reports": 54,
+        "public_reports": 55,
         "width": 1280
       },
       {
         "clusters": 38,
         "language": "de",
-        "public_reports": 54,
+        "public_reports": 55,
         "width": 390
       }
     ],
@@ -32,7 +40,7 @@
   "clusters": 58,
   "clusters_with_at_least_five_members": 38,
   "coverage": {
-    "classified": 185,
+    "classified": 187,
     "eligible_reports": 529,
     "entities": 475,
     "excluded_reports": 353,
@@ -44,17 +52,17 @@
     "cooperative": 86,
     "mixed": 7,
     "mutual": 4,
-    "public": 25,
-    "shareholder": 63,
-    "unknown": 290
+    "public": 26,
+    "shareholder": 64,
+    "unknown": 288
   },
   "ownership_research_queue": {
     "metric": "TREA",
-    "pending_total": 290,
-    "rankable": 234
+    "pending_total": 288,
+    "rankable": 232
   },
-  "registry_rows": 213,
+  "registry_rows": 215,
   "reviewed_control_relationships": 55,
   "reviewed_document_chains": 5,
-  "unit_tests": 1513
+  "unit_tests": 1514
 }

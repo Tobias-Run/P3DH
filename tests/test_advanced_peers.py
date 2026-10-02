@@ -215,16 +215,38 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
         self.assertEqual(baseline,set(self.selection['unrankable_leis']) |
                          {r['lei'] for r in self.selection['ranking_candidates']})
 
-    def test_followup_document_evidence_has_bank_specific_control_and_reviewed_parent(self):
+    def test_followup_evidence_matches_explicit_registry_basis(self):
         for path in (ROOT/'docs/advanced_peers/ownership_batches').glob('*.json'):
             for case in json.loads(path.read_text())['accepted']:
                 record=self.registry[case['lei']]
-                self.assertEqual(record['ownership_basis'],'reviewed_document_chain')
-                self.assertEqual(record['controller_lei'],case['controller_lei'])
+                self.assertEqual(record['ownership_basis'],case['ownership_basis'])
+                self.assertEqual(record['ownership'],case['ownership'])
                 self.assertEqual(record['source_sha256'],case['ownership_evidence']['sha256'])
-                self.assertEqual(record['control_source_sha256'],case['control_evidence']['sha256'])
-                self.assertIn(case['name'],case['control_evidence']['quote'])
-                self.assertEqual(record['ownership'],self.registry[case['controller_lei']]['ownership'])
+                if case['ownership_basis']=='direct_ownership':
+                    self.assertEqual(record['evidence_quote'],case['ownership_evidence']['quote'])
+                    self.assertEqual(record['source_url'],case['ownership_evidence']['url'])
+                    self.assertFalse(record['controller_lei'])
+                else:
+                    self.assertEqual(record['ownership_basis'],'reviewed_document_chain')
+                    self.assertEqual(record['controller_lei'],case['controller_lei'])
+                    self.assertEqual(record['control_source_sha256'],case['control_evidence']['sha256'])
+                    self.assertIn(case['name'],case['control_evidence']['quote'])
+                    self.assertEqual(record['ownership'],self.registry[case['controller_lei']]['ownership'])
+
+    def test_targeted_batch_respects_budget_and_records_unresolved_proof(self):
+        batch=json.loads((ROOT/'docs/advanced_peers/ownership_batches/batch_002.json').read_text())
+        attempts=batch['page_attempts']
+        counts={lei:sum(row['lei']==lei for row in attempts)
+                for lei in {row['lei'] for row in attempts}}
+        self.assertEqual(len(counts),batch['batch_size'])
+        self.assertLessEqual(max(counts.values()),batch['limits']['page_attempts_per_bank'])
+        self.assertEqual(batch['new_network_fetches'],sum(row['new_network_fetch'] for row in attempts))
+        self.assertEqual(len(batch['accepted'])+len(batch['deferred']),batch['batch_size'])
+        self.assertTrue(all(case['next_action'] for case in batch['deferred']))
+        cgd=next(case for case in batch['accepted'] if case['lei']=='TO822O0VT80V06K0FH57')
+        self.assertIn('fully owned by the State',cgd['ownership_evidence']['quote'])
+        eurobank=next(case for case in batch['accepted'] if case['lei']=='213800KGF4EFNUQKAT69')
+        self.assertIn('04.09.2026',eurobank['ownership_evidence']['quote'])
 
     def test_accounting_assets_order_and_currency_overlay(self):
         values=self.selection['selected']
