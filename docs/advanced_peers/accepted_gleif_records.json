@@ -9758,6 +9758,154 @@
     },
     "type": "lei-records"
   },
+  "b9f5fc75563f562eb10b1ed829a185003077ed69529de2b9d2dee6d3cef95a75": {
+    "attributes": {
+      "bic": [
+        "SAOENO22XXX"
+      ],
+      "conformityFlag": "CONFORMING",
+      "entity": {
+        "associatedEntity": {
+          "lei": null,
+          "name": null
+        },
+        "category": "GENERAL",
+        "creationDate": "1970-06-10T00:00:00Z",
+        "eventGroups": [],
+        "expiration": {
+          "date": null,
+          "reason": null
+        },
+        "headquartersAddress": {
+          "addressLines": [
+            "Stasjonsgata 14"
+          ],
+          "addressNumber": null,
+          "addressNumberWithinBuilding": null,
+          "city": "Hokksund",
+          "country": "NO",
+          "language": "no",
+          "mailRouting": null,
+          "postalCode": "3300",
+          "region": "NO-30"
+        },
+        "jurisdiction": "NO",
+        "legalAddress": {
+          "addressLines": [
+            "Stasjonsgata 14"
+          ],
+          "addressNumber": null,
+          "addressNumberWithinBuilding": null,
+          "city": "Hokksund",
+          "country": "NO",
+          "language": "no",
+          "mailRouting": null,
+          "postalCode": "3300",
+          "region": "NO-30"
+        },
+        "legalForm": {
+          "id": "R71C",
+          "other": null
+        },
+        "legalName": {
+          "language": "no",
+          "name": "SPAREBANKEN ØST"
+        },
+        "otherAddresses": [],
+        "otherNames": [],
+        "registeredAs": "937 888 937",
+        "registeredAt": {
+          "id": "RA000472",
+          "other": null
+        },
+        "status": "ACTIVE",
+        "subCategory": null,
+        "successorEntities": [],
+        "successorEntity": {
+          "lei": null,
+          "name": null
+        },
+        "transliteratedOtherNames": [
+          {
+            "language": "no",
+            "name": "SPAREBANKEN OST",
+            "type": "AUTO_ASCII_TRANSLITERATED_LEGAL_NAME"
+          }
+        ]
+      },
+      "gem": null,
+      "lei": "5967007LIEEXZX51WW28",
+      "mic": null,
+      "ocid": "no/937888937",
+      "qcc": "QNOHP9SWNS",
+      "registration": {
+        "corroborationLevel": "FULLY_CORROBORATED",
+        "initialRegistrationDate": "2014-08-14T00:00:00Z",
+        "lastUpdateDate": "2026-07-22T05:31:00Z",
+        "managingLou": "549300O897ZC5H7CY412",
+        "nextRenewalDate": "2027-07-27T07:04:00Z",
+        "otherValidationAuthorities": [],
+        "status": "ISSUED",
+        "validatedAs": "937 888 937",
+        "validatedAt": {
+          "id": "RA000472",
+          "other": null
+        }
+      },
+      "spglobal": [
+        "884396"
+      ]
+    },
+    "id": "5967007LIEEXZX51WW28",
+    "links": {
+      "self": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28"
+    },
+    "relationships": {
+      "direct-children": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28/direct-children",
+          "relationship-records": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28/direct-child-relationships"
+        }
+      },
+      "direct-parent": {
+        "links": {
+          "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28/direct-parent-reporting-exception"
+        }
+      },
+      "field-modifications": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28/field-modifications"
+        }
+      },
+      "isins": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28/isins"
+        }
+      },
+      "lei-issuer": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28/lei-issuer"
+        }
+      },
+      "managing-lou": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28/managing-lou"
+        }
+      },
+      "ultimate-children": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28/ultimate-children",
+          "relationship-records": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28/ultimate-child-relationships"
+        }
+      },
+      "ultimate-parent": {
+        "links": {
+          "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX51WW28/ultimate-parent-reporting-exception"
+        }
+      }
+    },
+    "type": "lei-records"
+  },
   "bce18c69620e2fbbe57a5c780bb4af314d70d51eb7d8e5426acd8992baee2a05": {
     "attributes": {
       "bic": [

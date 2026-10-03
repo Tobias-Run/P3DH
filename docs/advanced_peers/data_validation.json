@@ -1,5 +1,5 @@
 {
-  "accepted_gleif_records": 88,
+  "accepted_gleif_records": 89,
   "automated_discovery_status_counts": {
     "evidence_collected": 139,
     "website_no_ownership_passage": 128,
@@ -25,13 +25,13 @@
       {
         "clusters": 37,
         "language": "en",
-        "public_reports": 60,
+        "public_reports": 62,
         "width": 1280
       },
       {
         "clusters": 37,
         "language": "de",
-        "public_reports": 60,
+        "public_reports": 62,
         "width": 390
       }
     ],
@@ -268,26 +268,257 @@
       "None": 3
     }
   },
-  "clusters": 59,
+  "campaign_next70c": {
+    "accepted": 11,
+    "baseline_commit": "85a3f653a256e2755fe42c30f49bc755260489b8",
+    "batches": [
+      {
+        "accepted": 1,
+        "banks": [
+          "5493002K643MZPQEK497",
+          "9695002JOWSRCLLLNY11",
+          "5493009VJC01E4H6HH77",
+          "959800R86KE31EAVRC30",
+          "BB3BGO3LCED63R8R9R41"
+        ],
+        "batch": "031",
+        "decision_bundle_chars": 3812,
+        "deferred": 4,
+        "new_network_fetches": 8,
+        "page_attempts": 9
+      },
+      {
+        "accepted": 0,
+        "banks": [
+          "815600B5C61A10BBB451",
+          "969500GVS02SJYG9S632",
+          "724500M4G9AVEMHMV291",
+          "54930060Q00W1SRIUI57",
+          "222100PG81CES7H3HZ28"
+        ],
+        "batch": "032",
+        "decision_bundle_chars": 3265,
+        "deferred": 5,
+        "new_network_fetches": 4,
+        "page_attempts": 8
+      },
+      {
+        "accepted": 1,
+        "banks": [
+          "213800GO21RWIB6O9Q29",
+          "635400LCCIYHUL6ELA34",
+          "5967007LIEEXZX76AW36",
+          "529900DSIVJWCUQUMP41",
+          "529900IRBZTADXJB6757"
+        ],
+        "batch": "033",
+        "decision_bundle_chars": 3683,
+        "deferred": 4,
+        "new_network_fetches": 7,
+        "page_attempts": 12
+      },
+      {
+        "accepted": 1,
+        "banks": [
+          "549300EHNXQVOI120S55",
+          "HWIPDOTRM1EKRPKYKH81",
+          "5967007LIEEXZX51WW28",
+          "2138002PVBMEHILJ1340",
+          "724500SF1CI8OD5AHI07"
+        ],
+        "batch": "034",
+        "decision_bundle_chars": 3471,
+        "deferred": 4,
+        "new_network_fetches": 6,
+        "page_attempts": 10
+      },
+      {
+        "accepted": 0,
+        "banks": [
+          "549300SGF4BS54YG8M65",
+          "549300JECLPX13NZLU57",
+          "254900WR3I1Z9NPC7D84",
+          "39120001JPAYYPDRNN92",
+          "2138007F5HA5FFJROB80"
+        ],
+        "batch": "035",
+        "decision_bundle_chars": 3098,
+        "deferred": 5,
+        "new_network_fetches": 3,
+        "page_attempts": 9
+      },
+      {
+        "accepted": 1,
+        "banks": [
+          "RG3IZJKPYQ4H6IQPIC08",
+          "529900TDG1TFZM39SF37",
+          "529900FZWXWNKF3O8394",
+          "529900Q2C3I7VCILLG45",
+          "2138005M92IEIQVEL297"
+        ],
+        "batch": "036",
+        "decision_bundle_chars": 3515,
+        "deferred": 4,
+        "new_network_fetches": 2,
+        "page_attempts": 10
+      },
+      {
+        "accepted": 0,
+        "banks": [
+          "9695007EQZDL89LUW373",
+          "529900UIRB65OY6U4B21",
+          "724500ZNT2I60RYZQI38",
+          "R1IO4YJ0O79SMWVCHB58",
+          "5493006Z4NTMNDDBGL49"
+        ],
+        "batch": "037",
+        "decision_bundle_chars": 3151,
+        "deferred": 5,
+        "new_network_fetches": 5,
+        "page_attempts": 9
+      },
+      {
+        "accepted": 2,
+        "banks": [
+          "81560017C4A61A529235",
+          "2138007JGI1M5YF7FJ53",
+          "529900RQOBT3ZJMDRK43",
+          "815600B6B356EC776E54",
+          "95980020140005658381"
+        ],
+        "batch": "038",
+        "decision_bundle_chars": 4174,
+        "deferred": 3,
+        "new_network_fetches": 7,
+        "page_attempts": 13
+      },
+      {
+        "accepted": 0,
+        "banks": [
+          "549300ZOE0EU2VKF6M35",
+          "529900UHDH7QLRMEJQ86",
+          "259400DAAAR5M4A6SI23",
+          "213800JF3JFF6MMR2P36",
+          "81560035485BD7DB3590"
+        ],
+        "batch": "039",
+        "decision_bundle_chars": 3306,
+        "deferred": 5,
+        "new_network_fetches": 4,
+        "page_attempts": 10
+      },
+      {
+        "accepted": 2,
+        "banks": [
+          "5299001PEMDU9N24CH60",
+          "529900SEFOTJH1MLGZ92",
+          "529900U5XAEYOT68AC40",
+          "QS3ZEAHRBZY9228Z0111",
+          "549300TEJKOLFN65KR76"
+        ],
+        "batch": "040",
+        "decision_bundle_chars": 4099,
+        "deferred": 3,
+        "new_network_fetches": 5,
+        "page_attempts": 9
+      },
+      {
+        "accepted": 1,
+        "banks": [
+          "213800UIIZ6YSEQB5S26",
+          "549300FRBP5L0O1HY885",
+          "529900OLW8QPFMTBDC23",
+          "529900VVDOKMRRAHZ894",
+          "549300RMML7KXP6M1Y98"
+        ],
+        "batch": "041",
+        "decision_bundle_chars": 3616,
+        "deferred": 4,
+        "new_network_fetches": 6,
+        "page_attempts": 10
+      },
+      {
+        "accepted": 0,
+        "banks": [
+          "9845009BE414FBF82130",
+          "549300M2IHOB9P5WE714",
+          "969500F3KYDJBFS4XM73",
+          "81560062CEAE87A85C80",
+          "529900XB6RQ3XCELQO62"
+        ],
+        "batch": "042",
+        "decision_bundle_chars": 3279,
+        "deferred": 5,
+        "new_network_fetches": 6,
+        "page_attempts": 9
+      },
+      {
+        "accepted": 1,
+        "banks": [
+          "213800ZOI1EW481WPV90",
+          "9695002K2HDLD20JU790",
+          "213800TKOS7J5UA3ZI07",
+          "8156003D79D064FB5360",
+          "529900BIK4WRWS06MR52"
+        ],
+        "batch": "043",
+        "decision_bundle_chars": 3664,
+        "deferred": 4,
+        "new_network_fetches": 7,
+        "page_attempts": 13
+      },
+      {
+        "accepted": 1,
+        "banks": [
+          "2534005A84927EKSR789",
+          "213800RENLNKMWZV8767",
+          "549300YV6LXRPJO3U576",
+          "959800VHSP2QBPNRF210",
+          "724500AG21Z9GIJE4735"
+        ],
+        "batch": "044",
+        "decision_bundle_chars": 4095,
+        "deferred": 4,
+        "new_network_fetches": 6,
+        "page_attempts": 11
+      }
+    ],
+    "campaign": "next_70_trea_c",
+    "deferred": 59,
+    "institutions": 70,
+    "limitations": "70 bounded reviews, not 70 accepted classifications. Script-rendered pages, missing chart text and PDF size limits require targeted follow-ups. Current ownership classification is not a historical ownership time series. Compact bundle characters are not measured chat tokens.",
+    "new_network_fetches": 76,
+    "page_attempts": 142,
+    "reviewed_at": "2026-10-03",
+    "selection": "Next 70 previously unreviewed pending TREA-ranked LEIs; previous checkpoints excluded; frozen before curation.",
+    "source_reuse": "Ten direct ownership classifications, including an explicit two-report France/Swiss/Holding/family chain; one canonical Norwegian R71C statutory bank form. No unreviewed parent inheritance or new controller classification.",
+    "status_counts": {
+      "200": 133,
+      "403": 3,
+      "404": 2,
+      "None": 4
+    }
+  },
+  "clusters": 60,
   "clusters_with_at_least_five_members": 37,
   "coverage": {
-    "classified": 222,
+    "classified": 233,
     "eligible_reports": 529,
     "entities": 475,
     "excluded_reports": 353,
     "group_duplicates": 84
   },
   "maximum_cluster_size_ratio": 8.880675784895631,
-  "median_cluster_silhouette": 0.361868,
+  "median_cluster_silhouette": 0.3542325,
   "ownership_counts": {
     "cooperative": 91,
-    "foundation": 1,
+    "foundation": 2,
     "mixed": 12,
-    "mutual": 5,
-    "public": 29,
-    "savings": 4,
-    "shareholder": 80,
-    "unknown": 253
+    "mutual": 6,
+    "public": 30,
+    "savings": 9,
+    "shareholder": 83,
+    "unknown": 242
   },
   "ownership_research_campaign_next70": {
     "accepted": 20,
@@ -309,11 +540,11 @@
   },
   "ownership_research_queue": {
     "metric": "TREA",
-    "pending_total": 253,
-    "rankable": 197
+    "pending_total": 242,
+    "rankable": 186
   },
-  "registry_rows": 251,
+  "registry_rows": 262,
   "reviewed_control_relationships": 65,
   "reviewed_document_chains": 10,
-  "unit_tests": 1518
+  "unit_tests": 1520
 }

@@ -1,6 +1,6 @@
 # Eigentümerrecherche mit begrenztem Kontext
 
-Stand: 3. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach den Paketen 001–030 sind 222/475 Institute belegt, 253 bleiben offen. 197 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 56 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
+Stand: 3. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach den Paketen 001–044 sind 233/475 Institute belegt, 242 bleiben offen. 186 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 56 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
 
 ## Feste Standardgrenzen
 
@@ -81,3 +81,11 @@ Die [zweite feste Auswahl](NEXT70B_OWNERSHIP.md) ergänzt **15 Belege**, 55 Fäl
 Die permanente Collector-Navigation berücksichtigt nun Satzungen (`vedtaegter`, `statut`, `satzung`) und selbständige Sparkassenformen. Sie verwirft Produktseiten zu Wohneigentum, Datenschutz, Personal, Geräteverlust und Kunden-Eigentümerhilfe. Die Regression prüft echte beobachtete Pfade; Quellen werden trotzdem vor jeder Einordnung manuell auf Bankidentität und Eigentümerbezug geprüft.
 
 Der First-Investment-Bank-Treffer `pinbank.ua` wurde als falsche ukrainische Bank verworfen und aus den aktuellen Websitekandidaten entfernt. Die korrekte bulgarische Bank ist über ihren LEI zu recherchieren. Grucajrural ist laut aktuellem GLEIF-Register inaktiv; der 2025-Bericht bestätigt die Aufnahme durch Banco Cooperativo. Historische Einordnung benötigt einen datierten Ansatz und bleibt offen.
+
+## Pakete 031–044: weitere 70 Fälle
+
+Die [dritte feste Auswahl](NEXT70C_OWNERSHIP.md) ergänzt **11 Belege**, 59 Fälle erhalten gezielte Nachprüfungen. 142 Quellenversuche / 76 neue Abrufe; maximal vier je Institut. Größtes Entscheidungs-JSON: **4,174 Zeichen**. Das misst keine Chat-Tokens. Zehn direkte Einordnungen umfassen zwei explizite 2025-Berichte für die France/Suisse/Holding/Familien-Kette; ein norwegischer R71C-Fall verwendet einen vorhandenen kanonischen GLEIF-Datensatz.
+
+Zusätzliche beobachtete Fallen: Unternehmensnachfolge, Anlegerkunden (`asset-owners`), Unternehmens-Eigentümerberatung, Immobilieneigentum und Dormant-Account-Berichte. Diese Produktpfade werden nun gefiltert. Tatsächliche Unternehmenspfade wie `om-sparekassen`, `om-middelfart`, `om-oss`, `o-nas` sowie estnisches `aktsionarid` werden berücksichtigt. Sitemaps werden nur als URL-Hinweise gelesen; sie beweisen keine Eigentümer.
+
+Die Kandidaten für FESTA HOLDING (falsche Bank) und ECCM (Domainverkauf) wurden entfernt, der frühere First-Investment-Bank-Identitätsfehler bleibt bereinigt. Bei Coop Pank sind 41 % Coop-Beteiligung und der Aktionärspakt archiviert: ein Vorkaufsrecht wird nicht als Mehrheit behandelt. Ein Satzungs-/Votenbeleg bleibt nötig. Gespeicherte Fälle werden übersprungen und können gezielt wiederaufgenommen werden; die verbleibende Queue umfasst 186 priorisierbare und 56 nicht eindeutig priorisierbare Kennungen.

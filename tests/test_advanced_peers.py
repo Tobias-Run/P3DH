@@ -250,7 +250,7 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
 
     def test_seventy_case_campaign_covers_fixed_selection_without_duplicate_acceptance(self):
         directory=ROOT/'docs/advanced_peers/ownership_batches'
-        for filename in ['campaign_next70.json','campaign_next70b.json']:
+        for filename in ['campaign_next70.json','campaign_next70b.json','campaign_next70c.json']:
             with self.subTest(campaign=filename):
                 self.check_seventy_case_campaign(directory,filename)
 
@@ -318,6 +318,31 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
         self.assertEqual(proof['majority_calculation']['as_of'],'2025-12-31')
         self.assertAlmostEqual(proof['majority_calculation']['share_percent'],51.825)
         self.assertEqual(case['ownership'],'cooperative')
+
+    def test_control_review_distinguishes_foundation_votes_from_names_and_coop_minority(self):
+        directory=ROOT/'docs/advanced_peers/ownership_batches'
+        frick=next(c for c in json.loads((directory/'batch_038.json').read_text())['accepted']
+                   if c['lei']=='529900RQOBT3ZJMDRK43')
+        self.assertEqual(frick['ownership'],'foundation')
+        self.assertIn('With voting rights: Kuno Frick Family Foundation',frick['ownership_evidence']['quote'])
+        self.assertIn('Without voting rights: PC capital',frick['ownership_evidence']['quote'])
+        coop=next(c for c in json.loads((directory/'batch_034.json').read_text())['deferred']
+                  if c['lei']=='549300EHNXQVOI120S55')
+        self.assertEqual(coop['unresolved_control_evidence']['cooperative_stakes_percent'],41)
+        self.assertNotIn(coop['lei'],self.registry)
+        signet=next(c for c in json.loads((directory/'batch_044.json').read_text())['accepted']
+                    if c['lei']=='2534005A84927EKSR789')
+        self.assertEqual(signet['ownership'],'shareholder')
+        self.assertIn('Investment company owned by the family',signet['ownership_evidence']['quote'])
+
+    def test_french_bank_ownership_requires_both_current_bank_and_owner_reports(self):
+        batch=json.loads((ROOT/'docs/advanced_peers/ownership_batches/batch_031.json').read_text())
+        case=next(c for c in batch['accepted'] if c['lei']=='9695002JOWSRCLLLNY11')
+        record=self.registry[case['lei']]
+        self.assertEqual(record['supporting_source_url'],case['supporting_ownership_evidence']['url'])
+        self.assertIn('France) est détenu à 100%',case['supporting_ownership_evidence']['quote'])
+        self.assertIn('2025 Edmond de Rothschild Holding S.A.',case['ownership_evidence']['quote'])
+        self.assertIn('famille Rothschild',case['ownership_evidence']['quote'])
 
     def test_accounting_assets_order_and_currency_overlay(self):
         values=self.selection['selected']

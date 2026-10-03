@@ -1,0 +1,155 @@
+{
+  "batch": "032",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 4,
+  "page_attempts": [
+    {
+      "lei": "815600B5C61A10BBB451",
+      "url": "https://www.bancasistema.it",
+      "status": 200,
+      "error": null,
+      "sha256": "aae388a03a59771c0c67bb4fd4621b7475750143329fb137b50ff465802353c2",
+      "retrieved_at": "2026-10-03T07:59:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600B5C61A10BBB451",
+      "url": "https://www.bancasistema.it/azionisti",
+      "status": 200,
+      "error": null,
+      "sha256": "6821af41ebc1de82d9c44997b05e0310ebaeec9df5ee7c498be7f5654cd1dd3b",
+      "retrieved_at": "2026-10-03T07:59:57Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "969500GVS02SJYG9S632",
+      "url": "https://www.carrefour-banque.fr",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:49Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "724500M4G9AVEMHMV291",
+      "url": "https://www.bunq.com",
+      "status": 200,
+      "error": null,
+      "sha256": "b3de8625e84ba1c1dc64abed2af8444ee2639c62a4d605feced7f0a2a2441253",
+      "retrieved_at": "2026-10-03T07:59:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500M4G9AVEMHMV291",
+      "url": "https://www.bunq.com/about",
+      "status": 200,
+      "error": null,
+      "sha256": "3a4f4ae8e96f1e1247cfbba6d6a2c10dbeb588f926dca303a1cd39f28b0be5ef",
+      "retrieved_at": "2026-10-03T07:59:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "54930060Q00W1SRIUI57",
+      "url": "https://www.vdk.be/",
+      "status": 200,
+      "error": null,
+      "sha256": "47490174c0412db19b9e2c614e38894a30574ff34bdab9296afd016aafdbfff7",
+      "retrieved_at": "2026-10-02T16:33:02Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "54930060Q00W1SRIUI57",
+      "url": "https://www.vdk.be/nl/corporate-governance",
+      "status": 200,
+      "error": null,
+      "sha256": "a1080d6faf6807fc3a8d627ecdef8c0abee0a84993ee06a074aa38110be09b3f",
+      "retrieved_at": "2026-10-02T16:33:07Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "222100PG81CES7H3HZ28",
+      "url": "https://www.banquehavilland.com",
+      "status": 200,
+      "error": null,
+      "sha256": "24703c9b207f749f8653b5f3ad83ee4786b0ba755a5db9181e7968cbbea3bfc9",
+      "retrieved_at": "2026-10-02T16:48:39Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "815600B5C61A10BBB451",
+      "name": "BANCA SISTEMA S.P.A.",
+      "rank": 114,
+      "trea_eur": 1681277239.31,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Current bank table identifies Banca CF+ at 85.67% after June 2026 offer. Verify the exact CF+ controlling owners/votes and ownership category through filed reports before classifying Banca Sistema; former foundation stakes may be outdated.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "969500GVS02SJYG9S632",
+      "name": "Carrefour banque",
+      "rank": 115,
+      "trea_eur": 1654455174.41,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use an alternative official Carrefour group annual report with Carrefour Banque subsidiary ownership and exact parent shareholder/voting table; do not retry the denied bank host.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.carrefour-banque.fr",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    },
+    {
+      "lei": "724500M4G9AVEMHMV291",
+      "name": "bunq Holding B.V.",
+      "rank": 116,
+      "trea_eur": 1648837829.5974877,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review exact bunq Holding BV, rather than only the regulated bank, in current Dutch filed accounts for Ali Niknam/other capital and differentiated control rights. Retail about page is not holding ownership proof.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "54930060Q00W1SRIUI57",
+      "name": "vdk bank",
+      "rank": 117,
+      "trea_eur": 1621452423.172,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Current vdk source identifies individuals and Christian labour social organisations with a majority shareholder pact, but lacks named percentage/control allocation. Review current pact and issuer share table; welfare/cooperative/mutual minority labels are not necessarily the controlling type.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "222100PG81CES7H3HZ28",
+      "name": "Aneto S.à r.l.",
+      "rank": 118,
+      "trea_eur": 1616964000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use exact Aneto holding filed Luxembourg accounts and completed control notices; Banque Havilland website and historic Rowland links do not establish current holding ownership or bank licence status.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

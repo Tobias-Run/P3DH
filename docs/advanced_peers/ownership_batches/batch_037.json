@@ -1,0 +1,164 @@
+{
+  "batch": "037",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 5,
+  "page_attempts": [
+    {
+      "lei": "9695007EQZDL89LUW373",
+      "url": "https://www.banorientfrance.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "df028eca7950785f63d3a2e2f5fd810c8168b397596eccc00313efaf6e0c9026",
+      "retrieved_at": "2026-10-02T16:33:44Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "9695007EQZDL89LUW373",
+      "url": "https://www.banorientfrance.com/english/about-the-bank/services",
+      "status": 200,
+      "error": null,
+      "sha256": "47e8a7a9bc282b8e338cc271f847ec1005f86fddd814934acdf944a1af4618b6",
+      "retrieved_at": "2026-10-02T16:33:46Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900UIRB65OY6U4B21",
+      "url": "https://www.lombardmalta.com",
+      "status": 200,
+      "error": null,
+      "sha256": "89295f549cb2b3f7c9c9d8d445e64c9d7d7aa9138d492321bd1a4e6835dd8862",
+      "retrieved_at": "2026-10-02T16:54:20Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900UIRB65OY6U4B21",
+      "url": "https://www.lombardmalta.com/en/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "6419cfad2b1797442a55bab72d0220655d09f21802f47419fa7f057bf0de049c",
+      "retrieved_at": "2026-10-02T16:54:21Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "724500ZNT2I60RYZQI38",
+      "url": "https://www.anadolubank.nl",
+      "status": 200,
+      "error": null,
+      "sha256": "61ade78edc1af0c78584c1ab89a34745aa2c9f416d5f1d94db709824fdf25d4b",
+      "retrieved_at": "2026-10-03T08:00:09Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500ZNT2I60RYZQI38",
+      "url": "https://www.anadolubank.nl/anadolubank/corporate-governance",
+      "status": 200,
+      "error": null,
+      "sha256": "b8752128ce90111e719fd10e973a8a42848dc5e1566688f63a4d62ec7b926bdb",
+      "retrieved_at": "2026-10-03T08:00:10Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "R1IO4YJ0O79SMWVCHB58",
+      "url": "https://www.lch.com",
+      "status": 200,
+      "error": null,
+      "sha256": "c12f80cb99df8081a11f97285e2909888748b291badab86daf730a3610882750",
+      "retrieved_at": "2026-10-03T08:00:09Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "R1IO4YJ0O79SMWVCHB58",
+      "url": "https://www.lseg.com/en/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "b64f797dccca11e7db5fbfb853431ca765f3972259da23ab558ff463a162d91b",
+      "retrieved_at": "2026-10-03T08:00:10Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493006Z4NTMNDDBGL49",
+      "url": "https://www.eccmbank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "9a7ccb4232ea3ee7a56adf13c759632b16e28d60bf302ef96a6e94dcf3cdc508",
+      "retrieved_at": "2026-10-03T08:00:10Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "9695007EQZDL89LUW373",
+      "name": "Banque Banorient France",
+      "rank": 139,
+      "trea_eur": 1044113535.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review exact Banorient France owner and upstream BLOM shareholder/vote structure in current filed bank/group reports; bank service page and ENTITY_SUPPLIED_ONLY relation do not prove ultimate control.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900UIRB65OY6U4B21",
+      "name": "Lombard Bank Malta plc",
+      "rank": 140,
+      "trea_eur": 1027828499.7727244,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Obtain current Lombard Bank Malta shareholder table with Malta government fund and other holders, dating recent transactions. The 1969 wholly owned subsidiary description is historical and cannot supply current ownership.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "724500ZNT2I60RYZQI38",
+      "name": "Anadolubank Nederland N.V.",
+      "rank": 141,
+      "trea_eur": 1025473885.1095,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Anadolubank Nederland current filed annual-report owner table and Turkish HABAŞ owner evidence with exact entities; governance landing is not ownership proof.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "R1IO4YJ0O79SMWVCHB58",
+      "name": "Banque centrale de compensation",
+      "rank": 142,
+      "trea_eur": 995639124.84,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Classify exact LSEG parent from current major-owner voting disclosures, then review the fully corroborated Banque centrale de compensation relation and bank-specific LCH SA identity; global LSEG about page is not a shareholder source.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "5493006Z4NTMNDDBGL49",
+      "name": "ECCM Bank plc",
+      "rank": 143,
+      "trea_eur": 947763385.38,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Discard eccmbank.com as current candidate: it redirects to a domain-for-sale marketplace. Start from exact Malta ECCM Bank registered identity and regulator/current filed accounts; domain purchase ownership text is unrelated to bank capital.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "invalid_candidate_evidence": {
+        "url": "https://domains.atom.com/lpd/name/eccmbank.com",
+        "requested_url": "https://www.eccmbank.com",
+        "sha256": "9a7ccb4232ea3ee7a56adf13c759632b16e28d60bf302ef96a6e94dcf3cdc508",
+        "quote": "ECCMBank.com — Domain For Sale | Atom Inc. 5000 honoree, 5 years running! Grateful to be named one of America’s fastest-growing companies, again. Read more 4.7 on Trustpilot (847) 597-0044 Chat Email Help Desk 0 Premium Domains Premium Domain Marketplace Ultra Premium Marketplace Sapphire Marketplace Top Domain Collections AI DomainsPopular One-Word Domains Short Domains Domains for Rent Lease-to-Own Domains All Domain Collections Domain Services Domain Broker Domain Transactions Domain Appraisal Domain Auctions Register Domains Register a Domain AI Domain Name Generator Transfer a Domain Explore More Domain ExtensionsPopular - .ai Schedule Domain TransfersNew WHOIS Domain Lookup Naming & Branding Name Your Company Hire Our Naming Agency Human Naming Contests Free Tools LLC Formation AI Naming Contest Business Name Generator How to Name a Business/Product Trademark Filing Trademark Search AI Name Testing AI Logo Generator AI Audience Testing Build a Brand Partners Partner With Atom Partnership APIs MCP Server White Label Marketplace About About Us Case Studies Testimonials Blog (847) 597-0044 Chat Email Help Desk Shortlist Domain for sale ECCMBank.com 0 See it live → Secure transactionYour payment is protected Fast transferTypically delivered within 24 hours Flexible paymentsMultiple payment options available ECCMBank.com One-time price$3,000 Buy now → Purchase this domain View comparable sales → Buy now$3,000one-time Lease to own$1,000/mo × 3 Start using your domain immediat"
+      }
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

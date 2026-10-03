@@ -23,7 +23,7 @@ import urllib.request
 
 AGENT='P3DH-research/1.0 (https://github.com/Tobias-Run/P3DH)'
 KEYWORDS=re.compile(r'co.operativ|genossenschaft|mutual|member.owned|customer.owned|sharehold|ownership|owned by|majority.owned|public.law|state.owned|government.owned|selveiende|selvejende|aktionär|eigentüm|trägerschaft|träger der|actionnair|sociétaire|participaci[oó]n|accionist|azionist|propriet|soci[ée]t[ée] coop|cooperativa|skarb|udziałow|omistaj|aandeelhoud|eigena|ägar|eiere|self.owned',re.I)
-GOVERNANCE=re.compile(r'about|profil|sharehold|ownership|owner|aktion|eigent|traeger|actionna|governance|corporate|annual.report|gesch[aä]ft|unternehmen|ueber|über|ejer|selve[i]?ende|selvejende|azionist|omist|aandeel|investor|rapport|cooperat|groupe|group/|vedt(?:ae|a|æ)gt|statut|satzung',re.I)
+GOVERNANCE=re.compile(r'about|profil|sharehold|ownership|owner|aktion|aktsion|eigent|traeger|actionna|governance|corporate|annual.report|gesch[aä]ft|unternehmen|ueber|über|ejer|selve[i]?ende|selvejende|azionist|omist|aandeel|investor|rapport|cooperat|groupe|group/|vedt(?:ae|a|æ)gt|statut|satzung|om-oss|om-sparekassen|om-middelfart|om-merkur|gremien|o-nas|par-mums',re.I)
 
 
 def governance_priority(url):
@@ -31,10 +31,12 @@ def governance_priority(url):
     path=urllib.parse.unquote(urllib.parse.urlparse(url).path)
     if re.search(r'ejerbolig|eierbolig|privatliv|privacy|cookie|lost-device|'
                  r'shareholders?-meeting|karriere|careers|jobs|contact|'
-                 r'financing|trade-finance|ressourcen-des-eigentuemers',path,re.I):
+                 r'financing|trade-finance|ressourcen-des-eigentuemers|'
+                 r'ejerskifte|virksomhedsejer|immobilieneigent|asset-owners|'
+                 r'digitale-vaerktoejer|rapporti-dormienti',path,re.I):
         return None
     if not GOVERNANCE.search(path):return None
-    if re.search(r'sharehold|ownership|owner|aktion|eigent|actionna|azionist|'
+    if re.search(r'sharehold|ownership|owner|aktion|aktsion|eigent|actionna|azionist|'
                  r'omist|ejer|selvejende|selveiende|vedt(?:ae|a|æ)gt|statut|satzung',path,re.I):return 1
     if re.search(r'annual|geschaeft|geschäft|report|rapport',path,re.I):return 2
     return 4

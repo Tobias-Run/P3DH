@@ -17,6 +17,11 @@ class EvidenceCollectionTest(unittest.TestCase):
         for path in ['/privat/bolig/ejerbolig', '/report-lost-device/',
                      '/om-sparekassen/privatlivspolitik-for-lejere',
                      '/investor-relations/shareholders-meeting',
+                     '/our-clients/asset-owners',
+                     '/private-banking/raadgivning/virksomhedsejer',
+                     '/ziele-wuensche/vom-mieter-zum-immobilieneigentuemer',
+                     '/it/rapporti-dormienti/',
+                     '/privat/produkter/digitale-vaerktoejer/',
                      '/hilfe/ressourcen-des-eigentuemers/ford-bank']:
             with self.subTest(path=path):
                 self.assertIsNone(research.governance_priority('https://bank.example'+path))
@@ -25,6 +30,12 @@ class EvidenceCollectionTest(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertEqual(research.governance_priority('https://bank.example'+path),1)
         self.assertEqual(research.governance_priority('https://bank.example/annual-report'),2)
+        self.assertEqual(research.governance_priority('https://bank.example/investorile/juhtimine/aktsionarid'),1)
+        for path in ['/om-middelfart-sparekasse/vores-historie',
+                     '/om-sparekassen/om-os', '/sv/privat/om-oss/om-sparbanken-syd',
+                     '/o-nas/about-bank-pocztowy']:
+            with self.subTest(path=path):
+                self.assertEqual(research.governance_priority('https://bank.example'+path),4)
         self.assertIsNone(research.governance_priority('https://owner.example/products'))
 
     def test_batch_priority_and_resume_do_not_repeat_attempted_cases(self):
