@@ -28,6 +28,8 @@ validation. German-language documents are marked where applicable.
 
 ## Viewer and performance
 
+- [Advanced peer groups and ownership research](advanced_peers/REPORT.md) *(German, draft)*
+
 - [Viewer design](viewer_redesign.md) *(German)*
 - [Performance review](performance_review.md) *(German)*
 - [Performance implementation](performance_implementation.md) *(German)*

@@ -1,0 +1,72 @@
+# Trägerschaft: 30 große bisher ungeprüfte Institute
+
+Stand: 2. Oktober 2026. Ergänzung zu [Issue #134](https://github.com/Tobias-Run/P3DH/issues/134) und [PR #135](https://github.com/Tobias-Run/P3DH/pull/135). Noch nicht produktiv.
+
+**Alle 30 ausgewählten Institutskennungen sind mit Eigentümerquellen ergänzt.** Die Abdeckung steigt von 154 auf 184 der 475 Viewer-Institute; 291 bleiben zur manuellen Prüfung offen. Im Register stehen nun 212 Einträge einschließlich separat geprüfter Konzernträger außerhalb des Viewers.
+
+## Auswahl nach Bilanzsumme
+
+Der eingefrorene Ausgangsbestand umfasst die 321 zuvor ungeprüften Kennungen. Verwendet wurde die positive, nicht dimensionswidersprüchliche Bilanzsumme aus LR1 (`70.00`, Zeile 0010, Spalte 0010), ersatzweise LI1 (`64.01.B`, gleicher Zellort): Vermögenswerte der veröffentlichten Rechnungslegung, **kein TREA-Ersatz**. Je Kennung wird der jüngste verfügbare Datenstichtag gewählt, bei gleichem Datum der konsolidierte Bericht. 191 Kennungen haben einschlägige Zellen, zwei scheiden wegen Widersprüchen aus. Für ING Bank, KBC und DNB wurden offizielle Konzernbilanzen 2025 ergänzt. Somit sind 192 Kennungen priorisierbar; 129 bleiben ohne ausreichend eindeutige Bilanzsumme.
+
+**Die Liste zeigt die größten 30 unter den belegbaren 192 Fällen. Eine abschließende Rangliste aller 321 ist damit nicht bewiesen.** Die Suche wurde um große Institute mit fehlender Hub-Bilanzsumme erweitert; TREA diente dabei ausschließlich als Recherchehinweis. Stichtage sind nicht einheitlich. Konsolidierte Bilanzen können Versicherungsgeschäfte enthalten (z. B. KBC); JPMorgan SE ist dagegen hier nach ihrem veröffentlichten IND-Bericht eingeordnet. Daher ist dies eine Recherchepriorität, keine bereinigte Branchenrangliste.
+
+[Eingefrorene Auswahl, Kandidaten und Quellen](top30_selection.json) · [SQL-Auswahl](top30_assets.sql) · [30 Einordnungen als CSV](top30_ownership.csv) · [Belegpassagen und Konzernnachweise](top30_ownership_evidence.json). Die JSON-Auswahl enthält den Hash des Ausgangsregisters und des verwendeten Parquets, alle 321 Ausgangskennungen, alle priorisierbaren Werte sowie die nicht priorisierbaren Kennungen.
+
+## Ergänzte Institute
+
+Bilanzsummen in Mrd. EUR; Umrechnung von NOK mit dem bereits im Datensatz verwendeten ECB-Stichtagsfaktor (31.12.2025: 0,08444 EUR/NOK). Eigentümerinformationen entsprechen jeweils dem angegebenen Quellenstand und sind keine rückwirkende historische Zuordnung.
+
+| Rang | Institut | Bilanzsumme | Bilanzstichtag | Trägerschaft | Nachweis |
+|---:|---|---:|---|---|---|
+| 1 | ING BANK N.V. | 1054.51 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://ing.com/binaries/content/assets/documents/annual-reports/2025-ing-groep-nv-form-20-f.pdf) · [Konzern](https://ing.com/binaries/content/assets/documents/annual-reports/2025-ing-bank-nv-annual-report.pdf) |
+| 2 | Banco Bilbao Vizcaya Argentaria, S.A. | 859.58 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://shareholdersandinvestors.bbva.com/wp-content/uploads/2026/02/17_2025_Annual_Corporate_Governance_Report.pdf) |
+| 3 | CaixaBank, S.A. | 664.04 | 2025-12-31 | Gemischte Trägerschaft | [Eigentümer](https://www.caixabank.com/en/shareholders-investors/caixabanks-share/capital-distribution.html) |
+| 4 | COMMERZBANK Aktiengesellschaft | 590.09 | 2025-12-31 | Gemischte Trägerschaft | [Eigentümer](https://www.deutsche-finanzagentur.de/stabilisierungsmassnahmen/finanzmarktstabilisierungsfonds/massnahmen) |
+| 5 | J.P. Morgan SE | 448.74 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/proxy-statement2026.pdf) · [Konzern](https://www.jpmorgan.com/content/dam/jpm/global/disclosures/de/2025-annual-report-eng.pdf) |
+| 6 | Danske Bank A/S | 427.88 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://danskebank.com/-/media/danske-bank-com/file-cloud/2026/2/corporate-governance-report-2025.pdf?rev=0bfb0ceff47e401f83462997d50dfac3) |
+| 7 | ABN AMRO Bank N.V. | 413.21 | 2025-12-31 | Gemischte Trägerschaft | [Eigentümer](https://downloads.ctfassets.net/1u811bvgvthc/688tP3vcLbHAgEsUavbdMR/22bd74bf45996df3f6e76b0893ecc950/ABN_AMRO_Bank_-_Annual_Report_2025.pdf#page=15) |
+| 8 | KBC Groupe | 397.37 | 2025-12-31 | Gemischte Trägerschaft | [Eigentümer](https://www.kbc.com/en/investor-relations/shareholder-information/shareholder-structure.html) · [Ergänzung](https://www.cera.coop/nl/particulieren/over-cera) |
+| 9 | Skandinaviska Enskilda Banken - gruppen | 339.21 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://tools.euroland.com/majorshareholder/s-seb_new/?lang=english) · [Ergänzung](https://sebgroup.com/investor-relations/the-share/largest-shareholders) |
+| 10 | DNB Bank ASA | 312.03 | 2025-12-31 | Gemischte Trägerschaft | [Eigentümer](https://www.ir.dnb.no/share/largest-shareholders) |
+| 11 | Svenska Handelsbanken - gruppen | 284.42 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://www.handelsbanken.com/en/investor-relations/the-share/the-shareholders) |
+| 12 | Swedbank - Grupp | 283.03 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://widget.datablocks.se/api/rose/widgets/owner-list?token=4c2cebc0-49fb-42f2-80a6-e6ed9b182026&stylesheet=swedbank-colors.css) · [Ergänzung](https://www.swedbank.com/investor-relations/the-share/shareholders.html) |
+| 13 | HSBC Continental Europe | 251.39 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf) · [Konzern](https://api.gleif.org/api/v1/lei-records/F0HUI1NY1AZMJMD8LP67/ultimate-parent-relationship) |
+| 14 | Banco de Sabadell, S.A. | 248.89 | 2026-03-31 | Aktionärsgetragen | [Eigentümer](https://www.cnmv.es/portal/Consultas/DerechosVoto/Notificaciones-Participaciones?qS={e43ff780-aa5b-4bde-8c18-6bc594a15233}) |
+| 15 | Banca Monte dei Paschi di Siena S.p.A. | 241.64 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://www.gruppomps.it/en/corporate-governance/shareholding-structure.html) |
+| 16 | Euroclear Holding | 226.90 | 2025-12-31 | Gemischte Trägerschaft | [Eigentümer](https://sfpim.be/uploads/2026/04/BE0253445063-20260402-VOL-kap-nl.pdf) · [Ergänzung](https://novoholdings.com/investments/euroclear) |
+| 17 | Goldman Sachs Bank Europe SE | 216.77 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://www.sec.gov/Archives/edgar/data/886982/000119312526117433/gs-20260319.htm) · [Konzern](https://api.gleif.org/api/v1/lei-records/8IBZUGJ7JPLH368JE346/ultimate-parent-relationship) |
+| 18 | BANCO BPM SOCIETA' PER AZIONI | 205.90 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://gruppo.bancobpm.it/en/investor-relations/share-price-shareholding-documents/) |
+| 19 | BPER Banca S.p.A. | 204.65 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://group.bper.it/en/investor-relations/shareholders) |
+| 20 | Volkswagen Financial Services AG | 202.27 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://www.porsche-se.com/en/investor-relations/shareholder-structure) · [Konzern](https://api.gleif.org/api/v1/lei-records/529900SSGT49ZZSWYE62/ultimate-parent-relationship) |
+| 21 | Citibank Europe plc | 199.59 | 2025-06-30 | Aktionärsgetragen | [Eigentümer](https://www.citigroup.com/rcs/citigpa/storage/public/Annual_Report/2025/2026-citi-proxy-statement.pdf) · [Konzern](https://www.sec.gov/Archives/edgar/data/831001/000083100126000011/citi-exh2101x12312025.htm) |
+| 22 | Belfius Bank | 192.85 | 2025-12-31 | Öffentlich | [Eigentümer](https://www.belfius.be/about-us/en/corporate-governance/group-structure) |
+| 23 | ICCREA BANCA S.P.A. - ISTITUTO CENTRALE DEL CREDITO COOPERATIVO (IN FORMA ABBREVIATA: ICCREA BANCA S.P.A.) | 167.65 | 2025-12-31 | Genossenschaftlich | [Eigentümer](https://www.iccreabanca.it/DocumentiBilancio/Financial/Reports%20and%20consolidated%20and%20separate%20financial%20statements%20at%20decembre%2031%2C%202025.pdf) |
+| 24 | Bank of Ireland Group plc | 164.80 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://investorrelations.bankofireland.com/app/uploads/Annual-Report-HoldCo-2025-WEB-high-res.pdf) |
+| 25 | AIB Group plc | 148.15 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://www.aib.ie/content/dam/frontdoor/investorrelations/docs/se-announcements/2025/aib-group-plc-statement-on-return-to-full-private-ownership-17062025.pdf) |
+| 26 | Stadshypotek AB | 147.47 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://www.handelsbanken.com/en/investor-relations/the-share/the-shareholders) · [Konzern](https://api.gleif.org/api/v1/lei-records/549300UOX05QGUJJ5707/ultimate-parent-relationship) |
+| 27 | Powszechna Kasa Oszczednosci Bank Polski S.A. | 138.14 | 2025-12-31 | Gemischte Trägerschaft | [Eigentümer](https://www.pkobp.pl/en/investor-relations/investor) |
+| 28 | Barclays Bank Ireland plc | 132.41 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://www.sec.gov/Archives/edgar/data/312069/000031206926000004/bcs-20251231.htm) · [Konzern](https://api.gleif.org/api/v1/lei-records/2G5BKIC2CB69PRJH1W31/ultimate-parent-relationship) |
+| 29 | Bankinter, S.A. | 131.02 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://www.cnmv.es/portal/Consultas/DerechosVoto/Notificaciones-Participaciones?qS={fae7fde6-f13b-4e05-9c35-7dc081866a53}) |
+| 30 | BofA Securities Europe SA | 116.56 | 2025-12-31 | Aktionärsgetragen | [Eigentümer](https://d1io3yog0oux5.cloudfront.net/_2d7333429ef3d80812f60e8a0751979c/bankofamerica/db/867/10497/proxy_statement/BAC+2026+Proxy+Statement.pdf) · [Konzern](https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-1231202510xkex21.htm) |
+
+## Kritische Einordnungen
+
+- **AIB:** Die Bank bestätigt die vollständige Privatisierung am 17. Juni 2025. **Belfius:** Eigentum des belgischen Bundesstaats über SFPI-FPIM; geplante Anteilsverkäufe gelten erst nach nachgewiesenem Vollzug.
+- **ABN AMRO, Commerzbank, PKO und DNB:** Materielle staatliche Beteiligungen neben anderen Aktionären. „Gemischt“ behauptet weder eine staatliche Mehrheit noch abschließend geprüfte faktische Kontrolle. PKO: Staat 29,43 %; DNB: Regierung 34,4 %, Stiftung 8,9 %, Folketrygdfondet 6,5 %. Die Stimmrechts-/Kontrollanalyse bleibt bei diesen Minderheitsstrukturen eine gesonderte Aufgabe.
+- **CaixaBank:** Stiftung 31 %, FROB 18 %, Streubesitz 50,7 % (30.06.2026): gemischte Trägerschaft. **KBC:** Cera ist eine Genossenschaft; mit KBC Ancora, MRBB und weiteren Kernaktionären besteht ein rund 42 % umfassender Aktionärspakt. Das belegt einen genossenschaftlichen Anker, keine vollständig genossenschaftliche Bank.
+- **Euroclear Holding:** SFPIM-Jahresabschluss 2025 nennt 13,25 % (Unternehmensnummer 0700.808.073); Novo Holdings bestätigt separat seine aktuelle Beteiligung und die Verwaltung des Vermögens der privaten Novo-Nordisk-Stiftung. Gemischte öffentliche/Stiftungsbeteiligung; die gesamte Eigentümerstruktur und mögliche gemeinsame öffentliche Kontrolle sind damit nicht abschließend rekonstruiert. Die neben dem Anteil ausgewiesenen Finanzzahlen der Beteiligung beziehen sich teils auf 2024 und werden nicht als Bilanzsumme 2025 übernommen.
+- **Swedbank, Handelsbanken, SEB, Danske, BPER und MPS:** Sparkassen, Stiftungen, Versicherer oder ein öffentlicher Restanteil unter den Aktionären machen eine Bank nicht automatisch genossenschaftlich, stiftungsgetragen oder staatlich kontrolliert. Die Einordnung bleibt aktionärsgetragen; Eigentümeranker und Anteile sind separat dokumentiert. MPS: MEF 4,86 %. BPER: Unipol 20 %, Sardegna-Stiftung 7,4 % (01.10.2026).
+- **Banco BPM:** Crédit Agricole 29,30 % laut Bankquelle vom 24.07.2026. Die genossenschaftliche Trägerschaft eines Minderheitsinvestors wird nicht auf die Bank übertragen.
+- **VW Financial Services:** Die explizit geprüfte Konzernkette endet bei Porsche SE, deren stimmberechtigte Stammaktien indirekt vollständig den Familien Porsche/Piëch gehören. Öffentliche Minderheitsanteile in Volkswagen bedeuten keine staatliche Mehrheitskontrolle der Bank.
+- **Dynamische Tabellen:** SEB (Euroland) und Swedbank (Modular Finance) verwenden durch die Bank eingebettete öffentliche Tabellen. Die Einbettungsseiten werden zusätzlich belegt; hier sind Eigentümertabellen von beauftragten Dienstleistern verwendet, keine unbestätigten Drittportale.
+- **Konzernketten:** Fünf neue Fälle haben aktive, vollständig corroborierte GLEIF-Beziehungen. Vier weitere Fälle (ING Bank, JPMorgan SE, Citibank Europe und BofA Securities Europe) sind ausdrücklich als `reviewed_document_chain` anhand des Bankgeschäftsberichts bzw. SEC-Tochterverzeichnisses gespeichert. Ein SEC-Tochterverzeichnis belegt Konzernzugehörigkeit, nicht zwingend 100 % Anteilsbesitz. Konzernträger und Banknachweis sind getrennte Quellen.
+
+„Aktionärsgetragen“ ersetzt im Viewer die zu pauschale Beschriftung „Private Aktionäre / Eigentümer“. Die Kategorie kann Minderheitsbeteiligungen öffentlicher Anleger oder Stiftungen enthalten; sie behauptet keine ausschließlich private Kapitalbasis. „Gemischt“ bezeichnet hier die ausdrücklich geprüften strukturellen Anker aus unterschiedlichen Trägerformen, nicht jede kleine Portfoliobeteiligung. Eine einheitliche, vollständig kontrollorientierte Taxonomie und historische Eigentümerzuordnung bleiben Weiterentwicklungspunkte.
+
+## Befund zur Währung: Bank Millennium
+
+Bank Millennium stand zunächst mit rund 145,96 Mrd. EUR in der Auswahl. Der offizielle Halbjahresbericht 2025 nennt für denselben Betrag ausdrücklich **145.956 Mio. PLN** zum 30.06.2025. In der normalisierten Hub-Zelle steht EUR bei FX = 1; Zahlenwert und Quellenwährung passen damit nicht zusammen. Für die Recherchepriorität ergibt die Umrechnung mit 0,23572 EUR/PLN rund **34,40 Mrd. EUR**. Die Bank fällt aus den ausgewählten 30. Die Korrektur ist ausschließlich als dokumentierte Auswahlüberlagerung gespeichert; die ursprünglichen Facts werden hier nicht geändert. Eine separate Datenprüfung ist erforderlich, bevor der Viewer monetäre Kennzahlen dieser Bank als bereinigt ausweist.
+
+## Validierung
+
+Die aktualisierte Klassifikation wird durch denselben Shard-/Cluster-Build verarbeitet. Quell- und Manifesthashes, 30 eindeutige neue Kennungen aus dem eingefrorenen Bestand, getrennte Konzernnachweise sowie Größen-/Datums-/Scopegrenzen werden geprüft. Unit- und Browserergebnisse stehen im [Gesamtbericht](REPORT.md#messung-und-tests). HTTP-/TLS-Fehler wurden nicht als fehlende Eigentümerinformation interpretiert; gesperrte Zugänge wurden nicht umgangen.

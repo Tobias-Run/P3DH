@@ -1,0 +1,287 @@
+{
+  "batch": "015",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 9,
+  "page_attempts": [
+    {
+      "lei": "CXUHEGU3MADZ2CEV7C11",
+      "url": "https://www.eurobank.com.cy",
+      "status": 200,
+      "error": null,
+      "sha256": "d8426c7eceb1762d327e332ec0dac4f0cdf094a1cf0cc575580cc2e6509f7a69",
+      "retrieved_at": "2026-10-02T23:50:16Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "CXUHEGU3MADZ2CEV7C11",
+      "url": "https://www.eurobank.cy/en/group",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:39Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "CXUHEGU3MADZ2CEV7C11",
+      "url": "https://www.eurobank.gr/en/group/grafeio-tupou",
+      "status": 200,
+      "error": null,
+      "sha256": "ba40d92cdf932ec17cc23c9a4da86e4c378b683c8f0216d6b35dc8e399d22e13",
+      "retrieved_at": "2026-10-02T16:48:13Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2138004FIUXU3B2MR537",
+      "url": "https://www.bancomontepio.pt",
+      "status": 200,
+      "error": null,
+      "sha256": "49caacba745ff05e041fcd7a81eb95dbe78fec3d47dc565ad66f126c406702bd",
+      "retrieved_at": "2026-10-02T16:47:00Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2138004FIUXU3B2MR537",
+      "url": "https://www.bancomontepio.pt/institucional/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "18a768a2b68a2e6a55fe2ee80ae72b0d01e55c9a226b7a8bf5fd9d4c90b4fb28",
+      "retrieved_at": "2026-10-02T16:47:02Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2138004FIUXU3B2MR537",
+      "url": "https://www.bancomontepio.pt/institucional/o-banco-montepio",
+      "status": 200,
+      "error": null,
+      "sha256": "bf34d2ee90ad5592858f21850891fec7d1b88e3f3f602d6c4df7c2508ee2e14c",
+      "retrieved_at": "2026-10-02T23:54:39Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "2138004FIUXU3B2MR537",
+      "url": "https://www.bancomontepio.pt/content/dam/montepio/pdf/institucional/estatutos-banco-montepio.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "89a992800d5d83e8303b7a7730836421a6b8a6bf0795f20471b9267fa779eba3",
+      "retrieved_at": "2026-10-02T23:59:25Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300O3HXYXXUHR0897",
+      "url": "https://www.klarna.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "1b5b7f29b272367a301d3aada6f9ea0e318e8f51a3f92df0caf12791c9bf7d6e",
+      "retrieved_at": "2026-10-02T16:33:14Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300O3HXYXXUHR0897",
+      "url": "https://www.klarna.com/international/about-us/",
+      "status": 200,
+      "error": null,
+      "sha256": "1914ea70eb6a66050cb63e933420bd979fe9ec28239d1338337206d05c72b2e1",
+      "retrieved_at": "2026-10-02T16:33:16Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300O3HXYXXUHR0897",
+      "url": "https://investors.klarna.com/financials/sec-filings/default.aspx",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:40Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "KFUXYFTU2LHQFQZDQG45",
+      "url": "https://www.kh.hu",
+      "status": 200,
+      "error": null,
+      "sha256": "bc0c94d1c2fc1783202e55ca8498eb1e405ac15f009c41697e1f7bae3b4afbfd",
+      "retrieved_at": "2026-10-02T23:50:16Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "KFUXYFTU2LHQFQZDQG45",
+      "url": "https://www.kh.hu/dokumentum-kereso?p_p_id=documentsearchportlet_WAR_documentsearchportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_pos=1&p_p_col_count=2&_documentsearchportlet_WAR_documentsearchportlet_groupMemberId=148410&_documentsearchportlet_WAR_documentsearchportlet_segmentId=148418",
+      "status": 200,
+      "error": null,
+      "sha256": "8172f4e76eb9b154655fe587141ef8459dc9dd1e4cea900f665b8c8c4aaaa75e",
+      "retrieved_at": "2026-10-02T23:50:18Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "KFUXYFTU2LHQFQZDQG45",
+      "url": "https://www.kh.hu/web/eng/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "82aa5b144c65f20372090b2abd485f0c5c13b7465be47ab5c9598e3b4103c678",
+      "retrieved_at": "2026-10-02T23:54:40Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "KFUXYFTU2LHQFQZDQG45",
+      "url": "https://www.kh.hu/web/eng/about-us/bank",
+      "status": 200,
+      "error": null,
+      "sha256": "cfaf8ea8d2dbf8667a5b38c19fd3e78122bf928cbfb9bc26c61e20863f1a58c6",
+      "retrieved_at": "2026-10-02T23:59:25Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "2138004FIUXU3B2MR537",
+      "name": "Caixa Económica Montepio Geral, Caixa Económica Bancária, S.A.",
+      "ownership": "mutual",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.bancomontepio.pt/content/dam/montepio/pdf/institucional/estatutos-banco-montepio.pdf",
+        "sha256": "89a992800d5d83e8303b7a7730836421a6b8a6bf0795f20471b9267fa779eba3",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T23:59:25Z",
+        "quote": " disposições legais aplicáveis e pelos presentes Estatutos. 2. O Montepio Geral – Associação Mutualista é a instituição titular da Caixa Económica, de acordo com o disposto no artigo 6.º n.º 2 do Regime Jurídico das Caixas Económicas. Artigo 2.º (Sede, Filiais, Sucursais e Outras Formas de Representação) 1. A Caixa Económica tem a sua sede na Rua Castilho, nº 5, em Lisboa. 2. A sede pode ser mudada para qualquer outro local dentro do território nacional por deliberação do Conselho de Administração. 3. A Caixa Económica pode estabelecer filiais, sucursais ou qualquer outra forma de representação e realizar prestações transfronteiriças de servi"
+      },
+      "note": "Official current statutes Article 1 identify Montepio Geral - Associacao Mutualista as the institution holder of the savings bank. Mutual association, not a cooperative or a State-owned bank. Current statutory form and exact bank identity verified.",
+      "bank_identity": {
+        "legal_name": "CAIXA ECONÓMICA MONTEPIO GERAL, CAIXA ECONÓMICA BANCÁRIA, S.A.",
+        "registered_as": "500792615",
+        "jurisdiction": "PT",
+        "gleif_record_sha256": "b1e39dc7d3f8b46582159dda860b0c8fad99857ac959972e4a8ba23e6c2da7ce"
+      }
+    },
+    {
+      "lei": "KFUXYFTU2LHQFQZDQG45",
+      "name": "Kereskedelmi és Hitelbank csoport",
+      "ownership": "mixed",
+      "ownership_basis": "reviewed_document_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.kbc.com/en/investor-relations/shareholder-information/shareholder-structure.html",
+        "sha256": "995a31545cfbaf799ebc510471133b2930f45d551ce9eb3d7bff6ba84295a6d2",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "CORE SHAREHOLDERS KBC Ancora30 June 202677 516 380Cera30 June 202616 748 774MRBB30 June 202651 905 219Other core shareholders30 June 202628 482 400OTHER SHAREHOLDERS (details: see “Notifications (transparency legislation)” below) FMR LLC17 July 202619 771 836BlackRock Inc.1 July 202517 215 344KBC Group30 July 202420 942 766 * Latest notification or update cf. the Act of 2 May 2007 (disclosure of significant participations) or the Act of 1 April 2007 (on public takeover bids) and other public information. Other shareholders: figures include the ‘voting rights that may be acquired if the instrument is exercised’ as stated under ‘B) Equivalent financial instruments’ in the transparency notification; any shareholders falling below the 3% notification threshold are no longer included in the table. Breakdown of shareholder structure by country/region (own estimates)End 2025Core shareholders (Belgium) 42%Shares repurchased under the share buyback programme (August 2023 - July 2024)5%Institutional shareholders: - Belgium - Other continental European countries - UK and Ireland - North America - Rest of the world 2% 10% 9% 19% 2% Other (retail shareholders, own shares, unidentified etc.) 11%Total100% Notifications (transparency legislation) The purpose of the transparency legislation is to ensure the transparency of the shareholder structure of listed companies. To achieve this, the transparency rules impose an obligation on investors in listed companies to notify the Belgian regulator (the FSMA) and the company itself whenever thresholds are exceeded, etc. (within four trading days after the event)."
+      },
+      "note": "KBC Group annual report 2025 identifies Hungarian K&H Bank Zrt at 100.00% group capital. Own bank website independently identifies 100% KBC Bank NV ownership. Bank identity/jurisdiction and exact group controller reviewed, not inferred from its sponsored foundations.",
+      "controller_lei": "213800X3Q9LSAKRUWY91",
+      "control_evidence": {
+        "url": "https://wcmassets.kbc.be/content/dam/kbccom/doc/investor-relations/Results/jvs-2025/jvs-2025-gr-en.pdf.cdn.res/last-modified/1774614405054/jvs-2025-gr-en.pdf",
+        "sha256": "8140183eb1d03106183dbe1d4c291493fc7286281518b5b4b5d33fb830f688b6",
+        "retrieved_at": "2026-10-02T21:58:43Z",
+        "quote": "rities NV Brussels – BE 0437.060.521 100.00 BEL stockbroker K&H Bank Zrt. Budapest – HU –– 100.00 IMA credit institution Loan Invest NV Brussels – BE 0889.054.884 100.00 BEL securitisation United Bulgarian Bank AD Sofia – BG –– 99.96 IMA credit institution KBC Insurance (group) KBC Insurance NV Leuven – BE 0403.552.563 100.00 BEL/GRP insurance company ADD NV Heverlee – BE 0406.080.305 100.00 BEL insurance broker KBC Group Re SA Luxembourg – LU –– 100.00 GRP reinsurance company ČSOB Pojišt’ovna a.s. Pardubice – CZ –– 100.00 CZR insurance company ČSOB Poist’ovňa a.s. Bratislava – SK –– 100.00 IMA insurance company DZI (group) Sofia – BG –– 100.",
+        "heading_quote": "Annual Report KBC Group 2025 4.1 million clients 14 000 employees 424 bank branches 131 billion EUR in loans and advances 148 billion EUR in deposits 4.3 million clients 12 000 employees 197 bank branches 44 billion EUR in loans and advances 54 billion EUR in deposits 0.8 million clients 3 000 employees 97 bank branches 13 billion EUR in loans and advances 9 billion EUR in deposits 1.7 million clients 4 000 employees 191 bank branches 8 billion EUR in loans and advances 11 billion EUR in deposit",
+        "matched_legal_name": "K&H Bank Zrt.",
+        "column_context": "red office Company number Share of capital held at group level (in %) Business unit* Activity KBC Bank (group) KBC Bank NV Brussels – BE 0462.920.226 100.00 BEL/GRP credit institution CBC BANQUE SA Namur – BE 0403.211.380 100.00 BEL credit institution Československá Obchodná Banka a.s. Bratislava – SK –– 100.00 IMA credit institution Československá Obchodní Banka a.s. Prague – CZ –– 100.00 CZR credit institution KBC Asset Management NV Brussels – BE 0469.444.267 100.00 BEL asset management KBC Autolease NV Leuven – BE 0422.562.385 100.00 BEL leasing KBC Commercial Finance NV Brussels – BE 0403.278.488 100.00 BEL factoring KBC IFIMA SA Luxembourg – LU –– 100.00 GRP f inance KBC Securities NV Brussels – BE 0437.060.521 100.00 BEL stockbroker "
+      },
+      "matched_legal_name": "K&H Bank Zrt.",
+      "bank_identity": {
+        "legal_name": "KERESKEDELMI ÉS HITELBANK ZÁRTKÖRŰEN MŰKÖDŐ RÉSZVÉNYTÁRSASÁG",
+        "registered_as": "01-10-041043",
+        "jurisdiction": "HU",
+        "gleif_record_sha256": "82866761f34840c61150bf3bb258ce223d4b40a73f33a5676999f0d78a566845"
+      }
+    },
+    {
+      "lei": "529900L89TGSPV9OU151",
+      "name": "Porsche Bank Aktiengesellschaft",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.porsche-se.com/en/investor-relations/shareholder-structure",
+        "sha256": "c9959b6a8b964f70d8720f339248ee74646cf6767d007d63a4a66db24cb63b0a",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "orsche SE’s subscribed capital in the form of no-par value bearer shares comprises 153,125,000 ordinary shares and 153,125,000 non-voting preference shares, each share arithmetically representing a 1 euro notional value of the share capital. According to the information available to Porsche SE, the ordinary shares are indirectly held exclusively by members of the Porsche and Piëch families. Just under half of the preference shares are held by institutional investors – mainly with a principal office outside Germany. These are predominantly attributable to index and long-only investment styles, while the proportion of hedge funds is in the mid-single-digit percentage range. The further free float preference shares are mainly distributed between private investors. According to the information available to Porsche SE, the ordinary shares are indirectly held exclusively by members of the Porsche and Piëch families. * Based on all identified shareholders as of 31 December 2025 LinkedIn Imprint Data privacy Change your cookie settings Scroll to top"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "529900NNUPAGGOMPXZ31",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/529900L89TGSPV9OU151/ultimate-parent-relationship",
+        "sha256": "4b56cee978d246a5a622419803fa07278492e6576de750bc32212fc96242b752",
+        "relationship": {
+          "startNode": {
+            "id": "529900L89TGSPV9OU151",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "529900NNUPAGGOMPXZ31",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2023-12-31T23:00:00Z",
+              "endDate": "2024-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2017-09-18T22:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2025-03-06T23:00:00Z",
+              "type": "DOCUMENT_FILING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2017-10-04T10:50:28Z",
+          "lastUpdateDate": "2025-10-23T09:57:15Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2026-12-05T23:00:00Z",
+          "managingLou": "5299000J2N45DDNE4Y28",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "Porsche Bank Aktiengesellschaft",
+        "registered_as": "58517f",
+        "jurisdiction": "AT",
+        "gleif_record_sha256": "62b3626868d21189cacce37ebe4ce9528e24a04d3f103ad61e8ce6046374f626"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "CXUHEGU3MADZ2CEV7C11",
+      "name": "Eurobank Limited",
+      "rank": 64,
+      "trea_eur": 8616771126.9,
+      "status": "pending_targeted_source_review",
+      "reason": "Eurobank Limited bank relation is ENTITY_SUPPLIED_ONLY; Cyprus bank sources were denied and parent press index gives no completed-control passage.",
+      "next_action": "Use a bank-specific official merger/completion or annual-report note for Eurobank Cyprus/Hellenic reorganisation and exact LEI, then reuse the reviewed Eurobank SA source."
+    },
+    {
+      "lei": "549300O3HXYXXUHR0897",
+      "name": "Klarna - Grupp",
+      "rank": 66,
+      "trea_eur": 8562166425.325411,
+      "status": "pending_targeted_source_review",
+      "reason": "Klarna investor source was 403; retail/about page is not shareholders evidence.",
+      "next_action": "Use an alternative official SEC registration/annual/proxy statement to exact Klarna group and bank ownership, including founders’ differentiated voting rights. No automatic inheritance through a merely named brand."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

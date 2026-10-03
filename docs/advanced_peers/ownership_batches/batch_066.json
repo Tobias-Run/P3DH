@@ -1,0 +1,354 @@
+{
+  "batch": "066",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 3,
+  "page_attempts": [
+    {
+      "lei": "549300ND1MQ8SNNYMJ22",
+      "url": "https://www.seb.ee/eraklient/kogumine-ja-investeerimine/roboinvestor",
+      "status": 200,
+      "error": null,
+      "sha256": "69b91cfc9cf197ab0d677024ed3e4ad651222b39748bfd5a83369b402e0fdf34",
+      "retrieved_at": "2026-10-02T16:33:16Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "529900ZVK4VTIS0TOT43",
+      "url": "https://www.denizbank.at/at/uber-uns/eigentumerstruktur",
+      "status": 200,
+      "error": null,
+      "sha256": "08b56b0c0211cd4dd64ae2e2e6db98647c7ebef2fcb84022d22bdb50b1fb07be",
+      "retrieved_at": "2026-10-02T16:54:32Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5493007QRSX9DS2CM858",
+      "url": "https://www.ccb.com",
+      "status": 200,
+      "error": null,
+      "sha256": "883b11069b8ac8a22b4a871a870b21f3075a071b315d5468c724a29d964f320f",
+      "retrieved_at": "2026-10-03T07:21:04Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5493007QRSX9DS2CM858",
+      "url": "https://en.ccb.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "f1b518ca129bbb079bebc2f28078292ef8f6d9e9d9a7623cd43c7779d2b3c5a2",
+      "retrieved_at": "2026-10-03T10:31:43Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600848DEFE160E913",
+      "url": "https://www.iblbanca.it/governance.html",
+      "status": 200,
+      "error": null,
+      "sha256": "c2e48b27bc4530e79be1540a23af771405e7ff4661b3d7ca8c60974b5d19893f",
+      "retrieved_at": "2026-10-03T07:21:07Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "549300OL514RA0SXJJ44",
+      "url": "https://www.clearstream.com/caas/v1/media/5107512/data/f0186089505c210b4e648c14df90633d/cbl-annual-account-2025.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "3bd371b1d34553f1ee51d8e933d80ac4457ed30a9013ab464efa8cc92bf17edb",
+      "retrieved_at": "2026-10-02T17:09:15Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "549300OL514RA0SXJJ44",
+      "url": "https://www.deutsche-boerse.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "08ec3ce4aa66fe2aabf43a9d37ac194ac5e0e34f1fccee202c516df58889ad0b",
+      "retrieved_at": "2026-10-03T10:31:43Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300OL514RA0SXJJ44",
+      "url": "https://www.deutsche-boerse.com/dbg-de/investor-relations/aktie-und-anleihen/aktionaersstruktur",
+      "status": 200,
+      "error": null,
+      "sha256": "1fd4e55668e40c553c2c887a7a89ac7871412ccb26d85617b21e7592519654ef",
+      "retrieved_at": "2026-10-03T10:39:42Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300OL514RA0SXJJ44",
+      "name": "Clearstream Banking S.A.",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.deutsche-boerse.com/dbg-de/investor-relations/aktie-und-anleihen/aktionaersstruktur",
+        "sha256": "1fd4e55668e40c553c2c887a7a89ac7871412ccb26d85617b21e7592519654ef",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "en Drucken Aktionärsstruktur Geografische Aktionärsstruktur Aktionärsstruktur der Deutsche Börse Aktiengesellschaft* 2025 2024 2023 2022 2021 2020 2019 2018 2017 2016 Privatanleger 10% 9% 9% 8% 8% 7% 4% 6% 7% 6% Institutionelle Investoren 90% 91% 91% 92% 92% 93% 96% 94% 93% 94% * Zum 31. Dezember Weitere Informationen zur aktuellen Aktionärsstruktur der Deutsche Börse Aktiengesellschaft finden Sie in einer Datenbank der Bundesanstalt für Finanzdienstleistungsaufsicht. Archiv Geografische Aktionärsstruktur der Deutsche Börse Aktiengesellschaft* 2025 2024 2023 2022 2021 2020 2019 2018 2017 2016 Deutschland 20% 20% 20% 18% 20% 20% 19% 20% 18% 17% Großbritannien 24% 26% 26% 24% 26% 25% 24% 26% 26% 29% Nordamerika 35% 34% 34% 36% 31% 36% 34% 33% 34% 30% Andere Länder 21% 20% 20% 22% 23% 19% 23% 21% 22% 24% * Zum 31. Dezember Weitere Informationen zur aktuellen Aktionärsstruktur der Deutsche Börse Aktiengesellschaft finden Sie in einer Datenbank der Bundesanstalt für Finanzdienstleistungsaufsicht. Archiv Unser Anmeldeservice Investor-Relations-Updates direkt in Ihr Postfach Einfache und kostenlose Registrierung Monatliche Handelsstatistiken und wichtige Kennzahlen JETZT ANMELDEN JETZT ANMELDEN ÜBER UNS Deutsche Börse Group Vorstandsmitglieder Investor Relations Media KONTAKT & SERVICES Hotlines Adressen Lieferantenportal Hinweisgebersystem FOLGEN SIE UNS LinkedIn Instagram YouTube QU"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "529900G3SW56SHYNPR95",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/549300OL514RA0SXJJ44/ultimate-parent-relationship",
+        "sha256": "fffb3cdf95c78d88dc0205eb39c6d89639b66e1165387fe97ef07419a831a427",
+        "relationship": {
+          "startNode": {
+            "id": "549300OL514RA0SXJJ44",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "529900G3SW56SHYNPR95",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2024-01-01T00:00:00Z",
+              "endDate": "2024-12-31T00:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2021-06-07T00:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2015-01-09T22:33:24Z",
+          "lastUpdateDate": "2026-04-22T13:20:07Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-06-07T00:00:00Z",
+          "managingLou": "213800WAVVOPS85N2205",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": "https://www.deutsche-boerse.com/resource/blob/4171106/c9cc6c4b50a7ad2155fa107b33f12373/data/DBG-annual-report-2024.pdf"
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "CLEARSTREAM BANKING S.A.",
+        "registered_as": "B9248",
+        "jurisdiction": "LU",
+        "gleif_record_sha256": "f3b6e79d8c320324e5ead8807e95d91349d16de3156632b50f9791fa092df7c3"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "026",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "549300OL514RA0SXJJ44",
+          "attributes": {
+            "lei": "549300OL514RA0SXJJ44",
+            "entity": {
+              "legalName": {
+                "name": "CLEARSTREAM BANKING S.A.",
+                "language": "en"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "lb",
+                "addressLines": [
+                  "42, AVENUE J.F. KENNEDY"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "LUXEMBOURG",
+                "region": "LU-LU",
+                "country": "LU",
+                "postalCode": "L-1855"
+              },
+              "headquartersAddress": {
+                "language": "lb",
+                "addressLines": [
+                  "42, AVENUE J.F. KENNEDY"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "LUXEMBOURG",
+                "region": "LU-LU",
+                "country": "LU",
+                "postalCode": "L-1855"
+              },
+              "registeredAt": {
+                "id": "RA000432",
+                "other": null
+              },
+              "registeredAs": "B9248",
+              "jurisdiction": "LU",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "5GGB",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "1970-11-03T00:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2015-01-09T22:33:24Z",
+              "lastUpdateDate": "2026-04-22T13:20:07Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-06-07T00:00:00Z",
+              "managingLou": "213800WAVVOPS85N2205",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000432",
+                "other": null
+              },
+              "validatedAs": "B9248",
+              "otherValidationAuthorities": []
+            },
+            "bic": [
+              "CEDELULLXXX"
+            ],
+            "mic": null,
+            "ocid": "lu/B9248",
+            "qcc": "QLU520CKC2",
+            "gem": null,
+            "spglobal": [
+              "4494963"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300OL514RA0SXJJ44/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300OL514RA0SXJJ44/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300OL514RA0SXJJ44/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/549300OL514RA0SXJJ44/direct-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/549300OL514RA0SXJJ44/direct-parent"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/549300OL514RA0SXJJ44/ultimate-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/549300OL514RA0SXJJ44/ultimate-parent"
+              }
+            },
+            "isins": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300OL514RA0SXJJ44/isins"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/549300OL514RA0SXJJ44"
+          }
+        },
+        "canonical_sha256": "f3b6e79d8c320324e5ead8807e95d91349d16de3156632b50f9791fa092df7c3"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300ND1MQ8SNNYMJ22",
+      "name": "AS SEB Pank",
+      "rank": 78,
+      "trea_eur": 3330476309.5,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "025",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use exact SEB Pank Estonian official annual-report subsidiary/control evidence and the already reviewed SEB owner source. Retail roboinvestor text and ENTITY_SUPPLIED_ONLY relation are insufficient.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use exact SEB Pank Estonian official annual-report subsidiary/control evidence and the already reviewed SEB owner source. Retail roboinvestor text and ENTITY_SUPPLIED_ONLY relation are insufficient.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900ZVK4VTIS0TOT43",
+      "name": "DenizBank AG",
+      "rank": 79,
+      "trea_eur": 3254643188.24,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "025",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Review the exact Emirates NBD parent LEI, its issuer shareholder table and ICD government ownership statement. DenizBank AG page proves DenizBank AS 99.999% and Emirates NBD group membership, not the ultimate parent ownership category.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Review the exact Emirates NBD parent LEI, its issuer shareholder table and ICD government ownership statement. DenizBank AG page proves DenizBank AS 99.999% and Emirates NBD group membership, not the ultimate parent ownership category.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "5493007QRSX9DS2CM858",
+      "name": "China Construction Bank (Europe) S.A.",
+      "rank": 80,
+      "trea_eur": 3175819122.47,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "025",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Review China Construction Bank issuer current controlling-owner table and Central Huijin legal ownership, matching exact parent LEI; then verify the fully corroborated Luxembourg bank relationship.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Review China Construction Bank issuer current controlling-owner table and Central Huijin legal ownership, matching exact parent LEI; then verify the fully corroborated Luxembourg bank relationship.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "815600848DEFE160E913",
+      "name": "IBL ISTITUTO BANCARIO DEL LAVORO S.P.A. (IN FORMA ABBREVIATA IBL BANCA)",
+      "rank": 81,
+      "trea_eur": 3167176127.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "026",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use IBL issuer current capital/shareholder table to Giordano/Angelini and percentages/votes. Directors biographies and the bank own subsidiaries are not evidence of who controls the bank.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Director biography says shareholder, but supplies no current capital/voting distribution. Read IBL current named shareholder table and control rights; director status is not majority.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

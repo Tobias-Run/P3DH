@@ -1,0 +1,402 @@
+{
+  "batch": "072",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 2,
+  "page_attempts": [
+    {
+      "lei": "222100PG81CES7H3HZ28",
+      "url": "https://www.banquehavilland.com",
+      "status": 200,
+      "error": null,
+      "sha256": "24703c9b207f749f8653b5f3ad83ee4786b0ba755a5db9181e7968cbbea3bfc9",
+      "retrieved_at": "2026-10-02T16:48:39Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "635400LCCIYHUL6ELA34",
+      "url": "https://www.usbank.com/about-us-bank.html",
+      "status": 200,
+      "error": null,
+      "sha256": "040f2bfcff5f382aed5c256d557e1d72e7883ff59b062a657d59f7be1ac9a96a",
+      "retrieved_at": "2026-10-03T07:59:59Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5967007LIEEXZX76AW36",
+      "url": "https://www.obos.no/bank/om-obos-banken",
+      "status": 200,
+      "error": null,
+      "sha256": "1d1047f4624581a18091684f2628c9751d03cb0c7320abb308d81fe1d5d11d88",
+      "retrieved_at": "2026-10-03T08:03:00Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5967007LIEEXZX76AW36",
+      "url": "https://cdn.sanity.io/files/tq6w17ny/prod/45016855b9f6c7f2620626e75749a1eeaf0d9a44.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "38e7a8317e46bb67f6d7107d0b5ecbeb8a58411038ef34422a06abd599eea6d0",
+      "retrieved_at": "2026-10-03T10:33:44Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5967007LIEEXZX76AW36",
+      "url": "https://www.obos.no/om-obos",
+      "status": 200,
+      "error": null,
+      "sha256": "90b2652bada643b9a77a0b70da8e4b7c2559cb1f25f322e15160282f5712675e",
+      "retrieved_at": "2026-10-02T17:35:46Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5967007LIEEXZX76AW36",
+      "url": "https://www.obos.no/dette-er-obos/medlemsdemokratiet",
+      "status": 200,
+      "error": null,
+      "sha256": "bc80ee15a313524c9cca03e17887200a057d12c021d546d343b5bf0be862ab34",
+      "retrieved_at": "2026-10-03T10:43:45Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900DSIVJWCUQUMP41",
+      "url": "https://www.akabank.de/gremien",
+      "status": 200,
+      "error": null,
+      "sha256": "0fb5c11f0df58b3336a48c61553f4223a3ebe9233391b397ef24a19da3199a89",
+      "retrieved_at": "2026-10-03T08:03:03Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "529900DSIVJWCUQUMP41",
+      "url": "https://www.akabank.de/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "bf4ac773ba4b5da63506f4bde996a80d3e7106a9d0d9766b44f04b06d689d2b5",
+      "retrieved_at": "2026-10-02T16:32:37Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900IRBZTADXJB6757",
+      "url": "https://flatexdegiro.com/",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:32:42Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "5967007LIEEXZX76AW36",
+      "name": "OBOS-BANKEN AS",
+      "ownership": "cooperative",
+      "ownership_basis": "reviewed_document_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.obos.no/om-obos",
+        "sha256": "90b2652bada643b9a77a0b70da8e4b7c2559cb1f25f322e15160282f5712675e",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "valtning, rådgivning, næringseiendom og digitale tjenester. Medlemsdemokratiet OBOS er en av Nordens største boligbyggere, eid av over en halv million medlemmer. Som medlem kan du være med og påvirke hvordan selskapet skal drives. Investor Relations Vi støtter formål innen kultur, idrett og humanitært arbeid. Vi støtter også boligselskaper som tenker grønt. Jobb i OBOS Vi søker etter deg som både er engasjert og faglig dyktig, og som tør å ta OBOS ett steg lenger. Vår historie OBOS ble stiftet i 1929, og det første borettslaget sto ferdig på Etterstad to år etter. Helt siden den gang har vi skaffet våre medlemmer boliger og forvaltet disse på en trygg måte. Og det skal vi fortsette med – lenge! Les om vår historie Mer om OBOS Konsernledelsen OBOS Boligkonferanse Styret Generalforsamling i OBOS Digital årsrapport Boligpriser og statistikk Vedtekter Nyheter og presse Representantskapet Strategi og styrende dokumenter Etiske retningslinjer for leverandører Fakturainformasjon for leverandører Trenger du hjelp? Vi svarer gjerne på dine spørsmål. Gå til kontaktsiden"
+      },
+      "note": "Official bank page explicitly identifies organisation 911986884 and 100% ownership by OBOS, combined with exact member-owned cooperative parent. No acceptance based solely on partly corroborated GLEIF relation.",
+      "controller_lei": "5967007LIEEXZXJ4UW55",
+      "control_evidence": {
+        "url": "https://www.obos.no/bank/om-obos-banken",
+        "sha256": "1d1047f4624581a18091684f2628c9751d03cb0c7320abb308d81fe1d5d11d88",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:03:00Z",
+        "quote": "OS-banken Forside OBOS-banken Om OBOS-banken Om OBOS-banken OBOS-banken ble etablert i 2013 og eies 100 % av OBOS – med over en halv million medlemmer. Vi er bank for personkunder, borettslag og sameier over hele landet. Bli bankkundeHvorfor velge OBOS-banken? Raske fakta om OBOS-banken Medlem av bankens sikringsfond. Alle innskudd er garantert med inntil 2 millioner kroner. Organisasjonsnummeret vårt er: 911 986 884 SWIFT er OBOSNOK1XXX. IBAN-nummeret finner du på kontoutskriften din. Vi er den 11. største norske banken, med en forvaltningskapital på rundt 71 milliarder kroner ved utgangen av september 2024. Vi er omtrent 90 ansatte. Vi har over 80 000 privatkunder. Tore Weldingh er administrerende direktør. OBOS har helt siden selskapet ble etablert i 1929 tilbudt sparing til medlemmene. Det mange kanskje ikke er klar over, er at finansiering av boliger stod nesten like sentralt som selve utbyggingen. På den tiden var sparelaget en helt essensiell faktor i boligsamvirket. Arbeiderkla"
+      },
+      "matched_legal_name": "OBOS-banken",
+      "bank_identity": {
+        "legal_name": "OBOS-BANKEN AS",
+        "registered_as": "911 986 884",
+        "jurisdiction": "NO",
+        "gleif_record_sha256": "4673987d1bc38a295cc18de8f26df04fb7be91b391acdfc0c3235a13cb487a71"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "033",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "5967007LIEEXZX76AW36",
+          "attributes": {
+            "lei": "5967007LIEEXZX76AW36",
+            "entity": {
+              "legalName": {
+                "name": "OBOS-BANKEN AS",
+                "language": "no"
+              },
+              "otherNames": [
+                {
+                  "name": "OBOSBANKEN AS",
+                  "language": "no",
+                  "type": "PREVIOUS_LEGAL_NAME"
+                }
+              ],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "no",
+                "addressLines": [
+                  "Standardveien 1"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Oslo",
+                "region": "NO-03",
+                "country": "NO",
+                "postalCode": "0581"
+              },
+              "headquartersAddress": {
+                "language": "no",
+                "addressLines": [
+                  "Standardveien 1"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Oslo",
+                "region": "NO-03",
+                "country": "NO",
+                "postalCode": "0581"
+              },
+              "registeredAt": {
+                "id": "RA000472",
+                "other": null
+              },
+              "registeredAs": "911 986 884",
+              "jurisdiction": "NO",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "YI42",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "2013-05-22T00:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": [
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2025-12-03T00:00:00Z",
+                      "recordedDate": "2026-07-30T04:45:00Z",
+                      "type": "CHANGE_LEGAL_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2025-12-03T00:00:00Z",
+                      "recordedDate": "2026-07-30T04:45:00Z",
+                      "type": "CHANGE_HQ_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "validationReference": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20250000745295&sokeverdi=911986884&spraak=nb",
+                      "effectiveDate": "2025-09-17T00:00:00Z",
+                      "recordedDate": "2025-10-10T00:00:00Z",
+                      "type": "CHANGE_LEGAL_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "validationReference": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20250000745295&sokeverdi=911986884&spraak=nb",
+                      "effectiveDate": "2025-09-17T00:00:00Z",
+                      "recordedDate": "2025-10-10T00:00:00Z",
+                      "type": "CHANGE_HQ_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                }
+              ]
+            },
+            "registration": {
+              "initialRegistrationDate": "2014-11-04T00:00:00Z",
+              "lastUpdateDate": "2026-09-14T04:52:00Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-11-09T08:13:00Z",
+              "managingLou": "549300O897ZC5H7CY412",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000472",
+                "other": null
+              },
+              "validatedAs": "911 986 884",
+              "otherValidationAuthorities": []
+            },
+            "bic": [
+              "OBOSNOK1XXX"
+            ],
+            "mic": null,
+            "ocid": "no/911986884",
+            "qcc": "QNO00SJD3A",
+            "gem": null,
+            "spglobal": [
+              "251836104"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36/direct-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36/direct-parent"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36/ultimate-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36/ultimate-parent"
+              }
+            },
+            "direct-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36/direct-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36/direct-children"
+              }
+            },
+            "isins": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36/isins"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX76AW36"
+          }
+        },
+        "canonical_sha256": "4673987d1bc38a295cc18de8f26df04fb7be91b391acdfc0c3235a13cb487a71"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "222100PG81CES7H3HZ28",
+      "name": "Aneto S.à r.l.",
+      "rank": 108,
+      "trea_eur": 1616964000.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "032",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use exact Aneto holding filed Luxembourg accounts and completed control notices; Banque Havilland website and historic Rowland links do not establish current holding ownership or bank licence status.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use exact Aneto holding filed Luxembourg accounts and completed control notices; Banque Havilland website and historic Rowland links do not establish current holding ownership or bank licence status.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "635400LCCIYHUL6ELA34",
+      "name": "USB European (Holdings) Limited",
+      "rank": 109,
+      "trea_eur": 1564219756.64,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "033",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use US Bancorp SEC subsidiary exhibit for exact USB European Holdings Irish entity and current beneficial-owner table; ENTITY_SUPPLIED_ONLY relationship and retail US Bank IR landing are insufficient.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use US Bancorp SEC subsidiary exhibit for exact USB European Holdings Irish entity and current beneficial-owner table; ENTITY_SUPPLIED_ONLY relationship and retail US Bank IR landing are insufficient.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900DSIVJWCUQUMP41",
+      "name": "AKA Ausfuhrkredit-Gesellschaft mit beschränkter Haftung",
+      "rank": 111,
+      "trea_eur": 1511791361.73,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "033",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: AKA describes historical public/private founders. Obtain current named bank shareholder percentages and review each relevant public/cooperative/market-listed owner; founding composition and governing board membership are not current economic ownership.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Current IR page explicitly says 17 current public/private shareholder institutions, but no ownership percentages. Read current report shareholder table; distinguish substantial public ownership from historical founders or token minority.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900IRBZTADXJB6757",
+      "name": "flatexDEGIRO AG",
+      "rank": 112,
+      "trea_eur": 1480008114.81,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "033",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use an alternative official exchange/filed flatexDEGIRO qualifying-holdings and voting table; do not retry the denied corporate site or classify the listed AG solely by form.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Previously cached 403 not re-fetched or bypassed. Use alternative official exchange/filed current qualifying-holdings and voting table.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://flatexdegiro.com/",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

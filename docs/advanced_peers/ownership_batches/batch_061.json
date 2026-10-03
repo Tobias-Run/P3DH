@@ -1,0 +1,373 @@
+{
+  "batch": "061",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 3,
+  "page_attempts": [
+    {
+      "lei": "I6USJ58BDV2BO5KP3C31",
+      "url": "https://investors.moneta.cz/",
+      "status": 200,
+      "error": null,
+      "sha256": "537622402b551cc728c5d6e96fb8c87c255cc60f1b981de8524f33dfbbab9f63",
+      "retrieved_at": "2026-10-02T16:34:28Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "B64D6Y3LBJS4ANNPCU93",
+      "url": "https://nibc.com/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "dc3a31cfca7849eb8aa05cf0d737c7796aa81ad7b46f95846a6d9b4bf9bd8a7e",
+      "retrieved_at": "2026-10-02T16:34:03Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "B64D6Y3LBJS4ANNPCU93",
+      "url": "https://nibc.com/investor-relations/annual-reports",
+      "status": 200,
+      "error": null,
+      "sha256": "0196e1af95c283fdab712195009ed32a45357a590b1850a330f76fb4dd599d84",
+      "retrieved_at": "2026-10-03T10:41:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "B64D6Y3LBJS4ANNPCU93",
+      "url": "https://nibc.com/media/s4oolbi5/annual-report-nibc-bank-nv-2025.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "b453c775da5a9506fe1e1c9504965a76b3e8a704de6715ededb15352a8298520",
+      "retrieved_at": "2026-10-03T10:43:12Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300IRGNL8Q3O8Y413",
+      "url": "https://www.postbank.bg",
+      "status": 200,
+      "error": null,
+      "sha256": "f563d9076f809c6ff7bbf45b21ed91dd6b6fa23cf22bb1eb7fcaf47feaebe92b",
+      "retrieved_at": "2026-10-03T07:20:35Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "724500PMK2A2M1SQQ228",
+      "url": "https://www.triodos.com/en/governance",
+      "status": 200,
+      "error": null,
+      "sha256": "12664631a1c5bac9912c6665f60e51c741f3b937fc6c3e4f3e99c21b290ad37d",
+      "retrieved_at": "2026-10-02T16:33:33Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "724500PMK2A2M1SQQ228",
+      "url": "https://www.triodos.com/binaries/content/assets/tbho/corporate-governance/triodos_articles-of-association_eng.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "d8e4023f6060c7fea7a85e068ec57f185adac0cd940e8cd4c19b4e9f4af79aae",
+      "retrieved_at": "2026-10-03T10:41:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300XWJHRKLHU2PS28",
+      "url": "https://www.erstebank.hu",
+      "status": 200,
+      "error": null,
+      "sha256": "7d4219bbed53ca767b2ee9fe3b60f57068ce0f7ad65327c8a5da534711fbd84b",
+      "retrieved_at": "2026-10-03T07:20:38Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300XWJHRKLHU2PS28",
+      "name": "ERSTE csoport",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://cdn.erstegroup.com/content/dam/at/eh/www_erstegroup_com/en/Investor_Relations/Shareholder_Structure_Development.pdf",
+        "sha256": "8e2623c15c18f7afb9736b81329af2369aa67a7457372f4d74218d05eb023d41",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "Erste Group Bank AG - Shareholder Structure Development 30.06.2026 Total number of shares: 410,514,384 By investor By region ERSTE Foundation direct 6.08% Austria 32.65% Sparkassenbeteiligungs GmbH & Co KG 12.59% North America 28.40% Foundations 1 3.71% UK & Ireland 16.15% Wiener Städtische Versicherungsverein 4.27% Continental Europe 17.31% Institutional Investors 59.03% Rest of world 1.93% BlackRock 5.05% Identified Trading** 0.25% Retail Investors 5.71% Unidentified* 3.31% Identified Trading** 0.25% Unidentified* 3.31% 31.03.2026 Total number of shares: 410,514,384 By investor By region ERSTE Foundation direct 6.04% Austria 32.51% Sparkassenbeteiligungs GmbH & Co KG 12.59% North America 28.43% Foundations 1 3.59% UK & Ireland 15.57% Wiener Städtische Versicherungsverein 4.27% Continental Europe 17.27% Institutional Investors 58.66% Rest of world 2.13% BlackRock 5.05% Identified Trading** 0.25% Retail Investors 5.71% Unidentified* 3.84% Identified Trading** 0.25% Unidentified* 3.84% 1 Erste Employees Private Foundation, Syndicated Savings Banks Foundations, own holdings of Savings Banks *Institutional and Retail Investors **Including Market Makers. Prime Brokerage. Proprietary Trading. Collateral and Stock Lending positions "
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "PQOH26KWDF7CG10L6792",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/ultimate-parent-relationship",
+        "sha256": "819494c6c43c0f355cb7b3c8846895f19d464519067256e9273f6e5328357845",
+        "relationship": {
+          "startNode": {
+            "id": "549300XWJHRKLHU2PS28",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "PQOH26KWDF7CG10L6792",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2024-01-01T00:00:00Z",
+              "endDate": "2024-12-31T00:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2024-07-16T00:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2013-09-13T08:17:00Z",
+          "lastUpdateDate": "2025-11-14T15:54:58Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-01-09T00:00:00Z",
+          "managingLou": "213800WAVVOPS85N2205",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": "https://cdn0.erstegroup.com/content/dam/at/eh/www_erstegroup_com/en/Investor_Relations/onlinear2024/ar24reports/AR2024_FINAL_en.pdf"
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "ERSTE BANK HUNGARY ZÁRTKÖRŰEN MŰKÖDŐ RÉSZVÉNYTÁRSASÁG",
+        "registered_as": "01-10-041054",
+        "jurisdiction": "HU",
+        "gleif_record_sha256": "dc655a5f87cf928ec33f60da00b63464779e1d1bfe77f49628757b2eae23767a"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "020",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "549300XWJHRKLHU2PS28",
+          "attributes": {
+            "lei": "549300XWJHRKLHU2PS28",
+            "entity": {
+              "legalName": {
+                "name": "ERSTE BANK HUNGARY ZÁRTKÖRŰEN MŰKÖDŐ RÉSZVÉNYTÁRSASÁG",
+                "language": "hu"
+              },
+              "otherNames": [
+                {
+                  "name": "ERSTE BANK HUNGARY ZRT.",
+                  "language": "hu",
+                  "type": "TRADING_OR_OPERATING_NAME"
+                },
+                {
+                  "name": "ERSTE BANK HUNGARY NYILVÁNOSAN MŰKÖDŐ RT.",
+                  "language": "hu",
+                  "type": "PREVIOUS_LEGAL_NAME"
+                }
+              ],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "hu",
+                "addressLines": [
+                  "NEPFURDO UTCA 24-26."
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "BUDAPEST",
+                "region": "HU-BU",
+                "country": "HU",
+                "postalCode": "1138"
+              },
+              "headquartersAddress": {
+                "language": "hu",
+                "addressLines": [
+                  "NEPFURDO UTCA 24-26."
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "BUDAPEST",
+                "region": "HU-BU",
+                "country": "HU",
+                "postalCode": "1138"
+              },
+              "registeredAt": {
+                "id": "RA000391",
+                "other": null
+              },
+              "registeredAs": "01-10-041054",
+              "jurisdiction": "HU",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "BKUX",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "2010-12-16T05:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2013-09-13T08:17:00Z",
+              "lastUpdateDate": "2025-11-14T15:54:58Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-01-09T00:00:00Z",
+              "managingLou": "213800WAVVOPS85N2205",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000391",
+                "other": null
+              },
+              "validatedAs": "01-10-041054",
+              "otherValidationAuthorities": []
+            },
+            "bic": [
+              "GIBAHUHBXXX"
+            ],
+            "mic": [
+              "EBHU"
+            ],
+            "ocid": null,
+            "qcc": "QHUBMPA9AE",
+            "gem": null,
+            "spglobal": [
+              "20949420"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/direct-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/direct-parent"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/ultimate-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/ultimate-parent"
+              }
+            },
+            "direct-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/direct-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/direct-children"
+              }
+            },
+            "isins": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28/isins"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/549300XWJHRKLHU2PS28"
+          }
+        },
+        "canonical_sha256": "dc655a5f87cf928ec33f60da00b63464779e1d1bfe77f49628757b2eae23767a"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "I6USJ58BDV2BO5KP3C31",
+      "name": "MONETA Money Bank, a.s.",
+      "rank": 53,
+      "trea_eur": 6799675012.7317915,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "018",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Follow MONETA current issuer financial-result navigation to the actual annual/proxy holdings table; account for current PPF/Tanemo stakes and votes, not retail product text.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Follow MONETA current issuer financial-result navigation to the actual annual/proxy holdings table; account for current PPF/Tanemo stakes and votes, not retail product text.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "B64D6Y3LBJS4ANNPCU93",
+      "name": "NIBC Bank N.V.",
+      "rank": 54,
+      "trea_eur": 6783360962.06,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "019",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use a dated official NIBC ownership/completion report; distinguish Blackstone ownership from any subsequently completed ABN AMRO purchase, with exact bank LEI.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Bank annual report 2025 obtained: ABN AMRO acquisition of all shares from Blackstone was still subject to ECB approval and expected in H2 2026. Find a dated completion/current voting disclosure before transferring ownership to new parent.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300IRGNL8Q3O8Y413",
+      "name": "Eurobank Bulgaria",
+      "rank": 55,
+      "trea_eur": 6783331201.599999,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "019",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Verify exact Bulgarian Postbank/Eurobank Bulgaria LEI in official issuer subsidiary accounts, then reuse the reviewed Eurobank controller ownership source. Do not transfer a brand-only group claim.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Verify exact Bulgarian Postbank/Eurobank Bulgaria LEI in official issuer subsidiary accounts, then reuse the reviewed Eurobank controller ownership source. Do not transfer a brand-only group claim.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "724500PMK2A2M1SQQ228",
+      "name": "Triodos Bank N.V.",
+      "rank": 56,
+      "trea_eur": 6600423668.64,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "019",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Review the current Triodos SAAT charter, DR-holder voting proxies and bank report share ownership section. The two ownership opinion articles discuss other firms; a legal foundation shareholder alone need not mean autonomous foundation control.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Bank articles obtained; legal share capital is not a complete current SAAT/DR holder voting analysis. Review latest DR proxy and SAAT constitutional rights, distinguish certification vehicle from charitable foundation.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

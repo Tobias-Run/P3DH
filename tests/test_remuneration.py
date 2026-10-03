@@ -110,11 +110,13 @@ class GateTest(unittest.TestCase):
         verschieben. Ein Filter, der erst auf die Tabelle wirkt, verschöbe still
         den Median, an dem sich alle anderen messen."""
         src = VIEWER.read_text(encoding="utf-8")
-        marker = "const allRows=prof.gate.length?gross.filter(r=>!r._out)"
+        marker = "const gatedRows=prof.gate.length?gross.filter(r=>!r._out)"
         self.assertIn(marker, src,
                       "Die Zeilenmenge wird nicht mehr am Tor geteilt — dann "
                       "messen Verteilung und Perzentile die ungefilterte Menge")
         gate = src.index(marker)
+        self.assertIn("advancedSelection(gatedRows)", src)
+        self.assertIn("const allRows=peerSelection.rows", src)
         for later in ("pmaps.set(c.id,percentileMap(", "fenceOutliers(fenceRows",
                       "distributionRow(allRows"):
             self.assertGreater(src.index(later), gate,

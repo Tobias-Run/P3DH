@@ -1,0 +1,137 @@
+{
+  "batch": "020",
+  "campaign": "next_70_trea_b",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 268,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 4,
+  "page_attempts": [
+    {
+      "lei": "549300XWJHRKLHU2PS28",
+      "url": "https://www.erstebank.hu",
+      "status": 200,
+      "error": null,
+      "sha256": "7d4219bbed53ca767b2ee9fe3b60f57068ce0f7ad65327c8a5da534711fbd84b",
+      "retrieved_at": "2026-10-03T07:20:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300L7YCATGO57ZE10",
+      "url": "https://www.finecobank.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "333b8e150d77fa278e224501153589e62127897e5daf66217183f5f13f49148c",
+      "retrieved_at": "2026-10-02T16:33:13Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300TDPXT0OW2AY198",
+      "url": "https://www.axabank.be",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:55:14Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300WDT1HWUMTUW770",
+      "url": "https://www.sc.com",
+      "status": 200,
+      "error": null,
+      "sha256": "3f75d70fb1cb2bd4492bddfd7bfb1042c657ddc2e7c5c87a39825e5219c69faf",
+      "retrieved_at": "2026-10-03T07:20:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "MMYX0N4ZEZ13Z4XCG897",
+      "url": "https://www.bny.com",
+      "status": 200,
+      "error": null,
+      "sha256": "eacd641204cc689a8be38656c48437df12392fc69b08547bc640bdaa64f4eeda",
+      "retrieved_at": "2026-10-03T07:20:39Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "MMYX0N4ZEZ13Z4XCG897",
+      "url": "https://www.bny.com/corporate/global/en/investor-relations/shareholder-services.html",
+      "status": 200,
+      "error": null,
+      "sha256": "f6d3a3d34fde5aef693f2638cb7902e2d70a3ed51a8f5ccd88e8500c053a4cbd",
+      "retrieved_at": "2026-10-03T07:20:40Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "549300XWJHRKLHU2PS28",
+      "name": "ERSTE csoport",
+      "rank": 69,
+      "trea_eur": 6356443600.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Classify the exact Erste Group parent with current foundation/association holdings, voting pact and percentages before using the fully corroborated Hungarian bank relationship.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300L7YCATGO57ZE10",
+      "name": "FINECOBANK BANCA FINECO S.P.A. (IN BREVE FINECOBANK S.P.A. OVVERO BANCA FINECO S.P.A. OVVERO FINECO BANCA S.P.A.)",
+      "rank": 70,
+      "trea_eur": 6299478641.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review the actual Fineco issuer qualifying-holdings/voting table from corporate investor navigation; current retail trading page is not owner evidence.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300TDPXT0OW2AY198",
+      "name": "FinAx",
+      "rank": 71,
+      "trea_eur": 6231075771.66531,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Reconcile FinAx holding identity and former AXA Bank Belgium website with Crelan acquisition/legal restructuring in official filings; unresolved old bank URL is not a parent ownership source.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.axabank.be",
+          "status": null,
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+        }
+      ]
+    },
+    {
+      "lei": "549300WDT1HWUMTUW770",
+      "name": "Standard Chartered Bank AG",
+      "rank": 72,
+      "trea_eur": 6213381032.45,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Standard Chartered issuer subsidiary accounts for the exact German AG and current parent shareholder/voting table; ENTITY_SUPPLIED_ONLY GLEIF relation is insufficient.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "MMYX0N4ZEZ13Z4XCG897",
+      "name": "THE BANK OF NEW YORK MELLON",
+      "rank": 73,
+      "trea_eur": 6091849319.005838,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use BNY issuer current beneficial-owner table and the exact New York bank/corporation registered identities. Shareholder-service page does not disclose controlling holdings; classify parent before the fully corroborated bank chain.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

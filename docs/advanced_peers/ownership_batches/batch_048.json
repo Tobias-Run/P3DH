@@ -1,0 +1,170 @@
+{
+  "batch": "048",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 2,
+  "page_attempts": [
+    {
+      "lei": "213800KOJ5JSZ6ID2R91",
+      "url": "https://www.balling-sparekasse.dk",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:48:10Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300KOORG6SN9LMO68",
+      "url": "https://www.iigbank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "7d5869953121c3101b6405de34d78dc3060148864ad41ac8f406c15b472a4b6c",
+      "retrieved_at": "2026-10-03T08:36:33Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800UK7516IBWZO445",
+      "url": "https://www.borbjerg-sparekasse.dk",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:48:27Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2138005MGIT3X9ZTMP37",
+      "url": "https://www.rondespard.dk",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:47:28Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "969500STN7T9MRUMJ267",
+      "url": "http://www.bpifrance.fr/",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:50Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "969500STN7T9MRUMJ267",
+      "url": "https://www.caissedesdepots.fr/resultats-et-rapports-annuels",
+      "status": 200,
+      "error": null,
+      "sha256": "36dd5ee5d0a20b9c23604dcf72d4f880824673ce992de1b10f83871b35eba0ea",
+      "retrieved_at": "2026-10-03T08:48:53Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "213800KOJ5JSZ6ID2R91",
+      "name": "Sparekassen Balling",
+      "rank": 183,
+      "trea_eur": 97963800.1567854,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Sparekassen Balling's verified current official charter or filed CVR annual report. Failed homepage and broad Danish F7JY form leave self-owned/cooperative distinction unverified.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.balling-sparekasse.dk",
+          "status": null,
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+        }
+      ],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "549300KOORG6SN9LMO68",
+      "name": "IIG Bank (Malta) Ltd",
+      "rank": 184,
+      "trea_eur": 77711969.94,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Verify current IIG Bank Malta identity and operating status against MFSA/LEI register, then read filed current controlling-shareholder note. Homepage HTTP 200 returned empty text, not ownership evidence.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "213800UK7516IBWZO445",
+      "name": "Borbjerg Sparekasse",
+      "rank": 185,
+      "trea_eur": 66036351.21246762,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Obtain Borbjerg Sparekasse's current official charter or filed CVR annual report after homepage failure. Broad F7JY form cannot distinguish self-owned savings bank from cooperative.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.borbjerg-sparekasse.dk",
+          "status": null,
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+        }
+      ],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "2138005MGIT3X9ZTMP37",
+      "name": "Rønde Sparekasse",
+      "rank": 186,
+      "trea_eur": 53335645.54147042,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Verify Ronde Sparekasse's current official domain using registered CVR identity and obtain charter/current accounts. Old candidate homepage failed; no ownership classification from the bank name or F7JY alone.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.rondespard.dk",
+          "status": null,
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+        }
+      ],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "969500STN7T9MRUMJ267",
+      "name": "Bpifrance",
+      "rank": 1,
+      "trea_eur": 91445333689.57,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use French State/CDC participation report for the exact BPIFRANCE registered entity and current State/EPIC/CDC shareholdings. CDC annual-report index was retrieved but not a bank-specific owner table; denied Bpifrance URL is cached and not retried.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [
+        {
+          "url": "http://www.bpifrance.fr/",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "002",
+      "previous_next_action": "Public investment-bank and sovereign-fund descriptions do not establish the exact legal entity and current ownership shares. Investor-relations URL returned 403; no retry or bypass. Next: Review official French State / Caisse des Depots participation report for Bpifrance SA and verify the State/EPIC and CDC holdings against its registered identity."
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

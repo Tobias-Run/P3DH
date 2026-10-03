@@ -1,0 +1,179 @@
+{
+  "batch": "041",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 6,
+  "page_attempts": [
+    {
+      "lei": "213800UIIZ6YSEQB5S26",
+      "url": "https://www.clearstream.com/caas/v1/media/5107512/data/f0186089505c210b4e648c14df90633d/cbl-annual-account-2025.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "3bd371b1d34553f1ee51d8e933d80ac4457ed30a9013ab464efa8cc92bf17edb",
+      "retrieved_at": "2026-10-02T17:09:15Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300FRBP5L0O1HY885",
+      "url": "https://www.sparbankensyd.se",
+      "status": 200,
+      "error": null,
+      "sha256": "7bba1f2bf15b2d0c79d89f88c0b7bd2b8be6fb981780f0c8126a60d358205ad8",
+      "retrieved_at": "2026-10-03T08:00:18Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300FRBP5L0O1HY885",
+      "url": "https://www.sparbankensyd.se/sv/privat/om-oss/hallbarhet/hallbarhetsrapporter",
+      "status": 200,
+      "error": null,
+      "sha256": "62322a8c4500ad3aa6919012cd4f4b66a17d75b89f28ec6d0ab862c185cd4ae7",
+      "retrieved_at": "2026-10-03T08:00:20Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300FRBP5L0O1HY885",
+      "url": "https://www.sparbankensyd.se/sv/privat/om-oss/om-sparbanken-syd",
+      "status": 200,
+      "error": null,
+      "sha256": "3ab7d768750ae8f9b645e4a77cefc13e0d1ebf204f4ff97d82cbe80aa54c5aba",
+      "retrieved_at": "2026-10-03T08:03:07Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900OLW8QPFMTBDC23",
+      "url": "https://www.neuebankag.li",
+      "status": 200,
+      "error": null,
+      "sha256": "58763dfd814d246a3fc0822b3b427542a69e8260accc3b49cbb9911d04e87d19",
+      "retrieved_at": "2026-10-02T16:53:33Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900OLW8QPFMTBDC23",
+      "url": "https://www.neuebank.li/ueber-uns",
+      "status": 200,
+      "error": null,
+      "sha256": "048b799754baccb267e0355699e06bad24d5471a4750a0b0fde512acaad538f3",
+      "retrieved_at": "2026-10-02T16:53:46Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900OLW8QPFMTBDC23",
+      "url": "https://www.neuebank.li/aktuell/geschaeftsberichte",
+      "status": 200,
+      "error": null,
+      "sha256": "62dcf89c5fdcf32e48d0a88e121018907dd00f1a5574e6ce78d415b4201de4ce",
+      "retrieved_at": "2026-10-03T08:03:07Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900VVDOKMRRAHZ894",
+      "url": "https://www.gazprombank.lu",
+      "status": 200,
+      "error": null,
+      "sha256": "627451766e3112ee54aa6a2f312839860dc8abdc5f3d084b50e9aa4cfdbd61bb",
+      "retrieved_at": "2026-10-02T16:54:24Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300RMML7KXP6M1Y98",
+      "url": "https://www.bancobaieuropa.pt",
+      "status": 200,
+      "error": null,
+      "sha256": "8f661c988cc827c172c53e36ebab67406f4742c29427bfc9871d6b4850d60345",
+      "retrieved_at": "2026-10-03T08:00:18Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300RMML7KXP6M1Y98",
+      "url": "https://www.bancobaieuropa.pt/pt/empresas/corporate-finance/",
+      "status": 200,
+      "error": null,
+      "sha256": "f9f340d684c2170e63d3a98e47b5af724547024bc5bf421aea6d520d9d05083d",
+      "retrieved_at": "2026-10-03T08:00:21Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300FRBP5L0O1HY885",
+      "name": "Sparbanken Syd",
+      "ownership": "savings",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.sparbankensyd.se/sv/privat/om-oss/om-sparbanken-syd",
+        "sha256": "3ab7d768750ae8f9b645e4a77cefc13e0d1ebf204f4ff97d82cbe80aa54c5aba",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:03:07Z",
+        "quote": "ledning hos Sparbanken Syd. Läs mer om vår ledning Huvudmän Som en äkta sparbank har vi inga externa ägare utan vi har istället huvudmän som representerar våra kunder och utses av samhället. Lär känna våra huvudmän Årsredovisningar Delårsrapporter Likviditet Kreditbetyg/Rating Ersättningar Upplåningsprogram Risk- och kapitalhantering Pressmeddelanden Vår story För oss på Sparbanken Syd är historien viktig. Den berättar om händelser som gjort skillnad för människor och skapar känslor som man kan relatera till. Vi vill gärna berätta vår historia här. Vår historia och story Vad våra kunder säger Under de snart 200 år som Sparbanken Syd har funnits till har vi fått ta emot både ris och ros. Men mest ros får vi ödmjukt erkänna. Här har vi samlat"
+      },
+      "note": "Bank explicitly has no outside owners and customer-representing principals; profits reinvested rather than shareholder dividends. Self-owned savings-bank institution, not municipal ownership inferred from principals appointed by society.",
+      "bank_identity": {
+        "legal_name": "Sparbanken Syd",
+        "registered_as": "548000-7425",
+        "jurisdiction": "SE",
+        "gleif_record_sha256": "776089d94a3eb990c762a6fff261c570e76387c8aabccb28ae3678a566956f53"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "213800UIIZ6YSEQB5S26",
+      "name": "Clearstream Fund Centre Holding S.A.",
+      "rank": 159,
+      "trea_eur": 605032324.25,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Discard CBL annual report as proof of this exact requested Clearstream Fund Centre Holding SA. Find CFCH-specific subsidiary/holding accounts and Deutsche Boerse parent owner source; same host does not mean same legal institution.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900OLW8QPFMTBDC23",
+      "name": "Neue Bank AG",
+      "rank": 161,
+      "trea_eur": 539260336.13823,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Inspect actual current Neue Bank annual report download via corporate navigation (HTML did not expose the PDF), then its voting-share table. About page/private-bank description is insufficient.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900VVDOKMRRAHZ894",
+      "name": "Bank GPB International S.A.",
+      "rank": 162,
+      "trea_eur": 526450699.201722,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review Bank GPB International exact bank capital and Gazprombank upstream control/current legal status in filed accounts and official registers; company nationality does not by itself establish public ownership.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300RMML7KXP6M1Y98",
+      "name": "BANCO BAI EUROPA S.A.",
+      "rank": 163,
+      "trea_eur": 523693400.88,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review BAI Europa exact subsidiary capital and current post-privatisation Banco Angolano de Investimentos owner table; bank finance product page is not evidence and historical Sonangol holdings may be outdated.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

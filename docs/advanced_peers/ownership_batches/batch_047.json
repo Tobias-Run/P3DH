@@ -1,0 +1,218 @@
+{
+  "batch": "047",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 9,
+  "page_attempts": [
+    {
+      "lei": "213800984CWACNBY8F31",
+      "url": "https://www.sparnebel.dk",
+      "status": 200,
+      "error": null,
+      "sha256": "0801e7d99c340e8e2755da3c915421b3733cf8947f4d6177cad39d769264928d",
+      "retrieved_at": "2026-10-02T16:47:42Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800984CWACNBY8F31",
+      "url": "https://sparnebel.dk/Om-os/Nyheder/Halvårsrapport-2026",
+      "status": null,
+      "error": "'ascii' codec can't encode character '\\xe5' in position 23: ordinal not in range(128)",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:36:31Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800984CWACNBY8F31",
+      "url": "https://sparnebel.dk/Om-os",
+      "status": 200,
+      "error": null,
+      "sha256": "6d37acc8631c4b5d72ad05ca2a643c20a3aebd7551f9b3d742d21c3e43da5570",
+      "retrieved_at": "2026-10-03T08:38:05Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800984CWACNBY8F31",
+      "url": "https://sparnebel.dk/Om-os/Regnskab",
+      "status": 200,
+      "error": null,
+      "sha256": "34f27b14b1faaceb077e291009d90f1b72e8a3489f53d076d48b3100bf7d24ba",
+      "retrieved_at": "2026-10-03T08:44:44Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "8156007C053DC07AC307",
+      "url": "https://www.crelov.it",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:55:29Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299005743YY767PR386",
+      "url": "https://www.dragsholmsparekasse.dk",
+      "status": 200,
+      "error": null,
+      "sha256": "a4ad1a9e9bf17615cacc857dbb1c70b5f13ff501ccf10605fa44fd57a31c1fc4",
+      "retrieved_at": "2026-10-02T16:50:38Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299005743YY767PR386",
+      "url": "https://www.dragsholmsparekasse.dk/om-os",
+      "status": 200,
+      "error": null,
+      "sha256": "71f0da182df5ec03686dd402b5b9a557ef72d4e1ac0fbd1ce015f17c8c0d5679",
+      "retrieved_at": "2026-10-03T08:38:06Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5299005743YY767PR386",
+      "url": "https://www.dragsholmsparekasse.dk/om-os/rapporter",
+      "status": 200,
+      "error": null,
+      "sha256": "ff1a88f04787ccad776c2170fc0ed6883a3a9bd7d12f46893b90e0925af32424",
+      "retrieved_at": "2026-10-03T08:39:47Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5299005743YY767PR386",
+      "url": "https://www.dragsholmsparekasse.dk/nyheder1/2026/august/halvaarsregnskab2026",
+      "status": 200,
+      "error": null,
+      "sha256": "296de631af57066aa3760478c574b0ac3bb5bd625096e5db44aa50db273060ba",
+      "retrieved_at": "2026-10-03T08:46:57Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "984500ADEE3DE4F14F51",
+      "url": "https://www.kompasbank.dk",
+      "status": 200,
+      "error": null,
+      "sha256": "640c2f55346c0916921a6a7e86a5efcca8ba0daa64df28907c4b65b66963f8ee",
+      "retrieved_at": "2026-10-03T08:36:31Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "984500ADEE3DE4F14F51",
+      "url": "https://kompasbank.dk/om-kompasbank/jura/klagevejledning/finanstilsynet",
+      "status": 200,
+      "error": null,
+      "sha256": "c8e99dca671c0af2aa222e120f8e1eacb3c1e21b0fa23ebcbb96bcbdea403a7a",
+      "retrieved_at": "2026-10-03T08:48:52Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800MLL4APN9UP1J53",
+      "url": "https://www.risesparekasse.dk",
+      "status": 503,
+      "error": "HTTP Error 503: Service Unavailable",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:36:31Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "213800984CWACNBY8F31",
+      "name": "Sparekassen for Nr. Nebel og Omegn",
+      "rank": 178,
+      "trea_eur": 160309549.35904104,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Follow the actual Regnskab page's current report/charter link and read the self-owned/guarantor governance clauses. Homepage, Om-os and Regnskab navigation were retrieved but supply no accepted ownership passage; home-insurance product text is unrelated.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [
+        {
+          "url": "https://sparnebel.dk/Om-os/Nyheder/Halvårsrapport-2026",
+          "status": null,
+          "error": "'ascii' codec can't encode character '\\xe5' in position 23: ordinal not in range(128)"
+        }
+      ],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "8156007C053DC07AC307",
+      "name": "CREDITO LOMBARDO VENETO S.P.A.",
+      "rank": 179,
+      "trea_eur": 126516417.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Credito Lombardo Veneto's verified official corporate report or Italian filed shareholder record. Website fetch failed; the SA legal form does not prove private ownership.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.crelov.it",
+          "status": null,
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+        }
+      ],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "5299005743YY767PR386",
+      "name": "Dragsholm Sparekasse",
+      "rank": 180,
+      "trea_eur": 125159940.8664036,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Follow the actual current annual-report or statute URL from Dragsholm's Regnskaber og kapital navigation. Retrieved Om-os and Reports pages and H1-2026 release did not state self-owned status; Danish F7JY is too broad to infer it.",
+      "successful_source_pages": 4,
+      "retrieval_failures": [],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "984500ADEE3DE4F14F51",
+      "name": "Kompasbank A/S",
+      "rank": 181,
+      "trea_eur": 108991854.16032001,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Kompasbank's current filed accounts/shareholder note or actual ownership navigation. Customer testimonials describe customers' owners; Finanstilsynet page is regulatory inspection navigation, not bank ownership.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "213800MLL4APN9UP1J53",
+      "name": "Rise Sparekasse",
+      "rank": 182,
+      "trea_eur": 99176924.30206601,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Rise Sparekasse's current official charter or CVR annual report after temporary source cooldown; do not equate the 503 with unavailable public information or use broad F7JY as ownership proof.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.risesparekasse.dk",
+          "status": 503,
+          "error": "HTTP Error 503: Service Unavailable"
+        }
+      ],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

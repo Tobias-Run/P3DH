@@ -1,0 +1,398 @@
+{
+  "batch": "023",
+  "campaign": "next_70_trea_b",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 268,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 4,
+  "page_attempts": [
+    {
+      "lei": "549300UY81ESCZJ0GR95",
+      "url": "http://www.pinbank.ua/",
+      "status": 200,
+      "error": null,
+      "sha256": "55294cd27077154d934d7420c7ce1f05431f68dcea5a02cc7f5aa2ffd9f8d5a6",
+      "retrieved_at": "2026-10-02T16:33:20Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300UY81ESCZJ0GR95",
+      "url": "https://www.pinbank.ua/pro-bank/noticetoshareholders",
+      "status": 200,
+      "error": null,
+      "sha256": "793a950e1b875146a3365a9eeceaa4d2a4cc36260cba95a0e926446d29478e64",
+      "retrieved_at": "2026-10-02T16:33:23Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900NNQW9IAE32GQ07",
+      "url": "https://www.grawe.at",
+      "status": 200,
+      "error": null,
+      "sha256": "af49c6090f58afa4162d34f9dd24d3c35aa4412fdf8262f295f54a5a48ec4348",
+      "retrieved_at": "2026-10-02T16:53:26Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900NNQW9IAE32GQ07",
+      "url": "https://www.grawe.at/grawe-group/",
+      "status": 200,
+      "error": null,
+      "sha256": "13849aa69b7425f7ab6fb999dc41f32cba4ba3114e87b5241947de073f0f17ca",
+      "retrieved_at": "2026-10-02T16:53:27Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493007BWYDPQZLZ0Y27",
+      "url": "http://www.hyponoe.at/",
+      "status": 200,
+      "error": null,
+      "sha256": "e6d6a8c356cb619a348fc32e05fbb9471dae58e54e23146a1214549d7e8e5fb4",
+      "retrieved_at": "2026-10-02T16:33:04Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493007BWYDPQZLZ0Y27",
+      "url": "https://www.hyponoe.at/ueber-uns",
+      "status": 200,
+      "error": null,
+      "sha256": "2ca6ef99e2f6f0a626e1b4239645f61e282ae8fb0584c6c34d955ad12ec8029b",
+      "retrieved_at": "2026-10-03T07:20:47Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600A029117B20DD63",
+      "url": "https://www.illimity.com",
+      "status": 200,
+      "error": null,
+      "sha256": "40bf18e38487fde54cc55af3e2aef67e18b7d72e886a3f154352ee2a1932b5d5",
+      "retrieved_at": "2026-10-03T07:20:47Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600A029117B20DD63",
+      "url": "https://www.illimity.com/it/governance",
+      "status": 200,
+      "error": null,
+      "sha256": "2ad4d6db0030be4cd17c5f2e8cc02bc54085ecc7a402e37d8fb7434a7252d232",
+      "retrieved_at": "2026-10-03T07:20:48Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900J35NSHS856UA68",
+      "url": "https://www.sparkron.dk/",
+      "status": 200,
+      "error": null,
+      "sha256": "8ffd48c32ab28109b3fdad26f123fcbf178fea4d20967ffefbf6d493ce2e45a3",
+      "retrieved_at": "2026-10-02T16:32:42Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900J35NSHS856UA68",
+      "url": "https://www.sparkron.dk/om-sparekassen/regnskab/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "d60821ee2dee6e216c27ca557f668dc4e42449227017ad117583a822beba9e69",
+      "retrieved_at": "2026-10-02T16:32:45Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900J35NSHS856UA68",
+      "url": "https://www.sparkron.dk/om-sparekassen/om-os/organisation/garantsparekasse-og-dermed-selvejende",
+      "status": 200,
+      "error": null,
+      "sha256": "40fb0e765213b6f78ad5676223aac3e33647328c8bc921c323f74707603434ca",
+      "retrieved_at": "2026-10-03T07:28:14Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "5493007BWYDPQZLZ0Y27",
+      "name": "HYPO NOE Landesbank für Niederösterreich und Wien AG",
+      "ownership": "public",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.hyponoe.at/ueber-uns",
+        "sha256": "2ca6ef99e2f6f0a626e1b4239645f61e282ae8fb0584c6c34d955ad12ec8029b",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T07:20:47Z",
+        "quote": "atungskompetenz mit Schwerpunkt in der Wohnbaufinanzierung. Mit dem Land Niederösterreich steht das größte Bundesland Österreichs als stabiler und verlässlicher 100%-Eigentümer hinter der HYPO NOE Landesbank. Die Eigentümerschaft ist langfristig orientiert und gewährleistet eine nachhaltige Umsetzung unserer Strategie: Organisches Wachstum im Kerngeschäft, digitale Best-in-Class-Lösungen in der Hypothekarfinanzierung, weitere Erhöhung der Profitabilität unter Beibehaltung eines konservativen Risiko- und starken Kapitalprofils. Nachhaltiges Handeln im Kerngeschäft wird durch klare ethische Leitlinien und Geschäftsgrundsätze sichergestellt und "
+      },
+      "note": "Bank identifies Land Niederösterreich as its stable 100% owner. Land/public ownership, not ownership inferred from Landesbank branding.",
+      "bank_identity": {
+        "legal_name": "HYPO NOE Landesbank für Niederösterreich und Wien AG",
+        "registered_as": "99073x",
+        "jurisdiction": "AT",
+        "gleif_record_sha256": "b06460f804d69a979de582f45cbff177afd5f282969212e5d1730dbefb787d8b"
+      }
+    },
+    {
+      "lei": "815600A029117B20DD63",
+      "name": "ILLIMITY BANK S.P.A.",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_document_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.bancaifis.it/chi-siamo/corporate-governance/azionariato/",
+        "sha256": "cbafa11c9f6bb8baf2c078bc227522e1ea0f4b5b1e4203ef20d6b86602da3045",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "ssemblea degli Azionisti Relazioni e documenti Corporate Governance Azionariato L’azionista di maggioranza di Banca Ifis, Fürstenberg Scogliera Holding S.A., assicura una visione di lungo termine e la continuità e coesione del Gruppo. Il Capitale Sociale di Banca Ifis è pari ad euro 61.818.925 i.v. diviso in 61.818.925 azioni ordinarie del valore nominale di 1 euro. Banca Ifis è un emittente azioni quotate “PMI” e pertanto la soglia da considerare per le partecipazioni rilevanti è pari 5%. I principali azionisti di Banca Ifis risultano evidenziati nella tabella seguente: (dati aggiornati al 2 luglio 2026). Azionisti Percentuale Numero di azioni Fürstenberg Scogliera Holding S.A. 45,051% 27.849.847 Preve Riccardo 4,863% 3.006.000 Mercato 49,222% 30.428.688 Azioni proprie 0,864% 534.390 Documenti Regolamento sul voto maggiorato Scarica il documento. Scarica il Regolamento Gestione del dialogo con gli investitori Scarica la Politica di gestione del dialogo da parte degli Amministratori con gli "
+      },
+      "note": "Official bank source states Banca Ifis holds 100% capital and votes after the offer; completed control, not an announced acquisition. Existing reviewed Ifis shareholder source reused.",
+      "controller_lei": "8156005420362AE59184",
+      "control_evidence": {
+        "url": "https://www.illimity.com/it/governance",
+        "sha256": "2ad4d6db0030be4cd17c5f2e8cc02bc54085ecc7a402e37d8fb7434a7252d232",
+        "retrieved_at": "2026-10-03T07:20:48Z",
+        "quote": "\"), promossa da Banca Ifis S.p.A. sulle azioni di illimity, Banca Ifis S.p.A. è titolare del 100% del capitale di illimity e dei diritti di voto nelle relative assemblee.​ Organi societari illimity Bank S.p.A. adotta un sistema di amministrazione e controllo tradizionale, idoneo ad assicurare una netta separazione funzionale tra i membri dell’organo con funzione di supervisione strategica e i membri dell’organo di controllo. Questo sistema si fonda sulla presenza di un Consiglio di Amministrazione e di un Collegio Sindacale, entrambi di nomina assembleare. Consiglio di Amministrazione Il Consiglio di Amministrazione riveste un ruolo centrale ",
+        "matched_legal_name": "illimity"
+      },
+      "matched_legal_name": "illimity",
+      "bank_identity": {
+        "legal_name": "ILLIMITY BANK S.P.A. IN FORMA ABBREVIATA \"ILLIMITY S.P.A.\"",
+        "registered_as": "03192350365",
+        "jurisdiction": "IT",
+        "gleif_record_sha256": "3e0504b9753aae2118c68ae8d002d50276c2226314ade62239fe4f93d914747b"
+      }
+    },
+    {
+      "lei": "529900J35NSHS856UA68",
+      "name": "Sparekassen Kronjylland",
+      "ownership": "savings",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.sparkron.dk/om-sparekassen/om-os/organisation/garantsparekasse-og-dermed-selvejende",
+        "sha256": "40fb0e765213b6f78ad5676223aac3e33647328c8bc921c323f74707603434ca",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T07:28:14Z",
+        "quote": "r Søg Kontakt Netbank Garantsparekasse og dermed selvejende Sparekassen Kronjylland er en garantsparekasse, og er dermed selvejende. Hvad er en garantsparekasse? At vi er en garantsparekasse betyder, at en del af vores kunder har indskudt kapital i Sparekassen Kronjylland. Dermed står de som garant bag ved Sparekassen Kronjylland, da de med deres indskud garanterer for virksomhedens drift. Garanter er altså kunder, som har valgt at indskyde kapital i Sparekassen. For garanten er der tale om en investering, der belønnes med en rente, og for Sparekassen er der tale om et indskud, der tæller med som en del af Sparekassens egenkapital. Har man in"
+      },
+      "note": "Official bank explicitly describes itself as self-owned (selvejende) and states there are no shareholders entitled to profits. Guarantors elect the representative assembly. Savings/self-owned category, not a cooperative or foundation based on the brand.",
+      "bank_identity": {
+        "legal_name": "SPAREKASSEN KRONJYLLAND",
+        "registered_as": "17912828",
+        "jurisdiction": "DK",
+        "gleif_record_sha256": "5f99fbfdffd3ba106870560bec213e5745cac81fe2d96bf11ddecd66d4fd8ce6"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300UY81ESCZJ0GR95",
+      "name": "First Investment Bank",
+      "rank": 84,
+      "trea_eur": 5046160867.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Correct candidate website: archived GLEIF identity is Bulgarian First Investment Bank, whereas pinbank.ua is a different Ukrainian bank. Discover Bulgarian issuer official site by LEI/register and review its actual qualifying holdings.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "identity_evidence": {
+        "source_url": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95",
+        "hash_kind": "canonical_gleif_record",
+        "sha256": "5503d06d59659f58b3cd443eeda4934954226063a2a1fa1154a8c2b518c4ea18",
+        "record": {
+          "type": "lei-records",
+          "id": "549300UY81ESCZJ0GR95",
+          "attributes": {
+            "lei": "549300UY81ESCZJ0GR95",
+            "entity": {
+              "legalName": {
+                "name": "\"ПЪРВА ИНВЕСТИЦИОННА БАНКА\" АД",
+                "language": "bg"
+              },
+              "otherNames": [
+                {
+                  "name": "FIRST INVESTMENT BANK AD",
+                  "language": "en",
+                  "type": "PREVIOUS_LEGAL_NAME"
+                }
+              ],
+              "transliteratedOtherNames": [
+                {
+                  "name": "FIRST INVESTMENT BANK",
+                  "language": "bg",
+                  "type": "PREFERRED_ASCII_TRANSLITERATED_LEGAL_NAME"
+                }
+              ],
+              "legalAddress": {
+                "language": "bg",
+                "addressLines": [
+                  "NO 111 P, STR. BUL. TSARIGRADSKO SHOSE"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "SOFIA",
+                "region": "BG-22",
+                "country": "BG",
+                "postalCode": "1784"
+              },
+              "headquartersAddress": {
+                "language": "bg",
+                "addressLines": [
+                  "NO 111 P, STR. BUL. TSARIGRADSKO SHOSE"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "SOFIA",
+                "region": "BG-22",
+                "country": "BG",
+                "postalCode": "1784"
+              },
+              "registeredAt": {
+                "id": "RA000065",
+                "other": null
+              },
+              "registeredAs": "831094393",
+              "jurisdiction": "BG",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "WTK4",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "2014-02-06T05:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": [
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "ACCOUNTS_FILING",
+                      "effectiveDate": "2024-04-12T00:00:00Z",
+                      "recordedDate": "2024-04-15T10:22:09Z",
+                      "type": "CHANGE_LEGAL_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "ACCOUNTS_FILING",
+                      "effectiveDate": "2024-04-12T00:00:00Z",
+                      "recordedDate": "2024-04-15T10:21:43Z",
+                      "type": "CHANGE_HQ_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                }
+              ]
+            },
+            "registration": {
+              "initialRegistrationDate": "2014-02-07T19:54:00Z",
+              "lastUpdateDate": "2026-04-29T16:02:30Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-05-29T00:00:00Z",
+              "managingLou": "213800WAVVOPS85N2205",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000065",
+                "other": null
+              },
+              "validatedAs": "831094393",
+              "otherValidationAuthorities": []
+            },
+            "bic": [
+              "FINVBGSFXXX"
+            ],
+            "mic": null,
+            "ocid": "bg/831094393",
+            "qcc": "QBG6V9REHX",
+            "gem": null,
+            "spglobal": [
+              "23018182"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95/direct-parent-reporting-exception"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95/ultimate-parent-reporting-exception"
+              }
+            },
+            "direct-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95/direct-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95/direct-children"
+              }
+            },
+            "ultimate-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95/ultimate-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95/ultimate-children"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/549300UY81ESCZJ0GR95"
+          }
+        }
+      }
+    },
+    {
+      "lei": "529900NNQW9IAE32GQ07",
+      "name": "GRAWE-Vermögensverwaltung",
+      "rank": 85,
+      "trea_eur": 4875126336.03,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review exact GRAWE-Vermoegensverwaltung holding owners and upstream Grazer Wechselseitige statute/ownership chain in filed reports; an insurer brand or group history alone is not mutual ownership proof.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

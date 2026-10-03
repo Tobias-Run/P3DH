@@ -1,0 +1,292 @@
+{
+  "batch": "042",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 6,
+  "page_attempts": [
+    {
+      "lei": "9845009BE414FBF82130",
+      "url": "https://www.fibank.bg",
+      "status": 200,
+      "error": null,
+      "sha256": "44b529b52095523adf2e379042cd5dc590e4e324e0a85ab1be9b3329ac4eeff3",
+      "retrieved_at": "2026-10-03T08:00:23Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300M2IHOB9P5WE714",
+      "url": "https://www.swissquote.lu",
+      "status": 200,
+      "error": null,
+      "sha256": "a1859133598fd8249a9bc035a480c72d373a8854e0447c9a78e133d1b9b831c3",
+      "retrieved_at": "2026-10-03T08:00:23Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300M2IHOB9P5WE714",
+      "url": "https://www.swissquote.com/en-lu/luxembourg/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "5bdd0d300fdd366f205300c70813da5f71aaf995fd8ec992dc4ec422dabbb873",
+      "retrieved_at": "2026-10-03T08:00:26Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "969500F3KYDJBFS4XM73",
+      "url": "https://www.banqueaudi.fr",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:55:36Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "81560062CEAE87A85C80",
+      "url": "https://www.bancaprofilo.it",
+      "status": 200,
+      "error": null,
+      "sha256": "0a689b15942108b667f56bc3cc627a45bac797765d607b8ab8ad1e9e5a444f50",
+      "retrieved_at": "2026-10-03T08:00:25Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "81560062CEAE87A85C80",
+      "url": "https://www.bancaprofilo.it/investor-relation/",
+      "status": 200,
+      "error": null,
+      "sha256": "f047a1506ef8e4f9fe9ddbf6e83349a0c0f5e5922a69ed8186b2276a2ce79260",
+      "retrieved_at": "2026-10-03T08:00:27Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900XB6RQ3XCELQO62",
+      "url": "https://www.bendura.li",
+      "status": 200,
+      "error": null,
+      "sha256": "3bde4eda29df26be6936016602aaab6c071b1d6f64e0be436b84352677042a33",
+      "retrieved_at": "2026-10-02T16:54:26Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900XB6RQ3XCELQO62",
+      "url": "https://www.bendura.li/ueber-uns",
+      "status": 200,
+      "error": null,
+      "sha256": "6e4045a051ed70193358dfed8528505aae0df87f7dbb348543c86a0eeded5401",
+      "retrieved_at": "2026-10-02T16:54:28Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900XB6RQ3XCELQO62",
+      "url": "https://www.bendura.li/kategorie/geschaeftsberichte/",
+      "status": 200,
+      "error": null,
+      "sha256": "00d3232281307c2eae5d88da69c12e0a10f5a3e2fca695489bca17a80165f7c8",
+      "retrieved_at": "2026-10-03T08:03:08Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "9845009BE414FBF82130",
+      "name": "FESTA HOLDING",
+      "rank": 164,
+      "trea_eur": 522615194.7798,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Correct candidate identity: exact GLEIF name is Bulgarian FESTA HOLDING, while fibank.bg is First Investment Bank. Remove that candidate and discover the holding through official register/issuer group accounts; do not assign another bank owners to this company.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "identity_evidence": {
+        "source_url": "https://api.gleif.org/api/v1/lei-records/9845009BE414FBF82130",
+        "hash_kind": "canonical_gleif_record",
+        "sha256": "43f23d9cfaf77d6d3c2cb091edddc4e3fe1a9b35354c13a87784631b3f3d837f",
+        "record": {
+          "type": "lei-records",
+          "id": "9845009BE414FBF82130",
+          "attributes": {
+            "lei": "9845009BE414FBF82130",
+            "entity": {
+              "legalName": {
+                "name": "ФЕСТА ХОЛДИНГ",
+                "language": "bg"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "bg",
+                "addressLines": [
+                  "ул. бул. БЪЛГАРИЯ 83-А"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "София",
+                "region": "BG-22",
+                "country": "BG",
+                "postalCode": "1404"
+              },
+              "headquartersAddress": {
+                "language": "bg",
+                "addressLines": [
+                  "ул. бул. БЪЛГАРИЯ 83-А"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "София",
+                "region": "BG-22",
+                "country": "BG",
+                "postalCode": "1404"
+              },
+              "registeredAt": {
+                "id": "RA000065",
+                "other": null
+              },
+              "registeredAs": "103123984",
+              "jurisdiction": "BG",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "WTK4",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "2008-05-10T00:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2022-08-03T10:51:48Z",
+              "lastUpdateDate": "2026-06-08T07:20:34Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-08-03T10:51:49Z",
+              "managingLou": "529900T8BM49AURSDO55",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000065",
+                "other": null
+              },
+              "validatedAs": "103123984",
+              "otherValidationAuthorities": []
+            },
+            "bic": null,
+            "mic": null,
+            "ocid": "bg/103123984",
+            "qcc": "QBGTE0HDM1",
+            "gem": null,
+            "spglobal": [
+              "22309082"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/9845009BE414FBF82130/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/9845009BE414FBF82130/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/9845009BE414FBF82130/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/9845009BE414FBF82130/direct-parent-reporting-exception"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/9845009BE414FBF82130/ultimate-parent-reporting-exception"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/9845009BE414FBF82130"
+          }
+        }
+      }
+    },
+    {
+      "lei": "549300M2IHOB9P5WE714",
+      "name": "Swissquote Bank Europe S.A",
+      "rank": 165,
+      "trea_eur": 494350585.92,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use exact Swissquote Europe bank subsidiary control note plus current Swissquote Group voting/beneficial owner table. Luxembourg about landing and an unreviewed parent relationship are insufficient.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "969500F3KYDJBFS4XM73",
+      "name": "Bank Audi France",
+      "rank": 166,
+      "trea_eur": 491055472.67,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Find Bank Audi France exact French regulator/issuer annual-report sources and Bank Audi shareholder/vote structure; legacy unreachable domain does not prove public ownership information unavailable.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.banqueaudi.fr",
+          "status": null,
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+        }
+      ]
+    },
+    {
+      "lei": "81560062CEAE87A85C80",
+      "name": "AREPO BP S.P.A.",
+      "rank": 167,
+      "trea_eur": 472335118.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review Arepo BP holding exact shareholder/fund owner structure in filed reports; Banca Profilo IR table identifies a subsidiary and does not establish owners of Arepo BP itself or subsequent completed changes.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900XB6RQ3XCELQO62",
+      "name": "BENDURA BANK AG",
+      "rank": 168,
+      "trea_eur": 464210066.1940201,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Obtain current BENDURA audited annual-report shareholder/voting table through actual download navigation; business-report index did not expose ownership. Date Citychamp/foundation/other control changes rather than guess from owners names.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

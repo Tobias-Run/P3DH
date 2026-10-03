@@ -1,0 +1,206 @@
+{
+  "batch": "043",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 7,
+  "page_attempts": [
+    {
+      "lei": "213800ZOI1EW481WPV90",
+      "url": "https://www.fcmbank.com.mt",
+      "status": 200,
+      "error": null,
+      "sha256": "dd2acd91bb0c9e2bdee6065ff937bf07c96d0d68572a321c470efca3fe43e530",
+      "retrieved_at": "2026-10-02T16:48:29Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800ZOI1EW481WPV90",
+      "url": "https://www.fcmbank.com.mt/about-us/",
+      "status": 200,
+      "error": null,
+      "sha256": "dd2acd91bb0c9e2bdee6065ff937bf07c96d0d68572a321c470efca3fe43e530",
+      "retrieved_at": "2026-10-02T16:48:32Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800ZOI1EW481WPV90",
+      "url": "https://www.fcmbank.com.mt/financial-publications/",
+      "status": 200,
+      "error": null,
+      "sha256": "aff0598e012ad0f8b6cc8e5aba04fd7a3bf5a0c5c7ceab7e8c9ab46b79b20a84",
+      "retrieved_at": "2026-10-03T08:03:10Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9695002K2HDLD20JU790",
+      "url": "https://www.agence-france-locale.fr",
+      "status": 200,
+      "error": null,
+      "sha256": "1b29169d3d123da578bdd21ff2a725c84510ecca13ca120eabc116b13c1e28cf",
+      "retrieved_at": "2026-10-03T08:00:29Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9695002K2HDLD20JU790",
+      "url": "https://www.agence-france-locale.fr/expertise/rapport-dactivite-et-de-developpement-durable-2024/",
+      "status": 200,
+      "error": null,
+      "sha256": "8400f8f7709455d95dcefdea67a7150e7cb5a76022a984057239581f25a02dcd",
+      "retrieved_at": "2026-10-03T08:00:30Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9695002K2HDLD20JU790",
+      "url": "https://www.agence-france-locale.fr/rse/gouvernance/",
+      "status": 200,
+      "error": null,
+      "sha256": "9cce8fd6518f222ce4dbafbd436b6cb25164babd2d7953d6647adae885e23928",
+      "retrieved_at": "2026-10-03T08:03:11Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800TKOS7J5UA3ZI07",
+      "url": "https://www.eabplc.com",
+      "status": 200,
+      "error": null,
+      "sha256": "e6e2cbe85dd62e88cad920f620148f736652585c41fb04ceb30ac2fba73a72ba",
+      "retrieved_at": "2026-10-02T16:48:22Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800TKOS7J5UA3ZI07",
+      "url": "https://arabbankeurope.com/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "f2db86d55614a95b018742a00df9ed042146f9d239b3b682b36d6ab45171837a",
+      "retrieved_at": "2026-10-02T16:48:23Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "8156003D79D064FB5360",
+      "url": "https://www.cassalombarda.it",
+      "status": 200,
+      "error": null,
+      "sha256": "125002418f993320da32d706a665acd81a1ab7f0b182c18ee113bbaea7c171d9",
+      "retrieved_at": "2026-10-03T08:00:29Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "8156003D79D064FB5360",
+      "url": "https://www.cassalombarda.it/governance/",
+      "status": 200,
+      "error": null,
+      "sha256": "d4b902212512db47ab6d0fc278a29444925f998a7fddf121e42c606d431730f6",
+      "retrieved_at": "2026-10-03T08:00:31Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "8156003D79D064FB5360",
+      "url": "https://www.cassalombarda.it/wp-content/uploads/2021/06/Company-Profile-31-03-2026-approfondimenti.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "dae41065a75ffa2bf830850549fb6cfb66786aa1c7bbeffc19664e75b829972a",
+      "retrieved_at": "2026-10-03T08:03:11Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900BIK4WRWS06MR52",
+      "url": "https://www.varengold.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "f3b34fa317f7e3ce2ef8771a932b37e615f62f8282501f98bd64b73f4b1c37e3",
+      "retrieved_at": "2026-10-02T16:32:31Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900BIK4WRWS06MR52",
+      "url": "https://www.ascory-bank.de/de/ueber-uns/engagement",
+      "status": 200,
+      "error": null,
+      "sha256": "e04266abfd1c27028cc23dd01673326a2317d318b22560df5b5f900efdaae9f8",
+      "retrieved_at": "2026-10-02T16:51:07Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "9695002K2HDLD20JU790",
+      "name": "AGENCE FRANCE LOCALE - SOCIETE TERRITORIALE",
+      "ownership": "public",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.agence-france-locale.fr/rse/gouvernance/",
+        "sha256": "9cce8fd6518f222ce4dbafbd436b6cb25164babd2d7953d6647adae885e23928",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:03:11Z",
+        "quote": "la filiale établissement de crédit. La Société Territoriale La Société territoriale (AFL-ST) est la compagnie financière holding. Son actionnariat : 100% détenue par les communes, départements, régions, établissements publics de coopération intercommunale (avec ou sans fiscalité propre), établissements publics territoriaux et établissements publics locaux. Ses missions : – La représentation des actionnaires ; – Le pilotage du mécanisme de garantie ; – La nomination des membres du Conseil de surveillance de l’établissement de crédit spécialisé ; – La fixation des grandes orientations stratégiques et le cadre d’appétit au risque ; – La promotion du modèle, conjointement avec l’AFL, auprès des collectivités locales en vue de l’augmentation du "
+      },
+      "note": "Exact requested AFL Societe territoriale holding is explicitly 100% owned by local/regional authorities and public intermunicipal institutions. The bank below it is a different company, more than 99.9% holding-owned. Cooperative operating language does not override public legal owners.",
+      "bank_identity": {
+        "legal_name": "AGENCE FRANCE LOCALE-SOCIETE TERRITORIALE",
+        "registered_as": "799055629",
+        "jurisdiction": "FR",
+        "gleif_record_sha256": "e77e14ab0994886dbee302e613d426eb40db40bfcd5eb61f787051d2dddaef12"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "213800ZOI1EW481WPV90",
+      "name": "FCM Bank Ltd",
+      "rank": 169,
+      "trea_eur": 462944114.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use FCM Bank exact current shareholder/completed control report and upstream SAB Financial Group legal ownership. Executive biographies and financial publications shell do not prove bank owners.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "213800TKOS7J5UA3ZI07",
+      "name": "EUROPE ARAB BANK SA",
+      "rank": 171,
+      "trea_eur": 440917666.22,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Reconcile Europe Arab Bank SA exact registered country/name with changed Arab Bank Europe brand and parent Arab Bank PLC; use bank subsidiary report and current parent shareholder/vote table, not generic Arab Bank branding.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "8156003D79D064FB5360",
+      "name": "CASSA LOMBARDA - S.P.A.",
+      "rank": 172,
+      "trea_eur": 438049293.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Current 2026-03-31 profile proves PKB Private Bank SA 99.6%, controlled wholly by Auriga SA. Verify Auriga exact ultimate owners/current votes in official filed accounts; private-bank wording does not establish ultimate family or foundation ownership.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900BIK4WRWS06MR52",
+      "name": "Varengold Bank AG",
+      "rank": 173,
+      "trea_eur": 402271102.51,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review Varengold/Ascory registered name continuity and current shareholder/voting disclosures after changes; community engagement page says nothing about control or sanctions-related holdings.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

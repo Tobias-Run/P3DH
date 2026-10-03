@@ -1,0 +1,263 @@
+{
+  "batch": "004",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 7,
+  "page_attempts": [
+    {
+      "lei": "3M5E1GQGKL17HI6CPN30",
+      "url": "https://www.jyskebank.dk/ir/aktien/aktionaerer",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:48:51Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "3M5E1GQGKL17HI6CPN30",
+      "url": "http://www.jyskebank.dk/",
+      "status": 200,
+      "error": null,
+      "sha256": "09744a17c9aaacceaffe2831c9da2a3e5661e33e39eebbe9dbe108e2506add71",
+      "retrieved_at": "2026-10-02T16:32:19Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "3M5E1GQGKL17HI6CPN30",
+      "url": "https://www.jyskebank.dk/wps/wcm/connect/jfo/77953027-e784-4c6b-a86d-ce9a5278e9e1/Jyske+Bank+%C3%85rsrapport+2025.pdf?MOD=AJPERES&CONVERT_TO=url&CACHEID=ROOTWORKSPACE.Z18_M920GHK04P907069CMCEUDJKK4-77953027-e784-4c6b-a86d-ce9a5278e9e1-pS-Nxd9",
+      "status": 200,
+      "error": null,
+      "sha256": "6bfbefb57e303115da416fe5035a7a4cc1cd9e78ec4bd1ef0a49927bd0db85bf",
+      "retrieved_at": "2026-10-02T22:19:16Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "LOO0AWXR8GF142JCO404",
+      "url": "https://www.cassacentrale.it/en/group",
+      "status": 200,
+      "error": null,
+      "sha256": "5b9dd94ac3da6852f4d478d6519b4a01e671b078c90fead167a3b332e483a70b",
+      "retrieved_at": "2026-10-02T23:48:51Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "LOO0AWXR8GF142JCO404",
+      "url": "https://www.cassacentrale.it/en/governance/shareholders-meeting",
+      "status": 200,
+      "error": null,
+      "sha256": "4ab03b00cd48c7499781fcd92458343accb3b32cadeb059948e5f802804a8401",
+      "retrieved_at": "2026-10-02T23:48:53Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "LOO0AWXR8GF142JCO404",
+      "url": "https://www.cassacentrale.it/en/governance/corporate-structure",
+      "status": 200,
+      "error": null,
+      "sha256": "fe4c2e7e9b90e2a6b547a817930b61eb85cede9d28cabf7b2ab9b2ad3f31863e",
+      "retrieved_at": "2026-10-02T23:50:37Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "259400LGXW3K0GDAG361",
+      "url": "https://www.erste.pl/",
+      "status": 200,
+      "error": null,
+      "sha256": "1624319a41f0dc5468bf82ef4b0ec775727ee684420f55c89dbd476527b049e9",
+      "retrieved_at": "2026-10-02T16:32:07Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400LGXW3K0GDAG361",
+      "url": "https://www.erste.pl/en/investor-relations/shares-and-shareholding",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:19Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "259400LGXW3K0GDAG361",
+      "url": "https://www.erste.pl/en/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "09276b618aaee8022969e0077e8928b2b86ef2ae0a8592d3ba5ba228b65e7a92",
+      "retrieved_at": "2026-10-02T16:49:01Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800DBQIB6VBNU5C64",
+      "url": "https://www.alpha.gr/",
+      "status": 200,
+      "error": null,
+      "sha256": "636768deb378fc42ce9b8a999d28263acbe25255c3a58748d210627ed0ba91d0",
+      "retrieved_at": "2026-10-02T16:32:00Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800DBQIB6VBNU5C64",
+      "url": "https://www.alpha.gr/-/media/AlphaGr/Files/Group/Press-Releases/2026/20260928-deltio-typou.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "ff82fe139a94ec7597192d362d29f19acb4ea0297346817d52a0f6111641eb10",
+      "retrieved_at": "2026-10-02T16:47:51Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800DBQIB6VBNU5C64",
+      "url": "https://www.alphaholdings.gr/en/investor-relations/share/shareholder-structure",
+      "status": 503,
+      "error": "HTTP Error 503: Service Unavailable",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:20Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800DBQIB6VBNU5C64",
+      "url": "https://www.alpha.gr/en/group/investor-relations/shareholders/shareholding-structure",
+      "status": 500,
+      "error": "HTTP Error 500: Internal Server Error",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:58:54Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "PSNL19R2RXX5U3QWHI44",
+      "name": "MEDIOBANCA - BANCA DI CREDITO FINANZIARIO S.P.A.",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.gruppomps.it/en/corporate-governance/shareholding-structure.html",
+        "sha256": "44ab0602181f85f613afc7a60610425bb60f7076285814c90c6bce8f754db0db",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "der the cases of exemption provided for by CONSOB Regulation no. 11971 concerning the discipline of issuers, are as follows: SHAREHOLDER % OF CAPITAL DELFIN S.A.R.L. 17.53% GRUPPO FRANCESCO GAETANO CALTAGIRONE (*) 10.26% MEF - MINISTERO DELL’ECONOMIA E DELLE FINANZE 4.86% BLACKROCK, INC. (**) 4.66% BANCO BPM SPA (***) 3.74% OTHER SHAREHOLDERS (****) 58.95% (*) Source: www.consob.it - Shareholdings and voting rights held through companies belonging to Caltagirone Group; as at dividend payment of 20 May 2026 Caltagirone Group held 13.49% of the share capital. (**) Shareholdings and voting rights held through companies belonging to BlackRock Group as communicated with Form 120/B on 30 April 2026. The stake held by the BlackRock Group is represented by voting rights attached to shares (4.665% of the share capital) and by potential investment and other long positions with physical and cash settlement (0.302% of the share capital). (***) Source: www.consob.it - Shareholdings and voting rights held also through Anima Holding S.p.A.. (****) By means of Form 120 (TR-1) submitted on 19 August 2026, Barclays PLC reported that it held through Barclays Capital Securities Limited an aggregate interest corresponding to a total position of 5.03% of the share capital. Such holding is represented by voting rights attached to shares (0.08% of the share capital) and by voting rights through financial instruments (potential holdings and other long positions amounting in aggregate to 4.95% of the share capital). Last modified: 26/08/2026 About us Presentation Shareholding Structure Strategy Organisational Model History Corporate Governance Governance Model Shareholding Structure Internal control system Board of directors Internal board committees Board of Statutory Auditors Management Remuneration Shareholders meeting and BoD Related-Party Transactions Internal dealing Events Whistleblowing Voluntary Public Exchange Offer on Banca Generali Spa "
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "J4CP7MHCXR8DAQMKIL78",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/PSNL19R2RXX5U3QWHI44/ultimate-parent-relationship",
+        "sha256": "09f0d5c7eff3d9fabfdcd68dba63b0225de618bbd4bc32c05fe0cdc705e97df1",
+        "relationship": {
+          "startNode": {
+            "id": "PSNL19R2RXX5U3QWHI44",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "J4CP7MHCXR8DAQMKIL78",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2025-01-01T00:00:00Z",
+              "endDate": "2025-12-31T00:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2025-01-01T00:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2012-06-06T15:51:00Z",
+          "lastUpdateDate": "2026-05-11T16:17:40Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-06-15T00:00:00Z",
+          "managingLou": "213800WAVVOPS85N2205",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": "https://www.gruppomps.it/static/upload/rel/relazione-finanziaria-annuale-gmps-2025.pdf"
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "MEDIOBANCA - BANCA DI CREDITO FINANZIARIO S.P.A.",
+        "registered_as": "00714490158",
+        "jurisdiction": "IT",
+        "gleif_record_sha256": "d37b46dbcc826e66781bbd7d6f56cb5f4876c0376f5e225a6faff2afbd3c740f"
+      }
+    },
+    {
+      "lei": "3M5E1GQGKL17HI6CPN30",
+      "name": "Jyske Bank A/S",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.jyskebank.dk/wps/wcm/connect/jfo/77953027-e784-4c6b-a86d-ce9a5278e9e1/Jyske+Bank+%C3%85rsrapport+2025.pdf?MOD=AJPERES&CONVERT_TO=url&CACHEID=ROOTWORKSPACE.Z18_M920GHK04P907069CMCEUDJKK4-77953027-e784-4c6b-a86d-ce9a5278e9e1-pS-Nxd9",
+        "sha256": "6bfbefb57e303115da416fe5035a7a4cc1cd9e78ec4bd1ef0a49927bd0db85bf",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T22:19:16Z",
+        "quote": "Aktionærer med 1.000-20.000 stk. Aktionærer med <1.000 stk. Jyske Banks største aktionær er BRFholding, der ejede 28,55% af aktiekapitalen ultimo 2025, svarende til 4.000 stemmeretter. BRFholding har hjemsted i København, Danmark, og er et 100% ejet datterselskab af BRFfonden, der har til formål at udøve realkreditvirksomhed gennem del- ejerskab af Jyske Bank. Ultimo 2025 var antallet af aktionærer ca. 140.000. Jyske Banks aktiekapital er kendetegnet ved at være fordelt blandt mange aktionærer, herunder også Jyske Bank-kunder og -medarbejdere. Hovedparten af aktiekapitalen ejes af dan- ske investorer. Jyske Banks største aktionær er BRFholdin"
+      },
+      "note": "Annual report 2025: BRFholding/BRFfonden 28.55%; distributed shareholders and voting restrictions. Foundation minority is recorded, not labelled foundation-controlled. Current shareholder category does not assert exclusively private capital.",
+      "bank_identity": {
+        "legal_name": "JYSKE BANK A/S",
+        "registered_as": "17616617",
+        "jurisdiction": "DK",
+        "gleif_record_sha256": "b10107748a838fe12a1a13f1865452db1bbfe41853886d9b756065b1ee20ca9a"
+      }
+    },
+    {
+      "lei": "LOO0AWXR8GF142JCO404",
+      "name": "CASSA CENTRALE BANCA - CREDITO COOPERATIVO ITALIANOSOCIETA' PER AZIONI (IN SIGLA CASSA CENTRALE BANCA)",
+      "ownership": "cooperative",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.cassacentrale.it/en/group",
+        "sha256": "5b9dd94ac3da6852f4d478d6519b4a01e671b078c90fead167a3b332e483a70b",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T23:48:51Z",
+        "quote": "ncome: € 1,162m Solid and constantly growing business model Group Structure 65* Cooperative Credit Banks Control the majority of the capital of the Cooperative Banking Group *data as 31.12.2025 Parent Company Direction, Group coordination and control Subsidiaries Services offered to local banks Group Banks Those that joined forces to create the Group 13Trentino Alto Adige 5Lazio 7Emilia Romagna 1Valle d'Aosta 6Piemonte 1Toscana 1Umbria 3Campania 2Calabria 7Puglia 1Marche 1Abruzzo 4Friuli Venezia Giulia 6Lombardia 3Sicilia 4Veneto Click on the Regions and discover the Banks of the Group All Group Banks All offices of the Parent Company Find th"
+      },
+      "note": "Official group page explicitly states 65 Cooperative Credit Banks control the majority of capital, as of 2025-12-31. Parent bank identity reviewed; not inferred from its SA legal form.",
+      "bank_identity": {
+        "legal_name": "CASSA CENTRALE BANCA - CREDITO COOPERATIVO ITALIANO S.P.A., O IN FORMA ABBREVIATA CASSA CENTRALE",
+        "registered_as": "00232480228",
+        "jurisdiction": "IT",
+        "gleif_record_sha256": "e74b2885881e945342686e4bc50a40f2fb6416c7fea84ccfcd3d9bd3d76a5e27"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "259400LGXW3K0GDAG361",
+      "name": "Santander Bank Polska S.A.",
+      "rank": 12,
+      "trea_eur": 32533929542.30645,
+      "status": "pending_targeted_source_review",
+      "reason": "Issuer branding is now Erste Bank Polska and the archived fully corroborated parent is Erste Group. Exact controller ownership model remains unclassified.",
+      "next_action": "Use the dated shareholder-structure PDF linked from the Erste Group issuer page, check foundation/association voting rights and ownership anchors, then review the changed bank name/control date."
+    },
+    {
+      "lei": "213800DBQIB6VBNU5C64",
+      "name": "Alpha Bank S.A.",
+      "rank": 13,
+      "trea_eur": 32482147955.744,
+      "status": "pending_targeted_source_review",
+      "reason": "Greek homepage/press-release hits and failed English shareholder path are not current ownership evidence.",
+      "next_action": "Use Alpha’s actual investor-site navigation and post-merger annual report to verify exact bank vs holding identity, current UniCredit stake and HFSF exit; current public/minority ownership must be dated."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

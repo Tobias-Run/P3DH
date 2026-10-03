@@ -1,0 +1,183 @@
+{
+  "batch": "031",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 8,
+  "page_attempts": [
+    {
+      "lei": "5493002K643MZPQEK497",
+      "url": "https://www.bradescobbi.com.br",
+      "status": 200,
+      "error": null,
+      "sha256": "f6aff20510f1f2a59f95d8b392ead1975f5b23acf241d91afb7ae06d1a293d58",
+      "retrieved_at": "2026-10-02T16:54:36Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "9695002JOWSRCLLLNY11",
+      "url": "https://www.edmond-de-rothschild.com",
+      "status": 200,
+      "error": null,
+      "sha256": "119242acdf9dcf26157c46ba395bd91323509cadd1f38ba2bb3ecb1d6a10661f",
+      "retrieved_at": "2026-10-03T07:59:53Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9695002JOWSRCLLLNY11",
+      "url": "https://www.edmond-de-rothschild.com/en/annual-report-and-pilar-iii",
+      "status": 200,
+      "error": null,
+      "sha256": "a8f0e7ef2937b73eb7bbcc8f89cb5be926f1b73791039f236a709021c03c80bc",
+      "retrieved_at": "2026-10-03T07:59:54Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9695002JOWSRCLLLNY11",
+      "url": "https://www.edmond-de-rothschild.com/media/jwld5qcy/edr-france-rapport-annuel-2025-fr.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "bc23e2016559ac3d2d061da76e7e60bf6e70691b9f32444191b12f01aa0311aa",
+      "retrieved_at": "2026-10-03T08:02:59Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9695002JOWSRCLLLNY11",
+      "url": "https://www.edmond-de-rothschild.com/media/bjrmk0lf/edr-suisse-rapport-annuel-2025.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "fed87b2a32e09b0eba1c9d5b5b85a2fd94c089d9fed342bc52ed3a3cb6ba5c74",
+      "retrieved_at": "2026-10-03T08:05:30Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493009VJC01E4H6HH77",
+      "url": "https://www.avanza.se",
+      "status": 200,
+      "error": null,
+      "sha256": "153c936f5bc53c58bdc671af4c049862f1b4d636077dafe3e82a80c71e062338",
+      "retrieved_at": "2026-10-03T07:59:53Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "959800R86KE31EAVRC30",
+      "url": "https://www.bancopichincha.es",
+      "status": 200,
+      "error": null,
+      "sha256": "b09d67ef0d8fdff556d618491e782114103ed33558841d75002e5ccfa4dd53c1",
+      "retrieved_at": "2026-10-03T07:59:54Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "BB3BGO3LCED63R8R9R41",
+      "url": "https://www.bankbps.pl",
+      "status": 200,
+      "error": null,
+      "sha256": "bccee16837ffab991bf4741b2cc91313f99de1da7eda2f5d300b34342bb79938",
+      "retrieved_at": "2026-10-03T07:59:54Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "BB3BGO3LCED63R8R9R41",
+      "url": "https://www.bankbps.pl/sitemap.xml",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:05:36Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "9695002JOWSRCLLLNY11",
+      "name": "Edmond de Rothschild (France)",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.edmond-de-rothschild.com/media/bjrmk0lf/edr-suisse-rapport-annuel-2025.pdf",
+        "sha256": "fed87b2a32e09b0eba1c9d5b5b85a2fd94c089d9fed342bc52ed3a3cb6ba5c74",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:05:30Z",
+        "quote": "tion au capital Taux de participation à l'ensemble des voix 2025 Edmond de Rothschild Holding S.A. CHF 58'693,5 100,0 % 100,0 % 2024 Edmond de Rothschild Holding S.A. CHF 58'693,5 100,0 % 100,0 % La totalité du capital-actions d’Edmond de Rothschild Holding S.A. est contrôlée directement ou indirectement par des membres de la famille Rothschild ou des employés du Groupe. La Hoirie Benjamin de Rothschild en détient 65,73% (89,84% des voix), La Baronne Edmond de Rothschild détient 16,84% du capital (6,77% des voix), alors que Mademoiselle Camilla Langoux détient 16,52% du capital (3.39% des voix). Participations croisées Aucune participation croisée n’existe à ce jour. LE GOUVERNEMENT D’ENTREPRISE Structure du capital Capital social 2025 Valeur nominale (en milliers) Nombre de titres Capital donnant droit au dividende (en milliers) Actions nominatives entièrement libérées de CHF 100.- nominal CHF 58’694 586'935 CHF 58’694 Total du capital social CHF 58'694 – – Indications spécifiques concernant le capital autorisé et conditionnel Edmond de Rothschild (Suisse) S.A. ne possède pas de cap"
+      },
+      "note": "Two current 2025 reports explicitly prove France bank 100% held by Swiss bank, Swiss bank 100% held by Holding SA, and Holding controlled by Rothschild family/employees. Hoirie Benjamin 65.73% capital / 89.84% votes. No family ownership inferred from brand or management names. French bank identity matches registered RCS number in report.",
+      "bank_identity": {
+        "legal_name": "EDMOND DE ROTHSCHILD (FRANCE)",
+        "registered_as": "572037026",
+        "jurisdiction": "FR",
+        "gleif_record_sha256": "9204e358f425fa7f7862b71b7d7caecea446a6f5351e6a07eb7a2d623ade99c2"
+      },
+      "supporting_ownership_evidence": {
+        "url": "https://www.edmond-de-rothschild.com/media/jwld5qcy/edr-france-rapport-annuel-2025-fr.pdf",
+        "sha256": "bc23e2016559ac3d2d061da76e7e60bf6e70691b9f32444191b12f01aa0311aa",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:02:59Z",
+        "quote": "fres-clés Edmond de Rothschild (France) au 31 décembre 2025 Actionnariat au 31 décembre 2025 Edmond de Rothschild (France) est détenu à 100% par Edmond de Rothschild (Suisse) S.A. Total des encours gérés En milliards d’euros Implantations en France France Bordeaux, Lyon, Marseille, Nantes, Paris, Strasbourg et Toulouse Répartition des encours gérés par métiers et par classes d’actifs (filiales de gestion d’actifs) 53.8 49.1 46.7 47.7 53.4 2021 2022 2023 2024 2025 Répartition des encours gérés par métiers Répartition des encours gérés par classes d’actifs (filiales de gestion) RAPPORT FINANCIER ANNUEL 2025 | 9 Principales données consolidées ("
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "5493002K643MZPQEK497",
+      "name": "Banco Bradesco Europa S.A.",
+      "rank": 109,
+      "trea_eur": 1853544772.2792652,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Reconcile Banco Bradesco Europa Luxembourg LEI with the Brazilian BBI candidate; obtain bank-specific filed subsidiary evidence and current Bradesco parent controlling shareholders. ENTITY_SUPPLIED_ONLY is insufficient.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "5493009VJC01E4H6HH77",
+      "name": "Avanza - Grupp",
+      "rank": 111,
+      "trea_eur": 1755290036.9493,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use exact Avanza Bank AB identity behind the EBA group and current Avanza Holding ownership/voting table plus bank subsidiary accounts; partially corroborated group relation is not proof of completed control.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "959800R86KE31EAVRC30",
+      "name": "LIBERTY PARTNERS S.L.U.",
+      "rank": 112,
+      "trea_eur": 1720864000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review exact Spanish Liberty Partners holding owners in official filed accounts; Banco Pichincha retail website describes a subsidiary/brand, not who controls this holding.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "BB3BGO3LCED63R8R9R41",
+      "name": "BANK POLSKIEJ SPOLDZIELCZOSCI S.A.",
+      "rank": 113,
+      "trea_eur": 1685850721.10169,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Find current BPS issuer annual-report shareholder table with cooperative banks and percentage/votes; a cooperative-bank name, association role or unavailable sitemap is not majority member control.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [
+        {
+          "url": "https://www.bankbps.pl/sitemap.xml",
+          "status": 404,
+          "error": "HTTP Error 404: Not Found"
+        }
+      ]
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

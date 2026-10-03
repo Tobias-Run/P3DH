@@ -145,3 +145,6 @@ jobs:
 
       - name: Scale-Befunde auf Desktop und Mobilgerät (DE/EN)
         run: python scripts/check_scale_runtime.py
+
+      - name: Advanced peer groups and ownership evidence (DE/EN)
+        run: python scripts/check_advanced_peers.py

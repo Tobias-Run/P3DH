@@ -1,0 +1,203 @@
+{
+  "batch": "033",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 7,
+  "page_attempts": [
+    {
+      "lei": "213800GO21RWIB6O9Q29",
+      "url": "http://www.midspar.dk",
+      "status": 200,
+      "error": null,
+      "sha256": "5714a56ea8f9318f4aa7f8d7af84fd7766fe2ddaaa1fc4b2b85ff802048c3f93",
+      "retrieved_at": "2026-10-02T16:32:00Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800GO21RWIB6O9Q29",
+      "url": "https://midspar.dk/privat/produkter/digitale-vaerktoejer/",
+      "status": 200,
+      "error": null,
+      "sha256": "0cd8d7cf8fb1403d24c32157efef15fae8ced7dc922aa1ee02a103b04770e581",
+      "retrieved_at": "2026-10-02T16:47:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800GO21RWIB6O9Q29",
+      "url": "https://midspar.dk/om-middelfart-sparekasse/vores-historie/",
+      "status": 200,
+      "error": null,
+      "sha256": "0bb15c50440587cb6fd3351dc6891e045a6903ab58c0eae9c7e0c7ba4326d74d",
+      "retrieved_at": "2026-10-03T08:02:59Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800GO21RWIB6O9Q29",
+      "url": "https://midspar.dk/om-middelfart-sparekasse/vedtaegter-og-god-selskabsledelse/",
+      "status": 200,
+      "error": null,
+      "sha256": "88631d121ac316f5a9bc084a1602645c13e17ee519fe0963fa7abd4ad27db23c",
+      "retrieved_at": "2026-10-03T08:05:30Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "635400LCCIYHUL6ELA34",
+      "url": "https://www.usbank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "7a4d49ab47cf5315d2150a6bef4a5a6da8acd1694a8a82eb8c9289ee9068f40f",
+      "retrieved_at": "2026-10-03T07:59:58Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "635400LCCIYHUL6ELA34",
+      "url": "https://www.usbank.com/about-us-bank.html",
+      "status": 200,
+      "error": null,
+      "sha256": "040f2bfcff5f382aed5c256d557e1d72e7883ff59b062a657d59f7be1ac9a96a",
+      "retrieved_at": "2026-10-03T07:59:59Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5967007LIEEXZX76AW36",
+      "url": "https://www.obos.no/bank",
+      "status": 200,
+      "error": null,
+      "sha256": "3379404158a8ecf91609d9ce38071667ec35c02c26f657487262b930fc43c358",
+      "retrieved_at": "2026-10-03T07:59:58Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5967007LIEEXZX76AW36",
+      "url": "https://www.obos.no/bank/om-obos-banken",
+      "status": 200,
+      "error": null,
+      "sha256": "1d1047f4624581a18091684f2628c9751d03cb0c7320abb308d81fe1d5d11d88",
+      "retrieved_at": "2026-10-03T08:03:00Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900DSIVJWCUQUMP41",
+      "url": "https://www.akabank.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "4427c7ffb6a51b89bdef7b7601524f59fecc11d9366fc0846dd239a038032d11",
+      "retrieved_at": "2026-10-02T16:32:36Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900DSIVJWCUQUMP41",
+      "url": "https://www.akabank.de/ueber-uns",
+      "status": 200,
+      "error": null,
+      "sha256": "603a4d1228b7d28d56faeca2825a69afa7ca7d9cc272375d601a30e0a7852622",
+      "retrieved_at": "2026-10-02T16:51:35Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900DSIVJWCUQUMP41",
+      "url": "https://www.akabank.de/gremien",
+      "status": 200,
+      "error": null,
+      "sha256": "0fb5c11f0df58b3336a48c61553f4223a3ebe9233391b397ef24a19da3199a89",
+      "retrieved_at": "2026-10-03T08:03:03Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900IRBZTADXJB6757",
+      "url": "https://flatexdegiro.com/",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:32:42Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "213800GO21RWIB6O9Q29",
+      "name": "Middelfart Sparekasse",
+      "ownership": "savings",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://midspar.dk/om-middelfart-sparekasse/vedtaegter-og-god-selskabsledelse/",
+        "sha256": "88631d121ac316f5a9bc084a1602645c13e17ee519fe0963fa7abd4ad27db23c",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:05:30Z",
+        "quote": "t Sparekasses redegørelse for god selskabsledelse Vedtægter Middelfart Sparekasse er en selvejende institution. Det betyder, at ingen er ejere af Sparekassens overskud eller formue, og hvis Sparekassen ophører, skal dens nettoformue anvendes til velgørende og almennyttige formål i Sparekassens virkeområde. Læs Middelfart Sparekasses vedtægter Sammen om det, der er noget værd Bliv kunde i Middelfart Sparekasse Bliv kunde Kontakt os Middelfart Sparekasse Havnegade 21 5500 Middelfart 64 22 22 22 kontakt@midspar.dk CVR 24 74 48 17 SWIFT/BIC: MISPDK21 Om Sparekassen Vores historie Repræsentantskab Bestyrelsen Vedtægter og god selskabsledelse Bæredygtighed Partnere Finanstilsynet redegørelse om ordinær inspektion 2025 Årsrapporter og halvårsrappo"
+      },
+      "note": "Bank explicitly states self-owned status: no owners of profit/assets; net assets on dissolution go to local charitable/public-benefit purposes. Not inferred from a guarantor product or a linked charity.",
+      "bank_identity": {
+        "legal_name": "MIDDELFART SPAREKASSE",
+        "registered_as": "24744817",
+        "jurisdiction": "DK",
+        "gleif_record_sha256": "41007f4f8e84c40170a9441fbb41479f10e1da94c9eebc15215ead948ba0414b"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "635400LCCIYHUL6ELA34",
+      "name": "USB European (Holdings) Limited",
+      "rank": 120,
+      "trea_eur": 1564219756.64,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use US Bancorp SEC subsidiary exhibit for exact USB European Holdings Irish entity and current beneficial-owner table; ENTITY_SUPPLIED_ONLY relationship and retail US Bank IR landing are insufficient.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "5967007LIEEXZX76AW36",
+      "name": "OBOS-BANKEN AS",
+      "rank": 121,
+      "trea_eur": 1544427136.9265401,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review bank-specific OBOS Bank annual accounts and parent OBOS cooperative membership/control statutes; shared website and member banking discounts do not prove bank shares or parent ownership.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900DSIVJWCUQUMP41",
+      "name": "AKA Ausfuhrkredit-Gesellschaft mit beschränkter Haftung",
+      "rank": 122,
+      "trea_eur": 1511791361.73,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "AKA describes historical public/private founders. Obtain current named bank shareholder percentages and review each relevant public/cooperative/market-listed owner; founding composition and governing board membership are not current economic ownership.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900IRBZTADXJB6757",
+      "name": "flatexDEGIRO AG",
+      "rank": 123,
+      "trea_eur": 1480008114.81,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use an alternative official exchange/filed flatexDEGIRO qualifying-holdings and voting table; do not retry the denied corporate site or classify the listed AG solely by form.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://flatexdegiro.com/",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

@@ -1,0 +1,173 @@
+{
+  "batch": "039",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 4,
+  "page_attempts": [
+    {
+      "lei": "549300ZOE0EU2VKF6M35",
+      "url": "https://www.lombardodier.com",
+      "status": 200,
+      "error": null,
+      "sha256": "2fb6ae8d2b0b664c867ce2072a3fa3ad5a2a214e06becdedbe4f9f0b45c81d84",
+      "retrieved_at": "2026-10-03T08:00:15Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300ZOE0EU2VKF6M35",
+      "url": "https://www.lombardodier.com/home/about-us/our-financial-reports.html",
+      "status": 200,
+      "error": null,
+      "sha256": "c4d3c75954700fc06a70ab5d039c3552716c6d0f919cbb2846de474389d5c903",
+      "retrieved_at": "2026-10-03T08:00:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900UHDH7QLRMEJQ86",
+      "url": "https://www.sigmabank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "196049e462c95d5ea37529e283358a11615e1ad4ee86002d43a6b645737718a1",
+      "retrieved_at": "2026-10-02T16:54:17Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900UHDH7QLRMEJQ86",
+      "url": "https://sigmabank.com:443/ueber-uns",
+      "status": 200,
+      "error": null,
+      "sha256": "873c98d269d850946e04888bf9048038765faaba45fb88fed54db29ad0b30dad",
+      "retrieved_at": "2026-10-02T16:54:20Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400DAAAR5M4A6SI23",
+      "url": "https://www.pocztowy.pl",
+      "status": 200,
+      "error": null,
+      "sha256": "7b6f5b950b36d0a05d816fe1505a11539edb32032f6d0141d5605aec4af68e25",
+      "retrieved_at": "2026-10-02T16:48:59Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400DAAAR5M4A6SI23",
+      "url": "https://www.pocztowy.pl/sitemap.xml",
+      "status": 200,
+      "error": null,
+      "sha256": "bbe6e5a5e7d5361180cd2f4a7d896590445ff947a5a37fefee3b3183447d23ef",
+      "retrieved_at": "2026-10-03T08:05:37Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "259400DAAAR5M4A6SI23",
+      "url": "https://www.pocztowy.pl/o-nas/about-bank-pocztowy",
+      "status": 200,
+      "error": null,
+      "sha256": "3029899ad611b14775b8c7e211e7628533034a3be03d0116b46f30393b688330",
+      "retrieved_at": "2026-10-03T08:08:00Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800JF3JFF6MMR2P36",
+      "url": "https://www.fynskebank.dk/",
+      "status": 200,
+      "error": null,
+      "sha256": "3bed102d10fa2d2ec043e0f2fdfcd26c50fc9b758d3643d36c127e51ad538c2c",
+      "retrieved_at": "2026-10-02T16:32:01Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800JF3JFF6MMR2P36",
+      "url": "https://www.fynskebank.dk/om-fynske-bank/investor-relations/aktionaerportalen",
+      "status": 200,
+      "error": null,
+      "sha256": "c9c39b8090d40b19b680d27cfc3a9e73cc8dfaab9b8b90a8f8b633a4cf21618f",
+      "retrieved_at": "2026-10-02T16:32:03Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "81560035485BD7DB3590",
+      "url": "https://www.bancapb.it",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:55:27Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "549300ZOE0EU2VKF6M35",
+      "name": "Lombard Odier (Europe) S.A.",
+      "rank": 149,
+      "trea_eur": 801697101.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review exact Luxembourg Lombard Odier Europe subsidiary ownership and current Swiss partnership owners in issuer accounts; partner-managed/private-client descriptions are not share ownership by themselves.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900UHDH7QLRMEJQ86",
+      "name": "Sigma Bank AG",
+      "rank": 150,
+      "trea_eur": 790415131.6883701,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review Sigma Bank exact current controlling owner and its legal type through filed reports/register; a financially strong private-bank owner description does not identify whether a foundation, family or holding controls it.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "259400DAAAR5M4A6SI23",
+      "name": "Bank Pocztowy S.A.",
+      "rank": 151,
+      "trea_eur": 789086408.46996,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Bank source proves Poczta Polska 75% minus 10 shares and PKO BP 25% plus 10. Obtain current official Poczta shareholder/State ownership proof and a dated bank capital table; name and historical strategic partnership alone do not prove public ultimate control.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "213800JF3JFF6MMR2P36",
+      "name": "Fynske Bank A/S",
+      "rank": 152,
+      "trea_eur": 732072131.0592,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use current Fynske Bank major shareholder/vote table from issuer report; shareholder login portal is not disclosure. Quantify any bank foundation stakes instead of inferring foundation control.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "81560035485BD7DB3590",
+      "name": "BANCO DI CREDITO P.AZZOAGLIO - S.P.A.",
+      "rank": 153,
+      "trea_eur": 726948866.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Discover current exact Banco di Credito P. Azzoaglio issuer site/register-linked annual report and controlling family/company holdings; unavailable bancapb candidate is not evidence that public ownership information is missing.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.bancapb.it",
+          "status": null,
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+        }
+      ]
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

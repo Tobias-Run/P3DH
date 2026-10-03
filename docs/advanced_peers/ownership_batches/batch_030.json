@@ -1,0 +1,241 @@
+{
+  "batch": "030",
+  "campaign": "next_70_trea_b",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 268,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 14,
+  "page_attempts": [
+    {
+      "lei": "5493007SWCCN9S3J2748",
+      "url": "https://www.bigbank.ee",
+      "status": 200,
+      "error": null,
+      "sha256": "918f1d5283dbb649048bb82e4f4a8a3ca8fdf357369ee28b4c82c297748bc831",
+      "retrieved_at": "2026-10-03T07:21:23Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493007SWCCN9S3J2748",
+      "url": "https://investor.bigbank.eu/et",
+      "status": 200,
+      "error": null,
+      "sha256": "1c97b3f1e7b5da26dcfb61c4598617cec1358422752db142162d6b5eea6d3465",
+      "retrieved_at": "2026-10-03T07:28:16Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493007SWCCN9S3J2748",
+      "url": "https://investor.bigbank.eu/et/reporting/",
+      "status": 200,
+      "error": null,
+      "sha256": "8528123971a9fb45da1c0332661980cad5d0bf26323d9f446dffc9e1db930ade",
+      "retrieved_at": "2026-10-03T07:29:19Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493007SWCCN9S3J2748",
+      "url": "https://static.bigbank.eu/investor/assets/2026/04/Bigbank_vahearuanne_kv2_2026.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "68cfd02dd51ab4cbcc4fc13952d4be72b91b83c27774ebf25562525d183a1c86",
+      "retrieved_at": "2026-10-03T07:30:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "635400F6HLXKXNJJX605",
+      "url": "https://www.eximbank.ro",
+      "status": 200,
+      "error": null,
+      "sha256": "c89da52f6a602192dc368803850eef9232fc9168e2f96304e0fb8887524ad047",
+      "retrieved_at": "2026-10-03T07:21:23Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "635400F6HLXKXNJJX605",
+      "url": "https://www.eximbank.ro/informatii-generale-despre-eximbank/",
+      "status": 200,
+      "error": null,
+      "sha256": "c9a7f30462770c9bc52a314f659deb7486906c7e1dd1ff43ba47bbd00ee68ad6",
+      "retrieved_at": "2026-10-03T07:28:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800A1O379I6DMCU10",
+      "url": "https://www.apsbank.com.mt",
+      "status": 200,
+      "error": null,
+      "sha256": "d02032286070b4dd9d8fbd985a7bdca8af8edf52b89ff177db3bfcb2c8a9c43d",
+      "retrieved_at": "2026-10-02T16:47:45Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300JSC82O1L4XV837",
+      "url": "https://www.nordnetab.com",
+      "status": 200,
+      "error": null,
+      "sha256": "b58679262b6c453de2bb222a05fb4f293a9ffdc9b2e6066c7104a9fc91eef655",
+      "retrieved_at": "2026-10-03T07:21:24Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300JSC82O1L4XV837",
+      "url": "https://nordnetab.com/governance/",
+      "status": 200,
+      "error": null,
+      "sha256": "8b534d419029e30e688bd22f53233aecf5d09ccbcbbbc75b7bfbb3510c595b17",
+      "retrieved_at": "2026-10-03T07:21:26Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300JSC82O1L4XV837",
+      "url": "https://nordnetab.com/investors/share-data/",
+      "status": 200,
+      "error": null,
+      "sha256": "9bee79a97b6391b02f0ba2e33988bd56d7ea5077887196daf65cd85eb3c7b6d8",
+      "retrieved_at": "2026-10-03T07:29:20Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300JSC82O1L4XV837",
+      "url": "https://nordnetab.com/wp-content/uploads/2026/03/Annual-and-Sustainability-Report-2025-.pdf",
+      "status": null,
+      "error": "Response exceeds 16 MiB evidence limit",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T07:30:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "7437006WYM821IJ3MN73",
+      "url": "https://www.alandsbanken.fi",
+      "status": 200,
+      "error": null,
+      "sha256": "e5cdd8d26199cf05702840130554cb50665e455e96f81ff860bb73edff4d8ea7",
+      "retrieved_at": "2026-10-03T07:21:24Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "7437006WYM821IJ3MN73",
+      "url": "https://www.alandsbanken.fi/meista/sijoittajille/debt-investors",
+      "status": 200,
+      "error": null,
+      "sha256": "6b4dd8ad6b4210029c0188666108363e71a7d59c255091ba9e30a8cc5beaa748",
+      "retrieved_at": "2026-10-03T07:21:26Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "7437006WYM821IJ3MN73",
+      "url": "https://www.alandsbanken.fi/meista/sijoittajille/osakkeet-ja-osakepaaoma",
+      "status": 200,
+      "error": null,
+      "sha256": "21d52fe87ad285843b1016d828dbd02c1b8670e0838659d7d3ca0fdf6b417e2c",
+      "retrieved_at": "2026-10-03T07:28:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "7437006WYM821IJ3MN73",
+      "url": "https://assets.alandsbanken.com/pdf/cg/20_storstaaktieagarna_30092026_fi.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "6fb5daf4d078053455b209d81549c8025040ecb875c47cfcf706c2b2c713a1a3",
+      "retrieved_at": "2026-10-03T07:29:22Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "635400F6HLXKXNJJX605",
+      "name": "EXIM BANCA ROMANEASCA S.A.",
+      "ownership": "public",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.eximbank.ro/informatii-generale-despre-eximbank/",
+        "sha256": "c9a7f30462770c9bc52a314f659deb7486906c7e1dd1ff43ba47bbd00ee68ad6",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T07:28:17Z",
+        "quote": "0 – Capital social: 2.022.528.336 lei – SWIFT/BIC: BRMAROBU Actionariat: – Statul roman, prin Ministerul Finantelor – 99,56% – Actionari minoritari persoane fizice si juridice – 0,44% Cum actioneaza Exim Banca Romaneasca Exim Banca Romaneasca se implica in sustinerea economiei romanesti prin doua directii: – Prin activitatea specifica unei banci comerciale universale – Exim Banca Romaneasca are propria oferta de produse si servicii bancare destinate atat persoanelor fizice, cat si companiilor, iar activitatea este coordonata de Comitetul de Directie, compus din presedintele executiv si vicepresedintii executivi. Conducerea executiva adopta de"
+      },
+      "note": "Official issuer identifies Romanian State through Ministry of Finance at 99.56% and other shareholders at 0.44%. Present owner table rather than its historical founding description.",
+      "bank_identity": {
+        "legal_name": "EXIM BANCA ROMÂNEASCĂ S.A.",
+        "registered_as": "361560",
+        "jurisdiction": "RO",
+        "gleif_record_sha256": "93d423f4ea3d4e7f83e4f5aa0299d2d04cee291afd6b5a65011aaf3227f62a30"
+      }
+    },
+    {
+      "lei": "7437006WYM821IJ3MN73",
+      "name": "Ålandsbanken Abp",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://assets.alandsbanken.com/pdf/cg/20_storstaaktieagarna_30092026_fi.pdf",
+        "sha256": "6fb5daf4d078053455b209d81549c8025040ecb875c47cfcf706c2b2c713a1a3",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T07:29:22Z",
+        "quote": "Ålandsbanken Abp - Kaksikymmentä suurinta osakkeenomistajaa 30.9.2026. Alla oleva luettelo käsittää myös osakkeenomistajan konserniyhtiöt ja määräysvallassa olevat yhtiöt . Omistajat A- osakkeita B- osakkeita Yhteensä Omistus- osuus, % Ääniosuus, % 1. Wiklöf Anders ja yhtiöt 1 993 534 1 332 961 3 326 495 21,56 29,75 2. Skandinaviska Enskilda Banken AB (Hallintarekisteröidyt osakkeet) 612 949 331 939 944 888 6,12 9,09 3. Familjen Kamprads Stiftelse* 0 858 128 858 128 5,56 0,62 4. Alandia Försäkring Abp 754 908 52 632 807 540 5,23 10,94 5. Pensionsförsäkringsaktiebolaget Veritas 123 66"
+      },
+      "note": "Issuer 20 largest shareholders table dated 2026-09-30. Wiklof Anders and companies 21.56% capital/29.75% votes; Familjen Kamprads Stiftelse 5.56% capital but only 0.62% votes. Nominee SEB position is explicitly not beneficial ownership. Minority foundation holding is not foundation control.",
+      "bank_identity": {
+        "legal_name": "Ålandsbanken Abp",
+        "registered_as": "0145019-3",
+        "jurisdiction": "FI",
+        "gleif_record_sha256": "02d897c1a3b3509d922247b7457a81c16174a8efaf53dca4ebb2cd239b0bf87e"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "5493007SWCCN9S3J2748",
+      "name": "Bigbank AS",
+      "rank": 119,
+      "trea_eur": 2017858077.22,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read actual Bigbank annual-report ownership table (Tarmo Sild/Indrek Vahter or other current owners); the retrieved Q2 2026 report has related-party accounting, not a named equity-owner table. Page budget exhausted.",
+      "successful_source_pages": 4,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "213800A1O379I6DMCU10",
+      "name": "APS BANK P.L.C.",
+      "rank": 121,
+      "trea_eur": 1921119393.99,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Discover APS official shareholder/voting table or current issuer annual report to Archdiocese/Diocese stakes and legal ownership type; church ownership is not automatically a foundation or mutual association.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300JSC82O1L4XV837",
+      "name": "Nordnet - Grupp",
+      "rank": 122,
+      "trea_eur": 1892697479.25458,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Prove exact Nordnet Bank AB (the GLEIF identity behind EBA group) subsidiary control in issuer accounts. Current Nordnet AB parent shareholder table is sourced, but bank annual-report PDF exceeds 16 MiB and GLEIF relation is only partially corroborated; do not infer bank control from brand.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [
+        {
+          "url": "https://nordnetab.com/wp-content/uploads/2026/03/Annual-and-Sustainability-Report-2025-.pdf",
+          "status": null,
+          "error": "Response exceeds 16 MiB evidence limit"
+        }
+      ]
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

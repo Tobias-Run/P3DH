@@ -1,0 +1,225 @@
+{
+  "batch": "002",
+  "metric": "TREA",
+  "population_before": 290,
+  "batch_size": 5,
+  "reviewed_at": "2026-10-02",
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 17,
+  "page_attempts": [
+    {
+      "lei": "969500STN7T9MRUMJ267",
+      "url": "https://www.bpifrance.com/",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "0dfca46e299108917839998c3220eda9eae82a432779f22cd996203a52fc22fb"
+    },
+    {
+      "lei": "213800KGF4EFNUQKAT69",
+      "url": "https://www.eurobank.gr/en/group",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "0c93f85e33914a2fd00a0d2e84b6b5663951bd8d649c28ee955716613db7ff94"
+    },
+    {
+      "lei": "96950001WI712W7PQG45",
+      "url": "https://www.mobilize-fs.com/en",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "2706cd077733ec4582484ab24e028e0a87c934e4b17ad440d524ea20b13f2336"
+    },
+    {
+      "lei": "TO822O0VT80V06K0FH57",
+      "url": "https://www.cgd.pt/English/Pages/English.aspx",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "54fea6180c46b828176ab5bc7e4e9f72ee146d852c03670129bbd7f3e934ae37"
+    },
+    {
+      "lei": "8156007D348794DB1690",
+      "url": "https://www.credit-agricole.it/",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "new_network_fetch": true,
+      "sha256": null
+    },
+    {
+      "lei": "969500STN7T9MRUMJ267",
+      "url": "https://www.bpifrance.fr/investor-relations",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "new_network_fetch": true,
+      "sha256": null
+    },
+    {
+      "lei": "213800KGF4EFNUQKAT69",
+      "url": "https://www.eurobank.gr/en/group/investor-relations",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "3823a94e527c9aa9b0c8abb2a0275e415ff6563bac400a5b490aaac37a685f99"
+    },
+    {
+      "lei": "96950001WI712W7PQG45",
+      "url": "https://www.mobilize-fs.com/en/our-group/governance",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "0f603a5209f585fd922be4755cd2b3405ec6a9e1308929e67cf050808833484f"
+    },
+    {
+      "lei": "TO822O0VT80V06K0FH57",
+      "url": "https://www.cgd.pt/English/Institutional/Corporate-Governance/Documents/CGD-Articles-of-Incorporation.pdf",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "e448955f335c312cfb467bce080467264d9f7b5579493ed3ecef6c38560d5b9f"
+    },
+    {
+      "lei": "8156007D348794DB1690",
+      "url": "https://www.credit-agricole.com/en/finance/finance/financial-publications",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "429227da02e7bfbb2daac9f313c02f590b47f3260fb8999b8c05514a9b9e77c1"
+    },
+    {
+      "lei": "969500STN7T9MRUMJ267",
+      "url": "https://www.bpifrance.com/our-history/",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "e7e5c5a67c4ec600d5925746647708e7e059266254011345ea1dda855823e990"
+    },
+    {
+      "lei": "213800KGF4EFNUQKAT69",
+      "url": "https://www.eurobank.gr/en/group/investor-relations/shareholders",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "c66e27d80c7e135cd431c6b56a1d1ee4e1858671e822ec29b1c061b32cb08029"
+    },
+    {
+      "lei": "96950001WI712W7PQG45",
+      "url": "https://www.renaultgroup.com/en/finance/stock-market/shareholding-structure",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "new_network_fetch": true,
+      "sha256": null
+    },
+    {
+      "lei": "8156007D348794DB1690",
+      "url": "https://www.credit-agricole.com/en/group/discover-the-credit-agricole-group",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": false,
+      "sha256": "8243a6460e928a75036ee6dd11c0a5e35bf767302be586809955096b4854b336"
+    },
+    {
+      "lei": "969500STN7T9MRUMJ267",
+      "url": "https://www.bpifrance.com/our-mission/",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "6210b5ad411a5c1352a9c1d509e2908498f88bae4db8eb55d6aa8bc56bf49454"
+    },
+    {
+      "lei": "213800KGF4EFNUQKAT69",
+      "url": "https://www.eurobank.gr/en/group/investor-relations/shareholders/shareholding-structure",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "dff9cd84ca85541f3b0ad936da250417c2e0e8a9b1db0bbcf8ff8c1c75bb1918"
+    },
+    {
+      "lei": "96950001WI712W7PQG45",
+      "url": "https://www.mobilize-fs.com/en/finance/reports-and-releases/business-reports-and-annual-reports",
+      "status": 502,
+      "error": "HTTP Error 502: Bad Gateway",
+      "new_network_fetch": true,
+      "sha256": null
+    },
+    {
+      "lei": "8156007D348794DB1690",
+      "url": "https://rapport-integre.credit-agricole.com/en/?utm_source=CASA-UK",
+      "status": 200,
+      "error": null,
+      "new_network_fetch": true,
+      "sha256": "da8ed163eaf4a95bb4571dcd6bf1ca04749ea67c68d0d58adf74023673d0a2ff"
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "213800KGF4EFNUQKAT69",
+      "name": "EUROBANK S.A.",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-02",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.eurobank.gr/en/group/investor-relations/shareholders/shareholding-structure",
+        "sha256": "dff9cd84ca85541f3b0ad936da250417c2e0e8a9b1db0bbcf8ff8c1c75bb1918",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T23:30:23Z",
+        "quote": "Our major shareholders are foreign institutional investors.\nThe dispersed shareholding structure ensures the efficient operation of Eurobank. Our major shareholders are international institutional investors.\nThe percentages of Eurobank voting rights on 04.09.2026* are as follows:\nFairfax Financial Holdings Limited**\nDomestic institutional investors\nOther foreign institutional investors\nNon-institutional investors (other legal entities and private investors)\n*As of 04.09.2026, due to a share capital increase following the exercise of stock option rights, the new total of the company's listed shares that are tradeable on the Euronext Athens amo"
+      },
+      "note": "Current issuer shareholder page identifies dispersed ownership, institutional investors, Fairfax and non-institutional investors. Voting-rights reference date 2026-09-04. Dynamic chart percentages are not extracted; no Fairfax majority or exclusively private ownership assertion."
+    },
+    {
+      "lei": "TO822O0VT80V06K0FH57",
+      "name": "Caixa Geral de Depósitos, S.A.",
+      "ownership": "public",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-02",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.cgd.pt/English/Institutional/Corporate-Governance/Documents/CGD-Articles-of-Incorporation.pdf",
+        "sha256": "e448955f335c312cfb467bce080467264d9f7b5579493ed3ecef6c38560d5b9f",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T23:28:43Z",
+        "quote": "ARTICLE1|NATUREANDNAME1.The Company is incorporated as a public limited company fully owned by the State and adopts the name CaixaGeraldeDepósitos, S.A.2.Caixa Geral deDepósitos, S.A. is governed by the rules of the European Union, by banking and commercial lawsand by the legal framework for government-owned companies and other applicable legislation, considering itsnature as a State-owned company, in any of the cases to the extent that they are legally applicable to the Com-pany, and also by these Articles of Incorporation. 2.Shares representing share capital shall be held exclusively by the State."
+      },
+      "note": "Official bank homepage links the articles. Article 1 states fully State-owned; Article 6 restricts shares exclusively to the State. Exact legal name and Portuguese registered entity verified. PDF text extraction joins words; no historical ownership-date inference."
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "969500STN7T9MRUMJ267",
+      "name": "Bpifrance",
+      "trea_eur": 91445333689.57,
+      "rank": 1,
+      "status": "pending_targeted_source_review",
+      "reason": "Public investment-bank and sovereign-fund descriptions do not establish the exact legal entity and current ownership shares. Investor-relations URL returned 403; no retry or bypass.",
+      "next_action": "Review official French State / Caisse des Depots participation report for Bpifrance SA and verify the State/EPIC and CDC holdings against its registered identity."
+    },
+    {
+      "lei": "96950001WI712W7PQG45",
+      "name": "RCI Banque",
+      "trea_eur": 48934538140.6,
+      "rank": 3,
+      "status": "pending_targeted_source_review",
+      "reason": "Active fully corroborated consolidation to Renault exists, but the controller ownership category is not yet verified. Guessed Renault shareholder URL returned 404; bank annual-report index temporarily returned 502.",
+      "next_action": "Follow the actual Renault finance navigation to a current dated shareholder/voting-rights table; distinguish State minority holdings from public control. Resume bank report index only after cooldown if needed."
+    },
+    {
+      "lei": "8156007D348794DB1690",
+      "name": "CRÉDIT AGRICOLE ITALIA S.P.A.",
+      "trea_eur": 43759890367.0,
+      "rank": 5,
+      "status": "pending_targeted_source_review",
+      "reason": "Archived ultimate-parent relation is ENTITY_SUPPLIED_ONLY, not FULLY_CORROBORATED. Bank homepage returned 403. Parent group and integrated-report landing pages do not provide bank-specific control proof.",
+      "next_action": "Use the official parent consolidated report subsidiary note for Credit Agricole Italia, then verify cooperative majority control of the exact registered parent; synthetic EBA group identifier is not a parent LEI."
+    }
+  ],
+  "note": "Bounded targeted manual review. Two cached GLEIF relationship records reused without network; one cached parent webpage reused. No automatic classification, denial bypass, or claims that deferred information is unavailable. Source dates differ from review date; current ownership labels are not a historical time series."
+}

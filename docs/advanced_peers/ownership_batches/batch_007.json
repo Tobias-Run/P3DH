@@ -1,0 +1,270 @@
+{
+  "batch": "007",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 10,
+  "page_attempts": [
+    {
+      "lei": "3DM5DPGI3W6OU6GJ4N92",
+      "url": "https://www.bancobpi.pt",
+      "status": 200,
+      "error": null,
+      "sha256": "d0ecde7b5b1acd92322cd5b75e6e499d619d86376464e096cccd409d67ac4831",
+      "retrieved_at": "2026-10-02T16:32:18Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "3DM5DPGI3W6OU6GJ4N92",
+      "url": "https://www.bancobpi.pt/en/investors/shareholders",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:53Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "3DM5DPGI3W6OU6GJ4N92",
+      "url": "https://www.bancobpi.pt/en/investors/institutional-information",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:01Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5967007LIEEXZX659K67",
+      "url": "https://www.dnb.no",
+      "status": 200,
+      "error": null,
+      "sha256": "8af47fb02d13a4f8195dadaf792ed0cfd6adf3a09fb4fa208c4c159836686931",
+      "retrieved_at": "2026-10-02T23:49:20Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5967007LIEEXZX659K67",
+      "url": "https://www.dnb.no/om-oss/kontaktpunkter/sponsorvirksomhet/tv-aksjonen",
+      "status": 200,
+      "error": null,
+      "sha256": "e41467a15174db584ae3f1a6969bb9fc12c3ec23c9dc7fd113407b2ea591adc0",
+      "retrieved_at": "2026-10-02T23:49:21Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5967007LIEEXZX659K67",
+      "url": "https://www.ir.dnb.no/debt-and-rating/dnb-boligkreditt",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:55Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5967007LIEEXZX659K67",
+      "url": "https://www.ir.dnb.no/sites/default/files/2026-03/DNB%20Boligkreditt%20Annual%20Report%202025.pdf",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:01Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493001BABFV7P27OW30",
+      "url": "https://www.nlb.si",
+      "status": 200,
+      "error": null,
+      "sha256": "14d0a5518a9a0b67bb50207a310753a112dcd5f6ea9db46797ccfc3cc90475f4",
+      "retrieved_at": "2026-10-02T16:33:01Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493001BABFV7P27OW30",
+      "url": "https://www.nlbgroup.com/int-en/investor-relations/nlb-shares",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493001BABFV7P27OW30",
+      "url": "https://www.nlbgroup.com/int-en/investor-relations/shareholders-and-shares",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:02Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300RG3H390KEL8896",
+      "url": "https://www.bancatransilvania.ro/",
+      "status": 200,
+      "error": null,
+      "sha256": "2c55a321d67a6e209685a4658d3dd794c50334681f96a08148cf37414e85f860",
+      "retrieved_at": "2026-10-02T16:33:17Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300RG3H390KEL8896",
+      "url": "https://bancatransilvania.ro/relatii-investitori/environment-social-governance/impact",
+      "status": 200,
+      "error": null,
+      "sha256": "e4528f1fe35cbfbb6301a785a63af4a2db25f1a0bdbc516afe9f275f925d1573",
+      "retrieved_at": "2026-10-02T16:33:21Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300RG3H390KEL8896",
+      "url": "https://www.bancatransilvania.ro/relatii-investitori/actiuni/structura-actionariatului",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:57Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300RG3H390KEL8896",
+      "url": "https://www.bancatransilvania.ro/relatii-investitori",
+      "status": 200,
+      "error": null,
+      "sha256": "8d8bbe9be954cb156ea2e547e46a92ae724171e58212b4f588cf3771b2723660",
+      "retrieved_at": "2026-10-02T23:59:03Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "Q5BP2UEQ48R75BOTCB92",
+      "name": "Československá obchodní banka, a.s.",
+      "ownership": "mixed",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.kbc.com/en/investor-relations/shareholder-information/shareholder-structure.html",
+        "sha256": "995a31545cfbaf799ebc510471133b2930f45d551ce9eb3d7bff6ba84295a6d2",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "CORE SHAREHOLDERS KBC Ancora30 June 202677 516 380Cera30 June 202616 748 774MRBB30 June 202651 905 219Other core shareholders30 June 202628 482 400OTHER SHAREHOLDERS (details: see “Notifications (transparency legislation)” below) FMR LLC17 July 202619 771 836BlackRock Inc.1 July 202517 215 344KBC Group30 July 202420 942 766 * Latest notification or update cf. the Act of 2 May 2007 (disclosure of significant participations) or the Act of 1 April 2007 (on public takeover bids) and other public information. Other shareholders: figures include the ‘voting rights that may be acquired if the instrument is exercised’ as stated under ‘B) Equivalent financial instruments’ in the transparency notification; any shareholders falling below the 3% notification threshold are no longer included in the table. Breakdown of shareholder structure by country/region (own estimates)End 2025Core shareholders (Belgium) 42%Shares repurchased under the share buyback programme (August 2023 - July 2024)5%Institutional shareholders: - Belgium - Other continental European countries - UK and Ireland - North America - Rest of the world 2% 10% 9% 19% 2% Other (retail shareholders, own shares, unidentified etc.) 11%Total100% Notifications (transparency legislation) The purpose of the transparency legislation is to ensure the transparency of the shareholder structure of listed companies. To achieve this, the transparency rules impose an obligation on investors in listed companies to notify the Belgian regulator (the FSMA) and the company itself whenever thresholds are exceeded, etc. (within four trading days after the event)."
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "213800X3Q9LSAKRUWY91",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/Q5BP2UEQ48R75BOTCB92/ultimate-parent-relationship",
+        "sha256": "40c29d68735286c1f6cfc4cb5648f132b537d21cf05f9ad333bb7e8ae4d31872",
+        "relationship": {
+          "startNode": {
+            "id": "Q5BP2UEQ48R75BOTCB92",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "213800X3Q9LSAKRUWY91",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2019-11-11T23:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2023-12-31T23:00:00Z",
+              "endDate": "2024-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2019-11-11T23:00:00Z",
+          "lastUpdateDate": "2025-10-22T07:41:56Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2026-11-24T23:00:00Z",
+          "managingLou": "315700LK78Z7C0WMIL03",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "Československá obchodní banka, a. s.",
+        "registered_as": "00001350",
+        "jurisdiction": "CZ",
+        "gleif_record_sha256": "9873cff0b7469c9c4b08e1cc11c02f3874adbe60c52b13b7bcec48a877f93d2a"
+      }
+    },
+    {
+      "lei": "5967007LIEEXZX659K67",
+      "name": "DNB BOLIGKREDITT AS",
+      "ownership": "mixed",
+      "ownership_basis": "reviewed_document_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.ir.dnb.no/share/largest-shareholders",
+        "sha256": "fe17bb8edafcced408f2eb6c1b704ef88b116c3745d6e7ddcda38fefde3b4811",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "Major shareholders as at 31 December 2025 Largest shareholders Shares in 1,000 Ownership in % Norwegian Government/Ministry of Trade, Industry and Fisheries 502 386 34,4 DNB Savings Bank Foundation 130 001 8,9 Folketrygdfondet 95 106 6,5 BlackRock, Inc. 64 497 4,4 Vanguard Group, Inc. 37 106 2,5 Deutsche Bank AG Group 34 257 2,3 DNB Asset Management AS 24 477 1,7 Storebrand Kapitalforvaltning 23 337 1,6 Schroders PLC 22 578 1,5 Kommunal Landspensjonskasse 20 001 1,4 Nordea Bank Abp 18 675 1,3 State Street Corporation 17 988 1,2 T. Rowe Price Group, Inc. 16 734 1,1 BNP Paribas, S.A. 16 344 1,1 Mawer Investment Management Ltd. 16 010 1,1 Ameriprise Financial, Inc. 12 664 0,9 Caisse des Dépôts et Consignations 11 741 0,8 SAS Rue La Boétie 11 346 0,8 Geode Capital Management, L.L.C. 10 040 0,7 UBS Group AG 9 315 0,6 Total largest shareholders 1 094 601 74,9 Other shareholders 366 374 25,1 Total 1 460 974 100,0 The data is provided by NASDAQ IR Insight and is obtained through analysis of beneficial ownership and fund manager information provided in replies to disclosure of ownership notices issued to all custodians in relation to DNB share register provided by Euronext VPS as of 31 December 2025. The ownership percentages do not necessarily include shareholdings that are lent. Shareholder list A list of DNB’s shareholders can be accessed through the Public Shareholder Portal provided by Euronext Securities: Daglig oppdatert aksjonærregister - Offentlig Aksjeeierportal Shareholder list including disclosure of nominee accounts A list of DNB’s shareholders as at 31 December 2025 including disclosure of nominee accounts can be found here: Shareholder list The data is provided by NASDAQ IR Insight and is obtained through analysis of beneficial ownership and fund manager information provided in replies to disclosure of ownership notices issued to all custodians in relation to DNB share register provided by Euronext VPS as of 31 December 2024. The ownership percentages do not necessarily include shareholdings that are lent. Our fact sheet Fact sheet Contact us Get in touch with us Contacts Stay connected or keep up "
+      },
+      "note": "Parent annual report 2025, subsidiary table with ownership-percentage header; 100% bank subsidiary. This document resolves the weaker PARTIALLY_CORROBORATED GLEIF relationship.",
+      "controller_lei": "549300GKFG0RYRRQ1414",
+      "control_evidence": {
+        "url": "https://www.ir.dnb.no/sites/default/files/arsrapport_2025_DNB_konsernet.pdf",
+        "sha256": "7dac0f580ff6f799209953d15d57b3d5a7aa942415137e94cbc46a48f7782da1",
+        "retrieved_at": "2026-10-02T21:58:47Z",
+        "quote": "B Asset Management Holding AS 274 842 220 050 100 2 182 107 DNB Boligkreditt AS 4 527 000 1 100 32 033 880 DNB Carnegie Business Management AS 300 1 000 100 300 DNB Eiendom AS 12 004 100 033 100 288 241 DNB Eiendomsutvikling AS 91 200 91 200 000 100 850 643 DNB Gjenstandsadministrasjon AS 3 000 30 100 3 000 DNB Invest Holding AS 1 000 200 000 100 22 703 DNB Livsforsikring AS 1 641 492 64 827 288 100 17 982 795 DNB Næringsmegling AS 1 000 10 000 100 24 000 DNB Ventures AS 100 1 000 100 83 468 Eksportfinans AS 2 771 097 263 914 100 3 718 066 Firmament AS 322 178 100 000 043 31 197 300 Godfjellet AS 9 636 8 030 100 500 000 Godskipet 8 AS 70 1 00",
+        "heading_quote": "Årsrapport 2025 Enklere hverdag og bedre økonomi for folk og bedrifter DNB-konsernet Om denne rapporten I denne integrerte årsrapporten for 2025 viser vi hvordan vi arbeider for å skape verdier på kort og lang sikt for ansatte, aksjonærer og samfunnet som helhet. Rapporten er utarbeidet i samsvar med relevante norske lover, forskrifter og standarder for regnskapsåret 2025, og oppfyller kravene i EUs bærekraftsrapporteringsdirektiv (Corporate Sustainability Reporting Directive, CSRD) som trådte i",
+        "matched_legal_name": "DNB Boligkreditt AS",
+        "column_context": "3 3 067 3 067 Andre tilknyttede selskaper² 202 921 Sum 10 234 10 953 1 Se note K36 for informasjon om endringer knyttet til Fremtind Holding AS. 2 Inkl. Eksportfinans AS i 2024 Note M32 Investeringer i datterselskaper Beløp i 1 000 Aksje- Antall andel Bokført Verdier i norske kroner når ikke annet er angitt kapital aksjer i prosent verdi Datterselskaper utenfor Norge DNB (UK) Ltd GBP 1 154 200 1 154 200 000 100 15 637 165 DNB Auto Finance OY EUR 100 100 100 2 136 730 DNB Baltic Invest AB EUR 5 000 1 000 100 3 659 116 DNB Bank Polska S.A. PLN 1 257 200 1 257 200 000 100 1 773 563 DNB Capital LLC 1 USD 100 24 201 960 DNB Carnegie Holding AB SEK 2 538 422 993 548 100 15 055 024 DNB Invest Denmark A/S DKK 877 579 877 578 841 100 12 339 249 DNB Luxembourg S.A. EUR 70 000 70 000 100 828 010 DNB Carnegie Inc. USD 1 1 000 100 3 695 DNB Sweden AB SEK 100 000 100 000 000 100 15 856 268 Datterselskaper i Norge B&R Holding AS 1 100 510 000 51 189 720 Cas Start Up 8 AS 30 30 000 100 30 DNB Asset Management Holding AS 274 842 220 050 100 2 182 107 "
+      },
+      "matched_legal_name": "DNB Boligkreditt AS",
+      "bank_identity": {
+        "legal_name": "DNB BOLIGKREDITT AS",
+        "registered_as": "985 621 551",
+        "jurisdiction": "NO",
+        "gleif_record_sha256": "906c3992edbb93bdd8cf28706f175cb3b987429d3beac271db574bd672bddde1"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "3DM5DPGI3W6OU6GJ4N92",
+      "name": "BANCO BPI S.A.",
+      "rank": 25,
+      "trea_eur": 20594299636.566303,
+      "status": "pending_targeted_source_review",
+      "reason": "English BPI shareholder/institutional paths returned 404.",
+      "next_action": "Use the Portuguese bank’s actual shareholder or issuer-report page to verify current CaixaBank ownership; review the bank-specific control document together with the already sourced mixed controller."
+    },
+    {
+      "lei": "5493001BABFV7P27OW30",
+      "name": "Nova Ljubljanska Banka d.d., Ljubljana",
+      "rank": 27,
+      "trea_eur": 20163888000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Guessed NLB issuer ownership paths returned 404.",
+      "next_action": "Follow current NLB Group investor navigation to qualifying holdings and votes; verify current Slovenian State holding and dispersed investors using the registered bank identity."
+    },
+    {
+      "lei": "549300RG3H390KEL8896",
+      "name": "Banca Transilvania",
+      "rank": 28,
+      "trea_eur": 19431893129.05371,
+      "status": "pending_targeted_source_review",
+      "reason": "Investor landing page was found; the guessed shareholding leaf was 404.",
+      "next_action": "Follow the actual current capital/ownership link or issuer annual-report share table to EBRD and other significant owners. Distinguish public portfolio minority from control."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

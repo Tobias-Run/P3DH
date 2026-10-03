@@ -144,9 +144,9 @@ class ViewerContractTest(unittest.TestCase):
         """Über alle Größenklassen zu zäunen hieße, eine Exportkreditagentur an
         einer Dorfsparkasse zu messen — dieselbe Überlegung wie bei den
         Perzentilbändern, und dort steht sie schon im Code."""
-        m = re.search(r"function fenceOutliers\(rows,colId\)\{(.*?)\n\}", self.src, re.S)
+        m = re.search(r"function fenceOutliers\(rows,colId,basis='standard'\)\{(.*?)\n\}", self.src, re.S)
         self.assertIsNotNone(m, "fenceOutliers nicht gefunden")
-        self.assertIn("peerKeyOf(r)", m.group(1),
+        self.assertIn("peerKeyOf(r,basis)", m.group(1),
                       "Zäune ohne Peer-Gruppe — der Marker wäre eine Aussage über die Größe")
         self.assertIn("PCT_MIN_GROUP", m.group(1),
                       "kein Mindestgruppengröße — ein Zaun aus 2 Werten ist Rauschen")

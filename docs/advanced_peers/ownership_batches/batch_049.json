@@ -1,0 +1,267 @@
+{
+  "batch": "049",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 8,
+  "page_attempts": [
+    {
+      "lei": "96950001WI712W7PQG45",
+      "url": "https://www.rcibs.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "10bd176266ea2139fae6b254ef53d6557d8f1df5d5a1e01f9a7f265246eb92c1",
+      "retrieved_at": "2026-10-02T16:33:40Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "96950001WI712W7PQG45",
+      "url": "https://www.mobilize-fs.com/fr/finance/rapports-et-communiques/presentations",
+      "status": 200,
+      "error": null,
+      "sha256": "47e2bdb8e6a283e8a4ec44f408c1577f1c41ed01f34a59cdfaff600a117b2469",
+      "retrieved_at": "2026-10-03T08:36:34Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "96950001WI712W7PQG45",
+      "url": "https://www.renaultgroup.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "3ddfd88ec992d20042ad435dd9b6ecc8a2dd67b8f74832baac936a9ee839aaec",
+      "retrieved_at": "2026-10-03T08:48:53Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "96950001WI712W7PQG45",
+      "url": "https://www.renaultgroup.com/finance/",
+      "status": 200,
+      "error": null,
+      "sha256": "a8d9f598fbc17c9c907763ac7887580051c29f8383ef670e7d5a94ae5c43c32e",
+      "retrieved_at": "2026-10-03T08:51:45Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "8156007D348794DB1690",
+      "url": "https://www.credit-agricole.it",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:36:34Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "8156007D348794DB1690",
+      "url": "https://www.credit-agricole.com/en/finance/shares-and-dividend",
+      "status": 503,
+      "error": "HTTP Error 503: Service Unavailable",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:41:44Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "JU1U6S0DG9YLT7N8ZV32",
+      "url": "http://www.millenniumbcp.pt",
+      "status": null,
+      "error": "timed out",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:36:34Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493000LKS7B3UTF7H35",
+      "url": "https://www.pekao.com.pl/en/investors-relations/shares/shareholder.html",
+      "status": 200,
+      "error": null,
+      "sha256": "a8b1a0ea0ff5767edc562961c2c0364cc3214a84b0afc48946349b0488970f21",
+      "retrieved_at": "2026-10-02T23:48:30Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493000LKS7B3UTF7H35",
+      "url": "https://www.pekao.com.pl/en/investors-relations/reports/reports.html",
+      "status": 200,
+      "error": null,
+      "sha256": "832e7593e039f0ee202d195747b8593a886b3e73422c1b794b4dd72e6df903bf",
+      "retrieved_at": "2026-10-03T08:36:35Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493000LKS7B3UTF7H35",
+      "url": "https://www.pzu.pl/en/investor-relations/shares-and-bonds/shareholding-structure",
+      "status": 200,
+      "error": null,
+      "sha256": "660879ed48915998fbbe78444056aaebede6213051352f54290632580777f2e8",
+      "retrieved_at": "2026-10-02T17:05:05Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493000LKS7B3UTF7H35",
+      "url": "https://www.pzu.pl/en/investor-relations/shares-and-bonds/shareholding-structure",
+      "purpose": "Read original HTML for omitted chart/table data; no script execution",
+      "status": 200,
+      "sha256": "69d4e7ad43b255e554a994004ec9849cd3370430cbb2b5a2a48e7417b0d0b2a5",
+      "new_network_fetch": true,
+      "retrieved_at": "2026-10-03T08:46:28Z"
+    },
+    {
+      "lei": "5UMCZOEYKCVFAW8ZLO05",
+      "url": "https://www.nbg.gr/",
+      "status": 200,
+      "error": null,
+      "sha256": "b45f80d2b4998a3bb0cb7f3742bfe9e71d6de44fdccf86074a8a92858ac2fc97",
+      "retrieved_at": "2026-10-02T16:33:27Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "5493000LKS7B3UTF7H35",
+      "name": "Bank Polska Kasa Opieki S.A.",
+      "ownership": "mixed",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.pzu.pl/en/investor-relations/shares-and-bonds/shareholding-structure",
+        "sha256": "69d4e7ad43b255e554a994004ec9849cd3370430cbb2b5a2a48e7417b0d0b2a5",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "hareholder structure Share split FAQ and useful links Bonds Changes in PZU SA shareholding structure from the IPO, including the shareholders holding more than 5% of all votes. Shareholders 9.06.2026 9.07.2026 State Treasury 34.2% 34.2% BlackRock, Inc. 5.0% X Other shareholders 60.8% 65.8% Documents to download Shareholder structure 2010-2026 16kB INVESTOR RELATIONS About the group Reports Shares and bonds Sustainability Downloads Contact for investors CONTACT kontakt@pzu.pl +48 801 102 102 CONTACT FOR INVESTORS ir@pzu.pl +48 (22) 582 26 23 SOCIAL MEDIA Facebook Twitter YouTube PZU APPS iOS Android PL ENG GDPR Privacy Policy © 2026 Copyright PZU Zamknij Szukaj"
+      },
+      "note": "Explicit active, published, fully corroborated accounting-control relation to exact PZU SA and current original shareholder table reviewed. Mixed group ownership; no multiplication of State ownership percentages into bank votes or assertion of bank public majority. Pekao PFR position is not separately assumed from its name. Alior PZU group 31.91% is not equated with majority share ownership.",
+      "controller_lei": "QLPCKOOKVX32FUELX240",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/5493000LKS7B3UTF7H35/ultimate-parent-relationship",
+        "sha256": "901290147c98de9613f724bdb7d0ab8ec714885a067cf2e5f0b629458853a0a3",
+        "relationship": {
+          "startNode": {
+            "id": "5493000LKS7B3UTF7H35",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "QLPCKOOKVX32FUELX240",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2025-12-31T23:00:00Z",
+              "endDate": "2026-03-30T22:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2017-08-30T22:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2017-08-30T22:00:00Z",
+          "lastUpdateDate": "2026-08-19T13:39:32Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-09-23T22:00:00Z",
+          "managingLou": "259400L3KBYEVNHEJF55",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "BANK POLSKA KASA OPIEKI - SPÓŁKA AKCYJNA",
+        "registered_as": "0000014843",
+        "jurisdiction": "PL",
+        "gleif_record_sha256": "9c1b57f56633665ec59a16a5cd792b54aec94928cc007703e47018aec439339e"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "003"
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "96950001WI712W7PQG45",
+      "name": "RCI Banque",
+      "rank": 2,
+      "trea_eur": 48934538140.6,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Follow current Renault finance navigation to the actual dated shareholder/voting-rights table and match Renault's LEI. Root/finance navigation was retrieved; State minority vs control remains unverified. Active bank/Renault GLEIF relationship alone cannot classify Renault ownership.",
+      "successful_source_pages": 4,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "002",
+      "previous_next_action": "Active fully corroborated consolidation to Renault exists, but the controller ownership category is not yet verified. Guessed Renault shareholder URL returned 404; bank annual-report index temporarily returned 502. Next: Follow the actual Renault finance navigation to a current dated shareholder/voting-rights table; distinguish State minority holdings from public control. Resume bank report index only after cooldown if needed."
+    },
+    {
+      "lei": "8156007D348794DB1690",
+      "name": "CRÉDIT AGRICOLE ITALIA S.P.A.",
+      "rank": 3,
+      "trea_eur": 43759890367.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Credit Agricole's current consolidated subsidiary note proving Italy bank control, then exact CA SA's cooperative/regional-bank shareholding source. Bank URL is denied; parent shares-and-dividend page returned temporary 503, not ownership evidence. Existing GLEIF relation remains ENTITY_SUPPLIED_ONLY.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.credit-agricole.it",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://www.credit-agricole.com/en/finance/shares-and-dividend",
+          "status": 503,
+          "error": "HTTP Error 503: Service Unavailable"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "002",
+      "previous_next_action": "Archived ultimate-parent relation is ENTITY_SUPPLIED_ONLY, not FULLY_CORROBORATED. Bank homepage returned 403. Parent group and integrated-report landing pages do not provide bank-specific control proof. Next: Use the official parent consolidated report subsidiary note for Credit Agricole Italia, then verify cooperative majority control of the exact registered parent; synthetic EBA group identifier is not a parent LEI."
+    },
+    {
+      "lei": "JU1U6S0DG9YLT7N8ZV32",
+      "name": "Banco Comercial Português, SA",
+      "rank": 4,
+      "trea_eur": 42901543108.17,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Follow current Millennium BCP official issuer navigation or Portuguese exchange qualifying-holdings table to dated Fosun/Sonangol shares and votes. Legacy discovery URL failed; verify Sonangol ownership separately rather than infer private or public bank control.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "http://www.millenniumbcp.pt",
+          "status": null,
+          "error": "timed out"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "003",
+      "previous_next_action": "Shareholder-source URL discovery incomplete; legacy URL resolved to an error page. Next: Use Millennium BCP official investor navigation to the current qualifying-holdings table; review Fosun and Sonangol, including the latter’s public ownership, before choosing shareholder/mixed."
+    },
+    {
+      "lei": "5UMCZOEYKCVFAW8ZLO05",
+      "name": "National Bank of Greece, S.A.",
+      "rank": 6,
+      "trea_eur": 41100000000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use NBG's actual investor menu/current issuer shareholder note to current HFSF/State remainder and votes. Greek retail homepage and report-free navigation contain no accepted current shareholder table; National Bank name does not prove public ownership.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "003",
+      "previous_next_action": "English shareholder paths returned 404; Greek homepage contains no usable current ownership passage. Next: Follow NBG’s actual investor menu or latest issuer annual report to qualifying holdings; verify the current HFSF/State remainder and votes. Do not infer public ownership from National Bank name."
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

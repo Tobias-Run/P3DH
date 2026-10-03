@@ -1,0 +1,238 @@
+{
+  "batch": "003",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 17,
+  "page_attempts": [
+    {
+      "lei": "JU1U6S0DG9YLT7N8ZV32",
+      "url": "http://www.millenniumbcp.pt",
+      "status": null,
+      "error": "timed out",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:48:29Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "JU1U6S0DG9YLT7N8ZV32",
+      "url": "https://ind.millenniumbcp.pt/en/Institucional/investidores/Pages/estrutura-accionista.aspx",
+      "status": 200,
+      "error": null,
+      "sha256": "5859f46c42e21c91566e5bfdca9df283e0ed0dd1b88fc32536afd212dad41f66",
+      "retrieved_at": "2026-10-02T23:50:34Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "JU1U6S0DG9YLT7N8ZV32",
+      "url": "https://www.millenniumbcp.pt/en/investors",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:16Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "JU1U6S0DG9YLT7N8ZV32",
+      "url": "https://www.millenniumbcp.pt/institucional/investidores/estrutura-acionista",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:58:52Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493000LKS7B3UTF7H35",
+      "url": "https://www.pekao.com.pl/en/investor-relations/shareholders.html",
+      "status": 200,
+      "error": null,
+      "sha256": "a1ca3dc0afc6fa97faaa26a297011c9b92ae91452c5a8ab6886841312e194b65",
+      "retrieved_at": "2026-10-02T23:48:29Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493000LKS7B3UTF7H35",
+      "url": "https://www.pekao.com.pl/en/investors-relations/shares/shareholder.html",
+      "status": 200,
+      "error": null,
+      "sha256": "a8b1a0ea0ff5767edc562961c2c0364cc3214a84b0afc48946349b0488970f21",
+      "retrieved_at": "2026-10-02T23:48:30Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493000LKS7B3UTF7H35",
+      "url": "https://www.pzu.pl/relacje-inwestorskie/akcje/struktura-akcjonariatu",
+      "status": 410,
+      "error": "HTTP Error 410: Gone",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:58:52Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5UMCZOEYKCVFAW8ZLO05",
+      "url": "https://www.nbg.gr/",
+      "status": 200,
+      "error": null,
+      "sha256": "b45f80d2b4998a3bb0cb7f3742bfe9e71d6de44fdccf86074a8a92858ac2fc97",
+      "retrieved_at": "2026-10-02T16:33:27Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5UMCZOEYKCVFAW8ZLO05",
+      "url": "https://www.nbg.gr/en/group-and-investors/investor-relations/share-information/shareholder-structure",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:50:34Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5UMCZOEYKCVFAW8ZLO05",
+      "url": "https://www.nbg.gr/en/group-and-investors",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:16Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5UMCZOEYKCVFAW8ZLO05",
+      "url": "https://www.nbg.gr/en/group-and-investors/investor-relations",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:58:53Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "54930056IRBXK0Q1FP96",
+      "url": "https://www.abanca.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "a4665ee3aa3335db5a9c8d776e8cfcd6aaea455bdbcf66f53b19deda463777b7",
+      "retrieved_at": "2026-10-02T16:33:01Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "54930056IRBXK0Q1FP96",
+      "url": "https://www.abancacorporacionbancaria.com/en/investor-relations/shareholders/",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:50:35Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "54930056IRBXK0Q1FP96",
+      "url": "https://www.abancacorporacionbancaria.com/en/",
+      "status": 200,
+      "error": null,
+      "sha256": "4233e82b59b5353d29e3854960f56d7a35abc327c91d08d9198fbd9fa24b0fb8",
+      "retrieved_at": "2026-10-02T23:53:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "54930056IRBXK0Q1FP96",
+      "url": "https://www.abancacorporacionbancaria.com/en/investors/general/",
+      "status": 200,
+      "error": null,
+      "sha256": "fdde5d3620c0985e45cbc3ecdf88197edbfb73731375072312a7bedb4f6d5251",
+      "retrieved_at": "2026-10-02T23:58:53Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "M6AD1Y1KW32H8THQ6F76",
+      "url": "https://www.piraeusholdings.gr",
+      "status": 200,
+      "error": null,
+      "sha256": "4ced75312b7cb912ba72fa33b356c88724c077ac6515f2d63575f46b6151fcd7",
+      "retrieved_at": "2026-10-02T23:48:31Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "M6AD1Y1KW32H8THQ6F76",
+      "url": "https://www.piraeusgroup.gr/el/csr",
+      "status": 200,
+      "error": null,
+      "sha256": "71086cb1fe43b2f2cd6542ef9af67eaeba09683153a08bba49e14d8b41a2a833",
+      "retrieved_at": "2026-10-02T23:48:33Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "M6AD1Y1KW32H8THQ6F76",
+      "url": "https://www.piraeusgroup.gr/en/investor-relations/shareholder-information/shareholding-structure",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:50:36Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "M6AD1Y1KW32H8THQ6F76",
+      "url": "https://www.piraeusgroup.gr/-/jssmedia/Com/2025/Files/Investors/Financials/Financial-Results/12M/Piraeus-Bank-SA_Annual-Financial-Report-2025-of-PB.pdf?sc_lang=el",
+      "status": 200,
+      "error": null,
+      "sha256": "6c58c758d8f093841bc72b6a46f07c749dce56922906323ea8562eeaeabd257b",
+      "retrieved_at": "2026-10-02T23:53:18Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "JU1U6S0DG9YLT7N8ZV32",
+      "name": "Banco Comercial Português, SA",
+      "rank": 4,
+      "trea_eur": 42901543108.17,
+      "status": "pending_targeted_source_review",
+      "reason": "Shareholder-source URL discovery incomplete; legacy URL resolved to an error page.",
+      "next_action": "Use Millennium BCP official investor navigation to the current qualifying-holdings table; review Fosun and Sonangol, including the latter’s public ownership, before choosing shareholder/mixed."
+    },
+    {
+      "lei": "5493000LKS7B3UTF7H35",
+      "name": "Bank Polska Kasa Opieki S.A.",
+      "rank": 5,
+      "trea_eur": 42246411125.69105,
+      "status": "pending_targeted_source_review",
+      "reason": "Current bank table identifies PZU 20.00% and PFR 12.80%, but PZU/PFR ownership types and joint control are not yet sourced. PZU candidate pages returned 410.",
+      "next_action": "Obtain a current official PZU State Treasury shareholder table and PFR ownership statement; then review the fully corroborated bank/PZU relationship and direct PFR stake."
+    },
+    {
+      "lei": "5UMCZOEYKCVFAW8ZLO05",
+      "name": "National Bank of Greece, S.A.",
+      "rank": 6,
+      "trea_eur": 41100000000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "English shareholder paths returned 404; Greek homepage contains no usable current ownership passage.",
+      "next_action": "Follow NBG’s actual investor menu or latest issuer annual report to qualifying holdings; verify the current HFSF/State remainder and votes. Do not infer public ownership from National Bank name."
+    },
+    {
+      "lei": "54930056IRBXK0Q1FP96",
+      "name": "Abanca Corporacion Bancaria, S.A.",
+      "rank": 7,
+      "trea_eur": 39116279545.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Corporate general-information page verifies bank identity/capital, but not controlling shareholders.",
+      "next_action": "Use the latest ABANCA issuer annual-report ownership note to verify ABANCA Holding Financiero/Banesco and Escotet; inspect the current shareholder percentages."
+    },
+    {
+      "lei": "M6AD1Y1KW32H8THQ6F76",
+      "name": "Piraeus Financial Holdings",
+      "rank": 8,
+      "trea_eur": 36604471638.4367,
+      "status": "pending_targeted_source_review",
+      "reason": "Retrieved official annual report is in Greek and concerns Piraeus Bank; mapping to the former Holdings LEI is not yet verified.",
+      "next_action": "Reconcile the bank/holding merger and surviving LEI with official announcements and register data, then review the report’s shareholder table. Do not assign a new bank’s owners to the former holding by name alone."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

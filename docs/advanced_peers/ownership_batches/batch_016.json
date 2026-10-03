@@ -1,0 +1,235 @@
+{
+  "batch": "016",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 10,
+  "page_attempts": [
+    {
+      "lei": "549300A2F46GR0UOM390",
+      "url": "https://www.erstebank.hr",
+      "status": 200,
+      "error": null,
+      "sha256": "e2d1ff09626999038184a4517d9477ecfe5e3d579b203d6fa2dbf5415326544b",
+      "retrieved_at": "2026-10-02T23:50:22Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300A2F46GR0UOM390",
+      "url": "https://www.erstebank.hr/en/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "bf19c6d1e65c3786657a7e22d14635ef57f49c2975228ffe5fb5d9978bd3e7fb",
+      "retrieved_at": "2026-10-02T23:54:41Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300A2F46GR0UOM390",
+      "url": "https://www.erstegroup.com/en/investors/share/shareholder-structure",
+      "status": 200,
+      "error": null,
+      "sha256": "1f8283931bdeb07ba2d166d22fc1fdb5b79f1749917ab03f630cc173fb939589",
+      "retrieved_at": "2026-10-02T23:58:57Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "XLEZHWWOI4HFQDGL4793",
+      "url": "https://www.citibank.pl/",
+      "status": 200,
+      "error": null,
+      "sha256": "d58e3435fe948a5bb660cc1c436821d1d27cf4919bffcd6770ce3773dafddb5d",
+      "retrieved_at": "2026-10-02T16:34:58Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "XLEZHWWOI4HFQDGL4793",
+      "url": "https://www.citibank.pl/corporate/relacje-inwestorskie/akcjonariat/",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:42Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "XLEZHWWOI4HFQDGL4793",
+      "url": "https://www.sec.gov/Archives/edgar/data/831001/000083100126000011/citi-exh2101x12312025.htm",
+      "status": 200,
+      "error": null,
+      "sha256": "b22632497ff227a93eb283e1b7f8611635e547ecd6171d0a5bd10c49e86d0216",
+      "retrieved_at": "2026-10-02T22:30:05Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800RZWHE5EUX9R444",
+      "url": "https://www.luminor.ee",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:48:19Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800RZWHE5EUX9R444",
+      "url": "https://www.luminor.lt/en/about-luminor",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:42Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500JIWG886A9RRT57",
+      "url": "https://www.natwestgroup.com/who-we-are/our-history.html",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:50:22Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500JIWG886A9RRT57",
+      "url": "https://www.natwestgroup.com",
+      "status": 200,
+      "error": null,
+      "sha256": "9b504538099ce12cab4c573f02e2de8a6f72c66426b975198ccabf7a31d04ac4",
+      "retrieved_at": "2026-10-02T23:50:23Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500JIWG886A9RRT57",
+      "url": "https://investors.natwestgroup.com/company-announcements/company-legal-structure",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:43Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500JIWG886A9RRT57",
+      "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/14022025/nwg-annual-report-and-accounts-accessible-11032025.pdf",
+      "status": null,
+      "error": "Response exceeds 16 MiB evidence limit",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:26Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "22210058UCKT3BJTCN24",
+      "url": "https://www.otpbank.lu",
+      "status": 200,
+      "error": null,
+      "sha256": "fe4d1c77b999ec245bd60cfe153f0f74f35c5f80c9e893b396492fa9456113d7",
+      "retrieved_at": "2026-10-02T16:48:34Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "22210058UCKT3BJTCN24",
+      "url": "https://www.otpgroup.info/investor-relations/shares/ownership-structure",
+      "status": 200,
+      "error": null,
+      "sha256": "acb8cb9dcbbffd158d4bd9a8dc35628d603656d87aa9de96d9811846b0f2b872",
+      "retrieved_at": "2026-10-02T16:48:37Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "22210058UCKT3BJTCN24",
+      "url": "https://www.otpbank.lu/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "438ba928d9aa99c3225a3a3caf012fc27a1895dedaf1989317d5fa3ab036dd66",
+      "retrieved_at": "2026-10-02T23:54:43Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "22210058UCKT3BJTCN24",
+      "url": "https://www.otpgroup.info/static/sw/file/OTP_2025_annual_report.pdf",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:27Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "XLEZHWWOI4HFQDGL4793",
+      "name": "BANK HANDLOWY W WARSZAWIE SA",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_document_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Annual_Report/2025/2026-citi-proxy-statement.pdf",
+        "sha256": "c1d2cdd8c9ecccf5f5f4b5274499cd8f7c0dd6f7d690e951c5eed5952bbbacaf",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "ode of Conduct 45 Communications with the Board 45 STOCK OWNERSHIP 46 Beneficial Ownership Table 46 Owners of More than 5% of Citi’s Common Stock 47 Insider Trading Policies for Citi and Citi’s Board, Officers and Employees 47 PROPOSAL 1: ELECTION OF DIRECTORS 48 Director Criteria and Nomination Process 48 Director Qualifications 49 The Nominees 53 Directors’ Compensation 66 AUDIT COMMITTEE REPORT 70 PROPOSAL 2: RATIFICATION OF SELECTION OF INDEPENDENT REGISTERED PUBLIC ACCOUNTING FIRM 71 PROPOSAL 3: ADVISORY VOTE TO APPROVE OUR 2025 EXECUTIVE COMPENSATION 73 Compensation Discussion and Analysis 73 The Compensation, Performance Management and Culture Committee Report 97 2025 Summary Compensation Table and Compensation Information 98 Additional Compensation Disclosures 109 PROPOSAL 4: APPROVAL OF ADDITIONAL SHARES FOR THE CITIGROUP 2019 STOCK INCENTIVE PLAN 110 STOCKHOLDER PROPOSALS 118 Submission of Future Stockholder Proposals 118 Cost of Annual Meeting and Proxy Solicitation 118 Householding 119 ABOUT THE 2026 ANNUAL MEETING 120 ANNEX A 126 Additional Information Regarding Proposal 3 126 Citigroup – Quantitative Scorecard Metric Details And Reconciliations 127 FORWARD-LOOKING STATEMENTS Certain statements in this Proxy Statement are “forward-looking statements” within the meaning of the Private Securities Litigation Refor"
+      },
+      "note": "Exact Polish bank listed under Citigroup in SEC subsidiary Exhibit 21.01 as of 2025-12-31. No 100% ownership assertion; no classification based on ENTITY_SUPPLIED_ONLY relationship alone.",
+      "controller_lei": "6SHGI4ZSSLCXXQSBB395",
+      "control_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/831001/000083100126000011/citi-exh2101x12312025.htm",
+        "sha256": "b22632497ff227a93eb283e1b7f8611635e547ecd6171d0a5bd10c49e86d0216",
+        "retrieved_at": "2026-10-02T22:30:05Z",
+        "quote": "ngs Bahamas Limited Bahamas 6 Citibank Europe plc Ireland 7 Bank Handlowy w Warszawie S.A. Poland 6 Citigroup Asia Pacific Holding LLC Delaware 7 Banco Citibank S.A. Brazil 5 Citigroup Holding (Singapore) Private Limited Singapore 6 Citibank Berhad Malaysia 6 Citibank (Hong Kong) Limited Hong Kong 6 Citibank Singapore Limited Singapore 6 Citicorp International Limited Hong Kong 6 Citicorp Investment Bank (Singapore) Limited Singapore 4 Citibank Korea Inc. South Korea 4 Citibank Nigeria Limited Nigeria 4 Citibank Taiwan Ltd. Taiwan 4 Citigroup Chile SpA Chile 4 Citigroup Netherlands B.V. Netherlands 5 Citibank Anonim Sirketi Turkiye 3 CitiMort",
+        "heading_quote": "EX-21.01 8 citi-exh2101x12312025.htm EX-21.01 Document Significant Subsidiaries of Citigroup Inc. Exhibit 21.01 In accordance with SEC rules, the following is a list of Citigroup Inc.'s subsidiaries as of December 31, 2025, other than those subsidiaries, considered in the aggregate as a single subsidiary, that would not constitute a “significant subsidiary” as of December 31, 2025. This list of subsidiaries will change from year-to-year as a result of changes in Citigroup Inc.'s and its subsidia",
+        "matched_legal_name": "Bank Handlowy w Warszawie S.A."
+      },
+      "matched_legal_name": "Bank Handlowy w Warszawie S.A.",
+      "bank_identity": {
+        "legal_name": "BANK HANDLOWY W WARSZAWIE SPÓŁKA AKCYJNA",
+        "registered_as": "0000001538",
+        "jurisdiction": "PL",
+        "gleif_record_sha256": "562b41cf4230f77d2b427005e64b31dc8ff522a1aa04b1d67d6790064d9d554c"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300A2F46GR0UOM390",
+      "name": "Erste&Steiermärkische Bank d.d.",
+      "rank": 69,
+      "trea_eur": 8067578529.89,
+      "status": "pending_targeted_source_review",
+      "reason": "Archived ultimate-parent relation is fully corroborated; parent major-owner page lacks extracted current voting percentages.",
+      "next_action": "Review current Erste Group shareholder structure and the Croatian bank’s direct shareholder structure to distinguish its Erste and Steiermärkische owners; classify the precise bank/controller chain."
+    },
+    {
+      "lei": "213800RZWHE5EUX9R444",
+      "name": "Luminor Holding AS",
+      "rank": 71,
+      "trea_eur": 7899514109.64487,
+      "status": "pending_targeted_source_review",
+      "reason": "Two official country-site sources returned 403.",
+      "next_action": "Use alternative official Luminor annual-report or ECB/exchange ownership documents for current Blackstone/other holdings and actual holding LEI. Do not retry denied paths."
+    },
+    {
+      "lei": "724500JIWG886A9RRT57",
+      "name": "RBS Holdings N.V.",
+      "rank": 72,
+      "trea_eur": 7897854103.86611,
+      "status": "pending_targeted_source_review",
+      "reason": "Guessed parent legal-structure page was 404; old issuer PDF exceeds retrieval/processing limits or failed. No bank-specific current subsidiary edge is reviewed.",
+      "next_action": "Use NatWest’s actual current legal-structure or annual-report subsidiary note for RBS Holdings NV plus current parent shareholder data; separately verify the completed UK State exit date."
+    },
+    {
+      "lei": "22210058UCKT3BJTCN24",
+      "name": "OTP Luxembourg S.à r.l.",
+      "rank": 73,
+      "trea_eur": 7880667000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Guessed Luxembourg/about URL resolves to the parent error page and guessed annual report was 404; relationship is ENTITY_SUPPLIED_ONLY.",
+      "next_action": "Use the actual OTP issuer annual-report link and exact Luxembourg subsidiary note to prove control, then reuse the reviewed OTP shareholder source. Parent branding is insufficient."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

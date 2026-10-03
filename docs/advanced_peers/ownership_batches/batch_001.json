@@ -1,0 +1,72 @@
+{
+  "batch": "001",
+  "metric": "TREA",
+  "population_before": 291,
+  "batch_size": 5,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 0,
+  "reuse_note": "Cache-only collector pass plus manual reuse of two archived issuer documents (parent proxy and SEC subsidiary exhibit).",
+  "accepted": [
+    {
+      "lei": "EQYXK86SF381Q21S3020",
+      "name": "Bank of America Europe Designated Activity Company",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_document_chain",
+      "controller_lei": "9DJT3UXIJIZJI4WXO774",
+      "ownership_evidence": {
+        "hash_kind": "http_response",
+        "quote": "policy, it will be reviewed for approval or ratification by our Corporate Governance Committee. Based on information contained in separate Schedule 13G filings with the SEC, each of Warren E. Buffett/Berkshire Hathaway Inc. (Berkshire Hathaway), BlackRock, Inc. (BlackRock), and The Vanguard Group (Vanguard) reported that it beneficially owned more than 5% of the outstanding shares of our common stock as of December 31, 2025 (see “Stock ownership of directors, executive officers, and certain beneficial owners” on the next page). In the ordinary course of our business during 2025, our subsidiaries provided and are expected to continue to provide financial advisory, sales and trading, treasury, and other financial or administrative services to Berkshire Hathaway, BlackRock, and Vanguard and their subsidiaries. These and other routine business transactions between the companies were entered into on an arm’s-length basis and contain customary terms and conditions. Our company and its subsidiaries may also, in the ordinary course, invest in BlackRock or Vanguard funds or other products or buy or sell assets to or from BlackRock or Vanguard funds and separate accounts. 36 Bank of America Stock ownership of directors, executive officers, and certain beneficial owners Stock ownership of directors, executive officers, and certain beneficial owners The following table shows the number of shares of our common stock beneficially owned as of March 13, 2026 (except to the extent indicated otherwise in the footnotes below) by: (i) each director; (ii) each named executive officer; (iii) all directors and executive officers as a group; and (iv) beneficial owners of more than 5% of any class of our voting securities (as determined under SEC rules). As of that date, none of our directors and executive officers owned any shares of any class of our voting securities or other preferred stock, other than as r",
+        "requested_url": "https://d1io3yog0oux5.cloudfront.net/_2d7333429ef3d80812f60e8a0751979c/bankofamerica/db/867/10497/proxy_statement/BAC+2026+Proxy+Statement.pdf",
+        "retrieved_at": "2026-10-02T21:52:28Z",
+        "sha256": "e18a00f56443f9ae17ee39f8c68184eb2a813e9f7655fcbc36e8427bbb284e67",
+        "url": "https://d1io3yog0oux5.cloudfront.net/_2d7333429ef3d80812f60e8a0751979c/bankofamerica/db/867/10497/proxy_statement/BAC+2026+Proxy+Statement.pdf"
+      },
+      "control_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-1231202510xkex21.htm",
+        "sha256": "d4276132e4f16d34ece626df9f88a1b0415abc73016edbbd3ad306591168ad87",
+        "retrieved_at": "2026-10-02T22:22:52Z",
+        "heading_quote": "EX-21 8 bac-1231202510xkex21.htm EX-21 Document Exhibit 21 Direct and Indirect Subsidiaries of Bank of America Corporation As of December 31, 2025 Name Location Jurisdiction BA Continuum India Private Limited Hyderabad, India India BA Electronic Data Processing (Guangzhou) Ltd. Guangzhou, PRC People's Republic of China BAC Canada Finance Company Toronto, Ontario, Canada Canada BAC North America Holding Company Charlotte, NC Delaware BAL Investment & Advisory, LLC San Francisco, CA Delaware Banc of America FSC Holdings, Inc. San Francisco, CA De",
+        "quote": "laware Banc of America Public Capital Corp San Francisco, CA Kansas Bank of America California, National Association San Francisco, CA United States of America Bank of America Europe Designated Activity Company Dublin, Ireland Ireland Bank of America Malaysia Berhad Kuala Lumpur, Malaysia Malaysia Bank of America Merrill Lynch Banco Múltiplo S.A. Sao Paulo, Brazil Brazil Bank of America Mexico, S.A., Institucion de Banca Multiple Mexico City, Mexico Mexico Bank of A"
+      },
+      "reviewed_at": "2026-10-02",
+      "status": "accepted",
+      "note": "Bank-specific SEC subsidiary listing reviewed against legal name and Irish jurisdiction, together with the already reviewed controller shareholder source. Explicit manual review; no automatic inherited classification; no 100% ownership assertion."
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "969500STN7T9MRUMJ267",
+      "name": "Bpifrance",
+      "trea_eur": 91445333689.57,
+      "status": "pending_targeted_source_review",
+      "reason": "The cache-only pilot did not provide a sufficient reviewed ownership passage. Requires a bounded targeted pass; does not establish absence of public information."
+    },
+    {
+      "lei": "213800KGF4EFNUQKAT69",
+      "name": "EUROBANK S.A.",
+      "trea_eur": 53646935316.43,
+      "status": "pending_targeted_source_review",
+      "reason": "The cache-only pilot did not provide a sufficient reviewed ownership passage. Requires a bounded targeted pass; does not establish absence of public information."
+    },
+    {
+      "lei": "96950001WI712W7PQG45",
+      "name": "RCI Banque",
+      "trea_eur": 48934538140.6,
+      "status": "pending_targeted_source_review",
+      "reason": "The cache-only pilot did not provide a sufficient reviewed ownership passage. Requires a bounded targeted pass; does not establish absence of public information."
+    },
+    {
+      "lei": "TO822O0VT80V06K0FH57",
+      "name": "Caixa Geral de Depósitos, S.A.",
+      "trea_eur": 47952630705.92,
+      "status": "pending_targeted_source_review",
+      "reason": "The cache-only pilot did not provide a sufficient reviewed ownership passage. Requires a bounded targeted pass; does not establish absence of public information."
+    }
+  ]
+}

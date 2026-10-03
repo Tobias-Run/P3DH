@@ -1,0 +1,197 @@
+{
+  "batch": "022",
+  "campaign": "next_70_trea_b",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 268,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 3,
+  "page_attempts": [
+    {
+      "lei": "5299000R7WZOVIFHLN21",
+      "url": "https://www.sozialfinanz.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "251c2af08075295cca2c405789b7c4c0043f40b50d799611a69a76f2e3a09b89",
+      "retrieved_at": "2026-10-02T16:32:21Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299000R7WZOVIFHLN21",
+      "url": "https://www.sozialfinanz.de/ueber-uns",
+      "status": 200,
+      "error": null,
+      "sha256": "30cd1cf7b5e28dfcbef9104b869cd3ff06ece9ca35da5f2202172becabef1e4e",
+      "retrieved_at": "2026-10-02T16:50:08Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299000R7WZOVIFHLN21",
+      "url": "https://www.sozialfinanz.de/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "8babccf71cd2e2815fca5f68f6a95113a07b3de427a41d4d3e3625719a1c996c",
+      "retrieved_at": "2026-10-02T16:50:10Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "724500BICUQ0LF1AH770",
+      "url": "https://www.nn.nl",
+      "status": 200,
+      "error": null,
+      "sha256": "58f98baf3f64e24b6aa4bb1ebde3bf740f15f4dc104fa4773db83ae3e4416d62",
+      "retrieved_at": "2026-10-03T07:20:43Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "81560027D07F9BDB8436",
+      "url": "https://www.bancadiasti.it",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:33Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300BZZFFS0SOWR325",
+      "url": "https://www.fordbank.de",
+      "status": 200,
+      "error": null,
+      "sha256": "fd27135fc9a5b72e86ab58d8e12282143e9ffa43a3d2d9a169f2d974725b42cd",
+      "retrieved_at": "2026-10-03T07:20:43Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300BZZFFS0SOWR325",
+      "url": "https://www.ford.de/hilfe/anleitungen/ressourcen-des-eigentuemers/ford-bank",
+      "status": 200,
+      "error": null,
+      "sha256": "f7f96f5927063547549e62e30d2b7efa6d349a6e5ffd0e9a593d8297e43a7cec",
+      "retrieved_at": "2026-10-03T07:20:44Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300SBPFE9JX7N8J82",
+      "name": "AB SEB bankas",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://tools.euroland.com/majorshareholder/s-seb_new/?lang=english",
+        "sha256": "12cfbed5d56458476234590f5f5f5b879ed2f90ea8c953de4a6d749e3c594690",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "Major shareholders Shareholders Sector Distribution Geo.Distribution Archive Shareholders Share capital % Votes % A Shares C Shares Total number of shares Monthly change % 1 Investor 21.97 22.03 432,198,555 4,000,372 436,198,927 0.0 2 AMF Pension & Fonder 3.96 4.00 78,540,730 0 78,540,730 -3.2 3 Swedbank Robur Fonder 3.88 3.92 76,972,974 0 76,972,974 -4.0 4 Capital Group 3.71 3.75 73,605,734 0 73,605,734 +2.8 5 Vanguard 3.55 3.55 69,674,798 893,203 70,568,001 +0.4 6 BlackRock 3.39 3.43 67,323,389 20,673 67,344,062 +4.3 7 Handelsbanken Fonder 2.75 2.77 54,477,561 24,551 54,502,112 -1.7 8 Alecta Tj�nstepension 2.71 2.74 53,834,715 0 53,834,715 0.0 9 SEB Funds 2.36 2.39 46,882,982 0 46,882,982 +0.5 10 SEBs own shareholding 2.01 2.03 39,911,993 0 39,911,993 +6.0 11 Fourth Swedish National Pension Fund 1.12 1.13 22,276,511 0 22,276,511 +0.0 12 Third Swedish National Pension Fund 0.91 0.92 18,139,251 0 18,139,251 +4.8 13 Folksam 0.87 0.88 17,222,262 0 17,222,262 -0.6 14 Avanza Fonder 0.86 0.87 17,014,498 12,174 17,026,672 +0.7 15 L�nsf�rs�kringar Fonder 0.81 0.82 16,047,364 0 16,047,364 +0.1 16 Nordea Funds 0.79 0.80 15,774,447 0 15,774,447 -2.4 17 Storebrand Asset Management 0.67 0.68 13,365,102 0 13,365,102 +0.8 18 Harding Loevner 0.66 0.67 13,116,525 0 13,116,525 -"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "F3JS33DEI6XQ4ZBPTN86",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/549300SBPFE9JX7N8J82/ultimate-parent-relationship",
+        "sha256": "954dcfb9219c2b491b3d50d44944cc806fa7ebb60b1e5b974d7404cf44341c24",
+        "relationship": {
+          "startNode": {
+            "id": "549300SBPFE9JX7N8J82",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "F3JS33DEI6XQ4ZBPTN86",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2023-01-01T00:00:00Z",
+              "endDate": "2023-12-31T00:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2023-04-27T00:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2013-11-13T03:03:00Z",
+          "lastUpdateDate": "2026-04-22T13:20:56Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-05-09T00:00:00Z",
+          "managingLou": "213800WAVVOPS85N2205",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/DA90E32A9554BB77C1258AD0003DF8D1/$FILE/SEB_AR23_Web_ENG_klickbar.pdf"
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "AB SEB BANKAS",
+        "registered_as": "112021238",
+        "jurisdiction": "LT",
+        "gleif_record_sha256": "efae241f5b1c94e0e89acba22232defa9225f5147c8e63ce458d4e322d717892"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "5299000R7WZOVIFHLN21",
+      "name": "BFS SozialFinanz AG",
+      "rank": 79,
+      "trea_eur": 5267617158.01,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review current named welfare association holdings and percentages in SozialFinanz issuer accounts, plus registered name change. Majority free-welfare ownership is stated, but it is not automatically mutual, cooperative or foundation control.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "724500BICUQ0LF1AH770",
+      "name": "Nationale-Nederlanden Bank N.V.",
+      "rank": 80,
+      "trea_eur": 5263541156.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review exact NN Group issuer holdings/voting table and NN Bank official subsidiary accounts; classify parent before applying the fully corroborated relationship.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "81560027D07F9BDB8436",
+      "name": "CASSA DI RISPARMIO DI ASTI S.P.A. (IN FORMA ABBREVIATA BANCA C.R. ASTI S.P.A.)",
+      "rank": 81,
+      "trea_eur": 5213053604.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use an alternative official foundation or issuer filed report giving exact Banca Asti foundation majority and current voting interests; do not retry the denied bank host or infer foundation ownership from its savings-bank name.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.bancadiasti.it",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    },
+    {
+      "lei": "549300BZZFFS0SOWR325",
+      "name": "Ford Bank GmbH",
+      "rank": 82,
+      "trea_eur": 5181057649.23,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Ford current SEC subsidiary exhibit for exact German Ford Bank GmbH and current Ford issuer shareholder/voting table; bank customer-help page and ENTITY_SUPPLIED_ONLY relation do not establish control.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}
