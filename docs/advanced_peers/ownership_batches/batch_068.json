@@ -1,0 +1,166 @@
+{
+  "batch": "068",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 2,
+  "page_attempts": [
+    {
+      "lei": "529900D5G4V6THXC5P79",
+      "url": "https://www.hpb.hr",
+      "status": 200,
+      "error": null,
+      "sha256": "1fbc879dcd24edeee97328f6d70582a74043e7525f53ff4d45fd9a821b95c869",
+      "retrieved_at": "2026-10-02T16:51:31Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "815600A32DA05F693F24",
+      "url": "http://www.lacassa.com/ita/Banca/Gruppo-Bancario",
+      "status": 200,
+      "error": null,
+      "sha256": "69e442e4ffd4b74c2cfd9614c35ec645ba732c2b5de231268702af57ce2421b2",
+      "retrieved_at": "2026-10-03T07:21:13Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "815600A32DA05F693F24",
+      "url": "http://www.lacassa.com/ita/Banca/Corporate-Governance",
+      "status": 200,
+      "error": null,
+      "sha256": "3789e00d5c5be23a1dc1d78d125b436aff8930a6d7fab2902dc6dfc49a0b3e34",
+      "retrieved_at": "2026-10-03T10:41:58Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "2138009Y59EAR7H1UO97",
+      "url": "https://www.citadele.lv/",
+      "status": 200,
+      "error": null,
+      "sha256": "a31ba1c3d72a1daf465b15f320fca78e437a372f29a8fca640648405f685c849",
+      "retrieved_at": "2026-10-02T16:31:59Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "2138009Y59EAR7H1UO97",
+      "url": "https://www.cblgroup.com/en/",
+      "status": 200,
+      "error": null,
+      "sha256": "0e4d14c3cd59245d53476de6e2266eb9c5e544690577fc805ffa2aafa2eef921",
+      "retrieved_at": "2026-10-03T10:33:45Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493002DPKDEC2JN1Y86",
+      "url": "https://www.sjfbank.dk/",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:01Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "9598002AYDQER7DXLR16",
+      "url": "https://www.grupocajarural.es",
+      "status": 200,
+      "error": null,
+      "sha256": "b2391c27566e84818b493aaf03ce35b616345a82b81350d6a554fdbce017c4f1",
+      "retrieved_at": "2026-10-03T07:21:15Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "529900D5G4V6THXC5P79",
+      "name": "Hrvatska poštanska banka d.d.",
+      "rank": 88,
+      "trea_eur": 2813546304.61,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "027",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Find HPB actual issuer annual-report shareholder table showing Croatian State and other public interests with dated aggregate percentages; current homepage is not ownership proof.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Find HPB actual issuer annual-report shareholder table showing Croatian State and other public interests with dated aggregate percentages; current homepage is not ownership proof.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "815600A32DA05F693F24",
+      "name": "LA CASSA DI RAVENNA S.P.A.",
+      "rank": 89,
+      "trea_eur": 2761011309.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "027",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use La Cassa Ravenna issuer current shareholder/voting table to Antonio Patuelli and other owners; retrieved group page lists subsidiaries, not the bank owners.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Corporate governance reached; governance roles and group subsidiaries do not establish the bank own shareholders. Read current capital table or bank report and identify foundation/family votes.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "2138009Y59EAR7H1UO97",
+      "name": "Akciju sabiedrība \"Citadele banka\"",
+      "rank": 90,
+      "trea_eur": 2743289145.96,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "028",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Follow Citadele actual corporate investor page to current shareholder and voting table; verify Ripplewood/EBRD holdings and any completed exits at exact bank LEI.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "CBL group landing page has no usable ownership excerpt. Find exact Citadele current shareholder/vote disclosure, then assess Ripplewood and EBRD shares.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "5493002DPKDEC2JN1Y86",
+      "name": "Sparekassen Sjælland-Fyn A/S",
+      "rank": 91,
+      "trea_eur": 2628084043.1869087,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "028",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use an alternative official Danish exchange/issuer report for current bank foundations and voting rights after conversions/mergers; do not retry denied bank site or assume self-owned structure for A/S.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use an alternative official Danish exchange/issuer report for current bank foundations and voting rights after conversions/mergers; do not retry denied bank site or assume self-owned structure for A/S.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.sjfbank.dk/",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    },
+    {
+      "lei": "9598002AYDQER7DXLR16",
+      "name": "GRUCAJRURAL INVERSIONES SL",
+      "rank": 92,
+      "trea_eur": 2590690874.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "028",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Handle historical entity explicitly: archived GLEIF says GRUCAJRURAL INVERSIONES SL INACTIVE/RETIRED. Banco Cooperativo audited 2025 accounts confirm absorption registered 2025-09-24. Verify historical holding ownership with a pre-merger report and design dated classification before assigning current owners to historical reports.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Handle historical entity explicitly: archived GLEIF says GRUCAJRURAL INVERSIONES SL INACTIVE/RETIRED. Banco Cooperativo audited 2025 accounts confirm absorption registered 2025-09-24. Verify historical holding ownership with a pre-merger report and design dated classification before assigning current owners to historical reports.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

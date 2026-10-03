@@ -1,0 +1,166 @@
+{
+  "batch": "071",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 2,
+  "page_attempts": [
+    {
+      "lei": "BB3BGO3LCED63R8R9R41",
+      "url": "https://www.bankbps.pl",
+      "status": 200,
+      "error": null,
+      "sha256": "bccee16837ffab991bf4741b2cc91313f99de1da7eda2f5d300b34342bb79938",
+      "retrieved_at": "2026-10-03T07:59:54Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "815600B5C61A10BBB451",
+      "url": "https://www.bancasistema.it/azionisti",
+      "status": 200,
+      "error": null,
+      "sha256": "6821af41ebc1de82d9c44997b05e0310ebaeec9df5ee7c498be7f5654cd1dd3b",
+      "retrieved_at": "2026-10-03T07:59:57Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "969500GVS02SJYG9S632",
+      "url": "https://www.carrefour-banque.fr",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:49Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "969500GVS02SJYG9S632",
+      "url": "https://www.carrefour.com/en/",
+      "status": 200,
+      "error": null,
+      "sha256": "8571f92747bec1dfc9ed1b5e5a4f591b4b85ee01b1dc0e8621bf35654c9112f2",
+      "retrieved_at": "2026-10-03T10:31:46Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500M4G9AVEMHMV291",
+      "url": "https://www.bunq.com/about",
+      "status": 200,
+      "error": null,
+      "sha256": "3a4f4ae8e96f1e1247cfbba6d6a2c10dbeb588f926dca303a1cd39f28b0be5ef",
+      "retrieved_at": "2026-10-03T07:59:56Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "54930060Q00W1SRIUI57",
+      "url": "https://www.vdk.be/nl/corporate-governance",
+      "status": 200,
+      "error": null,
+      "sha256": "a1080d6faf6807fc3a8d627ecdef8c0abee0a84993ee06a074aa38110be09b3f",
+      "retrieved_at": "2026-10-02T16:33:07Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "54930060Q00W1SRIUI57",
+      "url": "https://www.vdk.be/sites/default/files/2026-06/2025_JR_vdk_NBB.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "4377b26a6fc20f2b9db960c564d766b7d67c91cba9e8d949d4c011a4f16f6622",
+      "retrieved_at": "2026-10-03T10:33:30Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "BB3BGO3LCED63R8R9R41",
+      "name": "BANK POLSKIEJ SPOLDZIELCZOSCI S.A.",
+      "rank": 103,
+      "trea_eur": 1685850721.10169,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "031",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Find current BPS issuer annual-report shareholder table with cooperative banks and percentage/votes; a cooperative-bank name, association role or unavailable sitemap is not majority member control.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Find current BPS issuer annual-report shareholder table with cooperative banks and percentage/votes; a cooperative-bank name, association role or unavailable sitemap is not majority member control.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "815600B5C61A10BBB451",
+      "name": "BANCA SISTEMA S.P.A.",
+      "rank": 104,
+      "trea_eur": 1681277239.31,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "032",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Current bank table identifies Banca CF+ at 85.67% after June 2026 offer. Verify the exact CF+ controlling owners/votes and ownership category through filed reports before classifying Banca Sistema; former foundation stakes may be outdated.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Bank source currently gives Banca CF+ 85.67% following June 2026 offer. Read exact CF+ current owner/voting table and control edge; acquisition percentage does not establish owner type.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "969500GVS02SJYG9S632",
+      "name": "Carrefour banque",
+      "rank": 105,
+      "trea_eur": 1654455174.41,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "032",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use an alternative official Carrefour group annual report with Carrefour Banque subsidiary ownership and exact parent shareholder/voting table; do not retry the denied bank host.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Parent Carrefour homepage does not expose current named shareholder table. Obtain actual current issuer report with governance and exact Banque parent chain; no retail brand shortcut.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [
+        {
+          "url": "https://www.carrefour-banque.fr",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    },
+    {
+      "lei": "724500M4G9AVEMHMV291",
+      "name": "bunq Holding B.V.",
+      "rank": 106,
+      "trea_eur": 1648837829.5974877,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "032",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Review exact bunq Holding BV, rather than only the regulated bank, in current Dutch filed accounts for Ali Niknam/other capital and differentiated control rights. Retail about page is not holding ownership proof.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Review exact bunq Holding BV, rather than only the regulated bank, in current Dutch filed accounts for Ali Niknam/other capital and differentiated control rights. Retail about page is not holding ownership proof.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "54930060Q00W1SRIUI57",
+      "name": "vdk bank",
+      "rank": 107,
+      "trea_eur": 1621452423.172,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "032",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Current vdk source identifies individuals and Christian labour social organisations with a majority shareholder pact, but lacks named percentage/control allocation. Review current pact and issuer share table; welfare/cooperative/mutual minority labels are not necessarily the controlling type.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "2025 bank filed annual report now read: disclosed Volksvermogen 22.73% and Belfius 17.53% do not establish full pact control or absent other public stakes. Resolve Christian labour shareholder pact percentages and Belfius current public chain before choosing mixed/mutual/cooperative.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

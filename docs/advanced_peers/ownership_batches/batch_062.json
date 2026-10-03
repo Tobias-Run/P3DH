@@ -1,0 +1,353 @@
+{
+  "batch": "062",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 3,
+  "page_attempts": [
+    {
+      "lei": "549300L7YCATGO57ZE10",
+      "url": "https://www.finecobank.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "333b8e150d77fa278e224501153589e62127897e5daf66217183f5f13f49148c",
+      "retrieved_at": "2026-10-02T16:33:13Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "549300L7YCATGO57ZE10",
+      "url": "https://about.finecobank.com/it/",
+      "status": 200,
+      "error": null,
+      "sha256": "feb9eaa569d99a3dac37c52846fdde1996e74f80a903273a52e23fba1bf49fa9",
+      "retrieved_at": "2026-10-03T10:40:39Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300TDPXT0OW2AY198",
+      "url": "https://www.axabank.be",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:55:14Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "549300TDPXT0OW2AY198",
+      "url": "https://www.avh.be/",
+      "status": 200,
+      "error": null,
+      "sha256": "f06ca26aa9c187a5a1dd09d7092c6943756eaade3a0f1f5fbaae6fa1021d4e30",
+      "retrieved_at": "2026-10-03T10:33:47Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300TDPXT0OW2AY198",
+      "url": "https://www.avh.be/en/investor-relations/shareholder-structure",
+      "status": 200,
+      "error": null,
+      "sha256": "94b0c3f9672a033d78d3d222e741cac41db513438ea092408334e34b3b834bda",
+      "retrieved_at": "2026-10-03T10:39:40Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300WDT1HWUMTUW770",
+      "url": "https://www.sc.com",
+      "status": 200,
+      "error": null,
+      "sha256": "3f75d70fb1cb2bd4492bddfd7bfb1042c657ddc2e7c5c87a39825e5219c69faf",
+      "retrieved_at": "2026-10-03T07:20:38Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "MMYX0N4ZEZ13Z4XCG897",
+      "url": "https://www.bny.com/corporate/global/en/investor-relations/shareholder-services.html",
+      "status": 200,
+      "error": null,
+      "sha256": "f6d3a3d34fde5aef693f2638cb7902e2d70a3ed51a8f5ccd88e8500c053a4cbd",
+      "retrieved_at": "2026-10-03T07:20:40Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "485100FX5Y9YLAQLNP12",
+      "url": "https://www.revolut.com/report-lost-device/",
+      "status": 200,
+      "error": null,
+      "sha256": "b3169b77e81cf1bbe7905dc4c51cf736d47c6f5bf7e9d70b7757fa77e4b540fd",
+      "retrieved_at": "2026-10-03T07:20:41Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300TDPXT0OW2AY198",
+      "name": "FinAx",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.avh.be/en/investor-relations/shareholder-structure",
+        "sha256": "94b0c3f9672a033d78d3d222e741cac41db513438ea092408334e34b3b834bda",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": " 33,157,750 Disclosure threshhold: 5% Shareholder structure Scaldis Invest holds 11,054,000 shares in the capital of Ackermans & van Haaren, i.e. a stake of 33.34%. Scaldis Invest is in turn controlled by Belfimas, which holds 92.25% of the capital of Scaldis Invest. The ultimate control of Scaldis Invest is held by Stichting Administratiekantoor ‘Het Torentje', that also directly holds shares of AvH. These directly held shares represent a 1.54% interest. Redemption of own shares Ackermans & van Haaren holds 478,190 of its own shares as at December 31, 2025. The evolution of the number of treasury shares held by Ackermans & van Haaren is the result of the execution of its liquidity contract and the acquisition of shares to cover its stock option obligations vis-à-vis the beneficiaries. (The most recently reported number of treasury shares can be found on this website under the menu item \"Media\" and the subsection \"AvH - Acquisition and disposal of own shares\"). Reference shareholder Belfimas is the (indirect) reference shareholder of Ackermans & van Haaren. Belfimas' sole purpose is to invest, directly or indirectly, in Ackermans & van Haaren shares. Any transfer of securities issued by Belfimas is subject to a statutory right of approval of the Belfimas board of directors. Two of Ackermans & van Haaren's directors (Luc Bertrand and Frederic van Haaren) are members of the Belfi"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "5493005E2GHATS0Z6J59",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198/ultimate-parent-relationship",
+        "sha256": "f2f300cee91c4b863e432a78e348c88ffde345272c8d3df9190eaaeb14a3b3ef",
+        "relationship": {
+          "startNode": {
+            "id": "549300TDPXT0OW2AY198",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "5493005E2GHATS0Z6J59",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2020-01-19T23:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2023-12-31T23:00:00Z",
+              "endDate": "2024-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2019-02-11T21:31:00Z",
+          "lastUpdateDate": "2026-01-30T06:03:29Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-02-16T14:00:56Z",
+          "managingLou": "894500IIP432AHQ64V02",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "FinAx",
+        "registered_as": "0718694279",
+        "jurisdiction": "BE",
+        "gleif_record_sha256": "b15885a2aa1082d8e1d733960414e91a6dbc4a7f4fe1dd4b74660dea0cd97edd"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "020",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "549300TDPXT0OW2AY198",
+          "attributes": {
+            "lei": "549300TDPXT0OW2AY198",
+            "entity": {
+              "legalName": {
+                "name": "FinAx",
+                "language": "nl"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "nl",
+                "addressLines": [
+                  "Begijnenvest 113"
+                ],
+                "addressNumber": "113",
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Antwerpen",
+                "region": "BE-VAN",
+                "country": "BE",
+                "postalCode": "2000"
+              },
+              "headquartersAddress": {
+                "language": "nl",
+                "addressLines": [
+                  "Begijnenvest 113"
+                ],
+                "addressNumber": "113",
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Antwerpen",
+                "region": "BE-VAN",
+                "country": "BE",
+                "postalCode": "2000"
+              },
+              "registeredAt": {
+                "id": "RA000025",
+                "other": null
+              },
+              "registeredAs": "0718694279",
+              "jurisdiction": "BE",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "R85P",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "2018-12-30T23:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2019-02-11T21:31:00Z",
+              "lastUpdateDate": "2026-01-30T06:03:29Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-02-16T14:00:56Z",
+              "managingLou": "894500IIP432AHQ64V02",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000025",
+                "other": null
+              },
+              "validatedAs": "0718694279",
+              "otherValidationAuthorities": []
+            },
+            "bic": null,
+            "mic": null,
+            "ocid": null,
+            "qcc": "QBEJSP4DH0",
+            "gem": null,
+            "spglobal": [
+              "602177223"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198/direct-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198/direct-parent"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198/ultimate-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198/ultimate-parent"
+              }
+            },
+            "direct-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198/direct-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198/direct-children"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/549300TDPXT0OW2AY198"
+          }
+        },
+        "canonical_sha256": "b15885a2aa1082d8e1d733960414e91a6dbc4a7f4fe1dd4b74660dea0cd97edd"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300L7YCATGO57ZE10",
+      "name": "FINECOBANK BANCA FINECO S.P.A. (IN BREVE FINECOBANK S.P.A. OVVERO BANCA FINECO S.P.A. OVVERO FINECO BANCA S.P.A.)",
+      "rank": 58,
+      "trea_eur": 6299478641.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "020",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Review the actual Fineco issuer qualifying-holdings/voting table from corporate investor navigation; current retail trading page is not owner evidence.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Actual Fineco corporate page reached but no qualifying holdings table extracted. Follow its governance/report navigation to dated issuer owner/vote table.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300WDT1HWUMTUW770",
+      "name": "Standard Chartered Bank AG",
+      "rank": 60,
+      "trea_eur": 6213381032.45,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "020",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use Standard Chartered issuer subsidiary accounts for the exact German AG and current parent shareholder/voting table; ENTITY_SUPPLIED_ONLY GLEIF relation is insufficient.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use Standard Chartered issuer subsidiary accounts for the exact German AG and current parent shareholder/voting table; ENTITY_SUPPLIED_ONLY GLEIF relation is insufficient.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "MMYX0N4ZEZ13Z4XCG897",
+      "name": "THE BANK OF NEW YORK MELLON",
+      "rank": 61,
+      "trea_eur": 6091849319.005838,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "020",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use BNY issuer current beneficial-owner table and the exact New York bank/corporation registered identities. Shareholder-service page does not disclose controlling holdings; classify parent before the fully corroborated bank chain.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use BNY issuer current beneficial-owner table and the exact New York bank/corporation registered identities. Shareholder-service page does not disclose controlling holdings; classify parent before the fully corroborated bank chain.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "485100FX5Y9YLAQLNP12",
+      "name": "Revolut Holdings Europe UAB",
+      "rank": 62,
+      "trea_eur": 6069509814.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "021",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use Revolut official filed group/Europe holding accounts and shareholder voting structure, with the exact Lithuanian holding LEI; retail product page and ENTITY_SUPPLIED_ONLY relation are insufficient.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use Revolut official filed group/Europe holding accounts and shareholder voting structure, with the exact Lithuanian holding LEI; retail product page and ENTITY_SUPPLIED_ONLY relation are insufficient.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

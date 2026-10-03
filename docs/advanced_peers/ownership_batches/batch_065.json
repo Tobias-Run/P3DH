@@ -1,0 +1,160 @@
+{
+  "batch": "065",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 0,
+  "page_attempts": [
+    {
+      "lei": "2594000ZNGGQZXZKXH36",
+      "url": "https://www.velobank.pl/o-banku",
+      "status": 200,
+      "error": null,
+      "sha256": "892de61c2720f70863709fc0ce20e428988c9d2ea1282e2e02f48d3150bd2ab4",
+      "retrieved_at": "2026-10-03T07:20:49Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "815600DDCE9083CAC598",
+      "url": "https://www.mediobancapremier.com",
+      "status": 502,
+      "error": "HTTP Error 502: Bad Gateway",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T07:20:51Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5299005OACOC1C1OFJ11",
+      "url": "https://www.rlbt.at",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:50:39Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "MKP1B7E76TN04CD85Z79",
+      "url": "https://www.bosbank.pl",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:34:43Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "743700GC62JLHFBUND16",
+      "url": "https://www.aktia.fi/sv/",
+      "status": 200,
+      "error": null,
+      "sha256": "edf7901d8f52f5304e4dc1fc26f2d1b9b4aac81ba492f2223cd065e4a4214732",
+      "retrieved_at": "2026-10-02T16:33:30Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "2594000ZNGGQZXZKXH36",
+      "name": "VELOBANK SA",
+      "rank": 73,
+      "trea_eur": 3584045786.83017,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "024",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use dated official VeloBank shareholder/completion report showing Cerberus and institutional holdings/votes; distinguish completed ownership from proposed transactions.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use dated official VeloBank shareholder/completion report showing Cerberus and institutional holdings/votes; distinguish completed ownership from proposed transactions.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "815600DDCE9083CAC598",
+      "name": "MEDIOBANCA PREMIER S.P.A.",
+      "rank": 74,
+      "trea_eur": 3542523372.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "024",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use an alternative official Mediobanca report subsidiary note for exact Mediobanca Premier LEI plus reviewed parent/MPS chain. Homepage 502 is temporary, not evidence of unavailable public ownership.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use an alternative official Mediobanca report subsidiary note for exact Mediobanca Premier LEI plus reviewed parent/MPS chain. Homepage 502 is temporary, not evidence of unavailable public ownership.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.mediobancapremier.com",
+          "status": 502,
+          "error": "HTTP Error 502: Bad Gateway"
+        }
+      ]
+    },
+    {
+      "lei": "5299005OACOC1C1OFJ11",
+      "name": "Raiffeisen-Landesbank Tirol AG",
+      "rank": 75,
+      "trea_eur": 3492084703.9900002,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "024",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Resolve current official Raiffeisen Tirol website through bank register/linked report; inspect dated member-bank shareholder percentages, rather than assume cooperative control from its brand.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Resolve current official Raiffeisen Tirol website through bank register/linked report; inspect dated member-bank shareholder percentages, rather than assume cooperative control from its brand.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.rlbt.at",
+          "status": null,
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+        }
+      ]
+    },
+    {
+      "lei": "MKP1B7E76TN04CD85Z79",
+      "name": "BANK OCHRONY ŚRODOWISKA SA",
+      "rank": 76,
+      "trea_eur": 3381061426.05084,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "025",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use an alternative official Warsaw exchange/issuer annual report identifying BOŚ current controlling environmental/public institutions and their legal ownership; do not retry denied bank source.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use an alternative official Warsaw exchange/issuer annual report identifying BOŚ current controlling environmental/public institutions and their legal ownership; do not retry denied bank source.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.bosbank.pl",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    },
+    {
+      "lei": "743700GC62JLHFBUND16",
+      "name": "Aktia Bank Abp",
+      "rank": 77,
+      "trea_eur": 3378855772.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "025",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Find exact Aktia issuer current largest-shareholder/voting table via corporate investor website; review foundations individually with voting caps and aggregate rights instead of assuming foundation majority.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Find exact Aktia issuer current largest-shareholder/voting table via corporate investor website; review foundations individually with voting caps and aggregate rights instead of assuming foundation majority.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

@@ -1,0 +1,489 @@
+{
+  "batch": "069",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 5,
+  "page_attempts": [
+    {
+      "lei": "549300CQ9NLEHMRCU505",
+      "url": "https://www.cecabank.es/soluciones/plataformas-tecnologicas/servicios-de-tesoreria-riesgos-y-reporting/",
+      "status": 200,
+      "error": null,
+      "sha256": "1d43f04aae42a5d24b6ca4223047f9bbe18e57d7085cfec5cc8d48e9c34d0eae",
+      "retrieved_at": "2026-10-03T07:21:17Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "GDI8P8WHFH4PS5YTU851",
+      "url": "https://www.haitongib.com/en/who-we-are/",
+      "status": 200,
+      "error": null,
+      "sha256": "ab823bd7a41438b7c70f479b5691e413cbb1b0a93ec3e2fd8489d90a3b6d456f",
+      "retrieved_at": "2026-10-03T07:21:18Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "GDI8P8WHFH4PS5YTU851",
+      "url": "https://www.haitongib.com/en/who-we-are/corporate-information/",
+      "status": 200,
+      "error": null,
+      "sha256": "015b55f61798f8a516a443eec946030bfc804a88d7a98d898b30bf4f8ef30a8a",
+      "retrieved_at": "2026-10-03T10:41:58Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600722FAEE18D6013",
+      "url": "https://bancafucino.it/azienda/incassi-e-pagamenti/gruppo-pos",
+      "status": 200,
+      "error": null,
+      "sha256": "b1f8328911fe25eefe7b6d6336dab9e9e400e466fcee60c72ba8445a860b7d92",
+      "retrieved_at": "2026-10-03T07:21:22Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "815600722FAEE18D6013",
+      "url": "https://bancafucino.it/sito-istituzionale/investor-relations/documenti-societari",
+      "status": 200,
+      "error": null,
+      "sha256": "321dee647077db7b8ac84be8d93cbfa9ca48de2c5564ec17e54b307c10ad16b4",
+      "retrieved_at": "2026-10-03T10:41:59Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800UYAHIRLZ4NSN67",
+      "url": "https://www.lsb.dk/investor-relations/lsb-aktien",
+      "status": 200,
+      "error": null,
+      "sha256": "cac47eedbfe4c549a2de63d78c59fdd74a4ec77801fcbc1b22b457f376092712",
+      "retrieved_at": "2026-10-03T07:28:16Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "213800UYAHIRLZ4NSN67",
+      "url": "https://www.lsb.dk/investor-relations/regnskaber",
+      "status": 200,
+      "error": null,
+      "sha256": "0da7bad3d4e3daa27875d9b1791e3c6b1ef4f97f5bc47dde948adb49fd00208b",
+      "retrieved_at": "2026-10-03T10:41:59Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800UYAHIRLZ4NSN67",
+      "url": "https://www.lsb.dk/-/media/lsb/pdf/presse-ir/fondsboersmeddelser/2026/lsb_aarsrapport_2025.pdf?rev=684b58b509e94f53818d1880167a69d3&hash=135C9CBF4E71294A75619753245B60DB",
+      "status": 200,
+      "error": null,
+      "sha256": "a5c267d85e71b29f10935c96ae2c215050d5fcfe3bd85dcae278216ba0fb5cde",
+      "retrieved_at": "2026-10-03T10:43:12Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493007SWCCN9S3J2748",
+      "url": "https://investor.bigbank.eu/et/reporting/",
+      "status": 200,
+      "error": null,
+      "sha256": "8528123971a9fb45da1c0332661980cad5d0bf26323d9f446dffc9e1db930ade",
+      "retrieved_at": "2026-10-03T07:29:19Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5493007SWCCN9S3J2748",
+      "url": "https://static.bigbank.eu/investor/assets/2026/02/Bigbank_aastaaruanne_2025.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "ed5ba9e029243453e4aa2e574528238be6e966174d966f27a716412288e9b9bf",
+      "retrieved_at": "2026-10-03T10:33:30Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "213800UYAHIRLZ4NSN67",
+      "name": "Lån & Spar Bank A/S",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.lsb.dk/-/media/lsb/pdf/presse-ir/fondsboersmeddelser/2026/lsb_aarsrapport_2025.pdf?rev=684b58b509e94f53818d1880167a69d3&hash=135C9CBF4E71294A75619753245B60DB",
+        "sha256": "a5c267d85e71b29f10935c96ae2c215050d5fcfe3bd85dcae278216ba0fb5cde",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T10:43:12Z",
+        "quote": "n § 55 I henhold til Selskabsloven § 55 kan det oplyses, at følgende aktionærer har anmeldt at eje 5 % eller mere af aktiekapitalen i Lån & Spar Bank A/S: Antal aktier Procent af aktiekapital LB Forsikring A/S, Amerika Plads 15, 2100 København Ø. 513.540 14,79 % Pensionskassen for Sygeplejersker og Lægesekretærer, Tuborg Boulevard 3, 2900 Hellerup. 385.210 11,09 % Politiforbundet, Gl. Kongevej 60, 11. sal, 1850 Frederiksberg C. 371.648 10,70 % Danmarks Lærerforening, Vandkunsten 12, 1467 København K. 354.427 10,21 % Interesseforeningen, Ramsingsvej 30, 2. sal, 2500 Valby. 202.287 5,83 % 50 R egnskabsmæssig sikring Regnskabsmæssig sikring af nettoinvesteringen i udenlandske enheder Valutaomregningsrisikoen som følge af nettoinvesteringen i bankens svenske filial er sikret ved indgåelse af valutaterminsforretninger. Dagsværdien af nettoinvesteringen udgør 4.526.014 t.kr. (2024: 4.472.420 t.kr.), mens dagsværdien af sikringsinstrumenterne udgør 4.522.709 t.kr. (2024: 4.470.598 t.kr.). 51 Ne tto rente- og gebyrindtægter og kursreguleringer fordelt på aktiviteter og geografiske markeder Danmark Sverige I alt 2025 Nettorenteindtægter 724."
+      },
+      "note": "2025 bank report statutory disclosed share owners: LB Forsikring 14.79%, nursing pension fund 11.09%, police union 10.70%, teachers association 10.21%, interest association 5.83%. Shareholder model; insurer minority does not imply mutual-bank majority, trade unions do not imply public control, pension investments are not beneficial members direct bank votes.",
+      "bank_identity": {
+        "legal_name": "LÅN & SPAR BANK A/S",
+        "registered_as": "13538530",
+        "jurisdiction": "DK",
+        "gleif_record_sha256": "b09bd2cf722071d42206fd40ee87e12053c6d778dd702b8ea0e2736c232aef94"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "029",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "213800UYAHIRLZ4NSN67",
+          "attributes": {
+            "lei": "213800UYAHIRLZ4NSN67",
+            "entity": {
+              "legalName": {
+                "name": "LÅN & SPAR BANK A/S",
+                "language": "da"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "da",
+                "addressLines": [
+                  "HØJBRO PLADS 9 - 11",
+                  "POSTBOKS 2117"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "KØBENHAVN K",
+                "region": "DK-84",
+                "country": "DK",
+                "postalCode": "1200"
+              },
+              "headquartersAddress": {
+                "language": "da",
+                "addressLines": [
+                  "HØJBRO PLADS 9 - 11",
+                  "POSTBOKS 2117"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "KØBENHAVN K",
+                "region": "DK-84",
+                "country": "DK",
+                "postalCode": "1200"
+              },
+              "registeredAt": {
+                "id": "RA000170",
+                "other": null
+              },
+              "registeredAs": "13538530",
+              "jurisdiction": "DK",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "ZRPO",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "1989-10-11T00:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2014-01-07T00:00:00Z",
+              "lastUpdateDate": "2026-01-27T14:42:08Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-01-27T00:00:00Z",
+              "managingLou": "213800WAVVOPS85N2205",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000170",
+                "other": null
+              },
+              "validatedAs": "13538530",
+              "otherValidationAuthorities": []
+            },
+            "bic": [
+              "LOSADKKKXXX"
+            ],
+            "mic": [
+              "LASP"
+            ],
+            "ocid": "dk/13538530",
+            "qcc": "QDKU4JT6EV",
+            "gem": null,
+            "spglobal": [
+              "5868317"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/213800UYAHIRLZ4NSN67/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/213800UYAHIRLZ4NSN67/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/213800UYAHIRLZ4NSN67/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/213800UYAHIRLZ4NSN67/direct-parent-reporting-exception"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/213800UYAHIRLZ4NSN67/ultimate-parent-reporting-exception"
+              }
+            },
+            "isins": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/213800UYAHIRLZ4NSN67/isins"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/213800UYAHIRLZ4NSN67"
+          }
+        },
+        "canonical_sha256": "b09bd2cf722071d42206fd40ee87e12053c6d778dd702b8ea0e2736c232aef94"
+      }
+    },
+    {
+      "lei": "5493007SWCCN9S3J2748",
+      "name": "Bigbank AS",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://static.bigbank.eu/investor/assets/2026/02/Bigbank_aastaaruanne_2025.pdf",
+        "sha256": "ed5ba9e029243453e4aa2e574528238be6e966174d966f27a716412288e9b9bf",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T10:33:30Z",
+        "quote": "sikust aktsionäri vahel: Aktsionär Aktsiate arv (tk) Osalus Parvel Pruunsild 40 000 50% Vahur Voll (nõukogu liige) 40 000 50% Kohustuslik reservkapital Vastavalt äriseadustikule moodustatakse kohustuslik reservkapital iga -aastastest puhaskasumi eraldistest. Igal majan dusaastal tuleb e maettevõtte reservkapitali kanda vähemalt 1/20 puhaskasumist, kuni reservkapital moodustab 1/10 aktsiakapitalist. Reservkapitali võib kasutada kahjumi katmiseks, samuti aktsiakapitali suurendamiseks. Reservkapitalist ei või teha väljamakseid aktsionäridele. Raamatupidamise aastaaruanne (miljonites eurodes) 182 Bigbank AS 2025. aasta konsolideeritud majandusaasta aruanne Ühingu konsolideeritud majandusaasta aruanne .pdf formaadis Euroopa ühtse elektroonilise "
+      },
+      "note": "Bank 2025 annual report ownership table: Parvel Pruunsild 50%, Vahur Voll 50%. Prior proposed Tarmo Sild/Indrek Vahter names rejected; they do not identify this bank owners. Exact registered Bigbank AS identity checked.",
+      "bank_identity": {
+        "legal_name": "BIGBANK AS",
+        "registered_as": "10183757",
+        "jurisdiction": "EE",
+        "gleif_record_sha256": "b985d78d521b9737eb519a7280f35512cc033d9fa8c9c1a64cf3c430318a4870"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "030",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "5493007SWCCN9S3J2748",
+          "attributes": {
+            "lei": "5493007SWCCN9S3J2748",
+            "entity": {
+              "legalName": {
+                "name": "BIGBANK AS",
+                "language": "et"
+              },
+              "otherNames": [
+                {
+                  "name": "AS BALTI INVESTEERINGUTE GRUPP",
+                  "language": "et",
+                  "type": "PREVIOUS_LEGAL_NAME"
+                }
+              ],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "et",
+                "addressLines": [
+                  "Riia tn 2"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Tartu",
+                "region": "EE-796",
+                "country": "EE",
+                "postalCode": "51004"
+              },
+              "headquartersAddress": {
+                "language": "et",
+                "addressLines": [
+                  "Riia tn 2"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Tartu",
+                "region": "EE-796",
+                "country": "EE",
+                "postalCode": "51004"
+              },
+              "registeredAt": {
+                "id": "RA000181",
+                "other": null
+              },
+              "registeredAs": "10183757",
+              "jurisdiction": "EE",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "9LJA",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "1997-01-30T00:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2014-02-07T01:08:00Z",
+              "lastUpdateDate": "2026-01-14T09:19:00Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-01-16T00:00:00Z",
+              "managingLou": "549300O897ZC5H7CY412",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000181",
+                "other": null
+              },
+              "validatedAs": "10183757",
+              "otherValidationAuthorities": []
+            },
+            "bic": [
+              "BIGKBGSFXXX",
+              "BIGKEE2BXXX",
+              "BIGKFIH1XXX",
+              "BIGKLT21XXX",
+              "BIGKLV21XXX",
+              "BIGKSES1XXX"
+            ],
+            "mic": null,
+            "ocid": null,
+            "qcc": "QEESMYU6G9",
+            "gem": null,
+            "spglobal": [
+              "9171318"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/5493007SWCCN9S3J2748/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/5493007SWCCN9S3J2748/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/5493007SWCCN9S3J2748/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5493007SWCCN9S3J2748/direct-parent-reporting-exception"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5493007SWCCN9S3J2748/ultimate-parent-reporting-exception"
+              }
+            },
+            "isins": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/5493007SWCCN9S3J2748/isins"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/5493007SWCCN9S3J2748"
+          }
+        },
+        "canonical_sha256": "b985d78d521b9737eb519a7280f35512cc033d9fa8c9c1a64cf3c430318a4870"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300CQ9NLEHMRCU505",
+      "name": "Cecabank, S.A.",
+      "rank": 93,
+      "trea_eur": 2431932004.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "029",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Discover Cecabank current issuer shareholder table and CECA ownership/type in its official annual report; retrieved treasury-platform service page is not a capital-owner source.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Discover Cecabank current issuer shareholder table and CECA ownership/type in its official annual report; retrieved treasury-platform service page is not a capital-owner source.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "GDI8P8WHFH4PS5YTU851",
+      "name": "HAITONG BANK, S.A.",
+      "rank": 94,
+      "trea_eur": 2111653138.3797245,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "029",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Review Haitong Bank exact bank shareholding and post-merger Chinese parent identity/control in issuer accounts, including current State holdings. Corporate overview alone does not resolve parent ownership.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Corporate-information page and newly linked May 2026 statutes identify bank, not final post-merger parent control. Read latest issuer consolidation/shareholding note and match exact controller LEI.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "815600722FAEE18D6013",
+      "name": "BANCA DEL FUCINO S.P.A.",
+      "rank": 95,
+      "trea_eur": 2059667583.1,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "029",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Obtain Banca Fucino actual issuer ownership page/report via corporate navigation, matching LEI and current Igea/family/other holdings; retrieved POS operating subsidiary page is not the bank owners.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Documenti societari links meeting notices, not ownership distribution. Read bank 2025 capital/shareholder note; board renewal notices are not controlling owner proof.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

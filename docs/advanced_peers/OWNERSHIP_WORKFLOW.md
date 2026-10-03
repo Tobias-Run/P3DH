@@ -1,6 +1,6 @@
 # Eigentümerrecherche mit begrenztem Kontext
 
-Stand: 3. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach den Paketen 001–058 sind 244/475 Institute belegt, 231 bleiben offen. 176 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 55 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
+Stand: 3. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach den Paketen 001–072 sind 256/475 Institute belegt, 219 bleiben offen. 164 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 55 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
 
 ## Feste Standardgrenzen
 
@@ -96,4 +96,12 @@ Die [vierte feste Auswahl](NEXT70D_OWNERSHIP.md) enthält die letzten 19 noch ni
 
 161 Quellenversuche / 76 neue Abrufe, maximal vier je Fall. Original-HTML der PZU-Tabelle und Original-PDF des BCC-Eigentümerdiagramms wurden gezielt erneut gelesen; Cachehash bzw. Bildrichtung wurden geprüft. GLEIF-Relationship-URLs künftig ausschließlich aus den tatsächlichen Registerlinks entnehmen: Kommuninvest und BPI melden Eltern-Ausnahmen, keine Beziehung; die zwei spekulativen Endpunkte ergaben 404. Keinen weiteren URL-Variantenlauf daraus ableiten. Retail-Glossar-/Investor-Produkt-/Kundeneigentümer-Treffer sind keine Belege.
 
-Weitere reguläre Läufe dürfen keine neuen 70 ungeprüften, TREA-sortierten Institute behaupten: im jetzigen Checkpointbestand sind alle 176 noch offenen priorisierbaren Fälle bereits erstgeprüft. Fortsetzung über gezielte dokumentierte Nachweislücken; die 55 technisch unpriorisierbaren Kennungen separat anhand Bankidentität und Größen-/Qualitätsprüfung behandeln. Die Einordnung von Erste beseitigt eine bislang unpriorisierbare Trägerschaftslücke, verändert keine Quelldaten oder TREA-Ausschlussregeln.
+Weitere reguläre Läufe dürfen keine neuen 70 ungeprüften, TREA-sortierten Institute behaupten: im damaligen Checkpointbestand waren alle 176 noch offenen priorisierbaren Fälle bereits erstgeprüft. Fortsetzung über gezielte dokumentierte Nachweislücken; die 55 technisch unpriorisierbaren Kennungen separat anhand Bankidentität und Größen-/Qualitätsprüfung behandeln. Die Einordnung von Erste beseitigt eine bislang unpriorisierbare Trägerschaftslücke, verändert keine Quelldaten oder TREA-Ausschlussregeln.
+
+## Pakete 059–072: 70 gezielte Wiederaufnahmen
+
+Die [fünfte feste Auswahl](NEXT70E_OWNERSHIP.md) umfasst ausschließlich bereits zurückgestellte Fälle, nach TREA und unter Ausschluss der vorigen Auswahl D. **Zwölf belegt, 58 mit konkreten Nachweislücken offen.** Sieben genaue Konzernträger separat recherchiert, sämtlich außerhalb des aktuellen Viewers. Abdeckung 256/475, 219 offen; Queue 164 TREA-priorisierbar und 55 gesondert zu prüfen.
+
+107 Quellenversuche / 35 neue Abrufe. Archivierte Quellen zuerst lesen; tatsächliche Links und wiederverwendbare Konzernbelege selektiv vertiefen. Bei gescannten PDFs darf eine getrennt gezählte, größenbegrenzte Byte-Wiederholung mit Hashvergleich lokale OCR und visuelle Prüfung ermöglichen. Die Sparekassen-Danmark-Satzung wurde so auf Seite 2 geprüft. Kein automatischer PDF-Text-Treffer als Beweis. Keine 403-Wiederholung oder Umgehung. Eine fehlgeschlagene vermutete W&W-Blattseite wird als 404 dokumentiert, danach nur der tatsächlich verlinkte Geschäftsbericht gelesen; keine URL-Variantenserie.
+
+Bigbank zeigt eine wichtige Prüffalle: Suchhypothesen zu Eigentümern können die falsche Bank betreffen. Originalbericht statt erwartete Namen übernehmen. AvH-STAK ist ein Aktienadministrationsvehikel, keine belegte gemeinnützige Stiftungskontrolle. Ausgegebene NN-Aktien sind keine Eigentümertabelle, IBL-Direktorenrollen keine Mehrheit, NIBC-Übernahmeabsicht kein Vollzug. OBOS verwendet explizite Bankseiten-Kontrolle statt einer lediglich teilweise corroborierten Registerbeziehung. Im aktuellen Bestand bleiben alle 164 priorisierbaren Fälle Wiederaufnahmen; weitere Aufträge als gezielte Nachprüfung dokumentieren.

@@ -2,6 +2,7 @@
 import csv
 import itertools
 import json
+import hashlib
 from pathlib import Path
 import random
 import sys
@@ -252,7 +253,7 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
 
     def test_seventy_case_campaign_covers_fixed_selection_without_duplicate_acceptance(self):
         directory=ROOT/'docs/advanced_peers/ownership_batches'
-        for filename in ['campaign_next70.json','campaign_next70b.json','campaign_next70c.json','campaign_next70d.json']:
+        for filename in ['campaign_next70.json','campaign_next70b.json','campaign_next70c.json','campaign_next70d.json','campaign_next70e.json']:
             with self.subTest(campaign=filename):
                 self.check_seventy_case_campaign(directory,filename)
 
@@ -284,6 +285,49 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
                           for case in json.loads(path.read_text())['accepted']
                           if path.stem>'batch_'+campaign['batches'][-1]['batch']}
         self.assertTrue((set(deferred)&set(self.registry))<=later_acceptance)
+
+    def test_fifth_campaign_revisits_prior_cases_outside_immediately_previous_selection(self):
+        directory=ROOT/'docs/advanced_peers/ownership_batches'
+        campaign=json.loads((directory/'campaign_next70e.json').read_text())
+        self.assertEqual((campaign['first_reviews'],campaign['targeted_follow_ups']),(0,70))
+        with (directory.parent/'next70e_selection.csv').open() as source:
+            selection=list(csv.DictReader(source))
+        with (directory.parent/'next70d_selection.csv').open() as source:
+            previous={row['lei'] for row in csv.DictReader(source)}
+        self.assertFalse({row['lei'] for row in selection}&previous)
+        for row in selection:
+            self.assertEqual(row['review_mode'],'targeted_follow_up')
+            self.assertLess(int(row['previous_batch']),59)
+            snapshot=json.loads((directory/f"batch_{row['previous_batch']}.json").read_text())
+            self.assertIn(row['lei'],{case['lei'] for case in snapshot['deferred']})
+
+    def test_fifth_campaign_exact_owners_scanned_statutes_and_bank_control_proof(self):
+        directory=ROOT/'docs/advanced_peers/ownership_batches'
+        cases={case['lei']:case for item in json.loads((directory/'campaign_next70e.json').read_text())['batches']
+               for case in json.loads((directory/f"batch_{item['batch']}.json").read_text())['accepted']}
+        bigbank=cases['5493007SWCCN9S3J2748']['ownership_evidence']['quote']
+        self.assertIn('Parvel Pruunsild 40 000 50%',bigbank)
+        self.assertIn('Vahur Voll',bigbank)
+        savings=cases['549300L1IEXJYJ2NUV45']
+        self.assertEqual(savings['ownership'],'savings')
+        proof=savings['ownership_evidence']
+        self.assertEqual((proof['quote_kind'],proof['pdf_page']),('visual_text_transcription',2))
+        self.assertEqual(proof['verified_pdf_sha256'],proof['sha256'])
+        self.assertIn('Hverken stiftere, garanter eller andre',proof['quote'])
+        obos=cases['5967007LIEEXZX76AW36']
+        self.assertEqual((obos['ownership'],obos['ownership_basis']),('cooperative','reviewed_document_chain'))
+        self.assertIn('911 986 884',obos['control_evidence']['quote'])
+        self.assertIn('eies 100 % av OBOS',obos['control_evidence']['quote'])
+        controllers=json.loads((directory/'reviewed_controllers_next70e.json').read_text())
+        self.assertEqual(len(controllers),7)
+        for lei,case in controllers.items():
+            identity=case['identity_evidence']
+            self.assertEqual(identity['record']['attributes']['lei'],lei)
+            self.assertEqual(hashlib.sha256(json.dumps(identity['record'],ensure_ascii=False,sort_keys=True,
+                                                       separators=(',',':')).encode()).hexdigest(),identity['canonical_sha256'])
+            self.assertEqual(case['ownership_evidence']['sha256'],self.registry[lei]['source_sha256'])
+        self.assertIn('58.59%',controllers['54930053HGCFWVHYZX42']['ownership_evidence']['quote'])
+        self.assertIn('67,38 %',controllers['5299003H07ZT0Z5ZNN35']['ownership_evidence']['quote'])
 
     def test_fourth_campaign_distinguishes_first_reviews_and_targeted_followups(self):
         directory=ROOT/'docs/advanced_peers/ownership_batches'

@@ -42,6 +42,23 @@ def check():
                   ing:AP_DATA.metadata['3TK20IVIUJ8J3ZU0QE75'],
                   label:document.querySelector('#bmOwnership option[value=shareholder]').textContent})""")
                 assert checked['coverage']>=185
+                # Newly reviewed exact identities must reach the lazily loaded viewer data.
+                additions=page.evaluate("""()=>Object.fromEntries([
+                  '529900S1KHKOEQL5CK20','529900LKIMB57HKF3545',
+                  '5493007SWCCN9S3J2748','549300L1IEXJYJ2NUV45',
+                  '52990045V2BWJN669Q34','5967007LIEEXZX76AW36'
+                ].map(lei=>[lei,AP_DATA.metadata[lei]]))""")
+                for lei,ownership in {
+                    '529900S1KHKOEQL5CK20':'foundation',
+                    '529900LKIMB57HKF3545':'public',
+                    '5493007SWCCN9S3J2748':'shareholder',
+                    '549300L1IEXJYJ2NUV45':'savings',
+                    '52990045V2BWJN669Q34':'cooperative',
+                    '5967007LIEEXZX76AW36':'cooperative',
+                }.items():
+                    assert additions[lei]['ownership']==ownership,(lei,additions[lei])
+                assert additions['5967007LIEEXZX76AW36']['ownership_basis']=='reviewed_document_chain'
+                assert additions['5967007LIEEXZX76AW36']['group_head']=='5967007LIEEXZXJ4UW55'
                 assert checked['boaeurope']['ownership']=='shareholder'
                 assert checked['boaeurope']['ownership_basis']=='reviewed_document_chain'
                 assert checked['boaeurope']['controller_lei']=='9DJT3UXIJIZJI4WXO774'

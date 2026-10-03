@@ -1,0 +1,524 @@
+{
+  "batch": "067",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 3,
+  "page_attempts": [
+    {
+      "lei": "5493004D82XDFVPWQJ91",
+      "url": "https://ikano.co.uk/about-ikano",
+      "status": 200,
+      "error": null,
+      "sha256": "95f47e30f6fb8bf26f93a000ab5a7cac44e4ec476d3c767e854ff04a82cbb37e",
+      "retrieved_at": "2026-10-02T16:33:02Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5493004D82XDFVPWQJ91",
+      "url": "https://www.ikanobank.se/",
+      "status": 200,
+      "error": null,
+      "sha256": "b4ff880e676f0a82072e4b58ec1295f6cf056e873129c776863e4b59a9e523eb",
+      "retrieved_at": "2026-10-03T10:33:46Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900C3SHT3Q94H3W82",
+      "url": "https://www.bank11.de/investor-relations/",
+      "status": 200,
+      "error": null,
+      "sha256": "36925fdb455223b390147a97a7d389af2983ec4803a23e45e9eb3b3587b01c7b",
+      "retrieved_at": "2026-10-02T16:51:14Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "529900C3SHT3Q94H3W82",
+      "url": "https://www.werhahn.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "de62e8d624bdc41c431c66fd36327bd87fb41a2ebf1c0444b75cfed7ce95e7de",
+      "retrieved_at": "2026-10-03T10:31:45Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900OKPZTTS50FXP26",
+      "url": "https://www.advanzia.com/en/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "d6d9c0b5a89a77d3b5aeec5fdba907cefbac494a346ec4f7260b8b04268835a4",
+      "retrieved_at": "2026-10-02T16:32:53Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "52990045V2BWJN669Q34",
+      "url": "https://www.wuestenrot.at/de/ueber-uns/konzern/wuestenrot-gruppe.html",
+      "status": 200,
+      "error": null,
+      "sha256": "ecd6ec95d336ca0a549d76fb0d7c11201224bf06a827e4582c1ee63d812dbf39",
+      "retrieved_at": "2026-10-03T07:28:15Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "52990045V2BWJN669Q34",
+      "url": "https://www.wuestenrot.at/de/ueber-uns/konzern/wuestenrot-gruppe/wuestenrot_wohnungswirtschaft.html",
+      "status": 200,
+      "error": null,
+      "sha256": "e236d3b00c074a4f2059d82efb9290557535f516f596b2e485358e38b8df767e",
+      "retrieved_at": "2026-10-03T10:43:45Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300TK038P6EV4YU51",
+      "url": "https://www.artea.lt/",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:19Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "529900C3SHT3Q94H3W82",
+      "name": "Bank11 Holding GmbH",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.werhahn.de/",
+        "sha256": "de62e8d624bdc41c431c66fd36327bd87fb41a2ebf1c0444b75cfed7ce95e7de",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "en wir Zukunft – verlässlich, werteorientiert und bis heute zu 100 Prozent in Familienbesitz. Mehr über Werhahn Baustoffe Baustoffe Der Unternehmensbereich Baustoffe umfasst die Geschäftsbereiche Natursteine und Schiefer. Sie bieten insbesondere Gesteinsprodukte für den Verkehrswegebau sowie für Dach und Fassade an. Mehr erfahren Konsumgüter Konsumgüter Die Geschäftsbereiche Zwilling Küche und Zwilling Beauty Group bilden den Unternehmensbereich Konsumgüter. International aufgestellt, produzieren und vertreiben sie hochwertige Markenartikel rund um Küche und Körperpflege. Mehr erfahren Finanzdienstleistungen Finanzdienstleistungen Unter dem Dach des Unternehmensbereichs Finanzdienstleistungen sind der Leasing- und Factoringanbieter abcfinance mit der abcbank sowie der Kfz-Finanzierer Bank11 gebündelt. Mehr erfahren Die Wilh. Werhahn KG in Zahlen. 4,8 Mrd. € Umsatz weltweit. 10,4 Tausend Mitarbeitende weltweit. 185 Jahre erfolgreich als Familienunternehmen. Vielfalt – Ein prägendes Merkmal. Die Aktivitäten der Werhahn-Gruppe sind in drei Unternehmensbereiche mit sechs Geschäftsbereichen zusammengefasst. Weltweit arbeiten mehr als 10.000 Menschen für Werhahn und erwirtschafteten 2025 einen Umsatz von rund vier Milliarden Euro. Mehr zum Geschäftsbericht Download Geschäftsbericht 2025 Zeichen setzen. Verantwortung übernehmen. Als Familienunternehmen mit langer Tradition hat gesells"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "5299004RMSA334L0LD60",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/529900C3SHT3Q94H3W82/ultimate-parent-relationship",
+        "sha256": "8db2e357b592eff3631266228a4b2a390fd7c3e53a554a7f4cf724076cb14e69",
+        "relationship": {
+          "startNode": {
+            "id": "529900C3SHT3Q94H3W82",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "5299004RMSA334L0LD60",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2023-12-31T23:00:00Z",
+              "endDate": "2024-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2018-04-26T22:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2025-04-09T22:00:00Z",
+              "type": "DOCUMENT_FILING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2018-05-03T12:00:39Z",
+          "lastUpdateDate": "2026-03-24T12:36:42Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-05-03T12:00:39Z",
+          "managingLou": "5299000J2N45DDNE4Y28",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "Bank11 Holding GmbH",
+        "registered_as": "HRB 19328",
+        "jurisdiction": "DE",
+        "gleif_record_sha256": "a2ae9273e9be62f7f20c14e0b12e7875d0100ac5ad4f2a2e2dae6c48e9ece095"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "026",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "529900C3SHT3Q94H3W82",
+          "attributes": {
+            "lei": "529900C3SHT3Q94H3W82",
+            "entity": {
+              "legalName": {
+                "name": "Bank11 Holding GmbH",
+                "language": "de"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "de",
+                "addressLines": [
+                  "Hammer Landstraße 91"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Neuss",
+                "region": "DE-NW",
+                "country": "DE",
+                "postalCode": "41460"
+              },
+              "headquartersAddress": {
+                "language": "de",
+                "addressLines": [
+                  "Hammer Landstraße 91"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Neuss",
+                "region": "DE-NW",
+                "country": "DE",
+                "postalCode": "41460"
+              },
+              "registeredAt": {
+                "id": "RA000309",
+                "other": null
+              },
+              "registeredAs": "HRB 19328",
+              "jurisdiction": "DE",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "2HBR",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "2013-05-23T22:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2018-05-03T12:00:39Z",
+              "lastUpdateDate": "2026-03-24T12:36:42Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-05-03T12:00:39Z",
+              "managingLou": "5299000J2N45DDNE4Y28",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000309",
+                "other": null
+              },
+              "validatedAs": "HRB 19328",
+              "otherValidationAuthorities": []
+            },
+            "bic": null,
+            "mic": null,
+            "ocid": "de/R1102_HRB19328",
+            "qcc": "QDEGW8QQBA",
+            "gem": null,
+            "spglobal": [
+              "569878894"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/529900C3SHT3Q94H3W82/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/529900C3SHT3Q94H3W82/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/529900C3SHT3Q94H3W82/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/529900C3SHT3Q94H3W82/direct-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/529900C3SHT3Q94H3W82/direct-parent"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/529900C3SHT3Q94H3W82/ultimate-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/529900C3SHT3Q94H3W82/ultimate-parent"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/529900C3SHT3Q94H3W82"
+          }
+        },
+        "canonical_sha256": "a2ae9273e9be62f7f20c14e0b12e7875d0100ac5ad4f2a2e2dae6c48e9ece095"
+      }
+    },
+    {
+      "lei": "52990045V2BWJN669Q34",
+      "name": "Wüstenrot Wohnungswirtschaft registrierte Genossenschaft mit beschränkter Haftung",
+      "ownership": "cooperative",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.wuestenrot.at/de/ueber-uns/konzern/wuestenrot-gruppe/wuestenrot_wohnungswirtschaft.html",
+        "sha256": "e236d3b00c074a4f2059d82efb9290557535f516f596b2e485358e38b8df767e",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T10:43:45Z",
+        "quote": " sind die Wüstenrot Wohnungswirtschaft. Wir sind Wüstenrot. Die Wüstenrot Wohnungswirtschaft eGen ist eine auf unbestimmte Zeit errichtete Genossenschaft mit Sitz in Salzburg. Sie bildet gemeinsam mit ihren Tochtergesellschaften ein Finanzkonglomerat im Sinne des Finanzkonglomerategesetz – FKG. Die Bausparkasse Wüstenrot AG ist das zusätzlich beaufsichtigte Unternehmen gemäß § 5 (1) Z.2 FKG. Gegenstand des Unternehmens der Genossenschaft – im Wesentlichen zwecks Förderung des Erwerbs oder der Wirtschaft ihrer Mitglieder – ist: die Förderung des Bausparwesens; der Betrieb einer konzessionierten gemischten Finanzholdinggesellschaft gem. § 7b BWG auf Grund der Einbeziehung der Genossenschaft in den aufsichts-rechtlichen Konsolidierungskreis der Wüstenrot Kreditinstitutsgruppe nach Maßgabe der anzuwendenden aufsichtsrechtlichen Bestimmungen; die Beteiligung an juristischen Personen des Unternehmens-, Genossen-schafts- und Vereinsrechtes sowie an Personengesellschaften des Unternehmens- und Zivilrechts und die Errichtung von Privatstiftung"
+      },
+      "note": "Exact Austrian holding and registered cooperative form, member-economic purpose confirmed on specific current entity page. The entity itself is cooperative; not merely a subsidiary inheriting a group brand. Not the German W&W foundation.",
+      "bank_identity": {
+        "legal_name": "Wüstenrot Wohnungswirtschaft registrierte Genossenschaft mit beschränkter Haftung",
+        "registered_as": "69160g",
+        "jurisdiction": "AT",
+        "gleif_record_sha256": "c846e66b8888840c85c1c4f6c3d86ea3253f20b6155bf95a87a560cd79b5aeda"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "027",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "52990045V2BWJN669Q34",
+          "attributes": {
+            "lei": "52990045V2BWJN669Q34",
+            "entity": {
+              "legalName": {
+                "name": "Wüstenrot Wohnungswirtschaft registrierte Genossenschaft mit beschränkter Haftung",
+                "language": "de"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [
+                {
+                  "name": "Wustenrot Wohnungswirtschaft registrierte Genossenschaft mit beschrankter Haftung",
+                  "language": "de",
+                  "type": "AUTO_ASCII_TRANSLITERATED_LEGAL_NAME"
+                }
+              ],
+              "legalAddress": {
+                "language": "de",
+                "addressLines": [
+                  "Alpenstraße 70"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Salzburg",
+                "region": "AT-5",
+                "country": "AT",
+                "postalCode": "5020"
+              },
+              "headquartersAddress": {
+                "language": "de",
+                "addressLines": [
+                  "Alpenstraße 70"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Salzburg",
+                "region": "AT-5",
+                "country": "AT",
+                "postalCode": "5020"
+              },
+              "registeredAt": {
+                "id": "RA000017",
+                "other": null
+              },
+              "registeredAs": "69160g",
+              "jurisdiction": "AT",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "8888",
+                "other": "registrierte Genossenschaft mit beschränkter Haftung"
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "1929-12-27T23:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": [
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2021-07-29T22:00:00Z",
+                      "recordedDate": "2025-10-01T10:14:43Z",
+                      "type": "MERGERS_AND_ACQUISITIONS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                }
+              ]
+            },
+            "registration": {
+              "initialRegistrationDate": "2014-02-13T10:44:32Z",
+              "lastUpdateDate": "2025-12-30T15:05:05Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-02-27T15:00:09Z",
+              "managingLou": "5299000J2N45DDNE4Y28",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000017",
+                "other": null
+              },
+              "validatedAs": "69160g",
+              "otherValidationAuthorities": []
+            },
+            "bic": null,
+            "mic": null,
+            "ocid": null,
+            "qcc": "QAT8JR4TK9",
+            "gem": null,
+            "spglobal": [
+              "59605510"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/52990045V2BWJN669Q34/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/52990045V2BWJN669Q34/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/52990045V2BWJN669Q34/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/52990045V2BWJN669Q34/direct-parent-reporting-exception"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/52990045V2BWJN669Q34/ultimate-parent-reporting-exception"
+              }
+            },
+            "direct-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/52990045V2BWJN669Q34/direct-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/52990045V2BWJN669Q34/direct-children"
+              }
+            },
+            "ultimate-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/52990045V2BWJN669Q34/ultimate-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/52990045V2BWJN669Q34/ultimate-children"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/52990045V2BWJN669Q34"
+          }
+        },
+        "canonical_sha256": "c846e66b8888840c85c1c4f6c3d86ea3253f20b6155bf95a87a560cd79b5aeda"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "5493004D82XDFVPWQJ91",
+      "name": "Ikano Bank AB (publ)",
+      "rank": 83,
+      "trea_eur": 3078571598.9661818,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "026",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Reconcile changed Ingka ownership with official completion dates and exact Swedish bank LEI; verify Ingka controlling foundation and bank annual report. UK branch page names Ingka, while archived ultimate-parent relation still points to Ikano and is only partially corroborated.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "UK bank page explicitly refers to Ingka ownership, differing from older register snapshot. Establish exact Swedish bank acquisition/completion dates and current Ingka ownership/control before classification.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900OKPZTTS50FXP26",
+      "name": "Advanzia Bank S.A.",
+      "rank": 85,
+      "trea_eur": 2960946485.5386596,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "026",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use Advanzia actual official annual-report link or Kistefos filed subsidiary report with dated ownership percentage; retrieved investor shell contains no owner table.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Investor URL returns no usable annual-report ownership table. Obtain actually linked bank/parent filed report, not guessed PDF variants, and exact Kistefos control.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300TK038P6EV4YU51",
+      "name": "AB Artea bankas",
+      "rank": 87,
+      "trea_eur": 2855601000.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "027",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use an alternative official Nasdaq Baltic issuer ownership disclosure for Artea/Siauliu name change and qualifying holdings, including EBRD minority; do not retry denied bank URL.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use an alternative official Nasdaq Baltic issuer ownership disclosure for Artea/Siauliu name change and qualifying holdings, including EBRD minority; do not retry denied bank URL.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.artea.lt/",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

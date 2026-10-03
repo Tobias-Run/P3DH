@@ -1,0 +1,1327 @@
+{
+  "5299003H07ZT0Z5ZNN35": {
+    "lei": "5299003H07ZT0Z5ZNN35",
+    "name": "Wüstenrot & Württembergische AG",
+    "ownership": "foundation",
+    "ownership_basis": "direct_ownership",
+    "reviewed_at": "2026-10-03",
+    "status": "accepted",
+    "ownership_evidence": {
+      "url": "https://www.ww-ag.com/media/dokumente/investor_relations_1/berichte_1/geschaeftsberichte/2025_9/WuW_GB_2025.pdf",
+      "sha256": "eb28502f966fb7359c84096e7e4a7ca64bdc9afe58d9834bca77aeaa861de317",
+      "hash_kind": "http_response",
+      "retrieved_at": "2026-10-03T10:39:40Z",
+      "quote": "olumen in Stück 36 022 38 246 24 448 1 Dividendenvorschlag. Die Aktionärsstruktur der W&W AG blieb im Verlauf des Berichtsjahrs stabil. Die gemeinnützige Wüstenrot Stiftung, Gemeinschaft der Freunde Deutscher Eigenheimverein e. V., Ludwigsburg, hält über zwei Holdings eine mittelbare Beteiligung an der W&W AG von insgesamt 67,38 %. Davon hält die WS Holding AG, Stuttgart, 27,47 % und die Wüsten- rot Holding AG, Ludwigsburg, 39,91 %. Weitere Großaktio- närin der W&W AG ist mit mehr als 10 % der Anteile die FS BW Holding GmbH, München. Zum 31. Dezember 2025 hielt die W&W AG keine eigenen Aktien. 6,5 (Vj. 6,9) % der insgesamt ausgegebenen Aktien der W&W AG sind ausländischen Aktionären zuzuordnen. Dividendenpolitik Die W&W AG strebt eine stabile und verlässliche Dividende für ihre Aktionäre an. Für das vergangene Geschäftsjahr schlägt der Vorstand der Jahreshauptver- Wüstenrot & Württembergische AG Zusammengefasster Lagebericht 19 sammlung dementsprechend eine unveränderte Dividen- denzahlung in Höhe von 0,65 € je Aktie vor. Gemessen am Jahresschlusskurs 2025 entspricht dies einer Dividen- denrendite von 4,47 (Vj. 5,58) %. Mitarbeiteraktien Im April 2025 hat die W&W AG erneut konzernweit Mitar- beiteraktien ausgegeben. Auf den XETRA-Schlusskurs vom 24. März 2025 erhielten berechtigte Mitarbeiterinnen und Mitarbeiter 5 € Nachlass auf maximal 40 Aktien. Unser Unternehmen setzt damit"
+    },
+    "note": "2025 annual report: Wuestenrot Stiftung indirectly owns 67.38% through WS Holding 27.47% and Wuestenrot Holding 39.91%. Exact German W&W parent, distinct from Austrian cooperative. Current published report basis, not historical ownership of every filing.",
+    "bank_identity": {
+      "legal_name": "Wüstenrot & Württembergische AG",
+      "registered_as": "HRB 20203",
+      "jurisdiction": "DE",
+      "gleif_record_sha256": "cd4e0575416031548d0733765e40fc167499042a95b202106234c8534d7549a8"
+    },
+    "identity_evidence": {
+      "record": {
+        "type": "lei-records",
+        "id": "5299003H07ZT0Z5ZNN35",
+        "attributes": {
+          "lei": "5299003H07ZT0Z5ZNN35",
+          "entity": {
+            "legalName": {
+              "name": "Wüstenrot & Württembergische AG",
+              "language": "de"
+            },
+            "otherNames": [],
+            "transliteratedOtherNames": [
+              {
+                "name": "Wustenrot & Wurttembergische AG",
+                "language": "de",
+                "type": "AUTO_ASCII_TRANSLITERATED_LEGAL_NAME"
+              }
+            ],
+            "legalAddress": {
+              "language": "de",
+              "addressLines": [
+                "W&W Platz 1"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Kornwestheim",
+              "region": "DE-BW",
+              "country": "DE",
+              "postalCode": "70806"
+            },
+            "headquartersAddress": {
+              "language": "de",
+              "addressLines": [
+                "W&W Platz 1"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Kornwestheim",
+              "region": "DE-BW",
+              "country": "DE",
+              "postalCode": "70806"
+            },
+            "registeredAt": {
+              "id": "RA000351",
+              "other": null
+            },
+            "registeredAs": "HRB 20203",
+            "jurisdiction": "DE",
+            "category": "GENERAL",
+            "legalForm": {
+              "id": "6QQB",
+              "other": null
+            },
+            "associatedEntity": {
+              "lei": null,
+              "name": null
+            },
+            "status": "ACTIVE",
+            "expiration": {
+              "date": null,
+              "reason": null
+            },
+            "successorEntity": {
+              "lei": null,
+              "name": null
+            },
+            "successorEntities": [],
+            "creationDate": "1999-05-02T22:00:00Z",
+            "subCategory": null,
+            "otherAddresses": [],
+            "eventGroups": [
+              {
+                "groupType": "STANDALONE",
+                "events": [
+                  {
+                    "validationDocuments": "SUPPORTING_DOCUMENTS",
+                    "effectiveDate": "2024-01-19T23:00:00Z",
+                    "recordedDate": "2024-01-20T12:00:25Z",
+                    "type": "CHANGE_HQ_ADDRESS",
+                    "status": "COMPLETED"
+                  }
+                ]
+              },
+              {
+                "groupType": "STANDALONE",
+                "events": [
+                  {
+                    "validationDocuments": "SUPPORTING_DOCUMENTS",
+                    "effectiveDate": "2024-01-19T23:00:00Z",
+                    "recordedDate": "2024-01-20T12:00:25Z",
+                    "type": "CHANGE_LEGAL_ADDRESS",
+                    "status": "COMPLETED"
+                  }
+                ]
+              }
+            ]
+          },
+          "registration": {
+            "initialRegistrationDate": "2013-05-08T10:36:30Z",
+            "lastUpdateDate": "2026-03-23T06:01:12Z",
+            "status": "ISSUED",
+            "nextRenewalDate": "2027-05-18T22:00:00Z",
+            "managingLou": "5299000J2N45DDNE4Y28",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "validatedAt": {
+              "id": "RA000351",
+              "other": null
+            },
+            "validatedAs": "HRB 20203",
+            "otherValidationAuthorities": []
+          },
+          "bic": null,
+          "mic": null,
+          "ocid": "de/B8534_HRB20203",
+          "qcc": "QDEWDDP33R",
+          "gem": null,
+          "spglobal": [
+            "2482220"
+          ],
+          "conformityFlag": "CONFORMING"
+        },
+        "relationships": {
+          "managing-lou": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35/managing-lou"
+            }
+          },
+          "lei-issuer": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35/lei-issuer"
+            }
+          },
+          "field-modifications": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35/field-modifications"
+            }
+          },
+          "direct-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35/direct-parent-reporting-exception"
+            }
+          },
+          "ultimate-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35/ultimate-parent-reporting-exception"
+            }
+          },
+          "direct-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35/direct-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35/direct-children"
+            }
+          },
+          "ultimate-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35/ultimate-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35/ultimate-children"
+            }
+          },
+          "isins": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35/isins"
+            }
+          }
+        },
+        "links": {
+          "self": "https://api.gleif.org/api/v1/lei-records/5299003H07ZT0Z5ZNN35"
+        }
+      },
+      "canonical_sha256": "cd4e0575416031548d0733765e40fc167499042a95b202106234c8534d7549a8"
+    }
+  },
+  "54930053HGCFWVHYZX42": {
+    "lei": "54930053HGCFWVHYZX42",
+    "name": "中国银行股份有限公司",
+    "ownership": "public",
+    "ownership_basis": "direct_ownership",
+    "reviewed_at": "2026-10-03",
+    "status": "accepted",
+    "ownership_evidence": {
+      "url": "https://pic.bankofchina.com/bocappd/report/202608/P020260828601670971259.pdf",
+      "sha256": "74ce7bfc964c6866c14fde4f50d2ea9219d36928d79f75073fa7207a3debaad8",
+      "hash_kind": "http_response",
+      "retrieved_at": "2026-10-03T10:40:39Z",
+      "quote": " as authorised by the State Council. To the extent of its capital contribution, Huijin exercises its rights and fulfils its obligations as an investor in major state-owned financial institutions on behalf of the State, in accordance with applicable laws aimed at preserving and enhancing the value of state-owned financial assets. Huijin neither engages in other business activities nor intervenes in the daily operation of the major state-owned financial institutions of which it is the controlling shareholder. As at 30 June 2026, Huijin directly held 58.59% of shares of the Bank. Companies under Huijin include its equity interests in subsidiaries, associates and joint ventures. The Group enters into transactions with Huijin and companies under Huijin in the normal course of business on commercial terms which include mainly purchase and sale of debt securities, money market transactions and derivative transactions. (1) Transactions with Huijin The main transactions that the Group entered into with Huijin are as follows: Transaction balances As at 30 June 2026 As at 31 December 2025 Financial investments 62,944 63,960"
+    },
+    "note": "June 2026 interim report: Huijin directly owns 58.59%, exercises investor rights on behalf of the State. Same paragraph establishes public character and majority; country or bank name alone never used.",
+    "bank_identity": {
+      "legal_name": "中国银行股份有限公司",
+      "registered_as": "911000001000013428",
+      "jurisdiction": "CN",
+      "gleif_record_sha256": "c982931a532c4c775d3f5201ead903e265a421c7f2dc540b06afd477886831f5"
+    },
+    "identity_evidence": {
+      "record": {
+        "type": "lei-records",
+        "id": "54930053HGCFWVHYZX42",
+        "attributes": {
+          "lei": "54930053HGCFWVHYZX42",
+          "entity": {
+            "legalName": {
+              "name": "中国银行股份有限公司",
+              "language": "zh"
+            },
+            "otherNames": [
+              {
+                "name": "BANK OF CHINA LIMITED",
+                "language": "en",
+                "type": "ALTERNATIVE_LANGUAGE_LEGAL_NAME"
+              }
+            ],
+            "transliteratedOtherNames": [],
+            "legalAddress": {
+              "language": "zh",
+              "addressLines": [
+                "复兴门内大街1号"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "西城区",
+              "region": "CN-BJ",
+              "country": "CN",
+              "postalCode": "100818"
+            },
+            "headquartersAddress": {
+              "language": "zh",
+              "addressLines": [
+                "复兴门内大街1号"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "西城区",
+              "region": "CN-BJ",
+              "country": "CN",
+              "postalCode": "100818"
+            },
+            "registeredAt": {
+              "id": "RA000092",
+              "other": null
+            },
+            "registeredAs": "911000001000013428",
+            "jurisdiction": "CN",
+            "category": "GENERAL",
+            "legalForm": {
+              "id": "ECAK",
+              "other": null
+            },
+            "associatedEntity": {
+              "lei": null,
+              "name": null
+            },
+            "status": "ACTIVE",
+            "expiration": {
+              "date": null,
+              "reason": null
+            },
+            "successorEntity": {
+              "lei": null,
+              "name": null
+            },
+            "successorEntities": [],
+            "creationDate": "1983-10-30T16:00:00Z",
+            "subCategory": null,
+            "otherAddresses": [
+              {
+                "fieldType": "OtherAddress",
+                "language": "en",
+                "type": "ALTERNATIVE_LANGUAGE_LEGAL_ADDRESS",
+                "addressLines": [
+                  "No.1 Fuxingmen Nei Dajie"
+                ],
+                "city": "Xicheng Qu",
+                "region": "CN-BJ",
+                "country": "CN",
+                "postalCode": "100818"
+              },
+              {
+                "fieldType": "OtherAddress",
+                "language": "en",
+                "type": "ALTERNATIVE_LANGUAGE_HEADQUARTERS_ADDRESS",
+                "addressLines": [
+                  "No.1 Fuxingmen Nei Dajie"
+                ],
+                "city": "Xicheng Qu",
+                "region": "CN-BJ",
+                "country": "CN",
+                "postalCode": "100818"
+              }
+            ],
+            "eventGroups": []
+          },
+          "registration": {
+            "initialRegistrationDate": "2013-08-19T14:50:00Z",
+            "lastUpdateDate": "2026-08-11T16:00:13Z",
+            "status": "ISSUED",
+            "nextRenewalDate": "2027-08-19T14:50:00Z",
+            "managingLou": "655600IJ8LS3CCDA4421",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "validatedAt": {
+              "id": "RA000092",
+              "other": null
+            },
+            "validatedAs": "911000001000013428",
+            "otherValidationAuthorities": []
+          },
+          "bic": [
+            "BKCHAEADXXX",
+            "BKCHAOLUXXX",
+            "BKCHARBAXXX",
+            "BKCHAU2SXXX",
+            "BKCHCAT2XXX",
+            "BKCHCNBJXXX",
+            "BKCHDEFFXXX",
+            "BKCHFRPPXXX",
+            "BKCHGB2LCUS",
+            "BKCHGB2LXXX",
+            "BKCHHUHHXXX",
+            "BKCHIDJAXXX",
+            "BKCHINBBXXX",
+            "BKCHITMMXXX",
+            "BKCHJPJTXXX",
+            "BKCHKRSEXXX",
+            "BKCHKYKYXXX",
+            "BKCHLALAXXX",
+            "BKCHLKLXXXX",
+            "BKCHLULLXXX",
+            "BKCHNZ2AXXX",
+            "BKCHPAPAXXX",
+            "BKCHPHMMXXX",
+            "BKCHPKKAXXX",
+            "BKCHQAQAXXX",
+            "BKCHSARIXXX",
+            "BKCHSGSGXXX",
+            "BKCHTWTPXXX",
+            "BKCHUS33XXX",
+            "BKCHZAJJXXX"
+          ],
+          "mic": [
+            "BOCF"
+          ],
+          "ocid": null,
+          "qcc": "QCNKF12D65",
+          "gem": null,
+          "spglobal": [
+            "4803422"
+          ],
+          "conformityFlag": "CONFORMING"
+        },
+        "relationships": {
+          "managing-lou": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/managing-lou"
+            }
+          },
+          "lei-issuer": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/lei-issuer"
+            }
+          },
+          "field-modifications": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/field-modifications"
+            }
+          },
+          "direct-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/direct-parent-reporting-exception"
+            }
+          },
+          "ultimate-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/ultimate-parent-reporting-exception"
+            }
+          },
+          "direct-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/direct-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/direct-children"
+            }
+          },
+          "ultimate-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/ultimate-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/ultimate-children"
+            }
+          },
+          "branches": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/branch-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/branches"
+            }
+          },
+          "isins": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42/isins"
+            }
+          }
+        },
+        "links": {
+          "self": "https://api.gleif.org/api/v1/lei-records/54930053HGCFWVHYZX42"
+        }
+      },
+      "canonical_sha256": "c982931a532c4c775d3f5201ead903e265a421c7f2dc540b06afd477886831f5"
+    }
+  },
+  "5493005E2GHATS0Z6J59": {
+    "lei": "5493005E2GHATS0Z6J59",
+    "name": "ACKERMANS & VAN HAAREN",
+    "ownership": "shareholder",
+    "ownership_basis": "direct_ownership",
+    "reviewed_at": "2026-10-03",
+    "status": "accepted",
+    "ownership_evidence": {
+      "url": "https://www.avh.be/en/investor-relations/shareholder-structure",
+      "sha256": "94b0c3f9672a033d78d3d222e741cac41db513438ea092408334e34b3b834bda",
+      "hash_kind": "http_response",
+      "retrieved_at": "2026-10-03T10:39:40Z",
+      "quote": " 33,157,750 Disclosure threshhold: 5% Shareholder structure Scaldis Invest holds 11,054,000 shares in the capital of Ackermans & van Haaren, i.e. a stake of 33.34%. Scaldis Invest is in turn controlled by Belfimas, which holds 92.25% of the capital of Scaldis Invest. The ultimate control of Scaldis Invest is held by Stichting Administratiekantoor ‘Het Torentje', that also directly holds shares of AvH. These directly held shares represent a 1.54% interest. Redemption of own shares Ackermans & van Haaren holds 478,190 of its own shares as at December 31, 2025. The evolution of the number of treasury shares held by Ackermans & van Haaren is the result of the execution of its liquidity contract and the acquisition of shares to cover its stock option obligations vis-à-vis the beneficiaries. (The most recently reported number of treasury shares can be found on this website under the menu item \"Media\" and the subsection \"AvH - Acquisition and disposal of own shares\"). Reference shareholder Belfimas is the (indirect) reference shareholder of Ackermans & van Haaren. Belfimas' sole purpose is to invest, directly or indirectly, in Ackermans & van Haaren shares. Any transfer of securities issued by Belfimas is subject to a statutory right of approval of the Belfimas board of directors. Two of Ackermans & van Haaren's directors (Luc Bertrand and Frederic van Haaren) are members of the Belfi"
+    },
+    "note": "Issuer table: Scaldis Invest 33.34%, Belfimas controls Scaldis, ultimate certification structure includes STAK Het Torentje. STAK is a share-administration vehicle, not evidence of charitable foundation ownership. Shareholder model with explicit issuer control chain, no claimed absolute capital majority or wholly private investor pool. Former AXA Bank website is not bank-specific identity evidence for FinAx holding.",
+    "bank_identity": {
+      "legal_name": "ACKERMANS & VAN HAAREN",
+      "registered_as": "0404616494",
+      "jurisdiction": "BE",
+      "gleif_record_sha256": "0ad74a2d34713cb2c4a12dc57fb20816b045913d20c5790ee1e158c83d69ee25"
+    },
+    "identity_evidence": {
+      "record": {
+        "type": "lei-records",
+        "id": "5493005E2GHATS0Z6J59",
+        "attributes": {
+          "lei": "5493005E2GHATS0Z6J59",
+          "entity": {
+            "legalName": {
+              "name": "ACKERMANS & VAN HAAREN",
+              "language": "nl"
+            },
+            "otherNames": [],
+            "transliteratedOtherNames": [],
+            "legalAddress": {
+              "language": "nl",
+              "addressLines": [
+                "Begijnenvest 113"
+              ],
+              "addressNumber": "113",
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Antwerpen",
+              "region": "BE-VAN",
+              "country": "BE",
+              "postalCode": "2000"
+            },
+            "headquartersAddress": {
+              "language": "nl",
+              "addressLines": [
+                "Begijnenvest 113"
+              ],
+              "addressNumber": "113",
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Antwerpen",
+              "region": "BE-VAN",
+              "country": "BE",
+              "postalCode": "2000"
+            },
+            "registeredAt": {
+              "id": "RA000025",
+              "other": null
+            },
+            "registeredAs": "0404616494",
+            "jurisdiction": "BE",
+            "category": "GENERAL",
+            "legalForm": {
+              "id": "R85P",
+              "other": null
+            },
+            "associatedEntity": {
+              "lei": null,
+              "name": null
+            },
+            "status": "ACTIVE",
+            "expiration": {
+              "date": null,
+              "reason": null
+            },
+            "successorEntity": {
+              "lei": null,
+              "name": null
+            },
+            "successorEntities": [],
+            "creationDate": "1924-12-30T00:00:00Z",
+            "subCategory": null,
+            "otherAddresses": [],
+            "eventGroups": []
+          },
+          "registration": {
+            "initialRegistrationDate": "2016-11-30T02:08:00Z",
+            "lastUpdateDate": "2026-03-18T06:02:57Z",
+            "status": "ISSUED",
+            "nextRenewalDate": "2027-04-13T07:41:58Z",
+            "managingLou": "894500IIP432AHQ64V02",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "validatedAt": {
+              "id": "RA000025",
+              "other": null
+            },
+            "validatedAs": "0404616494",
+            "otherValidationAuthorities": []
+          },
+          "bic": null,
+          "mic": null,
+          "ocid": null,
+          "qcc": "QBEWWFPV24",
+          "gem": null,
+          "spglobal": [
+            "4481312"
+          ],
+          "conformityFlag": "CONFORMING"
+        },
+        "relationships": {
+          "managing-lou": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59/managing-lou"
+            }
+          },
+          "lei-issuer": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59/lei-issuer"
+            }
+          },
+          "field-modifications": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59/field-modifications"
+            }
+          },
+          "direct-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59/direct-parent-reporting-exception"
+            }
+          },
+          "ultimate-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59/ultimate-parent-reporting-exception"
+            }
+          },
+          "direct-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59/direct-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59/direct-children"
+            }
+          },
+          "ultimate-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59/ultimate-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59/ultimate-children"
+            }
+          },
+          "isins": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59/isins"
+            }
+          }
+        },
+        "links": {
+          "self": "https://api.gleif.org/api/v1/lei-records/5493005E2GHATS0Z6J59"
+        }
+      },
+      "canonical_sha256": "0ad74a2d34713cb2c4a12dc57fb20816b045913d20c5790ee1e158c83d69ee25"
+    }
+  },
+  "549300X5UKJVE386ZB61": {
+    "lei": "549300X5UKJVE386ZB61",
+    "name": "ASSICURAZIONI GENERALI SOCIETA' PER AZIONI",
+    "ownership": "shareholder",
+    "ownership_basis": "direct_ownership",
+    "reviewed_at": "2026-10-03",
+    "status": "accepted",
+    "ownership_evidence": {
+      "url": "https://www.generali.com/investors/share-information-analysts/ownership-structure",
+      "sha256": "560a5734abec29c497958ef8a24b9b90213c1e3b8c0cf0d6cd4a002fac9ade14",
+      "hash_kind": "http_response",
+      "retrieved_at": "2026-10-03T10:34:28Z",
+      "quote": "gs of the other categories are adjusted proportionally. (1) Main Shareholders 13.35% Monte dei Paschi di Siena Group (through Mediobanca S.p.A.) 10.15% Del Vecchio Group 9.05% Unicredit Group [footnote ] 6.32% Caltagirone Group 4.91% Benetton Group 3.13% Intesa Sanpaolo Group (2) The category includes asset managers, sovereign funds, pension funds, life insurance companies (3) The category includes retail investors (Italian and foreign individuals), Italian companies linked to retail shareholders and other corporate entities such as foundations, religious and charitable institutes, trust companies and others (4) Data not yet transmitted by mainly foreign intermediaries Ownership structure detail December 31 2021 December 31 2022 December 31 2023 December 31 2024 December 31 2025 Current Main shareholders (>3%) 31.41% 33.81% 33.95% 34.74% 41.06% 46.91% Mediobanca 12.84% 12.77% 13.13% 13.10% 13.19%*** 13.35% Del Vecchio Group 6.62% 9.82% 9.77% 9.93% 10.05% 10.15% Unicredit Group - - - - 6.68% 9.05% Caltagirone Group 7.98% 6.46%* 6.23%** 6.92% 6.28% 6.32% Benetton Group 3.97% 4.78% 4.83% 4.80% 4.86% 4.91% Intesa Sanpaolo Group - - - - - 3.13% Institutional investors 36.24% 31.29% 34.86% 34.94% 30.48% 29.79% Private Investors 30.96% 30.59% 29.01% 26.71% 24.41% 20.97% Own Shares 0.39% 2.47% 1.10% 3.06% 3.01% 1.94% Not identifiable shareholders 1.01% 1.84% 1.08% 0.55% 1.04% 0.39% *So"
+    },
+    "note": "Latest issuer current column: Mediobanca/MPS 13.35%, Del Vecchio 10.15%, Unicredit 9.05%, Caltagirone 6.32%, Benetton 4.91%, Intesa 3.13%; institutional and other shareholders. This describes shareholder model, not exclusivity of private beneficial owners. No expired 2022 agreement treated current.",
+    "bank_identity": {
+      "legal_name": "ASSICURAZIONI GENERALI SOCIETA' PER AZIONI",
+      "registered_as": "00079760328",
+      "jurisdiction": "IT",
+      "gleif_record_sha256": "7de11c3840f61092be2729708736bbf684e4b089b8676987de94c5de267d2987"
+    },
+    "identity_evidence": {
+      "record": {
+        "type": "lei-records",
+        "id": "549300X5UKJVE386ZB61",
+        "attributes": {
+          "lei": "549300X5UKJVE386ZB61",
+          "entity": {
+            "legalName": {
+              "name": "ASSICURAZIONI GENERALI SOCIETA' PER AZIONI",
+              "language": "it"
+            },
+            "otherNames": [
+              {
+                "name": "ASSICURAZIONI GENERALI",
+                "language": "it",
+                "type": "TRADING_OR_OPERATING_NAME"
+              }
+            ],
+            "transliteratedOtherNames": [],
+            "legalAddress": {
+              "language": "en",
+              "addressLines": [
+                "PIAZZA DUCA DEGLI ABRUZZI 2"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "TRIESTE",
+              "region": "IT-TS",
+              "country": "IT",
+              "postalCode": "34132"
+            },
+            "headquartersAddress": {
+              "language": "en",
+              "addressLines": [
+                "PIAZZA DUCA DEGLI ABRUZZI 2"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "TRIESTE",
+              "region": "IT-TS",
+              "country": "IT",
+              "postalCode": "34132"
+            },
+            "registeredAt": {
+              "id": "RA000407",
+              "other": null
+            },
+            "registeredAs": "00079760328",
+            "jurisdiction": "IT",
+            "category": "GENERAL",
+            "legalForm": {
+              "id": "P418",
+              "other": null
+            },
+            "associatedEntity": {
+              "lei": null,
+              "name": null
+            },
+            "status": "ACTIVE",
+            "expiration": {
+              "date": null,
+              "reason": null
+            },
+            "successorEntity": {
+              "lei": null,
+              "name": null
+            },
+            "successorEntities": [],
+            "creationDate": "1996-02-19T00:00:00Z",
+            "subCategory": null,
+            "otherAddresses": [],
+            "eventGroups": []
+          },
+          "registration": {
+            "initialRegistrationDate": "2014-01-16T03:00:00Z",
+            "lastUpdateDate": "2026-04-03T10:18:09Z",
+            "status": "ISSUED",
+            "nextRenewalDate": "2027-04-03T10:18:09Z",
+            "managingLou": "5493001KJTIIGC8Y1R12",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "validatedAt": {
+              "id": "RA000407",
+              "other": null
+            },
+            "validatedAs": "00079760328",
+            "otherValidationAuthorities": []
+          },
+          "bic": [
+            "ASGNIT22XXX"
+          ],
+          "mic": null,
+          "ocid": null,
+          "qcc": null,
+          "gem": null,
+          "spglobal": [
+            "723344"
+          ],
+          "conformityFlag": "CONFORMING"
+        },
+        "relationships": {
+          "managing-lou": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/managing-lou"
+            }
+          },
+          "lei-issuer": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/lei-issuer"
+            }
+          },
+          "field-modifications": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/field-modifications"
+            }
+          },
+          "direct-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/direct-parent-reporting-exception"
+            }
+          },
+          "ultimate-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/ultimate-parent-reporting-exception"
+            }
+          },
+          "direct-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/direct-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/direct-children"
+            }
+          },
+          "ultimate-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/ultimate-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/ultimate-children"
+            }
+          },
+          "branches": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/branch-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/branches"
+            }
+          },
+          "isins": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61/isins"
+            }
+          }
+        },
+        "links": {
+          "self": "https://api.gleif.org/api/v1/lei-records/549300X5UKJVE386ZB61"
+        }
+      },
+      "canonical_sha256": "7de11c3840f61092be2729708736bbf684e4b089b8676987de94c5de267d2987"
+    }
+  },
+  "529900G3SW56SHYNPR95": {
+    "lei": "529900G3SW56SHYNPR95",
+    "name": "Deutsche Börse Aktiengesellschaft",
+    "ownership": "shareholder",
+    "ownership_basis": "direct_ownership",
+    "reviewed_at": "2026-10-03",
+    "status": "accepted",
+    "ownership_evidence": {
+      "url": "https://www.deutsche-boerse.com/dbg-de/investor-relations/aktie-und-anleihen/aktionaersstruktur",
+      "sha256": "1fd4e55668e40c553c2c887a7a89ac7871412ccb26d85617b21e7592519654ef",
+      "hash_kind": "http_response",
+      "retrieved_at": "2026-10-03T10:39:42Z",
+      "quote": "en Drucken Aktionärsstruktur Geografische Aktionärsstruktur Aktionärsstruktur der Deutsche Börse Aktiengesellschaft* 2025 2024 2023 2022 2021 2020 2019 2018 2017 2016 Privatanleger 10% 9% 9% 8% 8% 7% 4% 6% 7% 6% Institutionelle Investoren 90% 91% 91% 92% 92% 93% 96% 94% 93% 94% * Zum 31. Dezember Weitere Informationen zur aktuellen Aktionärsstruktur der Deutsche Börse Aktiengesellschaft finden Sie in einer Datenbank der Bundesanstalt für Finanzdienstleistungsaufsicht. Archiv Geografische Aktionärsstruktur der Deutsche Börse Aktiengesellschaft* 2025 2024 2023 2022 2021 2020 2019 2018 2017 2016 Deutschland 20% 20% 20% 18% 20% 20% 19% 20% 18% 17% Großbritannien 24% 26% 26% 24% 26% 25% 24% 26% 26% 29% Nordamerika 35% 34% 34% 36% 31% 36% 34% 33% 34% 30% Andere Länder 21% 20% 20% 22% 23% 19% 23% 21% 22% 24% * Zum 31. Dezember Weitere Informationen zur aktuellen Aktionärsstruktur der Deutsche Börse Aktiengesellschaft finden Sie in einer Datenbank der Bundesanstalt für Finanzdienstleistungsaufsicht. Archiv Unser Anmeldeservice Investor-Relations-Updates direkt in Ihr Postfach Einfache und kostenlose Registrierung Monatliche Handelsstatistiken und wichtige Kennzahlen JETZT ANMELDEN JETZT ANMELDEN ÜBER UNS Deutsche Börse Group Vorstandsmitglieder Investor Relations Media KONTAKT & SERVICES Hotlines Adressen Lieferantenportal Hinweisgebersystem FOLGEN SIE UNS LinkedIn Instagram YouTube QU"
+    },
+    "note": "Latest dated 31 December 2025 issuer ownership table: retail 10%, institutional 90%. Shareholder model only: institutional category may include public investors; no absence of sovereign minority or complete beneficial-owner list asserted.",
+    "bank_identity": {
+      "legal_name": "Deutsche Börse Aktiengesellschaft",
+      "registered_as": "HRB 32232",
+      "jurisdiction": "DE",
+      "gleif_record_sha256": "9e3abcedc108991efdc6d8afa69c8bc643e2cd309b71a66f7eee0dd23bfcec55"
+    },
+    "identity_evidence": {
+      "record": {
+        "type": "lei-records",
+        "id": "529900G3SW56SHYNPR95",
+        "attributes": {
+          "lei": "529900G3SW56SHYNPR95",
+          "entity": {
+            "legalName": {
+              "name": "Deutsche Börse Aktiengesellschaft",
+              "language": "de"
+            },
+            "otherNames": [],
+            "transliteratedOtherNames": [
+              {
+                "name": "Deutsche Borse Aktiengesellschaft",
+                "language": "de",
+                "type": "AUTO_ASCII_TRANSLITERATED_LEGAL_NAME"
+              }
+            ],
+            "legalAddress": {
+              "language": "de",
+              "addressLines": [
+                "Mergenthalerallee 61"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Eschborn",
+              "region": "DE-HE",
+              "country": "DE",
+              "postalCode": "65760"
+            },
+            "headquartersAddress": {
+              "language": "de",
+              "addressLines": [
+                "Mergenthalerallee 61"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Eschborn",
+              "region": "DE-HE",
+              "country": "DE",
+              "postalCode": "65760"
+            },
+            "registeredAt": {
+              "id": "RA000242",
+              "other": null
+            },
+            "registeredAs": "HRB 32232",
+            "jurisdiction": "DE",
+            "category": "GENERAL",
+            "legalForm": {
+              "id": "6QQB",
+              "other": null
+            },
+            "associatedEntity": {
+              "lei": null,
+              "name": null
+            },
+            "status": "ACTIVE",
+            "expiration": {
+              "date": null,
+              "reason": null
+            },
+            "successorEntity": {
+              "lei": null,
+              "name": null
+            },
+            "successorEntities": [],
+            "creationDate": "1990-07-31T22:00:00Z",
+            "subCategory": null,
+            "otherAddresses": [],
+            "eventGroups": [
+              {
+                "groupType": "STANDALONE",
+                "events": [
+                  {
+                    "validationDocuments": "SUPPORTING_DOCUMENTS",
+                    "effectiveDate": "2023-03-08T23:00:00Z",
+                    "recordedDate": "2024-03-06T11:53:52Z",
+                    "type": "MERGERS_AND_ACQUISITIONS",
+                    "status": "COMPLETED"
+                  }
+                ]
+              }
+            ]
+          },
+          "registration": {
+            "initialRegistrationDate": "2013-10-12T08:56:27Z",
+            "lastUpdateDate": "2026-08-16T10:27:49Z",
+            "status": "ISSUED",
+            "nextRenewalDate": "2027-10-14T09:38:26Z",
+            "managingLou": "5299000J2N45DDNE4Y28",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "validatedAt": {
+              "id": "RA000242",
+              "other": null
+            },
+            "validatedAs": "HRB 32232",
+            "otherValidationAuthorities": []
+          },
+          "bic": [
+            "XDWZDEF1XXX"
+          ],
+          "mic": [
+            "DAPA",
+            "DBDX",
+            "XCEF",
+            "XETR",
+            "XFRA"
+          ],
+          "ocid": "de/M1201_HRB32232",
+          "qcc": "QDE0D4HYRC",
+          "gem": null,
+          "spglobal": [
+            "1497295"
+          ],
+          "conformityFlag": "CONFORMING"
+        },
+        "relationships": {
+          "managing-lou": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95/managing-lou"
+            }
+          },
+          "lei-issuer": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95/lei-issuer"
+            }
+          },
+          "field-modifications": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95/field-modifications"
+            }
+          },
+          "direct-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95/direct-parent-reporting-exception"
+            }
+          },
+          "ultimate-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95/ultimate-parent-reporting-exception"
+            }
+          },
+          "direct-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95/direct-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95/direct-children"
+            }
+          },
+          "ultimate-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95/ultimate-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95/ultimate-children"
+            }
+          },
+          "isins": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95/isins"
+            }
+          }
+        },
+        "links": {
+          "self": "https://api.gleif.org/api/v1/lei-records/529900G3SW56SHYNPR95"
+        }
+      },
+      "canonical_sha256": "9e3abcedc108991efdc6d8afa69c8bc643e2cd309b71a66f7eee0dd23bfcec55"
+    }
+  },
+  "5299004RMSA334L0LD60": {
+    "lei": "5299004RMSA334L0LD60",
+    "name": "Wilh. Werhahn KG",
+    "ownership": "shareholder",
+    "ownership_basis": "direct_ownership",
+    "reviewed_at": "2026-10-03",
+    "status": "accepted",
+    "ownership_evidence": {
+      "url": "https://www.werhahn.de/",
+      "sha256": "de62e8d624bdc41c431c66fd36327bd87fb41a2ebf1c0444b75cfed7ce95e7de",
+      "hash_kind": "http_response",
+      "retrieved_at": "2026-10-03T10:31:45Z",
+      "quote": "en wir Zukunft – verlässlich, werteorientiert und bis heute zu 100 Prozent in Familienbesitz. Mehr über Werhahn Baustoffe Baustoffe Der Unternehmensbereich Baustoffe umfasst die Geschäftsbereiche Natursteine und Schiefer. Sie bieten insbesondere Gesteinsprodukte für den Verkehrswegebau sowie für Dach und Fassade an. Mehr erfahren Konsumgüter Konsumgüter Die Geschäftsbereiche Zwilling Küche und Zwilling Beauty Group bilden den Unternehmensbereich Konsumgüter. International aufgestellt, produzieren und vertreiben sie hochwertige Markenartikel rund um Küche und Körperpflege. Mehr erfahren Finanzdienstleistungen Finanzdienstleistungen Unter dem Dach des Unternehmensbereichs Finanzdienstleistungen sind der Leasing- und Factoringanbieter abcfinance mit der abcbank sowie der Kfz-Finanzierer Bank11 gebündelt. Mehr erfahren Die Wilh. Werhahn KG in Zahlen. 4,8 Mrd. € Umsatz weltweit. 10,4 Tausend Mitarbeitende weltweit. 185 Jahre erfolgreich als Familienunternehmen. Vielfalt – Ein prägendes Merkmal. Die Aktivitäten der Werhahn-Gruppe sind in drei Unternehmensbereiche mit sechs Geschäftsbereichen zusammengefasst. Weltweit arbeiten mehr als 10.000 Menschen für Werhahn und erwirtschafteten 2025 einen Umsatz von rund vier Milliarden Euro. Mehr zum Geschäftsbericht Download Geschäftsbericht 2025 Zeichen setzen. Verantwortung übernehmen. Als Familienunternehmen mit langer Tradition hat gesells"
+    },
+    "note": "Current official exact parent website explicitly says 100 percent family ownership. Bank11 accounting-control chain separately verified; parent percentage not asserted as bank share percentage.",
+    "bank_identity": {
+      "legal_name": "Wilh. Werhahn KG",
+      "registered_as": "HRA 4096",
+      "jurisdiction": "DE",
+      "gleif_record_sha256": "cac9bb300a4abe652544a3ade5e7a06d74ea612e3697679e284850d517cddc77"
+    },
+    "identity_evidence": {
+      "record": {
+        "type": "lei-records",
+        "id": "5299004RMSA334L0LD60",
+        "attributes": {
+          "lei": "5299004RMSA334L0LD60",
+          "entity": {
+            "legalName": {
+              "name": "Wilh. Werhahn KG",
+              "language": "de"
+            },
+            "otherNames": [],
+            "transliteratedOtherNames": [],
+            "legalAddress": {
+              "language": "de",
+              "addressLines": [
+                "Königstr. 1"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Neuss",
+              "region": "DE-NW",
+              "country": "DE",
+              "postalCode": "41460"
+            },
+            "headquartersAddress": {
+              "language": "de",
+              "addressLines": [
+                "Königstr. 1"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Neuss",
+              "region": "DE-NW",
+              "country": "DE",
+              "postalCode": "41460"
+            },
+            "registeredAt": {
+              "id": "RA000309",
+              "other": null
+            },
+            "registeredAs": "HRA 4096",
+            "jurisdiction": "DE",
+            "category": "GENERAL",
+            "legalForm": {
+              "id": "8Z6G",
+              "other": null
+            },
+            "associatedEntity": {
+              "lei": null,
+              "name": null
+            },
+            "status": "ACTIVE",
+            "expiration": {
+              "date": null,
+              "reason": null
+            },
+            "successorEntity": {
+              "lei": null,
+              "name": null
+            },
+            "successorEntities": [],
+            "creationDate": "2002-07-17T22:00:00Z",
+            "subCategory": null,
+            "otherAddresses": [],
+            "eventGroups": []
+          },
+          "registration": {
+            "initialRegistrationDate": "2013-09-05T08:18:00Z",
+            "lastUpdateDate": "2026-07-20T09:03:37Z",
+            "status": "ISSUED",
+            "nextRenewalDate": "2027-09-05T08:18:00Z",
+            "managingLou": "5299000J2N45DDNE4Y28",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "validatedAt": {
+              "id": "RA000309",
+              "other": null
+            },
+            "validatedAs": "HRA 4096",
+            "otherValidationAuthorities": []
+          },
+          "bic": null,
+          "mic": null,
+          "ocid": "de/R1102_HRA4096",
+          "qcc": "QDEQMG9MDD",
+          "gem": null,
+          "spglobal": [
+            "5471181"
+          ],
+          "conformityFlag": "CONFORMING"
+        },
+        "relationships": {
+          "managing-lou": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5299004RMSA334L0LD60/managing-lou"
+            }
+          },
+          "lei-issuer": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5299004RMSA334L0LD60/lei-issuer"
+            }
+          },
+          "field-modifications": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5299004RMSA334L0LD60/field-modifications"
+            }
+          },
+          "direct-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5299004RMSA334L0LD60/direct-parent-reporting-exception"
+            }
+          },
+          "ultimate-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5299004RMSA334L0LD60/ultimate-parent-reporting-exception"
+            }
+          },
+          "direct-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/5299004RMSA334L0LD60/direct-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/5299004RMSA334L0LD60/direct-children"
+            }
+          },
+          "ultimate-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/5299004RMSA334L0LD60/ultimate-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/5299004RMSA334L0LD60/ultimate-children"
+            }
+          }
+        },
+        "links": {
+          "self": "https://api.gleif.org/api/v1/lei-records/5299004RMSA334L0LD60"
+        }
+      },
+      "canonical_sha256": "cac9bb300a4abe652544a3ade5e7a06d74ea612e3697679e284850d517cddc77"
+    }
+  },
+  "5967007LIEEXZXJ4UW55": {
+    "lei": "5967007LIEEXZXJ4UW55",
+    "name": "OBOS BBL",
+    "ownership": "cooperative",
+    "ownership_basis": "direct_ownership",
+    "reviewed_at": "2026-10-03",
+    "status": "accepted",
+    "ownership_evidence": {
+      "url": "https://www.obos.no/om-obos",
+      "sha256": "90b2652bada643b9a77a0b70da8e4b7c2559cb1f25f322e15160282f5712675e",
+      "hash_kind": "http_response",
+      "retrieved_at": "2026-10-02T17:35:46Z",
+      "quote": "valtning, rådgivning, næringseiendom og digitale tjenester. Medlemsdemokratiet OBOS er en av Nordens største boligbyggere, eid av over en halv million medlemmer. Som medlem kan du være med og påvirke hvordan selskapet skal drives. Investor Relations Vi støtter formål innen kultur, idrett og humanitært arbeid. Vi støtter også boligselskaper som tenker grønt. Jobb i OBOS Vi søker etter deg som både er engasjert og faglig dyktig, og som tør å ta OBOS ett steg lenger. Vår historie OBOS ble stiftet i 1929, og det første borettslaget sto ferdig på Etterstad to år etter. Helt siden den gang har vi skaffet våre medlemmer boliger og forvaltet disse på en trygg måte. Og det skal vi fortsette med – lenge! Les om vår historie Mer om OBOS Konsernledelsen OBOS Boligkonferanse Styret Generalforsamling i OBOS Digital årsrapport Boligpriser og statistikk Vedtekter Nyheter og presse Representantskapet Strategi og styrende dokumenter Etiske retningslinjer for leverandører Fakturainformasjon for leverandører Trenger du hjelp? Vi svarer gjerne på dine spørsmål. Gå til kontaktsiden"
+    },
+    "note": "Exact OBOS BBL identity: Norwegian housing cooperative legal form 9DI1, organisation 937052766, combined with current parent statement owned by over half a million members and democratic influence. Bank-specific source separately supplies exact organisation 911986884 and 100% parent ownership; partial GLEIF relation alone not accepted.",
+    "bank_identity": {
+      "legal_name": "OBOS BBL",
+      "registered_as": "937 052 766",
+      "jurisdiction": "NO",
+      "gleif_record_sha256": "8c15881a1befdc4f90e1869ef63de764b2b0452154055379fa79bca39d3548d4"
+    },
+    "identity_evidence": {
+      "record": {
+        "type": "lei-records",
+        "id": "5967007LIEEXZXJ4UW55",
+        "attributes": {
+          "lei": "5967007LIEEXZXJ4UW55",
+          "entity": {
+            "legalName": {
+              "name": "OBOS BBL",
+              "language": "no"
+            },
+            "otherNames": [
+              {
+                "name": "OSLO BOLIG OG SPARELAG",
+                "language": "no",
+                "type": "PREVIOUS_LEGAL_NAME"
+              }
+            ],
+            "transliteratedOtherNames": [],
+            "legalAddress": {
+              "language": "no",
+              "addressLines": [
+                "Standardveien 1"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Oslo",
+              "region": "NO-03",
+              "country": "NO",
+              "postalCode": "0581"
+            },
+            "headquartersAddress": {
+              "language": "no",
+              "addressLines": [
+                "Standardveien 1"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Oslo",
+              "region": "NO-03",
+              "country": "NO",
+              "postalCode": "0581"
+            },
+            "registeredAt": {
+              "id": "RA000472",
+              "other": null
+            },
+            "registeredAs": "937 052 766",
+            "jurisdiction": "NO",
+            "category": "GENERAL",
+            "legalForm": {
+              "id": "9DI1",
+              "other": null
+            },
+            "associatedEntity": {
+              "lei": null,
+              "name": null
+            },
+            "status": "ACTIVE",
+            "expiration": {
+              "date": null,
+              "reason": null
+            },
+            "successorEntity": {
+              "lei": null,
+              "name": null
+            },
+            "successorEntities": [],
+            "creationDate": "1938-02-18T00:00:00Z",
+            "subCategory": null,
+            "otherAddresses": [],
+            "eventGroups": [
+              {
+                "groupType": "STANDALONE",
+                "events": [
+                  {
+                    "validationDocuments": "SUPPORTING_DOCUMENTS",
+                    "validationReference": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20250000675550&sokeverdi=937052766&spraak=en",
+                    "effectiveDate": "2025-08-05T00:00:00Z",
+                    "recordedDate": "2025-10-14T00:00:00Z",
+                    "type": "CHANGE_HQ_ADDRESS",
+                    "status": "COMPLETED"
+                  }
+                ]
+              },
+              {
+                "groupType": "STANDALONE",
+                "events": [
+                  {
+                    "validationDocuments": "SUPPORTING_DOCUMENTS",
+                    "validationReference": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20250000675550&sokeverdi=937052766&spraak=en",
+                    "effectiveDate": "2025-08-05T00:00:00Z",
+                    "recordedDate": "2025-10-14T00:00:00Z",
+                    "type": "CHANGE_LEGAL_ADDRESS",
+                    "status": "COMPLETED"
+                  }
+                ]
+              }
+            ]
+          },
+          "registration": {
+            "initialRegistrationDate": "2016-11-25T00:00:00Z",
+            "lastUpdateDate": "2026-09-21T12:24:00Z",
+            "status": "ISSUED",
+            "nextRenewalDate": "2027-11-15T08:58:00Z",
+            "managingLou": "549300O897ZC5H7CY412",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "validatedAt": {
+              "id": "RA000472",
+              "other": null
+            },
+            "validatedAs": "937 052 766",
+            "otherValidationAuthorities": []
+          },
+          "bic": null,
+          "mic": null,
+          "ocid": null,
+          "qcc": "QNOPE6GJAM",
+          "gem": null,
+          "spglobal": [
+            "12505777"
+          ],
+          "conformityFlag": "CONFORMING"
+        },
+        "relationships": {
+          "managing-lou": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55/managing-lou"
+            }
+          },
+          "lei-issuer": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55/lei-issuer"
+            }
+          },
+          "field-modifications": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55/field-modifications"
+            }
+          },
+          "direct-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55/direct-parent-reporting-exception"
+            }
+          },
+          "ultimate-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55/ultimate-parent-reporting-exception"
+            }
+          },
+          "direct-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55/direct-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55/direct-children"
+            }
+          },
+          "ultimate-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55/ultimate-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55/ultimate-children"
+            }
+          },
+          "isins": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55/isins"
+            }
+          }
+        },
+        "links": {
+          "self": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZXJ4UW55"
+        }
+      },
+      "canonical_sha256": "8c15881a1befdc4f90e1869ef63de764b2b0452154055379fa79bca39d3548d4"
+    }
+  }
+}
