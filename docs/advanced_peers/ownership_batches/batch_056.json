@@ -1,0 +1,170 @@
+{
+  "batch": "056",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 0,
+  "page_attempts": [
+    {
+      "lei": "549300ZHFZ4CSK7VS460",
+      "url": "https://www.pbz.hr/",
+      "status": 200,
+      "error": null,
+      "sha256": "7909286f49d42a742d6a38f92fe5a8ac5e16fe03b699df266214e180e143fadd",
+      "retrieved_at": "2026-10-02T16:33:23Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300ZHFZ4CSK7VS460",
+      "url": "https://www.pbz.hr/gradjani/pbz-investor.html",
+      "status": 200,
+      "error": null,
+      "sha256": "a748a24d78c9a0b244cb5e24d3c3642356826707bac6ccf89e288a88f63cea54",
+      "retrieved_at": "2026-10-02T16:33:25Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "9CZ7TVMR36CYD5TZBS50",
+      "url": "https://www.bil.com",
+      "status": 200,
+      "error": null,
+      "sha256": "501d49ff3748290a4c689a361e59130d4ec1efde84cfbc74e9d5eb5a12fb3be4",
+      "retrieved_at": "2026-10-02T23:50:00Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "9CZ7TVMR36CYD5TZBS50",
+      "url": "https://www.bil.com/fr/groupe-bil/Pages/index.aspx",
+      "status": 200,
+      "error": null,
+      "sha256": "236749dfca4fcae31ee1b44e66f53c95b5d2e9794d9c9cb6197682f43ed1eb88",
+      "retrieved_at": "2026-10-02T23:50:02Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "635400L14KNHZXPUZM19",
+      "url": "https://www.bankofcyprus.com",
+      "status": 200,
+      "error": null,
+      "sha256": "2586ec3cd4ffe43d2483e4217aba93709d6569af9ec34466a56cc9f1b9c7d879",
+      "retrieved_at": "2026-10-02T23:50:05Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "635400L14KNHZXPUZM19",
+      "url": "https://www.bankofcyprus.com/group/investor-relations/shareholder-information/",
+      "status": 200,
+      "error": null,
+      "sha256": "9ab987ff68c3ded6396096f678dc6d0e3175fdb2c7f4945956c32f62655d49b9",
+      "retrieved_at": "2026-10-02T23:50:07Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493008QOCP58OLEN998",
+      "url": "https://www.argenta.be",
+      "status": 200,
+      "error": null,
+      "sha256": "95b8be7250b649a197c266234f3fe319f49543011eafcf87540d83ea8e37e233",
+      "retrieved_at": "2026-10-02T23:50:03Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900GGYMNGRQTDOO93",
+      "url": "http://www.bng.nl",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:32:38Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "549300ZHFZ4CSK7VS460",
+      "name": "Privredna Banka Zagreb d.d.",
+      "rank": 37,
+      "trea_eur": 12041794115.2,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use PBZ's current issuer report or Intesa audited subsidiary note for exact bank-specific completed control. Retrieved retail PBZ Investor product page is unrelated to owners; existing GLEIF relation ENTITY_SUPPLIED_ONLY cannot be accepted. Reuse sourced Intesa owners after bank proof.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "012",
+      "previous_next_action": "Guessed PBZ investor/about paths failed; bank/Intesa relation is only ENTITY_SUPPLIED_ONLY. Next: Use PBZ’s exact issuer report or Intesa consolidated subsidiary table to prove bank-specific control; then reuse the reviewed Intesa shareholder evidence."
+    },
+    {
+      "lei": "9CZ7TVMR36CYD5TZBS50",
+      "name": "Banque Internationale à Luxembourg",
+      "rank": 38,
+      "trea_eur": 11695376623.09,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use BIL's current issuer report/shareholder note for Legend Holdings and Luxembourg State, with precise ultimate parent and votes. CMS group navigation remains no ownership passage; private/private-equity assumption is not allowed from brand.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "012",
+      "previous_next_action": "English BIL group landing is CMS content; the ownership leaf was not successfully retrieved. Next: Use BIL’s current annual report/shareholder table to verify Legend Holdings vs Luxembourg State shares and the ultimate controller’s type; do not assume private ownership from brand."
+    },
+    {
+      "lei": "635400L14KNHZXPUZM19",
+      "name": "Bank of Cyprus Holdings Public Limited Company",
+      "rank": 39,
+      "trea_eur": 10563647403.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use actual Bank of Cyprus Holdings significant-holdings issuer disclosures or filed holding annual report with dated voting percentages. Retrieved group shareholder-information navigation does not provide a current table; match the exact Irish holding LEI rather than assume bank/group identities are interchangeable.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "012",
+      "previous_next_action": "The guessed ownership page resolved to generic Greek shareholder navigation without a verified ownership table. Next: Follow the actual current significant-holdings disclosure or annual-report table for Bank of Cyprus Holdings and exact Irish entity identity, including voting percentages."
+    },
+    {
+      "lei": "5493008QOCP58OLEN998",
+      "name": "Investeringsmaatschappij Argenta - Société d'investissements Argenta - Investierungsgesellschaft Arg",
+      "rank": 40,
+      "trea_eur": 10385176140.0381,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use exact Investeringsmaatschappij Argenta company number 0404.453.475 filed ownership/accounts. Argenta group family's majority in downstream bank does not establish shareholders of requested upstream investment company; never reverse the child ownership edge.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "013",
+      "previous_next_action": "Argenta bank group states family majority, but this does not establish shareholders of its upstream investment company; published governance extract omits the holding owners. Next: Use the exact registered investment company’s filed accounts/ownership note, then match the registered company number 0404.453.475. Never infer parent ownership by reversing its child’s ownership description."
+    },
+    {
+      "lei": "529900GGYMNGRQTDOO93",
+      "name": "BNG Bank N.V.",
+      "rank": 41,
+      "trea_eur": 10324084076.37,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use alternative official Dutch Finance State-participation report or BNG annual-report shareholder note to exact State/municipal/provincial shares. BNG candidate URL remains denied; no retry or inferred fully public ownership from name.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "http://www.bng.nl",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "013",
+      "previous_next_action": "Bank source access was 403; guessed Dutch State participation leaf was 404. Next: Use an official Dutch Finance State-participation report or BNG filed annual report with State/municipal/provincial shareholder percentages; do not label fully public solely by the bank name."
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

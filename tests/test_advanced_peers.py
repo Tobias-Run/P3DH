@@ -210,8 +210,10 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
         self.assertEqual(len(selected),30)
         followup={case['lei'] for path in (ROOT/'docs/advanced_peers/ownership_batches').glob('batch_*.json')
                   for case in json.loads(path.read_text())['accepted']}
-        self.assertEqual(baseline.intersection(self.registry),selected|followup)
-        self.assertEqual(len(baseline-set(self.registry)),len(baseline-selected-followup))
+        controllers={lei for path in (ROOT/'docs/advanced_peers/ownership_batches').glob('reviewed_controllers_*.json')
+                     for lei in json.loads(path.read_text())}
+        self.assertEqual(baseline.intersection(self.registry),(selected|followup|controllers)&baseline)
+        self.assertEqual(len(baseline-set(self.registry)),len(baseline-selected-followup-controllers))
         self.assertEqual(baseline,set(self.selection['unrankable_leis']) |
                          {r['lei'] for r in self.selection['ranking_candidates']})
 
@@ -250,7 +252,7 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
 
     def test_seventy_case_campaign_covers_fixed_selection_without_duplicate_acceptance(self):
         directory=ROOT/'docs/advanced_peers/ownership_batches'
-        for filename in ['campaign_next70.json','campaign_next70b.json','campaign_next70c.json']:
+        for filename in ['campaign_next70.json','campaign_next70b.json','campaign_next70c.json','campaign_next70d.json']:
             with self.subTest(campaign=filename):
                 self.check_seventy_case_campaign(directory,filename)
 
@@ -275,7 +277,65 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
         self.assertFalse(set(accepted)&set(deferred))
         self.assertEqual(len(attempts),campaign['page_attempts'])
         self.assertEqual(sum(row['new_network_fetch'] for row in attempts),campaign['new_network_fetches'])
-        self.assertEqual(set(accepted),set(selected)&set(self.registry))
+        self.assertTrue(set(accepted)<=set(self.registry))
+        # A historical deferred case can receive a sourced decision in a later
+        # explicitly revisited campaign; the earlier snapshot stays unchanged.
+        later_acceptance={case['lei'] for path in directory.glob('batch_*.json')
+                          for case in json.loads(path.read_text())['accepted']
+                          if path.stem>'batch_'+campaign['batches'][-1]['batch']}
+        self.assertTrue((set(deferred)&set(self.registry))<=later_acceptance)
+
+    def test_fourth_campaign_distinguishes_first_reviews_and_targeted_followups(self):
+        directory=ROOT/'docs/advanced_peers/ownership_batches'
+        campaign=json.loads((directory/'campaign_next70d.json').read_text())
+        with (directory.parent/'next70d_selection.csv').open() as source:
+            selected=list(csv.DictReader(source))
+        fresh=[row for row in selected if row['review_mode']=='first_review']
+        repeat=[row for row in selected if row['review_mode']=='targeted_follow_up']
+        self.assertEqual((len(fresh),len(repeat)),(19,51))
+        self.assertEqual((campaign['first_reviews'],campaign['targeted_follow_ups']),(19,51))
+        self.assertTrue(all(not row['previous_batch'] for row in fresh))
+        for rows in [fresh,repeat]:
+            self.assertEqual([int(row['rank']) for row in rows],sorted(int(row['rank']) for row in rows))
+            self.assertEqual([float(row['trea_eur']) for row in rows],sorted((float(row['trea_eur']) for row in rows),reverse=True))
+        for row in repeat:
+            previous=json.loads((directory/('batch_'+row['previous_batch']+'.json')).read_text())
+            self.assertIn(row['lei'],{case['lei'] for case in previous['deferred']})
+            self.assertNotIn(row['lei'],{case['lei'] for case in previous['accepted']})
+
+    def test_current_owner_sources_do_not_turn_minority_anchors_into_majority_control(self):
+        directory=ROOT/'docs/advanced_peers/ownership_batches'
+        controllers=json.loads((directory/'reviewed_controllers_next70d.json').read_text())
+        erste=controllers['PQOH26KWDF7CG10L6792']
+        self.assertEqual(erste['ownership'],'shareholder')
+        self.assertIn('30.06.2026',erste['ownership_evidence']['quote'])
+        self.assertIn('Foundation direct 6.08%',erste['ownership_evidence']['quote'])
+        pzu=controllers['QLPCKOOKVX32FUELX240']
+        self.assertEqual(pzu['ownership'],'mixed')
+        self.assertIn('9.07.2026',pzu['ownership_evidence']['quote'])
+        self.assertIn('State Treasury 34.2%',pzu['ownership_evidence']['quote'])
+        self.assertIn('65.8%',pzu['ownership_evidence']['quote'])
+        cases=[case for item in json.loads((directory/'campaign_next70d.json').read_text())['batches']
+               for case in json.loads((directory/('batch_'+item['batch']+'.json')).read_text())['accepted']]
+        bcc=next(case for case in cases if case['lei']=='95980020140005881190')
+        self.assertEqual(bcc['ownership'],'cooperative')
+        self.assertEqual(bcc['ownership_evidence']['quote_kind'],'visual_diagram_transcription')
+        self.assertEqual(bcc['ownership_evidence']['pdf_page'],28)
+        self.assertAlmostEqual(bcc['ownership_evidence']['cooperative_share_percent'],97.41)
+        ibercaja=next(case for case in cases if case['lei']=='549300OLBL49CW8CT155')
+        self.assertEqual(ibercaja['ownership'],'foundation')
+        self.assertIn('únicos propietarios del banco son cuatro fundaciones',ibercaja['ownership_evidence']['quote'])
+
+    def test_ppf_source_is_not_reused_for_a_different_registered_parent(self):
+        directory=ROOT/'docs/advanced_peers/ownership_batches'
+        batch=json.loads((directory/'batch_057.json').read_text())
+        case=next(case for case in batch['deferred'] if case['lei']=='31570014BNQ1Q99CNQ35')
+        proof=case['unresolved_control_evidence']
+        self.assertEqual(proof['registered_ultimate_parent_lei'],'984500CE58365CB10V25')
+        self.assertEqual(proof['registered_ultimate_parent_name'],'AMALAR HOLDING s.r.o.')
+        self.assertIn('PPF Group N.V.',proof['different_entity_source']['quote'])
+        self.assertTrue(proof['different_entity_source']['does_not_identify_amalar_owners'])
+        self.assertNotIn(case['lei'],self.registry)
 
     def test_targeted_batch_respects_budget_and_records_unresolved_proof(self):
         batch=json.loads((ROOT/'docs/advanced_peers/ownership_batches/batch_002.json').read_text())

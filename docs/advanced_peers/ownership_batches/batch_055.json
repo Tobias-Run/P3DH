@@ -1,0 +1,345 @@
+{
+  "batch": "055",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 4,
+  "page_attempts": [
+    {
+      "lei": "549300C6TUMDXNOVXS82",
+      "url": "https://www.lansforsakringar.se/",
+      "status": 301,
+      "error": "HTTP Error 301: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Permanently",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:07Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299008I0TO44SUINZ71",
+      "url": "https://www.olb.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "07faa9552e40ec4b864392b627c76ab32f0ee3125fb4584875f03691be2bf7d4",
+      "retrieved_at": "2026-10-02T16:32:26Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299008I0TO44SUINZ71",
+      "url": "https://www.olb.de/ueber-uns",
+      "status": 200,
+      "error": null,
+      "sha256": "99df9733b5e429d068f350adb354c253c714e502457d8a0c6ce63ee1e96476b4",
+      "retrieved_at": "2026-10-02T16:50:57Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299008I0TO44SUINZ71",
+      "url": "https://www.olb.de/ueber-uns/investor-relations/veroeffentlichungen",
+      "status": 200,
+      "error": null,
+      "sha256": "ad4c93074434e908fe6f245d41c456fe30663d58894d651decb95797d66b238b",
+      "retrieved_at": "2026-10-03T08:39:49Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5299008I0TO44SUINZ71",
+      "url": "https://www.olb.de/cms-assets/1LDWfU96ZpM470FSggmkny/3ef3564fd8e82b5cfd8a012174009b01/OLB_AG_HGB_Halbjahresabschluss_zum_30.06.2026.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "b40be45fad44ba70efd72965afec6a16f422ae7bdd3566ded1b1eb64a91f5b73",
+      "retrieved_at": "2026-10-03T08:44:44Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "254900RNFMDM0P11YR84",
+      "url": "https://www.ablv.com",
+      "status": 200,
+      "error": null,
+      "sha256": "7a853be14e9c6ed0a0e6c79dc7406c60e813f9beddaeebf8b3735b72c6f2e7f7",
+      "retrieved_at": "2026-10-02T16:48:48Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "254900RNFMDM0P11YR84",
+      "url": "https://www.ablv.com/lv/about",
+      "status": 200,
+      "error": null,
+      "sha256": "cd8887c68c5ba7efa5641342ba1d023ea39774e9946c5407098a839e06d44854",
+      "retrieved_at": "2026-10-02T16:48:50Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900V3O1M5IHMOSF46",
+      "url": "https://www.statestreet.com",
+      "status": 200,
+      "error": null,
+      "sha256": "33935963ab253f533ea49e781b0459c2643ee61f9e7ac15c0e8f24b58f35e570",
+      "retrieved_at": "2026-10-02T16:54:20Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900V3O1M5IHMOSF46",
+      "url": "https://www.statestreet.com/content/statestreet/us/en/about/sustainability/inclusion-diversity",
+      "status": 200,
+      "error": null,
+      "sha256": "14fbb09c2f46dea16318a6280ca382c2f0855ea8d7aedc75ee49e1f33369293a",
+      "retrieved_at": "2026-10-02T16:54:22Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900V3O1M5IHMOSF46",
+      "url": "https://investors.statestreet.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "f4778e9fba96fe1e44213a6943757ef3d0254b7f11b03c6aef3ec9cad29988b1",
+      "retrieved_at": "2026-10-03T08:41:53Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900V3O1M5IHMOSF46",
+      "url": "https://investors.statestreet.com/filings-and-reports/annual-reports/default.aspx",
+      "status": 200,
+      "error": null,
+      "sha256": "00bd62e23b8129925161b90136cc45ce42e39362113707abfe1175cb1bad2ed4",
+      "retrieved_at": "2026-10-03T08:43:15Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300DVPJYGNF2P7B03",
+      "url": "https://www.sparkasse.at/steiermaerkische",
+      "status": 200,
+      "error": null,
+      "sha256": "e74088ee6753a15855fc447ff46d79582f460525c2e5f6f3af301758b5773d96",
+      "retrieved_at": "2026-10-02T16:33:08Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "549300C6TUMDXNOVXS82",
+      "name": "Länsförsäkringar Bank AB - gruppen",
+      "rank": 32,
+      "trea_eur": 13013114013.82776,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use the exact Lansforsakringar AB registered parent issuer annual report on actual corporate/IR navigation to 23 regional mutual insurers and ownership/control. Retail homepage returned redirect error; archived fully corroborated bank relationship cannot supply unclassified parent's type by itself.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.lansforsakringar.se/",
+          "status": 301,
+          "error": "HTTP Error 301: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Permanently"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "011",
+      "previous_next_action": "Company/financial leaf URLs failed. A fully corroborated bank/insurance-parent relation exists, but parent ownership remains unclassified. Next: Use official Länsförsäkringar AB/Bank reports to establish mutual regional-insurer ownership and control, rather than infer cooperative or mutual status from brand."
+    },
+    {
+      "lei": "5299008I0TO44SUINZ71",
+      "name": "Oldenburgische Landesbank Aktiengesellschaft",
+      "rank": 33,
+      "trea_eur": 12870000000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use official completed ABN AMRO acquisition announcement and current ownership note; distinguish pending transaction from former private-equity holders. Actual H1-2026 HGB financial statements retrieved but contain no explicit current shareholder edge.",
+      "successful_source_pages": 4,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "011",
+      "previous_next_action": "Guessed OLB company/report paths returned 404. Next: Follow actual OLB financial-report navigation and official ABN AMRO acquisition completion notices; distinguish completed sale from the old private-equity shareholder structure."
+    },
+    {
+      "lei": "254900RNFMDM0P11YR84",
+      "name": "Atlantic Lux HoldCo S.à r.l.",
+      "rank": 34,
+      "trea_eur": 12833792486.59,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Remove unrelated ABLV candidate and begin exact Atlantic Lux HoldCo Luxembourg registered ownership/filer search. LEI identity and ABLV page demonstrate different legal companies; review current OLB/ABN completed-sale documents before any holding ownership inference.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "011",
+      "previous_next_action": "Ledger candidate website is ABLV, which is not identity proof for Atlantic Lux HoldCo; guessed ABN completion page failed. Next: Start from Atlantic Lux HoldCo’s exact registered identity and official Luxembourg/OLB/ABN transaction documents. Verify its current parent and whether the holding remains in the relevant group; do not use ABLV owners.",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "254900RNFMDM0P11YR84",
+          "attributes": {
+            "lei": "254900RNFMDM0P11YR84",
+            "entity": {
+              "legalName": {
+                "name": "Atlantic Lux HoldCo S.à r.l.",
+                "language": "lb"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [
+                {
+                  "name": "Atlantic Lux HoldCo S.a r.l.",
+                  "language": "lb",
+                  "type": "AUTO_ASCII_TRANSLITERATED_LEGAL_NAME"
+                }
+              ],
+              "legalAddress": {
+                "language": "lb",
+                "addressLines": [
+                  "46A, Avenue John F. Kennedy"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Luxembourg",
+                "region": null,
+                "country": "LU",
+                "postalCode": "L-1855"
+              },
+              "headquartersAddress": {
+                "language": "lb",
+                "addressLines": [
+                  "46A, Avenue John F. Kennedy"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Luxembourg",
+                "region": null,
+                "country": "LU",
+                "postalCode": "L-1855"
+              },
+              "registeredAt": {
+                "id": "RA000432",
+                "other": null
+              },
+              "registeredAs": "B249456",
+              "jurisdiction": "LU",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "DVXS",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "2020-12-09T23:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2023-05-25T05:55:00Z",
+              "lastUpdateDate": "2026-03-18T08:11:05Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-05-14T22:00:00Z",
+              "managingLou": "485100001PLJJ09NZT59",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000432",
+                "other": null
+              },
+              "validatedAs": "B249456",
+              "otherValidationAuthorities": []
+            },
+            "bic": null,
+            "mic": null,
+            "ocid": null,
+            "qcc": "QLU6JUU4BX",
+            "gem": null,
+            "spglobal": [
+              "1839178539"
+            ],
+            "conformityFlag": "NON_CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/254900RNFMDM0P11YR84/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/254900RNFMDM0P11YR84/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/254900RNFMDM0P11YR84/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/254900RNFMDM0P11YR84/direct-parent-reporting-exception"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/254900RNFMDM0P11YR84/ultimate-parent-reporting-exception"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/254900RNFMDM0P11YR84"
+          }
+        },
+        "canonical_sha256": "b4587f534f360fb2a6df70d03122cb54587e3fbd5001c856d602713c35bad9e1"
+      },
+      "invalid_candidate_evidence": {
+        "url": "https://www.ablv.com/lv/legal-latest-news/ablv-bank-self-liquidation",
+        "reason": "Retrieved Latvian ABLV Bank source is not the exact Luxembourg Atlantic Lux HoldCo legal entity; candidate removed from current ledger.",
+        "sha256": "7a853be14e9c6ed0a0e6c79dc7406c60e813f9beddaeebf8b3735b72c6f2e7f7",
+        "retrieved_at": "2026-10-02T16:48:48Z",
+        "matched_registered_legal_name": "Atlantic Lux HoldCo S.à r.l."
+      }
+    },
+    {
+      "lei": "529900V3O1M5IHMOSF46",
+      "name": "State Street Europe Holdings Germany S.a.r.l. & Co. KG",
+      "rank": 35,
+      "trea_eur": 12754828698.09,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Follow the now verified State Street issuer Annual Reports and Proxy Statements index to current beneficial-owner table and exact issuer LEI, then curated accounting-control review. Index contains no shareholder proof by itself; cached SEC/issuer denials remain protected.",
+      "successful_source_pages": 4,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "011",
+      "previous_next_action": "Bank’s ultimate-parent relation is fully corroborated, but current State Street issuer ownership source is not reviewed. Next: Use SEC submissions index to the latest State Street proxy beneficial-owner table, verify exact issuer LEI, then review the archived bank/controller relationship. SEC metadata alone is not shareholder evidence."
+    },
+    {
+      "lei": "549300DVPJYGNF2P7B03",
+      "name": "Steiermärkische Bank und Sparkassen Aktiengesellschaft",
+      "rank": 36,
+      "trea_eur": 12095231486.55,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Steiermarkische's own current shareholder/foundation table, not only Erste's consolidation relationship. Exact Erste current share table is now sourced but accounting consolidation must not override bank-specific foundation control; check direct bank votes separately.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "012",
+      "previous_next_action": "Parent major-owner page was found, but no current exact foundation/bank ownership table was verified for Steiermärkische. Next: Review the bank’s current shareholder table and Sparkassen foundation votes; accounting consolidation by Erste must not be mistaken for majority economic ownership of the bank."
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

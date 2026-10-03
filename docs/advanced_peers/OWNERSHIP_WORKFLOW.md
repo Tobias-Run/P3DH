@@ -1,6 +1,6 @@
 # Eigentümerrecherche mit begrenztem Kontext
 
-Stand: 3. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach den Paketen 001–044 sind 233/475 Institute belegt, 242 bleiben offen. 186 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 56 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
+Stand: 3. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach den Paketen 001–058 sind 244/475 Institute belegt, 231 bleiben offen. 176 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 55 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
 
 ## Feste Standardgrenzen
 
@@ -88,4 +88,12 @@ Die [dritte feste Auswahl](NEXT70C_OWNERSHIP.md) ergänzt **11 Belege**, 59 Fäl
 
 Zusätzliche beobachtete Fallen: Unternehmensnachfolge, Anlegerkunden (`asset-owners`), Unternehmens-Eigentümerberatung, Immobilieneigentum und Dormant-Account-Berichte. Diese Produktpfade werden nun gefiltert. Tatsächliche Unternehmenspfade wie `om-sparekassen`, `om-middelfart`, `om-oss`, `o-nas` sowie estnisches `aktsionarid` werden berücksichtigt. Sitemaps werden nur als URL-Hinweise gelesen; sie beweisen keine Eigentümer.
 
-Die Kandidaten für FESTA HOLDING (falsche Bank) und ECCM (Domainverkauf) wurden entfernt, der frühere First-Investment-Bank-Identitätsfehler bleibt bereinigt. Bei Coop Pank sind 41 % Coop-Beteiligung und der Aktionärspakt archiviert: ein Vorkaufsrecht wird nicht als Mehrheit behandelt. Ein Satzungs-/Votenbeleg bleibt nötig. Gespeicherte Fälle werden übersprungen und können gezielt wiederaufgenommen werden; die verbleibende Queue umfasst 186 priorisierbare und 56 nicht eindeutig priorisierbare Kennungen.
+Die Kandidaten für FESTA HOLDING (falsche Bank) und ECCM (Domainverkauf) wurden entfernt, der frühere First-Investment-Bank-Identitätsfehler bleibt bereinigt. Bei Coop Pank sind 41 % Coop-Beteiligung und der Aktionärspakt archiviert: ein Vorkaufsrecht wird nicht als Mehrheit behandelt. Ein Satzungs-/Votenbeleg bleibt nötig. Gespeicherte Fälle werden übersprungen und können gezielt wiederaufgenommen werden; die damalige Queue umfasste 186 priorisierbare und 56 nicht eindeutig priorisierbare Kennungen.
+
+## Pakete 045–058: 19 Erstprüfungen und 51 Wiederaufnahmen
+
+Die [vierte feste Auswahl](NEXT70D_OWNERSHIP.md) enthält die letzten 19 noch nicht gespeicherten TREA-Erstprüfungen und die 51 größten bereits dokumentierten offenen TREA-Fälle. Wiederaufnahmen sind ausdrücklich als solche mit Vorpaket und bisherigem Prüfschritt markiert. **Zehn der 70 Fälle akzeptiert, 60 weiterhin offen.** Zwei zusätzlich geprüfte Konzernträger liefern wiederverwendbare Quellen; Erste Group ist selbst eine weitere Viewer-Kennung außerhalb der festen 70. Gesamtstand 244/475, 231 offen; Queue 176 priorisierbar und 55 nicht eindeutig priorisierbar.
+
+161 Quellenversuche / 76 neue Abrufe, maximal vier je Fall. Original-HTML der PZU-Tabelle und Original-PDF des BCC-Eigentümerdiagramms wurden gezielt erneut gelesen; Cachehash bzw. Bildrichtung wurden geprüft. GLEIF-Relationship-URLs künftig ausschließlich aus den tatsächlichen Registerlinks entnehmen: Kommuninvest und BPI melden Eltern-Ausnahmen, keine Beziehung; die zwei spekulativen Endpunkte ergaben 404. Keinen weiteren URL-Variantenlauf daraus ableiten. Retail-Glossar-/Investor-Produkt-/Kundeneigentümer-Treffer sind keine Belege.
+
+Weitere reguläre Läufe dürfen keine neuen 70 ungeprüften, TREA-sortierten Institute behaupten: im jetzigen Checkpointbestand sind alle 176 noch offenen priorisierbaren Fälle bereits erstgeprüft. Fortsetzung über gezielte dokumentierte Nachweislücken; die 55 technisch unpriorisierbaren Kennungen separat anhand Bankidentität und Größen-/Qualitätsprüfung behandeln. Die Einordnung von Erste beseitigt eine bislang unpriorisierbare Trägerschaftslücke, verändert keine Quelldaten oder TREA-Ausschlussregeln.

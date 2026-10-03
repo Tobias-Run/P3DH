@@ -1,14 +1,14 @@
 {
   "metric": "TREA (KM1 61.00 r0040 c0010)",
   "method": "Latest technically valid date per institution; CON preferred on ties; positive, unambiguous amount/dimensions/unit; relevant scale and explicit currency-review exclusions. Ownership is never inferred.",
-  "rankable": 186,
-  "pending_total": 242,
+  "rankable": 176,
+  "pending_total": 231,
   "source_hashes": {
-    "codebook/bank_classification.csv": "8db007ab54fe40a364deb91c886512260a022c432cd0ec9b2676b5f85d7dc263",
+    "codebook/bank_classification.csv": "52705fd249c7fcc35f442614f8b46fffbe59a7e81c41725c8186faf028c94a73",
     "codebook/ownership_research_size_exclusions.csv": "e7fed67c27b1539918b89b690b490f6737e0089aaf3a9e319ac0e9667b99044d",
     "processed/scale_flags.csv": "07dc556e9608d6e80fc2c2845b7024a5247d9e6153e6e3a76f3717caf7ffc1f8",
     "processed/lei_relations.csv": "e5445c268f3b46c5e6b23f296d8bb885450253fe2a75c679734e64bf7378fe3e",
-    "docs/advanced_peers/ownership_research.csv": "7d370ef231c6d472825906b9bb38c72980cd0a6b4a7067bd08c906cba0ddf745"
+    "docs/advanced_peers/ownership_research.csv": "0906a99907a28cebe402862942d08ebc2017b0600733de97ec9cac591e150a0b"
   },
   "joined_parquet_sha256": "8cc95fa2dd4a7d08c7502fb9e433bbe4f311d51ee50a17533730ee9db9fc6cdf"
 }

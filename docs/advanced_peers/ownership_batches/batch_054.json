@@ -1,0 +1,272 @@
+{
+  "batch": "054",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 3,
+  "page_attempts": [
+    {
+      "lei": "7LVZJ6XRIE7VNZ4UBX81",
+      "url": "http://www.bancamediolanum.it",
+      "status": 200,
+      "error": null,
+      "sha256": "655ff592c0e66aace8d0c355712d49dfa4553743590e206de46b1aa9fbd5c39f",
+      "retrieved_at": "2026-10-02T16:33:32Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "7LVZJ6XRIE7VNZ4UBX81",
+      "url": "https://www.bancamediolanum.it/corporate",
+      "status": 200,
+      "error": null,
+      "sha256": "2c8b9dec2d1bcbbf8fbf1c5e7a0023e71cce487b83eb9fca0bffda18a608ec84",
+      "retrieved_at": "2026-10-02T16:33:34Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "7LVZJ6XRIE7VNZ4UBX81",
+      "url": "https://www.bancamediolanum.it/corporate-governance/azionariato",
+      "status": 200,
+      "error": null,
+      "sha256": "97fd2317c0c2c9e728271c11bb3fec4e792b4062ffe7fde047cdbbfa2d3b63c9",
+      "retrieved_at": "2026-10-03T08:39:46Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "391200EEGLNXBBCVKC73",
+      "url": "https://www.s-finanzgruppe.de",
+      "status": 503,
+      "error": "HTTP Error 503: Service Unavailable",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:37:22Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "3H0Q3U74FVFED2SHZT16",
+      "url": "https://www.mbhbank.hu",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:50:03Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400QHDOZWMJ103294",
+      "url": "https://www.aliorbank.pl/en/investor-relations/shareholders.html",
+      "status": 200,
+      "error": null,
+      "sha256": "a321f290c047d58dcaf9e3906309e08ea2c17b9812e2590abc6520655b0083ad",
+      "retrieved_at": "2026-10-02T16:49:06Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400QHDOZWMJ103294",
+      "url": "https://www.aliorbank.pl/en/about-alior-bank.html",
+      "status": 200,
+      "error": null,
+      "sha256": "d79a1b66364558acaca618158313ccba219cccfe3236faec27765287c03429e6",
+      "retrieved_at": "2026-10-02T16:32:11Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400QHDOZWMJ103294",
+      "url": "https://www.pzu.pl/en/investor-relations/shares-and-bonds/shareholding-structure",
+      "status": 200,
+      "error": null,
+      "sha256": "660879ed48915998fbbe78444056aaebede6213051352f54290632580777f2e8",
+      "retrieved_at": "2026-10-02T17:05:05Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400QHDOZWMJ103294",
+      "url": "https://www.pzu.pl/en/investor-relations/shares-and-bonds/shareholding-structure",
+      "purpose": "Read original HTML for omitted chart/table data; no script execution",
+      "status": 200,
+      "sha256": "69d4e7ad43b255e554a994004ec9849cd3370430cbb2b5a2a48e7417b0d0b2a5",
+      "new_network_fetch": false,
+      "retrieved_at": "2026-10-03T08:46:28Z"
+    },
+    {
+      "lei": "TUKDD90GPC79G1KOE162",
+      "url": "https://www.hcob-bank.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "11e39376da098f6bffb6baf874a71fd75e8eff30362ff6dd8243c14a25c75ec1",
+      "retrieved_at": "2026-10-02T16:34:56Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "TUKDD90GPC79G1KOE162",
+      "url": "https://www.hcob-bank.com/geschaeftsfelder/corporates/",
+      "status": 200,
+      "error": null,
+      "sha256": "db23a5953ec4a01de0eab3e939ee96b4b6f0de7d3df3ae543ff9f10fde3d2571",
+      "retrieved_at": "2026-10-02T16:35:06Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "TUKDD90GPC79G1KOE162",
+      "url": "https://www.hcob-bank.com/investor-relations/veroeffentlichungen/",
+      "status": 200,
+      "error": null,
+      "sha256": "1c535a6a067c435762025033aa9d7d7b5aa0c569104d73b7f14729c5a76c8f25",
+      "retrieved_at": "2026-10-03T08:39:49Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "7LVZJ6XRIE7VNZ4UBX81",
+      "name": "BANCA MEDIOLANUM S.P.A.",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.bancamediolanum.it/corporate-governance/azionariato",
+        "sha256": "97fd2317c0c2c9e728271c11bb3fec4e792b4062ffe7fde047cdbbfa2d3b63c9",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:39:46Z",
+        "quote": "tecipazioni nel capitale sociale di Banca Mediolanum S.p.A. Azionista Percentuale Famiglia Doris 40,21% Fininvest S.p.A. 30,03% Altri azionisti 28,92% Azioni proprie 0,83% Comunicato stampa del 5 gennaio 2026 Corporate Governance 05 gennaio 2026 | 13:48 Scarica File Comunicato stampa del 5 gennaio 2026 Corporate Governance 05 gennaio 2026 | 13:34 Scarica File Comunicato stampa del 16 gennaio 2025 Corporate Governance 16 gennaio 2025 | 17:58 Scarica File Estratto Patto Parasociale Marina Berlusconi e Pier Silvio Berlusconi Corporate Governance 16 gennaio 2025 | 17:51 Scarica File Comunicato stampa del 3 gennaio 2025 Corporate Governance 03 gennaio 2025 | 15:39 Scarica File Comunicato stampa del 3 gennaio 2025 Corporate Governance 03 gennaio 2025 | 15:24 Scarica File Comunicato stampa del 5 gennaio 2024 Corporate Governance 05 gennaio 2024 | 15:22 Scarica File Avviso di rinnovo Patto Parasociale Corporate Governance 21 dicembre 2023 | 14:55 Scarica File Comunicato Stampa di deposito estr"
+      },
+      "note": "Current issuer table: Doris family 40.21%, Fininvest 30.03%, other shareholders 28.92%, own shares 0.83%. Former Doris/Fininvest syndicate expired without renewal 15 September 2019; it is not asserted currently binding. Current family pact separately described; no ownership inference from founder history or unrelated charitable foundation.",
+      "bank_identity": {
+        "legal_name": "BANCA MEDIOLANUM SPA",
+        "registered_as": "02124090164",
+        "jurisdiction": "IT",
+        "gleif_record_sha256": "9b2b857ffc66f15c5876a672e3e6194dd53f2f8277471667df5a0a7ee854ef32"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "009"
+    },
+    {
+      "lei": "259400QHDOZWMJ103294",
+      "name": "ALIOR BANK S.A.",
+      "ownership": "mixed",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.pzu.pl/en/investor-relations/shares-and-bonds/shareholding-structure",
+        "sha256": "69d4e7ad43b255e554a994004ec9849cd3370430cbb2b5a2a48e7417b0d0b2a5",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "hareholder structure Share split FAQ and useful links Bonds Changes in PZU SA shareholding structure from the IPO, including the shareholders holding more than 5% of all votes. Shareholders 9.06.2026 9.07.2026 State Treasury 34.2% 34.2% BlackRock, Inc. 5.0% X Other shareholders 60.8% 65.8% Documents to download Shareholder structure 2010-2026 16kB INVESTOR RELATIONS About the group Reports Shares and bonds Sustainability Downloads Contact for investors CONTACT kontakt@pzu.pl +48 801 102 102 CONTACT FOR INVESTORS ir@pzu.pl +48 (22) 582 26 23 SOCIAL MEDIA Facebook Twitter YouTube PZU APPS iOS Android PL ENG GDPR Privacy Policy © 2026 Copyright PZU Zamknij Szukaj"
+      },
+      "note": "Explicit active, published, fully corroborated accounting-control relation to exact PZU SA and current original shareholder table reviewed. Mixed group ownership; no multiplication of State ownership percentages into bank votes or assertion of bank public majority. Pekao PFR position is not separately assumed from its name. Alior PZU group 31.91% is not equated with majority share ownership.",
+      "controller_lei": "QLPCKOOKVX32FUELX240",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/259400QHDOZWMJ103294/ultimate-parent-relationship",
+        "sha256": "fe6ea1108e19374ad26698998c19df8ec23c52029a0aeb3b75dbbc015e3db0ba",
+        "relationship": {
+          "startNode": {
+            "id": "259400QHDOZWMJ103294",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "QLPCKOOKVX32FUELX240",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2023-12-31T23:00:00Z",
+              "endDate": "2024-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2015-12-17T23:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2015-12-17T23:00:00Z",
+          "lastUpdateDate": "2025-12-01T10:52:56Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-01-10T17:53:56Z",
+          "managingLou": "259400L3KBYEVNHEJF55",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "ALIOR BANK SPÓŁKA AKCYJNA",
+        "registered_as": "0000305178",
+        "jurisdiction": "PL",
+        "gleif_record_sha256": "bc955e0f9d6af632e1ebff3eeca21bc38b6ddfb61dfbb4487ee437303bda6e24"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "010"
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "391200EEGLNXBBCVKC73",
+      "name": "Erwerbsgesellschaft der S-Finanzgruppe mbH & Co. KG",
+      "rank": 28,
+      "trea_eur": 15508102262.51,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Verify exact Erwerbsgesellschaft der S-Finanzgruppe shareholders in an official filed register/report. Temporary 503 and savings-sector association are not public-law ownership proof; retain explicit bank/holding identity check.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.s-finanzgruppe.de",
+          "status": 503,
+          "error": "HTTP Error 503: Service Unavailable"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "009",
+      "previous_next_action": "Candidate site temporarily failed and DSGV organisation path was 404. Next: Verify this Erwerbsgesellschaft’s exact shareholders in an official filed report/register, including public-law savings banks; sector membership alone is not proof."
+    },
+    {
+      "lei": "3H0Q3U74FVFED2SHZT16",
+      "name": "MBH bankcsoport",
+      "rank": 29,
+      "trea_eur": 14777621471.5064,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use an alternative official Hungarian exchange/issuer current report for MBH ownership and exact group LEI, including public/private/foundation positions. Cached bank 403 is not retried or bypassed.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.mbhbank.hu",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "010",
+      "previous_next_action": "Bank source access returned 403. Next: Use an alternative official issuer annual report or Hungarian exchange qualifying-holdings disclosure for MBH; verify public/private/foundation stakes and exact bank/group identity. Do not retry denied URLs."
+    },
+    {
+      "lei": "TUKDD90GPC79G1KOE162",
+      "name": "Hamburg Commercial Bank AG",
+      "rank": 31,
+      "trea_eur": 13054215444.93,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use the actual HCOB report download metadata to 2025/H1-2026 shareholder note and current Cerberus/J.C.Flowers legal owners. Retrieved publications page exposes dates but no usable document URLs; private-commercial banking description is not ownership evidence.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "010",
+      "previous_next_action": "Bank overview describes a private commercial bank but does not establish the current shareholders. Next: Use the latest HCOB issuer annual-report ownership note to verify Cerberus/J.C.Flowers holdings and actual current parent entities; private commercial-bank description alone is not shareholder proof."
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

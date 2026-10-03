@@ -1,0 +1,497 @@
+{
+  "batch": "057",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 4,
+  "page_attempts": [
+    {
+      "lei": "815600F24AE25C9D1B94",
+      "url": "https://www.sellagroup.eu",
+      "status": 200,
+      "error": null,
+      "sha256": "9b1fd6150abc2c83439ae014e236004e16cebe2fa5497e0fc4c765945a2dd5b2",
+      "retrieved_at": "2026-10-02T23:50:09Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "815600F24AE25C9D1B94",
+      "url": "https://www.sellagroup.eu/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "c49542ba95f2f1fb24fbec9c76e890321d1948234ed737c56b1005e79f42edde",
+      "retrieved_at": "2026-10-03T08:37:27Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "635400DTNHVYGZODKQ93",
+      "url": "https://www.ptsb.ie/about-us/notices/2026/july/ptsbs-shareholders-vote-in-favour-of-the-bawag-acquisition/",
+      "status": 200,
+      "error": null,
+      "sha256": "dff3feb73b798a392933147ba34cf60cbc205147c19d421248604dfd4d2ae30c",
+      "retrieved_at": "2026-10-02T23:54:37Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "635400DTNHVYGZODKQ93",
+      "url": "https://www.ptsb.ie/about-us/notices/",
+      "status": 200,
+      "error": null,
+      "sha256": "4cf179d69239b003866035bae315150c1c18766e8bf56ee68f6692ef9b10cd47",
+      "retrieved_at": "2026-10-03T08:37:27Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5299003ATVTQVPTW4735",
+      "url": "https://www.btv.at",
+      "status": 200,
+      "error": null,
+      "sha256": "000499d32bad6f1fb053fcd6e7a6e4ebd6838d6d841aa35d8622dfce9fe0fb3c",
+      "retrieved_at": "2026-10-02T16:32:22Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299003ATVTQVPTW4735",
+      "url": "https://btv.at/ueber-uns/",
+      "status": 200,
+      "error": null,
+      "sha256": "39d9a2de4b1154647b7daafde0a8fbe58e8d2b6437161ca0b7e7c04b80ef4ad8",
+      "retrieved_at": "2026-10-02T16:50:27Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299003ATVTQVPTW4735",
+      "url": "https://btv.at/ueber-uns/investor-relations/",
+      "status": 200,
+      "error": null,
+      "sha256": "cf527c4daf1a08cb36df1e0af153a1cb255a23ed0dbb356a4eeed6792b7e326e",
+      "retrieved_at": "2026-10-02T16:32:25Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299003ATVTQVPTW4735",
+      "url": "https://btv.at/ueber-uns/investor-relations/btv-aktie/",
+      "status": 200,
+      "error": null,
+      "sha256": "fe536fb4e0e797b5b46d8b5caa2fe739a955b00b67f49700d6d2bacfd368f388",
+      "retrieved_at": "2026-10-02T23:59:22Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300UARE5MHTBUPJ19",
+      "url": "https://www.hcob-bank.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "11e39376da098f6bffb6baf874a71fd75e8eff30362ff6dd8243c14a25c75ec1",
+      "retrieved_at": "2026-10-02T23:50:15Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300UARE5MHTBUPJ19",
+      "url": "https://www.hcob-bank.com/geschaeftsfelder/corporates/",
+      "status": 200,
+      "error": null,
+      "sha256": "db23a5953ec4a01de0eab3e939ee96b4b6f0de7d3df3ae543ff9f10fde3d2571",
+      "retrieved_at": "2026-10-02T16:35:06Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "31570014BNQ1Q99CNQ35",
+      "url": "https://www.ppf.eu",
+      "status": 200,
+      "error": null,
+      "sha256": "c1369908cb550484a134a09d8cc43441502147fe14eb4416af9fa21e9a348d61",
+      "retrieved_at": "2026-10-02T16:49:31Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "31570014BNQ1Q99CNQ35",
+      "url": "https://www.ppf.eu/o-skupine-ppf/lide-a-statutarni-organy",
+      "status": 200,
+      "error": null,
+      "sha256": "807130fc4a3a9adf8b16944b171a52800f8725d9c8716f25fe368dbc65bba20b",
+      "retrieved_at": "2026-10-03T08:37:29Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "31570014BNQ1Q99CNQ35",
+      "url": "https://www.ppf.eu/o-skupine-ppf/lide-a-statutarni-organy/akcionari",
+      "status": 200,
+      "error": null,
+      "sha256": "353842261af4d1153fee3b7f57ca6b07cfd8f2cb095aced6c00d9875ac15875c",
+      "retrieved_at": "2026-10-03T08:39:47Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "815600F24AE25C9D1B94",
+      "name": "MAURIZIO SELLA - SOCIETA' IN ACCOMANDITA PER AZIONI",
+      "rank": 42,
+      "trea_eur": 10112185226.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read exact Maurizio Sella SAA filed shareholder/partner note. Retrieved group investor portal lists bank/group reports, not the requested upstream SAA's owners. Historical family management and VAT-group naming remain insufficient.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "013",
+      "previous_next_action": "Sella group corporate page names the Maurizio Sella VAT group and historic family management; this is not a current holding ownership table. Next: Review the exact Maurizio Sella SAA’s filed accounts/shareholder or partner structure. Historic founder names, current management and VAT group membership do not establish ownership."
+    },
+    {
+      "lei": "635400DTNHVYGZODKQ93",
+      "name": "Permanent TSB Group Holdings Plc",
+      "rank": 43,
+      "trea_eur": 10056839312.5,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use dated current PTSB Group shareholder table and latest completed-sale notice. July-2026 issuer announcement still requires ECB/court approval with Q4-2026/Q1-2027 expectation; shareholder approval is not completion or current BAWAG ownership.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "013",
+      "previous_next_action": "Official July 2026 announcement says BAWAG completion still needs ECB approval and Irish court sanction, expected Q4 2026/Q1 2027. Current pre-completion State/other holdings were not verified. Next: Obtain the dated current PTSB Group shareholder table and latest completion notice. Do not treat shareholder approval as a completed sale or assign BAWAG ownership prematurely."
+    },
+    {
+      "lei": "5299003ATVTQVPTW4735",
+      "name": "BTV Vier Länder Bank AG",
+      "rank": 44,
+      "trea_eur": 10049905530.58305,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read the current BTV owner chart or issuer annual table with amounts/votes. Actual BTV-Aktie page identifies an ownership chart but extraction omits positions; avoid guesses from cross-holdings or generic listed-company form.",
+      "successful_source_pages": 4,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "013",
+      "previous_next_action": "BTV share page describes its shareholder structure, but chart ownership percentages were not extractable from cached text. Next: Read the official current chart or issuer annual-report table for Wüstenrot/Generali/Oberbank/BKS stakes and votes; group cross-holdings may affect control."
+    },
+    {
+      "lei": "549300UARE5MHTBUPJ19",
+      "name": "Promontoria 19 Coöperatie U.A.",
+      "rank": 45,
+      "trea_eur": 9983705657.92,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read exact Promontoria 19 cooperative holding's registered owners/fund-control note, not HCOB downstream business pages. Dutch cooperative holding form does not imply member-owned cooperative banking; preserve exact upstream identity.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "014",
+      "previous_next_action": "HCOB bank overview does not establish Promontoria 19’s own owners. Next: Use Promontoria 19’s exact registered holding identity and official filed report to controlling fund owners; cooperative holding legal form does not imply member-owned cooperative banking."
+    },
+    {
+      "lei": "31570014BNQ1Q99CNQ35",
+      "name": "PPF Financial Holdings AS",
+      "rank": 46,
+      "trea_eur": 9767346023.740927,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Reconcile exact current ultimate parent AMALAR HOLDING s.r.o. (984500CE58365CB10V25) with PPF Group N.V. before ownership reuse. Retrieved PPF source explicitly gives Renata Kellnerova/family 100% of PPF Group NV, not of AMALAR; verify each current bank/holding ownership edge or current AMALAR owner source.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "014",
+      "previous_next_action": "PPF parent relation is fully corroborated, but guessed English group profile leaves failed. Next: Use the official parent annual-report ownership chart for PPF Group NV / Kellner family and exact registered controller LEI, then review the bank/parent relationship.",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "31570014BNQ1Q99CNQ35",
+          "attributes": {
+            "lei": "31570014BNQ1Q99CNQ35",
+            "entity": {
+              "legalName": {
+                "name": "PPF Financial Holdings a.s.",
+                "language": "cs"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "cs",
+                "addressLines": [
+                  "Evropská 2690/17"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Praha",
+                "region": "CZ-10",
+                "country": "CZ",
+                "postalCode": "160 00"
+              },
+              "headquartersAddress": {
+                "language": "cs",
+                "addressLines": [
+                  "Evropská 2690/17"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Praha",
+                "region": "CZ-10",
+                "country": "CZ",
+                "postalCode": "160 00"
+              },
+              "registeredAt": {
+                "id": "RA000163",
+                "other": null
+              },
+              "registeredAs": "10907718",
+              "jurisdiction": "CZ",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "6CQN",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "2014-11-13T23:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2017-12-03T23:00:00Z",
+              "lastUpdateDate": "2026-04-22T07:24:01Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2026-12-08T23:00:00Z",
+              "managingLou": "315700LK78Z7C0WMIL03",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000163",
+                "other": null
+              },
+              "validatedAs": "10907718",
+              "otherValidationAuthorities": []
+            },
+            "bic": null,
+            "mic": null,
+            "ocid": "cz/10907718",
+            "qcc": "QCZN08RB28",
+            "gem": null,
+            "spglobal": [
+              "403586976"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35/direct-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35/direct-parent"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35/ultimate-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35/ultimate-parent"
+              }
+            },
+            "direct-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35/direct-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35/direct-children"
+              }
+            },
+            "isins": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35/isins"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/31570014BNQ1Q99CNQ35"
+          }
+        },
+        "canonical_sha256": "5b301bab04114a970b4c1d7fbc628bed4b583e99226c15ab75a34e60cc279fe6"
+      },
+      "unresolved_control_evidence": {
+        "registered_ultimate_parent_lei": "984500CE58365CB10V25",
+        "registered_ultimate_parent_name": "AMALAR HOLDING s.r.o.",
+        "record": {
+          "type": "lei-records",
+          "id": "984500CE58365CB10V25",
+          "attributes": {
+            "lei": "984500CE58365CB10V25",
+            "entity": {
+              "legalName": {
+                "name": "AMALAR HOLDING s.r.o.",
+                "language": "cs"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "cs",
+                "addressLines": [
+                  "Evropská 2690/17",
+                  "Dejvice"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Praha",
+                "region": "CZ-10",
+                "country": "CZ",
+                "postalCode": "160 00"
+              },
+              "headquartersAddress": {
+                "language": "cs",
+                "addressLines": [
+                  "Evropská 2690/17",
+                  "Dejvice"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Praha",
+                "region": "CZ-10",
+                "country": "CZ",
+                "postalCode": "160 00"
+              },
+              "registeredAt": {
+                "id": "RA000163",
+                "other": null
+              },
+              "registeredAs": "19696477",
+              "jurisdiction": "CZ",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "9HLU",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "2023-09-06T00:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2024-02-19T17:16:43Z",
+              "lastUpdateDate": "2025-12-22T06:37:48Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-02-19T17:16:44Z",
+              "managingLou": "529900T8BM49AURSDO55",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000163",
+                "other": null
+              },
+              "validatedAs": "19696477",
+              "otherValidationAuthorities": []
+            },
+            "bic": null,
+            "mic": null,
+            "ocid": null,
+            "qcc": "QCZYX9RCBC",
+            "gem": null,
+            "spglobal": [
+              "1872163591"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/984500CE58365CB10V25/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/984500CE58365CB10V25/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/984500CE58365CB10V25/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/984500CE58365CB10V25/direct-parent-reporting-exception"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/984500CE58365CB10V25/ultimate-parent-reporting-exception"
+              }
+            },
+            "direct-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/984500CE58365CB10V25/direct-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/984500CE58365CB10V25/direct-children"
+              }
+            },
+            "ultimate-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/984500CE58365CB10V25/ultimate-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/984500CE58365CB10V25/ultimate-children"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/984500CE58365CB10V25"
+          }
+        },
+        "canonical_sha256": "89281e7a41d368a1e13bd53c3b7e5b9309e8215398907fcb2d569392d978076a",
+        "different_entity_source": {
+          "url": "https://www.ppf.eu/o-skupine-ppf/lide-a-statutarni-organy/akcionari",
+          "quote": "Renáta Kellnerová s rodinou — Akcionáři, PPF Group N.V. — Podíl 100 %",
+          "does_not_identify_amalar_owners": true,
+          "sha256": "353842261af4d1153fee3b7f57ca6b07cfd8f2cb095aced6c00d9875ac15875c",
+          "retrieved_at": "2026-10-03T08:39:47Z"
+        }
+      }
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

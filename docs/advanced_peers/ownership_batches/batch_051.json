@@ -1,0 +1,273 @@
+{
+  "batch": "051",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 7,
+  "page_attempts": [
+    {
+      "lei": "95980020140005881190",
+      "url": "https://www.bcc.es",
+      "status": 200,
+      "error": null,
+      "sha256": "25c8be737838a831880a9d30e0b5df3b51179d1bf7ccbe7b453a4a5dc5754dbb",
+      "retrieved_at": "2026-10-02T23:48:54Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "95980020140005881190",
+      "url": "https://www.bcc.es/es/informacion-corporativa/sala-de-prensa/ano-2026/dbrs-mejora-un-escalon-el-rating-a-largo-plazo-de-grupo-cooperativo-cajamar-a-bbb-high/",
+      "status": 200,
+      "error": null,
+      "sha256": "d21ec85b5c7049ceb4a8cfe0f8f21b0dc4d0516a67593b6a419e5a7f56748d48",
+      "retrieved_at": "2026-10-03T08:36:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "95980020140005881190",
+      "url": "https://www.bcc.es/storage/documents/473/presentacion-institucional-gcc.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "c6a21f1d9399f0ee94f9146fae1b55fba37935e86129f69a350140d3a098da32",
+      "retrieved_at": "2026-10-02T23:58:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "95980020140005881190",
+      "url": "https://www.bcc.es/storage/documents/473/presentacion-institucional-gcc.pdf",
+      "purpose": "Visual verification of archived ownership diagram; original PDF hash matched",
+      "status": 200,
+      "sha256": "c6a21f1d9399f0ee94f9146fae1b55fba37935e86129f69a350140d3a098da32",
+      "new_network_fetch": true,
+      "retrieved_at": "2026-10-03T08:49:55Z"
+    },
+    {
+      "lei": "5493007SJLLCTM6J6M37",
+      "url": "https://www.unicajabanco.es",
+      "status": 200,
+      "error": null,
+      "sha256": "da1c1b24c24727730ac9f0f1c05fd999a62a38cbc246d2ba9697186b57b415e2",
+      "retrieved_at": "2026-10-02T16:33:06Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493007SJLLCTM6J6M37",
+      "url": "https://www.unicajabanco.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "5e3179d056c2a7c660f9a0dee8edb07d56391eef37c90641fe6fc2dfaf88e053",
+      "retrieved_at": "2026-10-03T08:41:50Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493007SJLLCTM6J6M37",
+      "url": "https://www.unicajabanco.com/es/inversores-y-accionistas/informacion-general/participaciones-significativas-y-autocartera",
+      "status": 200,
+      "error": null,
+      "sha256": "eae373634b6399e2d7dc1a65c7c483e9378c79df1b0666887d4e16e8938d16aa",
+      "retrieved_at": "2026-10-03T08:43:12Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900JZTYE3W7WQH904",
+      "url": "https://www.haspa-finanzholding.de",
+      "status": 200,
+      "error": null,
+      "sha256": "4de1d8c62efb7fd883cec744564b5cae012981ff24e18d2937b0ecd0daf1347d",
+      "retrieved_at": "2026-10-02T16:52:28Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900JZTYE3W7WQH904",
+      "url": "https://haspafinanzholding.de/unternehmen",
+      "status": 200,
+      "error": null,
+      "sha256": "b2ce73ab8092af670cdd34f3157fc31a6dabd4cfd10d492a98fd0bf198d57a25",
+      "retrieved_at": "2026-10-02T16:52:31Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "9KOGW2C2FCIOJQ7FF485",
+      "url": "https://www.csas.cz/",
+      "status": 200,
+      "error": null,
+      "sha256": "182e1727821c36aaf4d509adf3c08d80529e0f15a8884f00d38ddcc2ca378620",
+      "retrieved_at": "2026-10-02T16:33:56Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "9KOGW2C2FCIOJQ7FF485",
+      "url": "https://www.csas.cz/cs/o-nas/bezpecnost-ochrana-dat",
+      "status": 200,
+      "error": null,
+      "sha256": "0217158c2c641c2501eb2d8ea8a155f85b8c8f518fdb405fa3a378bfac7b423e",
+      "retrieved_at": "2026-10-03T08:36:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9KOGW2C2FCIOJQ7FF485",
+      "url": "https://cdn.erstegroup.com/content/dam/at/eh/www_erstegroup_com/en/Investor_Relations/Shareholder_Structure_Development.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "8e2623c15c18f7afb9736b81329af2369aa67a7457372f4d74218d05eb023d41",
+      "retrieved_at": "2026-10-03T08:39:44Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "J48C8PCSJVUBR8KCW529",
+      "url": "https://www.popso.it",
+      "status": 200,
+      "error": null,
+      "sha256": "6e8a798f69c2e2565b44772c3750b4c289a60356891bc4be298d0f743f71a9ed",
+      "retrieved_at": "2026-10-03T08:36:57Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "95980020140005881190",
+      "name": "Banco de Crédito Social Cooperativo",
+      "ownership": "cooperative",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.bcc.es/storage/documents/473/presentacion-institucional-gcc.pdf",
+        "sha256": "c6a21f1d9399f0ee94f9146fae1b55fba37935e86129f69a350140d3a098da32",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T23:58:55Z",
+        "quote": "Page 28, Gobierno corporativo: Cajamar Caja Rural / Resto Cajas Rurales → 97,41% Accionariado → BCC. La base de nuestro modelo son las cooperativas de crédito. Cada una mantiene su arraigo local, con la Asamblea General de Socios como máximo órgano de decisión y un Consejo Rector encargado de la supervisión directa.",
+        "quote_kind": "visual_diagram_transcription",
+        "pdf_page": 28,
+        "cooperative_share_percent": 97.41,
+        "verified_pdf_sha256": "c6a21f1d9399f0ee94f9146fae1b55fba37935e86129f69a350140d3a098da32"
+      },
+      "note": "Original institutional presentation visually reviewed on page 28: shareholder arrow explicitly runs from Cajamar Caja Rural and other rural cooperative banks to BCC with 97.41%. Page 4 separately confirms 18 credit cooperatives and consolidable group. Current source describes majority cooperative ownership, not merely founding history. PDF bytes re-fetched and SHA-256 matched archived source before visual inspection.",
+      "bank_identity": {
+        "legal_name": "BANCO DE CREDITO SOCIAL COOPERATIVO SA",
+        "registered_as": "1000291962359",
+        "jurisdiction": "ES",
+        "gleif_record_sha256": "f1039bd8ed39e5ca54866fb1c94840c5e6f28dbf6879a666ab29afb53cbfba5f"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "005"
+    },
+    {
+      "lei": "9KOGW2C2FCIOJQ7FF485",
+      "name": "Česká spořitelna, a.s.",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://cdn.erstegroup.com/content/dam/at/eh/www_erstegroup_com/en/Investor_Relations/Shareholder_Structure_Development.pdf",
+        "sha256": "8e2623c15c18f7afb9736b81329af2369aa67a7457372f4d74218d05eb023d41",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "Erste Group Bank AG - Shareholder Structure Development 30.06.2026 Total number of shares: 410,514,384 By investor By region ERSTE Foundation direct 6.08% Austria 32.65% Sparkassenbeteiligungs GmbH & Co KG 12.59% North America 28.40% Foundations 1 3.71% UK & Ireland 16.15% Wiener Städtische Versicherungsverein 4.27% Continental Europe 17.31% Institutional Investors 59.03% Rest of world 1.93% BlackRock 5.05% Identified Trading** 0.25% Retail Investors 5.71% Unidentified* 3.31% Identified Trading** 0.25% Unidentified* 3.31% 31.03.2026 Total number of shares: 410,514,384 By investor By region ERSTE Foundation direct 6.04% Austria 32.51% Sparkassenbeteiligungs GmbH & Co KG 12.59% North America 28.43% Foundations 1 3.59% UK & Ireland 15.57% Wiener Städtische Versicherungsverein 4.27% Continental Europe 17.27% Institutional Investors 58.66% Rest of world 2.13% BlackRock 5.05% Identified Trading** 0.25% Retail Investors 5.71% Unidentified* 3.84% Identified Trading** 0.25% Unidentified* 3.84% 1 Erste Employees Private Foundation, Syndicated Savings Banks Foundations, own holdings of Savings Banks *Institutional and Retail Investors **Including Market Makers. Prime Brokerage. Proprietary Trading. Collateral and Stock Lending positions "
+      },
+      "note": "Explicit active, published, fully corroborated accounting-control relation to exact Erste Group Bank AG and dated shareholder table reviewed. Group-model category, not 100% bank shares, direct foundation ownership or absence of minority bank shareholders. Current registered Polish name is Erste Bank Polska; EBA legacy alias and historical report dates do not define historical ownership.",
+      "controller_lei": "PQOH26KWDF7CG10L6792",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/9KOGW2C2FCIOJQ7FF485/ultimate-parent-relationship",
+        "sha256": "95d9aceaadc120b2958c17ebf6d15e191d80af19edc08c92674a191bcfd36e1c",
+        "relationship": {
+          "startNode": {
+            "id": "9KOGW2C2FCIOJQ7FF485",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "PQOH26KWDF7CG10L6792",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2020-02-03T23:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2023-12-31T23:00:00Z",
+              "endDate": "2024-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2020-02-03T23:00:00Z",
+          "lastUpdateDate": "2026-02-11T12:42:22Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-03-09T23:00:00Z",
+          "managingLou": "315700LK78Z7C0WMIL03",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "Česká spořitelna, a.s.",
+        "registered_as": "45244782",
+        "jurisdiction": "CZ",
+        "gleif_record_sha256": "70ce01e0b4066c072ee47dcdfb69669102407d7f065a0fd9fc86ed17f5039cac"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "006"
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "5493007SJLLCTM6J6M37",
+      "name": "Unicaja Banco, S.A.",
+      "rank": 13,
+      "trea_eur": 30097390082.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read the original current ownership table or linked CNMV significant-holdings notices on the now discovered corporate Participaciones significativas y Autocartera page. Extracted navigation lacks actual holder data; distinguish Fundacion Unicaja, Mayoral and voting caps from unrelated retail pages.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "005",
+      "previous_next_action": "Guessed issuer ownership/investor paths returned 404. Next: Find the current Unicaja issuer shareholder table via its actual corporate navigation; distinguish Fundación Unicaja/Mayoral/other holdings and voting caps."
+    },
+    {
+      "lei": "529900JZTYE3W7WQH904",
+      "name": "HASPA Finanzholding",
+      "rank": 14,
+      "trea_eur": 29971856760.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Obtain exact HASPA Finanzholding founding statute and current Hamburg register old-law legal-person evidence. Current company/disclosure navigation does not establish ownerless status; do not infer municipal or autonomous savings ownership from Sparkasse brand.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "005",
+      "previous_next_action": "Official pages establish Haspa’s holding role, not its own membership/ownership; disclosure report gives no explicit ownerless status. Next: Review the current Hamburg register entry and founding statute for the exact old-law legal person; verify autonomous/ownerless structure before using the savings category. Do not infer municipal ownership from Sparkasse."
+    },
+    {
+      "lei": "J48C8PCSJVUBR8KCW529",
+      "name": "BANCA POPOLARE DI SONDRIO SOCIETA' PER AZIONI",
+      "rank": 16,
+      "trea_eur": 24332992114.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use official completed BPER takeover/merger notices and registered LEI status to applicable current/historical bank ownership. Retrieved Popolare di Sondrio homepage is only navigation; SA form is not owners' identity.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "006",
+      "previous_next_action": "Current Popolare di Sondrio institutional page is sparse and candidate BPER ownership path failed. Next: Review official BPER takeover/merger completion notices and legal register to determine whether the bank still exists under this LEI and the applicable control date; SA form does not prove the owners."
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

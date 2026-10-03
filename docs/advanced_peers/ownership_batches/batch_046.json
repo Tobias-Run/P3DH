@@ -1,0 +1,208 @@
+{
+  "batch": "046",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 6,
+  "page_attempts": [
+    {
+      "lei": "RY3KI4Q2655O2GIL8D68",
+      "url": "https://www.bancainvestis.com",
+      "status": 200,
+      "error": null,
+      "sha256": "165c205086337ce56b71555fded797c0e8ef0795fb6ad29bd7ff94a3ff6b5e86",
+      "retrieved_at": "2026-10-03T08:36:29Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "RY3KI4Q2655O2GIL8D68",
+      "url": "https://www.bancainvestis.com/investor-relations/",
+      "status": 200,
+      "error": null,
+      "sha256": "ceaa028287d901f9dc794ea6785a431f40bddc9227cafbb73394f08b89ab77d2",
+      "retrieved_at": "2026-10-03T08:36:31Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "RY3KI4Q2655O2GIL8D68",
+      "url": "https://www.bancainvestis.com/corporate-governance/",
+      "status": 200,
+      "error": null,
+      "sha256": "94e56eea54e920a91fd314300339d1dc3f0317f736f6ee11e4a82fe2d90dc45b",
+      "retrieved_at": "2026-10-03T08:48:51Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300OMTXWX1144LP69",
+      "url": "https://www.ribbank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "ec0971ab54044670f76ba165568377bb2728e9dd7e62f0e45eb1fc62501aeb65",
+      "retrieved_at": "2026-10-03T08:36:29Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300OMTXWX1144LP69",
+      "url": "https://www.ribbank.com/lv/par-mums",
+      "status": 200,
+      "error": null,
+      "sha256": "e6cd4373f196ae03befcc6114b447101cb297c9132d4be0342aa393fa8854ac2",
+      "retrieved_at": "2026-10-03T08:36:31Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300OMTXWX1144LP69",
+      "url": "https://www.ribbank.com/en/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "3c55123d57dfa9ea4c05c3919649a156bd86463f4d7065a326f413724aad7f65",
+      "retrieved_at": "2026-10-03T08:38:05Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800CBW4NPFP73ZK64",
+      "url": "https://www.ancoriabank.com/el/about-us/governance/shareholders/",
+      "status": 200,
+      "error": null,
+      "sha256": "f8b286bc0a62a527fd1ae1555e73ee6caa930497c753d5f06f0657b900750edd",
+      "retrieved_at": "2026-10-02T16:47:51Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800CBW4NPFP73ZK64",
+      "url": "https://www.ancoriabank.com/about-us/governance/shareholders/",
+      "status": 200,
+      "error": null,
+      "sha256": "9e94763d03ed801f78cb9bc59bf813050b168789c9a43cf9531fcd7da04ba1c8",
+      "retrieved_at": "2026-10-02T16:47:49Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "21380033CFFM2V1ZCK65",
+      "url": "https://www.sparkasse-bank-malta.com",
+      "status": 200,
+      "error": null,
+      "sha256": "f31c55986bc2e630410db0b9ac4af15ef5e49a8631583f5f44a10f186a47322e",
+      "retrieved_at": "2026-10-02T16:46:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "21380033CFFM2V1ZCK65",
+      "url": "https://sbm.bank/About-Us-1/Overview",
+      "status": 200,
+      "error": null,
+      "sha256": "0b950ae0c498ce1324d6a2885d2510ec069199e0ac52408ce5f0cccc2bc8bb40",
+      "retrieved_at": "2026-10-02T16:46:56Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800C78WI8VFJCYR09",
+      "url": "https://www.sparekassenbredebro.dk",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:47:46Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300OMTXWX1144LP69",
+      "name": "Akciju sabiedrība \"Reģionālā investīciju banka\"",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.ribbank.com/en/about-us",
+        "sha256": "3c55123d57dfa9ea4c05c3919649a156bd86463f4d7065a326f413724aad7f65",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:38:05Z",
+        "quote": "a and a credit institution’s licence was obtained. OUR TEAM Shareholders The total share capital of the bank currently amounts to EUR 32.33M. The largest shareholder of the bank is SIA “SKY Investment Holding” that owns 34.353% of shares. More than 10% of shares belong also to SIA “VILLA FLORA” (14.427%), Iurii Rodin (26.902%) and Mark Bekker (10.573%). 34.353% SKY Investment Holding 26.902% Iurii Rodin 14.427% VILLA FLORA 10.573% Mark Bekker Council The RIB* Council represents the interests of shareholders, and its main task is to monitor the operation of the Bank’s Board. The Council is elected for five years; its meetings are convoked at least once a quarter, and the RIB Council consists of five Members of the Council. The latest changes in the composition of the Bank’s Council were registered in the Commercial Register of Latvia on May 2, 2023. Iurii Rodin Chairman of the Supervisory Board Mark Bekker Deputy Chairman of the Supervisory Board ALLA VANETSYANTS Member of the Council M"
+      },
+      "note": "Exact Latvian bank LEI and current issuer shareholder table reviewed: SKY Investment Holding 34.353%, VILLA FLORA 14.427%, Iurii Rodin 26.902%, Mark Bekker 10.573%. Describes corporate/individual shareholder model, not a complete ultimate-owner mapping of every corporate holder or wholly private guarantee.",
+      "bank_identity": {
+        "legal_name": "Akciju sabiedrība \"Reģionālā investīciju banka\"",
+        "registered_as": "40003563375",
+        "jurisdiction": "LV",
+        "gleif_record_sha256": "c2c6ee84a0683432599d368c9dea1dd2a7c2d9afb0bea638a1e2e6907fad0aaf"
+      },
+      "review_mode": "first_review",
+      "previous_batch": ""
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "RY3KI4Q2655O2GIL8D68",
+      "name": "BANCA INVESTIS S.P.A.",
+      "rank": 173,
+      "trea_eur": 245128279.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read Banca Investis's actual Azionisti document linked through investor navigation or registered issuer report. Corporate-governance page describes elected boards, not the current shareholders; do not guess further leaf paths.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "213800CBW4NPFP73ZK64",
+      "name": "ANCORIA INVESTMENTS PLC",
+      "rank": 175,
+      "trea_eur": 199412464.55,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Find the shareholder note for ANCORIA INVESTMENTS PLC itself and match its registered company number. Retrieved Ancoria Bank table concerns another entity (Sievert Larsson 51.39%, Ancoria Insurance 20%, scholarship foundation 12.706%); do not reverse subsidiary ownership into a holding classification.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "21380033CFFM2V1ZCK65",
+      "name": "SPARKASSE (HOLDINGS) MALTA LIMITED",
+      "rank": 176,
+      "trea_eur": 185105768.9,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Bank source explicitly places Sparkasse Holdings Malta under Anteilsverwaltungssparkasse Schwaz. Obtain the exact AVS statute/current filed report to verify its autonomous savings-bank, foundation or public-owner model; Savings Bank Act reference and AVS name alone do not settle it.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "213800C78WI8VFJCYR09",
+      "name": "Sparekassen Bredebro",
+      "rank": 177,
+      "trea_eur": 166879379.79782715,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Sparekassen Bredebro's current registered CVR statutory document or verified official annual report; homepage retrieval failed. Danish F7JY combines savings/cooperative forms and cannot select ownership alone.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.sparekassenbredebro.dk",
+          "status": null,
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+        }
+      ],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

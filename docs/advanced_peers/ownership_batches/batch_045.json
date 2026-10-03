@@ -1,0 +1,188 @@
+{
+  "batch": "045",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 7,
+  "page_attempts": [
+    {
+      "lei": "529900DPOQPLDSF3R482",
+      "url": "https://www.kaiserpartner.bank",
+      "status": 200,
+      "error": null,
+      "sha256": "2d2d93c0a23d9318180f3765706554ace490190a7d65284c4c49d99eab7ba166",
+      "retrieved_at": "2026-10-02T16:51:33Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "EV2XZWMLLXF2QRX0CD47",
+      "url": "https://www.kommuninvest.se",
+      "status": 200,
+      "error": null,
+      "sha256": "d9c481662e89e838e53915929eda210d81bc80d33154a8d613ec299cd458a6f9",
+      "retrieved_at": "2026-10-03T08:36:27Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "EV2XZWMLLXF2QRX0CD47",
+      "url": "https://kommuninvest.se/om-oss/press-och-nyheter/nyheter-svenska/2026-08-25-delarsrapport-2026-stabil-utlaningstillvaxt-i-en-tid-av-omstallning.html",
+      "status": 200,
+      "error": null,
+      "sha256": "d13947185c5963f31c7f2bf3fabd80b179ebc789a6cc6dd800a5ecd10a2f87dd",
+      "retrieved_at": "2026-10-03T08:36:29Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "EV2XZWMLLXF2QRX0CD47",
+      "url": "https://kommuninvest.se/om-oss.html",
+      "status": 200,
+      "error": null,
+      "sha256": "1e7bf2f7ac6ea6590c771e35bcec0d45e98c1080ee8ca433556b7ad226680c03",
+      "retrieved_at": "2026-10-03T08:38:05Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "EV2XZWMLLXF2QRX0CD47",
+      "url": "https://api.gleif.org/api/v1/lei-records/EV2XZWMLLXF2QRX0CD47/ultimate-parent-relationship",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:44:39Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800CQ92347ZCS9V73",
+      "url": "https://www.atlantico.eu",
+      "status": 200,
+      "error": null,
+      "sha256": "af47a0bd051712db8b497380c11207f594b8dcba7e827fcc1c7b1fa06d80f4d8",
+      "retrieved_at": "2026-10-02T16:47:48Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "9845006BAF66DZ35C849",
+      "url": "https://www.lunar.app",
+      "status": 200,
+      "error": null,
+      "sha256": "3a1e50cd4968590f9414467de1fddb0b3be96ccbee6d126c73ecde4357546591",
+      "retrieved_at": "2026-10-03T08:36:27Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9845006BAF66DZ35C849",
+      "url": "https://www.lunar.app/en/personal/corporate",
+      "status": 200,
+      "error": null,
+      "sha256": "38fa89ae8eb02322d3f9994ff702a477652da4cf639fce7d4c898fcde15db573",
+      "retrieved_at": "2026-10-03T08:36:28Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9845006BAF66DZ35C849",
+      "url": "https://cdn.sanity.io/files/inp43svr/production/7601e2851c037f093b2a2af58dcb93edcefe3a8f.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "864aafbab9a3285b0d43d0fc565d7ec1620f9c6bd16792c95c76327f35d09e00",
+      "retrieved_at": "2026-10-03T08:48:51Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900EKPN8EYA3AX590",
+      "url": "https://www.teximbank.bg",
+      "status": 200,
+      "error": null,
+      "sha256": "1922bb7b9ecfb07be8b045fca12dfcf1e71eb52d87a18c7386de66d3d7d5e8f0",
+      "retrieved_at": "2026-10-02T16:51:42Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "529900DPOQPLDSF3R482",
+      "name": "Kaiser Partner Privatbank AG",
+      "rank": 168,
+      "trea_eur": 298562384.77137005,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Kaiser Partner's current legal/governance disclosures or filed Privatbank annual report to identify controlling owners. Private-banking business description is not private ownership; the retrieved homepage contains no ownership passage.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "EV2XZWMLLXF2QRX0CD47",
+      "name": "Kommuninvest - Grupp",
+      "rank": 169,
+      "trea_eur": 288943560.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Retrieve the currently linked Kommuninvest issuer annual report and its shareholder note: distinguish Kommuninvest i Sverige AB (this LEI) from the municipal-member economic association. About-us confirms municipal/regional members, but does not give the exact bank ownership edge. Registered GLEIF record has parent-reporting exceptions; the speculative relationship URL returned 404 and must not be retried.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [
+        {
+          "url": "https://api.gleif.org/api/v1/lei-records/EV2XZWMLLXF2QRX0CD47/ultimate-parent-relationship",
+          "status": 404,
+          "error": "HTTP Error 404: Not Found"
+        }
+      ],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "213800CQ92347ZCS9V73",
+      "name": "ATLÂNTICO EUROPA, SGPS, SA",
+      "rank": 170,
+      "trea_eur": 273193711.328287,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Obtain the exact Atlantico Europa SGPS holding's filed accounts and shareholder/ultimate-owner note. The retrieved atlantico.eu page has only 43 characters; a similarly named operating bank is not holding ownership evidence.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "9845006BAF66DZ35C849",
+      "name": "Lunar Group A/S",
+      "rank": 171,
+      "trea_eur": 260514781.41921332,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Lunar Group A/S's actual consolidated annual report and group shareholder table. Retrieved linked corporate PDF is governance/meeting material without an ownership passage; Lunar Bank being 100% held by Group does not identify the Group's owners.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    },
+    {
+      "lei": "529900EKPN8EYA3AX590",
+      "name": "Texim Bank AD",
+      "rank": 172,
+      "trea_eur": 249733236.39999998,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Texim Bank's Bulgarian issuer annual report or exchange qualifying-holdings table and confirm this registered LEI. Generic homepage and listed-company form do not establish owners.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "review_mode": "first_review",
+      "previous_batch": "",
+      "previous_next_action": ""
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

@@ -1,0 +1,434 @@
+{
+  "batch": "050",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 5,
+  "page_attempts": [
+    {
+      "lei": "54930056IRBXK0Q1FP96",
+      "url": "https://www.abanca.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "a4665ee3aa3335db5a9c8d776e8cfcd6aaea455bdbcf66f53b19deda463777b7",
+      "retrieved_at": "2026-10-02T16:33:01Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "54930056IRBXK0Q1FP96",
+      "url": "https://www.abancacorporacionbancaria.com/en/investors/corporate-governance/",
+      "status": 200,
+      "error": null,
+      "sha256": "6c27db733b564b1f408dcb51ae2925e43c458d932cf0a255dc6d83fe7747b88b",
+      "retrieved_at": "2026-10-03T08:41:42Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "54930056IRBXK0Q1FP96",
+      "url": "https://www.abancacorporacionbancaria.com/files/documents/memoria-anual-2025vf-en-d10c08aa.pdf",
+      "status": null,
+      "error": "Response exceeds 16 MiB evidence limit",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:43:12Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "M6AD1Y1KW32H8THQ6F76",
+      "url": "https://www.piraeusholdings.gr",
+      "status": 200,
+      "error": null,
+      "sha256": "4ced75312b7cb912ba72fa33b356c88724c077ac6515f2d63575f46b6151fcd7",
+      "retrieved_at": "2026-10-02T23:48:31Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "M6AD1Y1KW32H8THQ6F76",
+      "url": "https://www.piraeusgroup.gr/-/jssmedia/Com/2025/Files/Investors/Financials/Financial-Results/12M/Piraeus-Bank-SA_Annual-Financial-Report-2025-of-PB.pdf?sc_lang=el",
+      "status": 200,
+      "error": null,
+      "sha256": "6c58c758d8f093841bc72b6a46f07c749dce56922906323ea8562eeaeabd257b",
+      "retrieved_at": "2026-10-02T23:53:18Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400LGXW3K0GDAG361",
+      "url": "https://www.erste.pl/",
+      "status": 200,
+      "error": null,
+      "sha256": "1624319a41f0dc5468bf82ef4b0ec775727ee684420f55c89dbd476527b049e9",
+      "retrieved_at": "2026-10-02T16:32:07Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400LGXW3K0GDAG361",
+      "url": "https://www.erste.pl/en/about-erste",
+      "status": 200,
+      "error": null,
+      "sha256": "d1a0d883d71c1b2fa146cc20b5d24865fedf807dacced8cdc8f9e9c3dc11d04c",
+      "retrieved_at": "2026-10-02T16:32:10Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400LGXW3K0GDAG361",
+      "url": "https://cdn.erstegroup.com/content/dam/at/eh/www_erstegroup_com/en/Investor_Relations/Shareholder_Structure_Development.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "8e2623c15c18f7afb9736b81329af2369aa67a7457372f4d74218d05eb023d41",
+      "retrieved_at": "2026-10-03T08:39:44Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800DBQIB6VBNU5C64",
+      "url": "https://www.alpha.gr/",
+      "status": 200,
+      "error": null,
+      "sha256": "636768deb378fc42ce9b8a999d28263acbe25255c3a58748d210627ed0ba91d0",
+      "retrieved_at": "2026-10-02T16:32:00Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800DBQIB6VBNU5C64",
+      "url": "https://www.alpha.gr/-/media/AlphaGr/Files/Group/Press-Releases/2026/20260928-deltio-typou.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "ff82fe139a94ec7597192d362d29f19acb4ea0297346817d52a0f6111641eb10",
+      "retrieved_at": "2026-10-02T16:47:51Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300U4LIZV0REEQQ46",
+      "url": "https://www.kutxabank.es",
+      "status": 200,
+      "error": null,
+      "sha256": "101cdfaa71362dadeafcbc38d2f3123b700cd58b28392034c869ea5991abbe0f",
+      "retrieved_at": "2026-10-02T23:48:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300U4LIZV0REEQQ46",
+      "url": "http://www.kutxabank.com/cs/Satellite/kutxabank/en/home",
+      "status": 200,
+      "error": null,
+      "sha256": "f6b6834a9b58fbbaaae6b62638c769ce7e6d240d56efbb7d1fc04482656f56ec",
+      "retrieved_at": "2026-10-03T08:41:44Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300U4LIZV0REEQQ46",
+      "url": "https://www.kutxabank.com/cs/Satellite/kutxabank/en/quienes__brsomos_",
+      "status": 200,
+      "error": null,
+      "sha256": "4f385d8ac2132f0c2ee45ac53212b89092f327bebd67da7c014821e78b9a9a32",
+      "retrieved_at": "2026-10-03T08:44:40Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "259400LGXW3K0GDAG361",
+      "name": "Santander Bank Polska S.A.",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://cdn.erstegroup.com/content/dam/at/eh/www_erstegroup_com/en/Investor_Relations/Shareholder_Structure_Development.pdf",
+        "sha256": "8e2623c15c18f7afb9736b81329af2369aa67a7457372f4d74218d05eb023d41",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "Erste Group Bank AG - Shareholder Structure Development 30.06.2026 Total number of shares: 410,514,384 By investor By region ERSTE Foundation direct 6.08% Austria 32.65% Sparkassenbeteiligungs GmbH & Co KG 12.59% North America 28.40% Foundations 1 3.71% UK & Ireland 16.15% Wiener Städtische Versicherungsverein 4.27% Continental Europe 17.31% Institutional Investors 59.03% Rest of world 1.93% BlackRock 5.05% Identified Trading** 0.25% Retail Investors 5.71% Unidentified* 3.31% Identified Trading** 0.25% Unidentified* 3.31% 31.03.2026 Total number of shares: 410,514,384 By investor By region ERSTE Foundation direct 6.04% Austria 32.51% Sparkassenbeteiligungs GmbH & Co KG 12.59% North America 28.43% Foundations 1 3.59% UK & Ireland 15.57% Wiener Städtische Versicherungsverein 4.27% Continental Europe 17.27% Institutional Investors 58.66% Rest of world 2.13% BlackRock 5.05% Identified Trading** 0.25% Retail Investors 5.71% Unidentified* 3.84% Identified Trading** 0.25% Unidentified* 3.84% 1 Erste Employees Private Foundation, Syndicated Savings Banks Foundations, own holdings of Savings Banks *Institutional and Retail Investors **Including Market Makers. Prime Brokerage. Proprietary Trading. Collateral and Stock Lending positions "
+      },
+      "note": "Explicit active, published, fully corroborated accounting-control relation to exact Erste Group Bank AG and dated shareholder table reviewed. Group-model category, not 100% bank shares, direct foundation ownership or absence of minority bank shareholders. Current registered Polish name is Erste Bank Polska; EBA legacy alias and historical report dates do not define historical ownership.",
+      "controller_lei": "PQOH26KWDF7CG10L6792",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/259400LGXW3K0GDAG361/ultimate-parent-relationship",
+        "sha256": "280e3876db1c6d19cd9fb2021c4aca8860f426f0a10326b1f0f332a0b22fb2a8",
+        "relationship": {
+          "startNode": {
+            "id": "259400LGXW3K0GDAG361",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "PQOH26KWDF7CG10L6792",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2024-12-31T23:00:00Z",
+              "endDate": "2025-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2026-01-08T23:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2026-01-08T23:00:00Z",
+          "lastUpdateDate": "2026-04-24T10:36:36Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2026-12-20T12:00:21Z",
+          "managingLou": "259400L3KBYEVNHEJF55",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "ERSTE BANK POLSKA SPÓŁKA AKCYJNA",
+        "registered_as": "0000008723",
+        "jurisdiction": "PL",
+        "gleif_record_sha256": "0a9deafaea74cc3e8881bb44b8ffa9d5ce200d28247d852e263516790ee77a18"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "004"
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "54930056IRBXK0Q1FP96",
+      "name": "Abanca Corporacion Bancaria, S.A.",
+      "rank": 7,
+      "trea_eur": 39116279545.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read the actual linked ABANCA 2025 annual-report ownership note for ABANCA Holding Financiero/Banesco and controlling parties using a separately budgeted large-document pass. File exceeded collector's 16-MiB limit; do not infer owners from access failure or substitute founder history.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [
+        {
+          "url": "https://www.abancacorporacionbancaria.com/files/documents/memoria-anual-2025vf-en-d10c08aa.pdf",
+          "status": null,
+          "error": "Response exceeds 16 MiB evidence limit"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "003",
+      "previous_next_action": "Corporate general-information page verifies bank identity/capital, but not controlling shareholders. Next: Use the latest ABANCA issuer annual-report ownership note to verify ABANCA Holding Financiero/Banesco and Escotet; inspect the current shareholder percentages."
+    },
+    {
+      "lei": "M6AD1Y1KW32H8THQ6F76",
+      "name": "Piraeus Financial Holdings",
+      "rank": 8,
+      "trea_eur": 36604471638.4367,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Reconcile the INACTIVE Piraeus Financial Holdings LEI with dated bank/holding merger and successor LEI. Retrieved 2025 report is explicitly Piraeus Bank SA, a different legal identity; use historical-date evidence before assigning surviving bank owners to retired holding facts.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "003",
+      "previous_next_action": "Retrieved official annual report is in Greek and concerns Piraeus Bank; mapping to the former Holdings LEI is not yet verified. Next: Reconcile the bank/holding merger and surviving LEI with official announcements and register data, then review the report’s shareholder table. Do not assign a new bank’s owners to the former holding by name alone.",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "M6AD1Y1KW32H8THQ6F76",
+          "attributes": {
+            "lei": "M6AD1Y1KW32H8THQ6F76",
+            "entity": {
+              "legalName": {
+                "name": "ΠΕΙΡΑΙΩΣ FINANCIAL HOLDINGS ΑΝΩΝΥΜΗ ΕΤΑΙΡΕΙΑ",
+                "language": "el"
+              },
+              "otherNames": [
+                {
+                  "name": "ΠΕΙΡΑΙΩΣ FINANCIAL HOLDINGS",
+                  "language": "el",
+                  "type": "TRADING_OR_OPERATING_NAME"
+                },
+                {
+                  "name": "ΤΡΑΠΕΖΑ ΠΕΙΡΑΙΩΣ ΑΝΩΝΥΜΟΣ ΕΤΑΙΡΕΙΑ",
+                  "language": "el",
+                  "type": "PREVIOUS_LEGAL_NAME"
+                }
+              ],
+              "transliteratedOtherNames": [
+                {
+                  "name": "PIRAEUS FINANCIAL HOLDINGS S.A.",
+                  "language": "el",
+                  "type": "PREFERRED_ASCII_TRANSLITERATED_LEGAL_NAME"
+                }
+              ],
+              "legalAddress": {
+                "language": "el",
+                "addressLines": [
+                  "4, AMERIKIS STR.",
+                  "94, VAS. SOFIAS AVE. & 1 KERASSOUNTOS STR., 11528"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "ATHENS",
+                "region": null,
+                "country": "GR",
+                "postalCode": "10564"
+              },
+              "headquartersAddress": {
+                "language": "el",
+                "addressLines": [
+                  "4, AMERIKIS STR.",
+                  "94, VAS. SOFIAS AVE. & 1 KERASSOUNTOS STR., 11528"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "ATHENS",
+                "region": null,
+                "country": "GR",
+                "postalCode": "10564"
+              },
+              "registeredAt": {
+                "id": "RA000685",
+                "other": null
+              },
+              "registeredAs": "000225501000",
+              "jurisdiction": "GR",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "W2NK",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "INACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": "PIRAEUS BANK S.A."
+              },
+              "successorEntities": [
+                {
+                  "name": "PIRAEUS BANK S.A.",
+                  "lang": "en"
+                }
+              ],
+              "creationDate": "1916-07-06T00:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": [
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "ACCOUNTS_FILING",
+                      "effectiveDate": "2025-12-19T00:00:00Z",
+                      "recordedDate": "2026-01-21T10:04:53Z",
+                      "type": "MERGERS_AND_ACQUISITIONS",
+                      "status": "COMPLETED",
+                      "affectedFields": [
+                        {
+                          "value": "PIRAEUS BANK S.A.",
+                          "xpath": "/lei:LEIData/lei:LEIRecords/lei:LEIRecord/lei:Entity/lei:SuccessorEntity/lei:SuccessorEntityName"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "registration": {
+              "initialRegistrationDate": "2012-06-27T11:51:00Z",
+              "lastUpdateDate": "2026-01-21T10:10:08Z",
+              "status": "RETIRED",
+              "nextRenewalDate": "2026-06-21T00:00:00Z",
+              "managingLou": "213800WAVVOPS85N2205",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000685",
+                "other": null
+              },
+              "validatedAs": "000225501000",
+              "otherValidationAuthorities": []
+            },
+            "bic": null,
+            "mic": null,
+            "ocid": "gr/000225501000",
+            "qcc": "QGRDHS3J9W",
+            "gem": null,
+            "spglobal": [
+              "678541375"
+            ],
+            "conformityFlag": "NOT_APPLICABLE"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/M6AD1Y1KW32H8THQ6F76/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/M6AD1Y1KW32H8THQ6F76/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/M6AD1Y1KW32H8THQ6F76/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/M6AD1Y1KW32H8THQ6F76/direct-parent-reporting-exception"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/M6AD1Y1KW32H8THQ6F76/ultimate-parent-reporting-exception"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/M6AD1Y1KW32H8THQ6F76"
+          }
+        },
+        "canonical_sha256": "e7474ffb5814994139f45596c46e40147a32f806821f1b85af4c8e46ec9ca594"
+      }
+    },
+    {
+      "lei": "213800DBQIB6VBNU5C64",
+      "name": "Alpha Bank S.A.",
+      "rank": 10,
+      "trea_eur": 32482147955.744,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Alpha's investor-site post-merger report/issuer notices to exact bank-vs-holding LEI, current UniCredit stake and HFSF exit. Retrieved retail homepage and 2026 press release are not the dated ownership table.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "004",
+      "previous_next_action": "Greek homepage/press-release hits and failed English shareholder path are not current ownership evidence. Next: Use Alpha’s actual investor-site navigation and post-merger annual report to verify exact bank vs holding identity, current UniCredit stake and HFSF exit; current public/minority ownership must be dated."
+    },
+    {
+      "lei": "549300U4LIZV0REEQQ46",
+      "name": "Kutxabank, S.A.",
+      "rank": 11,
+      "trea_eur": 30879944000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use the corporate site's actual current annual report/shareholder or 2026 statutory disclosure for BBK/Kutxa/Vital's current foundation status and percentages. Quienes-somos passage describes 2012 founding ownership, not sufficient current foundation ownership. Do not infer public ownership from former cajas.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "005",
+      "previous_next_action": "Corporate information points to a separate corporate website; guessed English ownership paths failed. Next: Follow the exact corporate-site link and current issuer report to BBK/Kutxa/Vital ownership and votes; verify the three banking foundations rather than assume a public savings bank."
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}
