@@ -1,0 +1,254 @@
+{
+  "batch": "014",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 9,
+  "page_attempts": [
+    {
+      "lei": "549300UARE5MHTBUPJ19",
+      "url": "https://www.hcob-bank.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "11e39376da098f6bffb6baf874a71fd75e8eff30362ff6dd8243c14a25c75ec1",
+      "retrieved_at": "2026-10-02T23:50:15Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300UARE5MHTBUPJ19",
+      "url": "https://www.hcob-bank.com/ueber-uns/",
+      "status": 200,
+      "error": null,
+      "sha256": "596508fbfcf99f2464c21c2cc54ac19b2d909ea15fb1574131b20177c13ca6cd",
+      "retrieved_at": "2026-10-02T23:49:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300UARE5MHTBUPJ19",
+      "url": "https://www.hcob-bank.com/ueber-uns/unternehmen/ueberblick/",
+      "status": 200,
+      "error": null,
+      "sha256": "ffa93b4f356a9b4376ad5f7471d405405a5e568daa0821c8e4cac34c009d5cf9",
+      "retrieved_at": "2026-10-02T17:04:57Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300UARE5MHTBUPJ19",
+      "url": "https://www.hcob-bank.com/en/about-us/the-company/overview/",
+      "status": 200,
+      "error": null,
+      "sha256": "87be60f479df8cd508e6355f8db094f635522a6483d07a96a073eb004b0f1377",
+      "retrieved_at": "2026-10-02T23:59:12Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "31570014BNQ1Q99CNQ35",
+      "url": "https://www.ppf.eu",
+      "status": 200,
+      "error": null,
+      "sha256": "c1369908cb550484a134a09d8cc43441502147fe14eb4416af9fa21e9a348d61",
+      "retrieved_at": "2026-10-02T16:49:31Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "31570014BNQ1Q99CNQ35",
+      "url": "https://www.ppf.eu/insights/ppf-group-insights/digitalni-inkluze-ve-skupine-ppf",
+      "status": 200,
+      "error": null,
+      "sha256": "bd7ebcb5b436cb4734aacf47a45a39f38df81f6f66ebd49a630a5b414a366852",
+      "retrieved_at": "2026-10-02T23:50:15Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "31570014BNQ1Q99CNQ35",
+      "url": "https://www.ppf.eu/en/about-us",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "31570014BNQ1Q99CNQ35",
+      "url": "https://www.ppf.eu/en/ppf-group",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:23Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "21380057HUGFEAF25W84",
+      "url": "https://www.noba.bank/about-noba",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:50:15Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "21380057HUGFEAF25W84",
+      "url": "https://www.nordax.se/",
+      "status": 200,
+      "error": null,
+      "sha256": "0d441506c75615b9bc818c47bfc0b8b4fc3b0343a416483e847b3842eee71786",
+      "retrieved_at": "2026-10-02T16:31:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "21380057HUGFEAF25W84",
+      "url": "https://www.noba.bank/about-us",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:39Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "21380057HUGFEAF25W84",
+      "url": "https://www.nobagroup.com/en/about-us/ownership/",
+      "status": 200,
+      "error": null,
+      "sha256": "a5fc30bc6303276bdc26b3dfcb7c9f0c8a9f3d11ff45aeecbb98fe9b3775bc52",
+      "retrieved_at": "2026-10-02T23:59:24Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "315700E9POA724IWFP59",
+      "url": "http://www.jtfg.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "d51a6cad82b3c82a863e3ae38fb72beb1d6598db8041d88d4136ea317c176706",
+      "retrieved_at": "2026-10-02T16:32:14Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "315700E9POA724IWFP59",
+      "url": "https://www.jtfg.com/investors",
+      "status": 200,
+      "error": null,
+      "sha256": "f23256b2638a25a41dfc542e71ad05edbdbe234ba74927ae75b6b5685270a579",
+      "retrieved_at": "2026-10-02T16:32:17Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300VRM6G42M8OWN49",
+      "url": "https://www.sb1ostlandet.no/",
+      "status": 200,
+      "error": null,
+      "sha256": "8512c9b70da2d4d9e1047b92848ceef2d6f258f5612f9816dcfe0085f4d50b7f",
+      "retrieved_at": "2026-10-02T16:33:20Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300VRM6G42M8OWN49",
+      "url": "https://www.sparebank1.no/en/ostlandet/about-us/investor/ownership-structure.html",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:39Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300VRM6G42M8OWN49",
+      "url": "https://www.sparebank1.no/en/ostlandet/about-us/investor.html",
+      "status": 200,
+      "error": null,
+      "sha256": "02107e8ddd28d9c4ec509b76908cb25c3b9aa6b384ffcd0328e04b425cec84ea",
+      "retrieved_at": "2026-10-02T23:59:24Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "315700E9POA724IWFP59",
+      "name": "J&amp;T FINANCE GROUP SE",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.jtfg.com/",
+        "sha256": "d51a6cad82b3c82a863e3ae38fb72beb1d6598db8041d88d4136ea317c176706",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T16:32:14Z",
+        "quote": " Člen představenstva Ing. Michal Sedlák Člen představenstva Akcionáři skupiny RW 45.05% Jozef Tkáč 35.15% Ivan Jakabovič 9.9% Rainbow Wisdom 4.95% Štěpán Ašer 4.95% Igor Kováč Náš příběh Založili jsme J&T Banku Založili jsme první společnost J&T na Slovensku. 1994 J&T Securities Vznik J&T Securities, obchodníka s cennými papíry. 1996 J&T BANKA, a. s. Vstoupili jsme na trh českého bankovnictví, akvizicí Podnikatelské banky vznikla J&T BANKA, a. s. 1998 J&T INVESTIČNÍ SPOLEČNOST, a.s. Vytvořili jsme J&T Asset Management, investiční společnost v České republice. 1998 J&T BANKA, a.s., pobočka zahraničnej banky Otevřeli jsme pobočku J&T Banky na S",
+        "requested_url": "http://www.jtfg.com/"
+      },
+      "note": "Official ownership listing: Jozef Tkac 45.05%, Ivan Jakabovic 35.15%, Rainbow Wisdom 9.9%, other named individuals 4.95% each. Founders total 80.20%; no claim about the ultimate ownership of Rainbow Wisdom.",
+      "bank_identity": {
+        "legal_name": "J&T FINANCE GROUP SE",
+        "registered_as": "27592502",
+        "jurisdiction": "CZ",
+        "gleif_record_sha256": "ae88e375e486df81d079dd82a81f241dc65ebb814890bf71c29c23e7f0b05b26"
+      }
+    },
+    {
+      "lei": "549300VRM6G42M8OWN49",
+      "name": "Sparebank 1 Østlandet",
+      "ownership": "savings",
+      "ownership_basis": "registered_bank_form",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/549300VRM6G42M8OWN49",
+        "sha256": "e8f960ee40e09bd48f69dc148cec8a1d3ce034665effcb78e669cedd7de7f8f9",
+        "hash_kind": "canonical_gleif_record",
+        "retrieved_at": null,
+        "quote": "GLEIF registered bank legal name: SPAREBANK 1 ØSTLANDET. Legal form R71C — Sparebank (Norway, active ELF entry). Entity status: ACTIVE. Registration updated: 2025-12-04T23:14:59Z. Statutory savings-bank form; equity capital certificate investors may coexist with the self-owned core capital."
+      },
+      "note": "Explicit manual review of Norwegian bank identity and statutory R71C Sparebank form using the archived active GLEIF record and official ISO 20275 ELF mapping. Classification describes self-owned savings-bank core capital, not the distribution/control of listed equity capital certificates; not extended to the ASA form of SpareBank 1 Sor-Norge.",
+      "bank_identity": {
+        "legal_name": "SPAREBANK 1 ØSTLANDET",
+        "registered_as": "920 426 530",
+        "jurisdiction": "NO",
+        "gleif_record_sha256": "e8f960ee40e09bd48f69dc148cec8a1d3ce034665effcb78e669cedd7de7f8f9"
+      },
+      "legal_form_evidence": {
+        "elf_code": "R71C",
+        "jurisdiction": "NO",
+        "form": "Sparebank",
+        "source_url": "https://www.gleif.org/en/about-lei/code-lists/iso-20275-entity-legal-forms-code-list"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300UARE5MHTBUPJ19",
+      "name": "Promontoria 19 Coöperatie U.A.",
+      "rank": 59,
+      "trea_eur": 9983705657.92,
+      "status": "pending_targeted_source_review",
+      "reason": "HCOB bank overview does not establish Promontoria 19’s own owners.",
+      "next_action": "Use Promontoria 19’s exact registered holding identity and official filed report to controlling fund owners; cooperative holding legal form does not imply member-owned cooperative banking."
+    },
+    {
+      "lei": "31570014BNQ1Q99CNQ35",
+      "name": "PPF Financial Holdings AS",
+      "rank": 60,
+      "trea_eur": 9767346023.740927,
+      "status": "pending_targeted_source_review",
+      "reason": "PPF parent relation is fully corroborated, but guessed English group profile leaves failed.",
+      "next_action": "Use the official parent annual-report ownership chart for PPF Group NV / Kellner family and exact registered controller LEI, then review the bank/parent relationship."
+    },
+    {
+      "lei": "21380057HUGFEAF25W84",
+      "name": "NOBA Group",
+      "rank": 61,
+      "trea_eur": 9632510836.587534,
+      "status": "pending_targeted_source_review",
+      "reason": "Candidate NOBA ownership page returned empty 200 text and Nordax is a brand, not an ownership proof.",
+      "next_action": "Use the listed NOBA Bank Group issuer prospectus/current shareholder table; verify Nordic Capital/Sampo/free-float holdings and exact EBA group/LEI identity."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

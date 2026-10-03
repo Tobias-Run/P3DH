@@ -208,7 +208,7 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
         baseline=set(self.selection['baseline_unknown_leis'])
         selected={r['lei'] for r in self.selection['selected']}
         self.assertEqual(len(selected),30)
-        followup={case['lei'] for path in (ROOT/'docs/advanced_peers/ownership_batches').glob('*.json')
+        followup={case['lei'] for path in (ROOT/'docs/advanced_peers/ownership_batches').glob('batch_*.json')
                   for case in json.loads(path.read_text())['accepted']}
         self.assertEqual(baseline.intersection(self.registry),selected|followup)
         self.assertEqual(len(baseline-set(self.registry)),len(baseline-selected-followup))
@@ -216,7 +216,7 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
                          {r['lei'] for r in self.selection['ranking_candidates']})
 
     def test_followup_evidence_matches_explicit_registry_basis(self):
-        for path in (ROOT/'docs/advanced_peers/ownership_batches').glob('*.json'):
+        for path in (ROOT/'docs/advanced_peers/ownership_batches').glob('batch_*.json'):
             for case in json.loads(path.read_text())['accepted']:
                 record=self.registry[case['lei']]
                 self.assertEqual(record['ownership_basis'],case['ownership_basis'])
@@ -226,12 +226,51 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
                     self.assertEqual(record['evidence_quote'],case['ownership_evidence']['quote'])
                     self.assertEqual(record['source_url'],case['ownership_evidence']['url'])
                     self.assertFalse(record['controller_lei'])
+                elif case['ownership_basis']=='registered_bank_form':
+                    self.assertEqual(record['source_hash_kind'],'canonical_gleif_record')
+                    self.assertEqual(case['legal_form_evidence']['elf_code'],'R71C')
+                    self.assertEqual(case['legal_form_evidence']['jurisdiction'],'NO')
+                    self.assertEqual(record['ownership'],'savings')
+                    self.assertEqual(record['source_sha256'],case['bank_identity']['gleif_record_sha256'])
                 else:
-                    self.assertEqual(record['ownership_basis'],'reviewed_document_chain')
                     self.assertEqual(record['controller_lei'],case['controller_lei'])
                     self.assertEqual(record['control_source_sha256'],case['control_evidence']['sha256'])
-                    self.assertIn(case['name'],case['control_evidence']['quote'])
+                    if case['ownership_basis']=='reviewed_control_chain':
+                        proof=case['control_evidence']
+                        self.assertEqual(proof['relationship']['startNode']['id'],case['lei'])
+                        self.assertEqual(proof['relationship']['endNode']['id'],case['controller_lei'])
+                        self.assertEqual(proof['relationship']['status'],'ACTIVE')
+                        self.assertEqual(proof['registration']['status'],'PUBLISHED')
+                        self.assertEqual(proof['registration']['corroborationLevel'],'FULLY_CORROBORATED')
+                    else:
+                        self.assertEqual(record['ownership_basis'],'reviewed_document_chain')
+                        name=case.get('matched_legal_name',case['name'])
+                        self.assertIn(name.casefold(),' '.join(case['control_evidence']['quote'].split()).casefold())
                     self.assertEqual(record['ownership'],self.registry[case['controller_lei']]['ownership'])
+
+    def test_seventy_case_campaign_covers_fixed_selection_without_duplicate_acceptance(self):
+        directory=ROOT/'docs/advanced_peers/ownership_batches'
+        campaign=json.loads((directory/'campaign_next70.json').read_text())
+        selected=[];accepted=[];deferred=[];attempts=[]
+        for item in campaign['batches']:
+            batch=json.loads((directory/('batch_'+item['batch']+'.json')).read_text())
+            self.assertEqual(batch['batch_size'],5)
+            selected.extend(item['banks'])
+            accepted.extend(case['lei'] for case in batch['accepted'])
+            deferred.extend(case['lei'] for case in batch['deferred'])
+            self.assertTrue(all(case['next_action'] for case in batch['deferred']))
+            self.assertEqual(set(item['banks']),{case['lei'] for case in batch['accepted']+batch['deferred']})
+            for lei in item['banks']:
+                self.assertLessEqual(sum(row['lei']==lei for row in batch['page_attempts']),4)
+            attempts.extend(batch['page_attempts'])
+        self.assertEqual(len(selected),70)
+        self.assertEqual(len(set(selected)),70)
+        self.assertEqual(len(accepted),campaign['accepted'])
+        self.assertEqual(len(deferred),campaign['deferred'])
+        self.assertFalse(set(accepted)&set(deferred))
+        self.assertEqual(len(attempts),campaign['page_attempts'])
+        self.assertEqual(sum(row['new_network_fetch'] for row in attempts),campaign['new_network_fetches'])
+        self.assertEqual(set(accepted),set(selected)&set(self.registry))
 
     def test_targeted_batch_respects_budget_and_records_unresolved_proof(self):
         batch=json.loads((ROOT/'docs/advanced_peers/ownership_batches/batch_002.json').read_text())

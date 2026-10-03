@@ -1,0 +1,243 @@
+{
+  "batch": "011",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 12,
+  "page_attempts": [
+    {
+      "lei": "549300C6TUMDXNOVXS82",
+      "url": "https://www.lansforsakringar.se/stockholm/privat/om-oss/om-bolaget/",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:49:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300C6TUMDXNOVXS82",
+      "url": "https://www.lansforsakringar.se/",
+      "status": 301,
+      "error": "HTTP Error 301: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Permanently",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:07Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300C6TUMDXNOVXS82",
+      "url": "https://www.lansforsakringar.se/stockholm/privat/om-oss/om-bolaget/finansiell-information/",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:13Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5299008I0TO44SUINZ71",
+      "url": "https://www.olb.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "07faa9552e40ec4b864392b627c76ab32f0ee3125fb4584875f03691be2bf7d4",
+      "retrieved_at": "2026-10-02T16:32:26Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299008I0TO44SUINZ71",
+      "url": "https://www.olb.de/ueber-uns",
+      "status": 200,
+      "error": null,
+      "sha256": "99df9733b5e429d068f350adb354c253c714e502457d8a0c6ce63ee1e96476b4",
+      "retrieved_at": "2026-10-02T16:50:57Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5299008I0TO44SUINZ71",
+      "url": "https://www.olb.de/ueber-uns/unternehmensprofil",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:30Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5299008I0TO44SUINZ71",
+      "url": "https://www.olb.de/ueber-uns/investor-relations/finanzberichte",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:15Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "254900RNFMDM0P11YR84",
+      "url": "https://www.ablv.com",
+      "status": 200,
+      "error": null,
+      "sha256": "7a853be14e9c6ed0a0e6c79dc7406c60e813f9beddaeebf8b3735b72c6f2e7f7",
+      "retrieved_at": "2026-10-02T16:48:48Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "254900RNFMDM0P11YR84",
+      "url": "https://www.abnamro.com/en/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "cd3170a9cc176702f8d0b00de1db5cb686f4341b4b20a50efbdeca64dd47d756",
+      "retrieved_at": "2026-10-02T22:12:26Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "254900RNFMDM0P11YR84",
+      "url": "https://www.abnamro.com/en/news/abn-amro-completes-acquisition-of-olb",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:16Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900V3O1M5IHMOSF46",
+      "url": "https://www.statestreet.com",
+      "status": 200,
+      "error": null,
+      "sha256": "33935963ab253f533ea49e781b0459c2643ee61f9e7ac15c0e8f24b58f35e570",
+      "retrieved_at": "2026-10-02T16:54:20Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900V3O1M5IHMOSF46",
+      "url": "https://www.statestreet.com/content/statestreet/us/en/insights/institutional-investor-indicators-august-2026",
+      "status": 200,
+      "error": null,
+      "sha256": "70f1650b7ddf3e80ae1622c0b3558cb6160d253d4438a7383054f82e2ed234cd",
+      "retrieved_at": "2026-10-02T23:49:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900V3O1M5IHMOSF46",
+      "url": "https://investors.statestreet.com/investor-relations/financial-information/sec-filings/default.aspx",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:31Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900V3O1M5IHMOSF46",
+      "url": "https://data.sec.gov/submissions/CIK0000093751.json",
+      "status": 200,
+      "error": null,
+      "sha256": "54d25dd943276570ba306115593143d842da26c28a59b4a7a7dbdf7725fd7874",
+      "retrieved_at": "2026-10-02T23:59:16Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300DYPOFMXOR7XM56",
+      "url": "https://www.crelan.be",
+      "status": 200,
+      "error": null,
+      "sha256": "7acf118fb328c25d4559e4a5cf76e64490ab834c6dfaf46cc4515f1f9244055e",
+      "retrieved_at": "2026-10-02T23:49:57Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300DYPOFMXOR7XM56",
+      "url": "https://www.crelan.be/nl/particulieren/sparen-en-beleggen/beleggen/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "fdb74741bab16a47f81f06820cfa4e9d9da81b8c0728e2e079dc2a595e5a66b3",
+      "retrieved_at": "2026-10-02T23:49:59Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300DYPOFMXOR7XM56",
+      "url": "https://www.crelan.be/nl/corporate/over-crelan",
+      "status": 200,
+      "error": null,
+      "sha256": "d5579828218510702523fb83efbf963f34838869b8c33d85f747693bcdb56ffa",
+      "retrieved_at": "2026-10-02T23:54:31Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300DYPOFMXOR7XM56",
+      "url": "https://www.crelan.be/nl/particulieren/artikel/de-groep-crelan",
+      "status": 200,
+      "error": null,
+      "sha256": "74a5e59b47ec3826f740cab56234fc04cfa07a3ee9a6dfa803885369cc6bf5b8",
+      "retrieved_at": "2026-10-02T23:59:16Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300DYPOFMXOR7XM56",
+      "name": "Crelan",
+      "ownership": "cooperative",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.crelan.be/nl/particulieren/artikel/de-groep-crelan",
+        "sha256": "74a5e59b47ec3826f740cab56234fc04cfa07a3ee9a6dfa803885369cc6bf5b8",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T23:59:16Z",
+        "quote": "rdigd met twee bankenlogo’s: Crelan en Europabank. CrelanCo CrelanCo cv is de enige en voor 100% aandeelhouder van Groep Crelan. Het maatschappelijk kapitaal van deze erkende coöperatieve vennootschap wordt gevormd door de participatie van meer dan 291.000 coöperatieve aandeelhouders. Deze laatsten zijn dus allemaal een stukje mede-eigenaar van onze bankengroep. De coöperatieve wortels van Crelan gaan terug tot de jaren zestig en vinden hun oorsprong in de sterke band die de bank heeft met de Belgische land- en tuinbouwsector. De eerste coöperatieve kassen zamelden spaargelden onder de landbouwers in, waarmee de bank op haar beurt landbouwkre"
+      },
+      "note": "Official group structure identifies Crelan NV and CrelanCo as its sole 100% shareholder, whose capital is held by more than 291,000 cooperative shareholders. Reviewed chain is described directly in the bank source; no legal-form-only inference from Crelan NV.",
+      "bank_identity": {
+        "legal_name": "CRELAN",
+        "registered_as": "0205764318",
+        "jurisdiction": "BE",
+        "gleif_record_sha256": "7e761e4c3341cc68df047a644b4b8fa2d032a9cb3727c1433461f35c1e42e230"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300C6TUMDXNOVXS82",
+      "name": "Länsförsäkringar Bank AB - gruppen",
+      "rank": 44,
+      "trea_eur": 13013114013.82776,
+      "status": "pending_targeted_source_review",
+      "reason": "Company/financial leaf URLs failed. A fully corroborated bank/insurance-parent relation exists, but parent ownership remains unclassified.",
+      "next_action": "Use official Länsförsäkringar AB/Bank reports to establish mutual regional-insurer ownership and control, rather than infer cooperative or mutual status from brand."
+    },
+    {
+      "lei": "5299008I0TO44SUINZ71",
+      "name": "Oldenburgische Landesbank Aktiengesellschaft",
+      "rank": 45,
+      "trea_eur": 12870000000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Guessed OLB company/report paths returned 404.",
+      "next_action": "Follow actual OLB financial-report navigation and official ABN AMRO acquisition completion notices; distinguish completed sale from the old private-equity shareholder structure."
+    },
+    {
+      "lei": "254900RNFMDM0P11YR84",
+      "name": "Atlantic Lux HoldCo S.à r.l.",
+      "rank": 46,
+      "trea_eur": 12833792486.59,
+      "status": "pending_targeted_source_review",
+      "reason": "Ledger candidate website is ABLV, which is not identity proof for Atlantic Lux HoldCo; guessed ABN completion page failed.",
+      "next_action": "Start from Atlantic Lux HoldCo’s exact registered identity and official Luxembourg/OLB/ABN transaction documents. Verify its current parent and whether the holding remains in the relevant group; do not use ABLV owners."
+    },
+    {
+      "lei": "529900V3O1M5IHMOSF46",
+      "name": "State Street Europe Holdings Germany S.a.r.l. & Co. KG",
+      "rank": 47,
+      "trea_eur": 12754828698.09,
+      "status": "pending_targeted_source_review",
+      "reason": "Bank’s ultimate-parent relation is fully corroborated, but current State Street issuer ownership source is not reviewed.",
+      "next_action": "Use SEC submissions index to the latest State Street proxy beneficial-owner table, verify exact issuer LEI, then review the archived bank/controller relationship. SEC metadata alone is not shareholder evidence."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

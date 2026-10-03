@@ -1,5 +1,5 @@
 {
-  "accepted_gleif_records": 85,
+  "accepted_gleif_records": 87,
   "automated_discovery_status_counts": {
     "evidence_collected": 139,
     "website_no_ownership_passage": 128,
@@ -23,46 +23,65 @@
   "browser_checks": {
     "cases": [
       {
-        "clusters": 38,
+        "clusters": 37,
         "language": "en",
-        "public_reports": 55,
+        "public_reports": 56,
         "width": 1280
       },
       {
-        "clusters": 38,
+        "clusters": 37,
         "language": "de",
-        "public_reports": 55,
+        "public_reports": 56,
         "width": 390
       }
     ],
     "javascript_errors": 0
   },
-  "clusters": 58,
-  "clusters_with_at_least_five_members": 38,
+  "clusters": 59,
+  "clusters_with_at_least_five_members": 37,
   "coverage": {
-    "classified": 187,
+    "classified": 207,
     "eligible_reports": 529,
     "entities": 475,
     "excluded_reports": 353,
     "group_duplicates": 84
   },
   "maximum_cluster_size_ratio": 8.676437195438183,
-  "median_cluster_silhouette": 0.35421100000000005,
+  "median_cluster_silhouette": 0.353026,
   "ownership_counts": {
-    "cooperative": 86,
-    "mixed": 7,
-    "mutual": 4,
-    "public": 26,
-    "shareholder": 64,
-    "unknown": 288
+    "cooperative": 89,
+    "mixed": 11,
+    "mutual": 5,
+    "public": 27,
+    "savings": 2,
+    "shareholder": 73,
+    "unknown": 268
+  },
+  "ownership_research_campaign_next70": {
+    "accepted": 20,
+    "deferred": 50,
+    "institutions": 70,
+    "maximum_decision_bundle_chars": 4543,
+    "new_network_fetches": 171,
+    "page_attempts": 235,
+    "status_counts": {
+      "200": 155,
+      "301": 1,
+      "403": 11,
+      "404": 56,
+      "410": 3,
+      "500": 1,
+      "503": 2,
+      "None": 6
+    }
   },
   "ownership_research_queue": {
     "metric": "TREA",
-    "pending_total": 288,
-    "rankable": 232
+    "pending_total": 268,
+    "rankable": 212
   },
-  "registry_rows": 215,
-  "reviewed_control_relationships": 55,
-  "reviewed_document_chains": 5,
-  "unit_tests": 1514
+  "registry_rows": 236,
+  "reviewed_control_relationships": 61,
+  "reviewed_document_chains": 9,
+  "unit_tests": 1515
 }

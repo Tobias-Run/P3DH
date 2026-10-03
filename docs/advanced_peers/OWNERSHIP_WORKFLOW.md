@@ -1,6 +1,6 @@
 # Eigentümerrecherche mit begrenztem Kontext
 
-Stand: 2. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach zwei Recherchepaketen sind 187/475 Institute belegt, 288 bleiben offen. 232 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 56 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
+Stand: 3. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach den Paketen 001–016 sind 207/475 Institute belegt, 268 bleiben offen. 212 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 56 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
 
 ## Feste Standardgrenzen
 
@@ -65,3 +65,11 @@ Tests prüfen TREA-Reihenfolge, Scope-/Datumswahl, Mengen-/Dimensionskonflikte, 
 Das komprimierte Entscheidungs-JSON umfasst **4.423 Zeichen**; zusätzliche kurze Quellenprüfungen und Werkzeugausgaben sind darin nicht enthalten. Auch dieser Wert misst keine Gesamttokens. Das komplette versionierte Paket enthält außerdem Abrufprotokoll, Quellhashes und konkrete Nachprüfungen. Einzelcheckpoint-Dateien wurden im üblichen lokalen Ausgabeordner `interim/ownership_research/` gespeichert. Der nächste Lauf mit demselben Ausgabeordner überspringt diese bereits geprüften Fälle; die drei ungeklärten Banken bleiben in der Warteschlange und im Ledger und können gezielt wiederaufgenommen werden.
 
 Bei Crédit Agricole Italia wurde eine nur `ENTITY_SUPPLIED_ONLY` belegte GLEIF-Beziehung ausdrücklich nicht als vollständig corroboriert akzeptiert. Bei RCI fehlt noch die geprüfte Eigentümerstruktur des exakten Renault-Konzernträgers. Für Bpifrance ist der nächste Schritt ein amtlicher Beteiligungsbericht des Staates bzw. der Caisse des Dépôts mit genauer Rechtsträgerzuordnung. Aktuelle Trägerschaftslabels bilden keine historische Eigentümer-Zeitreihe; Eurobanks verwendete Aktionärsseite nennt den 4. September 2026.
+
+## Pakete 003–016: nächste 70 Fälle
+
+Die [feste Auswahl und Einzelfallentscheidungen](NEXT70_OWNERSHIP.md) enthalten **20 akzeptierte Einordnungen und 50 konkrete Nachprüfungen**. Auswahl vor Klassifikationsänderungen eingefroren; die drei offenen Fälle aus Batch 002 wurden durch gespeicherte Checkpoints nicht erneut breit untersucht. 235 Quellenversuche / 171 neue Abrufe; höchstens vier Versuche pro Bank. Vier neue Dokumentketten verwenden bereits archivierte DNB/KBC-Berichte und das Citigroup-SEC-Tochterverzeichnis; dafür erfolgten keine weiteren HTTP-Aufrufe. Archivsuche und vorhandene Register-/ELF-Daten bleiben lokale Arbeit.
+
+Das größte komprimierte Entscheidungs-JSON umfasst **4.543 Zeichen**. Zusätzlich wurden kurze Quellenauszüge manuell geprüft; das ist kein gemessener Gesamttokenverbrauch und kein Nachweis einer bestimmten Tokenersparnis. Alle 70 Checkpoints liegen im üblichen lokalen Ausgabeordner; der nächste reguläre Lauf überspringt sie, ihre noch offenen Fälle bleiben im Ledger und in der Queue. Versionierte Entscheidungen erlauben gezielte Wiederaufnahme.
+
+**Verbesserungsbedarf der Quellensuche:** 56 Versuche lieferten HTTP 404, drei HTTP 410. Vermutete Blattseiten waren häufig falsch oder veraltet. Für die gezielte Fortsetzung zuerst die tatsächliche offizielle IR-/Corporate-Navigation, verlinkte aktuelle Geschäftsberichte oder amtliche Register verwenden; nicht weitere Varianten desselben vermuteten Pfads probieren. Leere/generische HTTP-200-Seiten gelten nicht als Nachweise. Die 50 Fälle sind ausdrücklich keine Behauptung, dass Eigentümerinformationen öffentlich fehlen.

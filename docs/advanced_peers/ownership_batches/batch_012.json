@@ -1,0 +1,261 @@
+{
+  "batch": "012",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 16,
+  "page_attempts": [
+    {
+      "lei": "549300DVPJYGNF2P7B03",
+      "url": "https://www.sparkasse.at/steiermaerkische",
+      "status": 200,
+      "error": null,
+      "sha256": "e74088ee6753a15855fc447ff46d79582f460525c2e5f6f3af301758b5773d96",
+      "retrieved_at": "2026-10-02T16:33:08Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300DVPJYGNF2P7B03",
+      "url": "https://www.sparkasse.at/steiermaerkische/karriere",
+      "status": 200,
+      "error": null,
+      "sha256": "1477ce103d5f22221bfa25032bb4b8d38461d94e81396edbf2ca4b14eb5bf97c",
+      "retrieved_at": "2026-10-02T23:50:00Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300DVPJYGNF2P7B03",
+      "url": "https://www.sparkasse.at/steiermaerkische/wir-ueber-uns/unternehmen",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:31Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300DVPJYGNF2P7B03",
+      "url": "https://www.erstegroup.com/en/investors/share/shareholder-structure",
+      "status": 200,
+      "error": null,
+      "sha256": "1f8283931bdeb07ba2d166d22fc1fdb5b79f1749917ab03f630cc173fb939589",
+      "retrieved_at": "2026-10-02T23:58:57Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300ZHFZ4CSK7VS460",
+      "url": "https://www.pbz.hr/",
+      "status": 200,
+      "error": null,
+      "sha256": "7909286f49d42a742d6a38f92fe5a8ac5e16fe03b699df266214e180e143fadd",
+      "retrieved_at": "2026-10-02T16:33:23Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300ZHFZ4CSK7VS460",
+      "url": "https://www.pbz.hr/gradjani/pbz-investor.html",
+      "status": 200,
+      "error": null,
+      "sha256": "a748a24d78c9a0b244cb5e24d3c3642356826707bac6ccf89e288a88f63cea54",
+      "retrieved_at": "2026-10-02T16:33:25Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300ZHFZ4CSK7VS460",
+      "url": "https://www.pbz.hr/en/o-nama/odnosi-s-investitorima.html",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:33Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300ZHFZ4CSK7VS460",
+      "url": "https://www.pbz.hr/en/o-nama.html",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9CZ7TVMR36CYD5TZBS50",
+      "url": "https://www.bil.com",
+      "status": 200,
+      "error": null,
+      "sha256": "501d49ff3748290a4c689a361e59130d4ec1efde84cfbc74e9d5eb5a12fb3be4",
+      "retrieved_at": "2026-10-02T23:50:00Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9CZ7TVMR36CYD5TZBS50",
+      "url": "https://www.bil.com/fr/groupe-bil/Pages/index.aspx",
+      "status": 200,
+      "error": null,
+      "sha256": "236749dfca4fcae31ee1b44e66f53c95b5d2e9794d9c9cb6197682f43ed1eb88",
+      "retrieved_at": "2026-10-02T23:50:02Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9CZ7TVMR36CYD5TZBS50",
+      "url": "https://www.bil.com/en/bil-group/Pages/index.aspx",
+      "status": 200,
+      "error": null,
+      "sha256": "8c0761618d8d5cc67fc386c94251ffe418b76ccfbbb3db61a10b3a883bc59dde",
+      "retrieved_at": "2026-10-02T23:54:33Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9CZ7TVMR36CYD5TZBS50",
+      "url": "https://www.bil.com/en/bil-group/about-bil/Pages/shareholders.aspx",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493009ML6YX83YHC820",
+      "url": "https://www.argenta.be",
+      "status": 200,
+      "error": null,
+      "sha256": "95b8be7250b649a197c266234f3fe319f49543011eafcf87540d83ea8e37e233",
+      "retrieved_at": "2026-10-02T23:50:03Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493009ML6YX83YHC820",
+      "url": "https://www.argenta.be/nl/over-argenta/persberichten.html",
+      "status": 200,
+      "error": null,
+      "sha256": "d703f021576beb6363afb6c6af18de17d030cafde83ca324dc95652ad57be884",
+      "retrieved_at": "2026-10-02T23:50:04Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493009ML6YX83YHC820",
+      "url": "https://www.argenta.be/nl/over-argenta.html",
+      "status": 200,
+      "error": null,
+      "sha256": "2bdb35413035b55f4ee0b91aae2c1e63fb691de5ce091e0f22981f1b32cd81f5",
+      "retrieved_at": "2026-10-02T23:54:34Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493009ML6YX83YHC820",
+      "url": "https://www.argenta.be/content/dam/argenta/over-argenta/governancemorandum.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "77a0eca36b6353316d457bc5fd5a09fbc1d273cf23ed3cc3591cff9bee098662",
+      "retrieved_at": "2026-10-02T23:59:18Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "635400L14KNHZXPUZM19",
+      "url": "https://www.bankofcyprus.com",
+      "status": 200,
+      "error": null,
+      "sha256": "2586ec3cd4ffe43d2483e4217aba93709d6569af9ec34466a56cc9f1b9c7d879",
+      "retrieved_at": "2026-10-02T23:50:05Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "635400L14KNHZXPUZM19",
+      "url": "https://www.bankofcyprus.com/group/investor-relations/shareholder-information/",
+      "status": 200,
+      "error": null,
+      "sha256": "9ab987ff68c3ded6396096f678dc6d0e3175fdb2c7f4945956c32f62655d49b9",
+      "retrieved_at": "2026-10-02T23:50:07Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "635400L14KNHZXPUZM19",
+      "url": "https://www.bankofcyprus.com/group/investor-relations/shareholder-information/-2/",
+      "status": 200,
+      "error": null,
+      "sha256": "b0a60dd112715140a83082f73f6b3a787ded805ed792cb580af0936a0d85cc41",
+      "retrieved_at": "2026-10-02T23:54:35Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "635400L14KNHZXPUZM19",
+      "url": "https://www.bankofcyprus.com/en-gb/group/investor-relations/shareholder-information/shareholder-structure/",
+      "status": 200,
+      "error": null,
+      "sha256": "cbee2103eeaa4069bab4477fd89b689811ca69151a0f6ba60ddfa3b39bd7d265",
+      "retrieved_at": "2026-10-02T23:59:18Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "5493009ML6YX83YHC820",
+      "name": "Argenta Bank- en Verzekeringsgroep NV",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.argenta.be/nl/over-argenta.html",
+        "sha256": "2bdb35413035b55f4ee0b91aae2c1e63fb691de5ce091e0f22981f1b32cd81f5",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T23:54:34Z",
+        "quote": " groep coöperanten is mede-eigenaar van Argenta, terwijl de familie Van Rompuy de meerderheid van de aandelen bezit. Daardoor kunnen we op lange termijn werken, met aandacht voor klanten en niet alleen voor winst op korte termijn. Is Argenta beursgenoteerd? Nee, Argenta is niet beursgenoteerd. Daardoor hoeven we geen rekening te houden met de verwachtingen van aandeelhouders op de beurs. We kunnen ons focussen op wat voor onze klanten belangrijk is: eenvoudige producten, een gezonde financiële basis en een langetermijnvisie. Is Argenta duurzaam? Duurzaamheid maakt deel uit van hoe Argenta onderneemt. We houden rekening met de impact van onze "
+      },
+      "note": "Bank group explicitly states family Van Rompuy majority and cooperative minority. No cooperative-controlled classification. This evidence does not establish the shareholders of its upstream investment company.",
+      "bank_identity": {
+        "legal_name": "ARGENTA BANK - EN VERZEKERINGSGROEP",
+        "registered_as": "0475.525.276",
+        "jurisdiction": "BE",
+        "gleif_record_sha256": "98b940e9365d930ab30f60be4151221cf4169dab72859ff18afae534d459a77d"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300DVPJYGNF2P7B03",
+      "name": "Steiermärkische Bank und Sparkassen Aktiengesellschaft",
+      "rank": 49,
+      "trea_eur": 12095231486.55,
+      "status": "pending_targeted_source_review",
+      "reason": "Parent major-owner page was found, but no current exact foundation/bank ownership table was verified for Steiermärkische.",
+      "next_action": "Review the bank’s current shareholder table and Sparkassen foundation votes; accounting consolidation by Erste must not be mistaken for majority economic ownership of the bank."
+    },
+    {
+      "lei": "549300ZHFZ4CSK7VS460",
+      "name": "Privredna Banka Zagreb d.d.",
+      "rank": 50,
+      "trea_eur": 12041794115.2,
+      "status": "pending_targeted_source_review",
+      "reason": "Guessed PBZ investor/about paths failed; bank/Intesa relation is only ENTITY_SUPPLIED_ONLY.",
+      "next_action": "Use PBZ’s exact issuer report or Intesa consolidated subsidiary table to prove bank-specific control; then reuse the reviewed Intesa shareholder evidence."
+    },
+    {
+      "lei": "9CZ7TVMR36CYD5TZBS50",
+      "name": "Banque Internationale à Luxembourg",
+      "rank": 51,
+      "trea_eur": 11695376623.09,
+      "status": "pending_targeted_source_review",
+      "reason": "English BIL group landing is CMS content; the ownership leaf was not successfully retrieved.",
+      "next_action": "Use BIL’s current annual report/shareholder table to verify Legend Holdings vs Luxembourg State shares and the ultimate controller’s type; do not assume private ownership from brand."
+    },
+    {
+      "lei": "635400L14KNHZXPUZM19",
+      "name": "Bank of Cyprus Holdings Public Limited Company",
+      "rank": 53,
+      "trea_eur": 10563647403.0,
+      "status": "pending_targeted_source_review",
+      "reason": "The guessed ownership page resolved to generic Greek shareholder navigation without a verified ownership table.",
+      "next_action": "Follow the actual current significant-holdings disclosure or annual-report table for Bank of Cyprus Holdings and exact Irish entity identity, including voting percentages."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}
