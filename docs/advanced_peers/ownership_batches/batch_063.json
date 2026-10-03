@@ -1,0 +1,360 @@
+{
+  "batch": "063",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 2,
+  "page_attempts": [
+    {
+      "lei": "PWEFG14QWWESISQ84C69",
+      "url": "http://www.ikb.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "84b46cf6b89201cc3d02387f01cae28ff623d9288b2e76502c26a381e54be340",
+      "retrieved_at": "2026-10-02T16:34:52Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "52990033C5FUEN4LMC06",
+      "url": "https://www.volksbank.it/it/corporate-governance",
+      "status": 200,
+      "error": null,
+      "sha256": "48df51dbfe800ff8210b78399f9b9ac10ad7d23a9a7accafb73d2011c51c5078",
+      "retrieved_at": "2026-10-03T07:20:41Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "815600903231FA2E7698",
+      "url": "http://www.bancagenerali.com",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:36Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "815600903231FA2E7698",
+      "url": "https://www.generali.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "9fb2f61f4a004ad2c5fbeefb50f5565f2896bac4e7367a3dd83119b26cd9a330",
+      "retrieved_at": "2026-10-03T10:31:42Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600903231FA2E7698",
+      "url": "https://www.generali.com/investors/share-information-analysts/ownership-structure",
+      "status": 200,
+      "error": null,
+      "sha256": "560a5734abec29c497958ef8a24b9b90213c1e3b8c0cf0d6cd4a002fac9ade14",
+      "retrieved_at": "2026-10-03T10:34:28Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "747DLM6L5TO7LXZY5T60",
+      "url": "https://www.scotiabank.com/ca/en/about/investors-shareholders.html",
+      "status": 200,
+      "error": null,
+      "sha256": "ab5d9f18f82de64341a099cff5e81df86a234870abc2d93aba90315af476f2e1",
+      "retrieved_at": "2026-10-03T07:20:42Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5299000R7WZOVIFHLN21",
+      "url": "https://www.sozialfinanz.de/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "8babccf71cd2e2815fca5f68f6a95113a07b3de427a41d4d3e3625719a1c996c",
+      "retrieved_at": "2026-10-02T16:50:10Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5299000R7WZOVIFHLN21",
+      "url": "https://www.sozialfinanz.de/investor-relations/aktientransaktionen",
+      "status": 200,
+      "error": null,
+      "sha256": "9dbee84df7cce576fb61785ca7149b157277fdfbb75697611ffaaea8a04dadd8",
+      "retrieved_at": "2026-10-02T16:50:11Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "815600903231FA2E7698",
+      "name": "BANCA GENERALI - SOCIETA' PER AZIONI (IN FORMA ABBREVIATA GENERBANCA)",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.generali.com/investors/share-information-analysts/ownership-structure",
+        "sha256": "560a5734abec29c497958ef8a24b9b90213c1e3b8c0cf0d6cd4a002fac9ade14",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "gs of the other categories are adjusted proportionally. (1) Main Shareholders 13.35% Monte dei Paschi di Siena Group (through Mediobanca S.p.A.) 10.15% Del Vecchio Group 9.05% Unicredit Group [footnote ] 6.32% Caltagirone Group 4.91% Benetton Group 3.13% Intesa Sanpaolo Group (2) The category includes asset managers, sovereign funds, pension funds, life insurance companies (3) The category includes retail investors (Italian and foreign individuals), Italian companies linked to retail shareholders and other corporate entities such as foundations, religious and charitable institutes, trust companies and others (4) Data not yet transmitted by mainly foreign intermediaries Ownership structure detail December 31 2021 December 31 2022 December 31 2023 December 31 2024 December 31 2025 Current Main shareholders (>3%) 31.41% 33.81% 33.95% 34.74% 41.06% 46.91% Mediobanca 12.84% 12.77% 13.13% 13.10% 13.19%*** 13.35% Del Vecchio Group 6.62% 9.82% 9.77% 9.93% 10.05% 10.15% Unicredit Group - - - - 6.68% 9.05% Caltagirone Group 7.98% 6.46%* 6.23%** 6.92% 6.28% 6.32% Benetton Group 3.97% 4.78% 4.83% 4.80% 4.86% 4.91% Intesa Sanpaolo Group - - - - - 3.13% Institutional investors 36.24% 31.29% 34.86% 34.94% 30.48% 29.79% Private Investors 30.96% 30.59% 29.01% 26.71% 24.41% 20.97% Own Shares 0.39% 2.47% 1.10% 3.06% 3.01% 1.94% Not identifiable shareholders 1.01% 1.84% 1.08% 0.55% 1.04% 0.39% *So"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "549300X5UKJVE386ZB61",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/ultimate-parent-relationship",
+        "sha256": "d0545f2a907085ea2f7232da2c068d863e4c8e327e68d3a93d8032c91ae966c4",
+        "relationship": {
+          "startNode": {
+            "id": "815600903231FA2E7698",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "549300X5UKJVE386ZB61",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2024-07-11T09:22:55Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2024-07-11T09:22:55Z",
+              "endDate": "2027-02-05T08:37:47Z",
+              "type": "ACCOUNTING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2024-07-11T09:22:55Z",
+          "lastUpdateDate": "2025-12-08T08:01:20Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-02-05T08:37:47Z",
+          "managingLou": "815600EAD78C57FCE690",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "BANCA GENERALI - SOCIETA' PER AZIONI O IN FORMA ABBREVIATA: GENERBANCA",
+        "registered_as": "00833240328",
+        "jurisdiction": "IT",
+        "gleif_record_sha256": "0aedc713bad68ed02357e6e6353d4966ec6a354f43e08d48bc3987aab3e2567c"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "021",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "815600903231FA2E7698",
+          "attributes": {
+            "lei": "815600903231FA2E7698",
+            "entity": {
+              "legalName": {
+                "name": "BANCA GENERALI - SOCIETA' PER AZIONI O IN FORMA ABBREVIATA: GENERBANCA",
+                "language": "it-IT"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "it-IT",
+                "addressLines": [
+                  "VIA MACHIAVELLI, 4"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "TRIESTE",
+                "region": "IT-TS",
+                "country": "IT",
+                "postalCode": "34132"
+              },
+              "headquartersAddress": {
+                "language": "it-IT",
+                "addressLines": [
+                  "VIA MACHIAVELLI, 4"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "TRIESTE",
+                "region": "IT-TS",
+                "country": "IT",
+                "postalCode": "34132"
+              },
+              "registeredAt": {
+                "id": "RA000407",
+                "other": null
+              },
+              "registeredAs": "00833240328",
+              "jurisdiction": "IT",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "P418",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "1992-07-27T22:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2014-02-05T08:37:47Z",
+              "lastUpdateDate": "2025-12-08T08:01:21Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-02-05T08:37:47Z",
+              "managingLou": "815600EAD78C57FCE690",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000407",
+                "other": null
+              },
+              "validatedAs": "00833240328",
+              "otherValidationAuthorities": []
+            },
+            "bic": [
+              "BGENIT2TXXX"
+            ],
+            "mic": null,
+            "ocid": null,
+            "qcc": null,
+            "gem": null,
+            "spglobal": [
+              "11779230"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/direct-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/direct-parent"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/ultimate-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/ultimate-parent"
+              }
+            },
+            "direct-children": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/direct-child-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/direct-children"
+              }
+            },
+            "isins": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698/isins"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/815600903231FA2E7698"
+          }
+        },
+        "canonical_sha256": "0aedc713bad68ed02357e6e6353d4966ec6a354f43e08d48bc3987aab3e2567c"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "PWEFG14QWWESISQ84C69",
+      "name": "IKB Deutsche Industriebank Aktiengesellschaft",
+      "rank": 63,
+      "trea_eur": 5614000000.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "021",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Resolve IKB actual corporate/annual-report menu to a dated owner and completion note, including any Lone Star exit; legacy root supplied no current ownership passage.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Resolve IKB actual corporate/annual-report menu to a dated owner and completion note, including any Lone Star exit; legacy root supplied no current ownership passage.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "52990033C5FUEN4LMC06",
+      "name": "BANCA POPOLARE DELL'ALTO ADIGE SOCIETA' PER AZIONI (IN TEDESCO SUDTIROLER VOLKSBANK A.G.)",
+      "rank": 64,
+      "trea_eur": 5551076095.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "021",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Obtain current Volksbank Alto Adige shareholder and voting-cap table from issuer reports; distinguish SA converted in 2016 from a cooperative merely suggested by the Volksbank name.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Obtain current Volksbank Alto Adige shareholder and voting-cap table from issuer reports; distinguish SA converted in 2016 from a cooperative merely suggested by the Volksbank name.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "747DLM6L5TO7LXZY5T60",
+      "name": "Scotiabank (Ireland) Designated Activity Company",
+      "rank": 66,
+      "trea_eur": 5324357289.192755,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "021",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use official Scotiabank annual-report subsidiary disclosure for the exact Irish DAC and parent major shareholder/voting table; corporate IR landing and ENTITY_SUPPLIED_ONLY relation do not prove the chain.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use official Scotiabank annual-report subsidiary disclosure for the exact Irish DAC and parent major shareholder/voting table; corporate IR landing and ENTITY_SUPPLIED_ONLY relation do not prove the chain.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "5299000R7WZOVIFHLN21",
+      "name": "BFS SozialFinanz AG",
+      "rank": 67,
+      "trea_eur": 5267617158.01,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "022",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Review current named welfare association holdings and percentages in SozialFinanz issuer accounts, plus registered name change. Majority free-welfare ownership is stated, but it is not automatically mutual, cooperative or foundation control.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Actual stock-transaction page covers transfer procedures and consent, not welfare organisation ownership percentages. Use issuer 2025 holdings note and exact association identities; no mutual/public inference.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

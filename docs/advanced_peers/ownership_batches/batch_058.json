@@ -1,0 +1,263 @@
+{
+  "batch": "058",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 3,
+  "page_attempts": [
+    {
+      "lei": "21380057HUGFEAF25W84",
+      "url": "https://www.nordax.se/",
+      "status": 200,
+      "error": null,
+      "sha256": "0d441506c75615b9bc818c47bfc0b8b4fc3b0343a416483e847b3842eee71786",
+      "retrieved_at": "2026-10-02T16:31:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "21380057HUGFEAF25W84",
+      "url": "https://www.noba.bank/",
+      "status": 200,
+      "error": null,
+      "sha256": "aad8f13bffd2a53371f3578ff62c6b80d044806dc4f2b346109dc9b7f7713271",
+      "retrieved_at": "2026-10-03T08:41:53Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "21380057HUGFEAF25W84",
+      "url": "https://www.noba.bank/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "88c54a0fc5d5dc3a1afce5b1734b03a02e56620e35fd1d3f98c079b167a4a004",
+      "retrieved_at": "2026-10-03T08:48:52Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "CXUHEGU3MADZ2CEV7C11",
+      "url": "https://www.eurobank.com.cy",
+      "status": 200,
+      "error": null,
+      "sha256": "d8426c7eceb1762d327e332ec0dac4f0cdf094a1cf0cc575580cc2e6509f7a69",
+      "retrieved_at": "2026-10-02T23:50:16Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "CXUHEGU3MADZ2CEV7C11",
+      "url": "https://www.eurobank.cy/en/group/legal-and-regulatory-framework",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:45:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300O3HXYXXUHR0897",
+      "url": "https://www.klarna.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "1b5b7f29b272367a301d3aada6f9ea0e318e8f51a3f92df0caf12791c9bf7d6e",
+      "retrieved_at": "2026-10-02T16:33:14Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300O3HXYXXUHR0897",
+      "url": "https://www.klarna.com/international/about-us/",
+      "status": 200,
+      "error": null,
+      "sha256": "1914ea70eb6a66050cb63e933420bd979fe9ec28239d1338337206d05c72b2e1",
+      "retrieved_at": "2026-10-02T16:33:16Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300O3HXYXXUHR0897",
+      "url": "https://investors.klarna.com/overview/default.aspx",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:17Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300A2F46GR0UOM390",
+      "url": "https://www.erstebank.hr",
+      "status": 200,
+      "error": null,
+      "sha256": "e2d1ff09626999038184a4517d9477ecfe5e3d579b203d6fa2dbf5415326544b",
+      "retrieved_at": "2026-10-02T23:50:22Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300A2F46GR0UOM390",
+      "url": "https://cdn.erstegroup.com/content/dam/at/eh/www_erstegroup_com/en/Investor_Relations/Shareholder_Structure_Development.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "8e2623c15c18f7afb9736b81329af2369aa67a7457372f4d74218d05eb023d41",
+      "retrieved_at": "2026-10-03T08:39:44Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800RZWHE5EUX9R444",
+      "url": "https://www.luminor.ee",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:48:19Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300A2F46GR0UOM390",
+      "name": "Erste&Steiermärkische Bank d.d.",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://cdn.erstegroup.com/content/dam/at/eh/www_erstegroup_com/en/Investor_Relations/Shareholder_Structure_Development.pdf",
+        "sha256": "8e2623c15c18f7afb9736b81329af2369aa67a7457372f4d74218d05eb023d41",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "Erste Group Bank AG - Shareholder Structure Development 30.06.2026 Total number of shares: 410,514,384 By investor By region ERSTE Foundation direct 6.08% Austria 32.65% Sparkassenbeteiligungs GmbH & Co KG 12.59% North America 28.40% Foundations 1 3.71% UK & Ireland 16.15% Wiener Städtische Versicherungsverein 4.27% Continental Europe 17.31% Institutional Investors 59.03% Rest of world 1.93% BlackRock 5.05% Identified Trading** 0.25% Retail Investors 5.71% Unidentified* 3.31% Identified Trading** 0.25% Unidentified* 3.31% 31.03.2026 Total number of shares: 410,514,384 By investor By region ERSTE Foundation direct 6.04% Austria 32.51% Sparkassenbeteiligungs GmbH & Co KG 12.59% North America 28.43% Foundations 1 3.59% UK & Ireland 15.57% Wiener Städtische Versicherungsverein 4.27% Continental Europe 17.27% Institutional Investors 58.66% Rest of world 2.13% BlackRock 5.05% Identified Trading** 0.25% Retail Investors 5.71% Unidentified* 3.84% Identified Trading** 0.25% Unidentified* 3.84% 1 Erste Employees Private Foundation, Syndicated Savings Banks Foundations, own holdings of Savings Banks *Institutional and Retail Investors **Including Market Makers. Prime Brokerage. Proprietary Trading. Collateral and Stock Lending positions "
+      },
+      "note": "Explicit active, published, fully corroborated accounting-control relation to exact Erste Group Bank AG and dated shareholder table reviewed. Group-model category, not 100% bank shares, direct foundation ownership or absence of minority bank shareholders. Current registered Polish name is Erste Bank Polska; EBA legacy alias and historical report dates do not define historical ownership.",
+      "controller_lei": "PQOH26KWDF7CG10L6792",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/549300A2F46GR0UOM390/ultimate-parent-relationship",
+        "sha256": "16ec0af2aed237a049a631f2bdff98c938de860fdbffe454e03af8dcc8e4c8fc",
+        "relationship": {
+          "startNode": {
+            "id": "549300A2F46GR0UOM390",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "PQOH26KWDF7CG10L6792",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2003-08-01T00:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2024-01-01T00:00:00Z",
+              "endDate": "2024-12-31T00:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2025-02-28T00:00:00Z",
+              "type": "DOCUMENT_FILING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2018-01-16T10:09:19Z",
+          "lastUpdateDate": "2026-02-16T08:00:06Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-02-16T23:59:00Z",
+          "managingLou": "747800R0J5YBJED3N877",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": "https://www.erstegroup.com/en/investors/reports/financial-reports"
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "ERSTE&STEIERMÄRKISCHE BANKA dioničko društvo",
+        "registered_as": "040001037",
+        "jurisdiction": "HR",
+        "gleif_record_sha256": "fe32fb8d56311f328fc28c09d3ffe902a9ce3cba96775eb33c4aa4baa8dc650f"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "016"
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "21380057HUGFEAF25W84",
+      "name": "NOBA Group",
+      "rank": 47,
+      "trea_eur": 9632510836.587534,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use actual NOBA issuer share/prospectus report navigation to Nordic Capital/Sampo/free-float shares and dates. Root and investor landing pages are technically successful but contain no ownership passage; verify NOBA legal company number against this LEI before classification.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "014",
+      "previous_next_action": "Candidate NOBA ownership page returned empty 200 text and Nordax is a brand, not an ownership proof. Next: Use the listed NOBA Bank Group issuer prospectus/current shareholder table; verify Nordic Capital/Sampo/free-float holdings and exact EBA group/LEI identity."
+    },
+    {
+      "lei": "CXUHEGU3MADZ2CEV7C11",
+      "name": "Eurobank Limited",
+      "rank": 48,
+      "trea_eur": 8616771126.9,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use exact Eurobank Limited's current completed merger/ownership note after Cyprus reorganisation. Current legal-framework alternative returned 403; do not retry. ENTITY_SUPPLIED_ONLY relationship and reused Eurobank SA owner source do not prove the bank control edge.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [
+        {
+          "url": "https://www.eurobank.cy/en/group/legal-and-regulatory-framework",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "015",
+      "previous_next_action": "Eurobank Limited bank relation is ENTITY_SUPPLIED_ONLY; Cyprus bank sources were denied and parent press index gives no completed-control passage. Next: Use a bank-specific official merger/completion or annual-report note for Eurobank Cyprus/Hellenic reorganisation and exact LEI, then reuse the reviewed Eurobank SA source."
+    },
+    {
+      "lei": "549300O3HXYXXUHR0897",
+      "name": "Klarna - Grupp",
+      "rank": 49,
+      "trea_eur": 8562166425.325411,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use an alternative official SEC registration/annual/proxy statement to exact Klarna Bank vs plc Group ownership and founders' votes. Actual linked investor page denied access and retail pages lack owners; archived fully corroborated controller type is not yet sourced.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [
+        {
+          "url": "https://investors.klarna.com/overview/default.aspx",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "015",
+      "previous_next_action": "Klarna investor source was 403; retail/about page is not shareholders evidence. Next: Use an alternative official SEC registration/annual/proxy statement to exact Klarna group and bank ownership, including founders’ differentiated voting rights. No automatic inheritance through a merely named brand."
+    },
+    {
+      "lei": "213800RZWHE5EUX9R444",
+      "name": "Luminor Holding AS",
+      "rank": 51,
+      "trea_eur": 7899514109.64487,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use alternative official Luminor Holding issuer/ECB/exchange report for current Blackstone/other ownership at this LEI. Cached country-site 403 is not retried; bank brand and nationality do not establish owners.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.luminor.ee",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "016",
+      "previous_next_action": "Two official country-site sources returned 403. Next: Use alternative official Luminor annual-report or ECB/exchange ownership documents for current Blackstone/other holdings and actual holding LEI. Do not retry denied paths."
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

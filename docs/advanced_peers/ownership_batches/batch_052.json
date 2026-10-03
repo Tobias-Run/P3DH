@@ -1,0 +1,241 @@
+{
+  "batch": "052",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 8,
+  "page_attempts": [
+    {
+      "lei": "549300V1VN70Q7PQ7234",
+      "url": "https://www.ca-autobank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "972f59028c165d291ff93b4e888b3df7ffe60230886522281dd9be34bf0674df",
+      "retrieved_at": "2026-10-02T23:48:58Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300V1VN70Q7PQ7234",
+      "url": "https://www.ca-autobank.com/governance/statuto/",
+      "status": 200,
+      "error": null,
+      "sha256": "f9c19881750a95c9193e50aa9090d336bd6714e6a930999d5e8bb9655027ea14",
+      "retrieved_at": "2026-10-03T08:36:58Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300V1VN70Q7PQ7234",
+      "url": "https://www.credit-agricole.com/en/finance/shares-and-dividend",
+      "status": null,
+      "error": "The read operation timed out",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:41:47Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600AD83B2B6317788",
+      "url": "https://www.credem.it",
+      "status": 200,
+      "error": null,
+      "sha256": "c80206a288046d094f296d70e17cf03d43a3c28cedd0cc2df31e43fa2941bf68",
+      "retrieved_at": "2026-10-02T23:49:01Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "815600AD83B2B6317788",
+      "url": "https://www.credem.it/content/credem/it/gruppo-credem/governance.html",
+      "status": 200,
+      "error": null,
+      "sha256": "606cfbb59a1e50bf438e4ebf14fadc887c3dcebe3e11282870e60b7950bc38e5",
+      "retrieved_at": "2026-10-03T08:36:58Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "3DM5DPGI3W6OU6GJ4N92",
+      "url": "https://www.bancobpi.pt",
+      "status": 200,
+      "error": null,
+      "sha256": "d0ecde7b5b1acd92322cd5b75e6e499d619d86376464e096cccd409d67ac4831",
+      "retrieved_at": "2026-10-02T16:32:18Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "3DM5DPGI3W6OU6GJ4N92",
+      "url": "https://api.gleif.org/api/v1/lei-records/3DM5DPGI3W6OU6GJ4N92/ultimate-parent-relationship",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:45:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "3DM5DPGI3W6OU6GJ4N92",
+      "url": "https://www.bancobpi.pt/grupo-bpi",
+      "status": 200,
+      "error": null,
+      "sha256": "1a0f533a03af920eb12d758692479c8b7a3dcfc16c60d6fcb9c5eed8bd517acf",
+      "retrieved_at": "2026-10-03T08:48:54Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "3DM5DPGI3W6OU6GJ4N92",
+      "url": "https://www.bancobpi.pt/particulares/informacao-util/glossario",
+      "status": 200,
+      "error": null,
+      "sha256": "9b4b4cece31f8a61e9db1768bdb0d9c2b8a77b58e5965fad06a8fb4ae8e28117",
+      "retrieved_at": "2026-10-03T08:51:45Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493001BABFV7P27OW30",
+      "url": "https://www.nlb.si",
+      "status": 200,
+      "error": null,
+      "sha256": "14d0a5518a9a0b67bb50207a310753a112dcd5f6ea9db46797ccfc3cc90475f4",
+      "retrieved_at": "2026-10-02T16:33:01Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493001BABFV7P27OW30",
+      "url": "https://www.nlbgroup.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "fb74884ccae6927192828ea25d0507e2f4d60278eb16936f2ae4490c9b24972e",
+      "retrieved_at": "2026-10-03T08:41:51Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493001BABFV7P27OW30",
+      "url": "https://www.nlbgroup.com/int-en/investor-relations/ownership-structure",
+      "status": 200,
+      "error": null,
+      "sha256": "34e777a2b7031de54ab90868f7582caff808e6843fd7ade1a0c34397f8c2003d",
+      "retrieved_at": "2026-10-03T08:43:13Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300RG3H390KEL8896",
+      "url": "https://www.bancatransilvania.ro/",
+      "status": 200,
+      "error": null,
+      "sha256": "2c55a321d67a6e209685a4658d3dd794c50334681f96a08148cf37414e85f860",
+      "retrieved_at": "2026-10-02T16:33:17Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300RG3H390KEL8896",
+      "url": "https://www.bancatransilvania.ro/companii/corporate",
+      "status": 200,
+      "error": null,
+      "sha256": "738ceedbb714c5c35d18ee970ee09d253bdea6e33ea0b1823e4026134c3bce76",
+      "retrieved_at": "2026-10-02T16:33:19Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "5493001BABFV7P27OW30",
+      "name": "Nova Ljubljanska Banka d.d., Ljubljana",
+      "ownership": "mixed",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.nlbgroup.com/int-en/investor-relations/ownership-structure",
+        "sha256": "34e777a2b7031de54ab90868f7582caff808e6843fd7ade1a0c34397f8c2003d",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:43:13Z",
+        "quote": "f which Brandes Investment Partners, L.P. (iv) / >5 and <10 Republic of Slovenia 5,000,001 25.00 Other shareholders 5,999,208 30.00 Total 20,000,000 100 Notes: (i) Information is sourced from the NLB shareholders book available at the web services of CSD (Central Security Depository, Slovenian: KDD - Centralna klirinško depotna družba) to the CSD members. Information on major holdings is based on self-declarations by individual holders pursuant to the applicable provisions of the Slovenian legislation, which require that the holders of shares in a listed company notify the company whenever their direct and/or indirect holdings go over the present thresholds of 5%, 10%, 15%, 20%, 25%, 1/3, 50% or 75%. The table provides all self-declared major holders whose notifications have been received. In reliance on this obligation vested in the holders of major holdings, the Bank postulates that no other entities nor any natural persons hold directly and/or indirectly ten or more percent of the B"
+      },
+      "note": "Current official bank shareholder structure: Republic of Slovenia 5,000,001 shares / 25.00%; depositary receipts and other investors occupy remainder. Significant public minority with other shareholders, not public majority. Depositary/nominee BNY is not equated with beneficial ownership of all underlying investors.",
+      "bank_identity": {
+        "legal_name": "NOVA LJUBLJANSKA BANKA d.d., Ljubljana",
+        "registered_as": "5860571000",
+        "jurisdiction": "SI",
+        "gleif_record_sha256": "0f49ff0e2e5123a67909fa4b164d53d10e11ac9d7921c6a81e607b746e69081e"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "007"
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300V1VN70Q7PQ7234",
+      "name": "CRÉDIT AGRICOLE AUTO BANK S.P.A.",
+      "rank": 17,
+      "trea_eur": 23980553298.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use CA Auto Bank annual report completed control chain plus CA SA regional/cooperative shareholder evidence. Articles landing page is not shareholder proof and parent shares page timed out; archived ultimate relationship remains ENTITY_SUPPLIED_ONLY.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [
+        {
+          "url": "https://www.credit-agricole.com/en/finance/shares-and-dividend",
+          "status": null,
+          "error": "The read operation timed out"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "006",
+      "previous_next_action": "Bank site names CA Personal Finance and Mobility; the ultimate GLEIF parent relation is only ENTITY_SUPPLIED_ONLY. Next: Use the bank annual report for the completed control chain to Crédit Agricole SA, and verify regional-bank cooperative control of that exact parent. Synthetic EBA group ID is not a controller LEI."
+    },
+    {
+      "lei": "815600AD83B2B6317788",
+      "name": "CREDITO EMILIANO HOLDING SOCIETA' PER AZIONI",
+      "rank": 18,
+      "trea_eur": 23192588795.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read the requested Credito Emiliano Holding company's filed ownership/partner note, not Credito Emiliano SpA's table naming the Holding as its owner. Exact holding LEI and Maramotti-family current ownership must be linked explicitly.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "006",
+      "previous_next_action": "Retrieved shareholder table describes Credito Emiliano SpA being held by Credito Emiliano Holding; it does not identify the shareholders of the requested holding. Next: Review the exact Holding’s filed annual report and ownership note for Maramotti/family interests. Do not invert the subsidiary ownership edge."
+    },
+    {
+      "lei": "3DM5DPGI3W6OU6GJ4N92",
+      "name": "BANCO BPI S.A.",
+      "rank": 19,
+      "trea_eur": 20594299636.566303,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Follow BPI's actual corporate owner/report navigation to current CaixaBank shares and bank-specific control proof. Registered GLEIF bank record has parent-reporting exceptions, so guessed relationship URL 404 is not useful. Generic group branding and glossary false-positive do not prove shares; reuse mixed CaixaBank source only after control is established.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [
+        {
+          "url": "https://api.gleif.org/api/v1/lei-records/3DM5DPGI3W6OU6GJ4N92/ultimate-parent-relationship",
+          "status": 404,
+          "error": "HTTP Error 404: Not Found"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "007",
+      "previous_next_action": "English BPI shareholder/institutional paths returned 404. Next: Use the Portuguese bank’s actual shareholder or issuer-report page to verify current CaixaBank ownership; review the bank-specific control document together with the already sourced mixed controller."
+    },
+    {
+      "lei": "549300RG3H390KEL8896",
+      "name": "Banca Transilvania",
+      "rank": 21,
+      "trea_eur": 19431893129.05371,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use actual Banca Transilvania investor navigation/exchange current share table to EBRD and other holders with dated votes. Retail/product ESG links were discovery false-positives; public portfolio minority must not be equated with control.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "007",
+      "previous_next_action": "Investor landing page was found; the guessed shareholding leaf was 404. Next: Follow the actual current capital/ownership link or issuer annual-report share table to EBRD and other significant owners. Distinguish public portfolio minority from control."
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

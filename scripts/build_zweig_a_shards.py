@@ -1057,6 +1057,18 @@ def main():
                      json.dumps(peer_formen, ensure_ascii=False, separators=(",", ":")))
     from build_benchmark_parts import build as build_benchmark_parts
     build_benchmark_parts(OUT)
+    # advanced_peers also reads processed/lei_relations.csv and
+    # processed/coverage_gap.csv for current group roles and deduplication.
+    # Optional advanced peers are fitted on joined facts, not on the KPI a
+    # user is ranking. Keep the payload lazy and coupled to this codebook.
+    from advanced_peers import build as build_advanced_peers, encoded
+    import hashlib
+    advanced = encoded(build_advanced_peers(con, ROOT, meta))
+    write_if_changed(OUT / "advanced_peers.json", advanced.decode("utf-8"))
+    book = json.loads((OUT / "codebook.json").read_text(encoding="utf-8"))
+    book["advanced_peers"] = {"schema": 1, "path": "advanced_peers.json",
+                              "sha256": hashlib.sha256(advanced).hexdigest()}
+    write_if_changed(OUT / "codebook.json", encoded(book).decode("utf-8"))
 
     # --- sizes (raw + gzip, since Pages serves gzip) ---
     def sz(name):

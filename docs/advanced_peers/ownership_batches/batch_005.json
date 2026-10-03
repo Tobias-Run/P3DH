@@ -1,0 +1,255 @@
+{
+  "batch": "005",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 13,
+  "page_attempts": [
+    {
+      "lei": "549300U4LIZV0REEQQ46",
+      "url": "https://portal.kutxabank.es/cs/Satellite/kb/en/kutxabank/shareholders",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:48:54Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300U4LIZV0REEQQ46",
+      "url": "https://www.kutxabank.es",
+      "status": 200,
+      "error": null,
+      "sha256": "101cdfaa71362dadeafcbc38d2f3123b700cd58b28392034c869ea5991abbe0f",
+      "retrieved_at": "2026-10-02T23:48:55Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300U4LIZV0REEQQ46",
+      "url": "https://portal.kutxabank.es/cs/Satellite/kb/en/private-customers/corporative-information",
+      "status": 200,
+      "error": null,
+      "sha256": "bdeae901d83295ac5cce00e85d6310492ccb0925167d27545a32e51b6cd44a8c",
+      "retrieved_at": "2026-10-02T23:53:21Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300U4LIZV0REEQQ46",
+      "url": "https://www.kutxabank.com/en/corporate-information/shareholding-structure.html",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:58:54Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "95980020140005881190",
+      "url": "https://www.bcc.es",
+      "status": 200,
+      "error": null,
+      "sha256": "25c8be737838a831880a9d30e0b5df3b51179d1bf7ccbe7b453a4a5dc5754dbb",
+      "retrieved_at": "2026-10-02T23:48:54Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "95980020140005881190",
+      "url": "https://www.bcc.es/es/informacion-para-inversores/accionistas/",
+      "status": 200,
+      "error": null,
+      "sha256": "6ba32e3ec1f1ee230afd1417ea81a894bf9920101fecde4b3e61debfdd2dbe53",
+      "retrieved_at": "2026-10-02T23:50:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "95980020140005881190",
+      "url": "https://www.bcc.es/es/informacion-corporativa/quienes-somos/",
+      "status": 200,
+      "error": null,
+      "sha256": "19578d7d36a2923d70128ed7b514f4d3ee84f538694fad1034cf90dee2167113",
+      "retrieved_at": "2026-10-02T23:53:22Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "95980020140005881190",
+      "url": "https://www.bcc.es/storage/documents/473/presentacion-institucional-gcc.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "c6a21f1d9399f0ee94f9146fae1b55fba37935e86129f69a350140d3a098da32",
+      "retrieved_at": "2026-10-02T23:58:55Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493007SJLLCTM6J6M37",
+      "url": "https://www.unicajabanco.es",
+      "status": 200,
+      "error": null,
+      "sha256": "da1c1b24c24727730ac9f0f1c05fd999a62a38cbc246d2ba9697186b57b415e2",
+      "retrieved_at": "2026-10-02T16:33:06Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493007SJLLCTM6J6M37",
+      "url": "https://www.unicajabanco.com/en/accionistas-e-inversores/la-accion/estructura-accionarial",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:23Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "5493007SJLLCTM6J6M37",
+      "url": "https://www.unicajabanco.com/en/investors",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:58:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900JZTYE3W7WQH904",
+      "url": "https://www.haspa-finanzholding.de/unternehmen/",
+      "status": 200,
+      "error": null,
+      "sha256": "b2ce73ab8092af670cdd34f3157fc31a6dabd4cfd10d492a98fd0bf198d57a25",
+      "retrieved_at": "2026-10-02T23:48:55Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900JZTYE3W7WQH904",
+      "url": "https://haspafinanzholding.de/fileadmin/download/pdf/Haspa-Finanzholding-uebersicht-gruppenstruktur-2026.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "8e632a768f38c14ba9e0f4057df763c5de98178837723b0563f78c88102e8261",
+      "retrieved_at": "2026-10-02T16:52:33Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900JZTYE3W7WQH904",
+      "url": "https://haspafinanzholding.de/unternehmen/",
+      "status": 200,
+      "error": null,
+      "sha256": "b2ce73ab8092af670cdd34f3157fc31a6dabd4cfd10d492a98fd0bf198d57a25",
+      "retrieved_at": "2026-10-02T23:50:39Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900JZTYE3W7WQH904",
+      "url": "https://haspafinanzholding.de/fileadmin/download/pdf/Offenlegungsbericht-zum-31122025-der-HASPA-Finanzholding-Gruppe.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "b94b9f381b4f7dda8e3b80ef2522d5bca1f22a00f041e4b02fbca70e761d3bc9",
+      "retrieved_at": "2026-10-02T23:53:24Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "259400DZXF7UJKK2AY35",
+      "name": "mBank S.A.",
+      "ownership": "mixed",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.deutsche-finanzagentur.de/stabilisierungsmassnahmen/finanzmarktstabilisierungsfonds/massnahmen",
+        "sha256": "1b19c351d54f14b85c17016ddd27b5343301396e2e5055a654f9789c3e6b73b6",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "e 1] ausstehende Kapitalmaßnahmen (§ 7 StFG) per 31.12.2025 Buchwerte Kapitalmaßnahmen (§ 7 StFG) per 31.12.2025 Commerzbank AG - 4,4 [footnote 2] 2,1 [footnote 2] Hypo Real Estate Holding GmbH (HRE) - 6,7 [footnote 3] 0,1 Portigon AG - 2,0 0,0 FMS Wertmanagement AöR (FMS-WM) - - - Erste Abwicklungsanstalt (EAA) - - - Summe [footnote 4] 0,0 13,1 2,2 Refinanzierung FMS WM über FMS zum 31.12.2025 (max. 60 Mrd. €) [footnote 5] 51,4 1) Aus ausgelaufenen Liquiditätsgarantien von bis zu 168 Mrd. € wurden Garantieerträge i. H. v. 2,2 Mrd. € erzielt. Eine Inanspruchnahme dieser Garantien erfolgte nicht. 2) Der Aktienanteil des FMS an der CBK beträgt 12,6 % (rd. 142 Mio. Aktien). Handelsrechtliche Bewertungsobergrenze der Anschaffungskosten (HGB): 2,1 Mrd. €. 3) Davon sind 3,7 Mrd. € wirtschaftlich der FMS-WM zurechenbar: 2,1 Mrd. € wurden direkt an die FMS-WM gezahlt; 1,6 Mrd. € wurden von der DEPFA als Zahlungsauflage an die FMS-WM gezahlt. 4) Rundungsdifferenzen können auftreten. 5) Mit dem Inkrafttreten der gesetzlichen Änderung von § 9 StFG am 29.12.2020 wurde die Euro-Refinanzierung der FMS-WM über das Sondervermögen FMS auf maximal 60 Mrd. € erhöht. Die Refinanzierung der FMS-WM ist für den FMS ergebnisneutral. Ergebnis FMS seit Maßnahm"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "851WYGNLUQLFZBSYGB56",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/259400DZXF7UJKK2AY35/ultimate-parent-relationship",
+        "sha256": "50312d1cdaf586c870edf970490afca9793f421cff00717004d5c15a74b01178",
+        "relationship": {
+          "startNode": {
+            "id": "259400DZXF7UJKK2AY35",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "851WYGNLUQLFZBSYGB56",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2023-12-31T23:00:00Z",
+              "endDate": "2024-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "1994-11-30T23:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "1994-11-30T23:00:00Z",
+          "lastUpdateDate": "2025-12-03T14:38:31Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-01-12T18:09:25Z",
+          "managingLou": "259400L3KBYEVNHEJF55",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "mBank Spółka Akcyjna",
+        "registered_as": "0000025237",
+        "jurisdiction": "PL",
+        "gleif_record_sha256": "4f09b9cca71af134cd27273a0ca066767e8788a7734383d5f1ae1529a6d172e4"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300U4LIZV0REEQQ46",
+      "name": "Kutxabank, S.A.",
+      "rank": 15,
+      "trea_eur": 30879944000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Corporate information points to a separate corporate website; guessed English ownership paths failed.",
+      "next_action": "Follow the exact corporate-site link and current issuer report to BBK/Kutxa/Vital ownership and votes; verify the three banking foundations rather than assume a public savings bank."
+    },
+    {
+      "lei": "95980020140005881190",
+      "name": "Banco de Crédito Social Cooperativo",
+      "rank": 16,
+      "trea_eur": 30190657477.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current pages describe the cooperative founders; presentation PDF flattens a 97.41% diagram without a reliable named ownership edge.",
+      "next_action": "Inspect the original current institutional-presentation ownership diagram or annual-report shareholder table to establish which entities hold the BCC majority. Founding by cooperatives alone is not enough."
+    },
+    {
+      "lei": "5493007SJLLCTM6J6M37",
+      "name": "Unicaja Banco, S.A.",
+      "rank": 17,
+      "trea_eur": 30097390082.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Guessed issuer ownership/investor paths returned 404.",
+      "next_action": "Find the current Unicaja issuer shareholder table via its actual corporate navigation; distinguish Fundación Unicaja/Mayoral/other holdings and voting caps."
+    },
+    {
+      "lei": "529900JZTYE3W7WQH904",
+      "name": "HASPA Finanzholding",
+      "rank": 18,
+      "trea_eur": 29971856760.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Official pages establish Haspa’s holding role, not its own membership/ownership; disclosure report gives no explicit ownerless status.",
+      "next_action": "Review the current Hamburg register entry and founding statute for the exact old-law legal person; verify autonomous/ownerless structure before using the savings category. Do not infer municipal ownership from Sparkasse."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

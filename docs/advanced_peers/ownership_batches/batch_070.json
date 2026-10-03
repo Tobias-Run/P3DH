@@ -1,0 +1,142 @@
+{
+  "batch": "070",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 0,
+  "page_attempts": [
+    {
+      "lei": "213800A1O379I6DMCU10",
+      "url": "https://www.apsbank.com.mt",
+      "status": 200,
+      "error": null,
+      "sha256": "d02032286070b4dd9d8fbd985a7bdca8af8edf52b89ff177db3bfcb2c8a9c43d",
+      "retrieved_at": "2026-10-02T16:47:45Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "549300JSC82O1L4XV837",
+      "url": "https://nordnetab.com/governance/",
+      "status": 200,
+      "error": null,
+      "sha256": "8b534d419029e30e688bd22f53233aecf5d09ccbcbbbc75b7bfbb3510c595b17",
+      "retrieved_at": "2026-10-03T07:21:26Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5493002K643MZPQEK497",
+      "url": "https://www.bradescobbi.com.br",
+      "status": 200,
+      "error": null,
+      "sha256": "f6aff20510f1f2a59f95d8b392ead1975f5b23acf241d91afb7ae06d1a293d58",
+      "retrieved_at": "2026-10-02T16:54:36Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "5493009VJC01E4H6HH77",
+      "url": "https://www.avanza.se",
+      "status": 200,
+      "error": null,
+      "sha256": "153c936f5bc53c58bdc671af4c049862f1b4d636077dafe3e82a80c71e062338",
+      "retrieved_at": "2026-10-03T07:59:53Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "959800R86KE31EAVRC30",
+      "url": "https://www.bancopichincha.es",
+      "status": 200,
+      "error": null,
+      "sha256": "b09d67ef0d8fdff556d618491e782114103ed33558841d75002e5ccfa4dd53c1",
+      "retrieved_at": "2026-10-03T07:59:54Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "213800A1O379I6DMCU10",
+      "name": "APS BANK P.L.C.",
+      "rank": 98,
+      "trea_eur": 1921119393.99,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "030",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Discover APS official shareholder/voting table or current issuer annual report to Archdiocese/Diocese stakes and legal ownership type; church ownership is not automatically a foundation or mutual association.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Discover APS official shareholder/voting table or current issuer annual report to Archdiocese/Diocese stakes and legal ownership type; church ownership is not automatically a foundation or mutual association.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300JSC82O1L4XV837",
+      "name": "Nordnet - Grupp",
+      "rank": 99,
+      "trea_eur": 1892697479.25458,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "030",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Prove exact Nordnet Bank AB (the GLEIF identity behind EBA group) subsidiary control in issuer accounts. Current Nordnet AB parent shareholder table is sourced, but bank annual-report PDF exceeds 16 MiB and GLEIF relation is only partially corroborated; do not infer bank control from brand.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Prove exact Nordnet Bank AB (the GLEIF identity behind EBA group) subsidiary control in issuer accounts. Current Nordnet AB parent shareholder table is sourced, but bank annual-report PDF exceeds 16 MiB and GLEIF relation is only partially corroborated; do not infer bank control from brand.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "5493002K643MZPQEK497",
+      "name": "Banco Bradesco Europa S.A.",
+      "rank": 100,
+      "trea_eur": 1853544772.2792652,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "031",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Reconcile Banco Bradesco Europa Luxembourg LEI with the Brazilian BBI candidate; obtain bank-specific filed subsidiary evidence and current Bradesco parent controlling shareholders. ENTITY_SUPPLIED_ONLY is insufficient.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Reconcile Banco Bradesco Europa Luxembourg LEI with the Brazilian BBI candidate; obtain bank-specific filed subsidiary evidence and current Bradesco parent controlling shareholders. ENTITY_SUPPLIED_ONLY is insufficient.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "5493009VJC01E4H6HH77",
+      "name": "Avanza - Grupp",
+      "rank": 101,
+      "trea_eur": 1755290036.9493,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "031",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use exact Avanza Bank AB identity behind the EBA group and current Avanza Holding ownership/voting table plus bank subsidiary accounts; partially corroborated group relation is not proof of completed control.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use exact Avanza Bank AB identity behind the EBA group and current Avanza Holding ownership/voting table plus bank subsidiary accounts; partially corroborated group relation is not proof of completed control.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "959800R86KE31EAVRC30",
+      "name": "LIBERTY PARTNERS S.L.U.",
+      "rank": 102,
+      "trea_eur": 1720864000.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "031",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Review exact Spanish Liberty Partners holding owners in official filed accounts; Banco Pichincha retail website describes a subsidiary/brand, not who controls this holding.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Review exact Spanish Liberty Partners holding owners in official filed accounts; Banco Pichincha retail website describes a subsidiary/brand, not who controls this holding.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

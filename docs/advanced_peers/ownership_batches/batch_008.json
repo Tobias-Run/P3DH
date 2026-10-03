@@ -1,0 +1,249 @@
+{
+  "batch": "008",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 16,
+  "page_attempts": [
+    {
+      "lei": "549300OLBL49CW8CT155",
+      "url": "https://www.ibercaja.com/corporate-information/shareholders/",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:49:22Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300OLBL49CW8CT155",
+      "url": "https://www.ibercaja.es",
+      "status": 200,
+      "error": null,
+      "sha256": "3df9a715751c490c0975107408362eea028d185923dc9f29389077cfd750dcff",
+      "retrieved_at": "2026-10-02T16:33:15Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300OLBL49CW8CT155",
+      "url": "https://www.ibercaja.com/accionistas-e-inversores/accionistas/",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:59Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300OLBL49CW8CT155",
+      "url": "https://www.ibercaja.com/conoce-ibercaja/accionistas/",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:04Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300Q3OIWRHQUQM052",
+      "url": "https://www.sparebank1.no/en/sor-norge/about-us/investor.html",
+      "status": 200,
+      "error": null,
+      "sha256": "64e9263d9ff4e9ecf96381826ba59b73c3d025dcde085e4888d4fe82ed6999a1",
+      "retrieved_at": "2026-10-02T23:49:22Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300Q3OIWRHQUQM052",
+      "url": "https://www.sparebank1.no/nb/sor-norge/om-oss.html",
+      "status": 200,
+      "error": null,
+      "sha256": "87302b393f70229d7370fad57373fa5c293f52caf0a3cdb5e21b38c9bd565aa5",
+      "retrieved_at": "2026-10-02T23:49:22Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300Q3OIWRHQUQM052",
+      "url": "https://www.sparebank1.no/en/sor-norge/about-us/investor/ownership-structure.html",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:01Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800M7T3CYVZ3ZRT12",
+      "url": "https://www.spv.no/om-oss/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "e53f5ef312ceb6911eb520a974534512daf1ea2f49ca364814f4aa610845f638",
+      "retrieved_at": "2026-10-02T23:49:23Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800M7T3CYVZ3ZRT12",
+      "url": "https://ir.sparebankennorge.no/en/reports-and-presentations",
+      "status": 200,
+      "error": null,
+      "sha256": "1fcc06478a944772c0300f7b3805d4631d2df2329c18f98469682e3fc9625cd8",
+      "retrieved_at": "2026-10-02T23:49:26Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800M7T3CYVZ3ZRT12",
+      "url": "https://ir.sparebankennorge.no/en/equity-capital-certificates",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:02Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800M7T3CYVZ3ZRT12",
+      "url": "https://ir.sparebankennorge.no/en/equity-capital-certificates/ownership-structure",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:04Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500A1FNICHSDF2I11",
+      "url": "https://www.asnbank.nl",
+      "status": null,
+      "error": "The read operation timed out",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:49:23Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500A1FNICHSDF2I11",
+      "url": "https://www.asnbank.nl/over-asn-bank/organisatie.html",
+      "status": null,
+      "error": "The read operation timed out",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:03Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500A1FNICHSDF2I11",
+      "url": "https://www.devolksbank.nl/over-de-volksbank/organisatie",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:05Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "DZZ47B9A52ZJ6LT6VV95",
+      "url": "https://www.pfandbriefbank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "40f602696fe8f267db075993c27f9b38e65a6c95dccf84f17710c4491c38af97",
+      "retrieved_at": "2026-10-02T16:34:10Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "DZZ47B9A52ZJ6LT6VV95",
+      "url": "https://www.pfandbriefbank.com/unternehmen/corporate-governance/",
+      "status": 200,
+      "error": null,
+      "sha256": "93a840acfeb369c6681c0ff98df24fc4688d38360322ff32611760beff3af7ba",
+      "retrieved_at": "2026-10-02T23:49:27Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "DZZ47B9A52ZJ6LT6VV95",
+      "url": "https://www.pfandbriefbank.com/investoren/aktieninvestoren/",
+      "status": 200,
+      "error": null,
+      "sha256": "2be69b71ca508e28d9ada57657c8819a89204b97af669f3a33fa1c4f825adcde",
+      "retrieved_at": "2026-10-02T23:54:20Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "DZZ47B9A52ZJ6LT6VV95",
+      "url": "https://www.pfandbriefbank.com/fileadmin/user_upload/downloads/Corportate_Governance/Erklaerung_zur_Unternehmensfuehrung_GB_2025_de_final.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "913b9ba510d8642ce077e9051d6c4d1a939b1cf4d0e42cd2d79c1ea2d8cc7234",
+      "retrieved_at": "2026-10-02T23:59:05Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "213800M7T3CYVZ3ZRT12",
+      "name": "Sparebanken Norge",
+      "ownership": "savings",
+      "ownership_basis": "registered_bank_form",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/213800M7T3CYVZ3ZRT12",
+        "sha256": "c2ce98e7483835c6478aef53e718455634a8988e2e504f7612e169a637ad9aec",
+        "hash_kind": "canonical_gleif_record",
+        "retrieved_at": null,
+        "quote": "GLEIF registered bank legal name: SPAREBANKEN NORGE. Legal form R71C — Sparebank (Norway, active ELF entry). Entity status: ACTIVE. Registration updated: 2025-12-18T15:41:00Z. Statutory savings-bank form; equity capital certificate investors may coexist with the self-owned core capital."
+      },
+      "note": "Explicit manual review of Norwegian bank identity and statutory R71C Sparebank form using the archived active GLEIF record and official ISO 20275 ELF mapping. Classification describes self-owned savings-bank core capital, not the distribution/control of listed equity capital certificates; not extended to the ASA form of SpareBank 1 Sor-Norge.",
+      "bank_identity": {
+        "legal_name": "SPAREBANKEN NORGE",
+        "registered_as": "832 554 332",
+        "jurisdiction": "NO",
+        "gleif_record_sha256": "c2ce98e7483835c6478aef53e718455634a8988e2e504f7612e169a637ad9aec"
+      },
+      "legal_form_evidence": {
+        "elf_code": "R71C",
+        "jurisdiction": "NO",
+        "form": "Sparebank",
+        "source_url": "https://www.gleif.org/en/about-lei/code-lists/iso-20275-entity-legal-forms-code-list"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300OLBL49CW8CT155",
+      "name": "Ibercaja Banco, S.A.",
+      "rank": 29,
+      "trea_eur": 19220983000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Guessed Ibercaja ownership paths returned 404.",
+      "next_action": "Use the official corporate sitemap or issuer annual report to Fundación Bancaria Ibercaja and the other foundations, with dated percentages and voting rights."
+    },
+    {
+      "lei": "549300Q3OIWRHQUQM052",
+      "name": "SpareBank 1 Sør-Norge",
+      "rank": 30,
+      "trea_eur": 19191082662.5874,
+      "status": "pending_targeted_source_review",
+      "reason": "Ownership leaf was not discovered; the bank is registered as ASA, not the R71C self-owned savings-bank form.",
+      "next_action": "Use the current IR shareholder/equity structure and foundation holdings following the merger; do not apply the statutory Sparebank category to this ASA by its name."
+    },
+    {
+      "lei": "724500A1FNICHSDF2I11",
+      "name": "ASN Bank N.V.",
+      "rank": 32,
+      "trea_eur": 18258565112.0,
+      "status": "pending_targeted_source_review",
+      "reason": "ASN organisation source failed and former de Volksbank path was 404.",
+      "next_action": "Review official ASN/de Volksbank name-change notices and Dutch State/NLFI ownership at the exact registered LEI. State ownership requires current primary proof."
+    },
+    {
+      "lei": "DZZ47B9A52ZJ6LT6VV95",
+      "name": "Deutsche Pfandbriefbank AG",
+      "rank": 33,
+      "trea_eur": 17997000000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Corporate-governance declaration and investor portal do not provide a verified shareholder/voting table.",
+      "next_action": "Find current pbb qualifying-holdings notices or latest issuer shareholder table; governance/stock-market listing alone does not prove ownership."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

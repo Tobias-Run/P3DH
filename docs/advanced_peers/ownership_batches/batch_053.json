@@ -1,0 +1,235 @@
+{
+  "batch": "053",
+  "campaign": "next_70_trea_d",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 242,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 10,
+  "page_attempts": [
+    {
+      "lei": "549300OLBL49CW8CT155",
+      "url": "https://www.ibercaja.es",
+      "status": 200,
+      "error": null,
+      "sha256": "3df9a715751c490c0975107408362eea028d185923dc9f29389077cfd750dcff",
+      "retrieved_at": "2026-10-02T16:33:15Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300OLBL49CW8CT155",
+      "url": "https://www.ibercaja.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "867c40bad4fd66c022c8569e326382c4f80eb2c51fb2d8cd8efed983e5784a29",
+      "retrieved_at": "2026-10-03T08:41:49Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300OLBL49CW8CT155",
+      "url": "https://www.ibercaja.com/accionistas-e-inversores/gobierno-corporativo-y-politica-de-remuneraciones",
+      "status": 200,
+      "error": null,
+      "sha256": "73b43e9aef61dc210e73a4d0f7405ba459102547454400cd01e4895f18563546",
+      "retrieved_at": "2026-10-03T08:44:39Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300OLBL49CW8CT155",
+      "url": "https://www.ibercaja.com/sobre-ibercaja-banco/quienes-somos",
+      "status": 200,
+      "error": null,
+      "sha256": "a68b1cb584a7c02107fffb2d4e01efca50dd49698aa829dcfc8d29d892702476",
+      "retrieved_at": "2026-10-03T08:46:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300Q3OIWRHQUQM052",
+      "url": "http://www.sr-bank.no",
+      "status": 200,
+      "error": null,
+      "sha256": "3ff6b78235fadd3a12485e8a20ef89efeeb1c979485c7d1e85834a31203b3704",
+      "retrieved_at": "2026-10-02T16:33:16Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "724500A1FNICHSDF2I11",
+      "url": "https://www.asnbank.nl",
+      "status": null,
+      "error": "The read operation timed out",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:37:00Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500A1FNICHSDF2I11",
+      "url": "https://www.nlfi.nl/wp-content/uploads/2026/06/Voortgangsrapportage-ASN-Bank-over-2025.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "4f9c11462e2a0a58efa952e1eb7cd692dd9144fa515c18e47fe5de33e6719b50",
+      "retrieved_at": "2026-10-03T08:41:42Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500A1FNICHSDF2I11",
+      "url": "https://www.nlfi.nl/category/asn-bank/",
+      "status": 200,
+      "error": null,
+      "sha256": "7b5c6f338b8ad19a01cc6e1a40caf9527f4a2be86183126195678623c6eb6a96",
+      "retrieved_at": "2026-10-03T08:44:43Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500A1FNICHSDF2I11",
+      "url": "https://www.nlfi.nl/wp-content/uploads/2026/06/Kamerbrief-voortgangsrapportage-ASN-Bank-over-2025.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "8c1e2810a5e66781d4a08cc19fcaaf57413592f0604baaa7edddf30038d4f62e",
+      "retrieved_at": "2026-10-03T08:46:56Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "DZZ47B9A52ZJ6LT6VV95",
+      "url": "https://www.pfandbriefbank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "40f602696fe8f267db075993c27f9b38e65a6c95dccf84f17710c4491c38af97",
+      "retrieved_at": "2026-10-02T16:34:10Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "DZZ47B9A52ZJ6LT6VV95",
+      "url": "https://www.pfandbriefbank.com/investoren/financial-ratings-overview/reports-moodys-ratings/",
+      "status": 200,
+      "error": null,
+      "sha256": "58425e35758c4cb15e5ba896330fd9ec5010b0e93b08aa8717347abb7b8e68cc",
+      "retrieved_at": "2026-10-03T08:37:00Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9845006C7B5CC707X660",
+      "url": "https://www.swedbank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "7c7fbe2061080c87429bf2311170ef68f451ab99a7af3c64849f354587a884df",
+      "retrieved_at": "2026-10-02T23:49:45Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "9845006C7B5CC707X660",
+      "url": "https://www.swedbank.com/investor-relations/reports-and-presentations.html",
+      "status": 200,
+      "error": null,
+      "sha256": "e687dc0fefb028c53b63f29ece7c510387b06676188fca35c368f86429a11b8a",
+      "retrieved_at": "2026-10-03T08:37:01Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9845006C7B5CC707X660",
+      "url": "https://www.swedbank.com/about-swedbank/subsidiaries.html",
+      "status": 200,
+      "error": null,
+      "sha256": "af717e234fe7795b1818c1cb37acd0e86621c2d3519eefe56f213978c1da8f35",
+      "retrieved_at": "2026-10-03T08:39:48Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300OLBL49CW8CT155",
+      "name": "Ibercaja Banco, S.A.",
+      "ownership": "foundation",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.ibercaja.com/sobre-ibercaja-banco/quienes-somos",
+        "sha256": "a68b1cb584a7c02107fffb2d4e01efca50dd49698aa829dcfc8d29d892702476",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:46:56Z",
+        "quote": "neral. A través de nuestra singular estructura accionarial (los únicos propietarios del banco son cuatro fundaciones, siendo Fundación Ibercaja la principal) reinvertimos el 100 % de los beneficios en la sociedad, a través del desarrollo de proyectos sociales, educativos, científicos y medioambientales, que generan valor para todos. Ibercaja CorporativoArchivo Descargar/Visualizar Nuestro Propósito y Valores Quiénes Somos Nuestro Código Ético Historia Recursos visuales de marca Únete a nuestro equipo × Important Information Unfortunately, this information is not available in English. For any enquiry related with our Communication Department, please send an email to comunicacion@ibercaja.es close Acede a... Ibercaja.es (Zona para Clientes) Fundación Bancaria Ibercaja Fundación Caja Inmaculada Fundación Caja Badajoz Fundación Círculo Católico de Burgos A un clic... Quiénes somos Información Periódica Comunicaciones a la CNMV Notas de Prensa Informes Anuales Contáctanos Clientes Inversore"
+      },
+      "note": "Current bank page explicitly says the only owners are four foundations, with Fundacion Ibercaja the principal. All owners are foundations; no guessed 79% capital/current votes or public ownership from former savings-bank identity.",
+      "bank_identity": {
+        "legal_name": "IBERCAJA BANCO S.A.",
+        "registered_as": "1000116304547",
+        "jurisdiction": "ES",
+        "gleif_record_sha256": "f6d449ba2a58c45000887fc22594f86056c847210bbe00adf015d9350ed4ba33"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "008"
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300Q3OIWRHQUQM052",
+      "name": "SpareBank 1 Sør-Norge",
+      "rank": 23,
+      "trea_eur": 19191082662.5874,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use current SpareBank 1 Sor-Norge ASA shareholder/foundation table after merger. ASA bank is not registered R71C and retrieved source was unavailable; savings-bank name does not establish autonomous form.",
+      "successful_source_pages": 1,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "008",
+      "previous_next_action": "Ownership leaf was not discovered; the bank is registered as ASA, not the R71C self-owned savings-bank form. Next: Use the current IR shareholder/equity structure and foundation holdings following the merger; do not apply the statutory Sparebank category to this ASA by its name."
+    },
+    {
+      "lei": "724500A1FNICHSDF2I11",
+      "name": "ASN Bank N.V.",
+      "rank": 24,
+      "trea_eur": 18258565112.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read ASN's current issuer annual-report shareholder note or exact State/NLFI participant table. June-2026 NLFI report and ministerial letter confirm monitoring/privatisation not yet ready, but do not explicitly quantify all current shareholders; policy intent is not proof of completed sale or 100% ownership.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [
+        {
+          "url": "https://www.asnbank.nl",
+          "status": null,
+          "error": "The read operation timed out"
+        }
+      ],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "008",
+      "previous_next_action": "ASN organisation source failed and former de Volksbank path was 404. Next: Review official ASN/de Volksbank name-change notices and Dutch State/NLFI ownership at the exact registered LEI. State ownership requires current primary proof."
+    },
+    {
+      "lei": "DZZ47B9A52ZJ6LT6VV95",
+      "name": "Deutsche Pfandbriefbank AG",
+      "rank": 25,
+      "trea_eur": 17997000000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use current pbb qualifying-holdings notices or issuer annual shareholder table. Rating portal and governance/stock-market material do not give current ownership; do not classify from listing alone.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "008",
+      "previous_next_action": "Corporate-governance declaration and investor portal do not provide a verified shareholder/voting table. Next: Find current pbb qualifying-holdings notices or latest issuer shareholder table; governance/stock-market listing alone does not prove ownership."
+    },
+    {
+      "lei": "9845006C7B5CC707X660",
+      "name": "Swedbank Baltics AS",
+      "rank": 26,
+      "trea_eur": 17996692000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Follow the actual Swedbank annual-report link to exact Swedbank Baltics subsidiary/control note. General wholly-owned subsidiaries page does not include this entity; GLEIF relation is ENTITY_SUPPLIED_ONLY. Reuse accepted Swedbank shareholder source only after bank control proof.",
+      "successful_source_pages": 3,
+      "retrieval_failures": [],
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "009",
+      "previous_next_action": "Parent ownership is sourced, but bank relation is ENTITY_SUPPLIED_ONLY and guessed annual-report PDF was 404. Next: Use the exact Swedbank annual-report link and bank-specific Swedbank Baltics subsidiary note, then reuse the reviewed controller shareholder source."
+    }
+  ],
+  "note": "Fixed 19 first-review plus 51 explicitly revisited cases before curation; initial 2-page pass reserves remaining actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

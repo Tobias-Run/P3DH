@@ -1,0 +1,299 @@
+{
+  "batch": "010",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 12,
+  "page_attempts": [
+    {
+      "lei": "3H0Q3U74FVFED2SHZT16",
+      "url": "https://www.mbhbank.hu",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:50:03Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "3H0Q3U74FVFED2SHZT16",
+      "url": "https://www.mbhbank.hu/investor-relations",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:28Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "3H0Q3U74FVFED2SHZT16",
+      "url": "https://www.mbhbank.hu/ir/shareholder-information",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:11Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "259400QHDOZWMJ103294",
+      "url": "https://www.aliorbank.pl/en/investor-relations/shareholders.html",
+      "status": 200,
+      "error": null,
+      "sha256": "a321f290c047d58dcaf9e3906309e08ea2c17b9812e2590abc6520655b0083ad",
+      "retrieved_at": "2026-10-02T16:49:06Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "259400QHDOZWMJ103294",
+      "url": "https://www.aliorbank.pl/dodatkowe-informacje/o-banku/kontakt-dla-mediow.html",
+      "status": 200,
+      "error": null,
+      "sha256": "e2bfde018ec23079af55bc3fb736d5e9845b8f1f81a68b06129f1fb0739eff05",
+      "retrieved_at": "2026-10-02T23:49:52Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "259400QHDOZWMJ103294",
+      "url": "https://www.pzu.pl/en/investor-relations/shares/shareholding-structure",
+      "status": 410,
+      "error": "HTTP Error 410: Gone",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:29Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "259400QHDOZWMJ103294",
+      "url": "https://www.pzu.pl/relacje-inwestorskie/akcje/struktura-akcjonariatu",
+      "status": 410,
+      "error": "HTTP Error 410: Gone",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:58:52Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "XTC5E2QFTEF0435JWL77",
+      "url": "https://www.fmo.nl/our-shareholders",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:49:52Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "XTC5E2QFTEF0435JWL77",
+      "url": "https://www.fmo.nl",
+      "status": 200,
+      "error": null,
+      "sha256": "cab2e1d4bf0edfc3c69a650f8948147ff60e44e655120c26ce35611c3a24c6c6",
+      "retrieved_at": "2026-10-02T23:49:53Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "XTC5E2QFTEF0435JWL77",
+      "url": "https://www.fmo.nl/about-fmo",
+      "status": 200,
+      "error": null,
+      "sha256": "dc923151d6efdf90b35ff89a755bb0151d21da918179e34b28447d18e80a0b8d",
+      "retrieved_at": "2026-10-02T23:54:29Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "XTC5E2QFTEF0435JWL77",
+      "url": "https://www.fmo.nl/about-us/shareholders",
+      "status": 200,
+      "error": null,
+      "sha256": "2329c2f2fc14c2648be46aa3eba7d3ed721e4489c9e11f3103a789c47219b979",
+      "retrieved_at": "2026-10-02T23:59:27Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900DEAYRUPP22B339",
+      "url": "https://www.mercedes-benz-bank.de",
+      "status": 200,
+      "error": null,
+      "sha256": "71e99f88fb1083e49bbd433bc0d18cff699fbdc3e3c892145a4f1b73d9ad6a42",
+      "retrieved_at": "2026-10-02T16:32:33Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900DEAYRUPP22B339",
+      "url": "https://www.mercedes-benz.de/passengercars/models.html?group=all",
+      "status": 200,
+      "error": null,
+      "sha256": "b5562cc4e015420e678e77d9b8d0e47b18668f70e02ed192b4cea026b95ad579",
+      "retrieved_at": "2026-10-02T23:49:54Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900DEAYRUPP22B339",
+      "url": "https://group.mercedes-benz.com/investors/share/shareholder-structure/",
+      "status": 200,
+      "error": null,
+      "sha256": "e1e5b9029b740c97a509e0450aa6c03a43b03f4ee2689b01b1fc008086e2b05a",
+      "retrieved_at": "2026-10-02T23:54:30Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "TUKDD90GPC79G1KOE162",
+      "url": "https://www.hcob-bank.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "11e39376da098f6bffb6baf874a71fd75e8eff30362ff6dd8243c14a25c75ec1",
+      "retrieved_at": "2026-10-02T16:34:56Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "TUKDD90GPC79G1KOE162",
+      "url": "https://www.hcob-bank.com/ueber-uns/",
+      "status": 200,
+      "error": null,
+      "sha256": "596508fbfcf99f2464c21c2cc54ac19b2d909ea15fb1574131b20177c13ca6cd",
+      "retrieved_at": "2026-10-02T23:49:55Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "TUKDD90GPC79G1KOE162",
+      "url": "https://www.hcob-bank.com/ueber-uns/unternehmen/ueberblick/",
+      "status": 200,
+      "error": null,
+      "sha256": "ffa93b4f356a9b4376ad5f7471d405405a5e568daa0821c8e4cac34c009d5cf9",
+      "retrieved_at": "2026-10-02T17:04:57Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "TUKDD90GPC79G1KOE162",
+      "url": "https://www.hcob-bank.com/en/about-us/the-company/overview/",
+      "status": 200,
+      "error": null,
+      "sha256": "87be60f479df8cd508e6355f8db094f635522a6483d07a96a073eb004b0f1377",
+      "retrieved_at": "2026-10-02T23:59:12Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "XTC5E2QFTEF0435JWL77",
+      "name": "Nederlandse Financierings-Maatschappij voor Ontwikkelingslanden N.V.",
+      "ownership": "public",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.fmo.nl/about-us/shareholders",
+        "sha256": "2329c2f2fc14c2648be46aa3eba7d3ed721e4489c9e11f3103a789c47219b979",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T23:59:27Z",
+        "quote": "l Meeting of Shareholders (AGM) at least every year in May. FMO's shareholders are comprised of a 51% holding by the Dutch State, 42% by several large Dutch banks, and 7% is held by employers' associations, trade unions and approximately 100 Dutch companies and individual investors. In accordance with Best Practice Provision 4.2.2 of the Dutch Corporate Governance Code FMO has prepared a specific policy with regard to bilateral contacts with its shareholders. For more information please see our Policy on Bilateral Contacts with Shareholders. Annual General Meeting The AGM is convened once every year. However, both the Management and Superviso"
+      },
+      "note": "Official shareholder page: Dutch State 51%, Dutch banks 42%, other organisations/individuals 7%. Public majority, not wholly State-owned.",
+      "bank_identity": {
+        "legal_name": "NEDERLANDSE FINANCIERINGS-MAATSCHAPPIJ VOOR ONTWIKKELINGSLANDEN N.V.",
+        "registered_as": "27078545",
+        "jurisdiction": "NL",
+        "gleif_record_sha256": "d285bcdc92a8fa1b51407830ad4941e93da0825278417158256ea578f9f74ac4"
+      }
+    },
+    {
+      "lei": "529900DEAYRUPP22B339",
+      "name": "Mercedes-Benz Bank AG",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://group.mercedes-benz.com/investors/share/shareholder-structure/",
+        "sha256": "e1e5b9029b740c97a509e0450aa6c03a43b03f4ee2689b01b1fc008086e2b05a",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "cedes-Benz Group AG are in circulation worldwide. Among the largest known shareholders are BAIC Group, holding 9.98% of the registered share capital, investor Li Shufu, holding 9.69% through Tenaciou3 Prospect Investment Limited, and the Kuwait Investment Authority, holding 5.33%. The information is based on the most recently published voting rights notifications. Shares by ownership based on voting rights notifications(in % of registered capital stock, 30 June 2026) To see a combination of names and figures, please hover over the pie chart or touch it with your finger. Shares by region based on voting rights notifications(of institutional an"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "529900R27DL06UVNT076",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/529900DEAYRUPP22B339/ultimate-parent-relationship",
+        "sha256": "69eca4ef489e6dee1bde4cb1a9d2f58a45e6e2d4606623ecba8b228c01da0ef5",
+        "relationship": {
+          "startNode": {
+            "id": "529900DEAYRUPP22B339",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "529900R27DL06UVNT076",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2024-12-31T23:00:00Z",
+              "endDate": "2025-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2017-09-11T22:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2026-03-02T23:00:00Z",
+              "type": "DOCUMENT_FILING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2017-10-17T05:45:15Z",
+          "lastUpdateDate": "2026-09-14T14:49:40Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-10-25T22:00:00Z",
+          "managingLou": "5299000J2N45DDNE4Y28",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "Mercedes-Benz Bank AG",
+        "registered_as": "HRB 22937",
+        "jurisdiction": "DE",
+        "gleif_record_sha256": "b6fbb4f26cfd1f625c03400767c12fdf1c54082d21e2592698630b2c2b69931e"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "3H0Q3U74FVFED2SHZT16",
+      "name": "MBH bankcsoport",
+      "rank": 39,
+      "trea_eur": 14777621471.5064,
+      "status": "pending_targeted_source_review",
+      "reason": "Bank source access returned 403.",
+      "next_action": "Use an alternative official issuer annual report or Hungarian exchange qualifying-holdings disclosure for MBH; verify public/private/foundation stakes and exact bank/group identity. Do not retry denied URLs."
+    },
+    {
+      "lei": "259400QHDOZWMJ103294",
+      "name": "ALIOR BANK S.A.",
+      "rank": 40,
+      "trea_eur": 14130023130.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Bank table shows PZU Group 31.91%; parent State ownership type is not yet verified, and PZU candidate sources were 410.",
+      "next_action": "Obtain a current official PZU shareholder/voting table through its actual IR navigation, then review the fully corroborated Alior/PZU chain. Do not treat the bank table as exclusive private ownership."
+    },
+    {
+      "lei": "TUKDD90GPC79G1KOE162",
+      "name": "Hamburg Commercial Bank AG",
+      "rank": 43,
+      "trea_eur": 13054215444.93,
+      "status": "pending_targeted_source_review",
+      "reason": "Bank overview describes a private commercial bank but does not establish the current shareholders.",
+      "next_action": "Use the latest HCOB issuer annual-report ownership note to verify Cerberus/J.C.Flowers holdings and actual current parent entities; private commercial-bank description alone is not shareholder proof."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

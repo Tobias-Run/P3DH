@@ -90,3 +90,7 @@ interim/korrekturen_raw/
 # ein Modell; gehoert dann als Artefakt auf den data-Branch wie
 # long_form_raw.csv, nicht auf main - er waechst mit jedem Dokument.
 interim/llm_cache.jsonl
+
+# Ownership research: archived web responses and discovery are working material.
+# Reviewed classifications, explicitly labelled assumptions and frozen peer rosters are versioned.
+interim/ownership_research/

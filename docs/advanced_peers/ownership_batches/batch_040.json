@@ -1,0 +1,187 @@
+{
+  "batch": "040",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 5,
+  "page_attempts": [
+    {
+      "lei": "5299001PEMDU9N24CH60",
+      "url": "https://www.delavska-hranilnica.si",
+      "status": 200,
+      "error": null,
+      "sha256": "d91147e9a80e6ebfbda8cee9ec0e8eaf3b6cc8fc1226d80488f6d858471029c2",
+      "retrieved_at": "2026-10-02T16:50:17Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900SEFOTJH1MLGZ92",
+      "url": "https://www.lpb.dk",
+      "status": 200,
+      "error": null,
+      "sha256": "4dcf438d3bf05e7a8390f8719a8bd6a2279fcf2328bee95bbbeb9b4ad500a4b1",
+      "retrieved_at": "2026-10-02T16:53:54Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900SEFOTJH1MLGZ92",
+      "url": "https://www.lpb.dk/Om-os/Rapporter-og-noegletal/Rapporter",
+      "status": 200,
+      "error": null,
+      "sha256": "0953d75675a46e1209ace85228b61b46b66b51c278f341af69b7e52e06ee66db",
+      "retrieved_at": "2026-10-02T16:53:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900SEFOTJH1MLGZ92",
+      "url": "https://www.lpb.dk/Om-os",
+      "status": 200,
+      "error": null,
+      "sha256": "caf79fb35a331b555c9ca4c3553b761b787b0d814e6dfc2d359945af1383273f",
+      "retrieved_at": "2026-10-03T08:03:07Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900SEFOTJH1MLGZ92",
+      "url": "https://www.lpb.dk/Om-os/Organisation-og-ledelse/Laegernes-Bank",
+      "status": 200,
+      "error": null,
+      "sha256": "995fc58ef05d544eb3588f8814fc6716c54ae25878e51988f41f7def4e54fabc",
+      "retrieved_at": "2026-10-03T08:05:35Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900U5XAEYOT68AC40",
+      "url": "https://www.efginternational.com",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:54:17Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "QS3ZEAHRBZY9228Z0111",
+      "url": "https://www.juliusbaer.com",
+      "status": 200,
+      "error": null,
+      "sha256": "f571906024ad499313329a2ee83fb614563156d6812335a7a152488d82ad8604",
+      "retrieved_at": "2026-10-03T08:00:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300TEJKOLFN65KR76",
+      "url": "https://www.bnf.bank",
+      "status": 200,
+      "error": null,
+      "sha256": "7289f4fab3dedd1baff2c776b249d6a48d4f08c4a55c2425365d6519a3366776",
+      "retrieved_at": "2026-10-03T08:00:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300TEJKOLFN65KR76",
+      "url": "https://www.bnf.bank/about",
+      "status": 200,
+      "error": null,
+      "sha256": "f26802604c0a477a05c6e3a66e61aa33bf1eedb47338352493796aed0ce01552",
+      "retrieved_at": "2026-10-03T08:00:18Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "529900SEFOTJH1MLGZ92",
+      "name": "Lægernes Bank A/S",
+      "ownership": "mutual",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.lpb.dk/Om-os/Organisation-og-ledelse/Laegernes-Bank",
+        "sha256": "995fc58ef05d544eb3588f8814fc6716c54ae25878e51988f41f7def4e54fabc",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:05:35Z",
+        "quote": "sigt attraktiv fuldservicebank. Derudover er banken også en god forretning for sine ejere – dvs. medlemmerne af Lægernes Pension – både når det gælder omkostninger og afkast. Samdriften med banken giver nemlig lavere omkostninger i pensionskassen. Oveni bidrager Lægernes Bank med et stabilt årligt afkast til lægernes pensioner. Lægernes Bank er specialiseret i at betjene læger - både som privatkunder og erhvervskunder (praktiserende læger og speciallæger). Vi kender lægerne indgående. Det gælder deres indtægtsforløb og formueforhold, jobsikkerhed og invaliditetsmønster og alt andet, der har betydning, når man skal rådgive om penge. Lægernes Bank blev oprettet i 1992. Målt på arbejdende kapital er banken den 22. største af de 56 danske banke"
+      },
+      "note": "Bank source identifies its owners as members of Laegernes Pension. Member-owned occupational pension institution, not a bank-owned charitable foundation or a commercial shareholder family. Member/customer restriction is not the sole ownership evidence.",
+      "bank_identity": {
+        "legal_name": "LÆGERNES BANK A/S",
+        "registered_as": "15966637",
+        "jurisdiction": "DK",
+        "gleif_record_sha256": "8dadcc454a57987fc420683c07b58acf571bb58bab228121798afab9cdca9485"
+      }
+    },
+    {
+      "lei": "549300TEJKOLFN65KR76",
+      "name": "BNF Bank plc",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.bnf.bank/about",
+        "sha256": "f26802604c0a477a05c6e3a66e61aa33bf1eedb47338352493796aed0ce01552",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:00:18Z",
+        "quote": "ium sized enterprises (SMEs) and other corporate customers. JUD Investment Group Ltd, a subsidiary of Al Faisal International for Investment, one of Qatar's largest private diversified groups, is BNF Bank's majority shareholder having 92.4% stake in the Bank. The remaining 7.6% of shares are held by four Maltese shareholders: PG Holdings Ltd, Virtu Investments Ltd, SAK Ltd and Mizzi Organisation Limited. BNF Bank was awarded Bank of the Year Malta by The Banker as published by the Financial Times for three consecutive years from 2020 to 2022. Our Values Ambition We embrace change and face challenges head on, continually looking for innovative solutions. Responsibility We take personal responsibility for our growth and development, being hon"
+      },
+      "note": "Bank explicitly identifies 92.4% JUD Investment Group, subsidiary of private Al Faisal International for Investment, and 7.6% four named Maltese corporate owners. No inference from Qatar nationality or business-market segment.",
+      "bank_identity": {
+        "legal_name": "BNF BANK PLC",
+        "registered_as": "C 41030",
+        "jurisdiction": "MT",
+        "gleif_record_sha256": "77db896369657c96a2f068d1ea0fcbec00bd9f83fe23f8168bf2672d1dd6db7e"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "5299001PEMDU9N24CH60",
+      "name": "DELAVSKA HRANILNICA d.d. LJUBLJANA",
+      "rank": 154,
+      "trea_eur": 725366000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Follow actual dh.si corporate issuer/report navigation to current Delavska Hranilnica trade-union and other share percentages/votes. Union-customer credit offers are not owner control; AG form does not determine type.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900U5XAEYOT68AC40",
+      "name": "EFG Bank (Luxembourg) S.A.",
+      "rank": 156,
+      "trea_eur": 707704904.97,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use alternative official EFG International issuer accounts for exact Luxembourg bank subsidiary and EFG parent owner voting table; do not retry denied group website.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.efginternational.com",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    },
+    {
+      "lei": "QS3ZEAHRBZY9228Z0111",
+      "name": "Bank Julius Baer Europe S.A.",
+      "rank": 157,
+      "trea_eur": 673755353.69,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use current Julius Baer parent qualifying holdings and exact Europe bank subsidiary accounts; classify the precise controller before accepting bank relationship, rather than a private-banking brand.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

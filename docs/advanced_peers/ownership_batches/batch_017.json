@@ -1,0 +1,170 @@
+{
+  "batch": "017",
+  "campaign": "next_70_trea_b",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 268,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 4,
+  "page_attempts": [
+    {
+      "lei": "959800LQ598A5RQASA61",
+      "url": "https://www.bancamarch.es/es/",
+      "status": 200,
+      "error": null,
+      "sha256": "50888e1dd9d66b841d921e6d5c341b306c10e7632237d1afec1751a9493ff445",
+      "retrieved_at": "2026-10-02T16:33:39Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "959800LQ598A5RQASA61",
+      "url": "https://www.bancamarch.es/es/nosotros/",
+      "status": 200,
+      "error": null,
+      "sha256": "6c26855d399d480180cbdfead8c199049ddb8a2790156af4b610686098e47992",
+      "retrieved_at": "2026-10-03T07:20:30Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900S1KHKOEQL5CK20",
+      "url": "http://www.wuestenrot.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "a5c6d22f526c5fded10e2a83439bcb51e257188a79146d7e712419a18db3d3ed",
+      "retrieved_at": "2026-10-02T16:32:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900S1KHKOEQL5CK20",
+      "url": "https://www.wuestenrot.de/ueber-uns",
+      "status": 200,
+      "error": null,
+      "sha256": "ae9284b975fad396fa9755e876b1d46bc77dedbfc2557ef3fdc589c795fdeae2",
+      "retrieved_at": "2026-10-02T16:53:52Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300PZMFIQR79Q0T97",
+      "url": "https://www.islandsbanki.is",
+      "status": 200,
+      "error": null,
+      "sha256": "6157a57c38d400da0915826961cf64976ff8ea8ff9293e39820aaf5459d6c75b",
+      "retrieved_at": "2026-10-03T07:20:30Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900BHRYZ464GFD289",
+      "url": "http://www.grenke.de",
+      "status": 200,
+      "error": null,
+      "sha256": "396899f3e6a769c14bf94f3800ba86ca41f003d84eee52f5674b56bc82e62e2b",
+      "retrieved_at": "2026-10-02T16:32:30Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900BHRYZ464GFD289",
+      "url": "https://www.grenke.com/de/unternehmen/investor-relations/",
+      "status": 200,
+      "error": null,
+      "sha256": "63a6f6f4cb8235d5bae0c0b1c79e827f2f267bd6bf187ee3da39bcbfe75abe84",
+      "retrieved_at": "2026-10-03T07:28:18Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900BHRYZ464GFD289",
+      "url": "https://www.grenke.com/de/unternehmen/investor-relations/grenke-aktie/aktionaersstruktur/",
+      "status": 200,
+      "error": null,
+      "sha256": "700f17d0ac059ca59a6a4c90111289bc3f6fdccab69e751991aede453c7dd832",
+      "retrieved_at": "2026-10-03T07:29:16Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800HDJ876ACJXXD05",
+      "url": "https://www.aikbanka.rs",
+      "status": 200,
+      "error": null,
+      "sha256": "afccc3d5ef03934ff92dad2bc329bcc826cb5d62dc132ef70e41e72745b2d164",
+      "retrieved_at": "2026-10-02T16:48:00Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "959800LQ598A5RQASA61",
+      "name": "Banca March, S.A.",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.bancamarch.es/es/",
+        "sha256": "50888e1dd9d66b841d921e6d5c341b306c10e7632237d1afec1751a9493ff445",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T16:33:39Z",
+        "quote": " uno de los equipos de gestores mejor valorados. desde 1926 Banca March, entidad de propiedad 100% familiar, de origen balear. Banca March refuerza su apuesta por el País Vasco con la inauguración de un nuevo centro de negocio en San Sebastián Visión de Mercados Trabaje con nosotros Fin del contenido principal Contáctenos Llámenos 900 227 227 Escríbanos info@bancamarch.es O si lo prefiere nosotros le contactamos Los campos con asterisco (*) son obligatorios. * Nombre y apellidos: * Teléfono: * E-mail: Aceptar política de protección de datos * Acepto la política de protección de datos y confirmo que la he leído Banca March, S.A. como responsab"
+      },
+      "note": "Bank explicitly states 100% family ownership. No inference from the bank name, directors or its stakes in other companies.",
+      "bank_identity": {
+        "legal_name": "BANCA MARCH SA",
+        "registered_as": "PM-644-8",
+        "jurisdiction": "ES",
+        "gleif_record_sha256": "9256fcf785d585b6b78a2bae487002991d99dbd0f1b6dbc3406ecf4e963c59ba"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "529900S1KHKOEQL5CK20",
+      "name": "Wüstenrot Bausparkasse Aktiengesellschaft",
+      "rank": 55,
+      "trea_eur": 7571866501.84,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review the exact Wuestenrot & Wuerttemberg AG parent LEI and current foundation/control voting table, then the fully corroborated bank relationship; distinguish German group from Austrian Wuestenrot.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300PZMFIQR79Q0T97",
+      "name": "Íslandsbanki hf.",
+      "rank": 56,
+      "trea_eur": 7304067600.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Discover Islandsbanki current investor shareholder table through the bank corporate menu or latest issuer report; date the Icelandic State exit and any later holdings before classification.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900BHRYZ464GFD289",
+      "name": "GRENKE AG",
+      "rank": 57,
+      "trea_eur": 7182742350.27,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read the actual GRENKE shareholder chart or issuer report table; cached HTML omits percentages. Review Grenke family partnership, free float, foundation minority and the non-control agreement separately.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "213800HDJ876ACJXXD05",
+      "name": "AIKGROUP (CY) LIMITED",
+      "rank": 58,
+      "trea_eur": 7147631124.89822,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Identify Cyprus-registered AIKGROUP CY holding in its exact filed ownership report; Serbian AikBank retail site does not establish this parent company owners.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

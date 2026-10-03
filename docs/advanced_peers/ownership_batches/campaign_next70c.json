@@ -1,0 +1,231 @@
+{
+  "campaign": "next_70_trea_c",
+  "reviewed_at": "2026-10-03",
+  "baseline_commit": "85a3f653a256e2755fe42c30f49bc755260489b8",
+  "selection": "Next 70 previously unreviewed pending TREA-ranked LEIs; previous checkpoints excluded; frozen before curation.",
+  "institutions": 70,
+  "accepted": 11,
+  "deferred": 59,
+  "page_attempts": 142,
+  "new_network_fetches": 76,
+  "status_counts": {
+    "200": 133,
+    "404": 2,
+    "403": 3,
+    "None": 4
+  },
+  "batches": [
+    {
+      "batch": "031",
+      "banks": [
+        "5493002K643MZPQEK497",
+        "9695002JOWSRCLLLNY11",
+        "5493009VJC01E4H6HH77",
+        "959800R86KE31EAVRC30",
+        "BB3BGO3LCED63R8R9R41"
+      ],
+      "accepted": 1,
+      "deferred": 4,
+      "page_attempts": 9,
+      "new_network_fetches": 8,
+      "decision_bundle_chars": 3812
+    },
+    {
+      "batch": "032",
+      "banks": [
+        "815600B5C61A10BBB451",
+        "969500GVS02SJYG9S632",
+        "724500M4G9AVEMHMV291",
+        "54930060Q00W1SRIUI57",
+        "222100PG81CES7H3HZ28"
+      ],
+      "accepted": 0,
+      "deferred": 5,
+      "page_attempts": 8,
+      "new_network_fetches": 4,
+      "decision_bundle_chars": 3265
+    },
+    {
+      "batch": "033",
+      "banks": [
+        "213800GO21RWIB6O9Q29",
+        "635400LCCIYHUL6ELA34",
+        "5967007LIEEXZX76AW36",
+        "529900DSIVJWCUQUMP41",
+        "529900IRBZTADXJB6757"
+      ],
+      "accepted": 1,
+      "deferred": 4,
+      "page_attempts": 12,
+      "new_network_fetches": 7,
+      "decision_bundle_chars": 3683
+    },
+    {
+      "batch": "034",
+      "banks": [
+        "549300EHNXQVOI120S55",
+        "HWIPDOTRM1EKRPKYKH81",
+        "5967007LIEEXZX51WW28",
+        "2138002PVBMEHILJ1340",
+        "724500SF1CI8OD5AHI07"
+      ],
+      "accepted": 1,
+      "deferred": 4,
+      "page_attempts": 10,
+      "new_network_fetches": 6,
+      "decision_bundle_chars": 3471
+    },
+    {
+      "batch": "035",
+      "banks": [
+        "549300SGF4BS54YG8M65",
+        "549300JECLPX13NZLU57",
+        "254900WR3I1Z9NPC7D84",
+        "39120001JPAYYPDRNN92",
+        "2138007F5HA5FFJROB80"
+      ],
+      "accepted": 0,
+      "deferred": 5,
+      "page_attempts": 9,
+      "new_network_fetches": 3,
+      "decision_bundle_chars": 3098
+    },
+    {
+      "batch": "036",
+      "banks": [
+        "RG3IZJKPYQ4H6IQPIC08",
+        "529900TDG1TFZM39SF37",
+        "529900FZWXWNKF3O8394",
+        "529900Q2C3I7VCILLG45",
+        "2138005M92IEIQVEL297"
+      ],
+      "accepted": 1,
+      "deferred": 4,
+      "page_attempts": 10,
+      "new_network_fetches": 2,
+      "decision_bundle_chars": 3515
+    },
+    {
+      "batch": "037",
+      "banks": [
+        "9695007EQZDL89LUW373",
+        "529900UIRB65OY6U4B21",
+        "724500ZNT2I60RYZQI38",
+        "R1IO4YJ0O79SMWVCHB58",
+        "5493006Z4NTMNDDBGL49"
+      ],
+      "accepted": 0,
+      "deferred": 5,
+      "page_attempts": 9,
+      "new_network_fetches": 5,
+      "decision_bundle_chars": 3151
+    },
+    {
+      "batch": "038",
+      "banks": [
+        "81560017C4A61A529235",
+        "2138007JGI1M5YF7FJ53",
+        "529900RQOBT3ZJMDRK43",
+        "815600B6B356EC776E54",
+        "95980020140005658381"
+      ],
+      "accepted": 2,
+      "deferred": 3,
+      "page_attempts": 13,
+      "new_network_fetches": 7,
+      "decision_bundle_chars": 4174
+    },
+    {
+      "batch": "039",
+      "banks": [
+        "549300ZOE0EU2VKF6M35",
+        "529900UHDH7QLRMEJQ86",
+        "259400DAAAR5M4A6SI23",
+        "213800JF3JFF6MMR2P36",
+        "81560035485BD7DB3590"
+      ],
+      "accepted": 0,
+      "deferred": 5,
+      "page_attempts": 10,
+      "new_network_fetches": 4,
+      "decision_bundle_chars": 3306
+    },
+    {
+      "batch": "040",
+      "banks": [
+        "5299001PEMDU9N24CH60",
+        "529900SEFOTJH1MLGZ92",
+        "529900U5XAEYOT68AC40",
+        "QS3ZEAHRBZY9228Z0111",
+        "549300TEJKOLFN65KR76"
+      ],
+      "accepted": 2,
+      "deferred": 3,
+      "page_attempts": 9,
+      "new_network_fetches": 5,
+      "decision_bundle_chars": 4099
+    },
+    {
+      "batch": "041",
+      "banks": [
+        "213800UIIZ6YSEQB5S26",
+        "549300FRBP5L0O1HY885",
+        "529900OLW8QPFMTBDC23",
+        "529900VVDOKMRRAHZ894",
+        "549300RMML7KXP6M1Y98"
+      ],
+      "accepted": 1,
+      "deferred": 4,
+      "page_attempts": 10,
+      "new_network_fetches": 6,
+      "decision_bundle_chars": 3616
+    },
+    {
+      "batch": "042",
+      "banks": [
+        "9845009BE414FBF82130",
+        "549300M2IHOB9P5WE714",
+        "969500F3KYDJBFS4XM73",
+        "81560062CEAE87A85C80",
+        "529900XB6RQ3XCELQO62"
+      ],
+      "accepted": 0,
+      "deferred": 5,
+      "page_attempts": 9,
+      "new_network_fetches": 6,
+      "decision_bundle_chars": 3279
+    },
+    {
+      "batch": "043",
+      "banks": [
+        "213800ZOI1EW481WPV90",
+        "9695002K2HDLD20JU790",
+        "213800TKOS7J5UA3ZI07",
+        "8156003D79D064FB5360",
+        "529900BIK4WRWS06MR52"
+      ],
+      "accepted": 1,
+      "deferred": 4,
+      "page_attempts": 13,
+      "new_network_fetches": 7,
+      "decision_bundle_chars": 3664
+    },
+    {
+      "batch": "044",
+      "banks": [
+        "2534005A84927EKSR789",
+        "213800RENLNKMWZV8767",
+        "549300YV6LXRPJO3U576",
+        "959800VHSP2QBPNRF210",
+        "724500AG21Z9GIJE4735"
+      ],
+      "accepted": 1,
+      "deferred": 4,
+      "page_attempts": 11,
+      "new_network_fetches": 6,
+      "decision_bundle_chars": 4095
+    }
+  ],
+  "source_reuse": "Ten direct ownership classifications, including an explicit two-report France/Swiss/Holding/family chain; one canonical Norwegian R71C statutory bank form. No unreviewed parent inheritance or new controller classification.",
+  "limitations": "70 bounded reviews, not 70 accepted classifications. Script-rendered pages, missing chart text and PDF size limits require targeted follow-ups. Current ownership classification is not a historical ownership time series. Compact bundle characters are not measured chat tokens."
+}

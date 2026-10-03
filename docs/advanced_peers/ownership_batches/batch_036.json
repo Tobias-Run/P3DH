@@ -1,0 +1,179 @@
+{
+  "batch": "036",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 2,
+  "page_attempts": [
+    {
+      "lei": "RG3IZJKPYQ4H6IQPIC08",
+      "url": "https://www.addiko.hr",
+      "status": 200,
+      "error": null,
+      "sha256": "2e14906e62cac8931445900658b162e109514737b473e8c37872ebdc9f1b3397",
+      "retrieved_at": "2026-10-03T08:00:07Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900TDG1TFZM39SF37",
+      "url": "https://www.baaderbank.de",
+      "status": 200,
+      "error": null,
+      "sha256": "43dbd2904ff2cc452ddbf39d3699300f1cefc728467df1d749c5f99dad97e99f",
+      "retrieved_at": "2026-10-02T16:54:10Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900TDG1TFZM39SF37",
+      "url": "https://www.baaderbank.de/uber-uns/unternehmen",
+      "status": 200,
+      "error": null,
+      "sha256": "350df917ef5ee097a9ab5e387a2955476e36dea87b0058e9b4db4ccf23afcaf9",
+      "retrieved_at": "2026-10-02T16:54:11Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900FZWXWNKF3O8394",
+      "url": "https://www.sparthy.dk",
+      "status": 200,
+      "error": null,
+      "sha256": "9e29792401a2a8c5dc3e4e435951c239ab6740cd21e0d335c7ae67193d252cdc",
+      "retrieved_at": "2026-10-02T16:51:53Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900FZWXWNKF3O8394",
+      "url": "https://www.sparthy.dk/sparthy/produkter/investering/sparekassen-thy---investor",
+      "status": 200,
+      "error": null,
+      "sha256": "8dec9b02a04978cd775e351e73bbd656685577cc7a2f10c024bb1aad7bcaa64f",
+      "retrieved_at": "2026-10-02T16:51:54Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900FZWXWNKF3O8394",
+      "url": "https://www.sparthy.dk/om-sparekassen",
+      "status": 200,
+      "error": null,
+      "sha256": "cb906b470c118d5de2636f416827b8ce5805bf02bbfa522ad92980451fc83f94",
+      "retrieved_at": "2026-10-03T08:03:04Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900Q2C3I7VCILLG45",
+      "url": "https://www.fimbank.com/en/shareholder-services",
+      "status": 200,
+      "error": null,
+      "sha256": "23be3c20769ea06df7f1e68def1f929e229f427f258ffc67c91b1cca87d420f2",
+      "retrieved_at": "2026-10-02T16:53:41Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900Q2C3I7VCILLG45",
+      "url": "https://www.fimbank.com/en/about-malta",
+      "status": 200,
+      "error": null,
+      "sha256": "32bfc7b1393874ccc68b4d2dd2940ba5b592aaed72dccb7abdb488f26ce4a13f",
+      "retrieved_at": "2026-10-02T16:53:41Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2138005M92IEIQVEL297",
+      "url": "https://www.inbank.ee",
+      "status": 200,
+      "error": null,
+      "sha256": "02e03998fae58f94a721dbfc9f0b42a0f6dfa0360b71011a9fe19db4380efcca",
+      "retrieved_at": "2026-10-02T16:47:23Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2138005M92IEIQVEL297",
+      "url": "https://inbank.ee/investor/volakirjad",
+      "status": 200,
+      "error": null,
+      "sha256": "e5a261011d0b3e6077d52a807c2e467f54e6f24635740e4520b6c4c10d4d0481",
+      "retrieved_at": "2026-10-02T16:47:26Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "529900FZWXWNKF3O8394",
+      "name": "Sparekassen Thy",
+      "ownership": "savings",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.sparthy.dk/om-sparekassen",
+        "sha256": "cb906b470c118d5de2636f416827b8ce5805bf02bbfa522ad92980451fc83f94",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:03:04Z",
+        "quote": "se, så vi sammen kan bringe værdiskabende indsatser i spil. Frihed fra ejere og aktionærer Sparekassen Thy er en garantsparekasse. Det betyder, at vores øverste myndighed er vores repræsentantskab. Repræsentantskabet vælges blandt og af de af vores kunder, der har tegnet garantkapital i Sparekassen Thy. Det er også blandt repræsentantskabet, at bestyrelsen vælges. Vores ejerskabsform giver os mulighed for at have det lange lys på. Både i forhold til sparekassens udvikling og i udviklingen af de lokalsamfund, vi er en del af. Og det giver os frihed til at udvikle sparekassen med kundernes behov i centrum. Læs mere om garant Danmarks 4. bedste bank - ifølge kunderne Hvert år gennemfører analyseinstituttet Voxmeter en dybdegående tilfredshedsu"
+      },
+      "note": "Bank explicitly states freedom from owners/shareholders and guarantor-bank governance: highest authority elected by customers subscribing guarantor capital. Its charitable foundation is a separate institution, not inferred to own the bank.",
+      "bank_identity": {
+        "legal_name": "SPAREKASSEN THY",
+        "registered_as": "24255816",
+        "jurisdiction": "DK",
+        "gleif_record_sha256": "646cb35b14d9bca6d3131958ac5d4905d7333d325e7ffa900170430b40080a9f"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "RG3IZJKPYQ4H6IQPIC08",
+      "name": "Addiko Bank d.d.",
+      "rank": 134,
+      "trea_eur": 1155691796.77,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review exact Croatian Addiko bank and Austrian group/controller LEIs plus current issuer major holdings/completed acquisition dates. Classify parent explicitly before any fully corroborated subsidiary record.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900TDG1TFZM39SF37",
+      "name": "Baader Beteiligungs GmbH",
+      "rank": 135,
+      "trea_eur": 1154054798.32,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review Baader Beteiligungs GmbH own current ownership in filed German accounts/register. Baader Bank subsidiary table and bank shareholder table showing the holding as owner do not prove who owns the holding.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900Q2C3I7VCILLG45",
+      "name": "FIMBank plc",
+      "rank": 137,
+      "trea_eur": 1085936453.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Current FIMBank shareholder-service page lacks exact ultimate controlling-owner category. Review Burgan Bank/KIPCO current shareholder and voting chain with registered identities before accepting the fully corroborated bank relation.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "2138005M92IEIQVEL297",
+      "name": "AS Inbank",
+      "rank": 138,
+      "trea_eur": 1045267228.6076869,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Obtain Inbank actual current shareholder/voting table and bank annual report from issuer navigation; bond-marketing landing alone is not owner evidence.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

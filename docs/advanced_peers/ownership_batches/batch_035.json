@@ -1,0 +1,158 @@
+{
+  "batch": "035",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 3,
+  "page_attempts": [
+    {
+      "lei": "549300SGF4BS54YG8M65",
+      "url": "https://www.citco.com",
+      "status": 200,
+      "error": null,
+      "sha256": "bd8e4219d4add07ee45825dacb42f4397786cbc36934f1eda3ba9124f488dec9",
+      "retrieved_at": "2026-10-03T08:00:05Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300SGF4BS54YG8M65",
+      "url": "https://www.citco.com/our-clients/asset-owners",
+      "status": 200,
+      "error": null,
+      "sha256": "8a89318c7edacf3b2dff7e41dc93d76477d5be0a9d92c3f07157cd274eacc5fd",
+      "retrieved_at": "2026-10-03T08:00:06Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300JECLPX13NZLU57",
+      "url": "https://www.andelskassen.dk",
+      "status": 200,
+      "error": null,
+      "sha256": "5cacfbe2dd9863e1bf77723387e27917b2073690c2f0c47b51f5f2fa7863616e",
+      "retrieved_at": "2026-10-02T16:33:11Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300JECLPX13NZLU57",
+      "url": "https://www.andelskassen.dk/private-banking/raadgivning/virksomhedsejer",
+      "status": 200,
+      "error": null,
+      "sha256": "ebdb1c0f98a4e4eff0f0d4fa4824d75742e7235e97cd51aee0a7dd842677d64b",
+      "retrieved_at": "2026-10-03T08:00:05Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "254900WR3I1Z9NPC7D84",
+      "url": "https://www.kvika.is",
+      "status": 200,
+      "error": null,
+      "sha256": "ac4430e0e5174abd68927297e45d1b3825e3ae06d42a2fb41236ad740649543f",
+      "retrieved_at": "2026-10-02T16:48:58Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "39120001JPAYYPDRNN92",
+      "url": "http://www.badenia.de",
+      "status": 200,
+      "error": null,
+      "sha256": "6ff5ee0946cf4177c3a2f24ec03680dc2aa834e058b4ac7565887c0264fb7f45",
+      "retrieved_at": "2026-10-02T16:32:16Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "39120001JPAYYPDRNN92",
+      "url": "https://www.badenia.de/ziele-wuensche/bauen-kaufen/vom-mieter-zum-eigentuemer",
+      "status": 200,
+      "error": null,
+      "sha256": "e01da70439c8b0742efa71a5b176aa5f84e4455e2ed4e2be143e38665ad1fd47",
+      "retrieved_at": "2026-10-02T16:32:18Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2138007F5HA5FFJROB80",
+      "url": "http://www.rietumu.lv",
+      "status": 200,
+      "error": null,
+      "sha256": "9c1cfa06b9390202be94d3762be7ba001d296792b6ce2d367104cfca970f86ca",
+      "retrieved_at": "2026-10-02T16:31:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2138007F5HA5FFJROB80",
+      "url": "https://www.rietumu.com/lv/corporate",
+      "status": 200,
+      "error": null,
+      "sha256": "b06164487cd8bfabf7d192f73aed06291302568eac6c8d9e968aebad42f04914",
+      "retrieved_at": "2026-10-02T16:31:58Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "549300SGF4BS54YG8M65",
+      "name": "Citco Bank Nederland N.V.",
+      "rank": 129,
+      "trea_eur": 1388794700.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review Citco Bank Nederland exact regulated company shareholders and completed ownership/control chain in filed accounts. Citco asset-owner client pages are product descriptions, not bank ownership.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300JECLPX13NZLU57",
+      "name": "Danske Andelskassers Bank A/S",
+      "rank": 130,
+      "trea_eur": 1299173721.9105241,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Obtain current Danske Andelskassers Bank shareholders and voting percentages, distinguishing converted listed bank from historic cooperative roots and foundation minority; business-owner advisory page is irrelevant.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "254900WR3I1Z9NPC7D84",
+      "name": "Kvika banki hf.",
+      "rank": 131,
+      "trea_eur": 1268144806.6,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Discover Kvika current issuer corporate/IR major shareholders and votes, matching Icelandic LEI and transaction dates; do not infer ownership from merger or bank-name narratives.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "39120001JPAYYPDRNN92",
+      "name": "Deutsche Bausparkasse Badenia Aktiengesellschaft",
+      "rank": 132,
+      "trea_eur": 1265173198.38,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Reuse archived Badenia 2025 report to prove exact bank control, then classify current Generali parent via issuer shareholder/vote evidence. Home-to-property-owner product page is irrelevant.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "2138007F5HA5FFJROB80",
+      "name": "Akciju sabiedrība \"Rietumu Banka\"",
+      "rank": 133,
+      "trea_eur": 1235059000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use current Rietumu issuer annual-report capital/shareholder table with dated family/foundation interests, matching Latvian legal identity; corporate products page does not identify owners.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

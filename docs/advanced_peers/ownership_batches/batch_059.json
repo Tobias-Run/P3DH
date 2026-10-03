@@ -1,0 +1,461 @@
+{
+  "batch": "059",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 3,
+  "page_attempts": [
+    {
+      "lei": "724500JIWG886A9RRT57",
+      "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/14022025/nwg-annual-report-and-accounts-accessible-11032025.pdf",
+      "status": null,
+      "error": "Response exceeds 16 MiB evidence limit",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:26Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "22210058UCKT3BJTCN24",
+      "url": "https://www.otpgroup.info/static/sw/file/OTP_2025_annual_report.pdf",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:27Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "529900S1KHKOEQL5CK20",
+      "url": "https://www.wuestenrot.de/ueber-uns",
+      "status": 200,
+      "error": null,
+      "sha256": "ae9284b975fad396fa9755e876b1d46bc77dedbfc2557ef3fdc589c795fdeae2",
+      "retrieved_at": "2026-10-02T16:53:52Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "529900S1KHKOEQL5CK20",
+      "url": "https://www.ww-ag.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "f84c5b5c021e88dc3ee5356c71172f98a90446b1a2e0330208472ebdf2afa409",
+      "retrieved_at": "2026-10-03T10:31:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900S1KHKOEQL5CK20",
+      "url": "https://www.ww-ag.com/de/investor-relations/aktie/aktionaersstruktur",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T10:33:45Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900S1KHKOEQL5CK20",
+      "url": "https://www.ww-ag.com/media/dokumente/investor_relations_1/berichte_1/geschaeftsberichte/2025_9/WuW_GB_2025.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "eb28502f966fb7359c84096e7e4a7ca64bdc9afe58d9834bca77aeaa861de317",
+      "retrieved_at": "2026-10-03T10:39:40Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300PZMFIQR79Q0T97",
+      "url": "https://www.islandsbanki.is",
+      "status": 200,
+      "error": null,
+      "sha256": "6157a57c38d400da0915826961cf64976ff8ea8ff9293e39820aaf5459d6c75b",
+      "retrieved_at": "2026-10-03T07:20:30Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "529900BHRYZ464GFD289",
+      "url": "https://www.grenke.com/de/unternehmen/investor-relations/grenke-aktie/aktionaersstruktur/",
+      "status": 200,
+      "error": null,
+      "sha256": "700f17d0ac059ca59a6a4c90111289bc3f6fdccab69e751991aede453c7dd832",
+      "retrieved_at": "2026-10-03T07:29:16Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "529900S1KHKOEQL5CK20",
+      "name": "Wüstenrot Bausparkasse Aktiengesellschaft",
+      "ownership": "foundation",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.ww-ag.com/media/dokumente/investor_relations_1/berichte_1/geschaeftsberichte/2025_9/WuW_GB_2025.pdf",
+        "sha256": "eb28502f966fb7359c84096e7e4a7ca64bdc9afe58d9834bca77aeaa861de317",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "olumen in Stück 36 022 38 246 24 448 1 Dividendenvorschlag. Die Aktionärsstruktur der W&W AG blieb im Verlauf des Berichtsjahrs stabil. Die gemeinnützige Wüstenrot Stiftung, Gemeinschaft der Freunde Deutscher Eigenheimverein e. V., Ludwigsburg, hält über zwei Holdings eine mittelbare Beteiligung an der W&W AG von insgesamt 67,38 %. Davon hält die WS Holding AG, Stuttgart, 27,47 % und die Wüsten- rot Holding AG, Ludwigsburg, 39,91 %. Weitere Großaktio- närin der W&W AG ist mit mehr als 10 % der Anteile die FS BW Holding GmbH, München. Zum 31. Dezember 2025 hielt die W&W AG keine eigenen Aktien. 6,5 (Vj. 6,9) % der insgesamt ausgegebenen Aktien der W&W AG sind ausländischen Aktionären zuzuordnen. Dividendenpolitik Die W&W AG strebt eine stabile und verlässliche Dividende für ihre Aktionäre an. Für das vergangene Geschäftsjahr schlägt der Vorstand der Jahreshauptver- Wüstenrot & Württembergische AG Zusammengefasster Lagebericht 19 sammlung dementsprechend eine unveränderte Dividen- denzahlung in Höhe von 0,65 € je Aktie vor. Gemessen am Jahresschlusskurs 2025 entspricht dies einer Dividen- denrendite von 4,47 (Vj. 5,58) %. Mitarbeiteraktien Im April 2025 hat die W&W AG erneut konzernweit Mitar- beiteraktien ausgegeben. Auf den XETRA-Schlusskurs vom 24. März 2025 erhielten berechtigte Mitarbeiterinnen und Mitarbeiter 5 € Nachlass auf maximal 40 Aktien. Unser Unternehmen setzt damit"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "5299003H07ZT0Z5ZNN35",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/529900S1KHKOEQL5CK20/ultimate-parent-relationship",
+        "sha256": "62e49c9eaa8fec9a6ac0ee21b8b5e647a5eb00014246faaaf11bc230762f703f",
+        "relationship": {
+          "startNode": {
+            "id": "529900S1KHKOEQL5CK20",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "5299003H07ZT0Z5ZNN35",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2024-12-31T23:00:00Z",
+              "endDate": "2025-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2017-09-10T22:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2026-03-25T23:00:00Z",
+              "type": "DOCUMENT_FILING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2017-09-12T08:48:51Z",
+          "lastUpdateDate": "2026-08-20T10:19:39Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-09-28T22:00:00Z",
+          "managingLou": "5299000J2N45DDNE4Y28",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "Wüstenrot Bausparkasse Aktiengesellschaft",
+        "registered_as": "HRB 205323",
+        "jurisdiction": "DE",
+        "gleif_record_sha256": "5eab90fd869e46fe2b2a3515e4aef3e263a8b0dd5784ae9b335d8b033ee2e410"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "017",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "529900S1KHKOEQL5CK20",
+          "attributes": {
+            "lei": "529900S1KHKOEQL5CK20",
+            "entity": {
+              "legalName": {
+                "name": "Wüstenrot Bausparkasse Aktiengesellschaft",
+                "language": "de"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [
+                {
+                  "name": "Wustenrot Bausparkasse Aktiengesellschaft",
+                  "language": "de",
+                  "type": "AUTO_ASCII_TRANSLITERATED_LEGAL_NAME"
+                }
+              ],
+              "legalAddress": {
+                "language": "de",
+                "addressLines": [
+                  "W&W-Platz 1"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Kornwestheim",
+                "region": "DE-BW",
+                "country": "DE",
+                "postalCode": "70806"
+              },
+              "headquartersAddress": {
+                "language": "de",
+                "addressLines": [
+                  "W&W-Platz 1"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Kornwestheim",
+                "region": "DE-BW",
+                "country": "DE",
+                "postalCode": "70806"
+              },
+              "registeredAt": {
+                "id": "RA000351",
+                "other": null
+              },
+              "registeredAs": "HRB 205323",
+              "jurisdiction": "DE",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "6QQB",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "1998-05-13T22:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": [
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2024-09-10T22:00:00Z",
+                      "recordedDate": "2025-01-16T16:38:56Z",
+                      "type": "MERGERS_AND_ACQUISITIONS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2024-08-11T22:00:00Z",
+                      "recordedDate": "2024-08-12T11:03:10Z",
+                      "type": "CHANGE_HQ_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2024-08-11T22:00:00Z",
+                      "recordedDate": "2024-08-12T11:03:10Z",
+                      "type": "CHANGE_LEGAL_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2023-08-15T22:00:00Z",
+                      "recordedDate": "2023-08-16T08:22:12Z",
+                      "type": "CHANGE_HQ_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2023-08-15T22:00:00Z",
+                      "recordedDate": "2023-08-16T08:22:12Z",
+                      "type": "CHANGE_LEGAL_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2021-10-06T22:00:00Z",
+                      "recordedDate": "2023-06-12T12:08:30Z",
+                      "type": "MERGERS_AND_ACQUISITIONS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2020-06-25T22:00:00Z",
+                      "recordedDate": "2022-03-29T11:52:26Z",
+                      "type": "MERGERS_AND_ACQUISITIONS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                }
+              ]
+            },
+            "registration": {
+              "initialRegistrationDate": "2013-09-17T10:42:48Z",
+              "lastUpdateDate": "2026-08-20T10:19:39Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-09-28T22:00:00Z",
+              "managingLou": "5299000J2N45DDNE4Y28",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000351",
+                "other": null
+              },
+              "validatedAs": "HRB 205323",
+              "otherValidationAuthorities": []
+            },
+            "bic": [
+              "BSWLDE61XXX"
+            ],
+            "mic": null,
+            "ocid": "de/B8534_HRB205323",
+            "qcc": "QDEUKSV8QN",
+            "gem": null,
+            "spglobal": [
+              "12315796"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/529900S1KHKOEQL5CK20/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/529900S1KHKOEQL5CK20/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/529900S1KHKOEQL5CK20/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/529900S1KHKOEQL5CK20/direct-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/529900S1KHKOEQL5CK20/direct-parent"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/529900S1KHKOEQL5CK20/ultimate-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/529900S1KHKOEQL5CK20/ultimate-parent"
+              }
+            },
+            "isins": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/529900S1KHKOEQL5CK20/isins"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/529900S1KHKOEQL5CK20"
+          }
+        },
+        "canonical_sha256": "5eab90fd869e46fe2b2a3515e4aef3e263a8b0dd5784ae9b335d8b033ee2e410"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "724500JIWG886A9RRT57",
+      "name": "RBS Holdings N.V.",
+      "rank": 43,
+      "trea_eur": 7897854103.86611,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "016",
+      "previous_next_action": "Guessed parent legal-structure page was 404; old issuer PDF exceeds retrieval/processing limits or failed. No bank-specific current subsidiary edge is reviewed. Next: Use NatWest’s actual current legal-structure or annual-report subsidiary note for RBS Holdings NV plus current parent shareholder data; separately verify the completed UK State exit date.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "NatWest-specific RBS Holdings NV ownership note remains absent from accessible archived evidence; locate current exact legal structure and dated parent owner table, no retail-bank successor inference.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/14022025/nwg-annual-report-and-accounts-accessible-11032025.pdf",
+          "status": null,
+          "error": "Response exceeds 16 MiB evidence limit"
+        }
+      ]
+    },
+    {
+      "lei": "22210058UCKT3BJTCN24",
+      "name": "OTP Luxembourg S.à r.l.",
+      "rank": 44,
+      "trea_eur": 7880667000.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "016",
+      "previous_next_action": "Guessed Luxembourg/about URL resolves to the parent error page and guessed annual report was 404; relationship is ENTITY_SUPPLIED_ONLY. Next: Use the actual OTP issuer annual-report link and exact Luxembourg subsidiary note to prove control, then reuse the reviewed OTP shareholder source. Parent branding is insufficient.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Archived guessed pages were 404 and relationship is entity-supplied only. Read actual OTP consolidated Luxembourg subsidiary note; reuse parent shareholder proof only after exact bank edge is established.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.otpgroup.info/static/sw/file/OTP_2025_annual_report.pdf",
+          "status": 404,
+          "error": "HTTP Error 404: Not Found"
+        }
+      ]
+    },
+    {
+      "lei": "549300PZMFIQR79Q0T97",
+      "name": "Íslandsbanki hf.",
+      "rank": 46,
+      "trea_eur": 7304067600.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "017",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Discover Islandsbanki current investor shareholder table through the bank corporate menu or latest issuer report; date the Icelandic State exit and any later holdings before classification.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Discover Islandsbanki current investor shareholder table through the bank corporate menu or latest issuer report; date the Icelandic State exit and any later holdings before classification.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900BHRYZ464GFD289",
+      "name": "GRENKE AG",
+      "rank": 47,
+      "trea_eur": 7182742350.27,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "017",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Read the actual GRENKE shareholder chart or issuer report table; cached HTML omits percentages. Review Grenke family partnership, free float, foundation minority and the non-control agreement separately.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Issuer shareholder page has family partnership names and a non-control agreement, but chart percentages remain absent. Read original issuer report or chart image and current voting disclosures; family list alone is not majority control.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

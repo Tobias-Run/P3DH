@@ -1,0 +1,282 @@
+{
+  "batch": "009",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 15,
+  "page_attempts": [
+    {
+      "lei": "9845006C7B5CC707X660",
+      "url": "https://www.swedbank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "7c7fbe2061080c87429bf2311170ef68f451ab99a7af3c64849f354587a884df",
+      "retrieved_at": "2026-10-02T23:49:45Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9845006C7B5CC707X660",
+      "url": "https://www.swedbank.com/about-swedbank/management-and-corporate-governance.html",
+      "status": 200,
+      "error": null,
+      "sha256": "3a614d6234d1f5e24439a4dbbff492f0d01827ef4ca18bab48ed6a212bf97a78",
+      "retrieved_at": "2026-10-02T23:49:46Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9845006C7B5CC707X660",
+      "url": "https://www.swedbank.com/about-swedbank/organisation.html",
+      "status": 200,
+      "error": null,
+      "sha256": "6e861b708c57325621e5982046291b0db68881df11d587d3e42b635e8c670fa4",
+      "retrieved_at": "2026-10-02T23:54:21Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9845006C7B5CC707X660",
+      "url": "https://www.swedbank.com/content/dam/swedbank/corporate/reports/2025/swedbank-annual-and-sustainability-report-2025.pdf",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:06Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "7LVZJ6XRIE7VNZ4UBX81",
+      "url": "http://www.bancamediolanum.it",
+      "status": 200,
+      "error": null,
+      "sha256": "655ff592c0e66aace8d0c355712d49dfa4553743590e206de46b1aa9fbd5c39f",
+      "retrieved_at": "2026-10-02T16:33:32Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "7LVZJ6XRIE7VNZ4UBX81",
+      "url": "https://www.bancamediolanum.it/informazioni-al-cliente/rapporti-dormienti",
+      "status": 200,
+      "error": null,
+      "sha256": "67c5a8d9edf08efbc29c5c789dc5d874095f8ee10ea5a229740ce2073443d1e7",
+      "retrieved_at": "2026-10-02T16:33:37Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "7LVZJ6XRIE7VNZ4UBX81",
+      "url": "https://www.bancamediolanum.it/corporate/investor-relations/azionariato",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:22Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "7LVZJ6XRIE7VNZ4UBX81",
+      "url": "https://www.bancamediolanum.it/corporate/azionariato",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:07Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "AT0000000000043000VB",
+      "url": "https://www.volksbankwien.at",
+      "status": 200,
+      "error": null,
+      "sha256": "6815d98e7f2df9435be0e2cb43043b36d83f60b2b426d8abd514bce4df134e73",
+      "retrieved_at": "2026-10-02T23:49:45Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "AT0000000000043000VB",
+      "url": "https://www.volksbankwien.at/wien/bankprofil/eigentuemerclub.page?&",
+      "status": 200,
+      "error": null,
+      "sha256": "b16788f4b10e35fa0149a9ed1c46bfa478a0bbba92636a82936684199de40cea",
+      "retrieved_at": "2026-10-02T23:49:47Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "AT0000000000043000VB",
+      "url": "https://www.volksbankwien.at/wien/ir/eigentuemerstruktur.page?&main=3&nav=0&sub=2",
+      "status": 200,
+      "error": null,
+      "sha256": "cff17fa56a14a22093950731f14dddf83c3568dc9bc11f345a0329efdd559895",
+      "retrieved_at": "2026-10-02T23:54:23Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "AT0000000000043000VB",
+      "url": "https://www.volksbankwien.at/volksbankenverbund/genossenschaft",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:07Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "391200EEGLNXBBCVKC73",
+      "url": "https://www.s-finanzgruppe.de",
+      "status": 503,
+      "error": "HTTP Error 503: Service Unavailable",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:49:47Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "391200EEGLNXBBCVKC73",
+      "url": "https://www.dsgv.de/sparkassen-finanzgruppe/organisation.html",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:54:25Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "391200EEGLNXBBCVKC73",
+      "url": "https://www.dsgv.de/verband/organisation.html",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:59:08Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "6TJCK1B7E7UTXP528Y04",
+      "url": "http://www.citigroup.de/",
+      "status": 200,
+      "error": null,
+      "sha256": "3bf94b094d69e5b648851d8f4ef1a13dadbeb11a2465e3b463b108995d21cb91",
+      "retrieved_at": "2026-10-02T16:33:28Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "6TJCK1B7E7UTXP528Y04",
+      "url": "https://www.citigroup.com/global",
+      "status": 200,
+      "error": null,
+      "sha256": "8c333542f5694c7b7333c045de4ae823b03bad402b0ca9105e73a79be3cf5de4",
+      "retrieved_at": "2026-10-02T23:49:50Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "6TJCK1B7E7UTXP528Y04",
+      "url": "https://www.citigroup.com/citi/about/countries-and-jurisdictions/germany.html",
+      "status": 200,
+      "error": null,
+      "sha256": "b57ac3fab2b2fa7ace34a164c123780258d14ae07585295abb09029ea5b212bc",
+      "retrieved_at": "2026-10-02T23:54:27Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "6TJCK1B7E7UTXP528Y04",
+      "url": "https://www.sec.gov/Archives/edgar/data/831001/000083100126000011/citi-exh2101x12312025.htm",
+      "status": 200,
+      "error": null,
+      "sha256": "b22632497ff227a93eb283e1b7f8611635e547ecd6171d0a5bd10c49e86d0216",
+      "retrieved_at": "2026-10-02T22:30:05Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "AT0000000000043000VB",
+      "name": "VOLKSBANK WIEN AG VB",
+      "ownership": "cooperative",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.volksbankwien.at/wien/ir/eigentuemerstruktur.page?&main=3&nav=0&sub=2",
+        "sha256": "cff17fa56a14a22093950731f14dddf83c3568dc9bc11f345a0329efdd559895",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-02T23:54:23Z",
+        "quote": "VB Baden Beteiligung e.Gen. (11,41 % Stammaktien) Volksbank Tirol AG (9,48 % Stammaktien) VB Ost Verwaltung eG (9,15 % Stammaktien) VB Verbund-Beteiligung eG (8,31 % Stammaktien) Volksbank Niederösterreich AG (7,81 % Stammaktien) VB Niederösterreich Süd eG (7,27 % Stammaktien) Volksbank Steiermark AG (6,8 % Stammaktien) Volksbank Salzburg eG (6,15 % Stammaktien) VB Wien Beteiligung eG (5,06 % Stammaktien) Volksbank Oberösterreich AG (4,83 % Stammaktien) VB Südburgenland Verwaltung eG (4,28 % Stammaktien) VB Weinviertel Verwaltung eG (3,86 % Stammaktien) VOLKSBANK VORARLBERG e.Gen (3,12 % Stammaktien) Volksbank Kärnten eG (2,96 % Stammaktien) Österreichische Ärzte- und Apothekerbank AG (2,72 % Stammaktien) WV Beteiligung eG (2,72 % Stammaktien) VB Beteiligung Obersdorf-Wolkersdorf-Deutsch-Wagram eG (1,78 % Stammaktien) Verwaltungsgenossenschaft Gärtnerbank e.Gen. (1,11 % Stammaktien) Volksbanken Holding eGen (0,84 % Stammaktien) SPARDA AUSTRIA Holding eG (0,36 % Stammaktien) ",
+        "majority_calculation": {
+          "named_owners": [
+            "VB Baden Beteiligung e.Gen.",
+            "VB Ost Verwaltung eG",
+            "VB Verbund-Beteiligung eG",
+            "VB Niederösterreich Süd eG",
+            "Volksbank Salzburg eG",
+            "VB Wien Beteiligung eG",
+            "VB Südburgenland Verwaltung eG",
+            "VB Weinviertel Verwaltung eG"
+          ],
+          "ordinary_share_percent": 55.49
+        }
+      },
+      "note": "Eight explicitly named bank-network cooperative shareholder entities in the ownership table jointly hold 55.49% of ordinary shares; remaining cooperative holders are not needed for the majority test. AG bank form alone was not used; this is a reviewed network ownership table, not a generic non-bank investment cooperative inference."
+    },
+    {
+      "lei": "6TJCK1B7E7UTXP528Y04",
+      "name": "Citigroup Global Markets Europe AG",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_document_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Annual_Report/2025/2026-citi-proxy-statement.pdf",
+        "sha256": "c1d2cdd8c9ecccf5f5f4b5274499cd8f7c0dd6f7d690e951c5eed5952bbbacaf",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "ode of Conduct 45 Communications with the Board 45 STOCK OWNERSHIP 46 Beneficial Ownership Table 46 Owners of More than 5% of Citi’s Common Stock 47 Insider Trading Policies for Citi and Citi’s Board, Officers and Employees 47 PROPOSAL 1: ELECTION OF DIRECTORS 48 Director Criteria and Nomination Process 48 Director Qualifications 49 The Nominees 53 Directors’ Compensation 66 AUDIT COMMITTEE REPORT 70 PROPOSAL 2: RATIFICATION OF SELECTION OF INDEPENDENT REGISTERED PUBLIC ACCOUNTING FIRM 71 PROPOSAL 3: ADVISORY VOTE TO APPROVE OUR 2025 EXECUTIVE COMPENSATION 73 Compensation Discussion and Analysis 73 The Compensation, Performance Management and Culture Committee Report 97 2025 Summary Compensation Table and Compensation Information 98 Additional Compensation Disclosures 109 PROPOSAL 4: APPROVAL OF ADDITIONAL SHARES FOR THE CITIGROUP 2019 STOCK INCENTIVE PLAN 110 STOCKHOLDER PROPOSALS 118 Submission of Future Stockholder Proposals 118 Cost of Annual Meeting and Proxy Solicitation 118 Householding 119 ABOUT THE 2026 ANNUAL MEETING 120 ANNEX A 126 Additional Information Regarding Proposal 3 126 Citigroup – Quantitative Scorecard Metric Details And Reconciliations 127 FORWARD-LOOKING STATEMENTS Certain statements in this Proxy Statement are “forward-looking statements” within the meaning of the Private Securities Litigation Refor"
+      },
+      "note": "Exact German AG subsidiary reviewed, distinct from similarly named English Finance Limited. SEC Exhibit 21.01 significant subsidiaries as of 2025-12-31; no 100% ownership assertion.",
+      "controller_lei": "6SHGI4ZSSLCXXQSBB395",
+      "control_evidence": {
+        "url": "https://www.sec.gov/Archives/edgar/data/831001/000083100126000011/citi-exh2101x12312025.htm",
+        "sha256": "b22632497ff227a93eb283e1b7f8611635e547ecd6171d0a5bd10c49e86d0216",
+        "retrieved_at": "2026-10-02T22:30:05Z",
+        "quote": "imited Bahamas 4 Citigroup Global Markets Limited England 5 Citigroup Global Markets Europe AG Germany 3 Citigroup Global Markets Inc. New York (a) Indicates the number of subsidiaries levels the subsidiary resides beneath Citigroup Inc.",
+        "heading_quote": "EX-21.01 8 citi-exh2101x12312025.htm EX-21.01 Document Significant Subsidiaries of Citigroup Inc. Exhibit 21.01 In accordance with SEC rules, the following is a list of Citigroup Inc.'s subsidiaries as of December 31, 2025, other than those subsidiaries, considered in the aggregate as a single subsidiary, that would not constitute a “significant subsidiary” as of December 31, 2025. This list of subsidiaries will change from year-to-year as a result of changes in Citigroup Inc.'s and its subsidia",
+        "matched_legal_name": "Citigroup Global Markets Europe AG"
+      },
+      "matched_legal_name": "Citigroup Global Markets Europe AG",
+      "bank_identity": {
+        "legal_name": "Citigroup Global Markets Europe AG",
+        "registered_as": "HRB 88301",
+        "jurisdiction": "DE",
+        "gleif_record_sha256": "fa7d98d031554d6a31dce2b299221b1501ec413e34ead7d5b935bf3113598200"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "9845006C7B5CC707X660",
+      "name": "Swedbank Baltics AS",
+      "rank": 34,
+      "trea_eur": 17996692000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Parent ownership is sourced, but bank relation is ENTITY_SUPPLIED_ONLY and guessed annual-report PDF was 404.",
+      "next_action": "Use the exact Swedbank annual-report link and bank-specific Swedbank Baltics subsidiary note, then reuse the reviewed controller shareholder source."
+    },
+    {
+      "lei": "7LVZJ6XRIE7VNZ4UBX81",
+      "name": "BANCA MEDIOLANUM S.P.A.",
+      "rank": 35,
+      "trea_eur": 16681605098.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Guessed Mediolanum ownership leaves returned 404; retail pages are not shareholders evidence.",
+      "next_action": "Use corporate investor navigation to the current Doris/Fininvest shareholding and voting table; exclude unrelated Mediolanum charitable foundation pages."
+    },
+    {
+      "lei": "391200EEGLNXBBCVKC73",
+      "name": "Erwerbsgesellschaft der S-Finanzgruppe mbH & Co. KG",
+      "rank": 37,
+      "trea_eur": 15508102262.51,
+      "status": "pending_targeted_source_review",
+      "reason": "Candidate site temporarily failed and DSGV organisation path was 404.",
+      "next_action": "Verify this Erwerbsgesellschaft’s exact shareholders in an official filed report/register, including public-law savings banks; sector membership alone is not proof."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

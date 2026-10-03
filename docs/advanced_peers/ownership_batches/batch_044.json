@@ -1,0 +1,200 @@
+{
+  "batch": "044",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 6,
+  "page_attempts": [
+    {
+      "lei": "2534005A84927EKSR789",
+      "url": "https://signetbank.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "23a664a54ebaf0ea378d332a89c91deadec20132780542f91c406dfff931882b",
+      "retrieved_at": "2026-10-02T16:32:05Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2534005A84927EKSR789",
+      "url": "https://signetbank.com/sitemap.xml",
+      "status": 200,
+      "error": null,
+      "sha256": "5475317b684063ae6add428aefaf5832606ebdf1124fe336f0390daabba24cbd",
+      "retrieved_at": "2026-10-03T08:05:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "2534005A84927EKSR789",
+      "url": "https://signetbank.com/page-sitemap.xml",
+      "status": 200,
+      "error": null,
+      "sha256": "ab88c8685cf524f0fc0df3dae6e30855b229513f6119944d8bf51e909e70ab51",
+      "retrieved_at": "2026-10-03T08:08:01Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "2534005A84927EKSR789",
+      "url": "https://signetbank.com/en/about-us/management-and-shareholders/",
+      "status": 200,
+      "error": null,
+      "sha256": "c97f748f0456217b6f9f6fd5ee80d3f047777cf98b1a8471c0f47f0504423344",
+      "retrieved_at": "2026-10-03T08:10:36Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800RENLNKMWZV8767",
+      "url": "https://www.lollandsbank.dk/",
+      "status": 200,
+      "error": null,
+      "sha256": "29f7134190d335d193efd91d8d6e84a5f9127ef56616fa8bc70e8034d4695265",
+      "retrieved_at": "2026-10-02T16:32:03Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800RENLNKMWZV8767",
+      "url": "https://www.lollandsbank.dk/aktionaer/",
+      "status": 200,
+      "error": null,
+      "sha256": "75265308a6413924029f84f1dec62510bf8fe00a05eb0c2d3ef95d34c2a5648c",
+      "retrieved_at": "2026-10-02T16:32:04Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300YV6LXRPJO3U576",
+      "url": "https://merkur.dk/",
+      "status": 200,
+      "error": null,
+      "sha256": "6a6b4bb7a7c7c23f856c59f18a98a452cab0942c2e1d9b13360166fa09da0ee5",
+      "retrieved_at": "2026-10-02T16:33:21Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300YV6LXRPJO3U576",
+      "url": "https://merkur.dk/privat/produkter/digitale-vaerktoejer/",
+      "status": 200,
+      "error": null,
+      "sha256": "23a542fc65084212cf59cb538c5552a9206a4d4fb3f1adc3e813ff5f7915115f",
+      "retrieved_at": "2026-10-03T08:00:33Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300YV6LXRPJO3U576",
+      "url": "https://merkur.dk/sitemap.xml",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-03T08:05:36Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "959800VHSP2QBPNRF210",
+      "url": "https://www.bmce-intl.co.uk",
+      "status": null,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:55:32Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "724500AG21Z9GIJE4735",
+      "url": "https://www.warburgpincus.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "8b24c2825c5a3b90cef15659cfd6208dfd154e47b09df4ce4a04dd090f4bc455",
+      "retrieved_at": "2026-10-03T08:00:33Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "2534005A84927EKSR789",
+      "name": "Signet Bank AS",
+      "ownership": "shareholder",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://signetbank.com/en/about-us/management-and-shareholders/",
+        "sha256": "c97f748f0456217b6f9f6fd5ee80d3f047777cf98b1a8471c0f47f0504423344",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:10:36Z",
+        "quote": "n of Member of the Board at Signet Asset Management Latvia. Shareholders Signet Acquisition III, USA Participation in capital 20,4% Signet Acquisition III is based in United States of America and its sole shareholder is Alexander Solovey, an experienced US investor. SIA Reglink, Latvia Total participation in capital 9,59% SIA Reglink is based in Latvia and its founder is professional with over 20 years of experience in banking and international investments – Irina Pigozne. AS RIT Group, Latvia Participation in capital 9,41% AS RIT Group is based in Latvia and owned by Rapoport family. Solrut Holding Company LLC, USA Participation in capital 8,11% Natalija Petkevicha , Latvia Participation in capital 8,22% ID Family Foundation SIA, Latvia Participation in capital 4,2% Investment company owned by the family of Roberts Idelsons. Other, Participation in capital 40,07% Board of Directors Michael Balboni CHAIRMAN OF THE SUPERVISORY BOARD Michael has spent thirty years in government in the Un"
+      },
+      "note": "Current issuer shareholder table: named individuals/family investment companies, largest position Signet Acquisition III 20.4%, sole owner Alexander Solovey. ID Family Foundation SIA at 4.2% is explicitly a family investment company, not evidence of a legally controlling foundation. Unknown other 40.07% and Solrut ultimate owners are not asserted exclusively private or fully researched.",
+      "bank_identity": {
+        "legal_name": "Signet Bank AS",
+        "registered_as": "40003043232",
+        "jurisdiction": "LV",
+        "gleif_record_sha256": "41f00ddc4728ac34971585bab514f4b9fa5d919ecf22015e64a6410f9c5d4cb2"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "213800RENLNKMWZV8767",
+      "name": "Lollands Bank A/S",
+      "rank": 175,
+      "trea_eur": 363219901.72914004,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use actual current Lollands Bank issuer major shareholder/vote table and quantify foundation holdings; share service page/nominee registration does not establish controlling beneficial owners.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300YV6LXRPJO3U576",
+      "name": "Merkur Andelskasse",
+      "rank": 176,
+      "trea_eur": 338502788.75995106,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Find Merkur current statutes/official owner statement confirming cooperative members and voting rules; F7JY is a broad Danish savings/cooperative-bank legal form, so it cannot alone choose cooperative vs self-owned savings classification. Digital banking page and unavailable sitemap are not owners evidence.",
+      "successful_source_pages": 2,
+      "retrieval_failures": [
+        {
+          "url": "https://merkur.dk/sitemap.xml",
+          "status": 404,
+          "error": "HTTP Error 404: Not Found"
+        }
+      ]
+    },
+    {
+      "lei": "959800VHSP2QBPNRF210",
+      "name": "Bank of Africa Europe, S.A.",
+      "rank": 177,
+      "trea_eur": 326990845.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Discover Bank of Africa Europe exact current Spanish bank site through register/issuer report and verify parent BOA group holdings; legacy UK BMCE domain does not establish identity or ownership.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.bmce-intl.co.uk",
+          "status": null,
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+        }
+      ]
+    },
+    {
+      "lei": "724500AG21Z9GIJE4735",
+      "name": "WP XII Financial Holdings Coöperatief U.A.",
+      "rank": 178,
+      "trea_eur": 323246476.19,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review exact WP XII Financial Holdings Cooperatief UA own members, fund/voting control and bank holding role in Dutch filed accounts. A private-equity sponsor brand and generic investment cooperative form do not establish member-owned cooperative banking.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

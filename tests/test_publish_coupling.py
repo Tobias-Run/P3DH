@@ -40,7 +40,7 @@ def _geholt():
     holt. `reports/...` ist ausgenommen: ein Shard je Report, und die Liste
     waere unbrauchbar lang."""
     src = VIEWER.read_text(encoding="utf-8")
-    treffer = set(re.findall(r"getJSON\('([^']+\.json)'\)", src))
+    treffer = set(re.findall(r"getJSON\('([^']+\.json)'\s*[,)]", src))
     return {t for t in treffer if "/" not in t}
 
 

@@ -1,0 +1,984 @@
+{
+  "213800LBQA1Y9L22JB70": {
+    "interpretation": "2025 Form 20-F current disclosure of notified major owners; historical notification dates retained.",
+    "name": "BARCLAYS PLC",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Major shareholders Major shareholders do not have different voting rights from those of other shareholders. Information provided to the Company by substantial shareholders (holding voting rights of 3% or more in the financial instruments of the Company) pursuant to the DTRs are published via a Regulatory Information Service and is available on the Company’s website. As at 31 December 2025, the Company had been notified under Rule 5 of the DTRs of the following holdings of voting rights in its shares. Strategy Shareholder information Climate and sustainability report Governance Risk review Financial review Financial statements Barclays PLC Annual Report 2025 on Form 20-F 114 Directors' report: Other statutory and regulatory information (continued) Person interested Number of Barclays Shares % of total voting rights attaching to issued share capital1 Nature of holding (direct or indirect) BlackRock, Inc.2 944,022,209 5.78 indirect Notes: 1The percentage of voting rights detailed above was calculated at the time of the relevant disclosures made in accordance with Rule 5 of the DTRs. 2Total shown includes 6,687,206 contracts for difference to which voting rights are attached. Part of the holding is held as American Depositary Receipts. Between 31 December 2025 and 6 February 2026 (the latest practicable date for inclusion in this report), the Company has not received any additional notifications pursuant to Rule 5 of the DTRs. Powers of Directors to issue and allot or buy back the Company’s shares The powers of the Directors are determined by the Act and the Articles. The Directors are authorised to issue and allot shares and to buy back shares subject to, and on the terms of, the annual shareholder approval at the AGM. Such authorities were granted by shareholders at the 2025 AGM. It will",
+      "requested_url": "https://www.sec.gov/Archives/edgar/data/312069/000031206926000004/bcs-20251231.htm",
+      "retrieved_at": "2026-10-02T22:05:15Z",
+      "sha256": "82c5a6c91ff96aa0184d655bab3019b9bfad5288db33d89a6fece0c4558529a5",
+      "url": "https://www.sec.gov/Archives/edgar/data/312069/000031206926000004/bcs-20251231.htm"
+    }
+  },
+  "213800X3Q9LSAKRUWY91": {
+    "additional_evidence": [
+      {
+        "hash_kind": "http_response",
+        "quote": " keep our negative impact to a minimum. Our shareholder structure A special feature of our shareholder structure is the core shareholder syndicate consisting of Cera, KBC Ancora, MRBB and the other core shareholders, which together held roughly 42% of our shares at the end of 2025. These shareholders act in concert, thereby ensuring shareholder stability in our group. Challenges A macroeconomic environment characterised by geopolitical challenges Impact of climate change on our and our clients’ operations, and the use of opportunities related to the transition to a greener economy Stricter regulation in areas like client protection, solvency, the environment, data, AI, etc. Changing client behaviour, competition (including integrated financial solutions offered by non-financial players) New technologies and cybercrime 14 Annual Report KBC Group 2025 We have structured our group around three business units, which focus on local activities and contribute to sustainable earnings and growth. The units are Belgium, the Czech Republic and International Markets. The latter includes our activities in Slovakia, Hungary and Bulgaria. A more detailed description is provided in the ‘Our business units’ section. The Board of Directors is r",
+        "requested_url": "https://wcmassets.kbc.be/content/dam/kbccom/doc/investor-relations/Results/jvs-2025/jvs-2025-gr-en.pdf.cdn.res/last-modified/1774614405054/jvs-2025-gr-en.pdf",
+        "retrieved_at": "2026-10-02T21:58:43Z",
+        "sha256": "8140183eb1d03106183dbe1d4c291493fc7286281518b5b4b5d33fb830f688b6",
+        "url": "https://wcmassets.kbc.be/content/dam/kbccom/doc/investor-relations/Results/jvs-2025/jvs-2025-gr-en.pdf.cdn.res/last-modified/1774614405054/jvs-2025-gr-en.pdf"
+      }
+    ],
+    "interpretation": "Cooperative Cera anchor alongside KBC Ancora, MRBB and other core shareholders in a 42% shareholder pact, plus market investors. Mixed cooperative/other shareholders; neither Cera direct minority nor the pact is represented as 100% cooperative ownership.",
+    "name": "KBC Groupe",
+    "ownership": "mixed",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "CORE SHAREHOLDERS KBC Ancora30 June 202677 516 380Cera30 June 202616 748 774MRBB30 June 202651 905 219Other core shareholders30 June 202628 482 400OTHER SHAREHOLDERS (details: see “Notifications (transparency legislation)” below) FMR LLC17 July 202619 771 836BlackRock Inc.1 July 202517 215 344KBC Group30 July 202420 942 766 * Latest notification or update cf. the Act of 2 May 2007 (disclosure of significant participations) or the Act of 1 April 2007 (on public takeover bids) and other public information. Other shareholders: figures include the ‘voting rights that may be acquired if the instrument is exercised’ as stated under ‘B) Equivalent financial instruments’ in the transparency notification; any shareholders falling below the 3% notification threshold are no longer included in the table. Breakdown of shareholder structure by country/region (own estimates)End 2025Core shareholders (Belgium) 42%Shares repurchased under the share buyback programme (August 2023 - July 2024)5%Institutional shareholders: - Belgium - Other continental European countries - UK and Ireland - North America - Rest of the world 2% 10% 9% 19% 2% Other (retail shareholders, own shares, unidentified etc.) 11%Total100% Notifications (transparency legislation) The purpose of the transparency legislation is to ensure the transparency of the shareholder structure of listed companies. To achieve this, the transparency rules impose an obligation on investors in listed companies to notify the Belgian regulator (the FSMA) and the company itself whenever thresholds are exceeded, etc. (within four trading days after the event).",
+      "requested_url": "https://www.kbc.com/en/investor-relations/shareholder-information/shareholder-structure.html",
+      "retrieved_at": "2026-10-02T16:48:36Z",
+      "sha256": "995a31545cfbaf799ebc510471133b2930f45d551ce9eb3d7bff6ba84295a6d2",
+      "url": "https://www.kbc.com/en/investor-relations/shareholder-information/shareholder-structure.html"
+    },
+    "supporting_evidence": {
+      "hash_kind": "http_response",
+      "quote": "jn Cera Cera in mijn buurt Particulieren Verenigingen Cooperaties nl fr de Home Terug Particulieren Over Cera Over Cera Cera is een van de grootste coöperaties van België. Cera brengt mensen, middelen en organisaties samen, bundelt krachten, neemt initiatieven en realiseert waardevolle projecten met een duidelijk doel: Samen Investeren in Welvaart en Welzijn. Wat is Cera? Cera in een notendop Lees meer Missie en waarden Lees meer Band met KBC Lees meer De roots van Cera Lees meer Een open huis Lees meer Over de Cera-aandelen Soorten aandelen Cera heeft verschillende soorten aandelen, met hun eigen specifieke kenmerken. Lees meer Waarde aandelen Bereken de waarde van je aandelen. Lees meer Coöperatief dividend Als Cera-vennoot heb je het vooruitzicht op een aantrekkelijk jaarlijks dividend. Lees meer Uittreden Wat moet je doen om uit te treden? Lees meer Wie zijn we? Contacteer ons Bereikbaar Te voet Op een kwartiertje wandelen van Leuven Station. Lees meer Maak kennis met ons team De Cera-ploeg is het beste bewijs van de coöperatieve kracht. Lees meer Een breed netwerk Coöperaties zijn van nature voorlopers in maatschappelijk verantwoord ondernemen. Le",
+      "requested_url": "https://www.cera.coop/nl/particulieren/over-cera",
+      "retrieved_at": "2026-10-02T22:43:27Z",
+      "sha256": "6cf6bad2dc9b683b1e3645c2c6bfefe9c90f0ba23dbf4cac473d720623fa638e",
+      "url": "https://www.cera.coop/nl/particulieren/over-cera"
+    }
+  },
+  "2G5BKIC2CB69PRJH1W31": {
+    "control_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Current active, fully corroborated GLEIF ultimate accounting consolidation relationship.",
+      "record": {
+        "response": {
+          "data": {
+            "attributes": {
+              "extension": {
+                "deletedAt": null
+              },
+              "registration": {
+                "corroborationDocuments": "ACCOUNTS_FILING",
+                "corroborationLevel": "FULLY_CORROBORATED",
+                "corroborationReference": "https://home.barclays/content/dam/home-barclays/documents/investor-relations/reports-and-events/annual-reports/2024/Barclays-PLC-Annual-Report-2024.pdf",
+                "initialRegistrationDate": "2012-06-27T15:09:14Z",
+                "lastUpdateDate": "2026-04-13T15:09:56Z",
+                "managingLou": "213800WAVVOPS85N2205",
+                "nextRenewalDate": "2027-04-30T00:00:00Z",
+                "status": "PUBLISHED"
+              },
+              "relationship": {
+                "endNode": {
+                  "id": "213800LBQA1Y9L22JB70",
+                  "type": "LEI"
+                },
+                "periods": [
+                  {
+                    "endDate": "2024-12-31T00:00:00Z",
+                    "startDate": "2024-01-01T00:00:00Z",
+                    "type": "ACCOUNTING_PERIOD"
+                  },
+                  {
+                    "startDate": "2022-04-14T19:21:46Z",
+                    "type": "RELATIONSHIP_PERIOD"
+                  }
+                ],
+                "startNode": {
+                  "id": "2G5BKIC2CB69PRJH1W31",
+                  "type": "LEI"
+                },
+                "status": "ACTIVE",
+                "type": "IS_ULTIMATELY_CONSOLIDATED_BY"
+              },
+              "validFrom": "2026-04-14T00:00:00Z",
+              "validTo": null
+            },
+            "id": "2G5BKIC2CB69PRJH1W31|LEI|IS_ULTIMATELY_CONSOLIDATED_BY|9|24a48a53c6f8780b595255212464c3abd0a5628f9929442adb2232a31104c808|",
+            "relationships": {
+              "end-node": {
+                "links": {
+                  "related": "https://api.gleif.org/api/v1/lei-records/213800LBQA1Y9L22JB70"
+                }
+              },
+              "start-node": {
+                "links": {
+                  "related": "https://api.gleif.org/api/v1/lei-records/2G5BKIC2CB69PRJH1W31"
+                }
+              }
+            },
+            "type": "relationship-records"
+          },
+          "meta": {
+            "goldenCopy": {
+              "publishDate": "2026-10-02T08:00:00Z"
+            }
+          }
+        },
+        "sha256": "658e2ea4248ef0ee45215c9b6440de4d83c23c495075226bdf06dde3fd6b06b6",
+        "url": "https://api.gleif.org/api/v1/lei-records/2G5BKIC2CB69PRJH1W31/ultimate-parent-relationship"
+      },
+      "sha256": "658e2ea4248ef0ee45215c9b6440de4d83c23c495075226bdf06dde3fd6b06b6",
+      "url": "https://api.gleif.org/api/v1/lei-records/2G5BKIC2CB69PRJH1W31/ultimate-parent-relationship"
+    },
+    "controller_lei": "213800LBQA1Y9L22JB70",
+    "interpretation": "Explicitly reviewed controller ownership plus bank-specific published group-control evidence; subsidiary list does not imply 100% share ownership.",
+    "name": "Barclays Bank Ireland plc",
+    "ownership": "shareholder",
+    "ownership_basis": "reviewed_control_chain",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Major shareholders Major shareholders do not have different voting rights from those of other shareholders. Information provided to the Company by substantial shareholders (holding voting rights of 3% or more in the financial instruments of the Company) pursuant to the DTRs are published via a Regulatory Information Service and is available on the Company’s website. As at 31 December 2025, the Company had been notified under Rule 5 of the DTRs of the following holdings of voting rights in its shares. Strategy Shareholder information Climate and sustainability report Governance Risk review Financial review Financial statements Barclays PLC Annual Report 2025 on Form 20-F 114 Directors' report: Other statutory and regulatory information (continued) Person interested Number of Barclays Shares % of total voting rights attaching to issued share capital1 Nature of holding (direct or indirect) BlackRock, Inc.2 944,022,209 5.78 indirect Notes: 1The percentage of voting rights detailed above was calculated at the time of the relevant disclosures made in accordance with Rule 5 of the DTRs. 2Total shown includes 6,687,206 contracts for difference to which voting rights are attached. Part of the holding is held as American Depositary Receipts. Between 31 December 2025 and 6 February 2026 (the latest practicable date for inclusion in this report), the Company has not received any additional notifications pursuant to Rule 5 of the DTRs. Powers of Directors to issue and allot or buy back the Company’s shares The powers of the Directors are determined by the Act and the Articles. The Directors are authorised to issue and allot shares and to buy back shares subject to, and on the terms of, the annual shareholder approval at the AGM. Such authorities were granted by shareholders at the 2025 AGM. It will",
+      "requested_url": "https://www.sec.gov/Archives/edgar/data/312069/000031206926000004/bcs-20251231.htm",
+      "retrieved_at": "2026-10-02T22:05:15Z",
+      "sha256": "82c5a6c91ff96aa0184d655bab3019b9bfad5288db33d89a6fece0c4558529a5",
+      "url": "https://www.sec.gov/Archives/edgar/data/312069/000031206926000004/bcs-20251231.htm"
+    }
+  },
+  "3TK20IVIUJ8J3ZU0QE75": {
+    "control_evidence": {
+      "hash_kind": "http_response",
+      "quote": "tements Other information and appendices 116 Notes to the Consolidated financial statements 1 Basis of preparation and material accounting policy information 1.1 Reporting entity and authorisation of the Consolidated financial statements ING Bank N.V. (Naamloze Vennootschap) is a company domiciled in Amsterdam, the Netherlands. Commercial Register of Amsterdam, number 33031431. ING Bank N.V. is a wholly-owned subsidiary of ING Groep N.V. domiciled in Amsterdam, the Netherlands. These Consolidated financial statements, as at and for the year ended 31 December 2025, comprise ING Bank N.V. (the Parent company) and its subsidiaries, together referred to as ING Bank. ING Bank is a global financial institution with a strong European base, offering a wide range of retail and wholesale banking services to customers. The ING Bank Consolidated financial statements, as at and for the year ended 31 December 2025, were authorised for issue in accordance with a resolution of the Management Board Banking on 23 February 2026. The General Meeting of the Shareholder may decide not to adopt the financial statements, but may not amend these. 1.2 Basis of preparation of the Consolidated financial statements The ING Bank Consolidated financial statements have been prepared in accordance with International Financial Reporting Standards (IFRS Accounting Standards) as adopted by the European Union (EU) and the relevant articles of Part 9 of Book 2 of the Dutch Civil Code. IFRS Accounting Standards as adopted by the EU are IFRS Accounting Standards and IFRS Interpretations as issued by the International Accounting Standards Board (IAS",
+      "requested_url": "https://ing.com/binaries/content/assets/documents/annual-reports/2025-ing-bank-nv-annual-report.pdf",
+      "retrieved_at": "2026-10-02T21:52:26Z",
+      "sha256": "206744137ea822909c23f48147b588111837620165adcc89290ca7ce3a34ee1a",
+      "url": "https://ing.com/binaries/content/assets/documents/annual-reports/2025-ing-bank-nv-annual-report.pdf"
+    },
+    "controller_lei": "549300NYKK9MWM7GGW15",
+    "interpretation": "Explicitly reviewed controller ownership plus bank-specific published group-control evidence; subsidiary list does not imply 100% share ownership.",
+    "name": "ING Bank N.V.",
+    "ownership": "shareholder",
+    "ownership_basis": "reviewed_document_chain",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": " more than 5% of the outstanding shares of that class. The shareholder is obliged to file Schedule 13D or 13G until their holdings drop below 5%. To the best of our knowledge, as of 31 December 2025, no holder of ordinary shares or ADSs, other than BlackRock Inc. held 5% or more of ING Group’s issued share capital. On 1 February 2023, BlackRock, Inc. disclosed by way of a Schedule 13G filed with the SEC, beneficial ownership of 259,211,756 ordinary shares of ING Group as of 31 December 2022, representing 7.0% of ING Group's issued share capital. On 13 February 2023, Capital Research Global Investors disclosed by way of a Schedule 13G filed with the SEC, beneficial ownership of 57,557,399 ordinary shares of ING Group as of 30 December 2022, representing 1.5% of ING Group's issued share capital. On 6 February 2024, BlackRock, Inc. disclosed by way of a Schedule 13G filed with the SEC, beneficial ownership of 255,592,935 ordinary shares of ING Group as of 31 December 2023, representing 7.3% of ING Group's issued share capital. On 12 November 2024, Capital Research Global Investors disclosed by way of a Schedule 13G filed with the SEC, beneficial ownership of 214,691,773 ordinary shares of ING Group as of September 30, 2",
+      "requested_url": "https://ing.com/binaries/content/assets/documents/annual-reports/2025-ing-groep-nv-form-20-f.pdf",
+      "retrieved_at": "2026-10-02T22:18:42Z",
+      "sha256": "3eb5f7393409d25eb7cfda1f571479c3a91cfae9d6b66db8e3ea0613c398f565",
+      "url": "https://ing.com/binaries/content/assets/documents/annual-reports/2025-ing-groep-nv-form-20-f.pdf"
+    }
+  },
+  "529900NNUPAGGOMPXZ31": {
+    "interpretation": "All voting ordinary shares held by Porsche/Piëch families; non-voting preference shares distributed among investors.",
+    "name": "VOLKSWAGEN AKTIENGESELLSCHAFT",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "orsche SE’s subscribed capital in the form of no-par value bearer shares comprises 153,125,000 ordinary shares and 153,125,000 non-voting preference shares, each share arithmetically representing a 1 euro notional value of the share capital. According to the information available to Porsche SE, the ordinary shares are indirectly held exclusively by members of the Porsche and Piëch families. Just under half of the preference shares are held by institutional investors – mainly with a principal office outside Germany. These are predominantly attributable to index and long-only investment styles, while the proportion of hedge funds is in the mid-single-digit percentage range. The further free float preference shares are mainly distributed between private investors. According to the information available to Porsche SE, the ordinary shares are indirectly held exclusively by members of the Porsche and Piëch families. * Based on all identified shareholders as of 31 December 2025 LinkedIn Imprint Data privacy Change your cookie settings Scroll to top",
+      "requested_url": "https://www.porsche-se.com/en/investor-relations/shareholder-structure",
+      "retrieved_at": "2026-10-02T22:09:03Z",
+      "sha256": "c9959b6a8b964f70d8720f339248ee74646cf6767d007d63a4a66db24cb63b0a",
+      "url": "https://www.porsche-se.com/en/investor-relations/shareholder-structure"
+    }
+  },
+  "529900SSGT49ZZSWYE62": {
+    "control_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Current active, fully corroborated GLEIF ultimate accounting consolidation relationship.",
+      "record": {
+        "response": {
+          "data": {
+            "attributes": {
+              "extension": {
+                "deletedAt": null
+              },
+              "registration": {
+                "corroborationDocuments": "ACCOUNTS_FILING",
+                "corroborationLevel": "FULLY_CORROBORATED",
+                "corroborationReference": null,
+                "initialRegistrationDate": "2024-07-12T08:28:03Z",
+                "lastUpdateDate": "2026-07-23T08:53:39Z",
+                "managingLou": "5299000J2N45DDNE4Y28",
+                "nextRenewalDate": "2027-09-08T07:52:33Z",
+                "status": "PUBLISHED"
+              },
+              "relationship": {
+                "endNode": {
+                  "id": "529900NNUPAGGOMPXZ31",
+                  "type": "LEI"
+                },
+                "periods": [
+                  {
+                    "endDate": "2025-12-30T23:00:00Z",
+                    "startDate": "2024-12-31T23:00:00Z",
+                    "type": "ACCOUNTING_PERIOD"
+                  },
+                  {
+                    "startDate": "2024-07-09T22:00:00Z",
+                    "type": "RELATIONSHIP_PERIOD"
+                  },
+                  {
+                    "startDate": "2026-03-05T23:00:00Z",
+                    "type": "DOCUMENT_FILING_PERIOD"
+                  }
+                ],
+                "startNode": {
+                  "id": "529900SSGT49ZZSWYE62",
+                  "type": "LEI"
+                },
+                "status": "ACTIVE",
+                "type": "IS_ULTIMATELY_CONSOLIDATED_BY"
+              },
+              "validFrom": "2026-07-23T16:00:00Z",
+              "validTo": null
+            },
+            "id": "529900SSGT49ZZSWYE62|LEI|IS_ULTIMATELY_CONSOLIDATED_BY|2|7b98784c036ddaa88f5f9fc489327f30c76cd58197984852be8ab47686ba7c49|",
+            "relationships": {
+              "end-node": {
+                "links": {
+                  "related": "https://api.gleif.org/api/v1/lei-records/529900NNUPAGGOMPXZ31"
+                }
+              },
+              "start-node": {
+                "links": {
+                  "related": "https://api.gleif.org/api/v1/lei-records/529900SSGT49ZZSWYE62"
+                }
+              }
+            },
+            "type": "relationship-records"
+          },
+          "meta": {
+            "goldenCopy": {
+              "publishDate": "2026-10-02T08:00:00Z"
+            }
+          }
+        },
+        "sha256": "069b01764f6f78e3a1d58cb405ad2c3e0def7cc648f583cdde02032b9d7b5eef",
+        "url": "https://api.gleif.org/api/v1/lei-records/529900SSGT49ZZSWYE62/ultimate-parent-relationship"
+      },
+      "sha256": "069b01764f6f78e3a1d58cb405ad2c3e0def7cc648f583cdde02032b9d7b5eef",
+      "url": "https://api.gleif.org/api/v1/lei-records/529900SSGT49ZZSWYE62/ultimate-parent-relationship"
+    },
+    "controller_lei": "529900NNUPAGGOMPXZ31",
+    "interpretation": "Explicitly reviewed controller ownership plus bank-specific published group-control evidence; subsidiary list does not imply 100% share ownership.",
+    "name": "Volkswagen Financial Services AG",
+    "ownership": "shareholder",
+    "ownership_basis": "reviewed_control_chain",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "orsche SE’s subscribed capital in the form of no-par value bearer shares comprises 153,125,000 ordinary shares and 153,125,000 non-voting preference shares, each share arithmetically representing a 1 euro notional value of the share capital. According to the information available to Porsche SE, the ordinary shares are indirectly held exclusively by members of the Porsche and Piëch families. Just under half of the preference shares are held by institutional investors – mainly with a principal office outside Germany. These are predominantly attributable to index and long-only investment styles, while the proportion of hedge funds is in the mid-single-digit percentage range. The further free float preference shares are mainly distributed between private investors. According to the information available to Porsche SE, the ordinary shares are indirectly held exclusively by members of the Porsche and Piëch families. * Based on all identified shareholders as of 31 December 2025 LinkedIn Imprint Data privacy Change your cookie settings Scroll to top",
+      "requested_url": "https://www.porsche-se.com/en/investor-relations/shareholder-structure",
+      "retrieved_at": "2026-10-02T22:09:03Z",
+      "sha256": "c9959b6a8b964f70d8720f339248ee74646cf6767d007d63a4a66db24cb63b0a",
+      "url": "https://www.porsche-se.com/en/investor-relations/shareholder-structure"
+    }
+  },
+  "549300FH0WJAPEHTIQ77": {
+    "control_evidence": {
+      "hash_kind": "http_response",
+      "quote": ", Mexico Mexico Bank of America, National Association Charlotte, NC United States of America Bank of America Singapore Limited Singapore, Singapore Singapore Bank of America Yatirim Bank A.S. Istanbul, Turkey Turkey BankAmerica International Financial Corporation San Francisco, CA United States of America Blue Ridge Investments, L.L.C. New York, NY Delaware BofA Finance LLC Charlotte, NC Delaware BofA Securities Europe SA Paris, France France BofA Securities, Inc. New York, NY Delaware BofA Securities India Limited Mumbai, India India BofA Securities Japan Co., Ltd. Tokyo, Japan Japan BofA Securities Prime, Inc. New York, NY Delaware Managed Account Advisors LLC Jersey City, NJ Delaware Merrill Lynch (Asia Pacific) Limited Hong Kong, PRC Hong Kong Merrill Lynch (Australia) Futures Limited Sydney, Australia Australia Merrill Lynch (Singapore) Pte. Ltd. Singapore, Singapore Singapore Merrill Lynch Argentina S.A. Capital Federal, Argentina Argentina Merrill Lynch B.V. Amsterdam, Netherlands Netherlands Merrill Lynch Bank and Trust Company (Cayman) Limited George Town, Grand Cayman, Cayman Is. Cayman Islands Merrill Lynch Canada Inc. Toronto, Ontario, Canada Canada Merrill Lynch Capital Services, Inc. New York, NY Delaware Merrill Lynch Commodities Canada, ULC Toronto, Ontario, Canada Canada Merrill Lynch Commodities, Inc. Houston, TX Delaware Merrill Lynch Corredores de Bolsa SpA Santiago, Chile Chile Merrill Lynch Equities (Australia) Limited Sydney, Australia Australia Merrill Lynch Far East Limited Hong Kong, PRC Hong Kong Merrill Lynch Global Services Pte. Ltd. Singapore, Singapore Singapore Me",
+      "requested_url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-1231202510xkex21.htm",
+      "retrieved_at": "2026-10-02T22:22:52Z",
+      "sha256": "d4276132e4f16d34ece626df9f88a1b0415abc73016edbbd3ad306591168ad87",
+      "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-1231202510xkex21.htm"
+    },
+    "controller_lei": "9DJT3UXIJIZJI4WXO774",
+    "interpretation": "Explicitly reviewed controller ownership plus bank-specific published group-control evidence; subsidiary list does not imply 100% share ownership.",
+    "name": "BofA Securities Europe SA",
+    "ownership": "shareholder",
+    "ownership_basis": "reviewed_document_chain",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "policy, it will be reviewed for approval or ratification by our Corporate Governance Committee. Based on information contained in separate Schedule 13G filings with the SEC, each of Warren E. Buffett/Berkshire Hathaway Inc. (Berkshire Hathaway), BlackRock, Inc. (BlackRock), and The Vanguard Group (Vanguard) reported that it beneficially owned more than 5% of the outstanding shares of our common stock as of December 31, 2025 (see “Stock ownership of directors, executive officers, and certain beneficial owners” on the next page). In the ordinary course of our business during 2025, our subsidiaries provided and are expected to continue to provide financial advisory, sales and trading, treasury, and other financial or administrative services to Berkshire Hathaway, BlackRock, and Vanguard and their subsidiaries. These and other routine business transactions between the companies were entered into on an arm’s-length basis and contain customary terms and conditions. Our company and its subsidiaries may also, in the ordinary course, invest in BlackRock or Vanguard funds or other products or buy or sell assets to or from BlackRock or Vanguard funds and separate accounts. 36 Bank of America Stock ownership of directors, executive officers, and certain beneficial owners Stock ownership of directors, executive officers, and certain beneficial owners The following table shows the number of shares of our common stock beneficially owned as of March 13, 2026 (except to the extent indicated otherwise in the footnotes below) by: (i) each director; (ii) each named executive officer; (iii) all directors and executive officers as a group; and (iv) beneficial owners of more than 5% of any class of our voting securities (as determined under SEC rules). As of that date, none of our directors and executive officers owned any shares of any class of our voting securities or other preferred stock, other than as r",
+      "requested_url": "https://d1io3yog0oux5.cloudfront.net/_2d7333429ef3d80812f60e8a0751979c/bankofamerica/db/867/10497/proxy_statement/BAC+2026+Proxy+Statement.pdf",
+      "retrieved_at": "2026-10-02T21:52:28Z",
+      "sha256": "e18a00f56443f9ae17ee39f8c68184eb2a813e9f7655fcbc36e8427bbb284e67",
+      "url": "https://d1io3yog0oux5.cloudfront.net/_2d7333429ef3d80812f60e8a0751979c/bankofamerica/db/867/10497/proxy_statement/BAC+2026+Proxy+Statement.pdf"
+    }
+  },
+  "549300GKFG0RYRRQ1414": {
+    "interpretation": "Norwegian Government 34.4%, foundation 8.9%, Folketrygdfondet 6.5%, private/institutional holders; public minority is not labelled majority control.",
+    "name": "DNB BANK ASA",
+    "ownership": "mixed",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Major shareholders as at 31 December 2025 Largest shareholders Shares in 1,000 Ownership in % Norwegian Government/Ministry of Trade, Industry and Fisheries 502 386 34,4 DNB Savings Bank Foundation 130 001 8,9 Folketrygdfondet 95 106 6,5 BlackRock, Inc. 64 497 4,4 Vanguard Group, Inc. 37 106 2,5 Deutsche Bank AG Group 34 257 2,3 DNB Asset Management AS 24 477 1,7 Storebrand Kapitalforvaltning 23 337 1,6 Schroders PLC 22 578 1,5 Kommunal Landspensjonskasse 20 001 1,4 Nordea Bank Abp 18 675 1,3 State Street Corporation 17 988 1,2 T. Rowe Price Group, Inc. 16 734 1,1 BNP Paribas, S.A. 16 344 1,1 Mawer Investment Management Ltd. 16 010 1,1 Ameriprise Financial, Inc. 12 664 0,9 Caisse des Dépôts et Consignations 11 741 0,8 SAS Rue La Boétie 11 346 0,8 Geode Capital Management, L.L.C. 10 040 0,7 UBS Group AG 9 315 0,6 Total largest shareholders 1 094 601 74,9 Other shareholders 366 374 25,1 Total 1 460 974 100,0 The data is provided by NASDAQ IR Insight and is obtained through analysis of beneficial ownership and fund manager information provided in replies to disclosure of ownership notices issued to all custodians in relation to DNB share register provided by Euronext VPS as of 31 December 2025. The ownership percentages do not necessarily include shareholdings that are lent. Shareholder list A list of DNB’s shareholders can be accessed through the Public Shareholder Portal provided by Euronext Securities: Daglig oppdatert aksjonærregister - Offentlig Aksjeeierportal Shareholder list including disclosure of nominee accounts A list of DNB’s shareholders as at 31 December 2025 including disclosure of nominee accounts can be found here: Shareholder list The data is provided by NASDAQ IR Insight and is obtained through analysis of beneficial ownership and fund manager information provided in replies to disclosure of ownership notices issued to all custodians in relation to DNB share register provided by Euronext VPS as of 31 December 2024. The ownership percentages do not necessarily include shareholdings that are lent. Our fact sheet Fact sheet Contact us Get in touch with us Contacts Stay connected or keep up ",
+      "requested_url": "https://www.ir.dnb.no/share/largest-shareholders",
+      "retrieved_at": "2026-10-02T21:52:26Z",
+      "sha256": "fe17bb8edafcced408f2eb6c1b704ef88b116c3745d6e7ddcda38fefde3b4811",
+      "url": "https://www.ir.dnb.no/share/largest-shareholders"
+    }
+  },
+  "549300IQZVZ949N37S44": {
+    "additional_evidence": [
+      {
+        "hash_kind": "http_response",
+        "quote": "tScroll to learn more We are a holding and investment company Novo Holdings is a holding and investment company that is responsible for managing the assets and the wealth of the Novo Nordisk Foundation, one of the world’s largest philanthropic enterprise foundations. Novo Holdings is the controlling shareholder of Novo Nordisk A/S and Novonesis A/S, and manages an investment portfolio with a long-term return perspective. In addition to managing a broad portfolio of equities, bonds, real estate, infrastructure and private equity assets, Novo Holdings is a world-leading life sciences investor. Through its Seed, Venture, Principal Investments, Planetary Health Investments and Asia teams, Novo Holdings invests in life science companies at all stages of development. As of year-end 2025, Novo Holdings had Total Assets under Management of DKK 694 billion (EUR 93 billion)Learn more about our investmentsLearn more about the Novo Group See our fact sheet “We recognise that the health of people and the health of our planet are intertwined, and we are determined to play our part in securing a more sustainable future.” Kasim Kutay CEO, Novo Holdings Purpose To improve people’s health and the sus",
+        "requested_url": "https://novoholdings.dk/about",
+        "retrieved_at": "2026-10-02T22:39:15Z",
+        "sha256": "ef2a5bbb9afdc4a3a815d3fe00d9b06c6fe296e220b11541111d3b0eeef180f3",
+        "url": "https://novoholdings.com/about"
+      }
+    ],
+    "interpretation": "SFPIM 2025 filed accounts list 13.25% of Euroclear Holding (Belgian company 0700.808.073). Novo Holdings separately confirms its current investment; its own about page identifies the private philanthropic foundation. Mixed public/foundation ownership; no complete control map or public majority asserted.",
+    "name": "Euroclear Holding",
+    "ownership": "mixed",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "104000 Liège België 0404.484.654 Naamloze vennootschap Gewone aandelen op naam 6.333.330 31,67 0,00 EUROCLEAR HOLDING 5.782.702.92331-12-2024 EUR 1.397.167.567 Boulevard du Roi Albert II 1 1210 Sint-Joost-ten-Node België 0700.808.073 Naamloze vennootschap Gewone aandelen op naam 4.169.720 13,25 0,00 EXEVIR BIO 5.616.54131-12-2024 EUR -4.822.921 Technologiepark-Zwijnaarde 94 9052 Zwijnaarde België 0750.495.334 Besloten vennootschap Gewone aandelen op naam 6.000 13,42 0,00 FORTINO CAPITAL VENTURE I ARKIV - IN VEREFFENING 11.338.98631-12-2024 EUR -858.610 Borsbeeksebrug 36 2600 Berchem (Antwerpen) België 0646.862.118 Commanditaire vennootschap Gewone aandelen op naam 82.500 10,82 0,00 24/95 Nr. 0253.445.063 VOL-kap 6.5.1 DEELNEMINGEN EN MAATSCHAPPELIJKE RECHTEN IN ANDERE ONDERNEMINGEN INLICHTINGEN OMTRENT DE DEELNEMINGEN Hieronder worden de ondernemingen vermeld waarin de vennootschap een deelneming bezit (opgenomen in de posten 280 en 282 van de activa), alsmede de andere ondernemingen waarin de vennootschap maatschappelijke rechten bezit (opgenomen in de posten 284 en 51/53 van de activa) ten belope van ten minste 10 % van het kapitaal, van het eigen vermogen of van een soort aandelen van die vennootschap. NAAM, volledig adres van de ZETEL en, zo het een onderneming naar Belgisch recht betreft, het ONDERNEMINGSNUMMER Aangehouden maatschappelijke rechten rechtstreeks doch- ters Aantal % % Gegeven",
+      "requested_url": "https://sfpim.be/uploads/2026/04/BE0253445063-20260402-VOL-kap-nl.pdf",
+      "retrieved_at": "2026-10-02T22:21:03Z",
+      "sha256": "e49453d7296b01a933e1b8c4769c9dc1093dbd9acd1ddb0cabeb06b594f9876a",
+      "url": "https://sfpim.be/uploads/2026/04/BE0253445063-20260402-VOL-kap-nl.pdf"
+    },
+    "supporting_evidence": {
+      "hash_kind": "http_response",
+      "quote": "gures Media Library Contact Public Relations News & Reports Euroclear Investment area Capital Investments Region Europe Date of investment September 2023 As providers of Financial Market Infrastructure (FMI), Euroclear offer expert transaction settlement, asset servicing, and collateral management, as well as a wide range of services for issuers. All asset types are covered, including bonds, equities, funds, and derivatives. Euroclear Bank, the leading International Central Securities Depository (ICSD), serves as a gateway to counterparties worldwide for post-trade services, covering more than 1 million securities. The Euroclear group’s national Central Securities Depositories (CSDs) for Belgium, Finland, France, Ireland, the Netherlands, Sweden, and the United Kingdom serve local clients for local transactions.Visit site Investing to benefit people and the planet Novo Holdings A/S Tuborg Havnevej 19 2900 Hellerup Denmark +45 3527 6500 Email: Info@novoholdings.dk CVR# 24257630 Media Relations Christian Mostrup Scheel Head of Public Relations Email: novoholdingsmedia@novo.dk +45 3067 4805 Novo Holdings US Inc.* Boston: 200 Clarendon Str",
+      "requested_url": "https://novoholdings.dk/investments/euroclear",
+      "retrieved_at": "2026-10-02T22:38:41Z",
+      "sha256": "62dac6e827a06b78d6347b86ec96e7f876446a5afec3bcb2ab7b0b9eb8c00030",
+      "url": "https://novoholdings.com/investments/euroclear"
+    }
+  },
+  "549300NYKK9MWM7GGW15": {
+    "interpretation": "Strengthens an existing controller record with disclosed beneficial owners, rather than stock listing alone.",
+    "name": "ING Groep N.V.",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": " more than 5% of the outstanding shares of that class. The shareholder is obliged to file Schedule 13D or 13G until their holdings drop below 5%. To the best of our knowledge, as of 31 December 2025, no holder of ordinary shares or ADSs, other than BlackRock Inc. held 5% or more of ING Group’s issued share capital. On 1 February 2023, BlackRock, Inc. disclosed by way of a Schedule 13G filed with the SEC, beneficial ownership of 259,211,756 ordinary shares of ING Group as of 31 December 2022, representing 7.0% of ING Group's issued share capital. On 13 February 2023, Capital Research Global Investors disclosed by way of a Schedule 13G filed with the SEC, beneficial ownership of 57,557,399 ordinary shares of ING Group as of 30 December 2022, representing 1.5% of ING Group's issued share capital. On 6 February 2024, BlackRock, Inc. disclosed by way of a Schedule 13G filed with the SEC, beneficial ownership of 255,592,935 ordinary shares of ING Group as of 31 December 2023, representing 7.3% of ING Group's issued share capital. On 12 November 2024, Capital Research Global Investors disclosed by way of a Schedule 13G filed with the SEC, beneficial ownership of 214,691,773 ordinary shares of ING Group as of September 30, 2",
+      "requested_url": "https://ing.com/binaries/content/assets/documents/annual-reports/2025-ing-groep-nv-form-20-f.pdf",
+      "retrieved_at": "2026-10-02T22:18:42Z",
+      "sha256": "3eb5f7393409d25eb7cfda1f571479c3a91cfae9d6b66db8e3ea0613c398f565",
+      "url": "https://ing.com/binaries/content/assets/documents/annual-reports/2025-ing-groep-nv-form-20-f.pdf"
+    }
+  },
+  "549300UOX05QGUJJ5707": {
+    "control_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Current active, fully corroborated GLEIF ultimate accounting consolidation relationship.",
+      "record": {
+        "response": {
+          "data": {
+            "attributes": {
+              "extension": {
+                "deletedAt": null
+              },
+              "registration": {
+                "corroborationDocuments": "ACCOUNTS_FILING",
+                "corroborationLevel": "FULLY_CORROBORATED",
+                "corroborationReference": "https://vp292.alertir.com/afw/files/press/handelsbanken/202202250015-1.pdf",
+                "initialRegistrationDate": "2013-09-21T00:00:00Z",
+                "lastUpdateDate": "2026-03-18T07:57:00Z",
+                "managingLou": "549300O897ZC5H7CY412",
+                "nextRenewalDate": "2027-04-24T07:42:41Z",
+                "status": "PUBLISHED"
+              },
+              "relationship": {
+                "endNode": {
+                  "id": "NHBDILHZTYCNBV5UYZ31",
+                  "type": "LEI"
+                },
+                "periods": [
+                  {
+                    "endDate": "2025-12-30T23:00:00Z",
+                    "startDate": "2024-12-31T23:00:00Z",
+                    "type": "ACCOUNTING_PERIOD"
+                  },
+                  {
+                    "startDate": "2023-04-24T00:00:00Z",
+                    "type": "RELATIONSHIP_PERIOD"
+                  },
+                  {
+                    "endDate": "2021-12-31T00:00:00Z",
+                    "startDate": "2021-01-01T00:00:00Z",
+                    "type": "DOCUMENT_FILING_PERIOD"
+                  }
+                ],
+                "startNode": {
+                  "id": "549300UOX05QGUJJ5707",
+                  "type": "LEI"
+                },
+                "status": "ACTIVE",
+                "type": "IS_ULTIMATELY_CONSOLIDATED_BY"
+              },
+              "validFrom": "2026-03-18T16:00:00Z",
+              "validTo": null
+            },
+            "id": "549300UOX05QGUJJ5707|LEI|IS_ULTIMATELY_CONSOLIDATED_BY|40|835acdc6d0ba40282533dbcf5351c41a5ecb57617edf73aa8f66693aa450aa93|",
+            "relationships": {
+              "end-node": {
+                "links": {
+                  "related": "https://api.gleif.org/api/v1/lei-records/NHBDILHZTYCNBV5UYZ31"
+                }
+              },
+              "start-node": {
+                "links": {
+                  "related": "https://api.gleif.org/api/v1/lei-records/549300UOX05QGUJJ5707"
+                }
+              }
+            },
+            "type": "relationship-records"
+          },
+          "meta": {
+            "goldenCopy": {
+              "publishDate": "2026-10-02T08:00:00Z"
+            }
+          }
+        },
+        "sha256": "cdd8f65586077e5d986bed8cefd69f7bed36ee1712ea8318fe705d3179d86a29",
+        "url": "https://api.gleif.org/api/v1/lei-records/549300UOX05QGUJJ5707/ultimate-parent-relationship"
+      },
+      "sha256": "cdd8f65586077e5d986bed8cefd69f7bed36ee1712ea8318fe705d3179d86a29",
+      "url": "https://api.gleif.org/api/v1/lei-records/549300UOX05QGUJJ5707/ultimate-parent-relationship"
+    },
+    "controller_lei": "NHBDILHZTYCNBV5UYZ31",
+    "interpretation": "Explicitly reviewed controller ownership plus bank-specific published group-control evidence; subsidiary list does not imply 100% share ownership.",
+    "name": "Stadshypotek AB",
+    "ownership": "shareholder",
+    "ownership_basis": "reviewed_control_chain",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": " relations The share The shareholders The shareholders A rundown of our major shareholders About our shareholders We have more than 200,000 shareholders. One shareholders’ holdings exceed 10 percent, Industrivärden. The major Swedish shareholders 31 December, 2025 Shareholder: Industrivärden Number of shares: 230 000 000 Percentage of votes: 11.8 Shareholder: Oktogonen Foundation Number of shares: 159 225 141 Percentage of votes: 8.2 Shareholder: Lundberg-gruppen Number of shares: 95 781 000 Percentage of votes: 4.9 Shareholder: BlackRock Number of shares: 69 730 671 Percentage of votes: 3.6 Shareholder: Vanguard Number of shares: 65 548 347 Percentage of votes: 3.3 Shareholder: Handelsbanken Funds Number of shares: 32 169 769 Percentage of votes: 1.7 Shareholder: Fidelity Number of shares: 29 919 408 Percentage of votes: 1.5 Shareholder: J. Wallanders & T. Hedelius stiftelse, T. Browaldhs stiftelse Number of shares: 28 996 000 Percentage of votes: 1.5 Shareholder: SEB Funds Number of shares: 27 287 220 Percentage of votes: 1.4 Shareholder: First Eagle Investment Management, LLC Number of shares: 20 933 302 Percentage of votes: 1.1 Shareholder: Avanza Funds Number of shares: 18 378 820 Percentage of votes: 0.9 Shareholder: Folksam Number of shares: 16 476 392 Percentage of votes: 0.8 Sharehold",
+      "requested_url": "https://www.handelsbanken.com/en/investor-relations/the-share/the-shareholders",
+      "retrieved_at": "2026-10-02T21:58:45Z",
+      "sha256": "e515f6bb5f85008597543a85d8ed1bdb2363ebf577a24482d33effee35efad2d",
+      "url": "https://www.handelsbanken.com/en/investor-relations/the-share/the-shareholders"
+    }
+  },
+  "549300ZK53CNGEEI6A29": {
+    "control_evidence": {
+      "hash_kind": "http_response",
+      "quote": "the purposes of measuring ECL. 5. SIGNIFICANT ACCOUNTING POLICIES The following are the significant accounting policies applied in the preparation of the financial statements. These policies have been applied consistently in each of the years presented, unless stated otherwise. 5.1 Consolidation The sole shareholder of the entity is J.P . Morgan International Finance Limited, Newark/Delaware, and its ultimate parent company is JPMorgan Chase & Co., Wilmington/Delaware, both incorporated in the United States of America. The Bank is included in the consolidated financial statements of JPMorgan Chase & Co., which are publicly available. According to §290 Para. 5 HGB in relation to §296 Para. 2 HGB, the entity is not required to prepare group financial statements, because subsidiaries are immaterial for the financial statements. 5.2 Foreign Currency Translation Monetary assets and liabilities denominated in foreign currencies are translated in Euro at the exchange rate on the balance sheet date. Income and expense items denominated in foreign currencies are translated in Euro at the exchange rate prevailing at the date of the transaction. Any gains or losses arising on translation are recognized directly in the income statement. Non-monetary items that are measured based on historical cost in a foreign currency are translated in Euro at the exchange rate at the date of the transaction. Non-monetary items denominated in foreign currencies that are stated at fair value, are translated in Euro at the foreign exchange rate when the fair value was determined. Translation differences arising from non-monetary items measur",
+      "requested_url": "https://www.jpmorgan.com/content/dam/jpm/global/disclosures/de/2025-annual-report-eng.pdf",
+      "retrieved_at": "2026-10-02T22:09:02Z",
+      "sha256": "73820156727f9240520df002f120d044a0269bb357f633f326eb896ec66fb055",
+      "url": "https://www.jpmorgan.com/content/dam/jpm/global/disclosures/de/2025-annual-report-eng.pdf"
+    },
+    "controller_lei": "8I5DZWZKVSZI1NUHU748",
+    "interpretation": "Explicitly reviewed controller ownership plus bank-specific published group-control evidence; subsidiary list does not imply 100% share ownership.",
+    "name": "J.P. Morgan SE",
+    "ownership": "shareholder",
+    "ownership_basis": "reviewed_document_chain",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "rs and executive officers | Executive compensation 2026 Proxy Statement 75 Pursuant to SEC filings, the companies included in the table below were the beneficial owners of more than 5% of our outstanding common stock as of December 31, 2025. Name of beneficial owner Address of beneficial owner Common stock owned (#) Percent owned (%) The Vanguard Group1 100 Vanguard Blvd, Malvern, PA 19355 265,758,185 9.86 BlackRock, Inc.2 50 Hudson Yards, New York, NY 10001 192,831,104 7.15 1 The number of shares reported as beneficially owned is derived from shares reported in the Form 13F as filed by Vanguard with the SEC for the quarter ending December 31, 2025. According to the Schedule 13G dated February 13, 2024, filed with the SEC, in the aggregate, Vanguard (including the affiliated entities identified in the Schedule 13G) had sole dispositive power over 259,678,951 shares, shared dispositive power over 12,732,039 shares, sole voting power over 0 shares and shared voting power over 3,623,542 shares of our common stock. The Vanguard Group owns the above holdings in its capacity as an investment advisor in accordance with SEC Rule 13d-1(b)(1)(ii)(E). 2 BlackRock, Inc. owns the above holdings in its capacity as a parent holding company or control person in accordance with SEC Rule 13d-1(b)(1)(ii)(G). According to the Schedule 13G ",
+      "requested_url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/proxy-statement2026.pdf",
+      "retrieved_at": "2026-10-02T21:52:27Z",
+      "sha256": "d44837c570a6a7268ecf975c8c9130e34af7ece307c8b8135da2072619f84a48",
+      "url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/proxy-statement2026.pdf"
+    }
+  },
+  "635400AKJBGNS5WNQL34": {
+    "interpretation": "Official announcement of complete State exit on 17 June 2025.",
+    "name": "AIB Group plc",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "17 June 2025 AIB GROUP PLC - STATEMENT ON RETURN TO FULL PRIVATE OWNERSHIP AIB Group plc welcomes the announcement by the Irish Department of Finance regarding the State’s exit from AIB’s share register, which results in the Group returning to full private ownership. Commenting on the development, AIB Group Chief Executive Officer Colin Hunt, said: “Reaching this milestone is a significant day for the Group. AIB profoundly regrets that the institution had to be rescued by the State almost two decades ago and owes an immense debt of gratitude to Irish taxpayers for the support provided during that challenging time. Since then, our focus has been on rebuilding trust, repaying the State and continuing to support our customers, communities and the wider economy. The Group has undergone significant transformation and through the implementation of our proven strategy, we are well-positioned to continue generating value for all our stakeholders over the medium -term.",
+      "requested_url": "https://www.aib.ie/content/dam/frontdoor/investorrelations/docs/se-announcements/2025/aib-group-plc-statement-on-return-to-full-private-ownership-17062025.pdf",
+      "retrieved_at": "2026-10-02T21:58:43Z",
+      "sha256": "40fe5186cbbeac40bd70ebd2cb7d26310146312f73bbe57344d9459930b507af",
+      "url": "https://www.aib.ie/content/dam/frontdoor/investorrelations/docs/se-announcements/2025/aib-group-plc-statement-on-return-to-full-private-ownership-17062025.pdf"
+    }
+  },
+  "635400C8EK6DRI12LJ39": {
+    "interpretation": "2025 annual report gives the holding-company shareholder/voting interests; Norges Bank is a minority investor, not public control.",
+    "name": "Bank of Ireland Group plc",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "ors’ interests set out on page 110 there were no other interests disclosed to the Company in accordance with the Market Abuse Regulation and Part 5 of the Transparency Regulations and the related transparency rules during the period from 31 December 2025 to 27 February 2026 . For information on acquisition or disposal of own shares, refer to note 44. Table: 1 31 December 2025 % 27 February 2026 % Massachusetts Financial Services Company 7.76% 7.76% BlackRock, Inc. 5.60% 6.04% Norges Bank 4.81% 4.81% Pzena Investment Management LLC 3.01% 3.01% Authority to purchase own ordinary shares At the AGM held on 22 May 2025, the members gave the Company, and any of its subsidiaries, the authority to make market purchases up to c.10% of its own ordinary shares. This authority will expire on close of business on the date of the AGM of the Company in 2026 or on 22 August 2026, whichever is earlier. Strategic Report Financial Review Governance Sustainability Risk Management Financial Statements Other Information Bank of Ireland Annual Report 2025 98 Report of the Directors (continued) Any such purchases would be made only at a price level that the Directors considered to be in the best",
+      "requested_url": "https://investorrelations.bankofireland.com/app/uploads/Annual-Report-HoldCo-2025-WEB-high-res.pdf",
+      "retrieved_at": "2026-10-02T22:19:16Z",
+      "sha256": "879de6b5405c964f6b45566b6be269c5cac8440cbc9144b8e4ec7552672cd308",
+      "url": "https://investorrelations.bankofireland.com/app/uploads/Annual-Report-HoldCo-2025-WEB-high-res.pdf"
+    }
+  },
+  "6SHGI4ZSSLCXXQSBB395": {
+    "interpretation": "Proxy beneficial owners: BlackRock 6.9%, Vanguard 8.7%; percentages are fund-manager beneficial holdings, not personal controllers.",
+    "name": "CITIGROUP INC.",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "ode of Conduct 45 Communications with the Board 45 STOCK OWNERSHIP 46 Beneficial Ownership Table 46 Owners of More than 5% of Citi’s Common Stock 47 Insider Trading Policies for Citi and Citi’s Board, Officers and Employees 47 PROPOSAL 1: ELECTION OF DIRECTORS 48 Director Criteria and Nomination Process 48 Director Qualifications 49 The Nominees 53 Directors’ Compensation 66 AUDIT COMMITTEE REPORT 70 PROPOSAL 2: RATIFICATION OF SELECTION OF INDEPENDENT REGISTERED PUBLIC ACCOUNTING FIRM 71 PROPOSAL 3: ADVISORY VOTE TO APPROVE OUR 2025 EXECUTIVE COMPENSATION 73 Compensation Discussion and Analysis 73 The Compensation, Performance Management and Culture Committee Report 97 2025 Summary Compensation Table and Compensation Information 98 Additional Compensation Disclosures 109 PROPOSAL 4: APPROVAL OF ADDITIONAL SHARES FOR THE CITIGROUP 2019 STOCK INCENTIVE PLAN 110 STOCKHOLDER PROPOSALS 118 Submission of Future Stockholder Proposals 118 Cost of Annual Meeting and Proxy Solicitation 118 Householding 119 ABOUT THE 2026 ANNUAL MEETING 120 ANNEX A 126 Additional Information Regarding Proposal 3 126 Citigroup – Quantitative Scorecard Metric Details And Reconciliations 127 FORWARD-LOOKING STATEMENTS Certain statements in this Proxy Statement are “forward-looking statements” within the meaning of the Private Securities Litigation Refor",
+      "requested_url": "https://www.citigroup.com/rcs/citigpa/storage/public/Annual_Report/2025/2026-citi-proxy-statement.pdf",
+      "retrieved_at": "2026-10-02T21:50:34Z",
+      "sha256": "c1d2cdd8c9ecccf5f5f4b5274499cd8f7c0dd6f7d690e951c5eed5952bbbacaf",
+      "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Annual_Report/2025/2026-citi-proxy-statement.pdf"
+    }
+  },
+  "784F5XWPLTWKTBV3E584": {
+    "interpretation": "2026 proxy: BlackRock 7.80%, State Street 6.65%, Vanguard 9.68%.",
+    "name": "THE GOLDMAN SACHS GROUP, INC.",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": " Shareholders BENEFICIAL OWNERSHIP Beneficial Owners of More than Five Percent Based on filings made under Section 13(d) and Section 13(g) of the Exchange Act, as of March 2, 2026 the only persons known by us to be beneficial owners of more than 5% of Common Stock were as follows: Name and Address of Beneficial Owner Number of Shares of Common Stock Beneficially Owned (#) Percent of Class (%) BlackRock, Inc. 50 Hudson Yards New York, NY 10001 23,010,145 (a) 7.80 State Street Corporation State Street Financial Center 1 Congress Street, Suite 1 Boston, Massachusetts 02114 19,616,360 (b) 6.65 The Vanguard Group 100 Vanguard Blvd. Malvern, Pennsylvania 19355 28,546,582 (c) 9.68 (a) This information has been derived from the Schedule 13G filed with the SEC on February 5, 2013, Amendment No. 1 to such filing filed with the SEC on February 4, 2014, Amendment No. 2 to such filing filed with the SEC on February 9, 2015, Amendment No. 3 to such filing filed with the SEC on February 10, 2016, Amendment No. 4 to such filing filed with the SEC on January 24, 2017, Amendment No. 5 to such filing filed with the SEC on January 5, 2018, Amendment No. 6 to such filing filed with the SEC on February 4, 2019, Amendment No. 7 to such filing filed with the SEC on February 5, 2020, Amendment No. 8 to such filing filed with the SEC on",
+      "requested_url": "https://www.sec.gov/Archives/edgar/data/886982/000119312526117433/gs-20260319.htm",
+      "retrieved_at": "2026-10-02T22:01:37Z",
+      "sha256": "d55e7b75926d71e3fa1a5d403af30c06371937a007c8612065154a31b3e93b9c",
+      "url": "https://www.sec.gov/Archives/edgar/data/886982/000119312526117433/gs-20260319.htm"
+    }
+  },
+  "7CUNS533WID6K7DGFI87": {
+    "interpretation": "Foundation anchor 31%, FROB 18%, free float 50.7% (30 June 2026); neither minority stake alone establishes control.",
+    "name": "CaixaBank, S.A.",
+    "ownership": "mixed",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": " Shareholders [footnote (1)] 506,856 Share capital (number of shares) 6,975,929,960 Free float [footnote (2)] 3,537,241,668 Latest share price € 12.385 Mkt. capitalisation € 86,396,892,554.60 (1) For those investors' shares which operate through a custody entity located outside of Spain, only the custody entity is considered to be the shareholder, and shall be that which is registered in the corresponding book-entry ledger. (2) Calculated as the number of shares issued less treasury shares, which are held by members of the Board of Directors and those in the hands of \"la Caixa\" Foundation and FROB. Figures as of 30 June 2026 Breakdown of share capital by type of shareholder \"la Caixa\" Foundation [footnote 2] 31.0% Treasury and Board of Directors [footnote 4] 0.3% Free float [footnote 1] 50.7% FROB [footnote 3] 18.0% 5.0% Institutional National 23.0% Retail 0.8% Employees 71.2% Institutional International (1) Calculated as the number of shares issued less treasury shares, which are held by members of the Board of Directors and those in the hands of \"la Caixa\" Foundation and FROB. (2) According to the information provided by \"la Caixa\" Foundation (and its subsidiary Criteria Caixa, S.A.U.) as of 30 June 2026. (3) According to the information provided by FROB (and its subsidiary BFA, Te",
+      "requested_url": "https://www.caixabank.com/en/shareholders-investors/caixabanks-share/capital-distribution.html",
+      "retrieved_at": "2026-10-02T21:55:56Z",
+      "sha256": "a7fe63e389d82c08bbc5098b7f1e5eb56c9af2e32b78acbbb68057ce04a6be12",
+      "url": "https://www.caixabank.com/en/shareholders-investors/caixabanks-share/capital-distribution.html"
+    }
+  },
+  "815600E4E6DCD2D25E30": {
+    "interpretation": "24 July 2026: Crédit Agricole 29.30%, BlackRock 5.61% including instruments; no cooperative classification inherited from a minority investor.",
+    "name": "BANCO BPM SOCIETA' PER AZIONI",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "ing section for information on investors of Banco BPM who have adhered to a Consultation Agreement. Shareholder % stake Crédit Agricole SA 29.30% BlackRock, INC. 5.61% (1) N.B. Shareholders with voting rights attributable to shares greater than 3% (1) The stake d is represented by voting rights attributable to shares (4.61% of the share capital) and other positions through financial instruments (1.00% of the share capital) For further details and further information, please refer to the website consob.it– Banco BPM Ownership Last update: 24 July 2026 CONSULTATION AGREEMENTS Updated essential information on the Consultation Agreement, which was signed on 21 December 2020, updated as at 20 July 2021, 18 October 2022, 31 December 2022, 27 March 2023, 19 December 2023, 16 February 2024, 31 December 2024 and 31 December 2025 which regroups 5.93% of Banco BPM’s share capital, can be found here below. 31 December 2025 - Essential information on the Consultation Agreement among shareholders of Banco BPM S.p.A. 124,52 KB 7 January 2025 - Essential information on the Consultation Agreement among shareholders of Banco BPM S.p.A. 266,37 KB 16 February 2024 - Essential information on the Consultation Agreement among shareholders of Banco BPM S.p.A. 253,89 KB 21 December 2023 - Essential information on the Consultation Agreement among shareholders of Banco BPM S.p.A. 253,81 KB 27 March 2023 - Essential informa",
+      "requested_url": "https://gruppo.bancobpm.it/en/investor-relations/share-price-shareholding-documents/",
+      "retrieved_at": "2026-10-02T21:52:23Z",
+      "sha256": "9a70c404ae9afcec8097b69736c5c03ced8e45273038815e3566041ee16827f3",
+      "url": "https://gruppo.bancobpm.it/en/investor-relations/share-price-shareholding-documents/"
+    }
+  },
+  "851WYGNLUQLFZBSYGB56": {
+    "interpretation": "German FMS retains 12.6% at 31 December 2025; classify material public minority plus other shareholders, not public majority.",
+    "name": "COMMERZBANK Aktiengesellschaft",
+    "ownership": "mixed",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "e 1] ausstehende Kapitalmaßnahmen (§ 7 StFG) per 31.12.2025 Buchwerte Kapitalmaßnahmen (§ 7 StFG) per 31.12.2025 Commerzbank AG - 4,4 [footnote 2] 2,1 [footnote 2] Hypo Real Estate Holding GmbH (HRE) - 6,7 [footnote 3] 0,1 Portigon AG - 2,0 0,0 FMS Wertmanagement AöR (FMS-WM) - - - Erste Abwicklungsanstalt (EAA) - - - Summe [footnote 4] 0,0 13,1 2,2 Refinanzierung FMS WM über FMS zum 31.12.2025 (max. 60 Mrd. €) [footnote 5] 51,4 1) Aus ausgelaufenen Liquiditätsgarantien von bis zu 168 Mrd. € wurden Garantieerträge i. H. v. 2,2 Mrd. € erzielt. Eine Inanspruchnahme dieser Garantien erfolgte nicht. 2) Der Aktienanteil des FMS an der CBK beträgt 12,6 % (rd. 142 Mio. Aktien). Handelsrechtliche Bewertungsobergrenze der Anschaffungskosten (HGB): 2,1 Mrd. €. 3) Davon sind 3,7 Mrd. € wirtschaftlich der FMS-WM zurechenbar: 2,1 Mrd. € wurden direkt an die FMS-WM gezahlt; 1,6 Mrd. € wurden von der DEPFA als Zahlungsauflage an die FMS-WM gezahlt. 4) Rundungsdifferenzen können auftreten. 5) Mit dem Inkrafttreten der gesetzlichen Änderung von § 9 StFG am 29.12.2020 wurde die Euro-Refinanzierung der FMS-WM über das Sondervermögen FMS auf maximal 60 Mrd. € erhöht. Die Refinanzierung der FMS-WM ist für den FMS ergebnisneutral. Ergebnis FMS seit Maßnahm",
+      "requested_url": "https://www.deutsche-finanzagentur.de/stabilisierungsmassnahmen/finanzmarktstabilisierungsfonds/massnahmen",
+      "retrieved_at": "2026-10-02T22:12:29Z",
+      "sha256": "1b19c351d54f14b85c17016ddd27b5343301396e2e5055a654f9789c3e6b73b6",
+      "url": "https://www.deutsche-finanzagentur.de/stabilisierungsmassnahmen/finanzmarktstabilisierungsfonds/massnahmen"
+    }
+  },
+  "8I5DZWZKVSZI1NUHU748": {
+    "interpretation": "Parent proxy: Vanguard 9.86%, BlackRock 7.15% as of 31 December 2025.",
+    "name": "JPMORGAN CHASE & CO.",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "rs and executive officers | Executive compensation 2026 Proxy Statement 75 Pursuant to SEC filings, the companies included in the table below were the beneficial owners of more than 5% of our outstanding common stock as of December 31, 2025. Name of beneficial owner Address of beneficial owner Common stock owned (#) Percent owned (%) The Vanguard Group1 100 Vanguard Blvd, Malvern, PA 19355 265,758,185 9.86 BlackRock, Inc.2 50 Hudson Yards, New York, NY 10001 192,831,104 7.15 1 The number of shares reported as beneficially owned is derived from shares reported in the Form 13F as filed by Vanguard with the SEC for the quarter ending December 31, 2025. According to the Schedule 13G dated February 13, 2024, filed with the SEC, in the aggregate, Vanguard (including the affiliated entities identified in the Schedule 13G) had sole dispositive power over 259,678,951 shares, shared dispositive power over 12,732,039 shares, sole voting power over 0 shares and shared voting power over 3,623,542 shares of our common stock. The Vanguard Group owns the above holdings in its capacity as an investment advisor in accordance with SEC Rule 13d-1(b)(1)(ii)(E). 2 BlackRock, Inc. owns the above holdings in its capacity as a parent holding company or control person in accordance with SEC Rule 13d-1(b)(1)(ii)(G). According to the Schedule 13G ",
+      "requested_url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/proxy-statement2026.pdf",
+      "retrieved_at": "2026-10-02T21:52:27Z",
+      "sha256": "d44837c570a6a7268ecf975c8c9130e34af7ece307c8b8135da2072619f84a48",
+      "url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/proxy-statement2026.pdf"
+    }
+  },
+  "8IBZUGJ7JPLH368JE346": {
+    "control_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Current active, fully corroborated GLEIF ultimate accounting consolidation relationship.",
+      "record": {
+        "response": {
+          "data": {
+            "attributes": {
+              "extension": {
+                "deletedAt": null
+              },
+              "registration": {
+                "corroborationDocuments": "REGULATORY_FILING",
+                "corroborationLevel": "FULLY_CORROBORATED",
+                "corroborationReference": "https://www.sec.gov/Archives/edgar/data/886982/000088698226000091/gs-20251231.htm",
+                "initialRegistrationDate": "2023-09-13T00:00:00Z",
+                "lastUpdateDate": "2026-09-11T14:24:30Z",
+                "managingLou": "529900T8BM49AURSDO55",
+                "nextRenewalDate": "2027-10-05T12:42:37Z",
+                "status": "PUBLISHED"
+              },
+              "relationship": {
+                "endNode": {
+                  "id": "784F5XWPLTWKTBV3E584",
+                  "type": "LEI"
+                },
+                "periods": [
+                  {
+                    "endDate": "2025-12-31T00:00:00Z",
+                    "startDate": "2025-01-01T00:00:00Z",
+                    "type": "ACCOUNTING_PERIOD"
+                  },
+                  {
+                    "startDate": "2019-01-15T00:00:00Z",
+                    "type": "RELATIONSHIP_PERIOD"
+                  },
+                  {
+                    "startDate": "2019-01-15T00:00:00Z",
+                    "type": "DOCUMENT_FILING_PERIOD"
+                  }
+                ],
+                "startNode": {
+                  "id": "8IBZUGJ7JPLH368JE346",
+                  "type": "LEI"
+                },
+                "status": "ACTIVE",
+                "type": "IS_ULTIMATELY_CONSOLIDATED_BY"
+              },
+              "validFrom": "2026-09-12T00:00:00Z",
+              "validTo": null
+            },
+            "id": "8IBZUGJ7JPLH368JE346|LEI|IS_ULTIMATELY_CONSOLIDATED_BY|46|acff0cc5562b1383702cefd3e570bbff8a4d81bc0f03fc951693a75b0033addc|",
+            "relationships": {
+              "end-node": {
+                "links": {
+                  "related": "https://api.gleif.org/api/v1/lei-records/784F5XWPLTWKTBV3E584"
+                }
+              },
+              "start-node": {
+                "links": {
+                  "related": "https://api.gleif.org/api/v1/lei-records/8IBZUGJ7JPLH368JE346"
+                }
+              }
+            },
+            "type": "relationship-records"
+          },
+          "meta": {
+            "goldenCopy": {
+              "publishDate": "2026-10-02T08:00:00Z"
+            }
+          }
+        },
+        "sha256": "ada7feac0e65bfdb5c17a7c4f1eebfb730adced99c51f02b6fa1b0c90c2e32b8",
+        "url": "https://api.gleif.org/api/v1/lei-records/8IBZUGJ7JPLH368JE346/ultimate-parent-relationship"
+      },
+      "sha256": "ada7feac0e65bfdb5c17a7c4f1eebfb730adced99c51f02b6fa1b0c90c2e32b8",
+      "url": "https://api.gleif.org/api/v1/lei-records/8IBZUGJ7JPLH368JE346/ultimate-parent-relationship"
+    },
+    "controller_lei": "784F5XWPLTWKTBV3E584",
+    "interpretation": "Explicitly reviewed controller ownership plus bank-specific published group-control evidence; subsidiary list does not imply 100% share ownership.",
+    "name": "Goldman Sachs Bank Europe SE",
+    "ownership": "shareholder",
+    "ownership_basis": "reviewed_control_chain",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": " Shareholders BENEFICIAL OWNERSHIP Beneficial Owners of More than Five Percent Based on filings made under Section 13(d) and Section 13(g) of the Exchange Act, as of March 2, 2026 the only persons known by us to be beneficial owners of more than 5% of Common Stock were as follows: Name and Address of Beneficial Owner Number of Shares of Common Stock Beneficially Owned (#) Percent of Class (%) BlackRock, Inc. 50 Hudson Yards New York, NY 10001 23,010,145 (a) 7.80 State Street Corporation State Street Financial Center 1 Congress Street, Suite 1 Boston, Massachusetts 02114 19,616,360 (b) 6.65 The Vanguard Group 100 Vanguard Blvd. Malvern, Pennsylvania 19355 28,546,582 (c) 9.68 (a) This information has been derived from the Schedule 13G filed with the SEC on February 5, 2013, Amendment No. 1 to such filing filed with the SEC on February 4, 2014, Amendment No. 2 to such filing filed with the SEC on February 9, 2015, Amendment No. 3 to such filing filed with the SEC on February 10, 2016, Amendment No. 4 to such filing filed with the SEC on January 24, 2017, Amendment No. 5 to such filing filed with the SEC on January 5, 2018, Amendment No. 6 to such filing filed with the SEC on February 4, 2019, Amendment No. 7 to such filing filed with the SEC on February 5, 2020, Amendment No. 8 to such filing filed with the SEC on",
+      "requested_url": "https://www.sec.gov/Archives/edgar/data/886982/000119312526117433/gs-20260319.htm",
+      "retrieved_at": "2026-10-02T22:01:37Z",
+      "sha256": "d55e7b75926d71e3fa1a5d403af30c06371937a007c8612065154a31b3e93b9c",
+      "url": "https://www.sec.gov/Archives/edgar/data/886982/000119312526117433/gs-20260319.htm"
+    }
+  },
+  "9DJT3UXIJIZJI4WXO774": {
+    "interpretation": "Bank-authored proxy major beneficial shareholder disclosure.",
+    "name": "BANK OF AMERICA CORPORATION",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "policy, it will be reviewed for approval or ratification by our Corporate Governance Committee. Based on information contained in separate Schedule 13G filings with the SEC, each of Warren E. Buffett/Berkshire Hathaway Inc. (Berkshire Hathaway), BlackRock, Inc. (BlackRock), and The Vanguard Group (Vanguard) reported that it beneficially owned more than 5% of the outstanding shares of our common stock as of December 31, 2025 (see “Stock ownership of directors, executive officers, and certain beneficial owners” on the next page). In the ordinary course of our business during 2025, our subsidiaries provided and are expected to continue to provide financial advisory, sales and trading, treasury, and other financial or administrative services to Berkshire Hathaway, BlackRock, and Vanguard and their subsidiaries. These and other routine business transactions between the companies were entered into on an arm’s-length basis and contain customary terms and conditions. Our company and its subsidiaries may also, in the ordinary course, invest in BlackRock or Vanguard funds or other products or buy or sell assets to or from BlackRock or Vanguard funds and separate accounts. 36 Bank of America Stock ownership of directors, executive officers, and certain beneficial owners Stock ownership of directors, executive officers, and certain beneficial owners The following table shows the number of shares of our common stock beneficially owned as of March 13, 2026 (except to the extent indicated otherwise in the footnotes below) by: (i) each director; (ii) each named executive officer; (iii) all directors and executive officers as a group; and (iv) beneficial owners of more than 5% of any class of our voting securities (as determined under SEC rules). As of that date, none of our directors and executive officers owned any shares of any class of our voting securities or other preferred stock, other than as r",
+      "requested_url": "https://d1io3yog0oux5.cloudfront.net/_2d7333429ef3d80812f60e8a0751979c/bankofamerica/db/867/10497/proxy_statement/BAC+2026+Proxy+Statement.pdf",
+      "retrieved_at": "2026-10-02T21:52:28Z",
+      "sha256": "e18a00f56443f9ae17ee39f8c68184eb2a813e9f7655fcbc36e8427bbb284e67",
+      "url": "https://d1io3yog0oux5.cloudfront.net/_2d7333429ef3d80812f60e8a0751979c/bankofamerica/db/867/10497/proxy_statement/BAC+2026+Proxy+Statement.pdf"
+    },
+    "supporting_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Annual Reports & Proxy Statements | Bank of America Corporation (BAC) Skip to main content Skip to footer Personal Small business Wealth management Businesses & institutions About Our company Responsible growth Business practices What we offer How we help people, companies and institutions realize their financial goals Making an impact Local impact Sustainable finance Supporting economic opportunity Environmental sustainability Find resources Working here Explore Careers Investors Profile Quarterly Earnings Events & Presentations Regulatory & Other Filings Fixed Income Shareholder Info Press Releases Annual Reports & Proxy Governance Sustainability Reports Newsroom Press releases Executive biographies Journalist resources Awards & recognition Help How can we help you? Sign in Contact us Client login Contact us Personal Small business Wealth management Businesses & institutions About Clear Search Click here to search When autocomplete results are available use up and down arrows to review and enter to select",
+      "requested_url": "https://investor.bankofamerica.com/annual-reports-and-proxy-statements",
+      "retrieved_at": "2026-10-02T21:50:35Z",
+      "sha256": "4f811c87cb0aa3cbb01a9b03df5cfb3a213014cc23dc76d96c94bcfd1edcac93",
+      "url": "https://investor.bankofamerica.com/annual-reports-and-proxy-statements"
+    }
+  },
+  "A5GWLFH3KM7YV2SFQL84": {
+    "interpretation": "Belgian federal State ownership through SFPI-FPIM; a proposed partial privatisation is not evidence of completion.",
+    "name": "Belfius Bank",
+    "ownership": "public",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "< Corporate Governance Structure of the group Governance × Intersecting objects Sphere positions Sphere projected Camera coordinates Camera rotation Clicked items < Structure of the group Belfius is an integrated bank-insurer, currently owned by the Belgian federal state through the Federal Holding and Investment Company (FPIM – SFPI). Belfius Bank operates as the mother company, with Belfius Insurance and various other companies as (fully owned) subsidiaries. Entities",
+      "requested_url": "https://www.belfius.be/about-us/en/corporate-governance/group-structure",
+      "retrieved_at": "2026-10-02T21:52:23Z",
+      "sha256": "7ca986f066911ee3087b9031a501e3aefb8431a03e087fc9a523a31bdec1cd4e",
+      "url": "https://www.belfius.be/about-us/en/corporate-governance/group-structure"
+    }
+  },
+  "BFXS5XCH7N0Y05NIXW11": {
+    "interpretation": "Dutch State 27.5% at end 2025, alongside other shareholders; subsequent sale targets are not completed transactions.",
+    "name": "ABN AMRO Bank N.V.",
+    "ownership": "mixed",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "ce by 5,200 full-time equivalents (FTEs) by 2028 compared with 2024, with half of the reductions expected to occur through attrition. Read more about the strategic plan, our financial targets and our long- term ambitions in the Our strategy section. 27.5% Dutch State reduces stake The Dutch State reduced its stake in ABN AMRO from 38.5% in 2024 to 27.5% at the end of 2025. In September 2025, the holder of the Dutch State’s stake (NLFI) announced that it aims to further reduce its stake to around 20%. Since NLFI’s stake has fallen below one third, the bank no longer requires NLFI’s approval for investments or divestments with a value of more than 10% of the bank’s share capital. NLFI’s approval is also no longer required for the issuance of, or the granting of rights to acquire, shares in the bank. The Dutch State, which acquired the bank in 2008, began reducing its stake following ABN AMRO’s stock market listing in 2015. NIBC to boost our ma",
+      "requested_url": "https://downloads.ctfassets.net/1u811bvgvthc/688tP3vcLbHAgEsUavbdMR/22bd74bf45996df3f6e76b0893ecc950/ABN_AMRO_Bank_-_Annual_Report_2025.pdf#page=15",
+      "retrieved_at": "2026-10-02T22:15:12Z",
+      "sha256": "4857de6d9a62878b71065385f6cbf1c0aa1e84f1ab5d41623d16b7d17760ae2d",
+      "url": "https://downloads.ctfassets.net/1u811bvgvthc/688tP3vcLbHAgEsUavbdMR/22bd74bf45996df3f6e76b0893ecc950/ABN_AMRO_Bank_-_Annual_Report_2025.pdf#page=15"
+    }
+  },
+  "F0HUI1NY1AZMJMD8LP67": {
+    "control_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Current active, fully corroborated GLEIF ultimate accounting consolidation relationship.",
+      "record": {
+        "response": {
+          "data": {
+            "attributes": {
+              "extension": {
+                "deletedAt": null
+              },
+              "registration": {
+                "corroborationDocuments": "ACCOUNTS_FILING",
+                "corroborationLevel": "FULLY_CORROBORATED",
+                "corroborationReference": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2024/annual/pdfs/hsbc-holdings-plc/250219-annual-report-and-accounts-2024.pdf",
+                "initialRegistrationDate": "2012-06-06T15:54:15Z",
+                "lastUpdateDate": "2025-10-01T14:48:28Z",
+                "managingLou": "213800WAVVOPS85N2205",
+                "nextRenewalDate": "2026-10-31T00:00:00Z",
+                "status": "PUBLISHED"
+              },
+              "relationship": {
+                "endNode": {
+                  "id": "MLU0ZO3ML4LN2LL2TL39",
+                  "type": "LEI"
+                },
+                "periods": [
+                  {
+                    "endDate": "2024-12-31T00:00:00Z",
+                    "startDate": "2024-01-01T00:00:00Z",
+                    "type": "ACCOUNTING_PERIOD"
+                  },
+                  {
+                    "startDate": "2012-06-06T00:00:00Z",
+                    "type": "RELATIONSHIP_PERIOD"
+                  }
+                ],
+                "startNode": {
+                  "id": "F0HUI1NY1AZMJMD8LP67",
+                  "type": "LEI"
+                },
+                "status": "ACTIVE",
+                "type": "IS_ULTIMATELY_CONSOLIDATED_BY"
+              },
+              "validFrom": "2025-10-02T00:00:00Z",
+              "validTo": null
+            },
+            "id": "F0HUI1NY1AZMJMD8LP67|LEI|IS_ULTIMATELY_CONSOLIDATED_BY|21|01c927c5eb6613e0f43fb95d4e2d19b6ea213d3b85a5508191c77ff98b768a42|",
+            "relationships": {
+              "end-node": {
+                "links": {
+                  "related": "https://api.gleif.org/api/v1/lei-records/MLU0ZO3ML4LN2LL2TL39"
+                }
+              },
+              "start-node": {
+                "links": {
+                  "related": "https://api.gleif.org/api/v1/lei-records/F0HUI1NY1AZMJMD8LP67"
+                }
+              }
+            },
+            "type": "relationship-records"
+          },
+          "meta": {
+            "goldenCopy": {
+              "publishDate": "2026-10-02T08:00:00Z"
+            }
+          }
+        },
+        "sha256": "0d0fa12a83c88790792f2388c623ed64c6150d9db109bc8e528c98bd10a34894",
+        "url": "https://api.gleif.org/api/v1/lei-records/F0HUI1NY1AZMJMD8LP67/ultimate-parent-relationship"
+      },
+      "sha256": "0d0fa12a83c88790792f2388c623ed64c6150d9db109bc8e528c98bd10a34894",
+      "url": "https://api.gleif.org/api/v1/lei-records/F0HUI1NY1AZMJMD8LP67/ultimate-parent-relationship"
+    },
+    "controller_lei": "MLU0ZO3ML4LN2LL2TL39",
+    "interpretation": "Explicitly reviewed controller ownership plus bank-specific published group-control evidence; subsidiary list does not imply 100% share ownership.",
+    "name": "HSBC Continental Europe",
+    "ownership": "shareholder",
+    "ownership_basis": "reviewed_control_chain",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Notifiable interests in share capital During 2025, HSBC Holdings did not receive any notification of major holdings of voting rights pursuant to the requirements of Rule 5 of the Disclosure Guidance and Transparency Rules (’Rule 5 of the DTRs’). No notifications had been received between 31 December 2025 and 19 February 2026. Previous notifications received are as follows: – BlackRock, Inc. gave notice on 3 March 2020 that on 2 March 2020 it had the following: an indirect interest in HSBC Holdings ordinary shares of 1,235,558,490; qualifying financial instruments with 7,294,459 voting rights that may be acquired if the instruments are exercised or converted; and financial instruments with a similar economic effect to qualifying financial instruments, which refer to 2,441,397 voting rights, representing 6.07%, 0.03% and 0.01%, respectively, of the total voting rights at 2 March 2020. – Ping An Asset Management Co., Ltd. gave notice on 6 December 2017 that on 4 December 2017 it had an indirect interest in HSBC Holdings ordinary shares of 1,007,946,172, representing 5.04% of the total voting rights at that date. At 31 December 2025, according to the register maintained by HSBC Holdings pursuant to section 336 of the Securities and Futures Ordinance of Hong Kong: – BlackRock, Inc. gave notice on 16 July 2025 that on 11 July 2025 it had the following interests in HSBC Holdings ordinary shares: a long position of 1,586,341,122 shares and a short position of 6,856,029 shares, representing 9.09% and 0.04%, respectively, of the ordinary shares in issue 11 July 2025. – Ping An Asset Management Co., Ltd. gave notice on 10 May 2024 that on 7 May 2024 it had a long position of 1,502,584,731 in HSBC Holdings ordinary shares, representing 7.98% of the ordinary shares in issue at 7 May 2024. – The Bank of New York Mellon Corporation gave notice on 17 October 2025 that on 15 October 2025 it had the following interests in HSBC Holdings ordinary shares: a long position of 1,035,915,129 shares, a short position of 551,070,412 shares and a lending pool of 449,036,061 shares representing 6.01%, 3.20% and 2.61%, respectively, of the ordinary shares in issue at 15 October 2025. The Bank of New York Mellon Corporation is the Depositary for the HSBC ADSs. Under the SFO, they are required to report the HSBC ADSs position a",
+      "requested_url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf",
+      "retrieved_at": "2026-10-02T21:55:58Z",
+      "sha256": "94aab2f5c83d1060ee95d344f1915833869fe4502dc635e4ab9ca84f496ee94b",
+      "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf"
+    }
+  },
+  "F3JS33DEI6XQ4ZBPTN86": {
+    "interpretation": "Bank-embedded shareholder table: Investor 21.97% capital/22.03% votes (31 August 2026); no controlling foundation inferred.",
+    "name": "Skandinaviska Enskilda Banken - gruppen",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Major shareholders Shareholders Sector Distribution Geo.Distribution Archive Shareholders Share capital % Votes % A Shares C Shares Total number of shares Monthly change % 1 Investor 21.97 22.03 432,198,555 4,000,372 436,198,927 0.0 2 AMF Pension & Fonder 3.96 4.00 78,540,730 0 78,540,730 -3.2 3 Swedbank Robur Fonder 3.88 3.92 76,972,974 0 76,972,974 -4.0 4 Capital Group 3.71 3.75 73,605,734 0 73,605,734 +2.8 5 Vanguard 3.55 3.55 69,674,798 893,203 70,568,001 +0.4 6 BlackRock 3.39 3.43 67,323,389 20,673 67,344,062 +4.3 7 Handelsbanken Fonder 2.75 2.77 54,477,561 24,551 54,502,112 -1.7 8 Alecta Tj�nstepension 2.71 2.74 53,834,715 0 53,834,715 0.0 9 SEB Funds 2.36 2.39 46,882,982 0 46,882,982 +0.5 10 SEBs own shareholding 2.01 2.03 39,911,993 0 39,911,993 +6.0 11 Fourth Swedish National Pension Fund 1.12 1.13 22,276,511 0 22,276,511 +0.0 12 Third Swedish National Pension Fund 0.91 0.92 18,139,251 0 18,139,251 +4.8 13 Folksam 0.87 0.88 17,222,262 0 17,222,262 -0.6 14 Avanza Fonder 0.86 0.87 17,014,498 12,174 17,026,672 +0.7 15 L�nsf�rs�kringar Fonder 0.81 0.82 16,047,364 0 16,047,364 +0.1 16 Nordea Funds 0.79 0.80 15,774,447 0 15,774,447 -2.4 17 Storebrand Asset Management 0.67 0.68 13,365,102 0 13,365,102 +0.8 18 Harding Loevner 0.66 0.67 13,116,525 0 13,116,525 -",
+      "requested_url": "https://tools.euroland.com/majorshareholder/s-seb_new/?lang=english",
+      "retrieved_at": "2026-10-02T21:58:43Z",
+      "sha256": "12cfbed5d56458476234590f5f5f5b879ed2f90ea8c953de4a6d749e3c594690",
+      "url": "https://tools.euroland.com/majorshareholder/s-seb_new/?lang=english"
+    },
+    "supporting_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Largest Shareholders & Ownership Data | SEB Go to content sebgroup.com Investors The share Largest shareholders Largest shareholders Contact Contact information Follow us on social media Our locations Press contacts seb.se Quick links Annual general meeting Events Financial calendar IBAN Reports and publications SEB's green bonds Legal Legal and regulatory information Authorisation Legal Notice Recruitment Privacy Notice Privacy at SEB Group Accessibility Settings How we use cookies Recommended browsers © Skandinaviska Enskilda Banken AB (publ) Up",
+      "requested_url": "https://sebgroup.com/investor-relations/the-share/largest-shareholders",
+      "retrieved_at": "2026-10-02T17:46:21Z",
+      "sha256": "ebc0986cd7f880937aa9f61c26f87e70b7323830ee9194aa4856f510993be623",
+      "url": "https://sebgroup.com/investor-relations/the-share/largest-shareholders"
+    }
+  },
+  "J4CP7MHCXR8DAQMKIL78": {
+    "interpretation": "Private shareholder anchors; Treasury residual 4.86% is not public control. Table dates and later notifications must be read separately.",
+    "name": "Banca Monte dei Paschi di Siena S.p.A.",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "der the cases of exemption provided for by CONSOB Regulation no. 11971 concerning the discipline of issuers, are as follows: SHAREHOLDER % OF CAPITAL DELFIN S.A.R.L. 17.53% GRUPPO FRANCESCO GAETANO CALTAGIRONE (*) 10.26% MEF - MINISTERO DELL’ECONOMIA E DELLE FINANZE 4.86% BLACKROCK, INC. (**) 4.66% BANCO BPM SPA (***) 3.74% OTHER SHAREHOLDERS (****) 58.95% (*) Source: www.consob.it - Shareholdings and voting rights held through companies belonging to Caltagirone Group; as at dividend payment of 20 May 2026 Caltagirone Group held 13.49% of the share capital. (**) Shareholdings and voting rights held through companies belonging to BlackRock Group as communicated with Form 120/B on 30 April 2026. The stake held by the BlackRock Group is represented by voting rights attached to shares (4.665% of the share capital) and by potential investment and other long positions with physical and cash settlement (0.302% of the share capital). (***) Source: www.consob.it - Shareholdings and voting rights held also through Anima Holding S.p.A.. (****) By means of Form 120 (TR-1) submitted on 19 August 2026, Barclays PLC reported that it held through Barclays Capital Securities Limited an aggregate interest corresponding to a total position of 5.03% of the share capital. Such holding is represented by voting rights attached to shares (0.08% of the share capital) and by voting rights through financial instruments (potential holdings and other long positions amounting in aggregate to 4.95% of the share capital). Last modified: 26/08/2026 About us Presentation Shareholding Structure Strategy Organisational Model History Corporate Governance Governance Model Shareholding Structure Internal control system Board of directors Internal board committees Board of Statutory Auditors Management Remuneration Shareholders meeting and BoD Related-Party Transactions Internal dealing Events Whistleblowing Voluntary Public Exchange Offer on Banca Generali Spa ",
+      "requested_url": "https://www.gruppomps.it/en/corporate-governance/shareholding-structure.html",
+      "retrieved_at": "2026-10-02T21:52:22Z",
+      "sha256": "44ab0602181f85f613afc7a60610425bb60f7076285814c90c6bce8f754db0db",
+      "url": "https://www.gruppomps.it/en/corporate-governance/shareholding-structure.html"
+    }
+  },
+  "K8MS7FD7N5Z2WQ51AZ71": {
+    "interpretation": "Dispersed shareholder ownership; notified voting interests are not a controlling parent.",
+    "name": "Banco Bilbao Vizcaya Argentaria, S.A.",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "ched to shares % of voting rights through ﬁnancial instruments total % of voting rights Direct Indirect Direct Indirect Blackrock, Inc. 0.00% 7.076% 0.082% 0.00% 7.158% Capital Research and Management Company 0.00% 4.968% 0.00% 0.00% 4.968% 3.3. Shareholdings held by members of the Board of Directors ( A.3 ) As of December 31, 2025, the shareholdings held by the members of the Board of Directors in the share capital of the Bank are as follows: This English version is a translation of the original in Spanish for information purposes only. In case of discrepancy the original in Spanish shall prevail. Annual Corporate Governance Report of BBVA p. 14 Name of director % voting rights Attributed to shares Through ﬁnancial instruments That may be transferred through ﬁnancial instruments Direct Indirect Direct Indirect Total Direct",
+      "requested_url": "https://shareholdersandinvestors.bbva.com/wp-content/uploads/2026/02/17_2025_Annual_Corporate_Governance_Report.pdf",
+      "retrieved_at": "2026-10-02T22:05:15Z",
+      "sha256": "afbaebf0334ff0333c86e793fe31d88b5b9a404f5e753fc6d920d382841549a9",
+      "url": "https://shareholdersandinvestors.bbva.com/wp-content/uploads/2026/02/17_2025_Annual_Corporate_Governance_Report.pdf"
+    }
+  },
+  "M312WZV08Y7LYUC71685": {
+    "interpretation": "Officially embedded table: savings-bank owners association 12.96%, savings foundations 4.08%, Folksam 5.54%; dispersed ownership does not establish cooperative control.",
+    "name": "Swedbank - Grupp",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Name Num. of shares Capital Votes Verified 1 Sparbankernas Ägareförening 146,661,918 12.96% 12.96% 2026-08-27 2 Folksam 62,679,152 5.54% 5.54% 2026-08-27 3 Swedbank Robur Funds 57,529,239 5.08% 5.08% 2026-08-31 4 Sparbanksstiftelser 46,167,468 4.08% 4.08% 2026-08-27 5 BlackRock 40,933,309 3.62% 3.62% 2026-09-30 6 SEB Funds 40,763,068 3.60% 3.60% 2026-08-31 7 Norges Bank Investment Management 40,501,374 3.58% 3.58% 2026-08-27 8 Vanguard 38,904,007 3.44% 3.44% 2026-08-31 9 Handelsbanken Funds 24,635,464 2.18% 2.18% 2026-08-31 10 Alecta Tjänstepension 24,284,105 2.15% 2.15% 2026-08-27 Total 10 523,059,104 46.21% 46.21% Others 608,946,618 53.79% 53.79% Total number of owners 412,877 2026-08-31 Total number of shares 1,132,005,722 2026-10-02 Powered by Modular Finance",
+      "requested_url": "https://widget.datablocks.se/api/rose/widgets/owner-list?token=4c2cebc0-49fb-42f2-80a6-e6ed9b182026&stylesheet=swedbank-colors.css",
+      "retrieved_at": "2026-10-02T22:34:20Z",
+      "sha256": "3405a2be2250023e517bc4c8a4dbd8f468c469f5c669c3a14b42d7d17bb64ee7",
+      "url": "https://widget.datablocks.se/api/rose/widgets/owner-list?token=4c2cebc0-49fb-42f2-80a6-e6ed9b182026&stylesheet=swedbank-colors.css"
+    },
+    "supporting_evidence": {
+      "hash_kind": "http_response",
+      "quote": "oom Investor relations The share Shareholders Swedbank’s shareholders Information on Swedbank’s largest shareholders is updated monthly. Sources: Modular Finance AB, Euroclear. To view this content, you first need to accept cookies for Functions, performance and statistics. Settings for cookies To view this content, you first need to accept cookies for Functions, performance and statistics. Settings for cookies To view this content, you first need to accept cookies for Functions, performance and statistics. Settings for cookies Svenska English Våra cookies, ditt val Our cookies, your choices Vi använder nödvändiga cookies eller liknande tekniker för att webbplatsen ska fungera för dig. Det finns även cookies du kan välja som förbättrar din upplevelse: Funktioner, prestanda och statistik Relevant marknadsföring Du kan ta tillbaka ditt cookie-medgivande när du vill, på cookie-sidan eller under din profil när du är inloggad. Så hanterar vi cookies. We use cookies or similar technologies that are necessary for this website to work for you. There are also cookies you can choose to improve your experience: Features, perform",
+      "requested_url": "https://www.swedbank.com/investor-relations/the-share/shareholders.html",
+      "retrieved_at": "2026-10-02T17:22:08Z",
+      "sha256": "f50009edab813823b803ddabc5232b43bdee2575a6c3982ebd78a960428824ea",
+      "url": "https://www.swedbank.com/investor-relations/the-share/shareholders.html"
+    }
+  },
+  "MAES062Z21O4RZ2U7M96": {
+    "interpretation": "A.P. Møller Holding is the only shareholder above 5%; a foundation behind a minority shareholder does not establish foundation control of the bank.",
+    "name": "Danske Bank A/S",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "ed on Nasdaq Copenhagen. All Danske Bank’s shareholders are entitled to exercise their rights at the general meeting in accordance with the Articles of Association and the one-share-one-vote principle. In 2025, the A.P . Møller Holding Group was the only major shareholder of Danske Bank holding more than 5% of the shares. More information about the shareholder base of Danske Bank is available in the Annual Report 2025 at www.danskebank.com. Board of Directors At the general meeting the shareholders elect between six and ten directors of the Board of Directors for a one-year term in accordance with the Articles of Association. In the period following the annual general meeting on 20 March 2025 and until year-end, ",
+      "requested_url": "https://danskebank.com/-/media/danske-bank-com/file-cloud/2026/2/corporate-governance-report-2025.pdf?rev=0bfb0ceff47e401f83462997d50dfac3",
+      "retrieved_at": "2026-10-02T17:27:38Z",
+      "sha256": "3df5aecd58e01650d4c32a07a8b34b3ccbde0e9b3b05058711994042769eb3a4",
+      "url": "https://danskebank.com/-/media/danske-bank-com/file-cloud/2026/2/corporate-governance-report-2025.pdf?rev=0bfb0ceff47e401f83462997d50dfac3"
+    }
+  },
+  "MLU0ZO3ML4LN2LL2TL39": {
+    "interpretation": "Disclosed beneficial interests of BlackRock and Ping An; no single owner identified as controlling the parent.",
+    "name": "HSBC HOLDINGS PLC",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "Notifiable interests in share capital During 2025, HSBC Holdings did not receive any notification of major holdings of voting rights pursuant to the requirements of Rule 5 of the Disclosure Guidance and Transparency Rules (’Rule 5 of the DTRs’). No notifications had been received between 31 December 2025 and 19 February 2026. Previous notifications received are as follows: – BlackRock, Inc. gave notice on 3 March 2020 that on 2 March 2020 it had the following: an indirect interest in HSBC Holdings ordinary shares of 1,235,558,490; qualifying financial instruments with 7,294,459 voting rights that may be acquired if the instruments are exercised or converted; and financial instruments with a similar economic effect to qualifying financial instruments, which refer to 2,441,397 voting rights, representing 6.07%, 0.03% and 0.01%, respectively, of the total voting rights at 2 March 2020. – Ping An Asset Management Co., Ltd. gave notice on 6 December 2017 that on 4 December 2017 it had an indirect interest in HSBC Holdings ordinary shares of 1,007,946,172, representing 5.04% of the total voting rights at that date. At 31 December 2025, according to the register maintained by HSBC Holdings pursuant to section 336 of the Securities and Futures Ordinance of Hong Kong: – BlackRock, Inc. gave notice on 16 July 2025 that on 11 July 2025 it had the following interests in HSBC Holdings ordinary shares: a long position of 1,586,341,122 shares and a short position of 6,856,029 shares, representing 9.09% and 0.04%, respectively, of the ordinary shares in issue 11 July 2025. – Ping An Asset Management Co., Ltd. gave notice on 10 May 2024 that on 7 May 2024 it had a long position of 1,502,584,731 in HSBC Holdings ordinary shares, representing 7.98% of the ordinary shares in issue at 7 May 2024. – The Bank of New York Mellon Corporation gave notice on 17 October 2025 that on 15 October 2025 it had the following interests in HSBC Holdings ordinary shares: a long position of 1,035,915,129 shares, a short position of 551,070,412 shares and a lending pool of 449,036,061 shares representing 6.01%, 3.20% and 2.61%, respectively, of the ordinary shares in issue at 15 October 2025. The Bank of New York Mellon Corporation is the Depositary for the HSBC ADSs. Under the SFO, they are required to report the HSBC ADSs position a",
+      "requested_url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf",
+      "retrieved_at": "2026-10-02T21:55:58Z",
+      "sha256": "94aab2f5c83d1060ee95d344f1915833869fe4502dc635e4ab9ca84f496ee94b",
+      "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf"
+    }
+  },
+  "N1FBEDJ5J41VKZLO2475": {
+    "control_evidence": {
+      "hash_kind": "http_response",
+      "quote": "inanciero Citi Mexico, S.A. de C.V. Mexico 7 Banco Citi Mexico, Sociedad Anonima, Institucion de Banca Multiple, Grupo Financiero Citi Mexico Mexico 2 Citibank, N.A. United States 3 Citibank (China) Co., Ltd. China 3 Citibank Kazakhstan JSC Kazakhstan 3 Citibank Overseas Investment Corporation United States 4 Citi Investments Bahamas Ltd. Bahamas 5 Citi Overseas Holdings Bahamas Limited Bahamas 6 Citibank Europe plc Ireland 7 Bank Handlowy w Warszawie S.A. Poland 6 Citigroup Asia Pacific Holding LLC Delaware 7 Banco Citibank S.A. Brazil 5 Citigroup Holding (Singapore) Private Limited Singapore 6 Citibank Berhad Malaysia 6 Citibank (Hong Kong) Limited Hong Kong 6 Citibank Singapore Limited Singapore 6 Citicorp International Limited Hong Kong 6 Citicorp Investment Bank (Singapore) Limited Singapore 4 Citibank Korea Inc. South Korea 4 Citibank Nigeria Limited Nigeria 4 Citibank Taiwan Ltd. Taiwan 4 Citigroup Chile SpA Chile 4 Citigroup Netherlands B.V. Netherlands 5 Citibank Anonim Sirketi Turkiye 3 CitiMortgage, Inc. New York 2 Citigroup Japan Holdings G.K. Japan 3 Citigroup Global Markets Japan Inc. Japan 1 Citigroup Global Markets Holdings Inc. New York 2 Citigroup Financial Products Inc. Delaware 3 Citigroup Energy Inc. Delaware 3 Citigroup Global Markets Europe Finance Limited England 4 Citigroup Global Markets (International) Finance GmbH Switzerland 5 Citigroup Global Markets Overseas Finance Limited Cayman Islands 6 Citigroup Global Markets Hong Kong Holdings Limited Hong Kong 7 Citigroup Global Markets Asia Limited Hong Kong 3 Citigroup Global Markets Holdings Bahamas Limited Bahamas 4 ",
+      "requested_url": "https://www.sec.gov/Archives/edgar/data/831001/000083100126000011/citi-exh2101x12312025.htm",
+      "retrieved_at": "2026-10-02T22:30:05Z",
+      "sha256": "b22632497ff227a93eb283e1b7f8611635e547ecd6171d0a5bd10c49e86d0216",
+      "url": "https://www.sec.gov/Archives/edgar/data/831001/000083100126000011/citi-exh2101x12312025.htm"
+    },
+    "controller_lei": "6SHGI4ZSSLCXXQSBB395",
+    "interpretation": "Explicitly reviewed controller ownership plus bank-specific published group-control evidence; subsidiary list does not imply 100% share ownership.",
+    "name": "Citibank Europe plc",
+    "ownership": "shareholder",
+    "ownership_basis": "reviewed_document_chain",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "ode of Conduct 45 Communications with the Board 45 STOCK OWNERSHIP 46 Beneficial Ownership Table 46 Owners of More than 5% of Citi’s Common Stock 47 Insider Trading Policies for Citi and Citi’s Board, Officers and Employees 47 PROPOSAL 1: ELECTION OF DIRECTORS 48 Director Criteria and Nomination Process 48 Director Qualifications 49 The Nominees 53 Directors’ Compensation 66 AUDIT COMMITTEE REPORT 70 PROPOSAL 2: RATIFICATION OF SELECTION OF INDEPENDENT REGISTERED PUBLIC ACCOUNTING FIRM 71 PROPOSAL 3: ADVISORY VOTE TO APPROVE OUR 2025 EXECUTIVE COMPENSATION 73 Compensation Discussion and Analysis 73 The Compensation, Performance Management and Culture Committee Report 97 2025 Summary Compensation Table and Compensation Information 98 Additional Compensation Disclosures 109 PROPOSAL 4: APPROVAL OF ADDITIONAL SHARES FOR THE CITIGROUP 2019 STOCK INCENTIVE PLAN 110 STOCKHOLDER PROPOSALS 118 Submission of Future Stockholder Proposals 118 Cost of Annual Meeting and Proxy Solicitation 118 Householding 119 ABOUT THE 2026 ANNUAL MEETING 120 ANNEX A 126 Additional Information Regarding Proposal 3 126 Citigroup – Quantitative Scorecard Metric Details And Reconciliations 127 FORWARD-LOOKING STATEMENTS Certain statements in this Proxy Statement are “forward-looking statements” within the meaning of the Private Securities Litigation Refor",
+      "requested_url": "https://www.citigroup.com/rcs/citigpa/storage/public/Annual_Report/2025/2026-citi-proxy-statement.pdf",
+      "retrieved_at": "2026-10-02T21:50:34Z",
+      "sha256": "c1d2cdd8c9ecccf5f5f4b5274499cd8f7c0dd6f7d690e951c5eed5952bbbacaf",
+      "url": "https://www.citigroup.com/rcs/citigpa/storage/public/Annual_Report/2025/2026-citi-proxy-statement.pdf"
+    }
+  },
+  "N747OI7JINV7RUUH6190": {
+    "interpretation": "1 October 2026: Unipol 20%, Sardegna foundation 7.4%, others 72.6%; foundation is a minority anchor.",
+    "name": "BPER Banca S.p.A.",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "ionale Homepage Investor Relations Shareholders Shareholder base and dividends Shareholders Legenda 20.0% Unipol Assicurazioni S.p.A. 7.4% Fondazione di Sardegna 72.6% Other Shareholders* Data Updated: October 1st, 2026. Shareholders Legenda 19.9% Unipol Assicurazioni S.p.A. 7.4% Fondazione di Sardegna 5.0% BlackRock Inc.* 67.7% Other Shareholders* Data Updated : August 11th, 2026 (*) With regard to the shareholdings described above, the following should be noted: BlackRock Inc. reported, with Model 120 (TR-1), a shareholding equal to 4.78% of BPER Banca’s share capital on 25 September 2026 and an equity investment in financial instruments equal to 0.22%. No updates to these shareholdings were communicated. JPMorgan Chase & Co. reported, with Model 120 (TR-1), a shareholding equal to 4.63% of BPER Banca’s share capital on 14 August 2026 and an equity investment in financial instruments equal to 1.16%. No updates to these shareholdings were communicated. Note: figures may not add up exactly due to rounding differences. Data are updated based on the most recent communications received. Dividends Interim Dividend for 2025 The Board of Directors of BPER Banca S.p.A., during its meeting on November 5, 2025, having verified compliance with the requirements of Article 2433-bis of the Italian Civil Code and based on the Bank's financial position as of June 30, 2025, resolved to distribute €0.10 (ten euro cents) per outstanding ordinary share, before legal withholdings, as an interim divid",
+      "requested_url": "https://group.bper.it/en/investor-relations/shareholders",
+      "retrieved_at": "2026-10-02T21:52:23Z",
+      "sha256": "01537792b9b437c31e1ba2b44e60f1631f308fb19f074b2a07e6a6bf9c04c303",
+      "url": "https://group.bper.it/en/investor-relations/shareholders"
+    }
+  },
+  "NHBDILHZTYCNBV5UYZ31": {
+    "interpretation": "Industrivärden is the only holder exceeding 10%; Oktogonen foundation is a minority owner, not a bank controller.",
+    "name": "Svenska Handelsbanken - gruppen",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": " relations The share The shareholders The shareholders A rundown of our major shareholders About our shareholders We have more than 200,000 shareholders. One shareholders’ holdings exceed 10 percent, Industrivärden. The major Swedish shareholders 31 December, 2025 Shareholder: Industrivärden Number of shares: 230 000 000 Percentage of votes: 11.8 Shareholder: Oktogonen Foundation Number of shares: 159 225 141 Percentage of votes: 8.2 Shareholder: Lundberg-gruppen Number of shares: 95 781 000 Percentage of votes: 4.9 Shareholder: BlackRock Number of shares: 69 730 671 Percentage of votes: 3.6 Shareholder: Vanguard Number of shares: 65 548 347 Percentage of votes: 3.3 Shareholder: Handelsbanken Funds Number of shares: 32 169 769 Percentage of votes: 1.7 Shareholder: Fidelity Number of shares: 29 919 408 Percentage of votes: 1.5 Shareholder: J. Wallanders & T. Hedelius stiftelse, T. Browaldhs stiftelse Number of shares: 28 996 000 Percentage of votes: 1.5 Shareholder: SEB Funds Number of shares: 27 287 220 Percentage of votes: 1.4 Shareholder: First Eagle Investment Management, LLC Number of shares: 20 933 302 Percentage of votes: 1.1 Shareholder: Avanza Funds Number of shares: 18 378 820 Percentage of votes: 0.9 Shareholder: Folksam Number of shares: 16 476 392 Percentage of votes: 0.8 Sharehold",
+      "requested_url": "https://www.handelsbanken.com/en/investor-relations/the-share/the-shareholders",
+      "retrieved_at": "2026-10-02T21:58:45Z",
+      "sha256": "e515f6bb5f85008597543a85d8ed1bdb2363ebf577a24482d33effee35efad2d",
+      "url": "https://www.handelsbanken.com/en/investor-relations/the-share/the-shareholders"
+    }
+  },
+  "NNVPP80YIZGEY2314M97": {
+    "interpretation": "Affiliated mutual/cooperative banks hold 97.475% of Iccrea Banca share capital at 31 December 2025.",
+    "name": "ICCREA BANCA S.P.A. - ISTITUTO CENTRALE DEL CREDITO COOPERATIVO (IN FORMA ABBREVIATA: ICCREA BANCA S.P.A.)",
+    "ownership": "cooperative",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "will be implemented in the ﬁrst half of 2026 after receiving the authorization by the ECB. 12. OTHER INFORMATION Treasury shares At December 31, 2025 the share capital of Iccrea Banca was represented by 27,125,759 ordinary shares with a par value of €51.65 each, equal to €1,401,045,452.35. Of this, 97.475%, for a nominal value of €1,365,675,945.55 is represented by 26,440,967 ordinary shares held by afﬁliated banks, which are to be considered as treasury shares Held for the purposes of the consolidated ﬁnancial statements. T h e a f ﬁ l i a t e d m u t u a l b a n k s h o l d t r e a s u r y s h a r e s f o r € 2 7 , 7 1 7 , 6 7 3 . 7 0 . T h e c o n s o l i d a t e d ﬁ n a n c i a l s t a t e m e n t s a l s o report treasury shares in the afﬁliated banks held by Group companies for a total amount of €85,640.64. The total amount of treasury shares of the afﬁliated mutual banks in the consolidated ﬁnancial statements is therefore €27,803,314.34, bringing the total treasury shares reported in the consolidated ﬁnancial statements as of December 31, 2025 to €1,393,479,260.89. No shares of the ",
+      "requested_url": "https://www.iccreabanca.it/DocumentiBilancio/Financial/Reports%20and%20consolidated%20and%20separate%20financial%20statements%20at%20decembre%2031%2C%202025.pdf",
+      "retrieved_at": "2026-10-02T22:18:44Z",
+      "sha256": "ec53237c1abdb57da37a27ed8c43d910ff61747e0e42b131d28672f130c16597",
+      "url": "https://www.iccreabanca.it/DocumentiBilancio/Financial/Reports%20and%20consolidated%20and%20separate%20financial%20statements%20at%20decembre%2031%2C%202025.pdf"
+    }
+  },
+  "P4GTT6GF1W40CVIMFR43": {
+    "interpretation": "State Treasury 29.43%, other holders 70.57%; mixed public/private capital. No majority or de facto State control asserted without separate voting/control proof.",
+    "name": "Powszechna Kasa Oszczednosci Bank Polski S.A.",
+    "ownership": "mixed",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": "der Share in the capital % Share in the number of votes at the GSM % Address details of major shareholders Contact information for major shareholders State Treasury 367 918 980 29.43% 367 918 980 29.43% Ministerstwo Aktywów Państwowych ul. Krucza 36/Wspólna 6 00-522 Warszawa +48 22 695 86 90 sekretariatDNI@map.gov.pl www.gov.pl/web/aktywa-panstwowe Nationale-Nederlanden OFE 87 916 405 7.03% 87 916 405 7.03% Nationale-Nederlanden PTE S.A. ul. Topiel 12 00-342 Warszawa +48 22 522 00 00 info@nn.pl www.nn.pl Allianz Polska OFE 73 752 392 5.90% 73 752 392 5.90% PTE Allianz Polska S.A. ul. Rodziny Hiszpańskich 1 02-685 Warszawa +48 22 567 46 00 pte@allianz.pl www.ofeallianz.pl Other shareholders 720 412 223 57.64% 720 412 223 57.64% Total 1 250 000 000 100% 1 250 000 000 100% Dividend Dividend from profit earned in 2025 The Annual General Meeting of the Bank allocated as a dividend, from the net profit of the Bank achieved in 2025, PLN 7,675,000,000 representing PLN 6.14 gross per each share. The AGM set the following dates: the dividend date: 5 August 2026, the dividend payment date: 13 August 2026. The remainder of the profit in the amount of PLN 2,565,339,773.72 was allocated to the reserve capital for the payment of dividend, including interim divide",
+      "requested_url": "https://www.pkobp.pl/en/investor-relations/investor",
+      "retrieved_at": "2026-10-02T21:55:59Z",
+      "sha256": "a5c37cbf3b3141764a9faabe4a6469375f2ee7e433e74bd8f3e13415f81331f6",
+      "url": "https://www.pkobp.pl/en/investor-relations/investor"
+    }
+  },
+  "SI5RG2M0WQQLZCXKRM20": {
+    "interpretation": "CNMV notified shareholder/voting interests; financial instruments are distinct from voting shares.",
+    "name": "Banco de Sabadell, S.A.",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": " en la pagina web CNMV: 31/07/2026 Accionistas Significativos % de derechos de voto atribuidos a las acciones % de derechos de voto a través de instrumentos financieros % de derechos de voto total Histórico de notificaciones Denominación % Total (A) % Directo % Indirecto % (B) (A+B) F.Registro Entrada CNMV Información adicional Detalle/anulaciones BLACKROCK INC. 8,367 0,000 8,367 0,076 8,443 18/06/2026 ZURICH INSURANCE GROUP LTD 4,947 0,000 4,947 0,000 4,947 24/09/2025 OTRAS NOTIFICACIONES (1) (1) En este apartado se podrán visualizar las notificaciones remitidas por partícipes significativos que han perdido tal condición y todas las notificaciones de los consejeros remitidas hasta el 2 de marzo de 2020. Esta notificación anula otras anteriores Notificación anulada Contacto Mapa web Nota legal Política de cookies Protección de datos Accesibilidad X @CNMV_MEDIOS X @CNMV_IP X@CNMV_IFI Instagram LinkedIn YouTube RSS",
+      "requested_url": "https://www.cnmv.es/portal/Consultas/DerechosVoto/Notificaciones-Participaciones.aspx?qS={e43ff780-aa5b-4bde-8c18-6bc594a15233}",
+      "retrieved_at": "2026-10-02T22:12:27Z",
+      "sha256": "8f998a79099d6d44b03a263ccbfc0c3efebac088e9b087de83093d7bdb8eb63d",
+      "url": "https://www.cnmv.es/portal/Consultas/DerechosVoto/Notificaciones-Participaciones?qS={e43ff780-aa5b-4bde-8c18-6bc594a15233}"
+    }
+  },
+  "VWMYAEQSTOPNV0SUGU82": {
+    "interpretation": "Cartival 23.186% voting shares, 23.191% including instruments; regulator notices, not a majority-control assertion.",
+    "name": "Bankinter, S.A.",
+    "ownership": "shareholder",
+    "ownership_evidence": {
+      "hash_kind": "http_response",
+      "quote": " de voto atribuidos a las acciones % de derechos de voto a través de instrumentos financieros % de derechos de voto total Histórico de notificaciones Denominación % Total (A) % Directo % Indirecto % (B) (A+B) F.Registro Entrada CNMV Información adicional Detalle/anulaciones BANK OF AMERICA CORPORATION 0,062 0,000 0,062 3,017 3,079 02/10/2026 BLACKROCK INC. 5,031 0,000 5,031 0,879 5,910 21/07/2025 CARTIVAL, S.A. 23,186 23,186 0,000 0,005 23,191 22/12/2020 FMR LLC 3,278 0,000 3,278 0,501 3,779 09/07/2025 LAZARD ASSET MANAGEMENT 3,032 0,000 3,032 0,000 3,032 09/12/2020 MASAVEU HERRERO, FERNANDO 5,311 0,087 5,225 0,000 5,311 23/02/2015 OTRAS NOTIFICACIONES (1) (1) En este apartado se podrán visualizar las notificaciones remitidas por partícipes significativos que han perdido tal condición y todas las notificaciones de los consejeros remitidas hasta el 2 de marzo de 2020. Esta notificación anula otras anteriores Notificación anulada Contacto Mapa web Nota legal Política de cookies Protección de datos Accesibilidad X @CNMV_MEDIOS X @CNMV_IP X@CNMV_IFI Instagram LinkedIn YouTube RSS",
+      "requested_url": "https://www.cnmv.es/portal/Consultas/DerechosVoto/Notificaciones-Participaciones.aspx?qS={fae7fde6-f13b-4e05-9c35-7dc081866a53}",
+      "retrieved_at": "2026-10-02T22:09:11Z",
+      "sha256": "892b0b646ba812f758ceacade3910bd923ce051f020caf01fdb60d387a8cc261",
+      "url": "https://www.cnmv.es/portal/Consultas/DerechosVoto/Notificaciones-Participaciones?qS={fae7fde6-f13b-4e05-9c35-7dc081866a53}"
+    }
+  }
+}

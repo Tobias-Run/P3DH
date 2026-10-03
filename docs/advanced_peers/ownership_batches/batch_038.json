@@ -1,0 +1,217 @@
+{
+  "batch": "038",
+  "campaign": "next_70_trea_c",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 253,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 7,
+  "page_attempts": [
+    {
+      "lei": "81560017C4A61A529235",
+      "url": "https://www.carifermo.it",
+      "status": 200,
+      "error": null,
+      "sha256": "a62aea636308e2b64e652b09865891434c5a1b60dfa87971a3cc839d86af7465",
+      "retrieved_at": "2026-10-03T08:00:11Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "81560017C4A61A529235",
+      "url": "https://www.carifermo.it/it/rapporti-dormienti/",
+      "status": 200,
+      "error": null,
+      "sha256": "2b27e25bc950ae429e800f6b1c68008be22978d4abf1446cf6f88a5dc4dbb74a",
+      "retrieved_at": "2026-10-03T08:00:13Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "81560017C4A61A529235",
+      "url": "https://www.carifermo.it/it/bilanci/",
+      "status": 200,
+      "error": null,
+      "sha256": "867b6f6e9800db415c2ad46b3b86286036d9999ba235e765e10f94cd1ef84237",
+      "retrieved_at": "2026-10-03T08:03:14Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "2138007JGI1M5YF7FJ53",
+      "url": "https://www.sydjysksparekasse.dk/",
+      "status": 200,
+      "error": null,
+      "sha256": "aa23dcb2063483bff496e944c03d48f1e39e42099a9ac93e1ae71d11219f0280",
+      "retrieved_at": "2026-10-02T16:31:56Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2138007JGI1M5YF7FJ53",
+      "url": "https://www.sydjysksparekasse.dk/privat/vi-tilbyder/investering/sydjysk-investor",
+      "status": 200,
+      "error": null,
+      "sha256": "4d412bc6d041bb06ae188dcc5872317bf564f17df693ed7531b354ef7e8e6410",
+      "retrieved_at": "2026-10-02T16:31:57Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "2138007JGI1M5YF7FJ53",
+      "url": "https://www.sydjysksparekasse.dk/om-sparekassen/om-os",
+      "status": 200,
+      "error": null,
+      "sha256": "e6a72e1fe1b9e4000d5510ff475b373b04f2826c9cdb91abf7b93343f35e67e2",
+      "retrieved_at": "2026-10-03T08:03:06Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900RQOBT3ZJMDRK43",
+      "url": "https://www.bankfrick.li/en",
+      "status": 200,
+      "error": null,
+      "sha256": "7eda261081be91f1b65663351249501fb161bc8c1817e34d2e6bfe929241ccc8",
+      "retrieved_at": "2026-10-02T16:32:54Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900RQOBT3ZJMDRK43",
+      "url": "https://www.bankfrick.li/en/about-bank-frick",
+      "status": 200,
+      "error": null,
+      "sha256": "6cce1229d93eda2df6510a37e630b6455d96b1666a3a3a48ebbdfe4f8a224d8e",
+      "retrieved_at": "2026-10-02T16:32:55Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900RQOBT3ZJMDRK43",
+      "url": "https://www.bankfrick.li/en/about-bank-frick/facts-and-figures",
+      "status": 200,
+      "error": null,
+      "sha256": "9a64f9523ec06719c5b1c4b3fbec721d7faf08999bc9f095af1afc8c7e23de34",
+      "retrieved_at": "2026-10-02T16:53:52Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900RQOBT3ZJMDRK43",
+      "url": "https://www.bankfrick.li/sites/default/files/documents/Bank_Frick_Annual%20report25_EN_2026-4.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "e5924b38488c3793bf7333f599c63e25147afb5acfcbec0e3826ccb3b9ef185e",
+      "retrieved_at": "2026-10-03T08:05:31Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600B6B356EC776E54",
+      "url": "https://www.crvolterra.it",
+      "status": 200,
+      "error": null,
+      "sha256": "11bf6f1ede5ac220db509924f517a14c576a0c5d6200ff1179b778927db2d776",
+      "retrieved_at": "2026-10-03T08:00:11Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600B6B356EC776E54",
+      "url": "https://www.crvolterra.it/info-e-opportunita-corporate/",
+      "status": 200,
+      "error": null,
+      "sha256": "fb0d8ce66393db8400cbcfbf65ae9fc17af9fc3371c54a6e830abb3837621d9f",
+      "retrieved_at": "2026-10-03T08:00:12Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "95980020140005658381",
+      "url": "http://www.aresbank.es",
+      "status": 200,
+      "error": null,
+      "sha256": "3ba4a45f0e7a678ca92d8aa49d6fe7e77db7e00db7045f88c3a34e7a72310bc7",
+      "retrieved_at": "2026-10-02T16:33:38Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "2138007JGI1M5YF7FJ53",
+      "name": "Frøs Sparekasse",
+      "ownership": "savings",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.sydjysksparekasse.dk/om-sparekassen/om-os",
+        "sha256": "e6a72e1fe1b9e4000d5510ff475b373b04f2826c9cdb91abf7b93343f35e67e2",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:03:06Z",
+        "quote": ", der bor her. Vi er stolte af at være en garantsparekasse. Det betyder, at vi ejer os selv – og at en del af vores overskud bliver investeret i fællesskabet. Vi bakker op om lokale initiativer, foreninger og erhvervsliv, fordi vi tror på, at et stærkt fællesskab skaber en stærk landsdel og så vi i fremtiden fortsat er: Et godt sted at være. Centreret overskrift Vi er en sparekasse bygget på stærke værdier. 1. Et godt sted at være. 2. Ordentlighed. 3. Stærke kompetencer. 4. Lokal. Vil du vide mere om? Bliv kunde Bliv garant Sponsorater Afdelinger og medarbejdere Job og karriere i sparekassen Sparekassen i tal Blandt de 20 største pengeinstitutter i Danmark Ca. 73.000 kunder 18.000 garanter 12 afdelinger | 215 ansatte Bliv kunde Derfor Sydjy"
+      },
+      "note": "Exact GLEIF legal identity is Sydjysk Sparekasse, with EBA display alias Fros Sparekasse. Current bank explicitly says it owns itself; no transfer of ownership from an unrelated successor LEI. Guarantors coexist with the self-owned institution.",
+      "bank_identity": {
+        "legal_name": "Sydjysk Sparekasse",
+        "registered_as": "67051815",
+        "jurisdiction": "DK",
+        "gleif_record_sha256": "7fdc32e8d93a59298569ce84df8c6d1273bb72ffbcbb1c407811d4101b911e70"
+      }
+    },
+    {
+      "lei": "529900RQOBT3ZJMDRK43",
+      "name": "Bank Frick AG",
+      "ownership": "foundation",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.bankfrick.li/sites/default/files/documents/Bank_Frick_Annual%20report25_EN_2026-4.pdf",
+        "sha256": "e5924b38488c3793bf7333f599c63e25147afb5acfcbec0e3826ccb3b9ef185e",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T08:05:31Z",
+        "quote": "g rights in CHF 1,000 Nominal Share in % Nominal Share in % With voting rights: Kuno Frick Family Foundation, Balzers 21,250 100 21,250 100 Total 21,250 100 21,250 100 Without voting rights: PC capital 6,000 100 6,000 100 Total 6,000 100 6,000 100 Financial year Previous year in CHF 1,000 Financial year Previous year Annual profit 9,169 9,544 Profit carried forward – – Net profit 9,169 9,544 Appropriation of profit Allocation to legal reserves – – Allocation to free reserves 1,169 1,544 Distribution to share capital 8,000 8,000 Profit carried forward – – 52 Financial statement 2025 | 53 Previous year Statement of shareholders’ equity Due in in CHF 1,000 2025 Shareholders’ equity at the start of the financial year Subscribed capital 27, 25 0"
+      },
+      "note": "Audited 2025 annual report significant-shareholders table: Kuno Frick Family Foundation, Balzers, holds 100% voting share capital, CHF 21.25m; separate non-voting participation capital CHF 6m is not equated with voting control. Foundation control, not generic private family-bank classification.",
+      "bank_identity": {
+        "legal_name": "Bank Frick AG",
+        "registered_as": "FL-0001.548.501-4",
+        "jurisdiction": "LI",
+        "gleif_record_sha256": "e6ac4722da95725e1ba4c33ddd926ac6be1dc56d6b6bb5b28b14edfc41b832da"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "81560017C4A61A529235",
+      "name": "CASSA DI RISPARMIO DI FERMO S.P.A. (IN FORMA ABBREVIATA CARIFERMO S.P.A.)",
+      "rank": 144,
+      "trea_eur": 902083284.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Follow current Carifermo official issuer accounts/foundation sources to named owners and dated percentages. Dormant-account reports are unrelated; a linked savings-bank foundation does not establish majority ownership.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "815600B6B356EC776E54",
+      "name": "CASSA DI RISPARMIO DI VOLTERRA S.P.A.",
+      "rank": 147,
+      "trea_eur": 815411934.44,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Cassa Volterra current issuer annual report/capital table to foundation and other ownership/voting percentages; corporate product overview alone does not establish the bank owners.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "95980020140005658381",
+      "name": "Aresbank, S.A.",
+      "rank": 148,
+      "trea_eur": 810861000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Find current Aresbank official annual-report shareholder table and exact Libyan Foreign Bank control/State ownership proof; a historic geographic role or foreign-bank name is insufficient.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

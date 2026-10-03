@@ -1,0 +1,46 @@
+{
+  "PQOH26KWDF7CG10L6792": {
+    "lei": "PQOH26KWDF7CG10L6792",
+    "name": "ERSTE GROUP BANK AG",
+    "ownership": "shareholder",
+    "ownership_basis": "direct_ownership",
+    "reviewed_at": "2026-10-03",
+    "status": "accepted",
+    "ownership_evidence": {
+      "url": "https://cdn.erstegroup.com/content/dam/at/eh/www_erstegroup_com/en/Investor_Relations/Shareholder_Structure_Development.pdf",
+      "sha256": "8e2623c15c18f7afb9736b81329af2369aa67a7457372f4d74218d05eb023d41",
+      "hash_kind": "http_response",
+      "retrieved_at": "2026-10-03T08:39:44Z",
+      "quote": "Erste Group Bank AG - Shareholder Structure Development 30.06.2026 Total number of shares: 410,514,384 By investor By region ERSTE Foundation direct 6.08% Austria 32.65% Sparkassenbeteiligungs GmbH & Co KG 12.59% North America 28.40% Foundations 1 3.71% UK & Ireland 16.15% Wiener Städtische Versicherungsverein 4.27% Continental Europe 17.31% Institutional Investors 59.03% Rest of world 1.93% BlackRock 5.05% Identified Trading** 0.25% Retail Investors 5.71% Unidentified* 3.31% Identified Trading** 0.25% Unidentified* 3.31% 31.03.2026 Total number of shares: 410,514,384 By investor By region ERSTE Foundation direct 6.04% Austria 32.51% Sparkassenbeteiligungs GmbH & Co KG 12.59% North America 28.43% Foundations 1 3.59% UK & Ireland 15.57% Wiener Städtische Versicherungsverein 4.27% Continental Europe 17.27% Institutional Investors 58.66% Rest of world 2.13% BlackRock 5.05% Identified Trading** 0.25% Retail Investors 5.71% Unidentified* 3.84% Identified Trading** 0.25% Unidentified* 3.84% 1 Erste Employees Private Foundation, Syndicated Savings Banks Foundations, own holdings of Savings Banks *Institutional and Retail Investors **Including Market Makers. Prime Brokerage. Proprietary Trading. Collateral and Stock Lending positions "
+    },
+    "note": "Current 30 June 2026 issuer table: ERSTE Foundation direct 6.08%, Sparkassenbeteiligungs 12.59%, Foundations 3.71%, Wiener Stadtische association 4.27%, institutional investors 59.03%, BlackRock 5.05%, retail 5.71%. Foundations are minority anchors, not an asserted absolute foundation voting majority. Table reports share ownership, not a complete current voting pact. Category describes shareholder model; no exclusively private or absence of special voting arrangements claim.",
+    "bank_identity": {
+      "legal_name": "ERSTE GROUP BANK AG",
+      "registered_as": "33209m",
+      "jurisdiction": "AT",
+      "gleif_record_sha256": "f4717554a060695202b385120ce5ed0853cc34a86bf71112bc46791c1b33fe7c"
+    }
+  },
+  "QLPCKOOKVX32FUELX240": {
+    "lei": "QLPCKOOKVX32FUELX240",
+    "name": "POWSZECHNY ZAKŁAD UBEZPIECZEŃ SPÓŁKA AKCYJNA",
+    "ownership": "mixed",
+    "ownership_basis": "direct_ownership",
+    "reviewed_at": "2026-10-03",
+    "status": "accepted",
+    "ownership_evidence": {
+      "url": "https://www.pzu.pl/en/investor-relations/shares-and-bonds/shareholding-structure",
+      "sha256": "69d4e7ad43b255e554a994004ec9849cd3370430cbb2b5a2a48e7417b0d0b2a5",
+      "hash_kind": "http_response",
+      "retrieved_at": "2026-10-03T08:46:28Z",
+      "quote": "hareholder structure Share split FAQ and useful links Bonds Changes in PZU SA shareholding structure from the IPO, including the shareholders holding more than 5% of all votes. Shareholders 9.06.2026 9.07.2026 State Treasury 34.2% 34.2% BlackRock, Inc. 5.0% X Other shareholders 60.8% 65.8% Documents to download Shareholder structure 2010-2026 16kB INVESTOR RELATIONS About the group Reports Shares and bonds Sustainability Downloads Contact for investors CONTACT kontakt@pzu.pl +48 801 102 102 CONTACT FOR INVESTORS ir@pzu.pl +48 (22) 582 26 23 SOCIAL MEDIA Facebook Twitter YouTube PZU APPS iOS Android PL ENG GDPR Privacy Policy © 2026 Copyright PZU Zamknij Szukaj"
+    },
+    "note": "Original HTML re-read and static table manually verified. Latest column 9 July 2026: State Treasury 34.2%, other shareholders 65.8%. BlackRock 5.0% belongs to the 9 June column and is X in July; not asserted current 5%. Substantial State minority and other shareholders give mixed ownership, not a State absolute-majority assertion. Exact PZU SA registered controller verified.",
+    "bank_identity": {
+      "legal_name": "POWSZECHNY ZAKŁAD UBEZPIECZEŃ SPÓŁKA AKCYJNA",
+      "registered_as": "0000009831",
+      "jurisdiction": "PL",
+      "gleif_record_sha256": "d22c3868f31a021227fbfacb613e76aa0eb198dd37fdb34fa3c555925a5b6cdf"
+    }
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "batch": "006",
+  "campaign": "next_70_trea",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 288,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 13,
+  "page_attempts": [
+    {
+      "lei": "9KOGW2C2FCIOJQ7FF485",
+      "url": "https://www.csas.cz/",
+      "status": 200,
+      "error": null,
+      "sha256": "182e1727821c36aaf4d509adf3c08d80529e0f15a8884f00d38ddcc2ca378620",
+      "retrieved_at": "2026-10-02T16:33:56Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "9KOGW2C2FCIOJQ7FF485",
+      "url": "https://www.erstegroup.com/en/investors/share",
+      "status": 200,
+      "error": null,
+      "sha256": "bc3e79cfe4f1b225a33b7eb10ccee1a326a5fba26d6abd3a374f731f4048d119",
+      "retrieved_at": "2026-10-02T23:53:45Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "9KOGW2C2FCIOJQ7FF485",
+      "url": "https://www.erstegroup.com/en/investors/share/shareholder-structure",
+      "status": 200,
+      "error": null,
+      "sha256": "1f8283931bdeb07ba2d166d22fc1fdb5b79f1749917ab03f630cc173fb939589",
+      "retrieved_at": "2026-10-02T23:58:57Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "J48C8PCSJVUBR8KCW529",
+      "url": "https://www.popso.it",
+      "status": null,
+      "error": "The read operation timed out",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:48:58Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "J48C8PCSJVUBR8KCW529",
+      "url": "https://www.bper.it/gruppo-bper/relazioni-investitori/azione/azionariato",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T23:53:46Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "J48C8PCSJVUBR8KCW529",
+      "url": "https://istituzionale.popso.it/it/azionariato",
+      "status": 200,
+      "error": null,
+      "sha256": "1be7971eb519abcedf99a8e49b8c4b863c0610a01ed63f0718a44d705f7fa1fc",
+      "retrieved_at": "2026-10-02T23:58:58Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300V1VN70Q7PQ7234",
+      "url": "https://www.ca-autobank.com",
+      "status": 200,
+      "error": null,
+      "sha256": "972f59028c165d291ff93b4e888b3df7ffe60230886522281dd9be34bf0674df",
+      "retrieved_at": "2026-10-02T23:48:58Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300V1VN70Q7PQ7234",
+      "url": "https://www.ca-autobank.com/il-gruppo/",
+      "status": 200,
+      "error": null,
+      "sha256": "66c78f9541f2423cba06953d05a2d6368a7bc9047da3e688da63ae42e66f30d1",
+      "retrieved_at": "2026-10-02T23:49:00Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300V1VN70Q7PQ7234",
+      "url": "https://www.ca-autobank.com/en/the-group/",
+      "status": 200,
+      "error": null,
+      "sha256": "972f59028c165d291ff93b4e888b3df7ffe60230886522281dd9be34bf0674df",
+      "retrieved_at": "2026-10-02T23:53:49Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300V1VN70Q7PQ7234",
+      "url": "https://www.ca-autobank.com/il-gruppo/chi-siamo/",
+      "status": 200,
+      "error": null,
+      "sha256": "b4ef57355be3c04d35ec139628cea2ecbcfe29db4ed0721f8741f03b8850ca98",
+      "retrieved_at": "2026-10-02T23:59:00Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600AD83B2B6317788",
+      "url": "https://www.credem.it",
+      "status": 200,
+      "error": null,
+      "sha256": "c80206a288046d094f296d70e17cf03d43a3c28cedd0cc2df31e43fa2941bf68",
+      "retrieved_at": "2026-10-02T23:49:01Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600AD83B2B6317788",
+      "url": "https://www.credem.it/content/credem/it/gruppo-credem.html",
+      "status": 200,
+      "error": null,
+      "sha256": "85fd03e9110332ed58beff2f04b0a49fe7e7aba2e5e981bc3819457ebb284d7c",
+      "retrieved_at": "2026-10-02T23:49:01Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600AD83B2B6317788",
+      "url": "https://www.credem.it/content/credem/it/gruppo-credem/investor-relations/azionariato.html",
+      "status": 200,
+      "error": null,
+      "sha256": "b730b30ad67514776e88ed5f9b54b5c55b9b53eeb53a6dca725de07d373d129b",
+      "retrieved_at": "2026-10-02T23:53:52Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600AD83B2B6317788",
+      "url": "https://www.credem.it/content/dam/credem/documenti/gruppo/Investor-Relations/bilanci/bilancio_credemholding_2025.pdf",
+      "status": null,
+      "error": "Stream has ended unexpectedly",
+      "sha256": "512c947a09e00adb3ce1b7e180d873329850f93fd405fbd321b09fba42c9b1a6",
+      "retrieved_at": "2026-10-02T23:59:01Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300TJREQ7GHIXWR36",
+      "name": "Swedbank Hypotek AB",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://widget.datablocks.se/api/rose/widgets/owner-list?token=4c2cebc0-49fb-42f2-80a6-e6ed9b182026&stylesheet=swedbank-colors.css",
+        "sha256": "3405a2be2250023e517bc4c8a4dbd8f468c469f5c669c3a14b42d7d17bb64ee7",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "Name Num. of shares Capital Votes Verified 1 Sparbankernas Ägareförening 146,661,918 12.96% 12.96% 2026-08-27 2 Folksam 62,679,152 5.54% 5.54% 2026-08-27 3 Swedbank Robur Funds 57,529,239 5.08% 5.08% 2026-08-31 4 Sparbanksstiftelser 46,167,468 4.08% 4.08% 2026-08-27 5 BlackRock 40,933,309 3.62% 3.62% 2026-09-30 6 SEB Funds 40,763,068 3.60% 3.60% 2026-08-31 7 Norges Bank Investment Management 40,501,374 3.58% 3.58% 2026-08-27 8 Vanguard 38,904,007 3.44% 3.44% 2026-08-31 9 Handelsbanken Funds 24,635,464 2.18% 2.18% 2026-08-31 10 Alecta Tjänstepension 24,284,105 2.15% 2.15% 2026-08-27 Total 10 523,059,104 46.21% 46.21% Others 608,946,618 53.79% 53.79% Total number of owners 412,877 2026-08-31 Total number of shares 1,132,005,722 2026-10-02 Powered by Modular Finance"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "M312WZV08Y7LYUC71685",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/549300TJREQ7GHIXWR36/ultimate-parent-relationship",
+        "sha256": "11e28c8580409853ac16757058f115adebe5d77e4bd968efd8b7055abef77396",
+        "relationship": {
+          "startNode": {
+            "id": "549300TJREQ7GHIXWR36",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "M312WZV08Y7LYUC71685",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2024-12-31T23:00:00Z",
+              "endDate": "2025-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2017-11-30T00:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2021-01-01T00:00:00Z",
+              "endDate": "2021-12-31T00:00:00Z",
+              "type": "DOCUMENT_FILING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2013-11-05T00:00:00Z",
+          "lastUpdateDate": "2026-08-31T08:34:00Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-10-10T18:00:00Z",
+          "managingLou": "549300O897ZC5H7CY412",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": "https://internetbank.swedbank.se/ConditionsEarchive/download?bankid=1111&id=WEBDOC-PRODE109370778"
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "Swedbank Hypotek AB",
+        "registered_as": "556003-3283",
+        "jurisdiction": "SE",
+        "gleif_record_sha256": "ad84f2dbe969df8fd899a0b7d387e4ab05e37034a76f8d7fc57ec41f7756705f"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "9KOGW2C2FCIOJQ7FF485",
+      "name": "Česká spořitelna, a.s.",
+      "rank": 19,
+      "trea_eur": 28130725899.55916,
+      "status": "pending_targeted_source_review",
+      "reason": "Fully corroborated bank/Erste relationship exists; parent page identifies major owners but extracted text lacks the dated ownership/voting percentages.",
+      "next_action": "Review the linked current Erste shareholder-structure PDF, foundation charter/association stakes and voting pact; explicitly classify the parent before any group-based bank record."
+    },
+    {
+      "lei": "J48C8PCSJVUBR8KCW529",
+      "name": "BANCA POPOLARE DI SONDRIO SOCIETA' PER AZIONI",
+      "rank": 21,
+      "trea_eur": 24332992114.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current Popolare di Sondrio institutional page is sparse and candidate BPER ownership path failed.",
+      "next_action": "Review official BPER takeover/merger completion notices and legal register to determine whether the bank still exists under this LEI and the applicable control date; SA form does not prove the owners."
+    },
+    {
+      "lei": "549300V1VN70Q7PQ7234",
+      "name": "CRÉDIT AGRICOLE AUTO BANK S.P.A.",
+      "rank": 22,
+      "trea_eur": 23980553298.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Bank site names CA Personal Finance and Mobility; the ultimate GLEIF parent relation is only ENTITY_SUPPLIED_ONLY.",
+      "next_action": "Use the bank annual report for the completed control chain to Crédit Agricole SA, and verify regional-bank cooperative control of that exact parent. Synthetic EBA group ID is not a controller LEI."
+    },
+    {
+      "lei": "815600AD83B2B6317788",
+      "name": "CREDITO EMILIANO HOLDING SOCIETA' PER AZIONI",
+      "rank": 23,
+      "trea_eur": 23192588795.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Retrieved shareholder table describes Credito Emiliano SpA being held by Credito Emiliano Holding; it does not identify the shareholders of the requested holding.",
+      "next_action": "Review the exact Holding’s filed annual report and ownership note for Maramotti/family interests. Do not invert the subsidiary ownership edge."
+    }
+  ],
+  "note": "Fixed campaign selection after batch 002, five banks per package. Full archived parent reports and existing GLEIF/ELF records searched locally without new HTTP calls. Page attempts measure bounded fetch invocations; redirects may generate further requests. No automatic ownership acceptance, 403 retry/bypass, exact chat-token/cost assertion or historical ownership reconstruction."
+}

@@ -1,0 +1,599 @@
+{
+  "batch": "060",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 5,
+  "page_attempts": [
+    {
+      "lei": "213800HDJ876ACJXXD05",
+      "url": "https://www.aikbanka.rs",
+      "status": 200,
+      "error": null,
+      "sha256": "afccc3d5ef03934ff92dad2bc329bcc826cb5d62dc132ef70e41e72745b2d164",
+      "retrieved_at": "2026-10-02T16:48:00Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "549300L1IEXJYJ2NUV45",
+      "url": "https://www.spard.dk/om-sparekassen/politikker-og-vedtaegter/vedtaegter",
+      "status": 200,
+      "error": null,
+      "sha256": "e30204abb23bbc2b67b453c28de4035f56ee8b578ce24f17eb23d41e93629cd6",
+      "retrieved_at": "2026-10-03T07:29:16Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "549300L1IEXJYJ2NUV45",
+      "url": "https://www.spard.dk/-/media/sparekassendanmark/pdf/om-sparekassen/vedtaegter/vedtaegter-sparekassen-danmark-1-april-2025.pdf?rev=199e5b7b1dbd41859f97879a631ed437&hash=B6F79C0B56CA6D8066EFAF82812A3F51",
+      "status": 200,
+      "error": null,
+      "sha256": "228949efc08edca70ade7f9913fecf080dacde9e527fc23816e489e212d23709",
+      "retrieved_at": "2026-10-03T10:31:38Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300L1IEXJYJ2NUV45",
+      "url": "https://www.spard.dk/-/media/sparekassendanmark/pdf/om-sparekassen/vedtaegter/vedtaegter-sparekassen-danmark-1-april-2025.pdf?rev=199e5b7b1dbd41859f97879a631ed437&hash=B6F79C0B56CA6D8066EFAF82812A3F51",
+      "status": 200,
+      "error": null,
+      "sha256": "228949efc08edca70ade7f9913fecf080dacde9e527fc23816e489e212d23709",
+      "retrieved_at": "2026-10-03T10:31:38Z",
+      "new_network_fetch": true,
+      "purpose": "Repeated identical-byte PDF retrieval for local visual/OCR verification; collector extraction empty."
+    },
+    {
+      "lei": "724500973ODKK3IFQ447",
+      "url": "https://investors.adyen.com/governance",
+      "status": 200,
+      "error": null,
+      "sha256": "9823638512c6b1a5a6e6343fa4e3356f1a906518f8e26f3014664b32cb9bd0df",
+      "retrieved_at": "2026-10-03T07:29:17Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "529900LKIMB57HKF3545",
+      "url": "https://www.bankofchina.com/lu",
+      "status": 200,
+      "error": null,
+      "sha256": "c64018ccff4e465052e44d3aca5bed65b6965eb9801b5357a8ace817d9e63122",
+      "retrieved_at": "2026-10-02T16:52:48Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "529900LKIMB57HKF3545",
+      "url": "https://www.bankofchina.com/en/",
+      "status": 200,
+      "error": null,
+      "sha256": "193841559084b9fc27e7f5708b08e8b7e2c15f76faacb04c97552fff13885d70",
+      "retrieved_at": "2026-10-03T10:31:41Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900LKIMB57HKF3545",
+      "url": "https://www.bankofchina.com/en/investor/ir3/202608/t20260828_25688304.html",
+      "status": 200,
+      "error": null,
+      "sha256": "80dbedf881d9b18c0166df30fba7cfdb9874f3874f57ec8b8839b8aa715c18fa",
+      "retrieved_at": "2026-10-03T10:39:44Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900LKIMB57HKF3545",
+      "url": "https://pic.bankofchina.com/bocappd/report/202608/P020260828601670971259.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "74ce7bfc964c6866c14fde4f50d2ea9219d36928d79f75073fa7207a3debaad8",
+      "retrieved_at": "2026-10-03T10:40:39Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "SX0CI4F7GVW5530ZMN03",
+      "url": "https://www.wellsfargo.com",
+      "status": 200,
+      "error": null,
+      "sha256": "1ff0a05738da28adc10390042674236378006916482ae987c25b76ec1c671740",
+      "retrieved_at": "2026-10-03T07:20:33Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300L1IEXJYJ2NUV45",
+      "name": "Sparekassen Danmark",
+      "ownership": "savings",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.spard.dk/-/media/sparekassendanmark/pdf/om-sparekassen/vedtaegter/vedtaegter-sparekassen-danmark-1-april-2025.pdf?rev=199e5b7b1dbd41859f97879a631ed437&hash=B6F79C0B56CA6D8066EFAF82812A3F51",
+        "sha256": "228949efc08edca70ade7f9913fecf080dacde9e527fc23816e489e212d23709",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T10:31:38Z",
+        "quote": "Page 2, section 1.4 Selvejende institution: Sparekassen er en selvejende institution. Hverken stiftere, garanter eller andre er ejere af Sparekassens formue eller overskud.",
+        "quote_kind": "visual_text_transcription",
+        "pdf_page": 2,
+        "verified_pdf_sha256": "228949efc08edca70ade7f9913fecf080dacde9e527fc23816e489e212d23709"
+      },
+      "note": "Current 1 April 2025 statutes scanned PDF, zero collector text. Identical PDF bytes re-read and SHA verified; page 2 visually verified after local OCR. Institution has ownerless capital, guarantors not owners of assets or surplus; not State-owned from savings-bank name. Cover identity CVR 64806815 checked.",
+      "bank_identity": {
+        "legal_name": "Sparekassen Danmark",
+        "registered_as": "64806815",
+        "jurisdiction": "DK",
+        "gleif_record_sha256": "9998b66a1e5a268f6bc3625cc34eda94f8b579eb2ecba18c513919da5ffccb91"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "018",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "549300L1IEXJYJ2NUV45",
+          "attributes": {
+            "lei": "549300L1IEXJYJ2NUV45",
+            "entity": {
+              "legalName": {
+                "name": "Sparekassen Danmark",
+                "language": "da"
+              },
+              "otherNames": [
+                {
+                  "name": "SPAREKASSEN VENDSYSSEL",
+                  "language": "da",
+                  "type": "PREVIOUS_LEGAL_NAME"
+                }
+              ],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "da",
+                "addressLines": [
+                  "Østergade 15"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Vrå",
+                "region": "DK-81",
+                "country": "DK",
+                "postalCode": "9760"
+              },
+              "headquartersAddress": {
+                "language": "da",
+                "addressLines": [
+                  "Østergade 15"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Vrå",
+                "region": "DK-81",
+                "country": "DK",
+                "postalCode": "9760"
+              },
+              "registeredAt": {
+                "id": "RA000170",
+                "other": null
+              },
+              "registeredAs": "64806815",
+              "jurisdiction": "DK",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "F7JY",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "1871-02-06T00:00:24Z",
+              "subCategory": null,
+              "otherAddresses": [
+                {
+                  "fieldType": "TransliteratedOtherAddress",
+                  "language": "da",
+                  "type": "AUTO_ASCII_TRANSLITERATED_LEGAL_ADDRESS",
+                  "addressLines": [
+                    "Ostergade 15"
+                  ],
+                  "city": "Vra",
+                  "region": "DK-81",
+                  "country": "DK",
+                  "postalCode": "9760"
+                },
+                {
+                  "fieldType": "TransliteratedOtherAddress",
+                  "language": "da",
+                  "type": "AUTO_ASCII_TRANSLITERATED_HEADQUARTERS_ADDRESS",
+                  "addressLines": [
+                    "Ostergade 15"
+                  ],
+                  "city": "Vra",
+                  "region": "DK-81",
+                  "country": "DK",
+                  "postalCode": "9760"
+                }
+              ],
+              "eventGroups": []
+            },
+            "registration": {
+              "initialRegistrationDate": "2014-01-30T01:15:00Z",
+              "lastUpdateDate": "2025-11-18T12:31:00Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-01-04T08:12:22Z",
+              "managingLou": "549300O897ZC5H7CY412",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000170",
+                "other": null
+              },
+              "validatedAs": "64806815",
+              "otherValidationAuthorities": []
+            },
+            "bic": [
+              "VRSPDK22XXX"
+            ],
+            "mic": null,
+            "ocid": "dk/64806815",
+            "qcc": "QDKHVDRJH2",
+            "gem": null,
+            "spglobal": [
+              "32452590"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300L1IEXJYJ2NUV45/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300L1IEXJYJ2NUV45/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300L1IEXJYJ2NUV45/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/549300L1IEXJYJ2NUV45/direct-parent-reporting-exception"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "reporting-exception": "https://api.gleif.org/api/v1/lei-records/549300L1IEXJYJ2NUV45/ultimate-parent-reporting-exception"
+              }
+            },
+            "isins": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/549300L1IEXJYJ2NUV45/isins"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/549300L1IEXJYJ2NUV45"
+          }
+        },
+        "canonical_sha256": "9998b66a1e5a268f6bc3625cc34eda94f8b579eb2ecba18c513919da5ffccb91"
+      }
+    },
+    {
+      "lei": "529900LKIMB57HKF3545",
+      "name": "Bank of China (Europe) S.A",
+      "ownership": "public",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://pic.bankofchina.com/bocappd/report/202608/P020260828601670971259.pdf",
+        "sha256": "74ce7bfc964c6866c14fde4f50d2ea9219d36928d79f75073fa7207a3debaad8",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": " as authorised by the State Council. To the extent of its capital contribution, Huijin exercises its rights and fulfils its obligations as an investor in major state-owned financial institutions on behalf of the State, in accordance with applicable laws aimed at preserving and enhancing the value of state-owned financial assets. Huijin neither engages in other business activities nor intervenes in the daily operation of the major state-owned financial institutions of which it is the controlling shareholder. As at 30 June 2026, Huijin directly held 58.59% of shares of the Bank. Companies under Huijin include its equity interests in subsidiaries, associates and joint ventures. The Group enters into transactions with Huijin and companies under Huijin in the normal course of business on commercial terms which include mainly purchase and sale of debt securities, money market transactions and derivative transactions. (1) Transactions with Huijin The main transactions that the Group entered into with Huijin are as follows: Transaction balances As at 30 June 2026 As at 31 December 2025 Financial investments 62,944 63,960"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "54930053HGCFWVHYZX42",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545/ultimate-parent-relationship",
+        "sha256": "10b77f2fd70b462774a10b65e928f474111882e2fa39b487ade07a9a404ff23c",
+        "relationship": {
+          "startNode": {
+            "id": "529900LKIMB57HKF3545",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "54930053HGCFWVHYZX42",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2024-12-31T23:00:00Z",
+              "endDate": "2025-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2017-05-07T22:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2026-03-29T22:00:00Z",
+              "type": "DOCUMENT_FILING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2021-05-12T10:16:16Z",
+          "lastUpdateDate": "2026-04-20T13:05:50Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-06-02T22:00:00Z",
+          "managingLou": "5299000J2N45DDNE4Y28",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "BANK OF CHINA (EUROPE) S.A.",
+        "registered_as": "B36940",
+        "jurisdiction": "LU",
+        "gleif_record_sha256": "1df2349dbe78ca596b46e831403bc38a6f86f4dc2ff13968271082d13771cbe5"
+      },
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "018",
+      "identity_evidence": {
+        "record": {
+          "type": "lei-records",
+          "id": "529900LKIMB57HKF3545",
+          "attributes": {
+            "lei": "529900LKIMB57HKF3545",
+            "entity": {
+              "legalName": {
+                "name": "BANK OF CHINA (EUROPE) S.A.",
+                "language": "fr"
+              },
+              "otherNames": [],
+              "transliteratedOtherNames": [],
+              "legalAddress": {
+                "language": "fr",
+                "addressLines": [
+                  "Boulevard Royal 55"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Luxembourg",
+                "region": "LU-LU",
+                "country": "LU",
+                "postalCode": "L-2449"
+              },
+              "headquartersAddress": {
+                "language": "fr",
+                "addressLines": [
+                  "Boulevard Royal 55"
+                ],
+                "addressNumber": null,
+                "addressNumberWithinBuilding": null,
+                "mailRouting": null,
+                "city": "Luxembourg",
+                "region": "LU-LU",
+                "country": "LU",
+                "postalCode": "L-2449"
+              },
+              "registeredAt": {
+                "id": "RA000432",
+                "other": null
+              },
+              "registeredAs": "B36940",
+              "jurisdiction": "LU",
+              "category": "GENERAL",
+              "legalForm": {
+                "id": "5GGB",
+                "other": null
+              },
+              "associatedEntity": {
+                "lei": null,
+                "name": null
+              },
+              "status": "ACTIVE",
+              "expiration": {
+                "date": null,
+                "reason": null
+              },
+              "successorEntity": {
+                "lei": null,
+                "name": null
+              },
+              "successorEntities": [],
+              "creationDate": "1991-06-02T22:00:00Z",
+              "subCategory": null,
+              "otherAddresses": [],
+              "eventGroups": [
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2023-04-20T22:00:00Z",
+                      "recordedDate": "2023-04-21T09:54:22Z",
+                      "type": "CHANGE_HQ_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2023-04-20T22:00:00Z",
+                      "recordedDate": "2023-04-21T09:54:22Z",
+                      "type": "CHANGE_LEGAL_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                },
+                {
+                  "groupType": "STANDALONE",
+                  "events": [
+                    {
+                      "validationDocuments": "SUPPORTING_DOCUMENTS",
+                      "effectiveDate": "2022-05-24T22:00:00Z",
+                      "recordedDate": "2022-05-25T14:00:16Z",
+                      "type": "CHANGE_HQ_ADDRESS",
+                      "status": "COMPLETED"
+                    }
+                  ]
+                }
+              ]
+            },
+            "registration": {
+              "initialRegistrationDate": "2014-02-08T08:27:28Z",
+              "lastUpdateDate": "2026-04-20T13:05:50Z",
+              "status": "ISSUED",
+              "nextRenewalDate": "2027-06-02T22:00:00Z",
+              "managingLou": "5299000J2N45DDNE4Y28",
+              "corroborationLevel": "FULLY_CORROBORATED",
+              "validatedAt": {
+                "id": "RA000432",
+                "other": null
+              },
+              "validatedAs": "B36940",
+              "otherValidationAuthorities": []
+            },
+            "bic": [
+              "BKCHBEBBXXX",
+              "BKCHGRAAXXX",
+              "BKCHIE3DXXX",
+              "BKCHLULAXXX",
+              "BKCHNL2RXXX",
+              "BKCHPLPXXXX",
+              "BKCHPTPLXXX",
+              "BKCHSESSXXX"
+            ],
+            "mic": null,
+            "ocid": "lu/B36940",
+            "qcc": "QLUR59PG48",
+            "gem": null,
+            "spglobal": [
+              "140946839"
+            ],
+            "conformityFlag": "CONFORMING"
+          },
+          "relationships": {
+            "managing-lou": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545/managing-lou"
+              }
+            },
+            "lei-issuer": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545/lei-issuer"
+              }
+            },
+            "field-modifications": {
+              "links": {
+                "related": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545/field-modifications"
+              }
+            },
+            "direct-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545/direct-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545/direct-parent"
+              }
+            },
+            "ultimate-parent": {
+              "links": {
+                "relationship-record": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545/ultimate-parent-relationship",
+                "lei-record": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545/ultimate-parent"
+              }
+            },
+            "branches": {
+              "links": {
+                "relationship-records": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545/branch-relationships",
+                "related": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545/branches"
+              }
+            }
+          },
+          "links": {
+            "self": "https://api.gleif.org/api/v1/lei-records/529900LKIMB57HKF3545"
+          }
+        },
+        "canonical_sha256": "1df2349dbe78ca596b46e831403bc38a6f86f4dc2ff13968271082d13771cbe5"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "213800HDJ876ACJXXD05",
+      "name": "AIKGROUP (CY) LIMITED",
+      "rank": 48,
+      "trea_eur": 7147631124.89822,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "017",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Identify Cyprus-registered AIKGROUP CY holding in its exact filed ownership report; Serbian AikBank retail site does not establish this parent company owners.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Identify Cyprus-registered AIKGROUP CY holding in its exact filed ownership report; Serbian AikBank retail site does not establish this parent company owners.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "724500973ODKK3IFQ447",
+      "name": "Adyen N.V.",
+      "rank": 50,
+      "trea_eur": 7032215319.54,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "018",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Obtain the actual Adyen issuer annual-report major holdings/voting table; governance page is a thin script-rendered shell. Founders or a listing do not alone prove current ownership.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Obtain the actual Adyen issuer annual-report major holdings/voting table; governance page is a thin script-rendered shell. Founders or a listing do not alone prove current ownership.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "SX0CI4F7GVW5530ZMN03",
+      "name": "Wells Fargo Bank International Unlimited Company",
+      "rank": 52,
+      "trea_eur": 6840264486.56,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "018",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use Wells Fargo SEC annual-report subsidiary exhibit for the exact Irish unlimited company plus current issuer major shareholders; ENTITY_SUPPLIED_ONLY consolidation is not sufficient.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use Wells Fargo SEC annual-report subsidiary exhibit for the exact Irish unlimited company plus current issuer major shareholders; ENTITY_SUPPLIED_ONLY consolidation is not sufficient.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}

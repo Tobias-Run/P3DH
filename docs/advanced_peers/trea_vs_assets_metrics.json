@@ -1,0 +1,380 @@
+{
+  "original_unknown_321": {
+    "institutions": 321,
+    "with_facts": 320,
+    "trea_at_latest_report": 257,
+    "assets_at_latest_report": 114,
+    "trea_any_latest_valid": 265,
+    "assets_any_latest_valid": 173,
+    "same_report_pairs": 106,
+    "spearman_same_report": 0.9201249464695065,
+    "latest_report_top30_overlap": 10,
+    "trea_problem_counts": {
+      "scale_finding": 34,
+      "manual_currency_review": 1,
+      "missing": 28
+    },
+    "assets_problem_counts": {
+      "scale_finding": 15,
+      "non_positive_or_missing": 1,
+      "missing": 190
+    }
+  },
+  "remaining_unknown_291": {
+    "institutions": 291,
+    "with_facts": 290,
+    "trea_at_latest_report": 228,
+    "assets_at_latest_report": 105,
+    "trea_any_latest_valid": 235,
+    "assets_any_latest_valid": 143,
+    "same_report_pairs": 97,
+    "spearman_same_report": 0.902324847464759,
+    "latest_report_top30_overlap": 14,
+    "trea_problem_counts": {
+      "scale_finding": 34,
+      "manual_currency_review": 1,
+      "missing": 27
+    },
+    "assets_problem_counts": {
+      "scale_finding": 15,
+      "non_positive_or_missing": 1,
+      "missing": 169
+    }
+  },
+  "fact_roster": {
+    "institutions": 474,
+    "with_facts": 474,
+    "trea_at_latest_report": 379,
+    "assets_at_latest_report": 162,
+    "trea_any_latest_valid": 391,
+    "assets_any_latest_valid": 258,
+    "same_report_pairs": 141,
+    "spearman_same_report": 0.9219658375786635,
+    "latest_report_top30_overlap": 7,
+    "trea_problem_counts": {
+      "scale_finding": 43,
+      "non_positive_or_missing": 1,
+      "manual_currency_review": 1,
+      "missing": 50
+    },
+    "assets_problem_counts": {
+      "scale_finding": 18,
+      "non_positive_or_missing": 2,
+      "missing": 292
+    }
+  },
+  "original_selection_comparison": {
+    "old_top30_overlap_all_trea": 25,
+    "trea_top30_new": [
+      {
+        "entityID": "rs:969500STN7T9MRUMJ267.CON",
+        "lei": "969500STN7T9MRUMJ267",
+        "scope": "CON",
+        "date": "2025-12-31",
+        "name": "Bpifrance",
+        "trea_eur": 91445333689.57,
+        "ov1_eur": 91445333689.57,
+        "assets_eur": 106327589000.0,
+        "trea_problem": "",
+        "assets_problem": "",
+        "assets_source": "70.00"
+      },
+      {
+        "entityID": "rs:EQYXK86SF381Q21S3020.IND",
+        "lei": "EQYXK86SF381Q21S3020",
+        "scope": "IND",
+        "date": "2025-12-31",
+        "name": "Bank of America Europe Designated Activity Company",
+        "trea_eur": 60452938405.18642,
+        "ov1_eur": 60452938405.18642,
+        "assets_eur": 89610010462.13,
+        "trea_problem": "",
+        "assets_problem": "",
+        "assets_source": "70.00"
+      },
+      {
+        "entityID": "rs:213800KGF4EFNUQKAT69.CON",
+        "lei": "213800KGF4EFNUQKAT69",
+        "scope": "CON",
+        "date": "2025-12-31",
+        "name": "EUROBANK S.A.",
+        "trea_eur": 53646935316.43,
+        "ov1_eur": null,
+        "assets_eur": 107975913659.47,
+        "trea_problem": "",
+        "assets_problem": "",
+        "assets_source": "70.00"
+      },
+      {
+        "entityID": "rs:96950001WI712W7PQG45.CON",
+        "lei": "96950001WI712W7PQG45",
+        "scope": "CON",
+        "date": "2025-12-31",
+        "name": "RCI Banque",
+        "trea_eur": 48934538140.6,
+        "ov1_eur": 48934538140.6,
+        "assets_eur": 74021342735.0,
+        "trea_problem": "",
+        "assets_problem": "",
+        "assets_source": "70.00"
+      },
+      {
+        "entityID": "rs:TO822O0VT80V06K0FH57.CON",
+        "lei": "TO822O0VT80V06K0FH57",
+        "scope": "CON",
+        "date": "2025-12-31",
+        "name": "Caixa Geral de Depósitos, S.A.",
+        "trea_eur": 47952630705.92,
+        "ov1_eur": 47952630705.9156,
+        "assets_eur": 108732609742.0,
+        "trea_problem": "",
+        "assets_problem": "",
+        "assets_source": "70.00"
+      }
+    ],
+    "old_asset_top30_not_in_trea": [
+      {
+        "lei": "549300IQZVZ949N37S44",
+        "entityID": "rs:549300IQZVZ949N37S44.CON",
+        "scope": "CON",
+        "name": "Euroclear Holding",
+        "country": "Belgium",
+        "date": "2025-12-31",
+        "template_id": "70.00",
+        "assets_eur": 226897055000.0,
+        "rank": 16,
+        "trea_rank": 69,
+        "trea_eur": 15634561262.0
+      },
+      {
+        "lei": "549300UOX05QGUJJ5707",
+        "entityID": "rs:549300UOX05QGUJJ5707.IND",
+        "scope": "IND",
+        "name": "Stadshypotek AB",
+        "country": "Sweden",
+        "date": "2025-12-31",
+        "template_id": "70.00",
+        "assets_eur": 147468397960.75952,
+        "rank": 26,
+        "trea_rank": 44,
+        "trea_eur": 32500079029.82304
+      },
+      {
+        "lei": "2G5BKIC2CB69PRJH1W31",
+        "entityID": "rs:2G5BKIC2CB69PRJH1W31.IND",
+        "scope": "IND",
+        "name": "Barclays Bank Ireland plc",
+        "country": "Ireland",
+        "date": "2025-12-31",
+        "template_id": "70.00",
+        "assets_eur": 132410204451.05974,
+        "rank": 28,
+        "trea_rank": 38,
+        "trea_eur": 36863040311.64766
+      },
+      {
+        "lei": "VWMYAEQSTOPNV0SUGU82",
+        "entityID": "rs:VWMYAEQSTOPNV0SUGU82.CON",
+        "scope": "CON",
+        "name": "Bankinter, S.A.",
+        "country": "Spain",
+        "date": "2025-12-31",
+        "template_id": "70.00",
+        "assets_eur": 131018891734.0,
+        "rank": 29,
+        "trea_rank": 31,
+        "trea_eur": 45567287639.0
+      },
+      {
+        "lei": "549300FH0WJAPEHTIQ77",
+        "entityID": "rs:549300FH0WJAPEHTIQ77.IND",
+        "scope": "IND",
+        "name": "BofA Securities Europe SA",
+        "country": "France",
+        "date": "2025-12-31",
+        "template_id": "70.00",
+        "assets_eur": 116561216964.0,
+        "rank": 30,
+        "trea_rank": 35,
+        "trea_eur": 42217648088.6891
+      }
+    ],
+    "same_rankable_population": 166,
+    "top30_overlap_within_same_population": 25
+  },
+  "examples": [
+    {
+      "entityID": "rs:529900HEKOENJHPNN480.CON",
+      "lei": "529900HEKOENJHPNN480",
+      "scope": "CON",
+      "date": "2025-12-31",
+      "name": "Kuntarahoitus Oyj",
+      "trea_eur": 1815051000.0,
+      "ov1_eur": 1815051000.0,
+      "assets_eur": 55634327000.0,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "70.00",
+      "trea_over_accounting_assets": 0.032624659951400146
+    },
+    {
+      "entityID": "rs:549300IQZVZ949N37S44.CON",
+      "lei": "549300IQZVZ949N37S44",
+      "scope": "CON",
+      "date": "2025-12-31",
+      "name": "Euroclear Holding",
+      "trea_eur": 15634561262.0,
+      "ov1_eur": 15634561262.0,
+      "assets_eur": 226897055000.0,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "70.00",
+      "trea_over_accounting_assets": 0.06890596822422397
+    },
+    {
+      "entityID": "rs:529900GGYMNGRQTDOO93.CON",
+      "lei": "529900GGYMNGRQTDOO93",
+      "scope": "CON",
+      "date": "2025-12-31",
+      "name": "BNG Bank N.V.",
+      "trea_eur": 10324084076.37,
+      "ov1_eur": 10324084076.37,
+      "assets_eur": 115564291994.3,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "70.00",
+      "trea_over_accounting_assets": 0.08933628111423222
+    },
+    {
+      "entityID": "rs:549300UOX05QGUJJ5707.IND",
+      "lei": "549300UOX05QGUJJ5707",
+      "scope": "IND",
+      "date": "2025-12-31",
+      "name": "Stadshypotek AB",
+      "trea_eur": 32500079029.82304,
+      "ov1_eur": 32500079029.84429,
+      "assets_eur": 147468397960.75952,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "70.00",
+      "trea_over_accounting_assets": 0.22038673695004893
+    },
+    {
+      "entityID": "rs:F0HUI1NY1AZMJMD8LP67.CON",
+      "lei": "F0HUI1NY1AZMJMD8LP67",
+      "scope": "CON",
+      "date": "2025-12-31",
+      "name": "HSBC Continental Europe",
+      "trea_eur": 60303393905.0,
+      "ov1_eur": 60304411347.37,
+      "assets_eur": 251391000000.0,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "70.00",
+      "trea_over_accounting_assets": 0.23987888947893918
+    },
+    {
+      "entityID": "rs:2G5BKIC2CB69PRJH1W31.IND",
+      "lei": "2G5BKIC2CB69PRJH1W31",
+      "scope": "IND",
+      "date": "2025-12-31",
+      "name": "Barclays Bank Ireland plc",
+      "trea_eur": 36863040311.64766,
+      "ov1_eur": 36863040311.652145,
+      "assets_eur": 132410204451.05974,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "70.00",
+      "trea_over_accounting_assets": 0.27840029750329887
+    },
+    {
+      "entityID": "rs:549300ZK53CNGEEI6A29.IND",
+      "lei": "549300ZK53CNGEEI6A29",
+      "scope": "IND",
+      "date": "2025-12-31",
+      "name": "J.P. Morgan SE",
+      "trea_eur": 125190598428.143,
+      "ov1_eur": 125190598428.14001,
+      "assets_eur": 448738565440.01,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "70.00",
+      "trea_over_accounting_assets": 0.27898337265794737
+    },
+    {
+      "entityID": "rs:3TK20IVIUJ8J3ZU0QE75.CON",
+      "lei": "3TK20IVIUJ8J3ZU0QE75",
+      "scope": "CON",
+      "date": "2025-12-31",
+      "name": "ING Bank N.V.",
+      "trea_eur": 340186000000.0,
+      "ov1_eur": 340186000000.0,
+      "assets_eur": 1054507000000.0,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "reviewed_official_balance",
+      "trea_over_accounting_assets": 0.3226019362602619
+    },
+    {
+      "entityID": "rs:SI5RG2M0WQQLZCXKRM20.CON",
+      "lei": "SI5RG2M0WQQLZCXKRM20",
+      "scope": "CON",
+      "date": "2026-03-31",
+      "name": "Banco de Sabadell, S.A.",
+      "trea_eur": 80720936710.0,
+      "ov1_eur": 80720936710.0,
+      "assets_eur": 248893486000.0,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "70.00",
+      "trea_over_accounting_assets": 0.32431920178899337
+    },
+    {
+      "entityID": "rs:549300FH0WJAPEHTIQ77.IND",
+      "lei": "549300FH0WJAPEHTIQ77",
+      "scope": "IND",
+      "date": "2025-12-31",
+      "name": "BofA Securities Europe SA",
+      "trea_eur": 42217648088.6891,
+      "ov1_eur": 42217648088.68913,
+      "assets_eur": 116561216964.0,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "70.00",
+      "trea_over_accounting_assets": 0.36219292478499127
+    },
+    {
+      "entityID": "rs:N747OI7JINV7RUUH6190.CON",
+      "lei": "N747OI7JINV7RUUH6190",
+      "scope": "CON",
+      "date": "2025-12-31",
+      "name": "BPER Banca S.p.A.",
+      "trea_eur": 80141721578.0,
+      "ov1_eur": 80147593228.0,
+      "assets_eur": 204649960364.0,
+      "trea_problem": "",
+      "assets_problem": "",
+      "assets_source": "70.00",
+      "trea_over_accounting_assets": 0.39160389494068887
+    }
+  ],
+  "crosscheck_ov1": {
+    "valid_report_pairs": 642,
+    "over_one_percent_difference": 11,
+    "median_relative_difference": 0.0
+  },
+  "currency_review": {
+    "lei": "259400OFDZ9KPZEO8K78",
+    "date": "2025-06-30",
+    "hub_trea_eur": 51106510892.0,
+    "official_rwa_pln_million": 51099.26,
+    "action": "Exclude TREA/OV1 from this analysis until currency and small amount discrepancy are reviewed; no source-fact mutation or replacement."
+  },
+  "method": {
+    "reviewed_at": "2026-10-02",
+    "joined_parquet_sha256": "8cc95fa2dd4a7d08c7502fb9e433bbe4f311d51ee50a17533730ee9db9fc6cdf",
+    "input_rank_baseline": "top30_selection.json",
+    "ranking": "Excludes Bank Millennium H1 2025 pending separately evidenced currency review. Latest valid same-metric date, CON preferred on ties; excludes reported scale findings affecting KM1 or whole report; positive finite, unique raw amount and dimension, non-ambiguous unit. No unknown ownership or complete risk mix requirement for a size-only research queue.",
+    "paired_comparison": "Both metrics from the same preferred latest report/date/scope, including the four previously reviewed accounting-asset overlays. LR exposure (KM1 r0210) is not accounting assets."
+  }
+}

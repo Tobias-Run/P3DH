@@ -1,0 +1,156 @@
+{
+  "batch": "064",
+  "campaign": "next_70_trea_e",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 231,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 2,
+  "page_attempts": [
+    {
+      "lei": "724500BICUQ0LF1AH770",
+      "url": "https://www.nn.nl",
+      "status": 200,
+      "error": null,
+      "sha256": "58f98baf3f64e24b6aa4bb1ebde3bf740f15f4dc104fa4773db83ae3e4416d62",
+      "retrieved_at": "2026-10-03T07:20:43Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "724500BICUQ0LF1AH770",
+      "url": "https://www.nn-group.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "d546c5a0e60e965678541742590d2c5a8dec62b49a15bcca70f8ac935fe288be",
+      "retrieved_at": "2026-10-03T10:31:43Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500BICUQ0LF1AH770",
+      "url": "https://www.nn-group.com/investors/share-information",
+      "status": 200,
+      "error": null,
+      "sha256": "7c6dea8d433a62a6b923dcfab5ab9655c81fee5ccc091eac2316a973c93f3fee",
+      "retrieved_at": "2026-10-03T10:39:41Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "81560027D07F9BDB8436",
+      "url": "https://www.bancadiasti.it",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:33Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "549300BZZFFS0SOWR325",
+      "url": "https://www.ford.de/hilfe/anleitungen/ressourcen-des-eigentuemers/ford-bank",
+      "status": 200,
+      "error": null,
+      "sha256": "f7f96f5927063547549e62e30d2b7efa6d349a6e5ffd0e9a593d8297e43a7cec",
+      "retrieved_at": "2026-10-03T07:20:44Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    },
+    {
+      "lei": "529900NNQW9IAE32GQ07",
+      "url": "https://www.grawe.at/grawe-group/",
+      "status": 200,
+      "error": null,
+      "sha256": "13849aa69b7425f7ab6fb999dc41f32cba4ba3114e87b5241947de073f0f17ca",
+      "retrieved_at": "2026-10-02T16:53:27Z",
+      "new_network_fetch": false,
+      "purpose": "Review one previously archived source against specific prior follow-up, no homepage recrawl"
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "724500BICUQ0LF1AH770",
+      "name": "Nationale-Nederlanden Bank N.V.",
+      "rank": 68,
+      "trea_eur": 5263541156.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "022",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Review exact NN Group issuer holdings/voting table and NN Bank official subsidiary accounts; classify parent before applying the fully corroborated relationship.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "NN current share-information page gives issued/treasury shares at 30 September 2026, not named holders. Obtain current qualifying owner/vote table or AFM filings; issued ordinary shares alone do not settle control.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "81560027D07F9BDB8436",
+      "name": "CASSA DI RISPARMIO DI ASTI S.P.A. (IN FORMA ABBREVIATA BANCA C.R. ASTI S.P.A.)",
+      "rank": 69,
+      "trea_eur": 5213053604.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "022",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use an alternative official foundation or issuer filed report giving exact Banca Asti foundation majority and current voting interests; do not retry the denied bank host or infer foundation ownership from its savings-bank name.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use an alternative official foundation or issuer filed report giving exact Banca Asti foundation majority and current voting interests; do not retry the denied bank host or infer foundation ownership from its savings-bank name.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.bancadiasti.it",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    },
+    {
+      "lei": "549300BZZFFS0SOWR325",
+      "name": "Ford Bank GmbH",
+      "rank": 70,
+      "trea_eur": 5181057649.23,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "022",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Use Ford current SEC subsidiary exhibit for exact German Ford Bank GmbH and current Ford issuer shareholder/voting table; bank customer-help page and ENTITY_SUPPLIED_ONLY relation do not establish control.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Use Ford current SEC subsidiary exhibit for exact German Ford Bank GmbH and current Ford issuer shareholder/voting table; bank customer-help page and ENTITY_SUPPLIED_ONLY relation do not establish control.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300UY81ESCZJ0GR95",
+      "name": "First Investment Bank",
+      "rank": 71,
+      "trea_eur": 5046160867.0,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "023",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Correct candidate website: archived GLEIF identity is Bulgarian First Investment Bank, whereas pinbank.ua is a different Ukrainian bank. Discover Bulgarian issuer official site by LEI/register and review its actual qualifying holdings.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "Correct candidate website: archived GLEIF identity is Bulgarian First Investment Bank, whereas pinbank.ua is a different Ukrainian bank. Discover Bulgarian issuer official site by LEI/register and review its actual qualifying holdings.",
+      "successful_source_pages": 0,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900NNQW9IAE32GQ07",
+      "name": "GRAWE-Vermögensverwaltung",
+      "rank": 72,
+      "trea_eur": 4875126336.03,
+      "review_mode": "targeted_follow_up",
+      "previous_batch": "023",
+      "previous_next_action": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information. Next: Review exact GRAWE-Vermoegensverwaltung holding owners and upstream Grazer Wechselseitige statute/ownership chain in filed reports; an insurer brand or group history alone is not mutual ownership proof.",
+      "status": "pending_targeted_source_review",
+      "reason": "No sufficient exact current ownership/control proof accepted in this bounded follow-up. A successful page or failed retrieval does not prove ownership or absence of public information.",
+      "next_action": "GRAWE group page remains only a group description. Exact Vermoegensverwaltung owner edge and upstream mutual-versus-share company control must be established in accounts/statutes.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "70 targeted follow-ups frozen before curation, excluding the immediately previous campaign D selection. Prior archived bank evidence reviewed without network; actual linked documents and exact parent sources fetched selectively. A cached denied source is never retried. Repeat identical PDF byte retrieval for visual verification is explicitly counted. Compact characters are not measured chat tokens."
+}
