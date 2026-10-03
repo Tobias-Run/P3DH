@@ -13,6 +13,20 @@ import research_bank_ownership as research
 
 
 class EvidenceCollectionTest(unittest.TestCase):
+    def test_source_navigation_excludes_misleading_product_and_privacy_paths(self):
+        for path in ['/privat/bolig/ejerbolig', '/report-lost-device/',
+                     '/om-sparekassen/privatlivspolitik-for-lejere',
+                     '/investor-relations/shareholders-meeting',
+                     '/hilfe/ressourcen-des-eigentuemers/ford-bank']:
+            with self.subTest(path=path):
+                self.assertIsNone(research.governance_priority('https://bank.example'+path))
+        for path in ['/om-sparekassen/vedtaegter', '/shareholder-structure',
+                     '/governance/konsernirakenne-ja-omistajat', '/vi-er-selvejende']:
+            with self.subTest(path=path):
+                self.assertEqual(research.governance_priority('https://bank.example'+path),1)
+        self.assertEqual(research.governance_priority('https://bank.example/annual-report'),2)
+        self.assertIsNone(research.governance_priority('https://owner.example/products'))
+
     def test_batch_priority_and_resume_do_not_repeat_attempted_cases(self):
         banks=[{'lei':'a'},{'lei':'a'},{'lei':'b'},{'lei':'c'}]
         with tempfile.TemporaryDirectory() as d:

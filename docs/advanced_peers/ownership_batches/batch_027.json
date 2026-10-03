@@ -1,0 +1,196 @@
+{
+  "batch": "027",
+  "campaign": "next_70_trea_b",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 268,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 7,
+  "page_attempts": [
+    {
+      "lei": "52990045V2BWJN669Q34",
+      "url": "https://www.wuestenrot.at",
+      "status": 200,
+      "error": null,
+      "sha256": "d9c55a399c68087abc27b8842dbf5be4eeb344d564d219fd92f5fe8d7d937414",
+      "retrieved_at": "2026-10-02T16:50:28Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "52990045V2BWJN669Q34",
+      "url": "https://www.wuestenrot.at/de/ueber-uns.html",
+      "status": 200,
+      "error": null,
+      "sha256": "102762445f2e71fab04c476c62c101d46284ba4a9f4fe5390ed6ec488bc45eda",
+      "retrieved_at": "2026-10-03T07:21:08Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "52990045V2BWJN669Q34",
+      "url": "https://www.wuestenrot.at/de/ueber-uns/konzern/wuestenrot-gruppe.html",
+      "status": 200,
+      "error": null,
+      "sha256": "ecd6ec95d336ca0a549d76fb0d7c11201224bf06a827e4582c1ee63d812dbf39",
+      "retrieved_at": "2026-10-03T07:28:15Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300TK038P6EV4YU51",
+      "url": "https://www.artea.lt/",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "sha256": null,
+      "retrieved_at": "2026-10-02T16:33:19Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900D5G4V6THXC5P79",
+      "url": "https://www.hpb.hr",
+      "status": 200,
+      "error": null,
+      "sha256": "1fbc879dcd24edeee97328f6d70582a74043e7525f53ff4d45fd9a821b95c869",
+      "retrieved_at": "2026-10-02T16:51:31Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300LYFYVPUCG6SY25",
+      "url": "https://www.bancocooperativo.es",
+      "status": 200,
+      "error": null,
+      "sha256": "6bf1bf4375fdb482c9a1f1607b574cba601b2595843d8f1b842a44de901bf2eb",
+      "retrieved_at": "2026-10-03T07:21:08Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300LYFYVPUCG6SY25",
+      "url": "https://www.bancocooperativo.es/en/about-bank",
+      "status": 200,
+      "error": null,
+      "sha256": "0ddc7e70b777848476910d5f5b7773e244be71703a154541859ccdc3eea9bd71",
+      "retrieved_at": "2026-10-03T07:28:15Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300LYFYVPUCG6SY25",
+      "url": "https://www.bancocooperativo.es/sites/default/files/2026-06/informe-ccaacc-bce-2025_eng-2.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "6f5ba4b5b53f9a818763ad99d24e0b524c5c5e13e2237413deefcc65370cac7c",
+      "retrieved_at": "2026-10-03T07:29:18Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600A32DA05F693F24",
+      "url": "https://www.lacassa.com",
+      "status": 200,
+      "error": null,
+      "sha256": "5757a18d3cdd490c140152927a2fa5e2359d8a82869ecea55c3afae961a40ddf",
+      "retrieved_at": "2026-10-03T07:21:10Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600A32DA05F693F24",
+      "url": "http://www.lacassa.com/ita/Banca/Gruppo-Bancario",
+      "status": 200,
+      "error": null,
+      "sha256": "69e442e4ffd4b74c2cfd9614c35ec645ba732c2b5de231268702af57ce2421b2",
+      "retrieved_at": "2026-10-03T07:21:13Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300LYFYVPUCG6SY25",
+      "name": "Banco Cooperativo Español, S.A.",
+      "ownership": "cooperative",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.bancocooperativo.es/sites/default/files/2026-06/informe-ccaacc-bce-2025_eng-2.pdf",
+        "sha256": "6f5ba4b5b53f9a818763ad99d24e0b524c5c5e13e2237413deefcc65370cac7c",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T07:29:18Z",
+        "quote": "tood at 2,937,526 shares, all fully subscribed and paid up. The shareholders holding more than 5% of the share capital were, as at 31 December 2025 and 2024, as follows: % Stake Entity 2025 2024 Grucajrural Inversiones, S.L. - 87,948 Caja Rural de Navarra, S.C.C. 17,844 - DZ Bank AG 12,030 12,030 Caja Rural del Sur, S.C.C. 10,283 - Caja Rural de Albacete, Ciudad Real y Cuenca, S.C.C. 9,291 - Caja Rural de Granada, S.C.C. 7,688 - Caja Rural de Asturias, S.C.C. 6,719 - On 29 December 2017, the savings banks that are members of the Spanish Association of Rural Savings Banks and shareholders of the Bank entered into a Framework Agreement which included, amongst other things, the following agreements (see Note 1. j)): - To consolidate the shares held by the savings banks in Banco Cooperativo and in RGA Seguros General Rural, S.A. de Seguros y Reaseguros (hereinafter, RGA) within the company Grucajrural Inversiones, S.L., a vehicle incorporat",
+        "majority_calculation": {
+          "named_owners": [
+            "Caja Rural de Navarra, S.C.C.",
+            "Caja Rural del Sur, S.C.C.",
+            "Caja Rural de Albacete, Ciudad Real y Cuenca, S.C.C.",
+            "Caja Rural de Granada, S.C.C.",
+            "Caja Rural de Asturias, S.C.C."
+          ],
+          "share_percent": 51.825,
+          "as_of": "2025-12-31"
+        }
+      },
+      "note": "Audited 2025 accounts Note 17.1: five named S.C.C. rural credit cooperatives jointly hold 51.825% at 2025-12-31. The 2025 column is used: Grucajrural no longer holds 87.948%, its 2024 stake. Completed absorption registered 2025-09-24. Historical parent ownership is not inverted.",
+      "bank_identity": {
+        "legal_name": "BANCO COOPERATIVO ESPAÑOL SA",
+        "registered_as": "1000241207231",
+        "jurisdiction": "ES",
+        "gleif_record_sha256": "d23a908e96df1009ab57e0e98896fc062bc18b51cc083627c97d69dc57513cc5"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "52990045V2BWJN669Q34",
+      "name": "Wüstenrot Wohnungswirtschaft registrierte Genossenschaft mit beschränkter Haftung",
+      "rank": 104,
+      "trea_eur": 2958293686.31,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review exact Wuestenrot Wohnungswirtschaft eGen current member/voting structure and statutes. Group page proves this cooperative owns the group, not who owns the cooperative holding; do not invert that ownership edge.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300TK038P6EV4YU51",
+      "name": "AB Artea bankas",
+      "rank": 105,
+      "trea_eur": 2855601000.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use an alternative official Nasdaq Baltic issuer ownership disclosure for Artea/Siauliu name change and qualifying holdings, including EBRD minority; do not retry denied bank URL.",
+      "successful_source_pages": 0,
+      "retrieval_failures": [
+        {
+          "url": "https://www.artea.lt/",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    },
+    {
+      "lei": "529900D5G4V6THXC5P79",
+      "name": "Hrvatska poštanska banka d.d.",
+      "rank": 106,
+      "trea_eur": 2813546304.61,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Find HPB actual issuer annual-report shareholder table showing Croatian State and other public interests with dated aggregate percentages; current homepage is not ownership proof.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "815600A32DA05F693F24",
+      "name": "LA CASSA DI RAVENNA S.P.A.",
+      "rank": 108,
+      "trea_eur": 2761011309.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use La Cassa Ravenna issuer current shareholder/voting table to Antonio Patuelli and other owners; retrieved group page lists subsidiaries, not the bank owners.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

@@ -1,0 +1,176 @@
+{
+  "batch": "018",
+  "campaign": "next_70_trea_b",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 268,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 4,
+  "page_attempts": [
+    {
+      "lei": "549300L1IEXJYJ2NUV45",
+      "url": "https://www.sparv.dk",
+      "status": 200,
+      "error": null,
+      "sha256": "a96cfefa300a8e91fc6f4a19dc3e0c5a0bf3147a3022bf347ae8010d6229ae17",
+      "retrieved_at": "2026-10-02T16:33:12Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300L1IEXJYJ2NUV45",
+      "url": "https://www.spard.dk/om-sparekassen/politikker-og-vedtaegter/privatlivspolitik-for-lejere",
+      "status": 200,
+      "error": null,
+      "sha256": "57cb4a4bea1deba2f0802a43d71b9274755400424985a9ff3765e89a743c3d7b",
+      "retrieved_at": "2026-10-03T07:20:33Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300L1IEXJYJ2NUV45",
+      "url": "https://www.spard.dk/om-sparekassen/regnskab-og-rapporter/corporate-governance",
+      "status": 200,
+      "error": null,
+      "sha256": "a16c778c5ec4351398ae84f54dc3c7da67c1097d23e46aa013c5b6aebdc746b9",
+      "retrieved_at": "2026-10-02T16:33:17Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300L1IEXJYJ2NUV45",
+      "url": "https://www.spard.dk/om-sparekassen/politikker-og-vedtaegter/vedtaegter",
+      "status": 200,
+      "error": null,
+      "sha256": "e30204abb23bbc2b67b453c28de4035f56ee8b578ce24f17eb23d41e93629cd6",
+      "retrieved_at": "2026-10-03T07:29:16Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500973ODKK3IFQ447",
+      "url": "https://www.adyen.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "b75aa7883489f97f51886df3fe53ea14f491b0269e01bd9cf2a521920f526dc1",
+      "retrieved_at": "2026-10-02T16:33:28Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "724500973ODKK3IFQ447",
+      "url": "https://investors.adyen.com",
+      "status": 200,
+      "error": null,
+      "sha256": "7098dbdf70f4401ba7a0f1c02421e8b3a812f85a01012a5353b9dc05cfa22243",
+      "retrieved_at": "2026-10-02T16:33:28Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "724500973ODKK3IFQ447",
+      "url": "https://investors.adyen.com/governance",
+      "status": 200,
+      "error": null,
+      "sha256": "9823638512c6b1a5a6e6343fa4e3356f1a906518f8e26f3014664b32cb9bd0df",
+      "retrieved_at": "2026-10-03T07:29:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "529900LKIMB57HKF3545",
+      "url": "https://www.bankofchina.com/lu",
+      "status": 200,
+      "error": null,
+      "sha256": "c64018ccff4e465052e44d3aca5bed65b6965eb9801b5357a8ace817d9e63122",
+      "retrieved_at": "2026-10-02T16:52:48Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "SX0CI4F7GVW5530ZMN03",
+      "url": "https://www.wellsfargo.com",
+      "status": 200,
+      "error": null,
+      "sha256": "1ff0a05738da28adc10390042674236378006916482ae987c25b76ec1c671740",
+      "retrieved_at": "2026-10-03T07:20:33Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "I6USJ58BDV2BO5KP3C31",
+      "url": "https://www.moneta.cz/",
+      "status": 200,
+      "error": null,
+      "sha256": "d85ea3c651e1f8ad02ecbfa8219292edc885c2ff2e5eb403b7d5f6b01c375d05",
+      "retrieved_at": "2026-10-02T16:34:26Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "I6USJ58BDV2BO5KP3C31",
+      "url": "https://investors.moneta.cz/",
+      "status": 200,
+      "error": null,
+      "sha256": "537622402b551cc728c5d6e96fb8c87c255cc60f1b981de8524f33dfbbab9f63",
+      "retrieved_at": "2026-10-02T16:34:28Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "549300L1IEXJYJ2NUV45",
+      "name": "Sparekassen Danmark",
+      "rank": 59,
+      "trea_eur": 7092659521.758513,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Read the current 2025-04-01 statutes PDF linked on the retrieved Vedtaegter page to verify self-owned guarantor-bank status; four-page collection budget reached before the PDF.",
+      "successful_source_pages": 4,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "724500973ODKK3IFQ447",
+      "name": "Adyen N.V.",
+      "rank": 60,
+      "trea_eur": 7032215319.54,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Obtain the actual Adyen issuer annual-report major holdings/voting table; governance page is a thin script-rendered shell. Founders or a listing do not alone prove current ownership.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900LKIMB57HKF3545",
+      "name": "Bank of China (Europe) S.A",
+      "rank": 61,
+      "trea_eur": 6988455159.05,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review Bank of China issuer controlling-owner table and the precise ultimate-parent LEI; do not equate a country name with State control. Then review archived fully corroborated Luxembourg bank relationship.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "SX0CI4F7GVW5530ZMN03",
+      "name": "Wells Fargo Bank International Unlimited Company",
+      "rank": 62,
+      "trea_eur": 6840264486.56,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Wells Fargo SEC annual-report subsidiary exhibit for the exact Irish unlimited company plus current issuer major shareholders; ENTITY_SUPPLIED_ONLY consolidation is not sufficient.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "I6USJ58BDV2BO5KP3C31",
+      "name": "MONETA Money Bank, a.s.",
+      "rank": 63,
+      "trea_eur": 6799675012.7317915,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Follow MONETA current issuer financial-result navigation to the actual annual/proxy holdings table; account for current PPF/Tanemo stakes and votes, not retail product text.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

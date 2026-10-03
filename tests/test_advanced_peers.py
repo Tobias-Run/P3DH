@@ -250,7 +250,12 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
 
     def test_seventy_case_campaign_covers_fixed_selection_without_duplicate_acceptance(self):
         directory=ROOT/'docs/advanced_peers/ownership_batches'
-        campaign=json.loads((directory/'campaign_next70.json').read_text())
+        for filename in ['campaign_next70.json','campaign_next70b.json']:
+            with self.subTest(campaign=filename):
+                self.check_seventy_case_campaign(directory,filename)
+
+    def check_seventy_case_campaign(self,directory,filename):
+        campaign=json.loads((directory/filename).read_text())
         selected=[];accepted=[];deferred=[];attempts=[]
         for item in campaign['batches']:
             batch=json.loads((directory/('batch_'+item['batch']+'.json')).read_text())
@@ -286,6 +291,33 @@ class OwnershipResearchSnapshotTest(unittest.TestCase):
         self.assertIn('fully owned by the State',cgd['ownership_evidence']['quote'])
         eurobank=next(case for case in batch['accepted'] if case['lei']=='213800KGF4EFNUQKAT69')
         self.assertIn('04.09.2026',eurobank['ownership_evidence']['quote'])
+
+    def test_wrong_bank_website_and_retired_holding_remain_unclassified(self):
+        directory=ROOT/'docs/advanced_peers/ownership_batches'
+        bulgarian='549300UY81ESCZJ0GR95'
+        case=next(c for c in json.loads((directory/'batch_023.json').read_text())['deferred']
+                  if c['lei']==bulgarian)
+        self.assertEqual(case['identity_evidence']['record']['attributes']['entity']['jurisdiction'],'BG')
+        ledger=next(r for r in csv.DictReader((ROOT/'docs/advanced_peers/ownership_research.csv').open())
+                    if r['lei']==bulgarian)
+        self.assertFalse(ledger['candidate_websites'])
+        self.assertNotIn(bulgarian,self.registry)
+        holding='9598002AYDQER7DXLR16'
+        case=next(c for c in json.loads((directory/'batch_028.json').read_text())['deferred']
+                  if c['lei']==holding)
+        self.assertEqual(case['identity_evidence']['record']['attributes']['entity']['status'],'INACTIVE')
+        self.assertIn('24 September 2025',case['merger_evidence']['quote'])
+        self.assertNotIn(holding,self.registry)
+
+    def test_cooperative_majority_uses_current_shareholder_column_after_merger(self):
+        batch=json.loads((ROOT/'docs/advanced_peers/ownership_batches/batch_027.json').read_text())
+        case=next(c for c in batch['accepted'] if c['lei']=='549300LYFYVPUCG6SY25')
+        proof=case['ownership_evidence']
+        self.assertIn('Entity 2025 2024',proof['quote'])
+        self.assertIn('Grucajrural Inversiones, S.L. - 87,948',proof['quote'])
+        self.assertEqual(proof['majority_calculation']['as_of'],'2025-12-31')
+        self.assertAlmostEqual(proof['majority_calculation']['share_percent'],51.825)
+        self.assertEqual(case['ownership'],'cooperative')
 
     def test_accounting_assets_order_and_currency_overlay(self):
         values=self.selection['selected']

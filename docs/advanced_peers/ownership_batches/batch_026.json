@@ -1,0 +1,167 @@
+{
+  "batch": "026",
+  "campaign": "next_70_trea_b",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 268,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 2,
+  "page_attempts": [
+    {
+      "lei": "815600848DEFE160E913",
+      "url": "https://www.iblbanca.it",
+      "status": 200,
+      "error": null,
+      "sha256": "6cbf738352e62d0f624ac7003fad516b2a647dd410a1c89f193fcf76da6a6747",
+      "retrieved_at": "2026-10-03T07:21:06Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600848DEFE160E913",
+      "url": "https://www.iblbanca.it/governance.html",
+      "status": 200,
+      "error": null,
+      "sha256": "c2e48b27bc4530e79be1540a23af771405e7ff4661b3d7ca8c60974b5d19893f",
+      "retrieved_at": "2026-10-03T07:21:07Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "549300OL514RA0SXJJ44",
+      "url": "https://www.clearstream.com/caas/v1/media/5107512/data/f0186089505c210b4e648c14df90633d/cbl-annual-account-2025.pdf",
+      "status": 200,
+      "error": null,
+      "sha256": "3bd371b1d34553f1ee51d8e933d80ac4457ed30a9013ab464efa8cc92bf17edb",
+      "retrieved_at": "2026-10-02T17:09:15Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493004D82XDFVPWQJ91",
+      "url": "https://ikano.co.uk/",
+      "status": 200,
+      "error": null,
+      "sha256": "ea3eab3e9188956f627ace7e9311c1033abd5e1bbe8ab7af0892ad55a463dd86",
+      "retrieved_at": "2026-10-02T16:33:01Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "5493004D82XDFVPWQJ91",
+      "url": "https://ikano.co.uk/about-ikano",
+      "status": 200,
+      "error": null,
+      "sha256": "95f47e30f6fb8bf26f93a000ab5a7cac44e4ec476d3c767e854ff04a82cbb37e",
+      "retrieved_at": "2026-10-02T16:33:02Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900C3SHT3Q94H3W82",
+      "url": "https://www.bank11.de",
+      "status": 200,
+      "error": null,
+      "sha256": "dc2ed1044c68e0309b4d1fcb5edb9665862bf07c517d331e5797520fe16ee2f1",
+      "retrieved_at": "2026-10-02T16:51:13Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900C3SHT3Q94H3W82",
+      "url": "https://www.bank11.de/investor-relations/",
+      "status": 200,
+      "error": null,
+      "sha256": "36925fdb455223b390147a97a7d389af2983ec4803a23e45e9eb3b3587b01c7b",
+      "retrieved_at": "2026-10-02T16:51:14Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900OKPZTTS50FXP26",
+      "url": "https://www.advanzia.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "db54ef34e666694161119fedc2a7e930334e8e0bb4d65e9cc632878b6d47dafa",
+      "retrieved_at": "2026-10-02T16:32:49Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900OKPZTTS50FXP26",
+      "url": "https://www.advanzia.com/en/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "e6cbf912d4c10e60139343ca062f95a227f99680d6da3498eff219355b3fc6d3",
+      "retrieved_at": "2026-10-02T16:32:52Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "529900OKPZTTS50FXP26",
+      "url": "https://www.advanzia.com/en/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "d6d9c0b5a89a77d3b5aeec5fdba907cefbac494a346ec4f7260b8b04268835a4",
+      "retrieved_at": "2026-10-02T16:32:53Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [],
+  "deferred": [
+    {
+      "lei": "815600848DEFE160E913",
+      "name": "IBL ISTITUTO BANCARIO DEL LAVORO S.P.A. (IN FORMA ABBREVIATA IBL BANCA)",
+      "rank": 99,
+      "trea_eur": 3167176127.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use IBL issuer current capital/shareholder table to Giordano/Angelini and percentages/votes. Directors biographies and the bank own subsidiaries are not evidence of who controls the bank.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300OL514RA0SXJJ44",
+      "name": "Clearstream Banking S.A.",
+      "rank": 100,
+      "trea_eur": 3134286406.08,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Classify Deutsche Boerse exact parent from a current issuer major-owner/voting table, then reuse CBL audited 2025 report that explicitly proves 100% Clearstream Holding and 100% Deutsche Boerse chain.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "5493004D82XDFVPWQJ91",
+      "name": "Ikano Bank AB (publ)",
+      "rank": 101,
+      "trea_eur": 3078571598.9661818,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Reconcile changed Ingka ownership with official completion dates and exact Swedish bank LEI; verify Ingka controlling foundation and bank annual report. UK branch page names Ingka, while archived ultimate-parent relation still points to Ikano and is only partially corroborated.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900C3SHT3Q94H3W82",
+      "name": "Bank11 Holding GmbH",
+      "rank": 102,
+      "trea_eur": 3028832863.24,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Verify exact Bank11 Holding and Werhahn upstream company ownership in official filed reports; bank11.de IR landing concerns bank operations and alone does not establish holding owners.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "529900OKPZTTS50FXP26",
+      "name": "Advanzia Bank S.A.",
+      "rank": 103,
+      "trea_eur": 2960946485.5386596,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use Advanzia actual official annual-report link or Kistefos filed subsidiary report with dated ownership percentage; retrieved investor shell contains no owner table.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

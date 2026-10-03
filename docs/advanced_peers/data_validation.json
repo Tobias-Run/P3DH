@@ -1,5 +1,5 @@
 {
-  "accepted_gleif_records": 87,
+  "accepted_gleif_records": 88,
   "automated_discovery_status_counts": {
     "evidence_collected": 139,
     "website_no_ownership_passage": 128,
@@ -25,37 +25,269 @@
       {
         "clusters": 37,
         "language": "en",
-        "public_reports": 56,
+        "public_reports": 60,
         "width": 1280
       },
       {
         "clusters": 37,
         "language": "de",
-        "public_reports": 56,
+        "public_reports": 60,
         "width": 390
       }
     ],
     "javascript_errors": 0
   },
+  "campaign_next70b": {
+    "accepted": 15,
+    "baseline_commit": "43eaf16e305121c189750be9d2bc5c228d16d2ac",
+    "batches": [
+      {
+        "accepted": 1,
+        "banks": [
+          "959800LQ598A5RQASA61",
+          "529900S1KHKOEQL5CK20",
+          "549300PZMFIQR79Q0T97",
+          "529900BHRYZ464GFD289",
+          "213800HDJ876ACJXXD05"
+        ],
+        "batch": "017",
+        "decision_bundle_chars": 3365,
+        "deferred": 4,
+        "new_network_fetches": 4,
+        "page_attempts": 9
+      },
+      {
+        "accepted": 0,
+        "banks": [
+          "549300L1IEXJYJ2NUV45",
+          "724500973ODKK3IFQ447",
+          "529900LKIMB57HKF3545",
+          "SX0CI4F7GVW5530ZMN03",
+          "I6USJ58BDV2BO5KP3C31"
+        ],
+        "batch": "018",
+        "decision_bundle_chars": 3026,
+        "deferred": 5,
+        "new_network_fetches": 4,
+        "page_attempts": 11
+      },
+      {
+        "accepted": 2,
+        "banks": [
+          "B64D6Y3LBJS4ANNPCU93",
+          "549300IRGNL8Q3O8Y413",
+          "8156003A4FB445454553",
+          "G8ZTNESVNKW4NN761W05",
+          "724500PMK2A2M1SQQ228"
+        ],
+        "batch": "019",
+        "decision_bundle_chars": 4100,
+        "deferred": 3,
+        "new_network_fetches": 4,
+        "page_attempts": 8
+      },
+      {
+        "accepted": 0,
+        "banks": [
+          "549300XWJHRKLHU2PS28",
+          "549300L7YCATGO57ZE10",
+          "549300TDPXT0OW2AY198",
+          "549300WDT1HWUMTUW770",
+          "MMYX0N4ZEZ13Z4XCG897"
+        ],
+        "batch": "020",
+        "decision_bundle_chars": 3190,
+        "deferred": 5,
+        "new_network_fetches": 4,
+        "page_attempts": 6
+      },
+      {
+        "accepted": 0,
+        "banks": [
+          "485100FX5Y9YLAQLNP12",
+          "PWEFG14QWWESISQ84C69",
+          "52990033C5FUEN4LMC06",
+          "815600903231FA2E7698",
+          "747DLM6L5TO7LXZY5T60"
+        ],
+        "batch": "021",
+        "decision_bundle_chars": 3280,
+        "deferred": 5,
+        "new_network_fetches": 4,
+        "page_attempts": 8
+      },
+      {
+        "accepted": 1,
+        "banks": [
+          "5299000R7WZOVIFHLN21",
+          "724500BICUQ0LF1AH770",
+          "81560027D07F9BDB8436",
+          "549300BZZFFS0SOWR325",
+          "549300SBPFE9JX7N8J82"
+        ],
+        "batch": "022",
+        "decision_bundle_chars": 3731,
+        "deferred": 4,
+        "new_network_fetches": 3,
+        "page_attempts": 7
+      },
+      {
+        "accepted": 3,
+        "banks": [
+          "549300UY81ESCZJ0GR95",
+          "529900NNQW9IAE32GQ07",
+          "5493007BWYDPQZLZ0Y27",
+          "815600A029117B20DD63",
+          "529900J35NSHS856UA68"
+        ],
+        "batch": "023",
+        "decision_bundle_chars": 4482,
+        "deferred": 2,
+        "new_network_fetches": 4,
+        "page_attempts": 11
+      },
+      {
+        "accepted": 2,
+        "banks": [
+          "743700FTBNXAUN57RH30",
+          "2594000ZNGGQZXZKXH36",
+          "815600DDCE9083CAC598",
+          "5967007LIEEXZX5PU005",
+          "5299005OACOC1C1OFJ11"
+        ],
+        "batch": "024",
+        "decision_bundle_chars": 3866,
+        "deferred": 3,
+        "new_network_fetches": 7,
+        "page_attempts": 10
+      },
+      {
+        "accepted": 0,
+        "banks": [
+          "MKP1B7E76TN04CD85Z79",
+          "743700GC62JLHFBUND16",
+          "549300ND1MQ8SNNYMJ22",
+          "529900ZVK4VTIS0TOT43",
+          "5493007QRSX9DS2CM858"
+        ],
+        "batch": "025",
+        "decision_bundle_chars": 3182,
+        "deferred": 5,
+        "new_network_fetches": 1,
+        "page_attempts": 7
+      },
+      {
+        "accepted": 0,
+        "banks": [
+          "815600848DEFE160E913",
+          "549300OL514RA0SXJJ44",
+          "5493004D82XDFVPWQJ91",
+          "529900C3SHT3Q94H3W82",
+          "529900OKPZTTS50FXP26"
+        ],
+        "batch": "026",
+        "decision_bundle_chars": 3149,
+        "deferred": 5,
+        "new_network_fetches": 2,
+        "page_attempts": 10
+      },
+      {
+        "accepted": 1,
+        "banks": [
+          "52990045V2BWJN669Q34",
+          "549300TK038P6EV4YU51",
+          "529900D5G4V6THXC5P79",
+          "549300LYFYVPUCG6SY25",
+          "815600A32DA05F693F24"
+        ],
+        "batch": "027",
+        "decision_bundle_chars": 3730,
+        "deferred": 4,
+        "new_network_fetches": 7,
+        "page_attempts": 10
+      },
+      {
+        "accepted": 2,
+        "banks": [
+          "2138009Y59EAR7H1UO97",
+          "549300ZEF3QWM810M319",
+          "5493002DPKDEC2JN1Y86",
+          "549300YW95G1VBBGGV07",
+          "9598002AYDQER7DXLR16"
+        ],
+        "batch": "028",
+        "decision_bundle_chars": 4287,
+        "deferred": 3,
+        "new_network_fetches": 5,
+        "page_attempts": 7
+      },
+      {
+        "accepted": 1,
+        "banks": [
+          "549300CQ9NLEHMRCU505",
+          "549300X34UUBDEUL1Z91",
+          "GDI8P8WHFH4PS5YTU851",
+          "815600722FAEE18D6013",
+          "213800UYAHIRLZ4NSN67"
+        ],
+        "batch": "029",
+        "decision_bundle_chars": 3630,
+        "deferred": 4,
+        "new_network_fetches": 6,
+        "page_attempts": 9
+      },
+      {
+        "accepted": 2,
+        "banks": [
+          "5493007SWCCN9S3J2748",
+          "635400F6HLXKXNJJX605",
+          "213800A1O379I6DMCU10",
+          "549300JSC82O1L4XV837",
+          "7437006WYM821IJ3MN73"
+        ],
+        "batch": "030",
+        "decision_bundle_chars": 4259,
+        "deferred": 3,
+        "new_network_fetches": 14,
+        "page_attempts": 15
+      }
+    ],
+    "campaign": "next_70_trea_b",
+    "deferred": 55,
+    "institutions": 70,
+    "limitations": "70 bounded reviews, not 70 accepted classifications. Script-rendered pages, missing chart text and PDF size limits require targeted follow-ups. Current ownership classification is not a historical ownership time series. Compact bundle characters are not measured chat tokens.",
+    "new_network_fetches": 69,
+    "page_attempts": 128,
+    "reviewed_at": "2026-10-03",
+    "selection": "Next 70 previously unreviewed pending TREA-ranked LEIs; previous checkpoints excluded; frozen before curation.",
+    "source_reuse": "Four fully corroborated chains reuse reviewed ABN AMRO/SEB/HSBC parent evidence. One official completed illimity/Ifis document chain; one canonical Norwegian R71C bank form. Nine directly reviewed ownership pages/reports. No additional controller classified.",
+    "status_counts": {
+      "200": 119,
+      "403": 5,
+      "502": 1,
+      "None": 3
+    }
+  },
   "clusters": 59,
   "clusters_with_at_least_five_members": 37,
   "coverage": {
-    "classified": 207,
+    "classified": 222,
     "eligible_reports": 529,
     "entities": 475,
     "excluded_reports": 353,
     "group_duplicates": 84
   },
-  "maximum_cluster_size_ratio": 8.676437195438183,
-  "median_cluster_silhouette": 0.353026,
+  "maximum_cluster_size_ratio": 8.880675784895631,
+  "median_cluster_silhouette": 0.361868,
   "ownership_counts": {
-    "cooperative": 89,
-    "mixed": 11,
+    "cooperative": 91,
+    "foundation": 1,
+    "mixed": 12,
     "mutual": 5,
-    "public": 27,
-    "savings": 2,
-    "shareholder": 73,
-    "unknown": 268
+    "public": 29,
+    "savings": 4,
+    "shareholder": 80,
+    "unknown": 253
   },
   "ownership_research_campaign_next70": {
     "accepted": 20,
@@ -77,11 +309,11 @@
   },
   "ownership_research_queue": {
     "metric": "TREA",
-    "pending_total": 268,
-    "rankable": 212
+    "pending_total": 253,
+    "rankable": 197
   },
-  "registry_rows": 236,
-  "reviewed_control_relationships": 61,
-  "reviewed_document_chains": 9,
-  "unit_tests": 1515
+  "registry_rows": 251,
+  "reviewed_control_relationships": 65,
+  "reviewed_document_chains": 10,
+  "unit_tests": 1518
 }

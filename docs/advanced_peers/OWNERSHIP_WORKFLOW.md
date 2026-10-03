@@ -1,6 +1,6 @@
 # Eigentümerrecherche mit begrenztem Kontext
 
-Stand: 3. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach den Paketen 001–016 sind 207/475 Institute belegt, 268 bleiben offen. 212 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 56 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
+Stand: 3. Oktober 2026. Die weitere Recherche ist **auf TREA-Priorisierung umgestellt**. Nach den Paketen 001–030 sind 222/475 Institute belegt, 253 bleiben offen. 197 der offenen Kennungen sind nach technischen Qualitätsfiltern per TREA priorisierbar; 56 benötigen gesonderte Größen-/Qualitätsprüfung. Das Clustering verwendet bereits TREA und wurde methodisch nicht umgestellt.
 
 ## Feste Standardgrenzen
 
@@ -73,3 +73,11 @@ Die [feste Auswahl und Einzelfallentscheidungen](NEXT70_OWNERSHIP.md) enthalten 
 Das größte komprimierte Entscheidungs-JSON umfasst **4.543 Zeichen**. Zusätzlich wurden kurze Quellenauszüge manuell geprüft; das ist kein gemessener Gesamttokenverbrauch und kein Nachweis einer bestimmten Tokenersparnis. Alle 70 Checkpoints liegen im üblichen lokalen Ausgabeordner; der nächste reguläre Lauf überspringt sie, ihre noch offenen Fälle bleiben im Ledger und in der Queue. Versionierte Entscheidungen erlauben gezielte Wiederaufnahme.
 
 **Verbesserungsbedarf der Quellensuche:** 56 Versuche lieferten HTTP 404, drei HTTP 410. Vermutete Blattseiten waren häufig falsch oder veraltet. Für die gezielte Fortsetzung zuerst die tatsächliche offizielle IR-/Corporate-Navigation, verlinkte aktuelle Geschäftsberichte oder amtliche Register verwenden; nicht weitere Varianten desselben vermuteten Pfads probieren. Leere/generische HTTP-200-Seiten gelten nicht als Nachweise. Die 50 Fälle sind ausdrücklich keine Behauptung, dass Eigentümerinformationen öffentlich fehlen.
+
+## Pakete 017–030: weitere 70 Fälle
+
+Die [zweite feste Auswahl](NEXT70B_OWNERSHIP.md) ergänzt **15 Belege**, 55 Fälle erhalten gezielte Nachprüfungen. 128 Quellenversuche / 69 neue Abrufe; keine 404/410-Blattpfadserie in diesem Durchlauf. Maximal vier Quellenversuche je Institut, größtes Entscheidungs-JSON 4.482 Zeichen. Das misst keine Chat-Tokens. Die ersten maximal zwei Quellen pro Fall lassen Budget für aktuelle verlinkte Eigentümerseiten/Berichte frei. Bereits abgeschlossene Prüffälle werden weiterhin übersprungen.
+
+Die permanente Collector-Navigation berücksichtigt nun Satzungen (`vedtaegter`, `statut`, `satzung`) und selbständige Sparkassenformen. Sie verwirft Produktseiten zu Wohneigentum, Datenschutz, Personal, Geräteverlust und Kunden-Eigentümerhilfe. Die Regression prüft echte beobachtete Pfade; Quellen werden trotzdem vor jeder Einordnung manuell auf Bankidentität und Eigentümerbezug geprüft.
+
+Der First-Investment-Bank-Treffer `pinbank.ua` wurde als falsche ukrainische Bank verworfen und aus den aktuellen Websitekandidaten entfernt. Die korrekte bulgarische Bank ist über ihren LEI zu recherchieren. Grucajrural ist laut aktuellem GLEIF-Register inaktiv; der 2025-Bericht bestätigt die Aufnahme durch Banco Cooperativo. Historische Einordnung benötigt einen datierten Ansatz und bleibt offen.

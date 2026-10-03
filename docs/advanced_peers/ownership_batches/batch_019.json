@@ -1,0 +1,215 @@
+{
+  "batch": "019",
+  "campaign": "next_70_trea_b",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 268,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 4,
+  "page_attempts": [
+    {
+      "lei": "B64D6Y3LBJS4ANNPCU93",
+      "url": "http://www.nibc.com/",
+      "status": 200,
+      "error": null,
+      "sha256": "a03270e08233529c753c440f94e46c3d89a99af0a69193996cd4cebec4391c16",
+      "retrieved_at": "2026-10-02T16:33:59Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "B64D6Y3LBJS4ANNPCU93",
+      "url": "https://nibc.com/about-us",
+      "status": 200,
+      "error": null,
+      "sha256": "dc3a31cfca7849eb8aa05cf0d737c7796aa81ad7b46f95846a6d9b4bf9bd8a7e",
+      "retrieved_at": "2026-10-02T16:34:03Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300IRGNL8Q3O8Y413",
+      "url": "https://www.postbank.bg",
+      "status": 200,
+      "error": null,
+      "sha256": "f563d9076f809c6ff7bbf45b21ed91dd6b6fa23cf22bb1eb7fcaf47feaebe92b",
+      "retrieved_at": "2026-10-03T07:20:35Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "8156003A4FB445454553",
+      "url": "https://www.sparkasse.it",
+      "status": 200,
+      "error": null,
+      "sha256": "f3ed82174c2aeeebf895881a4fb189fa27daaed60ba65e4827df8af27d285617",
+      "retrieved_at": "2026-10-03T07:20:35Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "8156003A4FB445454553",
+      "url": "https://www.sparkasse.it/chi-siamo/azionisti/",
+      "status": 200,
+      "error": null,
+      "sha256": "1d5cfc505869d462afa9ca5d5016299d5cdd00589baface09c14913dad8a29dc",
+      "retrieved_at": "2026-10-03T07:20:37Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500PMK2A2M1SQQ228",
+      "url": "https://www.triodos.com/en/articles/2026/why-alternative-ownership-forms-live-up-to-the-hype",
+      "status": 200,
+      "error": null,
+      "sha256": "72f8850af4f36637df874f0b2777291ba7c0a6674dc5b15dd4979a95dd3a9655",
+      "retrieved_at": "2026-10-02T16:33:31Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "724500PMK2A2M1SQQ228",
+      "url": "https://www.triodos.com/en/articles/2026/alternative-ownership-structures-it-takes-a-village",
+      "status": 200,
+      "error": null,
+      "sha256": "e58515f9545a06e9af9f2eb9e5d0b5bd12b89a91543ae5ff9649703dee96dce9",
+      "retrieved_at": "2026-10-03T07:20:37Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "724500PMK2A2M1SQQ228",
+      "url": "https://www.triodos.com/en/governance",
+      "status": 200,
+      "error": null,
+      "sha256": "12664631a1c5bac9912c6665f60e51c741f3b937fc6c3e4f3e99c21b290ad37d",
+      "retrieved_at": "2026-10-02T16:33:33Z",
+      "new_network_fetch": false
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "8156003A4FB445454553",
+      "name": "CASSA DI RISPARMIO DI BOLZANO S.P.A. - SUDTIROLER SPARKASSE AG",
+      "ownership": "foundation",
+      "ownership_basis": "direct_ownership",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.sparkasse.it/chi-siamo/azionisti/",
+        "sha256": "1d5cfc505869d462afa9ca5d5016299d5cdd00589baface09c14913dad8a29dc",
+        "hash_kind": "http_response",
+        "retrieved_at": "2026-10-03T07:20:37Z",
+        "quote": "olzano è una società per azioni. Nello stesso anno nasce la Fondazione Cassa di Risparmio, oggi azionista di maggioranza con il 63,0% delle quote. Il 29,3% della Cassa di Risparmio è invece distribuito tra oltre 22.000 azionisti prevalentemente residenti in Alto Adige. Dal loro impegno sono nate le associazioni Sindacato di voto Piccoli Azionisti Cassa di Risparmio e Sette Api. Una volta all’anno tutti gli azionisti della Cassa di Risparmio sono invitati all’Assemblea dei Soci. In quella sede approvano a maggioranza il bilancio dell’ultimo esercizio e l’ammontare del dividendo da distribuire. Vorvel La negoziazione delle azioni della Cassa di"
+      },
+      "note": "Official bank shareholder page states foundation majority of 63.0%, with 29.3% distributed among over 22,000 shareholders. Foundation control is explicit, not inferred from savings-bank name.",
+      "bank_identity": {
+        "legal_name": "CASSA DI RISPARMIO DI BOLZANO S.P.A.",
+        "registered_as": "00152980215",
+        "jurisdiction": "IT",
+        "gleif_record_sha256": "1d399f9952bf197c7eca51bb9f6795267bb037f73e9beee7e83a3afdc3d779b5"
+      }
+    },
+    {
+      "lei": "G8ZTNESVNKW4NN761W05",
+      "name": "ABN AMRO Clearing Bank N.V.",
+      "ownership": "mixed",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://downloads.ctfassets.net/1u811bvgvthc/688tP3vcLbHAgEsUavbdMR/22bd74bf45996df3f6e76b0893ecc950/ABN_AMRO_Bank_-_Annual_Report_2025.pdf#page=15",
+        "sha256": "4857de6d9a62878b71065385f6cbf1c0aa1e84f1ab5d41623d16b7d17760ae2d",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "ce by 5,200 full-time equivalents (FTEs) by 2028 compared with 2024, with half of the reductions expected to occur through attrition. Read more about the strategic plan, our financial targets and our long- term ambitions in the Our strategy section. 27.5% Dutch State reduces stake The Dutch State reduced its stake in ABN AMRO from 38.5% in 2024 to 27.5% at the end of 2025. In September 2025, the holder of the Dutch State’s stake (NLFI) announced that it aims to further reduce its stake to around 20%. Since NLFI’s stake has fallen below one third, the bank no longer requires NLFI’s approval for investments or divestments with a value of more than 10% of the bank’s share capital. NLFI’s approval is also no longer required for the issuance of, or the granting of rights to acquire, shares in the bank. The Dutch State, which acquired the bank in 2008, began reducing its stake following ABN AMRO’s stock market listing in 2015. NIBC to boost our ma"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "BFXS5XCH7N0Y05NIXW11",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/G8ZTNESVNKW4NN761W05/ultimate-parent-relationship",
+        "sha256": "79d22a948f76a987b72ff088a14ffbee41a25fcb1d191b2cabf8a71e7e197e35",
+        "relationship": {
+          "startNode": {
+            "id": "G8ZTNESVNKW4NN761W05",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "BFXS5XCH7N0Y05NIXW11",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2024-12-31T23:00:00Z",
+              "endDate": "2025-12-30T23:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "1982-11-25T23:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            },
+            {
+              "startDate": "2026-03-09T23:00:00Z",
+              "type": "DOCUMENT_FILING_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2019-07-02T14:43:06Z",
+          "lastUpdateDate": "2026-06-06T05:10:44Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-06-06T09:11:11Z",
+          "managingLou": "724500A93Z8V1MJK5349",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": null
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "ABN AMRO Clearing Bank N.V.",
+        "registered_as": "33170459",
+        "jurisdiction": "NL",
+        "gleif_record_sha256": "e03810767eeace8069962d0d6048685d30cebc2a78e9ec429af9570a2fa99782"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "B64D6Y3LBJS4ANNPCU93",
+      "name": "NIBC Bank N.V.",
+      "rank": 64,
+      "trea_eur": 6783360962.06,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Use a dated official NIBC ownership/completion report; distinguish Blackstone ownership from any subsequently completed ABN AMRO purchase, with exact bank LEI.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "549300IRGNL8Q3O8Y413",
+      "name": "Eurobank Bulgaria",
+      "rank": 65,
+      "trea_eur": 6783331201.599999,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Verify exact Bulgarian Postbank/Eurobank Bulgaria LEI in official issuer subsidiary accounts, then reuse the reviewed Eurobank controller ownership source. Do not transfer a brand-only group claim.",
+      "successful_source_pages": 1,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "724500PMK2A2M1SQQ228",
+      "name": "Triodos Bank N.V.",
+      "rank": 68,
+      "trea_eur": 6600423668.64,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review the current Triodos SAAT charter, DR-holder voting proxies and bank report share ownership section. The two ownership opinion articles discuss other firms; a legal foundation shareholder alone need not mean autonomous foundation control.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

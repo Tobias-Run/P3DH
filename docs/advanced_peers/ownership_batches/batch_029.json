@@ -1,0 +1,209 @@
+{
+  "batch": "029",
+  "campaign": "next_70_trea_b",
+  "metric": "TREA",
+  "batch_size": 5,
+  "reviewed_at": "2026-10-03",
+  "population_before": 268,
+  "limits": {
+    "banks": 5,
+    "page_attempts_per_bank": 4,
+    "review_bundle_chars": 12000,
+    "excerpts_per_bank": 2,
+    "quote_chars": 650
+  },
+  "new_network_fetches": 6,
+  "page_attempts": [
+    {
+      "lei": "549300CQ9NLEHMRCU505",
+      "url": "https://www.cecabank.es",
+      "status": 200,
+      "error": null,
+      "sha256": "e962e28e1a02204e7c7c4c2a61d57c95e5dcf6d1a6cfa4eecad4a142a57e7640",
+      "retrieved_at": "2026-10-02T16:33:08Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "549300CQ9NLEHMRCU505",
+      "url": "https://www.cecabank.es/soluciones/plataformas-tecnologicas/servicios-de-tesoreria-riesgos-y-reporting/",
+      "status": 200,
+      "error": null,
+      "sha256": "1d43f04aae42a5d24b6ca4223047f9bbe18e57d7085cfec5cc8d48e9c34d0eae",
+      "retrieved_at": "2026-10-03T07:21:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "GDI8P8WHFH4PS5YTU851",
+      "url": "https://www.haitongib.com",
+      "status": 200,
+      "error": null,
+      "sha256": "67c7b1e71530baaac4926b418582557a4b11bc21147dc00a67ccff775532eb58",
+      "retrieved_at": "2026-10-03T07:21:17Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "GDI8P8WHFH4PS5YTU851",
+      "url": "https://www.haitongib.com/en/who-we-are/",
+      "status": 200,
+      "error": null,
+      "sha256": "ab823bd7a41438b7c70f479b5691e413cbb1b0a93ec3e2fd8489d90a3b6d456f",
+      "retrieved_at": "2026-10-03T07:21:18Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600722FAEE18D6013",
+      "url": "https://www.bancafucino.it",
+      "status": 200,
+      "error": null,
+      "sha256": "67bdd644a3040df680c3b410fd6fe1063d2ed08da055511306e5a6df11039e88",
+      "retrieved_at": "2026-10-03T07:21:19Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "815600722FAEE18D6013",
+      "url": "https://bancafucino.it/azienda/incassi-e-pagamenti/gruppo-pos",
+      "status": 200,
+      "error": null,
+      "sha256": "b1f8328911fe25eefe7b6d6336dab9e9e400e466fcee60c72ba8445a860b7d92",
+      "retrieved_at": "2026-10-03T07:21:22Z",
+      "new_network_fetch": true
+    },
+    {
+      "lei": "213800UYAHIRLZ4NSN67",
+      "url": "https://www.lsb.dk",
+      "status": 200,
+      "error": null,
+      "sha256": "2eba5416b0422ca295efa013305a4c8a6a63b93775014d8470d36435975895c4",
+      "retrieved_at": "2026-10-02T16:32:03Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800UYAHIRLZ4NSN67",
+      "url": "https://www.lsb.dk/investor-relations",
+      "status": 200,
+      "error": null,
+      "sha256": "40f49135234572cb79d2378f9cc6876764d9e0eac5572182452b5e0a1bf1d3f0",
+      "retrieved_at": "2026-10-02T16:32:04Z",
+      "new_network_fetch": false
+    },
+    {
+      "lei": "213800UYAHIRLZ4NSN67",
+      "url": "https://www.lsb.dk/investor-relations/lsb-aktien",
+      "status": 200,
+      "error": null,
+      "sha256": "cac47eedbfe4c549a2de63d78c59fdd74a4ec77801fcbc1b22b457f376092712",
+      "retrieved_at": "2026-10-03T07:28:16Z",
+      "new_network_fetch": true
+    }
+  ],
+  "accepted": [
+    {
+      "lei": "549300X34UUBDEUL1Z91",
+      "name": "HSBC Bank Malta p.l.c.",
+      "ownership": "shareholder",
+      "ownership_basis": "reviewed_control_chain",
+      "reviewed_at": "2026-10-03",
+      "status": "accepted",
+      "ownership_evidence": {
+        "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf",
+        "sha256": "94aab2f5c83d1060ee95d344f1915833869fe4502dc635e4ab9ca84f496ee94b",
+        "hash_kind": "http_response",
+        "retrieved_at": null,
+        "quote": "Notifiable interests in share capital During 2025, HSBC Holdings did not receive any notification of major holdings of voting rights pursuant to the requirements of Rule 5 of the Disclosure Guidance and Transparency Rules (’Rule 5 of the DTRs’). No notifications had been received between 31 December 2025 and 19 February 2026. Previous notifications received are as follows: – BlackRock, Inc. gave notice on 3 March 2020 that on 2 March 2020 it had the following: an indirect interest in HSBC Holdings ordinary shares of 1,235,558,490; qualifying financial instruments with 7,294,459 voting rights that may be acquired if the instruments are exercised or converted; and financial instruments with a similar economic effect to qualifying financial instruments, which refer to 2,441,397 voting rights, representing 6.07%, 0.03% and 0.01%, respectively, of the total voting rights at 2 March 2020. – Ping An Asset Management Co., Ltd. gave notice on 6 December 2017 that on 4 December 2017 it had an indirect interest in HSBC Holdings ordinary shares of 1,007,946,172, representing 5.04% of the total voting rights at that date. At 31 December 2025, according to the register maintained by HSBC Holdings pursuant to section 336 of the Securities and Futures Ordinance of Hong Kong: – BlackRock, Inc. gave notice on 16 July 2025 that on 11 July 2025 it had the following interests in HSBC Holdings ordinary shares: a long position of 1,586,341,122 shares and a short position of 6,856,029 shares, representing 9.09% and 0.04%, respectively, of the ordinary shares in issue 11 July 2025. – Ping An Asset Management Co., Ltd. gave notice on 10 May 2024 that on 7 May 2024 it had a long position of 1,502,584,731 in HSBC Holdings ordinary shares, representing 7.98% of the ordinary shares in issue at 7 May 2024. – The Bank of New York Mellon Corporation gave notice on 17 October 2025 that on 15 October 2025 it had the following interests in HSBC Holdings ordinary shares: a long position of 1,035,915,129 shares, a short position of 551,070,412 shares and a lending pool of 449,036,061 shares representing 6.01%, 3.20% and 2.61%, respectively, of the ordinary shares in issue at 15 October 2025. The Bank of New York Mellon Corporation is the Depositary for the HSBC ADSs. Under the SFO, they are required to report the HSBC ADSs position a"
+      },
+      "note": "Bank LEI and exact registered controller reviewed against the archived relationship. Controller ownership source reused; explicit curated group-based classification, no automatic runtime inheritance or 100% ownership assertion.",
+      "controller_lei": "MLU0ZO3ML4LN2LL2TL39",
+      "control_evidence": {
+        "url": "https://api.gleif.org/api/v1/lei-records/549300X34UUBDEUL1Z91/ultimate-parent-relationship",
+        "sha256": "30e4af6c10b4cc08d8cceeec0836c030a082b39b7308c48731f9c303a895a976",
+        "relationship": {
+          "startNode": {
+            "id": "549300X34UUBDEUL1Z91",
+            "type": "LEI"
+          },
+          "endNode": {
+            "id": "MLU0ZO3ML4LN2LL2TL39",
+            "type": "LEI"
+          },
+          "type": "IS_ULTIMATELY_CONSOLIDATED_BY",
+          "status": "ACTIVE",
+          "periods": [
+            {
+              "startDate": "2025-01-01T00:00:00Z",
+              "endDate": "2025-12-31T00:00:00Z",
+              "type": "ACCOUNTING_PERIOD"
+            },
+            {
+              "startDate": "2013-07-11T00:00:00Z",
+              "type": "RELATIONSHIP_PERIOD"
+            }
+          ]
+        },
+        "registration": {
+          "initialRegistrationDate": "2013-07-11T23:22:17Z",
+          "lastUpdateDate": "2026-08-04T11:07:30Z",
+          "status": "PUBLISHED",
+          "nextRenewalDate": "2027-08-31T00:00:00Z",
+          "managingLou": "213800WAVVOPS85N2205",
+          "corroborationLevel": "FULLY_CORROBORATED",
+          "corroborationDocuments": "ACCOUNTS_FILING",
+          "corroborationReference": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf?download=1"
+        },
+        "quote": "Explicit review of active, published, fully corroborated ultimate consolidation relationship. No 100% shareholding inference."
+      },
+      "bank_identity": {
+        "legal_name": "HSBC BANK MALTA P.L.C.",
+        "registered_as": "C 3177",
+        "jurisdiction": "MT",
+        "gleif_record_sha256": "624feb78a5cf907c3f8a907e8385249119a4d2544ebf46ae4443aa013b5a4301"
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "lei": "549300CQ9NLEHMRCU505",
+      "name": "Cecabank, S.A.",
+      "rank": 114,
+      "trea_eur": 2431932004.0,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Discover Cecabank current issuer shareholder table and CECA ownership/type in its official annual report; retrieved treasury-platform service page is not a capital-owner source.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "GDI8P8WHFH4PS5YTU851",
+      "name": "HAITONG BANK, S.A.",
+      "rank": 116,
+      "trea_eur": 2111653138.3797245,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review Haitong Bank exact bank shareholding and post-merger Chinese parent identity/control in issuer accounts, including current State holdings. Corporate overview alone does not resolve parent ownership.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "815600722FAEE18D6013",
+      "name": "BANCA DEL FUCINO S.P.A.",
+      "rank": 117,
+      "trea_eur": 2059667583.1,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Obtain Banca Fucino actual issuer ownership page/report via corporate navigation, matching LEI and current Igea/family/other holdings; retrieved POS operating subsidiary page is not the bank owners.",
+      "successful_source_pages": 2,
+      "retrieval_failures": []
+    },
+    {
+      "lei": "213800UYAHIRLZ4NSN67",
+      "name": "Lån & Spar Bank A/S",
+      "rank": 118,
+      "trea_eur": 2038235760.6227705,
+      "status": "pending_targeted_source_review",
+      "reason": "Current exact bank ownership/control evidence remains unverified in this bounded pass. Technical successes are not ownership proof; failures never establish absence of public information.",
+      "next_action": "Review dated Laan & Spar full holdings percentages and ownership types for LB Forsikring, unions and pensions. Largest-owner list and 15% single-owner cap do not establish a majority mutual/cooperative control model.",
+      "successful_source_pages": 3,
+      "retrieval_failures": []
+    }
+  ],
+  "note": "Fixed selection before curation; initial 2-page pass reserves up to 2 actual navigation/linked report sources. Cached evidence and exact LEI relationships reused. No automatic acceptance, denied URL retry or ownership inferred from unavailable pages. Source attempt count is not HTTP redirect count or chat-token usage."
+}

@@ -664,26 +664,13 @@
     "reviewed_controller_source_url": "https://www.otpgroup.info/investor-relations/shares/ownership-structure"
   },
   {
-    "lei": "959800LQ598A5RQASA61",
-    "name": "Banca March, S.A.",
-    "entityID": "rs:959800LQ598A5RQASA61.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 7572525858.07,
-    "rank": 54,
-    "websites": [
-      "https://www.bancamarch.es/es/",
-      "http://www.bancamarch.com"
-    ]
-  },
-  {
     "lei": "529900S1KHKOEQL5CK20",
     "name": "Wüstenrot Bausparkasse Aktiengesellschaft",
     "entityID": "rs:529900S1KHKOEQL5CK20.IND",
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 7571866501.84,
-    "rank": 55,
+    "rank": 54,
     "websites": [
       "http://www.wuestenrot.de/"
     ],
@@ -696,7 +683,7 @@
     "scope": "CON",
     "date": "2026-03-31",
     "trea_eur": 7304067600.0,
-    "rank": 56,
+    "rank": 55,
     "websites": [
       "https://www.islandsbanki.is"
     ]
@@ -708,7 +695,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 7182742350.27,
-    "rank": 57,
+    "rank": 56,
     "websites": [
       "http://www.grenke.de"
     ]
@@ -720,7 +707,7 @@
     "scope": "CON",
     "date": "2025-09-30",
     "trea_eur": 7147631124.89822,
-    "rank": 58,
+    "rank": 57,
     "websites": [
       "https://www.aikbanka.rs"
     ]
@@ -732,7 +719,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 7092659521.758513,
-    "rank": 59,
+    "rank": 58,
     "websites": [
       "https://www.sparv.dk"
     ]
@@ -744,7 +731,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 7032215319.54,
-    "rank": 60,
+    "rank": 59,
     "websites": [
       "https://www.adyen.com/"
     ]
@@ -756,7 +743,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 6988455159.05,
-    "rank": 61,
+    "rank": 60,
     "websites": [
       "https://www.bankofchina.com/lu"
     ],
@@ -769,7 +756,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 6840264486.56,
-    "rank": 62,
+    "rank": 61,
     "websites": [
       "https://www.wellsfargo.com"
     ],
@@ -782,7 +769,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 6799675012.7317915,
-    "rank": 63,
+    "rank": 62,
     "websites": [
       "https://www.moneta.cz/"
     ]
@@ -794,7 +781,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 6783360962.06,
-    "rank": 64,
+    "rank": 63,
     "websites": [
       "http://www.nibc.com/"
     ]
@@ -806,36 +793,10 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 6783331201.599999,
-    "rank": 65,
+    "rank": 64,
     "websites": [
       "https://www.postbank.bg"
     ]
-  },
-  {
-    "lei": "8156003A4FB445454553",
-    "name": "CASSA DI RISPARMIO DI BOLZANO S.P.A. - SUDTIROLER SPARKASSE AG",
-    "entityID": "rs:8156003A4FB445454553.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 6741162974.0,
-    "rank": 66,
-    "websites": [
-      "https://www.sparkasse.it"
-    ]
-  },
-  {
-    "lei": "G8ZTNESVNKW4NN761W05",
-    "name": "ABN AMRO Clearing Bank N.V.",
-    "entityID": "rs:G8ZTNESVNKW4NN761W05.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 6694127208.0,
-    "rank": 67,
-    "websites": [
-      "http://www.abnamroclearing.com"
-    ],
-    "controller_candidate_lei": "BFXS5XCH7N0Y05NIXW11",
-    "reviewed_controller_source_url": "https://downloads.ctfassets.net/1u811bvgvthc/688tP3vcLbHAgEsUavbdMR/22bd74bf45996df3f6e76b0893ecc950/ABN_AMRO_Bank_-_Annual_Report_2025.pdf#page=15"
   },
   {
     "lei": "724500PMK2A2M1SQQ228",
@@ -844,7 +805,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 6600423668.64,
-    "rank": 68,
+    "rank": 65,
     "websites": [
       "https://www.triodos.com/"
     ]
@@ -856,7 +817,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 6356443600.0,
-    "rank": 69,
+    "rank": 66,
     "websites": [
       "https://www.erstebank.hu"
     ],
@@ -869,7 +830,7 @@
     "scope": "CON",
     "date": "2026-03-31",
     "trea_eur": 6299478641.0,
-    "rank": 70,
+    "rank": 67,
     "websites": [
       "https://www.finecobank.com/"
     ]
@@ -881,7 +842,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 6231075771.66531,
-    "rank": 71,
+    "rank": 68,
     "websites": [
       "https://www.axabank.be"
     ],
@@ -894,7 +855,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 6213381032.45,
-    "rank": 72,
+    "rank": 69,
     "websites": [
       "https://www.sc.com"
     ],
@@ -907,7 +868,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 6091849319.005838,
-    "rank": 73,
+    "rank": 70,
     "websites": [
       "https://www.bny.com"
     ],
@@ -920,7 +881,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 6069509814.0,
-    "rank": 74,
+    "rank": 71,
     "websites": [
       "https://www.revolut.com"
     ],
@@ -933,7 +894,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 5614000000.0,
-    "rank": 75,
+    "rank": 72,
     "websites": [
       "http://www.ikb.de/"
     ]
@@ -945,7 +906,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 5551076095.0,
-    "rank": 76,
+    "rank": 73,
     "websites": [
       "https://www.volksbank.it"
     ]
@@ -957,7 +918,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 5464859043.0,
-    "rank": 77,
+    "rank": 74,
     "websites": [
       "http://www.bancagenerali.com"
     ],
@@ -970,7 +931,7 @@
     "scope": "IND",
     "date": "2025-10-31",
     "trea_eur": 5324357289.192755,
-    "rank": 78,
+    "rank": 75,
     "websites": [
       "https://www.scotiabank.com"
     ],
@@ -983,7 +944,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 5267617158.01,
-    "rank": 79,
+    "rank": 76,
     "websites": [
       "https://www.sozialfinanz.de/"
     ]
@@ -995,7 +956,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 5263541156.0,
-    "rank": 80,
+    "rank": 77,
     "websites": [
       "https://www.nn.nl"
     ],
@@ -1008,7 +969,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 5213053604.0,
-    "rank": 81,
+    "rank": 78,
     "websites": [
       "https://www.bancadiasti.it"
     ]
@@ -1020,25 +981,11 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 5181057649.23,
-    "rank": 82,
+    "rank": 79,
     "websites": [
       "https://www.fordbank.de"
     ],
     "controller_candidate_lei": "20S05OYHG0MQM4VUIC57"
-  },
-  {
-    "lei": "549300SBPFE9JX7N8J82",
-    "name": "AB SEB bankas",
-    "entityID": "rs:549300SBPFE9JX7N8J82.IND",
-    "scope": "IND",
-    "date": "2025-12-31",
-    "trea_eur": 5070736504.95,
-    "rank": 83,
-    "websites": [
-      "http://www.seb.lt"
-    ],
-    "controller_candidate_lei": "F3JS33DEI6XQ4ZBPTN86",
-    "reviewed_controller_source_url": "https://tools.euroland.com/majorshareholder/s-seb_new/?lang=english"
   },
   {
     "lei": "549300UY81ESCZJ0GR95",
@@ -1047,10 +994,8 @@
     "scope": "CON",
     "date": "2026-03-31",
     "trea_eur": 5046160867.0,
-    "rank": 84,
-    "websites": [
-      "http://www.pinbank.ua/"
-    ]
+    "rank": 80,
+    "websites": []
   },
   {
     "lei": "529900NNQW9IAE32GQ07",
@@ -1059,59 +1004,9 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 4875126336.03,
-    "rank": 85,
+    "rank": 81,
     "websites": [
       "https://www.grawe.at"
-    ]
-  },
-  {
-    "lei": "5493007BWYDPQZLZ0Y27",
-    "name": "HYPO NOE Landesbank für Niederösterreich und Wien AG",
-    "entityID": "rs:5493007BWYDPQZLZ0Y27.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 4734931000.0,
-    "rank": 86,
-    "websites": [
-      "http://www.hyponoe.at/"
-    ]
-  },
-  {
-    "lei": "815600A029117B20DD63",
-    "name": "ILLIMITY BANK S.P.A.",
-    "entityID": "rs:815600A029117B20DD63.CON",
-    "scope": "CON",
-    "date": "2025-06-30",
-    "trea_eur": 4546529000.0,
-    "rank": 87,
-    "websites": [
-      "https://www.illimity.com"
-    ],
-    "controller_candidate_lei": "8156005420362AE59184",
-    "reviewed_controller_source_url": "https://www.bancaifis.it/chi-siamo/corporate-governance/azionariato/"
-  },
-  {
-    "lei": "529900J35NSHS856UA68",
-    "name": "Sparekassen Kronjylland",
-    "entityID": "rs:529900J35NSHS856UA68.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 4216972097.648924,
-    "rank": 88,
-    "websites": [
-      "https://www.sparkron.dk/"
-    ]
-  },
-  {
-    "lei": "743700FTBNXAUN57RH30",
-    "name": "S-Pankki Oyj",
-    "entityID": "rs:743700FTBNXAUN57RH30.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 4129000000.0,
-    "rank": 89,
-    "websites": [
-      "https://www.s-pankki.fi"
     ]
   },
   {
@@ -1121,7 +1016,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 3584045786.83017,
-    "rank": 90,
+    "rank": 82,
     "websites": [
       "https://www.velobank.pl"
     ]
@@ -1133,24 +1028,12 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 3542523372.0,
-    "rank": 91,
+    "rank": 83,
     "websites": [
       "https://www.mediobancapremier.com"
     ],
     "controller_candidate_lei": "J4CP7MHCXR8DAQMKIL78",
     "reviewed_controller_source_url": "https://www.gruppomps.it/en/corporate-governance/shareholding-structure.html"
-  },
-  {
-    "lei": "5967007LIEEXZX5PU005",
-    "name": "Sparebanken Møre SPA",
-    "entityID": "rs:5967007LIEEXZX5PU005.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 3508988640.0,
-    "rank": 92,
-    "websites": [
-      "https://sbm.no"
-    ]
   },
   {
     "lei": "5299005OACOC1C1OFJ11",
@@ -1159,7 +1042,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 3492084703.9900002,
-    "rank": 93,
+    "rank": 84,
     "websites": [
       "https://www.rlbt.at"
     ]
@@ -1171,7 +1054,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 3381061426.05084,
-    "rank": 94,
+    "rank": 85,
     "websites": [
       "https://www.bosbank.pl"
     ]
@@ -1183,7 +1066,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 3378855772.0,
-    "rank": 95,
+    "rank": 86,
     "websites": [
       "https://www.aktia.fi/sv/",
       "http://www.aktia.fi"
@@ -1196,7 +1079,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 3330476309.5,
-    "rank": 96,
+    "rank": 87,
     "websites": [
       "http://www.seb.ee/"
     ],
@@ -1210,7 +1093,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 3254643188.24,
-    "rank": 97,
+    "rank": 88,
     "websites": [
       "https://www.denizbank.at"
     ],
@@ -1223,7 +1106,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 3175819122.47,
-    "rank": 98,
+    "rank": 89,
     "websites": [
       "https://www.ccb.com"
     ],
@@ -1236,7 +1119,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 3167176127.0,
-    "rank": 99,
+    "rank": 90,
     "websites": [
       "https://www.iblbanca.it"
     ]
@@ -1248,7 +1131,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 3134286406.08,
-    "rank": 100,
+    "rank": 91,
     "websites": [
       "https://www.clearstream.com"
     ],
@@ -1261,7 +1144,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 3078571598.9661818,
-    "rank": 101,
+    "rank": 92,
     "websites": [
       "https://ikano.co.uk/",
       "https://ikanobank.se/",
@@ -1280,7 +1163,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 3028832863.24,
-    "rank": 102,
+    "rank": 93,
     "websites": [
       "https://www.bank11.de"
     ],
@@ -1293,7 +1176,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 2960946485.5386596,
-    "rank": 103,
+    "rank": 94,
     "websites": [
       "https://www.advanzia.com/"
     ]
@@ -1305,7 +1188,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 2958293686.31,
-    "rank": 104,
+    "rank": 95,
     "websites": [
       "https://www.wuestenrot.at"
     ]
@@ -1317,7 +1200,7 @@
     "scope": "CON",
     "date": "2026-03-31",
     "trea_eur": 2855601000.0,
-    "rank": 105,
+    "rank": 96,
     "websites": [
       "https://www.artea.lt/"
     ]
@@ -1329,21 +1212,9 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 2813546304.61,
-    "rank": 106,
+    "rank": 97,
     "websites": [
       "https://www.hpb.hr"
-    ]
-  },
-  {
-    "lei": "549300LYFYVPUCG6SY25",
-    "name": "Banco Cooperativo Español, S.A.",
-    "entityID": "rs:549300LYFYVPUCG6SY25.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 2791109477.0,
-    "rank": 107,
-    "websites": [
-      "https://www.bancocooperativo.es"
     ]
   },
   {
@@ -1353,7 +1224,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 2761011309.0,
-    "rank": 108,
+    "rank": 98,
     "websites": [
       "https://www.lacassa.com"
     ]
@@ -1365,21 +1236,9 @@
     "scope": "CON",
     "date": "2026-03-31",
     "trea_eur": 2743289145.96,
-    "rank": 109,
+    "rank": 99,
     "websites": [
       "https://www.citadele.lv/"
-    ]
-  },
-  {
-    "lei": "549300ZEF3QWM810M319",
-    "name": "Ziklo Bank AB",
-    "entityID": "rs:549300ZEF3QWM810M319.IND",
-    "scope": "IND",
-    "date": "2025-12-31",
-    "trea_eur": 2654339722.7787266,
-    "rank": 110,
-    "websites": [
-      "https://www.ziklo.com"
     ]
   },
   {
@@ -1389,24 +1248,10 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 2628084043.1869087,
-    "rank": 111,
+    "rank": 100,
     "websites": [
       "https://www.sjfbank.dk/"
     ]
-  },
-  {
-    "lei": "549300YW95G1VBBGGV07",
-    "name": "AS \"SEB banka\"",
-    "entityID": "rs:549300YW95G1VBBGGV07.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 2611820516.9574,
-    "rank": 112,
-    "websites": [
-      "https://www.seb.lv/"
-    ],
-    "controller_candidate_lei": "F3JS33DEI6XQ4ZBPTN86",
-    "reviewed_controller_source_url": "https://tools.euroland.com/majorshareholder/s-seb_new/?lang=english"
   },
   {
     "lei": "9598002AYDQER7DXLR16",
@@ -1415,7 +1260,7 @@
     "scope": "CON",
     "date": "2025-06-30",
     "trea_eur": 2590690874.0,
-    "rank": 113,
+    "rank": 101,
     "websites": [
       "https://www.grupocajarural.es"
     ]
@@ -1427,24 +1272,10 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 2431932004.0,
-    "rank": 114,
+    "rank": 102,
     "websites": [
       "https://www.cecabank.es"
     ]
-  },
-  {
-    "lei": "549300X34UUBDEUL1Z91",
-    "name": "HSBC Bank Malta p.l.c.",
-    "entityID": "rs:549300X34UUBDEUL1Z91.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 2173519754.79,
-    "rank": 115,
-    "websites": [
-      "https://www.hsbc.com.mt"
-    ],
-    "controller_candidate_lei": "MLU0ZO3ML4LN2LL2TL39",
-    "reviewed_controller_source_url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf"
   },
   {
     "lei": "GDI8P8WHFH4PS5YTU851",
@@ -1453,7 +1284,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 2111653138.3797245,
-    "rank": 116,
+    "rank": 103,
     "websites": [
       "https://www.haitongib.com"
     ]
@@ -1465,7 +1296,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 2059667583.1,
-    "rank": 117,
+    "rank": 104,
     "websites": [
       "https://www.bancafucino.it"
     ]
@@ -1477,7 +1308,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 2038235760.6227705,
-    "rank": 118,
+    "rank": 105,
     "websites": [
       "https://www.lsb.dk"
     ]
@@ -1489,21 +1320,9 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 2017858077.22,
-    "rank": 119,
+    "rank": 106,
     "websites": [
       "https://www.bigbank.ee"
-    ]
-  },
-  {
-    "lei": "635400F6HLXKXNJJX605",
-    "name": "EXIM BANCA ROMANEASCA S.A.",
-    "entityID": "rs:635400F6HLXKXNJJX605.IND",
-    "scope": "IND",
-    "date": "2025-06-30",
-    "trea_eur": 1951609091.97044,
-    "rank": 120,
-    "websites": [
-      "https://www.eximbank.ro"
     ]
   },
   {
@@ -1513,7 +1332,7 @@
     "scope": "IND",
     "date": "2026-03-31",
     "trea_eur": 1921119393.99,
-    "rank": 121,
+    "rank": 107,
     "websites": [
       "https://www.apsbank.com.mt"
     ]
@@ -1525,23 +1344,11 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1892697479.25458,
-    "rank": 122,
+    "rank": 108,
     "websites": [
       "https://www.nordnetab.com"
     ],
     "controller_candidate_lei": "549300D6WW5ZTWLZ4C08"
-  },
-  {
-    "lei": "7437006WYM821IJ3MN73",
-    "name": "Ålandsbanken Abp",
-    "entityID": "rs:7437006WYM821IJ3MN73.CON",
-    "scope": "CON",
-    "date": "2025-12-31",
-    "trea_eur": 1887785853.91,
-    "rank": 123,
-    "websites": [
-      "https://www.alandsbanken.fi"
-    ]
   },
   {
     "lei": "5493002K643MZPQEK497",
@@ -1550,7 +1357,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 1853544772.2792652,
-    "rank": 124,
+    "rank": 109,
     "websites": [
       "https://www.bradescobbi.com.br"
     ],
@@ -1563,7 +1370,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1831316040.626,
-    "rank": 125,
+    "rank": 110,
     "websites": [
       "https://www.edmond-de-rothschild.com"
     ],
@@ -1576,7 +1383,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1755290036.9493,
-    "rank": 126,
+    "rank": 111,
     "websites": [
       "https://www.avanza.se"
     ],
@@ -1589,7 +1396,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1720864000.0,
-    "rank": 127,
+    "rank": 112,
     "websites": [
       "https://www.bancopichincha.es"
     ],
@@ -1602,7 +1409,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1685850721.10169,
-    "rank": 128,
+    "rank": 113,
     "websites": [
       "https://www.bankbps.pl"
     ]
@@ -1614,7 +1421,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1681277239.31,
-    "rank": 129,
+    "rank": 114,
     "websites": [
       "https://www.bancasistema.it"
     ]
@@ -1626,7 +1433,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1654455174.41,
-    "rank": 130,
+    "rank": 115,
     "websites": [
       "https://www.carrefour-banque.fr"
     ],
@@ -1639,7 +1446,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1648837829.5974877,
-    "rank": 131,
+    "rank": 116,
     "websites": [
       "https://www.bunq.com"
     ]
@@ -1651,7 +1458,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 1621452423.172,
-    "rank": 132,
+    "rank": 117,
     "websites": [
       "https://www.vdk.be/"
     ]
@@ -1663,7 +1470,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1616964000.0,
-    "rank": 133,
+    "rank": 118,
     "websites": [
       "https://www.banquehavilland.com"
     ],
@@ -1676,7 +1483,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1602035125.1384563,
-    "rank": 134,
+    "rank": 119,
     "websites": [
       "http://www.midspar.dk"
     ]
@@ -1688,7 +1495,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1564219756.64,
-    "rank": 135,
+    "rank": 120,
     "websites": [
       "https://www.usbank.com"
     ],
@@ -1701,7 +1508,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1544427136.9265401,
-    "rank": 136,
+    "rank": 121,
     "websites": [
       "https://www.obos.no/bank"
     ],
@@ -1714,7 +1521,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 1511791361.73,
-    "rank": 137,
+    "rank": 122,
     "websites": [
       "https://www.akabank.de/"
     ]
@@ -1726,7 +1533,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1480008114.81,
-    "rank": 138,
+    "rank": 123,
     "websites": [
       "https://flatexdegiro.com/"
     ]
@@ -1738,7 +1545,7 @@
     "scope": "CON",
     "date": "2026-03-31",
     "trea_eur": 1477830900.0178,
-    "rank": 139,
+    "rank": 124,
     "websites": [
       "https://www.cooppank.ee"
     ],
@@ -1751,7 +1558,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 1418878060.727343,
-    "rank": 140,
+    "rank": 125,
     "websites": [
       "https://www.northerntrust.com"
     ],
@@ -1764,7 +1571,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1414740109.582945,
-    "rank": 141,
+    "rank": 126,
     "websites": [
       "http://www.oest.no/"
     ]
@@ -1776,7 +1583,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 1413538489.0992386,
-    "rank": 142,
+    "rank": 127,
     "websites": [
       "https://www.mufg-investorservices.com"
     ],
@@ -1789,7 +1596,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1397966394.2984216,
-    "rank": 143,
+    "rank": 128,
     "websites": [
       "https://www.hcbinternational.nl"
     ]
@@ -1801,7 +1608,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1388794700.0,
-    "rank": 144,
+    "rank": 129,
     "websites": [
       "https://www.citco.com"
     ]
@@ -1813,7 +1620,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1299173721.9105241,
-    "rank": 145,
+    "rank": 130,
     "websites": [
       "https://www.andelskassen.dk"
     ]
@@ -1825,7 +1632,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1268144806.6,
-    "rank": 146,
+    "rank": 131,
     "websites": [
       "https://www.kvika.is"
     ]
@@ -1837,7 +1644,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 1265173198.38,
-    "rank": 147,
+    "rank": 132,
     "websites": [
       "http://www.badenia.de"
     ],
@@ -1850,7 +1657,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1235059000.0,
-    "rank": 148,
+    "rank": 133,
     "websites": [
       "http://www.rietumu.lv"
     ]
@@ -1862,7 +1669,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 1155691796.77,
-    "rank": 149,
+    "rank": 134,
     "websites": [
       "https://www.addiko.hr"
     ],
@@ -1875,7 +1682,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1154054798.32,
-    "rank": 150,
+    "rank": 135,
     "websites": [
       "https://www.baaderbank.de"
     ]
@@ -1887,7 +1694,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1100532444.140127,
-    "rank": 151,
+    "rank": 136,
     "websites": [
       "https://www.sparthy.dk"
     ]
@@ -1899,7 +1706,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1085936453.0,
-    "rank": 152,
+    "rank": 137,
     "websites": [
       "https://www.fimbank.com"
     ],
@@ -1912,7 +1719,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1045267228.6076869,
-    "rank": 153,
+    "rank": 138,
     "websites": [
       "https://www.inbank.ee"
     ]
@@ -1924,7 +1731,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 1044113535.0,
-    "rank": 154,
+    "rank": 139,
     "websites": [
       "https://www.banorientfrance.com/"
     ],
@@ -1937,7 +1744,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 1027828499.7727244,
-    "rank": 155,
+    "rank": 140,
     "websites": [
       "https://www.lombardmalta.com"
     ]
@@ -1949,7 +1756,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 1025473885.1095,
-    "rank": 156,
+    "rank": 141,
     "websites": [
       "https://www.anadolubank.nl"
     ],
@@ -1962,7 +1769,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 995639124.84,
-    "rank": 157,
+    "rank": 142,
     "websites": [
       "https://www.lch.com"
     ],
@@ -1975,7 +1782,7 @@
     "scope": "IND",
     "date": "2025-09-30",
     "trea_eur": 947763385.38,
-    "rank": 158,
+    "rank": 143,
     "websites": [
       "https://www.eccmbank.com"
     ],
@@ -1988,7 +1795,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 902083284.0,
-    "rank": 159,
+    "rank": 144,
     "websites": [
       "https://www.carifermo.it"
     ]
@@ -2000,7 +1807,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 827487505.0564877,
-    "rank": 160,
+    "rank": 145,
     "websites": [
       "https://www.sydjysksparekasse.dk/"
     ]
@@ -2012,7 +1819,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 817519287.22461,
-    "rank": 161,
+    "rank": 146,
     "websites": [
       "https://www.bankfrick.li/en"
     ]
@@ -2024,7 +1831,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 815411934.44,
-    "rank": 162,
+    "rank": 147,
     "websites": [
       "https://www.crvolterra.it"
     ]
@@ -2036,7 +1843,7 @@
     "scope": "IND",
     "date": "2025-06-30",
     "trea_eur": 810861000.0,
-    "rank": 163,
+    "rank": 148,
     "websites": [
       "http://www.aresbank.es"
     ]
@@ -2048,7 +1855,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 801697101.0,
-    "rank": 164,
+    "rank": 149,
     "websites": [
       "https://www.lombardodier.com"
     ],
@@ -2061,7 +1868,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 790415131.6883701,
-    "rank": 165,
+    "rank": 150,
     "websites": [
       "https://www.sigmabank.com"
     ]
@@ -2073,7 +1880,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 789086408.46996,
-    "rank": 166,
+    "rank": 151,
     "websites": [
       "https://www.pocztowy.pl"
     ],
@@ -2086,7 +1893,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 732072131.0592,
-    "rank": 167,
+    "rank": 152,
     "websites": [
       "https://www.fynskebank.dk/"
     ]
@@ -2098,7 +1905,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 726948866.0,
-    "rank": 168,
+    "rank": 153,
     "websites": [
       "https://www.bancapb.it"
     ]
@@ -2110,7 +1917,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 725366000.0,
-    "rank": 169,
+    "rank": 154,
     "websites": [
       "https://www.delavska-hranilnica.si"
     ]
@@ -2122,7 +1929,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 712948852.6500001,
-    "rank": 170,
+    "rank": 155,
     "websites": [
       "https://www.lpb.dk"
     ],
@@ -2135,7 +1942,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 707704904.97,
-    "rank": 171,
+    "rank": 156,
     "websites": [
       "https://www.efginternational.com"
     ],
@@ -2148,7 +1955,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 673755353.69,
-    "rank": 172,
+    "rank": 157,
     "websites": [
       "https://www.juliusbaer.com"
     ],
@@ -2161,7 +1968,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 646645007.32,
-    "rank": 173,
+    "rank": 158,
     "websites": [
       "https://www.bnf.bank"
     ]
@@ -2173,7 +1980,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 605032324.25,
-    "rank": 174,
+    "rank": 159,
     "websites": [
       "https://www.clearstream.com"
     ],
@@ -2186,7 +1993,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 592343547.8372985,
-    "rank": 175,
+    "rank": 160,
     "websites": [
       "https://www.sparbankensyd.se"
     ]
@@ -2198,7 +2005,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 539260336.13823,
-    "rank": 176,
+    "rank": 161,
     "websites": [
       "https://www.neuebankag.li"
     ]
@@ -2210,7 +2017,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 526450699.201722,
-    "rank": 177,
+    "rank": 162,
     "websites": [
       "https://www.gazprombank.lu"
     ]
@@ -2222,7 +2029,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 523693400.88,
-    "rank": 178,
+    "rank": 163,
     "websites": [
       "https://www.bancobaieuropa.pt"
     ]
@@ -2234,7 +2041,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 522615194.7798,
-    "rank": 179,
+    "rank": 164,
     "websites": [
       "https://www.fibank.bg"
     ]
@@ -2246,7 +2053,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 494350585.92,
-    "rank": 180,
+    "rank": 165,
     "websites": [
       "https://www.swissquote.lu"
     ],
@@ -2259,7 +2066,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 491055472.67,
-    "rank": 181,
+    "rank": 166,
     "websites": [
       "https://www.banqueaudi.fr"
     ],
@@ -2272,7 +2079,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 472335118.0,
-    "rank": 182,
+    "rank": 167,
     "websites": [
       "https://www.bancaprofilo.it"
     ]
@@ -2284,7 +2091,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 464210066.1940201,
-    "rank": 183,
+    "rank": 168,
     "websites": [
       "https://www.bendura.li"
     ]
@@ -2296,7 +2103,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 462944114.0,
-    "rank": 184,
+    "rank": 169,
     "websites": [
       "https://www.fcmbank.com.mt"
     ]
@@ -2308,7 +2115,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 455524556.52,
-    "rank": 185,
+    "rank": 170,
     "websites": [
       "https://www.agence-france-locale.fr"
     ]
@@ -2320,7 +2127,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 440917666.22,
-    "rank": 186,
+    "rank": 171,
     "websites": [
       "https://www.eabplc.com"
     ],
@@ -2333,7 +2140,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 438049293.0,
-    "rank": 187,
+    "rank": 172,
     "websites": [
       "https://www.cassalombarda.it"
     ]
@@ -2345,7 +2152,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 402271102.51,
-    "rank": 188,
+    "rank": 173,
     "websites": [
       "https://www.varengold.de/"
     ]
@@ -2357,7 +2164,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 378333168.92,
-    "rank": 189,
+    "rank": 174,
     "websites": [
       "https://signetbank.com/"
     ]
@@ -2369,7 +2176,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 363219901.72914004,
-    "rank": 190,
+    "rank": 175,
     "websites": [
       "https://www.lollandsbank.dk/"
     ]
@@ -2381,7 +2188,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 338502788.75995106,
-    "rank": 191,
+    "rank": 176,
     "websites": [
       "https://merkur.dk/"
     ]
@@ -2393,7 +2200,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 326990845.0,
-    "rank": 192,
+    "rank": 177,
     "websites": [
       "https://www.bmce-intl.co.uk"
     ]
@@ -2405,7 +2212,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 323246476.19,
-    "rank": 193,
+    "rank": 178,
     "websites": [
       "https://www.warburgpincus.com/",
       "https://www.cerberus.com/"
@@ -2418,7 +2225,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 298562384.77137005,
-    "rank": 194,
+    "rank": 179,
     "websites": [
       "https://www.kaiserpartner.bank"
     ]
@@ -2430,7 +2237,7 @@
     "scope": "CON",
     "date": "2026-03-31",
     "trea_eur": 288943560.0,
-    "rank": 195,
+    "rank": 180,
     "websites": [
       "https://www.kommuninvest.se"
     ]
@@ -2442,7 +2249,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 273193711.328287,
-    "rank": 196,
+    "rank": 181,
     "websites": [
       "https://www.atlantico.eu"
     ]
@@ -2454,7 +2261,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 260514781.41921332,
-    "rank": 197,
+    "rank": 182,
     "websites": [
       "https://www.lunar.app"
     ]
@@ -2466,7 +2273,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 249733236.39999998,
-    "rank": 198,
+    "rank": 183,
     "websites": [
       "https://www.teximbank.bg"
     ]
@@ -2478,7 +2285,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 245128279.0,
-    "rank": 199,
+    "rank": 184,
     "websites": [
       "https://www.bancainvestis.com"
     ]
@@ -2490,7 +2297,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 229480397.0,
-    "rank": 200,
+    "rank": 185,
     "websites": [
       "https://www.ribbank.com"
     ]
@@ -2502,7 +2309,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 199412464.55,
-    "rank": 201,
+    "rank": 186,
     "websites": [
       "https://www.ancoriabank.com"
     ]
@@ -2514,7 +2321,7 @@
     "scope": "CON",
     "date": "2025-12-31",
     "trea_eur": 185105768.9,
-    "rank": 202,
+    "rank": 187,
     "websites": [
       "https://www.sparkasse-bank-malta.com"
     ]
@@ -2526,7 +2333,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 166879379.79782715,
-    "rank": 203,
+    "rank": 188,
     "websites": [
       "https://www.sparekassenbredebro.dk"
     ]
@@ -2538,7 +2345,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 160309549.35904104,
-    "rank": 204,
+    "rank": 189,
     "websites": [
       "https://www.sparnebel.dk"
     ]
@@ -2550,7 +2357,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 126516417.0,
-    "rank": 205,
+    "rank": 190,
     "websites": [
       "https://www.crelov.it"
     ]
@@ -2562,7 +2369,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 125159940.8664036,
-    "rank": 206,
+    "rank": 191,
     "websites": [
       "https://www.dragsholmsparekasse.dk"
     ]
@@ -2574,7 +2381,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 108991854.16032001,
-    "rank": 207,
+    "rank": 192,
     "websites": [
       "https://www.kompasbank.dk"
     ]
@@ -2586,7 +2393,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 99176924.30206601,
-    "rank": 208,
+    "rank": 193,
     "websites": [
       "https://www.risesparekasse.dk"
     ]
@@ -2598,7 +2405,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 97963800.1567854,
-    "rank": 209,
+    "rank": 194,
     "websites": [
       "https://www.balling-sparekasse.dk"
     ]
@@ -2610,7 +2417,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 77711969.94,
-    "rank": 210,
+    "rank": 195,
     "websites": [
       "https://www.iigbank.com"
     ]
@@ -2622,7 +2429,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 66036351.21246762,
-    "rank": 211,
+    "rank": 196,
     "websites": [
       "https://www.borbjerg-sparekasse.dk"
     ]
@@ -2634,7 +2441,7 @@
     "scope": "IND",
     "date": "2025-12-31",
     "trea_eur": 53335645.54147042,
-    "rank": 212,
+    "rank": 197,
     "websites": [
       "https://www.rondespard.dk"
     ]

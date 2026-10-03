@@ -2083,6 +2083,73 @@
     "sha256": "f0d221706c66c0c2635ec36262252daa2cbd46f24a8d8faeea11c0ca54a01c25",
     "url": "https://api.gleif.org/api/v1/lei-records/549300RFKNCOX56F8591/ultimate-parent-relationship"
   },
+  "549300SBPFE9JX7N8J82": {
+    "response": {
+      "data": {
+        "attributes": {
+          "extension": {
+            "deletedAt": null
+          },
+          "registration": {
+            "corroborationDocuments": "ACCOUNTS_FILING",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "corroborationReference": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/DA90E32A9554BB77C1258AD0003DF8D1/$FILE/SEB_AR23_Web_ENG_klickbar.pdf",
+            "initialRegistrationDate": "2013-11-13T03:03:00Z",
+            "lastUpdateDate": "2026-04-22T13:20:56Z",
+            "managingLou": "213800WAVVOPS85N2205",
+            "nextRenewalDate": "2027-05-09T00:00:00Z",
+            "status": "PUBLISHED"
+          },
+          "relationship": {
+            "endNode": {
+              "id": "F3JS33DEI6XQ4ZBPTN86",
+              "type": "LEI"
+            },
+            "periods": [
+              {
+                "endDate": "2023-12-31T00:00:00Z",
+                "startDate": "2023-01-01T00:00:00Z",
+                "type": "ACCOUNTING_PERIOD"
+              },
+              {
+                "startDate": "2023-04-27T00:00:00Z",
+                "type": "RELATIONSHIP_PERIOD"
+              }
+            ],
+            "startNode": {
+              "id": "549300SBPFE9JX7N8J82",
+              "type": "LEI"
+            },
+            "status": "ACTIVE",
+            "type": "IS_ULTIMATELY_CONSOLIDATED_BY"
+          },
+          "validFrom": "2026-04-23T00:00:00Z",
+          "validTo": null
+        },
+        "id": "549300SBPFE9JX7N8J82|LEI|IS_ULTIMATELY_CONSOLIDATED_BY|48|a77aed88666f0fdd1eac7bd62959cd41abdca5c8a136ad827fad3c77f1a1e47b|",
+        "relationships": {
+          "end-node": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/F3JS33DEI6XQ4ZBPTN86"
+            }
+          },
+          "start-node": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/549300SBPFE9JX7N8J82"
+            }
+          }
+        },
+        "type": "relationship-records"
+      },
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-02T08:00:00Z"
+        }
+      }
+    },
+    "sha256": "954dcfb9219c2b491b3d50d44944cc806fa7ebb60b1e5b974d7404cf44341c24",
+    "url": "https://api.gleif.org/api/v1/lei-records/549300SBPFE9JX7N8J82/ultimate-parent-relationship"
+  },
   "549300TJREQ7GHIXWR36": {
     "response": {
       "data": {
@@ -2294,6 +2361,73 @@
     "sha256": "cffe66ed70973a2c255c48699f2b6163d1e88effb529150ca8c5bff97a4816ee",
     "url": "https://api.gleif.org/api/v1/lei-records/549300URJH9VSI58CS32/ultimate-parent-relationship"
   },
+  "549300X34UUBDEUL1Z91": {
+    "response": {
+      "data": {
+        "attributes": {
+          "extension": {
+            "deletedAt": null
+          },
+          "registration": {
+            "corroborationDocuments": "ACCOUNTS_FILING",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "corroborationReference": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf?download=1",
+            "initialRegistrationDate": "2013-07-11T23:22:17Z",
+            "lastUpdateDate": "2026-08-04T11:07:30Z",
+            "managingLou": "213800WAVVOPS85N2205",
+            "nextRenewalDate": "2027-08-31T00:00:00Z",
+            "status": "PUBLISHED"
+          },
+          "relationship": {
+            "endNode": {
+              "id": "MLU0ZO3ML4LN2LL2TL39",
+              "type": "LEI"
+            },
+            "periods": [
+              {
+                "endDate": "2025-12-31T00:00:00Z",
+                "startDate": "2025-01-01T00:00:00Z",
+                "type": "ACCOUNTING_PERIOD"
+              },
+              {
+                "startDate": "2013-07-11T00:00:00Z",
+                "type": "RELATIONSHIP_PERIOD"
+              }
+            ],
+            "startNode": {
+              "id": "549300X34UUBDEUL1Z91",
+              "type": "LEI"
+            },
+            "status": "ACTIVE",
+            "type": "IS_ULTIMATELY_CONSOLIDATED_BY"
+          },
+          "validFrom": "2026-08-05T00:00:00Z",
+          "validTo": null
+        },
+        "id": "549300X34UUBDEUL1Z91|LEI|IS_ULTIMATELY_CONSOLIDATED_BY|16|aea00aafb8f77c567eaabec7456ce7323d7f2e40b7a009a5750a5fbe98005659|",
+        "relationships": {
+          "end-node": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/MLU0ZO3ML4LN2LL2TL39"
+            }
+          },
+          "start-node": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/549300X34UUBDEUL1Z91"
+            }
+          }
+        },
+        "type": "relationship-records"
+      },
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-02T08:00:00Z"
+        }
+      }
+    },
+    "sha256": "30e4af6c10b4cc08d8cceeec0836c030a082b39b7308c48731f9c303a895a976",
+    "url": "https://api.gleif.org/api/v1/lei-records/549300X34UUBDEUL1Z91/ultimate-parent-relationship"
+  },
   "549300XGJX6FOWLOI640": {
     "response": {
       "data": {
@@ -2360,6 +2494,73 @@
     },
     "sha256": "e208d01057b8b6b531a4eae38a04c42c36799666e80a8e05797fca0abd904102",
     "url": "https://api.gleif.org/api/v1/lei-records/549300XGJX6FOWLOI640/ultimate-parent-relationship"
+  },
+  "549300YW95G1VBBGGV07": {
+    "response": {
+      "data": {
+        "attributes": {
+          "extension": {
+            "deletedAt": null
+          },
+          "registration": {
+            "corroborationDocuments": "ACCOUNTS_FILING",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "corroborationReference": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/0C76B7571DFB23F5C1258C4900320544/$FILE/SEB_Annual_Report_2024_ENG.pdf",
+            "initialRegistrationDate": "2013-12-13T03:23:00Z",
+            "lastUpdateDate": "2025-11-06T11:49:07Z",
+            "managingLou": "213800WAVVOPS85N2205",
+            "nextRenewalDate": "2026-12-15T00:00:00Z",
+            "status": "PUBLISHED"
+          },
+          "relationship": {
+            "endNode": {
+              "id": "F3JS33DEI6XQ4ZBPTN86",
+              "type": "LEI"
+            },
+            "periods": [
+              {
+                "endDate": "2024-12-31T00:00:00Z",
+                "startDate": "2023-01-01T00:00:00Z",
+                "type": "ACCOUNTING_PERIOD"
+              },
+              {
+                "startDate": "2017-05-25T00:00:00Z",
+                "type": "RELATIONSHIP_PERIOD"
+              }
+            ],
+            "startNode": {
+              "id": "549300YW95G1VBBGGV07",
+              "type": "LEI"
+            },
+            "status": "ACTIVE",
+            "type": "IS_ULTIMATELY_CONSOLIDATED_BY"
+          },
+          "validFrom": "2025-11-07T00:00:00Z",
+          "validTo": null
+        },
+        "id": "549300YW95G1VBBGGV07|LEI|IS_ULTIMATELY_CONSOLIDATED_BY|48|9ea55a4525aaa4b143ed821600b12c01fb0f126695af9d62ec30d0930def5a21|",
+        "relationships": {
+          "end-node": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/F3JS33DEI6XQ4ZBPTN86"
+            }
+          },
+          "start-node": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/549300YW95G1VBBGGV07"
+            }
+          }
+        },
+        "type": "relationship-records"
+      },
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-02T08:00:00Z"
+        }
+      }
+    },
+    "sha256": "c7624febd03b28ae27896e4dcf1bc1cd88163010e0f02fccbe96d07d60c63f45",
+    "url": "https://api.gleif.org/api/v1/lei-records/549300YW95G1VBBGGV07/ultimate-parent-relationship"
   },
   "549300Z7V2WOFIMUEK50": {
     "response": {
@@ -3263,6 +3464,77 @@
     },
     "sha256": "0d0fa12a83c88790792f2388c623ed64c6150d9db109bc8e528c98bd10a34894",
     "url": "https://api.gleif.org/api/v1/lei-records/F0HUI1NY1AZMJMD8LP67/ultimate-parent-relationship"
+  },
+  "G8ZTNESVNKW4NN761W05": {
+    "response": {
+      "data": {
+        "attributes": {
+          "extension": {
+            "deletedAt": null
+          },
+          "registration": {
+            "corroborationDocuments": "ACCOUNTS_FILING",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "corroborationReference": null,
+            "initialRegistrationDate": "2019-07-02T14:43:06Z",
+            "lastUpdateDate": "2026-06-06T05:10:44Z",
+            "managingLou": "724500A93Z8V1MJK5349",
+            "nextRenewalDate": "2027-06-06T09:11:11Z",
+            "status": "PUBLISHED"
+          },
+          "relationship": {
+            "endNode": {
+              "id": "BFXS5XCH7N0Y05NIXW11",
+              "type": "LEI"
+            },
+            "periods": [
+              {
+                "endDate": "2025-12-30T23:00:00Z",
+                "startDate": "2024-12-31T23:00:00Z",
+                "type": "ACCOUNTING_PERIOD"
+              },
+              {
+                "startDate": "1982-11-25T23:00:00Z",
+                "type": "RELATIONSHIP_PERIOD"
+              },
+              {
+                "startDate": "2026-03-09T23:00:00Z",
+                "type": "DOCUMENT_FILING_PERIOD"
+              }
+            ],
+            "startNode": {
+              "id": "G8ZTNESVNKW4NN761W05",
+              "type": "LEI"
+            },
+            "status": "ACTIVE",
+            "type": "IS_ULTIMATELY_CONSOLIDATED_BY"
+          },
+          "validFrom": "2026-06-07T00:00:00Z",
+          "validTo": null
+        },
+        "id": "G8ZTNESVNKW4NN761W05|LEI|IS_ULTIMATELY_CONSOLIDATED_BY|22|b329d97a420c36dd46bb99052aa2fe41fc2bc47a8415fbbbb929fa39392c6842|",
+        "relationships": {
+          "end-node": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/BFXS5XCH7N0Y05NIXW11"
+            }
+          },
+          "start-node": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/G8ZTNESVNKW4NN761W05"
+            }
+          }
+        },
+        "type": "relationship-records"
+      },
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-02T08:00:00Z"
+        }
+      }
+    },
+    "sha256": "79d22a948f76a987b72ff088a14ffbee41a25fcb1d191b2cabf8a71e7e197e35",
+    "url": "https://api.gleif.org/api/v1/lei-records/G8ZTNESVNKW4NN761W05/ultimate-parent-relationship"
   },
   "I6SS27Q1Q3385V753S50": {
     "response": {

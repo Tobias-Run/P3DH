@@ -747,6 +747,206 @@
     },
     "type": "lei-records"
   },
+  "0a3d424dcdd5b17ce134262d7c7610517b1cb76dc3f8f9d7feab4b00fcf15755": {
+    "attributes": {
+      "bic": [
+        "SPARNO22XXX"
+      ],
+      "conformityFlag": "CONFORMING",
+      "entity": {
+        "associatedEntity": {
+          "lei": null,
+          "name": null
+        },
+        "category": "GENERAL",
+        "creationDate": "1985-04-01T00:00:00Z",
+        "eventGroups": [
+          {
+            "events": [
+              {
+                "effectiveDate": "2025-05-22T00:00:00Z",
+                "recordedDate": "2025-10-01T00:00:00Z",
+                "status": "COMPLETED",
+                "type": "CHANGE_LEGAL_ADDRESS",
+                "validationDocuments": "SUPPORTING_DOCUMENTS",
+                "validationReference": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20250000308755&sokeverdi=937899319&spraak=nb"
+              }
+            ],
+            "groupType": "STANDALONE"
+          },
+          {
+            "events": [
+              {
+                "effectiveDate": "2025-05-22T00:00:00Z",
+                "recordedDate": "2025-10-01T00:00:00Z",
+                "status": "COMPLETED",
+                "type": "CHANGE_HQ_ADDRESS",
+                "validationDocuments": "SUPPORTING_DOCUMENTS",
+                "validationReference": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20250000308755&sokeverdi=937899319&spraak=nb"
+              }
+            ],
+            "groupType": "STANDALONE"
+          }
+        ],
+        "expiration": {
+          "date": null,
+          "reason": null
+        },
+        "headquartersAddress": {
+          "addressLines": [
+            "Parkgata 2"
+          ],
+          "addressNumber": null,
+          "addressNumberWithinBuilding": null,
+          "city": "Ålesund",
+          "country": "NO",
+          "language": "no",
+          "mailRouting": null,
+          "postalCode": "6003",
+          "region": "NO-15"
+        },
+        "jurisdiction": "NO",
+        "legalAddress": {
+          "addressLines": [
+            "Parkgata 2"
+          ],
+          "addressNumber": null,
+          "addressNumberWithinBuilding": null,
+          "city": "Ålesund",
+          "country": "NO",
+          "language": "no",
+          "mailRouting": null,
+          "postalCode": "6003",
+          "region": "NO-15"
+        },
+        "legalForm": {
+          "id": "R71C",
+          "other": null
+        },
+        "legalName": {
+          "language": "no",
+          "name": "SPAREBANKEN MØRE"
+        },
+        "otherAddresses": [
+          {
+            "addressLines": [
+              "Parkgata 2"
+            ],
+            "city": "Alesund",
+            "country": "NO",
+            "fieldType": "TransliteratedOtherAddress",
+            "language": "no",
+            "postalCode": "6003",
+            "region": "NO-15",
+            "type": "AUTO_ASCII_TRANSLITERATED_LEGAL_ADDRESS"
+          },
+          {
+            "addressLines": [
+              "Parkgata 2"
+            ],
+            "city": "Alesund",
+            "country": "NO",
+            "fieldType": "TransliteratedOtherAddress",
+            "language": "no",
+            "postalCode": "6003",
+            "region": "NO-15",
+            "type": "AUTO_ASCII_TRANSLITERATED_HEADQUARTERS_ADDRESS"
+          }
+        ],
+        "otherNames": [],
+        "registeredAs": "937 899 319",
+        "registeredAt": {
+          "id": "RA000472",
+          "other": null
+        },
+        "status": "ACTIVE",
+        "subCategory": null,
+        "successorEntities": [],
+        "successorEntity": {
+          "lei": null,
+          "name": null
+        },
+        "transliteratedOtherNames": [
+          {
+            "language": "no",
+            "name": "SPAREBANKEN MORE",
+            "type": "AUTO_ASCII_TRANSLITERATED_LEGAL_NAME"
+          }
+        ]
+      },
+      "gem": null,
+      "lei": "5967007LIEEXZX5PU005",
+      "mic": null,
+      "ocid": "no/937899319",
+      "qcc": "QNOV3KR34P",
+      "registration": {
+        "corroborationLevel": "FULLY_CORROBORATED",
+        "initialRegistrationDate": "2014-10-10T00:00:00Z",
+        "lastUpdateDate": "2025-10-01T06:39:00Z",
+        "managingLou": "549300O897ZC5H7CY412",
+        "nextRenewalDate": "2026-10-22T08:04:00Z",
+        "otherValidationAuthorities": [],
+        "status": "ISSUED",
+        "validatedAs": "937 899 319",
+        "validatedAt": {
+          "id": "RA000472",
+          "other": null
+        }
+      },
+      "spglobal": [
+        "884395"
+      ]
+    },
+    "id": "5967007LIEEXZX5PU005",
+    "links": {
+      "self": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005"
+    },
+    "relationships": {
+      "direct-children": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005/direct-children",
+          "relationship-records": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005/direct-child-relationships"
+        }
+      },
+      "direct-parent": {
+        "links": {
+          "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005/direct-parent-reporting-exception"
+        }
+      },
+      "field-modifications": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005/field-modifications"
+        }
+      },
+      "isins": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005/isins"
+        }
+      },
+      "lei-issuer": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005/lei-issuer"
+        }
+      },
+      "managing-lou": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005/managing-lou"
+        }
+      },
+      "ultimate-children": {
+        "links": {
+          "related": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005/ultimate-children",
+          "relationship-records": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005/ultimate-child-relationships"
+        }
+      },
+      "ultimate-parent": {
+        "links": {
+          "reporting-exception": "https://api.gleif.org/api/v1/lei-records/5967007LIEEXZX5PU005/ultimate-parent-reporting-exception"
+        }
+      }
+    },
+    "type": "lei-records"
+  },
   "0a8d2397f36b0a41512d188f69bb99884eb79a732711bf0613296d7993db2105": {
     "attributes": {
       "bic": [

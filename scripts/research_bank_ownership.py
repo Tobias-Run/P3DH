@@ -22,8 +22,22 @@ import urllib.parse
 import urllib.request
 
 AGENT='P3DH-research/1.0 (https://github.com/Tobias-Run/P3DH)'
-KEYWORDS=re.compile(r'co.operativ|genossenschaft|mutual|member.owned|customer.owned|sharehold|ownership|owned by|majority.owned|public.law|state.owned|government.owned|selveiende|aktionär|eigentüm|trägerschaft|träger der|actionnair|sociétaire|participaci[oó]n|accionist|azionist|propriet|soci[ée]t[ée] coop|cooperativa|skarb|udziałow|omistaj|aandeelhoud|eigena|ägar|eiere|self.owned',re.I)
-GOVERNANCE=re.compile(r'about|profil|sharehold|ownership|owner|aktion|eigent|traeger|actionna|governance|corporate|annual.report|gesch[aä]ft|unternehmen|ueber|über|ejer|selveiende|azionist|omist|aandeel|investor|rapport|cooperat|groupe|group/',re.I)
+KEYWORDS=re.compile(r'co.operativ|genossenschaft|mutual|member.owned|customer.owned|sharehold|ownership|owned by|majority.owned|public.law|state.owned|government.owned|selveiende|selvejende|aktionär|eigentüm|trägerschaft|träger der|actionnair|sociétaire|participaci[oó]n|accionist|azionist|propriet|soci[ée]t[ée] coop|cooperativa|skarb|udziałow|omistaj|aandeelhoud|eigena|ägar|eiere|self.owned',re.I)
+GOVERNANCE=re.compile(r'about|profil|sharehold|ownership|owner|aktion|eigent|traeger|actionna|governance|corporate|annual.report|gesch[aä]ft|unternehmen|ueber|über|ejer|selve[i]?ende|selvejende|azionist|omist|aandeel|investor|rapport|cooperat|groupe|group/|vedt(?:ae|a|æ)gt|statut|satzung',re.I)
+
+
+def governance_priority(url):
+    """Rank discovered source paths; home ownership and privacy are not bank owners."""
+    path=urllib.parse.unquote(urllib.parse.urlparse(url).path)
+    if re.search(r'ejerbolig|eierbolig|privatliv|privacy|cookie|lost-device|'
+                 r'shareholders?-meeting|karriere|careers|jobs|contact|'
+                 r'financing|trade-finance|ressourcen-des-eigentuemers',path,re.I):
+        return None
+    if not GOVERNANCE.search(path):return None
+    if re.search(r'sharehold|ownership|owner|aktion|eigent|actionna|azionist|'
+                 r'omist|ejer|selvejende|selveiende|vedt(?:ae|a|æ)gt|statut|satzung',path,re.I):return 1
+    if re.search(r'annual|geschaeft|geschäft|report|rapport',path,re.I):return 2
+    return 4
 
 class PageText(HTMLParser):
     def __init__(self):super().__init__();self.parts=[];self.links=[];self.ignore=0
@@ -116,10 +130,10 @@ def collect(bank,output,max_pages=12,cache_dir=None,cache_only=False):
             link=link.split('#')[0]
             target=(urllib.parse.urlparse(link).hostname or '').removeprefix('www.')
             if not any(target==h or target.endswith('.'+h) for h in base_hosts):continue
-            if not GOVERNANCE.search(link) or link in visited:continue
+            score=governance_priority(link)
+            if score is None or link in visited:continue
             # Ownership before investor navigation; recurse so a governance
             # landing page does not consume the entire ownership investigation.
-            score=1 if re.search('sharehold|ownership|owner|aktion|eigent|actionna|azionist|omist|ejer',link,re.I) else 2 if re.search('annual|geschaeft|geschäft|report|rapport',link,re.I) else 4
             queue.append((score,link))
         time.sleep(.1)
     return {**bank,'collection_mode':'cache_only' if cache_only else 'network_allowed',
