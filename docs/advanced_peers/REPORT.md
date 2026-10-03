@@ -2,6 +2,10 @@
 
 Stand: 3. Oktober 2026. Arbeitsstand zu [Issue #134](https://github.com/Tobias-Run/P3DH/issues/134), noch nicht produktiv veröffentlicht. Die Recherche ist **nicht abgeschlossen**. „Noch nicht verifiziert“ bedeutet nicht, dass die Information öffentlich fehlt.
 
+## Stabile historische Peergruppen
+
+[Stabile Peergruppen](STABLE_PEER_GROUPS.md) sind jetzt im Entwurfs-Viewer verfügbar: **42 feste Gruppen, davon 19 mit mindestens fünf Banken**, 237 Bank/Konsolidierungskreis-Zuordnungen. Mitglieder bleiben beim Wechsel des Meldestichtags gleich; Perzentile werden weiterhin innerhalb desselben Stichtags und Frameworks berechnet. Die explorative Referenzbildung verwendet zusätzlich 219 ausdrücklich gekennzeichnete externe Zuordnungen/Annahmen. Der geprüfte Registerstand bleibt 256/475; Annahmen zählen nicht als abgeschlossene Eigentümerrecherche. Gruppen werden nur durch ausdrücklichen Refresh neu gebildet.
+
 ## Rechercheergebnis
 
 Von **475 unterschiedlichen Institutskennungen im Viewer** sind **256** mit Quellen eingeordnet: 94 genossenschaftlich, 96 aktionärsgetragen, 31 öffentlich, 15 mit gemischter Trägerschaft, 6 als Gegenseitigkeitsorganisation, 10 mit selbstständiger Sparkassenform und 4 stiftungskontrolliert. **219 benötigen weitere manuelle Prüfung**. Der Viewer hat 476 Institut/Scope-Karten; ein Institut kommt mit mehreren Konsolidierungskreisen vor. Der Registerbestand enthält 293 Einträge, einschließlich zusätzlicher Konzernträger und Katalogeinträge außerhalb des aktuellen Viewers.
@@ -85,7 +89,7 @@ Die Schwellenwerte 0,20/0,30 liefern eine Nachbarschafts-Jaccard-Sensitivität. 
 
 [Messwerte](data_validation.json): 529 Berichte haben vollständige Fitdaten, 353 sind ausgeschlossen; 84 Konzernrepräsentationsdubletten werden nicht gefittet. Es entstehen 67 Cluster, davon 43 mit mindestens fünf Mitgliedern. Größte tatsächliche TREA-Spanne: **9,57-fach**. Median der definierten Cluster-Silhouetten: **0,3458**; die Trennung ist mäßig und rechtfertigt noch keine pauschale Aussage „bessere Peers“. Vor den Paketen 045–058 lag der Wert bei 0,3542; die Veränderung durch zusätzliche Einordnungen ist eine Modelldiagnose, kein unabhängiger Nachweis einer besseren Nutzerentscheidung.
 
-- 1.525 Unit-/Datentests bestanden, einschließlich fehlender Werte, Dimensionenkonflikte, Scale-Ausschlüsse, Frameworkgrenzen, Größe, Konzernbereinigung, Quellpflicht und Collectorfehlern.
+- 1.531 Unit-/Datentests bestanden, einschließlich fehlender Werte, Dimensionenkonflikte, Scale-Ausschlüsse, Frameworkgrenzen, Größe, Konzernbereinigung, Quellpflicht und Collectorfehlern.
 - Echte Chromium-Prüfung bei 1280 px/Englisch und 390 px/Deutsch: Filter, Perzentile, CSV, Quellen, Sprachwechsel, geteilte Links, Neuladen, Risikoansicht, veraltetes Cluster, fehlende Datei und ältere Veröffentlichung ohne Manifest; keine JavaScript-Fehler.
 - Standardstart lädt die Zusatzdatei nicht; die bisherige Standard-Perzentilberechnung bleibt gleich.
 - Reale Artefakte geprüft auf disjunkte Mitgliedschaften, Datums-/Scopegrenzen, Konzernbereinigung, maximale Distanz, Größenrahmen sowie Quell- und Manifesthashes.

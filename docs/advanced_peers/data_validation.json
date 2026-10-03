@@ -23,13 +23,13 @@
   "browser_checks": {
     "cases": [
       {
-        "clusters": 43,
+        "clusters": 19,
         "language": "en",
         "public_reports": 63,
         "width": 1280
       },
       {
-        "clusters": 43,
+        "clusters": 19,
         "language": "de",
         "public_reports": 63,
         "width": 390
@@ -1024,6 +1024,44 @@
   "registry_rows": 293,
   "reviewed_control_relationships": 77,
   "reviewed_document_chains": 11,
-  "unit_tests": 1525,
+  "stable_peer_groups": {
+    "anchor_dates": {
+      "2025-06-30": 1,
+      "2025-09-30": 2,
+      "2025-12-31": 26,
+      "2026-03-31": 13
+    },
+    "bank_scope_memberships": 237,
+    "browser_checks": {
+      "cases": [
+        {
+          "clusters": 19,
+          "language": "en",
+          "public_reports": 63,
+          "width": 1280
+        },
+        {
+          "clusters": 19,
+          "language": "de",
+          "public_reports": 63,
+          "width": 390
+        }
+      ],
+      "javascript_errors": 0
+    },
+    "groups": 42,
+    "groups_at_least_five": 19,
+    "median_anchor_silhouette": 0.463774,
+    "members_in_groups_at_least_five": 168,
+    "ownership_assignment_status": {
+      "assumption": 145,
+      "externally_reported_unverified": 74,
+      "reviewed": 256
+    },
+    "policy": "frozen-latest-usable-bank-scope-v1",
+    "snapshot_sha256": "93012703bf5042b2f87e4c81749a3f3b9f022f6109ccb139c7619302928b3afa",
+    "unit_tests": 1531
+  },
+  "unit_tests": 1531,
   "unit_tests_status": "passed"
 }

@@ -84,11 +84,29 @@ def check():
                 page.select_option('#bmCluster',clusters[0]);page.wait_for_function('(id)=>BM_CLUSTER===id && document.querySelector(".peer-note")',arg=clusters[0])
                 public_count=out['count']
                 out=page.evaluate('''()=>{const rows=advancedSelection(benchmarkRows()).rows;return {
-                  clusters:[...new Set(rows.map(r=>AP_DATA.reports[r.key]?.cluster))],
+                  clusters:[...new Set(rows.map(r=>clusterOf(r)))],
                   suppressed:clusterFittingMetric('trea'),notSuppressed:clusterFittingMetric('cet1'),
                   csv:benchmarkCSV(rows,bmProf()),defaultKey:peerKeyOf(rows[0]),advancedKey:peerKeyOf(rows[0],'cluster')}}''')
                 assert out['clusters']==[clusters[0]] and out['suppressed'] and not out['notSuppressed']
                 assert out['defaultKey']!=out['advancedKey'] and '# Fitting method:' in out['csv']
+                assert 'ownership_status' in out['csv'] and 'peer_anchor_date' in out['csv']
+                assert 'Stable peer rosters' in out['csv']
+                roster=page.evaluate('AP_CLUSTERS.get(BM_CLUSTER).roster.slice().sort()')
+                for date in ['2025-12-31','2026-03-31']:
+                    page.select_option('#fDate',date)
+                    page.wait_for_function('(date)=>document.querySelector("#fDate").value===date && !document.querySelector("#main[aria-busy=true]")',arg=date)
+                    history=page.evaluate("""()=>{const rows=advancedSelection(benchmarkRows()).rows;
+                      const partitions=new Map();for(const r of rows){const k=advancedPeerKey(r,'cluster');
+                        if(k)(partitions.get(k)||partitions.set(k,new Set()).get(k)).add([r.date,r.scope,byKey(r.key).framework].join('|'));}
+                      return {id:BM_CLUSTER,roster:AP_CLUSTERS.get(BM_CLUSTER).roster.slice().sort(),
+                        leis:[...new Set(rows.map(r=>r.lei))],dates:[...new Set(rows.map(r=>r.date))],
+                        partitions:[...partitions.values()].map(s=>s.size)};}""")
+                    assert history['id']==clusters[0] and history['roster']==roster
+                    assert history['leis'] and set(history['leis'])<=set(roster),'historical roster widened'
+                    assert history['dates']==[date]
+                    assert all(n==1 for n in history['partitions']),'percentile mixes dates or frameworks'
+                page.select_option('#fDate','')
+                page.wait_for_function("document.querySelector('#fDate').value==='' && !document.querySelector('#main[aria-busy=true]')")
                 page.check('#bmPct')
                 assert page.locator('.bmtable .pctb').count()>0,'non-fitting capital metrics lost percentiles'
                 page.select_option('#bmProfile','risk')

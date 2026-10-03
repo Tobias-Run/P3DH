@@ -92,5 +92,5 @@ interim/korrekturen_raw/
 interim/llm_cache.jsonl
 
 # Ownership research: archived web responses and discovery are working material.
-# Only reviewed classifications and the research report are versioned.
+# Reviewed classifications, explicitly labelled assumptions and frozen peer rosters are versioned.
 interim/ownership_research/

@@ -301,13 +301,15 @@ def build(con, root=ROOT, extra_leis=()):
     for key, rep in excluded.items():
         reports[key]["representative"] = rep
         reports[key]["cluster"] = None
-    return {"schema": 1, "method": METHOD, "threshold": THRESHOLD, "weights": WEIGHTS,
+    from stable_peer_groups import load as load_stable_peers
+    stable = load_stable_peers(root, metadata)
+    return {**stable, "schema": 1, "method": METHOD, "threshold": THRESHOLD, "weights": WEIGHTS,
             "max_size_ratio": MAX_SIZE_RATIO,
             "fitting_metrics": ["trea", "sh_credit", "sh_ccr", "sh_cva", "sh_market", "sh_op"],
             "source_files": {str(path.relative_to(root)): hashlib.sha256(path.read_bytes()).hexdigest()
                              for path in [root/"codebook/bank_classification.csv",
                                           root/"processed/lei_relations.csv",root/"processed/coverage_gap.csv",
-                                          root/"processed/scale_flags.csv"] if path.exists()},
+                                          root/"processed/scale_flags.csv", root/"codebook/stable_peer_groups.json"] if path.exists()},
             "metadata": metadata, "reports": reports, "clusters": clusters,
             "excluded": missing,
             "coverage": {"entities": len(metadata),

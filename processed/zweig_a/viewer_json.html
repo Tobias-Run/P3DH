@@ -524,6 +524,14 @@ function applyTheme(){ document.documentElement.dataset.theme = DARK?'dark':'lig
    Funktionswoertern. Eine vergessene Zeichenkette ist damit ein Befund und
    keine Geschmacksfrage. */
 const DE = {
+  "Maximum TREA size ratio at anchor date: {0}×.": "Maximales TREA-Größenverhältnis am Referenzstichtag: {0}×.",
+  "Stable peer groups": "Stabile Peergruppen",
+  "Assumed ownership": "Angenommene Trägerschaft",
+  "External ownership assignment": "Übernommene Trägerschaft",
+  "Fixed peer roster anchored at {0}. Historical dates use the same banks; missing reports are not replaced.": "Feste Peer-Liste auf Basis von {0}. Historische Stichtage verwenden dieselben Banken; fehlende Meldungen werden nicht ersetzt.",
+  "Ownership assumptions are included for this exploratory peer analysis.": "Trägerschaftsannahmen sind in dieser explorativen Peer-Analyse enthalten.",
+  "Percentiles compare only the same date, scope and reporting framework within the fixed roster.": "Perzentile vergleichen innerhalb der festen Gruppe nur denselben Stichtag, Konsolidierungskreis und Melderahmen.",
+  "Peer rosters stay fixed until an explicit refresh. Anchor diagnostics do not describe historical fit quality.": "Peer-Listen bleiben bis zur ausdrücklichen Neubildung fest. Die Referenzdiagnostik beschreibt nicht die historische Clusterqualität.",
   "Cooperative": "Genossenschaftlich",
   "Publicly owned": "Öffentlich getragen",
   "Shareholder-owned": "Aktionärsgetragen",
@@ -2680,7 +2688,7 @@ const OWN_LABEL={cooperative:'Cooperative',public:'Publicly owned',shareholder:'
   mixed:'Mixed ownership',mutual:'Mutual',foundation:'Foundation-controlled',savings:'Self-owned savings bank',unknown:'Ownership not yet verified'};
 const ROLE_LABEL={group_head:'Group head',subsidiary:'Subsidiary',
   no_consolidating_parent:'No consolidating parent (GLEIF)',unknown:'Unknown group role'};
-const PEER_LABEL={standard:'Size, scope and date',bank_type:'Ownership and group role',cluster:'Statistical clusters'};
+const PEER_LABEL={standard:'Size, scope and date',bank_type:'Ownership and group role',cluster:'Stable peer groups'};
 function ensureAdvancedPeers(){
   if(AP_DATA) return Promise.resolve();
   if(!AP_MANIFEST || AP_MANIFEST.schema!==1 || AP_MANIFEST.path!=='advanced_peers.json' ||
@@ -2691,18 +2699,22 @@ function ensureAdvancedPeers(){
     AP_PROMISE=getJSON('advanced_peers.json',integrity).then(data=>{
       if(data.schema!==1 || data.method!=='complete-linkage-gower-caliper-v1' || !data.metadata || !data.reports || !Array.isArray(data.clusters))
         throw new Error(tr('Unsupported advanced peer data.'));
-      AP_DATA=data;AP_CLUSTERS=new Map(data.clusters.map(c=>[c.id,c]));
+      AP_DATA=data;AP_CLUSTERS=new Map((data.stable_clusters||data.clusters).map(c=>[c.id,c]));
     }).catch(e=>{AP_PROMISE=null;throw e;});
   }
   return AP_PROMISE;
 }
 function peerMeta(row){
-  return AP_DATA?.metadata[row.lei]||{ownership:'unknown',role:'unknown',group_head:''};
+  const base=AP_DATA?.metadata[row.lei]||{ownership:'unknown',role:'unknown',group_head:''};
+  return BM_PEER==='cluster' && AP_DATA?.stable_metadata?.[row.lei]?{...base,...AP_DATA.stable_metadata[row.lei]}:base;
+}
+function clusterOf(row){
+  return AP_DATA?.stable_memberships?AP_DATA.stable_memberships[row.lei+'|'+row.scope]:AP_DATA?.reports[row.key]?.cluster;
 }
 function advancedSelection(rows){
   if(BM_PEER==='standard' || !AP_DATA) return {rows,duplicates:[],filtered:0};
   const filtered=rows.filter(r=>{
-    const m=peerMeta(r), cluster=AP_DATA.reports[r.key]?.cluster;
+    const m=peerMeta(r), cluster=clusterOf(r);
     return (!BM_OWN || m.ownership===BM_OWN) && (!BM_ROLE || m.role===BM_ROLE) &&
       (!BM_CLUSTER || cluster===BM_CLUSTER);
   });
@@ -2731,8 +2743,9 @@ function advancedPeerKey(r,basis){
   if(!AP_DATA) return null;
   const rep=byKey(r.key),m=peerMeta(r);
   if(basis==='cluster'){
-    const id=AP_DATA.reports[r.key]?.cluster;
-    return id && AP_CLUSTERS.has(id)?'cluster:'+id:null;
+    if(!rep?.framework || rep.framework==='unknown')return null;
+    const id=clusterOf(r);
+    return id && AP_CLUSTERS.has(id)?['cluster',id,r.date,r.scope,rep?.framework||'?'].join('|'):null;
   }
   if(m.ownership==='unknown' || m.role==='unknown') return null;
   return [r.itype||'?',r.scope,r.date,rep?.framework||'?',m.ownership,m.role].join('|');
@@ -2743,7 +2756,8 @@ function peerControls(){
     `<option value="${id}"${id===value?' selected':''}>${esc(tr(label))}</option>`).join('');
   let h=`<div class="peer-controls"><label class="ctl">${tr('Peer basis')}: <select id="bmPeer">${opts(PEER_LABEL,BM_PEER)}</select></label>`;
   if(BM_PEER!=='standard'){
-    const availableOwners=new Set(Object.values(AP_DATA?.metadata||{}).map(m=>m.ownership));
+    const ownerMetadata=BM_PEER==='cluster'?(AP_DATA?.stable_metadata||AP_DATA?.metadata):AP_DATA?.metadata;
+    const availableOwners=new Set(Object.values(ownerMetadata||{}).map(m=>m.ownership));
     const owners=Object.fromEntries(Object.entries(OWN_LABEL).filter(([id])=>availableOwners.has(id)||id===BM_OWN));
     h+=`<label class="ctl">${tr('Ownership')}: <select id="bmOwnership"><option value="">${tr('All ownership types')}</option>${opts(owners,BM_OWN)}</select></label>
       <label class="ctl">${tr('Group role')}: <select id="bmRole"><option value="">${tr('All group roles')}</option>${opts(ROLE_LABEL,BM_ROLE)}</select></label>`;
@@ -2757,7 +2771,7 @@ function peerControls(){
 function peerExplanation(rows,selection){
   if(BM_PEER==='standard') return '';
   const unavailable=BM_CLUSTER && !AP_CLUSTERS.has(BM_CLUSTER);
-  const ownershipKnown=rows.filter(r=>peerMeta(r).ownership!=='unknown').length;
+  const ownershipKnown=rows.filter(r=>{const m=peerMeta(r);return m.ownership!=='unknown' && !['assumption','externally_reported_unverified'].includes(m.classification_status);}).length;
   const groupUnknown=rows.filter(r=>!peerMeta(r).group_head).length;
   const eligible=rows.filter(r=>advancedPeerKey(r,BM_PEER)).length;
   const memberships=new Map();
@@ -2767,17 +2781,18 @@ function peerExplanation(rows,selection){
     ${tr('{0} reports have an unknown group head.',groupUnknown)}
     ${tr('{0} reports have no peer assignment; {1} are in groups smaller than five.',rows.length-eligible,small)}
     ${tr('Percentiles require five valid values per metric. No automatic widening of the peer group.')}
-    <details><summary>${tr('Peer method, coverage and exclusions')}</summary><p>${tr('Ownership describes the current reviewed classification, not historical ownership at the report date. Sources and review dates are shown per bank. Subsidiaries do not inherit ownership automatically.')}</p>
+    <details><summary>${tr('Peer method, coverage and exclusions')}</summary><p>${BM_PEER==='cluster'?tr('Ownership assumptions are included for this exploratory peer analysis.'):tr('Ownership describes the current reviewed classification, not historical ownership at the report date. Sources and review dates are shown per bank. Subsidiaries do not inherit ownership automatically.')}</p>
     <p>${tr('At most one report per known group, date, scope and framework is retained. Unknown group heads remain separate; independence is not established.')}
     ${tr('{0} related reports excluded.',selection.duplicates.length)}</p>`;
   if(selection.duplicates.length)h+=`<details><summary>${tr('Show related reports excluded')}</summary><ul>${selection.duplicates.map(x=>
     `<li>${esc(x.row.name+' · '+x.row.date)} → ${esc(x.representative.name)}</li>`).join('')}</ul></details>`;
   if(BM_PEER==='bank_type')h+=`<p>${tr('Groups share size class, scope, date, framework, ownership and group role. Unknown ownership or role receives no percentile.')}</p>`;
   else{
-    h+=`<p>${tr('Maximum TREA size ratio within a cluster: {0}×.',AP_DATA.max_size_ratio)}</p><p>${tr('Exploratory complete-linkage clusters: size 25%, risk mix 50%, ownership 15%, group role 10%. Same date, scope and framework; maximum distance 0.25. Unknown categories contribute a neutral distance of 0.5. Capital and liquidity ratios are not fitting inputs.')}</p>
+    const dates=[...new Set([...AP_CLUSTERS.values()].filter(c=>!BM_CLUSTER || c.id===BM_CLUSTER).map(c=>c.date))].sort().join(', ');
+    h+=`<p>${tr('Fixed peer roster anchored at {0}. Historical dates use the same banks; missing reports are not replaced.',dates)}</p><p>${tr('Ownership assumptions are included for this exploratory peer analysis.')}</p><p>${tr('Percentiles compare only the same date, scope and reporting framework within the fixed roster.')}</p><p>${tr('Peer rosters stay fixed until an explicit refresh. Anchor diagnostics do not describe historical fit quality.')}</p><p>${tr('Maximum TREA size ratio at anchor date: {0}×.',AP_DATA.max_size_ratio)}</p><p>${tr('Exploratory complete-linkage clusters: size 25%, risk mix 50%, ownership 15%, group role 10%. Same date, scope and framework; maximum distance 0.25. Unknown categories contribute a neutral distance of 0.5. Capital and liquidity ratios are not fitting inputs.')}</p>
       <p>${tr('Cluster diagnostics describe the fitted population; filters may reduce the members used for this benchmark.')}</p>
     <p>${tr('TREA and risk-profile percentiles use fitting inputs and are suppressed in cluster mode. Report overview and cell peer context keep their standard basis.')}</p>`;
-    const used=[...new Set(rows.map(r=>AP_DATA.reports[r.key]?.cluster).filter(Boolean))];
+    const used=[...new Set(rows.map(r=>clusterOf(r)).filter(Boolean))];
     if(used.length)h+=`<details class="peer-diagnostics"><summary>${tr('Cluster diagnostics and members')} (${used.length})</summary>${used.map(id=>{
       const c=AP_CLUSTERS.get(id);
       return `<details><summary>${esc(c.date+' · '+c.scope+' · RF '+c.framework+' · '+id.slice(0,6))} · n=${c.members.length} · ${tr('Maximum distance')}: ${nf(c.max_distance,3,3)}</summary>
@@ -2792,15 +2807,17 @@ function peerExplanation(rows,selection){
 function peerEvidence(r){
   if(BM_PEER==='standard')return '';
   const m=peerMeta(r),p=AP_DATA?.reports[r.key],reason=AP_DATA?.excluded[r.key];
-  const source=m.source_url?`<a href="${esc(m.source_url)}" target="_blank" rel="noopener">${tr('Ownership source')}</a> · ${esc(m.reviewed_at)}${m.supporting_source_url?' · <a href="'+esc(m.supporting_source_url)+'" target="_blank" rel="noopener">'+tr('Supporting ownership source')+'</a>':''}<br>${esc(m.evidence_quote)}`:tr('No reviewed ownership source.');
+  const assumed=['assumption','externally_reported_unverified'].includes(m.classification_status);
+  const source=assumed?esc(tr(m.classification_status==='assumption'?'Assumed ownership':'External ownership assignment'))+' · '+esc(m.assumption_basis||''):m.source_url?`<a href="${esc(m.source_url)}" target="_blank" rel="noopener">${tr('Ownership source')}</a> · ${esc(m.reviewed_at)}${m.supporting_source_url?' · <a href="'+esc(m.supporting_source_url)+'" target="_blank" rel="noopener">'+tr('Supporting ownership source')+'</a>':''}<br>${esc(m.evidence_quote)}`:tr('No reviewed ownership source.');
   const chain=m.control_source_url?'<br><a href="'+esc(m.control_source_url)+'" target="_blank" rel="noopener">'+tr('Verified group relationship')+'</a> · '+tr('Controller LEI')+': '+esc(m.controller_lei):'';
   const head=m.group_head?`${tr('Group head LEI')}: ${esc(m.group_head)} (${esc(m.group_source)})`:tr('Unknown group head');
-  const cluster=p?.cluster?`${tr('Cluster')}: ${esc(p.cluster.slice(0,6))}`:tr('No cluster assignment');
+  const clusterId=clusterOf(r);
+  const cluster=clusterId?`${tr('Cluster')}: ${esc(clusterId.slice(0,6))}`:tr('No cluster assignment');
   const why=reason?tr({scale_finding:'Scale finding in fitting inputs',missing_or_ambiguous_size:'Missing or ambiguous size',missing_or_ambiguous_framework:'Missing or ambiguous framework',missing_or_invalid_risk:'Missing, ambiguous or invalid risk mix'}[reason]||'Missing fitting inputs'):
     p?.representative?tr('Another report represents this group in the fitted clusters.'):
     !p?tr('Missing fitting inputs'):tr('Isolated at the selected distance threshold.');
   return `<details class="peer-evidence"><summary>${esc(tr(OWN_LABEL[m.ownership]||OWN_LABEL.unknown))} · ${esc(tr(ROLE_LABEL[m.role]||ROLE_LABEL.unknown))}</summary>
-    <div>${source}${chain}<br>${head}${BM_PEER==='cluster'?'<br>'+cluster+(p?.cluster?'':' · '+esc(why)):''}</div></details>`;
+    <div>${source}${chain}<br>${head}${BM_PEER==='cluster'?'<br>'+cluster+(clusterId?'':' · '+esc(why)):''}</div></details>`;
 }
 function bindPeerControls(){
   document.getElementById('bmPeer').onchange=e=>{
@@ -3643,10 +3660,10 @@ function benchmarkCSV(rows, prof){
            '# '+tr('view:')+' '+location.href,
            '#'];
   if(BM_PEER!=='standard')k.push('# Peer basis: '+BM_PEER,
-    '# Current reviewed ownership; not historical ownership at report date.',
+    '# Current ownership classification; cluster mode can include explicit assumptions, not historical ownership at report date.',
     '# One representative per known group/date/scope/framework; unknown parents are not proven independent.',
     '# Advanced peer data SHA-256: '+AP_MANIFEST.sha256);
-  if(BM_PEER==='cluster')k.push('# Fitting method: '+AP_DATA.method+'; threshold '+AP_DATA.threshold+'; weights '+JSON.stringify(AP_DATA.weights)+'; maximum TREA size ratio '+AP_DATA.max_size_ratio,
+  if(BM_PEER==='cluster')k.push('# Stable peer rosters; historical missing reports are not replaced; same date/scope/framework per percentile.', '# Fitting method: '+AP_DATA.method+'; threshold '+AP_DATA.threshold+'; weights '+JSON.stringify(AP_DATA.weights)+'; maximum TREA size ratio '+AP_DATA.max_size_ratio,
     '# TREA/risk-profile cluster percentiles are suppressed because size/risk mix are fitting inputs.');
   else if(BM_PEER==='bank_type')k.push('# Groups share size class, scope, date, framework, ownership and group role; at least five valid values per metric.');
   for(const z of CSV_CAVEATS()) k.push('# '+z);
@@ -3661,7 +3678,7 @@ function benchmarkCSV(rows, prof){
   // danach handeln, und eine Warnung ohne Handhabe ist Dekoration.
   const kopf=['institution','lei','country','size_class','consolidation','reference_date',
               'framework', ...sichtbareSpalten(prof).map(c=>c.id),
-              'scale_finding','plausibility',...(BM_PEER==='standard'?[]:['ownership','ownership_reviewed_at','ownership_source','ownership_basis','ownership_controller_lei','ownership_control_source','group_role','group_head_lei','cluster_id'])];
+              'scale_finding','plausibility',...(BM_PEER==='standard'?[]:['ownership','ownership_reviewed_at','ownership_source','ownership_basis','ownership_controller_lei','ownership_control_source','group_role','group_head_lei','cluster_id','ownership_status','peer_anchor_date'])];
   const zeilen=[kopf.map(csvFeld).join(',')];
   for(const r of rows){
     const sc=r.q&&r.q.sc;
@@ -3672,7 +3689,7 @@ function benchmarkCSV(rows, prof){
     zeilen.push([r.name, r.lei, r.country, r.itype, r.scope, r.date,
                  rep?rep.framework:'',
                  ...sichtbareSpalten(prof).map(c=>csvZahl(r[c.id])), skal, q,
-                 ...(BM_PEER==='standard'?[]:[peerMeta(r).ownership,peerMeta(r).reviewed_at||'',peerMeta(r).source_url||'',peerMeta(r).ownership_basis||'',peerMeta(r).controller_lei||'',peerMeta(r).control_source_url||'',peerMeta(r).role,peerMeta(r).group_head||'',AP_DATA.reports[r.key]?.cluster||''])]
+                 ...(BM_PEER==='standard'?[]:[peerMeta(r).ownership,peerMeta(r).reviewed_at||'',peerMeta(r).source_url||'',peerMeta(r).ownership_basis||'',peerMeta(r).controller_lei||'',peerMeta(r).control_source_url||'',peerMeta(r).role,peerMeta(r).group_head||'',clusterOf(r)||'',peerMeta(r).classification_status||'reviewed',AP_CLUSTERS.get(clusterOf(r))?.date||''])]
                 .map(csvFeld).join(','));
   }
   return k.join('\n')+'\n'+zeilen.join('\n')+'\n';

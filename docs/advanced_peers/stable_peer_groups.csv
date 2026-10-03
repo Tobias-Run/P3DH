@@ -1,0 +1,238 @@
+peer_group_id,anchor_date,scope,anchor_framework,group_size,lei,name,ownership,classification_status
+e8abe454d137,2026-03-31,CON,4.2,6,0W2PZJM8XOY22M4GG883,DekaBank Deutsche Girozentrale,public,reviewed
+e8abe454d137,2026-03-31,CON,4.2,6,A5GWLFH3KM7YV2SFQL84,Belfius Bank,public,reviewed
+e8abe454d137,2026-03-31,CON,4.2,6,B81CK4ESI35472RHJ606,Landesbank Baden-Württemberg,public,reviewed
+e8abe454d137,2026-03-31,CON,4.2,6,DIZES5CFO5K3I5R58746,Landesbank Hessen-Thüringen Girozentrale,public,reviewed
+e8abe454d137,2026-03-31,CON,4.2,6,DSNHHQ2B9X5N6OUJ1236,Norddeutsche Landesbank - Girozentrale -,public,reviewed
+e8abe454d137,2026-03-31,CON,4.2,6,VDYMYTQGZZ6DU0912C88,Bayerische Landesbank,public,reviewed
+69217ac42278,2026-03-31,CON,4.2,2,2138009Y59EAR7H1UO97,"Akciju sabiedrība ""Citadele banka""",mixed,assumption
+69217ac42278,2026-03-31,CON,4.2,2,5493001BABFV7P27OW30,"Nova Ljubljanska Banka d.d., Ljubljana",mixed,reviewed
+702ec4bb302e,2026-03-31,CON,4.2,4,213800X3Q9LSAKRUWY91,KBC Groupe,mixed,reviewed
+702ec4bb302e,2026-03-31,CON,4.2,4,7CUNS533WID6K7DGFI87,"CaixaBank, S.A.",mixed,reviewed
+702ec4bb302e,2026-03-31,CON,4.2,4,851WYGNLUQLFZBSYGB56,COMMERZBANK Aktiengesellschaft,mixed,reviewed
+702ec4bb302e,2026-03-31,CON,4.2,4,BFXS5XCH7N0Y05NIXW11,ABN AMRO Bank N.V.,mixed,reviewed
+54b62d808a4d,2026-03-31,CON,4.2,10,259400LGXW3K0GDAG361,Santander Bank Polska S.A.,shareholder,reviewed
+54b62d808a4d,2026-03-31,CON,4.2,10,5493007SJLLCTM6J6M37,"Unicaja Banco, S.A.",shareholder,externally_reported_unverified
+54b62d808a4d,2026-03-31,CON,4.2,10,5UMCZOEYKCVFAW8ZLO05,"National Bank of Greece, S.A.",shareholder,externally_reported_unverified
+54b62d808a4d,2026-03-31,CON,4.2,10,635400AKJBGNS5WNQL34,AIB Group plc,shareholder,reviewed
+54b62d808a4d,2026-03-31,CON,4.2,10,635400C8EK6DRI12LJ39,Bank of Ireland Group plc,shareholder,reviewed
+54b62d808a4d,2026-03-31,CON,4.2,10,635400L14KNHZXPUZM19,Bank of Cyprus Holdings Public Limited Company,shareholder,externally_reported_unverified
+54b62d808a4d,2026-03-31,CON,4.2,10,815600AD83B2B6317788,CREDITO EMILIANO HOLDING SOCIETA' PER AZIONI,shareholder,assumption
+54b62d808a4d,2026-03-31,CON,4.2,10,DZZ47B9A52ZJ6LT6VV95,Deutsche Pfandbriefbank AG,shareholder,assumption
+54b62d808a4d,2026-03-31,CON,4.2,10,VWMYAEQSTOPNV0SUGU82,"Bankinter, S.A.",shareholder,reviewed
+54b62d808a4d,2026-03-31,CON,4.2,10,XLEZHWWOI4HFQDGL4793,BANK HANDLOWY W WARSZAWIE SA,shareholder,reviewed
+0a36f009f9f1,2026-03-31,CON,4.2,9,2W8N8UU78PMDQKZENC08,Intesa Sanpaolo S.p.A.,shareholder,reviewed
+0a36f009f9f1,2026-03-31,CON,4.2,9,529900SSGT49ZZSWYE62,Volkswagen Financial Services AG,shareholder,reviewed
+0a36f009f9f1,2026-03-31,CON,4.2,9,5493006QMFDDMYWIAM13,"Banco Santander, S.A.",shareholder,reviewed
+0a36f009f9f1,2026-03-31,CON,4.2,9,549300NYKK9MWM7GGW15,ING Groep N.V.,shareholder,reviewed
+0a36f009f9f1,2026-03-31,CON,4.2,9,549300TRUWO2CD2G5692,"UNICREDIT, SOCIETA' PER AZIONI",shareholder,reviewed
+0a36f009f9f1,2026-03-31,CON,4.2,9,7LTWFZYICNSX8D621K86,DEUTSCHE BANK AKTIENGESELLSCHAFT,shareholder,reviewed
+0a36f009f9f1,2026-03-31,CON,4.2,9,K8MS7FD7N5Z2WQ51AZ71,"Banco Bilbao Vizcaya Argentaria, S.A.",shareholder,reviewed
+0a36f009f9f1,2026-03-31,CON,4.2,9,O2RNE8IBXP4R0TD8PU41,Société générale S.A.,shareholder,reviewed
+0a36f009f9f1,2026-03-31,CON,4.2,9,R0MUWSFPU8MPRO8K5P83,BNP Paribas,shareholder,reviewed
+e70c498a5e66,2026-03-31,CON,4.2,3,3157002JBFAI478MD587,"Tatra banka, a.s.",cooperative,reviewed
+e70c498a5e66,2026-03-31,CON,4.2,3,96950041VJ1QP0B69503,Crédit mutuel Arkéa,cooperative,reviewed
+e70c498a5e66,2026-03-31,CON,4.2,3,969500A3Y5KTGJEMDZ32,Caisse régionale de crédit agricole mutuel du Languedoc,cooperative,reviewed
+01ea0ce19552,2026-03-31,CON,4.2,3,315700E9POA724IWFP59,J&amp;T FINANCE GROUP SE,shareholder,reviewed
+01ea0ce19552,2026-03-31,CON,4.2,3,549300L7YCATGO57ZE10,FINECOBANK BANCA FINECO S.P.A. (IN BREVE FINECOBANK S.P.A. OVVERO BANCA FINECO S.P.A. OVVERO FINECO BANCA S.P.A.),shareholder,externally_reported_unverified
+01ea0ce19552,2026-03-31,CON,4.2,3,549300PZMFIQR79Q0T97,Íslandsbanki hf.,shareholder,assumption
+7ec8cdce3dee,2026-03-31,CON,4.2,5,3H0Q3U74FVFED2SHZT16,MBH bankcsoport,mixed,externally_reported_unverified
+7ec8cdce3dee,2026-03-31,CON,4.2,5,5493000LKS7B3UTF7H35,Bank Polska Kasa Opieki S.A.,mixed,reviewed
+7ec8cdce3dee,2026-03-31,CON,4.2,5,549300GKFG0RYRRQ1414,DNB BANK ASA,mixed,reviewed
+7ec8cdce3dee,2026-03-31,CON,4.2,5,9CZ7TVMR36CYD5TZBS50,Banque Internationale à Luxembourg,mixed,assumption
+7ec8cdce3dee,2026-03-31,CON,4.2,5,P4GTT6GF1W40CVIMFR43,Powszechna Kasa Oszczednosci Bank Polski S.A.,mixed,reviewed
+8979cd4a660d,2026-03-31,CON,4.2,10,3M5E1GQGKL17HI6CPN30,Jyske Bank A/S,shareholder,reviewed
+8979cd4a660d,2026-03-31,CON,4.2,10,529900ODI3047E2LIV03,Nordea Bank Abp,shareholder,reviewed
+8979cd4a660d,2026-03-31,CON,4.2,10,529900W3MOO00A18X956,OTP-csoport,shareholder,reviewed
+8979cd4a660d,2026-03-31,CON,4.2,10,815600E4E6DCD2D25E30,BANCO BPM SOCIETA' PER AZIONI,shareholder,reviewed
+8979cd4a660d,2026-03-31,CON,4.2,10,F3JS33DEI6XQ4ZBPTN86,Skandinaviska Enskilda Banken - gruppen,shareholder,reviewed
+8979cd4a660d,2026-03-31,CON,4.2,10,J4CP7MHCXR8DAQMKIL78,Banca Monte dei Paschi di Siena S.p.A.,shareholder,reviewed
+8979cd4a660d,2026-03-31,CON,4.2,10,M312WZV08Y7LYUC71685,Swedbank - Grupp,shareholder,reviewed
+8979cd4a660d,2026-03-31,CON,4.2,10,MAES062Z21O4RZ2U7M96,Danske Bank A/S,shareholder,reviewed
+8979cd4a660d,2026-03-31,CON,4.2,10,NHBDILHZTYCNBV5UYZ31,Svenska Handelsbanken - gruppen,shareholder,reviewed
+8979cd4a660d,2026-03-31,CON,4.2,10,SI5RG2M0WQQLZCXKRM20,"Banco de Sabadell, S.A.",shareholder,reviewed
+7e66296e448e,2026-03-31,CON,4.2,2,529900HNOAA1KXQJUQ27,"DZ BANK AG Deutsche Zentral-Genossenschaftsbank, Frankfurt am Main",cooperative,reviewed
+7e66296e448e,2026-03-31,CON,4.2,2,FR9695005MSX1OYEMGDF,Groupe BPCE,cooperative,reviewed
+5e76b74f6a3b,2026-03-31,CON,4.2,5,529900JZTYE3W7WQH904,HASPA Finanzholding,savings,assumption
+5e76b74f6a3b,2026-03-31,CON,4.2,5,529900XSTAE561178282,Raiffeisenbankengruppe OÖ Verbund eGen,cooperative,reviewed
+5e76b74f6a3b,2026-03-31,CON,4.2,5,7437003B5WFBOIEFY714,OP Osuuskunta,cooperative,reviewed
+5e76b74f6a3b,2026-03-31,CON,4.2,5,95980020140005881190,Banco de Crédito Social Cooperativo,cooperative,reviewed
+5e76b74f6a3b,2026-03-31,CON,4.2,5,NNVPP80YIZGEY2314M97,ICCREA BANCA S.P.A. - ISTITUTO CENTRALE DEL CREDITO COOPERATIVO (IN FORMA ABBREVIATA: ICCREA BANCA S.P.A.),cooperative,reviewed
+95e056753ff3,2026-03-31,CON,4.2,3,549300HFEHJOXGE4ZE63,SFIL S.A.,public,reviewed
+95e056753ff3,2026-03-31,CON,4.2,3,635400DTNHVYGZODKQ93,Permanent TSB Group Holdings Plc,public,assumption
+95e056753ff3,2026-03-31,CON,4.2,3,H0YX5LBGKDVOWCXBZ594,SBAB Bank AB - Grupp,public,reviewed
+9ff17d712f52,2026-03-31,CON,4.2,2,549300OLBL49CW8CT155,"Ibercaja Banco, S.A.",foundation,reviewed
+9ff17d712f52,2026-03-31,CON,4.2,2,549300U4LIZV0REEQQ46,"Kutxabank, S.A.",foundation,externally_reported_unverified
+4932ea36ca36,2025-12-31,CON,4.1,6,0W5QHUNYV4W7GJO62R27,HYPO TIROL BANK AG,public,reviewed
+4932ea36ca36,2025-12-31,CON,4.1,6,529900NNQW9IAE32GQ07,GRAWE-Vermögensverwaltung,mutual,assumption
+4932ea36ca36,2025-12-31,CON,4.1,6,5493007BWYDPQZLZ0Y27,HYPO NOE Landesbank für Niederösterreich und Wien AG,public,reviewed
+4932ea36ca36,2025-12-31,CON,4.1,6,GDI8P8WHFH4PS5YTU851,"HAITONG BANK, S.A.",public,assumption
+4932ea36ca36,2025-12-31,CON,4.1,6,MKP1B7E76TN04CD85Z79,BANK OCHRONY ŚRODOWISKA SA,public,assumption
+4932ea36ca36,2025-12-31,CON,4.1,6,XTC5E2QFTEF0435JWL77,Nederlandse Financierings-Maatschappij voor Ontwikkelingslanden N.V.,public,reviewed
+b2d33d59e9bf,2025-12-31,CON,4.1,10,21380033CFFM2V1ZCK65,SPARKASSE (HOLDINGS) MALTA LIMITED,savings,assumption
+b2d33d59e9bf,2025-12-31,CON,4.1,10,213800CBW4NPFP73ZK64,ANCORIA INVESTMENTS PLC,shareholder,assumption
+b2d33d59e9bf,2025-12-31,CON,4.1,10,213800CQ92347ZCS9V73,"ATLÂNTICO EUROPA, SGPS, SA",shareholder,assumption
+b2d33d59e9bf,2025-12-31,CON,4.1,10,213800RENLNKMWZV8767,Lollands Bank A/S,shareholder,assumption
+b2d33d59e9bf,2025-12-31,CON,4.1,10,2534005A84927EKSR789,Signet Bank AS,shareholder,reviewed
+b2d33d59e9bf,2025-12-31,CON,4.1,10,529900DPOQPLDSF3R482,Kaiser Partner Privatbank AG,shareholder,externally_reported_unverified
+b2d33d59e9bf,2025-12-31,CON,4.1,10,81560062CEAE87A85C80,AREPO BP S.P.A.,shareholder,assumption
+b2d33d59e9bf,2025-12-31,CON,4.1,10,9695002K2HDLD20JU790,AGENCE FRANCE LOCALE - SOCIETE TERRITORIALE,public,reviewed
+b2d33d59e9bf,2025-12-31,CON,4.1,10,9845006BAF66DZ35C849,Lunar Group A/S,shareholder,assumption
+b2d33d59e9bf,2025-12-31,CON,4.1,10,RY3KI4Q2655O2GIL8D68,BANCA INVESTIS S.P.A.,shareholder,assumption
+148ce639ed82,2025-12-31,CON,4.1,4,2138007JGI1M5YF7FJ53,Frøs Sparekasse,savings,reviewed
+148ce639ed82,2025-12-31,CON,4.1,4,213800GO21RWIB6O9Q29,Middelfart Sparekasse,savings,reviewed
+148ce639ed82,2025-12-31,CON,4.1,4,529900FZWXWNKF3O8394,Sparekassen Thy,savings,reviewed
+148ce639ed82,2025-12-31,CON,4.1,4,529900J35NSHS856UA68,Sparekassen Kronjylland,savings,reviewed
+85f4dc4bf99f,2025-12-31,CON,4.1,8,213800DBQIB6VBNU5C64,Alpha Bank S.A.,shareholder,externally_reported_unverified
+85f4dc4bf99f,2025-12-31,CON,4.1,8,213800KGF4EFNUQKAT69,EUROBANK S.A.,shareholder,reviewed
+85f4dc4bf99f,2025-12-31,CON,4.1,8,5493009EIBTCB1X12G89,LGT Group Foundation,shareholder,reviewed
+85f4dc4bf99f,2025-12-31,CON,4.1,8,549300RG3H390KEL8896,Banca Transilvania,shareholder,assumption
+85f4dc4bf99f,2025-12-31,CON,4.1,8,7LVZJ6XRIE7VNZ4UBX81,BANCA MEDIOLANUM S.P.A.,shareholder,reviewed
+85f4dc4bf99f,2025-12-31,CON,4.1,8,8156005420362AE59184,BANCA IFIS S.P.A. (OVVERO IFIS BANCA S.P.A. O IN FORMA ABBREVIATA IFIS S.P.A.),shareholder,reviewed
+85f4dc4bf99f,2025-12-31,CON,4.1,8,815600F24AE25C9D1B94,MAURIZIO SELLA - SOCIETA' IN ACCOMANDITA PER AZIONI,shareholder,assumption
+85f4dc4bf99f,2025-12-31,CON,4.1,8,N747OI7JINV7RUUH6190,BPER Banca S.p.A.,shareholder,reviewed
+db37fd53a795,2025-12-31,CON,4.1,6,213800RZWHE5EUX9R444,Luminor Holding AS,shareholder,externally_reported_unverified
+db37fd53a795,2025-12-31,CON,4.1,6,529900JG015JC10LED24,AS LHV Group,shareholder,reviewed
+db37fd53a795,2025-12-31,CON,4.1,6,549300TK038P6EV4YU51,AB Artea bankas,shareholder,externally_reported_unverified
+db37fd53a795,2025-12-31,CON,4.1,6,549300UARE5MHTBUPJ19,Promontoria 19 Coöperatie U.A.,shareholder,assumption
+db37fd53a795,2025-12-31,CON,4.1,6,724500JIWG886A9RRT57,RBS Holdings N.V.,shareholder,externally_reported_unverified
+db37fd53a795,2025-12-31,CON,4.1,6,TUKDD90GPC79G1KOE162,Hamburg Commercial Bank AG,shareholder,externally_reported_unverified
+6ffb8518c7b6,2025-12-31,CON,4.1,17,22210058UCKT3BJTCN24,OTP Luxembourg S.à r.l.,shareholder,externally_reported_unverified
+6ffb8518c7b6,2025-12-31,CON,4.1,17,31570014BNQ1Q99CNQ35,PPF Financial Holdings AS,shareholder,assumption
+6ffb8518c7b6,2025-12-31,CON,4.1,17,485100FX5Y9YLAQLNP12,Revolut Holdings Europe UAB,shareholder,externally_reported_unverified
+6ffb8518c7b6,2025-12-31,CON,4.1,17,529900C3SHT3Q94H3W82,Bank11 Holding GmbH,shareholder,reviewed
+6ffb8518c7b6,2025-12-31,CON,4.1,17,5493003BDYD5VPGUQS04,UniCredit Bank S.A.,shareholder,reviewed
+6ffb8518c7b6,2025-12-31,CON,4.1,17,5493008QRHH0XCLJ4238,BRD-Groupe Société Générale SA,shareholder,reviewed
+6ffb8518c7b6,2025-12-31,CON,4.1,17,5493009VJC01E4H6HH77,Avanza - Grupp,shareholder,assumption
+6ffb8518c7b6,2025-12-31,CON,4.1,17,549300A2F46GR0UOM390,Erste&Steiermärkische Bank d.d.,shareholder,reviewed
+6ffb8518c7b6,2025-12-31,CON,4.1,17,549300ND1MQ8SNNYMJ22,AS SEB Pank,shareholder,externally_reported_unverified
+6ffb8518c7b6,2025-12-31,CON,4.1,17,549300O3HXYXXUHR0897,Klarna - Grupp,shareholder,externally_reported_unverified
+6ffb8518c7b6,2025-12-31,CON,4.1,17,549300SGF4BS54YG8M65,Citco Bank Nederland N.V.,shareholder,assumption
+6ffb8518c7b6,2025-12-31,CON,4.1,17,549300TDPXT0OW2AY198,FinAx,shareholder,reviewed
+6ffb8518c7b6,2025-12-31,CON,4.1,17,549300ZHFZ4CSK7VS460,Privredna Banka Zagreb d.d.,shareholder,externally_reported_unverified
+6ffb8518c7b6,2025-12-31,CON,4.1,17,635400LCCIYHUL6ELA34,USB European (Holdings) Limited,shareholder,assumption
+6ffb8518c7b6,2025-12-31,CON,4.1,17,815600903231FA2E7698,BANCA GENERALI - SOCIETA' PER AZIONI (IN FORMA ABBREVIATA GENERBANCA),shareholder,reviewed
+6ffb8518c7b6,2025-12-31,CON,4.1,17,959800R86KE31EAVRC30,LIBERTY PARTNERS S.L.U.,shareholder,assumption
+6ffb8518c7b6,2025-12-31,CON,4.1,17,9695002JOWSRCLLLNY11,Edmond de Rothschild (France),shareholder,reviewed
+89b3b41d2dd8,2025-12-31,CON,4.1,12,254900WR3I1Z9NPC7D84,Kvika banki hf.,shareholder,assumption
+89b3b41d2dd8,2025-12-31,CON,4.1,12,2594000ZNGGQZXZKXH36,VELOBANK SA,shareholder,externally_reported_unverified
+89b3b41d2dd8,2025-12-31,CON,4.1,12,529900UHDH7QLRMEJQ86,Sigma Bank AG,shareholder,assumption
+89b3b41d2dd8,2025-12-31,CON,4.1,12,5493002DPKDEC2JN1Y86,Sparekassen Sjælland-Fyn A/S,shareholder,assumption
+89b3b41d2dd8,2025-12-31,CON,4.1,12,549300JECLPX13NZLU57,Danske Andelskassers Bank A/S,shareholder,assumption
+89b3b41d2dd8,2025-12-31,CON,4.1,12,724500M4G9AVEMHMV291,bunq Holding B.V.,shareholder,assumption
+89b3b41d2dd8,2025-12-31,CON,4.1,12,724500SF1CI8OD5AHI07,HCBG Holding B.V.,shareholder,externally_reported_unverified
+89b3b41d2dd8,2025-12-31,CON,4.1,12,815600722FAEE18D6013,BANCA DEL FUCINO S.P.A.,shareholder,assumption
+89b3b41d2dd8,2025-12-31,CON,4.1,12,815600B5C61A10BBB451,BANCA SISTEMA S.P.A.,shareholder,assumption
+89b3b41d2dd8,2025-12-31,CON,4.1,12,959800LQ598A5RQASA61,"Banca March, S.A.",shareholder,reviewed
+89b3b41d2dd8,2025-12-31,CON,4.1,12,I6USJ58BDV2BO5KP3C31,"MONETA Money Bank, a.s.",shareholder,externally_reported_unverified
+89b3b41d2dd8,2025-12-31,CON,4.1,12,PWEFG14QWWESISQ84C69,IKB Deutsche Industriebank Aktiengesellschaft,shareholder,externally_reported_unverified
+6e547f8df814,2025-12-31,CON,4.1,5,259400QHDOZWMJ103294,ALIOR BANK S.A.,mixed,reviewed
+6e547f8df814,2025-12-31,CON,4.1,5,3DM5DPGI3W6OU6GJ4N92,BANCO BPI S.A.,mixed,externally_reported_unverified
+6e547f8df814,2025-12-31,CON,4.1,5,96950001WI712W7PQG45,RCI Banque,mixed,externally_reported_unverified
+6e547f8df814,2025-12-31,CON,4.1,5,JU1U6S0DG9YLT7N8ZV32,"Banco Comercial Português, SA",mixed,externally_reported_unverified
+6e547f8df814,2025-12-31,CON,4.1,5,KFUXYFTU2LHQFQZDQG45,Kereskedelmi és Hitelbank csoport,mixed,reviewed
+60359f158ce7,2025-12-31,CON,4.1,5,259400YLRTOBISHBVX41,ING Bank Slaski S.A.,shareholder,reviewed
+60359f158ce7,2025-12-31,CON,4.1,5,5493000LM0MZ4JPMGM90,"Santander Consumer Finance, S.A.",shareholder,reviewed
+60359f158ce7,2025-12-31,CON,4.1,5,969500VHT1ZNPVWOYF63,BNP Paribas Personal Finance,shareholder,reviewed
+60359f158ce7,2025-12-31,CON,4.1,5,F0HUI1NY1AZMJMD8LP67,HSBC Continental Europe,shareholder,reviewed
+60359f158ce7,2025-12-31,CON,4.1,5,LIU16F6VZJSD6UKHD557,Nykredit Realkredit A/S,mutual,reviewed
+4fe7ed9268f5,2025-12-31,CON,4.1,5,5299000R7WZOVIFHLN21,BFS SozialFinanz AG,foundation,assumption
+4fe7ed9268f5,2025-12-31,CON,4.1,5,529900RQOBT3ZJMDRK43,Bank Frick AG,foundation,reviewed
+4fe7ed9268f5,2025-12-31,CON,4.1,5,81560027D07F9BDB8436,CASSA DI RISPARMIO DI ASTI S.P.A. (IN FORMA ABBREVIATA BANCA C.R. ASTI S.P.A.),foundation,assumption
+4fe7ed9268f5,2025-12-31,CON,4.1,5,8156003A4FB445454553,CASSA DI RISPARMIO DI BOLZANO S.P.A. - SUDTIROLER SPARKASSE AG,foundation,reviewed
+4fe7ed9268f5,2025-12-31,CON,4.1,5,815600A32DA05F693F24,LA CASSA DI RAVENNA S.P.A.,foundation,assumption
+290f9278c0d9,2025-12-31,CON,4.1,3,5299002GPCR602QYJC04,KfW Beteiligungsholding GmbH,public,reviewed
+290f9278c0d9,2025-12-31,CON,4.1,3,529900LKIMB57HKF3545,Bank of China (Europe) S.A,public,reviewed
+290f9278c0d9,2025-12-31,CON,4.1,3,81560064085A02B2B297,MEDIOCREDITO CENTRALE - BANCA DEL MEZZOGIORNO SPA,public,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,52990045V2BWJN669Q34,Wüstenrot Wohnungswirtschaft registrierte Genossenschaft mit beschränkter Haftung,cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,529900MQJIQGD8N3YV53,Hannoversche Volksbank eG,cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,529900QYEJ2GYSWK1F08,RLB-Stmk Verbund eGen,cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,529900T7MYZUMMW4O176,Berliner Volksbank eG,cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,549300G3C8M0WXQCWH61,Caja Laboral Popular Coop. de Crédito,cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,549300LYFYVPUCG6SY25,"Banco Cooperativo Español, S.A.",cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,5967007LIEEXZX76AW36,OBOS-BANKEN AS,cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,743700PW2HDTPU3YRJ31,POP Pankkikeskus osk,cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,8156008B43CE788F4932,BANCA AGRICOLA POPOLARE DI SICILIA SOCIETA' COOPERATIVA PER AZIONI,cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,8156008FC57F3F707049,ENTE CAMBIANO SOCIETA' COOPERATIVA PER AZIONI,cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,815600FDD3EB3EA03194,BANCA POPOLARE DEL LAZIO SOCIETA' COOPERATIVA,cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,95980020140005012943,"Caja Rural de Aragón, Sociedad Cooperativa de Crédito",cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,95980020140005375335,"Caja Rural del Sur, S. Coop. de Crédito",cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,95980020140005484654,"Caja Rural de Albacete, Ciudad Real y Cuenca, Sociedad Cooperativa de Crédito",cooperative,reviewed
+3162c9a820cd,2025-12-31,CON,4.1,15,95980020140005552166,"Eurocaja Rural, Sociedad Cooperativa de Crédito",cooperative,reviewed
+437a06ac8e8d,2025-12-31,CON,4.1,4,549300DYPOFMXOR7XM56,Crelan,cooperative,reviewed
+437a06ac8e8d,2025-12-31,CON,4.1,4,549300V1VN70Q7PQ7234,CRÉDIT AGRICOLE AUTO BANK S.P.A.,cooperative,assumption
+437a06ac8e8d,2025-12-31,CON,4.1,4,AT0000000000043000VB,VOLKSBANK WIEN AG VB,cooperative,reviewed
+437a06ac8e8d,2025-12-31,CON,4.1,4,LOO0AWXR8GF142JCO404,CASSA CENTRALE BANCA - CREDITO COOPERATIVO ITALIANOSOCIETA' PER AZIONI (IN SIGLA CASSA CENTRALE BANCA),cooperative,reviewed
+eb99b1ce6802,2025-12-31,CON,4.1,2,549300IQZVZ949N37S44,Euroclear Holding,mixed,reviewed
+eb99b1ce6802,2025-12-31,CON,4.1,2,B64D6Y3LBJS4ANNPCU93,NIBC Bank N.V.,mixed,externally_reported_unverified
+6c822236647f,2025-12-31,CON,4.1,3,724500A1FNICHSDF2I11,ASN Bank N.V.,public,externally_reported_unverified
+6c822236647f,2025-12-31,CON,4.1,3,969500STN7T9MRUMJ267,Bpifrance,public,externally_reported_unverified
+6c822236647f,2025-12-31,CON,4.1,3,TO822O0VT80V06K0FH57,"Caixa Geral de Depósitos, S.A.",public,reviewed
+f17907f23c66,2025-12-31,CON,4.1,4,9695000CG7B84NLR5984,Confédération Nationale du Crédit Mutuel,cooperative,reviewed
+f17907f23c66,2025-12-31,CON,4.1,4,9ZHRYM6F437SQJ6OUG95,Raiffeisen Bank International AG,cooperative,reviewed
+f17907f23c66,2025-12-31,CON,4.1,4,DG3RU1DBUFHT4ZF9WN62,Coöperatieve Rabobank U.A.,cooperative,reviewed
+f17907f23c66,2025-12-31,CON,4.1,4,KX1WK48MPD4Y2NCUIZ63,Natixis,cooperative,reviewed
+b4067f643e74,2025-12-31,IND,4.1,3,213800984CWACNBY8F31,Sparekassen for Nr. Nebel og Omegn,savings,assumption
+b4067f643e74,2025-12-31,IND,4.1,3,529900VVDOKMRRAHZ894,Bank GPB International S.A.,public,assumption
+b4067f643e74,2025-12-31,IND,4.1,3,81560017C4A61A529235,CASSA DI RISPARMIO DI FERMO S.P.A. (IN FORMA ABBREVIATA CARIFERMO S.P.A.),foundation,assumption
+8d85718ad933,2025-12-31,IND,4.1,8,213800UYAHIRLZ4NSN67,Lån & Spar Bank A/S,shareholder,reviewed
+8d85718ad933,2025-12-31,IND,4.1,8,52990033C5FUEN4LMC06,BANCA POPOLARE DELL'ALTO ADIGE SOCIETA' PER AZIONI (IN TEDESCO SUDTIROLER VOLKSBANK A.G.),shareholder,assumption
+8d85718ad933,2025-12-31,IND,4.1,8,529900B91AUH0YTEXN10,National-Bank Aktiengesellschaft,shareholder,reviewed
+8d85718ad933,2025-12-31,IND,4.1,8,549300IRGNL8Q3O8Y413,Eurobank Bulgaria,shareholder,assumption
+8d85718ad933,2025-12-31,IND,4.1,8,549300SBPFE9JX7N8J82,AB SEB bankas,shareholder,reviewed
+8d85718ad933,2025-12-31,IND,4.1,8,815600DDCE9083CAC598,MEDIOBANCA PREMIER S.P.A.,shareholder,assumption
+8d85718ad933,2025-12-31,IND,4.1,8,MMYX0N4ZEZ13Z4XCG897,THE BANK OF NEW YORK MELLON,shareholder,externally_reported_unverified
+8d85718ad933,2025-12-31,IND,4.1,8,SX0CI4F7GVW5530ZMN03,Wells Fargo Bank International Unlimited Company,shareholder,externally_reported_unverified
+4b2c056bf690,2025-12-31,IND,4.1,4,2G5BKIC2CB69PRJH1W31,Barclays Bank Ireland plc,shareholder,reviewed
+4b2c056bf690,2025-12-31,IND,4.1,4,549300FH0WJAPEHTIQ77,BofA Securities Europe SA,shareholder,reviewed
+4b2c056bf690,2025-12-31,IND,4.1,4,549300ZK53CNGEEI6A29,J.P. Morgan SE,shareholder,reviewed
+4b2c056bf690,2025-12-31,IND,4.1,4,6TJCK1B7E7UTXP528Y04,Citigroup Global Markets Europe AG,shareholder,reviewed
+38c6a8e26dc3,2025-12-31,IND,4.1,4,5299001ADI8FLGT0GU28,Sparkasse KölnBonn,public,reviewed
+38c6a8e26dc3,2025-12-31,IND,4.1,4,529900CJAJ0HDPPKUI53,Nassauische Sparkasse,public,reviewed
+38c6a8e26dc3,2025-12-31,IND,4.1,4,529900D5G4V6THXC5P79,Hrvatska poštanska banka d.d.,public,externally_reported_unverified
+38c6a8e26dc3,2025-12-31,IND,4.1,4,R7CQUF1DQM73HUTV1078,"Banque et Caisse d´Epargne de l´Etat, Luxembourg",public,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,52990026HQOTT4AJP655,GLS Gemeinschaftsbank e.G.,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,5299005OACOC1C1OFJ11,Raiffeisen-Landesbank Tirol AG,cooperative,assumption
+7c49a2b8c3be,2025-12-31,IND,4.1,19,52990061592SQLEJN964,Volksbank Mittelhessen eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,5299007S3UH5RKUYDA52,DEUTSCHE APOTHEKER- UND ÄRZTEBANK EG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,52990089LBIKLBM8YB23,VR Bank Nord eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,5299008I0TO44SUINZ71,Oldenburgische Landesbank Aktiengesellschaft,cooperative,externally_reported_unverified
+7c49a2b8c3be,2025-12-31,IND,4.1,19,52990093INYLJNWHQ228,Volksbank eG - Die Gestalterbank,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,529900C9OP6Y0DPYSK11,VR Bank RheinAhrEifel eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,529900DXTOU2U9IZDY54,meine Volksbank Raiffeisenbank eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,529900E0WY09Z3H21393,VR Bank Rhein-Neckar eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,529900JRKG8AEYL65326,VR Bank Heilbronn Schwäbisch Hall eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,529900LIZVBUANJ20E31,BBBank eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,529900P8BY9HZTZ82T70,Volksbank Kraichgau eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,529900PUK9IU39VCWK54,Volksbank in Ostwestfalen eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,529900WF3IXMJXSVJ831,Vereinigte Volksbanken eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,529900ZMDTSQYEYCKL45,VR TeilhaberBank Metropolregion Nürnberg eG,cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,95980020140005219553,"Caja Rural de Asturias, Sociedad Cooperativa de Crédito",cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,95980020140005220135,"Caja Rural de Granada, Sociedad Cooperativa de Crédito",cooperative,reviewed
+7c49a2b8c3be,2025-12-31,IND,4.1,19,95980020140005439549,"Caja Rural de Navarra, S. Coop. de Crédito",cooperative,reviewed
+9f8675da625f,2025-12-31,IND,4.1,7,529900BIK4WRWS06MR52,Varengold Bank AG,shareholder,assumption
+9f8675da625f,2025-12-31,IND,4.1,7,529900OLW8QPFMTBDC23,Neue Bank AG,shareholder,assumption
+9f8675da625f,2025-12-31,IND,4.1,7,549300TEJKOLFN65KR76,BNF Bank plc,shareholder,reviewed
+9f8675da625f,2025-12-31,IND,4.1,7,724500ZNT2I60RYZQI38,Anadolubank Nederland N.V.,shareholder,externally_reported_unverified
+9f8675da625f,2025-12-31,IND,4.1,7,8156003D79D064FB5360,CASSA LOMBARDA - S.P.A.,shareholder,assumption
+9f8675da625f,2025-12-31,IND,4.1,7,815600B6B356EC776E54,CASSA DI RISPARMIO DI VOLTERRA S.P.A.,shareholder,assumption
+9f8675da625f,2025-12-31,IND,4.1,7,RG3IZJKPYQ4H6IQPIC08,Addiko Bank d.d.,shareholder,assumption
+e50721bd6c30,2025-12-31,IND,4.1,4,529900SEFOTJH1MLGZ92,Lægernes Bank A/S,mutual,reviewed
+e50721bd6c30,2025-12-31,IND,4.1,4,529900XB6RQ3XCELQO62,BENDURA BANK AG,shareholder,assumption
+e50721bd6c30,2025-12-31,IND,4.1,4,549300KOORG6SN9LMO68,IIG Bank (Malta) Ltd,shareholder,assumption
+e50721bd6c30,2025-12-31,IND,4.1,4,549300RMML7KXP6M1Y98,BANCO BAI EUROPA S.A.,shareholder,assumption
+ed25b41509c1,2025-12-31,IND,4.1,3,529900ZVK4VTIS0TOT43,DenizBank AG,public,assumption
+ed25b41509c1,2025-12-31,IND,4.1,3,5493004D82XDFVPWQJ91,Ikano Bank AB (publ),foundation,assumption
+ed25b41509c1,2025-12-31,IND,4.1,3,5493007QRSX9DS2CM858,China Construction Bank (Europe) S.A.,public,externally_reported_unverified
+52fa38c1b74d,2025-12-31,IND,4.1,2,549300CQ9NLEHMRCU505,"Cecabank, S.A.",savings,assumption
+52fa38c1b74d,2025-12-31,IND,4.1,2,549300L1IEXJYJ2NUV45,Sparekassen Danmark,savings,reviewed
+c6b4706819e1,2025-12-31,IND,4.1,3,549300OL514RA0SXJJ44,Clearstream Banking S.A.,shareholder,reviewed
+c6b4706819e1,2025-12-31,IND,4.1,3,HWIPDOTRM1EKRPKYKH81,Northern Trust Global Services SE,shareholder,assumption
+c6b4706819e1,2025-12-31,IND,4.1,3,QS3ZEAHRBZY9228Z0111,Bank Julius Baer Europe S.A.,shareholder,externally_reported_unverified
+644c2c162571,2025-09-30,CON,4.1,3,54930056IRBXK0Q1FP96,"Abanca Corporacion Bancaria, S.A.",shareholder,externally_reported_unverified
+644c2c162571,2025-09-30,CON,4.1,3,J48C8PCSJVUBR8KCW529,BANCA POPOLARE DI SONDRIO SOCIETA' PER AZIONI,shareholder,externally_reported_unverified
+644c2c162571,2025-09-30,CON,4.1,3,M6AD1Y1KW32H8THQ6F76,Piraeus Financial Holdings,shareholder,assumption
+01d4cf9e6194,2025-09-30,CON,4.1,2,N1FBEDJ5J41VKZLO2475,Citibank Europe plc,shareholder,reviewed
+01d4cf9e6194,2025-09-30,CON,4.1,2,PSNL19R2RXX5U3QWHI44,MEDIOBANCA - BANCA DI CREDITO FINANZIARIO S.P.A.,shareholder,reviewed
+ab69067cc6d9,2025-06-30,CON,4.1,2,259400OFDZ9KPZEO8K78,BANK MILLENNIUM SA,mixed,externally_reported_unverified
+ab69067cc6d9,2025-06-30,CON,4.1,2,JLS56RAMYQZECFUF2G44,ING Belgie,shareholder,reviewed
