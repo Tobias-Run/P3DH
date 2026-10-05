@@ -99,6 +99,31 @@ await assert.rejects(selectDataVersion(),/Invalid dataset version/);
 assert.equal(DATA_REV,revision);
 """)
 
+    def test_cors_failure_prefers_raw_for_subsequent_files(self):
+        self.check("""
+DATA_REV=revision;
+global.fetch=async(url)=>{calls.push(url);
+  if(url.includes('jsdelivr'))throw new TypeError('Failed to fetch: CORS');
+  return response(200,{ok:true});};
+assert.deepEqual(await getJSON('index.json'),{ok:true});
+assert.equal(calls.length,2);assert(DATA_CDN_FAILED);
+assert.deepEqual(await getJSON('codebook.json'),{ok:true});
+assert.equal(calls.length,3);
+assert(calls[2].includes('raw.githubusercontent.com')&&calls[2].includes(revision));
+assert.equal(await getJSON('data_version.json') instanceof Object,true);
+assert(calls[3].includes('raw.githubusercontent.com'));
+""")
+
+    def test_403_prefers_raw_but_cdn_remains_available_as_fallback(self):
+        self.check("""
+global.fetch=async(url)=>{calls.push(url);return response(url.includes('jsdelivr')?403:200,{ok:true});};
+assert.deepEqual(await getJSON('index.json'),{ok:true});assert(DATA_CDN_FAILED);
+global.fetch=async(url)=>{calls.push(url);return response(url.includes('raw.githubusercontent.com')?503:200,{recovered:true});};
+assert.deepEqual(await getJSON('labels.json'),{recovered:true});
+assert(calls[2].includes('raw.githubusercontent.com'));
+assert(calls[3].includes('jsdelivr'));
+""")
+
 
 if __name__ == '__main__':
     unittest.main()

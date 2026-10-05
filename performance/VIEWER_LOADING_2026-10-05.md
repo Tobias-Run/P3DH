@@ -29,6 +29,19 @@ a permanent CDN outage.
 - Keep SHA-256 integrity on both origins, missing-file semantics and legacy
   compatibility. The mutable revision pointer remains raw-origin-first and
   is not raced against a possibly stale CDN pointer.
+- After a CDN failure (including browser CORS/network rejection or HTTP 403),
+  prefer the raw origin for subsequent files in this page session. The CDN
+  remains a fallback if raw fails; reload resets the preference. Losing
+  requests cancelled after a successful response do not mark an origin failed.
+- Add a self-contained favicon to avoid the unrelated root favicon 404.
+
+The user's console screenshot additionally confirms CDN CORS rejection and a
+403 response. Probes with the Pages origin header currently return HTTP 200
+and `Access-Control-Allow-Origin: *` for the pinned KM1 and index files at both
+origins. This does not reproduce the user's particular 403 or establish its
+internal cause; it rules out claiming that those URLs are permanently missing
+the CORS header. Error pages without CORS headers can surface to JavaScript as
+a generic fetch rejection, which the fallback and session preference handle.
 
 ## Controlled comparison
 
@@ -52,9 +65,10 @@ not treated as native-browser performance measurements.
 
 ## Validation
 
-- 1,539 unit/data tests pass, including eight loader regressions for stalled
+- 1,541 unit/data tests pass, including ten loader regressions for stalled
   headers, stalled bodies, cancelled losing requests, integrity errors,
-  authoritative pointer absence, malformed pointers and both-origin failures.
+  authoritative pointer absence, malformed pointers, both-origin failures,
+  CORS rejection and HTTP 403 with session-level origin preference and recovery.
 - Advanced-peer browser tests pass in English/1280 px and German/390 px,
   including the 19 usable stable groups; zero JavaScript errors.
 - General viewer runtime checks pass: report rendering, delayed and warm KPI

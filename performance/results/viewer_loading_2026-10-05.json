@@ -201,9 +201,9 @@
     "Controlled comparisons use identical locally served real data with a four-second delay on labels or non-KM1 overview data."
   ],
   "tests": {
-    "unit_tests": 1539,
+    "unit_tests": 1541,
     "unit_result": "pass",
-    "loader_regressions": 8,
+    "loader_regressions": 10,
     "peer_browser": {
       "cases": [
         {
@@ -221,7 +221,34 @@
       ],
       "javascript_errors": 0
     },
-    "general_viewer_runtime": "pass"
+    "general_viewer_runtime": "pass",
+    "cors_followup_browser": {
+      "method": "local real data, controlled 4-second delay; not a live timing benchmark",
+      "cases": [
+        {
+          "version": "fixed",
+          "delayed": "labels",
+          "delay_seconds": 4,
+          "overview_seconds": 1.031,
+          "series_seconds": 1.304,
+          "labels_requested_before_series": false
+        },
+        {
+          "version": "fixed",
+          "delayed": "non_km1",
+          "delay_seconds": 4,
+          "overview_seconds": 0.878,
+          "series_seconds": 1.146,
+          "labels_requested_before_series": false
+        }
+      ],
+      "javascript_errors": []
+    }
   },
-  "local_codebook_sha256": "e848f3e35d7680865d4ea65fd91f0bf131655cdd3fdf2c44924af469e2a51de3"
+  "local_codebook_sha256": "e848f3e35d7680865d4ea65fd91f0bf131655cdd3fdf2c44924af469e2a51de3",
+  "cors_followup": {
+    "user_evidence": "Console screenshot: jsDelivr missing CORS header / ERR_FAILED, another CDN request HTTP 403, unrelated favicon 404. Exact 403 URL is not fully visible.",
+    "probe_result": "Pinned KM1 and index at CDN and raw returned HTTP 200 with Access-Control-Allow-Origin: * using the Pages Origin header.",
+    "mitigation": "On a CDN rejection prefer raw for subsequent files in the page session; retain same revision, integrity, raw-first pointer and CDN fallback. Add inline favicon."
+  }
 }

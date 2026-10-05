@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pillar 3 Viewer (JSON) — P3DH</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23c8102e'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='17' fill='white'%3EP3%3C/text%3E%3C/svg%3E">
 <style>
   /* ======================================================================
      Gestaltungssystem (#61). Redaktionelles Idiom statt Software-Chrome:
@@ -1103,6 +1104,7 @@ const DATA_BASES = LOCAL ? ['data/']
   : ['https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@data/',
      'https://raw.githubusercontent.com/Tobias-Run/P3DH/data/'];
 let DATA_REV=null;
+let DATA_CDN_FAILED=false; // Session only; a reload retries the preferred CDN.
 const DATA_HEDGE_MS=1200, DATA_TIMEOUT_MS=15000;
 async function getJSON(path,integrity=null){
   let bases=DATA_REV&&!LOCAL ? DATA_BASES.map(base=>
@@ -1110,6 +1112,7 @@ async function getJSON(path,integrity=null){
   // The raw branch is authoritative for the optional rollout pointer.
   // A CDN error must not veto a confirmed legacy publication.
   if(path==='data_version.json' && !LOCAL) bases=[...bases].reverse();
+  else if(DATA_CDN_FAILED) bases.sort((a,b)=>Number(a.includes('cdn.jsdelivr.net'))-Number(b.includes('cdn.jsdelivr.net')));
   return new Promise((resolve,reject)=>{
     let settled=false, hedge=null, next=0;
     const active=new Set(), failures=[];
@@ -1141,6 +1144,9 @@ async function getJSON(path,integrity=null){
         throw new Error(path.split('/').pop()+' '+r.status);
       })().then(value=>finish(value),error=>{
         if(settled) return;
+        // CORS failures surface as fetch TypeErrors, while accessible CDN
+        // error pages expose 403/5xx. Neither should penalize every next file.
+        if(base.startsWith('https://cdn.jsdelivr.net/')) DATA_CDN_FAILED=true;
         clearTimeout(request.timer);active.delete(request);
         failures.push({error,missing});clearHedge();
         if(next<bases.length) start();
