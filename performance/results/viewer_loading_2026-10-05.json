@@ -1,0 +1,227 @@
+{
+  "date": "2026-10-05",
+  "baseline_commit": "b7d59a2b13b685b386a0e7cb0d6286408b9bd344",
+  "live_data_revision": "e93a3ae558d297fc4afee92b129c764d26b68e80",
+  "controlled_browser": {
+    "method": "local real data, controlled 4-second delay; not a live timing benchmark",
+    "cases": [
+      {
+        "version": "baseline",
+        "delayed": "labels",
+        "delay_seconds": 4,
+        "overview_seconds": 0.647,
+        "series_seconds": 5.523,
+        "labels_requested_before_series": true
+      },
+      {
+        "version": "baseline",
+        "delayed": "non_km1",
+        "delay_seconds": 4,
+        "overview_seconds": 0.765,
+        "series_seconds": 5.231,
+        "labels_requested_before_series": true
+      },
+      {
+        "version": "fixed",
+        "delayed": "labels",
+        "delay_seconds": 4,
+        "overview_seconds": 1.008,
+        "series_seconds": 1.353,
+        "labels_requested_before_series": false
+      },
+      {
+        "version": "fixed",
+        "delayed": "non_km1",
+        "delay_seconds": 4,
+        "overview_seconds": 0.874,
+        "series_seconds": 1.094,
+        "labels_requested_before_series": false
+      }
+    ],
+    "javascript_errors": []
+  },
+  "http_probes": [
+    {
+      "host": "cdn",
+      "path": "index.json",
+      "ttfb": 1.596,
+      "seconds": 1.611,
+      "bytes": 355955,
+      "status": 200
+    },
+    {
+      "host": "cdn",
+      "path": "codebook.json",
+      "ttfb": 0.325,
+      "seconds": 0.326,
+      "bytes": 91789,
+      "status": 200
+    },
+    {
+      "host": "cdn",
+      "path": "labels.json",
+      "ttfb": 0.49,
+      "seconds": 0.568,
+      "bytes": 9409293,
+      "status": 200
+    },
+    {
+      "host": "raw",
+      "path": "index.json",
+      "ttfb": 0.32,
+      "seconds": 0.327,
+      "bytes": 355955,
+      "status": 200
+    },
+    {
+      "host": "raw",
+      "path": "codebook.json",
+      "ttfb": 0.112,
+      "seconds": 0.123,
+      "bytes": 91789,
+      "status": 200
+    },
+    {
+      "host": "raw",
+      "path": "labels.json",
+      "ttfb": 0.538,
+      "seconds": 0.675,
+      "bytes": 9409293,
+      "status": 200
+    }
+  ],
+  "live_browser_bridge_baseline": {
+    "overview_seconds": 4.384,
+    "timeseries_seconds": 5.121,
+    "javascript_errors": [],
+    "requests": [
+      {
+        "url": "https://tobias-run.github.io/P3DH/processed/zweig_a/viewer_json.html",
+        "seconds": 0.282,
+        "bytes": 254851,
+        "status": 200
+      },
+      {
+        "url": "https://raw.githubusercontent.com/Tobias-Run/P3DH/data/data_version.json",
+        "seconds": 0.26,
+        "bytes": 67,
+        "status": 200
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@e93a3ae558d297fc4afee92b129c764d26b68e80/codebook.json",
+        "seconds": 0.068,
+        "bytes": 91789,
+        "status": 200
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@e93a3ae558d297fc4afee92b129c764d26b68e80/index.json",
+        "seconds": 0.129,
+        "bytes": 355955,
+        "status": 200
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@e93a3ae558d297fc4afee92b129c764d26b68e80/reports/rs_549300TRUWO2CD2G5692.CON__2026-03-31.json",
+        "seconds": 0.934,
+        "bytes": 40153,
+        "status": 200
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@e93a3ae558d297fc4afee92b129c764d26b68e80/labels.json",
+        "seconds": 0.169,
+        "bytes": 9409293,
+        "status": 200
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@e93a3ae558d297fc4afee92b129c764d26b68e80/benchmark/82.00.A.cc4494c6fa849f95d8d2e03f0c236b81d28814db19dc0a4b977a1ed6c727de8f.json",
+        "seconds": 0.232,
+        "bytes": 278824,
+        "status": 200
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@e93a3ae558d297fc4afee92b129c764d26b68e80/benchmark/61.00.c6d14338bb7cc07cbeba9c87c417072674b7b7d6bf6ee1bc6195724eb30b9d45.json",
+        "seconds": 0.454,
+        "bytes": 3428954,
+        "status": 200
+      }
+    ]
+  },
+  "live_browser_bridge_fixed_preview": {
+    "overview_seconds": 2.38,
+    "timeseries_seconds": 4.139,
+    "javascript_errors": [],
+    "requests": [
+      {
+        "url": "https://tobias-run.github.io/P3DH/processed/zweig_a/viewer_json.html",
+        "seconds": 0.241,
+        "bytes": 254851,
+        "status": 200
+      },
+      {
+        "url": "https://raw.githubusercontent.com/Tobias-Run/P3DH/data/data_version.json",
+        "seconds": 0.188,
+        "bytes": 67,
+        "status": 200
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@e93a3ae558d297fc4afee92b129c764d26b68e80/codebook.json",
+        "seconds": 0.091,
+        "bytes": 91789,
+        "status": 200
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@e93a3ae558d297fc4afee92b129c764d26b68e80/index.json",
+        "seconds": 0.342,
+        "bytes": 355955,
+        "status": 200
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@e93a3ae558d297fc4afee92b129c764d26b68e80/reports/rs_549300TRUWO2CD2G5692.CON__2026-03-31.json",
+        "seconds": 0.1,
+        "bytes": 40153,
+        "status": 200
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@e93a3ae558d297fc4afee92b129c764d26b68e80/benchmark/82.00.A.cc4494c6fa849f95d8d2e03f0c236b81d28814db19dc0a4b977a1ed6c727de8f.json",
+        "seconds": 0.042,
+        "bytes": 278824,
+        "status": 200
+      },
+      {
+        "url": "https://raw.githubusercontent.com/Tobias-Run/P3DH/e93a3ae558d297fc4afee92b129c764d26b68e80/benchmark/61.00.c6d14338bb7cc07cbeba9c87c417072674b7b7d6bf6ee1bc6195724eb30b9d45.json",
+        "seconds": 0.463,
+        "bytes": 3428954,
+        "status": 200
+      }
+    ]
+  },
+  "method_limitations": [
+    "HTTP probes use the execution environment, not the user desktop.",
+    "Browser bridge fetches live HTTPS requests through Python with verified CA trust and fulfills Playwright routes because Chromium does not trust the execution proxy CA. This is not a native-browser timing score.",
+    "The fixed live-data check substitutes only the local proposed viewer HTML; the production viewer has not been changed.",
+    "Controlled comparisons use identical locally served real data with a four-second delay on labels or non-KM1 overview data."
+  ],
+  "tests": {
+    "unit_tests": 1539,
+    "unit_result": "pass",
+    "loader_regressions": 8,
+    "peer_browser": {
+      "cases": [
+        {
+          "width": 1280,
+          "language": "en",
+          "public_reports": 63,
+          "clusters": 19
+        },
+        {
+          "width": 390,
+          "language": "de",
+          "public_reports": 63,
+          "clusters": 19
+        }
+      ],
+      "javascript_errors": 0
+    },
+    "general_viewer_runtime": "pass"
+  },
+  "local_codebook_sha256": "e848f3e35d7680865d4ea65fd91f0bf131655cdd3fdf2c44924af469e2a51de3"
+}
