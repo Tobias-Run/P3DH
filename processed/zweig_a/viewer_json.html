@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pillar 3 Viewer (JSON) — P3DH</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23c8102e'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='17' fill='white'%3EP3%3C/text%3E%3C/svg%3E">
 <style>
   /* ======================================================================
      Gestaltungssystem (#61). Redaktionelles Idiom statt Software-Chrome:
@@ -1103,27 +1104,63 @@ const DATA_BASES = LOCAL ? ['data/']
   : ['https://cdn.jsdelivr.net/gh/Tobias-Run/P3DH@data/',
      'https://raw.githubusercontent.com/Tobias-Run/P3DH/data/'];
 let DATA_REV=null;
+let DATA_CDN_FAILED=false; // Session only; a reload retries the preferred CDN.
+const DATA_HEDGE_MS=1200, DATA_TIMEOUT_MS=15000;
 async function getJSON(path,integrity=null){
-  let err, missing=true;
   let bases=DATA_REV&&!LOCAL ? DATA_BASES.map(base=>
     base.replace('@data/','@'+DATA_REV+'/').replace('/data/','/'+DATA_REV+'/')) : DATA_BASES;
   // The raw branch is authoritative for the optional rollout pointer.
   // A CDN error must not veto a confirmed legacy publication.
   if(path==='data_version.json' && !LOCAL) bases=[...bases].reverse();
-  for(const base of bases){
-    try{
-      const r=await fetch(base+path,{cache:DATA_REV||path.startsWith('benchmark/')?'default':'no-store',
-        ...(integrity?{integrity}:{})});
-      if(r.ok) return await r.json();   // native parse — no hand-rolled CSV parser
-      if(r.status===404 && path==='data_version.json' && base.startsWith('https://raw.githubusercontent.com/')){
-        return null; // authoritative absence: older publication, no pointer yet
-      }
-      if(r.status!==404) missing=false;
-      err=new Error(path.split('/').pop()+' '+r.status);
-    }catch(e){ err=e; missing=false; }
-  }
-  err.missing=missing;
-  throw err;
+  else if(DATA_CDN_FAILED) bases.sort((a,b)=>Number(a.includes('cdn.jsdelivr.net'))-Number(b.includes('cdn.jsdelivr.net')));
+  return new Promise((resolve,reject)=>{
+    let settled=false, hedge=null, next=0;
+    const active=new Set(), failures=[];
+    const clearHedge=()=>{clearTimeout(hedge);hedge=null;};
+    const finish=(value,error)=>{
+      if(settled) return;
+      settled=true;clearHedge();
+      for(const request of active){clearTimeout(request.timer);request.controller.abort();}
+      active.clear();
+      if(error) reject(error);else resolve(value);
+    };
+    const start=()=>{
+      if(settled || next>=bases.length) return;
+      const base=bases[next++], controller=new AbortController();
+      const request={controller,timer:setTimeout(()=>controller.abort(),DATA_TIMEOUT_MS)};
+      active.add(request);
+      let missing=false;
+      (async()=>{
+        const r=await fetch(base+path,{signal:controller.signal,
+          cache:DATA_REV||path.startsWith('benchmark/')?'default':'no-store',
+          ...(integrity?{integrity}:{})});
+        // Once headers arrive, allow the download to complete instead of
+        // duplicating large dictionaries on an otherwise healthy connection.
+        clearHedge();
+        if(r.ok) return await r.json();
+        if(r.status===404 && path==='data_version.json' && base.startsWith('https://raw.githubusercontent.com/'))
+          return null; // authoritative absence: older publication, no pointer yet
+        missing=r.status===404;
+        throw new Error(path.split('/').pop()+' '+r.status);
+      })().then(value=>finish(value),error=>{
+        if(settled) return;
+        // CORS failures surface as fetch TypeErrors, while accessible CDN
+        // error pages expose 403/5xx. Neither should penalize every next file.
+        if(base.startsWith('https://cdn.jsdelivr.net/')) DATA_CDN_FAILED=true;
+        clearTimeout(request.timer);active.delete(request);
+        failures.push({error,missing});clearHedge();
+        if(next<bases.length) start();
+        else if(!active.size){
+          error.missing=failures.every(f=>f.missing);
+          finish(null,error);
+        }
+      });
+    };
+    start();
+    // The mutable version pointer must remain authoritative: only try its
+    // second origin after a real failure, never race a stale cached pointer.
+    if(bases.length>1 && path!=='data_version.json') hedge=setTimeout(start,DATA_HEDGE_MS);
+  });
 }
 async function selectDataVersion(){
   try{
@@ -2380,19 +2417,20 @@ async function renderReport(rep){
     if(OPENMETRIC && !LABELS_LOADED){ labelView(document.getElementById('ovSection'),()=>renderOverview(rep),current); return; }
     renderOverview(rep);
   });
-  // Prepare labels after the useful report is visible, before optional peer data.
-  // Catch prefetch errors here; the actual reader provides a retry control.
-  ensureLabels().catch(()=>{}).then(()=>{
-    if(current()) return ensureBenchmark(overviewTemplates());
-  }).then(()=>{
+  // Overview peer context and time series do not read cell labels. In
+  // particular, a slow 9.4 MB label dictionary must not gate either view.
+  ensureBenchmark(overviewTemplates()).then(()=>{
     if(!current()) return;
     renderOverview(rep);
-    if(entityReports(rep).length>=2) renderTimeseries(rep);
+  }).catch(()=>{}); // Own KPI values remain available without peer context.
+  const loadSeries=()=>ensureBenchmark(BM_MANIFEST?['61.00']:null);
+  if(entityReports(rep).length>=2) loadSeries().then(()=>{
+    if(current()) renderTimeseries(rep);
   }).catch(e=>{
     if(!current()) return;
     const host=document.getElementById('tsSection');
-    if(entityReports(rep).length>=2) showRetry(host,tr('Error:')+' '+e.message,async()=>{
-      try{await ensureBenchmark(overviewTemplates());if(current()){renderOverview(rep);renderTimeseries(rep);}}
+    showRetry(host,tr('Error:')+' '+e.message,async()=>{
+      try{await loadSeries();if(current()) renderTimeseries(rep);}
       catch(err){if(current()) showRetry(host,tr('Error:')+' '+err.message,()=>renderReport(rep));}
     });
   });
