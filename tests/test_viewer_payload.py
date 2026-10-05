@@ -80,8 +80,10 @@ class ViewerTest(unittest.TestCase):
         self.assertIn("await ensureLabels()", fill,
                       "fillTheme rendert ohne auf die Beschriftungen zu warten")
         # Vergleichsansicht
-        cmp_ = self.src[self.src.index("async function renderCompare()"):][:400]
+        cmp_ = self.src[self.src.index("async function renderCompare()"):]
+        cmp_ = cmp_[:cmp_.index("/* ================= routing & tabs")]
         self.assertIn("ensureLabels()", cmp_)
+        self.assertLess(cmp_.index("ensureLabels()"), cmp_.index("const draw="))
         # Kennzahlen-Beleg
         self.assertIn("if(OPENMETRIC && !LABELS_LOADED)", self.src)
 

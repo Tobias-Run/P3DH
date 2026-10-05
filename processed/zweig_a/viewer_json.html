@@ -466,6 +466,7 @@ let EUR   = store.eur ?? false;           // EUR normalization
 let PINS  = new Set(store.pins||[]);      // report keys for compare
 let DARK  = store.dark ?? window.matchMedia('(prefers-color-scheme: dark)').matches;
 let CMPTPL = store.cmptpl || '61.00';
+let CMPDATE = /^\d{4}-\d{2}-\d{2}$/.test(store.cmpdate||'') ? store.cmpdate : '';
 /* Peer-Kontext an der Zelle (#23). AUS per Default.
 
    Die Einordnung ist der Zweck dieses Werkzeugs — „12,4 %" allein ist eine
@@ -492,7 +493,7 @@ let CTX = store.ctx ?? false;
 let SICHTEN = Array.isArray(store.sichten) ? store.sichten : [];
 const SICHT_MAX = 20;
 function persist(){ localStorage.setItem('p3dh', JSON.stringify({
-  scale:SCALE, eur:EUR, pins:[...PINS], dark:DARK, cmptpl:CMPTPL, lang:LANG,
+  scale:SCALE, eur:EUR, pins:[...PINS], dark:DARK, cmptpl:CMPTPL, cmpdate:CMPDATE, lang:LANG,
   sichten:SICHTEN,
   themes:(typeof OPENTHEMES!=='undefined'?[...OPENTHEMES]:undefined),
   bmp:(typeof BMP!=='undefined'?BMP:undefined)})); }
@@ -617,6 +618,14 @@ const DE = {
   "Metrics": "Kennzahlen",
   "loading…": "lädt…",
   "Compare": "Vergleich",
+  "All institutions are compared at the same reference date.": "Alle Institute werden zum selben Stichtag verglichen.",
+  "No report for this reference date": "Kein Report für diesen Stichtag",
+  "No common reference date; missing reports are shown explicitly.": "Kein gemeinsamer Stichtag; fehlende Reports werden ausdrücklich angezeigt.",
+  "Report could not be loaded": "Report konnte nicht geladen werden",
+  "No reports available at this reference date.": "Für diesen Stichtag sind keine Reports verfügbar.",
+  "Filled by all selected institutions": "Von allen ausgewählten Instituten befüllt",
+  "Filled by some selected institutions": "Von einem Teil der ausgewählten Institute befüllt",
+  "No template filled by all selected institutions": "Kein Template von allen ausgewählten Instituten befüllt",
   "Views": "Sichten",
   "Toggle dark mode": "Dark Mode umschalten",
   "Remember the current state — view, filters, profile, sorting, columns, selection — under a name. What is stored is the shareable link, so a view can be copied as well.":
@@ -1705,7 +1714,10 @@ const PIN_MAX=4;
 function togglePin(key){
   if(PINS.has(key)) PINS.delete(key);
   else{
-    if(PINS.size>=PIN_MAX){ alert(tr('Compare at most {0} reports.',PIN_MAX)); return; }
+    const entity=byKey(key)?.entityID;
+    const existing=[...PINS].find(k=>entity && byKey(k)?.entityID===entity);
+    if(existing) PINS.delete(existing);
+    else if(PINS.size>=PIN_MAX){ alert(tr('Compare at most {0} reports.',PIN_MAX)); return; }
     PINS.add(key);
   }
   persist(); updateCmpBadge(); renderReportList(); shareState();
@@ -3740,47 +3752,85 @@ function ladeHerunter(name, text){
 }
 
 /* ================= compare view ================= */
+function compareSelection(pinned,reports,date=''){
+  const anchors=[...new Map(pinned.map(r=>[r.entityID,r])).values()];
+  const histories=anchors.map(a=>new Map(reports.filter(r=>r.entityID===a.entityID).map(r=>[r.refPeriod,r])));
+  const dates=[...new Set(histories.flatMap(h=>[...h.keys()]))].sort().reverse();
+  const common=dates.filter(d=>histories.every(h=>h.has(d)));
+  const selected=date || common[0] || dates[0] || '';
+  if(selected && !dates.includes(selected)) dates.unshift(selected);
+  return {date:selected,dates,common,slots:anchors.map((a,i)=>({anchor:a,entityID:a.entityID,rep:histories[i].get(selected)||null}))};
+}
+function compareTemplates(slots){
+  const counts=new Map();
+  for(const s of slots){
+    if(!s.rep?.loaded || s.error) continue;
+    for(const [tid,cells] of s.rep.templates){
+      if(cells.some(c=>c.val!=null)) counts.set(tid,(counts.get(tid)||0)+1);
+    }
+  }
+  const ids=[...counts.keys()].sort();
+  return {counts,common:ids.filter(t=>counts.get(t)===slots.length),partial:ids.filter(t=>counts.get(t)<slots.length)};
+}
+let CMP_RENDER=0;
 async function renderCompare(){
-  // Die Vergleichstabelle beschriftet jede Zelle — ohne Labels waere sie eine
-  // Matrix aus Koordinaten.
-  try{ await ensureLabels(); }catch(e){}
+  const generation=++CMP_RENDER;
   rememberView('compare');
   VIEW='compare'; setTabs(); activeKey=null;
   const main=document.getElementById('main');
-  const reps=[...PINS].map(byKey).filter(Boolean);
-  if(!reps.length){
+  const current=()=>VIEW==='compare' && generation===CMP_RENDER;
+  const selected=compareSelection([...PINS].map(byKey).filter(Boolean),REPORTS,CMPDATE);
+  const slots=selected.slots;
+  if(!slots.length){
     main.innerHTML=`<div class="rhead"><h2>${tr('Compare')}</h2></div>
       <div class="status">${tr('No reports pinned. Click the <b>⊞</b> symbol on up to 4 reports in the list on the left.')}</div>`;
     return;
   }
+  CMPDATE=selected.date;
+  PINS=new Set(slots.map(s=>repKey(s.anchor)));
+  persist();updateCmpBadge();renderReportList();shareState();
+  const reps=slots.map(s=>s.rep).filter(Boolean);
   const need=reps.filter(r=>!r.loaded);
-  if(need.length){
-    main.innerHTML=`<div class="rhead"><h2>${tr('Compare')}</h2></div><div class="status">${tr('Loading {0} report(s)…',need.length)}</div>`;
-    try{ await Promise.all(need.map(ensureLoaded)); }catch(e){}
-    if(VIEW!=='compare') return;   // navigated away while loading
+  main.innerHTML=`<div class="rhead"><h2>${tr('Compare')} · ${esc(CMPDATE)}</h2></div><div class="status" role="status">${tr('Loading {0} report(s)…',need.length)}</div>`;
+  try{
+    await Promise.all([ensureLabels(),Promise.allSettled(need.map(ensureLoaded))]);
+  }catch(e){
+    if(current()) showRetry(main,tr('Error:')+' '+e.message,renderCompare);
+    return;
   }
-  const tplSet=new Set();
-  reps.forEach(r=>[...r.templates.keys()].forEach(t=>tplSet.add(t)));
-  const tpls=[...tplSet].sort();
+  if(!current()) return;
+  for(const s of slots) s.error=!!s.rep && !s.rep.loaded;
+  const groups=compareTemplates(slots);
+  const tpls=[...groups.common,...groups.partial];
   if(!tpls.includes(CMPTPL)) CMPTPL=tpls.includes('61.00')?'61.00':tpls[0];
+  const options=ids=>ids.map(t=>{
+    const ttl=TITLES.get(dpmCode(t))||'';
+    const count=groups.counts.get(t);
+    return `<option value="${esc(t)}"${t===CMPTPL?' selected':''}>${esc(t)}${ttl?' — '+esc(ttl.slice(0,45)):''}${count<slots.length?' ('+count+'/'+slots.length+')':''}</option>`;
+  }).join('');
   main.innerHTML=`<div class="rhead"><h2>${tr('Compare')}</h2></div><div class="cmp-pick">
+    <label class="ctl">${tr('Reference date')}:
+      <select id="cmpDate">${selected.dates.map(d=>`<option value="${esc(d)}"${d===CMPDATE?' selected':''}>${esc(d)}</option>`).join('')}</select></label>
     <label class="ctl">Template:
-      <select id="cmpTpl">${tpls.map(t=>{
-        const ttl=TITLES.get(dpmCode(t))||'';
-        return `<option value="${esc(t)}"${t===CMPTPL?' selected':''}>${esc(t)}${ttl?' — '+esc(ttl.slice(0,45)):''}</option>`;
-      }).join('')}</select></label>
+      <select id="cmpTpl"><optgroup label="${esc(tr('Filled by all selected institutions'))}">${groups.common.length?options(groups.common):'<option disabled>'+tr('No template filled by all selected institutions')+'</option>'}</optgroup>
+      ${groups.partial.length?'<optgroup label="'+esc(tr('Filled by some selected institutions'))+'">'+options(groups.partial)+'</optgroup>':''}</select></label>
     ${controlsHTML()}
-    ${reps.map(r=>`<span class="chip">${esc(bankName(r.entityID).slice(0,28))} · ${esc(r.refPeriod)}
-      <button title="${esc(tr('remove'))}" data-k="${esc(repKey(r))}">✕</button></span>`).join('')}
-  </div><div id="cmpBody"></div>`;
+    ${slots.map(s=>`<span class="chip">${esc(bankName(s.entityID).slice(0,28))} · ${esc(leiParts(s.entityID).scope)}
+      ${!s.rep?' · '+tr('No report for this reference date'):s.error?' · '+tr('Report could not be loaded'):''}
+      <button title="${esc(tr('remove'))}" data-k="${esc(repKey(s.anchor))}">✕</button></span>`).join('')}
+  </div><p class="scalenote">${tr('All institutions are compared at the same reference date.')}${!selected.common.length?' '+tr('No common reference date; missing reports are shown explicitly.'):''}</p>
+  ${slots.some(s=>s.error)?'<button id="cmpRetry">'+tr('Retry')+'</button>':''}<div id="cmpBody"></div>`;
 
   const draw=()=>{
     const body=document.getElementById('cmpBody');
+    if(!tpls.length){body.innerHTML='<div class="status">'+tr('No reports available at this reference date.')+'</div>';return;}
     const tcode=dpmCode(CMPTPL);
-    const per=reps.map(rep=>{
+    const per=slots.map(s=>{
+      const rep=s.rep && !s.error?s.rep:null;
+      if(!rep) return {...s,rep:null,rate:1,cur:null,val:new Map()};
       const cells=rep.templates.get(CMPTPL)||[];
       const {rate,cur}=fxOf(rep, CMPTPL);
-      return {rep,rate,cur,val:new Map(cells.map(c=>[c.row+'|'+c.col,c.val]))};
+      return {...s,rep,rate,cur,val:new Map(cells.map(c=>[c.row+'|'+c.col,c.val]))};
     });
     const keys=new Set();
     per.forEach(p=>p.val.forEach((_,k)=>keys.add(k)));
@@ -3791,14 +3841,15 @@ async function renderCompare(){
       if(dt==='monetary'){ const n=Math.abs(Number(v))*p.rate; if(n>maxAbs) maxAbs=n; }
     }));
     const unit=maxAbs>0?pickUnit(maxAbs):1;
-    const anyFx=per.some(p=>p.cur==='EUR'&&curOf(p.rep,CMPTPL)!=='EUR');
-    const mixedCur=new Set(per.map(p=>EUR?p.cur:curOf(p.rep,CMPTPL))).size>1;
+    const available=per.filter(p=>p.rep);
+    const anyFx=available.some(p=>p.cur==='EUR'&&curOf(p.rep,CMPTPL)!=='EUR');
+    const mixedCur=new Set(available.map(p=>EUR?p.cur:curOf(p.rep,CMPTPL))).size>1;
     const ttl=TITLES.get(tcode)||'';
     let t=`<section><h3>${esc(CMPTPL)} — ${esc(ttl)}
-      ${unit>1?`<span class="scalenote">${tr('Amounts in')} ${unitLabel(unit)} ${EUR?'EUR':esc(curOf(per[0].rep,CMPTPL))}${anyFx?' · '+tr('ECB rate'):''}</span>`:''}
+      ${unit>1?`<span class="scalenote">${tr('Amounts in')} ${unitLabel(unit)} ${EUR?'EUR':esc(curOf(available[0].rep,CMPTPL))}${anyFx?' · '+tr('ECB rate'):''}</span>`:''}
       ${mixedCur?`<span class="scalenote" style="color:#b26b00">${tr('⚠ different currencies — the EUR toggle is recommended')}</span>`:''}
       </h3><table><thead><tr><th class="rh">${tr('Cell')}</th><th class="rl"></th>`;
-    per.forEach(p=>{ t+=`<th>${esc(bankName(p.rep.entityID).slice(0,24))}<br><span class="cl">${esc(p.rep.refPeriod)} · ${esc(curOf(p.rep,CMPTPL))}</span></th>`; });
+    per.forEach(p=>{ t+=`<th>${esc(bankName(p.entityID).slice(0,24))}<br><span class="cl">${esc(CMPDATE)} · ${esc(leiParts(p.entityID).scope)}${p.rep?' · '+esc(curOf(p.rep,CMPTPL)):' · '+tr(p.error?'Report could not be loaded':'No report for this reference date')}</span></th>`; });
     t+='</tr></thead><tbody>';
     for(const k of sorted){
       const [row,col]=k.split('|');
@@ -3807,7 +3858,7 @@ async function renderCompare(){
           <td class="rl">${esc(e.rl||'')}${e.cl?`<span class="cl"> · ${esc(e.cl)}</span>`:''}</td>`;
       per.forEach(p=>{
         const v=p.val.get(k);
-        t+= v===undefined?'<td class="empty"></td>':
+        t+= v===undefined?'<td class="empty">'+(!p.rep?'—':'')+'</td>':
           `<td class="num">${fmtTyped(v,e.dt||'',unit,(e.dt==='monetary')?p.rate:1)}</td>`;
       });
       t+='</tr>';
@@ -3815,9 +3866,11 @@ async function renderCompare(){
     body.innerHTML=t+'</tbody></table></section>';
   };
   draw();
+  document.getElementById('cmpDate').addEventListener('change',e=>{CMPDATE=e.target.value;persist();shareState();renderCompare();});
   document.getElementById('cmpTpl').addEventListener('change',e=>{ CMPTPL=e.target.value; persist(); draw(); });
   wireControls(draw);
   main.querySelectorAll('.chip button').forEach(b=>b.onclick=()=>togglePin(b.dataset.k));
+  const retry=document.getElementById('cmpRetry');if(retry) retry.onclick=renderCompare;
   main.scrollTop=0;
 }
 
@@ -3882,6 +3935,7 @@ function shareParams(){
   // Die Auswahl (#50). Ohne sie laesst sich ein Vergleich nicht weitergeben —
   // man kann nur AUFZAEHLEN, welche vier Reports der andere anpinnen soll.
   if(PINS.size) p.set('pin', [...PINS].sort().join(','));
+  if(PINS.size && CMPDATE) p.set('cmpdate',CMPDATE);
   return p;
 }
 /* Nur der Routenteil, ohne Parameter — die Basis, an die angehaengt wird. */
@@ -3958,6 +4012,7 @@ function applyShared(){
     PINS=new Set(gibt.slice(0, PIN_MAX));
     store.pins=[...PINS]; persist();
   }
+  if(p.has('cmpdate') || p.has('pin')) CMPDATE=/^\d{4}-\d{2}-\d{2}$/.test(p.get('cmpdate')||'')?p.get('cmpdate'):'';
 }
 function setTabs(){
   document.getElementById('tabReports').classList.toggle('on',VIEW==='reports');
