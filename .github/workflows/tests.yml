@@ -148,3 +148,6 @@ jobs:
 
       - name: Advanced peer groups and ownership evidence (DE/EN)
         run: python scripts/check_advanced_peers.py
+
+      - name: Same-date compare and template coverage (DE/EN)
+        run: python scripts/check_compare_dates.py
