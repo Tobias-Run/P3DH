@@ -618,6 +618,17 @@ const DE = {
   "Metrics": "Kennzahlen",
   "loading…": "lädt…",
   "Compare": "Vergleich",
+  "Usable peer coverage": "Nutzbare Vergleichsdaten",
+  "Comparable values": "Vergleichbare Werte",
+  "Peer populations with at least five values": "Vergleichsgruppen mit mindestens fünf Werten",
+  "Values with percentile context": "Werte mit Perzentileinordnung",
+  "Not ranked: clustering input": "Keine Rangbildung: Clustering-Eingabe",
+  "Usable for this metric": "Für diese Kennzahl nutzbar",
+  "Insufficient data for this metric": "Zu wenige Daten für diese Kennzahl",
+  "Current metric: {0}; counts reflect the selected dates and existing unit exclusions.": "Aktuelle Kennzahl: {0}; die Zahlen berücksichtigen die gewählten Stichtage und bestehenden Einheitenausschlüsse.",
+  "Roster size is not the number of valid values at this date.": "Die Größe der festen Gruppe ist nicht die Zahl gültiger Werte an diesem Stichtag.",
+  "Choose one reference date to assess current coverage.": "Einen Stichtag wählen, um die aktuelle Abdeckung zu beurteilen.",
+  "Assumed or unverified ownership: {0} of {1} reports.": "Angenommene oder ungeprüfte Trägerschaft: {0} von {1} Reports.",
   "All institutions are compared at the same reference date.": "Alle Institute werden zum selben Stichtag verglichen.",
   "No report for this reference date": "Kein Report für diesen Stichtag",
   "No common reference date; missing reports are shown explicitly.": "Kein gemeinsamer Stichtag; fehlende Reports werden ausdrücklich angezeigt.",
@@ -2761,12 +2772,12 @@ function peerMeta(row){
 function clusterOf(row){
   return AP_DATA?.stable_memberships?AP_DATA.stable_memberships[row.lei+'|'+row.scope]:AP_DATA?.reports[row.key]?.cluster;
 }
-function advancedSelection(rows){
+function advancedSelection(rows,options={}){
   if(BM_PEER==='standard' || !AP_DATA) return {rows,duplicates:[],filtered:0};
   const filtered=rows.filter(r=>{
     const m=peerMeta(r), cluster=clusterOf(r);
     return (!BM_OWN || m.ownership===BM_OWN) && (!BM_ROLE || m.role===BM_ROLE) &&
-      (!BM_CLUSTER || cluster===BM_CLUSTER);
+      (!(options.cluster??BM_CLUSTER) || cluster===(options.cluster??BM_CLUSTER));
   });
   // Representatives are selected within the actual visible date/scope/framework
   // population, before size/type partitioning. Unknown parents stay separate.
@@ -2801,6 +2812,36 @@ function advancedPeerKey(r,basis){
   return [r.itype||'?',r.scope,r.date,rep?.framework||'?',m.ownership,m.role].join('|');
 }
 const clusterFittingMetric=id=>BM_PEER==='cluster' && (AP_DATA?.fitting_metrics||[]).includes(id);
+let BM_COVERAGE_ROWS=[];
+function metricPeerGroups(rows,metric,prof,basis=BM_PEER){
+  const groups=new Map();
+  for(const row of rows){
+    const v=row[metric.id];
+    if(v==null || !Number.isFinite(v) || (BAR_KINDS.has(metric.kind) && !barErlaubt(prof,row,metric))) continue;
+    const key=peerKeyOf(row,basis);if(!key) continue;
+    (groups.get(key)||groups.set(key,[]).get(key)).push(row);
+  }
+  return groups;
+}
+function peerCoverage(rows,prof,basis=BM_PEER){
+  return sichtbareSpalten(prof).map(metric=>{
+    const groups=metricPeerGroups(rows,metric,prof,basis);
+    const usable=[...groups.values()].filter(g=>g.length>=PCT_MIN_GROUP);
+    const comparable=rows.filter(r=>r[metric.id]!=null && Number.isFinite(r[metric.id]) &&
+      (!BAR_KINDS.has(metric.kind)||barErlaubt(prof,r,metric))).length;
+    const suppressed=basis==='cluster' && (AP_DATA?.fitting_metrics||[]).includes(metric.id);
+    return {metric,comparable,suppressed,usableGroups:suppressed?0:usable.length,
+      ranked:suppressed?0:usable.reduce((n,g)=>n+g.length,0)};
+  });
+}
+function peerCoverageHTML(rows,prof){
+  const data=peerCoverage(rows,prof);
+  const dates=new Set(rows.map(r=>r.date));
+  return `<details id="bmCoverage"${BM_PEER==='cluster'?' open':''}><summary>${tr('Usable peer coverage')}</summary>
+    <p class="scalenote">${tr('Roster size is not the number of valid values at this date.')}${dates.size>1?' '+tr('Choose one reference date to assess current coverage.'):''}</p>
+    <table><thead><tr><th>${tr('Metric')}</th><th>${tr('Comparable values')}</th><th>${tr('Peer populations with at least five values')}</th><th>${tr('Values with percentile context')}</th></tr></thead><tbody>
+    ${data.map(d=>`<tr data-coverage="${esc(d.metric.id)}"><th>${esc(mlabel(d.metric))}</th><td>${d.comparable}</td><td>${d.suppressed?'—':d.usableGroups}</td><td>${d.suppressed?tr('Not ranked: clustering input'):d.ranked}</td></tr>`).join('')}</tbody></table></details>`;
+}
 function peerControls(){
   const opts=(items,value)=>Object.entries(items).map(([id,label])=>
     `<option value="${id}"${id===value?' selected':''}>${esc(tr(label))}</option>`).join('');
@@ -2812,8 +2853,17 @@ function peerControls(){
     h+=`<label class="ctl">${tr('Ownership')}: <select id="bmOwnership"><option value="">${tr('All ownership types')}</option>${opts(owners,BM_OWN)}</select></label>
       <label class="ctl">${tr('Group role')}: <select id="bmRole"><option value="">${tr('All group roles')}</option>${opts(ROLE_LABEL,BM_ROLE)}</select></label>`;
     if(BM_PEER==='cluster'){
-      h+=`<label class="ctl">${tr('Cluster')}: <select id="bmCluster"><option value="">${tr('All clusters and unassigned reports')}</option>${BM_CLUSTER && !AP_CLUSTERS.has(BM_CLUSTER)?'<option value="'+esc(BM_CLUSTER)+'" selected>'+tr('Unavailable cluster')+' '+esc(BM_CLUSTER)+'</option>':''}${[...AP_CLUSTERS.values()].map(c=>
-        `<option value="${c.id}"${BM_CLUSTER===c.id?' selected':''}>${esc(c.date+' · '+c.scope+' · RF '+c.framework+' · '+c.id.slice(0,6)+' · n='+c.members.length)}</option>`).join('')}</select></label>`;
+      const prof=bmProf();
+      const metric=prof.cols.find(c=>c.id===bmSort?.col&&!clusterFittingMetric(c.id))||prof.cols.find(c=>!clusterFittingMetric(c.id))||prof.cols[0];
+      const stats=[...AP_CLUSTERS.values()].map(c=>{
+        const rows=advancedSelection(BM_COVERAGE_ROWS,{cluster:c.id}).rows;
+        const groups=metricPeerGroups(rows,metric,prof);
+        return {c,n:[...groups.values()].reduce((n,g)=>n+g.length,0),usable:[...groups.values()].some(g=>g.length>=PCT_MIN_GROUP)&&!clusterFittingMetric(metric.id)};
+      });
+      const options=items=>items.map(({c,n})=>`<option value="${c.id}"${BM_CLUSTER===c.id?' selected':''}>${esc(c.date+' · '+c.scope+' · RF '+c.framework+' · '+c.id.slice(0,6)+' · '+n+'/'+c.members.length)}</option>`).join('');
+      h+=`<label class="ctl">${tr('Cluster')}: <select id="bmCluster"><option value="">${tr('All clusters and unassigned reports')}</option>${BM_CLUSTER && !AP_CLUSTERS.has(BM_CLUSTER)?'<option value="'+esc(BM_CLUSTER)+'" selected>'+tr('Unavailable cluster')+' '+esc(BM_CLUSTER)+'</option>':''}
+        <optgroup label="${esc(tr('Usable for this metric'))}">${options(stats.filter(s=>s.usable))}</optgroup><optgroup label="${esc(tr('Insufficient data for this metric'))}">${options(stats.filter(s=>!s.usable))}</optgroup></select></label>
+        <span class="scalenote">${esc(tr('Current metric: {0}; counts reflect the selected dates and existing unit exclusions.',mlabel(metric)))}</span>`;
     }
   }
   return h+'</div>';
@@ -2822,13 +2872,14 @@ function peerExplanation(rows,selection){
   if(BM_PEER==='standard') return '';
   const unavailable=BM_CLUSTER && !AP_CLUSTERS.has(BM_CLUSTER);
   const ownershipKnown=rows.filter(r=>{const m=peerMeta(r);return m.ownership!=='unknown' && !['assumption','externally_reported_unverified'].includes(m.classification_status);}).length;
+  const assumptions=rows.filter(r=>['assumption','externally_reported_unverified'].includes(peerMeta(r).classification_status)).length;
   const groupUnknown=rows.filter(r=>!peerMeta(r).group_head).length;
   const eligible=rows.filter(r=>advancedPeerKey(r,BM_PEER)).length;
   const memberships=new Map();
   for(const r of rows){const k=advancedPeerKey(r,BM_PEER);if(k)(memberships.get(k)||memberships.set(k,[]).get(k)).push(r);}
   const small=[...memberships.values()].filter(g=>g.length<5).reduce((n,g)=>n+g.length,0);
   let h=`<div class="peer-note" role="status">${unavailable?'<p>'+tr('The requested cluster does not exist in this data revision. Choose another cluster or all reports.')+'</p>':''}<b>${esc(tr(PEER_LABEL[BM_PEER]))}</b> · ${tr('{0} of {1} reports have reviewed ownership.',ownershipKnown,rows.length)}
-    ${tr('{0} reports have an unknown group head.',groupUnknown)}
+    ${tr('{0} reports have an unknown group head.',groupUnknown)} ${tr('Assumed or unverified ownership: {0} of {1} reports.',assumptions,rows.length)}
     ${tr('{0} reports have no peer assignment; {1} are in groups smaller than five.',rows.length-eligible,small)}
     ${tr('Percentiles require five valid values per metric. No automatic widening of the peer group.')}
     <details><summary>${tr('Peer method, coverage and exclusions')}</summary><p>${BM_PEER==='cluster'?tr('Ownership assumptions are included for this exploratory peer analysis.'):tr('Ownership describes the current reviewed classification, not historical ownership at the report date. Sources and review dates are shown per bank. Subsidiaries do not inherit ownership automatically.')}</p>
@@ -3493,6 +3544,7 @@ async function renderBenchmark(){
   // und die Namen stehen unter der Tabelle (#18).
   const gatedOut=prof.gate.length?gross.filter(r=>r._out):[];
   const gatedRows=prof.gate.length?gross.filter(r=>!r._out):gross;
+  BM_COVERAGE_ROWS=gatedRows;
   const peerSelection=advancedSelection(gatedRows);
   const allRows=peerSelection.rows;
   // Perzentile IMMER auf der vollen (zugelassenen) Menge: ein ausgeblendeter
@@ -3527,6 +3579,7 @@ async function renderBenchmark(){
   let h=`<div class="rhead"><h2>${tr('Benchmark')}</h2></div>
     ${peerControls()}
     ${peerExplanation(allRows,peerSelection)}
+    ${peerCoverageHTML(allRows,prof)}
     <div class="bmbar"><label class="ctl">${tr('Profile')}: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> ${tr('Percentile within peer group')}</label>
       <label class="ctl" title="${esc(tr('Hides reports in which the plausibility check found values far outside their cell population. Percentiles stay computed on the full set.'))}"><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> ${tr('collapse conspicuous')}${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
