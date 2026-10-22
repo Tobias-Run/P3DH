@@ -1,0 +1,35 @@
+{
+  "pilot_version": "2026-10-22-pilot-v1",
+  "frozen_policy": "frozen-latest-usable-bank-scope-v1",
+  "evaluated_roster_pairs": 897,
+  "reviewed_model_entities": 2,
+  "group_descriptions_without_entity_validation": 1,
+  "mixed_reviewed_models": [
+    {
+      "cluster": "0a36f009f9f1",
+      "date": "2026-03-31",
+      "reports": [
+        "rs:529900SSGT49ZZSWYE62.CON|2026-03-31",
+        "rs:R0MUWSFPU8MPRO8K5P83.CON|2026-03-31"
+      ],
+      "models": [
+        "vehicle_finance",
+        "diversified_banking"
+      ],
+      "legacy_parts": {
+        "size": 0.04868543822800184,
+        "risk": 0.02459965007643507,
+        "ownership": 0.0,
+        "role": 0.1
+      },
+      "legacy_distance": 0.17328508830443692,
+      "risk_rescaled_distance": 0.21018456341908953,
+      "still_below_cutoff_after_risk_rescale": true,
+      "source_urls": [
+        "https://www.vwfs.com/en.html",
+        "https://group.bnpparibas/en/group"
+      ]
+    }
+  ],
+  "decision": "Keep frozen rosters versioned. Treat them as proposals, show model provenance and size/risk differences, and allow explicit custom membership. A blind risk-weight change does not establish economic comparability."
+}

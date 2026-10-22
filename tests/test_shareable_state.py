@@ -90,7 +90,7 @@ class TeilbarerZustandTest(unittest.TestCase):
                 self.assertIn(f"p.set('{feld}'", self.src)
 
     def test_changing_a_filter_updates_the_link(self):
-        self.assertRegex(self.src, r"const rerender=\(\)=>\{[^}]*shareState\(\);")
+        self.assertRegex(self.src, r"const rerender=(?:\(\)|event)=>\{[^}]*shareState\(\);")
 
     def test_the_route_patterns_are_untouched(self):
         """Die drei bestehenden Routen muessen buchstaeblich bleiben."""

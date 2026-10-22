@@ -209,7 +209,7 @@ class ViewerTest(unittest.TestCase):
     def test_the_javascript_still_parses(self):
         """Ein Syntaxfehler im Viewer faellt sonst erst im Browser auf — dort
         sieht er aus wie eine leere Seite, nicht wie ein Fehler."""
-        bloecke = re.findall(r"<script[^>]*>(.*?)</script>", self.src, re.S)
+        bloecke = [b for b in re.findall(r"<script[^>]*>(.*?)</script>", self.src, re.S) if b.strip()]
         self.assertEqual(len(bloecke), 1)
         with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False,
                                          encoding="utf-8") as fh:

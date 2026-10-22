@@ -143,7 +143,7 @@ class ViewerTest(unittest.TestCase):
         """Kein Platzhalter, der nach Null aussieht — dieselbe Regel wie bei
         den leeren Zellen: ueber die einzelne Zelle wissen wir nichts und
         behaupten deshalb nichts."""
-        m = re.search(r"const ctx\s*=\s*\(CTX&&pc\)\s*\?", self.src)
+        m = re.search(r"const ctx\s*=\s*\(CTX&&!BM_REF&&pc\)\s*\?", self.src)
         self.assertTrue(m, "Sekundaerzeile haengt nicht an einer vorhandenen Peer-Gruppe")
         rest = self.src[m.end():]
         zweig = rest[:rest.index(";")]
@@ -172,7 +172,7 @@ class ViewerTest(unittest.TestCase):
         self.assertIn("store.ctx", self.src)
 
     def test_the_javascript_still_parses(self):
-        bloecke = re.findall(r"<script[^>]*>(.*?)</script>", self.src, re.S)
+        bloecke = [b for b in re.findall(r"<script[^>]*>(.*?)</script>", self.src, re.S) if b.strip()]
         self.assertEqual(len(bloecke), 1)
         with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False,
                                          encoding="utf-8") as fh:

@@ -373,6 +373,13 @@
   .fb{display:inline-block;font-size:10px;font-weight:600;border-radius:3px;padding:0 .3rem;
       margin-left:.3rem;background:var(--soft);color:var(--softink);cursor:help;white-space:nowrap}
   .cmp-pick{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.4rem 0 .8rem}
+  .analysis-card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.7rem;min-width:0}
+  .analysis-card strong{font-size:var(--f4)}
+  .analysis-card p{margin:.35rem 0;color:var(--ink2)}
+  #bmAnalysisControls{max-width:100%}
+  #bmAnalysisControls label{min-width:0;max-width:100%}
+  #bmReference{max-width:min(36rem,75vw)}
+  #bmMembers select{max-width:75vw}
   .chip{display:inline-flex;align-items:center;gap:.35rem;background:var(--soft);color:var(--softink);
         border-radius:12px;padding:2px 9px;font-size:11.5px}
   .chip button{border:0;background:transparent;color:inherit;cursor:pointer;font-size:12px;padding:0}
@@ -446,6 +453,7 @@
   and colour values are our own, and we left them the red rectangle.</div>
 </footer>
 
+<script src="business_model_pilot.js"></script>
 <script>
 'use strict';
 /* ================= state & persistence ================= */
@@ -619,6 +627,58 @@ const DE = {
   "loading…": "lädt…",
   "Compare": "Vergleich",
   "Usable peer coverage": "Nutzbare Vergleichsdaten",
+  "Reference institution": "Referenzinstitut",
+  "Custom membership settings: {0} omitted, {1} added; the proposal roster is unchanged.": "Eigene Mitgliederwahl: {0} ausgelassen, {1} ergänzt; die vorgeschlagene Mitgliederliste bleibt unverändert.",
+  "Current size/risk inputs unavailable": "Aktuelle Größen-/Risikoeingaben nicht verfügbar",
+  "Economic review required: this proposal contains different reviewed business models.": "Wirtschaftliche Prüfung erforderlich: Der Vorschlag enthält unterschiedliche geprüfte Geschäftsmodelle.",
+  "Reviewed ownership": "Trägerschaft geprüft",
+  "Reviewed business-model descriptions: {0}/{1}.": "Geprüfte Geschäftsmodellbeschreibungen: {0}/{1}.",
+  "Different reviewed business models occur in this proposal. Inspect the membership.": "Der Vorschlag enthält unterschiedliche geprüfte Geschäftsmodelle. Die Mitgliederliste prüfen.",
+  "Vehicle finance and mobility": "Fahrzeugfinanzierung und Mobilität",
+  "Diversified banking": "Diversifiziertes Bankgeschäft",
+  "Custody and securities services": "Verwahr- und Wertpapierdienstleistungen",
+  "Official description reviewed": "Offizielle Beschreibung geprüft",
+  "Group description; reporting entity unverified": "Konzernbeschreibung; Zuordnung zur Meldeeinheit ungeprüft",
+  "Business model not reviewed": "Geschäftsmodell ungeprüft",
+  "Current TREA size ratio: {0}×": "Aktuelles TREA-Größenverhältnis: {0}×",
+  "Outside the anchor size corridor": "Außerhalb des Größenkorridors am Ankerstichtag",
+  "Average risk-share difference: {0} pp": "Mittlere Abweichung der Risikoanteile: {0} pp",
+  "Related institutions are represented once per known group.": "Verbundene Institute werden je bekanntem Konzern einmal berücksichtigt.",
+  "Legacy distance coefficients: size 0.25, risk mix 0.50, ownership 0.15, group role 0.10. Effective influence depends on feature scales. The roster is a proposal, not a business-model validation.": "Bisherige Distanzkoeffizienten: Größe 0,25, Risikomischung 0,50, Trägerschaft 0,15, Konzernrolle 0,10. Der tatsächliche Einfluss hängt von den Merkmalsskalen ab. Die Mitgliederliste ist ein Vorschlag, keine Geschäftsmodellvalidierung.",
+  "Data explorer": "Datenübersicht",
+  "Choose a reference institution for a peer comparison.": "Für einen Peer-Vergleich ein Referenzinstitut wählen.",
+  "Higher NPL means more non-performing loans.": "Eine höhere NPL-Quote bedeutet mehr notleidende Kredite.",
+  "Export reference analysis": "Referenzanalyse exportieren",
+  "Outside the plotted range": "Außerhalb des dargestellten Bereichs",
+  "Source findings": "Quellbefunde",
+  "A source template has findings; this does not establish that this metric cell is wrong.": "Ein Quelltemplate enthält Befunde; die Kennzahlzelle ist dadurch nicht als falsch nachgewiesen.",
+  "Data explorer — no reference institution": "Datenübersicht — kein Referenzinstitut",
+  "Open data explorer": "Datenübersicht öffnen",
+  "No reference report at this date. Choose another date explicitly.": "Für diesen Stichtag fehlt der Referenzreport. Bitte einen anderen Stichtag auswählen.",
+  "{0} reports in this comparison population": "{0} Reports in dieser Vergleichsgrundlage",
+  "Reference included when its value is available": "Referenzinstitut bei verfügbarem Wert enthalten",
+  "Reference is outside the selected population": "Referenzinstitut liegt außerhalb der gewählten Vergleichsgrundlage",
+  "Membership confirmed by the user; economic suitability is not independently certified.": "Mitgliederliste vom Nutzer bestätigt; wirtschaftliche Eignung nicht unabhängig geprüft.",
+  "Peer proposal: review the institutions before interpreting the results.": "Peer-Vorschlag: Die Institute vor der Interpretation der Ergebnisse prüfen.",
+  "Valid comparison values": "Gültige Vergleichswerte",
+  "Peer median": "Peer-Median",
+  "Too few valid values for percentile context.": "Zu wenige gültige Werte für eine Perzentileinordnung.",
+  "Numerical percentile: P{0}": "Numerisches Perzentil: P{0}",
+  "Difference from peer median": "Abstand zum Peer-Median",
+  "Unit or scale findings prevent comparison.": "Einheiten- oder Skalenbefunde verhindern den Vergleich.",
+  "Definition and source": "Definition und Quelle",
+  "Review comparison institutions": "Vergleichsinstitute prüfen",
+  "Business-model compatibility is not established by ownership or a cluster score. Unknown classifications remain unknown.": "Trägerschaft und Clusterwert belegen keine Geschäftsmodellähnlichkeit. Ungeprüfte Klassifikationen bleiben ungeprüft.",
+  "Add an institution at this date and scope": "Institut zu diesem Stichtag und Scope ergänzen",
+  "I have reviewed this membership for my comparison.": "Ich habe die Mitgliederliste für meinen Vergleich geprüft.",
+  "Changing membership creates a custom comparison; the frozen roster is preserved.": "Eine Änderung erzeugt einen eigenen Vergleich; die eingefrorene Mitgliederliste bleibt erhalten.",
+  "Active benchmark population: {0} · {1}": "Aktive Benchmark-Grundlage: {0} · {1}",
+  "Reports outside the active population receive no benchmark percentile.": "Reports außerhalb der aktiven Vergleichsgrundlage erhalten kein Benchmark-Perzentil.",
+  "Report overview uses this comparison population. Published cell peer context is disabled while a reference analysis is active.": "Die Report-Übersicht nutzt diese Vergleichsgrundlage. Der veröffentlichte Zellkontext ist während einer Referenzanalyse deaktiviert.",
+  "Use this report as benchmark reference": "Diesen Report als Benchmark-Referenz verwenden",
+  "Comparison method and coverage": "Vergleichsmethode und Abdeckung",
+  "Comparison distributions": "Verteilungen der Vergleichsgruppe",
+  "Cell context uses another population and is disabled during this benchmark analysis.": "Der Zellkontext nutzt eine andere Grundgesamtheit und ist während dieser Benchmark-Analyse deaktiviert.",
   "Search limits the table, not the comparison population.": "Die Suche begrenzt die Tabelle, nicht die Vergleichsgrundlage.",
   "Comparison population: {0} reports before display filters.": "Vergleichsgrundlage: {0} Reports vor Anzeigefiltern.",
   "Comparable values": "Vergleichbare Werte",
@@ -1713,7 +1773,7 @@ function initFilters(){
       o.textContent=(label?label(v):v); sel.appendChild(o); });
   };
   fill('fCountry',countries); fill('fItype',itypes,shortItype); fill('fDate',dates);
-  const rerender=()=>{ renderReportList(); if(VIEW==='benchmark') renderBenchmark(); shareState(); };
+  const rerender=event=>{ if(event?.target?.id!=='reportFilter')BM_CONFIRMED=false;renderReportList(); if(VIEW==='benchmark') renderBenchmark(); else if(BM_REF&&activeKey)renderOverview(byKey(activeKey)); shareState(); };
   ['fCountry','fItype','fScope','fDate'].forEach(id=>
     document.getElementById(id).addEventListener('change',rerender));
   document.getElementById('fGsii').addEventListener('change',rerender);
@@ -1760,6 +1820,7 @@ function wireControls(redraw){
     chk.addEventListener('change',()=>{ EUR=chk.checked; persist(); redraw(); }); }
   const cx=document.getElementById('ctxChk');
   if(cx){ cx.checked=CTX;
+    if(BM_REF){cx.checked=false;cx.disabled=true;cx.title=tr('Cell context uses another population and is disabled during this benchmark analysis.');}
     cx.addEventListener('change',()=>{ CTX=cx.checked; store.ctx=CTX; persist(); redraw(); }); }
 }
 
@@ -1933,7 +1994,7 @@ function renderTemplate(tid, cells, rep){
       const cls=`num${bs||am?' fwcell':''}${fg?' oddcell sev-'+fg[0]:''}${selected?' kpi-source':''}`;
       // Sekundaerzeile nur, wenn eingeschaltet UND eine Peer-Gruppe da war.
       // Fehlt sie, steht dort NICHTS — kein Platzhalter, der nach Null aussieht.
-      const ctx = (CTX&&pc) ? `<span class="ctxline">P${pc[0]} · ⌀${
+      const ctx = (CTX&&!BM_REF&&pc) ? `<span class="ctxline">P${pc[0]} · ⌀${
         esc(fmtTyped(pc[1],dt,unit,dt==='monetary'?rate:1))}</span>${
         shapeStrip(shapeAt(rep,tid,r,c), v)}` : '';
       const shown=fmtTyped(v,dt,unit,dt==='monetary'?rate:1);
@@ -2105,6 +2166,10 @@ const metricHead=m=>mlabel(m)+((m.unit==='%')?'':' ('+metricUnit(m)+')');
 let OV_PCT=null;
 function overviewPercentiles(){
   if(!haveBenchmark(overviewTemplates())) return null;
+  if(BM_REF){
+    const rows=comparisonPopulation().rows;
+    return new Map(OV_METRICS().map(m=>[m.id,analysisPercentiles(rows,m,{tpl:(m.cells||[])[0]?.[0]||'61.00'})]));
+  }
   if(OV_PCT) return OV_PCT;
   const rows=REPORTS.map(rep=>{
     const {lei,scope}=leiParts(rep.entityID);
@@ -2273,6 +2338,14 @@ function renderOverview(rep){
   if(!host) return;
   const pm=overviewPercentiles();
   const key=repKey(rep);
+  if(BM_SOURCE?.key===key){
+    const source=BM_SOURCE;BM_SOURCE=null;
+    const previous=OPENMETRIC;
+    const load=()=>ensureLabels().then(()=>{
+      if(activeKey===key&&OPENMETRIC===previous&&document.getElementById('ovSection')){OPENMETRIC=source.metric;renderOverview(rep);}
+    }).catch(e=>{if(activeKey===key&&OPENMETRIC===previous)showRetry(document.getElementById('ovSection'),e.message,load);});
+    load();
+  }
   const have=[], miss=[];
   for(const mt of OV_METRICS()){
     const v=metricValue(rep,mt);
@@ -2315,9 +2388,10 @@ function renderOverview(rep){
       q.t&&q.t.length?` <span class="cl">· ${esc(q.t.slice(0,10).join(', '))}${q.t.length>10?' …':''}</span>`:''}</div>`;
   h+=similarBlock(rep);
   if(!h){ host.innerHTML=''; return; }
-  const note=pm?tr('Bar = percentile within the peer group (same size class, consolidation, reference date; from 5 reports)')
+  const note=BM_REF?tr('Active benchmark population: {0} · {1}',bankName(BM_REF),activeFilters().d):pm?tr('Bar = percentile within the peer group (same size class, consolidation, reference date; from 5 reports)')
                :tr('Loading peer context…');
-  host.innerHTML=`<section><h3>${tr('Overview')} <span class="scalenote">${esc(note)}</span></h3>${h}</section>`;
+  host.innerHTML=`<section><h3>${tr('Overview')} <span class="scalenote">${esc(note)}</span></h3><button id="ovBenchmark">${tr('Use this report as benchmark reference')}</button>${BM_REF?'<p class="scalenote">'+tr('Reports outside the active population receive no benchmark percentile.')+'</p>':''}${h}</section>`;
+  document.getElementById('ovBenchmark').onclick=()=>{setBenchmarkReference(rep.entityID,rep.refPeriod);location.hash='#benchmark'+hashQuery();};
 }
 
 /* ---- Aehnliche Institute (#13/#27) ---------------------------------------
@@ -2747,6 +2821,7 @@ const km1Value=(rep,row)=>tplValue(rep,'61.00',row);
 /* Optional peer formation: separate from report/cell context. */
 let AP_MANIFEST=null, AP_DATA=null, AP_PROMISE=null, AP_CLUSTERS=new Map();
 let BM_PEER='standard', BM_OWN='', BM_ROLE='', BM_CLUSTER='';
+let BM_REF='',BM_EXCLUDED=new Set(),BM_ADDED=new Set(),BM_AUTO_GROUP=false,BM_CONFIRMED=false,BM_SOURCE=null,BM_DATE_INITIALIZED=false;
 const OWN_LABEL={cooperative:'Cooperative',public:'Publicly owned',shareholder:'Shareholder-owned',
   mixed:'Mixed ownership',mutual:'Mutual',foundation:'Foundation-controlled',savings:'Self-owned savings bank',unknown:'Ownership not yet verified'};
 const ROLE_LABEL={group_head:'Group head',subsidiary:'Subsidiary',
@@ -2782,14 +2857,16 @@ function advancedSelection(rows,options={}){
   const families=new Map(),duplicates=[];
   for(const r of rows){
     const m=peerMeta(r),rep=byKey(r.key);
-    const partition=basis==='cluster'?(clusterOf(r)||'unassigned'):
-      basis==='bank_type'?[r.itype,m.ownership,m.role].join('|'):r.itype;
+    const partition=options.partition??(basis==='cluster'?(clusterOf(r)||'unassigned'):
+      basis==='bank_type'?[r.itype,m.ownership,m.role].join('|'):r.itype);
     const family=[partition,r.date,r.scope,rep?.framework||'?',m.group_head||'unknown:'+r.lei].join('|');
     (families.get(family)||families.set(family,[]).get(family)).push(r);
   }
   const selected=[];
   for(const family of families.values()){
     family.sort((a,b)=>{
+      if(options.referenceKey && (a.key===options.referenceKey || b.key===options.referenceKey))
+        return Number(b.key===options.referenceKey)-Number(a.key===options.referenceKey);
       const ma=peerMeta(a),mb=peerMeta(b);
       return Number(ma.role!=='group_head')-Number(mb.role!=='group_head') ||
         Number(a.itype.includes('sub'))-Number(b.itype.includes('sub')) || a.key.localeCompare(b.key);
@@ -2819,13 +2896,163 @@ function advancedPeerKey(r,basis){
   return [r.itype||'?',r.scope,r.date,rep?.framework||'?',m.ownership,m.role].join('|');
 }
 const clusterFittingMetric=id=>BM_PEER==='cluster' && (AP_DATA?.fitting_metrics||[]).includes(id);
+const rowEntity=r=>byKey(r.key)?.entityID||r.key.split('|')[0];
+function analysisReference(){
+  const date=activeFilters().d;
+  return BM_REF?REPORTS.find(r=>r.entityID===BM_REF && r.refPeriod===date)||null:null;
+}
+function setBenchmarkReference(entity,date=null){
+  BM_REF=entity;BM_EXCLUDED=new Set();BM_ADDED=new Set();BM_CONFIRMED=false;BM_AUTO_GROUP=!!entity;
+  if(entity){
+    const reps=REPORTS.filter(r=>r.entityID===entity).sort((a,b)=>b.refPeriod.localeCompare(a.refPeriod));
+    const wanted=date||activeFilters().d;
+    const chosen=reps.find(r=>r.refPeriod===wanted)||reps.find(r=>r.templates.has(bmProf().tpl))||reps[0];
+    if(chosen)document.getElementById('fDate').value=chosen.refPeriod;
+    document.getElementById('fScope').value=leiParts(entity).scope;
+    document.getElementById('reportFilter').value='';
+  }else{BM_PEER='standard';BM_OWN='';BM_ROLE='';BM_CLUSTER='';}
+  shareState();
+}
+function referencePopulation(rows,includeExcluded=false){
+  if(!BM_REF)return advancedSelection(rows);
+  const ref=analysisReference();
+  if(!ref || !ref.framework || ref.framework==='unknown')return {rows:[],duplicates:[],filtered:rows.length,referenceMissing:true};
+  const {lei,scope}=leiParts(ref.entityID);
+  const reference={key:repKey(ref),lei,scope,date:ref.refPeriod,itype:shortItype((META.get(lei)||{}).institution_type||'')};
+  const referenceKey=peerKeyOf(reference,BM_PEER);
+  const cluster=BM_CLUSTER||clusterOf(reference);
+  const pool=rows.filter(r=>{
+    if(r.date!==ref.refPeriod || r.scope!==scope || byKey(r.key)?.framework!==ref.framework)return false;
+    if(BM_ADDED.has(rowEntity(r)))return true;
+    const m=peerMeta(r);
+    if((BM_OWN&&m.ownership!==BM_OWN)||(BM_ROLE&&m.role!==BM_ROLE))return false;
+    return BM_PEER==='cluster'?!!cluster&&clusterOf(r)===cluster:!!referenceKey&&peerKeyOf(r,BM_PEER)===referenceKey;
+  });
+  const chosen=advancedSelection(pool,{basis:'standard',independent:true,partition:'reference',referenceKey:repKey(ref)});
+  return {...chosen,rows:chosen.rows.filter(r=>includeExcluded||!BM_EXCLUDED.has(rowEntity(r)))};
+}
+function comparisonPopulation(){
+  const prof=bmProf(),rows=benchmarkRows();
+  return referencePopulation(prof.gate.length?rows.filter(r=>!r._out):rows);
+}
+function analysisStats(rows,metric,prof){
+  const valid=rows.map(r=>({...r,[metric.id]:metricValue(byKey(r.key),metric)})).filter(r=>{
+    return metricComparable(byKey(r.key),metric,prof);
+  });
+  const values=valid.map(r=>r[metric.id]).sort((a,b)=>a-b),n=values.length;
+  const suppressed=clusterFittingMetric(metric.id);
+  return {n,values,valid,suppressed,...(n?quart(values):{q1:null,med:null,q3:null})};
+}
+function metricComparable(rep,metric,prof){
+  if(!rep)return false;
+  const value=metricValue(rep,metric);
+  return value!=null&&Number.isFinite(value)&&!(prof.gate||[]).some(m=>outsideCorridor(m,metricValue(rep,m)))&&
+    !outsideCorridor(metric,value)&&(!BAR_KINDS.has(metric.kind)||barErlaubt(prof,{q:rep.quality},metric));
+}
+function analysisRank(value,stats){
+  if(value==null||!Number.isFinite(value)||stats.n<PCT_MIN_GROUP||stats.suppressed)return null;
+  return (stats.values.filter(v=>v<value).length+stats.values.filter(v=>v===value).length/2)/stats.n*100;
+}
+function analysisPercentiles(rows,metric,prof){
+  const stats=analysisStats(rows,metric,prof),out=new Map();
+  for(const r of stats.valid){const p=analysisRank(r[metric.id],stats);if(p!=null)out.set(r.key,{p,n:stats.n,basis:'analysis'});}
+  return out;
+}
+function analysisControls(){
+  const entities=[...new Set(REPORTS.map(r=>r.entityID))].sort((a,b)=>bankName(a).localeCompare(bankName(b)));
+  const dates=BM_REF?[...new Set(REPORTS.filter(r=>r.entityID===BM_REF).map(r=>r.refPeriod))].sort().reverse():
+    [...new Set(REPORTS.map(r=>r.refPeriod))].sort().reverse();
+  const date=activeFilters().d;if(date&&!dates.includes(date))dates.unshift(date);
+  return `<div class="cmp-pick" id="bmAnalysisControls"><label class="ctl">${tr('Reference institution')}: <select id="bmReference"><option value="">${tr('Data explorer — no reference institution')}</option>
+    ${entities.map(e=>`<option value="${esc(e)}"${e===BM_REF?' selected':''}>${esc(bankName(e)+' · '+leiParts(e).scope)}</option>`).join('')}</select></label>
+    <label class="ctl">${tr('Reference date')}: <select id="bmDate">${dates.map(d=>`<option value="${esc(d)}"${d===date?' selected':''}>${esc(d)}</option>`).join('')}</select></label>
+    ${BM_REF?'<button id="bmClearReference">'+tr('Open data explorer')+'</button><button id="bmAnalysisCsv">'+tr('Export reference analysis')+'</button>':''}</div>`;
+}
+function analysisMetrics(prof){
+  return BMP==='km1'?['cet1','hr','lcr','nsfr','npl'].map(id=>METRICDOC.get(id)).filter(Boolean):sichtbareSpalten(prof);
+}
+function analysisSummary(rows,prof){
+  if(!BM_REF)return '';
+  const ref=analysisReference();
+  if(!ref)return '<div class="status" role="status">'+tr('No reference report at this date. Choose another date explicitly.')+'</div>';
+  const {lei,scope}=leiParts(ref.entityID);
+  const same=rows.some(r=>r.key===repKey(ref));
+  const reviewedModels=rows.map(r=>businessModel(r)).filter(m=>m?.status==='reviewed');
+  const mixedModels=new Set(reviewedModels.map(m=>m.model)).size>1;
+  return `<section id="bmReferenceSummary"><h3>${esc(bankName(ref.entityID))}</h3><p>${esc(ref.refPeriod+' · '+scope+' · RF '+ref.framework)} · ${tr('{0} reports in this comparison population',rows.length)} · ${tr(same?'Reference included when its value is available':'Reference is outside the selected population')}</p>
+    <p class="caveat">${tr(BM_CONFIRMED?'Membership confirmed by the user; economic suitability is not independently certified.':'Peer proposal: review the institutions before interpreting the results.')}</p>
+    ${mixedModels?'<p id="bmModelWarning" class="caveat">'+tr('Economic review required: this proposal contains different reviewed business models.')+'</p>':''}
+    <div class="ovgrid">${analysisMetrics(prof).map(m=>{
+      const stats=analysisStats(rows,m,prof),value=metricValue(ref,m);
+      const comparable=metricComparable(ref,m,prof);
+      const p=comparable?analysisRank(value,stats):null;
+      const fmt=v=>v==null?'—':nf(v,metricDec(m))+NBSP+metricUnit(m);
+      return `<div class="analysis-card" data-analysis-metric="${esc(m.id)}"><div>${esc(mlabel(m))}</div><strong>${esc(fmt(value))}</strong>
+        <p>${tr('Valid comparison values')}: ${stats.n}</p>
+        ${stats.n>=PCT_MIN_GROUP?'<p>'+tr('Peer median')+': '+esc(fmt(stats.med))+'<br>Q1–Q3: '+esc(fmt(stats.q1))+' – '+esc(fmt(stats.q3))+'</p>':'<p>'+tr('Too few valid values for percentile context.')+'</p>'}
+        ${p==null?'':'<p>'+tr('Numerical percentile: P{0}',nf(p,0,0))+'</p>'}
+        ${stats.n>=PCT_MIN_GROUP&&comparable?'<p>'+tr('Difference from peer median')+': '+esc(nf(value-stats.med,metricDec(m))+NBSP+(['pct','ratio','shareOfTrea','pp'].includes(m.kind)?'pp':metricUnit(m)))+'</p>':''}
+        ${stats.suppressed?'<p>'+tr('Not ranked: clustering input')+'</p>':''}
+        ${m.id==='npl'?'<p>'+tr('Higher NPL means more non-performing loans.')+'</p>':''}
+        ${value!=null&&!comparable?'<p>'+tr('Unit or scale findings prevent comparison.')+'</p>':''}
+        <button data-benchmark-source="${esc(m.id)}">${tr('Definition and source')}</button></div>`;
+    }).join('')}</div></section>`;
+}
+function analysisMembers(rows,prof){
+  if(!BM_REF)return '';
+  const ref=analysisReference();if(!ref)return '';
+  const candidates=referencePopulation(rows,true).rows;
+  const available=rows.filter(r=>r.date===ref.refPeriod&&r.scope===leiParts(ref.entityID).scope&&byKey(r.key)?.framework===ref.framework&&
+    !candidates.some(c=>rowEntity(c)===rowEntity(r)));
+  const models=candidates.map(r=>businessModel(r)).filter(m=>m?.status==='reviewed');
+  const modelTypes=new Set(models.map(m=>m.model));
+  return `<details id="bmMembers"><summary>${tr('Review comparison institutions')} (${candidates.length})</summary>
+    <p>${tr('Business-model compatibility is not established by ownership or a cluster score. Unknown classifications remain unknown.')}</p>
+    <p>${tr('Reviewed business-model descriptions: {0}/{1}.',models.length,candidates.length)} ${modelTypes.size>1?tr('Different reviewed business models occur in this proposal. Inspect the membership.'):''}</p>
+    ${candidates.map(r=>{const meta=peerMeta(r),model=businessModel(r),diagnostic=peerSuitability(ref,r);return `<div style="margin:.5rem 0"><label><input type="checkbox" data-peer-member="${esc(rowEntity(r))}"${!BM_EXCLUDED.has(rowEntity(r))?' checked':''}${r.key===repKey(ref)?' disabled':''}> ${esc(r.name)} · ${esc(tr(OWN_LABEL[meta.ownership]||OWN_LABEL.unknown))} · ${esc(tr(['assumption','externally_reported_unverified'].includes(meta.classification_status)?meta.classification_status==='assumption'?'Assumed ownership':'External ownership assignment':meta.ownership==='unknown'?'Ownership not yet verified':'Reviewed ownership'))}</label>
+      <div class="scalenote">${model?esc(tr(MODEL_LABEL[model.model]))+' · '+esc(tr(model.status==='reviewed'?'Official description reviewed':'Group description; reporting entity unverified'))+' · <a href="'+esc(model.source_url)+'" target="_blank" rel="noopener">'+tr('Source')+'</a>':tr('Business model not reviewed')}
+      ${diagnostic.ratio==null&&diagnostic.risk==null?' · '+tr('Current size/risk inputs unavailable'):''}${diagnostic.ratio==null?'':' · '+tr('Current TREA size ratio: {0}×',nf(diagnostic.ratio,1,1))}${diagnostic.outside?' · '+tr('Outside the anchor size corridor'):''}${diagnostic.risk==null?'':' · '+tr('Average risk-share difference: {0} pp',nf(diagnostic.risk*100,1,1))}</div></div>`;}).join('')}
+    ${referencePopulation(rows,true).duplicates.length?'<p>'+tr('Related institutions are represented once per known group.')+'</p>':''}
+    <label>${tr('Add an institution at this date and scope')}: <select id="bmAddMember"><option value="">—</option>${available.map(r=>`<option value="${esc(rowEntity(r))}">${esc(r.name)}</option>`).join('')}</select></label>
+    <label style="display:block"><input type="checkbox" id="bmConfirmMembers"${BM_CONFIRMED?' checked':''}> ${tr('I have reviewed this membership for my comparison.')}</label>
+    <p>${tr('Changing membership creates a custom comparison; the frozen roster is preserved.')}</p></details>`;
+}
+const MODEL_LABEL={vehicle_finance:'Vehicle finance and mobility',diversified_banking:'Diversified banking',custody_services:'Custody and securities services'};
+function businessModel(row){
+  const m=globalThis.BUSINESS_MODEL_PILOT?.models?.[row.lei];
+  return m&&m.scopes.includes(row.scope)?m:null;
+}
+function peerSuitability(ref,row){
+  const a=AP_DATA?.reports?.[repKey(ref)]?.features,b=AP_DATA?.reports?.[row.key]?.features;
+  const sizes=[a?.trea_eur,b?.trea_eur];
+  const ratio=sizes.every(v=>Number.isFinite(v)&&v>0)?Math.max(...sizes)/Math.min(...sizes):null;
+  const names=['credit','counterparty','cva','market','operational'];
+  const risk=names.every(k=>Number.isFinite(a?.risk?.[k])&&Number.isFinite(b?.risk?.[k]))?
+    names.reduce((v,k)=>v+Math.abs(a.risk[k]-b.risk[k]),0)/names.length:null;
+  return {ratio,risk,outside:ratio!=null&&ratio>(AP_DATA.max_size_ratio||10)};
+}
+function bindAnalysisControls(){
+  document.getElementById('bmReference').onchange=e=>{setBenchmarkReference(e.target.value);renderBenchmark();};
+  document.getElementById('bmDate').onchange=e=>{document.getElementById('fDate').value=e.target.value;BM_CONFIRMED=false;renderReportList();renderBenchmark();shareState();};
+  const clear=document.getElementById('bmClearReference');if(clear)clear.onclick=()=>{setBenchmarkReference('');renderBenchmark();};
+  const exportAnalysis=document.getElementById('bmAnalysisCsv');if(exportAnalysis)exportAnalysis.onclick=()=>ladeHerunter('p3dh_reference_analysis.csv',referenceAnalysisCSV());
+  const add=document.getElementById('bmAddMember');if(add)add.onchange=e=>{if(e.target.value){BM_ADDED.add(e.target.value);BM_EXCLUDED.delete(e.target.value);BM_CONFIRMED=false;renderBenchmark();shareState();}};
+  const confirm=document.getElementById('bmConfirmMembers');if(confirm)confirm.onchange=e=>{BM_CONFIRMED=e.target.checked;renderBenchmark();shareState();};
+  document.querySelectorAll('[data-peer-member]').forEach(el=>el.onchange=()=>{if(el.checked)BM_EXCLUDED.delete(el.dataset.peerMember);else BM_EXCLUDED.add(el.dataset.peerMember);BM_CONFIRMED=false;renderBenchmark();shareState();});
+  document.querySelectorAll('[data-benchmark-source]').forEach(el=>el.onclick=()=>{
+    const metric=el.dataset.benchmarkSource,rep=analysisReference();if(!rep)return;
+    const target='#r/'+leiParts(rep.entityID).lei+'/'+rep.refPeriod+'/'+leiParts(rep.entityID).scope+hashQuery();
+    BM_SOURCE={key:repKey(rep),metric};location.hash=target;
+  });
+}
 let BM_COVERAGE_ROWS=[];
 function metricPeerGroups(rows,metric,prof,basis=BM_PEER){
   const groups=new Map();
   for(const row of rows){
     const v=row[metric.id];
     if(v==null || !Number.isFinite(v) || (BAR_KINDS.has(metric.kind) && !barErlaubt(prof,row,metric))) continue;
-    const key=peerKeyOf(row,basis);if(!key) continue;
+    if(BM_REF&&!metricComparable(byKey(row.key),metric,prof))continue;
+    const key=BM_REF?['reference',BM_REF,row.date,row.scope,byKey(row.key)?.framework||'?'].join('|'):peerKeyOf(row,basis);if(!key) continue;
     (groups.get(key)||groups.set(key,[]).get(key)).push(row);
   }
   return groups;
@@ -2835,7 +3062,8 @@ function peerCoverage(rows,prof,basis=BM_PEER){
     const groups=metricPeerGroups(rows,metric,prof,basis);
     const usable=[...groups.values()].filter(g=>g.length>=PCT_MIN_GROUP);
     const comparable=rows.filter(r=>r[metric.id]!=null && Number.isFinite(r[metric.id]) &&
-      (!BAR_KINDS.has(metric.kind)||barErlaubt(prof,r,metric))).length;
+      (!BAR_KINDS.has(metric.kind)||barErlaubt(prof,r,metric))&&
+      (!BM_REF||metricComparable(byKey(r.key),metric,prof))).length;
     const suppressed=basis==='cluster' && (AP_DATA?.fitting_metrics||[]).includes(metric.id);
     return {metric,comparable,suppressed,usableGroups:suppressed?0:usable.length,
       ranked:suppressed?0:usable.reduce((n,g)=>n+g.length,0)};
@@ -2881,14 +3109,15 @@ function peerExplanation(rows,selection){
   const ownershipKnown=rows.filter(r=>{const m=peerMeta(r);return m.ownership!=='unknown' && !['assumption','externally_reported_unverified'].includes(m.classification_status);}).length;
   const assumptions=rows.filter(r=>['assumption','externally_reported_unverified'].includes(peerMeta(r).classification_status)).length;
   const groupUnknown=rows.filter(r=>!peerMeta(r).group_head).length;
-  const eligible=rows.filter(r=>advancedPeerKey(r,BM_PEER)).length;
+  const eligible=BM_REF?rows.length:rows.filter(r=>advancedPeerKey(r,BM_PEER)).length;
   const memberships=new Map();
-  for(const r of rows){const k=advancedPeerKey(r,BM_PEER);if(k)(memberships.get(k)||memberships.set(k,[]).get(k)).push(r);}
+  for(const r of rows){const k=BM_REF?'reference':advancedPeerKey(r,BM_PEER);if(k)(memberships.get(k)||memberships.set(k,[]).get(k)).push(r);}
   const small=[...memberships.values()].filter(g=>g.length<5).reduce((n,g)=>n+g.length,0);
   let h=`<div class="peer-note" role="status">${unavailable?'<p>'+tr('The requested cluster does not exist in this data revision. Choose another cluster or all reports.')+'</p>':''}<b>${esc(tr(PEER_LABEL[BM_PEER]))}</b> · ${tr('{0} of {1} reports have reviewed ownership.',ownershipKnown,rows.length)}
     ${tr('{0} reports have an unknown group head.',groupUnknown)} ${tr('Assumed or unverified ownership: {0} of {1} reports.',assumptions,rows.length)}
     ${tr('{0} reports have no peer assignment; {1} are in groups smaller than five.',rows.length-eligible,small)}
     ${tr('Percentiles require five valid values per metric. No automatic widening of the peer group.')}
+    ${BM_REF&&(BM_EXCLUDED.size||BM_ADDED.size)?'<p>'+tr('Custom membership settings: {0} omitted, {1} added; the proposal roster is unchanged.',BM_EXCLUDED.size,BM_ADDED.size)+'</p>':''}
     <details><summary>${tr('Peer method, coverage and exclusions')}</summary><p>${BM_PEER==='cluster'?tr('Ownership assumptions are included for this exploratory peer analysis.'):tr('Ownership describes the current reviewed classification, not historical ownership at the report date. Sources and review dates are shown per bank. Subsidiaries do not inherit ownership automatically.')}</p>
     <p>${tr('At most one report per known group, date, scope and framework is retained. Unknown group heads remain separate; independence is not established.')}
     ${tr('{0} related reports excluded.',selection.duplicates.length)}</p>`;
@@ -2897,9 +3126,9 @@ function peerExplanation(rows,selection){
   if(BM_PEER==='bank_type')h+=`<p>${tr('Groups share size class, scope, date, framework, ownership and group role. Unknown ownership or role receives no percentile.')}</p>`;
   else{
     const dates=[...new Set([...AP_CLUSTERS.values()].filter(c=>!BM_CLUSTER || c.id===BM_CLUSTER).map(c=>c.date))].sort().join(', ');
-    h+=`<p>${tr('Fixed peer roster anchored at {0}. Historical dates use the same banks; missing reports are not replaced.',dates)}</p><p>${tr('Ownership assumptions are included for this exploratory peer analysis.')}</p><p>${tr('Percentiles compare only the same date, scope and reporting framework within the fixed roster.')}</p><p>${tr('Peer rosters stay fixed until an explicit refresh. Anchor diagnostics do not describe historical fit quality.')}</p><p>${tr('Maximum TREA size ratio at anchor date: {0}×.',AP_DATA.max_size_ratio)}</p><p>${tr('Exploratory complete-linkage clusters: size 25%, risk mix 50%, ownership 15%, group role 10%. Same date, scope and framework; maximum distance 0.25. Unknown categories contribute a neutral distance of 0.5. Capital and liquidity ratios are not fitting inputs.')}</p>
+    h+=`<p>${tr('Fixed peer roster anchored at {0}. Historical dates use the same banks; missing reports are not replaced.',dates)}</p><p>${tr('Ownership assumptions are included for this exploratory peer analysis.')}</p><p>${tr('Percentiles compare only the same date, scope and reporting framework within the fixed roster.')}</p><p>${tr('Peer rosters stay fixed until an explicit refresh. Anchor diagnostics do not describe historical fit quality.')}</p><p>${tr('Maximum TREA size ratio at anchor date: {0}×.',AP_DATA.max_size_ratio)}</p><p>${tr('Legacy distance coefficients: size 0.25, risk mix 0.50, ownership 0.15, group role 0.10. Effective influence depends on feature scales. The roster is a proposal, not a business-model validation.')}</p>
       <p>${tr('Cluster diagnostics describe the fitted population; filters may reduce the members used for this benchmark.')}</p>
-    <p>${tr('TREA and risk-profile percentiles use fitting inputs and are suppressed in cluster mode. Report overview and cell peer context keep their standard basis.')}</p>`;
+    <p>${tr(BM_REF?'Report overview uses this comparison population. Published cell peer context is disabled while a reference analysis is active.':'TREA and risk-profile percentiles use fitting inputs and are suppressed in cluster mode. Report overview and cell peer context keep their standard basis.')}</p>`;
     const used=[...new Set(rows.map(r=>clusterOf(r)).filter(Boolean))];
     if(used.length)h+=`<details class="peer-diagnostics"><summary>${tr('Cluster diagnostics and members')} (${used.length})</summary>${used.map(id=>{
       const c=AP_CLUSTERS.get(id);
@@ -2929,11 +3158,11 @@ function peerEvidence(r){
 }
 function bindPeerControls(){
   document.getElementById('bmPeer').onchange=e=>{
-    BM_PEER=e.target.value;BM_OWN='';BM_ROLE='';BM_CLUSTER='';
+      BM_PEER=e.target.value;BM_OWN='';BM_ROLE='';BM_CLUSTER='';BM_CONFIRMED=false;
     renderBenchmark();shareState();
   };
   for(const [id,set] of [['bmOwnership',v=>BM_OWN=v],['bmRole',v=>BM_ROLE=v],['bmCluster',v=>BM_CLUSTER=v]]){
-    const el=document.getElementById(id);if(el)el.onchange=e=>{set(e.target.value);renderBenchmark();shareState();};
+    const el=document.getElementById(id);if(el)el.onchange=e=>{set(e.target.value);BM_CONFIRMED=false;renderBenchmark();shareState();};
   }
 }
 
@@ -2998,10 +3227,11 @@ function benchmarkRows(){
   if(!prof) return [];
   const f=activeFilters();
   f.q=''; // Finding a bank never changes the statistical denominator.
+  if(BM_REF)f.s=leiParts(BM_REF).scope;
   const out=[];
   for(const rep of REPORTS){
     if(!passFilters(rep,f)) continue;
-    if(!rep.templates.has(prof.tpl)) continue;
+    if(!BM_REF&&!rep.templates.has(prof.tpl)) continue;
     const {lei,scope}=leiParts(rep.entityID);
     const m=META.get(lei)||{};
     const row={key:repKey(rep), lei, name:bankName(rep.entityID), country:m.country||'',
@@ -3170,11 +3400,11 @@ function distChart(vals){
    messen — dieselbe Ueberlegung wie bei den Perzentilbaendern. Das Histogramm
    oben BESCHREIBT dagegen die angezeigte Menge; nur die Aussage ueber eine
    einzelne Zeile ist peer-relativ. */
-function fenceOutliers(rows,colId,basis='standard'){
+function fenceOutliers(rows,colId,basis='standard',keyOf=peerKeyOf){
   const groups=new Map();
   for(const r of rows){ const v=r[colId];
     if(v==null||!isFinite(v)) continue;
-    const k=peerKeyOf(r,basis); if(!k) continue; (groups.get(k)||groups.set(k,[]).get(k)).push(v); }
+    const k=keyOf(r,basis); if(!k) continue; (groups.get(k)||groups.set(k,[]).get(k)).push(v); }
   const fen=new Map();
   for(const [k,arr] of groups){
     if(arr.length<PCT_MIN_GROUP) continue;      // darunter ist ein Zaun Rauschen
@@ -3183,7 +3413,7 @@ function fenceOutliers(rows,colId,basis='standard'){
   const out=new Map();
   for(const r of rows){
     const v=r[colId]; if(v==null||!isFinite(v)) continue;
-    const f=fen.get(peerKeyOf(r,basis)); if(!f) continue;
+    const f=fen.get(keyOf(r,basis)); if(!f) continue;
     if(v>f.hi) out.set(r.key,'hoch'); else if(v<f.lo) out.set(r.key,'niedrig');
   }
   return out;
@@ -3203,6 +3433,15 @@ function fenceBadge(dir,label){
    Markiert wird TEMPLATE-GENAU: nur wenn die Befunde im gerade angezeigten
    Template liegen. Ein Befund in 41.00 sagt nichts ueber die KM1-Spalten. */
 function flaggedFor(q, tpl){ return !!(q && q.t && q.t.includes(tpl)); }
+function profileFindingTemplates(row,prof){
+  const templates=new Set([prof.tpl,...prof.cols.flatMap(m=>(m.cells||[]).map(c=>c[0]))]);
+  return [...templates].filter(t=>flaggedFor(row.q,t));
+}
+function profileFlagged(row,prof){return profileFindingTemplates(row,prof).length>0;}
+function sourceFindingBadge(row,prof){
+  const source=profileFindingTemplates(row,prof).filter(t=>t!==prof.tpl);
+  return source.length?'<span class="badge" title="'+esc(tr('A source template has findings; this does not establish that this metric cell is wrong.'))+'">'+esc(tr('Source findings'))+': '+esc(source.join(', '))+'</span>':'';
+}
 /* ---- Skalenbefund (#83) --------------------------------------------------
    Eigene Marke, nicht in `qualityBadge` hineinverhandelt: die Aussage ist eine
    andere. `sc.t` leer heisst „gilt für den ganzen Report", nicht „für kein
@@ -3431,10 +3670,17 @@ function distributionRow(rows, prof){
   const period=dates.length===1?dates[0]
     :`${dates[0]}–${dates[dates.length-1]} (${tr('{0} reference dates',dates.length)})`;
   let cards='';
-  for(const c of prof.cols){
-    const comparable=BAR_KINDS.has(c.kind)?rows.filter(r=>barErlaubt(prof,r,c)):rows;
+  for(const c of sichtbareSpalten(prof)){
+    const comparable=BM_REF?rows.filter(r=>metricComparable(byKey(r.key),c,prof)):
+      BAR_KINDS.has(c.kind)?rows.filter(r=>barErlaubt(prof,r,c)):rows;
     const d=distChart(comparable.map(r=>r[c.id]));
     if(!d) continue;
+    const reference=BM_REF?analysisReference():null;
+    const refValue=reference?metricValue(reference,c):null;
+    if(metricComparable(reference,c,prof)){
+      const x=DPAD+Math.max(0,Math.min(1,(refValue-d.lo)/((d.hi-d.lo)||1)))*(DW-2*DPAD);
+      d.svg=d.svg.replace('</svg>',`<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="1" y2="${DH-6}" stroke="var(--accent)" stroke-width="2"><title>${esc(tr('Reference institution'))}: ${esc(nf(refValue,metricDec(c)))}${refValue<d.lo||refValue>d.hi?' · '+esc(tr('Outside the plotted range')):''}</title></line></svg>`);
+    }
     const tail=[d.nLo?tr('{0} left',d.nLo):'', d.nHi?tr('{0} right',d.nHi):''].filter(Boolean).join(' · ');
     // Quellzeile aus den Registry-Zellen: bei einer Zelle die Koordinate,
     // bei einer abgeleiteten Kennzahl die beteiligten.
@@ -3536,7 +3782,7 @@ async function renderBenchmark(){
     status.remove();main.removeAttribute('aria-busy');
     if(table)table.inert=false;
   }
-  if(BM_PEER!=='standard' && !AP_DATA){
+  if((BM_PEER!=='standard'||(BM_REF&&AP_MANIFEST)) && !AP_DATA){
     const status=document.createElement('div');status.className='status';status.setAttribute('role','status');
     status.textContent=tr('Loading advanced peers…');main.prepend(status);main.setAttribute('aria-busy','true');
     const table=main.querySelector('.bmtable');if(table){table.inert=true;table.hidden=true;}
@@ -3547,12 +3793,26 @@ async function renderBenchmark(){
       status.querySelector('button').id='bmPeerRetry';
       const reset=document.createElement('button');reset.textContent=tr('Use standard peers');
       reset.id='bmPeerStandard';
-      reset.onclick=()=>{BM_PEER='standard';BM_OWN='';BM_ROLE='';BM_CLUSTER='';renderBenchmark();shareState();};status.append(reset);
+      reset.onclick=()=>{BM_REF='';BM_AUTO_GROUP=false;BM_PEER='standard';BM_OWN='';BM_ROLE='';BM_CLUSTER='';renderBenchmark();shareState();};status.append(reset);
     }return;}
     if(serial!==BM_RENDER_SERIAL || VIEW!=='benchmark')return;
     status.remove();if(table){table.inert=false;table.hidden=false;}
   }
   main.removeAttribute('aria-busy');
+  if(BM_REF && BM_AUTO_GROUP){
+    const ref=analysisReference(),parts=leiParts(BM_REF),id=clusterOf({lei:parts.lei,scope:parts.scope,key:ref?repKey(ref):''});
+    BM_PEER=id?'cluster':'standard';BM_CLUSTER=id||'';BM_OWN='';BM_ROLE='';BM_AUTO_GROUP=false;
+  }
+  if(!activeFilters().d && (BM_REF||!BM_DATE_INITIALIZED)){
+    const filter={...activeFilters(),q:'',d:''};
+    const latest=REPORTS.filter(r=>(BM_REF?r.entityID===BM_REF:passFilters(r,filter))&&r.templates.has(prof.tpl)).map(r=>r.refPeriod).sort().pop();
+    if(latest){document.getElementById('fDate').value=latest;renderReportList();shareState();}
+  }
+  BM_DATE_INITIALIZED=true;
+  if(BM_REF && !haveBenchmark(overviewTemplates())){
+    try{await ensureBenchmark(overviewTemplates());}catch(e){if(serial===BM_RENDER_SERIAL&&VIEW==='benchmark')showRetry(main,e.message,renderBenchmark);return;}
+    if(serial!==BM_RENDER_SERIAL||VIEW!=='benchmark')return;
+  }
   bmSortOr(prof);
   const gross=benchmarkRows();
   // Das Plausibilitaets-Tor greift VOR allem anderen: eine Meldung in falscher
@@ -3561,20 +3821,21 @@ async function renderBenchmark(){
   // und die Namen stehen unter der Tabelle (#18).
   const gatedOut=prof.gate.length?gross.filter(r=>r._out):[];
   const gatedRows=prof.gate.length?gross.filter(r=>!r._out):gross;
-  BM_COVERAGE_ROWS=gatedRows;
-  const peerSelection=advancedSelection(gatedRows);
+  const coverageRef=analysisReference();
+  BM_COVERAGE_ROWS=coverageRef?gatedRows.filter(r=>r.date===coverageRef.refPeriod&&r.scope===leiParts(coverageRef.entityID).scope&&byKey(r.key)?.framework===coverageRef.framework):gatedRows;
+  const peerSelection=referencePopulation(gatedRows);
   const allRows=peerSelection.rows;
   // Perzentile IMMER auf der vollen (zugelassenen) Menge: ein ausgeblendeter
   // Ausreisser darf die Verteilung nicht verschieben, sonst aendert das
   // Einklappen die Zahlen.
-  const nFlag=allRows.filter(r=>flaggedFor(r.q,prof.tpl)).length;
+  const nFlag=allRows.filter(r=>profileFlagged(r,prof)).length;
   const searchRows=benchmarkDisplayRows(allRows);
-  const rows=BM_HIDEFLAG?searchRows.filter(r=>!flaggedFor(r.q,prof.tpl)):searchRows;
+  const rows=BM_HIDEFLAG?searchRows.filter(r=>!profileFlagged(r,prof)):searchRows;
   const profSel=Object.entries(bmAll()).map(([k,p])=>
     `<option value="${k}"${k===BMP?' selected':''}>${esc(mlabel(p))}</option>`).join('');
   const pmaps=new Map();
   if(BM_PCT) for(const c of sichtbareSpalten(prof).filter(c=>!clusterFittingMetric(c.id)))
-    pmaps.set(c.id,percentileMap(BAR_KINDS.has(c.kind)?allRows.filter(r=>barErlaubt(prof,r,c)):allRows,c.id,BM_PEER));
+    pmaps.set(c.id,BM_REF?analysisPercentiles(allRows,c,prof):percentileMap(BAR_KINDS.has(c.kind)?allRows.filter(r=>barErlaubt(prof,r,c)):allRows,c.id,BM_PEER));
   // Bezug der Groessenbalken (#49): das Maximum der SICHTBAREN Zeilen. Berechnet
   // auf `rows`, nicht auf `allRows` — blendet jemand die auffaelligen Reports
   // aus, soll der Balken sich auf das beziehen, was er sieht.
@@ -3584,9 +3845,10 @@ async function renderBenchmark(){
   // die entscheidet, wer die Liste anfuehrt. Bei Sortierung nach Name/Stichtag
   // gibt es keine Metrik und damit keinen Marker.
   const sortCol=spalten.find(c=>c.id===bmSort.col);
-  const fenceRows=sortCol && BAR_KINDS.has(sortCol.kind)?allRows.filter(r=>barErlaubt(prof,r,sortCol)):allRows;
-  const fmarks=sortCol && !clusterFittingMetric(sortCol.id)?fenceOutliers(fenceRows, sortCol.id,BM_PEER):new Map();
-  const context=JSON.stringify([LANG,BMP,activeFilters(),BM_HIDEFLAG,BM_PCT,BM_PEER,BM_OWN,BM_ROLE,BM_CLUSTER,spalten.map(c=>c.id)]);
+  const fenceRows=sortCol&&BM_REF?allRows.filter(r=>metricComparable(byKey(r.key),sortCol,prof)):
+    sortCol && BAR_KINDS.has(sortCol.kind)?allRows.filter(r=>barErlaubt(prof,r,sortCol)):allRows;
+  const fmarks=sortCol && !clusterFittingMetric(sortCol.id)?fenceOutliers(fenceRows, sortCol.id,BM_PEER,BM_REF?()=> 'reference':peerKeyOf):new Map();
+  const context=JSON.stringify([LANG,BMP,activeFilters(),BM_HIDEFLAG,BM_PCT,BM_PEER,BM_OWN,BM_ROLE,BM_CLUSTER,BM_REF,[...BM_EXCLUDED],[...BM_ADDED],BM_CONFIRMED,spalten.map(c=>c.id)]);
   const pageContext=context+JSON.stringify(bmSort);
   if(BM_PAGE_CONTEXT!==pageContext){BM_PAGE=0;BM_PAGE_CONTEXT=pageContext;}
   BM_PAGE=Math.min(BM_PAGE,Math.max(0,Math.ceil(rows.length/BM_PAGE_SIZE)-1));
@@ -3594,11 +3856,16 @@ async function renderBenchmark(){
   if(!main.querySelector('.bmtable') || BM_DOM.context!==context)
     BM_DOM={context,rows:new Map()};
   let newRows='';
-  let h=`<div class="rhead"><h2>${tr('Benchmark')}</h2></div>
+  let h=`<div class="rhead"><h2>${tr(BM_REF?'Benchmark':'Data explorer')}</h2></div>
+    ${!BM_REF?'<p>'+tr('Choose a reference institution for a peer comparison.')+'</p>':''}
+    ${analysisControls()}
+    ${analysisSummary(allRows,prof)}${analysisMembers(gatedRows,prof)}
     <p class="scalenote">${tr('Comparison population: {0} reports before display filters.',allRows.length)} ${tr('Search limits the table, not the comparison population.')}</p>
+    ${BM_REF?'<details id="bmMethod"><summary>'+tr('Comparison method and coverage')+'</summary>':''}
     ${peerControls()}
     ${peerExplanation(allRows,peerSelection)}
     ${peerCoverageHTML(allRows,prof)}
+    ${BM_REF?'</details>':''}
     <div class="bmbar"><label class="ctl">${tr('Profile')}: <select id="bmProfile">${profSel}</select></label>
       <label class="ctl"><input type="checkbox" id="bmPct"${BM_PCT?' checked':''}> ${tr('Percentile within peer group')}</label>
       <label class="ctl" title="${esc(tr('Hides reports in which the plausibility check found values far outside their cell population. Percentiles stay computed on the full set.'))}"><input type="checkbox" id="bmHide"${BM_HIDEFLAG?' checked':''}> ${tr('collapse conspicuous')}${nFlag?` <span class="cl">(${nFlag})</span>`:''}</label>
@@ -3614,7 +3881,7 @@ async function renderBenchmark(){
     ${mtext(prof,'note')?`<div class="caveat">ⓘ ${esc(mtext(prof,'note'))}</div>`:''}
     ${barMax.size?`<div class="bmlegend"><span class="k"></span> ${tr('Bar = share of the largest value of the column in the current selection, linear. No value judgement — and none where the filed unit is disputed or a scale finding stands, where the length would be a claim about comparability that does not hold.')}</div>`:''}
     <div class="caveat">${tr('⚠ Comparability caveat: accounting framework, scope of consolidation (CON/IND), national options and framework version (4.1/4.2) differ — rankings are indicative, not a supervisory metric. Source: public Pillar 3 disclosures (© EBA).')}</div>
-    ${distributionRow(allRows, prof)}
+    ${BM_REF?'<details id="bmDistributions"><summary>'+tr('Comparison distributions')+'</summary>':''}${distributionRow(allRows, prof)}${BM_REF?'</details>':''}
     <div class="bmpages" role="group" aria-label="${LANG==='de'?'Ergebnisseiten':'Result pages'}">
       <button id="bmPrev"${BM_PAGE===0?' disabled':''}>${LANG==='de'?'Zurück':'Previous'}</button>
       <span role="status">${rows.length?offset+1:0}–${offset+visibleRows.length} / ${rows.length}</span>
@@ -3639,10 +3906,10 @@ async function renderBenchmark(){
     // Skalenbefund markiert die Zeile ebenfalls: in einer Rangliste ABSOLUTER
     // Beträge ist ein um 10^6 zu kleiner Report der irreführendste Eintrag, den
     // es gibt — er steht ganz unten und sieht nach einem winzigen Institut aus.
-    const cls=[flaggedFor(r.q,prof.tpl)?'flagged':'', scaleFor(r.q,prof.tpl)?'scaled':'']
+    const cls=[profileFlagged(r,prof)?'flagged':'', scaleFor(r.q,prof.tpl)?'scaled':'']
                 .filter(Boolean).join(' ');
     newRows+=`<tr data-key="${esc(r.key)}"${cls?` class="${cls}"`:''}><td class="bank"><a href="#r/${r.lei}/${r.date}/${r.scope}">${esc(r.name)}</a>
-        ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}${scaleBadge(r.q,prof.tpl)}${
+        ${r.gsii?'<span class="badge gs">G-SII</span>':''}${qualityBadge(r.q,prof.tpl)}${sourceFindingBadge(r,prof)}${scaleBadge(r.q,prof.tpl)}${
           '<span class="bm-fence"></span>'}
         <span class="sub">${esc(r.country)} · ${esc(r.itype)} · ${esc(r.scope)}</span>${peerEvidence(r)}</td>
         <td>${esc(r.date)}</td>`;
@@ -3656,11 +3923,13 @@ async function renderBenchmark(){
   h+=gateNote(prof, gatedOut, gross.length);
   mountBenchmark(main,h,newRows,visibleRows,sortCol,fmarks);
   bindPeerControls();
+  bindAnalysisControls();
+  if(BM_REF)shareState();
   document.getElementById('bmPrev').onclick=()=>{BM_PAGE--;renderBenchmark();};
   document.getElementById('bmNext').onclick=()=>{BM_PAGE++;renderBenchmark();};
   document.getElementById('bmProfile').value=BMP;
   document.getElementById('bmProfile').onchange=e=>{
-    BMP=e.target.value; bmSort={...bmAll()[BMP].defaultSort};
+    BMP=e.target.value; BM_CONFIRMED=false;bmSort={...bmAll()[BMP].defaultSort};
     store.bmp=BMP; persist(); renderBenchmark(); shareState();
   };
   document.getElementById('bmPct').checked=BM_PCT;
@@ -3770,6 +4039,29 @@ function csvFeld(v){
    Binaerrest von 0,3876*1000. Zwoelf Stellen sind mehr, als irgendeine Zahl
    in diesem Bestand traegt, und machen die Datei lesbar. */
 const csvZahl=v=>(v==null||!isFinite(v)) ? '' : String(Number(v.toPrecision(12)));
+function analysisSnapshotHeader(rows){
+  return ['# Dataset revision: '+(DATA_REV||'legacy-unversioned'),
+    '# Advanced peer data SHA-256: '+(AP_MANIFEST?.sha256||'unavailable'),
+    '# Reference: '+(BM_REF?BM_REF+'|'+activeFilters().d:'none'),
+    '# Peer basis: '+BM_PEER+'; cluster: '+BM_CLUSTER,
+    '# Business-model pilot: '+(globalThis.BUSINESS_MODEL_PILOT?.version||'unavailable'),
+    '# Exact comparison report keys: '+JSON.stringify(rows.map(r=>r.key).sort()),
+    '# Membership review: '+(BM_CONFIRMED?'user-confirmed, not independently certified':'proposal, not economically validated'),
+    '# A high percentile means a high numerical value; interpret each metric separately.'];
+}
+function referenceAnalysisCSV(){
+  const prof=bmProf(),rows=comparisonPopulation().rows,ref=analysisReference();
+  const header=analysisSnapshotHeader(rows);
+  const fields=['metric','unit','reference_value','peer_n','peer_median','peer_q1','peer_q3','percentile','delta_to_median','delta_unit','reviewed_ownership_n','unverified_ownership_n','unknown_group_head_n','source_cells'];
+  const data=analysisMetrics(prof).map(m=>{
+    const stats=analysisStats(rows,m,prof),value=ref?metricValue(ref,m):null;
+    const comparable=metricComparable(ref,m,prof);
+    const reviewed=stats.valid.filter(r=>{const meta=peerMeta(r);return meta.ownership!=='unknown'&&!['assumption','externally_reported_unverified'].includes(meta.classification_status);}).length;
+    const unverified=stats.valid.filter(r=>['assumption','externally_reported_unverified'].includes(peerMeta(r).classification_status)).length;
+    return [m.id,metricUnit(m),csvZahl(value),stats.n,csvZahl(stats.n>=5?stats.med:null),csvZahl(stats.n>=5?stats.q1:null),csvZahl(stats.n>=5?stats.q3:null),csvZahl(comparable?analysisRank(value,stats):null),csvZahl(comparable&&stats.n>=5?value-stats.med:null),['pct','ratio','pp','shareOfTrea'].includes(m.kind)?'pp':metricUnit(m),reviewed,unverified,stats.valid.filter(r=>!peerMeta(r).group_head).length,JSON.stringify(m.cells||[])];
+  });
+  return header.join('\n')+'\n'+[fields,...data].map(row=>row.map(csvFeld).join(',')).join('\n')+'\n';
+}
 function benchmarkCSV(rows, prof){
   const jetzt=new Date().toISOString().slice(0,19)+'Z';
   const filter=[...shareParams().entries()].map(([k,v])=>k+'='+v).join(' · ')||tr('none');
@@ -3781,6 +4073,10 @@ function benchmarkCSV(rows, prof){
            '# '+tr('rows:')+' '+rows.length,
            '# '+tr('view:')+' '+location.href,
            '#'];
+  const population=BM_REF?comparisonPopulation().rows:advancedSelection(benchmarkRows().filter(r=>!prof.gate.length||!r._out)).rows;
+  k.push(...analysisSnapshotHeader(population));
+  const metrics=sichtbareSpalten(prof);
+  const statsByMetric=new Map(metrics.map(m=>[m.id,metricPeerGroups(population,m,prof)]));
   if(BM_PEER!=='standard')k.push('# Peer basis: '+BM_PEER,
     '# Current ownership classification; cluster mode can include explicit assumptions, not historical ownership at report date.',
     '# One representative per known group/date/scope/framework; unknown parents are not proven independent.',
@@ -3800,7 +4096,8 @@ function benchmarkCSV(rows, prof){
   // danach handeln, und eine Warnung ohne Handhabe ist Dekoration.
   const kopf=['institution','lei','country','size_class','consolidation','reference_date',
               'framework', ...sichtbareSpalten(prof).map(c=>c.id),
-              'scale_finding','plausibility',...(BM_PEER==='standard'?[]:['ownership','ownership_reviewed_at','ownership_source','ownership_basis','ownership_controller_lei','ownership_control_source','group_role','group_head_lei','cluster_id','ownership_status','peer_anchor_date'])];
+               'scale_finding','plausibility',...(BM_PEER==='standard'?[]:['ownership','ownership_reviewed_at','ownership_source','ownership_basis','ownership_controller_lei','ownership_control_source','group_role','group_head_lei','cluster_id','ownership_status','peer_anchor_date']),
+               ...metrics.flatMap(m=>[m.id+'_peer_n',m.id+'_peer_median',m.id+'_peer_q1',m.id+'_peer_q3',m.id+'_percentile'])];
   const zeilen=[kopf.map(csvFeld).join(',')];
   for(const r of rows){
     const sc=r.q&&r.q.sc;
@@ -3811,7 +4108,15 @@ function benchmarkCSV(rows, prof){
     zeilen.push([r.name, r.lei, r.country, r.itype, r.scope, r.date,
                  rep?rep.framework:'',
                  ...sichtbareSpalten(prof).map(c=>csvZahl(r[c.id])), skal, q,
-                 ...(BM_PEER==='standard'?[]:[peerMeta(r).ownership,peerMeta(r).reviewed_at||'',peerMeta(r).source_url||'',peerMeta(r).ownership_basis||'',peerMeta(r).controller_lei||'',peerMeta(r).control_source_url||'',peerMeta(r).role,peerMeta(r).group_head||'',clusterOf(r)||'',peerMeta(r).classification_status||'reviewed',AP_CLUSTERS.get(clusterOf(r))?.date||''])]
+                  ...(BM_PEER==='standard'?[]:[peerMeta(r).ownership,peerMeta(r).reviewed_at||'',peerMeta(r).source_url||'',peerMeta(r).ownership_basis||'',peerMeta(r).controller_lei||'',peerMeta(r).control_source_url||'',peerMeta(r).role,peerMeta(r).group_head||'',clusterOf(r)||'',peerMeta(r).classification_status||'reviewed',AP_CLUSTERS.get(clusterOf(r))?.date||'']),
+                  ...metrics.flatMap(m=>{
+                    const key=BM_REF?['reference',BM_REF,r.date,r.scope,byKey(r.key)?.framework||'?'].join('|'):peerKeyOf(r,BM_PEER);
+                    const values=(statsByMetric.get(m.id).get(key)||[]).map(p=>p[m.id]).sort((a,b)=>a-b),n=values.length;
+                    const stats={n,values,suppressed:clusterFittingMetric(m.id)};
+                    const q=n>=5?quart(values):{med:null,q1:null,q3:null};
+                    const eligible=metricComparable(byKey(r.key),m,prof);
+                    return [n,csvZahl(q.med),csvZahl(q.q1),csvZahl(q.q3),csvZahl(eligible?analysisRank(r[m.id],stats):null)];
+                  })]
                 .map(csvFeld).join(','));
   }
   return k.join('\n')+'\n'+zeilen.join('\n')+'\n';
@@ -3980,10 +4285,15 @@ function shareParams(){
     const el=document.getElementById(id);
     if(el && el.value) p.set(k, el.value);
   }
+  if(VIEW==='benchmark'&&!BM_REF&&BM_DATE_INITIALIZED&&!activeFilters().d)p.set('d','all');
   const g=document.getElementById('fGsii');
   if(g && g.checked) p.set('g','1');
-  if(VIEW==='benchmark'){
-    if(BM_PEER!=='standard')p.set('peer',BM_PEER);
+  if(VIEW==='benchmark'||BM_REF){
+    if(BM_PEER!=='standard'||BM_REF)p.set('peer',BM_PEER);
+    if(BM_REF)p.set('ref',BM_REF);
+    if(BM_REF&&BM_EXCLUDED.size)p.set('omit',[...BM_EXCLUDED].sort().join(','));
+    if(BM_REF&&BM_ADDED.size)p.set('add',[...BM_ADDED].sort().join(','));
+    if(BM_REF&&BM_CONFIRMED)p.set('review','1');
     if(BM_OWN)p.set('ownership',BM_OWN);
     if(BM_ROLE)p.set('role',BM_ROLE);
     if(BM_CLUSTER)p.set('cluster',BM_CLUSTER);
@@ -4038,10 +4348,23 @@ function shareState(){
 function applyShared(){
   const roh=(location.hash||'').split('?')[1]||'';
   const p=new URLSearchParams(roh);
+  const requested=p.get('ref')||'';
+  const nextRef=/^rs:[A-Z0-9]{20}\.(CON|IND)$/.test(requested)?requested:'';
+  if(nextRef!==BM_REF&&nextRef&&!p.has('peer')&&!p.has('cluster'))BM_AUTO_GROUP=true;
+  BM_REF=nextRef;if(!BM_REF)BM_AUTO_GROUP=false;
+  const entities=new Set(REPORTS.map(r=>r.entityID));
+  BM_EXCLUDED=new Set((p.get('omit')||'').split(',').filter(e=>entities.has(e)&&e!==BM_REF));
+  BM_ADDED=new Set((p.get('add')||'').split(',').filter(e=>entities.has(e)&&e!==BM_REF));
+  BM_CONFIRMED=!!BM_REF&&p.get('review')==='1';
   for(const [k,id] of Object.entries(SHARE_FIELDS)){
     const el=document.getElementById(id);
     if(!el) continue;
     const v=p.get(k)||'';
+    if(k==='d'&&v==='all'){BM_DATE_INITIALIZED=true;el.value='';continue;}
+    if(k==='d'&&v)BM_DATE_INITIALIZED=true;
+    if(k==='d' && /^\d{4}-\d{2}-\d{2}$/.test(v) && ![...el.options].some(o=>o.value===v)){
+      const option=document.createElement('option');option.value=v;option.textContent=v;el.appendChild(option);
+    }
     // Ein Wert, den dieses Auswahlfeld nicht kennt (veralteter Link, anderer
     // Bestand), wird verworfen statt den Filter auf etwas Leeres zu setzen.
     if(el.tagName==='SELECT' && v && ![...el.options].some(o=>o.value===v)) continue;
@@ -4090,6 +4413,8 @@ function setTabs(){
   document.getElementById('tabReports').classList.toggle('on',VIEW==='reports');
   document.getElementById('tabBenchmark').classList.toggle('on',VIEW==='benchmark');
   document.getElementById('tabCompare').classList.toggle('on',VIEW==='compare');
+  const dateAll=document.querySelector('#fDate option[value=""]');if(dateAll)dateAll.disabled=VIEW==='benchmark'&&!!BM_REF;
+  const scope=document.getElementById('fScope');if(scope)scope.disabled=VIEW==='benchmark'&&!!BM_REF;
 }
 function route(){
   const hsh=decodeURIComponent(hashRoute());
@@ -4117,8 +4442,11 @@ const hashQuery=()=>{ const i=(location.hash||'').indexOf('?'); return i<0?'':lo
 /* Ein Sprung INNERHALB der Anwendung. Die eine Stelle dafuer — benutzt vom
    Zeilenklick in der Berichtsliste und vom delegierten Link-Handler unten. */
 function springZu(route){ location.hash = route + hashQuery(); }
-document.getElementById('tabBenchmark').onclick=()=>{ location.hash='#benchmark'+hashQuery(); };
-document.getElementById('tabCompare').onclick=()=>{ location.hash='#compare'+hashQuery(); };
+document.getElementById('tabBenchmark').onclick=()=>{
+  if(VIEW==='reports'&&activeKey&&!BM_REF&&hashRoute().startsWith('#r/')){const rep=byKey(activeKey);if(rep)setBenchmarkReference(rep.entityID,rep.refPeriod);}
+  location.hash='#benchmark'+hashQuery();
+};
+document.getElementById('tabCompare').onclick=()=>{if(BM_REF){CMPDATE=activeFilters().d;shareState();}location.hash='#compare'+hashQuery();};
 
 /* Dasselbe fuer JEDEN internen Sprung, und zwar an einer Stelle.
  *

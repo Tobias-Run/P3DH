@@ -14,7 +14,7 @@ class BenchmarkPopulationTest(unittest.TestCase):
         helpers=source[source.index('function metricPeerGroups('):source.index('function peerControls(')]
         harness="""
 const assert=require('node:assert/strict');
-const PCT_MIN_GROUP=5,BAR_KINDS=new Set(['eur']),BM_PEER='cluster';
+const PCT_MIN_GROUP=5,BAR_KINDS=new Set(['eur']),BM_PEER='cluster',BM_REF='';
 const AP_DATA={fitting_metrics:['trea']};
 const peerKeyOf=(r,basis)=>r.assigned===false?null:[r.cluster,r.date,r.scope,r.framework].join('|');
 const barErlaubt=(p,r,m)=>!r.badUnit;
