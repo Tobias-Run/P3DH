@@ -151,3 +151,6 @@ jobs:
 
       - name: Same-date compare and template coverage (DE/EN)
         run: python scripts/check_compare_dates.py
+
+      - name: Benchmark coverage and reference populations (DE/EN)
+        run: python scripts/check_benchmark_review.py
