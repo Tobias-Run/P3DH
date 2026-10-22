@@ -115,9 +115,9 @@ class GateTest(unittest.TestCase):
                       "Die Zeilenmenge wird nicht mehr am Tor geteilt — dann "
                       "messen Verteilung und Perzentile die ungefilterte Menge")
         gate = src.index(marker)
-        self.assertIn("advancedSelection(gatedRows)", src)
+        self.assertIn("referencePopulation(gatedRows)", src)
         self.assertIn("const allRows=peerSelection.rows", src)
-        for later in ("pmaps.set(c.id,percentileMap(", "fenceOutliers(fenceRows",
+        for later in ("pmaps.set(c.id,", "fenceOutliers(fenceRows",
                       "distributionRow(allRows"):
             self.assertGreater(src.index(later), gate,
                                f"{later} misst vor dem Plausibilitäts-Tor")

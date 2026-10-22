@@ -52,7 +52,10 @@ def pruefe(browser, url):
                 }''')
                 assert messages == [('Compare at most 4 reports.' if lang == 'en' else 'Maximal 4 Reports vergleichen.')]
                 for profile in ('esg', 'verg', 'headroom'):
-                    page.evaluate('id=>location.hash="#benchmark?prof="+id', profile)
+                    # This case checks multi-date explorer captions. The normal
+                    # benchmark now starts at one date; explicitly request all
+                    # dates so historical ESG/remuneration data are exercised.
+                    page.evaluate('id=>location.hash="#benchmark?d=all&prof="+id', profile)
                     page.wait_for_function('id=>document.querySelector("#bmProfile")?.value===id && !document.querySelector("#main").hasAttribute("aria-busy")', arg=profile)
                     expected_options = page.evaluate('(PROFILES.map(p=>LANG==="en"?p.en:p.label))')
                     assert page.locator('#bmProfile option').all_text_contents() == expected_options
