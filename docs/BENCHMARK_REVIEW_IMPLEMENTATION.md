@@ -27,3 +27,24 @@ with 38 observations. March NPL has no usable values. No JavaScript errors.
 This first change exposes the current population without silently changing the
 frozen roster or refreshing classifications. Subsequent changes address the
 separately identified filter/deduplication inconsistencies.
+
+## 2. Canonical populations and display search
+
+Known-family representatives are selected within each peer partition before
+cluster/ownership/role filters. The stable group identifier belongs to that
+partition, so a mother in another group cannot suppress its subsidiary here.
+Unknown families remain separate. The same cluster has identical members and
+metric ranks whether selected explicitly or viewed among all clusters.
+
+Search now filters display rows after statistics are computed. Country, size,
+scope and date remain deliberate comparison-population filters. Their role is
+stated in the UI. Standard peer keys now include the reporting framework;
+unknown frameworks have no percentile. The legacy standard explorer keeps its
+published report population independently of whether optional peer metadata
+was previously opened; it does not claim proven group independence.
+
+Checks: ten JavaScript population/coverage regressions and actual browser
+checks. Cluster `60359f158ce7` at 2025-12-31 retains all five NPL observations
+and identical per-metric ranks in both filter states. Searching the exact
+UniCredit name reduces visible rows to one without changing its statistical
+denominator or percentile. Legacy distribution contract tests pass.

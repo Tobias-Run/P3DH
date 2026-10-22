@@ -619,6 +619,8 @@ const DE = {
   "loading…": "lädt…",
   "Compare": "Vergleich",
   "Usable peer coverage": "Nutzbare Vergleichsdaten",
+  "Search limits the table, not the comparison population.": "Die Suche begrenzt die Tabelle, nicht die Vergleichsgrundlage.",
+  "Comparison population: {0} reports before display filters.": "Vergleichsgrundlage: {0} Reports vor Anzeigefiltern.",
   "Comparable values": "Vergleichbare Werte",
   "Peer populations with at least five values": "Vergleichsgruppen mit mindestens fünf Werten",
   "Values with percentile context": "Werte mit Perzentileinordnung",
@@ -2773,18 +2775,16 @@ function clusterOf(row){
   return AP_DATA?.stable_memberships?AP_DATA.stable_memberships[row.lei+'|'+row.scope]:AP_DATA?.reports[row.key]?.cluster;
 }
 function advancedSelection(rows,options={}){
-  if(BM_PEER==='standard' || !AP_DATA) return {rows,duplicates:[],filtered:0};
-  const filtered=rows.filter(r=>{
-    const m=peerMeta(r), cluster=clusterOf(r);
-    return (!BM_OWN || m.ownership===BM_OWN) && (!BM_ROLE || m.role===BM_ROLE) &&
-      (!(options.cluster??BM_CLUSTER) || cluster===(options.cluster??BM_CLUSTER));
-  });
-  // Representatives are selected within the actual visible date/scope/framework
-  // population, before size/type partitioning. Unknown parents stay separate.
+  const basis=options.basis??BM_PEER;
+  if((basis==='standard'&&!options.independent) || !AP_DATA) return {rows,duplicates:[],filtered:0};
+  // Choose canonical representatives within each actual peer population,
+  // before display/cluster/ownership filters. A dropdown cannot redefine it.
   const families=new Map(),duplicates=[];
-  for(const r of filtered){
+  for(const r of rows){
     const m=peerMeta(r),rep=byKey(r.key);
-    const family=[r.date,r.scope,rep?.framework||'?',m.group_head||'unknown:'+r.lei].join('|');
+    const partition=basis==='cluster'?(clusterOf(r)||'unassigned'):
+      basis==='bank_type'?[r.itype,m.ownership,m.role].join('|'):r.itype;
+    const family=[partition,r.date,r.scope,rep?.framework||'?',m.group_head||'unknown:'+r.lei].join('|');
     (families.get(family)||families.set(family,[]).get(family)).push(r);
   }
   const selected=[];
@@ -2798,7 +2798,14 @@ function advancedSelection(rows,options={}){
     duplicates.push(...family.slice(1).map(r=>({row:r,representative:family[0]})));
   }
   const keep=new Set(selected.map(r=>r.key));
-  return {rows:filtered.filter(r=>keep.has(r.key)),duplicates,filtered:rows.length-filtered.length};
+  const filtered=selected.filter(r=>{
+    const m=peerMeta(r),cluster=clusterOf(r);
+    return basis==='standard'||((!BM_OWN||m.ownership===BM_OWN)&&(!BM_ROLE||m.role===BM_ROLE)&&
+      (!(options.cluster??BM_CLUSTER)||cluster===(options.cluster??BM_CLUSTER)));
+  });
+  const visible=new Set(filtered.map(r=>r.key));
+  return {rows:rows.filter(r=>keep.has(r.key)&&visible.has(r.key)),
+    duplicates:duplicates.filter(d=>visible.has(d.representative.key)),filtered:selected.length-filtered.length};
 }
 function advancedPeerKey(r,basis){
   if(!AP_DATA) return null;
@@ -2990,6 +2997,7 @@ function benchmarkRows(){
   const prof=bmProf();
   if(!prof) return [];
   const f=activeFilters();
+  f.q=''; // Finding a bank never changes the statistical denominator.
   const out=[];
   for(const rep of REPORTS){
     if(!passFilters(rep,f)) continue;
@@ -3031,6 +3039,11 @@ function benchmarkRows(){
   });
   return out;
 }
+function benchmarkDisplayRows(rows){
+  const q=activeFilters().q;
+  if(!q) return rows;
+  return rows.filter(r=>passFilters(byKey(r.key),{q,c:'',i:'',s:'',d:'',g:false}));
+}
 /* ---- Perzentil-Bänder ----------------------------------------------------
    Eine Rangliste sagt „Platz 12 von 400". Sinnvoll wird daraus erst eine
    Einordnung, wenn sie INNERHALB der Peer-Gruppe erfolgt: eine
@@ -3040,7 +3053,11 @@ function benchmarkRows(){
    institution_type) + Konsolidierungskreis + Stichtag; ein Stichtagsmix
    würde sonst Werte unterschiedlicher Zeitpunkte vermischen. */
 const PCT_MIN_GROUP=5;   // darunter ist ein Perzentil Rauschen, nicht Signal
-const peerKeyOf=(r,basis='standard')=>basis==='standard'?(r.itype||'?')+'|'+(r.scope||'?')+'|'+(r.date||'?'):advancedPeerKey(r,basis);
+const peerKeyOf=(r,basis='standard')=>{
+  if(basis!=='standard')return advancedPeerKey(r,basis);
+  const framework=byKey(r.key)?.framework;
+  return framework&&framework!=='unknown'?[r.itype||'?',r.scope||'?',r.date||'?',framework].join('|'):null;
+};
 
 function percentileMap(rows,colId,basis='standard'){
   const groups=new Map();
@@ -3551,7 +3568,8 @@ async function renderBenchmark(){
   // Ausreisser darf die Verteilung nicht verschieben, sonst aendert das
   // Einklappen die Zahlen.
   const nFlag=allRows.filter(r=>flaggedFor(r.q,prof.tpl)).length;
-  const rows=BM_HIDEFLAG?allRows.filter(r=>!flaggedFor(r.q,prof.tpl)):allRows;
+  const searchRows=benchmarkDisplayRows(allRows);
+  const rows=BM_HIDEFLAG?searchRows.filter(r=>!flaggedFor(r.q,prof.tpl)):searchRows;
   const profSel=Object.entries(bmAll()).map(([k,p])=>
     `<option value="${k}"${k===BMP?' selected':''}>${esc(mlabel(p))}</option>`).join('');
   const pmaps=new Map();
@@ -3577,6 +3595,7 @@ async function renderBenchmark(){
     BM_DOM={context,rows:new Map()};
   let newRows='';
   let h=`<div class="rhead"><h2>${tr('Benchmark')}</h2></div>
+    <p class="scalenote">${tr('Comparison population: {0} reports before display filters.',allRows.length)} ${tr('Search limits the table, not the comparison population.')}</p>
     ${peerControls()}
     ${peerExplanation(allRows,peerSelection)}
     ${peerCoverageHTML(allRows,prof)}

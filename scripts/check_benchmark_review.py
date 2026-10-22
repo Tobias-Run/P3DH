@@ -35,6 +35,35 @@ def check():
                 assert page.locator('#bmCluster optgroup').first.locator('option').count()==0
                 results.append({'width':width,'lang':lang,'coverage':summary,'missing_march_npl':'pass'})
                 page.close()
+            page=browser.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
+            page.goto(base+'#benchmark?peer=cluster&prof=npl&d=2025-12-31&pct=1',wait_until='networkidle')
+            page.wait_for_selector('#bmCoverage')
+            group='60359f158ce7'
+            before=page.evaluate("""id=>{
+              const rows=advancedSelection(benchmarkRows()).rows;
+              const ranks=percentileMap(rows,'npl','cluster');
+              return Object.fromEntries(rows.filter(r=>clusterOf(r)===id).map(r=>[r.key,ranks.get(r.key)]));
+            }""",group)
+            page.select_option('#bmCluster',group)
+            page.wait_for_function('(id)=>BM_CLUSTER===id',arg=group)
+            after=page.evaluate("""()=>{
+              const rows=advancedSelection(benchmarkRows()).rows,ranks=percentileMap(rows,'npl','cluster');
+              return Object.fromEntries(rows.map(r=>[r.key,ranks.get(r.key)]));
+            }""")
+            assert len(before)==5 and before==after,(before,after)
+            page.close()
+            page=browser.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
+            page.goto(base+'#benchmark?prof=npl&d=2025-12-31&pct=1',wait_until='networkidle')
+            page.wait_for_selector('.bmtable')
+            key='rs:549300TRUWO2CD2G5692.CON|2025-12-31'
+            rank="key=>percentileMap(advancedSelection(benchmarkRows()).rows,'npl',BM_PEER).get(key)"
+            initial=page.evaluate(rank,key)
+            page.fill('#reportFilter',"UNICREDIT, SOCIETA' PER AZIONI")
+            page.wait_for_function("benchmarkDisplayRows(advancedSelection(benchmarkRows()).rows).length===1")
+            assert page.evaluate(rank,key)==initial
+            assert page.locator('.bmtable tbody tr[data-key]').count()==1
+            assert initial['n']>=5
+            page.close()
             browser.close()
     finally:server.shutdown();server.server_close()
     assert not errors,errors
